@@ -21,6 +21,15 @@ All calls are fluent by nature. To shorten fluent calls an interface can be assi
 * **Concrete API**
 All APIs are interface defined as well as corresponding models and builders.  No need to ever refer to the implementation. Implementations are always defined within an "internal" package.
 
+Maven
+-----
+```
+<dependency>
+    <groupId>org.pacesys</groupId>
+    <artifactId>openstack4j</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
 
 Authenticating
 --------------
