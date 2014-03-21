@@ -253,7 +253,7 @@ Networks (Neutron)
 
 **Network Operations**
 ```java
-// List the networks to which the current authorized tenant has access to
+// List the networks which the current authorized tenant has access to
 List<Network> networks = os.networking().network().list();
 
 // Network by ID
@@ -265,6 +265,12 @@ os.networking().network().delete("networkId");
 // Create a Network
 Network network = os.networking().network()
                     .create(Builders.network().name("MyNewNet").tenantId(tenant.getId()).build());
+```
+
+**Subnet Operations**
+```java
+// List all subnets which the current authorized tenant has access to
+List<Subnet> subnets = os.networking().subnet().list();
 ```
 
 **TODO Finish Network Doc**
