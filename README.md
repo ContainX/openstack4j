@@ -50,7 +50,7 @@ OSClient os = OSFactory.builder()
 
 Identity Operations (Keystone)
 ------------------------------
-After successful authentication you can invoke any Identity (Keysyone) directly from the OSClient. The examples below do not utilize all possible operations.  They are meant to give you a high level example of Identity (Keystone) based operations.
+After successful authentication you can invoke any Identity (Keysyone) directly from the OSClient. 
 
 Identity Services fully cover Tenants, Users, Roles, Services, Endpoints and Identity Extension listings.  The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
 
@@ -119,7 +119,7 @@ sm.deleteEndpoint("endpointId");
 
 Compute Operations (Nova)
 -------------------------
-OpenStack4j covers most the major common compute based operations and more.  With the simplistic API approach you can fully manage Servers, Flavors, Images, Quota-Sets, Diagnostics, Tenant Usage and more.  As the API evolves additional providers and extensions will be covered and documented within the API.
+OpenStack4j covers most the major common compute based operations.  With the simplistic API approach you can fully manage Servers, Flavors, Images, Quota-Sets, Diagnostics, Tenant Usage and more.  As the API evolves additional providers and extensions will be covered and documented within the API.
 
 **Create a Flavor and Boot a Server/VM**
 ```java
