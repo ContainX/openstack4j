@@ -271,6 +271,22 @@ Network network = os.networking().network()
 ```java
 // List all subnets which the current authorized tenant has access to
 List<Subnet> subnets = os.networking().subnet().list();
+
+// Get a Subnet by ID
+Subnet subnet = os.networking().subnet().get("subnetId");
+
+// Delete a Subnet
+os.networking().subnet().delete("subnetId");
+
+// Create a Subnet
+Subnet subnet = os.networking().subnet().create(Builders.subnet()
+                  .name("MySubnet")
+                  .networkId("networkId")
+                  .tenantId("tenantId")
+                  .addPool("192.168.0.1", "192.168.0.254")
+                  .ipVersion(IPVersionType.V4)
+                  .cidr("192.168.0.0/24")
+                  .build());
 ```
 
 **TODO Finish Network Doc**
