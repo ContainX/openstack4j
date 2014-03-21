@@ -117,7 +117,7 @@ Compute Operations (Nova)
 -------------------------
 OpenStack4j covers most the major common compute based operations and more.  With the simplistic API approach you can fully manage Servers, Flavors, Images, Quota-Sets, Diagnostics, Tenant Usage and more.  As the API evolves additional providers and extensions will be covered and documented within the API.
 
-**Create a Flavor and Boot a Server/VM **
+**Create a Flavor and Boot a Server/VM**
 ```java
 // Create a Flavor for a special customer base
 Flavor flavor = os.compute().flavors()
