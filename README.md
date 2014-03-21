@@ -1,5 +1,5 @@
-openstack4j
-===========
+OpenStack for Java (OpenStack4j)
+================================
 OpenStack4j is a fluent OpenStack client which allows provisioning and control of an OpenStack system.   This include Identity, Compute and Neutron using Java.  
 
 API Highlights
@@ -20,6 +20,10 @@ All calls are fluent by nature. To shorten fluent calls an interface can be assi
 
 * **Concrete API**
 All APIs are interface defined as well as corresponding models and builders.  No need to ever refer to the implementation. Implementations are always defined within an "internal" package.
+
+API Documentation
+-----------------
+http://www.openstack4j.com/javadoc/index.html
 
 Maven
 -----
