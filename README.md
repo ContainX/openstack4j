@@ -130,6 +130,7 @@ Server server = os.compute().servers()
 ```
 
 **Server Actions**
+
 Simple Actions are a single command giving the Server ID and desired Action.  The available simple actions
 are PAUSE, UNPAUSE, STOP, START, LOCK, UNLOCK, SUSPEND, RESUMT, RESCUE, UNRESCUE, SHELVE, SHELVE_OFFLOAD, UNSHELVE.
 
