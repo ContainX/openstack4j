@@ -1,0 +1,11 @@
+.*
+!.gitignore
+.classpath
+.project
+.orig
+.settings/**/*
+target/**/*
+*.class
+target
+Thumbs.db
+test-output
