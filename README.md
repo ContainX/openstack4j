@@ -50,7 +50,7 @@ OSClient os = OSFactory.builder()
 
 Identity Operations (Keystone)
 ------------------------------
-After successful authentication you can invoke any Identity (Keysyone) directly from the OSClient. 
+After successful authentication you can invoke any Identity (Keystone) directly from the OSClient. 
 
 Identity Services fully cover Tenants, Users, Roles, Services, Endpoints and Identity Extension listings.  The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
 
