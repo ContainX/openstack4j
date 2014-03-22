@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.internal;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.networking.NetworkService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.networking.PortService;
 import org.openstack4j.api.networking.SubnetService;
 
 /**
@@ -26,6 +27,14 @@ public class NetworkingServiceImpl implements NetworkingService {
 	@Override
 	public SubnetService subnet() {
 		return Apis.get(SubnetService.class);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public PortService port() {
+		return Apis.get(PortService.class);
 	}
 
 }

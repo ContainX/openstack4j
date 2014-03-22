@@ -1,0 +1,256 @@
+package org.openstack4j.openstack.networking.domain;
+
+import java.util.List;
+import java.util.Set;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonRootName;
+import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.network.IP;
+import org.openstack4j.model.network.Port;
+import org.openstack4j.model.network.State;
+import org.openstack4j.model.network.builder.PortBuilder;
+import org.openstack4j.openstack.common.ListResult;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.Sets;
+
+/**
+ * A Neutron Port
+ * 
+ * @author Jeremy Unruh
+ */
+@JsonRootName("port")
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class NeutronPort implements Port {
+
+	private static final long serialVersionUID = 1L;
+
+	private String id;
+	private String name;
+
+	@JsonProperty("admin_state_up")
+	private boolean adminStateUp = true;
+
+	@JsonProperty("device_id")
+	private String deviceId;
+
+	@JsonProperty("device_owner")
+	private String deviceOwner;
+
+	@JsonProperty("fixed_ips")
+	private Set<NeutronIP> fixedIps;
+
+	@JsonProperty("mac_address")
+	private String macAddress;
+
+	@JsonProperty("network_id")
+	private String networkId;
+
+	private State state;
+
+	@JsonProperty("tenant_id")
+	private String tenantId;
+
+	@JsonProperty("security_groups")
+	private List<String> securityGroups;
+	
+	public static PortBuilder builder() {
+		return new PortConcreteBuilder();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public State getState() {
+		return state;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isAdminStateUp() {
+		return adminStateUp;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getNetworkId() {
+		return networkId;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDeviceId() {
+		return deviceId;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDeviceOwner() {
+		return deviceOwner;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Set<? extends IP> getFixedIps() {
+		return fixedIps;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getMacAddress() {
+		return macAddress;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<String> getSecurityGroups() {
+		return securityGroups;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this).omitNullValues()
+				    .add("id", id).add("name", name).add("adminStateUp", adminStateUp).add("deviceId", deviceId)
+				    .add("deviceOwner", deviceOwner).add("fixedIps", fixedIps).add("macAddress", macAddress)
+				    .add("networkId", networkId).add("tenantId", tenantId).add("securityGroups", securityGroups)
+				    .toString();
+	}
+	
+	public static class Ports extends ListResult<NeutronPort> {
+
+		private static final long serialVersionUID = 1L;
+		
+		@JsonProperty("ports")
+		private List<NeutronPort> ports;
+		
+		@Override
+		protected List<NeutronPort> value() {
+			return ports;
+		}
+	}
+	
+	public static class PortConcreteBuilder implements PortBuilder {
+
+		private NeutronPort m = new NeutronPort();
+		
+		@Override
+		public PortBuilder name(String name) {
+			m.name = name;
+			return this;
+		}
+
+		@Override
+		public PortBuilder tenantId(String tenantId) {
+			m.tenantId = tenantId;
+			return this;
+		}
+
+		@Override
+		public PortBuilder tenant(Tenant tenant) {
+			m.tenantId = tenant.getId();
+			return this;
+		}
+
+		@Override
+		public PortBuilder networkId(String networkId) {
+			m.networkId = networkId;
+			return this;
+		}
+
+		@Override
+		public PortBuilder deviceId(String deviceId) {
+			m.deviceId = deviceId;
+			return this;
+		}
+
+		@Override
+		public PortBuilder deviceOwner(String deviceOwner) {
+			m.deviceOwner = deviceOwner;
+			return this;
+		}
+
+		@Override
+		public PortBuilder macAddress(String macAddress) {
+			m.macAddress = macAddress;
+			return this;
+		}
+
+		@Override
+		public PortBuilder fixedIp(String address, String subnetId) {
+			if (m.fixedIps == null)
+				m.fixedIps = Sets.newHashSet();
+			
+			m.fixedIps.add(new NeutronIP(address, subnetId));
+			return this;
+		}
+
+		@Override
+		public PortBuilder adminState(boolean adminStateUp) {
+			m.adminStateUp = adminStateUp;
+			return this;
+		}
+
+		@Override
+		public PortBuilder state(State state) {
+			m.state = state;
+			return this;
+		}
+		
+		@Override
+		public Port build() {
+			return m;
+		}
+
+		@Override
+		public PortBuilder from(Port in) {
+			m = (NeutronPort) in;
+			return this;
+		}
+		
+	}
+
+}

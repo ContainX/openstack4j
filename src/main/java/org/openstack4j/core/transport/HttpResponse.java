@@ -3,6 +3,8 @@ package org.openstack4j.core.transport;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.core.Response;
 
@@ -17,8 +19,8 @@ import org.openstack4j.api.exceptions.ServerResponseException;
  */
 public class HttpResponse {
 
+	private static final Pattern MESSAGE_PATTERN = Pattern.compile(".*message\\\":\\s\\\"([^\"]+)\\\".*");
 	private Response response;
-
 
 	private HttpResponse(Response response) {
 		this.response = response;
@@ -64,7 +66,26 @@ public class HttpResponse {
 				}
 				return null;
 			}
-
+			if (response.getStatus() < 500)
+			{
+				try
+				{
+				  String json = response.readEntity(String.class);
+				  if (json != null && json.contains("message")) {
+				  	Matcher m = MESSAGE_PATTERN.matcher(json);
+				  	if (m.matches())
+				  	{
+				  		throw mapException(m.group(1), response.getStatusInfo().getStatusCode());
+				  	}
+				  }
+				}
+				catch (ResponseException re) {
+					throw re;
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 			throw mapException(response.getStatusInfo().getReasonPhrase(),
 					response.getStatusInfo().getStatusCode());
 		}
