@@ -294,6 +294,24 @@ Subnet subnet = os.networking().subnet().create(Builders.subnet()
                   .build());
 ```
 
+**Port Operations**
+```java
+// List all Ports which the current authorized tenant has access to
+List<Port> ports = os.networking().port().list();
+
+// Get a Port by ID
+Port port = os.networking().port().get("portId");
+
+// Delete a Port
+os.networking().port().delete("portId");
+
+// Create a Port
+Port port = os.networking().port().create(Builders.port()
+              .name("port1").networkId("networkId").fixedIp("52.51.1.253", "subnetId").build());
+              
+// Update a Port
+Port updatedPort = os.networking().port().update(port);
+```
 **TODO Finish Network Doc**
 
 Contributing
