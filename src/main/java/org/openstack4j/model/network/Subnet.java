@@ -3,24 +3,14 @@ package org.openstack4j.model.network;
 import java.util.List;
 
 import org.openstack4j.common.Buildable;
-import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.common.Resource;
 
 /**
  * A Subnet is a network with Pools and network based settings
  * 
  * @author Jeremy Unruh
  */
-public interface Subnet extends ModelEntity, Buildable {
-
-	/**
-	 * @return the subnet identifier
-	 */
-	String getId();
-	
-	/**
-	 * @return the name of the subnet
-	 */
-	String getName();
+public interface Subnet extends Resource, Buildable {
 
 	/**
 	 * @return true if DHCP is enabled for this subnet, false if not.
@@ -31,12 +21,6 @@ public interface Subnet extends ModelEntity, Buildable {
 	 * @return the id of the network this subnet is associated with
 	 */
 	String getNetworkId();
-
-	/**
-	 * @return the tenant identifier
-	 */
-	String getTenantId();
-
 
 	/**
 	 * @return the DNS server names/IP
