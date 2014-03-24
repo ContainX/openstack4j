@@ -6,7 +6,8 @@ import java.util.Set;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
-import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.IP;
 import org.openstack4j.model.network.Port;
 import org.openstack4j.model.network.State;
@@ -147,6 +148,30 @@ public class NeutronPort implements Port {
 	public List<String> getSecurityGroups() {
 		return securityGroups;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
 	
 	/**
 	 * {@inheritDoc}
@@ -173,28 +198,10 @@ public class NeutronPort implements Port {
 		}
 	}
 	
-	public static class PortConcreteBuilder implements PortBuilder {
+	public static class PortConcreteBuilder extends ResourceBuilder<Port, PortConcreteBuilder> implements PortBuilder {
 
 		private NeutronPort m = new NeutronPort();
 		
-		@Override
-		public PortBuilder name(String name) {
-			m.name = name;
-			return this;
-		}
-
-		@Override
-		public PortBuilder tenantId(String tenantId) {
-			m.tenantId = tenantId;
-			return this;
-		}
-
-		@Override
-		public PortBuilder tenant(Tenant tenant) {
-			m.tenantId = tenant.getId();
-			return this;
-		}
-
 		@Override
 		public PortBuilder networkId(String networkId) {
 			m.networkId = networkId;
@@ -250,7 +257,11 @@ public class NeutronPort implements Port {
 			m = (NeutronPort) in;
 			return this;
 		}
+
+		@Override
+		protected Resource reference() {
+			return m;
+		}
 		
 	}
-
 }
