@@ -55,6 +55,30 @@ public class NeutronSubnet implements Subnet {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getId() {
 		return id;
 	}
