@@ -312,7 +312,34 @@ Port port = os.networking().port().create(Builders.port()
 // Update a Port
 Port updatedPort = os.networking().port().update(port);
 ```
-**TODO Finish Network Doc**
+
+**Router Operations**
+```java
+// List all Routers 
+List<Router> = os.networking().router().list();
+
+// Get a Router by ID
+Router router = os.networking().router().get("routerId");
+
+// Delete a Router
+os.networking().router().delete("routerId");
+
+// Create a Router
+Router router = os.networking().router().create(Builders.router()
+                  .name("ext_net").adminStateUp(true).externalGateway("networkId").build());
+                  
+// Update a Router
+router = os.networking().router().update(router.toBuilder().name("ext_net2").build());
+
+// Toggle Administrative State
+Router router = os.networking().router().toggleAdminStateUp("routerId", true);
+
+// Attach an External Interface
+RouterInterface iface = os.networking().router().attachInterface("routerId", AttachInterfaceType.SUBNET, "subnetId");
+
+// Detach an External Insterface
+RouterInterface iface = os.networking().router().detachInterface("routerId", "subnetId", null);
+```
 
 Contributing
 ------------
