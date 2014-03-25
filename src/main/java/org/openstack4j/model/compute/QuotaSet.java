@@ -1,6 +1,5 @@
 package org.openstack4j.model.compute;
 
-import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 
 /**
@@ -8,7 +7,7 @@ import org.openstack4j.model.ModelEntity;
  * 
  * @author Jeremy Unruh
  */
-public interface QuotaSet extends ModelEntity, Buildable {
+public interface QuotaSet extends ModelEntity {
 
 	/**
 	 * @return the identifier

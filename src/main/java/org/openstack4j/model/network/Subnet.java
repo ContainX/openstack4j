@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.network.builder.SubnetBuilder;
 
 /**
  * A Subnet is a network with Pools and network based settings
  * 
  * @author Jeremy Unruh
  */
-public interface Subnet extends Resource, Buildable {
+public interface Subnet extends Resource, Buildable<SubnetBuilder> {
 
 	/**
 	 * @return true if DHCP is enabled for this subnet, false if not.

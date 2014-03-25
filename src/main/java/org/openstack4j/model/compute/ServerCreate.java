@@ -6,13 +6,14 @@ import java.util.Map;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.compute.Server.DiskConfig;
+import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 
 /**
  * The Model used to create a new VM/Server 
  * 
  * @author Jeremy Unruh
  */
-public interface ServerCreate extends ModelEntity, Buildable {
+public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder> {
 
 	/**
 	 * The descriptive name for the Server

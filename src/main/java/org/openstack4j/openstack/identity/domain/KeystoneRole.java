@@ -33,6 +33,11 @@ public class KeystoneRole implements Role {
 		return new RoleConcreteBuilder();
 	}
 	
+	@Override
+	public RoleBuilder toBuilder() {
+		return new RoleConcreteBuilder(this);
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -101,7 +106,15 @@ public class KeystoneRole implements Role {
 	
 	public static class RoleConcreteBuilder implements RoleBuilder {
 
-		private KeystoneRole model = new KeystoneRole();
+		private KeystoneRole model;
+		
+		RoleConcreteBuilder() {
+			this(new KeystoneRole());
+		}
+		
+		RoleConcreteBuilder(KeystoneRole model) {
+			this.model = model;
+		}
 		
 		public RoleBuilder id(String id) {
 			model.id = id;

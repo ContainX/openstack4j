@@ -5,15 +5,15 @@ import java.util.Set;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.network.builder.PortBuilder;
 
 /**
  * A Network (Neutron) Port
  * 
  * @author Jeremy Unruh
  */
-public interface Port extends Resource, Buildable {
+public interface Port extends Resource, Buildable<PortBuilder> {
 
-	
 	 /**
    * @return the current state of the port
    */

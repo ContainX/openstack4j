@@ -8,13 +8,14 @@ import java.util.List;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Link;
+import org.openstack4j.model.compute.builder.FlavorBuilder;
 
 /**
  * An OpenStack Flavor which is a template used for configuration against running Instances
  * 
  * @author Jeremy Unruh
  */
-public interface Flavor extends ModelEntity, Buildable {
+public interface Flavor extends ModelEntity, Buildable<FlavorBuilder> {
 
 	/**
 	 * @return the id for this flavor

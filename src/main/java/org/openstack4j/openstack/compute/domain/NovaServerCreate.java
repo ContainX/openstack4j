@@ -48,8 +48,13 @@ public class NovaServerCreate implements ServerCreate {
 	
 	private List<Personality> personality;
 	
-	public static ServerCreateConcreteBuilder builder() {
+	public static ServerCreateBuilder builder() {
 		return new ServerCreateConcreteBuilder();
+	}
+	
+	@Override
+	public ServerCreateBuilder toBuilder() {
+		return new ServerCreateConcreteBuilder(this);
 	}
 	
 	public String getName() {
@@ -161,7 +166,15 @@ public class NovaServerCreate implements ServerCreate {
 	
 	public static class ServerCreateConcreteBuilder implements ServerCreateBuilder {
 
-		NovaServerCreate m = new NovaServerCreate();
+		NovaServerCreate m;
+		
+		ServerCreateConcreteBuilder() {
+			this(new NovaServerCreate());
+		}
+		
+		ServerCreateConcreteBuilder(NovaServerCreate m) {
+			this.m = m;
+		}
 		
 		public ServerCreateConcreteBuilder name(String name) {
 			m.name = name;
@@ -198,8 +211,5 @@ public class NovaServerCreate implements ServerCreate {
 			m = (NovaServerCreate)in;
 			return this;
 		}
-		
 	}
-	
-	
 }

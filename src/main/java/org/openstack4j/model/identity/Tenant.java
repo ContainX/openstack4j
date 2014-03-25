@@ -2,6 +2,7 @@ package org.openstack4j.model.identity;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.identity.builder.TenantBuilder;
 
 /**
  * Tenant Model class use to group/isolate resources and/or identity objects
@@ -10,7 +11,7 @@ import org.openstack4j.model.ModelEntity;
  * 
  * @see <a href="http://docs.openstack.org/api/openstack-identity-service/2.0/content/GET_listTenants_v2.0_tenants_Tenant_Operations.html#GET_listTenants_v2.0_tenants_Tenant_Operations-Response"
  */
-public interface Tenant extends ModelEntity, Buildable {
+public interface Tenant extends ModelEntity, Buildable<TenantBuilder> {
 	
 	/**
 	 * By providing an ID it is assumed this object will be mapped to an existing Tenant.

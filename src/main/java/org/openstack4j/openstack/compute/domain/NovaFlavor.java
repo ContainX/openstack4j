@@ -48,6 +48,11 @@ public class NovaFlavor implements Flavor {
 		return new FlavorConcreteBuilder();
 	}
 	
+	@Override
+	public FlavorBuilder toBuilder() {
+		return new FlavorConcreteBuilder(this);
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -182,7 +187,15 @@ public class NovaFlavor implements Flavor {
 	
 	public static class FlavorConcreteBuilder implements FlavorBuilder {
 
-		private NovaFlavor m = new NovaFlavor();
+		private NovaFlavor m;
+		
+		FlavorConcreteBuilder() {
+			this(new NovaFlavor());
+		}
+		
+		FlavorConcreteBuilder(NovaFlavor model) {
+			this.m = model;
+		}
 		
 		/**
 		 * @see Flavor#getName()

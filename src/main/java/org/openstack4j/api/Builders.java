@@ -11,6 +11,7 @@ import org.openstack4j.model.identity.builder.TenantBuilder;
 import org.openstack4j.model.identity.builder.UserBuilder;
 import org.openstack4j.model.network.builder.NetworkBuilder;
 import org.openstack4j.model.network.builder.PortBuilder;
+import org.openstack4j.model.network.builder.RouterBuilder;
 import org.openstack4j.model.network.builder.SubnetBuilder;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
@@ -23,6 +24,7 @@ import org.openstack4j.openstack.identity.domain.KeystoneTenant;
 import org.openstack4j.openstack.identity.domain.KeystoneUser;
 import org.openstack4j.openstack.networking.domain.NeutronNetwork;
 import org.openstack4j.openstack.networking.domain.NeutronPort;
+import org.openstack4j.openstack.networking.domain.NeutronRouter;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
 
 /**
@@ -137,5 +139,13 @@ public class Builders {
 	 */
 	public static PortBuilder port() {
 		return NeutronPort.builder();
+	}
+	
+	/**
+	 * The builder to create a Router
+	 * @return the router builder
+	 */
+	public static RouterBuilder router() {
+		return NeutronRouter.builder();
 	}
 }

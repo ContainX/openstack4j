@@ -6,8 +6,10 @@ package org.openstack4j.common;
  * 
  * @author Jeremy Unruh
  */
-public interface Buildable {
+public interface Buildable<B> {
 
+	B toBuilder();
+	
 	/**
 	 * Builder used to create/build corresponding Model Entity 
 	 * 
@@ -16,7 +18,7 @@ public interface Buildable {
 	 * 
 	 * @author Jeremy Unruh
 	 */
-	public interface Builder<T extends Builder<T, M>, M extends Buildable> {
+	public interface Builder<T extends Builder<T, M>, M extends Buildable<?>> {
 
 		/**
 		 * Creates and return the Model Entity M

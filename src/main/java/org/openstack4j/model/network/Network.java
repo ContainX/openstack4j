@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.network.builder.NetworkBuilder;
 
 /**
  * An OpenStack (Neutron) network
  * 
  * @author Jeremy Unruh
  */
-public interface Network extends Resource, Buildable {
+public interface Network extends Resource, Buildable<NetworkBuilder> {
 
 	/**
 	 * @return the status of the network

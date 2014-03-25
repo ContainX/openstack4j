@@ -36,6 +36,11 @@ public class KeystoneTenant implements Tenant {
 		return new TenantConcreteBuilder();
 	}
 	
+	@Override
+	public TenantBuilder toBuilder() {
+		return new TenantConcreteBuilder(this);
+	}
+	
 	/**
 	 * By providing an ID it is assumed this object will be mapped to an existing Tenant
 	 *
@@ -144,7 +149,15 @@ public class KeystoneTenant implements Tenant {
 	
 	public static class TenantConcreteBuilder implements TenantBuilder {
 
-		KeystoneTenant model = new KeystoneTenant();
+		KeystoneTenant model;
+		
+		TenantConcreteBuilder() {
+			this(new KeystoneTenant());
+		}
+		
+		TenantConcreteBuilder(KeystoneTenant model) {
+			this.model = model;
+		}
 		
 		/**
 		 * @see KeystoneTenant#getName()

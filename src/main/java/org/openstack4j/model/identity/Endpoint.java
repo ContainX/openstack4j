@@ -4,6 +4,7 @@ import java.net.URI;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.identity.builder.EndpointBuilder;
 
 /**
  * Endpoint Model is used to describe a network address which is described by URL's and other service
@@ -13,7 +14,7 @@ import org.openstack4j.model.ModelEntity;
  * 
  * @see <a href="http://docs.openstack.org/api/openstack-identity-service/2.0/content/GET_listEndpointsForToken_v2.0_tokens__tokenId__endpoints_Token_Operations.html#GET_listEndpointsForToken_v2.0_tokens__tokenId__endpoints_Token_Operations-Response"
  */
-public interface Endpoint extends ModelEntity, Buildable {
+public interface Endpoint extends ModelEntity, Buildable<EndpointBuilder> {
 
 	String getType();
 

@@ -34,6 +34,10 @@ public class KeystoneUser implements User
 		return new UserConcreteBuilder();
 	}
 	
+	@Override
+	public UserBuilder toBuilder() {
+		return new UserConcreteBuilder(this);
+	}
 	
 	public String getId() {
 		return id;
@@ -82,7 +86,15 @@ public class KeystoneUser implements User
 	
 	public static class UserConcreteBuilder implements UserBuilder {
 
-		private KeystoneUser model = new KeystoneUser();
+		private KeystoneUser model;
+		
+		UserConcreteBuilder() {
+			this(new KeystoneUser());
+		}
+		
+		UserConcreteBuilder(KeystoneUser model) {
+			this.model = model;
+		}
 		
 		public UserBuilder name(String name) {
 			model.name = name;

@@ -42,6 +42,11 @@ public class KeystoneEndpoint implements Endpoint {
 		return new EndPointConcreteBuilder();
 	}
 	
+	@Override
+	public EndpointBuilder toBuilder() {
+		return new EndPointConcreteBuilder(this);
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -179,7 +184,11 @@ public class KeystoneEndpoint implements Endpoint {
 		protected KeystoneEndpoint model;
 		
 		protected EndPointConcreteBuilder() {
-			this.model = new KeystoneEndpoint();
+			this(new KeystoneEndpoint());
+		}
+		
+		EndPointConcreteBuilder(KeystoneEndpoint model) {
+			this.model = model;
 		}
 		
 		/**

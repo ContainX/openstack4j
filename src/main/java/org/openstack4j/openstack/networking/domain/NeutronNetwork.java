@@ -43,6 +43,14 @@ public class NeutronNetwork implements Network {
 	public static NetworkBuilder builder() {
 		return new NetworkConcreteBuilder();
 	}
+
+	/**
+	 * Wraps this Network into a Builder
+	 * @return the network builder
+	 */
+	public NetworkBuilder toBuilder() {
+		return new NetworkConcreteBuilder(this);
+	}
 	
 	/**
 	 * {@inheritDoc}
@@ -182,7 +190,15 @@ public class NeutronNetwork implements Network {
 	
 	public static class NetworkConcreteBuilder implements NetworkBuilder {
 
-		private NeutronNetwork m = new NeutronNetwork();
+		private NeutronNetwork m;
+		
+		public NetworkConcreteBuilder() {
+			this(new NeutronNetwork());
+		}
+		
+		public NetworkConcreteBuilder(NeutronNetwork m) {
+			this.m = m;
+		}
 		
 		@Override
 		public NetworkBuilder name(String name) {

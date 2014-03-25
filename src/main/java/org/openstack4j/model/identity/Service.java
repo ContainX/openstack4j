@@ -2,6 +2,7 @@ package org.openstack4j.model.identity;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.identity.builder.ServiceBuilder;
 
 /**
  * OpenStack service, such as Compute (Nova), Object Storage (Swift), or Image Service (Glance).
@@ -9,7 +10,7 @@ import org.openstack4j.model.ModelEntity;
  *  
  * @author Jeremy Unruh
  */
-public interface Service extends ModelEntity, Buildable {
+public interface Service extends ModelEntity, Buildable<ServiceBuilder> {
 
 	/**
 	 * @return the id for the service

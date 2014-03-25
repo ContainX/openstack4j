@@ -17,6 +17,7 @@ import org.openstack4j.api.identity.UserService;
 import org.openstack4j.api.networking.NetworkService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.networking.PortService;
+import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.openstack.compute.internal.ComputeServiceImpl;
 import org.openstack4j.openstack.compute.internal.FlavorServiceImpl;
@@ -31,6 +32,7 @@ import org.openstack4j.openstack.identity.internal.UserServiceImpl;
 import org.openstack4j.openstack.networking.internal.NetworkServiceImpl;
 import org.openstack4j.openstack.networking.internal.NetworkingServiceImpl;
 import org.openstack4j.openstack.networking.internal.PortServiceImpl;
+import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
 
 import com.google.common.collect.Maps;
@@ -64,6 +66,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(NetworkService.class, NetworkServiceImpl.class);
 		bind(SubnetService.class, SubnetServiceImpl.class);
 		bind(PortService.class, PortServiceImpl.class);
+		bind(RouterService.class, RouterServiceImpl.class);
 	}
 
 	/**

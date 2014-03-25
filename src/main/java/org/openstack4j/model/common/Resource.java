@@ -1,6 +1,5 @@
 package org.openstack4j.model.common;
 
-import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 
 
@@ -9,7 +8,7 @@ import org.openstack4j.model.ModelEntity;
  * 
  * @author Jeremy Unruh
  */
-public interface Resource extends ModelEntity, Buildable {
+public interface Resource extends ModelEntity {
 
 	/**
 	 * @return the identifier for this resource

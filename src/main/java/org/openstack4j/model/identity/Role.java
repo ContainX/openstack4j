@@ -2,6 +2,7 @@ package org.openstack4j.model.identity;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.identity.builder.RoleBuilder;
 
 /**
  * A permission scheme a user is assigned when performing specific operations.  A role includes a set of rights and previleges. Any user who is assigned
@@ -9,7 +10,7 @@ import org.openstack4j.model.ModelEntity;
  * 
  * @author Jeremy Unruh
  */
-public interface Role extends ModelEntity, Buildable {
+public interface Role extends ModelEntity, Buildable<RoleBuilder> {
 
 	/**
 	 * @return the id of the role

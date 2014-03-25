@@ -5,7 +5,8 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
-import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.IPVersionType;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.Pool;
@@ -49,6 +50,11 @@ public class NeutronSubnet implements Subnet {
 
 	public static SubnetBuilder builder() {
 		return new SubnetConcreteBuilder();
+	}
+	
+	@Override
+	public SubnetBuilder toBuilder() {
+		return new SubnetConcreteBuilder(this);
 	}
 	
 	/**
@@ -189,16 +195,18 @@ public class NeutronSubnet implements Subnet {
 		}
 	}
 
-	public static class SubnetConcreteBuilder implements SubnetBuilder {
+	public static class SubnetConcreteBuilder extends ResourceBuilder<Subnet, SubnetConcreteBuilder> implements SubnetBuilder {
 
-		private NeutronSubnet m = new NeutronSubnet();
-		
-		@Override
-		public SubnetBuilder name(String name) {
-			m.name = name;
-			return this;
+		private NeutronSubnet m;
+
+		SubnetConcreteBuilder() {
+		 this(new NeutronSubnet());
 		}
-
+		
+		SubnetConcreteBuilder(NeutronSubnet m ) {
+			this.m = m;
+		}
+		 
 		@Override
 		public SubnetBuilder networkId(String networkId) {
 			m.networkId = networkId;
@@ -232,18 +240,6 @@ public class NeutronSubnet implements Subnet {
 		}
 
 		@Override
-		public SubnetBuilder tenantId(String tenantId) {
-			m.tenantId = tenantId;
-			return this;
-		}
-
-		@Override
-		public SubnetBuilder tenant(Tenant tenant) {
-			m.tenantId = tenant.getId();
-			return this;
-		}
-		
-		@Override
 		public Subnet build() {
 			return m;
 		}
@@ -251,6 +247,11 @@ public class NeutronSubnet implements Subnet {
 		@Override
 		public SubnetBuilder from(Subnet in) {
 			return this;
+		}
+
+		@Override
+		protected Resource reference() {
+			return m;
 		}
 
 	}
