@@ -341,6 +341,10 @@ RouterInterface iface = os.networking().router().attachInterface("routerId", Att
 RouterInterface iface = os.networking().router().detachInterface("routerId", "subnetId", null);
 ```
 
+Image Operations (Glance)
+-------------------------
+Documenation coming soon...
+
 Contributing
 ------------
 If you would like to contribute to this project we welcome you. Please contact us and let us know your area of expertise. We are looking for engineers to extend API functionality as well as add extensions and extended providers.
