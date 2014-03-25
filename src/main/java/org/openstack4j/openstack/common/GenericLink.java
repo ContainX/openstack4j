@@ -33,6 +33,11 @@ public class GenericLink implements Link {
 		return new LinkConcreteBuilder();
 	}
 	
+	@Override
+	public LinkBuilder toBuilder() {
+		return new LinkConcreteBuilder(this);
+	}
+	
 	/**
 	 * @return the relative URL or null
 	 */
@@ -68,8 +73,12 @@ public class GenericLink implements Link {
 
 		GenericLink model;
 		
-		public LinkConcreteBuilder() {
-			model = new GenericLink();
+		LinkConcreteBuilder() {
+			this(new GenericLink());
+		}
+		
+		LinkConcreteBuilder(GenericLink link) {
+			this.model = link;
 		}
 		
 		/**

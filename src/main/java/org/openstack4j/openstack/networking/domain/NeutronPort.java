@@ -60,7 +60,12 @@ public class NeutronPort implements Port {
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
 	}
-
+	
+	@Override
+	public PortBuilder toBuilder() {
+		return new PortConcreteBuilder(this);
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -200,8 +205,15 @@ public class NeutronPort implements Port {
 	
 	public static class PortConcreteBuilder extends ResourceBuilder<Port, PortConcreteBuilder> implements PortBuilder {
 
-		private NeutronPort m = new NeutronPort();
+		private NeutronPort m;
 		
+		PortConcreteBuilder() { 
+			this(new NeutronPort());
+		}
+		
+		PortConcreteBuilder(NeutronPort port) {
+			this.m = port;
+		}
 		@Override
 		public PortBuilder networkId(String networkId) {
 			m.networkId = networkId;

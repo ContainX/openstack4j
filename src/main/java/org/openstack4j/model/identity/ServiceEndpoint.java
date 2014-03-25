@@ -4,13 +4,14 @@ import java.net.URI;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.identity.builder.ServiceEndpointBuilder;
 
 /**
  * OpenStack ServiceEndpoint is an endpoint which is mapped to a {@link Service}
  * 
  * @author Jeremy Unruh
  */
-public interface ServiceEndpoint extends ModelEntity, Buildable {
+public interface ServiceEndpoint extends ModelEntity, Buildable<ServiceEndpointBuilder> {
 
 	/**
 	 * @return the endpoint identifier

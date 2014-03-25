@@ -40,6 +40,11 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 		return new ServiceConcreteEndpointBuilder();
 	}
 	
+	@Override
+	public ServiceEndpointBuilder toBuilder() { 
+		return new ServiceConcreteEndpointBuilder(this);
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -138,7 +143,15 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 	
 	public static class ServiceConcreteEndpointBuilder implements ServiceEndpointBuilder {
 
-		private KeystoneServiceEndpoint model = new KeystoneServiceEndpoint();
+		private KeystoneServiceEndpoint model;
+		
+		ServiceConcreteEndpointBuilder() {
+			this(new KeystoneServiceEndpoint());
+		}
+		
+		ServiceConcreteEndpointBuilder(KeystoneServiceEndpoint model) {
+			this.model = model;
+		}
 		
 		public ServiceEndpointBuilder region(String region) {
 			model.region = region;

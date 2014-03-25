@@ -9,6 +9,12 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.google.common.base.Objects;
 
+/**
+ * OpenStack service, such as Compute (Nova), Object Storage (Swift), or Image Service (Glance).
+ * A service provides one or more endpoints through which users can access resources and perform 
+ *  
+ * @author Jeremy Unruh
+ */
 public class KeystoneService implements Service {
 
 	private static final long serialVersionUID = 1L;
@@ -20,6 +26,11 @@ public class KeystoneService implements Service {
 	
 	public static ServiceBuilder builder() {
 		return new ServiceConcreteBuilder();
+	}
+	
+	@Override
+	public ServiceBuilder toBuilder() {
+		return new ServiceConcreteBuilder(this);
 	}
 	
 	public String getId() {
@@ -60,7 +71,15 @@ public class KeystoneService implements Service {
 	
 	public static class ServiceConcreteBuilder implements ServiceBuilder {
 
-		private KeystoneService model = new KeystoneService();
+		private KeystoneService model;
+		
+		ServiceConcreteBuilder() {
+			this(new KeystoneService());
+		}
+		
+		ServiceConcreteBuilder(KeystoneService model) {
+			this.model = model;
+		}
 		
 		public ServiceBuilder name(String name) {
 			model.name = name;

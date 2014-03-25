@@ -23,4 +23,9 @@ public interface NetworkingService extends RestService {
 	 * @return the Port Service API
 	 */
 	PortService port();
+	
+	/**
+	 * @return the Router Service API
+	 */
+	RouterService router();
 }
