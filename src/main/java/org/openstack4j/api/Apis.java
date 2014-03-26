@@ -4,6 +4,7 @@ import java.util.ServiceLoader;
 
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.identity.IdentityService;
+import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 
 /**
@@ -51,6 +52,15 @@ public class Apis {
 	 */
 	public static NetworkingService getNetworkingServices() {
 		return get(NetworkingService.class);
+	}
+	
+	/**
+	 * Gets the (Glance) Image services API
+	 * 
+	 * @return the image services
+	 */
+	public static ImageService getImageService() {
+		return get(ImageService.class);
 	}
 	
 	private static APIProvider initializeProvider() {

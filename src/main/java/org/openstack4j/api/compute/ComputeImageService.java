@@ -11,7 +11,7 @@ import org.openstack4j.model.compute.Image;
  * 
  * @author Jeremy Unruh
  */
-public interface ImageService extends RestService {
+public interface ComputeImageService extends RestService {
 
 	/**
 	 * Lists Images on an OpenStack Compute EndPoint.  By default this method lists in "Detail" which means all

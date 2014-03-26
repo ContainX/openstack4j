@@ -9,6 +9,7 @@ import org.openstack4j.model.identity.builder.ServiceBuilder;
 import org.openstack4j.model.identity.builder.ServiceEndpointBuilder;
 import org.openstack4j.model.identity.builder.TenantBuilder;
 import org.openstack4j.model.identity.builder.UserBuilder;
+import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.network.builder.NetworkBuilder;
 import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.model.network.builder.RouterBuilder;
@@ -22,6 +23,7 @@ import org.openstack4j.openstack.identity.domain.KeystoneService;
 import org.openstack4j.openstack.identity.domain.KeystoneServiceEndpoint;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant;
 import org.openstack4j.openstack.identity.domain.KeystoneUser;
+import org.openstack4j.openstack.image.domain.GlanceImage;
 import org.openstack4j.openstack.networking.domain.NeutronNetwork;
 import org.openstack4j.openstack.networking.domain.NeutronPort;
 import org.openstack4j.openstack.networking.domain.NeutronRouter;
@@ -147,5 +149,13 @@ public class Builders {
 	 */
 	public static RouterBuilder router() {
 		return NeutronRouter.builder();
+	}
+	
+	/**
+	 * The builder to create a Glance Image
+	 * @return the image builder
+	 */
+	public static ImageBuilder image() {
+		return GlanceImage.builder();
 	}
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
-import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.IPVersionType;
 import org.openstack4j.model.network.Network;
@@ -250,7 +249,7 @@ public class NeutronSubnet implements Subnet {
 		}
 
 		@Override
-		protected Resource reference() {
+		protected Subnet reference() {
 			return m;
 		}
 

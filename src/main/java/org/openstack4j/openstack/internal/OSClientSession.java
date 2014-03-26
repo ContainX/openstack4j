@@ -6,17 +6,17 @@ import java.util.Map;
 import java.util.Set;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.OSClient;
 import org.openstack4j.api.EndpointTokenProvider;
+import org.openstack4j.api.OSClient;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.identity.IdentityService;
+import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Access.Service;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.Token;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
-import org.openstack4j.openstack.identity.domain.KeystoneEndpoint;
 import org.openstack4j.openstack.identity.functions.ServiceToServiceType;
 
 import com.google.common.collect.Iterables;
@@ -88,6 +88,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	public boolean supportsNetwork() {
 		return supports.contains(ServiceType.NETWORK);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean supportsImage() {
+		return supports.contains(ServiceType.IMAGE);
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -123,7 +131,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 			{
 				if (sc.getServiceType() == ServiceType.NETWORK)
 				{
-					KeystoneEndpoint.builder().from(sc.getEndpoints().get(0)).type(sc.getServiceType().name());
+					sc.getEndpoints().get(0).toBuilder().type(sc.getServiceType().name());
 					endpoints.put(service, sc.getEndpoints().get(0));
 				}
 				else
@@ -195,6 +203,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	@Override
 	public NetworkingService networking() {
 		return Apis.getNetworkingServices();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ImageService images() {
+		return Apis.getImageService();
 	}
 
 }

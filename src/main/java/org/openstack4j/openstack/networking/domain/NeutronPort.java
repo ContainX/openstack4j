@@ -6,7 +6,6 @@ import java.util.Set;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
-import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.IP;
 import org.openstack4j.model.network.Port;
@@ -271,7 +270,7 @@ public class NeutronPort implements Port {
 		}
 
 		@Override
-		protected Resource reference() {
+		protected Port reference() {
 			return m;
 		}
 		

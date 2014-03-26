@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
-import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.ExternalGateway;
 import org.openstack4j.model.network.HostRoute;
@@ -224,7 +223,7 @@ public class NeutronRouter implements Router {
 		 * {@inheritDoc}
 		 */
 		@Override
-		protected Resource reference() {
+		protected Router reference() {
 			return m;
 		}
 		

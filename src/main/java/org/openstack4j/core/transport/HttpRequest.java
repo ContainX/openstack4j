@@ -1,7 +1,6 @@
 package org.openstack4j.core.transport;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.ModelEntity;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
 /**
@@ -29,6 +29,10 @@ public class HttpRequest<R> {
 	String contentType = ClientConstants.CONTENT_TYPE_JSON;
 	HttpMethod method = HttpMethod.GET;
 	String json;
+	private Map<String, List<Object>> queryParams;
+	private Map<String, Object> headers = new HashMap<String, Object>();
+	private Function<String, String> endpointFunc;
+	
 	
 	public HttpRequest() { }
 
@@ -36,7 +40,7 @@ public class HttpRequest<R> {
 	 * Creates a new HttpRequest
 	 *
 	 * @param endpoint the endpoint URI
-	 * @param path the path which will be appened to the endpoint URI
+	 * @param path the path which will be appended to the endpoint URI
 	 * @param method the method the method type to invoke
 	 * @param entity the entity (used for posts)
 	 * @param returnType the expected return type
@@ -82,14 +86,12 @@ public class HttpRequest<R> {
 		return contentType;
 	}
 
-	private Map<String, List<Object>> queryParams;
-	private Map<String, List<Object>> headers = new HashMap<String, List<Object>>();
-
-
 	/**
 	 * @return the endpoint URI
 	 */
 	public String getEndpoint() {
+		if (endpointFunc != null)
+			return endpointFunc.apply(endpoint);
 		return endpoint;
 	}
 	
@@ -146,7 +148,7 @@ public class HttpRequest<R> {
 	/**
 	 * @return the headers to apply
 	 */
-	public Map<String, List<Object>> getHeaders() {
+	public Map<String, Object> getHeaders() {
 		return headers;
 	}
 
@@ -191,7 +193,17 @@ public class HttpRequest<R> {
 			request.method = method;
 			return this;
 		}
-
+		
+		/**
+		 * A Function which allows manipulation of the endpoint depending on the service API utilizing it
+		 * @param endpointFunc the function to modify the current endpoint into a resulting endpoint
+		 * @return this
+		 */
+		public RequestBuilder<R> endpointFunction(Function<String, String> endpointFunc) {
+			request.endpointFunc = endpointFunc;
+			return this;
+		}
+ 
 		/**
 		 * Flags the request method as PUT
 		 *
@@ -237,6 +249,27 @@ public class HttpRequest<R> {
 		 */
 		public RequestBuilder<R> entity(ModelEntity entity) {
 			request.entity = entity;
+			return this;
+		}
+		
+		/**
+		 * Pushes the Map of Headers into the existing headers for this request
+		 * @param headers the headers to append
+		 * @return the request builder
+		 */
+		public RequestBuilder<R> headers(Map<String, Object> headers) {
+			request.getHeaders().putAll(headers);
+			return this;
+		}
+		
+		/**
+		 * Adds a new Header to the request
+		 * @param name the header name
+		 * @param value the header value
+		 * @return the request builder
+		 */
+		public RequestBuilder<R> header(String name, Object value) {
+			request.getHeaders().put(name, value);
 			return this;
 		}
 		
@@ -304,7 +337,7 @@ public class HttpRequest<R> {
 			if (provider != null)
 			{
 				request.endpoint = provider.getEndpoint(service);
-				request.getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, Arrays.asList((Object)provider.getTokenId()));
+				request.getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, provider.getTokenId());
 			}
 			return request;
 		}
