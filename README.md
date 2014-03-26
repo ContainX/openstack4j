@@ -136,7 +136,7 @@ Server server = os.compute().servers()
 **Server Actions**
 
 Simple Actions are a single command giving the Server ID and desired Action.  The available simple actions
-are PAUSE, UNPAUSE, STOP, START, LOCK, UNLOCK, SUSPEND, RESUMT, RESCUE, UNRESCUE, SHELVE, SHELVE_OFFLOAD, UNSHELVE.
+are PAUSE, UNPAUSE, STOP, START, LOCK, UNLOCK, SUSPEND, RESUME, RESCUE, UNRESCUE, SHELVE, SHELVE_OFFLOAD, UNSHELVE.
 
 Extended actions are handled via direct API calls.  
 ```java
@@ -233,10 +233,10 @@ Flavor f = os.compute().flavors().create(Builders.flavor().name("Ubuntu").vcpus(
 **Images**
 ```java
 // List all Images (detailed @see #list(boolean detailed) for brief)
-List<Image> images = os.compute().images().list();
+List<ComputeImage> images = os.compute().images().list();
 
 // Get an Image by ID
-Image img = os.compute().images().get("imageId");
+ComputeImage img = os.compute().images().get("imageId");
 
 // Delete an Image
 os.compute().images().delete("imageId");
@@ -343,7 +343,27 @@ RouterInterface iface = os.networking().router().detachInterface("routerId", "su
 
 Image Operations (Glance)
 -------------------------
-Documenation coming soon...
+```java
+// List all Images
+List<Image> images = os.images().list();
+
+// Get an Image by ID
+Image image = os.images().get("imageId");
+
+// Delete a Image
+os.images().delete("imageId");
+
+// Update a Image
+Image image = os.images().get("imageId");
+
+os.images().update(image.toBuilder()
+           .name("New VM Image Name").minDisk(1024).property("personal-distro", "true"));
+
+
+// Download the Image Data (VM)
+InputStream is = os.images().getAsStream("imageId"); 
+
+```
 
 Contributing
 ------------
