@@ -26,8 +26,13 @@ public class BaseImageServices extends BaseOpenStackService {
 		
 		@Override
 		public String apply(String input) {
-			if (input != null && input.contains("/v2"))
-				return input.replace("/v2", "/v1");
+			if (input != null)
+			{
+			  if (input.contains("/v2"))
+				  return input.replace("/v2", "/v1");
+			  else if (!input.contains("/v"))
+			  	return input.concat("/v1");
+			}
 			return input;
 		}
 	}
