@@ -9,19 +9,8 @@ import org.openstack4j.model.identity.Tenant;
  * @param <M> the model type
  * @param <T> the builder type
  */
-public abstract class ResourceBuilder<M extends Resource, T extends ResourceBuilder<M,T>> {
+public abstract class ResourceBuilder<M extends Resource, T extends ResourceBuilder<M,T>> extends BasicResourceBuilder<M, T> {
 
-	/**
-	 * Sets the name on the resource
-	 *
-	 * @param name the name
-	 * @return the builder
-	 */
-	public T name(String name) {
-		reference().setName(name);
-		return self();
-	}
-	
 	/**
 	 * Set the Tenant id.
 	 *
@@ -44,22 +33,4 @@ public abstract class ResourceBuilder<M extends Resource, T extends ResourceBuil
 		return self();
 	}
 	
-	/**
-	 * Sets the Id.
-	 *
-	 * @param id the identifier
-	 * @return the builder
-	 */
-	public T id(String id) {
-		reference().setId(id);
-		return self();
-	}
-	
-	@SuppressWarnings("unchecked")
-	private T self() {
-		return (T) this;
-	}
-	
-	protected abstract Resource reference();
-
 }

@@ -24,7 +24,7 @@ public interface ComputeService extends RestService {
 	 *
 	 * @return the image service
 	 */
-	ImageService images();
+	ComputeImageService images();
 	
 	/**
 	 * Server Service API

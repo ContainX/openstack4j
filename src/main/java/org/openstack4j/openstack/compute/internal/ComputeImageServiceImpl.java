@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 import java.util.Map;
 
-import org.openstack4j.api.compute.ImageService;
+import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.openstack.compute.domain.MetaDataWrapper;
 import org.openstack4j.openstack.compute.domain.NovaImage;
@@ -16,7 +16,7 @@ import org.openstack4j.openstack.compute.domain.NovaImage.NovaImages;
  *
  * @author Jeremy Unruh
  */
-public class ImageServiceImpl extends BaseComputeServices implements ImageService {
+public class ComputeImageServiceImpl extends BaseComputeServices implements ComputeImageService {
 
 	/**
 	 * {@inheritDoc}

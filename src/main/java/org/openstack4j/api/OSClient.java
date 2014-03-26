@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.identity.IdentityService;
+import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Token;
@@ -45,6 +46,13 @@ public interface OSClient {
 	boolean supportsNetwork();
 	
 	/**
+	 * Determines if the Image (Glance) service is supported
+	 *
+	 * @return true, if supports image
+	 */
+	boolean supportsImage();
+	
+	/**
 	 * Gets the token that was assigned during authorization
 	 *
 	 * @return the authentication token
@@ -78,4 +86,11 @@ public interface OSClient {
 	 * @return the networking service
 	 */
 	NetworkingService networking();
+	
+	/**
+	 * Returns the Image Service API
+	 * 
+	 * @return the image service
+	 */
+	ImageService images();
 }

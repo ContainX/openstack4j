@@ -61,8 +61,10 @@ public class HttpExecutor implements HttpExecutorService {
 	private <R> HttpResponse invoke(HttpRequest<R> request) throws Exception {
 		Client client = ClientFactory.create();
 		WebTarget target = client.target(request.getEndpoint()).path(request.getPath());
+		
 		if (Boolean.getBoolean(HttpLoggingFilter.class.getName()))
 			target.register(new HttpLoggingFilter(Logger.getLogger("os"), 10000));
+		
 		target = populateQueryParams(target, request);
 
 		Invocation.Builder invocation = target.request();
@@ -99,12 +101,8 @@ public class HttpExecutor implements HttpExecutorService {
 
 		if (!request.hasHeaders()) return;
 
-		for(Map.Entry<String, List<Object>> h : request.getHeaders().entrySet()) {
-			StringBuilder sb = new StringBuilder();
-			for(Object v : h.getValue()) {
-				sb.append(String.valueOf(v));
-			}
-			invocation.header(h.getKey(), sb);
+		for(Map.Entry<String, Object> h : request.getHeaders().entrySet()) {
+			invocation.header(h.getKey(), h.getValue());
 		}
 	}
 

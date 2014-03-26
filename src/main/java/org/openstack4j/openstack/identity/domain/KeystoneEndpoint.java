@@ -1,12 +1,10 @@
 package org.openstack4j.openstack.identity.domain;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.builder.EndpointBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -69,10 +67,6 @@ public class KeystoneEndpoint implements Endpoint {
 	 * @return the admin URL for this endpoint, or null when the endpoint is part of the Access ServiceCatalog
 	 */
 	public URI getAdminURL() {
-		if (type != null && type.equals(ServiceType.NETWORK.name())) {
-			if (!adminURL.toString().contains("/v"))
-				adminURL = uriFrom(adminURL.toString() + "/v2.0");
-		}
 		return adminURL;
 	}
 
@@ -80,10 +74,6 @@ public class KeystoneEndpoint implements Endpoint {
 	 * @return the public URL for this endpoint
 	 */
 	public URI getPublicURL() {
-		if (type != null && type.equals(ServiceType.NETWORK.name())) {
-			if (!publicURL.toString().contains("/v"))
-				publicURL = uriFrom(publicURL.toString() + "/v2.0");
-		}
 		return publicURL;
 	}
 	
@@ -135,15 +125,6 @@ public class KeystoneEndpoint implements Endpoint {
             tenantId, type);
    }
 	 
-	 private URI uriFrom(String uri) {
-		 try {
-			return new URI(uri);
-		}
-		catch (URISyntaxException e) {
-			return null;
-		}
-	 }
-
    @Override
    public boolean equals(Object obj) {
       if (this == obj)
