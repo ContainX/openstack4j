@@ -337,7 +337,7 @@ Router router = os.networking().router().toggleAdminStateUp("routerId", true);
 // Attach an External Interface
 RouterInterface iface = os.networking().router().attachInterface("routerId", AttachInterfaceType.SUBNET, "subnetId");
 
-// Detach an External Insterface
+// Detach an External Interface
 RouterInterface iface = os.networking().router().detachInterface("routerId", "subnetId", null);
 ```
 
@@ -367,7 +367,7 @@ os.images().update(image.toBuilder()
 InputStream is = os.images().getAsStream("imageId"); 
 ```
 
-**Create a Server**
+**Create a Image**
 ```java
 // (URL Payload in this example, File, InputStream are other payloads available)
 Image image = os.images().create(Builders.image()
@@ -379,7 +379,7 @@ Image image = os.images().create(Builders.image()
 				), Payloads.create(new URL("https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img")));
 ```
 
-**Reserve and Upload a Server**
+**Reserve and Upload a Image**
 ```java
 Image image = os.images().reserve(Builders.image()
 				.name("Cirros 0.3.0 x64")
