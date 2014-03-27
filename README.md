@@ -35,6 +35,31 @@ Maven
 </dependency>
 ```
 
+Working with Model Objects
+--------------------------
+Any object returned or specified within the API that is decorated with the "buildable" interface has the following characteristics.
+
+In this scenario lets assume we are dealing with a Tenant object and a Image object (both implement buildable).
+
+**Creating a new Object**
+```java
+Tenant tenant = Builders.tenant().name("My Tenant").description("Some meaning...").build();
+
+Image image = Builders().image().name("My Image").diskFormat(DiskFormat.QCOW2).minDisk(1024).build();
+```
+
+**Updating an Object retrieved or already assigned**
+```java
+Tenant tenant = // some get operation
+tenant.builder().name("New Name");
+
+Image image = //...
+image.builder().name("New Name").minRam(2048);
+```
+
+As you can see in the above examples any Buildable can be created via **Builders** and mutated via **Object.builder()**
+
+
 Authenticating
 --------------
 Creating and authenticating against OpenStack is extremely simple. Below is an example of authenticating which will
