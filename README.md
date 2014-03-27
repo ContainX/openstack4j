@@ -362,7 +362,7 @@ os.images().update(image.toBuilder()
            .name("New VM Image Name").minDisk(1024).property("personal-distro", "true"));
 ```
 
-**Download the Image Data***
+**Download the Image Data**
 ```java
 InputStream is = os.images().getAsStream("imageId"); 
 ```
@@ -399,10 +399,10 @@ image = os.images().upload(image.getId(),
 List<ImageMember> members = os.images().listMembers("imageId");
 
 // Add a Member (give a Tenant access to a private image) - returns true for success
-os.images().addMember("imageId", "tenantId"))
+os.images().addMember("imageId", "tenantId");
 
 // Remove a Member (revoke a Tenant access to a private image) - returns true for success
-if (os.images().removeMember("imageId", "tenantId"))
+os.images().removeMember("imageId", "tenantId");
 ```
 
 Contributing
