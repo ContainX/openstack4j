@@ -6,6 +6,7 @@ import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.image.ContainerFormat;
 import org.openstack4j.model.image.DiskFormat;
 import org.openstack4j.model.image.Image;
+import org.openstack4j.model.image.StoreType;
 
 /**
  * Builder which creates an Image
@@ -73,5 +74,13 @@ public interface ImageBuilder extends Builder<ImageBuilder, Image>{
 	 * @see Image#getProperties()
 	 */
 	ImageBuilder property(String key, String value);
+	
+	/**
+	 * Store type to be used during create or reserving of new images
+	 * 
+	 * @param storeType the store type
+	 * @return the image builder
+	 */
+	ImageBuilder storeType(StoreType storeType);
 	
 }

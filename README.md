@@ -343,6 +343,8 @@ RouterInterface iface = os.networking().router().detachInterface("routerId", "su
 
 Image Operations (Glance)
 -------------------------
+
+**Basic Operations**
 ```java
 // List all Images
 List<Image> images = os.images().list();
@@ -358,11 +360,49 @@ Image image = os.images().get("imageId");
 
 os.images().update(image.toBuilder()
            .name("New VM Image Name").minDisk(1024).property("personal-distro", "true"));
+```
 
-
-// Download the Image Data (VM)
+**Download the Image Data***
+```java
 InputStream is = os.images().getAsStream("imageId"); 
+```
 
+**Create a Server**
+```java
+// (URL Payload in this example, File, InputStream are other payloads available)
+Image image = os.images().create(Builders.image()
+                .name("Cirros 0.3.0 x64")
+				.isPublic(true)
+				.containerFormat(ContainerFormat.BARE)
+				.diskFormat(DiskFormat.QCOW2)
+				.build()
+				), Payloads.create(new URL("https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img")));
+```
+
+**Reserve and Upload a Server**
+```java
+Image image = os.images().reserve(Builders.image()
+				.name("Cirros 0.3.0 x64")
+				.isPublic(true)
+				.build());
+
+// Passing the image is optional and can be null but in this example we want to make sure 
+// the ContainerFormat and DiskFormat are correct
+image = os.images().upload(image.getId(), 
+           				   Payloads.create(new File("/path/to/vmimage.img")), 
+						   image.builder().containerFormat(ContainerFormat.BARE).diskFormat(DiskFormat.QCOW2));
+```
+
+**Image Membership Operations**
+```java
+// List Members who have access to a private image
+List<ImageMember> members = os.images().listMembers("imageId");
+
+// Add a Member (give a Tenant access to a private image) - returns true for success
+os.images().addMember("imageId", "tenantId"))
+
+// Remove a Member (revoke a Tenant access to a private image) - returns true for success
+if (os.images().removeMember("imageId", "tenantId"))
 ```
 
 Contributing

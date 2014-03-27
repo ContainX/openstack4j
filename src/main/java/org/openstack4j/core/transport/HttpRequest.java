@@ -8,6 +8,7 @@ import java.util.Map;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.common.Payload;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
@@ -25,7 +26,7 @@ public class HttpRequest<R> {
 	String endpoint;
 	String path;
 	Class<R> returnType;
-	ModelEntity entity;
+	Object entity;
 	String contentType = ClientConstants.CONTENT_TYPE_JSON;
 	HttpMethod method = HttpMethod.GET;
 	String json;
@@ -127,7 +128,7 @@ public class HttpRequest<R> {
 	/**
 	 * @return the entity to post
 	 */
-	public ModelEntity getEntity() {
+	public Object getEntity() {
 		return entity;
 	}
 	
@@ -253,6 +254,15 @@ public class HttpRequest<R> {
 		}
 		
 		/**
+		 * @see HttpRequest#getEntity()
+		 */
+		public RequestBuilder<R> entity(Payload<?> entity) {
+			if (entity != null)
+			request.entity = entity.open();
+			return this;
+		}
+		
+		/**
 		 * Pushes the Map of Headers into the existing headers for this request
 		 * @param headers the headers to append
 		 * @return the request builder
@@ -325,6 +335,17 @@ public class HttpRequest<R> {
 		 */
 		public RequestBuilder<R> json(String json) {
 			request.json = json;
+			return this;
+		}
+		
+		/**
+		 * Overrides the default content type for the request
+		 * 
+		 * @param contentType the content type to use in the request
+		 * @return the request builder
+		 */
+		public RequestBuilder<R> contentType(String contentType) {
+			request.contentType = contentType;
 			return this;
 		}
 

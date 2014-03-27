@@ -11,6 +11,7 @@ import static org.openstack4j.openstack.image.domain.ImageHeader.OWNER;
 import static org.openstack4j.openstack.image.domain.ImageHeader.PROPERTY;
 import static org.openstack4j.openstack.image.domain.ImageHeader.PROTECTED;
 import static org.openstack4j.openstack.image.domain.ImageHeader.SIZE;
+import static org.openstack4j.openstack.image.domain.ImageHeader.STORE;
 
 import java.util.Map;
 
@@ -55,6 +56,7 @@ public class ImageForUpdateToHeaders implements Function<Image, Map<String, Obje
 		addIfNotNull(headers, PROTECTED, from.isProtected());
 		addIfNotNull(headers, CHECKSUM, from.getChecksum());
 		addIfNotNull(headers, SIZE, from.getSize());
+		addIfNotNull(headers, STORE, from.getStoreType());
 		
 		if (from.getContainerFormat() != ContainerFormat.UNRECOGNIZED)
 			headers.put(CONTAINER_FORMAT.asHeader(), from.getContainerFormat().value());

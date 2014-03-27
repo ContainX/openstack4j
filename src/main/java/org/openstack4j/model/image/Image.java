@@ -124,4 +124,10 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
 	 */
 	Map<String, String> getProperties();
 	
+	/**
+	 * This will always be null on any list or get request.  It is intented as an option for creating, updating or reserving images
+	 * @return the store type
+	 */
+	StoreType getStoreType();
+	
 }
