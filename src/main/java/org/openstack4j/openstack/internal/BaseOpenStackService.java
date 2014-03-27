@@ -3,12 +3,14 @@ package org.openstack4j.openstack.internal;
 import java.util.Map;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpRequest.RequestBuilder;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.common.Payload;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -89,6 +91,17 @@ public class BaseOpenStackService {
 		
 		public Invocation<R> entity(ModelEntity entity) {
 			req.entity(entity);
+			return this;
+		}
+		
+		public Invocation<R> entity(Payload<?> entity) {
+			req.entity(entity);
+			req.contentType(ClientConstants.CONTENT_TYPE_OCTECT_STREAM);
+			return this;
+		}
+		
+		public Invocation<R> contentType(String contentType) {
+			req.contentType(contentType);
 			return this;
 		}
 		

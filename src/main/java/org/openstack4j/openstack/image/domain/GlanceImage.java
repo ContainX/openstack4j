@@ -12,6 +12,7 @@ import org.openstack4j.model.common.builder.BasicResourceBuilder;
 import org.openstack4j.model.image.ContainerFormat;
 import org.openstack4j.model.image.DiskFormat;
 import org.openstack4j.model.image.Image;
+import org.openstack4j.model.image.StoreType;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -69,6 +70,8 @@ public class GlanceImage implements Image {
 	private boolean isProtected;
 	
 	private Map<String, String> properties;
+	
+	private transient StoreType storeType;
 	
 	public static ImageBuilder builder() {
 		return new ImageConcreteBuilder();
@@ -231,6 +234,14 @@ public class GlanceImage implements Image {
 	@Override
 	public boolean isProtected() {
 		return isProtected;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public StoreType getStoreType() {
+		return storeType;
 	}
 
 	/**
@@ -406,6 +417,12 @@ public class GlanceImage implements Image {
 					m.properties = Maps.newHashMap();
 				m.properties.put(key, value);
 			}
+			return this;
+		}
+
+		@Override
+		public ImageBuilder storeType(StoreType storeType) {
+			m.storeType = storeType;
 			return this;
 		}
 		
