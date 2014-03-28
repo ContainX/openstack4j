@@ -6,12 +6,26 @@ import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Link;
 
+/**
+ * Access is the entity returned when Authenticated by the Identity service
+ * 
+ * @author Jeremy Unruh
+ */
 public interface Access extends ModelEntity {
 
+	/**
+	 * @return the authorized token
+	 */
 	Token getToken();
 	
+	/**
+	 * @return the service catalog
+	 */
 	List<? extends Service> getServiceCatalog();
 	
+	/**
+	 * @return details about the current user
+	 */
 	UserDetails getUser();
 	
 	public interface UserDetails

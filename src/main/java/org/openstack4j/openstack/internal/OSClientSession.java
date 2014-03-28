@@ -13,6 +13,7 @@ import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.Access.Service;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.Token;
@@ -36,18 +37,16 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	Map<ServiceType, Endpoint> endpoints = Maps.newHashMap();
 	KeystoneAccess access;
 	Set<ServiceType> supports;
-	String endpoint;
 	String publicHostIP;
 	
 	private OSClientSession(KeystoneAccess access, String endpoint)
 	{
 		this.access = access;
-		this.endpoint = endpoint;
 		sessions.set(this);
 	}
 	
-	public static OSClientSession createSession(KeystoneAccess access, String endpoint) {
-		return new OSClientSession(access, endpoint);
+	public static OSClientSession createSession(KeystoneAccess access) {
+		return new OSClientSession(access, access.getEndpoint());
 	}
 	
 	public static OSClientSession getCurrent() {
@@ -59,7 +58,6 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	 */
 	@Override
 	public Set<ServiceType> getSupportedServices() {
-		System.out.println(access.getServiceCatalog());
 		if (supports == null)
 			supports = Sets.immutableEnumSet(Iterables.transform(access.getServiceCatalog(), new ServiceToServiceType()));
 		return supports;
@@ -110,7 +108,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	 */
 	@Override
 	public String getEndpoint() {
-		return endpoint;
+		return access.getEndpoint();
 	}
 	
 	/**
@@ -140,7 +138,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 			}
 		}
 		
-		return endpoint;
+		return access.getEndpoint();
 	}
 	
 	/**
@@ -164,7 +162,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	private String getPublicIP() {
 		if (publicHostIP == null) {
 			try {
-				publicHostIP = new URI(endpoint).getHost();
+				publicHostIP = new URI(access.getEndpoint()).getHost();
 			}
 			catch (URISyntaxException e) {
 				e.printStackTrace();
@@ -211,6 +209,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	@Override
 	public ImageService images() {
 		return Apis.getImageService();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Access getAccess() {
+		return access;
 	}
 
 }

@@ -25,6 +25,8 @@ public class KeystoneAccess implements Access {
   private KeystoneToken token;
 	private List<AccessService> serviceCatalog;
 	private AccessUser user;
+	private String endpoint;
+	private Credentials credentials;
 
 	/**
 	 * @return the token
@@ -45,6 +47,20 @@ public class KeystoneAccess implements Access {
 	 */
 	public UserDetails getUser() {
 		return user;
+	}
+	
+	public String getEndpoint() {
+		return endpoint;
+	}
+	
+	public Credentials getCredentials() {
+		return credentials;
+	}
+	
+	public KeystoneAccess applyContext(String endpoint, Credentials credentials) {
+		this.credentials = credentials;
+		this.endpoint = endpoint;
+		return this;
 	}
 	
 	/**
