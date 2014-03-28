@@ -35,6 +35,31 @@ Maven
 </dependency>
 ```
 
+Working with Model Objects
+--------------------------
+Any object returned or specified within the API that is decorated with the "buildable" interface has the following characteristics.
+
+In this scenario lets assume we are dealing with a Tenant object and a Image object (both implement buildable).
+
+**Creating a new Object**
+```java
+Tenant tenant = Builders.tenant().name("My Tenant").description("Some meaning...").build();
+
+Image image = Builders().image().name("My Image").diskFormat(DiskFormat.QCOW2).minDisk(1024).build();
+```
+
+**Updating an Object retrieved or already assigned**
+```java
+Tenant tenant = // some get operation
+tenant.builder().name("New Name");
+
+Image image = //...
+image.builder().name("New Name").minRam(2048);
+```
+
+As you can see in the above examples any Buildable can be created via **Builders** and mutated via **Object.builder()**
+
+
 Authenticating
 --------------
 Creating and authenticating against OpenStack is extremely simple. Below is an example of authenticating which will
@@ -337,7 +362,7 @@ Router router = os.networking().router().toggleAdminStateUp("routerId", true);
 // Attach an External Interface
 RouterInterface iface = os.networking().router().attachInterface("routerId", AttachInterfaceType.SUBNET, "subnetId");
 
-// Detach an External Insterface
+// Detach an External Interface
 RouterInterface iface = os.networking().router().detachInterface("routerId", "subnetId", null);
 ```
 
@@ -362,12 +387,12 @@ os.images().update(image.toBuilder()
            .name("New VM Image Name").minDisk(1024).property("personal-distro", "true"));
 ```
 
-**Download the Image Data***
+**Download the Image Data**
 ```java
 InputStream is = os.images().getAsStream("imageId"); 
 ```
 
-**Create a Server**
+**Create a Image**
 ```java
 // (URL Payload in this example, File, InputStream are other payloads available)
 Image image = os.images().create(Builders.image()
@@ -379,7 +404,7 @@ Image image = os.images().create(Builders.image()
 				), Payloads.create(new URL("https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img")));
 ```
 
-**Reserve and Upload a Server**
+**Reserve and Upload a Image**
 ```java
 Image image = os.images().reserve(Builders.image()
 				.name("Cirros 0.3.0 x64")
@@ -399,10 +424,10 @@ image = os.images().upload(image.getId(),
 List<ImageMember> members = os.images().listMembers("imageId");
 
 // Add a Member (give a Tenant access to a private image) - returns true for success
-os.images().addMember("imageId", "tenantId"))
+os.images().addMember("imageId", "tenantId");
 
 // Remove a Member (revoke a Tenant access to a private image) - returns true for success
-if (os.images().removeMember("imageId", "tenantId"))
+os.images().removeMember("imageId", "tenantId");
 ```
 
 Contributing
