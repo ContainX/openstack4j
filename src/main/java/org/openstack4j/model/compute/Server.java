@@ -69,10 +69,20 @@ public interface Server extends ModelEntity {
 	List<? extends Link> getLinks();
 
 	/**
+	 * @return the image identifier
+	 */
+	String getImageId();
+	
+	/**
 	 * @return the image used to boot the server with
 	 */
 	Image getImage();
 
+	/**
+	 * @return the flavor identifier
+	 */
+	String getFlavorId();
+	
 	/**
 	 * @return the flavor to boot into
 	 */

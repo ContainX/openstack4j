@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
+import org.openstack4j.api.Apis;
 import org.openstack4j.model.common.Link;
 import org.openstack4j.model.compute.Addresses;
 import org.openstack4j.model.compute.Fault;
@@ -94,12 +95,26 @@ public class NovaServer implements Server {
 	}
 
 	@Override
+	public String getImageId() {
+		return (image != null) ? image.getId() : null;
+	}
+	
+	@Override
 	public Image getImage() {
+		if (image != null && image.getName() == null)
+			image = (NovaImage) Apis.getComputeServices().images().get(image.getId());
 		return image;
+	}
+	
+	@Override
+	public String getFlavorId() {
+		return (flavor != null) ? flavor.getId() : null;
 	}
 
 	@Override
 	public Flavor getFlavor() {
+		if (flavor != null && flavor.getName() == null)
+			flavor = (NovaFlavor) Apis.getComputeServices().flavors().get(flavor.getId());
 		return flavor;
 	}
 
