@@ -7,6 +7,7 @@ import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.Token;
 
 /**
@@ -93,4 +94,9 @@ public interface OSClient {
 	 * @return the image service
 	 */
 	ImageService images();
+	
+	/**
+	 * @return the authorized access entity which contains the authorized token, user details and service catalog
+	 */
+	Access getAccess();
 }
