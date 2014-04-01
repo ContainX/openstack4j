@@ -1,4 +1,6 @@
 .*
+release.properties
+javadoc
 !.travis.yml
 !.gitignore
 .classpath
