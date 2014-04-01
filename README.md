@@ -1,29 +1,11 @@
-OpenStack for Java (OpenStack4j)
-================================
+# OpenStack4j [![Build Status](https://travis-ci.org/gondor/openstack4j.png)](https://travis-ci.org/gondor/openstack4j)
+
 OpenStack4j is a fluent OpenStack client which allows provisioning and control of an OpenStack system.   This include Identity, Compute and Neutron using Java.  
 
-API Highlights
---------------
 
-* **Expected Results**
-All API calls that return a single object will be null if no data is found.  Calls that return a List/Collection will
-return an empty list if not found.  
+# Full Documentation
 
-* **Easy Exception Handling**
-Exceptions will never be thrown for 404 (Not Found) See above for standards.  Based on the OpenStack specifications of errors all exceptions extends a common unchecked ResponseException.  Server and Client exceptions also have an enumerated type fully classifying the exact reason for failure.  Exceptions are broken up into 3 categories.
- * ServerResponseException - is thrown if error codes are between 500 and 600.  
- * ClientResponseException - is thrown if error codes are between 400 and 499 excluding 404
- * ResponseException - Base exception is for all other failures
-
-* **Fluent Interface**
-All calls are fluent by nature. To shorten fluent calls an interface can be assigned during the chain to shorten the calls.  
-
-* **Concrete API**
-All APIs are interface defined as well as corresponding models and builders.  No need to ever refer to the implementation. Implementations are always defined within an "internal" package.
-
-API Documentation
------------------
-http://www.openstack4j.com/javadoc/index.html
+Visit [OpenStack4j.com](http://www.openstack4j.com)
 
 Maven
 -----
