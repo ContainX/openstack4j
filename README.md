@@ -1,4 +1,4 @@
-# OpenStack4j
+# OpenStack4j [![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)
 
 OpenStack4j is a fluent OpenStack client which allows provisioning and control of an OpenStack system.   This include Identity, Compute and Neutron using Java.  
 
