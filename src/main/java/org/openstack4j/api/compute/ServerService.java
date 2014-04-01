@@ -8,6 +8,8 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.VNCConsole;
+import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 
 /**
@@ -123,4 +125,21 @@ public interface ServerService {
 	 * @return a builder to create a ServerCreate
 	 */
 	ServerCreateBuilder serverBuilder();
+	
+	/**
+	 * Will attempt to tail and return the last {@code numLines} from the given servers console.
+	 * @param serverId the server identifier
+	 * @param numLines the number of console lines to return
+	 * @return console output as string or null
+	 */
+	String getConsoleOutput(String serverId, int numLines);
+	
+	/**
+	 * Obtains the VNC Console connection information for the given server and VNC Console Type
+	 * 
+	 * @param serverId the server identifier
+	 * @param type the VNC Console type
+	 * @return VNCConsole or null if not applicable
+	 */
+	VNCConsole getVNCConsole(String serverId, Type type);
 }

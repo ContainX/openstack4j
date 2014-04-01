@@ -37,4 +37,13 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	 */
 	ServerCreateBuilder image(Image image);
 	
+	/**
+	 * Adds a Personality to the Server.  A personality is a path to a file and the contents to be replaced on the new 
+	 * VM.
+	 * @param path the path (max is 255 bytes)
+	 * @param contents the contents of the file {@code path}
+	 * @return this builder
+	 */
+	ServerCreateBuilder addPersonality(String path, String contents);
+	
 }
