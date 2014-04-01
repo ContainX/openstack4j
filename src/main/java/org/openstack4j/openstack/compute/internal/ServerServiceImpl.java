@@ -13,9 +13,13 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.VNCConsole;
+import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
+import org.openstack4j.openstack.compute.domain.ConsoleOutput;
 import org.openstack4j.openstack.compute.domain.NovaServer;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 
 /**
@@ -154,6 +158,31 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 		return invokeAction(serverId, "revertResize");
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getConsoleOutput(String serverId, int numLines) {
+		checkNotNull(serverId);
+		if (numLines <= 0)
+			numLines = 50;
+
+		ConsoleOutput c = post(ConsoleOutput.class, uri("/servers/%s/action", serverId)).json(ConsoleOutput.getJSONAction(numLines)).execute();
+		return (c != null) ? c.getOutput() : null;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public VNCConsole getVNCConsole(String serverId, Type type) {
+		checkNotNull(serverId);
+		if (type == null)
+			type = Type.NOVNC;
+		
+		return post(NovaVNCConsole.class, uri("/servers/%s/action", serverId)).json(NovaVNCConsole.getJSONAction(type)).execute();
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */

@@ -2,6 +2,11 @@ package org.openstack4j.model.compute;
 
 import org.openstack4j.model.ModelEntity;
 
+/**
+ * A Personality is a file (path to file) and the contents that should be replaced on a new VM Server
+ * 
+ * @author Jeremy Unruh
+ */
 public class Personality implements ModelEntity {
 
 	/** The Constant serialVersionUID. */

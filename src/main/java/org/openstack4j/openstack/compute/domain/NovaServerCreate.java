@@ -6,13 +6,14 @@ import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
+import org.codehaus.jackson.node.BinaryNode;
 import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.model.compute.NetworkCreate;
 import org.openstack4j.model.compute.Personality;
 import org.openstack4j.model.compute.Server.DiskConfig;
-import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 
 import com.google.common.collect.Lists;
 
@@ -198,6 +199,16 @@ public class NovaServerCreate implements ServerCreate {
 		
 		public ServerCreateConcreteBuilder image(Image image) {
 			m.imageRef = image.getId();
+			return this;
+		}
+		
+		@Override
+		public ServerCreateBuilder addPersonality(String path, String contents) {
+			if (path == null || contents == null) return this;
+			
+			if (m.personality == null)
+				m.personality = Lists.newArrayList();
+			m.personality.add(new Personality(path, new BinaryNode(contents.getBytes()).asText()));
 			return this;
 		}
 		
