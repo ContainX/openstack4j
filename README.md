@@ -9,13 +9,29 @@ Visit [OpenStack4j.com](http://www.openstack4j.com)
 
 Maven
 -----
+
+#### Latest Release
+
 ```
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
+
+#### Current Development
+
+
+```
+<dependency>
+    <groupId>org.pacesys</groupId>
+    <artifactId>openstack4j</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+</dependency>
+```
+
+
 
 Working with Model Objects
 --------------------------
