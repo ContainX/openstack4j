@@ -20,6 +20,8 @@ import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.networking.PortService;
 import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.storage.BlockStorageService;
+import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.openstack.compute.internal.ComputeServiceImpl;
 import org.openstack4j.openstack.compute.internal.FlavorServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
@@ -36,6 +38,8 @@ import org.openstack4j.openstack.networking.internal.NetworkingServiceImpl;
 import org.openstack4j.openstack.networking.internal.PortServiceImpl;
 import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 
 import com.google.common.collect.Maps;
 
@@ -70,6 +74,8 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(PortService.class, PortServiceImpl.class);
 		bind(RouterService.class, RouterServiceImpl.class);
 		bind(ImageService.class, ImageServiceImpl.class);
+		bind(BlockStorageService.class, BlockStorageServiceImpl.class);
+		bind(BlockVolumeService.class, BlockVolumeServiceImpl.class);
 	}
 
 	/**

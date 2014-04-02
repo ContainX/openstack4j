@@ -5,7 +5,7 @@ public enum ServiceType {
 	IDENTITY("keystone"),
 	COMPUTE("nova"),
 	IMAGE("glance"),
-	VOLUME("cinder"),
+	BLOCK_STORAGE("cinder"),
 	NETWORK("neutron"),
 	EC2("ec2"),
 	UNKNOWN("NA")
