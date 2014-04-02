@@ -2,6 +2,7 @@ package org.openstack4j.api;
 
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.FlavorBuilder;
+import org.openstack4j.model.compute.builder.FloatingIPBuilder;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.model.identity.builder.EndpointBuilder;
 import org.openstack4j.model.identity.builder.RoleBuilder;
@@ -14,8 +15,11 @@ import org.openstack4j.model.network.builder.NetworkBuilder;
 import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.model.network.builder.RouterBuilder;
 import org.openstack4j.model.network.builder.SubnetBuilder;
+import org.openstack4j.model.storage.block.builder.VolumeBuilder;
+import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
+import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.identity.domain.KeystoneEndpoint;
 import org.openstack4j.openstack.identity.domain.KeystoneRole;
@@ -28,6 +32,8 @@ import org.openstack4j.openstack.networking.domain.NeutronNetwork;
 import org.openstack4j.openstack.networking.domain.NeutronPort;
 import org.openstack4j.openstack.networking.domain.NeutronRouter;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
+import org.openstack4j.openstack.storage.block.domain.CinderVolume;
+import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
 
 /**
  * A utility class to quickly access available Builders within the OpenStack API
@@ -157,5 +163,29 @@ public class Builders {
 	 */
 	public static ImageBuilder image() {
 		return GlanceImage.builder();
+	}
+	
+	/**
+	 * The builder to create a Block Volume
+	 * @return the volume builder
+	 */
+	public static VolumeBuilder volume() {
+		return CinderVolume.builder();
+	}
+	
+	/**
+	 * The builder to create a Block Volume Snapshot
+	 * @return the snapshot builder
+	 */
+	public static VolumeSnapshotBuilder volumeSnapshot() {
+		return CinderVolumeSnapshot.builder();
+	}
+	
+	/**
+	 * The builder to create a Compute/Nova Floating IP
+	 * @return the floating ip builder
+	 */
+	public static FloatingIPBuilder floatingIP() {
+		return NovaFloatingIP.builder();
 	}
 }

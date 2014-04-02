@@ -3,6 +3,7 @@ package org.openstack4j.openstack.compute.internal;
 import java.util.List;
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.api.compute.ComputeImageService;
@@ -56,6 +57,14 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	@Override
 	public List<? extends Extension> listExtensions() {
 		return get(NovaExtensions.class, uri("/extensions")).execute().getList();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ComputeFloatingIPService floatingIps() {
+		return Apis.get(ComputeFloatingIPService.class);
 	}
 
 }

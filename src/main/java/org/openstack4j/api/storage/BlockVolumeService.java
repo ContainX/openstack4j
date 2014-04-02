@@ -33,4 +33,27 @@ public interface BlockVolumeService extends RestService {
 	 * @return the volume or null if not found
 	 */
 	Volume get(String volumeId);
+	
+	/**
+	 * Deletes the specified volume
+	 * 
+	 * @param volumeId the volume identifier
+	 */
+	void delete(String volumeId);
+	
+	/**
+	 * Creates a new Block Storage Volume
+	 * @param volume the volume for create
+	 * @return the created volume
+	 */
+	Volume create(Volume volume);
+	
+	/**
+	 * OpenStack only allows name or description to be updated. This call enforces that based on the API docs.
+	 * 
+	 * @param volumeId the volume id
+	 * @param name the name to update (null indicates no name update)
+	 * @param description the description to update (null indicates no description update)
+	 */
+	void update(String volumeId, String name, String description);
 }
