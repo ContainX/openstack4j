@@ -18,31 +18,38 @@ public interface ComputeService extends RestService {
 	 * @return the flavor service
 	 */
 	FlavorService flavors();
-	
+
 	/**
 	 * Image Service API
 	 *
 	 * @return the image service
 	 */
 	ComputeImageService images();
-	
+
 	/**
 	 * Server Service API
 	 *
 	 * @return the server service
 	 */
 	ServerService servers();
-	
+
 	/**
 	 * Quota-Set Service API
 	 *
 	 * @return the quota set service
 	 */
 	QuotaSetService quotaSets();
-	
+
+	/**
+	 * Floating IP Service API
+	 *
+	 * @return the floating-ip service
+	 */
+	ComputeFloatingIPService floatingIps();
+
 	/**
 	 * @return a list of Extensions that have been added against the Compute service
 	 */
 	List<? extends Extension> listExtensions();
-	
+
 }

@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.networking.internal;
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.api.networking.FloatingIPService;
 import org.openstack4j.api.networking.NetworkService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.networking.PortService;
@@ -44,6 +45,14 @@ public class NetworkingServiceImpl implements NetworkingService {
 	@Override
 	public RouterService router() {
 		return Apis.get(RouterService.class);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public FloatingIPService floatingip() {
+		return Apis.get(FloatingIPService.class);
 	}
 
 }

@@ -14,4 +14,9 @@ public interface BlockStorageService extends RestService {
 	 */
 	BlockVolumeService volumes();
 	
+	/**
+	 * @return the Volume Snapshot Service API
+	 */
+	BlockVolumeSnapshotService snapshots();
+	
 }

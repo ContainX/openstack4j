@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.openstack4j.model.storage.block.Volume;
+import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.google.common.base.Objects;
@@ -27,6 +29,7 @@ public class CinderVolume implements Volume {
 	@JsonProperty("display_description")
 	private String description;
 	private Status status;
+	@JsonSerialize(include=JsonSerialize.Inclusion.NON_DEFAULT)
 	@JsonProperty("size")
 	private Integer size;
 	@JsonProperty("availability_zone")
@@ -44,6 +47,21 @@ public class CinderVolume implements Volume {
 	private Map<String, String> metadata;
 	@JsonProperty("bootable")
 	private Boolean bootable;
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public VolumeBuilder toBuilder() {
+		return new ConcreteVolumeBuilder(this);
+	}
+
+	/**
+	 * @return the Volume Builder
+	 */
+	public static VolumeBuilder builder() {
+		return new ConcreteVolumeBuilder();
+	}
 	
 	/**
 	 * {@inheritDoc}
@@ -166,6 +184,83 @@ public class CinderVolume implements Volume {
 		protected List<CinderVolume> value() {
 			return volumes;
 		}
+	}
+	
+	public static class ConcreteVolumeBuilder implements VolumeBuilder {
+
+		private CinderVolume m;
 		
+		ConcreteVolumeBuilder() {
+			this(new CinderVolume());
+		}
+		
+		ConcreteVolumeBuilder(CinderVolume m) {
+			this.m = m;
+		}
+		
+		@Override
+		public VolumeBuilder name(String name) {
+			m.name = name;
+			return this;
+		}
+
+		@Override
+		public VolumeBuilder description(String description) {
+			m.description = description;
+			return this;
+		}
+
+		@Override
+		public VolumeBuilder source_volid(String uuid) {
+			m.sourceVolid = uuid;
+			return this;
+		}
+
+		@Override
+		public VolumeBuilder snapshot(String snapshotId) {
+			m.snapshotId = snapshotId;
+			return this;
+		}
+
+		@Override
+		public VolumeBuilder imageRef(String imageRef) {
+			m.imageRef = imageRef;
+			return this;
+		}
+
+		@Override
+		public VolumeBuilder size(int size) {
+			m.size = size;
+			return this;
+		}
+
+		@Override
+		public VolumeBuilder volumeType(String volumeType) {
+			m.volumeType = volumeType;
+			return this;
+		}
+
+		@Override
+		public VolumeBuilder bootable(boolean isBootable) {
+			m.bootable = isBootable;
+			return this;
+		}
+
+		@Override
+		public VolumeBuilder metadata(Map<String, String> metadata) {
+			m.metadata = metadata;
+			return this;
+		}
+		
+		@Override
+		public Volume build() {
+			return m;
+		}
+
+		@Override
+		public VolumeBuilder from(Volume in) {
+			m = (CinderVolume) in;
+			return this;
+		}
 	}
 }

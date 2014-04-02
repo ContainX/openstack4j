@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
+import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
@@ -41,6 +42,37 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	public Volume get(String volumeId) {
 		checkNotNull(volumeId);
 		return get(CinderVolume.class, uri("/volumes/%s", volumeId)).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void delete(String volumeId) {
+		checkNotNull(volumeId);
+		delete(Void.class, uri("/volumes/%s", volumeId)).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Volume create(Volume volume) {
+		checkNotNull(volume);
+		return post(CinderVolume.class, uri("/volumes")).entity(volume).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void update(String volumeId, String name, String description) {
+		checkNotNull(volumeId);
+		if (name == null && description == null) return;
+		
+		put(Void.class, uri("/volumes/%s", volumeId))
+		    .entity(Builders.volume().name(name).description(description).build())
+		    .execute();
 	}
 
 }

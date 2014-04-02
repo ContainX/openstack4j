@@ -3,9 +3,10 @@ package org.openstack4j.openstack.provider;
 import java.util.Map;
 
 import org.openstack4j.api.APIProvider;
+import org.openstack4j.api.compute.ComputeFloatingIPService;
+import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
-import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
@@ -15,6 +16,7 @@ import org.openstack4j.api.identity.ServiceManagerService;
 import org.openstack4j.api.identity.TenantService;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.networking.FloatingIPService;
 import org.openstack4j.api.networking.NetworkService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.networking.PortService;
@@ -22,9 +24,11 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
+import org.openstack4j.api.storage.BlockVolumeSnapshotService;
+import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
+import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeServiceImpl;
 import org.openstack4j.openstack.compute.internal.FlavorServiceImpl;
-import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
 import org.openstack4j.openstack.identity.internal.IdentityServiceImpl;
@@ -33,6 +37,7 @@ import org.openstack4j.openstack.identity.internal.ServiceManagerServiceImpl;
 import org.openstack4j.openstack.identity.internal.TenantServiceImpl;
 import org.openstack4j.openstack.identity.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
+import org.openstack4j.openstack.networking.internal.FloatingIPServiceImpl;
 import org.openstack4j.openstack.networking.internal.NetworkServiceImpl;
 import org.openstack4j.openstack.networking.internal.NetworkingServiceImpl;
 import org.openstack4j.openstack.networking.internal.PortServiceImpl;
@@ -40,6 +45,7 @@ import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
 
 import com.google.common.collect.Maps;
 
@@ -76,6 +82,9 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ImageService.class, ImageServiceImpl.class);
 		bind(BlockStorageService.class, BlockStorageServiceImpl.class);
 		bind(BlockVolumeService.class, BlockVolumeServiceImpl.class);
+		bind(BlockVolumeSnapshotService.class, BlockVolumeSnapshotServiceImpl.class);
+		bind(FloatingIPService.class, FloatingIPServiceImpl.class);
+		bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
 	}
 
 	/**

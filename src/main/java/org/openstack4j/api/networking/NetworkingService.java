@@ -28,4 +28,9 @@ public interface NetworkingService extends RestService {
 	 * @return the Router Service API
 	 */
 	RouterService router();
+	
+	/**
+	 * @return the FloatingIP Service API
+	 */
+	FloatingIPService floatingip();
 }

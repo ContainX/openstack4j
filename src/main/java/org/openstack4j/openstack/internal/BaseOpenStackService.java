@@ -84,6 +84,12 @@ public class BaseOpenStackService {
 			return this;
 		}
 		
+		public Invocation<R> param(boolean condition, String name, Object value) {
+			if (condition)
+				req.queryParam(name, value);
+			return this;
+		}
+		
 		public Invocation<R> serviceType(ServiceType serviceType) {
 			req.serviceType(serviceType);
 			return this;

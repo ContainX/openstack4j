@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonValue;
+import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 
 import com.google.common.base.CaseFormat;
 
@@ -16,7 +18,7 @@ import com.google.common.base.CaseFormat;
  * 
  * @author Jeremy Unruh
  */
-public interface Volume extends ModelEntity {
+public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 
 	/**
 	 * The current Volume Status
