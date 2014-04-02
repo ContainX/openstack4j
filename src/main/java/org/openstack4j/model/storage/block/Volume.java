@@ -104,7 +104,4 @@ public interface Volume extends ModelEntity {
 	 * @return extended meta data information. key value pair of String key, String value
 	 */
 	Map<String, String> getMetaData();
-	
-	
-
 }
