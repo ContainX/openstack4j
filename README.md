@@ -4,9 +4,11 @@ OpenStack4j
 [![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)
 
 
-OpenStack4j is a fluent OpenStack client which allows provisioning and control of an OpenStack system.   This includes support for Identity, Compute, Image, Network and more.
+OpenStack4j is a fluent OpenStack client which allows provisioning and control of an OpenStack system.   This includes support for Identity, Compute, Image, Network, Block Storage and more.
 
 ### Documenation/Tutorials:  [www.OpenStack4j.com](http://www.openstack4j.com)                      
+
+**Keep up to date with us on Twitter: [@openstack4j](https://twitter.com/openstack4j)**
 
 Maven
 -----
