@@ -5,8 +5,10 @@ import java.util.Map;
 import org.openstack4j.api.APIProvider;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
+import org.openstack4j.api.compute.ComputeSecurityGroupService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
+import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
@@ -27,8 +29,10 @@ import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
+import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeServiceImpl;
 import org.openstack4j.openstack.compute.internal.FlavorServiceImpl;
+import org.openstack4j.openstack.compute.internal.KeypairServiceImpl;
 import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
 import org.openstack4j.openstack.identity.internal.IdentityServiceImpl;
@@ -85,6 +89,8 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(BlockVolumeSnapshotService.class, BlockVolumeSnapshotServiceImpl.class);
 		bind(FloatingIPService.class, FloatingIPServiceImpl.class);
 		bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
+		bind(ComputeSecurityGroupService.class, ComputeSecurityGroupServiceImpl.class);
+		bind(KeypairService.class, KeypairServiceImpl.class);
 	}
 
 	/**

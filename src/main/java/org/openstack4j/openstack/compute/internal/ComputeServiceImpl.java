@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
+import org.openstack4j.api.compute.ComputeSecurityGroupService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.api.compute.ComputeImageService;
+import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.model.common.Extension;
@@ -65,6 +67,22 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	@Override
 	public ComputeFloatingIPService floatingIps() {
 		return Apis.get(ComputeFloatingIPService.class);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ComputeSecurityGroupService securityGroups() {
+		return Apis.get(ComputeSecurityGroupService.class);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public KeypairService keypairs() {
+		return Apis.get(KeypairService.class);
 	}
 
 }

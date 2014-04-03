@@ -3,6 +3,7 @@ package org.openstack4j.api;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.FlavorBuilder;
 import org.openstack4j.model.compute.builder.FloatingIPBuilder;
+import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.model.identity.builder.EndpointBuilder;
 import org.openstack4j.model.identity.builder.RoleBuilder;
@@ -21,6 +22,7 @@ import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.identity.domain.KeystoneEndpoint;
 import org.openstack4j.openstack.identity.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.domain.KeystoneService;
@@ -187,5 +189,13 @@ public class Builders {
 	 */
 	public static FloatingIPBuilder floatingIP() {
 		return NovaFloatingIP.builder();
+	}
+	
+	/**
+	 * A Builder which creates a Security Group Rule
+	 * @return the security group rule builder
+	 */
+	public static SecurityGroupRuleBuilder secGroupRule() {
+		return SecurityGroupRule.builder();
 	}
 }

@@ -46,6 +46,19 @@ public interface ComputeService extends RestService {
 	 * @return the floating-ip service
 	 */
 	ComputeFloatingIPService floatingIps();
+	
+	/**
+	 * Security Groups Extension API
+	 * 
+	 * @return the security groups service
+	 */
+	ComputeSecurityGroupService securityGroups();
+	
+	/**
+	 * Keypair Management Service
+	 * @return the keypair service
+	 */
+	KeypairService keypairs();
 
 	/**
 	 * @return a list of Extensions that have been added against the Compute service
