@@ -51,7 +51,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	@Override
 	public Server get(String serverId) {
   	checkNotNull(serverId);
-		return get(Server.class, uri("/servers/%s", serverId)).execute();
+		return get(NovaServer.class, uri("/servers/%s", serverId)).execute();
 	}
 
 	/**
