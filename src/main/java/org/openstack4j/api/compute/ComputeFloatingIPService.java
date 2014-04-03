@@ -21,6 +21,13 @@ public interface ComputeFloatingIPService extends RestService {
 	 */
 	List<? extends FloatingIP> list();
 	
+	
+	/**
+	 * Lists the current Floating IP Pool Names
+	 * @return List of floating IP pool names
+	 */
+	List<String> getPoolNames();
+	
 	/**
 	 * Allocate a floating ip address to tenant.
 	 *

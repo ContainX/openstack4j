@@ -11,6 +11,7 @@ import org.openstack4j.model.compute.FloatingIP;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP.NovaFloatingIPs;
+import org.openstack4j.openstack.compute.domain.NovaFloatingIPPools;
 
 /**
  * OpenStack Floating-IP API Implementation
@@ -27,6 +28,14 @@ public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements
     return get(NovaFloatingIPs.class, uri("/os-floating-ips")).execute().getList();
   }
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<String> getPoolNames() {
+		return get(NovaFloatingIPPools.class, uri("/os-floating-ip-pools")).execute().getList();
+	}
+	
 	/**
    * {@inheritDoc}
    */
