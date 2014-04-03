@@ -1,6 +1,6 @@
 # ChangeLog
 
-## 1.0.1-SNAPSHOT
+### 1.0.1-SNAPSHOT
 
 * Block Storage (Cinder) support
 * Floating IP support in Compute
@@ -8,6 +8,6 @@
 * Personality support on Computer -> Server -> Create
 
 
-## 1.0.0
+### 1.0.0
 
 * Initial public release
