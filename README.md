@@ -10,6 +10,9 @@ OpenStack4j is a fluent OpenStack client which allows provisioning and control o
 
 **Keep up to date with us on Twitter: [@openstack4j](https://twitter.com/openstack4j)**
 
+**Latest Changelog: [Changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md)**
+
+
 Maven
 -----
 
