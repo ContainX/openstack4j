@@ -12,6 +12,9 @@ import org.openstack4j.model.identity.builder.ServiceEndpointBuilder;
 import org.openstack4j.model.identity.builder.TenantBuilder;
 import org.openstack4j.model.identity.builder.UserBuilder;
 import org.openstack4j.model.image.builder.ImageBuilder;
+import org.openstack4j.model.network.builder.NetFloatingIPBuilder;
+import org.openstack4j.model.network.builder.NetSecurityGroupBuilder;
+import org.openstack4j.model.network.builder.NetSecurityGroupRuleBuilder;
 import org.openstack4j.model.network.builder.NetworkBuilder;
 import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.model.network.builder.RouterBuilder;
@@ -21,8 +24,8 @@ import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
-import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
+import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.identity.domain.KeystoneEndpoint;
 import org.openstack4j.openstack.identity.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.domain.KeystoneService;
@@ -30,9 +33,12 @@ import org.openstack4j.openstack.identity.domain.KeystoneServiceEndpoint;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant;
 import org.openstack4j.openstack.identity.domain.KeystoneUser;
 import org.openstack4j.openstack.image.domain.GlanceImage;
+import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
 import org.openstack4j.openstack.networking.domain.NeutronNetwork;
 import org.openstack4j.openstack.networking.domain.NeutronPort;
 import org.openstack4j.openstack.networking.domain.NeutronRouter;
+import org.openstack4j.openstack.networking.domain.NeutronSecurityGroup;
+import org.openstack4j.openstack.networking.domain.NeutronSecurityGroupRule;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
@@ -198,4 +204,32 @@ public class Builders {
 	public static SecurityGroupRuleBuilder secGroupRule() {
 		return SecurityGroupRule.builder();
 	}
+  
+  /**
+   * The builder to create a Neutron Security Group
+   *
+   * @return the security group builder
+   */
+  public static NetSecurityGroupBuilder securityGroup() {
+    return NeutronSecurityGroup.builder();
+  }
+  
+  /**
+   * The builder to create a Neutron Security Group Rule
+   *
+   * @return the security group builder
+   */
+  public static NetSecurityGroupRuleBuilder securityGroupRule() {
+    return NeutronSecurityGroupRule.builder();
+  }
+  
+  /**
+   * The builder to create a Neutron Floating IP Address
+   *
+   * @return the floating ip builder
+   */
+  public static NetFloatingIPBuilder netFloatingIP() {
+    return NeutronFloatingIP.builder();
+  }
+	
 }

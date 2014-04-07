@@ -32,5 +32,19 @@ public interface NetworkingService extends RestService {
 	/**
 	 * @return the FloatingIP Service API
 	 */
-	FloatingIPService floatingip();
+	NetFloatingIPService floatingip();
+	
+	/**
+	 *
+	 * @return the Security Group Service API
+	 */
+	SecurityGroupService securitygroup();
+	
+	/**
+  *
+  * @return the Security Group Rule Service API
+  */
+ SecurityGroupRuleService securityrule();
+	
+	
 }
