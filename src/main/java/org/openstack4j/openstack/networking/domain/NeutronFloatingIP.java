@@ -4,18 +4,19 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
-import org.openstack4j.model.network.FloatingIP;
+import org.openstack4j.model.network.NetFloatingIP;
+import org.openstack4j.model.network.builder.NetFloatingIPBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.google.common.base.Objects;
 
 /**
- * An OpenStack Neutron Floating IP Model
- * 
- * @author nanderson
+ * An OpenStack Neutron Floating IP Model.
+ *
+ * @author Nathan Anderson
  */
-@JsonRootName("floatingips")
-public class NeutronFloatingIP implements FloatingIP {
+@JsonRootName("floatingip")
+public class NeutronFloatingIP implements NetFloatingIP {
   
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +40,23 @@ public class NeutronFloatingIP implements FloatingIP {
   
   @JsonProperty("port_id")
   private String portId;
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public NetFloatingIPBuilder toBuilder() {
+    return new FloatingIPConcreteBuilder(this);
+  }
+  
+  /**
+   * Builder.
+   *
+   * @return the net floating ip builder
+   */
+  public static NetFloatingIPBuilder builder() {
+    return new FloatingIPConcreteBuilder();
+  }
   
   /**
    * {@inheritDoc}
@@ -164,6 +182,12 @@ public class NeutronFloatingIP implements FloatingIP {
             .toString();
   }
   
+  /**
+   * The Class FloatingIPs.
+   * 
+   *
+   * @author Nathan Anderson
+   */
   public static class FloatingIPs extends ListResult<NeutronFloatingIP> {
     
     private static final long serialVersionUID = 1L;
@@ -171,10 +195,74 @@ public class NeutronFloatingIP implements FloatingIP {
     @JsonProperty("floatingips")
     private List<NeutronFloatingIP> floatingIps;
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected List<NeutronFloatingIP> value() {
       return floatingIps;
     }
   }
   
+  /**
+   * The Class FloatingIPConcreteBuilder.
+   * 
+   *
+   * @author Nathan Anderson
+   */
+  public static class FloatingIPConcreteBuilder implements NetFloatingIPBuilder {
+    
+    private NeutronFloatingIP f = null;
+    
+    /**
+     * Instantiates a new floating ip concrete builder.
+     */
+    public FloatingIPConcreteBuilder() {
+      f = new NeutronFloatingIP();
+    }
+    
+    /**
+     * Instantiates a new floating ip concrete builder.
+     *
+     * @param in the in
+     */
+    public FloatingIPConcreteBuilder(NetFloatingIP in) {
+      f = (NeutronFloatingIP) in;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NetFloatingIP build() {
+      return f;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NetFloatingIPBuilder from(NetFloatingIP in) {
+      f = (NeutronFloatingIP) in;
+      return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NetFloatingIPBuilder floatingNetworkId(String networkId) {
+      f.floatingNetworkId = networkId;
+      return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NetFloatingIPBuilder portId(String portId) {
+      f.portId = portId;
+      return this;
+    }
+  }
 }

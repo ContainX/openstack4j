@@ -1,11 +1,13 @@
 package org.openstack4j.openstack.networking.internal;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.networking.FloatingIPService;
+import org.openstack4j.api.networking.NetFloatingIPService;
 import org.openstack4j.api.networking.NetworkService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.networking.PortService;
 import org.openstack4j.api.networking.RouterService;
+import org.openstack4j.api.networking.SecurityGroupRuleService;
+import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
 
 /**
@@ -51,8 +53,25 @@ public class NetworkingServiceImpl implements NetworkingService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public FloatingIPService floatingip() {
-		return Apis.get(FloatingIPService.class);
+	public NetFloatingIPService floatingip() {
+		return Apis.get(NetFloatingIPService.class);
 	}
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public SecurityGroupService securitygroup() {
+    return Apis.get(SecurityGroupService.class);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public SecurityGroupRuleService securityrule() {
+    return Apis.get(SecurityGroupRuleService.class);
+  }
+  
+  
 }
