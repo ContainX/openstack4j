@@ -18,11 +18,13 @@ import org.openstack4j.api.identity.ServiceManagerService;
 import org.openstack4j.api.identity.TenantService;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.api.image.ImageService;
-import org.openstack4j.api.networking.FloatingIPService;
+import org.openstack4j.api.networking.NetFloatingIPService;
 import org.openstack4j.api.networking.NetworkService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.networking.PortService;
 import org.openstack4j.api.networking.RouterService;
+import org.openstack4j.api.networking.SecurityGroupRuleService;
+import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
@@ -46,6 +48,8 @@ import org.openstack4j.openstack.networking.internal.NetworkServiceImpl;
 import org.openstack4j.openstack.networking.internal.NetworkingServiceImpl;
 import org.openstack4j.openstack.networking.internal.PortServiceImpl;
 import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
+import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImpl;
+import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
@@ -87,10 +91,13 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(BlockStorageService.class, BlockStorageServiceImpl.class);
 		bind(BlockVolumeService.class, BlockVolumeServiceImpl.class);
 		bind(BlockVolumeSnapshotService.class, BlockVolumeSnapshotServiceImpl.class);
-		bind(FloatingIPService.class, FloatingIPServiceImpl.class);
-		bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
 		bind(ComputeSecurityGroupService.class, ComputeSecurityGroupServiceImpl.class);
 		bind(KeypairService.class, KeypairServiceImpl.class);
+		bind(NetFloatingIPService.class, FloatingIPServiceImpl.class);
+    bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
+    bind(SecurityGroupService.class, SecurityGroupServiceImpl.class);
+    bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
+		
 	}
 
 	/**
