@@ -6,7 +6,6 @@ import static org.testng.Assert.assertNull;
 import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.OSClient;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.Tenant;
@@ -22,7 +21,6 @@ import org.testng.annotations.Test;
 @Test(suiteName="Identity/Keystone")
 public class KeystoneTests extends AbstractTest {
 
-	private static final String JSON_ACCESS = "/identity/access.json";
 	private static final String JSON_ROLES = "/identity/roles.json";
 	private static final String JSON_ROLE = "/identity/member-role.json";
 	private static final String JSON_USERS = "/identity/users.json";
@@ -30,8 +28,6 @@ public class KeystoneTests extends AbstractTest {
 	private static final String JSON_TENANT = "/identity/tenant-admin.json";
 	private static final String JSON_EXTENSIONS = "/identity/extensions.json";
 
-	private OSClient os;
-	
 	/**
 	 * Tests authentication and receiving the Access object with the current Token
 	 *
@@ -40,14 +36,14 @@ public class KeystoneTests extends AbstractTest {
 	public void authenticateTest() throws Exception {
 		
 		respondWith(JSON_ACCESS);
-		os = OSFactory.builder()
-				.endpoint(authURL("/v2.0"))
-				.credentials("admin", "test")
-				.tenantName("admin")
-				.authenticate();
+	  associateClient(OSFactory.builder()
+											.endpoint(authURL("/v2.0"))
+											.credentials("admin", "test")
+											.tenantName("admin")
+											.authenticate());
 		
-		assertEquals(os.getAccess().getToken().getTenant().getId(), "b80f8d4e28b74188858b654cb1fccf7d");
-		assertEquals(os.getAccess().getUser().getName(), "admin");
+		assertEquals(os().getAccess().getToken().getTenant().getId(), "b80f8d4e28b74188858b654cb1fccf7d");
+		assertEquals(os().getAccess().getUser().getName(), "admin");
 	}
 	
 	/**
@@ -58,15 +54,15 @@ public class KeystoneTests extends AbstractTest {
 	public void rolesTest() throws Exception {
 		respondWith(JSON_ROLES);
 		
-		List<? extends Role> roles = os.identity().roles().list();
+		List<? extends Role> roles = os().identity().roles().list();
 		assertEquals(roles.size(), 5);
 		
 		respondWith(JSON_ROLES);
-		Role role = os.identity().roles().getByName("admin");
+		Role role = os().identity().roles().getByName("admin");
 		assertEquals(role.getName(), "admin");
 		
 		respondWith(JSON_ROLE);
-		role = os.identity().roles().get("b8e55a37fc3748de887f165954448db5");
+		role = os().identity().roles().get("b8e55a37fc3748de887f165954448db5");
 		assertEquals(role.getName(), "Member");
 	}
 	
@@ -78,7 +74,7 @@ public class KeystoneTests extends AbstractTest {
 	public void usersTest() throws Exception 
 	{
 		respondWith(JSON_USERS);
-		List<? extends User> users = os.identity().users().list();
+		List<? extends User> users = os().identity().users().list();
 		
 		assertEquals(users.size(), 8);
 	}
@@ -90,10 +86,10 @@ public class KeystoneTests extends AbstractTest {
 	public void testAPIPatterns() {
 		
 		respondWith(404);
-		assertNull(os.identity().users().get("bogus_id"));
+		assertNull(os().identity().users().get("bogus_id"));
 		
 		respondWith(404);
-		assertEquals(os.identity().users().list().size(), 0);
+		assertEquals(os().identity().users().list().size(), 0);
 	}
 
 	/**
@@ -104,11 +100,11 @@ public class KeystoneTests extends AbstractTest {
 	public void testTenants() throws Exception {
 		respondWith(JSON_TENANTS);
 		
-		List<? extends Tenant> tenants = os.identity().tenants().list();
+		List<? extends Tenant> tenants = os().identity().tenants().list();
 		assertEquals(tenants.size(), 3);
 		
 		respondWith(JSON_TENANT);
-		Tenant t = os.identity().tenants().get("b80f8d4e28b74188858b654cb1fccf7d");
+		Tenant t = os().identity().tenants().get("b80f8d4e28b74188858b654cb1fccf7d");
 		assertEquals(t.getName(), "admin");
 	}
 	
@@ -120,7 +116,7 @@ public class KeystoneTests extends AbstractTest {
 	public void testExtensions() throws Exception {
 		respondWith(JSON_EXTENSIONS);
 		
-		List<? extends Extension> extensions = os.identity().listExtensions();
+		List<? extends Extension> extensions = os().identity().listExtensions();
 		assertEquals(extensions.size(), 4);
 	}
 

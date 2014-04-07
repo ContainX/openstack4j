@@ -53,6 +53,14 @@ public class KeystoneAccess implements Access {
 		return endpoint;
 	}
 	
+	/**
+	 * ONLY used for unit tests
+	 * @param endpoint
+	 */
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
+	}
+	
 	public Credentials getCredentials() {
 		return credentials;
 	}
