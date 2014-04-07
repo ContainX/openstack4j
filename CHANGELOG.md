@@ -8,6 +8,8 @@
 * Personality support on Compute -> Server -> Create
 * Security Group & Rules in Compute
 * Keypair support
+* Floating IP in Network
+* Security Groups & Rules in Network
 
 ### 1.0.0
 
