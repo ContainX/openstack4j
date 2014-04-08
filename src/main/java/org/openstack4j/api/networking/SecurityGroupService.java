@@ -13,14 +13,12 @@ import org.openstack4j.model.network.SecurityGroup;
  */
 public interface SecurityGroupService extends RestService {
 
-  
   /**
    * Get list of security groups accessible by the current tenant
    *
    * @return the list<? extends security group>
    */
   List<? extends SecurityGroup> list();
-  
   
   /**
    * Gets the Security Group by id.

@@ -39,7 +39,7 @@ public interface NetFloatingIPService extends RestService {
   
   
   /**
-   * Creates the.
+   * Creates a new Floating IP
    *
    * @param floatingIp the floating ip
    * @return the net floating ip
@@ -48,7 +48,7 @@ public interface NetFloatingIPService extends RestService {
   
   
   /**
-   * Associate to port.
+   * Associates a Floating IP to a Port.
    *
    * @param floatingIp the floating ip
    * @return the net floating ip
@@ -57,7 +57,7 @@ public interface NetFloatingIPService extends RestService {
   
   
   /**
-   * Disassociate from port.
+   * Deassociate's from port.
    *
    * @param floatingIp the floating ip
    * @return the net floating ip
