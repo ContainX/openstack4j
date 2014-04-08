@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.network.SecurityGroupRule;
-import org.openstack4j.openstack.networking.domain.NeutronSecurityGroupRule.SecurityGroupRules;
 
 
 /**
