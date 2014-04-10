@@ -1,5 +1,7 @@
 package org.openstack4j.model.compute.builder;
 
+import java.util.List;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.Image;
@@ -36,6 +38,14 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	 * @see Server#getImage()
 	 */
 	ServerCreateBuilder image(Image image);
+	
+	/**
+	 * Adds list of networks (by id) to server
+	 *
+	 * @param networks list of network ids
+	 * @return this builder
+	 */
+	ServerCreateBuilder networks(List<String> networks);
 	
 	/**
 	 * Adds a Personality to the Server.  A personality is a path to a file and the contents to be replaced on the new 
