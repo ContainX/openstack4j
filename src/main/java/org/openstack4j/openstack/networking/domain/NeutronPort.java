@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.networking.domain;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -245,6 +246,24 @@ public class NeutronPort implements Port {
 			m.fixedIps.add(new NeutronIP(address, subnetId));
 			return this;
 		}
+		
+    @Override
+    public PortBuilder removeFixedIp(String address, String subnetId) {
+      if (m.fixedIps == null)
+        m.fixedIps = Sets.newHashSet();
+      
+      Iterator<NeutronIP> iter = m.fixedIps.iterator();
+      
+      while (iter.hasNext()) {
+        NeutronIP fixedIP = iter.next();
+        if (fixedIP.getSubnetId() != null && fixedIP.getSubnetId().equals(subnetId) && 
+            fixedIP.getIpAddress() != null && fixedIP.getIpAddress().equals(address)) {
+          iter.remove();
+        }
+      }
+      
+      return this;
+    }
 
 		@Override
 		public PortBuilder adminState(boolean adminStateUp) {
@@ -273,6 +292,5 @@ public class NeutronPort implements Port {
 		protected Port reference() {
 			return m;
 		}
-		
 	}
 }
