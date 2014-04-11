@@ -2,6 +2,7 @@ package org.openstack4j.openstack.networking.domain;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
@@ -100,6 +101,7 @@ public class NeutronSubnet implements Subnet {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@JsonIgnore
 	public boolean isDHCPEnabled() {
 		return enableDHCP;
 	}
