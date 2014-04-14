@@ -4,7 +4,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
-import org.openstack4j.api.Builders;
 import org.openstack4j.api.networking.NetFloatingIPService;
 import org.openstack4j.model.network.NetFloatingIP;
 import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
@@ -63,7 +62,7 @@ public class FloatingIPServiceImpl extends BaseNetworkingServices implements Net
     checkNotNull(portId);
     String inner = String.format("{ \"port_id\":\"%s\" }", portId);
     String json = String.format("{ \"%s\": %s }", "floatingip", inner);
-    return put(NeutronFloatingIP.class, uri("/floatingips/%s"),id).json(json).execute();
+    return put(NeutronFloatingIP.class, uri("/floatingips/%s",id)).json(json).execute();
   }
 
   /**
@@ -73,6 +72,6 @@ public class FloatingIPServiceImpl extends BaseNetworkingServices implements Net
   public NetFloatingIP disassociateFromPort(String id) {
     checkNotNull(id);
     String json = String.format("{ \"%s\": %s }", "floatingip", "{ \"port_id\":null }");
-    return put(NeutronFloatingIP.class, uri("/floatingips/%s"),id).json(json).execute();
+    return put(NeutronFloatingIP.class, uri("/floatingips/%s",id)).json(json).execute();
   }
 }
