@@ -203,6 +203,16 @@ public class NovaServerCreate implements ServerCreate {
 		}
 		
 		@Override
+		public ServerCreateConcreteBuilder networks(List<String> idList) {
+		  if (idList != null) {
+		    for (String id : idList) {
+		      m.addNetwork(id, null);
+		    }
+		  }
+		  return this;
+		}
+		
+		@Override
 		public ServerCreateBuilder addPersonality(String path, String contents) {
 			if (path == null || contents == null) return this;
 			

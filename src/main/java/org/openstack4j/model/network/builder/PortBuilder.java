@@ -57,6 +57,15 @@ public interface PortBuilder extends Builder<PortBuilder, Port> {
 	PortBuilder fixedIp(String address, String subnetId);
 	
 	/**
+   * Removes a fixed IP from the current list of fixed IP Addresses
+   * @param address the IP Address
+   * @param subnetId the subnet identifier
+   * @return PortBuilder
+   * 
+   */
+	PortBuilder removeFixedIp(String address, String subnetId);
+	
+	/**
 	 * @see Port#isAdminStateUp()
 	 */
 	PortBuilder adminState(boolean adminStateUp);
