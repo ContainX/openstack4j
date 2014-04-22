@@ -27,7 +27,7 @@ public class BaseNetworkingServices extends BaseOpenStackService {
 		public String apply(String input) {
 			if (input == null || input.contains("/v"))
 				return input;
-			return input.concat("v2.0");
+			return input.concat(input.endsWith("/") ? "v2.0" : "/v2.0");
 		}
 	}
 	
