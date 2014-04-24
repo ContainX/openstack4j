@@ -44,9 +44,16 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
 	 */
 	@Override
 	public List<? extends Statistics> statistics(String meterName) {
-		checkNotNull(meterName);
+		return statistics(meterName, 0);
+	}
+
+	@Override
+	public List<? extends Statistics> statistics(String meterName, int period) {
+checkNotNull(meterName);
 		
-		CeilometerStatistics[] stats = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName)).execute();
+		CeilometerStatistics[] stats = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName))
+																	  .param(period > 0, "period", period)
+																		.execute();
 		return wrapList(stats);
 	}
 
