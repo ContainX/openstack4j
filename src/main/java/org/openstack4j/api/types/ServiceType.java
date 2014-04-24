@@ -8,6 +8,7 @@ public enum ServiceType {
 	BLOCK_STORAGE("cinder"),
 	NETWORK("neutron"),
 	EC2("ec2"),
+	TELEMETRY("ceilometer"),
 	UNKNOWN("NA")
 	;
 	

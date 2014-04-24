@@ -29,6 +29,8 @@ import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
+import org.openstack4j.api.telemetry.MeterService;
+import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
@@ -54,6 +56,8 @@ import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
+import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
+import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
 import com.google.common.collect.Maps;
 
@@ -97,7 +101,8 @@ public class DefaultAPIProvider implements APIProvider {
     bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
     bind(SecurityGroupService.class, SecurityGroupServiceImpl.class);
     bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
-		
+		bind(TelemetryService.class, TelemetryServiceImpl.class);
+		bind(MeterService.class, MeterServiceImpl.class);
 	}
 
 	/**
