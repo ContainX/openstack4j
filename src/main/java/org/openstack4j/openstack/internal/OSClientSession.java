@@ -13,6 +13,7 @@ import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.storage.BlockStorageService;
+import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.Access.Service;
@@ -226,6 +227,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	@Override
 	public BlockStorageService blockStorage() {
 		return Apis.get(BlockStorageService.class);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public TelemetryService telemetry() {
+		return Apis.get(TelemetryService.class);
 	}
 
 }
