@@ -10,6 +10,7 @@
 * Keypair support
 * Floating IP in Network
 * Security Groups & Rules in Network
+* Telemetry (Ceilometer) support
 
 ### 1.0.0
 
