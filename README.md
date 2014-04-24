@@ -187,7 +187,7 @@ Image image = os.images().create(Builders.image()
 
 Contributing
 ------------
-If you would like to contribute to this project we welcome you. Please contact us and let us know your area of expertise. We are looking for engineers to extend API functionality as well as add extensions and extended providers.
+If you would like to contribute please see our contributing [guidelines](https://github.com/gondor/openstack4j/blob/master/CONTRIBUTING.md)
 
 License
 -------
