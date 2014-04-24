@@ -4,7 +4,7 @@ OpenStack4j
 [![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)
 
 
-OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage and more.
+OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry and more.
 
 ### Documenation/Tutorials:  [www.OpenStack4j.com](http://www.openstack4j.com)                      
 
@@ -18,17 +18,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 Maven
 -----
 
-#### Latest Release
-
-```
-<dependency>
-    <groupId>org.pacesys</groupId>
-    <artifactId>openstack4j</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
-#### Current Development
+#### Current (Master Branch)
 
 
 ```
@@ -36,6 +26,18 @@ Maven
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
     <version>1.0.1-SNAPSHOT</version>
+</dependency>
+```
+
+#### Latest Release (Stable)
+
+**Note:** May not include all documented features on the website tutorials and documentation.  See [the changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md) for details
+
+```
+<dependency>
+    <groupId>org.pacesys</groupId>
+    <artifactId>openstack4j</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
