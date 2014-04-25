@@ -31,7 +31,7 @@ Maven
 
 #### Latest Release (Stable)
 
-**Note:** May not include all documented features on the website tutorials and documentation.  See [the changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md) for details
+**Note:** May not include all documented features on the website tutorials and documentation.  See [ changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md) for details
 
 ```
 <dependency>
