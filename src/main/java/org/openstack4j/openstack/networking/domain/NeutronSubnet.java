@@ -239,6 +239,12 @@ public class NeutronSubnet implements Subnet {
 			m.pools.add(new NeutronPool(start, end));
 			return this;
 		}
+		
+		@Override 
+		public SubnetBuilder enableDHCP(boolean enable) {
+		  m.enableDHCP = enable;
+		  return this;
+		}
 
 		@Override
 		public Subnet build() {
