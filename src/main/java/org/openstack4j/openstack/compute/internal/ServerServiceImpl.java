@@ -139,6 +139,26 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 		checkNotNull(flavorId);
 		return invokeAction(serverId, "resize", String.format("{ \"flavorRef\": \"%s\" }", flavorId));
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse addSecurityGroup(String serverId, String secGroupName) {
+		checkNotNull(serverId);
+		checkNotNull(secGroupName);
+		return invokeAction(serverId, "addSecurityGroup", String.format("{ \"name\": \"%s\" }", secGroupName));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse removeSecurityGroup(String serverId, String secGroupName) {
+		checkNotNull(serverId);
+		checkNotNull(secGroupName);
+		return invokeAction(serverId, "removeSecurityGroup", String.format("{ \"name\": \"%s\" }", secGroupName));
+	}
 
 	/**
 	 * {@inheritDoc}
