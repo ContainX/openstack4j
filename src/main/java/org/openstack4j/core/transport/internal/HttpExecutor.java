@@ -5,11 +5,13 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 
+import org.openstack4j.api.exceptions.ConnectionException;
 import org.openstack4j.api.exceptions.ResponseException;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpExecutorService;
@@ -80,6 +82,8 @@ public class HttpExecutor implements HttpExecutorService {
 				return HttpResponse.wrap(invocation.method(request.getMethod().name(), Entity.entity(request.getJson(), ClientConstants.CONTENT_TYPE_JSON)));
 			}
 			return HttpResponse.wrap(invocation.method(request.getMethod().name()));
+		} catch (ProcessingException pe) {
+			throw new ConnectionException(pe.getMessage(), 0, pe);
 		} catch (ClientErrorException e) {
 			throw HttpResponse.mapException(e.getResponse().getStatusInfo().toString(), e.getResponse().getStatus(), e);
 		}

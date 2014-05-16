@@ -213,6 +213,13 @@ public class NovaServerCreate implements ServerCreate {
 		}
 		
 		@Override
+		public ServerCreateBuilder addSecurityGroup(String name) {
+			if (name != null && !name.isEmpty())
+				m.addSecurityGroup(name);
+			return this;
+		}
+		
+		@Override
 		public ServerCreateBuilder addPersonality(String path, String contents) {
 			if (path == null || contents == null) return this;
 			
