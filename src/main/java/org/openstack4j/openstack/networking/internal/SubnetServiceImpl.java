@@ -47,5 +47,9 @@ public class SubnetServiceImpl extends BaseNetworkingServices implements SubnetS
 		checkNotNull(subnet);
 		return post(NeutronSubnet.class, uri("/subnets")).entity(subnet).execute();
 	}
-
+	
+	public Subnet update(Subnet subnet) {
+	  checkNotNull(subnet);
+	  return put(NeutronSubnet.class, uri("/subnets/%s", subnet.getId())).entity(subnet).execute();
+	}
 }
