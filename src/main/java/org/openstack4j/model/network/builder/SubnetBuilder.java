@@ -57,5 +57,10 @@ public interface SubnetBuilder extends Builder<SubnetBuilder, Subnet> {
 	 */
 	SubnetBuilder tenant(Tenant tenant);
 	
+	/**
+   * @see Subnet#isDHCPEnabled()
+   */
+	SubnetBuilder enableDHCP(boolean enable);
+	
 	
 }
