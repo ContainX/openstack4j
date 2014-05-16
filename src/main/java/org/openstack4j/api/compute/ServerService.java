@@ -112,6 +112,24 @@ public interface ServerService {
 	String createSnapshot(String serverId, String snapshotName);
 	
 	/**
+	 * Associates the specified Server Group by name to the Server by it's identifier
+	 * 
+	 * @param serverId the server identifier
+	 * @param secGroupName the security group name
+	 * @return the action response
+	 */
+	ActionResponse addSecurityGroup(String serverId, String secGroupName);
+	
+	/**
+	 * Removes the specified Server Group by name from the Server by it's identifier
+	 * 
+	 * @param serverId the server identifier
+	 * @param secGroupName the security group name
+	 * @return the action response
+	 */
+	ActionResponse removeSecurityGroup(String serverId, String secGroupName);
+	
+	/**
 	 * Gets usage information about the server.  Usage includes CPU, Memory, IO.  Information
 	 * is dependent on the hypervisor used by the OpenStack installation and whether that hypervisor
 	 * supports diagnostics
