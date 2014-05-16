@@ -1,6 +1,7 @@
 package org.openstack4j.openstack;
 
 import org.openstack4j.api.OSClient;
+import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.internal.HttpExecutor;
@@ -60,8 +61,9 @@ public class OSFactory {
 		 * from the controller. As a result a client will be returned encapsulating the authorized access and corresponding API access
 		 * 
 		 * @return the authenticated client
+		 * @throws AuthenticationException if the credentials or default tenant is invalid
 		 */
-		public OSClient authenticate() {
+		public OSClient authenticate() throws AuthenticationException {
 			Credentials credentials = new Credentials(user, password, tenantName);
 			HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).endpoint(endpoint).method(HttpMethod.POST).path("/tokens").entity(credentials).build();
 			KeystoneAccess access = HttpExecutor.create().execute(request).getEntity(KeystoneAccess.class);

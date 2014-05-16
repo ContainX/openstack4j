@@ -56,4 +56,11 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	 */
 	ServerCreateBuilder addPersonality(String path, String contents);
 	
+	/**
+	 * Adds the security group.
+	 *
+	 * @param name the name
+	 */
+	ServerCreateBuilder addSecurityGroup(String name);
+	
 }

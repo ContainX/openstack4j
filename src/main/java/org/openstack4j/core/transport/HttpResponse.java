@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import javax.ws.rs.core.Response;
 
+import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.api.exceptions.ClientResponseException;
 import org.openstack4j.api.exceptions.ResponseException;
 import org.openstack4j.api.exceptions.ServerResponseException;
@@ -168,6 +169,8 @@ public class HttpResponse {
 	 * @return the response exception
 	 */
 	public static ResponseException mapException(String message, int status, Throwable cause) {
+		if (status == 401)
+			  return new AuthenticationException(message, status, cause);
 		if (status >= 400 && status < 499)
 			return new ClientResponseException(message, status, cause);
 		if (status >= 500 && status < 600)
