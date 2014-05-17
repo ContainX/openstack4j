@@ -116,7 +116,7 @@ Map<String, ? extends Number> diagnostics = os.compute().servers().diagnostics("
 **Network Operations**
 ```java
 // List the networks which the current authorized tenant has access to
-List<Network> networks = os.networking().network().list();
+List<? extends Network> networks = os.networking().network().list();
 
 // Create a Network
 Network network = os.networking().network()
@@ -126,7 +126,7 @@ Network network = os.networking().network()
 **Subnet Operations**
 ```java
 // List all subnets which the current authorized tenant has access to
-List<Subnet> subnets = os.networking().subnet().list();
+List<? extends Subnet> subnets = os.networking().subnet().list();
 
 // Create a Subnet
 Subnet subnet = os.networking().subnet().create(Builders.subnet()
@@ -142,7 +142,7 @@ Subnet subnet = os.networking().subnet().create(Builders.subnet()
 **Router Operations**
 ```java
 // List all Routers 
-List<Router> = os.networking().router().list();
+List<? extends Router> = os.networking().router().list();
 
 // Create a Router
 Router router = os.networking().router().create(Builders.router()
@@ -155,7 +155,7 @@ Router router = os.networking().router().create(Builders.router()
 **Basic Operations**
 ```java
 // List all Images
-List<Image> images = os.images().list();
+List<? extends Image> images = os.images().list();
 
 // Get an Image by ID
 Image image = os.images().get("imageId");
