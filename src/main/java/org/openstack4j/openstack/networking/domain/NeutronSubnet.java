@@ -133,6 +133,7 @@ public class NeutronSubnet implements Subnet {
 	/**
 	 * {@inheritDoc}
 	 */
+	@JsonIgnore
 	@Override
 	public List<? extends Pool> getAllocationPools() {
 		return pools;
