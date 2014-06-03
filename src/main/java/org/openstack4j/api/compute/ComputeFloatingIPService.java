@@ -57,6 +57,15 @@ public interface ComputeFloatingIPService extends RestService {
 	ActionResponse addFloatingIP(Server server, String fixedIpAddress, String ipAddress);
 	
 	/**
+	 * Adds floating-ip to server.
+	 *
+	 * @param server the server
+	 * @param ipAddress the ip address
+	 * @return the action response
+	 */
+	ActionResponse addFloatingIP(Server server, String ipAddress);
+	
+	/**
 	 * Remove floating-ip from server
 	 *
 	 * @param server the server
