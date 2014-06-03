@@ -59,6 +59,9 @@ public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements
    */
   @Override
   public ActionResponse addFloatingIP(Server server, String fixedIpAddress, String ipAddress) {
+  	if (fixedIpAddress == null)
+  		return addFloatingIP(server, ipAddress);
+  	
     checkNotNull(server);
     checkNotNull(fixedIpAddress);
     checkNotNull(ipAddress);
@@ -69,6 +72,21 @@ public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements
     String uri = uri("/servers/%s/action", server.getId());
     return invokeAction(uri, action, innerJson);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+	public ActionResponse addFloatingIP(Server server, String ipAddress) {
+  	checkNotNull(server);
+    checkNotNull(ipAddress);
+    
+    String action = "addFloatingIp";
+    String innerJson = String.format("{ \"address\": \"%s\" }", ipAddress);
+    
+    String uri = uri("/servers/%s/action", server.getId());
+    return invokeAction(uri, action, innerJson);
+	}
 
   /**
    * {@inheritDoc}
