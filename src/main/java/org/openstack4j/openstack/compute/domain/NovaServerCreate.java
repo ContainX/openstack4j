@@ -239,5 +239,11 @@ public class NovaServerCreate implements ServerCreate {
 			m = (NovaServerCreate)in;
 			return this;
 		}
+
+		@Override
+		public ServerCreateBuilder keypairName(String name) {
+			m.keyName = name;
+			return this;
+		}
 	}
 }
