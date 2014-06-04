@@ -63,4 +63,10 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	 */
 	ServerCreateBuilder addSecurityGroup(String name);
 	
+	/**
+	 * Associates this Server with a public keypair name
+	 * @param name the name of the public keypair
+	 */
+	ServerCreateBuilder keypairName(String name);
+	
 }
