@@ -22,7 +22,8 @@ public class OSFactory {
 		String user;
 		String tenantName;
 		String password;
-
+		boolean useNonStrictSSL;
+		
 		private OSFactory() { }
 		
 		/**
@@ -40,22 +41,51 @@ public class OSFactory {
 			return new OSFactory();
 		}
 		
+		/**
+		 * The identity endpoint to connect to
+		 * @param endpoint the endpoint URL of the identity service
+		 * @return self for method chaining
+		 */
 		public OSFactory endpoint(String endpoint) {
 			this.endpoint = endpoint;
 			return this;
 		}
 		
+		/**
+		 * The authentication credentials
+		 * 
+		 * @param user the user to authenticate with
+		 * @param password the password to authenticate with
+		 * @return self for method chaining
+		 */
 		public OSFactory credentials(String user, String password) {
 		  this.user = user;
 			this.password = password;
 			return this;
 		}
 		
+		/**
+		 * The tenant/project to authenticate as
+		 * @param tenantName the tenant/project name
+		 * @return self for method chaining
+		 */
 		public OSFactory tenantName(String tenantName) {
 			this.tenantName = tenantName;
 			return this;
 		}
 		
+		/**
+		 * In some private environments self signed certificates are used.  If you are using HTTPS and using
+		 * self-signed cerificates then set this to true.  Otherwise the default strict hostname and properly
+		 * signed validation based client will be used.
+		 * 
+		 * @param useNonStrictSSL true if an HTTPS self-signed environment
+		 * @return self for method chaining
+		 */
+		public OSFactory useNonStrictSSLClient(boolean useNonStrictSSL) {
+			this.useNonStrictSSL = useNonStrictSSL;
+			return this;
+		}
 		/**
 		 * Attempts to connect, authenticated and obtain an authorization access entity which contains a token, service catalog and endpoints
 		 * from the controller. As a result a client will be returned encapsulating the authorized access and corresponding API access
@@ -66,8 +96,8 @@ public class OSFactory {
 		public OSClient authenticate() throws AuthenticationException {
 			Credentials credentials = new Credentials(user, password, tenantName);
 			HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).endpoint(endpoint).method(HttpMethod.POST).path("/tokens").entity(credentials).build();
-			KeystoneAccess access = HttpExecutor.create().execute(request).getEntity(KeystoneAccess.class);
-			return OSClientSession.createSession(access.applyContext(endpoint, credentials));
+			KeystoneAccess access = HttpExecutor.create().execute(request, useNonStrictSSL).getEntity(KeystoneAccess.class);
+			return OSClientSession.createSession(access.applyContext(endpoint, credentials), useNonStrictSSL);
 		}
 		
 }

@@ -27,7 +27,7 @@ public class KeystoneAccess implements Access {
 	private AccessUser user;
 	private String endpoint;
 	private Credentials credentials;
-
+	
 	/**
 	 * @return the token
 	 */

@@ -16,4 +16,14 @@ public interface HttpExecutorService {
 	 */
 	<R> HttpResponse execute(HttpRequest<R> request);
 	
+	/**
+	 * Executes the given request and returns the {@code HttpResponse} result from the server
+	 *
+	 * @param <R> the underlying return entity type
+	 * @param request the request to execute
+	 * @param useNonStrictSSL set this to true if the endpoint is using a self-signed certificate.  False to use trusted only client
+	 * @return HttpResponse from the server
+	 */
+	<R> HttpResponse execute(HttpRequest<R> request, boolean useNonStrictSSL);
+	
 }

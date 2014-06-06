@@ -40,15 +40,21 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	KeystoneAccess access;
 	Set<ServiceType> supports;
 	String publicHostIP;
+	boolean useNonStrictSSL;
 	
-	private OSClientSession(KeystoneAccess access, String endpoint)
+	private OSClientSession(KeystoneAccess access, String endpoint, boolean useNonStrictSSL)
 	{
 		this.access = access;
+		this.useNonStrictSSL = useNonStrictSSL;
 		sessions.set(this);
 	}
 	
 	public static OSClientSession createSession(KeystoneAccess access) {
-		return new OSClientSession(access, access.getEndpoint());
+		return new OSClientSession(access, access.getEndpoint(), Boolean.FALSE);
+	}
+	
+	public static OSClientSession createSession(KeystoneAccess access, boolean useNonStrictSSL) {
+		return new OSClientSession(access, access.getEndpoint(), useNonStrictSSL);
 	}
 	
 	public static OSClientSession getCurrent() {
@@ -65,6 +71,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 		return supports;
 	}
 
+	/**
+	 * @return true if we should ignore self-signed cerificates
+	 */
+	@Override
+	public boolean useNonStrictSSLClient() {
+		return this.useNonStrictSSL;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
