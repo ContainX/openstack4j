@@ -33,8 +33,7 @@ public class HttpRequest<R> {
 	private Map<String, List<Object>> queryParams;
 	private Map<String, Object> headers = new HashMap<String, Object>();
 	private Function<String, String> endpointFunc;
-	
-	
+	private boolean useNonStrictSSLClient;
 	public HttpRequest() { }
 
 	/**
@@ -94,6 +93,10 @@ public class HttpRequest<R> {
 		if (endpointFunc != null)
 			return endpointFunc.apply(endpoint);
 		return endpoint;
+	}
+	
+	public boolean useNonStrictSSLClient() {
+			return useNonStrictSSLClient;
 	}
 	
 	/**
@@ -358,6 +361,7 @@ public class HttpRequest<R> {
 			if (provider != null)
 			{
 				request.endpoint = provider.getEndpoint(service);
+				request.useNonStrictSSLClient = provider.useNonStrictSSLClient();
 				request.getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, provider.getTokenId());
 			}
 			return request;

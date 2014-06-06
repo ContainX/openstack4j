@@ -40,8 +40,16 @@ public class HttpExecutor implements HttpExecutorService {
 	 */
 	@Override
 	public <R> HttpResponse execute(HttpRequest<R> request) {
+		return execute(request, request.useNonStrictSSLClient());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public <R> HttpResponse execute(HttpRequest<R> request, boolean useNonStrictSSL) {
 		try {
-			return invoke(request);
+			return invoke(request, useNonStrictSSL);
 		}
 		catch (ResponseException re) {
 			throw re;
@@ -51,7 +59,7 @@ public class HttpExecutor implements HttpExecutorService {
 			return null;
 		}
 	}
-
+	
 	/**
 	 * Invokes the given request
 	 *
@@ -60,8 +68,8 @@ public class HttpExecutor implements HttpExecutorService {
 	 * @return the response
 	 * @throws Exception the exception
 	 */
-	private <R> HttpResponse invoke(HttpRequest<R> request) throws Exception {
-		Client client = ClientFactory.create();
+	private <R> HttpResponse invoke(HttpRequest<R> request, boolean useNonStrictSSL) throws Exception {
+		Client client = ClientFactory.create(useNonStrictSSL);
 		WebTarget target = client.target(request.getEndpoint()).path(request.getPath());
 		
 		if (Boolean.getBoolean(HttpLoggingFilter.class.getName()))
