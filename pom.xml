@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.pacesys</groupId>
 	<artifactId>openstack4j</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<name>OpenStack Java API</name>
 	<description>OpenStack Java API</description>
 	<url>http://github.com/gondor/openstack4j/</url>
