@@ -22,6 +22,7 @@ public class OSFactory {
 		String user;
 		String tenantName;
 		String password;
+		String tenantId;
 		boolean useNonStrictSSL;
 		
 		private OSFactory() { }
@@ -75,6 +76,16 @@ public class OSFactory {
 		}
 		
 		/**
+		 * The tenant/project to authenticate as (some clouds such as HP use tenantId vs tenantName)
+		 * @param tenantId the tenant/project id
+		 * @return self for method chaining
+		 */
+		public OSFactory tenantId(String tenantId) {
+			this.tenantId = tenantId;
+			return this;
+		}
+		
+		/**
 		 * In some private environments self signed certificates are used.  If you are using HTTPS and using
 		 * self-signed cerificates then set this to true.  Otherwise the default strict hostname and properly
 		 * signed validation based client will be used.
@@ -94,7 +105,7 @@ public class OSFactory {
 		 * @throws AuthenticationException if the credentials or default tenant is invalid
 		 */
 		public OSClient authenticate() throws AuthenticationException {
-			Credentials credentials = new Credentials(user, password, tenantName);
+			Credentials credentials = new Credentials(user, password, tenantName, tenantId);
 			HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).endpoint(endpoint).method(HttpMethod.POST).path("/tokens").entity(credentials).build();
 			KeystoneAccess access = HttpExecutor.create().execute(request, useNonStrictSSL).getEntity(KeystoneAccess.class);
 			return OSClientSession.createSession(access.applyContext(endpoint, credentials), useNonStrictSSL);

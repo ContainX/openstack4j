@@ -141,7 +141,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 		}
 		
 		for (Service sc : access.getServiceCatalog()) {
-			if (service.getServiceName().equals(sc.getName()))
+			if (service.getServiceName().equals(sc.getName()) || service.name().toLowerCase().equals(sc.getType()))
 			{
 				if (sc.getServiceType() == ServiceType.NETWORK)
 				{
