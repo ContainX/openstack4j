@@ -21,6 +21,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.glassfish.jersey.apache.connector.ApacheConnector;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.spi.Connector;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.openstack4j.core.transport.ClientConstants;
 
@@ -47,11 +50,13 @@ class ClientFactory {
 			return getNonStrictSSLClient();
 		
 		if (clientStrict == null) {
-			clientStrict = ClientBuilder.newBuilder()
-					 									.register(JacksonFeature.class)
-					 									.register(RESOLVER)
-					 									.register(new RequestFilter())
-					 									.build();
+			ClientConfig clientConfig = new ClientConfig();
+			clientConfig.register(JacksonFeature.class);
+			clientConfig.register(RESOLVER);
+			clientConfig.register(new RequestFilter());
+			Connector connector = new ApacheConnector(clientConfig.getConfiguration());
+			clientConfig.connector(connector);
+			clientStrict = ClientBuilder.newClient(clientConfig);
 		}
 		
 		return clientStrict;
