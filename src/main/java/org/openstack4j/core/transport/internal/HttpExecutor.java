@@ -10,6 +10,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 import org.openstack4j.api.exceptions.ConnectionException;
 import org.openstack4j.api.exceptions.ResponseException;
@@ -77,7 +78,7 @@ public class HttpExecutor implements HttpExecutorService {
 		
 		target = populateQueryParams(target, request);
 
-		Invocation.Builder invocation = target.request();
+		Invocation.Builder invocation = target.request(MediaType.APPLICATION_JSON);
 		populateHeaders(invocation,  request);
 
 		Entity<?> entity = (request.getEntity() == null) ? null :
