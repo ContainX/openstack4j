@@ -20,6 +20,14 @@ public interface UserService {
 	 */
 	User get(String userId);
 	
+	/**API added by @ Sandeep Kumar Singh
+     * Gets detailed information about a specified user by name
+     *
+     * @param userName the user name
+     * @return the user
+     */
+    User getByName(String userName);
+	
   /**
    * Lists current users
    *

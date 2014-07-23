@@ -91,4 +91,12 @@ public class UserServiceImpl extends BaseOpenStackService implements UserService
 		checkNotNull(user);
 		return Apis.getIdentityServices().roles().listRolesForUser(user.getId(), user.getTenantId());
 	}
+/*
+ * API added by @ Sandeep Kumar Singh
+ * 
+ */
+  @Override
+  public User getByName(String userName) {
+    checkNotNull(userName);
+    return get(KeystoneUser.class, "/users").param("name", userName).execute();   }
 }
