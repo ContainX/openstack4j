@@ -33,7 +33,7 @@ public class ActionResponse implements Serializable {
 	 * @return true if the action was successful
 	 */
 	public boolean isSuccess() {
-		return message != null;
+		return message == null;
 	}
 	
 	/**
