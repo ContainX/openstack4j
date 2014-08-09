@@ -10,6 +10,7 @@ import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
+import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 
 /**
@@ -160,4 +161,13 @@ public interface ServerService {
 	 * @return VNCConsole or null if not applicable
 	 */
 	VNCConsole getVNCConsole(String serverId, Type type);
+	/**
+	 * attach the volume  to the given server 
+	 * 
+	 * @param serverId the server identifier
+	 * @param volumeId the volume identifier
+	 * @author octopus zhang
+	 * @return volumeAttachment or null if not applicable
+	 */
+	VolumeAttachment attachVolume(String serverId,String volumeId);
 }
