@@ -15,12 +15,14 @@ import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
+import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.openstack.compute.domain.ConsoleOutput;
 import org.openstack4j.openstack.compute.domain.NovaServer;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
+import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
 
 /**
  * Server Operation API implementation
@@ -236,5 +238,14 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	@Override
 	public ServerCreateBuilder serverBuilder() {
 		return NovaServerCreate.builder();
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public VolumeAttachment attachVolume(String serverId, String volumeId) {
+		String body = String.format("{\"volumeAttachment\":{ \"volumeId\": \"%s\" }}", volumeId);
+		System.out.println(body);
+		return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId)).json(body).execute();
 	}
 }
