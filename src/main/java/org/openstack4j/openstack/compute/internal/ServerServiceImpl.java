@@ -245,7 +245,6 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	@Override
 	public VolumeAttachment attachVolume(String serverId, String volumeId) {
 		String body = String.format("{\"volumeAttachment\":{ \"volumeId\": \"%s\" }}", volumeId);
-		System.out.println(body);
 		return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId)).json(body).execute();
 	}
 }
