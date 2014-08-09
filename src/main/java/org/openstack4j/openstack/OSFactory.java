@@ -110,5 +110,21 @@ public class OSFactory {
 			KeystoneAccess access = HttpExecutor.create().execute(request, useNonStrictSSL).getEntity(KeystoneAccess.class);
 			return OSClientSession.createSession(access.applyContext(endpoint, credentials), useNonStrictSSL);
 		}
+		/**
+		 * Attempts to connect, authenticated ,but not create session,just return whether credentials and tenant right
+		 * from the controller. As a result a client will be returned encapsulating the authorized access and corresponding API access
+		 * 
+		 * @return if username,password,tenant is right
+		 */
+		public boolean identifyUser(){
+			try{
+				Credentials credentials = new Credentials(user, password, tenantName, tenantId);
+				HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).endpoint(endpoint).method(HttpMethod.POST).path("/tokens").entity(credentials).build();
+				HttpExecutor.create().execute(request, useNonStrictSSL).getEntity(KeystoneAccess.class);
+			}catch (AuthenticationException ae){
+				return false;
+			}
+			return true;
+		}
 		
 }
