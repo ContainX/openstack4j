@@ -3,6 +3,7 @@ package org.openstack4j.model.storage.block;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonCreator;
@@ -106,4 +107,9 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return extended meta data information. key value pair of String key, String value
 	 */
 	Map<String, String> getMetaData();
+	/**
+	 * @author octopus zhang
+	 * @return volume attachment data information. 
+	 */
+	List<? extends VolumeAttachment> getAttachments();
 }
