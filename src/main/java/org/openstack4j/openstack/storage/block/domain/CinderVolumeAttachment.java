@@ -61,7 +61,7 @@ public class CinderVolumeAttachment implements VolumeAttachment {
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
 				.add("device", device).add("id", id).add("serverId", server_id)
-				.add("volumeId", volume_id).add("host_name", host_name).toString();
+				.add("volumeId", volume_id).add("hostname", host_name).toString();
 
 	}
 

@@ -17,25 +17,25 @@ public interface VolumeAttachment extends ModelEntity {
 	 */
 	String getDevice();
 	/**
-	 * return the host that volume on
+	 * return the host where volume is on
 	 * @return hostname
 	 */
 	String getHostname();
     /**
-	 * Gets the id.
+	 * Gets the id of this volume attachment
 	 * @return the id
 	 */
 	String getId();
 	
 	/**
-	 * the server's id int this attachment
-	 * @return the id
+	 * the server's id in this volume attachment 
+	 * @return the  id of a server
 	 */
 	String getServerId();
 	
 	/**
-	 * the volume's id int this attachment
-	 * @return the id
+	 * the volume's id in this volume attachment 
+	 * @return the id of a volume
 	 */
 	String getVolumeId();
 }
