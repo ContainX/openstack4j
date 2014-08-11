@@ -173,8 +173,8 @@ public interface ServerService {
 	/**
 	 * detach the volume to the given server
 	 * @param serverId the server identifier
-	 * @param volumeId the volume identifier
+	 * @param attachmentId the attachment identifier
 	 * @author octopus zhang
 	 */
-	void detachVolume(String serverId,String volumeId);
+	void detachVolume(String serverId,String attachmentId);
 }
