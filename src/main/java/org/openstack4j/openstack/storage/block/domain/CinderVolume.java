@@ -8,9 +8,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.openstack4j.model.storage.block.Volume;
+import org.openstack4j.model.storage.block.VolumeAttachment;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.openstack.common.ListResult;
-
 import com.google.common.base.Objects;
 
 /**
@@ -47,6 +47,8 @@ public class CinderVolume implements Volume {
 	private Map<String, String> metadata;
 	@JsonProperty("bootable")
 	private Boolean bootable;
+	@JsonProperty("attachments")
+	private List<CinderVolumeAttachment> attachments;
 	
 	/**
 	 * {@inheritDoc}
@@ -158,7 +160,15 @@ public class CinderVolume implements Volume {
 	public Map<String, String> getMetaData() {
 		return metadata;
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends VolumeAttachment> getAttachments() {
+		return attachments;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
