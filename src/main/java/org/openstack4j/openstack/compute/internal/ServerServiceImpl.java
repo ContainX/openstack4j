@@ -248,4 +248,11 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 		System.out.println(body);
 		return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId)).json(body).execute();
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void detachVolume(String serverId, String attachmentId) {
+		delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).execute();
+	}
 }
