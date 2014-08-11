@@ -170,4 +170,11 @@ public interface ServerService {
 	 * @return volumeAttachment or null if not applicable
 	 */
 	VolumeAttachment attachVolume(String serverId,String volumeId);
+	/**
+	 * detach the volume to the given server
+	 * @param serverId the server identifier
+	 * @param volumeId the volume identifier
+	 * @author octopus zhang
+	 */
+	void detachVolume(String serverId,String volumeId);
 }
