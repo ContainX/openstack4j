@@ -94,6 +94,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 			case SHELVE: return invokeAction(serverId, "shelve");
 			case SHELVE_OFFLOAD: return invokeAction(serverId, "shelveOffload");
 			case UNSHELVE: return invokeAction(serverId, "unshelve");
+			case SUSPEND: return invokeAction(serverId, "suspend");
 			default:
 				return ActionResponse.actionFailed(String.format("Action %s was not found in the list of invokable actions", action));
 		}
