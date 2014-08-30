@@ -2,6 +2,7 @@ package org.openstack4j.api.compute;
 
 import java.util.List;
 
+import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.Extension;
 
@@ -25,6 +26,13 @@ public interface ComputeService extends RestService {
 	 * @return the image service
 	 */
 	ComputeImageService images();
+	
+	/**
+	 * Hypervisor Service Extension API 
+	 * 
+	 * @return the hypervisor service
+	 */
+	HypervisorService hypervisors();
 
 	/**
 	 * Server Service API
@@ -64,5 +72,4 @@ public interface ComputeService extends RestService {
 	 * @return a list of Extensions that have been added against the Compute service
 	 */
 	List<? extends Extension> listExtensions();
-
 }
