@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
+import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
-import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.openstack.common.ExtensionValue.NovaExtensions;
 
@@ -85,4 +86,11 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 		return Apis.get(KeypairService.class);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HypervisorService hypervisors() {
+		return Apis.get(HypervisorService.class);
+	}
 }
