@@ -9,6 +9,7 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.identity.TokenV2;
 import org.openstack4j.model.identity.User;
 import org.openstack4j.openstack.OSFactory;
 import org.testng.annotations.Test;
@@ -42,7 +43,7 @@ public class KeystoneTests extends AbstractTest {
 											.tenantName("admin")
 											.authenticate());
 		
-		assertEquals(os().getAccess().getToken().getTenant().getId(), "b80f8d4e28b74188858b654cb1fccf7d");
+		assertEquals(((TokenV2)os().getAccess().getToken()).getTenant().getId(), "b80f8d4e28b74188858b654cb1fccf7d");
 		assertEquals(os().getAccess().getUser().getName(), "admin");
 	}
 	

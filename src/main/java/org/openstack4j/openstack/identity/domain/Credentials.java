@@ -3,9 +3,11 @@ package org.openstack4j.openstack.identity.domain;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
+import org.openstack4j.model.identity.AuthStore;
+import org.openstack4j.model.identity.AuthVersion;
 
 @JsonRootName("auth")
-public class Credentials extends Auth {
+public class Credentials extends Auth implements AuthStore {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -51,6 +53,12 @@ public class Credentials extends Auth {
 			 this.username = username;
 			 this.password = password;
 		 }
+	}
+
+	@JsonIgnore
+	@Override
+	public AuthVersion getVersion() {
+		return AuthVersion.V2;
 	}
 
 }

@@ -24,9 +24,27 @@ public interface Access extends ModelEntity {
 	List<? extends Service> getServiceCatalog();
 	
 	/**
+	 * @return the original endpoint used to authenticate
+	 */
+	String getEndpoint();
+	
+	/**
 	 * @return details about the current user
 	 */
 	UserDetails getUser();
+	
+	/**
+	 * If Access is being wrapped such as in V3 then this will return the underlying wrapped instance.  Otherwise it returns itself
+	 * 
+	 * @return the unwrapped underlying data source
+	 */
+	<T> T unwrap();
+	
+	
+	/**
+	 * @return the version of the authentication method
+	 */
+	AuthVersion getVersion();
 	
 	public interface UserDetails
 	{

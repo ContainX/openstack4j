@@ -8,6 +8,7 @@ package org.openstack4j.core.transport;
 public interface ClientConstants 
 {
 	static final String HEADER_X_AUTH_TOKEN = "X-Auth-Token";
+	static final String HEADER_X_SUBJECT_TOKEN = "X-Subject-Token";
 	static final String HEADER_CONTENT_LANGUAGE = "Content-Language";
 	static final String HEADER_CONTENT_ENCODING = "Content-Encoding";
 	static final String HEADER_ACCEPT = "Accept";
