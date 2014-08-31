@@ -27,7 +27,8 @@ public interface Token extends ModelEntity {
 	Date getExpires();
 	
 	/**
-	 * @return the tenant associated with the original authentication request
+	 * @return the authentication version of this token
 	 */
-	Tenant getTenant();
+	AuthVersion getVersion();
+	
 }

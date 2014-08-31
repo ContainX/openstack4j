@@ -2,12 +2,14 @@ package org.openstack4j.openstack.identity.domain;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.Tenant;
-import org.openstack4j.model.identity.Token;
+import org.openstack4j.model.identity.TokenV2;
 
 import com.google.common.base.Objects;
 
-public final class KeystoneToken implements Token {
+public final class KeystoneToken implements TokenV2 {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -34,6 +36,12 @@ public final class KeystoneToken implements Token {
 		return Objects.toStringHelper(this).omitNullValues()
 				   .add("id", id).add("expires", expires).add("tenant", tenant)
 				   .toString();
+	}
+
+	@JsonIgnore
+	@Override
+	public AuthVersion getVersion() {
+		return AuthVersion.V2;
 	}
 	
 }
