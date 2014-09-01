@@ -52,6 +52,15 @@ public interface ServerService {
 	Server boot(ServerCreate server);
 	
 	/**
+	 * Create (boot) a new Server
+	 *
+	 * @param server the server to boot
+	 * @param maxWaitTime the max time to wait in milliseconds for the server to become ACTIVE
+	 * @return the newly created server
+	 */
+	Server bootAndWaitActive(ServerCreate server, int maxWaitTime);
+	
+	/**
 	 * Delete (i.e shut down and delete the image) of the server
 	 * @param serverId the server identifier
 	 */
