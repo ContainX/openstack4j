@@ -94,6 +94,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 			case SHELVE: return invokeAction(serverId, "shelve");
 			case SHELVE_OFFLOAD: return invokeAction(serverId, "shelveOffload");
 			case UNSHELVE: return invokeAction(serverId, "unshelve");
+			case SUSPEND: return invokeAction(serverId, "suspend");
 			default:
 				return ActionResponse.actionFailed(String.format("Action %s was not found in the list of invokable actions", action));
 		}
@@ -245,7 +246,6 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	@Override
 	public VolumeAttachment attachVolume(String serverId, String volumeId) {
 		String body = String.format("{\"volumeAttachment\":{ \"volumeId\": \"%s\" }}", volumeId);
-		System.out.println(body);
 		return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId)).json(body).execute();
 	}
 	/**

@@ -1,29 +1,26 @@
 package org.openstack4j.openstack.internal;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Map;
 import java.util.Set;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Access;
-import org.openstack4j.model.identity.Access.Service;
-import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.Token;
-import org.openstack4j.openstack.identity.domain.KeystoneAccess;
+import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.openstack.identity.functions.ServiceToServiceType;
+import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -35,26 +32,40 @@ import com.google.common.collect.Sets;
 public class OSClientSession implements OSClient, EndpointTokenProvider {
 	
 	private static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
-	
-	Map<ServiceType, Endpoint> endpoints = Maps.newHashMap();
-	KeystoneAccess access;
+
+	EndpointURLResolver epr = new DefaultEndpointURLResolver();
+	Access access;
+	Facing perspective;
+	String region;
 	Set<ServiceType> supports;
-	String publicHostIP;
 	boolean useNonStrictSSL;
 	
-	private OSClientSession(KeystoneAccess access, String endpoint, boolean useNonStrictSSL)
+	private OSClientSession(Access access, String endpoint, Facing perspective, boolean useNonStrictSSL)
 	{
 		this.access = access;
 		this.useNonStrictSSL = useNonStrictSSL;
+		this.perspective = perspective;
 		sessions.set(this);
 	}
 	
-	public static OSClientSession createSession(KeystoneAccess access) {
-		return new OSClientSession(access, access.getEndpoint(), Boolean.FALSE);
+	private OSClientSession(OSClientSession parent, String region)
+	{
+		this.access = parent.access;
+		this.useNonStrictSSL = parent.useNonStrictSSL;
+		this.perspective = parent.perspective;
+		this.region = region;
 	}
 	
-	public static OSClientSession createSession(KeystoneAccess access, boolean useNonStrictSSL) {
-		return new OSClientSession(access, access.getEndpoint(), useNonStrictSSL);
+	public static OSClientSession createSession(Access access) {
+		return new OSClientSession(access, access.getEndpoint(), null, Boolean.FALSE);
+	}
+	
+	public static OSClientSession createSession(Access access, boolean useNonStrictSSL) {
+		return new OSClientSession(access, access.getEndpoint(), null, useNonStrictSSL);
+	}
+	
+	public static OSClientSession createSession(Access access, Facing perspective, boolean useNonStrictSSL) {
+		return new OSClientSession(access, access.getEndpoint(), perspective, useNonStrictSSL);
 	}
 	
 	public static OSClientSession getCurrent() {
@@ -72,7 +83,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	}
 
 	/**
-	 * @return true if we should ignore self-signed cerificates
+	 * @return true if we should ignore self-signed certificates
 	 */
 	@Override
 	public boolean useNonStrictSSLClient() {
@@ -132,59 +143,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	 */
 	@Override
 	public String getEndpoint(ServiceType service) {
-		if (service == null)
-			return getEndpoint();
-		
-		if (endpoints.containsKey(service))
-		{
-			return getEndpointURL(endpoints.get(service));
-		}
-		
-		for (Service sc : access.getServiceCatalog()) {
-			if (service.getServiceName().equals(sc.getName()) || service.name().toLowerCase().equals(sc.getType()))
-			{
-				if (sc.getServiceType() == ServiceType.NETWORK)
-				{
-					sc.getEndpoints().get(0).toBuilder().type(sc.getServiceType().name());
-					endpoints.put(service, sc.getEndpoints().get(0));
-				}
-				else
-					endpoints.put(service, sc.getEndpoints().get(0));
-				return getEndpointURL(sc.getEndpoints().get(0));
-			}
-		}
-		
-		return access.getEndpoint();
-	}
-	
-	/**
-	 * Gets the endpoint url.
-	 *
-	 * @param endpoint the endpoint
-	 * @return the endpoint url
-	 */
-	private String getEndpointURL(Endpoint endpoint) {
-		if (endpoint.getAdminURL() != null)
-		{
-			if (getPublicIP() != null && !getPublicIP().equals(endpoint.getAdminURL().getHost()))
-			{
-				return endpoint.getAdminURL().toString().replaceAll(endpoint.getAdminURL().getHost(), getPublicIP());
-			}
-			return endpoint.getAdminURL().toString();
-		}
-		return endpoint.getPublicURL().toString();
-	}
-
-	private String getPublicIP() {
-		if (publicHostIP == null) {
-			try {
-				publicHostIP = new URI(access.getEndpoint()).getHost();
-			}
-			catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
-		}
-		return publicHostIP;
+		return epr.findURL(URLResolverParams.create(access, service).perspective(perspective).region(region));
 	}
 	
 	/**
@@ -250,5 +209,4 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	public TelemetryService telemetry() {
 		return Apis.get(TelemetryService.class);
 	}
-
 }
