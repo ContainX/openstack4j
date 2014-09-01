@@ -2,23 +2,30 @@ package org.openstack4j.api.types;
 
 public enum ServiceType {
 
-	IDENTITY("keystone"),
-	COMPUTE("nova"),
-	IMAGE("glance"),
-	BLOCK_STORAGE("cinder"),
-	NETWORK("neutron"),
-	EC2("ec2"),
-	TELEMETRY("ceilometer"),
-	UNKNOWN("NA")
+	IDENTITY("keystone", "identity"),
+	COMPUTE("nova", "compute"),
+	IMAGE("glance", "image"),
+	BLOCK_STORAGE("cinder", "volume"),
+	NETWORK("neutron", "network"),
+	EC2("ec2", "ec2"),
+	TELEMETRY("ceilometer", "metering"),
+	UNKNOWN("NA", "NA")
 	;
 	
 	private final String serviceName;
-	ServiceType(String serviceName) {
+	private final String typeV3;
+	
+	ServiceType(String serviceName, String typeV3) {
 		this.serviceName = serviceName;
+		this.typeV3 = typeV3;
 	}
 	
 	public String getServiceName() {
 		return this.serviceName;
+	}
+	
+	public String getTypeV3() {
+		return this.typeV3;
 	}
 	
 	public static ServiceType forName(String name) {
@@ -26,6 +33,10 @@ public enum ServiceType {
 		{
 			if (s.getServiceName().equalsIgnoreCase(name))
 			  return s;
+			if (s.name().equalsIgnoreCase(name))
+				return s;
+			if (s.typeV3.equalsIgnoreCase(name))
+				return s;
 		}
 		return ServiceType.UNKNOWN;
 	}

@@ -9,9 +9,11 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.common.Link;
 import org.openstack4j.model.identity.Access;
+import org.openstack4j.model.identity.AuthStore;
+import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.Role;
-import org.openstack4j.model.identity.Token;
+import org.openstack4j.model.identity.TokenV2;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -21,17 +23,17 @@ import com.google.common.base.Objects;
 public class KeystoneAccess implements Access {
 
 	private static final long serialVersionUID = 1L;
-	
-  private KeystoneToken token;
+
+	private KeystoneToken token;
 	private List<AccessService> serviceCatalog;
 	private AccessUser user;
 	private String endpoint;
-	private Credentials credentials;
-	
+	private AuthStore credentials;
+
 	/**
 	 * @return the token
 	 */
-	public Token getToken() {
+	public TokenV2 getToken() {
 		return token;
 	}
 
@@ -48,11 +50,11 @@ public class KeystoneAccess implements Access {
 	public UserDetails getUser() {
 		return user;
 	}
-	
+
 	public String getEndpoint() {
 		return endpoint;
 	}
-	
+
 	/**
 	 * ONLY used for unit tests
 	 * @param endpoint
@@ -60,38 +62,38 @@ public class KeystoneAccess implements Access {
 	public void setEndpoint(String endpoint) {
 		this.endpoint = endpoint;
 	}
-	
-	public Credentials getCredentials() {
+
+	public AuthStore getCredentials() {
 		return credentials;
 	}
-	
-	public KeystoneAccess applyContext(String endpoint, Credentials credentials) {
+
+	public KeystoneAccess applyContext(String endpoint, AuthStore credentials) {
 		this.credentials = credentials;
 		this.endpoint = endpoint;
 		return this;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-				   .add("token", token).add("serviceCatalog", serviceCatalog).add("user", user)
-				   .toString();
+				.add("token", token).add("serviceCatalog", serviceCatalog).add("user", user)
+				.toString();
 	}
-	
+
 	@JsonIgnoreProperties(ignoreUnknown=true)
 	public static final class AccessUser implements UserDetails {
-		
+
 		private String id;
 		private String name;
 		private String username;
 		private List<AccessRole> roles;
 		private Boolean enabled;
-		
+
 		@JsonProperty("roles_links")
 		private List<GenericLink> rolesLinks;
-		
+
 		public String getId() {
 			return id;
 		}
@@ -111,19 +113,19 @@ public class KeystoneAccess implements Access {
 		public List<? extends Link> getRolesLinks() {
 			return rolesLinks;
 		}
-		
+
 		public boolean isEnabled() {
 			return (enabled != null && enabled);
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
 		public String toString() {
 			return Objects.toStringHelper(this).omitNullValues()
-					   .add("id", id).add("name", name).add("username", username).add("enabled", enabled)
-					   .add("roles", roles).add("rolesLinks", rolesLinks)
-					   .toString();
+					.add("id", id).add("name", name).add("username", username).add("enabled", enabled)
+					.add("roles", roles).add("rolesLinks", rolesLinks)
+					.toString();
 		}
 
 		@JsonIgnoreProperties(ignoreUnknown=true)
@@ -136,31 +138,31 @@ public class KeystoneAccess implements Access {
 			 */
 			public String toString() {
 				return Objects.toStringHelper(this).omitNullValues()
-						   .add("id", getId()).add("name", getName()).add("tenantId", getTenantId())
-						   .toString();
+						.add("id", getId()).add("name", getName()).add("tenantId", getTenantId())
+						.toString();
 			}
 		}
 	}
-	
+
 	public static class AccessUsers extends ListResult<AccessUser> {
 
 		private static final long serialVersionUID = 1L;
 		@JsonProperty("users")
 		private List<AccessUser> list;
-		
+
 		public List<AccessUser> value() {
 			return list;
 		}
 	}
-	
-	
+
+
 	public static final class AccessService implements Service
 	{
 		private String type;
 		private String name;
 		private List<KeystoneEndpoint> endpoints;
 		private ServiceType serviceType;
-		
+
 		@JsonProperty("endpoints_links")
 		private List<GenericLink> endpointsLinks;
 
@@ -198,15 +200,28 @@ public class KeystoneAccess implements Access {
 		public List<? extends Link> getEndpointsLinks() {
 			return endpointsLinks;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
 		public String toString() {
 			return Objects.toStringHelper(this).omitNullValues()
-					   .add("name", name).add("type", type).add("endpoints", endpoints)
-					   .toString();
+					.add("name", name).add("type", type).add("endpoints", endpoints)
+					.toString();
 		}
+	}
+
+	@JsonIgnore
+	@Override
+	public AuthVersion getVersion() {
+		return AuthVersion.V2;
+	}
+
+	@SuppressWarnings("unchecked")
+	@JsonIgnore
+	@Override
+	public <T> T unwrap() {
+		return (T) this;
 	}
 
 }
