@@ -202,6 +202,11 @@ public class NovaServerCreate implements ServerCreate {
 			return this;
 		}
 		
+		public ServerCreateConcreteBuilder zone(String availabilityZone) {
+			m.availabilityZone = availabilityZone;
+			return this;
+		}
+		
 		@Override
 		public ServerCreateConcreteBuilder networks(List<String> idList) {
 		  if (idList != null) {

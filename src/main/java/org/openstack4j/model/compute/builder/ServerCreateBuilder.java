@@ -69,4 +69,10 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	 */
 	ServerCreateBuilder keypairName(String name);
 	
+	/**
+	 * specify the specify which server launch
+	 * @param zone The availability zone in which to launch the server. 
+	 */
+	ServerCreateBuilder zone(String availabilityZone);
+	
 }
