@@ -60,13 +60,23 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	 * Adds the security group.
 	 *
 	 * @param name the name
+	 * @return this builder
 	 */
 	ServerCreateBuilder addSecurityGroup(String name);
 	
 	/**
 	 * Associates this Server with a public keypair name
 	 * @param name the name of the public keypair
+	 * @return this builder
 	 */
 	ServerCreateBuilder keypairName(String name);
+	
+	/**
+	 * The availability zone in which to launch the server.
+	 * 
+	 * @param availabilityZone the availability zone
+	 * @return this builder
+	 */
+	ServerCreateBuilder availabilityZone(String availabilityZone); 
 	
 }
