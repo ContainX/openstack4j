@@ -21,19 +21,27 @@ import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 public interface ServerService {
 
 	/**
-	 * List all servers (detailed)
+	 * List all servers (detailed) that the current tenant has access to
 	 *
 	 * @return list of all servers
 	 */
 	List<? extends Server> list();
 	
 	/**
-	 * List all service (detailed / brief)
+	 * List all servers (detailed / brief) that the current tenant has access to
 	 *
 	 * @param detail if true all attributes will be populated, false (brief) will be ID, Name and Links
 	 * @return list of all servers
 	 */
 	List<? extends Server> list(boolean detail);
+	
+	/**
+	 * List all servers for all tenants (detailed / brief) 
+	 *
+	 * @param detail if true all attributes will be populated, false (brief) will be ID, Name and Links
+	 * @return list of all servers
+	 */
+	List<? extends Server> listAll(boolean detail);
 	
 	/**
 	 * Get the specified server by ID

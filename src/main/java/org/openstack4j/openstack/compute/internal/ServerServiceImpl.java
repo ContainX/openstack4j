@@ -39,13 +39,27 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	public List<? extends Server> list() {
 		return list(true);
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public List<? extends Server> list(boolean detail) {
-		return get(Servers.class, uri("/servers" + ((detail) ? "/detail" : ""))).execute().getList();
+		return list(detail, Boolean.FALSE);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Server> listAll(boolean detail) {
+		return list(detail, Boolean.TRUE);
+	}
+	
+	private List<? extends Server> list(boolean detail, boolean allTenants) {
+		Invocation<Servers> req = get(Servers.class, uri("/servers" + ((detail) ? "/detail" : "")));
+		req.param("all_tenants", 1);
+		return req.execute().getList();
 	}
 
 	/**
@@ -277,7 +291,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	    while ( !serverIsReady ) {
 	        server2 = get(serverId);
 
-	        if ( server2.getStatus() == Status.ACTIVE ) {
+	        if ( server2.getStatus() == Status.ACTIVE || server2.getStatus() == Status.ERROR) {
 	            serverIsReady = true;               
 	        }
 	        duration += sleep(1000);
@@ -295,5 +309,4 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 		}
 		return ms;
 	}
-	
 }
