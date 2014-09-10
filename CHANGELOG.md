@@ -1,6 +1,12 @@
 # Change Log
 
-### 1.0.1-SNAPSHOT
+### 1.0.2-SNAPSHOT
+
+* Issue #34, Issue #27 - Support for HP Cloud / Identity V3 authentication
+* Issue #18 - Network Facing Perspectives to determine endpoint resolution
+* Issue #19 - Boot and Wait for Server to become ACTIVE based upon max wait time
+
+### 1.0.1
 
 * Block Storage (Cinder) support
 * Floating IP/Pools support in Compute
