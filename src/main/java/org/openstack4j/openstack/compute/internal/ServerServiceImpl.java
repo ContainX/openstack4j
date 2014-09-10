@@ -12,6 +12,7 @@ import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
+import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
@@ -19,9 +20,9 @@ import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.openstack.compute.domain.ConsoleOutput;
 import org.openstack4j.openstack.compute.domain.NovaServer;
+import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
-import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
 
 /**
@@ -38,13 +39,27 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	public List<? extends Server> list() {
 		return list(true);
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public List<? extends Server> list(boolean detail) {
-		return get(Servers.class, uri("/servers" + ((detail) ? "/detail" : ""))).execute().getList();
+		return list(detail, Boolean.FALSE);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Server> listAll(boolean detail) {
+		return list(detail, Boolean.TRUE);
+	}
+	
+	private List<? extends Server> list(boolean detail, boolean allTenants) {
+		Invocation<Servers> req = get(Servers.class, uri("/servers" + ((detail) ? "/detail" : "")));
+		req.param("all_tenants", 1);
+		return req.execute().getList();
 	}
 
 	/**
@@ -63,6 +78,14 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	public Server boot(ServerCreate server) {
 		checkNotNull(server);
 		return post(NovaServer.class, uri("/servers")).entity(server).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Server bootAndWaitActive(ServerCreate server, int maxWaitTime) {
+		return waitUntilServerActive(boot(server), maxWaitTime);
 	}
 	
 	/**
@@ -254,5 +277,36 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	@Override
 	public void detachVolume(String serverId, String attachmentId) {
 		delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).execute();
+	}
+	
+	/**
+	 * Waits until the Server server has become ACTIVE, and returns it if it is under maxWait
+	 */
+	private Server waitUntilServerActive(Server server, int maxWait) {
+	    String serverId = server.getId();
+	    boolean serverIsReady = false;
+	    Server server2 = null;
+
+	    int duration = 0;
+	    while ( !serverIsReady ) {
+	        server2 = get(serverId);
+
+	        if ( server2.getStatus() == Status.ACTIVE || server2.getStatus() == Status.ERROR) {
+	            serverIsReady = true;               
+	        }
+	        duration += sleep(1000);
+	        if (duration >= maxWait)
+	        	return server2;
+	    }
+	    return server2;
+	}
+	
+	private int sleep(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return ms;
 	}
 }
