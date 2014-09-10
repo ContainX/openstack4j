@@ -235,6 +235,18 @@ public class NovaServerCreate implements ServerCreate {
 		}
 		
 		@Override
+		public ServerCreateBuilder keypairName(String name) {
+			m.keyName = name;
+			return this;
+		}
+
+		@Override
+		public ServerCreateBuilder availabilityZone(String availabilityZone) {
+			m.availabilityZone = availabilityZone;
+			return this;
+		}
+		
+		@Override
 		public ServerCreate build() {
 			return m;
 		}
@@ -242,12 +254,6 @@ public class NovaServerCreate implements ServerCreate {
 		@Override
 		public ServerCreateConcreteBuilder from(ServerCreate in) {
 			m = (NovaServerCreate)in;
-			return this;
-		}
-
-		@Override
-		public ServerCreateBuilder keypairName(String name) {
-			m.keyName = name;
 			return this;
 		}
 	}
