@@ -2,7 +2,7 @@ package org.openstack4j.api.compute.ext;
 
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ext.AvailabilityZoneInfo;
+import org.openstack4j.model.compute.ext.AvailabilityZones;
 /**
  * API which supports the "os-availability-zone" extension.  
  * 
@@ -17,5 +17,5 @@ public interface ZoneService extends RestService{
 	 *  
 	 * @return the available zones in detail
 	 */
-	AvailabilityZoneInfo getAvailabilityZoneInfo();
+	AvailabilityZones getAvailabilityZones();
 }
