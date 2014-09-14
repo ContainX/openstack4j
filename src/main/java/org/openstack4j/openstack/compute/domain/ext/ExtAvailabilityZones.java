@@ -9,10 +9,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
-import org.openstack4j.model.compute.ext.AvailabilityZoneInfo;
+import org.openstack4j.model.compute.ext.AvailabilityZones;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class ExtAvailabilityZoneInfo implements AvailabilityZoneInfo {
+public class ExtAvailabilityZones implements AvailabilityZones {
 	private static final long serialVersionUID = 1L;
 	
 	@JsonProperty("availabilityZoneInfo")
@@ -22,7 +22,7 @@ public class ExtAvailabilityZoneInfo implements AvailabilityZoneInfo {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<? extends AvailabilityZone> getAvailabilityZoneInfo() {
+	public List<? extends AvailabilityZone> getAvailabilityZoneList() {
 		return availabilityZoneInfo;
 	}
 	
