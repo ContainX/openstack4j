@@ -3,6 +3,7 @@ package org.openstack4j.api.compute;
 import java.util.List;
 
 import org.openstack4j.api.compute.ext.HypervisorService;
+import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.Extension;
 
@@ -33,6 +34,13 @@ public interface ComputeService extends RestService {
 	 * @return the hypervisor service
 	 */
 	HypervisorService hypervisors();
+	
+	/**
+	 * ZoneService Extension API 
+	 * 
+	 * @return the zones service
+	 */
+	ZoneService zones();
 
 	/**
 	 * Server Service API
