@@ -12,6 +12,7 @@ import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.compute.ext.HypervisorService;
+import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.identity.RoleService;
@@ -41,6 +42,7 @@ import org.openstack4j.openstack.compute.internal.KeypairServiceImpl;
 import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.HypervisorServiceImpl;
+import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
 import org.openstack4j.openstack.identity.internal.IdentityServiceImpl;
 import org.openstack4j.openstack.identity.internal.RoleServiceImpl;
 import org.openstack4j.openstack.identity.internal.ServiceManagerServiceImpl;
@@ -100,12 +102,13 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ComputeSecurityGroupService.class, ComputeSecurityGroupServiceImpl.class);
 		bind(KeypairService.class, KeypairServiceImpl.class);
 		bind(NetFloatingIPService.class, FloatingIPServiceImpl.class);
-    bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
-    bind(SecurityGroupService.class, SecurityGroupServiceImpl.class);
-    bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
+		bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
+		bind(SecurityGroupService.class, SecurityGroupServiceImpl.class);
+		bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
 		bind(TelemetryService.class, TelemetryServiceImpl.class);
 		bind(MeterService.class, MeterServiceImpl.class);
 		bind(HypervisorService.class, HypervisorServiceImpl.class);
+		bind(ZoneService.class, ZoneServiceImpl.class);
 	}
 
 	/**
