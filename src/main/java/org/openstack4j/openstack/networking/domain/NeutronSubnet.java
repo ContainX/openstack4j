@@ -234,6 +234,12 @@ public class NeutronSubnet implements Subnet {
 		}
 
 		@Override
+		public SubnetBuilder gateway(String gateway) {
+			m.gateway = gateway;
+			return this;
+		}
+		
+		@Override
 		public SubnetBuilder addPool(String start, String end) {
 			if (m.pools == null)
 				m.pools = Lists.newArrayList();

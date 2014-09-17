@@ -263,6 +263,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	public ServerCreateBuilder serverBuilder() {
 		return NovaServerCreate.builder();
 	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -271,12 +272,21 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 		String body = String.format("{\"volumeAttachment\":{ \"volumeId\": \"%s\" }}", volumeId);
 		return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId)).json(body).execute();
 	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void detachVolume(String serverId, String attachmentId) {
 		delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).execute();
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse migrateServer(String serverId) {
+		checkNotNull(serverId);
+		return invokeAction(serverId, "migrate");
 	}
 	
 	/**
@@ -309,4 +319,5 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 		}
 		return ms;
 	}
+
 }
