@@ -62,5 +62,9 @@ public interface SubnetBuilder extends Builder<SubnetBuilder, Subnet> {
    */
 	SubnetBuilder enableDHCP(boolean enable);
 	
+	/**
+	   * @see Subnet#gateway()
+	 */
+	SubnetBuilder gateway(String gateway);
 	
 }

@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.compute.domain;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class NovaServer implements Server {
 	public String name;
 	public NovaAddresses addresses;
 	public List<GenericLink> links;
-	public NovaImage image;
+	public Object image;
 	public NovaFlavor flavor;
 	public String accessIPv4;
 	public String accessIPv6;
@@ -96,14 +97,23 @@ public class NovaServer implements Server {
 
 	@Override
 	public String getImageId() {
+		Image image = getImage();
 		return (image != null) ? image.getId() : null;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Image getImage() {
-		if (image != null && image.getName() == null)
-			image = (NovaImage) Apis.getComputeServices().images().get(image.getId());
-		return image;
+		if (image instanceof LinkedHashMap) {
+			LinkedHashMap map = (LinkedHashMap) image;
+			String imageId = (String) map.get("id");
+			if (imageId == null || imageId.isEmpty()) {
+				return null;
+			}
+			NovaImage novaImage = (NovaImage) Apis.getComputeServices().images().get(imageId);
+			return novaImage;
+		}
+		return null;
 	}
 	
 	@Override
