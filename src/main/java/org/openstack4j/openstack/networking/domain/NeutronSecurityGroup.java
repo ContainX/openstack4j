@@ -33,6 +33,9 @@ public class NeutronSecurityGroup implements SecurityGroup {
   @JsonProperty("name")
   private String name;
   
+  @JsonProperty("security_group_rules")
+  private List<NeutronSecurityGroupRule> secGrpRules;
+  
   /**
    * {@inheritDoc}
    */
@@ -97,8 +100,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
    */
   @Override
   public List<? extends SecurityGroupRule> getRules() {
-    // TODO Auto-generated method stub
-    return null;
+    return secGrpRules;
   }
   
   /**
@@ -122,6 +124,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
             .add("id", id).add("tenantId", tenantId)
             .add("name", name)
             .add("description", description)
+            .add("security_group_rules", secGrpRules)
             .addValue("\n")
             .toString();
   }
