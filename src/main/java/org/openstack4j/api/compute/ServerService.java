@@ -178,6 +178,7 @@ public interface ServerService {
 	 * @return VNCConsole or null if not applicable
 	 */
 	VNCConsole getVNCConsole(String serverId, Type type);
+	
 	/**
 	 * attach the volume  to the given server 
 	 * 
@@ -187,6 +188,7 @@ public interface ServerService {
 	 * @return volumeAttachment or null if not applicable
 	 */
 	VolumeAttachment attachVolume(String serverId,String volumeId);
+	
 	/**
 	 * detach the volume to the given server
 	 * @param serverId the server identifier
@@ -194,4 +196,15 @@ public interface ServerService {
 	 * @author octopus zhang
 	 */
 	void detachVolume(String serverId,String attachmentId);
+	
+	/**
+	 * Only user with admin role can do this.
+	 * Migrate a server. The new host will be selected by the scheduler.  Until a resize event is confirmed {@link #confirmResize(String)}, the old server
+	 * will be kept around and you'll be able to roll back to the old host quick with {@link #revertResize(String)}.  All resizes
+	 * will be automatically confirmed after 24 hours.
+	 * 
+	 * @param serverId the server identifier
+	 * @return the action response
+	 */
+	ActionResponse migrateServer(String serverId);
 }
