@@ -6,6 +6,7 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
@@ -121,6 +122,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	public boolean supportsImage() {
 		return supports.contains(ServiceType.IMAGE);
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean supportsHeat() {
+		return supports.contains(ServiceType.ORCHESTRATION);
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -208,5 +217,13 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	@Override
 	public TelemetryService telemetry() {
 		return Apis.get(TelemetryService.class);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HeatService heat() {
+		return Apis.getHeatServices();
 	}
 }
