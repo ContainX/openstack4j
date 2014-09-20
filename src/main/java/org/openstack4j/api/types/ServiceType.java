@@ -9,6 +9,7 @@ public enum ServiceType {
 	NETWORK("neutron", "network"),
 	EC2("ec2", "ec2"),
 	TELEMETRY("ceilometer", "metering"),
+	ORCHESTRATION("heat", "orchestration"),
 	UNKNOWN("NA", "NA")
 	;
 	
