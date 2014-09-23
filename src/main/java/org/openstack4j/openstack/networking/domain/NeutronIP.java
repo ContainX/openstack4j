@@ -15,7 +15,7 @@ public class NeutronIP implements IP {
 	private static final long serialVersionUID = 1L;
 
   @JsonProperty("ip_address")
-  private String address;
+  private String ipAddress;
 
   @JsonProperty("subnet_id")
   private String subnetId;
@@ -23,7 +23,7 @@ public class NeutronIP implements IP {
   public NeutronIP() { }
   
   public NeutronIP(String address, String subnetId) {
-  	this.address = address;
+  	this.ipAddress = address;
   	this.subnetId = subnetId;
   }
   
@@ -32,7 +32,7 @@ public class NeutronIP implements IP {
 	 */
 	@Override
 	public String getIpAddress() {
-		return address;
+		return ipAddress;
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class NeutronIP implements IP {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues().add("ipAddress", address).add("subnetId", subnetId).toString();
+		return Objects.toStringHelper(this).omitNullValues().add("ipAddress", ipAddress).add("subnetId", subnetId).toString();
 	}
 
 }
