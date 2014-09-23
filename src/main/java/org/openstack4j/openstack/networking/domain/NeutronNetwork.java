@@ -1,15 +1,17 @@
 package org.openstack4j.openstack.networking.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
+import org.openstack4j.api.Apis;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.NetworkType;
 import org.openstack4j.model.network.State;
+import org.openstack4j.model.network.Subnet;
 import org.openstack4j.model.network.builder.NetworkBuilder;
 import org.openstack4j.openstack.common.ListResult;
-
 import com.google.common.base.Objects;
 
 /**
@@ -24,6 +26,7 @@ public class NeutronNetwork implements Network {
 	
 	private State status;
 	private List<String> subnets;
+	private List<NeutronSubnet> neutronSubnets;
 	private String name;
 	@JsonProperty("provider:physical_network")
 	private String providerPhyNet;
@@ -92,6 +95,21 @@ public class NeutronNetwork implements Network {
 		return subnets;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Subnet> getNeutronSubnets() {
+		if ( neutronSubnets == null && subnets.size() > 0) {
+			neutronSubnets = new ArrayList<NeutronSubnet>();
+			for ( String subnetId : subnets) {
+				NeutronSubnet sub = (NeutronSubnet)Apis.getNetworkingServices().subnet().get(subnetId);
+				neutronSubnets.add(sub);
+			}
+		}
+		return neutronSubnets;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */

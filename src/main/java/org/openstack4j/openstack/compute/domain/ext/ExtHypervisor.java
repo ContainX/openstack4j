@@ -18,7 +18,7 @@ public class ExtHypervisor implements Hypervisor {
 	@JsonProperty("current_workload")
 	private int currentWorkload;
 	@JsonProperty("disk_available_least")
-	private int leastDiskAvail;
+	private int leastDiskAvailable;
 	@JsonProperty("free_disk_gb")
 	private int freeDisk;
 	@JsonProperty("free_ram_mb")
@@ -26,16 +26,16 @@ public class ExtHypervisor implements Hypervisor {
 	@JsonProperty("hypervisor_type")
 	private String type;
 	@JsonProperty("hypervisor_hostname")
-	private String hostname;
+	private String hypervisorHostname;
 	@JsonProperty("host_ip")
 	private String hostIP;
 	private int version;
 	@JsonProperty("running_vms")
-	private int running;
+	private int runningVM;
 	@JsonProperty("vcpus")
-	private int vcpu;
+	private int virtualCPU;
 	@JsonProperty("vcpus_used")
-	private int usedVcpu;
+	private int virtualUsedCPU;
 	@JsonProperty("local_gb")
 	private int localDisk;
 	@JsonProperty("local_gb_used")
@@ -59,7 +59,7 @@ public class ExtHypervisor implements Hypervisor {
 
 	@Override
 	public int getLeastDiskAvailable() {
-		return leastDiskAvail;
+		return leastDiskAvailable;
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class ExtHypervisor implements Hypervisor {
 
 	@Override
 	public String getHypervisorHostname() {
-		return hostname;
+		return hypervisorHostname;
 	}
 
 	@Override
@@ -89,17 +89,17 @@ public class ExtHypervisor implements Hypervisor {
 
 	@Override
 	public int getRunningVM() {
-		return running;
+		return runningVM;
 	}
 
 	@Override
 	public int getVirtualCPU() {
-		return vcpu;
+		return virtualCPU;
 	}
 
 	@Override
 	public int getVirtualUsedCPU() {
-		return usedVcpu;
+		return virtualUsedCPU;
 	}
 	
 	@Override
@@ -136,11 +136,11 @@ public class ExtHypervisor implements Hypervisor {
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-				     .add("id", id).add("hypervisor_hostname", hostname).add("version", version).add("type", type)
-				     .add("host_ip", hostIP).add("running", running).add("freeDisk", freeDisk).add("freeRam", freeRam)
-				     .add("vcpus", vcpu).add("usedVcpu", usedVcpu).add("localDisk", localDisk).add("localDiskUsed", localDiskUsed)
+				     .add("id", id).add("hypervisor_hostname", hypervisorHostname).add("version", version).add("type", type)
+				     .add("host_ip", hostIP).add("running", runningVM).add("freeDisk", freeDisk).add("freeRam", freeRam)
+				     .add("vcpus", virtualCPU).add("usedVcpu", virtualUsedCPU).add("localDisk", localDisk).add("localDiskUsed", localDiskUsed)
 				     .add("localMemory", localMemory).add("localMemoryUsed", localMemoryUsed).add("currentWorkload",currentWorkload)
-				     .add("leastDiskAvail", leastDiskAvail).add("running_vms", running).add("service", service)
+				     .add("leastDiskAvail", leastDiskAvailable).add("running_vms", runningVM).add("service", service)
 				     .toString();
 	}
 
