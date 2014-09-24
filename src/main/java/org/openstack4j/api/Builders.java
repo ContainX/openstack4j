@@ -5,6 +5,10 @@ import org.openstack4j.model.compute.builder.FlavorBuilder;
 import org.openstack4j.model.compute.builder.FloatingIPBuilder;
 import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
+import org.openstack4j.model.heat.StackCreate;
+import org.openstack4j.model.heat.Template;
+import org.openstack4j.model.heat.builder.StackCreateBuilder;
+import org.openstack4j.model.heat.builder.TemplateBuilder;
 import org.openstack4j.model.identity.builder.EndpointBuilder;
 import org.openstack4j.model.identity.builder.RoleBuilder;
 import org.openstack4j.model.identity.builder.ServiceBuilder;
@@ -26,6 +30,8 @@ import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.heat.domain.HeatStackCreate;
+import org.openstack4j.openstack.heat.domain.HeatTemplate;
 import org.openstack4j.openstack.identity.domain.KeystoneEndpoint;
 import org.openstack4j.openstack.identity.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.domain.KeystoneService;
@@ -231,5 +237,21 @@ public class Builders {
   public static NetFloatingIPBuilder netFloatingIP() {
     return NeutronFloatingIP.builder();
   }
+  
+	/**
+	 * The builder to create a {@link Template}
+	 * @return the TemplateBuilder
+	 */
+	public static TemplateBuilder template(){
+		return HeatTemplate.build();
+	}
+	
+	/**
+	 * The builder to create a {@link StackCreate}
+	 * @return the StackCreate builder
+	 */
+	public static StackCreateBuilder stack(){
+		return HeatStackCreate.build();
+	}
 	
 }

@@ -3,6 +3,7 @@ package org.openstack4j.api;
 import java.util.Set;
 
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
@@ -55,6 +56,13 @@ public interface OSClient {
 	 */
 	boolean supportsImage();
 	
+	/**
+	 * Determines if the Orchestration (Heat) service is supported
+	 * 
+	 * @return true if supports Heat
+	 */
+	boolean supportsHeat();
+
 	/**
 	 * Gets the token that was assigned during authorization
 	 *
@@ -115,4 +123,11 @@ public interface OSClient {
 	 * @return the authorized access entity which contains the authorized token, user details and service catalog
 	 */
 	Access getAccess();
+	
+	/**
+	 * Returns the Heat Service API
+	 * 
+	 * @return the Heat service
+	 */
+	HeatService heat();
 }

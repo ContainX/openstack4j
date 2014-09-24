@@ -46,7 +46,7 @@ public class NeutronExternalGateway implements ExternalGateway {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isEnableSNAT() {
+	public boolean isEnableSnat() {
 		return enableSnat;
 	}
 	
