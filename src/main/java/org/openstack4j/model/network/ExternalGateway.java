@@ -25,6 +25,6 @@ public interface ExternalGateway extends ModelEntity {
 	 * 
 	 * @return true if SNAT is enabled
 	 */
-	boolean isEnableSNAT();
+	boolean isEnableSnat();
 	
 }

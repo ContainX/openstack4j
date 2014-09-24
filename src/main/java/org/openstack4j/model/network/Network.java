@@ -53,4 +53,9 @@ public interface Network extends Resource, Buildable<NetworkBuilder> {
 	 */
 	String getProviderSegID();
 
+	/**
+	 * @return the list of Subnets
+	 */
+	List<? extends Subnet> getNeutronSubnets();
+
 }
