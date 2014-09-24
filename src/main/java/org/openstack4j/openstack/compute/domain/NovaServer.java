@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.openstack4j.api.Apis;
@@ -95,6 +96,7 @@ public class NovaServer implements Server {
 		return links;
 	}
 
+	@JsonIgnore
 	@Override
 	public String getImageId() {
 		Image image = getImage();
@@ -116,6 +118,7 @@ public class NovaServer implements Server {
 		return null;
 	}
 	
+	@JsonIgnore
 	@Override
 	public String getFlavorId() {
 		return (flavor != null) ? flavor.getId() : null;
