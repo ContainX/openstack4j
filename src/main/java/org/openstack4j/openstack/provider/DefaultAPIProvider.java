@@ -14,7 +14,9 @@ import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
+import org.openstack4j.api.heat.EventsService;
 import org.openstack4j.api.heat.HeatService;
+import org.openstack4j.api.heat.ResourcesService;
 import org.openstack4j.api.heat.StackService;
 import org.openstack4j.api.heat.TemplateService;
 import org.openstack4j.api.identity.IdentityService;
@@ -46,7 +48,9 @@ import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.HypervisorServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
+import org.openstack4j.openstack.heat.internal.EventsServiceImpl;
 import org.openstack4j.openstack.heat.internal.HeatServiceImpl;
+import org.openstack4j.openstack.heat.internal.ResourcesServiceImpl;
 import org.openstack4j.openstack.heat.internal.StackServiceImpl;
 import org.openstack4j.openstack.heat.internal.TemplateServiceImpl;
 import org.openstack4j.openstack.identity.internal.IdentityServiceImpl;
@@ -118,6 +122,8 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(HeatService.class, HeatServiceImpl.class);
 		bind(StackService.class, StackServiceImpl.class);
 		bind(TemplateService.class, TemplateServiceImpl.class);
+		bind(EventsService.class, EventsServiceImpl.class);
+		bind(ResourcesService.class, ResourcesServiceImpl.class);
 	}
 
 	/**
