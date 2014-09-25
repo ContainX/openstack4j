@@ -3,6 +3,7 @@ package org.openstack4j.api.identity;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
@@ -37,15 +38,32 @@ public class KeystoneTests extends AbstractTest {
 	public void authenticateTest() throws Exception {
 		
 		respondWith(JSON_ACCESS);
-	  associateClient(OSFactory.builder()
-											.endpoint(authURL("/v2.0"))
-											.credentials("admin", "test")
-											.tenantName("admin")
-											.authenticate());
+	    associateClient(OSFactory.builder()
+								 .endpoint(authURL("/v2.0"))
+								 .credentials("admin", "test")
+								 .tenantName("admin")
+								 .authenticate());
 		
 		assertEquals(((TokenV2)os().getAccess().getToken()).getTenant().getId(), "b80f8d4e28b74188858b654cb1fccf7d");
 		assertEquals(os().getAccess().getUser().getName(), "admin");
 	}
+	
+	public void testAuthorizationFailure() throws IOException {
+        // First we simulate a 401 Authorization error
+        respondWith(401);
+        // The retry logic should re-authenticate and would be expecting the Access object
+        respondWith(JSON_ACCESS);
+        // The retry logic would then run the user lists expecting the proper result
+        respondWith(JSON_USERS);
+        assertEquals(os().identity().users().list().size(), 8);
+        
+        // Positive test to make sure we are back in sync
+        respondWith(JSON_TENANT);
+        Tenant t = os().identity().tenants().get("b80f8d4e28b74188858b654cb1fccf7d");
+        assertEquals(t.getName(), "admin");
+        
+    }
+    
 	
 	/**
 	 * Tests the Role based Operations

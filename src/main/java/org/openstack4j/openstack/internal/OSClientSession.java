@@ -92,6 +92,13 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 	}
 	
 	/**
+	 * @return the current perspective
+	 */
+	public Facing getPerspective() {
+	    return perspective;
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override

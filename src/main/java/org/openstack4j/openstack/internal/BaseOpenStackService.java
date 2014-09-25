@@ -66,6 +66,7 @@ public class BaseOpenStackService {
 	}
 	
 	private <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		System.out.println(OSClientSession.getCurrent().getTokenId());
 		RequestBuilder<R> req = HttpRequest.builder(returnType).endpointTokenProvider(OSClientSession.getCurrent()).method(method).path(path);
 		return new Invocation<R>(req, serviceType, endpointFunc);
 	}

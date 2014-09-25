@@ -247,6 +247,16 @@ public class HttpRequest<R> {
 			request.method = HttpMethod.POST;
 			return this;
 		}
+		
+		/**
+         * Uses a non-strict SSL client if true
+         *
+         * @return the request builder
+         */
+        public RequestBuilder<R> useNonStrictSSL(boolean useNonStrictSSL) {
+            request.useNonStrictSSLClient = useNonStrictSSL;
+            return this;
+        }
 
 		/**
 		 * @see HttpRequest#getEntity()
@@ -362,7 +372,8 @@ public class HttpRequest<R> {
 			{
 				request.endpoint = provider.getEndpoint(service);
 				request.useNonStrictSSLClient = provider.useNonStrictSSLClient();
-				request.getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, provider.getTokenId());
+				if (provider.getTokenId() != null)
+				    request.getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, provider.getTokenId());
 			}
 			return request;
 		}
