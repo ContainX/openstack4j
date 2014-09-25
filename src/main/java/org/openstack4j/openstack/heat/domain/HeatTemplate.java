@@ -6,8 +6,6 @@ import org.codehaus.jackson.annotate.JsonRawValue;
 import org.openstack4j.model.heat.Template;
 import org.openstack4j.model.heat.builder.TemplateBuilder;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * This class represents a HeatTemplate. It uses jackson for (de)serialization
  * of contents.
