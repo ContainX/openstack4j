@@ -17,6 +17,7 @@ public interface HeatService extends RestService{
 	
 	TemplateService templates();
 	
-	//EventsService
-	//ResourcesService
+	EventsService events();
+	
+	ResourcesService resources();
 }
