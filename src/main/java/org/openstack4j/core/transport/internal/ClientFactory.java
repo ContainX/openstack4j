@@ -5,7 +5,6 @@ import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
 import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
@@ -53,7 +52,6 @@ class ClientFactory {
 					 									.register(new RequestFilter())
 					 									.build();
 		}
-		
 		return clientStrict;
 	}
 	
@@ -88,7 +86,6 @@ class ClientFactory {
 				} };
 				SSLContext context = SSLContext.getInstance("TLS");
 				context.init(null, trustAllCerts, new SecureRandom());
-				HttpsURLConnection.setDefaultSSLSocketFactory(context.getSocketFactory());
 				
 				cb.sslContext(context);
 				cb.hostnameVerifier(new HostnameVerifier() {
@@ -118,7 +115,6 @@ class ClientFactory {
 			mapper.enable(SerializationConfig.Feature.INDENT_OUTPUT);
 			mapper.enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 			mapper.disable(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES);
-			
 			rootMapper = new ObjectMapper();
 			rootMapper.setSerializationInclusion(Inclusion.NON_NULL);
 			rootMapper.enable(SerializationConfig.Feature.INDENT_OUTPUT);

@@ -17,115 +17,126 @@ import com.google.common.base.Objects;
 @JsonRootName("token")
 public class KeystoneTokenV3 implements TokenV3 {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@JsonProperty("id")
-	public String id;
-	@JsonProperty("expires_at")
-	private Date expires;
-	@JsonProperty("issued_at")
-	private Date issued;
-	@JsonProperty("methods")
-	private List<String> methods;
+    @JsonProperty("id")
+    public String id;
+    @JsonProperty("expires_at")
+    private Date expires;
+    @JsonProperty("issued_at")
+    private Date issued;
+    @JsonProperty("methods")
+    private List<String> methods;
 
-	@JsonProperty("roles")
-	List<KeystoneRoleV3> roles;
-  @JsonProperty("project")
-  private KeystoneProjectV3 project;
-  
-  @JsonProperty
-  private List<KeystoneCatalog> catalog;
-  
-	@JsonIgnore
-	private KeystoneAuth credentials;
-	@JsonIgnore
-	private String endpoint;
+    @JsonProperty("roles")
+    List<KeystoneRoleV3> roles;
+    @JsonProperty("project")
+    private KeystoneProjectV3 project;
 
-	@Override 
-	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
-				.add("id", id).add("expires", expires).add("issued", issued)
-				.add("methods", methods).add("roles", roles).add("project", project)
-				.addValue("\n").add("catalog", catalog)
-				.toString();
-	}
+    @JsonProperty
+    private List<KeystoneCatalog> catalog;
 
-	@Override
-	public String getId() {
-		return id;
-	}
+    @JsonIgnore
+    private KeystoneAuth credentials;
+    @JsonIgnore
+    private String endpoint;
 
-	@Override
-	public Date getExpires() {
-		return expires;
-	}
+    @Override 
+    public String toString() {
+        return Objects.toStringHelper(this).omitNullValues()
+                .add("id", id).add("expires", expires).add("issued", issued)
+                .add("methods", methods).add("roles", roles).add("project", project)
+                .addValue("\n").add("catalog", catalog)
+                .toString();
+    }
 
-	@JsonIgnore
-	@Override
-	public AuthVersion getVersion() {
-		return AuthVersion.V3;
-	}
+    @Override
+    public String getId() {
+        return id;
+    }
 
-	@Override
-	public Date getIssuedAt() {
-		return issued;
-	}
+    @Override
+    public Date getExpires() {
+        return expires;
+    }
 
-	@Override
-	public List<String> getMethods() {
-		return methods;
-	}
-	
-	@Override
-	public List<? extends Catalog> getCatalog() {
-		return catalog;
-	}
+    @JsonIgnore
+    @Override
+    public boolean isExpired() {
+        return false;
+    }
 
-	@JsonIgnore
-	@Override
-	public ProjectV3 getProject() {
-		return project;
-	}
+    @JsonIgnore
+    @Override
+    public AuthVersion getVersion() {
+        return AuthVersion.V3;
+    }
 
-	@JsonIgnore
-	@Override
-	public List<? extends RoleV3> getRoles() {
-		return roles;
-	}
+    @Override
+    public Date getIssuedAt() {
+        return issued;
+    }
 
-	public KeystoneTokenV3 applyContext(String endpoint, KeystoneAuth credentials) {
-		this.endpoint = endpoint;
-		this.credentials = credentials;
-		return this;
-	}
+    @Override
+    public List<String> getMethods() {
+        return methods;
+    }
 
-	public static class KeystoneRoleV3 extends BasicResourceEntity implements RoleV3 {
-	}
+    @Override
+    public List<? extends Catalog> getCatalog() {
+        return catalog;
+    }
 
-	@JsonIgnore
-	public String getEndpoint() {
-		return this.endpoint;
-	}
+    @JsonIgnore
+    @Override
+    public ProjectV3 getProject() {
+        return project;
+    }
 
-	public static class KeystoneProjectV3 extends BasicResourceEntity implements ProjectV3 {
+    @JsonIgnore
+    @Override
+    public List<? extends RoleV3> getRoles() {
+        return roles;
+    }
+    
+    @JsonIgnore
+    public KeystoneAuth getCredentials() {
+        return credentials;
+    }
 
-		@JsonProperty
-		private KeystoneDomainV3 domain;
+    @JsonIgnore
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+    
+    public KeystoneTokenV3 applyContext(String endpoint, KeystoneAuth credentials) {
+        this.endpoint = endpoint;
+        this.credentials = credentials;
+        return this;
+    }
 
-		@Override
-		public DomainV3 getDomain() {
-			return domain;
-		}
+    public static class KeystoneRoleV3 extends BasicResourceEntity implements RoleV3 {
+    }
 
-		@Override
-		public String toString() {
-			return Objects.toStringHelper(getClass()).omitNullValues()
-					    .add("id", getId()).add("name", getName()).add("domain", domain)
-					    .toString();
-		}
-		
-		public static class KeystoneDomainV3 extends BasicResourceEntity implements DomainV3 {
-		}
+    public static class KeystoneProjectV3 extends BasicResourceEntity implements ProjectV3 {
 
-	}
+        @JsonProperty
+        private KeystoneDomainV3 domain;
+
+        @Override
+        public DomainV3 getDomain() {
+            return domain;
+        }
+
+        @Override
+        public String toString() {
+            return Objects.toStringHelper(getClass()).omitNullValues()
+                    .add("id", getId()).add("name", getName()).add("domain", domain)
+                    .toString();
+        }
+
+        public static class KeystoneDomainV3 extends BasicResourceEntity implements DomainV3 {
+        }
+
+    }
 }

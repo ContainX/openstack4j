@@ -31,4 +31,9 @@ public interface Token extends ModelEntity {
 	 */
 	AuthVersion getVersion();
 	
+	/**
+	 * @return true if the token has expired
+	 */
+	boolean isExpired();
+	
 }

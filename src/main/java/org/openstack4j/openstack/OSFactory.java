@@ -3,18 +3,15 @@ package org.openstack4j.openstack;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.api.types.Facing;
-import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
-import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.openstack.OSFactory.OSFactoryBuilder.OSFactoryBuilderV3;
 import org.openstack4j.openstack.identity.domain.Credentials;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
-import org.openstack4j.openstack.identity.domain.v3.AccessWrapper;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth;
-import org.openstack4j.openstack.identity.domain.v3.KeystoneTokenV3;
+import org.openstack4j.openstack.internal.OSAuthenticator;
 import org.openstack4j.openstack.internal.OSClientSession;
 
 /**
@@ -51,7 +48,6 @@ public abstract class OSFactory<T extends OSFactory<T>> {
 	public static OSFactoryBuilderV3 builderV3() {
 		return new OSFactoryBuilderV3();
 	}
-
 
 	/**
 	 * The identity endpoint to connect to
@@ -115,7 +111,7 @@ public abstract class OSFactory<T extends OSFactory<T>> {
 	 * @throws AuthenticationException if the credentials or default tenant is invalid
 	 */
 	public abstract OSClient authenticate() throws AuthenticationException;
-
+	
 	/**
 	 * Attempts to connect, authenticated ,but not create session,just return whether credentials and tenant right
 	 * from the controller. As a result a client will be returned encapsulating the authorized access and corresponding API access
@@ -151,19 +147,16 @@ public abstract class OSFactory<T extends OSFactory<T>> {
 
 		@Override
 		public OSClient authenticate() throws AuthenticationException {
-			Credentials credentials = new Credentials(user, password, tenantName, tenantId);
-			HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).endpoint(endpoint).method(HttpMethod.POST).path("/tokens").entity(credentials).build();
-			KeystoneAccess access = HttpExecutor.create().execute(request, useNonStrictSSL).getEntity(KeystoneAccess.class);
-			return OSClientSession.createSession(access.applyContext(endpoint, credentials), perspective, useNonStrictSSL);
+			return OSAuthenticator.invoke(new Credentials(user, password, tenantName, tenantId), endpoint, perspective, useNonStrictSSL);
 		}
-
+		
 		@Override
-		public boolean identifyUser(){
+		public boolean identifyUser() {
 			try 
 			{
 				Credentials credentials = new Credentials(user, password, tenantName, tenantId);
-				HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).endpoint(endpoint).method(HttpMethod.POST).path("/tokens").entity(credentials).build();
-				HttpExecutor.create().execute(request, useNonStrictSSL).getEntity(KeystoneAccess.class);
+				HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).useNonStrictSSL(useNonStrictSSL).endpoint(endpoint).method(HttpMethod.POST).path("/tokens").entity(credentials).build();
+				HttpExecutor.create().execute(request).getEntity(KeystoneAccess.class);
 				return Boolean.TRUE;
 			} catch (AuthenticationException ae)
 			{
@@ -200,21 +193,16 @@ public abstract class OSFactory<T extends OSFactory<T>> {
 
 			@Override
 			public OSClient authenticate() throws AuthenticationException {
-				KeystoneAuth credentials = new KeystoneAuth(user, password, domainName, domainId);
-				HttpRequest<KeystoneTokenV3> request = HttpRequest.builder(KeystoneTokenV3.class).endpoint(endpoint).method(HttpMethod.POST).path("/auth/tokens").entity(credentials).build();
-				HttpResponse response = HttpExecutor.create().execute(request, useNonStrictSSL);
-				KeystoneTokenV3 access = response.getEntity(KeystoneTokenV3.class);
-				access.id = response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN);
-				return OSClientSession.createSession(AccessWrapper.wrap(access.applyContext(endpoint, credentials)), perspective, useNonStrictSSL);
+				return OSAuthenticator.invoke(new KeystoneAuth(user, password, domainName, domainId), endpoint, perspective, useNonStrictSSL);
 			}
 
 			@Override
-			public boolean identifyUser(){
+			public boolean identifyUser() {
 				try 
 				{
 					KeystoneAuth credentials = new KeystoneAuth(user, password, domainId, domainId);
-					HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).endpoint(endpoint).method(HttpMethod.POST).path("/auth/tokens").entity(credentials).build();
-					HttpExecutor.create().execute(request, useNonStrictSSL).getEntity(KeystoneAccess.class);
+					HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class).useNonStrictSSL(useNonStrictSSL).endpoint(endpoint).method(HttpMethod.POST).path("/auth/tokens").entity(credentials).build();
+					HttpExecutor.create().execute(request).getEntity(KeystoneAccess.class);
 					return Boolean.TRUE;
 				} catch (AuthenticationException ae)
 				{

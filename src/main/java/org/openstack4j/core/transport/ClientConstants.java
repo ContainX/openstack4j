@@ -11,6 +11,7 @@ public interface ClientConstants
 	static final String HEADER_X_SUBJECT_TOKEN = "X-Subject-Token";
 	static final String HEADER_CONTENT_LANGUAGE = "Content-Language";
 	static final String HEADER_CONTENT_ENCODING = "Content-Encoding";
+	static final String HEADER_OS4J_AUTH = "OS4J-Auth-Command";
 	static final String HEADER_ACCEPT = "Accept";
 	
 	
