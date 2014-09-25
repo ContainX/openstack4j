@@ -62,12 +62,6 @@ public class KeystoneTokenV3 implements TokenV3 {
 
     @JsonIgnore
     @Override
-    public boolean isExpired() {
-        return false;
-    }
-
-    @JsonIgnore
-    @Override
     public AuthVersion getVersion() {
         return AuthVersion.V3;
     }

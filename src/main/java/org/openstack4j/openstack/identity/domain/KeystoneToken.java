@@ -1,9 +1,6 @@
 package org.openstack4j.openstack.identity.domain;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -34,13 +31,6 @@ public final class KeystoneToken implements TokenV2 {
 
 	public Tenant getTenant() {
 		return tenant;
-	}
-
-	@JsonIgnore
-	@Override
-	public boolean isExpired() {
-		Date d = new Date();
-		return (d.getTime() - TimeUnit.MINUTES.toMillis(expires.getTimezoneOffset())- expires.getTime()) > 0;
 	}
 
 	/**
