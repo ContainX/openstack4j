@@ -12,8 +12,6 @@ import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStack;
 import org.openstack4j.openstack.heat.domain.HeatStack.Stacks;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * This class implements all methods for manipulation of {@link HeatStack} objects. The
  * non-exhaustive list of methods is oriented along
