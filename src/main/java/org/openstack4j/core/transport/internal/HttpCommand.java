@@ -11,6 +11,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
@@ -47,7 +48,7 @@ public final class HttpCommand<R> {
         WebTarget target = client.target(request.getEndpoint()).path(request.getPath());
 
         if (Boolean.getBoolean(HttpLoggingFilter.class.getName()))
-            target.register(new HttpLoggingFilter(Logger.getLogger("os"), 10000));
+            target.register(new LoggingFilter(Logger.getLogger("os"), 10000));
 
         target = populateQueryParams(target, request);
 
