@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.identity.TenantUser;
 
 /**
  * Identity Tenant based Operations
@@ -57,5 +58,12 @@ public interface TenantService extends RestService {
 	 * @return the tenant
 	 */
 	Tenant update(Tenant tenant);
+	
+	/**
+	 * Returns a list of users associated by the {@code tenantId}
+	 * @param tenantId the tenant id to query users for
+	 * @return List of TenantUser
+	 */
+	List<? extends TenantUser> listUsers(String tenantId);
 	
 }
