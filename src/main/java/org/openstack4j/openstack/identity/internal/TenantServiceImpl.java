@@ -7,8 +7,10 @@ import java.util.List;
 
 import org.openstack4j.api.identity.TenantService;
 import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.identity.TenantUser;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant.Tenants;
+import org.openstack4j.openstack.identity.domain.KeystoneTenantUser.TenantUsers;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 public class TenantServiceImpl extends BaseOpenStackService implements TenantService  {
@@ -48,4 +50,10 @@ public class TenantServiceImpl extends BaseOpenStackService implements TenantSer
 		checkNotNull(tenant);
 		return post(KeystoneTenant.class, uri("/tenants/%s", tenant.getId())).entity(tenant).execute();
 	}
+
+    @Override
+    public List<? extends TenantUser> listUsers(String tenantId) {
+        checkNotNull(tenantId);
+        return get(TenantUsers.class, uri("/tenants/​%s/users", tenantId)).execute().getList();
+    }
 }

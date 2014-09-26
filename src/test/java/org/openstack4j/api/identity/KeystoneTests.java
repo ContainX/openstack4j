@@ -10,6 +10,7 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.identity.TenantUser;
 import org.openstack4j.model.identity.TokenV2;
 import org.openstack4j.model.identity.User;
 import org.openstack4j.openstack.OSFactory;
@@ -29,6 +30,7 @@ public class KeystoneTests extends AbstractTest {
 	private static final String JSON_TENANTS = "/identity/tenants.json";
 	private static final String JSON_TENANT = "/identity/tenant-admin.json";
 	private static final String JSON_EXTENSIONS = "/identity/extensions.json";
+    private static final String JSON_TENANT_USERS = "/identity/tenant-users.json";
 
 	/**
 	 * Tests authentication and receiving the Access object with the current Token
@@ -125,6 +127,12 @@ public class KeystoneTests extends AbstractTest {
 		respondWith(JSON_TENANT);
 		Tenant t = os().identity().tenants().get("b80f8d4e28b74188858b654cb1fccf7d");
 		assertEquals(t.getName(), "admin");
+	}
+	
+	public void testTenantUsers() throws Exception {
+	    respondWith(JSON_TENANT_USERS);
+	    List<? extends TenantUser> users = os().identity().tenants().listUsers("b80f8d4e28b74188858b654cb1fccf7d");
+	    assertEquals(users.size(), 2);
 	}
 	
 	/**
