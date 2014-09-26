@@ -11,6 +11,7 @@ import org.openstack4j.core.transport.HttpExecutorService;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.openstack.internal.OSAuthenticator;
+import org.openstack4j.openstack.internal.OSClientSession;
 
 /**
  * HttpExecutor is the default implementation for HttpExecutorService which is responsible for interfacing with Jersey and mapping common status codes, requests and responses
@@ -68,10 +69,10 @@ public class HttpExecutor implements HttpExecutorService {
 
     private <R> HttpResponse invokeRequest(HttpCommand<R> command) throws Exception {
         Response response = command.execute();
-
         if (command.getRetries() == 0 && response.getStatus() == 401 && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH))
         {
             OSAuthenticator.reAuthenticate();
+            command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
             return invokeRequest(command.incrementRetriesAndReturn());
         }
         return HttpResponse.wrap(response);
