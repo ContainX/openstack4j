@@ -47,10 +47,10 @@ class ClientFactory {
 		
 		if (clientStrict == null) {
 			clientStrict = ClientBuilder.newBuilder()
-					 									.register(JacksonFeature.class)
-					 									.register(RESOLVER)
-					 									.register(new RequestFilter())
-					 									.build();
+	 									.register(JacksonFeature.class)
+	 									.register(RESOLVER)
+	 									.register(new RequestFilter())
+	 									.build();
 		}
 		return clientStrict;
 	}
