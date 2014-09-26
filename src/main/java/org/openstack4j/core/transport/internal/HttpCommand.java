@@ -102,8 +102,9 @@ public final class HttpCommand<R> {
      * @return incremement's the retry count and returns self
      */
     public HttpCommand<R> incrementRetriesAndReturn() {
-        retries++;
-        return this;
+    	initialize();
+    	retries++;
+    	return this;
     }
 
     public HttpRequest<R> getRequest() {
