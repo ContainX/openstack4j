@@ -3,6 +3,7 @@
 ### 1.0.2-SNAPSHOT
 
 * Heat Orchestration Support
+* Issue #58 - Server status "SHUTOFF" showing as UNRECOGNIZED enum value on query
 * Issue #50 - List of SecurityGroupRule returns null
 * Issue #49 - Listing of servers error in some environments
 * Issue #45 - Seamless retry/auto-renew support when a token has expired. Will re-execute original request after renewal
