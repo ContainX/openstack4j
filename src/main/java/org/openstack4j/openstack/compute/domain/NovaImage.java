@@ -37,6 +37,17 @@ public class NovaImage implements Image {
 	private List<GenericLink> links;
 	@JsonProperty("metadata")
 	private Map<String, String> metadata;
+
+	public NovaImage() {
+	}
+
+	public NovaImage(String empty) {
+		if (!"".equals(empty)) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+        
 	
 	/**
 	 * {@inheritDoc}
