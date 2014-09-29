@@ -77,6 +77,14 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	 * @param availabilityZone the availability zone
 	 * @return this builder
 	 */
-	ServerCreateBuilder availabilityZone(String availabilityZone); 
+	ServerCreateBuilder availabilityZone(String availabilityZone);
+
+    /**
+     * Cloud-init userdata
+     *
+     * @param userData a base64 encoded string containing the userdata
+     * @return this userdata
+     */
+    ServerCreateBuilder userData(String userData);
 	
 }

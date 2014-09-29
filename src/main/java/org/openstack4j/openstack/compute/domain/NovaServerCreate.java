@@ -256,5 +256,11 @@ public class NovaServerCreate implements ServerCreate {
 			m = (NovaServerCreate)in;
 			return this;
 		}
+
+        @Override
+        public ServerCreateBuilder userData(String userData) {
+            m.userData = userData;
+            return this;
+        }
 	}
 }
