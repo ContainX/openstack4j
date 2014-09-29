@@ -1,6 +1,7 @@
 package org.openstack4j.api;
 
 import org.openstack4j.model.common.builder.LinkBuilder;
+import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
 import org.openstack4j.model.compute.builder.FlavorBuilder;
 import org.openstack4j.model.compute.builder.FloatingIPBuilder;
 import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
@@ -22,6 +23,7 @@ import org.openstack4j.model.network.builder.SubnetBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.openstack.common.GenericLink;
+import org.openstack4j.openstack.compute.domain.NovaBlockDeviceMappingCreate;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
@@ -66,6 +68,10 @@ public class Builders {
 	 */
 	public static ServerCreateBuilder server() {
 		return NovaServerCreate.builder();
+	}
+        
+        public static BlockDeviceMappingBuilder blockDeviceMapping() {
+		return NovaBlockDeviceMappingCreate.builder();
 	}
 	
 	/**

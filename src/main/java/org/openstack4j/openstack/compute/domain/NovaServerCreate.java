@@ -16,6 +16,7 @@ import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 
 import com.google.common.collect.Lists;
+import org.openstack4j.model.compute.BlockDeviceMappingCreate;
 
 @JsonRootName("server")
 public class NovaServerCreate implements ServerCreate {
@@ -48,6 +49,9 @@ public class NovaServerCreate implements ServerCreate {
 	private List<NovaNetworkCreate> networks = Lists.newArrayList();
 	
 	private List<Personality> personality;
+        
+        @JsonProperty("block_device_mapping_v2")
+        private List<BlockDeviceMappingCreate> blockDeviceMapping = Lists.newArrayList();
 	
 	public static ServerCreateBuilder builder() {
 		return new ServerCreateConcreteBuilder();
@@ -245,5 +249,11 @@ public class NovaServerCreate implements ServerCreate {
 			m.keyName = name;
 			return this;
 		}
+
+                @Override
+                public ServerCreateBuilder blockDevice(BlockDeviceMappingCreate blockDevice) {
+                        m.blockDeviceMapping.add(blockDevice);
+                        return this;
+                }
 	}
 }
