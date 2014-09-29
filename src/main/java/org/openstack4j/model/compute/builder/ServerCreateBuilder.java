@@ -3,6 +3,7 @@ package org.openstack4j.model.compute.builder;
 import java.util.List;
 
 import org.openstack4j.common.Buildable;
+import org.openstack4j.model.compute.BlockDeviceMappingCreate;
 import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.model.compute.Server;
@@ -68,5 +69,7 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	 * @param name the name of the public keypair
 	 */
 	ServerCreateBuilder keypairName(String name);
+        
+        ServerCreateBuilder blockDevice(BlockDeviceMappingCreate blockDevice);
 	
 }
