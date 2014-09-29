@@ -22,10 +22,12 @@ public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 	public String destination_type = "volume";
 	public String uuid;
 	public String boot_index;
+	public boolean delete_on_termination = false;
 
 	public static NovaBlockDeviceMappingBuilder builder() {
 		return new NovaBlockDeviceMappingBuilder(new NovaBlockDeviceMappingCreate());
 	}
+	
 
 	@Override
 	public NovaBlockDeviceMappingBuilder toBuilder() {
@@ -54,16 +56,34 @@ public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 			create.boot_index = String.valueOf(i);
 			return this;
 		}
+		
+		public BlockDeviceMappingBuilder sourceType(String type){
+			create.source_type = type;
+			return this;
+		}
+		
+		public BlockDeviceMappingBuilder destinationType(String type){
+			create.destination_type = type;
+			return this;
+		}
+		
+		@Override
+		public BlockDeviceMappingBuilder deleteOnTermination(boolean deleteOnTermination) {
+			create.delete_on_termination = deleteOnTermination;
+			return this;
+		}
 
 		@Override
 		public BlockDeviceMappingCreate build() {
 			return create;
 		}
+		
+		
+		
 
 		@Override
 		public BlockDeviceMappingBuilder from(BlockDeviceMappingCreate in) {
 			return new NovaBlockDeviceMappingBuilder((NovaBlockDeviceMappingCreate) in);
-		}
-
+		}		
 	}
 }

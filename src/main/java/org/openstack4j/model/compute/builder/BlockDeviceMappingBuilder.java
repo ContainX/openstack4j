@@ -15,4 +15,10 @@ public interface BlockDeviceMappingBuilder extends Buildable.Builder<BlockDevice
 
 	BlockDeviceMappingBuilder uuid(String id);
 
+	BlockDeviceMappingBuilder destinationType(String type);
+
+	BlockDeviceMappingBuilder sourceType(String type);
+	
+	BlockDeviceMappingBuilder deleteOnTermination(boolean deleteOnTermination);
+
 }
