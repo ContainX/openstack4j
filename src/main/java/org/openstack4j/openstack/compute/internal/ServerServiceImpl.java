@@ -58,7 +58,8 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 	
 	private List<? extends Server> list(boolean detail, boolean allTenants) {
 		Invocation<Servers> req = get(Servers.class, uri("/servers" + ((detail) ? "/detail" : "")));
-		req.param("all_tenants", 1);
+		if (allTenants)
+		    req.param("all_tenants", 1);
 		return req.execute().getList();
 	}
 
