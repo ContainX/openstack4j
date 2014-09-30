@@ -23,7 +23,7 @@ import com.google.common.base.Objects;
 public class KeystoneAccess implements Access {
 
 	private static final long serialVersionUID = 1L;
-
+	private static final String CACHE_FMT = "%s:%s";
 	private KeystoneToken token;
 	private List<AccessService> serviceCatalog;
 	private AccessUser user;
@@ -227,7 +227,15 @@ public class KeystoneAccess implements Access {
 	@JsonIgnore
     @Override
     public String getCacheIdentifier() {
-        return getEndpoint() + (getToken().getTenant().getId());
+	    String uniq = null;
+	    if (token.getTenant() != null)
+	        uniq = token.getTenant().getId();
+	    else if (user != null)
+	        uniq = user.getId();
+	    else
+	        uniq = "";
+	    return String.format(CACHE_FMT, endpoint, uniq);
+	    
     }
 
 }
