@@ -18,5 +18,11 @@ public interface NetworkCreate extends ModelEntity {
 	 * @return the fixed IP Address
 	 */
 	String getFixedIp();
+	
+	/**
+	 * port id of a pre-made port
+	 * @return 
+	 */
+	String getPort();
 
 }

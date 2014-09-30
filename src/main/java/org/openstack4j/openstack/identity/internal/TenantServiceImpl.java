@@ -54,6 +54,6 @@ public class TenantServiceImpl extends BaseOpenStackService implements TenantSer
     @Override
     public List<? extends TenantUser> listUsers(String tenantId) {
         checkNotNull(tenantId);
-        return get(TenantUsers.class, uri("/tenants/​%s/users", tenantId)).execute().getList();
+        return get(TenantUsers.class, uri("/tenants/%s/users", tenantId)).execute().getList();
     }
 }

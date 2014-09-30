@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.domain;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -58,7 +59,7 @@ public class NeutronPort implements Port {
 	private List<String> securityGroups;
 	
         @JsonProperty("extra_dhcp_opts")
-	private List<ExtraDhcpOptCreate> extraDhcpOptCreates = Lists.newArrayList();
+	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates = Lists.newArrayList();
         
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
@@ -298,9 +299,20 @@ public class NeutronPort implements Port {
 
                 @Override
                 public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
-                        m.extraDhcpOptCreates.add(extraDhcpOptCreate);
+                        m.extraDhcpOptCreates.add((NeutronExtraDhcpOptCreate)extraDhcpOptCreate);
                         return this;
                 }
+
+		@Override
+		public PortBuilder securityGroup(String groupName) {
+			if(m.securityGroups==null){
+				m.securityGroups = new ArrayList<String>();
+			}
+			m.securityGroups.add(groupName);
+			return this;
+		}
+		
+		
                 
                 
 	}
