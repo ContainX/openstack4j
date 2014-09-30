@@ -11,13 +11,11 @@ import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.Access.Service;
-import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.EndpointV3;
 import org.openstack4j.model.identity.v3.TokenV3;
-import org.openstack4j.openstack.identity.domain.KeystoneAccess;
 
 /**
  * Resolves an Endpoint URL based on the Service Type and Facing perspective
@@ -34,11 +32,9 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
 		if (p.type == null)
 			return p.access.getEndpoint();
-		String uniqId = p.access.getVersion() == AuthVersion.V2 ? ((KeystoneAccess)p.access).getCredentials().getId() : ((TokenV3)p.access).getProject().getDomain().getId();
-		Key key = Key.of(p.access.getCacheIdentifier(), p.type, p.perspective, p.region != null ? p.region : uniqId);
+		Key key = Key.of(p.access.getCacheIdentifier(), p.type, p.perspective, p.region);
 
 		String url = CACHE.get(key);
-		System.out.println(url);
 		if (url != null)
 			return url;
 
