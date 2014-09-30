@@ -82,14 +82,6 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
         
         ServerCreateBuilder blockDevice(BlockDeviceMappingCreate blockDevice);
         
-        /**
-         * Adds user data to server
-         * 
-         * @param userData
-         * @return 
-         */
-        ServerCreateBuilder userData(String userData);
-	
 	/**
 	 * The availability zone in which to launch the server.
 	 * 
