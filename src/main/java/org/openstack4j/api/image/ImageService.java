@@ -2,6 +2,7 @@ package org.openstack4j.api.image;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
@@ -23,8 +24,16 @@ public interface ImageService extends RestService {
 	 * @return list of images or empty
 	 */
 	List<? extends Image> list();
+        
+        /**
+         * * Returns list of public VM images filtered by parameters.
+         * 
+         * @param filteringParams map (name, value) of filtering parameters
+         * @return 
+         */
+        List<? extends Image> list(Map<String, String> filteringParams);
 	
-	/**
+        /**
 	 * Gets an Image by ID
 	 * 
 	 * @param imageId the image identifier
