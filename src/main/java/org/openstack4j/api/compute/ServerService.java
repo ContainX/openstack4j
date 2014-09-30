@@ -35,6 +35,14 @@ public interface ServerService {
 	 */
 	List<? extends Server> list(boolean detail);
 	
+        /**
+         * Returns list of servers filtered by parameters.
+         * 
+         * @param filteringParams map (name, value) of filtering parameters
+         * @return 
+         */
+        List<? extends Server> list(Map<String, String> filteringParams);
+  
 	/**
 	 * List all servers for all tenants (detailed / brief) 
 	 *

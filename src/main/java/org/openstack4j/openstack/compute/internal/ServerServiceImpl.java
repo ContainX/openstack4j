@@ -62,6 +62,20 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 		return req.execute().getList();
 	}
 
+        /**
+	 * {@inheritDoc}
+	 */
+        @Override
+        public List<? extends Server> list(Map<String, String> filteringParams) {
+            Invocation<Servers> serverInvocation = get(Servers.class, "/servers/detail");
+            if (filteringParams != null) {
+                for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+                    serverInvocation = serverInvocation.param(entry.getKey(), entry.getValue());
+                }
+            }
+            return serverInvocation.execute().getList();
+        }
+        
 	/**
 	 * {@inheritDoc}
 	 */
