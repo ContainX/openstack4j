@@ -1,21 +1,21 @@
 package org.openstack4j.openstack.networking.domain;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.openstack4j.model.common.builder.ResourceBuilder;
+import org.openstack4j.model.network.ExtraDhcpOptCreate;
 import org.openstack4j.model.network.IP;
 import org.openstack4j.model.network.Port;
 import org.openstack4j.model.network.State;
 import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.openstack.common.ListResult;
-
-import com.google.common.base.Objects;
-import com.google.common.collect.Sets;
 
 /**
  * A Neutron Port
@@ -57,6 +57,9 @@ public class NeutronPort implements Port {
 	@JsonProperty("security_groups")
 	private List<String> securityGroups;
 	
+        @JsonProperty("extra_dhcp_opts")
+	private List<ExtraDhcpOptCreate> extraDhcpOptCreates = Lists.newArrayList();
+        
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
 	}
@@ -292,5 +295,13 @@ public class NeutronPort implements Port {
 		protected Port reference() {
 			return m;
 		}
+
+                @Override
+                public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
+                        m.extraDhcpOptCreates.add(extraDhcpOptCreate);
+                        return this;
+                }
+                
+                
 	}
 }
