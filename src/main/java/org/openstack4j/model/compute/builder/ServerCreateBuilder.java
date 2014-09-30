@@ -49,6 +49,14 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	ServerCreateBuilder networks(List<String> networks);
 	
 	/**
+	 * Adds a network port
+	 *
+	 * @param portId id of port
+	 * @return this builder
+	 */
+	ServerCreateBuilder addNetworkPort(String portId);
+	
+	/**
 	 * Adds a Personality to the Server.  A personality is a path to a file and the contents to be replaced on the new 
 	 * VM.
 	 * @param path the path (max is 255 bytes)
@@ -71,5 +79,13 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
 	ServerCreateBuilder keypairName(String name);
         
         ServerCreateBuilder blockDevice(BlockDeviceMappingCreate blockDevice);
+        
+        /**
+         * Adds user data to server
+         * 
+         * @param userData
+         * @return 
+         */
+        ServerCreateBuilder userData(String userData);
 	
 }

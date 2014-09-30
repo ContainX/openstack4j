@@ -12,6 +12,8 @@ public class NovaNetworkCreate implements NetworkCreate {
 	@JsonProperty("fixed_ip")
 	private String fixedIp;
 	
+	private String port;
+	
 	public NovaNetworkCreate() { }
 	
 	public void setId(String id) {
@@ -22,10 +24,20 @@ public class NovaNetworkCreate implements NetworkCreate {
 		this.fixedIp = fixedIp;
 	}
 
+	public void setPort(String port) {
+		this.port = port;
+	}		
+
 	public NovaNetworkCreate(String id, String fixedIp) {
 		this.id = id;
 		this.fixedIp = fixedIp;
 	}
+
+	public NovaNetworkCreate(String id, String fixedIp, String port) {
+		this.id = id;
+		this.fixedIp = fixedIp;
+		this.port = port;
+	}		
 	
 	@Override
 	public String getId() {
@@ -36,5 +48,9 @@ public class NovaNetworkCreate implements NetworkCreate {
 	public String getFixedIp() {
 		return fixedIp;
 	}
+
+	public String getPort() {
+		return port;
+	}		
 
 }

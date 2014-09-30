@@ -154,6 +154,11 @@ public class NovaServerCreate implements ServerCreate {
 		networks.add(new NovaNetworkCreate(id, fixedIP));
 	}
 	
+	@Override
+	public void addNetworkPort(String id) {
+		networks.add(new NovaNetworkCreate(null,null,id));
+	}
+	
 	static class SecurityGroupInternal implements SecurityGroup {
 		
 		private static final long serialVersionUID = 1L;
@@ -208,13 +213,20 @@ public class NovaServerCreate implements ServerCreate {
 		
 		@Override
 		public ServerCreateConcreteBuilder networks(List<String> idList) {
-		  if (idList != null) {
-		    for (String id : idList) {
-		      m.addNetwork(id, null);
-		    }
-		  }
-		  return this;
+			if (idList != null) {
+				for (String id : idList) {
+					m.addNetwork(id, null);
+				}
+			}
+			return this;
 		}
+
+		@Override
+		public ServerCreateBuilder addNetworkPort(String portId) {
+			m.addNetworkPort(portId);
+			return this;
+		}
+		
 		
 		@Override
 		public ServerCreateBuilder addSecurityGroup(String name) {
@@ -255,5 +267,12 @@ public class NovaServerCreate implements ServerCreate {
                         m.blockDeviceMapping.add(blockDevice);
                         return this;
                 }
+
+                @Override
+                public ServerCreateBuilder userData(String userData) {
+                        m.userData = userData;
+                        return this;
+                }
+                
 	}
 }
