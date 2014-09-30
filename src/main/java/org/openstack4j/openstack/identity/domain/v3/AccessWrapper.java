@@ -3,6 +3,7 @@ package org.openstack4j.openstack.identity.domain.v3;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.common.Link;
 import org.openstack4j.model.identity.Access;
@@ -123,4 +124,11 @@ public class AccessWrapper implements Access {
 		}
 		
 	}
+
+
+	@JsonIgnore
+    @Override
+    public String getCacheIdentifier() {
+        return getEndpoint() + getToken().getId();
+    }
 }
