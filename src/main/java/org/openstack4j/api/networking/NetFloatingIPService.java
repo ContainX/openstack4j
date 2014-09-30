@@ -1,6 +1,7 @@
 package org.openstack4j.api.networking;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.RestService;
 
@@ -20,6 +21,14 @@ public interface NetFloatingIPService extends RestService {
    * @return List of NetFloatingIPs or empty
    */
   List<? extends NetFloatingIP> list();
+  
+  /**
+   * Returns list of floating IPs filtered by parameters.
+   * 
+   * @param filteringParams map (name, value) of filtering parameters
+   * @return 
+   */
+  List<? extends NetFloatingIP> list(Map<String, String> filteringParams);
   
   /**
    * Gets a NetFloatingIP by id.

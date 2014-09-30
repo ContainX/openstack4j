@@ -1,9 +1,8 @@
 package org.openstack4j.openstack.networking.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.List;
-
+import java.util.Map;
 import org.openstack4j.api.networking.NetFloatingIPService;
 import org.openstack4j.model.network.NetFloatingIP;
 import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
@@ -24,6 +23,20 @@ public class FloatingIPServiceImpl extends BaseNetworkingServices implements Net
 		return get(FloatingIPs.class, uri("/floatingips")).execute().getList();
 	}
 
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public List<? extends NetFloatingIP> list(Map<String, String> filteringParams) {
+            Invocation<FloatingIPs> fIPsInvocation = get(FloatingIPs.class, "/floatingips");
+            if (filteringParams != null) {
+                for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+                    fIPsInvocation = fIPsInvocation.param(entry.getKey(), entry.getValue());
+                }
+            }
+            return fIPsInvocation.execute().getList();
+        }
+        
 	/**
 	 * {@inheritDoc}
 	 */

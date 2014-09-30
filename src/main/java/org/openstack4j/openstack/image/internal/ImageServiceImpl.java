@@ -1,15 +1,13 @@
 package org.openstack4j.openstack.image.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_OCTECT_STREAM;
-import static org.openstack4j.core.transport.ClientConstants.HEADER_ACCEPT;
-
 import java.io.InputStream;
 import java.util.List;
-
+import java.util.Map;
 import javax.annotation.Nullable;
-
 import org.openstack4j.api.image.ImageService;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_OCTECT_STREAM;
+import static org.openstack4j.core.transport.ClientConstants.HEADER_ACCEPT;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.image.Image;
@@ -35,6 +33,21 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
 	public List<? extends Image> list() {
 		return get(Images.class, uri("/images/detail")).execute().getList();
 	}
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public List<? extends Image> list(Map<String, String> filteringParams) {
+            Invocation<Images> imageInvocation = get(Images.class, "/images/detail");
+            if (filteringParams != null) {
+                for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+                    imageInvocation = imageInvocation.param(entry.getKey(), entry.getValue());
+                }
+            }
+            return imageInvocation.execute().getList();
+        }
+        
 	/**
 	 * 
 	 * {@inheritDoc}
