@@ -224,4 +224,10 @@ public class KeystoneAccess implements Access {
 		return (T) this;
 	}
 
+	@JsonIgnore
+    @Override
+    public String getCacheIdentifier() {
+        return getEndpoint() + (getToken().getTenant().getId());
+    }
+
 }

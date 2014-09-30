@@ -42,6 +42,11 @@ public interface Access extends ModelEntity {
 	
 	
 	/**
+	 * @return the internal UUID used for cache lookups of this access
+	 */
+	String getCacheIdentifier();
+	
+	/**
 	 * @return the version of the authentication method
 	 */
 	AuthVersion getVersion();
