@@ -77,4 +77,7 @@ public interface PortBuilder extends Builder<PortBuilder, Port> {
 	PortBuilder state(State state);
 	
         PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate);
+	
+	PortBuilder securityGroup(String groupName);
+	
 }

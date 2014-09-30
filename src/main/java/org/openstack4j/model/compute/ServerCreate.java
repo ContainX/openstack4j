@@ -150,6 +150,12 @@ public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder
 	 */
 	void addNetwork(String id, String fixedIP);
 	
+	/**
+	 * Adds network port
+	 * @param id id of a premade neutron port
+	 */
+	void addNetworkPort(String id);
+	
 	public interface SecurityGroup extends ModelEntity {
 		
 		/**
