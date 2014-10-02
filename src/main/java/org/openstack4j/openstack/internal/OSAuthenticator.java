@@ -35,7 +35,7 @@ public class OSAuthenticator {
      */
     public static OSClient invoke(AuthStore auth, String endpoint, Facing perspective, boolean useNonStrictSSL) {
         if (auth.getVersion() == AuthVersion.V2)
-            return authenticateV2((Credentials) auth.unwrap(), endpoint, perspective, useNonStrictSSL);
+            return authenticateV2((Credentials) auth.unwrap(), endpoint, perspective, useNonStrictSSL, false);
 
         return authenticateV3((KeystoneAuth) auth.unwrap(), endpoint, perspective, useNonStrictSSL);
     }
@@ -53,12 +53,12 @@ public class OSAuthenticator {
             case V2:
             default:
                 KeystoneAccess access = session.getAccess().unwrap();
-                authenticateV2((Credentials) access.getCredentials().unwrap(), access.getEndpoint(), session.getPerspective(), session.useNonStrictSSLClient());
+                authenticateV2((Credentials) access.getCredentials().unwrap(), access.getEndpoint(), session.getPerspective(), session.useNonStrictSSLClient(), true);
                 break;
         }
     }
     
-    private static OSClient authenticateV2(Credentials credentials, String endpoint, Facing perspective, boolean useNonStrictSSL) {
+    private static OSClient authenticateV2(Credentials credentials, String endpoint, Facing perspective, boolean useNonStrictSSL, boolean reLinkToExistingSession) {
         HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class)
                 .header(ClientConstants.HEADER_OS4J_AUTH, TOKEN_INDICATOR)
                 .endpoint(endpoint)
@@ -69,7 +69,13 @@ public class OSAuthenticator {
                 .build();
         
         KeystoneAccess access = HttpExecutor.create().execute(request).getEntity(KeystoneAccess.class);
-        return OSClientSession.createSession(access.applyContext(endpoint, credentials), perspective, useNonStrictSSL);
+        access = access.applyContext(endpoint, credentials);
+        if (!reLinkToExistingSession)
+            return OSClientSession.createSession(access, perspective, useNonStrictSSL);
+        
+        OSClientSession current = OSClientSession.getCurrent();
+        current.access = access;
+        return current;
     }
 
     private static OSClient authenticateV3(KeystoneAuth credentials, String endpoint, Facing perspective, boolean useNonStrictSSL) {

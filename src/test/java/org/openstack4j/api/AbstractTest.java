@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.openstack4j.openstack.OSFactory;
+import org.openstack4j.openstack.identity.domain.Credentials;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -107,7 +108,7 @@ public abstract class AbstractTest {
 
 			try {
 				KeystoneAccess a = mapper.readValue(getClass().getResourceAsStream(JSON_ACCESS), KeystoneAccess.class);
-				a.setEndpoint("http://127.0.0.1");
+				a.applyContext(authURL("/v2.0"), new Credentials("test", "test"));
 				os = OSFactory.clientFromAccess(a);
 			} catch (Exception e) {
 				e.printStackTrace();
