@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.pacesys</groupId>
 	<artifactId>openstack4j</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<name>OpenStack Java API</name>
 	<description>OpenStack Java API</description>
 	<url>http://github.com/gondor/openstack4j/</url>
@@ -32,7 +32,8 @@
 		<connection>scm:git:git@github.com:gondor/openstack4j.git</connection>
 		<developerConnection>scm:git:git@github.com:gondor/openstack4j.git</developerConnection>
 		<url>http://github.com/gondor/openstack4j/</url>
-	</scm>
+	  <tag>openstack4j-1.0.2</tag>
+  </scm>
 	<dependencies>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
