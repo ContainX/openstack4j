@@ -3,6 +3,7 @@
 ### 1.0.2-SNAPSHOT
 
 * Heat Orchestration Support
+* Issue #65 - Instance rebuild with options support
 * Issue #58 - Server status "SHUTOFF" showing as UNRECOGNIZED enum value on query
 * Issue #56 - Set userdata when creating a server
 * Issue #50 - List of SecurityGroupRule returns null
