@@ -21,6 +21,23 @@ import org.openstack4j.model.identity.Token;
  */
 public interface OSClient {
 	
+    /**
+     * Specifies the region that should be used for further invocations with this client.  If the region is invalid or doesn't exists
+     * execution errors will occur when invoking API calls and a {@link RegionEndpointNotFoundException} will be
+     * thrown
+     * 
+     * @param region the region to use
+     * @return OSClient for method chaining
+     */
+    OSClient useRegion(String region);
+    
+    /**
+     * Removes the current region making all calls no longer resolving to region (if originally set otherwise no-op)
+     * 
+     * @return OSClient for method chaining
+     */
+    OSClient removeRegion();
+    
 	/**
 	 * Gets the supported services.  A set of ServiceTypes will be returned identifying the OpenStack services installed and supported
 	 *

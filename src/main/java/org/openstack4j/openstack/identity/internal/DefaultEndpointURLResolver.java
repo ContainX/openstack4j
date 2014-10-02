@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
@@ -35,6 +36,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 		Key key = Key.of(p.access.getCacheIdentifier(), p.type, p.perspective, p.region);
 
 		String url = CACHE.get(key);
+
 		if (url != null)
 			return url;
 
@@ -52,6 +54,9 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 			CACHE.put(key, url);
 			return url;
 		}
+		else if (p.region != null)
+		    throw RegionEndpointNotFoundException.create(p.region, p.type.getServiceName());
+		
 		return p.access.getEndpoint();
 	}
 

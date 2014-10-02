@@ -17,7 +17,7 @@ public class URLResolverParams {
 	
 	private URLResolverParams(Access access, ServiceType type) {
 		this.access = access;
-		this.type = type;
+		this.type = (type == null) ? ServiceType.IDENTITY : type;
 	}
 	
 	public static URLResolverParams create(Access access, ServiceType type) {
