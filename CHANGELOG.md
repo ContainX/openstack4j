@@ -12,6 +12,7 @@
 * Issue #26 - Ability to set Availibility Zone to a Server
 * Issue #19 - Boot and Wait for Server to become ACTIVE based upon max wait time
 * Issue #18 - Network Facing Perspectives to determine endpoint resolution
+* Issue #15 - Ability to specify a Region to call against
 * Issue #5, #47 PR - Availability Zones listing
 
 ### 1.0.1
