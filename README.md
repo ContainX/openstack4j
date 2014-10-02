@@ -18,6 +18,18 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 Maven
 -----
 
+#### Latest Release (Stable)
+
+**Note:** May not include all documented features on the website tutorials and documentation.  See [ changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md) for details
+
+```
+<dependency>
+    <groupId>org.pacesys</groupId>
+    <artifactId>openstack4j</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
+
 #### Current (Master Branch)
 
 
@@ -28,7 +40,7 @@ Maven
     <version>1.0.3-SNAPSHOT</version>
 </dependency>
 ```
-**NOTE** Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (below) are deployed to maven central and this step is not required.
+**NOTE** Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
 
 Example POM based repository declaration to grab snapshots:
 ```
@@ -40,18 +52,6 @@ Example POM based repository declaration to grab snapshots:
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
 </repositories>
-```
-
-#### Latest Release (Stable)
-
-**Note:** May not include all documented features on the website tutorials and documentation.  See [ changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md) for details
-
-```
-<dependency>
-    <groupId>org.pacesys</groupId>
-    <artifactId>openstack4j</artifactId>
-    <version>1.0.2</version>
-</dependency>
 ```
 
 Quick Usage Guide
