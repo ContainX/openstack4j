@@ -28,6 +28,19 @@ Maven
     <version>1.0.3-SNAPSHOT</version>
 </dependency>
 ```
+**NOTE** Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (below) are deployed to maven central and this step is not required.
+
+Example POM based repository declaration to grab snapshots:
+```
+
+<repositories>
+    <repository>
+      <id>st-snapshots</id>
+      <name>sonatype-snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+</repositories>
+```
 
 #### Latest Release (Stable)
 
