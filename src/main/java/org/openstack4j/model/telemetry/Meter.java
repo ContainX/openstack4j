@@ -1,8 +1,9 @@
 package org.openstack4j.model.telemetry;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonValue;
 import org.openstack4j.model.ModelEntity;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * A Meter is a category of Measurement

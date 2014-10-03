@@ -2,14 +2,14 @@ package org.openstack4j.openstack.identity.domain.v3;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.v3.Authentication;
 import org.openstack4j.openstack.common.BasicResourceEntity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Lists;
 
 @JsonRootName("auth")

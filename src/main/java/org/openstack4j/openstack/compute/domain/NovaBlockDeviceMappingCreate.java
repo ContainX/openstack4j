@@ -1,6 +1,5 @@
 package org.openstack4j.openstack.compute.domain;
 
-import org.openstack4j.common.Buildable;
 import org.openstack4j.model.compute.BlockDeviceMappingCreate;
 import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
 

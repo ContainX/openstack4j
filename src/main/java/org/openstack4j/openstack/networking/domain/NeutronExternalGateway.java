@@ -1,8 +1,8 @@
 package org.openstack4j.openstack.networking.domain;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.network.ExternalGateway;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 /**

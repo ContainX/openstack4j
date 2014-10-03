@@ -1,7 +1,8 @@
 package org.openstack4j.model.network;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 
 /**
  * IP Address Version Type (V4/V6)

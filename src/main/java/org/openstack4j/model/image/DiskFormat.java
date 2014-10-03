@@ -1,7 +1,8 @@
 package org.openstack4j.model.image;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 
 /** 
  * The disk format of a virtual machine image is the format of the underlying disk image

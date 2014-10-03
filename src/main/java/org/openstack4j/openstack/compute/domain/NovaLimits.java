@@ -2,11 +2,11 @@ package org.openstack4j.openstack.compute.domain;
 
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.openstack4j.model.compute.AbsoluteLimit;
 import org.openstack4j.model.compute.Limits;
 import org.openstack4j.model.compute.RateLimit;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**

@@ -1,6 +1,6 @@
 package org.openstack4j.model.network;
 
-import org.codehaus.jackson.annotate.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
  * The state of a Network (Neutron) entity

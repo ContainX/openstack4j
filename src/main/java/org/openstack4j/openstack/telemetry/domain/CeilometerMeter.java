@@ -1,8 +1,8 @@
 package org.openstack4j.openstack.telemetry.domain;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.telemetry.Meter;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 /**

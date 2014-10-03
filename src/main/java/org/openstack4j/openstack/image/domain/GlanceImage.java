@@ -6,8 +6,6 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.openstack4j.model.common.builder.BasicResourceBuilder;
 import org.openstack4j.model.image.ContainerFormat;
 import org.openstack4j.model.image.DiskFormat;
@@ -16,6 +14,8 @@ import org.openstack4j.model.image.StoreType;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 

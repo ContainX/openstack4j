@@ -1,8 +1,9 @@
 package org.openstack4j.model.compute;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonValue;
 import org.openstack4j.model.ModelEntity;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Represents a VNC Console which provides VNC connection information for a remote server

@@ -2,12 +2,13 @@ package org.openstack4j.core.transport.internal;
 
 import java.io.IOException;
 
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.JsonToken;
-import org.codehaus.jackson.JsonParser.NumberType;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.JsonDeserializer;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonParser.NumberType;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+
 
 /**
  * Openstack API V2 has a few Services which return a 'True' as a boolean value.  Jackson typically will not realize that this is equivalent to 'true' and will throw an
@@ -52,7 +53,7 @@ public class OSBadBooleanDeserializer extends JsonDeserializer<Boolean> {
          if (text.length() == 0) {
              return getEmptyValue();
          }
-         throw ctxt.weirdStringException(Boolean.class, "only \"true\" or \"false\" recognized");
+         throw ctxt.weirdStringException(text, Boolean.class, "only \"true\" or \"false\" recognized");
      }
      // Otherwise, no can do:
      throw ctxt.mappingException(Boolean.class, t);

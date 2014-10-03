@@ -1,10 +1,11 @@
 package org.openstack4j.openstack.heat.domain;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonRawValue;
 import org.openstack4j.model.heat.Template;
 import org.openstack4j.model.heat.builder.TemplateBuilder;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 
 /**
  * This class represents a HeatTemplate. It uses jackson for (de)serialization

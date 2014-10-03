@@ -4,13 +4,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.identity.Service;
 import org.openstack4j.model.identity.ServiceEndpoint;
 import org.openstack4j.model.identity.builder.ServiceEndpointBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 /**

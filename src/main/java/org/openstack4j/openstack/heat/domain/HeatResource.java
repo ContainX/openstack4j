@@ -3,11 +3,12 @@ package org.openstack4j.openstack.heat.domain;
 import java.util.Date;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.common.Link;
 import org.openstack4j.model.heat.Resource;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * This is a model of a HeatResource. It uses Jackson annotations for

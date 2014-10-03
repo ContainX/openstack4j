@@ -2,11 +2,11 @@ package org.openstack4j.openstack.identity.domain;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.identity.Service;
 import org.openstack4j.model.identity.builder.ServiceBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 /**

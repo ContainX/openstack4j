@@ -1,7 +1,8 @@
 package org.openstack4j.openstack.compute.domain;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.compute.NetworkCreate;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NovaNetworkCreate implements NetworkCreate {
 

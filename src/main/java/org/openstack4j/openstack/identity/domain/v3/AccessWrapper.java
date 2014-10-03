@@ -3,7 +3,6 @@ package org.openstack4j.openstack.identity.domain.v3;
 import java.util.Collections;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.common.Link;
 import org.openstack4j.model.identity.Access;
@@ -11,6 +10,8 @@ import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.TokenV3;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**

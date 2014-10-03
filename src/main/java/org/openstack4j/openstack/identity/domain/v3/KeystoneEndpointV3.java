@@ -2,10 +2,10 @@ package org.openstack4j.openstack.identity.domain.v3;
 
 import java.net.URL;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.model.identity.v3.EndpointV3;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 /**
