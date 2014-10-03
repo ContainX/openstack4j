@@ -2,8 +2,9 @@ package org.openstack4j.openstack.compute.domain;
 
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.ModelEntity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * A Wrapper for Rest calls to set/update Meta Data

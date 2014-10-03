@@ -1,7 +1,8 @@
 package org.openstack4j.openstack.compute.domain;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.ModelEntity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * A wrapper model class to return the console output from a server

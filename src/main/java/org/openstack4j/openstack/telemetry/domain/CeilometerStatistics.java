@@ -2,9 +2,9 @@ package org.openstack4j.openstack.telemetry.domain;
 
 import java.util.Date;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.telemetry.Statistics;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 /**

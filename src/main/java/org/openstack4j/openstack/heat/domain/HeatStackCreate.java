@@ -2,11 +2,12 @@ package org.openstack4j.openstack.heat.domain;
 
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonRawValue;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.builder.StackCreateBuilder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 
 /**
  * This class contains all elements required for the creation of a HeatStack. It

@@ -4,9 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonCreator;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Link;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
  * A server is a virtual machine instance on a compute based system.  

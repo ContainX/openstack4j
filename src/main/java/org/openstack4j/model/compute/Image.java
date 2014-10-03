@@ -4,9 +4,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonCreator;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Link;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
  * An OpenStack image is a collection of files used to create a Server.  Users provide pre-built OS images by default and or custom

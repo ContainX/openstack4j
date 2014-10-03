@@ -2,14 +2,14 @@ package org.openstack4j.openstack.identity.domain;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonRootName;
 import org.openstack4j.core.transport.internal.OSBadBooleanDeserializer;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.builder.RoleBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Objects;
 
 /**

@@ -1,15 +1,10 @@
 package org.openstack4j.openstack.networking.domain;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonRootName;
+
 import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.ExtraDhcpOptCreate;
 import org.openstack4j.model.network.IP;
@@ -17,6 +12,13 @@ import org.openstack4j.model.network.Port;
 import org.openstack4j.model.network.State;
 import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.openstack.common.ListResult;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * A Neutron Port

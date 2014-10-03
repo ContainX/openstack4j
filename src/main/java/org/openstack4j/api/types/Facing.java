@@ -1,7 +1,7 @@
 package org.openstack4j.api.types;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Defines the URL perspective in which the API is accessing data from within an OpenStack deployment.  For example: admin, public, internal

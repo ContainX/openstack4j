@@ -1,7 +1,8 @@
 package org.openstack4j.model.image;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 
 /**
  * The container format refers to whether the virtual machine image is in a file format that also

@@ -3,12 +3,12 @@ package org.openstack4j.openstack.identity.domain;
 import java.net.URI;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.builder.EndpointBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
 /**

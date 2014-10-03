@@ -3,7 +3,7 @@ package org.openstack4j.openstack.internal;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.codehaus.jackson.map.util.StdDateFormat;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 
 /**
  * Provides common parser routines when dealing with Headers or other non-json payloads
