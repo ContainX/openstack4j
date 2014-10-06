@@ -1,6 +1,12 @@
 # Change Log
 
-### 1.0.2-SNAPSHOT
+### 2.0.0-SNAPSHOT
+* Issue #71 - Support for other connector choices (Jersey2, Resteasy, HttpClient)
+* Issue #70 - Upgrade Jersey from 2.0 to 2.10.1
+* Issue #69 - Break out our current connector (Jersey) into a sub-module to offer various connector choices
+* Issue #67 - Upgrade Jackson 1 to Jackson 2
+
+### 1.0.2
 
 * Heat Orchestration Support
 * Issue #65 - Instance rebuild with options support
