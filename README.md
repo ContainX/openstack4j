@@ -32,14 +32,34 @@ Maven
 
 #### Current (Master Branch)
 
+Version 2.0.0 and above going forward of OpenStack4j is modular.  You can choose the connector that you would like to use in your environment.  
 
+**Using OpenStack4j with the default Jersey2 Connector**
 ```
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
 </dependency>
 ```
+
+**Using OpenStack4j with one of our connector modules**
+```
+<dependency>
+    <groupId>org.pacesys</groupId>
+    <artifactId>openstack4j-core</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+</dependency>
+<dependency>
+    <groupId>org.pacesys.openstack4j.connectors</groupId>
+    <artifactId>openstack4j-${connector}</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+</dependency>
+
+## ${connector} can be jersey2, resteasy or httpclient 
+```
+
+
 **NOTE** Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
 
 Example POM based repository declaration to grab snapshots:
