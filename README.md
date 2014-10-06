@@ -32,7 +32,7 @@ Maven
 
 #### Current (Master Branch)
 
-Version 2.0.0 and above going forward of OpenStack4j is modular.  You can choose the connector that you would like to use in your environment.  
+OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the ability to choose the connector that you would like to use in your environment.  
 
 **Using OpenStack4j with the default Jersey2 Connector**
 ```
