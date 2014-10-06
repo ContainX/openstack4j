@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.pacesys.openstack4j.connectors</groupId>
+		<artifactId>openstack4j-connectors</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>openstack4j-resteasy</artifactId>
+	<name>OpenStack4j RestEasy Connector</name>
+	<url>http://github.com/gondor/openstack4j/</url>
+	<packaging>jar</packaging>
+
+	<properties>
+		<resteasy-version>2.3.7.Final</resteasy-version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+		  		<groupId>org.jboss.resteasy</groupId>
+		  		<artifactId>resteasy-jaxrs</artifactId>
+		  		<version>${resteasy-version}</version>
+		  	</dependency>
+			<dependency>
+			  <groupId>com.fasterxml.jackson.jaxrs</groupId>
+			  <artifactId>jackson-jaxrs-json-provider</artifactId>
+			  <version>2.4.0</version>
+		    </dependency>
+		<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>3.1</version>
+		</dependency>
+	</dependencies>
+
+</project>
