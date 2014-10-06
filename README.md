@@ -8,7 +8,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 
 ### Documenation/Tutorials:  [www.OpenStack4j.com](http://www.openstack4j.com)                      
 
-### Mailing List/Group Discussions: [http://groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)
+**Mailing List/Group Discussions: [http://groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)**
 
 **Keep up to date with us on Twitter: [@openstack4j](https://twitter.com/openstack4j)**
 
