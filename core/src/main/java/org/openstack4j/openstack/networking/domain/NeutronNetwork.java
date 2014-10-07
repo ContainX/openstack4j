@@ -26,6 +26,7 @@ public class NeutronNetwork implements Network {
 	private static final long serialVersionUID = 1L;
 	
 	private State status;
+	@JsonProperty
 	private List<String> subnets;
 	private List<NeutronSubnet> neutronSubnets;
 	private String name;
@@ -101,7 +102,7 @@ public class NeutronNetwork implements Network {
 	 */
 	@Override
 	public List<? extends Subnet> getNeutronSubnets() {
-		if ( neutronSubnets == null && subnets.size() > 0) {
+		if ( neutronSubnets == null && (subnets != null && subnets.size() > 0)) {
 			neutronSubnets = new ArrayList<NeutronSubnet>();
 			for ( String subnetId : subnets) {
 				NeutronSubnet sub = (NeutronSubnet)Apis.getNetworkingServices().subnet().get(subnetId);
