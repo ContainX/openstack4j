@@ -58,9 +58,8 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
     <version>2.0.0-SNAPSHOT</version>
 </dependency>
 
-## ${connector} can be jersey2, resteasy or httpclient 
 ```
-
+**${connector}** can be jersey2, resteasy or httpclient
 
 **NOTE** Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
 
