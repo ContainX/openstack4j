@@ -6,7 +6,7 @@ OpenStack4j
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry and more.
 
-### Documenation/Tutorials:  [OpenStack4j.com](http://www.openstack4j.com)                      
+**Documenation/Tutorials:  [OpenStack4j.com](http://www.openstack4j.com)**                      
 
 **Mailing List/Group Discussions: [groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)**
 
@@ -24,7 +24,7 @@ Maven
 
 **Note:** May not include all documented features on the website tutorials and documentation.  See [ changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md) for details
 
-```
+```xml
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
@@ -36,8 +36,8 @@ Maven
 
 OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the ability to choose the connector that you would like to use in your environment.  
 
-**Using OpenStack4j with the default Jersey2 Connector**
-```
+###### Using OpenStack4j with the default Jersey2 Connector
+```xml
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
@@ -45,8 +45,8 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 </dependency>
 ```
 
-**Using OpenStack4j with one of our connector modules**
-```
+###### Using OpenStack4j with one of our connector modules
+```xml
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j-core</artifactId>
@@ -65,8 +65,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 **NOTE** Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
 
 Example POM based repository declaration to grab snapshots:
-```
-
+```xml
 <repositories>
     <repository>
       <id>st-snapshots</id>
