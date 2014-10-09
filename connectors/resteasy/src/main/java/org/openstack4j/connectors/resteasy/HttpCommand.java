@@ -7,6 +7,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
+import org.openstack4j.connectors.resteasy.executors.ApacheHttpClientExecutor;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
@@ -39,7 +40,7 @@ public final class HttpCommand<R> {
 
     private void initialize() {
         client = new ClientRequest(UriBuilder.fromUri(request.getEndpoint()  + "/" + request.getPath()), 
-                                   ClientRequest.getDefaultExecutor(), ResteasyClientFactory.getInstance());
+                ApacheHttpClientExecutor.create(request.getConfig()), ResteasyClientFactory.getInstance());
         
         populateQueryParams(request);
         populateHeaders(request);

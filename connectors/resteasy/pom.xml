@@ -17,20 +17,19 @@
 
 	<dependencies>
 		<dependency>
-		  		<groupId>org.jboss.resteasy</groupId>
-		  		<artifactId>resteasy-jaxrs</artifactId>
-		  		<version>${resteasy-version}</version>
-		  	</dependency>
-			<dependency>
-			  <groupId>com.fasterxml.jackson.jaxrs</groupId>
-			  <artifactId>jackson-jaxrs-json-provider</artifactId>
-			  <version>2.4.0</version>
-		    </dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${resteasy-version}</version>
+		</dependency>
 		<dependency>
-				<groupId>commons-httpclient</groupId>
-				<artifactId>commons-httpclient</artifactId>
-				<version>3.1</version>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
-
 </project>
