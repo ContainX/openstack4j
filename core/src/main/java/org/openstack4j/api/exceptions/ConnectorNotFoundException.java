@@ -5,7 +5,7 @@ package org.openstack4j.api.exceptions;
  *
  * @author Jeremy Unruh
  */
-public class ConnectorNotFoundException extends RuntimeException {
+public class ConnectorNotFoundException extends OS4JException {
 
     private static final long serialVersionUID = 1L;
 

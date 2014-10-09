@@ -36,8 +36,7 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
             throw re;
         }
         catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new ConnectionException("Error during execution: " + e, 0, e);
         }
     }
 

@@ -30,10 +30,10 @@ public class HttpRequest<R> {
 	String contentType = ClientConstants.CONTENT_TYPE_JSON;
 	HttpMethod method = HttpMethod.GET;
 	String json;
+	private Config config;
 	private Map<String, List<Object>> queryParams;
 	private Map<String, Object> headers = new HashMap<String, Object>();
 	private Function<String, String> endpointFunc;
-	private boolean useNonStrictSSLClient;
 	public HttpRequest() { }
 
 	/**
@@ -93,10 +93,6 @@ public class HttpRequest<R> {
 		if (endpointFunc != null)
 			return endpointFunc.apply(endpoint);
 		return endpoint;
-	}
-	
-	public boolean useNonStrictSSLClient() {
-			return useNonStrictSSLClient;
 	}
 	
 	/**
@@ -161,6 +157,13 @@ public class HttpRequest<R> {
 	 */
 	public boolean hasHeaders() {
 		return !headers.isEmpty();
+	}
+	
+	/**
+	 * @return the client configuration associated with this request
+	 */
+	public Config getConfig() {
+	    return config != null ? config : Config.DEFAULT;
 	}
 
 	public static final class RequestBuilder<R> {
@@ -249,16 +252,6 @@ public class HttpRequest<R> {
 		}
 		
 		/**
-         * Uses a non-strict SSL client if true
-         *
-         * @return the request builder
-         */
-        public RequestBuilder<R> useNonStrictSSL(boolean useNonStrictSSL) {
-            request.useNonStrictSSLClient = useNonStrictSSL;
-            return this;
-        }
-
-		/**
 		 * @see HttpRequest#getEntity()
 		 */
 		public RequestBuilder<R> entity(ModelEntity entity) {
@@ -274,6 +267,14 @@ public class HttpRequest<R> {
 			request.entity = entity.open();
 			return this;
 		}
+		
+		/**
+         * Sets a client configuration to use with this session
+         */
+        public RequestBuilder<R> config(Config config) {
+            request.config = config;
+            return this;
+        }
 		
 		/**
 		 * Pushes the Map of Headers into the existing headers for this request
@@ -371,7 +372,6 @@ public class HttpRequest<R> {
 			if (provider != null)
 			{
 				request.endpoint = provider.getEndpoint(service);
-				request.useNonStrictSSLClient = provider.useNonStrictSSLClient();
 				if (provider.getTokenId() != null)
 				    request.getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, provider.getTokenId());
 			}

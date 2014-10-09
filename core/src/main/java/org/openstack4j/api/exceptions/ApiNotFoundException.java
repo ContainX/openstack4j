@@ -5,7 +5,7 @@ package org.openstack4j.api.exceptions;
  * 
  * @author Jeremy Unruh
  */
-public class ApiNotFoundException extends RuntimeException {
+public class ApiNotFoundException extends OS4JException {
 
 	private static final long serialVersionUID = 1L;
 

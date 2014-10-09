@@ -7,7 +7,7 @@ import com.google.common.base.Objects;
  * 
  * @author Jeremy Unruh
  */
-public class ResponseException extends RuntimeException {
+public class ResponseException extends OS4JException {
 
 	private static final long serialVersionUID = 7294957362769575271L;
 

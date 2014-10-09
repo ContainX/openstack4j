@@ -53,7 +53,6 @@ public final class HttpCommand<R> {
     }
 
     private void initialize() {
-
         client = HttpClientBuilder.create().setUserAgent(USER_AGENT).build();
 
         URI url = null;
@@ -84,7 +83,6 @@ public final class HttpCommand<R> {
             clientReq = new HttpGet(url);
             break;
         }
-
         populateHeaders(request);
     }
 

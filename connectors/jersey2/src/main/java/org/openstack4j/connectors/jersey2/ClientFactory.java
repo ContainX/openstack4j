@@ -1,25 +1,26 @@
 package org.openstack4j.connectors.jersey2;
 
 import java.io.IOException;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.ext.ContextResolver;
 
+import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.jackson.JacksonFeature;
+import org.openstack4j.api.exceptions.ConnectionException;
 import org.openstack4j.core.transport.ClientConstants;
+import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 
 /**
  * A factory for creating a rest Client which is mapped to Jackson for JSON processing.
@@ -29,30 +30,53 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 class ClientFactory {
 
     private static final CustomContextResolver RESOLVER = new CustomContextResolver();
-    private static Client clientStrict;
-    private static Client client;
-
-
+    private static LoadingCache<Config, Client> CACHE = CacheBuilder.newBuilder()
+                                                                    .expireAfterAccess(20, TimeUnit.MINUTES)
+                                                                    .build(new CacheLoader<Config, Client>() {
+                                                                        @Override
+                                                                        public Client load(Config config) throws Exception {
+                                                                            return buildClientFromConfig(config);
+                                                                        } });
+    
     /**
      * Creates or Returns a Client
-     *
+     * 
+     * @param Config the configuration to use for the given client
      * @return the client
      */
-    static Client create(boolean useNonStrictSSL) {
-
-        if (useNonStrictSSL)
-            return getNonStrictSSLClient();
-
-        if (clientStrict == null) {
-            clientStrict = ClientBuilder.newBuilder()
-                    .register(JacksonFeature.class)
-                    .register(RESOLVER)
-                    .register(new RequestFilter())
-                    .build();
+    static Client create(Config config) {
+        try {
+            return CACHE.get(config);
+        } catch (ExecutionException e) {
+            throw new ConnectionException("Issue creating Jersey 2 Client: " + e.getMessage(), 0, e);
         }
-        return clientStrict;
     }
 
+    private static Client buildClientFromConfig(Config config) {
+        ClientBuilder cb = ClientBuilder.newBuilder()
+                            .register(JacksonFeature.class)
+                            .register(RESOLVER)
+                            .register(new RequestFilter());
+
+        if (config.getSslContext() != null)
+            cb.sslContext(config.getSslContext());
+        else if (config.isIgnoreSSLVerification())
+            cb.sslContext(UntrustedSSL.getSSLContext());
+        
+        if (config.getHostNameVerifier() != null)
+            cb.hostnameVerifier(config.getHostNameVerifier());
+        else if (config.isIgnoreSSLVerification())
+            cb.hostnameVerifier(UntrustedSSL.getHostnameVerifier());
+        
+        if (config.getReadTimeout() > 0)
+            cb.property(ClientProperties.READ_TIMEOUT, config.getReadTimeout());
+        
+        if (config.getConnectTimeout() > 0)
+            cb.property(ClientProperties.CONNECT_TIMEOUT, config.getConnectTimeout());
+        
+        return cb.build();
+    }
+    
     private static final class RequestFilter implements ClientRequestFilter {
 
         /**
@@ -63,43 +87,6 @@ class ClientFactory {
             requestContext.getHeaders().remove(ClientConstants.HEADER_CONTENT_LANGUAGE);
             requestContext.getHeaders().remove(ClientConstants.HEADER_CONTENT_ENCODING);			
         }
-    }
-
-    private static Client getNonStrictSSLClient() {
-        if (client == null) 
-        {
-            ClientBuilder cb = ClientBuilder.newBuilder()
-                    .register(JacksonFeature.class)
-                    .register(RESOLVER)
-                    .register(new RequestFilter());
-
-            try
-            {
-                TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return null;
-                    }
-                    public void checkClientTrusted(X509Certificate[] certs, String authType) {}
-                    public void checkServerTrusted(X509Certificate[] certs, String authType) {}
-                } };
-                SSLContext context = SSLContext.getInstance("TLS");
-                context.init(null, trustAllCerts, new SecureRandom());
-
-                cb.sslContext(context);
-                cb.hostnameVerifier(new HostnameVerifier() {
-                    @Override
-                    public boolean verify(String s, SSLSession session) {
-                        return true;
-                    } });
-            }
-            catch (Throwable t) {
-                t.printStackTrace();
-            }
-
-            client = cb.build();
-        }
-
-        return client;
     }
 
     private static final class CustomContextResolver implements ContextResolver<ObjectMapper> {

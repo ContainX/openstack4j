@@ -6,7 +6,7 @@ package org.openstack4j.api.exceptions;
  * @author Jeremy Unruh
  *
  */
-public class RegionEndpointNotFoundException extends RuntimeException {
+public class RegionEndpointNotFoundException extends OS4JException {
 
     private static final long serialVersionUID = 1L;
     private static final String EXCEPT_FORMAT = "Endpoint for '%s' service could not be found for region: '%s'";
