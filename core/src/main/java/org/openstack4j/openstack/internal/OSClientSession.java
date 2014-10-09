@@ -15,6 +15,7 @@ import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.Token;
 import org.openstack4j.model.identity.URLResolverParams;
@@ -35,16 +36,16 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     private static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
 
     EndpointURLResolver epr = new DefaultEndpointURLResolver();
+    Config config;
     Access access;
     Facing perspective;
     String region;
     Set<ServiceType> supports;
-    boolean useNonStrictSSL;
 
-    private OSClientSession(Access access, String endpoint, Facing perspective, boolean useNonStrictSSL)
+    private OSClientSession(Access access, String endpoint, Facing perspective, Config config)
     {
         this.access = access;
-        this.useNonStrictSSL = useNonStrictSSL;
+        this.config = config;
         this.perspective = perspective;
         sessions.set(this);
     }
@@ -52,21 +53,16 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     private OSClientSession(OSClientSession parent, String region)
     {
         this.access = parent.access;
-        this.useNonStrictSSL = parent.useNonStrictSSL;
         this.perspective = parent.perspective;
         this.region = region;
     }
 
     public static OSClientSession createSession(Access access) {
-        return new OSClientSession(access, access.getEndpoint(), null, Boolean.FALSE);
+        return new OSClientSession(access, access.getEndpoint(), null, null);
     }
 
-    public static OSClientSession createSession(Access access, boolean useNonStrictSSL) {
-        return new OSClientSession(access, access.getEndpoint(), null, useNonStrictSSL);
-    }
-
-    public static OSClientSession createSession(Access access, Facing perspective, boolean useNonStrictSSL) {
-        return new OSClientSession(access, access.getEndpoint(), perspective, useNonStrictSSL);
+    public static OSClientSession createSession(Access access, Facing perspective, Config config) {
+        return new OSClientSession(access, access.getEndpoint(), perspective, config);
     }
 
     public static OSClientSession getCurrent() {
@@ -98,14 +94,6 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
         if (supports == null)
             supports = Sets.immutableEnumSet(Iterables.transform(access.getServiceCatalog(), new ServiceToServiceType()));
         return supports;
-    }
-
-    /**
-     * @return true if we should ignore self-signed certificates
-     */
-    @Override
-    public boolean useNonStrictSSLClient() {
-        return this.useNonStrictSSL;
     }
 
     /**
@@ -178,7 +166,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public String getEndpoint(ServiceType service) {
         return epr.findURL(URLResolverParams.create(access, service).perspective(perspective).region(region));
     }
-
+    
+    /**
+     * @return the original client configuration associated with this session
+     */
+    public Config getConfig()
+    {
+        return config;
+    }
     /**
      * {@inheritDoc}
      */

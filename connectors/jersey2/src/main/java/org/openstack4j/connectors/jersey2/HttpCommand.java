@@ -45,7 +45,7 @@ public final class HttpCommand<R> {
     }
 
     private void initialize() {
-        Client client = ClientFactory.create(request.useNonStrictSSLClient());
+        Client client = ClientFactory.create(request.getConfig());
         WebTarget target = client.target(request.getEndpoint()).path(request.getPath());
 
         if (Boolean.getBoolean(HttpLoggingFilter.class.getName()))

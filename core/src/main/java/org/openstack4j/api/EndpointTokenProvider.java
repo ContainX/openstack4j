@@ -23,13 +23,4 @@ public interface EndpointTokenProvider {
 	 * @return the auth token identifier
 	 */
 	String getTokenId();
-
-	/**
-	 * Determines if the client should ignore self-signed cerificates and hostnames typically found in private or
-	 * DEV based environments.
-	 * 
-	 * @return true to use non strict SSL client
-	 */
-	boolean useNonStrictSSLClient();
-	
 }

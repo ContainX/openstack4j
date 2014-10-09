@@ -8,13 +8,25 @@ import javax.net.ssl.SSLContext;
  * 
  * @author Jeremy Unruh
  */
-public class Config {
+public final class Config {
 
+    public static final Config DEFAULT = new Config();
+    
     private int connectTimeout;
     private int readTimeout;
     private SSLContext sslContext;
     private HostnameVerifier hostNameVerifier;
     private boolean ignoreSSLVerification;
+    
+    private Config() {
+    }
+    
+    /**
+     * @return A new client configuration
+     */
+    public static Config newConfig() {
+        return new Config();
+    }
     
     /**
      * Sets the connection timeout in milliseconds
@@ -90,6 +102,34 @@ public class Config {
 
     public boolean isIgnoreSSLVerification() {
         return ignoreSSLVerification;
+    }
+    
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + connectTimeout;
+        result = prime * result + (ignoreSSLVerification ? 1231 : 1237);
+        result = prime * result + readTimeout;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Config other = (Config) obj;
+        if (connectTimeout != other.connectTimeout)
+            return false;
+        if (ignoreSSLVerification != other.ignoreSSLVerification)
+            return false;
+        if (readTimeout != other.readTimeout)
+            return false;
+        return true;
     }
     
 }
