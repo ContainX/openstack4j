@@ -4,6 +4,8 @@
 
 ##### Enhancements/Improvements
 
+* Issue #79 - Support for OKHttp connector
+* Issue #77 - Log4j and SLF4j Plugin support
 * Issue #71 - Support for other connector choices (Jersey2, Resteasy, HttpClient)
 * Issue #70 - Upgrade Jersey from 2.0 to 2.10.1
 * Issue #69 - Break out our current connector (Jersey) into a sub-module to offer various connector choices
