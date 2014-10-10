@@ -15,16 +15,18 @@ import org.openstack4j.openstack.identity.domain.KeystoneAccess;
 import org.openstack4j.openstack.identity.domain.v3.AccessWrapper;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneTokenV3;
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 /**
  * Responsible for authenticating and re-authenticating sessions for V2 and V3 of the Identity API
  * 
  * @author Jeremy Unruh
- *
  */
 public class OSAuthenticator {
 
     private static final String TOKEN_INDICATOR = "Tokens";
+    private static final Logger LOG = LoggerFactory.getLogger(OSAuthenticator.class);
     /**
      * Invokes authentication to obtain a valid Token for either V2 and V3
      * 
@@ -45,6 +47,9 @@ public class OSAuthenticator {
      * Re-authenticates/renews the token for the current Session
      */
     public static void reAuthenticate() {
+        
+        LOG.debug("Re-Authenticating session due to expired Token or invalid response");
+        
         OSClientSession session = OSClientSession.getCurrent();
         switch (session.getAccess().getVersion()) {
             case V3:

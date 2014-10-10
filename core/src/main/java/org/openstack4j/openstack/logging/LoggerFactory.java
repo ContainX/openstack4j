@@ -3,7 +3,6 @@ package org.openstack4j.openstack.logging;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
-import org.openstack4j.openstack.logging.Logger.LoggerFactorySupplier;
 import org.openstack4j.openstack.logging.internal.FallbackLoggerFactorySupplier;
 
 /**
@@ -12,25 +11,17 @@ import org.openstack4j.openstack.logging.internal.FallbackLoggerFactorySupplier;
  * 
  * @author Jeremy Unruh
  */
-public class LoggerFactory implements LoggerFactorySupplier {
+public class LoggerFactory {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Logger getLogger(String category) {
+    public static Logger getLogger(String category) {
         return getSupplier().getLogger(category);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Logger getLogger(Class<?> category) {
+    public static Logger getLogger(Class<?> category) {
         return getSupplier().getLogger(category);
     }
 
-    private LoggerFactorySupplier getSupplier() {
+    private static LoggerFactorySupplier getSupplier() {
         Iterator<LoggerFactorySupplier> it = ServiceLoader.load(LoggerFactorySupplier.class).iterator();
         if (it != null && it.hasNext())
             return it.next();

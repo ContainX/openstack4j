@@ -47,6 +47,7 @@
 		<module>core</module>
 		<module>core-test</module>
 		<module>connectors</module>
+		<module>plugins</module>
 		<module>distribution</module>
 	</modules>
 

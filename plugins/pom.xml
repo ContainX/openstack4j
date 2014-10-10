@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.pacesys</groupId>
+		<artifactId>openstack4j-parent</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.pacesys.openstack4j.plugins</groupId>
+	<artifactId>openstack4j-plugins</artifactId>
+	<name>OpenStack4j Plugins</name>
+	<description>OpenStack Java API Plugins</description>
+	<url>http://github.com/gondor/openstack4j/</url>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>log4j</module>
+		<module>slf4j</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.pacesys</groupId>
+			<artifactId>openstack4j-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.pacesys</groupId>
+			<artifactId>openstack4j-core-test</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
