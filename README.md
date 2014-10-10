@@ -50,41 +50,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 
 ###### Using OpenStack4j with one of our connector modules
 
-First declare the core module which is the API/Implementation and Model for OpenStack4j
-```xml
-<dependency>
-    <groupId>org.pacesys</groupId>
-    <artifactId>openstack4j-core</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-</dependency>
-```
-
-Add a dependency for the desired connector type:
- 
---Jersey 2
-```xml
-<dependency>
-    <groupId>org.pacesys.openstack4j.connectors</groupId>
-    <artifactId>openstack4j-jersey2</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-</dependency>
-```
---Resteasy
-```xml
-<dependency>
-    <groupId>org.pacesys.openstack4j.connectors</groupId>
-    <artifactId>openstack4j-resteasy</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-</dependency>
-```
---HttpClient
-```xml
-<dependency>
-    <groupId>org.pacesys.openstack4j.connectors</groupId>
-    <artifactId>openstack4j-httpclient</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
-</dependency>
-```
+To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/gondor/openstack4j/tree/master/connectors)
 
 **NOTE** Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
 
