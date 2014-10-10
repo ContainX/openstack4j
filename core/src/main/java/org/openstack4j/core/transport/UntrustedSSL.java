@@ -1,4 +1,4 @@
-package org.openstack4j.connectors.jersey2;
+package org.openstack4j.core.transport;
 
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
