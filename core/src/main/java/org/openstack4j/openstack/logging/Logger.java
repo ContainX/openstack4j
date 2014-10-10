@@ -63,15 +63,4 @@ public interface Logger {
     void error(String message, Object... args);
 
     void error(Throwable throwable, String message, Object... args);
-
-    /**
-     * Produces instances of {@link Logger} associated with the specified category
-     */
-    public interface LoggerFactorySupplier {
-        
-        Logger getLogger(String category);
-        
-        Logger getLogger(Class<?> category);
-        
-    }
  }

@@ -1,7 +1,7 @@
 package org.openstack4j.openstack.logging.internal;
 
 import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.Logger.LoggerFactorySupplier;
+import org.openstack4j.openstack.logging.LoggerFactorySupplier;
 
 /**
  * Fallback Logger Factory Supplier which returns a Console logger by default only logging WARN and ERROR levels
