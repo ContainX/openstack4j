@@ -11,7 +11,7 @@ import org.openstack4j.openstack.internal.OSAuthenticator;
 import org.openstack4j.openstack.internal.OSClientSession;
 
 /**
- * HttpExecutor is the default implementation for HttpExecutorService which is responsible for interfacing with Jersey and mapping common status codes, requests and responses
+ * HttpExecutor is the default implementation for HttpExecutorService which is responsible for interfacing with Resteasy and mapping common status codes, requests and responses
  * back to the common API
  * 
  * @author Jeremy Unruh

@@ -16,6 +16,7 @@ import org.openstack4j.api.exceptions.ConnectionException;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
+import org.openstack4j.core.transport.UntrustedSSL;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.cache.CacheBuilder;
