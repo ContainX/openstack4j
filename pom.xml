@@ -143,4 +143,21 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	
+	<dependencyManagement>
+	<dependencies>
+	<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+    </dependencies>
+	</dependencyManagement>
 </project>
