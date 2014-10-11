@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -15,13 +16,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.openstack4j.api.exceptions.ConnectionException;
+import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
+import org.openstack4j.core.transport.UntrustedSSL;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
@@ -53,10 +57,7 @@ public final class HttpCommand<R> {
     }
 
     private void initialize() {
-        client = HttpClientBuilder.create().setUserAgent(USER_AGENT).build();
-
         URI url = null;
-
         try
         {
             url = populateQueryParams(request);
@@ -65,6 +66,27 @@ public final class HttpCommand<R> {
             throw new ConnectionException(e.getMessage(),e.getIndex(), e);
         }
 
+        HttpClientBuilder cb = HttpClientBuilder.create().setUserAgent(USER_AGENT);
+        final Config config = request.getConfig();
+
+        if (config.isIgnoreSSLVerification())
+        {
+            cb.setSslcontext(UntrustedSSL.getSSLContext());
+            cb.setHostnameVerifier(new AllowAllHostnameVerifier());
+        }
+        
+        if (config.getSslContext() != null)
+            cb.setSslcontext(config.getSslContext());
+
+        RequestConfig.Builder rcb = RequestConfig.custom();
+        if (config.getConnectTimeout() > 0)
+            rcb.setConnectTimeout(config.getConnectTimeout());
+        
+        if (config.getReadTimeout() > 0)
+            rcb.setSocketTimeout(config.getReadTimeout());
+        
+        client = cb.setDefaultRequestConfig(rcb.build()).build();
+        
         switch (request.getMethod()) {
         case POST:
             clientReq = new HttpPost(url);
@@ -144,7 +166,7 @@ public final class HttpCommand<R> {
     private URI populateQueryParams(HttpRequest<R> request) throws URISyntaxException {
 
         URIBuilder uri = new URIBuilder(request.getEndpoint()  + "/" + request.getPath());
-
+        
         if (!request.hasQueryParams()) 
             return uri.build();
 
