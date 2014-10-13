@@ -2,6 +2,7 @@ package org.openstack4j.api.compute;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.ActionResponse;
@@ -9,6 +10,7 @@ import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.VNCConsole;
+import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
@@ -236,4 +238,14 @@ public interface ServerService {
      * @return ActionResponse
      */
     ActionResponse liveMigrate(String serverId, LiveMigrateOptions options); 
+    
+    /**
+     * Will poll the Server waiting for the {@code Status} to match or an Error state occurs for the {@code maxWait} 
+     * @param serverId the server identifier
+     * @param status the status to wait for
+     * @param maxWait the max wait time
+     * @param maxWaitUnit the unit the max wait time was specified in
+     * @return the last Server polled.  User should re-check status in case max wait was hit and the status was still not in the desired state.
+     */
+    Server waitForServerStatus(String serverId, Status status, int maxWait, TimeUnit maxWaitUnit);
 }

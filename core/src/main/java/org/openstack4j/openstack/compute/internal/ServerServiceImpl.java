@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.core.transport.HttpResponse;
@@ -106,7 +107,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      */
     @Override
     public Server bootAndWaitActive(ServerCreate server, int maxWaitTime) {
-        return waitUntilServerActive(boot(server), maxWaitTime);
+        return waitForServerStatus(boot(server).getId(), Status.ACTIVE, maxWaitTime, TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -334,27 +335,29 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
             options = LiveMigrateOptions.create();
         return invokeAction(serverId, "os-migrateLive", options.toJsonString());
     }
-
+    
     /**
-     * Waits until the Server server has become ACTIVE, and returns it if it is under maxWait
+     * {@inheritDoc}
      */
-    private Server waitUntilServerActive(Server server, int maxWait) {
-        String serverId = server.getId();
-        boolean serverIsReady = false;
-        Server server2 = null;
-
-        int duration = 0;
-        while ( !serverIsReady ) {
-            server2 = get(serverId);
-
-            if ( server2.getStatus() == Status.ACTIVE || server2.getStatus() == Status.ERROR) {
-                serverIsReady = true;               
-            }
+    @Override
+    public Server waitForServerStatus(String serverId, Status status, int maxWait, TimeUnit maxWaitUnit) {
+        checkNotNull(serverId);
+        Server server = null;
+        long duration = 0;
+        long maxTime = maxWaitUnit.toMillis(maxWait);
+        while ( duration < maxTime ) {
+            server = get(serverId);
+            
+            if (server.getStatus() == status || server.getStatus() == Status.ERROR)
+                break;
+            
             duration += sleep(1000);
-            if (duration >= maxWait)
-                return server2;
         }
-        return server2;
+        
+        // should never happen, want to insure non-null is returned
+        if (server == null)
+            server = get(serverId);
+        return server;
     }
 
     private int sleep(int ms) {
