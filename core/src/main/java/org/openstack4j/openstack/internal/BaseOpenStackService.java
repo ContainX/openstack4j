@@ -1,6 +1,8 @@
 package org.openstack4j.openstack.internal;
 
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.ClientConstants;
@@ -17,6 +19,9 @@ import com.google.common.base.Joiner;
 
 public class BaseOpenStackService {
 
+    private static final Pattern MESSAGE_PATTERN = Pattern.compile(".*message\\\":\\s\\\"([^\"]+)\\\".*");
+
+    
 	ServiceType serviceType = ServiceType.IDENTITY;
 	Function<String, String> endpointFunc;
 	
@@ -141,6 +146,20 @@ public class BaseOpenStackService {
 			return HttpExecutor.create().execute(req.build());
 		}
 		
+	}
+	
+	/**
+	 * If a JSON responses contains message then we will attempt to parse the error.  If not the original JSON string is returned 
+	 * @param json the json string
+	 * @return the processed message
+	 */
+	protected String attemptToExtractMessageFromJson(String json) {
+	    if (json != null && json.contains("message")) {
+            Matcher m = MESSAGE_PATTERN.matcher(json);
+            if (m.matches())
+                return m.group(1);
+	    }
+	    return json;
 	}
 	
 }

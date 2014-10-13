@@ -1,20 +1,14 @@
 package org.openstack4j.model.compute.actions;
 
-import java.util.Iterator;
-import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 /**
  * Options used to invoke the Rebuild Action on a Server
  *
  * @author Jeremy Unruh
  */
-public final class RebuildOptions {
+public final class RebuildOptions extends BaseActionOptions {
 
-    private static final String OPT_FMT = "\"%s\": \"%s\"";
-    
-    private enum Option {
+    private enum Option implements OptionEnum {
         IMAGE("imageRef"),
         NAME("name"),
         ADMIN_PASS("adminPass")
@@ -27,9 +21,9 @@ public final class RebuildOptions {
         }
     }
     
-    private Map<Option, Object> options = Maps.newHashMap();
-    
-    private RebuildOptions() { }
+    private RebuildOptions() { 
+        super();
+    }
     
     /**
      * @return a new RebuildOptions object
@@ -45,7 +39,7 @@ public final class RebuildOptions {
      * @return RebuildOptions
      */
     public RebuildOptions image(String imageId) {
-        options.put(Option.IMAGE, imageId);
+        add(Option.IMAGE, imageId);
         return this;
     }
     
@@ -56,7 +50,7 @@ public final class RebuildOptions {
      * @return RebuildOptions
      */
     public RebuildOptions name(String name) {
-        options.put(Option.NAME, name);
+        add(Option.NAME, name);
         return this;
     }
     
@@ -67,25 +61,7 @@ public final class RebuildOptions {
      * @return RebuildOptions
      */
     public RebuildOptions adminPass(String adminPass) {
-        options.put(Option.ADMIN_PASS, adminPass);
+        add(Option.ADMIN_PASS, adminPass);
         return this;
     }
-    
-    /**
-     * @return A JSON String representing this object
-     */
-    public String toJsonString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\n");
-        Iterator<Option> it = options.keySet().iterator();
-        while (it.hasNext()) {
-            Option opt = it.next();
-            sb.append(String.format(OPT_FMT, opt.getParam(), options.get(opt)));
-            if (it.hasNext())
-                sb.append(",\n");
-        }
-        sb.append("\n}");
-        return sb.toString();
-    }
-    
 }
