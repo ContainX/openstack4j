@@ -4,6 +4,7 @@
 
 ##### Enhancements/Improvements
 
+* Issue #83 - Live server migration
 * Issue #79 - Support for OKHttp connector
 * Issue #77 - Log4j and SLF4j Plugin support
 * Issue #71 - Support for other connector choices (Jersey2, Resteasy, HttpClient)
