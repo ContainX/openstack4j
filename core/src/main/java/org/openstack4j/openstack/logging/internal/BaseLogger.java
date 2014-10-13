@@ -27,62 +27,59 @@ public abstract class BaseLogger implements Logger {
      * {@inheritDoc}
      */
     public void trace(String message, Object... args) {
-       if (isTraceEnabled())
-          logTrace(formatArguments(message, args));
+        if (isTraceEnabled())
+            logTrace(formatArguments(message, args));
     }
 
     /**
      * {@inheritDoc}
      */
     public void debug(String message, Object... args) {
-       if (isDebugEnabled())
-          logDebug(formatArguments(message, args));
+        if (isDebugEnabled())
+            logDebug(formatArguments(message, args));
     }
 
     /**
      * {@inheritDoc}
      */
     public void info(String message, Object... args) {
-       if (isInfoEnabled())
-          logInfo(formatArguments(message, args));
+        if (isInfoEnabled())
+            logInfo(formatArguments(message, args));
     }
 
     /**
      * {@inheritDoc}
      */
     public void warn(String message, Object... args) {
-       if (isWarnEnabled())
-          logWarn(formatArguments(message, args));
+        if (isWarnEnabled())
+            logWarn(formatArguments(message, args));
     }
 
     /**
      * {@inheritDoc}
      */
     public void warn(Throwable e, String message, Object... args) {
-       if (isWarnEnabled())
-          logWarn(formatArguments(message, args), e);
+        if (isWarnEnabled())
+            logWarn(formatArguments(message, args), e);
     }
 
     /**
      * {@inheritDoc}
      */
     public void error(String message, Object... args) {
-       if (isErrorEnabled())
-          logError(formatArguments(message, args));
+        if (isErrorEnabled())
+            logError(formatArguments(message, args));
     }
 
     /**
      * {@inheritDoc}
      */
     public void error(Throwable e, String message, Object... args) {
-       if (isErrorEnabled())
-          logError(formatArguments(message, args), e);
+        if (isErrorEnabled())
+            logError(formatArguments(message, args), e);
     }
-    
+
     private String formatArguments(String message, Object... args) {
         return args.length == 0 ? message : String.format(message, args);
-     }
-
-
-
+    }
 }
