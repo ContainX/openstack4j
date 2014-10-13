@@ -46,5 +46,4 @@ public abstract class Parser {
 		}
 		return null;
 	}
-
 }

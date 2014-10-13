@@ -17,6 +17,7 @@ import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
+import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.openstack.compute.domain.ConsoleOutput;
@@ -25,6 +26,8 @@ import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 /**
  * Server Operation API implementation
@@ -33,6 +36,8 @@ import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
  */
 public class ServerServiceImpl extends BaseComputeServices implements ServerService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ServerServiceImpl.class);
+    
     /**
      * {@inheritDoc}
      */
@@ -271,8 +276,13 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         HttpResponse response = executeActionWithResponse(serverId, action, innerJson);
         if (response.getStatus() == 409)
         {
-            System.out.println("ERROR: " + response.readEntity(String.class));
+            LOG.error(response.readEntity(String.class));
             return ActionResponse.actionFailed(String.format("Cannot '%s' while instance in in state of %s", action, action));
+        }
+        if (response.getStatus() >= 400 && response.getStatus() < 409) {
+            String message = response.readEntity(String.class);
+            if (message != null && message.contains("message"))
+                return ActionResponse.actionFailed(attemptToExtractMessageFromJson(message));
         }
         return ActionResponse.actionSuccess();
     }
@@ -312,6 +322,17 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public ActionResponse migrateServer(String serverId) {
         checkNotNull(serverId);
         return invokeAction(serverId, "migrate");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse liveMigrate(String serverId, LiveMigrateOptions options) {
+        checkNotNull(serverId);
+        if (options == null)
+            options = LiveMigrateOptions.create();
+        return invokeAction(serverId, "os-migrateLive", options.toJsonString());
     }
 
     /**

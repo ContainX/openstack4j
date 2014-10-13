@@ -11,6 +11,7 @@ import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
+import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 
@@ -227,4 +228,12 @@ public interface ServerService {
      * @return the action response
      */
     ActionResponse migrateServer(String serverId);
+    
+    /**
+     * Live-migrates a server identified with {@code serverId} to a new host without rebooting
+     * @param serverId the server identifier
+     * @param options live migration options
+     * @return ActionResponse
+     */
+    ActionResponse liveMigrate(String serverId, LiveMigrateOptions options); 
 }
