@@ -26,6 +26,7 @@ import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
+import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
@@ -165,7 +166,7 @@ public final class HttpCommand<R> {
 
     private URI populateQueryParams(HttpRequest<R> request) throws URISyntaxException {
 
-        URIBuilder uri = new URIBuilder(request.getEndpoint()  + "/" + request.getPath());
+        URIBuilder uri = new URIBuilder(new EndpointURIFromRequestFunction().apply(request));
         
         if (!request.hasQueryParams()) 
             return uri.build();

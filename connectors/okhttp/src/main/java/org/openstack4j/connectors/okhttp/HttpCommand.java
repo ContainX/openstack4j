@@ -12,6 +12,7 @@ import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
+import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
@@ -130,7 +131,7 @@ public final class HttpCommand<R> {
     private void populateQueryParams(HttpRequest<R> request)  {
 
         StringBuilder url = new StringBuilder();
-        url.append(request.getEndpoint()).append("/").append(request.getPath());
+        url.append(new EndpointURIFromRequestFunction().apply(request));
 
         if (!request.hasQueryParams()) 
         {
