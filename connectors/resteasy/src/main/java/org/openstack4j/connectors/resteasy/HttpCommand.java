@@ -11,6 +11,7 @@ import org.openstack4j.connectors.resteasy.executors.ApacheHttpClientExecutor;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
+import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
@@ -39,7 +40,7 @@ public final class HttpCommand<R> {
     }
 
     private void initialize() {
-        client = new ClientRequest(UriBuilder.fromUri(request.getEndpoint()  + "/" + request.getPath()), 
+        client = new ClientRequest(UriBuilder.fromUri(new EndpointURIFromRequestFunction().apply(request)), 
                 ApacheHttpClientExecutor.create(request.getConfig()), ResteasyClientFactory.getInstance());
         
         populateQueryParams(request);

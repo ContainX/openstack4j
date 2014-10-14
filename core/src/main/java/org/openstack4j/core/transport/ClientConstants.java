@@ -5,24 +5,25 @@ package org.openstack4j.core.transport;
  * 
  * @author Jeremy Unruh
  */
-public interface ClientConstants 
+public final class ClientConstants 
 {
-	static final String HEADER_X_AUTH_TOKEN = "X-Auth-Token";
-	static final String HEADER_X_SUBJECT_TOKEN = "X-Subject-Token";
-	static final String HEADER_CONTENT_LANGUAGE = "Content-Language";
-	static final String HEADER_CONTENT_ENCODING = "Content-Encoding";
-	static final String HEADER_OS4J_AUTH = "OS4J-Auth-Command";
-	static final String HEADER_ACCEPT = "Accept";
+    
+	public static final String HEADER_X_AUTH_TOKEN = "X-Auth-Token";
+	public static final String HEADER_X_SUBJECT_TOKEN = "X-Subject-Token";
+	public static final String HEADER_CONTENT_LANGUAGE = "Content-Language";
+	public static final String HEADER_CONTENT_ENCODING = "Content-Encoding";
+	public static final String HEADER_OS4J_AUTH = "OS4J-Auth-Command";
+	public static final String HEADER_ACCEPT = "Accept";
 	
 	
-	static final String CONTENT_TYPE_JSON = "application/json";
-	static final String CONTENT_TYPE_STREAM = "application/stream";
-	static final String CONTENT_TYPE_OCTECT_STREAM = "application/octet-stream";
+	public static final String CONTENT_TYPE_JSON = "application/json";
+	public static final String CONTENT_TYPE_STREAM = "application/stream";
+	public static final String CONTENT_TYPE_OCTECT_STREAM = "application/octet-stream";
 	// Paths
-	static final String PATH_TENANTS = "/tenants";
-	static final String PATH_ROLES = "/roles";
-	static final String PATH_EXTENSIONS = "/extensions";
-	static final String URI_SEP = "/";
+	public static final String PATH_TENANTS = "/tenants";
+	public static final String PATH_ROLES = "/roles";
+	public static final String PATH_EXTENSIONS = "/extensions";
+	public static final String URI_SEP = "/";
 
 	
 }

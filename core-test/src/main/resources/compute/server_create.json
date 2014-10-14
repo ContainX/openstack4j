@@ -1,0 +1,22 @@
+{
+    "server": {
+        "name": "server-test-1",
+        "imageRef": "b5660a6e-4b46-4be3-9707-6b47221b454f",
+        "flavorRef": "2",
+        "max_count": 1,
+        "min_count": 1,
+        "networks": [
+            {
+                "uuid": "d32019d3-bc6e-4319-9c1d-6722fc136a22"
+            }
+        ],
+        "security_groups": [
+            {
+                "name": "default"
+            },
+            {
+                "name": "another-secgroup-name"
+            }
+        ]
+    }
+}
