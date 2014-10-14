@@ -8,7 +8,7 @@ import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.identity.domain.Credentials;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -86,7 +86,7 @@ public abstract class AbstractTest {
         return String.format("http://127.0.0.1:%d%s",service().port, path);
     }
 
-    @AfterTest
+    @AfterClass
     protected void afterTest()
     {
         try {

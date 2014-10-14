@@ -3,6 +3,7 @@ package org.openstack4j.api.compute;
 import java.util.List;
 
 import org.openstack4j.api.compute.ext.HypervisorService;
+import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.Extension;
@@ -72,10 +73,18 @@ public interface ComputeService extends RestService {
 	
 	/**
 	 * Keypair Management Service
+	 * 
 	 * @return the keypair service
 	 */
 	KeypairService keypairs();
 
+	/**
+	 * Administrators only - provides in-progress migrations for a region or cell
+	 * 
+	 * @return the migration service
+	 */
+	MigrationService migrations();
+	
 	/**
 	 * @return a list of Extensions that have been added against the Compute service
 	 */

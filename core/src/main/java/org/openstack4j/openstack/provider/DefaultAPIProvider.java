@@ -12,6 +12,7 @@ import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.compute.ext.HypervisorService;
+import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.heat.EventsService;
@@ -47,6 +48,7 @@ import org.openstack4j.openstack.compute.internal.KeypairServiceImpl;
 import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.HypervisorServiceImpl;
+import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
 import org.openstack4j.openstack.heat.internal.EventsServiceImpl;
 import org.openstack4j.openstack.heat.internal.HeatServiceImpl;
@@ -124,6 +126,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(TemplateService.class, TemplateServiceImpl.class);
 		bind(EventsService.class, EventsServiceImpl.class);
 		bind(ResourcesService.class, ResourcesServiceImpl.class);
+		bind(MigrationService.class, MigrationServiceImpl.class);
 	}
 
 	/**
