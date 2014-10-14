@@ -4,6 +4,7 @@
 
 ##### Enhancements/Improvements
 
+* Issue #85 - Support for os-migrations extension
 * Issue #83 - Live server migration
 * Issue #79 - Support for OKHttp connector
 * Issue #77 - Log4j and SLF4j Plugin support
