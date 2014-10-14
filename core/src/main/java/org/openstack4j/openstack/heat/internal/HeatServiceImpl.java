@@ -5,6 +5,7 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.heat.EventsService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.heat.ResourcesService;
+import org.openstack4j.api.heat.SoftwareConfigService;
 import org.openstack4j.api.heat.StackService;
 import org.openstack4j.api.heat.TemplateService;
 
@@ -34,6 +35,11 @@ public class HeatServiceImpl extends BaseHeatServices implements HeatService {
 	public ResourcesService resources() {
 		return Apis.get(ResourcesService.class);
 	}
+
+    @Override
+    public SoftwareConfigService softwareConfig() {
+        return Apis.get(SoftwareConfigService.class);
+    }
 	
 
 }

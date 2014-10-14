@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.heat.internal;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.heat.TemplateService;
 import org.openstack4j.model.heat.Template;
@@ -25,6 +27,8 @@ public class TemplateServiceImpl extends BaseHeatServices implements
 
 	@Override
 	public String validateTemplate(Template template) {
+        checkNotNull(template);
+
 		String result = "VALID";
 
 		try {

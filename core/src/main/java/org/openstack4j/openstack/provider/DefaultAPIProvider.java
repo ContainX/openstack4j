@@ -18,6 +18,7 @@ import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.heat.EventsService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.heat.ResourcesService;
+import org.openstack4j.api.heat.SoftwareConfigService;
 import org.openstack4j.api.heat.StackService;
 import org.openstack4j.api.heat.TemplateService;
 import org.openstack4j.api.identity.IdentityService;
@@ -53,6 +54,7 @@ import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
 import org.openstack4j.openstack.heat.internal.EventsServiceImpl;
 import org.openstack4j.openstack.heat.internal.HeatServiceImpl;
 import org.openstack4j.openstack.heat.internal.ResourcesServiceImpl;
+import org.openstack4j.openstack.heat.internal.SoftwareConfigServiceImpl;
 import org.openstack4j.openstack.heat.internal.StackServiceImpl;
 import org.openstack4j.openstack.heat.internal.TemplateServiceImpl;
 import org.openstack4j.openstack.identity.internal.IdentityServiceImpl;
@@ -127,6 +129,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(EventsService.class, EventsServiceImpl.class);
 		bind(ResourcesService.class, ResourcesServiceImpl.class);
 		bind(MigrationService.class, MigrationServiceImpl.class);
+		bind(SoftwareConfigService.class, SoftwareConfigServiceImpl.class);
 	}
 
 	/**
