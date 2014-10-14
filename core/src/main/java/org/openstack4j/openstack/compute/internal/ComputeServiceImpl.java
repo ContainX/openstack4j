@@ -12,6 +12,7 @@ import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.compute.ext.HypervisorService;
+import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.openstack.common.ExtensionValue.NovaExtensions;
@@ -102,4 +103,12 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	public ZoneService zones() {
 		return Apis.get(ZoneService.class);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+    @Override
+    public MigrationService migrations() {
+        return Apis.get(MigrationService.class);
+    }
 }

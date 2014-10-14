@@ -90,6 +90,14 @@ public class BaseOpenStackService {
 			return this;
 		}
 		
+		public Invocation<R> params(Map<String, Object> params) {
+		    if (params != null) {
+		        for (String name : params.keySet())
+		            req.queryParam(name, params.get(name));
+		    }
+            return this;
+        }
+		
 		public Invocation<R> param(boolean condition, String name, Object value) {
 			if (condition)
 				req.queryParam(name, value);
