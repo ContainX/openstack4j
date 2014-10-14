@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.heat.internal;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 
 import org.openstack4j.api.heat.ResourcesService;
@@ -19,11 +21,16 @@ public class ResourcesServiceImpl extends BaseHeatServices implements ResourcesS
 
 	@Override
 	public List<? extends Resource> list(String stackName, String stackId) {
+	    checkNotNull(stackName);
+        checkNotNull(stackId);
 		return get(Resources.class, uri("/stacks/%s/%s/resources", stackName, stackId)).execute().getList();
 	}
 	
 	@Override
 	public Resource show(String stackName, String stackId ,String resourceName) {
+	    checkNotNull(stackName);
+        checkNotNull(stackId);
+        checkNotNull(resourceName);
 		return get(HeatResource.class, uri("/stacks/%s/%s/resources/%s", stackName, stackId, resourceName)).execute();
 	}
 }

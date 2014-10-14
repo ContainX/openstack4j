@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.heat.internal;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 
 import org.openstack4j.api.heat.EventsService;
@@ -19,16 +21,25 @@ public class EventsServiceImpl extends BaseHeatServices implements EventsService
 
 	@Override
 	public List<? extends Event> list(String stackName, String stackId) {
+	    checkNotNull(stackId);
+	    checkNotNull(stackName);
 		return get(Events.class, uri("/stacks/%s/%s/events", stackName, stackId)).execute().getList();
 	}
 
 	@Override
 	public List<? extends Event> list(String stackName, String stackId, String resourceName) {
+	    checkNotNull(stackId);
+        checkNotNull(stackName);
+        checkNotNull(resourceName);
 		return get(Events.class, uri("/stacks/%s/%s/resources/%s/events", stackName, stackId ,resourceName)).execute().getList();
 	}
 
 	@Override
 	public Event show(String stackName, String stackId, String resourceName, String eventId) {
+	    checkNotNull(stackId);
+        checkNotNull(stackName);
+        checkNotNull(resourceName);
+        checkNotNull(eventId);
 		return get(HeatEvent.class, uri("/stacks/%s/%s/resources/%s/events/%s", stackName, stackId, resourceName, eventId)).execute();
 	}
 
