@@ -1,7 +1,7 @@
 package org.openstack4j.model.compute.ext;
 
 import org.openstack4j.model.common.BaseFilter;
-import org.openstack4j.model.compute.Server.Status;
+import org.openstack4j.model.compute.ext.Migration.Status;
 
 /**
  * Filter options used for Migration results
