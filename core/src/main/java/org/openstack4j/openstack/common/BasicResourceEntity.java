@@ -9,35 +9,18 @@ import com.google.common.base.Objects;
  * 
  * @author Jeremy Unruh
  */
-public class BasicResourceEntity implements BasicResource {
+public class BasicResourceEntity extends IdResourceEntity implements BasicResource {
 
 	private static final long serialVersionUID = 1L;
 
-	private String id;
 	private String name;
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	/**
@@ -51,7 +34,7 @@ public class BasicResourceEntity implements BasicResource {
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(getClass()).omitNullValues()
-				     .add("id", id).add("name", name)
+				     .add("id", getId()).add("name", name)
 				     .toString();
 	}
 }

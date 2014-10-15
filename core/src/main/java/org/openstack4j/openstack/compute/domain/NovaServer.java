@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.model.common.IdEntity;
 import org.openstack4j.model.common.Link;
 import org.openstack4j.model.compute.Addresses;
 import org.openstack4j.model.compute.Fault;
@@ -13,14 +14,17 @@ import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.openstack.common.GenericLink;
+import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 @JsonRootName("server")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class NovaServer implements Server {
 
 	public static final long serialVersionUID = 1L;
@@ -72,7 +76,7 @@ public class NovaServer implements Server {
 	@JsonProperty("OS-SRV-USG:terminated_at")
 	private Date terminatedAt;
 	@JsonProperty("os-extended-volumes:volumes_attached")
-	private List<String> osExtendedVolumesAttached;
+	private List<IdResourceEntity> osExtendedVolumesAttached;
 	private String uuid;
 	private String adminPass;
 
@@ -247,7 +251,7 @@ public class NovaServer implements Server {
 	}
 
 	@Override
-	public List<String> getOsExtendedVolumesAttached() {
+	public List<? extends IdEntity> getOsExtendedVolumesAttached() {
 		return osExtendedVolumesAttached;
 	}
 
