@@ -12,11 +12,20 @@ import org.openstack4j.model.heat.Template;
 public interface TemplateBuilder extends Buildable.Builder<TemplateBuilder, Template>{
 	
 	/**
-	 * sets the template in Json format
-	 * @param template template in Json format
+	 * Sets the template in JSON format. This value takes precedence over the template URL if both are supplied.
+	 * 
+	 * @param template template in JSON format
 	 * @return modified TemplateBuilder
 	 */
 	TemplateBuilder templateJson(String template);
-
+	
+	
+	/**
+	 * The URL of the template to instantiate. This value is ignored if the template is supplied inline
+	 * 
+	 * @param templateURL the template URL
+	 * @return TemplateBuilder
+	 */
+	TemplateBuilder templateURL(String templateURL);
 
 }

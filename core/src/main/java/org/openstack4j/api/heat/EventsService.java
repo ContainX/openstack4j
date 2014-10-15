@@ -41,5 +41,5 @@ public interface EventsService {
 	 * @param eventId      The unique identifier of an event related to the resource in the stack 
 	 * @return event details
 	 */
-	Event show(String stackName, String stackId, String resourceName ,String eventId);
+	Event show(String stackName, String stackId, String resourceName, String eventId);
 }

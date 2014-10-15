@@ -13,9 +13,18 @@ public interface Template extends ModelEntity, Buildable<TemplateBuilder> {
 	
 	/**
 	 * Returns the JSON-representation of the template
+	 * 
 	 * @return the JSON formatted template
 	 */
 	String getTemplateJson();
+	
+	/**
+	 * The URL of the template to instantiate. This value is ignored if the template is supplied inline.
+	 * 
+	 * @return the template URL
+	 */
+	String getTemplateURL();
+	
 	
 
 }
