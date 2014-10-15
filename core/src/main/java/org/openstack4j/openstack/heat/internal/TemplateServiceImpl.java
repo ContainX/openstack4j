@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.heat.TemplateService;
 import org.openstack4j.model.heat.Template;
+import org.openstack4j.model.heat.TemplateResponse;
 import org.openstack4j.openstack.heat.domain.HeatTemplate;
 
 /**
@@ -16,27 +17,38 @@ import org.openstack4j.openstack.heat.domain.HeatTemplate;
  * @author Matthias Reisser
  * 
  */
-public class TemplateServiceImpl extends BaseHeatServices implements
-		TemplateService {
+public class TemplateServiceImpl extends BaseHeatServices implements TemplateService {
 
-	@Override
-	public String validateTemplate(String template) {
-		return validateTemplate(Builders.template().templateJson(template)
-				.build());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TemplateResponse validateTemplate(String template) {
+        checkNotNull(template);
+        return validateTemplate(Builders.template().templateJson(template).build());
+    }
 
-	@Override
-	public String validateTemplate(Template template) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TemplateResponse validateTemplateByURL(String templateURL) {
+        checkNotNull(templateURL);
+        return validateTemplate(Builders.template().templateURL(templateURL).build());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TemplateResponse validateTemplate(Template template) {
         checkNotNull(template);
 
-		String result = "VALID";
-
-		try {
-			post(String.class, uri("/validate")).entity(template).execute();
-		} catch (RuntimeException re) {
-			result = re.getMessage();
-		}
-		return result;
-	}
-
+        try {
+            post(String.class, uri("/validate")).entity(template).execute();
+        } catch (RuntimeException re) {
+            return TemplateResponse.fail(re.getMessage());
+        }
+        return TemplateResponse.success();
+    }
 }

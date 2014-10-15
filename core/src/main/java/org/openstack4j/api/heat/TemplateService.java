@@ -1,6 +1,7 @@
 package org.openstack4j.api.heat;
 
 import org.openstack4j.model.heat.Template;
+import org.openstack4j.model.heat.TemplateResponse;
 
 /**
  * This Interface contains a non-exhaustive list of methods for the manipulation of Heat Templates
@@ -12,15 +13,23 @@ public interface TemplateService {
 	/**
 	 * Validates the template
 	 * @param template to validate, passed as a {@link Template}
-	 * @return String containing details about the validity of the template. Returns "VALID" if the template is valid.
+	 * @return TemplateResponse indicating valid or the error condition if not valid
 	 */
-	String validateTemplate(Template template);
+	TemplateResponse validateTemplate(Template template);
 	
 	/**
 	 * Validates the template
 	 * @param template to validate, passed as {@link String} in JSON Format
-	 * @return String containing details about the validity of the template. Returns "VALID" if the template is valid.
+	 * @return TemplateResponse indicating valid or the error condition if not valid
 	 */
-	String validateTemplate(String template);
+	TemplateResponse validateTemplate(String template);
+	
+	/**
+     * Validates the template
+     * 
+     * @param templateURL the remote template via URL to validate
+     * @return TemplateResponse indicating valid or the error condition if not valid
+     */
+    TemplateResponse validateTemplateByURL(String templateURL);
 	
 }

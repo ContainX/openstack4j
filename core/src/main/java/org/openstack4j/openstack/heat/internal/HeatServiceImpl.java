@@ -11,8 +11,8 @@ import org.openstack4j.api.heat.TemplateService;
 
 /**
  * This class contains getters for all implementation of the available Heat services
+ * 
  * @author Matthias Reisser
- *
  */
 public class HeatServiceImpl extends BaseHeatServices implements HeatService {
 
