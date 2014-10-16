@@ -3,6 +3,8 @@ package org.openstack4j.model.compute.ext;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.openstack4j.model.ModelEntity;
 
 /**
@@ -28,7 +30,7 @@ public interface AvailabilityZones extends ModelEntity {
 		/**
 		 * @return hosts in the zone and nova services in each host, not really implemented yet
 		 */
-		HashMap<String, HashMap<String, ? extends NovaService> > getHosts();
+		Map<String, HashMap<String, ? extends NovaService> > getHosts();
 
 		/**
 		 * @return zone's name

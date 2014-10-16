@@ -3,6 +3,7 @@ package org.openstack4j.openstack.compute.domain.ext;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.openstack4j.model.compute.ext.AvailabilityZones;
@@ -55,7 +56,7 @@ public class ExtAvailabilityZones implements AvailabilityZones {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public HashMap<String, HashMap<String, ? extends NovaService>> getHosts() {
+		public Map<String, HashMap<String, ? extends NovaService>> getHosts() {
 			HashMap<String, HashMap<String, ? extends NovaService>> map = new HashMap<String, HashMap<String, ? extends NovaService>>();
 			for (Entry<String, HashMap<String, ExtNovaService>> entry : hosts.entrySet()) {
 				map.put(entry.getKey(), entry.getValue());
