@@ -26,7 +26,7 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * 
 	 */
 	public enum Status {
-		CREATING, AVAILABLE, IN_USE, DELETING, ERROR, UNRECOGNIZED;
+		AVAILABLE, ATTACHING, BACKING_UP, CREATING, DELETING, DOWNLOADING, ERROR, ERROR_DELETING, ERROR_RESTORING, IN_USE, RESTORING_BACKUP, UNRECOGNIZED;
 		
 		@JsonValue
 		public String value() {
