@@ -90,6 +90,6 @@ public interface Image extends ModelEntity {
 	/**
 	 * @return extra metadata/specs associated with the image
 	 */
-	Map<String, String> getMetaData();
+	Map<String, Object> getMetaData();
 	
 }

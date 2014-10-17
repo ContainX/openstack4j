@@ -38,7 +38,7 @@ public class HeatStack implements Stack {
 	@JsonProperty("timeout_mins")
 	private Long timeoutMins;
 	@JsonProperty("outputs")
-	private List<Map<String, String>> outputs;
+	private List<Map<String, Object>> outputs;
 	@JsonProperty("parameters")
 	private Map<String, String> parameters;
 	@JsonProperty("creation_time")
@@ -80,7 +80,7 @@ public class HeatStack implements Stack {
 	}
 
 	@Override
-	public List<Map<String, String>> getOutputs() {
+	public List<Map<String, Object>> getOutputs() {
 		return outputs;
 	}
 

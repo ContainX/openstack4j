@@ -36,7 +36,7 @@ public class NovaImage implements Image {
 	private long size;
 	private List<GenericLink> links;
 	@JsonProperty("metadata")
-	private Map<String, String> metadata;
+	private Map<String, Object> metadata;
 
 	public NovaImage() {
 	}
@@ -133,7 +133,7 @@ public class NovaImage implements Image {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Map<String, String> getMetaData() {
+	public Map<String, Object> getMetaData() {
 		return metadata;
 	}
 	

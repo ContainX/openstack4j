@@ -74,7 +74,7 @@ public interface Stack extends ModelEntity {
 	 *         Name of the output, Value is Json formatted containing
 	 *         output_value, description and output_key
 	 */
-	List<Map<String, String>> getOutputs();
+	List<Map<String, Object>> getOutputs();
 
 	/**
 	 * Returns the parameters of the stack
