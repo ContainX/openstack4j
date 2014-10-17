@@ -8,9 +8,10 @@ import org.openstack4j.model.storage.block.VolumeSnapshot;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Objects;
 
 /**
@@ -24,12 +25,14 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
+	@JsonProperty("display_name")
 	private String name;
+	@JsonProperty("display_description")
 	private String description;
 	@JsonProperty("volume_id")
 	private String volumeId;
 	private Status status;
-	@JsonSerialize(include=JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonProperty("size")
 	private Integer size;
 	@JsonProperty("created_at")
