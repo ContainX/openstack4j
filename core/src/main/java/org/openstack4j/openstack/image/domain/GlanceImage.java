@@ -14,6 +14,7 @@ import org.openstack4j.model.image.StoreType;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
@@ -300,6 +301,16 @@ public class GlanceImage implements Image {
 		this.properties = properties;
 		return this;
 	}
+	
+	/**
+     * {@inheritDoc}
+     */
+    @JsonIgnore
+    @Override
+    public boolean isSnapshot() {
+        return properties != null && properties.containsKey("image_location") && "snapshot".equals(properties.get("image_location"));
+    }
+    
 	
 	/**
 	 * {@inheritDoc}
