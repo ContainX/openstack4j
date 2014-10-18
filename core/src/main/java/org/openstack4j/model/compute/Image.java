@@ -92,4 +92,11 @@ public interface Image extends ModelEntity {
 	 */
 	Map<String, Object> getMetaData();
 	
+	/**
+	 * Determines if this image is a snapshot
+	 * 
+	 * @return true if this image is a snapshot
+	 */
+	boolean isSnapshot();
+	
 }

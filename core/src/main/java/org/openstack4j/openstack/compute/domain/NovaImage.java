@@ -9,6 +9,7 @@ import org.openstack4j.model.compute.Image;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
@@ -140,10 +141,19 @@ public class NovaImage implements Image {
 	/**
 	 * {@inheritDoc}
 	 */
+	@JsonIgnore
+    @Override
+    public boolean isSnapshot() {
+        return getMetaData() != null && getMetaData().containsKey("image_location") && "snapshot".equals(getMetaData().get("image_location"));
+    }
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-						.add("id", id).add("name", name).add("status", status)
+						.add("id", id).add("name", name).add("status", status).add("isSnapshot", isSnapshot())
 						.add("progress", progress).add("size", size).add("minRam", minRam)
 						.add("minDisk", minDisk).add("created", created).add("updated", updated)
 						.add("metadata", metadata).add("links", links).addValue("\n")
@@ -162,5 +172,4 @@ public class NovaImage implements Image {
 		}
 		
 	}
-
 }
