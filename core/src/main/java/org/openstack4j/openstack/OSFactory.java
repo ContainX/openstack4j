@@ -8,6 +8,7 @@ import org.openstack4j.model.identity.Access;
 import org.openstack4j.openstack.client.OSClientBuilder;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
 import org.openstack4j.openstack.internal.OSClientSession;
+import org.openstack4j.openstack.logging.internal.FallbackLoggerFactorySupplier;
 
 /**
  * A Factory which sets up the APIs to be used a previously non-expired authorization or new authorization.
@@ -48,6 +49,14 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      */
     public static void enableHttpLoggingFilter(boolean enabled) {
         System.getProperties().setProperty(HttpLoggingFilter.class.getName(), String.valueOf(enabled));
+    }
+    
+    /**
+     * Unless a logger plugin is declared the default logger is console.  By invoking this method the default
+     * console is replaced by the JDK based Logger
+     */
+    public static void useJDKLogger() {
+        FallbackLoggerFactorySupplier.getInstance().useJDKLogger();
     }
 
 	/**
