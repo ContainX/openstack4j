@@ -12,6 +12,7 @@ import org.openstack4j.openstack.logging.LoggerFactorySupplier;
 public final class FallbackLoggerFactorySupplier implements LoggerFactorySupplier {
 
     private static final FallbackLoggerFactorySupplier INSTANCE = new FallbackLoggerFactorySupplier();
+    private boolean useJDKLogger;
     
     private FallbackLoggerFactorySupplier() { 
     }
@@ -20,9 +21,15 @@ public final class FallbackLoggerFactorySupplier implements LoggerFactorySupplie
         return INSTANCE;
     }
     
+    public void useJDKLogger() {
+        this.useJDKLogger = true;
+    }
     
     @Override
     public Logger getLogger(String category) {
+        if (useJDKLogger)
+            return new JDKLogger(category);
+        
         return new ConsoleLogger(category);
     }
 
