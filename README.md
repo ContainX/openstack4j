@@ -6,7 +6,9 @@ OpenStack4j
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry and more.
 
-### Documenation/Tutorials:  [www.OpenStack4j.com](http://www.openstack4j.com)                      
+**Documenation/Tutorials:  [OpenStack4j.com](http://www.openstack4j.com)**                      
+
+**Mailing List/Group Discussions: [groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)**
 
 **Keep up to date with us on Twitter: [@openstack4j](https://twitter.com/openstack4j)**
 
@@ -20,9 +22,9 @@ Maven
 
 #### Latest Release (Stable)
 
-**Note:** May not include all documented features on the website tutorials and documentation.  See [ changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md) for details
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.pacesys/openstack4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.pacesys/openstack4j)
 
-```
+```xml
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
@@ -32,19 +34,27 @@ Maven
 
 #### Current (Master Branch)
 
+OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the ability to choose the connector that you would like to use in your environment.  
 
-```
+**Using OpenStack4j with the default Jersey2 Connector**
+```xml
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
 </dependency>
 ```
-**NOTE** Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
+
+**Using OpenStack4j with one of our connector modules**
+
+To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/gondor/openstack4j/tree/master/connectors)
+
+**A note about referencing Snapshots without Source**
+
+Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
 
 Example POM based repository declaration to grab snapshots:
-```
-
+```xml
 <repositories>
     <repository>
       <id>st-snapshots</id>
@@ -207,25 +217,19 @@ If you would like to contribute please see our contributing [guidelines](https:/
 License
 -------
 ```
-The MIT License (MIT)
+This software is licensed under the Apache 2 license, quoted below.
 
-Copyright (c) 2014 Jeremy Unruh
+Copyright 2014 Jeremy Unruh and OpenStack4j
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+    http://www.apache.org/licenses/LICENSE-2.0
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
 ```
