@@ -1,0 +1,300 @@
+{
+  "images": [
+    {
+      "status": "ACTIVE",
+      "updated": "2014-10-16T02:48:46Z",
+      "links": [
+        {
+          "href": "http:\/\/123.30.50.93:8774\/v2\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/72f759b3-2576-4bf0-9ac9-7cb4a5b9d541",
+          "rel": "self"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:8774\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/72f759b3-2576-4bf0-9ac9-7cb4a5b9d541",
+          "rel": "bookmark"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:9292\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/72f759b3-2576-4bf0-9ac9-7cb4a5b9d541",
+          "type": "application\/vnd.openstack.image",
+          "rel": "alternate"
+        }
+      ],
+      "id": "72f759b3-2576-4bf0-9ac9-7cb4a5b9d541",
+      "OS-EXT-IMG-SIZE:size": 0,
+      "name": "ex_snapshot",
+      "created": "2014-10-16T02:48:46Z",
+      "minDisk": 0,
+      "progress": 100,
+      "minRam": 0,
+      "metadata": {
+        "block_device_mapping": [
+          {
+            "guest_format": null,
+            "boot_index": 0,
+            "no_device": null,
+            "volume_id": null,
+            "volume_size": null,
+            "disk_bus": "virtio",
+            "image_id": null,
+            "source_type": "snapshot",
+            "device_type": "disk",
+            "snapshot_id": "07add68b-10e2-4494-a086-5a952d4413cc",
+            "destination_type": "volume",
+            "delete_on_termination": null
+          }
+        ],
+        "kernel_id": "5fe7ff78-f801-4f6c-879d-bdc4ede26726",
+        "checksum": "f8a2eeee2dc65b3d9b6e63678955bd83",
+        "min_ram": "0",
+        "ramdisk_id": "13351128-c903-42ba-b0b9-4258ee34e1b2",
+        "disk_format": "ami",
+        "image_name": "cirros-0.3.1-x86_64-uec",
+        "bdm_v2": "True",
+        "image_id": "2d9bcf43-de40-43c0-b0c5-db776207113a",
+        "root_device_name": "\/dev\/vda",
+        "container_format": "ami",
+        "min_disk": "0",
+        "size": "25165824"
+      }
+    },
+    {
+      "status": "ACTIVE",
+      "updated": "2014-10-16T02:46:47Z",
+      "links": [
+        {
+          "href": "http:\/\/123.30.50.93:8774\/v2\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/754b0aed-07d8-4cf5-b1eb-7d2d8a8d8943",
+          "rel": "self"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:8774\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/754b0aed-07d8-4cf5-b1eb-7d2d8a8d8943",
+          "rel": "bookmark"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:9292\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/754b0aed-07d8-4cf5-b1eb-7d2d8a8d8943",
+          "type": "application\/vnd.openstack.image",
+          "rel": "alternate"
+        }
+      ],
+      "id": "754b0aed-07d8-4cf5-b1eb-7d2d8a8d8943",
+      "OS-EXT-IMG-SIZE:size": 0,
+      "name": "ex_snapshot",
+      "created": "2014-10-16T02:46:47Z",
+      "minDisk": 0,
+      "progress": 100,
+      "minRam": 0,
+      "metadata": {
+        "block_device_mapping": [
+          {
+            "guest_format": null,
+            "boot_index": 0,
+            "no_device": null,
+            "volume_id": null,
+            "volume_size": null,
+            "disk_bus": "virtio",
+            "image_id": null,
+            "source_type": "snapshot",
+            "device_type": "disk",
+            "snapshot_id": "d3f82dd2-78fe-42ab-a722-5209e6f491d2",
+            "destination_type": "volume",
+            "delete_on_termination": null
+          }
+        ],
+        "kernel_id": "5fe7ff78-f801-4f6c-879d-bdc4ede26726",
+        "checksum": "f8a2eeee2dc65b3d9b6e63678955bd83",
+        "min_ram": "0",
+        "ramdisk_id": "13351128-c903-42ba-b0b9-4258ee34e1b2",
+        "disk_format": "ami",
+        "image_name": "cirros-0.3.1-x86_64-uec",
+        "bdm_v2": "True",
+        "image_id": "2d9bcf43-de40-43c0-b0c5-db776207113a",
+        "root_device_name": "\/dev\/vda",
+        "container_format": "ami",
+        "min_disk": "0",
+        "size": "25165824"
+      }
+    },
+    {
+      "status": "ACTIVE",
+      "updated": "2014-10-08T09:39:03Z",
+      "links": [
+        {
+          "href": "http:\/\/123.30.50.93:8774\/v2\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/fed85754-2b83-43c7-afef-aa5d4a507e27",
+          "rel": "self"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:8774\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/fed85754-2b83-43c7-afef-aa5d4a507e27",
+          "rel": "bookmark"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:9292\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/fed85754-2b83-43c7-afef-aa5d4a507e27",
+          "type": "application\/vnd.openstack.image",
+          "rel": "alternate"
+        }
+      ],
+      "id": "fed85754-2b83-43c7-afef-aa5d4a507e27",
+      "OS-EXT-IMG-SIZE:size": 10420224,
+      "name": "example1",
+      "created": "2014-10-08T09:39:00Z",
+      "minDisk": 20,
+      "server": {
+        "id": "4d0222fb-58e7-4fce-9d57-572d14d6c249",
+        "links": [
+          {
+            "href": "http:\/\/123.30.50.93:8774\/v2\/88aa7a7d4f8c4c3c8df8a985da345858\/servers\/4d0222fb-58e7-4fce-9d57-572d14d6c249",
+            "rel": "self"
+          },
+          {
+            "href": "http:\/\/123.30.50.93:8774\/88aa7a7d4f8c4c3c8df8a985da345858\/servers\/4d0222fb-58e7-4fce-9d57-572d14d6c249",
+            "rel": "bookmark"
+          }
+        ]
+      },
+      "progress": 100,
+      "minRam": 0,
+      "metadata": {
+        "instance_uuid": "4d0222fb-58e7-4fce-9d57-572d14d6c249",
+        "image_location": "snapshot",
+        "image_state": "available",
+        "instance_type_memory_mb": "2048",
+        "instance_type_swap": "0",
+        "image_type": "snapshot",
+        "instance_type_id": "5",
+        "ramdisk_id": "13351128-c903-42ba-b0b9-4258ee34e1b2",
+        "instance_type_name": "m1.small",
+        "instance_type_ephemeral_gb": "0",
+        "instance_type_rxtx_factor": "1.0",
+        "kernel_id": "5fe7ff78-f801-4f6c-879d-bdc4ede26726",
+        "network_allocated": "True",
+        "instance_type_flavorid": "2",
+        "instance_type_vcpus": "1",
+        "user_id": "7e1239db95cd449297f7c32861693919",
+        "instance_type_root_gb": "20",
+        "base_image_ref": "2d9bcf43-de40-43c0-b0c5-db776207113a",
+        "owner_id": "acb81c10f82742169a40fcd4b69e0045"
+      }
+    },
+    {
+      "status": "ACTIVE",
+      "updated": "2014-10-06T08:56:35Z",
+      "links": [
+        {
+          "href": "http:\/\/123.30.50.93:8774\/v2\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/fcff4128-1869-44ac-8774-62a84b0f75c1",
+          "rel": "self"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:8774\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/fcff4128-1869-44ac-8774-62a84b0f75c1",
+          "rel": "bookmark"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:9292\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/fcff4128-1869-44ac-8774-62a84b0f75c1",
+          "type": "application\/vnd.openstack.image",
+          "rel": "alternate"
+        }
+      ],
+      "id": "fcff4128-1869-44ac-8774-62a84b0f75c1",
+      "OS-EXT-IMG-SIZE:size": 10878976,
+      "name": "snapshot_example2",
+      "created": "2014-10-06T08:56:01Z",
+      "minDisk": 1,
+      "server": {
+        "id": "9fe2ab64-0e1b-4b1c-9939-007037560358",
+        "links": [
+          {
+            "href": "http:\/\/123.30.50.93:8774\/v2\/88aa7a7d4f8c4c3c8df8a985da345858\/servers\/9fe2ab64-0e1b-4b1c-9939-007037560358",
+            "rel": "self"
+          },
+          {
+            "href": "http:\/\/123.30.50.93:8774\/88aa7a7d4f8c4c3c8df8a985da345858\/servers\/9fe2ab64-0e1b-4b1c-9939-007037560358",
+            "rel": "bookmark"
+          }
+        ]
+      },
+      "progress": 100,
+      "minRam": 0,
+      "metadata": {
+        "instance_uuid": "9fe2ab64-0e1b-4b1c-9939-007037560358",
+        "image_location": "snapshot",
+        "image_state": "available",
+        "instance_type_memory_mb": "512",
+        "instance_type_swap": "0",
+        "image_type": "snapshot",
+        "instance_type_id": "2",
+        "ramdisk_id": "42299b3e-f3ab-4ba4-ae7d-6246da74668a",
+        "instance_type_name": "m1.tiny",
+        "instance_type_ephemeral_gb": "0",
+        "instance_type_rxtx_factor": "1.0",
+        "kernel_id": "085a717a-0be1-4d40-bfdf-d284c9fc9502",
+        "network_allocated": "True",
+        "instance_type_flavorid": "1",
+        "instance_type_vcpus": "1",
+        "user_id": "7e1239db95cd449297f7c32861693919",
+        "instance_type_root_gb": "1",
+        "base_image_ref": "28d353a9-6893-4c33-88dc-6771386904f0",
+        "owner_id": "acb81c10f82742169a40fcd4b69e0045"
+      }
+    },
+    {
+      "status": "ACTIVE",
+      "updated": "2014-10-02T02:51:28Z",
+      "links": [
+        {
+          "href": "http:\/\/123.30.50.93:8774\/v2\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/e6d8cc11-b296-4e17-8ae3-8ab9f67a6bd5",
+          "rel": "self"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:8774\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/e6d8cc11-b296-4e17-8ae3-8ab9f67a6bd5",
+          "rel": "bookmark"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:9292\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/e6d8cc11-b296-4e17-8ae3-8ab9f67a6bd5",
+          "type": "application\/vnd.openstack.image",
+          "rel": "alternate"
+        }
+      ],
+      "id": "e6d8cc11-b296-4e17-8ae3-8ab9f67a6bd5",
+      "OS-EXT-IMG-SIZE:size": 226426880,
+      "name": "ubuntu-12.04-new",
+      "created": "2014-10-02T02:51:19Z",
+      "minDisk": 1,
+      "progress": 100,
+      "minRam": 512,
+      "metadata": {
+        "architecture": "64",
+        "description": "ubuntu-12-04-new"
+      }
+    },
+    {
+      "status": "ACTIVE",
+      "updated": "2014-09-23T10:29:22Z",
+      "links": [
+        {
+          "href": "http:\/\/123.30.50.93:8774\/v2\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/41a6cadc-a50e-4409-b8d0-017881b61c43",
+          "rel": "self"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:8774\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/41a6cadc-a50e-4409-b8d0-017881b61c43",
+          "rel": "bookmark"
+        },
+        {
+          "href": "http:\/\/123.30.50.93:9292\/88aa7a7d4f8c4c3c8df8a985da345858\/images\/41a6cadc-a50e-4409-b8d0-017881b61c43",
+          "type": "application\/vnd.openstack.image",
+          "rel": "alternate"
+        }
+      ],
+      "id": "41a6cadc-a50e-4409-b8d0-017881b61c43",
+      "OS-EXT-IMG-SIZE:size": 25165824,
+      "name": "new cirros snapshot",
+      "created": "2014-09-23T10:28:16Z",
+      "minDisk": 2,
+      "progress": 100,
+      "minRam": 512,
+      "metadata": {
+        "architecture": "64",
+        "description": "sss"
+      }
+    },
+    {
+      "status": "ACTIVE",
+      "updated": "2014-09-23T10:23:37Z"
+    }
+  ]
+}
