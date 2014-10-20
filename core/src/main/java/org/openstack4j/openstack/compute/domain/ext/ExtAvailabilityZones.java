@@ -33,7 +33,6 @@ public class ExtAvailabilityZones implements AvailabilityZones {
 		
 		ExtZoneState zoneState;
 		String zoneName;
-		@JsonIgnore
 		HashMap<String, HashMap<String, ExtNovaService>> hosts;
 			
 		/**
