@@ -12,7 +12,7 @@ public class ZoneServiceImpl extends BaseComputeServices implements ZoneService 
 	 */
 	@Override
 	public AvailabilityZones getAvailabilityZones() {
-		return get(ExtAvailabilityZones.class, "/os-availability-zone").execute();
+		return get(ExtAvailabilityZones.class, "/os-availability-zone/detail").execute();
 	}
 
 }
