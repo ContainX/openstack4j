@@ -16,6 +16,10 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 * Facebook: [facebook.com/openstack4j](http://www.facebook.com/openstack4j)
 * Changelog: [Changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md)
 
+## Bug Reports
+
+* GitHub Issues: [/gondor/openstack4j/issues](https://github.com/gondor/openstack4j/issues)
+
 Maven
 -----
 
