@@ -4,6 +4,7 @@
 
 ##### Enhancements/Improvements
 
+* Issue #90 - Volume Status "downloading" not regonized
 * Issue #87 - Software Configuration support for HEAT
 * Issue #85 - Support for os-migrations extension
 * Issue #83 - Live server migration
