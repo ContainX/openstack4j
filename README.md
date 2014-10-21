@@ -6,16 +6,15 @@ OpenStack4j
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry and more.
 
-**Documenation/Tutorials:  [OpenStack4j.com](http://www.openstack4j.com)**                      
+## Documentation and Support
 
-**Mailing List/Group Discussions: [groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)**
-
-**Keep up to date with us on Twitter: [@openstack4j](https://twitter.com/openstack4j)**
-
-**Join us on Facebook: [facebook.com/openstack4j](http://www.facebook.com/openstack4j)**
-
-**Latest Changelog: [Changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md)**
-
+* Website: [OpenStack4j.com](http://www.openstack4j.com)
+* Documentation/Tutorials: [OpenStack4j.com/learn/](http://www.openstack4j.com/learn/)
+* Questions - Use Google Groups: [groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)
+* Questions - Stackoverflow use **openstack4j** tag
+* Twitter: [@openstack4j](https://twitter.com/openstack4j)
+* Facebook: [facebook.com/openstack4j](http://www.facebook.com/openstack4j)
+* Changelog: [Changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md)
 
 Maven
 -----
