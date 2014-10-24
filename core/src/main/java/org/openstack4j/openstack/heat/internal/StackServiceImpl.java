@@ -30,15 +30,14 @@ public class StackServiceImpl extends BaseHeatServices implements StackService {
 
     @Override
     public Stack create(String name, String template,
-            Map<String, String> parameters, String disableRollback,
+            Map<String, String> parameters, boolean disableRollback,
             Long timeoutMins) {
         checkNotNull(name);
         checkNotNull(template);
         checkNotNull(parameters);
-        checkNotNull(disableRollback);
         checkNotNull(timeoutMins);
 
-        return create(Builders.stack().name(name).jsonTemplate(template)
+        return create(Builders.stack().name(name).template(template)
                 .parameters(parameters).timeoutMins(timeoutMins).build());
     }
 

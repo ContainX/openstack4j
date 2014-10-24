@@ -5,9 +5,7 @@ import java.util.Map;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.builder.StackCreateBuilder;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRawValue;
 
 /**
  * This class contains all elements required for the creation of a HeatStack. It
@@ -23,16 +21,12 @@ public class HeatStackCreate implements StackCreate {
 	private boolean disableRollback;
 	@JsonProperty("stack_name")
 	private String name;
-	@JsonRawValue
 	@JsonProperty("template")
-	private String jsonTemplate;
+	private String template;
 	@JsonProperty("parameters")
 	private Map<String, String> parameters;
 	@JsonProperty("timeout_mins")
 	private Long timeoutMins;
-
-	@JsonIgnore
-	private String yamlTemplate;
 
 	// To be added in the future
 	// @JsonProperty("environment")
@@ -59,11 +53,6 @@ public class HeatStackCreate implements StackCreate {
 	}
 
 	@Override
-	public String getJsonTemplate() {
-		return jsonTemplate;
-	}
-
-	@Override
 	public Map<String, String> getParameters() {
 
 		return parameters;
@@ -76,8 +65,8 @@ public class HeatStackCreate implements StackCreate {
 	}
 
 	@Override
-	public String getYamlTemplate() {
-		return yamlTemplate;
+	public String getTemplate() {
+		return template;
 	}
 
 	/**
@@ -130,12 +119,6 @@ public class HeatStackCreate implements StackCreate {
 		}
 
 		@Override
-		public StackCreateBuilder jsonTemplate(String template) {
-			model.jsonTemplate = template;
-			return this;
-		}
-
-		@Override
 		public StackCreateBuilder parameters(Map<String, String> parameters) {
 			model.parameters = parameters;
 			return this;
@@ -153,11 +136,11 @@ public class HeatStackCreate implements StackCreate {
 			return this;
 		}
 
-		@Override
-		public StackCreateBuilder yamlTemplate(String yamlTemplate) {
-			model.yamlTemplate = yamlTemplate;
-			return this;
-		}
+        @Override
+        public StackCreateBuilder template(String template) {
+           model.template = template;
+           return this;
+        }
 
 	}
 
