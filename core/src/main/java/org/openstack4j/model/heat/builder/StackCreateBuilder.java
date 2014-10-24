@@ -15,18 +15,11 @@ public interface StackCreateBuilder extends Buildable.Builder<StackCreateBuilder
 	StackCreateBuilder name(String name);
 	
 	/**
-	 * Sets the template in JSON format
-	 * @param template template in JSON format
-	 * @return the modified StackCreateBuilder
+	 * Sets the template in YAML/JSON format.  If the template begins with a "{" then JSON is assumed
+	 * @param template the template
+	 * @return StackCreateBuilder
 	 */
-	StackCreateBuilder jsonTemplate(String template);
-	
-	/**
-	 * Sets the template in Yaml format
-	 * @param template template in JSON format
-	 * @return the modified StackCreateBuilder
-	 */
-	StackCreateBuilder yamlTemplate(String yamlTemplate);
+	StackCreateBuilder template(String template);
 	
 	/**
 	 * Sets the parameters which are passed to the server. It might contain Information about flavor, image, etc.

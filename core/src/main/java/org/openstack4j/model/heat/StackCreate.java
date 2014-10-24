@@ -26,20 +26,12 @@ public interface StackCreate extends ModelEntity, Buildable<StackCreateBuilder> 
 
 	// Future versions: Replace with Template-Object
 	/**
-	 * Returns the Heat template if it was stored in JSON format
+	 * Returns the Heat template if it was stored in JSON format or YAML format
 	 * 
-	 * @return the JSON formatted template out of which the stack is to be
+	 * @return the JSON or YAML formatted template out of which the stack is to be
 	 *         created. Returns <code> null </code> if no JSON formatted template has been set.
 	 */
-	String getJsonTemplate();
-
-	/**
-	 * Returns the Heat template if it was stored in Yaml format
-	 * 
-	 * @return the Yaml formatted template out of which the stack is to be
-	 *         created. Returns <code> null </code> if no Yaml formatted template has been set.
-	 */
-	String getYamlTemplate();
+	String getTemplate();
 
 	/**
 	 * Returns the parameters which are used for creation of the stack

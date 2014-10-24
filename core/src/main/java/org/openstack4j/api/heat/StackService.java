@@ -40,7 +40,7 @@ public interface StackService {
 	 * @return new {@link Stack} as returned from the server
 	 */
 	Stack create(String name, String template, Map<String, String> parameters,
-			String disableRollback, Long timeOutMins);
+			boolean disableRollback, Long timeOutMins);
 
 	/**
 	 * Gets a list of currently existing {@link Stack}s.
