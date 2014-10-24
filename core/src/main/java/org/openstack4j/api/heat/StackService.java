@@ -32,7 +32,7 @@ public interface StackService {
 	 * @param name
 	 *            Name of Stack
 	 * @param template
-	 *            Template in Json-Format
+	 *            Template in Json-Format or YAML format
 	 * @param parameters
 	 *            Map of parameters
 	 * @param disableRollback boolean to enable or disable rollback
