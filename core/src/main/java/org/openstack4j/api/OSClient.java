@@ -8,6 +8,7 @@ import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.storage.BlockStorageService;
+import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Access;
@@ -121,6 +122,13 @@ public interface OSClient {
 	 * @return the block storage service
 	 */
 	BlockStorageService blockStorage();
+	
+	/**
+     * Returns the Object Storage Service API
+     * 
+     * @return the object storage service
+     */
+    ObjectStorageService objectStorage();
 	
 	/**
 	 * Returns the Image Service API
