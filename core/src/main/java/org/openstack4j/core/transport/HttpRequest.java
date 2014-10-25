@@ -159,6 +159,10 @@ public class HttpRequest<R> {
 		return !headers.isEmpty();
 	}
 	
+	public RequestBuilder<R> toBuilder() {
+	    return new RequestBuilder<R>(this);
+	}
+	
 	/**
 	 * @return the client configuration associated with this request
 	 */
@@ -171,6 +175,10 @@ public class HttpRequest<R> {
 		HttpRequest<R> request;
 		EndpointTokenProvider provider;
 		ServiceType service;
+		
+		public RequestBuilder(HttpRequest<R> request) {
+		    this.request = request;
+		}
 		
 		public RequestBuilder(Class<R> returnType) {
 			request = new HttpRequest<R>();
