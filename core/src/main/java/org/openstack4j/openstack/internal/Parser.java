@@ -9,16 +9,26 @@ import com.fasterxml.jackson.databind.util.StdDateFormat;
  * Provides common parser routines when dealing with Headers or other non-json payloads
  * @author Jeremy Unruh
  */
-public abstract class Parser {
+public final class Parser {
 	
 	/**
 	 * Takes a String Numeric and returns null or the Long value
 	 * @param number the number in string form
 	 * @return the Long or null
 	 */
-	protected Long asLong(String number) {
-		if (number == null) return null;
-		return Long.parseLong(number);
+	public static Long asLong(String number) {
+		return asLong(number, null);
+	}
+	
+	/**
+     * Takes a String Numeric and returns null or the Long value
+     * @param number the number in string form
+     * @param defaultValue the default value if number is null
+     * @return the Long or null
+     */
+	public static Long asLong(String number, Long defaultValue) {
+	    if (number == null) return defaultValue;
+        return Long.parseLong(number);
 	}
 
 	/**
@@ -26,7 +36,7 @@ public abstract class Parser {
 	 * @param bool the boolean in String form
 	 * @return the Boolean or null
 	 */
-	protected Boolean asBoolean(String bool) {
+	public static Boolean asBoolean(String bool) {
 		if (bool == null) return null;
 		return Boolean.parseBoolean(bool);
 	}
@@ -36,7 +46,7 @@ public abstract class Parser {
 	 * @param date the date in String form
 	 * @return Date or null
 	 */
-	protected Date asDate(String date) {
+	public static Date asDate(String date) {
 		try {
 			if (date != null)
 				return StdDateFormat.instance.parse(date);

@@ -17,6 +17,9 @@ import static org.openstack4j.openstack.image.domain.ImageHeader.PROTECTED;
 import static org.openstack4j.openstack.image.domain.ImageHeader.SIZE;
 import static org.openstack4j.openstack.image.domain.ImageHeader.STATUS;
 import static org.openstack4j.openstack.image.domain.ImageHeader.UPDATED_AT;
+import static org.openstack4j.openstack.internal.Parser.asBoolean;
+import static org.openstack4j.openstack.internal.Parser.asDate;
+import static org.openstack4j.openstack.internal.Parser.asLong;
 
 import java.util.Map;
 
@@ -29,7 +32,6 @@ import org.openstack4j.model.image.Image;
 import org.openstack4j.model.image.Image.Status;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.openstack.image.domain.GlanceImage;
-import org.openstack4j.openstack.internal.Parser;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
@@ -40,7 +42,7 @@ import com.google.common.collect.Maps;
  * 
  * @author Jeremy Unruh
  */
-public class ImageFromHeadersFunction extends Parser implements Function<HttpResponse, Image> {
+public class ImageFromHeadersFunction implements Function<HttpResponse, Image> {
 
 	private static final ImageFromHeadersFunction instance = new ImageFromHeadersFunction();
 	

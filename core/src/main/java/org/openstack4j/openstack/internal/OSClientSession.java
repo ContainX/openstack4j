@@ -12,6 +12,7 @@ import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.storage.BlockStorageService;
+import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
@@ -244,5 +245,13 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     @Override
     public HeatService heat() {
         return Apis.getHeatServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ObjectStorageService objectStorage() {
+        return Apis.get(ObjectStorageService.class);
     }
 }
