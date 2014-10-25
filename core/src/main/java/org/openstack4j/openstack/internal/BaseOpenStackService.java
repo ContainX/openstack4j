@@ -85,6 +85,10 @@ public class BaseOpenStackService {
 			req.endpointFunction(endpointFunc);
 		}
 		
+		public HttpRequest<R> getRequest() {
+		    return req.build();
+		}
+		
 		public Invocation<R> param(String name, Object value) {
 			req.queryParam(name, value);
 			return this;
