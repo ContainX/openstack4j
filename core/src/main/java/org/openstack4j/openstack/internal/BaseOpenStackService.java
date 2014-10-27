@@ -1,5 +1,8 @@
 package org.openstack4j.openstack.internal;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -158,6 +161,12 @@ public class BaseOpenStackService {
 			return HttpExecutor.create().execute(req.build());
 		}
 		
+	}
+	
+	protected <T> List<T> toList(T[] arr) {
+	    if (arr == null)
+	        return Collections.emptyList();
+	    return Arrays.asList(arr);
 	}
 	
 	/**

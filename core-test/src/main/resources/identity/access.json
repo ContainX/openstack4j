@@ -51,6 +51,19 @@
         "type": "network",
         "name": "neutron"
       },
+	 {
+	      "name": "Object Storage",
+	      "type": "object-store",
+	      "endpoints": [{
+	        "tenantId": "10108557731121",
+	        "publicURL": "http:\/\/127.0.0.1:8080\/v1\/10108557731121",
+	        "publicURL2": "",
+	        "region": "RegionOne",
+	        "versionId": "1",
+	        "versionInfo": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com\/v1\/",
+	        "versionList": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com"
+	      }]
+	    },
       {
         "endpoints": [
           {

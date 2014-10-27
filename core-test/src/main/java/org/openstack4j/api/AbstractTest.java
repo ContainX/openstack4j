@@ -2,6 +2,7 @@ package org.openstack4j.api;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.openstack4j.core.transport.internal.HttpExecutor;
@@ -29,7 +30,8 @@ public abstract class AbstractTest {
     protected enum Service {
         IDENTITY(5000),
         NETWORK(9696),
-        COMPUTE(8774);
+        COMPUTE(8774),
+        OBJECT_STORAGE(8080);
         ;
         private final int port;
 
@@ -71,13 +73,28 @@ public abstract class AbstractTest {
         r.setHeader("Content-Type", "application/json");
         server.enqueue(r);
     }
-
+    
     /**
      * Responds with negative based response code and no body
      * @param statusCode the status code to respond with
      */
     protected void respondWith(int statusCode) {
+        respondWith(null, statusCode);
+    }
+    
+    /**
+     * Responds with negative based response code and no body and optional headers
+     * @param headers optional headers
+     * @param statusCode the status code to respond with
+     */
+    protected void respondWith(Map<String,String> headers, int statusCode) {
         MockResponse r = new MockResponse();
+        if (headers != null) {
+            for (String name : headers.keySet()) {
+                r.addHeader(name, headers.get(name));
+            }
+        }
+        r.setBody("");
         r.setResponseCode(statusCode);
         server.enqueue(r);
     }
