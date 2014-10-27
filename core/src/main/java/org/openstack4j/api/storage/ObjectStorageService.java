@@ -15,4 +15,11 @@ public interface ObjectStorageService extends RestService {
      * @return the account service
      */
     ObjectStorageAccountService account();
+    
+    /**
+     * The Object Storage Container Service
+     * 
+     * @return the container service
+     */
+    ObjectStorageContainerService containers();
 }

@@ -15,6 +15,10 @@ public final class SwiftHeaders {
     public static final String ACCOUNT_CONTAINER_COUNT = "X-Account-Container-Count";
     public static final String ACCOUNT_OBJECT_COUNT = "X-Account-Object-Count";
     
+    // Container Headers
+    public static final String CONTAINER_METADATA_PREFIX = "X-Container-Meta-";
+    public static final String CONTAINER_REMOVE_METADATA_PREFIX = "X-Remove-Container-Meta-";
+    
     private SwiftHeaders() {
     }
 }

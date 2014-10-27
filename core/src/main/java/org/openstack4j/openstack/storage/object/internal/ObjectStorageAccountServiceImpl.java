@@ -8,13 +8,8 @@ import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOU
 import java.util.Map;
 
 import org.openstack4j.api.storage.ObjectStorageAccountService;
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.storage.object.SwiftAccount;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
-import org.openstack4j.openstack.storage.object.domain.MetaHeaderRequestWrapper;
-import org.openstack4j.openstack.storage.object.functions.MetadataToHeadersFunction;
 import org.openstack4j.openstack.storage.object.functions.ParseAccountFunction;
 
 /**
@@ -22,12 +17,8 @@ import org.openstack4j.openstack.storage.object.functions.ParseAccountFunction;
  * 
  * @author Jeremy Unruh
  */
-public class ObjectStorageAccountServiceImpl extends BaseOpenStackService implements ObjectStorageAccountService {
+public class ObjectStorageAccountServiceImpl extends BaseObjectStorageService implements ObjectStorageAccountService {
 
-    public ObjectStorageAccountServiceImpl() {
-        super(ServiceType.OBJECT_STORAGE);
-    }
-    
     /**
      * {@inheritDoc}
      */
@@ -67,11 +58,6 @@ public class ObjectStorageAccountServiceImpl extends BaseOpenStackService implem
         Invocation<Void> invocation = post(Void.class, "");
         applyMetaData(prefix, metadata, invocation.getRequest());
         return isResponseSuccess(invocation.executeWithResponse(), 204);
-    }
-    
-    private <R> void applyMetaData(String prefix, Map<String, String> metadata, HttpRequest<R> req) {
-        MetaHeaderRequestWrapper<R> wrapper = MetaHeaderRequestWrapper.of(prefix, metadata, req);
-        MetadataToHeadersFunction.<R>create().apply(wrapper);
     }
     
     private boolean isResponseSuccess(HttpResponse res, int status) {
