@@ -1,5 +1,7 @@
 package org.openstack4j.model.storage.object;
 
+import java.util.Map;
+
 import org.openstack4j.model.ModelEntity;
 
 /**
@@ -29,4 +31,11 @@ public interface SwiftContainer extends ModelEntity {
      * @return total size in bytes
      */
     long getTotalSize();
+    
+    /**
+     * The metadata for the current container.  NOTE: This is a lazy call to the server and will invoke each time this
+     * method is called.
+     * @return The metadata for this container
+     */
+    Map<String, String> getMetadata();
 }

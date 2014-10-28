@@ -1,5 +1,9 @@
 package org.openstack4j.openstack.storage.object.domain;
 
+import java.util.Map;
+
+import org.openstack4j.api.Apis;
+import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.model.storage.object.SwiftContainer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,6 +40,11 @@ public class SwiftContainerImpl implements SwiftContainer {
     @Override
     public long getTotalSize() {
         return totalSize;
+    }
+    
+    @Override
+    public Map<String, String> getMetadata() {
+        return Apis.get(ObjectStorageContainerService.class).getMetadata(name);
     }
 
     /**
