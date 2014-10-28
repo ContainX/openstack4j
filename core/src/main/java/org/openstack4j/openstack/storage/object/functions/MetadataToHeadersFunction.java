@@ -2,9 +2,6 @@ package org.openstack4j.openstack.storage.object.functions;
 
 import java.util.Map;
 
-import org.openstack4j.core.transport.HttpRequest;
-import org.openstack4j.openstack.storage.object.domain.MetaHeaderRequestWrapper;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
@@ -14,26 +11,32 @@ import com.google.common.collect.Maps;
  * 
  * @author Jeremy Unruh
  */
-public class MetadataToHeadersFunction<R> implements Function<MetaHeaderRequestWrapper<R>, HttpRequest<R>> {
+public class MetadataToHeadersFunction implements Function<Map<String, String>, Map<String, String>> {
 
-    public static <R> MetadataToHeadersFunction<R> create() {
-        return new MetadataToHeadersFunction<R>();
+    private String prefix;
+    
+    private MetadataToHeadersFunction(String prefix) {
+        this.prefix = prefix;
     }
     
-    @Override
-    public HttpRequest<R> apply(MetaHeaderRequestWrapper<R> input) {
-        Map<String, String> headers = apply(input.getPrefix(), input.getMetadata());
-        return input.getRequest().toBuilder().headers(headers).build();
+    /**
+     * Creates a new Metadata to Headers function
+     * 
+     * @param prefix the prefix used for headers
+     * @return MetadataToHeadersFunction
+     */
+    public static <R> MetadataToHeadersFunction create(String prefix) {
+        return new MetadataToHeadersFunction(prefix);
     }
     
     /**
      * Transforms metadata raw values into header form values
      * 
-     * @param prefix the prefix used for headers
      * @param metadata the map of metadata 
      * @return map of metadata in header format
      */
-    public Map<String, String> apply(String prefix, Map<String, String> metadata) {
+    @Override
+    public Map<String, String> apply(Map<String, String> metadata) {
         
         Map<String, String> headers = Maps.newHashMap();
         

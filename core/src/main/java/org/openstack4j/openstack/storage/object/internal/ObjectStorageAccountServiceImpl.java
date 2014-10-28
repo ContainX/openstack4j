@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.model.storage.object.SwiftAccount;
+import org.openstack4j.openstack.storage.object.functions.MetadataToHeadersFunction;
 import org.openstack4j.openstack.storage.object.functions.ParseAccountFunction;
 
 /**
@@ -23,7 +24,7 @@ public class ObjectStorageAccountServiceImpl extends BaseObjectStorageService im
      */
     @Override
     public SwiftAccount get() {
-        return ParseAccountFunction.INSTANCE.apply(head(Void.class, "").executeWithResponse());
+        return ParseAccountFunction.INSTANCE.apply(head(Void.class).executeWithResponse());
     }
 
     /**
@@ -50,12 +51,12 @@ public class ObjectStorageAccountServiceImpl extends BaseObjectStorageService im
     @Override
     public boolean updateTemporaryUrlKey(String temporaryUrlKey) {
         checkNotNull(temporaryUrlKey);
-        return isResponseSuccess(post(Void.class, "").header(ACCOUNT_TEMPORARY_URL_KEY, temporaryUrlKey).executeWithResponse(), 204);
+        return isResponseSuccess(post(Void.class).header(ACCOUNT_TEMPORARY_URL_KEY, temporaryUrlKey).executeWithResponse(), 204);
     }
 
     private boolean invokeMetadata(String prefix, Map<String, String> metadata) {
-        Invocation<Void> invocation = post(Void.class, "");
-        applyMetaData(prefix, metadata, invocation.getRequest());
-        return isResponseSuccess(invocation.executeWithResponse(), 204);
+        return isResponseSuccess(post(Void.class)
+                                  .headers(MetadataToHeadersFunction.create(prefix).apply(metadata))
+                                  .executeWithResponse(), 204);
     }
 }
