@@ -1,6 +1,6 @@
 package org.openstack4j.api.storage;
 
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.CONTAINER_METADATA_PREFIX;
+import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_METADATA_PREFIX;
 import static org.testng.Assert.*;
 
 import java.util.List;

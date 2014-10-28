@@ -6,6 +6,8 @@ import java.util.Map;
 import org.openstack4j.api.exceptions.ContainerNotEmptyException;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.storage.object.SwiftContainer;
+import org.openstack4j.model.storage.object.options.ContainerListOptions;
+import org.openstack4j.model.storage.object.options.CreateUpdateContainerOptions;
 
 /**
  * Provides access to the OpenStack Object Storage (Swift) Container API features.
@@ -22,6 +24,14 @@ public interface ObjectStorageContainerService extends RestService {
     List<? extends SwiftContainer> list();
     
     /**
+     * Listing of all containers with the associated options used in the query
+     * 
+     * @param options the query based options
+     * @return List of containers ordered by name
+     */
+    List<? extends SwiftContainer> list(ContainerListOptions options);
+    
+    /**
      * Creates a new container with the specified {@code name}
      * 
      * @param name the name of the new container
@@ -29,12 +39,20 @@ public interface ObjectStorageContainerService extends RestService {
     void create(String name);
     
     /**
-     * Creates a new container with the specified {@code name} with metadata
+     * Creates a new container with the specified {@code name} with options
      * 
      * @param name the name of the new container
-     * @param metadata metadata to be stored with the new container
+     * @param options the options to use when creating a container
      */
-    void create(String name, Map<String, String> metadata);
+    void create(String name, CreateUpdateContainerOptions options);
+    
+    /**
+     * Updates a container with the specified {@code name} with options
+     * 
+     * @param name the name of the container to update
+     * @param options the options to use when updating a container
+     */
+    void update(String name, CreateUpdateContainerOptions options);
     
     /**
      * Deletes an empty container with the specified {@code name}

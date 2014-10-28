@@ -1,4 +1,4 @@
-package org.openstack4j.openstack.storage.object.domain;
+package org.openstack4j.model.storage.object;
 
 /**
  * Common Object Storage (Swift) headers
@@ -14,11 +14,19 @@ public final class SwiftHeaders {
     public static final String ACCOUNT_BYTES_USED = "X-Account-Bytes-Used";
     public static final String ACCOUNT_CONTAINER_COUNT = "X-Account-Container-Count";
     public static final String ACCOUNT_OBJECT_COUNT = "X-Account-Object-Count";
-    
+
     // Container Headers
     public static final String CONTAINER_METADATA_PREFIX = "X-Container-Meta-";
     public static final String CONTAINER_REMOVE_METADATA_PREFIX = "X-Remove-Container-Meta-";
+
+    // Versioning
+    public static final String VERSIONS_LOCATION = "X-Versions-Location";
     
+    // ACL's (not all implementations support this)
+    public static final String CONTAINER_READ = "X-Container-Read";
+    public static final String CONTAINER_WRITE = "X-Container-Write";
+    public static final String CONTAINER_ACL_ANYBODY_READ = ".r:*,.rlistings";
+
     private SwiftHeaders() {
     }
 }

@@ -1,10 +1,10 @@
 package org.openstack4j.openstack.storage.object.functions;
 
+import static org.openstack4j.model.storage.object.SwiftHeaders.ACCOUNT_BYTES_USED;
+import static org.openstack4j.model.storage.object.SwiftHeaders.ACCOUNT_CONTAINER_COUNT;
+import static org.openstack4j.model.storage.object.SwiftHeaders.ACCOUNT_OBJECT_COUNT;
+import static org.openstack4j.model.storage.object.SwiftHeaders.ACCOUNT_TEMPORARY_URL_KEY;
 import static org.openstack4j.openstack.internal.Parser.asLong;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOUNT_BYTES_USED;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOUNT_CONTAINER_COUNT;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOUNT_OBJECT_COUNT;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOUNT_TEMPORARY_URL_KEY;
 
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.storage.object.SwiftAccount;

@@ -1,9 +1,9 @@
 package org.openstack4j.openstack.storage.object.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOUNT_METADATA_PREFIX;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOUNT_REMOVE_METADATA_PREFIX;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOUNT_TEMPORARY_URL_KEY;
+import static org.openstack4j.model.storage.object.SwiftHeaders.ACCOUNT_METADATA_PREFIX;
+import static org.openstack4j.model.storage.object.SwiftHeaders.ACCOUNT_REMOVE_METADATA_PREFIX;
+import static org.openstack4j.model.storage.object.SwiftHeaders.ACCOUNT_TEMPORARY_URL_KEY;
 
 import java.util.Map;
 
