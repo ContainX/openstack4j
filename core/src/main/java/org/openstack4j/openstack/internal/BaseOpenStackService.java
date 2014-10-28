@@ -137,7 +137,7 @@ public class BaseOpenStackService {
 			return this;
 		}
 		
-		public Invocation<R> headers(Map<String, Object> headers) {
+		public Invocation<R> headers(Map<String, ? extends Object> headers) {
 			if (headers != null)
 				req.headers(headers);
 			return this;

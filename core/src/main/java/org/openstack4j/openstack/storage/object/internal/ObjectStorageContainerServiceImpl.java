@@ -17,6 +17,7 @@ import org.openstack4j.model.storage.object.options.ContainerListOptions;
 import org.openstack4j.model.storage.object.options.CreateUpdateContainerOptions;
 import org.openstack4j.openstack.storage.object.domain.SwiftContainerImpl;
 import org.openstack4j.openstack.storage.object.functions.MapWithoutMetaPrefixFunction;
+import org.openstack4j.openstack.storage.object.functions.MetadataToHeadersFunction;
 
 /**
  * Provides access to the OpenStack Object Storage (Swift) Container API features.
@@ -61,11 +62,8 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
     @Override
     public void create(String name, CreateUpdateContainerOptions options) {
         checkNotNull(name);
-        Invocation<Void> invocation = put(Void.class, URI_SEP, name);
-        if (options != null)
-            invocation.getRequest().toBuilder().headers(options.getOptions());
         
-        invocation.execute();
+        put(Void.class, URI_SEP, name).headers(options != null ? options.getOptions() : null).execute();
     }
 
     /**
@@ -74,11 +72,9 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
     @Override
     public void update(String name, CreateUpdateContainerOptions options) {
         checkNotNull(name);
-        if (options == null) return;
         
-        Invocation<Void> invocation = post(Void.class, URI_SEP, name);
-        invocation.getRequest().toBuilder().headers(options.getOptions());
-        invocation.execute();
+        if (options != null)
+            post(Void.class, URI_SEP, name).headers(options.getOptions()).execute();
     }
     
     /**
@@ -124,8 +120,8 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
         checkNotNull(name);
         checkNotNull(metadata);
         
-        Invocation<Void> invocation = post(Void.class, URI_SEP, name);
-        applyMetaData(prefix, metadata, invocation.getRequest());
-        return isResponseSuccess(invocation.executeWithResponse(), 204);
+        return isResponseSuccess(post(Void.class, URI_SEP, name)
+                                    .headers(MetadataToHeadersFunction.create(prefix).apply(metadata))
+                                    .executeWithResponse(), 204);
     }
 }

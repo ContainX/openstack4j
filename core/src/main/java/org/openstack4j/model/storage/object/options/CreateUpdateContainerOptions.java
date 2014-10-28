@@ -46,7 +46,7 @@ public final class CreateUpdateContainerOptions {
      * @return CreateUpdateContainerOptions
      */
     public CreateUpdateContainerOptions metadata(Map<String, String> metadata) {
-        this.headers.putAll(MetadataToHeadersFunction.create().apply(CONTAINER_METADATA_PREFIX, metadata));
+        this.headers.putAll(MetadataToHeadersFunction.create(CONTAINER_METADATA_PREFIX).apply(metadata));
         return this;
     }
     
