@@ -6,6 +6,7 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.openstack.storage.object.domain.MetaHeaderRequestWrapper;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 
 /**
  * Transforms a MetaHeaderRequestWrapper which applies headers based on a prefix to the outbound
@@ -21,17 +22,30 @@ public class MetadataToHeadersFunction<R> implements Function<MetaHeaderRequestW
     
     @Override
     public HttpRequest<R> apply(MetaHeaderRequestWrapper<R> input) {
-        Map<String, String> metadata = input.getMetadata();
+        Map<String, String> headers = apply(input.getPrefix(), input.getMetadata());
+        return input.getRequest().toBuilder().headers(headers).build();
+    }
+    
+    /**
+     * Transforms metadata raw values into header form values
+     * 
+     * @param prefix the prefix used for headers
+     * @param metadata the map of metadata 
+     * @return map of metadata in header format
+     */
+    public Map<String, String> apply(String prefix, Map<String, String> metadata) {
+        
+        Map<String, String> headers = Maps.newHashMap();
         
         for (String key : metadata.keySet()) {
             String keyLower = key.toLowerCase();
             String value = metadata.get(key);
-            if (keyLower.startsWith(input.getPrefix()))
-                input.getRequest().toBuilder().header(keyLower, value);
+            if (keyLower.startsWith(prefix))
+                headers.put(keyLower, value);
             else
-                input.getRequest().toBuilder().header(String.format("%s%s", input.getPrefix(), keyLower), value);
+                headers.put(String.format("%s%s", prefix, keyLower), value);
         }
-        return input.getRequest();
+        return headers;
     }
 
 }

@@ -2,8 +2,8 @@ package org.openstack4j.openstack.storage.object.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.openstack4j.core.transport.ClientConstants.URI_SEP;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.CONTAINER_METADATA_PREFIX;
-import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.CONTAINER_REMOVE_METADATA_PREFIX;
+import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_METADATA_PREFIX;
+import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_REMOVE_METADATA_PREFIX;
 
 import java.util.List;
 import java.util.Map;
@@ -11,9 +11,11 @@ import java.util.Map;
 import org.openstack4j.api.exceptions.ContainerNotEmptyException;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.core.transport.HttpRequest.RequestBuilder;
 import org.openstack4j.model.storage.object.SwiftContainer;
+import org.openstack4j.model.storage.object.options.ContainerListOptions;
+import org.openstack4j.model.storage.object.options.CreateUpdateContainerOptions;
 import org.openstack4j.openstack.storage.object.domain.SwiftContainerImpl;
-import org.openstack4j.openstack.storage.object.domain.SwiftHeaders;
 import org.openstack4j.openstack.storage.object.functions.MapWithoutMetaPrefixFunction;
 
 /**
@@ -35,6 +37,20 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
      * {@inheritDoc}
      */
     @Override
+    public List<? extends SwiftContainer> list(ContainerListOptions options) {
+        Invocation<SwiftContainerImpl[]> invocation = get(SwiftContainerImpl[].class);
+        RequestBuilder<SwiftContainerImpl[]> rb = invocation.getRequest().toBuilder();
+        
+        for (String key : options.getOptions().keySet())
+            rb.queryParam(key, options.getOptions().get(key));
+        
+        return toList(invocation.execute());
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void create(String name) {
         create(name, null);
     }
@@ -43,12 +59,25 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
      * {@inheritDoc}
      */
     @Override
-    public void create(String name, Map<String, String> metadata) {
+    public void create(String name, CreateUpdateContainerOptions options) {
         checkNotNull(name);
         Invocation<Void> invocation = put(Void.class, URI_SEP, name);
-        if (metadata != null)
-            applyMetaData(SwiftHeaders.CONTAINER_METADATA_PREFIX, metadata, invocation.getRequest());
+        if (options != null)
+            invocation.getRequest().toBuilder().headers(options.getOptions());
         
+        invocation.execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update(String name, CreateUpdateContainerOptions options) {
+        checkNotNull(name);
+        if (options == null) return;
+        
+        Invocation<Void> invocation = post(Void.class, URI_SEP, name);
+        invocation.getRequest().toBuilder().headers(options.getOptions());
         invocation.execute();
     }
     
