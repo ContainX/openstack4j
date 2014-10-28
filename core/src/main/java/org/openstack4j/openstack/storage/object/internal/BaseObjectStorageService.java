@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.HttpRequest;
+import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 import org.openstack4j.openstack.storage.object.domain.MetaHeaderRequestWrapper;
 import org.openstack4j.openstack.storage.object.functions.MetadataToHeadersFunction;
@@ -22,5 +23,9 @@ public class BaseObjectStorageService extends BaseOpenStackService {
     protected <R> void applyMetaData(String prefix, Map<String, String> metadata, HttpRequest<R> req) {
         MetaHeaderRequestWrapper<R> wrapper = MetaHeaderRequestWrapper.of(prefix, metadata, req);
         MetadataToHeadersFunction.<R>create().apply(wrapper);
+    }
+    
+    protected boolean isResponseSuccess(HttpResponse res, int status) {
+        return res.getStatus() == status;
     }
 }

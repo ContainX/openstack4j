@@ -8,7 +8,6 @@ import static org.openstack4j.openstack.storage.object.domain.SwiftHeaders.ACCOU
 import java.util.Map;
 
 import org.openstack4j.api.storage.ObjectStorageAccountService;
-import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.storage.object.SwiftAccount;
 import org.openstack4j.openstack.storage.object.functions.ParseAccountFunction;
 
@@ -58,9 +57,5 @@ public class ObjectStorageAccountServiceImpl extends BaseObjectStorageService im
         Invocation<Void> invocation = post(Void.class, "");
         applyMetaData(prefix, metadata, invocation.getRequest());
         return isResponseSuccess(invocation.executeWithResponse(), 204);
-    }
-    
-    private boolean isResponseSuccess(HttpResponse res, int status) {
-        return res.getStatus() == status;
     }
 }
