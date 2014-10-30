@@ -13,6 +13,7 @@ import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
+import org.openstack4j.model.compute.actions.BackupOptions;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
@@ -238,6 +239,14 @@ public interface ServerService {
      * @return ActionResponse
      */
     ActionResponse liveMigrate(String serverId, LiveMigrateOptions options); 
+    
+    /**
+     * Sets up a new backup schedule service for the given {@code serverId}
+     * @param serverId the server identifier
+     * @param options the backup options
+     * @return ActionResponse
+     */
+    ActionResponse backupServer(String serverId, BackupOptions options);
     
     /**
      * Will poll the Server waiting for the {@code Status} to match or an Error state occurs for the {@code maxWait} 
