@@ -18,6 +18,7 @@ import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
+import org.openstack4j.model.compute.actions.BackupOptions;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
@@ -334,6 +335,16 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         if (options == null)
             options = LiveMigrateOptions.create();
         return invokeAction(serverId, "os-migrateLive", options.toJsonString());
+    }
+    
+    /**
+     * {{@link #invokeAction(String, String)}
+     */
+    @Override
+    public ActionResponse backupServer(String serverId, BackupOptions options) {
+        checkNotNull(serverId);
+        checkNotNull(options);
+        return invokeAction(serverId, "createBackup", options.toJsonString());
     }
     
     /**
