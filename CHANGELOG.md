@@ -18,6 +18,7 @@
 ##### Fixes
 
 * Issue #97 - Yaml based template ignored in Stack creation
+* Issue #95 - Easy determination within an Image to determine if it's a snapshot of a volume
 * Issue #93 - Error listing images (Error reading entity from input stream)
 * Issue #92 - Problems in deserializing an object (Heat Stack)
 * Issue #91 - Implementation of the method "getHosts()" in the class availabilityZoneList
