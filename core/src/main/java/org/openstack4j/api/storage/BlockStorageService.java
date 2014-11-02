@@ -1,6 +1,7 @@
 package org.openstack4j.api.storage;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.storage.block.BlockLimits;
 
 /**
  * Block Storage (Cinder) Service Operation API
@@ -19,4 +20,10 @@ public interface BlockStorageService extends RestService {
 	 */
 	BlockVolumeSnapshotService snapshots();
 	
+	/**
+	 * Gets the Absolute limits used by this tenant
+	 * 
+	 * @return the absolute limits
+	 */
+	BlockLimits getLimits();
 }
