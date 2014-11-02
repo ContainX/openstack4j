@@ -62,7 +62,7 @@ public final class HttpCommand<R> {
             client.body(ClientConstants.CONTENT_TYPE_JSON, request.getJson());
         }
         ClientResponse<R> response = client.httpMethod(request.getMethod().name(), request.getReturnType());
-
+        
         return response;
     }
 
