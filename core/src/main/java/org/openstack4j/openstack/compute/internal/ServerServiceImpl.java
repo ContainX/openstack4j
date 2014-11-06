@@ -22,6 +22,7 @@ import org.openstack4j.model.compute.actions.BackupOptions;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
+import org.openstack4j.openstack.common.Metadata;
 import org.openstack4j.openstack.compute.domain.ConsoleOutput;
 import org.openstack4j.openstack.compute.domain.NovaServer;
 import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
@@ -369,6 +370,35 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         if (server == null)
             server = get(serverId);
         return server;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String, String> getMetadata(String serverId) {
+        checkNotNull(serverId);
+        return get(Metadata.class, uri("/servers/%s/metadata", serverId)).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String, String> updateMetadata(String serverId, Map<String, String> metadata) {
+        checkNotNull(serverId);
+        checkNotNull(metadata);
+        return put(Metadata.class, uri("/servers/%s/metadata", serverId)).entity(Metadata.toMetadata(metadata)).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteMetadataItem(String serverId, String key) {
+        checkNotNull(serverId);
+        checkNotNull(key);
+        delete(Void.class, uri("/servers/%s/metadata/%s", serverId, key)).execute();
     }
 
     private int sleep(int ms) {

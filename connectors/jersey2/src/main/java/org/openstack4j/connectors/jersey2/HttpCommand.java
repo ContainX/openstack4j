@@ -74,7 +74,9 @@ public final class HttpCommand<R> {
             response = invocation.method(request.getMethod().name(), Entity.entity(request.getJson(), ClientConstants.CONTENT_TYPE_JSON));
         }
         else
+        {
             response = invocation.method(request.getMethod().name());
+        }
         
         return response;
     }
