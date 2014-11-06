@@ -13,10 +13,12 @@ import org.openstack4j.model.compute.Server.DiskConfig;
 import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.node.BinaryNode;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 @JsonRootName("server")
 public class NovaServerCreate implements ServerCreate {
@@ -32,6 +34,7 @@ public class NovaServerCreate implements ServerCreate {
     private Integer min;
     private Integer max;
     private DiskConfig diskConfig = DiskConfig.MANUAL;
+    @JsonProperty("metadata")
     private Map<String, String> metadata = new HashMap<String, String>();
     @JsonProperty("user_data")
     private String userData;
@@ -107,6 +110,7 @@ public class NovaServerCreate implements ServerCreate {
         return userData;
     }
 
+    @JsonIgnore
     @Override
     public Map<String, String> getMetaData() {
         return metadata;
@@ -283,6 +287,21 @@ public class NovaServerCreate implements ServerCreate {
         @Override
         public ServerCreateBuilder userData(String userData) {
             m.userData = userData;
+            return this;
+        }
+
+        @Override
+        public ServerCreateBuilder addMetaDataItem(String key, String value) {
+            if (m.metadata == null)
+                m.metadata = Maps.newHashMap();
+            
+            m.metadata.put(key, value);
+            return this;
+        }
+
+        @Override
+        public ServerCreateBuilder addMetaData(Map<String, String> metadata) {
+            m.metadata = metadata;
             return this;
         }
 

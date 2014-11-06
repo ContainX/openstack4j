@@ -257,4 +257,29 @@ public interface ServerService {
      * @return the last Server polled.  User should re-check status in case max wait was hit and the status was still not in the desired state.
      */
     Server waitForServerStatus(String serverId, Status status, int maxWait, TimeUnit maxWaitUnit);
+    
+    /**
+     * Returns the metadata for the specified server
+     * 
+     * @param serverId the server identifier
+     * @return Map of metadata of key and value
+     */
+    Map<String, String> getMetadata(String serverId);
+    
+    /**
+     * Creates or replaces metadata items for the specified server
+     * 
+     * @param serverId the server identifier
+     * @param metadata the metadata to create or update
+     * @return Map of metadata as the current state on the server
+     */
+    Map<String, String> updateMetadata(String serverId, Map<String, String> metadata);
+    
+    /**
+     * Removes the specified metadata item via the specified {@code key} and {@code serverId}
+     * 
+     * @param serverId the server identifier
+     * @param key the metadata key to remove
+     */
+    void deleteMetadataItem(String serverId, String key);
 }
