@@ -80,7 +80,7 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
      * @param value the metadata value
      * @return ServerCreateBuilder
      */
-    ServerCreateBuilder addMetaDataItem(String key, String value);
+    ServerCreateBuilder addMetadataItem(String key, String value);
     
     /**
      * Replaces and add the specified {@code metadata}
@@ -88,7 +88,7 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
      * @param metadata the metadata for this server
      * @return this builder
      */
-    ServerCreateBuilder addMetaData(Map<String, String> metadata);
+    ServerCreateBuilder addMetadata(Map<String, String> metadata);
 
     /**
      * Associates this Server with a public keypair name
