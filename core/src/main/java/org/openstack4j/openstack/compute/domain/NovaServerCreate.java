@@ -291,7 +291,7 @@ public class NovaServerCreate implements ServerCreate {
         }
 
         @Override
-        public ServerCreateBuilder addMetaDataItem(String key, String value) {
+        public ServerCreateBuilder addMetadataItem(String key, String value) {
             if (m.metadata == null)
                 m.metadata = Maps.newHashMap();
             
@@ -300,7 +300,7 @@ public class NovaServerCreate implements ServerCreate {
         }
 
         @Override
-        public ServerCreateBuilder addMetaData(Map<String, String> metadata) {
+        public ServerCreateBuilder addMetadata(Map<String, String> metadata) {
             m.metadata = metadata;
             return this;
         }
