@@ -352,6 +352,17 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      * {@inheritDoc}
      */
     @Override
+    public ActionResponse changeAdminPassword(String serverId, String adminPassword) {
+        checkNotNull(serverId);
+        checkNotNull(adminPassword);
+        String json = String.format("{ \"adminPass\": \"%s\" }", adminPassword);
+        return invokeAction(serverId, "changePassword",json);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Server waitForServerStatus(String serverId, Status status, int maxWait, TimeUnit maxWaitUnit) {
         checkNotNull(serverId);
         Server server = null;

@@ -211,7 +211,16 @@ public interface ServerService {
      * @author octopus zhang
      * @return volumeAttachment or null if not applicable
      */
-    VolumeAttachment attachVolume(String serverId,String volumeId);
+    VolumeAttachment attachVolume(String serverId, String volumeId);
+    
+    /**
+     * Changes the admin/root password on the server
+     * 
+     * @param serverId the server identifier
+     * @param adminPassword the new password
+     * @return ActionResponse
+     */
+    ActionResponse changeAdminPassword(String serverId, String adminPassword);
 
     /**
      * detach the volume to the given server
