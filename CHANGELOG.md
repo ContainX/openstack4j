@@ -4,7 +4,9 @@
 
 ##### Enhancements/Improvements
 
+* Issue #105 - Full server metadata support
 * Issue #102 - Support for backup server action
+* Issue #98 - API Support for Object Store (Swift)
 * Issue #87 - Software Configuration support for HEAT
 * Issue #85 - Support for os-migrations extension
 * Issue #83 - Live server migration
@@ -17,6 +19,7 @@
 
 ##### Fixes
 
+* Issue #103 - Issue when updating a port in network
 * Issue #97 - Yaml based template ignored in Stack creation
 * Issue #95 - Easy determination within an Image to determine if it's a snapshot of a volume
 * Issue #93 - Error listing images (Error reading entity from input stream)
