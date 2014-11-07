@@ -12,6 +12,7 @@ import org.openstack4j.model.compute.Server;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP.NovaFloatingIPs;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIPPools;
+import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
  * OpenStack Floating-IP API Implementation
@@ -105,11 +106,6 @@ public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements
   
   private ActionResponse invokeAction(String uri, String action, String innerJson) {
     HttpResponse response = post(Void.class, uri).json(String.format("{ \"%s\": %s }", action, innerJson)).executeWithResponse();
-    if (response.getStatus() == 409)
-    {
-      System.out.println("ERROR: " + response.readEntity(String.class));
-      return ActionResponse.actionFailed(String.format("Cannot '%s' while instance in in state of %s", action, action));
-    }
-    return ActionResponse.actionSuccess();
+    return ToActionResponseFunction.INSTANCE.apply(response, action);
   }
 }
