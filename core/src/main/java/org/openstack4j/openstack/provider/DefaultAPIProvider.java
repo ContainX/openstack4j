@@ -10,6 +10,7 @@ import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
+import org.openstack4j.api.compute.ServerGroupService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.MigrationService;
@@ -50,6 +51,7 @@ import org.openstack4j.openstack.compute.internal.ComputeServiceImpl;
 import org.openstack4j.openstack.compute.internal.FlavorServiceImpl;
 import org.openstack4j.openstack.compute.internal.KeypairServiceImpl;
 import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
+import org.openstack4j.openstack.compute.internal.ServerGroupServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.HypervisorServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
@@ -139,6 +141,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ObjectStorageService.class, ObjectStorageServiceImpl.class);
 		bind(ObjectStorageAccountService.class, ObjectStorageAccountServiceImpl.class);
 		bind(ObjectStorageContainerService.class, ObjectStorageContainerServiceImpl.class);
+		bind(ServerGroupService.class, ServerGroupServiceImpl.class);
 	}
 
 	/**
