@@ -10,6 +10,7 @@ import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
+import org.openstack4j.api.compute.ServerGroupService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.MigrationService;
@@ -111,4 +112,9 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
     public MigrationService migrations() {
         return Apis.get(MigrationService.class);
     }
+
+	@Override
+	public ServerGroupService serverGroups() {
+		 return Apis.get(ServerGroupService.class);
+	}
 }

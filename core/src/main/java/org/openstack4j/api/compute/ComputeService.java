@@ -89,4 +89,10 @@ public interface ComputeService extends RestService {
 	 * @return a list of Extensions that have been added against the Compute service
 	 */
 	List<? extends Extension> listExtensions();
+	
+	/**ServerGroup Management Service
+	 * @return ServerGroup service
+	 */
+	ServerGroupService serverGroups();
+	
 }
