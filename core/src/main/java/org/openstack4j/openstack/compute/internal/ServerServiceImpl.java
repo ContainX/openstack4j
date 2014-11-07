@@ -29,8 +29,7 @@ import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
  * Server Operation API implementation
@@ -39,8 +38,6 @@ import org.openstack4j.openstack.logging.LoggerFactory;
  */
 public class ServerServiceImpl extends BaseComputeServices implements ServerService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ServerServiceImpl.class);
-    
     /**
      * {@inheritDoc}
      */
@@ -277,17 +274,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
 
     private ActionResponse invokeAction(String serverId, String action, String innerJson) {
         HttpResponse response = executeActionWithResponse(serverId, action, innerJson);
-        if (response.getStatus() == 409)
-        {
-            LOG.error(response.readEntity(String.class));
-            return ActionResponse.actionFailed(String.format("Cannot '%s' while instance in in state of %s", action, action));
-        }
-        if (response.getStatus() >= 400 && response.getStatus() < 409) {
-            String message = response.readEntity(String.class);
-            if (message != null && message.contains("message"))
-                return ActionResponse.actionFailed(attemptToExtractMessageFromJson(message));
-        }
-        return ActionResponse.actionSuccess();
+        return ToActionResponseFunction.INSTANCE.apply(response, action);
     }
 
     private HttpResponse executeActionWithResponse(String serverId, String action, String innerJson) {
