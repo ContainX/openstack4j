@@ -1,9 +1,13 @@
 package org.openstack4j.openstack.storage.object.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.model.storage.object.SwiftHeaders.CONTENT_LENGTH;
 import static org.openstack4j.model.storage.object.SwiftHeaders.ETAG;
+import static org.openstack4j.model.storage.object.SwiftHeaders.OBJECT_METADATA_PREFIX;
+import static org.openstack4j.model.storage.object.SwiftHeaders.X_COPY_FROM;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.core.transport.HttpResponse;
@@ -11,10 +15,13 @@ import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.payloads.FilePayload;
 import org.openstack4j.model.storage.object.SwiftObject;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
+import org.openstack4j.model.storage.object.options.ObjectLocation;
 import org.openstack4j.model.storage.object.options.ObjectPutOptions;
 import org.openstack4j.openstack.storage.object.domain.SwiftObjectImpl;
 import org.openstack4j.openstack.storage.object.domain.SwiftObjectImpl.SwiftObjects;
 import org.openstack4j.openstack.storage.object.functions.ApplyContainerToObjectFunction;
+import org.openstack4j.openstack.storage.object.functions.MapWithoutMetaPrefixFunction;
+import org.openstack4j.openstack.storage.object.functions.MetadataToHeadersFunction;
 
 import com.google.common.collect.Lists;
 
@@ -83,6 +90,52 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(containerName);
         checkNotNull(name);
         
-        delete(Void.class, uri("/%s/%s", containerName, name)).execute();
+       delete(ObjectLocation.create(containerName, name));
+    }
+
+    @Override
+    public void delete(ObjectLocation location) {
+        checkNotNull(location);
+        delete(Void.class, location.getURI()).execute();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String copy(ObjectLocation source, ObjectLocation dest) {
+        checkNotNull(source);
+        checkNotNull(dest);
+
+        HttpResponse resp = put(Void.class, dest.getURI())
+                                .header(X_COPY_FROM, source.getURI())
+                                .header(CONTENT_LENGTH, 0)
+                                .executeWithResponse();
+        return resp.header(ETAG);
+    }
+
+    @Override
+    public Map<String, String> getMetadata(ObjectLocation location) {
+        checkNotNull(location);
+
+        HttpResponse resp = head(Void.class, location.getURI()).executeWithResponse();
+        return MapWithoutMetaPrefixFunction.INSTANCE.apply(resp.headers());
+    }
+
+    @Override
+    public Map<String, String> getMetadata(String containerName, String name) {
+        checkNotNull(containerName);
+        checkNotNull(name);
+        return getMetadata(ObjectLocation.create(containerName, name));
+    }
+
+    @Override
+    public boolean updateMetadata(ObjectLocation location, Map<String, String> metadata) {
+        checkNotNull(location);
+        checkNotNull(metadata);
+
+        return isResponseSuccess(post(Void.class, location.getURI())
+                  .headers(MetadataToHeadersFunction.create(OBJECT_METADATA_PREFIX).apply(metadata))
+                  .executeWithResponse(), 204);
     }
 }
