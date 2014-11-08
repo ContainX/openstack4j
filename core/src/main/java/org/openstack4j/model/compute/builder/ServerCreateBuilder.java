@@ -89,6 +89,23 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
      * @return this builder
      */
     ServerCreateBuilder addMetadata(Map<String, String> metadata);
+    
+    /**
+     * Adds a scheduler hint used for boot up
+     * 
+     * @param key the scheduler hint key
+     * @param value the scheduler hint value
+     * @return this builder
+     */
+    ServerCreateBuilder addSchedulerHint(String key, String value);
+    
+    /**
+     * Adds/Replaces scheduler hints used for bootup
+     * 
+     * @param schedulerHints map of key and value scheduler hints
+     * @return this builder
+     */
+    ServerCreateBuilder addSchedulerHints(Map<String, String> schedulerHints);
 
     /**
      * Associates this Server with a public keypair name

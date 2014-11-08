@@ -27,10 +27,10 @@ import org.openstack4j.openstack.compute.domain.ConsoleOutput;
 import org.openstack4j.openstack.compute.domain.NovaServer;
 import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
-import org.openstack4j.openstack.compute.domain.NovaServerCreateWithHints;
 import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
+import org.openstack4j.openstack.compute.functions.WrapServerIfApplicableFunction;
 
 /**
  * Server Operation API implementation
@@ -99,19 +99,10 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public Server boot(ServerCreate server) {
         checkNotNull(server);
-        return post(NovaServer.class, uri("/servers")).entity(server).execute();
+        return post(NovaServer.class, uri("/servers"))
+                     .entity(WrapServerIfApplicableFunction.INSTANCE.apply(server))
+                     .execute();
     }
-
-    /**
-     * {@inheritDoc}
-     */
-	@Override
-	public Server bootWithSchedulerHints(ServerCreate server,Map<String, String> hints) {
-		checkNotNull(server);
-		checkNotNull(hints);
-		NovaServerCreateWithHints serverWithHints = new NovaServerCreateWithHints(server,hints);
-		return post(NovaServer.class, uri("/servers")).entity(serverWithHints).execute();
-	}
 
     /**
      * {@inheritDoc}
