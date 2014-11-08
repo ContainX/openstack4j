@@ -22,4 +22,11 @@ public interface ObjectStorageService extends RestService {
      * @return the container service
      */
     ObjectStorageContainerService containers();
+    
+    /**
+     * The Object Storage file and directory service
+     * 
+     * @return the object service
+     */
+    ObjectStorageObjectService objects();
 }

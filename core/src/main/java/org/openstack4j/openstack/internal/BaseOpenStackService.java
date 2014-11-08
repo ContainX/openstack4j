@@ -94,7 +94,7 @@ public class BaseOpenStackService {
 			return this;
 		}
 		
-		public Invocation<R> params(Map<String, Object> params) {
+		public Invocation<R> params(Map<String, ? extends Object> params) {
 		    if (params != null) {
 		        for (String name : params.keySet())
 		            req.queryParam(name, params.get(name));
