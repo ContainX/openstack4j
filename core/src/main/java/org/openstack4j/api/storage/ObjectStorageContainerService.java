@@ -39,6 +39,14 @@ public interface ObjectStorageContainerService extends RestService {
     void create(String name);
     
     /**
+     * Creates a pseudo path aka directory for the specified {@code containerName}
+     * 
+     * @param containerName the name of the container
+     * @param path the path to create
+     */
+    void createPath(String containerName, String path);
+    
+    /**
      * Creates a new container with the specified {@code name} with options
      * 
      * @param name the name of the new container

@@ -272,7 +272,7 @@ public class HttpRequest<R> {
 		 */
 		public RequestBuilder<R> entity(Payload<?> entity) {
 			if (entity != null)
-			request.entity = entity.open();
+			  request.entity = entity.open();
 			return this;
 		}
 		
@@ -317,13 +317,16 @@ public class HttpRequest<R> {
 		}
 
 		/**
-		 * Adds a Key/Value based Query Param
+		 * Adds a Key/Value based Query Param     
 		 *
 		 * @param key the key
 		 * @param value the value
 		 * @return the request builder
 		 */
 		public RequestBuilder<R> queryParam(String key, Object value) {
+		    if (value == null)
+		        return this;
+		    
 			if (request.queryParams == null)
 				request.queryParams = Maps.newHashMap();
 
@@ -367,7 +370,8 @@ public class HttpRequest<R> {
 		 * @return the request builder
 		 */
 		public RequestBuilder<R> contentType(String contentType) {
-			request.contentType = contentType;
+		    if (contentType != null)
+		        request.contentType = contentType;
 			return this;
 		}
 

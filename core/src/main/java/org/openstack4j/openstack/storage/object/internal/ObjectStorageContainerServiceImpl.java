@@ -1,20 +1,26 @@
 package org.openstack4j.openstack.storage.object.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_DIRECTORY;
 import static org.openstack4j.core.transport.ClientConstants.URI_SEP;
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_METADATA_PREFIX;
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_REMOVE_METADATA_PREFIX;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Map;
 
+import org.openstack4j.api.Apis;
 import org.openstack4j.api.exceptions.ContainerNotEmptyException;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
+import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.core.transport.HttpRequest.RequestBuilder;
+import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.common.Payloads;
 import org.openstack4j.model.storage.object.SwiftContainer;
 import org.openstack4j.model.storage.object.options.ContainerListOptions;
 import org.openstack4j.model.storage.object.options.CreateUpdateContainerOptions;
+import org.openstack4j.model.storage.object.options.ObjectPutOptions;
 import org.openstack4j.openstack.storage.object.domain.SwiftContainerImpl;
 import org.openstack4j.openstack.storage.object.functions.MapWithoutMetaPrefixFunction;
 import org.openstack4j.openstack.storage.object.functions.MetadataToHeadersFunction;
@@ -39,13 +45,10 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
      */
     @Override
     public List<? extends SwiftContainer> list(ContainerListOptions options) {
-        Invocation<SwiftContainerImpl[]> invocation = get(SwiftContainerImpl[].class);
-        RequestBuilder<SwiftContainerImpl[]> rb = invocation.getRequest().toBuilder();
+        if (options == null)
+            return list();
         
-        for (String key : options.getOptions().keySet())
-            rb.queryParam(key, options.getOptions().get(key));
-        
-        return toList(invocation.execute());
+        return toList(get(SwiftContainerImpl[].class).params(options.getOptions()).execute());
     }
     
     /**
@@ -64,6 +67,18 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
         checkNotNull(name);
         
         put(Void.class, URI_SEP, name).headers(options != null ? options.getOptions() : null).execute();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void createPath(String containerName, String path) {
+        checkNotNull(containerName);
+        checkNotNull(path);
+        Payload<?> pl = Payloads.create(new ByteArrayInputStream(new byte[]{}));
+        Apis.get(ObjectStorageObjectService.class).put(containerName, path, pl, 
+                        ObjectPutOptions.create().contentType(CONTENT_TYPE_DIRECTORY));
     }
 
     /**

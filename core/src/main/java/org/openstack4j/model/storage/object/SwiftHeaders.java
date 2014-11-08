@@ -26,6 +26,11 @@ public final class SwiftHeaders {
     public static final String CONTAINER_READ = "X-Container-Read";
     public static final String CONTAINER_WRITE = "X-Container-Write";
     public static final String CONTAINER_ACL_ANYBODY_READ = ".r:*,.rlistings";
+    
+    
+    // Generic
+    public static final String CONTENT_TYPE = "Content-Type";
+    public static final String ETAG = "ETag";
 
     private SwiftHeaders() {
     }

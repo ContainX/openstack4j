@@ -41,6 +41,7 @@ import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
 import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
+import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.api.telemetry.TelemetryService;
@@ -81,6 +82,7 @@ import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageAccountServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerServiceImpl;
+import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
@@ -142,6 +144,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ObjectStorageAccountService.class, ObjectStorageAccountServiceImpl.class);
 		bind(ObjectStorageContainerService.class, ObjectStorageContainerServiceImpl.class);
 		bind(ServerGroupService.class, ServerGroupServiceImpl.class);
+		bind(ObjectStorageObjectService.class, ObjectStorageObjectServiceImpl.class);
 	}
 
 	/**
