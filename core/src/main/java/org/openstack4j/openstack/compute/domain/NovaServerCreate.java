@@ -44,6 +44,9 @@ public class NovaServerCreate implements ServerCreate {
     private String availabilityZone;
     @JsonProperty("config_drive")
     private boolean configDrive;
+    
+    @JsonIgnore
+    private transient Map<String, String> schedulerHints;
 
     @JsonProperty("security_groups")
     private List<SecurityGroup> securityGroups;
@@ -124,6 +127,12 @@ public class NovaServerCreate implements ServerCreate {
     @Override
     public String getAvailabilityZone() {
         return availabilityZone;
+    }
+    
+    @JsonIgnore
+    @Override
+    public Map<String, String> getSchedulerHints() {
+        return schedulerHints;
     }
 
     public boolean isConfigDrive() {
@@ -302,6 +311,21 @@ public class NovaServerCreate implements ServerCreate {
         @Override
         public ServerCreateBuilder addMetadata(Map<String, String> metadata) {
             m.metadata = metadata;
+            return this;
+        }
+
+        @Override
+        public ServerCreateBuilder addSchedulerHint(String key, String value) {
+            if (m.schedulerHints == null)
+                m.schedulerHints = Maps.newHashMap();
+            
+            m.schedulerHints.put(key, value);
+            return this;
+        }
+
+        @Override
+        public ServerCreateBuilder addSchedulerHints(Map<String, String> schedulerHints) {
+            m.schedulerHints = schedulerHints;
             return this;
         }
 

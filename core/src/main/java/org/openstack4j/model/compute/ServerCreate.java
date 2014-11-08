@@ -128,6 +128,13 @@ public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder
 	List<? extends NetworkCreate> getNetworks();
 	
 	/**
+	 * A Map of Key and Value used for scheduler hints on bootup
+	 * 
+	 * @return scheduler hints or null
+	 */
+	Map<String, String> getSchedulerHints();
+	
+	/**
 	 * Adds the personality.
 	 *
 	 * @param path the path
