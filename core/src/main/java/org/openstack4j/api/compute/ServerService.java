@@ -72,6 +72,16 @@ public interface ServerService {
      */
     Server boot(ServerCreate server);
 
+
+    /**
+     * Create (boot) a new Server with scheduler hints
+     * a hint is some key and value data that can be used by openstack schedulers
+     *
+     * @param server the server to boot
+     * @return the newly created server
+     */
+    Server bootWithSchedulerHints(ServerCreate server,Map<String,String> hints);
+
     /**
      * Create (boot) a new Server
      *
