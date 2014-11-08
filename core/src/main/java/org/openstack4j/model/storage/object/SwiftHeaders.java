@@ -18,6 +18,9 @@ public final class SwiftHeaders {
     // Container Headers
     public static final String CONTAINER_METADATA_PREFIX = "X-Container-Meta-";
     public static final String CONTAINER_REMOVE_METADATA_PREFIX = "X-Remove-Container-Meta-";
+    
+    // Object Headers
+    public static final String OBJECT_METADATA_PREFIX = "X-Object-Meta-";
 
     // Versioning
     public static final String VERSIONS_LOCATION = "X-Versions-Location";
@@ -31,6 +34,8 @@ public final class SwiftHeaders {
     // Generic
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String ETAG = "ETag";
+    public static final String X_COPY_FROM = "X-Copy-From";
+    public static final String CONTENT_LENGTH = "Content-Length";
 
     private SwiftHeaders() {
     }

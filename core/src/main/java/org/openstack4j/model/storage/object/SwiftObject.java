@@ -1,6 +1,7 @@
 package org.openstack4j.model.storage.object;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.openstack4j.model.ModelEntity;
 
@@ -57,4 +58,11 @@ public interface SwiftObject extends ModelEntity {
      * @return true if this is a directory
      */
     boolean isDirectory();
+    
+    /**
+     * Gets the object metadata  (this is a lazy fetch)
+     * 
+     * @return the metadata for this object
+     */
+    Map<String, String> getMetadata();
 }

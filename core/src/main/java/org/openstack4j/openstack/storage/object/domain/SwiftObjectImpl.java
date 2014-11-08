@@ -4,7 +4,10 @@ import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_DIRECT
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
+import org.openstack4j.api.Apis;
+import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.model.storage.object.SwiftObject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,6 +33,9 @@ public class SwiftObjectImpl implements SwiftObject {
     private String name;
     @JsonProperty("content_type")
     private String mimeType;
+    
+    @JsonIgnore
+    private Map<String, String> metadata;
     
     @JsonIgnore
     private String containerName;
@@ -72,6 +78,13 @@ public class SwiftObjectImpl implements SwiftObject {
     public void setContainerName(String containerName) {
         this.containerName = containerName;
     }
+    
+    @Override
+    public Map<String, String> getMetadata() {
+        if (metadata == null)
+            metadata = Apis.get(ObjectStorageObjectService.class).getMetadata(containerName, name);
+        return metadata;
+    }
 
     @Override
     public String toString() {
@@ -85,6 +98,4 @@ public class SwiftObjectImpl implements SwiftObject {
     public static class SwiftObjects extends ArrayList<SwiftObjectImpl> {
         private static final long serialVersionUID = 1L;
     }
-    
-   
 }
