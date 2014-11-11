@@ -56,6 +56,11 @@ public interface Sample extends ModelEntity {
 	 * @return UTC date and time when the measurement was made
 	 */
 	Date getTimestamp();
+	
+	/**
+   * @return UTC date and time when the sample was recorded
+   */
+	Date getRecordedAt();
 
 	/**
 	 * @return A unique identifier for the sample

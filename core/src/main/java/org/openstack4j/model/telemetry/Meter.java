@@ -67,5 +67,10 @@ public interface Meter extends ModelEntity {
 	 * @return the unit of measure
 	 */
 	String getUnit();
+	
+	/**
+   * @return The user id who last modified the resource
+   */
+	String getUserId();
 
 }

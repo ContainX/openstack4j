@@ -24,6 +24,11 @@ public class CeilometerMeter implements Meter {
 	private Type type;
 	private String unit;
 	
+	private String source;
+	
+	@JsonProperty("user_id")
+  private String userId;
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -73,6 +78,14 @@ public class CeilometerMeter implements Meter {
 	}
 	
 	/**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getUserId() {
+    return userId;
+  }
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -80,6 +93,8 @@ public class CeilometerMeter implements Meter {
 		return Objects.toStringHelper(this).omitNullValues()
 				    .add("id", id).add("name", name).add("resource_id", resourceId)
 				    .add("project_id", projectId).add("type", type).add("unit", unit)
+				    .add("user_id",  userId)
+				    .add("source", source)
 				    .toString();
 	}
 }
