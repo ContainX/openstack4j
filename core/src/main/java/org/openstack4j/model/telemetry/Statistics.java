@@ -70,4 +70,9 @@ public interface Statistics extends ModelEntity {
 	 * @return The unit type of the data set
 	 */
 	String getUnit();
+	
+	/**
+   * @return The group-by of the data set
+   */
+	String getGroupBy();
 }
