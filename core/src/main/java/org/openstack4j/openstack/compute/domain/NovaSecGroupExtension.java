@@ -159,7 +159,7 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 		 */
 		@Override
 		public IPProtocol getIPProtocol() {
-			return ipProtocol;
+			return (ipProtocol != null) ? ipProtocol : IPProtocol.UNRECOGNIZED;
 		}
 		
 		/**

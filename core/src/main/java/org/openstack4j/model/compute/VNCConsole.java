@@ -16,11 +16,21 @@ public interface VNCConsole extends ModelEntity {
 	 * The OpenStack VNC Console Type
 	 */
 	public enum Type {
-		NOVNC, XVPVNC, UNRECOGNIZED;
+		NOVNC("novnc"), 
+		XVPVNC("xvpvnc"),
+		SPICE("spice-html5"),
+		UNRECOGNIZED("unregonized")
+		;
+		
+		private final String value;
+		
+		private Type(String value) {
+		    this.value = value;
+		}
 		
 		@JsonValue
 		public String value() {
-			return name().toLowerCase();
+			return value;
 		}
 		
 		@JsonCreator
@@ -28,7 +38,12 @@ public interface VNCConsole extends ModelEntity {
 			if (vncType == null || vncType.isEmpty()) return UNRECOGNIZED;
 			try
 			{
-				return valueOf(vncType.toUpperCase());
+				for (Type t : Type.values())
+				{
+				    if (t.value.equalsIgnoreCase(vncType))
+				        return t;
+				}
+                return UNRECOGNIZED;
 			}
 			catch (IllegalArgumentException e) {
 				return UNRECOGNIZED;

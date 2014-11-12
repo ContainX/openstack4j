@@ -16,7 +16,8 @@ public class NovaVNCConsole implements VNCConsole {
 
 	private static final long serialVersionUID = 1L;
 	private static final String JSON_REQ_FORMAT = "{ \"os-getVNCConsole\": { \"type\": \"%s\"} }";
-	
+	private static final String JSON_SPICE_FORMAT = "{ \"os-getSPICEConsole\": { \"type\": \"%s\"} }";
+
 	@JsonProperty
 	private Type type;
 	
@@ -48,6 +49,6 @@ public class NovaVNCConsole implements VNCConsole {
 	}
 
 	public static String getJSONAction(Type type) {
-		return String.format(JSON_REQ_FORMAT, type.value());
+		return String.format((type == Type.SPICE) ? JSON_SPICE_FORMAT : JSON_REQ_FORMAT, type.value());
 	}
 }
