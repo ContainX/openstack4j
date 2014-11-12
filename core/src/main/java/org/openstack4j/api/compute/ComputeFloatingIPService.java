@@ -43,7 +43,7 @@ public interface ComputeFloatingIPService extends RestService {
 	 * @param id the id of floating ip address
 	 * @return the action response
 	 */
-	void deallocateIP(String id);
+     ActionResponse deallocateIP(String id);
 	
 	
 	/**

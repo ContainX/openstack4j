@@ -84,8 +84,9 @@ public interface ServerService {
     /**
      * Delete (i.e shut down and delete the image) of the server
      * @param serverId the server identifier
+     * @return the action response
      */
-    void delete(String serverId);
+    ActionResponse delete(String serverId);
 
     /**
      * Executes the specified Action such as RESUME, PAUSE, START, STOP ... see (@link {@link Action} for
@@ -226,9 +227,10 @@ public interface ServerService {
      * detach the volume to the given server
      * @param serverId the server identifier
      * @param attachmentId the attachment identifier
-     * @author octopus zhang
+     * 
+     * @return the action response
      */
-    void detachVolume(String serverId,String attachmentId);
+    ActionResponse detachVolume(String serverId,String attachmentId);
 
     /**
      * Only user with admin role can do this.
@@ -263,7 +265,8 @@ public interface ServerService {
      * @param status the status to wait for
      * @param maxWait the max wait time
      * @param maxWaitUnit the unit the max wait time was specified in
-     * @return the last Server polled.  User should re-check status in case max wait was hit and the status was still not in the desired state.
+     * @return the last Server polled or null.  User should re-check status in case max wait was hit and the status 
+     *         was still not in the desired state.  
      */
     Server waitForServerStatus(String serverId, Status status, int maxWait, TimeUnit maxWaitUnit);
     
@@ -289,6 +292,7 @@ public interface ServerService {
      * 
      * @param serverId the server identifier
      * @param key the metadata key to remove
+     * @return the action response
      */
-    void deleteMetadataItem(String serverId, String key);
+    ActionResponse deleteMetadataItem(String serverId, String key);
 }

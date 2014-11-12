@@ -50,9 +50,11 @@ public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements
    * {@inheritDoc}
    */
   @Override
-  public void deallocateIP(String id) {
+  public ActionResponse deallocateIP(String id) {
     checkNotNull(id);
-    delete(Void.class, uri("/os-floating-ips/%s", id)).execute();
+    return ToActionResponseFunction.INSTANCE.apply(
+               delete(Void.class, uri("/os-floating-ips/%s", id)).executeWithResponse()
+           );
   }
 
   /**

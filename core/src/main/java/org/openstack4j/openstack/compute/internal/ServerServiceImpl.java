@@ -116,9 +116,11 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      * {@inheritDoc}
      */
     @Override
-    public void delete(String serverId) {
+    public ActionResponse delete(String serverId) {
         checkNotNull(serverId);
-        delete(Void.class, uri("/servers/%s", serverId)).execute();
+        return ToActionResponseFunction.INSTANCE.apply(
+                    delete(Void.class, uri("/servers/%s", serverId)).executeWithResponse()
+               );
     }
 
     /**
@@ -305,8 +307,10 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      * {@inheritDoc}
      */
     @Override
-    public void detachVolume(String serverId, String attachmentId) {
-        delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).execute();
+    public ActionResponse detachVolume(String serverId, String attachmentId) {
+        return ToActionResponseFunction.INSTANCE.apply(
+                   delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).executeWithResponse()
+                );
     }
     /**
      * {@inheritDoc}
@@ -361,15 +365,11 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         while ( duration < maxTime ) {
             server = get(serverId);
             
-            if (server.getStatus() == status || server.getStatus() == Status.ERROR)
+            if (server == null || server.getStatus() == status || server.getStatus() == Status.ERROR)
                 break;
             
             duration += sleep(1000);
         }
-        
-        // should never happen, want to insure non-null is returned
-        if (server == null)
-            server = get(serverId);
         return server;
     }
     
@@ -396,10 +396,12 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      * {@inheritDoc}
      */
     @Override
-    public void deleteMetadataItem(String serverId, String key) {
+    public ActionResponse deleteMetadataItem(String serverId, String key) {
         checkNotNull(serverId);
         checkNotNull(key);
-        delete(Void.class, uri("/servers/%s/metadata/%s", serverId, key)).execute();
+        return ToActionResponseFunction.INSTANCE.apply(
+                  delete(Void.class, uri("/servers/%s/metadata/%s", serverId, key)).executeWithResponse()
+                );
     }
 
     private int sleep(int ms) {
