@@ -63,4 +63,16 @@ public class LiveMigrateOptions extends BaseActionOptions {
         add(Option.DISK_OVER_COMMIT, enabled);
         return this;
     }
+    
+    public String getHost() {
+        return get(Option.HOST);
+    }
+    
+    public boolean getBlockMigration() {
+        return get(Option.BLOCK_MIGRATION);
+    }
+    
+    public boolean getDiskOverCommit() {
+        return get(Option.DISK_OVER_COMMIT);
+    }
 }

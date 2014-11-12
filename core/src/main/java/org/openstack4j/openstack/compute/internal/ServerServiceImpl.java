@@ -29,6 +29,19 @@ import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
+import org.openstack4j.openstack.compute.domain.actions.BackupAction;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.ChangePassword;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.ConfirmResize;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.Migrate;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.Reboot;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.Resize;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.RevertResize;
+import org.openstack4j.openstack.compute.domain.actions.CreateSnapshotAction;
+import org.openstack4j.openstack.compute.domain.actions.LiveMigrationAction;
+import org.openstack4j.openstack.compute.domain.actions.RebuildAction;
+import org.openstack4j.openstack.compute.domain.actions.SecurityGroupActions;
+import org.openstack4j.openstack.compute.domain.actions.ServerAction;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.compute.functions.WrapServerIfApplicableFunction;
 
@@ -129,24 +142,12 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public ActionResponse action(String serverId, Action action) {
         checkNotNull(serverId);
-
-        switch (action) {
-        case PAUSE: return invokeAction(serverId, "pause");
-        case UNPAUSE: return invokeAction(serverId, "unpause");
-        case LOCK: return invokeAction(serverId, "lock");
-        case UNLOCK: return invokeAction(serverId, "unlock");
-        case START: return invokeAction(serverId, "os-start");
-        case STOP: return invokeAction(serverId, "os-stop");
-        case RESUME: return invokeAction(serverId, "resume");
-        case RESCUE: return invokeAction(serverId, "rescue");
-        case UNRESCUE: return invokeAction(serverId, "unrescue");
-        case SHELVE: return invokeAction(serverId, "shelve");
-        case SHELVE_OFFLOAD: return invokeAction(serverId, "shelveOffload");
-        case UNSHELVE: return invokeAction(serverId, "unshelve");
-        case SUSPEND: return invokeAction(serverId, "suspend");
-        default:
+        
+        ServerAction instance = BasicActions.actionInstanceFor(action);
+        if (instance == null)
             return ActionResponse.actionFailed(String.format("Action %s was not found in the list of invokable actions", action));
-        }
+        
+        return invokeAction(serverId, instance);
     }
 
     /**
@@ -157,8 +158,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(serverId);
         checkNotNull(snapshotName);
 
-        String body = String.format("{ \"name\": \"%s\", \"metadata\":{} }", snapshotName);
-        HttpResponse response = executeActionWithResponse(serverId, "createImage", body);
+        HttpResponse response = invokeActionWithResponse(serverId, CreateSnapshotAction.create(snapshotName));
         if (response.getStatus() == 202) {
             String location = response.header("location");
             if (location != null && location.contains("/"))
@@ -177,9 +177,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public ActionResponse reboot(String serverId, RebootType type) {
         checkNotNull(serverId);
-
-        String innerJson = String.format("{ \"type\": \"%s\" }", type.name());
-        return invokeAction(serverId, "reboot", innerJson);
+        return invokeAction(serverId, new Reboot(type));
     }
 
     /**
@@ -188,7 +186,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public ActionResponse rebuild(String serverId, RebuildOptions options) {
         checkNotNull(serverId);
-        return invokeAction(serverId, "rebuild", (options != null) ? options.toJsonString() : null);
+        return invokeAction(serverId, RebuildAction.create(options));
     }
 
     /**
@@ -198,7 +196,8 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public ActionResponse resize(String serverId, String flavorId) {
         checkNotNull(serverId);
         checkNotNull(flavorId);
-        return invokeAction(serverId, "resize", String.format("{ \"flavorRef\": \"%s\" }", flavorId));
+        
+        return invokeAction(serverId, new Resize(flavorId));
     }
 
     /**
@@ -208,7 +207,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public ActionResponse addSecurityGroup(String serverId, String secGroupName) {
         checkNotNull(serverId);
         checkNotNull(secGroupName);
-        return invokeAction(serverId, "addSecurityGroup", String.format("{ \"name\": \"%s\" }", secGroupName));
+        return invokeAction(serverId, SecurityGroupActions.add(secGroupName));
     }
 
     /**
@@ -218,7 +217,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public ActionResponse removeSecurityGroup(String serverId, String secGroupName) {
         checkNotNull(serverId);
         checkNotNull(secGroupName);
-        return invokeAction(serverId, "removeSecurityGroup", String.format("{ \"name\": \"%s\" }", secGroupName));
+        return invokeAction(serverId, SecurityGroupActions.remove(secGroupName));
     }
 
     /**
@@ -227,7 +226,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public ActionResponse confirmResize(String serverId) {
         checkNotNull(serverId);
-        return invokeAction(serverId, "confirmResize");
+        return invokeAction(serverId, BasicActions.instanceFor(ConfirmResize.class));
     }
 
     /**
@@ -236,7 +235,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public ActionResponse revertResize(String serverId) {
         checkNotNull(serverId);
-        return invokeAction(serverId, "revertResize");
+        return invokeAction(serverId, BasicActions.instanceFor(RevertResize.class));
     }
 
     /**
@@ -272,19 +271,27 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public Map<String, ? extends Number> diagnostics(String serverId) {
         return get(HashMap.class, uri("/servers/%s/diagnostics", serverId)).execute();
     }
-
-    private ActionResponse invokeAction(String serverId, String action) {
-        return invokeAction(serverId, action, null);
+    
+    private ActionResponse invokeAction(String serverId, ServerAction action)  {
+        return ToActionResponseFunction.INSTANCE.apply(invokeActionWithResponse(serverId, action), action.getClass().getName());
+    }
+    
+    private HttpResponse invokeActionWithResponse(String serverId, ServerAction action)  {
+        HttpResponse response  = post(Void.class, uri("/servers/%s/action", serverId))
+                                    .entity(action)
+                                    .executeWithResponse();
+        
+        return response;
     }
 
-    private ActionResponse invokeAction(String serverId, String action, String innerJson) {
-        HttpResponse response = executeActionWithResponse(serverId, action, innerJson);
-        return ToActionResponseFunction.INSTANCE.apply(response, action);
-    }
+//    private ActionResponse invokeAction(String serverId, String action, String innerJson) {
+//        HttpResponse response = executeActionWithResponse(serverId, action, innerJson);
+//        return ToActionResponseFunction.INSTANCE.apply(response, action);
+//    }
 
-    private HttpResponse executeActionWithResponse(String serverId, String action, String innerJson) {
-        return post(Void.class, uri("/servers/%s/action", serverId)).json(String.format("{ \"%s\": %s }", action, (innerJson != null) ? innerJson : "null")).executeWithResponse();
-    }
+//    private HttpResponse executeActionWithResponse(String serverId, String action, String innerJson) {
+//        return post(Void.class, uri("/servers/%s/action", serverId)).json(String.format("{ \"%s\": %s }", action, (innerJson != null) ? innerJson : "null")).executeWithResponse();
+//    }
 
     /**
      * {@inheritDoc}
@@ -318,7 +325,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public ActionResponse migrateServer(String serverId) {
         checkNotNull(serverId);
-        return invokeAction(serverId, "migrate");
+        return invokeAction(serverId, BasicActions.instanceFor(Migrate.class));
     }
 
     /**
@@ -329,7 +336,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(serverId);
         if (options == null)
             options = LiveMigrateOptions.create();
-        return invokeAction(serverId, "os-migrateLive", options.toJsonString());
+        return invokeAction(serverId, LiveMigrationAction.create(options));
     }
     
     /**
@@ -339,7 +346,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public ActionResponse backupServer(String serverId, BackupOptions options) {
         checkNotNull(serverId);
         checkNotNull(options);
-        return invokeAction(serverId, "createBackup", options.toJsonString());
+        return invokeAction(serverId, BackupAction.create(options));
     }
     
     /**
@@ -349,8 +356,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public ActionResponse changeAdminPassword(String serverId, String adminPassword) {
         checkNotNull(serverId);
         checkNotNull(adminPassword);
-        String json = String.format("{ \"adminPass\": \"%s\" }", adminPassword);
-        return invokeAction(serverId, "changePassword",json);
+        return invokeAction(serverId, new ChangePassword(adminPassword));
     }
     
     /**
