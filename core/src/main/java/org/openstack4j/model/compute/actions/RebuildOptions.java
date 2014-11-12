@@ -64,4 +64,16 @@ public final class RebuildOptions extends BaseActionOptions {
         add(Option.ADMIN_PASS, adminPass);
         return this;
     }
+    
+    public String getName() {
+        return get(Option.NAME);
+    }
+    
+    public String getAdminPass() {
+        return get(Option.ADMIN_PASS);
+    }
+    
+    public String getImageRef() {
+        return get(Option.IMAGE);
+    }
 }

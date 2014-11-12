@@ -60,4 +60,16 @@ public final class BackupOptions extends BaseActionOptions {
         add(Option.ROTATION, rotation);
         return this;
     }
+    
+    public String getName() {
+        return get(Option.NAME);
+    }
+    
+    public String getBackupType() {
+        return get(Option.BACKUP_TYPE);
+    }
+    
+    public Integer getRotation() {
+        return get(Option.ROTATION);
+    }
 }

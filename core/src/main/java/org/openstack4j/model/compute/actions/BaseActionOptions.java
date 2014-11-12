@@ -21,6 +21,10 @@ public class BaseActionOptions {
         options.put(option, value);
     }
     
+    @SuppressWarnings("unchecked")
+    protected <T> T get(OptionEnum option) {
+        return (T) options.get(option);
+    }
     
     /**
      * @return A JSON String representing this object

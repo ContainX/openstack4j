@@ -49,7 +49,6 @@ public class ResteasyClientFactory extends ResteasyProviderFactory {
         public ObjectMapper getContext(Class<?> type) {
             return ObjectMapperSingleton.getContext(type);
         }
-
     }
 
 }
