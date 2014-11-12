@@ -109,7 +109,7 @@ public class CeilometerSample implements Sample {
 		return userId;
 	}
 	
-	/**
+  /**
    * {@inheritDoc}
    */
   @Override
