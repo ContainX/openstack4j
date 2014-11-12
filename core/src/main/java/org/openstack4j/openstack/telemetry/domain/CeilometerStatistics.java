@@ -44,6 +44,8 @@ public class CeilometerStatistics implements Statistics {
 	
 	private String unit;
 	
+	private String groupby;
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -140,6 +142,14 @@ public class CeilometerStatistics implements Statistics {
 		return unit;
 	}
 	
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getGroupBy() {
+    return groupby;
+  }
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -150,6 +160,7 @@ public class CeilometerStatistics implements Statistics {
 				    .add("durationStart", durationStart).add("durationEnd", durationEnd)
 				    .add("min", min).add("max", max).add("sum", sum).add("period", period)
 				    .add("periodStart", periodStart).add("periodEnd", periodEnd).add("unit", unit)
+				    .add("groupBy", groupby)
 				    .toString();
 	}
 

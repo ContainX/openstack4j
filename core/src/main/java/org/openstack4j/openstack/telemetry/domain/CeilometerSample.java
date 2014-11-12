@@ -49,6 +49,10 @@ public class CeilometerSample implements Sample {
 	@JsonProperty("resource_metadata")
 	private Map<String, Object> metadata;
 	
+	@JsonProperty("recorded_at")
+	private Date recordedAt;
+	
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -104,6 +108,14 @@ public class CeilometerSample implements Sample {
 	public String getUserId() {
 		return userId;
 	}
+	
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Date getRecordedAt() {
+    return recordedAt;
+  }
 
 	/**
 	 * {@inheritDoc}
@@ -147,6 +159,7 @@ public class CeilometerSample implements Sample {
 				    .add("volume", counterVolume).add("timestamp", timestamp).add("source", source)
 				    .add("project", projectId).add("user", userId).add("resource", resourceId)
 				    .add("message", messageId).addValue("\n").add("metadata", metadata)
+				    .add("recorded_at", recordedAt)
 				    .toString();
 	}
 
