@@ -142,7 +142,7 @@ public class CeilometerStatistics implements Statistics {
 		return unit;
 	}
 	
-	/**
+  /**
    * {@inheritDoc}
    */
   @Override
