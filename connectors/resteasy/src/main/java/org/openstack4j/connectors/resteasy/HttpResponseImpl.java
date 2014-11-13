@@ -3,23 +3,16 @@ package org.openstack4j.connectors.resteasy;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.ws.rs.core.MultivaluedMap;
 
 import org.jboss.resteasy.client.ClientResponse;
-import org.openstack4j.api.exceptions.AuthenticationException;
-import org.openstack4j.api.exceptions.ClientResponseException;
-import org.openstack4j.api.exceptions.ResponseException;
-import org.openstack4j.api.exceptions.ServerResponseException;
+import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.core.transport.ListType;
 
 import com.google.common.base.Function;
 
 public class HttpResponseImpl implements HttpResponse {
-    private static final Pattern MESSAGE_PATTERN = Pattern.compile(".*message\\\":\\s\\\"([^\"]+)\\\".*");
     private ClientResponse<?> response;
 
     private HttpResponseImpl(ClientResponse<?> response) {
@@ -64,59 +57,25 @@ public class HttpResponseImpl implements HttpResponse {
      * @param parser an optional parser which will handle the HttpResponse and return the corresponding return type.  Error codes are handled and thrown prior to the parser being called
      * @return the entity
      */
+    @Override
     public <T> T getEntity(Class<T> returnType, Function<HttpResponse, T> parser) {
-        if(response.getStatus() >= 400) {
-            if (response.getStatus() == 404)
-            {
-                try
-                {
-                    if (ListType.class.isAssignableFrom(returnType))
-                        return returnType.newInstance();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-            if (response.getStatus() < 500)
-            {
-                try
-                {
-                    String json = response.getEntity(String.class);
-                    if (json != null && json.contains("message")) {
-                        Matcher m = MESSAGE_PATTERN.matcher(json);
-                        if (m.matches())
-                        {
-                            throw mapException(m.group(1), response.getResponseStatus().getStatusCode());
-                        }
-                    }
-                }
-                catch (ResponseException re) {
-                    throw re;
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            throw mapException(response.getResponseStatus().getReasonPhrase(),
-                    response.getResponseStatus().getStatusCode());
-        }
-
-        if (parser != null)
-            return parser.apply(this);
-
-        if (returnType == Void.class) return null;
-        
-        return response.getEntity(returnType);
+       return HttpEntityHandler.handle(this, returnType, parser);
     }
 
     /**
-     * Gets the status from the previous Request
-     *
-     * @return the status code
+     * {@inheritDoc}
      */
+    @Override
     public int getStatus() {
         return response.getStatus();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getStatusMessage() {
+        return response.getResponseStatus().getReasonPhrase();
     }
 
     /**
@@ -148,36 +107,6 @@ public class HttpResponseImpl implements HttpResponse {
         }
 
         return headers;
-    }
-
-    /**
-     * Maps an Exception based on the underlying status code
-     *
-     * @param message the message
-     * @param status the status
-     * @return the response exception
-     */
-    public static ResponseException mapException(String message, int status) {
-        return mapException(message, status, null);
-    }
-
-    /**
-     * Maps an Exception based on the underlying status code
-     *
-     * @param message the message
-     * @param status the status
-     * @param cause the cause
-     * @return the response exception
-     */
-    public static ResponseException mapException(String message, int status, Throwable cause) {
-        if (status == 401)
-            return new AuthenticationException(message, status, cause);
-        if (status >= 400 && status < 499)
-            return new ClientResponseException(message, status, cause);
-        if (status >= 500 && status < 600)
-            return new ServerResponseException(message, status, cause);
-
-        return new ResponseException(message, status, cause);
     }
 
     @Override

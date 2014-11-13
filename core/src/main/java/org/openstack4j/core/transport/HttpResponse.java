@@ -45,6 +45,12 @@ public interface HttpResponse {
 	 * @return the status code
 	 */
 	int getStatus();
+	
+	/**
+	 * The status message which is associated with the current {@link #getStatus()}
+	 * @return the status message or null
+	 */
+	String getStatusMessage();
 
 	/**
 	 * @return the input stream
