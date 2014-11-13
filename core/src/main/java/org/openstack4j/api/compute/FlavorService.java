@@ -1,6 +1,7 @@
 package org.openstack4j.api.compute;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.Flavor;
@@ -56,4 +57,39 @@ public interface FlavorService extends RestService {
 	 * @return the created flavor
 	 */
 	Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor, boolean isPublic);
+	
+	/**
+	 * list extra specs
+	 * 
+	 * @param flavorId
+	 * @return all extra specs for this flavor
+	 */
+	Map<String,String> ListExtarSpecs(String flavorId);
+	/**
+	 * post a key-value map, if key exist, value will be updated, if not ,new extra spec created.
+	 * openstack provides one api to support both create and update  extra spec
+	 * 
+	 * @param flavorId
+	 * @param spec
+	 * @return spec
+	 */
+	Map<String,String> CreateAndUpdateExtarSpecs(String flavorId, Map<String,String> spec);
+	
+	/**
+	 * delete the extra spec with the key and flavorId
+	 * @param flavorId
+	 * @param key
+	 */
+	void deleteExtarSpecs(String flavorId, String key);
+	
+	/**
+	 * get the extra spec's value by the key 
+	 * @param flavorId
+	 * @param key
+	 * @return value
+	 */
+	String getSpec(String flavorId, String key);
+	
+	
+	
 }
