@@ -16,32 +16,7 @@ public class NovaVolumeAttachment implements VolumeAttachment {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty
-	private String device;
-
-	@JsonProperty
-	private String id;
-
-	@JsonProperty
-	private String serverId;
-
-	@JsonProperty
 	private String volumeId;
-
-	@Override
-	public String getDevice() {
-		return device;
-	}
-
-	@Override
-	public String getId() {
-		return id;
-	}
-
-	@Override
-	public String getServerId() {
-		return serverId;
-	}
 
 	@Override
 	public String getVolumeId() {
@@ -51,9 +26,12 @@ public class NovaVolumeAttachment implements VolumeAttachment {
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-				.add("device", device).add("id", id).add("serverId", serverId)
 				.add("volumeId", volumeId).toString();
 
+	}
+	
+	public NovaVolumeAttachment(String volumeId) {
+		this.volumeId = volumeId;
 	}
 
 }
