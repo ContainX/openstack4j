@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openstack4j.api.identity.RoleService;
 import org.openstack4j.core.transport.HttpMethod;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.openstack.identity.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.domain.KeystoneRole.Roles;
@@ -22,32 +23,32 @@ public class RoleServiceImpl extends BaseOpenStackService implements RoleService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addUserRole(String userId, String roleId) {
-		addUserRole(null, userId, roleId);
+	public ActionResponse addUserRole(String userId, String roleId) {
+		return addUserRole(null, userId, roleId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addUserRole(String tenantId, String userId, String roleId) {
-		addRemoveRoles(HttpMethod.PUT, tenantId, userId, roleId);
+	public ActionResponse addUserRole(String tenantId, String userId, String roleId) {
+		return addRemoveRoles(HttpMethod.PUT, tenantId, userId, roleId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void removeUserRole(String userId, String roleId) {
-		removeUserRole(null, userId, roleId);
+	public ActionResponse removeUserRole(String userId, String roleId) {
+		return removeUserRole(null, userId, roleId);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void removeUserRole(String tenantId, String userId, String roleId) {
-		addRemoveRoles(HttpMethod.DELETE, tenantId, userId, roleId);
+	public ActionResponse removeUserRole(String tenantId, String userId, String roleId) {
+		return addRemoveRoles(HttpMethod.DELETE, tenantId, userId, roleId);
 	}
 
 	/**
@@ -57,12 +58,13 @@ public class RoleServiceImpl extends BaseOpenStackService implements RoleService
 	 * @param tenantId the tenant id
 	 * @param userId the user id
 	 * @param roleId the role id
+	 * @param the action response
 	 */
-	private void addRemoveRoles(HttpMethod method, String tenantId, String userId, String roleId) {
+	private ActionResponse addRemoveRoles(HttpMethod method, String tenantId, String userId, String roleId) {
 		checkNotNull(userId);
 		checkNotNull(roleId);
 		String uri = (tenantId != null) ? uri("/tenants/%s/users/%s/roles/OS-KSADM/%s", tenantId, userId, roleId) : uri("/users/%s/roles/OS-KSADM/%s", userId, roleId);
-		request(method, Void.class, uri).execute();
+		return request(method, ActionResponse.class, uri).execute();
 	}
 
 
@@ -96,9 +98,9 @@ public class RoleServiceImpl extends BaseOpenStackService implements RoleService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String roleId) {
+	public ActionResponse delete(String roleId) {
 		checkNotNull(roleId);
-		delete(Void.class, uri("/OS-KSADM/roles/%s", roleId)).execute();
+		return deleteWithResponse(uri("/OS-KSADM/roles/%s", roleId)).execute();
 	}
 
 	/**

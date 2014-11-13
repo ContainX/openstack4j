@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.heat.StackService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStack;
@@ -47,9 +48,9 @@ public class StackServiceImpl extends BaseHeatServices implements StackService {
     }
 
     @Override
-    public void delete(String stackName, String stackId) {
+    public ActionResponse delete(String stackName, String stackId) {
         checkNotNull(stackId);
-        delete(Void.class, uri("/stacks/%s/%s", stackName, stackId)).execute();
+        return deleteWithResponse(uri("/stacks/%s/%s", stackName, stackId)).execute();
     }
 
     @Override

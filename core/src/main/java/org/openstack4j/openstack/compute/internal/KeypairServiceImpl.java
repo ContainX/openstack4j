@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import org.openstack4j.api.compute.KeypairService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Keypair;
 import org.openstack4j.openstack.compute.domain.NovaKeypair;
 import org.openstack4j.openstack.compute.domain.NovaKeypair.Keypairs;
@@ -39,9 +40,9 @@ public class KeypairServiceImpl extends BaseComputeServices implements KeypairSe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String name) {
+	public ActionResponse delete(String name) {
 		checkNotNull(name);
-		delete(Void.class, uri("/os-keypairs/%s", name)).execute();
+		return deleteWithResponse(uri("/os-keypairs/%s", name)).execute();
 	}
 
 	/**

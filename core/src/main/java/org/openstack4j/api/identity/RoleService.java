@@ -3,6 +3,7 @@ package org.openstack4j.api.identity;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.identity.Role;
 
 /**
@@ -17,8 +18,9 @@ public interface RoleService extends RestService {
 	 *
 	 * @param userId the user id
 	 * @param roleId the role id to add
+	 * @return the action response
 	 */
-	void addUserRole(String userId, String roleId);
+	ActionResponse addUserRole(String userId, String roleId);
 	
 	/**
 	 * Adds a tenant based role to a user
@@ -26,16 +28,18 @@ public interface RoleService extends RestService {
 	 * @param tenantId the tenant id
 	 * @param userId the user id
 	 * @param roleId the role id
+	 * @return the action response
 	 */
-	void addUserRole(String tenantId, String userId, String roleId);
+	ActionResponse addUserRole(String tenantId, String userId, String roleId);
 
 	/**
 	 * Removes a global role from a user
 	 *
 	 * @param userId the user id
 	 * @param roleId the role id
+	 * @return the action response
 	 */
-	void removeUserRole(String userId, String roleId);
+	ActionResponse removeUserRole(String userId, String roleId);
 	
 	/**
 	 * Removes the user role from a user and the associated tenant
@@ -43,8 +47,9 @@ public interface RoleService extends RestService {
 	 * @param tenantId the tenant id
 	 * @param userId the user id
 	 * @param roleId the role id
+	 * @return the action response
 	 */
-	void removeUserRole(String tenantId, String userId, String roleId);
+	ActionResponse removeUserRole(String tenantId, String userId, String roleId);
 	
 	/**
 	 * Lists the global roles
@@ -74,8 +79,9 @@ public interface RoleService extends RestService {
 	 * Delete a role by it's ID
 	 *
 	 * @param roleId the role id
+	 * @param the action response
 	 */
-	void delete(String roleId);
+	ActionResponse delete(String roleId);
 	
 	/**
 	 * Gets a role by ID

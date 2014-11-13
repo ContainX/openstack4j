@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.openstack4j.api.exceptions.ResponseException;
+import org.openstack4j.model.compute.ActionResponse;
 
 import com.google.common.base.Function;
 
@@ -18,6 +19,7 @@ public class HttpEntityHandler {
     
     private static final Pattern MESSAGE_PATTERN = Pattern.compile(".*message\\\":\\s\\\"([^\"]+)\\\".*");
 
+    @SuppressWarnings("unchecked")
     public static <T> T handle(HttpResponse response, Class<T> returnType, Function<HttpResponse, T> parser) {
         if(response.getStatus() >= 400) {
             if (response.getStatus() == 404)
@@ -30,7 +32,8 @@ public class HttpEntityHandler {
                 catch (Exception e) {
                     e.printStackTrace();
                 }
-                return null;
+                if (returnType != ActionResponse.class)
+                    return null;
             }
             if (response.getStatus() < 500)
             {
@@ -41,6 +44,9 @@ public class HttpEntityHandler {
                         Matcher m = MESSAGE_PATTERN.matcher(json);
                         if (m.matches())
                         {
+                            if (returnType == ActionResponse.class)
+                                return (T) ActionResponse.actionFailed(m.group(1));
+                            
                             throw mapException(m.group(1), response.getStatus());
                         }
                     }
@@ -59,8 +65,11 @@ public class HttpEntityHandler {
         if (parser != null)
             return parser.apply(response);
 
-        if (returnType == Void.class) return null;
-        return response.readEntity(returnType);
+        if (returnType == Void.class) 
+            return null;
+        if (returnType == ActionResponse.class) 
+            return (T) ActionResponse.actionSuccess();
+         return response.readEntity(returnType);
     }
     
 }

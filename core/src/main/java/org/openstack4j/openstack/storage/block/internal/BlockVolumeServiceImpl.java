@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
@@ -48,9 +49,9 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String volumeId) {
+	public ActionResponse delete(String volumeId) {
 		checkNotNull(volumeId);
-		delete(Void.class, uri("/volumes/%s", volumeId)).execute();
+		return deleteWithResponse(uri("/volumes/%s", volumeId)).execute();
 	}
 
 	/**
@@ -66,13 +67,14 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(String volumeId, String name, String description) {
+	public ActionResponse update(String volumeId, String name, String description) {
 		checkNotNull(volumeId);
-		if (name == null && description == null) return;
+		if (name == null && description == null)
+		    return ActionResponse.actionFailed("Name and Description are both required");
 		
-		put(Void.class, uri("/volumes/%s", volumeId))
-		    .entity(Builders.volume().name(name).description(description).build())
-		    .execute();
+		return put(ActionResponse.class, uri("/volumes/%s", volumeId))
+        		    .entity(Builders.volume().name(name).description(description).build())
+        		    .execute();
 	}
 
 }

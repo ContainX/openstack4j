@@ -6,6 +6,7 @@ import static com.google.common.base.Preconditions.checkState;
 import java.util.List;
 
 import org.openstack4j.api.networking.RouterService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.AttachInterfaceType;
 import org.openstack4j.model.network.Router;
 import org.openstack4j.model.network.RouterInterface;
@@ -41,9 +42,9 @@ public class RouterServiceImpl extends BaseNetworkingServices implements RouterS
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String routerId) {
+	public ActionResponse delete(String routerId) {
 		checkNotNull(routerId);
-		delete(Void.class, uri("/routers/%s", routerId)).execute();
+		return deleteWithResponse(uri("/routers/%s", routerId)).execute();
 	}
 
 	/**

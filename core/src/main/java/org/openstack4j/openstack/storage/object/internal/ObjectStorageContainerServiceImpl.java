@@ -11,16 +11,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.exceptions.ContainerNotEmptyException;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.Payloads;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.object.SwiftContainer;
 import org.openstack4j.model.storage.object.options.ContainerListOptions;
 import org.openstack4j.model.storage.object.options.CreateUpdateContainerOptions;
 import org.openstack4j.model.storage.object.options.ObjectPutOptions;
+import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.storage.object.domain.SwiftContainerImpl;
 import org.openstack4j.openstack.storage.object.functions.MapWithoutMetaPrefixFunction;
 import org.openstack4j.openstack.storage.object.functions.MetadataToHeadersFunction;
@@ -55,29 +56,28 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
      * {@inheritDoc}
      */
     @Override
-    public void create(String name) {
-        create(name, null);
+    public ActionResponse create(String name) {
+        return create(name, null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void create(String name, CreateUpdateContainerOptions options) {
+    public ActionResponse create(String name, CreateUpdateContainerOptions options) {
         checkNotNull(name);
-        
-        put(Void.class, URI_SEP, name).headers(options != null ? options.getOptions() : null).execute();
+        return put(ActionResponse.class, URI_SEP, name).headers(options != null ? options.getOptions() : null).execute();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public void createPath(String containerName, String path) {
+    public String createPath(String containerName, String path) {
         checkNotNull(containerName);
         checkNotNull(path);
         Payload<?> pl = Payloads.create(new ByteArrayInputStream(new byte[]{}));
-        Apis.get(ObjectStorageObjectService.class).put(containerName, path, pl, 
+        return Apis.get(ObjectStorageObjectService.class).put(containerName, path, pl, 
                         ObjectPutOptions.create().contentType(CONTENT_TYPE_DIRECTORY));
     }
 
@@ -85,24 +85,25 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
      * {@inheritDoc}
      */
     @Override
-    public void update(String name, CreateUpdateContainerOptions options) {
+    public ActionResponse update(String name, CreateUpdateContainerOptions options) {
         checkNotNull(name);
         
-        if (options != null)
-            post(Void.class, URI_SEP, name).headers(options.getOptions()).execute();
+         return post(ActionResponse.class, URI_SEP, name)
+                      .headers(options != null ? options.getOptions() : null)
+                      .execute();
     }
     
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean delete(String name) {
+    public ActionResponse delete(String name) {
         checkNotNull(name);
         HttpResponse resp = delete(Void.class, URI_SEP, name).executeWithResponse();
         if (resp.getStatus() == 409)
-            throw new ContainerNotEmptyException(String.format("Container %s is not empty", name), 409);
+            return ActionResponse.actionFailed(String.format("Container %s is not empty", name));
         
-        return (resp.getStatus() == 404 || resp.getStatus() == 204);
+        return ToActionResponseFunction.INSTANCE.apply(resp);
     }
 
     /**

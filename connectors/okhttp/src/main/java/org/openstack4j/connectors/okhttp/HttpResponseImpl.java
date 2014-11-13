@@ -8,12 +8,15 @@ import org.openstack4j.api.exceptions.ClientResponseException;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.Response;
 
 public class HttpResponseImpl implements HttpResponse {
+    private static final Logger LOG = LoggerFactory.getLogger(HttpResponseImpl.class);
     private Response response;
 
     private HttpResponseImpl(Response response) {
@@ -115,7 +118,7 @@ public class HttpResponseImpl implements HttpResponse {
         try {
             return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(response.body().string());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e, e.getMessage());
             throw new ClientResponseException(e.getMessage(), 0, e);
         }
     }

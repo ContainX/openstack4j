@@ -3,6 +3,7 @@ package org.openstack4j.api.storage;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.block.VolumeSnapshot;
 
 /**
@@ -31,8 +32,9 @@ public interface BlockVolumeSnapshotService extends RestService {
 	 * Deletes a specified snapshot
 	 *
 	 * @param snapshotId the snapshot identifier
+	 * @return the action response
 	 */
-	void delete(String snapshotId);
+	ActionResponse delete(String snapshotId);
 	
 	/**
 	 * Updates the Name and/or Description for the specified snapshot
@@ -40,8 +42,9 @@ public interface BlockVolumeSnapshotService extends RestService {
 	 * @param snapshotId the snapshot identifier
 	 * @param name the new name
 	 * @param description the new description
+	 * @return the action response
 	 */
-	void update(String snapshotId, String name, String description);
+	ActionResponse update(String snapshotId, String name, String description);
 	
 	/**
 	 * Creates a snapshot, which is a point-in-time copy of a volume. You can create a volume from the snapshot.

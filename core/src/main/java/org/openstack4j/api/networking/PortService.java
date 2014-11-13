@@ -3,6 +3,7 @@ package org.openstack4j.api.networking;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.Port;
 
 /**
@@ -29,9 +30,11 @@ public interface PortService extends RestService {
 	
 	/**
 	 * Delete a Port by ID
+	 * 
 	 * @param portId the port identifier to delete
+	 * @return the action response
 	 */
-	void delete(String portId);
+	ActionResponse delete(String portId);
 	
 	/**
 	 * Creates a new Port

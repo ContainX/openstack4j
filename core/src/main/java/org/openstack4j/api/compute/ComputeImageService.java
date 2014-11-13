@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Image;
 
 /**
@@ -41,8 +42,9 @@ public interface ComputeImageService extends RestService {
 	 * Deletes an Image based on it's identifiers.  Images created by another user typically cannot be deleted
 	 * 
 	 * @param imageId the image identifier
+	 * @return the action response
 	 */
-	void delete(String imageId);
+	ActionResponse delete(String imageId);
 	
 	/**
 	 * Gets the metadata for an image
@@ -66,6 +68,7 @@ public interface ComputeImageService extends RestService {
 	 * 
 	 * @param imageId the image identifier
 	 * @param keys one or more keys/metadata names to remove
+	 * @return the action response
 	 */
-	void deleteMetaData(String imageId, String... keys);
+	ActionResponse deleteMetaData(String imageId, String... keys);
 }

@@ -14,6 +14,7 @@ import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.compute.ActionResponse;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -52,6 +53,10 @@ public class BaseOpenStackService {
 	protected <R> Invocation<R> delete(Class<R> returnType, String... path) {
 		return builder(returnType, path, HttpMethod.DELETE);
 	}
+	
+	protected <R> Invocation<ActionResponse> deleteWithResponse(String... path) {
+        return builder(ActionResponse.class, path, HttpMethod.DELETE);
+    }
 	
 	protected <R> Invocation<R> head(Class<R> returnType, String... path) {
 		return builder(returnType, path, HttpMethod.HEAD);

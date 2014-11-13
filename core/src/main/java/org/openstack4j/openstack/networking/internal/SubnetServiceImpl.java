@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.Subnet;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet.Subnets;
@@ -37,9 +38,9 @@ public class SubnetServiceImpl extends BaseNetworkingServices implements SubnetS
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String subnetId) {
+	public ActionResponse delete(String subnetId) {
 		checkNotNull(subnetId);
-		delete(Void.class, uri("/subnets/%s", subnetId)).execute();
+		return deleteWithResponse(uri("/subnets/%s", subnetId)).execute();
 	}
 
 	@Override

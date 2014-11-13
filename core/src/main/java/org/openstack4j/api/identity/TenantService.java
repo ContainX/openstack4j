@@ -3,6 +3,7 @@ package org.openstack4j.api.identity;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.identity.Tenant;
 import org.openstack4j.model.identity.TenantUser;
 
@@ -48,8 +49,9 @@ public interface TenantService extends RestService {
 	 * Deletes the specified tenant by ID
 	 *
 	 * @param tenantId the tenant id
+	 * @return the action response
 	 */
-	void delete(String tenantId);
+	ActionResponse delete(String tenantId);
 	
 	/**
 	 * Updates the tenant (ID must be set within the inbound tenant)

@@ -3,6 +3,7 @@ package org.openstack4j.api.compute;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.SecGroupExtension;
 import org.openstack4j.model.compute.SecGroupExtension.Rule;
 
@@ -56,8 +57,9 @@ public interface ComputeSecurityGroupService extends RestService {
 	/**
 	 * Deletes the specified Security Group
 	 * @param securityGroupId the security group identifier
+	 * @return the action response
 	 */
-	void delete(String securityGroupId);
+	ActionResponse delete(String securityGroupId);
 	
 	/**
 	 * Creates a new Security Group Rule
@@ -69,7 +71,8 @@ public interface ComputeSecurityGroupService extends RestService {
 	/**
 	 * Deletes a Security Group Rule
 	 * @param ruleId the rule identifier
+	 * @return the action response
 	 */
-	void deleteRule(String ruleId);
+	ActionResponse deleteRule(String ruleId);
 	
 }

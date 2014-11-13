@@ -6,12 +6,18 @@ import java.util.List;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.identity.UserService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.User;
 import org.openstack4j.openstack.identity.domain.KeystoneUser;
 import org.openstack4j.openstack.identity.domain.KeystoneUser.Users;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
+/**
+ * Identity User based Operations
+ * 
+ * @author Jeremy Unruh
+ */
 public class UserServiceImpl extends BaseOpenStackService implements UserService {
 	
 	@Override
@@ -45,9 +51,9 @@ public class UserServiceImpl extends BaseOpenStackService implements UserService
 	}
 
 	@Override
-	public void delete(String userId) {
+	public ActionResponse delete(String userId) {
 		checkNotNull(userId);
-		delete(Void.class, uri("/users/%s", userId)).execute();
+		return deleteWithResponse(uri("/users/%s", userId)).execute();
 	}
 
 	@Override
@@ -63,10 +69,10 @@ public class UserServiceImpl extends BaseOpenStackService implements UserService
 	}
 
 	@Override
-	public void changePassword(String userId, String password) {
+	public ActionResponse changePassword(String userId, String password) {
 		checkNotNull(userId);
 		checkNotNull(password);
-		put(Void.class, uri("/users/%s/OS-KSADM/password", userId)).entity(KeystoneUser.builder().id(userId).password(password).build()).execute();
+		return put(ActionResponse.class, uri("/users/%s/OS-KSADM/password", userId)).entity(KeystoneUser.builder().id(userId).password(password).build()).execute();
 	}
 
 	@Override
@@ -91,12 +97,10 @@ public class UserServiceImpl extends BaseOpenStackService implements UserService
 		checkNotNull(user);
 		return Apis.getIdentityServices().roles().listRolesForUser(user.getId(), user.getTenantId());
 	}
-/*
- * API added by @ Sandeep Kumar Singh
- * 
- */
-  @Override
-  public User getByName(String userName) {
-    checkNotNull(userName);
-    return get(KeystoneUser.class, "/users").param("name", userName).execute();   }
+	
+	@Override
+	public User getByName(String userName) {
+	    checkNotNull(userName);
+	    return get(KeystoneUser.class, "/users").param("name", userName).execute();   
+	}
 }

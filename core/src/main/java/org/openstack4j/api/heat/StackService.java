@@ -3,6 +3,7 @@ package org.openstack4j.api.heat;
 import java.util.List;
 import java.util.Map;
 
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
 
@@ -67,8 +68,9 @@ public interface StackService {
 	 *            Name of {@link Stack}
 	 * @param stackId
 	 *            Id of {@link Stack}
+	 * @return the action response
 	 */
-	void delete(String stackName, String stackId);
+	ActionResponse delete(String stackName, String stackId);
 
 
 }
