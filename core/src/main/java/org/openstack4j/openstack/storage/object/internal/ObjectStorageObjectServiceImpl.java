@@ -13,6 +13,7 @@ import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.payloads.FilePayload;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.object.SwiftObject;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
 import org.openstack4j.model.storage.object.options.ObjectLocation;
@@ -86,17 +87,17 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     }
 
     @Override
-    public void delete(String containerName, String name) {
+    public ActionResponse delete(String containerName, String name) {
         checkNotNull(containerName);
         checkNotNull(name);
         
-       delete(ObjectLocation.create(containerName, name));
+       return delete(ObjectLocation.create(containerName, name));
     }
 
     @Override
-    public void delete(ObjectLocation location) {
+    public ActionResponse delete(ObjectLocation location) {
         checkNotNull(location);
-        delete(Void.class, location.getURI()).execute();
+        return deleteWithResponse(location.getURI()).execute();
     }
     
     /**

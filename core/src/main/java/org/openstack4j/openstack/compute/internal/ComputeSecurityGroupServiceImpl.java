@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.SecGroupExtension;
 import org.openstack4j.model.compute.SecGroupExtension.Rule;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension;
@@ -50,9 +51,9 @@ public class ComputeSecurityGroupServiceImpl extends BaseComputeServices impleme
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String securityGroupId) {
+	public ActionResponse delete(String securityGroupId) {
 		checkNotNull(securityGroupId);
-		delete(Void.class, uri("/os-security-groups/%s", securityGroupId)).execute();
+		return deleteWithResponse(uri("/os-security-groups/%s", securityGroupId)).execute();
 	}
 
 	/**
@@ -91,8 +92,8 @@ public class ComputeSecurityGroupServiceImpl extends BaseComputeServices impleme
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteRule(String ruleId) {
+	public ActionResponse deleteRule(String ruleId) {
 		checkNotNull(ruleId);
-		delete(Void.class, uri("/os-security-group-rules/%s", ruleId)).execute();
+		return deleteWithResponse(uri("/os-security-group-rules/%s", ruleId)).execute();
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Keypair;
 
 /**
@@ -33,8 +34,9 @@ public interface KeypairService extends RestService {
 	 * Deletes the keypair by name
 	 *
 	 * @param name the keypair name
+	 * @return the action response
 	 */
-	void delete(String name);
+	ActionResponse delete(String name);
 	
 	/**
 	 * Generates or imports a keypair

@@ -3,6 +3,7 @@ package org.openstack4j.api.storage;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
 
@@ -38,8 +39,9 @@ public interface BlockVolumeService extends RestService {
 	 * Deletes the specified volume
 	 * 
 	 * @param volumeId the volume identifier
+	 * @return the action response
 	 */
-	void delete(String volumeId);
+	ActionResponse delete(String volumeId);
 	
 	/**
 	 * Creates a new Block Storage Volume
@@ -54,6 +56,7 @@ public interface BlockVolumeService extends RestService {
 	 * @param volumeId the volume id
 	 * @param name the name to update (null indicates no name update)
 	 * @param description the description to update (null indicates no description update)
+	 * @return the action response
 	 */
-	void update(String volumeId, String name, String description);
+	ActionResponse update(String volumeId, String name, String description);
 }

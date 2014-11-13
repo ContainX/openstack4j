@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.identity.ServiceManagerService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.identity.Service;
 import org.openstack4j.model.identity.ServiceEndpoint;
 import org.openstack4j.openstack.identity.domain.KeystoneService;
@@ -54,9 +55,9 @@ public class ServiceManagerServiceImpl extends BaseOpenStackService implements S
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String serviceId) {
+	public ActionResponse delete(String serviceId) {
 		checkNotNull(serviceId);
-		delete(Void.class, uri("/OS-KSADM/services/%s", serviceId)).execute();
+		return deleteWithResponse(uri("/OS-KSADM/services/%s", serviceId)).execute();
 	}
 
 	/**
@@ -87,9 +88,9 @@ public class ServiceManagerServiceImpl extends BaseOpenStackService implements S
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteEndpoint(String endpointId) {
+	public ActionResponse deleteEndpoint(String endpointId) {
 		checkNotNull(endpointId);
-		delete(Void.class, uri("/endpoints/%s", endpointId)).execute();
+		return deleteWithResponse(uri("/endpoints/%s", endpointId)).execute();
 	}
 
 }

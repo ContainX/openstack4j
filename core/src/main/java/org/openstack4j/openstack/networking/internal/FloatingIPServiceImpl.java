@@ -1,9 +1,12 @@
 package org.openstack4j.openstack.networking.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 import java.util.Map;
+
 import org.openstack4j.api.networking.NetFloatingIPService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.NetFloatingIP;
 import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
 import org.openstack4j.openstack.networking.domain.NeutronFloatingIP.FloatingIPs;
@@ -50,9 +53,9 @@ public class FloatingIPServiceImpl extends BaseNetworkingServices implements Net
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String id) {
+	public ActionResponse delete(String id) {
 		checkNotNull(id);
-		delete(Void.class, uri("/floatingips/%s", id)).execute();
+		return deleteWithResponse(uri("/floatingips/%s", id)).execute();
 	}
 
 	/**

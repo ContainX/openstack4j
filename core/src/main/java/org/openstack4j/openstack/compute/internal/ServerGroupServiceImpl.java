@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.compute.ServerGroupService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.ServerGroup;
 import org.openstack4j.openstack.compute.domain.NovaServerGroup;
 import org.openstack4j.openstack.compute.domain.NovaServerGroup.ServerGroups;
@@ -23,9 +24,9 @@ public class ServerGroupServiceImpl extends BaseComputeServices implements Serve
 	}
 
 	@Override
-	public void delete(String id) {
+	public ActionResponse delete(String id) {
 		checkNotNull(id);
-		delete(Void.class, uri("/os-server-groups/%s", id)).execute();
+		return deleteWithResponse(uri("/os-server-groups/%s", id)).execute();
 	}
 
 	@Override

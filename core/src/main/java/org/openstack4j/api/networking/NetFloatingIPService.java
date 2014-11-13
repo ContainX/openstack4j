@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.common.RestService;
-
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.NetFloatingIP;
 
 
@@ -43,8 +43,9 @@ public interface NetFloatingIPService extends RestService {
    * Deletes NetFloatingIP by id.
    *
    * @param id the id
+   * @return the action response
    */
-  void delete(String id);
+  ActionResponse delete(String id);
   
   
   /**

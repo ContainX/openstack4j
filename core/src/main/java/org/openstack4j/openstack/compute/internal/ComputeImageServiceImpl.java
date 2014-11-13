@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.compute.ComputeImageService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.openstack.compute.domain.MetaDataWrapper;
 import org.openstack4j.openstack.compute.domain.NovaImage;
@@ -48,9 +49,9 @@ public class ComputeImageServiceImpl extends BaseComputeServices implements Comp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String imageId) {
+	public ActionResponse delete(String imageId) {
 		checkNotNull(imageId);
-		delete(Void.class, uri("/images/%s", imageId)).execute();
+		return deleteWithResponse(uri("/images/%s", imageId)).execute();
 	}
 
 	/**
@@ -67,10 +68,15 @@ public class ComputeImageServiceImpl extends BaseComputeServices implements Comp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteMetaData(String imageId, String... keys) {
+	public ActionResponse deleteMetaData(String imageId, String... keys) {
 		checkNotNull(imageId);
 		for (String k : keys)
-			delete(Void.class, uri("/images/%s/metadata/%s", imageId, k)).execute();
+		{
+			ActionResponse resp  = deleteWithResponse(uri("/images/%s/metadata/%s", imageId, k)).execute();
+			if (!resp.isSuccess())
+			    return resp;
+		}
+		return ActionResponse.actionSuccess();
 	}
 
 	/**

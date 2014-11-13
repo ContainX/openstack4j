@@ -2,8 +2,8 @@ package org.openstack4j.api.compute;
 
 import java.util.List;
 
-
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.ServerGroup;
 
 public interface ServerGroupService extends RestService {
@@ -27,8 +27,9 @@ public interface ServerGroupService extends RestService {
 	 * Deletes the serverGroup by id
 	 *
 	 * @param name the serverGroup id
+	 * @return the action response
 	 */
-	void delete(String id);
+	ActionResponse delete(String id);
 	
 	/**
 	 * Generates or imports a serverGroup

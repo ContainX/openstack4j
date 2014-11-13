@@ -3,6 +3,7 @@ package org.openstack4j.api.networking;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.Network;
 
 /**
@@ -31,8 +32,9 @@ public interface NetworkService extends RestService {
 	 * Deletes a specified network and its associated resources
 	 *  
 	 * @param networkId the network identifier
+	 * @return the action response
 	 */
-	void delete(String networkId);
+	ActionResponse delete(String networkId);
 
 	/**
 	 * Creates a new Network

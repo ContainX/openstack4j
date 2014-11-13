@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Flavor;
 
 /**
@@ -32,8 +33,9 @@ public interface FlavorService extends RestService {
 	 * Deletes a Flavor by it's identifier
 	 * 
 	 * @param flavorId the flavor identifier
+	 * @return the action response
 	 */
-	void delete(String flavorId);
+	ActionResponse delete(String flavorId);
 	
 	/**
 	 * Creates a new Flavor

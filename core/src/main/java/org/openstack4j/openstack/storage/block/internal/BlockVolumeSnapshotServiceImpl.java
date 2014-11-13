@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.block.VolumeSnapshot;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot.VolumeSnapshots;
@@ -38,22 +39,23 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String snapshotId) {
+	public ActionResponse delete(String snapshotId) {
 		checkNotNull(snapshotId);
-		delete(Void.class, uri("/snapshots/%s", snapshotId)).execute();
+		return deleteWithResponse(uri("/snapshots/%s", snapshotId)).execute();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(String snapshotId, String name, String description) {
+	public ActionResponse update(String snapshotId, String name, String description) {
 		checkNotNull(snapshotId);
-		if (name == null && description == null) return;
+		if (name == null && description == null) 
+		    return ActionResponse.actionFailed("Both Name and Description are required");
 		
-		put(Void.class, uri("/snapshots/%s", snapshotId))
-		   .entity(Builders.volumeSnapshot().name(name).description(description).build())
-		   .execute();
+		return put(ActionResponse.class, uri("/snapshots/%s", snapshotId))
+    		   .entity(Builders.volumeSnapshot().name(name).description(description).build())
+    		   .execute();
 	}
 
 	/**

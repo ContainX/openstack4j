@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.networking.PortService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.Port;
 import org.openstack4j.openstack.networking.domain.NeutronPort;
 import org.openstack4j.openstack.networking.domain.NeutronPort.Ports;
@@ -37,9 +38,9 @@ public class PortServiceImpl extends BaseNetworkingServices implements PortServi
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String portId) {
+	public ActionResponse delete(String portId) {
 		checkNotNull(portId);
-		delete(Void.class, uri("/ports/%s", portId)).execute();
+		return deleteWithResponse(uri("/ports/%s", portId)).execute();
 	}
 
 	/**

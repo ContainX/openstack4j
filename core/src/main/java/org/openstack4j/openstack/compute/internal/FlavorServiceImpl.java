@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.compute.FlavorService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.openstack.compute.domain.ExtraSpecsWrapper;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
@@ -40,9 +41,9 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void delete(String flavorId) {
+	public ActionResponse delete(String flavorId) {
   	checkNotNull(flavorId);
-  	delete(Void.class, uri("/flavors/%s", flavorId)).execute();
+  	return deleteWithResponse(uri("/flavors/%s", flavorId)).execute();
 	}
 
 	/**

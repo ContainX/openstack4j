@@ -3,6 +3,7 @@ package org.openstack4j.api.identity;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.identity.Service;
 import org.openstack4j.model.identity.ServiceEndpoint;
 
@@ -42,8 +43,9 @@ public interface ServiceManagerService extends RestService {
 	 * Deletes a Service based on it's id
 	 *
 	 * @param serviceId the service id
+	 * @return the action response
 	 */
-	void delete(String serviceId);
+	ActionResponse delete(String serviceId);
 	
 	/**
 	 * Queries for service related Endpoints (endpoints mapped against services)
@@ -68,7 +70,8 @@ public interface ServiceManagerService extends RestService {
 	 * Deletes an Endpoint
 	 * 
 	 * @param endpointId the endpoint identifier
+	 * @return the action response
 	 */
-	void deleteEndpoint(String endpointId);
+	ActionResponse deleteEndpoint(String endpointId);
 	
 }

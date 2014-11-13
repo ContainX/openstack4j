@@ -3,6 +3,7 @@ package org.openstack4j.api.networking;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.Subnet;
 
 /**
@@ -31,8 +32,9 @@ public interface SubnetService extends RestService {
 	 * Delete a Subnet by ID
 	 * 
 	 * @param subnetId the subnet identifier to delete
+	 * @return the action response
 	 */
-	void delete(String subnetId);
+	ActionResponse delete(String subnetId);
 	
 	/**
 	 * Creates a new Subnet

@@ -3,6 +3,7 @@ package org.openstack4j.api.networking;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.AttachInterfaceType;
 import org.openstack4j.model.network.Router;
 import org.openstack4j.model.network.RouterInterface;
@@ -32,9 +33,11 @@ public interface RouterService extends RestService {
 	
 	/**
 	 * Deletes the specified Router by ID
+	 * 
 	 * @param routerId the router identifier to delete
+	 * @return the action response
 	 */
-	void delete(String routerId);
+	ActionResponse delete(String routerId);
 
 	/**
 	 * Creates a basic router with minimal params

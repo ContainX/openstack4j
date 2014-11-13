@@ -3,6 +3,7 @@ package org.openstack4j.openstack.heat.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.openstack4j.api.heat.SoftwareConfigService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.heat.SoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 
@@ -37,9 +38,9 @@ public class SoftwareConfigServiceImpl extends BaseHeatServices implements Softw
      * {@inheritDoc}
      */
     @Override
-    public void delete(String configId) {
+    public ActionResponse delete(String configId) {
         checkNotNull(configId);
-        delete(Void.class, uri(BASE_URI+"/%s", configId)).execute();
+        return deleteWithResponse(uri(BASE_URI+"/%s", configId)).execute();
     }
 
 }
