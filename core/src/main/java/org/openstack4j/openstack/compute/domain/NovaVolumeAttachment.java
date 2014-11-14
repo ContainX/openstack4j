@@ -2,6 +2,7 @@ package org.openstack4j.openstack.compute.domain;
 
 import org.openstack4j.model.compute.VolumeAttachment;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
@@ -12,6 +13,7 @@ import com.google.common.base.Objects;
  * @author Octopus Zhang
  */
 @JsonRootName("volumeAttachment")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class NovaVolumeAttachment implements VolumeAttachment {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +29,17 @@ public class NovaVolumeAttachment implements VolumeAttachment {
 
 	@JsonProperty
 	private String volumeId;
+	
+	public NovaVolumeAttachment() {
+	}
+	
+	private NovaVolumeAttachment(String volumeId) {
+	    this.volumeId = volumeId;
+	}
+	
+	public static NovaVolumeAttachment create(String volumeId) {
+	    return new NovaVolumeAttachment(volumeId);
+	}
 
 	@Override
 	public String getDevice() {
