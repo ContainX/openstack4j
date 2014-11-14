@@ -212,7 +212,7 @@ public interface ServerService {
      * @author octopus zhang
      * @return volumeAttachment or null if not applicable
      */
-    VolumeAttachment attachVolume(String serverId, String volumeId);
+    void attachVolume(String serverId, String volumeId);
     
     /**
      * Changes the admin/root password on the server
