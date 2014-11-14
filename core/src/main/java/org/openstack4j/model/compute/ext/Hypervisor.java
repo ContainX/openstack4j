@@ -1,5 +1,7 @@
 package org.openstack4j.model.compute.ext;
 
+import java.util.List;
+
 import org.openstack4j.model.ModelEntity;
 
 /**
@@ -128,6 +130,14 @@ public interface Hypervisor extends ModelEntity {
 	
 	
 	/**
+	 * Gets the cpu info.
+	 * 
+	 * @return CPUInfo
+	 */
+	CPUInfo getCPUInfo();
+	
+	
+	/**
 	 * The Hypervisor Services Detail
 	 * 
 	 * @author Jeremy Unruh
@@ -147,6 +157,54 @@ public interface Hypervisor extends ModelEntity {
 		 * @return the id
 		 */
 		String getId();
+	}
+	
+	public interface CPUInfo extends ModelEntity {
+	  
+	  /**
+	   * @return cpu vendor
+	   */
+	  String getVendor();
+	  
+	  /**
+	   * @return cpu model
+	   */
+	  String getModel();
+	  
+	  /**
+	   * @return chipset architecture
+	   */
+	  String getArch();
+	  
+	  /**
+	   * @return cpu feature set
+	   */
+	  List<String> getFeatures();
+	  
+	  
+	  /**
+	   * @return cpu topology
+	   */
+	  CPUTopology getTopology();
+	}
+	
+	public interface CPUTopology extends ModelEntity {
+	  
+	  /**
+	   * @return core count
+	   */
+	  int getCores();
+	  
+	  
+	  /**
+	   * @return thread count
+	   */
+	  int getThreads();
+	  
+	  /**
+	   * @return socket count
+	   */
+	  int getSockets();
 	}
 	
 }

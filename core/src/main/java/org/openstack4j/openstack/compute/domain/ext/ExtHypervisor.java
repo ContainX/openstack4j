@@ -8,6 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import com.google.gson.Gson;
 
 public class ExtHypervisor implements Hypervisor {
 
@@ -46,6 +47,13 @@ public class ExtHypervisor implements Hypervisor {
 	private int localMemoryUsed;
 	@JsonProperty("service")
 	private HypervisorService service;
+	
+	@JsonProperty("cpu_info")
+	//NOTE: this is a hack-around b/c the json returned from the call has quotes starting the value for cpu_info, making it a simple string instead of a type.
+	private String cpu_info;
+	
+	private HypervisorCPUInfo cpuInfo;
+	
 	
 	@Override
 	public String getId() {
@@ -131,6 +139,15 @@ public class ExtHypervisor implements Hypervisor {
 	public String getHostIP() {
 		return hostIP;
 	}
+	
+	@Override 
+	public CPUInfo getCPUInfo() {
+	  if (cpuInfo == null) {
+	    cpuInfo = HypervisorCPUInfo.getInstance(cpu_info);
+	  }
+	  
+	  return cpuInfo;
+	}
 
 	
 	@Override
@@ -141,6 +158,7 @@ public class ExtHypervisor implements Hypervisor {
 				     .add("vcpus", virtualCPU).add("usedVcpu", virtualUsedCPU).add("localDisk", localDisk).add("localDiskUsed", localDiskUsed)
 				     .add("localMemory", localMemory).add("localMemoryUsed", localMemoryUsed).add("currentWorkload",currentWorkload)
 				     .add("leastDiskAvail", leastDiskAvailable).add("running_vms", runningVM).add("service", service)
+				     .add("cpu_info", getCPUInfo())
 				     .toString();
 	}
 
@@ -165,6 +183,92 @@ public class ExtHypervisor implements Hypervisor {
 		public String toString() {
 			return Objects.toStringHelper(this).omitNullValues().add("id", id).add("host", host).toString();
 		}
+	}
+	
+	static class HypervisorCPUInfo implements CPUInfo {
+	  
+	  private static final long serialVersionUID = 1L;
+	  
+	  private String vendor;
+	  private String model;
+	  private String arch;
+	  private List<String> features;
+	  private HypervisorCPUTopology topology;
+	  
+	  static HypervisorCPUInfo getInstance(String json) {
+      // This is a hack because the cpu_info value returned from the api is enclosed in quotes "{...}" instead of {...}
+      Gson gson = new Gson();
+      HypervisorCPUInfo instance = gson.fromJson(json, HypervisorCPUInfo.class);
+      return instance;
+    }
+
+    @Override
+    public String getVendor() {
+      return vendor;
+    }
+
+    @Override
+    public String getModel() {
+      return model;
+    }
+
+    @Override
+    public String getArch() {
+      return arch;
+    }
+
+    @Override
+    public List<String> getFeatures() {
+      return features;
+    }
+
+    @Override
+    public CPUTopology getTopology() {
+      return topology;
+    }
+    
+    @Override
+    public String toString() {
+      return Objects.toStringHelper(this).omitNullValues().add("vendor", vendor)
+                                                          .add("model", model)
+                                                          .add("arch",  arch)
+                                                          .add("features", features)
+                                                          .add("topology", topology)
+                                                          .toString();
+    }
+	}
+	
+	@JsonRootName("topology")
+	static class HypervisorCPUTopology implements CPUTopology {
+    
+    private static final long serialVersionUID = 1L;
+    
+    int cores;
+    int threads;
+    int sockets;
+
+    @Override
+    public int getCores() {
+      return cores;
+    }
+
+    @Override
+    public int getThreads() {
+      return threads;
+    }
+
+    @Override
+    public int getSockets() {
+      return sockets;
+    }
+    
+    @Override
+    public String toString() {
+      return Objects.toStringHelper(this).omitNullValues().add("cores", cores)
+                                                          .add("threads",  threads)
+                                                          .add("sockets", sockets)
+                                                          .toString();
+    }
 	}
 	
   public static class Hypervisors extends ListResult<ExtHypervisor> {
