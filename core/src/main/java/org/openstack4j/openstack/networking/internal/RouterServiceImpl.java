@@ -10,6 +10,7 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.AttachInterfaceType;
 import org.openstack4j.model.network.Router;
 import org.openstack4j.model.network.RouterInterface;
+import org.openstack4j.openstack.networking.domain.AddRouterInterfaceAction;
 import org.openstack4j.openstack.networking.domain.NeutronRouter;
 import org.openstack4j.openstack.networking.domain.NeutronRouter.Routers;
 import org.openstack4j.openstack.networking.domain.NeutronRouterInterface;
@@ -89,7 +90,8 @@ public class RouterServiceImpl extends BaseNetworkingServices implements RouterS
 	  checkNotNull(type);
 	  checkNotNull(portOrSubnetId);
 		return put(NeutronRouterInterface.class, uri("/routers/%s/add_router_interface", routerId))
-				     .json(String.format("{\"%s\": \"%s\" }", type == AttachInterfaceType.PORT ? "port_id" : "subnet_id", portOrSubnetId)).execute();
+		          .entity(AddRouterInterfaceAction.create(type, portOrSubnetId))
+				  .execute();
 	}
 
 	@Override

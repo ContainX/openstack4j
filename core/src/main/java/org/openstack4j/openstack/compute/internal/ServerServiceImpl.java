@@ -272,27 +272,6 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         return get(HashMap.class, uri("/servers/%s/diagnostics", serverId)).execute();
     }
     
-    private ActionResponse invokeAction(String serverId, ServerAction action)  {
-        return ToActionResponseFunction.INSTANCE.apply(invokeActionWithResponse(serverId, action), action.getClass().getName());
-    }
-    
-    private HttpResponse invokeActionWithResponse(String serverId, ServerAction action)  {
-        HttpResponse response  = post(Void.class, uri("/servers/%s/action", serverId))
-                                    .entity(action)
-                                    .executeWithResponse();
-        
-        return response;
-    }
-
-//    private ActionResponse invokeAction(String serverId, String action, String innerJson) {
-//        HttpResponse response = executeActionWithResponse(serverId, action, innerJson);
-//        return ToActionResponseFunction.INSTANCE.apply(response, action);
-//    }
-
-//    private HttpResponse executeActionWithResponse(String serverId, String action, String innerJson) {
-//        return post(Void.class, uri("/servers/%s/action", serverId)).json(String.format("{ \"%s\": %s }", action, (innerJson != null) ? innerJson : "null")).executeWithResponse();
-//    }
-
     /**
      * {@inheritDoc}
      */
