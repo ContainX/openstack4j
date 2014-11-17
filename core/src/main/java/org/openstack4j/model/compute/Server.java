@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.common.IdEntity;
 import org.openstack4j.model.common.Link;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -251,7 +250,7 @@ public interface Server extends ModelEntity {
 	/**
 	 * @return the OS extended volumes attached
 	 */
-	List<? extends IdEntity> getOsExtendedVolumesAttached();
+	List<String> getOsExtendedVolumesAttached();
 
 	/**
 	 * @return the UUID for this server
