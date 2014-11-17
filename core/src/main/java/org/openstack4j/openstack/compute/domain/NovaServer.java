@@ -1,13 +1,14 @@
 package org.openstack4j.openstack.compute.domain;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.model.common.IdEntity;
 import org.openstack4j.model.common.Link;
+import org.openstack4j.model.common.functions.IdEntityToString;
 import org.openstack4j.model.compute.Addresses;
 import org.openstack4j.model.compute.Fault;
 import org.openstack4j.model.compute.Flavor;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 
 @JsonRootName("server")
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -250,9 +252,13 @@ public class NovaServer implements Server {
 		return terminatedAt;
 	}
 
+	@SuppressWarnings("unchecked")
+    @JsonIgnore
 	@Override
-	public List<? extends IdEntity> getOsExtendedVolumesAttached() {
-		return osExtendedVolumesAttached;
+	public List<String> getOsExtendedVolumesAttached() {
+		return (List<String>) ((osExtendedVolumesAttached == null) 
+		                      ? Collections.emptyList() 
+		                      : Lists.transform(osExtendedVolumesAttached, IdEntityToString.INSTANCE));
 	}
 
 	@Override
