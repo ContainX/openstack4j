@@ -3,9 +3,7 @@ package org.openstack4j.model.compute;
 import java.util.List;
 import java.util.Map;
 
-import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.compute.builder.FlavorBuilder;
 
 /**
  * An OpenStack ServerGroup which is a group that the server in it must be Located on different hosts
@@ -38,6 +36,4 @@ public interface ServerGroup extends ModelEntity {
 	 * @return the polices of this group
 	 */
 	List<String> getPolicies();
-	
-
 }
