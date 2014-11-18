@@ -22,69 +22,69 @@ import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
  */
 public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements ComputeFloatingIPService {
 
-  /**
-   * {@inheritDoc}
-   */
-	@Override
-  public List<? extends FloatingIP> list() {
-    return get(NovaFloatingIPs.class, uri("/os-floating-ips")).execute().getList();
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends FloatingIP> list() {
+        return get(NovaFloatingIPs.class, uri("/os-floating-ips")).execute().getList();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<String> getPoolNames() {
-		return get(NovaFloatingIPPools.class, uri("/os-floating-ip-pools")).execute().getList();
-	}
-	
-	/**
-   * {@inheritDoc}
-   */
-  @Override
-  public FloatingIP allocateIP(String pool) {
-    return post(NovaFloatingIP.class, uri("/os-floating-ips")).entity(MapEntity.create("pool", pool)).execute();
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getPoolNames() {
+        return get(NovaFloatingIPPools.class, uri("/os-floating-ip-pools")).execute().getList();
+    }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ActionResponse deallocateIP(String id) {
-    checkNotNull(id);
-    return ToActionResponseFunction.INSTANCE.apply(
-               delete(Void.class, uri("/os-floating-ips/%s", id)).executeWithResponse()
-           );
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FloatingIP allocateIP(String pool) {
+        return post(NovaFloatingIP.class, uri("/os-floating-ips")).entity(MapEntity.create("pool", pool)).execute();
+    }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ActionResponse addFloatingIP(Server server, String fixedIpAddress, String ipAddress) {
-    checkNotNull(server);
-    checkNotNull(ipAddress);
-    
-    return invokeAction(server.getId(), FloatingIpActions.Add.create(ipAddress, fixedIpAddress));
-  }
-  
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-	public ActionResponse addFloatingIP(Server server, String ipAddress) {
-  	  return addFloatingIP(server, ipAddress, null);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse deallocateIP(String id) {
+        checkNotNull(id);
+        return ToActionResponseFunction.INSTANCE.apply(
+                delete(Void.class, uri("/os-floating-ips/%s", id)).executeWithResponse()
+                );
+    }
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ActionResponse removeFloatingIP(Server server, String ipAddress) {
-    checkNotNull(server);
-    checkNotNull(ipAddress);
-    
-    return invokeAction(server.getId(), FloatingIpActions.Remove.create(ipAddress));
-  }
-  
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse addFloatingIP(Server server, String fixedIpAddress, String ipAddress) {
+        checkNotNull(server);
+        checkNotNull(ipAddress);
+
+        return invokeAction(server.getId(), FloatingIpActions.Add.create(ipAddress, fixedIpAddress));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse addFloatingIP(Server server, String ipAddress) {
+        return addFloatingIP(server, null,  ipAddress);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse removeFloatingIP(Server server, String ipAddress) {
+        checkNotNull(server);
+        checkNotNull(ipAddress);
+
+        return invokeAction(server.getId(), FloatingIpActions.Remove.create(ipAddress));
+    }
+
 }
