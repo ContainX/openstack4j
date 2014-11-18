@@ -1,5 +1,6 @@
 package org.openstack4j.connectors.jersey2;
 
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -11,6 +12,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.glassfish.jersey.client.ClientProperties;
+import org.glassfish.jersey.client.RequestEntityProcessing;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpMethod;
@@ -47,13 +50,13 @@ public final class HttpCommand<R> {
     private void initialize() {
         Client client = ClientFactory.create(request.getConfig());
         WebTarget target = client.target(request.getEndpoint()).path(request.getPath());
-
+        
         if (Boolean.getBoolean(HttpLoggingFilter.class.getName()))
             target.register(new LoggingFilter(Logger.getLogger("os"), 10000));
 
         target = populateQueryParams(target, request);
-
         invocation = target.request(MediaType.APPLICATION_JSON);
+        
         populateHeaders(invocation,  request);
 
         entity = (request.getEntity() == null) ? null : Entity.entity(request.getEntity(), request.getContentType());
@@ -68,6 +71,12 @@ public final class HttpCommand<R> {
         Response response = null;
 
         if (hasEntity()) {
+            if (isInputStreamEntity())
+            {
+                // Issue #20 - Out of Memory in Jersey for large streams
+                invocation.property(ClientProperties.CHUNKED_ENCODING_SIZE, 1024);
+                invocation.property(ClientProperties.REQUEST_ENTITY_PROCESSING, RequestEntityProcessing.CHUNKED);
+            }
             response = invocation.method(request.getMethod().name(), getEntity());
         }
         else if(HttpMethod.PUT == request.getMethod() || request.hasJson()) {
@@ -79,6 +88,10 @@ public final class HttpCommand<R> {
         }
         
         return response;
+    }
+    
+    private boolean isInputStreamEntity() {
+        return (hasEntity() && InputStream.class.isAssignableFrom(entity.getEntity().getClass()));
     }
 
     /**
