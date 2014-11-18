@@ -9,6 +9,7 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.ServerUpdateOptions;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.VNCConsole.Type;
@@ -106,7 +107,6 @@ public interface ServerService {
      * @return the action response
      */
     ActionResponse reboot(String serverId, RebootType type);
-    
     
     /**
      * Rebuilds the specified server
@@ -295,4 +295,13 @@ public interface ServerService {
      * @return the action response
      */
     ActionResponse deleteMetadataItem(String serverId, String key);
+    
+    /**
+     * Updates an existing Server instance
+     * 
+     * @param serverId the server identifier
+     * @param options the options used to update
+     * @return the updated server
+     */
+    Server update(String serverId, ServerUpdateOptions options);
 }

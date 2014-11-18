@@ -15,6 +15,7 @@ import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.ServerUpdateOptions;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
@@ -27,6 +28,7 @@ import org.openstack4j.openstack.compute.domain.ConsoleOutput;
 import org.openstack4j.openstack.compute.domain.NovaServer;
 import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.compute.domain.NovaServerUpdate;
 import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
 import org.openstack4j.openstack.compute.domain.actions.BackupAction;
@@ -397,5 +399,13 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
             e.printStackTrace();
         }
         return ms;
+    }
+
+    @Override
+    public Server update(String serverId, ServerUpdateOptions options) {
+        checkNotNull(serverId);
+        checkNotNull(options);
+
+        return put(NovaServer.class, uri("/servers/%s", serverId)).entity(NovaServerUpdate.fromOptions(options)).execute();
     }
 }
