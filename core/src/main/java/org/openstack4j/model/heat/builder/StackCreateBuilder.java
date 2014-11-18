@@ -7,8 +7,8 @@ import org.openstack4j.model.heat.StackCreate;
 
 /**
  * This interface describes a builder for {@link StackCreate} objects
+ * 
  * @author Matthias Reisser
- *
  */
 public interface StackCreateBuilder extends Buildable.Builder<StackCreateBuilder, StackCreate> {
 	
@@ -20,6 +20,13 @@ public interface StackCreateBuilder extends Buildable.Builder<StackCreateBuilder
 	 * @return StackCreateBuilder
 	 */
 	StackCreateBuilder template(String template);
+	
+	/**
+     * Sets the template URL
+     * @param template the template URL
+     * @return StackCreateBuilder
+     */
+    StackCreateBuilder templateURL(String templateURL);
 	
 	/**
 	 * Sets the parameters which are passed to the server. It might contain Information about flavor, image, etc.

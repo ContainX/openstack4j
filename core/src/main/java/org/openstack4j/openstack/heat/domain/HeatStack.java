@@ -135,5 +135,4 @@ public class HeatStack implements Stack {
 			return list;
 		}
 	}
-
 }

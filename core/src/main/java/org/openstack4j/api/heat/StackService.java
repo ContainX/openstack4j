@@ -6,6 +6,7 @@ import java.util.Map;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
+import org.openstack4j.model.heat.StackUpdate;
 
 /**
  * This interface defines all methods for the manipulation of stacks
@@ -24,6 +25,16 @@ public interface StackService {
 	 * @return new {@link Stack} as returned from the server
 	 */
 	Stack create(StackCreate newStack);
+	
+	/**
+     * Updates an existing Stack
+     * 
+     * @param stackName the stack name
+     * @param stackId the specific stack identifier
+     * @param stackUpdate the stack update options
+     * @return the action response
+     */
+	ActionResponse update(String stackName, String stackId, StackUpdate stackUpdate);
 
 	/**
 	 * <code> POST /v1/{tenant_id}/stacks </code> <br\>
