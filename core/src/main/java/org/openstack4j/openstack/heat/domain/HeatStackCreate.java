@@ -23,6 +23,8 @@ public class HeatStackCreate implements StackCreate {
 	private String name;
 	@JsonProperty("template")
 	private String template;
+	@JsonProperty("template_url")
+	private String templateURL;
 	@JsonProperty("parameters")
 	private Map<String, String> parameters;
 	@JsonProperty("timeout_mins")
@@ -54,13 +56,11 @@ public class HeatStackCreate implements StackCreate {
 
 	@Override
 	public Map<String, String> getParameters() {
-
 		return parameters;
 	}
 
 	@Override
 	public boolean getDisableRollback() {
-
 		return disableRollback;
 	}
 
@@ -69,6 +69,10 @@ public class HeatStackCreate implements StackCreate {
 		return template;
 	}
 
+	public String getTempateURL() {
+	    return templateURL;
+	}
+	
 	/**
 	 * A Builder to create a HeatStack. Use {@link #build()} to receive the
 	 * {@link StackCreate} object.
@@ -139,6 +143,12 @@ public class HeatStackCreate implements StackCreate {
         @Override
         public StackCreateBuilder template(String template) {
            model.template = template;
+           return this;
+        }
+        
+        @Override
+        public StackCreateBuilder templateURL(String templateURL) {
+           model.templateURL = templateURL;
            return this;
         }
 

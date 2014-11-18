@@ -10,6 +10,8 @@ import org.openstack4j.api.heat.StackService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
+import org.openstack4j.model.heat.StackUpdate;
+import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.heat.domain.HeatStack;
 import org.openstack4j.openstack.heat.domain.HeatStack.Stacks;
 
@@ -58,5 +60,17 @@ public class StackServiceImpl extends BaseHeatServices implements StackService {
         checkNotNull(stackName);
         checkNotNull(stackId);
         return get(HeatStack.class, uri("/stacks/%s/%s", stackName, stackId)).execute();
+    }
+
+    @Override
+    public ActionResponse update(String stackName, String stackId, StackUpdate stackUpdate) {
+        checkNotNull(stackName);
+        checkNotNull(stackId);
+        checkNotNull(stackUpdate);
+
+        return ToActionResponseFunction.INSTANCE
+                .apply(put(Void.class, uri("/stacks/%s/%s", stackName, stackId))
+                        .entity(stackUpdate)
+                        .executeWithResponse());
     }
 }
