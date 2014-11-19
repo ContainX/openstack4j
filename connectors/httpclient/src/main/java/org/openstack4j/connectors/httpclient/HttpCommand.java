@@ -22,7 +22,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.openstack4j.api.exceptions.ConnectionException;
 import org.openstack4j.core.transport.Config;
-import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
@@ -125,7 +124,7 @@ public final class HttpCommand<R> {
                     .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity()))
                     .setContentEncoding("UTF-8");
         }
-        else if(HttpMethod.PUT == request.getMethod() || request.hasJson()) {
+        else if(request.hasJson()) {
             builder = EntityBuilder.create()
                     .setContentType(ContentType.APPLICATION_JSON)
                     .setText(request.getJson())
