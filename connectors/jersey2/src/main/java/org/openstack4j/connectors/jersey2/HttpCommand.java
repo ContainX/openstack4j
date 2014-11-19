@@ -16,7 +16,6 @@ import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.RequestEntityProcessing;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.openstack4j.core.transport.ClientConstants;
-import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.internal.HttpLoggingFilter;
 
@@ -79,7 +78,7 @@ public final class HttpCommand<R> {
             }
             response = invocation.method(request.getMethod().name(), getEntity());
         }
-        else if(HttpMethod.PUT == request.getMethod() || request.hasJson()) {
+        else if(request.hasJson()) {
             response = invocation.method(request.getMethod().name(), Entity.entity(request.getJson(), ClientConstants.CONTENT_TYPE_JSON));
         }
         else

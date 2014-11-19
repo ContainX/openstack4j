@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.Config;
-import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
@@ -92,7 +91,7 @@ public final class HttpCommand<R> {
             String content = ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity());
             body = RequestBody.create(MediaType.parse(request.getContentType()), content);
         }
-        else if(HttpMethod.PUT == request.getMethod() || request.hasJson()) {
+        else if(request.hasJson()) {
             body = RequestBody.create(MediaType.parse(ClientConstants.CONTENT_TYPE_JSON), request.getJson());
         }
         

@@ -9,7 +9,6 @@ import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.openstack4j.connectors.resteasy.executors.ApacheHttpClientExecutor;
 import org.openstack4j.core.transport.ClientConstants;
-import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 
@@ -58,7 +57,7 @@ public final class HttpCommand<R> {
         if (request.getEntity() != null) {
             client.body(request.getContentType(), request.getEntity());
         }
-        else if(HttpMethod.PUT == request.getMethod() || request.hasJson()) {
+        else if(request.hasJson()) {
             client.body(ClientConstants.CONTENT_TYPE_JSON, request.getJson());
         }
         ClientResponse<R> response = client.httpMethod(request.getMethod().name(), request.getReturnType());

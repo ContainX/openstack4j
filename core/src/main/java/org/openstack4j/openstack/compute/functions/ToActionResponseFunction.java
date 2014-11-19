@@ -26,7 +26,7 @@ public class ToActionResponseFunction implements Function<HttpResponse, ActionRe
     public ActionResponse apply(HttpResponse response, String action) {
         if (response.getStatus() == 409)
         {
-            LOG.error(response.readEntity(String.class));
+            LOG.error(response.getStatus() + "," + response.getStatusMessage());
             if (action == null)
                 return ActionResponse.actionFailed("Instance currently is in build state");
             return ActionResponse.actionFailed(String.format("Cannot '%s' while instance in in state of %s", action, action));
