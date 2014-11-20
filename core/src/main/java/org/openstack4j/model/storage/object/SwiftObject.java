@@ -17,7 +17,7 @@ public interface SwiftObject extends ModelEntity {
      * 
      * @return the MD5 checksum
      */
-    String getMD5Checksum();
+    String getETag();
     
     /**
      * The date and time when the object was last modified.

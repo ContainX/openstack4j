@@ -1,5 +1,7 @@
 package org.openstack4j.model.storage.object.options;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Holds location information for an Object (Container and Object name including path)
  * 
@@ -13,6 +15,9 @@ public final class ObjectLocation {
     
     private ObjectLocation(String containerName, String objectName) {
         super();
+        checkNotNull(containerName, "ContainerName cannot be null");
+        checkNotNull(objectName, "ObjectName cannot be null");
+
         this.containerName = containerName;
         this.objectName = objectName;
     }
