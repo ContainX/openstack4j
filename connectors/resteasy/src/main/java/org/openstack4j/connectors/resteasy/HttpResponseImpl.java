@@ -9,7 +9,6 @@ import javax.ws.rs.core.MultivaluedMap;
 import org.jboss.resteasy.client.ClientResponse;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.model.compute.ActionResponse;
 
 import com.google.common.base.Function;
 
@@ -58,12 +57,9 @@ public class HttpResponseImpl implements HttpResponse {
      * @param parser an optional parser which will handle the HttpResponse and return the corresponding return type.  Error codes are handled and thrown prior to the parser being called
      * @return the entity
      */
-    @SuppressWarnings("unchecked")
     @Override
     public <T> T getEntity(Class<T> returnType, Function<HttpResponse, T> parser) {
-        if (returnType == ActionResponse.class && response.getStatus() > 400)
-            return (T) createActionResponse();
-       return HttpEntityHandler.handle(this, returnType, parser);
+       return HttpEntityHandler.handle(this, returnType, parser, Boolean.TRUE);
     }
 
     /**
@@ -116,16 +112,5 @@ public class HttpResponseImpl implements HttpResponse {
     @Override
     public <T> T readEntity(Class<T> typeToReadAs) {
         return response.getEntity(typeToReadAs);
-    }
-    
-    @SuppressWarnings("unchecked")
-    private ActionResponse createActionResponse() {
-        Map<String, Object> ar = response.getEntity(HashMap.class);
-        if (ar != null && ar.containsKey("error")) {
-            Map<String, String> error = (Map<String, String>) ar.get("error");
-            if (error.containsKey("message"))
-                return ActionResponse.actionFailed(error.get("message"));
-        }
-        return ActionResponse.actionFailed(String.format("Status: %d, Reason :%s", response.getStatus(), response.getResponseStatus().getReasonPhrase()));
     }
 }

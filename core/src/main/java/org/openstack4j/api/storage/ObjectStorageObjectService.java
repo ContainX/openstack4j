@@ -85,7 +85,6 @@ public interface ObjectStorageObjectService extends RestService {
      */
     InputStream download(String containerName, String name);
     
-    
     /**
      * Retrieves the InputStream for the data backing the given {@code containerName} and {@code name}
      * 
