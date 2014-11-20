@@ -24,7 +24,7 @@ public class SwiftObjectImpl implements SwiftObject {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("hash")
-    private String md5sum;
+    private String eTag;
     @JsonProperty("last_modified")
     private Date lastModified;
     @JsonProperty("bytes")
@@ -40,9 +40,13 @@ public class SwiftObjectImpl implements SwiftObject {
     @JsonIgnore
     private String containerName;
     
+    public static Builder builder() {
+        return new Builder();
+    }
+    
     @Override
-    public String getMD5Checksum() {
-        return md5sum;
+    public String getETag() {
+        return eTag;
     }
 
     @Override
@@ -90,12 +94,56 @@ public class SwiftObjectImpl implements SwiftObject {
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues()
                  .add("name", name).add("last_modified", lastModified).add("mimeType", mimeType)
-                 .add("size_bytes", sizeBytes).add("md5_checksum", md5sum).add("directory", isDirectory())
-                 .add("containerName", containerName)
+                 .add("size_bytes", sizeBytes).add("ETag", eTag).add("directory", isDirectory())
+                 .add("containerName", containerName).add("metadata", metadata)
                  .toString();
     }
 
     public static class SwiftObjects extends ArrayList<SwiftObjectImpl> {
         private static final long serialVersionUID = 1L;
+    }
+    
+public static class Builder {
+        
+        private SwiftObjectImpl obj = new SwiftObjectImpl();
+        
+        public Builder name(String name) {
+            obj.name = name;
+            return this;
+        }
+        
+        public Builder eTag(String eTag) {
+            obj.eTag = eTag;
+            return this;
+        }
+        
+        public Builder lastModified(Date lastModified) {
+            obj.lastModified = lastModified;
+            return this;
+        }
+        
+        public Builder sizeBytes(long sizeBytes) {
+            obj.sizeBytes = sizeBytes;
+            return this;
+        }
+        
+        public Builder mimeType(String mimeType) {
+            obj.mimeType = mimeType;
+            return this;
+        }
+        
+        public Builder containerName(String containerName) {
+            obj.containerName = containerName;
+            return this;
+        }
+        
+        public Builder metadata(Map<String, String> metadata) {
+            obj.metadata = metadata;
+            return this;
+        }
+        
+        public SwiftObjectImpl build() {
+            return obj;
+        }
     }
 }
