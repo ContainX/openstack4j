@@ -63,7 +63,7 @@ public class HttpResponseImpl implements HttpResponse {
      */
     @Override
     public <T> T getEntity(Class<T> returnType, Function<HttpResponse, T> parser) {
-       return HttpEntityHandler.handle(this, returnType, parser);
+       return HttpEntityHandler.handle(this, returnType, parser, Boolean.TRUE);
     }
 
     /**
