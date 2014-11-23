@@ -1,10 +1,10 @@
 package org.openstack4j.api.storage;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.DLPayload;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.block.options.DownloadOptions;
@@ -77,32 +77,32 @@ public interface ObjectStorageObjectService extends RestService {
     String put(String containerName, String name, Payload<?> payload, ObjectPutOptions options);
     
     /**
-     * Retrieves the InputStream for the data backing the given {@code containerName} and {@code name}
+     * Retrieves the Payload for the data backing the given {@code containerName} and {@code name}
      * 
      * @param containerName the container name
      * @param name the object name
-     * @return the InputStream
+     * @return the download payload
      */
-    InputStream download(String containerName, String name);
+    DLPayload download(String containerName, String name);
     
     /**
-     * Retrieves the InputStream for the data backing the given {@code containerName} and {@code name}
+     * Retrieves the Payload for the data backing the given {@code containerName} and {@code name}
      * 
      * @param containerName the container name
      * @param name the object name
      * @param options the download options
-     * @return the InputStream
+     * @return the download payload
      */
-    InputStream download(String containerName, String name, DownloadOptions options);
+    DLPayload download(String containerName, String name, DownloadOptions options);
     
     /**
-     * Retrieves the InputStream for the data backing the given {@code location}
+     * Retrieves the Payload for the data backing the given {@code location}
      * 
      * @param location the object location
      * @param options the download options
-     * @return the InputStream
+     * @return the download payload
      */
-    InputStream download(ObjectLocation location, DownloadOptions options);
+    DLPayload download(ObjectLocation location, DownloadOptions options);
     
     /**
      * Deletes an Object from the specified container

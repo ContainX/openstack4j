@@ -6,12 +6,12 @@ import static org.openstack4j.model.storage.object.SwiftHeaders.ETAG;
 import static org.openstack4j.model.storage.object.SwiftHeaders.OBJECT_METADATA_PREFIX;
 import static org.openstack4j.model.storage.object.SwiftHeaders.X_COPY_FROM;
 
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.DLPayload;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.payloads.FilePayload;
 import org.openstack4j.model.compute.ActionResponse;
@@ -20,6 +20,7 @@ import org.openstack4j.model.storage.object.SwiftObject;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
 import org.openstack4j.model.storage.object.options.ObjectLocation;
 import org.openstack4j.model.storage.object.options.ObjectPutOptions;
+import org.openstack4j.openstack.common.DLPayloadEntity;
 import org.openstack4j.openstack.common.functions.HeaderNameValuesToHeaderMap;
 import org.openstack4j.openstack.storage.object.domain.SwiftObjectImpl;
 import org.openstack4j.openstack.storage.object.domain.SwiftObjectImpl.SwiftObjects;
@@ -167,12 +168,12 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     }
 
     @Override
-    public InputStream download(String containerName, String name) {
+    public DLPayload download(String containerName, String name) {
         return download(ObjectLocation.create(containerName, name), DownloadOptions.create());
     }
 
     @Override
-    public InputStream download(String containerName, String name, DownloadOptions options) {
+    public DLPayload download(String containerName, String name, DownloadOptions options) {
         checkNotNull(containerName);
         checkNotNull(name);
         checkNotNull(options);
@@ -181,13 +182,15 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     }
 
     @Override
-    public InputStream download(ObjectLocation location, DownloadOptions options) {
+    public DLPayload download(ObjectLocation location, DownloadOptions options) {
         checkNotNull(location);
         checkNotNull(options);
         
-        return get(Void.class, location.getURI())
-                  .headers(HeaderNameValuesToHeaderMap.INSTANCE.apply(options.getHeaders()))
-                  .executeWithResponse()
-                  .getInputStream();
+        return DLPayloadEntity.create(
+                  get(Void.class, location.getURI())
+                    .headers(HeaderNameValuesToHeaderMap.INSTANCE.apply(options.getHeaders()))
+                    .executeWithResponse()
+                    .getInputStream()
+               );
     }
 }

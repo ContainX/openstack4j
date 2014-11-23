@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Map;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.common.DLPayload;
+import org.openstack4j.model.storage.block.options.DownloadOptions;
 
 /**
  * Represents an Object which is a File or Directory within a Container
@@ -65,4 +67,19 @@ public interface SwiftObject extends ModelEntity {
      * @return the metadata for this object
      */
     Map<String, String> getMetadata();
+    
+    /**
+     * Retrieves the Payload for the data backing the current object
+     * 
+     * @return the download payload
+     */
+    DLPayload download();
+    
+    /**
+     * Retrieves the Payload for the data backing the current object
+     * 
+     * @param options the download options
+     * @return the download payload
+     */
+    DLPayload download(DownloadOptions options);
 }
