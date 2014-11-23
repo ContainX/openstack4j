@@ -1,18 +1,5 @@
 package org.openstack4j.openstack.image.domain.functions;
 
-import static org.openstack4j.openstack.image.domain.ImageHeader.CHECKSUM;
-import static org.openstack4j.openstack.image.domain.ImageHeader.CONTAINER_FORMAT;
-import static org.openstack4j.openstack.image.domain.ImageHeader.DISK_FORMAT;
-import static org.openstack4j.openstack.image.domain.ImageHeader.IS_PUBLIC;
-import static org.openstack4j.openstack.image.domain.ImageHeader.MIN_DISK;
-import static org.openstack4j.openstack.image.domain.ImageHeader.MIN_RAM;
-import static org.openstack4j.openstack.image.domain.ImageHeader.NAME;
-import static org.openstack4j.openstack.image.domain.ImageHeader.OWNER;
-import static org.openstack4j.openstack.image.domain.ImageHeader.PROPERTY;
-import static org.openstack4j.openstack.image.domain.ImageHeader.PROTECTED;
-import static org.openstack4j.openstack.image.domain.ImageHeader.SIZE;
-import static org.openstack4j.openstack.image.domain.ImageHeader.STORE;
-
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -24,6 +11,8 @@ import org.openstack4j.openstack.image.domain.ImageHeader;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
+
+import static org.openstack4j.openstack.image.domain.ImageHeader.*;
 
 /**
  * A function which takes an Image and applies the values to headers. The function only applies values that are supported for Update based
@@ -57,6 +46,7 @@ public class ImageForUpdateToHeaders implements Function<Image, Map<String, Obje
 		addIfNotNull(headers, CHECKSUM, from.getChecksum());
 		addIfNotNull(headers, SIZE, from.getSize());
 		addIfNotNull(headers, STORE, from.getStoreType());
+        addIfNotNull(headers, COPY_FROM, from.getCopyFrom(), false);
 		
 		if (from.getContainerFormat() != ContainerFormat.UNRECOGNIZED)
 			headers.put(CONTAINER_FORMAT.asHeader(), from.getContainerFormat().value());
@@ -74,8 +64,18 @@ public class ImageForUpdateToHeaders implements Function<Image, Map<String, Obje
 	}
 	
 	private void addIfNotNull(Map<String, Object> headers, ImageHeader header, Object value) {
-		if (value == null) return;
-		headers.put(header.asHeader(), value);
+        addIfNotNull(headers, header, value, true);
 	}
+
+    private void addIfNotNull(Map<String, Object> headers, ImageHeader header, Object value, boolean asHeader) {
+        if (value == null) return;
+
+        if(asHeader){
+            headers.put(header.asHeader(), value);
+        }
+        else{
+            headers.put(header.asGlanceHeader(), value);
+        }
+    }
 
 }
