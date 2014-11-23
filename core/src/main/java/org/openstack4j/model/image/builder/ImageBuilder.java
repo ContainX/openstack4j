@@ -82,5 +82,12 @@ public interface ImageBuilder extends Builder<ImageBuilder, Image>{
 	 * @return the image builder
 	 */
 	ImageBuilder storeType(StoreType storeType);
+
+
+    /**
+     *
+     * @see Image#getCopyFrom()
+     */
+    ImageBuilder copyFrom(String copyFrom);
 	
 }
