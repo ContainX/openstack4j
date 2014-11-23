@@ -8,6 +8,8 @@ import java.util.Map;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
+import org.openstack4j.model.common.DLPayload;
+import org.openstack4j.model.storage.block.options.DownloadOptions;
 import org.openstack4j.model.storage.object.SwiftObject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -88,6 +90,16 @@ public class SwiftObjectImpl implements SwiftObject {
         if (metadata == null)
             metadata = Apis.get(ObjectStorageObjectService.class).getMetadata(containerName, name);
         return metadata;
+    }
+    
+    @Override
+    public DLPayload download() {
+        return download(DownloadOptions.create());
+    }
+
+    @Override
+    public DLPayload download(DownloadOptions options) {
+        return Apis.get(ObjectStorageObjectService.class).download(containerName, name, options);
     }
 
     @Override
