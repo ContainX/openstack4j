@@ -36,6 +36,7 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.NetQuotaService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
@@ -77,6 +78,7 @@ import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
@@ -145,6 +147,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ObjectStorageContainerService.class, ObjectStorageContainerServiceImpl.class);
 		bind(ServerGroupService.class, ServerGroupServiceImpl.class);
 		bind(ObjectStorageObjectService.class, ObjectStorageObjectServiceImpl.class);
+		bind(NetQuotaService.class, NetQuotaServiceImpl.class);
 	}
 
 	/**
