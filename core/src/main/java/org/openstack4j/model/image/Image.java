@@ -138,4 +138,10 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
      */
     boolean isSnapshot();
 
+    /**
+     *
+     * @return the image url as String
+     */
+    String getCopyFrom();
+
 }

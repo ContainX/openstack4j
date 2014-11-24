@@ -69,6 +69,9 @@ public class GlanceImage implements Image {
 	
 	@JsonProperty("protected")
 	private boolean isProtected;
+
+    @JsonProperty("copy_from")
+    private String copyFrom;
 	
 	private Map<String, String> properties;
 	
@@ -252,8 +255,13 @@ public class GlanceImage implements Image {
 	public Map<String, String> getProperties() {
 		return properties;
 	}
-	
-	/* Business Domain Method Chains for Conversion */
+
+    @Override
+    public String getCopyFrom() {
+        return copyFrom;
+    }
+
+    /* Business Domain Method Chains for Conversion */
 	
 	public GlanceImage isProtected(Boolean isProtected) {
 		if (isProtected != null)
@@ -436,6 +444,11 @@ public class GlanceImage implements Image {
 			m.storeType = storeType;
 			return this;
 		}
-		
-	}
+
+        @Override
+        public ImageBuilder copyFrom(String copyFrom) {
+            m.copyFrom = copyFrom;
+            return this;
+        }
+    }
 }
