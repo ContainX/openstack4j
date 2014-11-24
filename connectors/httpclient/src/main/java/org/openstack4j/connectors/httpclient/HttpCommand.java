@@ -1,5 +1,6 @@
 package org.openstack4j.connectors.httpclient;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -26,6 +27,8 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
+
+import com.google.common.io.ByteStreams;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
@@ -120,9 +123,18 @@ public final class HttpCommand<R> {
 
         if (request.getEntity() != null) {
             builder = EntityBuilder.create()
-                    .setContentType(ContentType.create(request.getContentType()))
+                    .setContentType(ContentType.create(request.getContentType()));
+            
+            if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) 
+            {
+                builder.setBinary(ByteStreams.toByteArray((InputStream)request.getEntity()));
+            }
+            else
+            {
+                builder
                     .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity()))
                     .setContentEncoding("UTF-8");
+            }
         }
         else if(request.hasJson()) {
             builder = EntityBuilder.create()
