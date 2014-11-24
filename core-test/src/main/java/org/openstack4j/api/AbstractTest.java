@@ -31,7 +31,7 @@ public abstract class AbstractTest {
         IDENTITY(5000),
         NETWORK(9696),
         COMPUTE(8774),
-        OBJECT_STORAGE(8080);
+        OBJECT_STORAGE(8082);
         ;
         private final int port;
 
