@@ -122,16 +122,18 @@ public final class HttpCommand<R> {
         EntityBuilder builder = null;
 
         if (request.getEntity() != null) {
-            builder = EntityBuilder.create()
-                    .setContentType(ContentType.create(request.getContentType()));
+            builder = EntityBuilder.create();
             
             if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) 
             {
-                builder.setBinary(ByteStreams.toByteArray((InputStream)request.getEntity()));
+                builder
+                	.setContentType(ContentType.create(request.getContentType()))
+                	.setBinary(ByteStreams.toByteArray((InputStream)request.getEntity()));
             }
             else
             {
                 builder
+                	.setContentType(ContentType.create(request.getContentType(),"UTF-8"))
                     .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity()))
                     .setContentEncoding("UTF-8");
             }
