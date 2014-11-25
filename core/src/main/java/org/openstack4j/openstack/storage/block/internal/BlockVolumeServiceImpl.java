@@ -33,7 +33,7 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	 */
 	@Override
 	public List<? extends Volume> list() {
-		return get(Volumes.class, uri("/volumes")).execute().getList();
+		return get(Volumes.class, uri("/volumes/detail")).execute().getList();
 	}
 
 	/**

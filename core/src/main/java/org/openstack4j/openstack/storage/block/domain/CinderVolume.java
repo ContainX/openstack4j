@@ -9,9 +9,10 @@ import org.openstack4j.model.storage.block.VolumeAttachment;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Objects;
 
 /**
@@ -30,7 +31,7 @@ public class CinderVolume implements Volume {
 	@JsonProperty("display_description")
 	private String description;
 	private Status status;
-	@JsonSerialize(include=JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonProperty("size")
 	private Integer size;
 	@JsonProperty("availability_zone")
@@ -50,6 +51,10 @@ public class CinderVolume implements Volume {
 	private Boolean bootable;
 	@JsonProperty("attachments")
 	private List<CinderVolumeAttachment> attachments;
+	@JsonProperty("image_id")
+	private String imageId;
+	@JsonProperty("volume_image_metadata")
+	private Map<String, Object> imageMetadata;
 	
 	/**
 	 * {@inheritDoc}
@@ -143,7 +148,15 @@ public class CinderVolume implements Volume {
 	 */
 	@Override
 	public String getImageRef() {
-		return imageRef;
+	    if (imageRef != null)
+	        return imageRef;
+
+	    // Depending on whether this is a Listing or a direct Get the information is different so we are smart 
+	    // about returning the proper imageId if applicable
+	    if (imageId == null && imageMetadata != null && imageMetadata.containsKey("image_id"))
+	        imageId = String.valueOf(imageMetadata.get("image_id"));
+	    
+	    return imageId;
 	}
 
 	/**
@@ -178,7 +191,7 @@ public class CinderVolume implements Volume {
 		return Objects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("name", name).add("description", description)
 				     .add("status", status).add("size", size).add("zone", zone).add("created", created)
-				     .add("volumeType", volumeType).add("imageRef", imageRef)
+				     .add("volumeType", volumeType).add("imageRef", getImageRef())
 				     .add("sourceVolid", sourceVolid).add("snapshotId", snapshotId).add("metadata", metadata)
 				     .add("bootable", bootable)
 				     .toString();
