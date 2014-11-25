@@ -1,13 +1,15 @@
 package org.openstack4j.model.network;
 
+import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.network.builder.NetQuotaBuilder;
 
 /**
  * Network quotas that are bound to a Tenant
  * 
  * @author Jeremy Unruh
  */
-public interface NetQuota extends ModelEntity {
+public interface NetQuota extends ModelEntity, Buildable<NetQuotaBuilder> {
 
     /**
      * Number of subnets allowed per tenant
