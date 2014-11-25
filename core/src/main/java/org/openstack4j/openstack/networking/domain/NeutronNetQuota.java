@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.domain;
 import static com.google.common.base.Objects.toStringHelper;
 
 import org.openstack4j.model.network.NetQuota;
+import org.openstack4j.model.network.builder.NetQuotaBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -28,6 +29,15 @@ public class NeutronNetQuota implements NetQuota {
     private int network;
     @JsonProperty("floatingip")
     private int floatingIp;
+
+    public static NetQuotaBuilder builder() {
+        return new NetQuotaConcreteBuilder();
+    }
+    
+    @Override
+    public NetQuotaBuilder toBuilder() {
+        return new NetQuotaConcreteBuilder(this);
+    }
     
     @Override
     public int getSubnet() {
@@ -63,4 +73,59 @@ public class NeutronNetQuota implements NetQuota {
                 .toString();
     }
 
+    public static class NetQuotaConcreteBuilder implements NetQuotaBuilder {
+
+        private NeutronNetQuota model;
+        
+        public NetQuotaConcreteBuilder() {
+            model = new NeutronNetQuota();
+        }
+        
+        public NetQuotaConcreteBuilder(NeutronNetQuota model) {
+            this.model = model;
+        }
+        
+        @Override
+        public NetQuota build() {
+            return model;
+        }
+
+        @Override
+        public NetQuotaBuilder from(NetQuota in) {
+            model = (NeutronNetQuota) in;
+            return this;
+        }
+
+        @Override
+        public NetQuotaBuilder subnet(int subnet) {
+            model.subnet = subnet;
+            return this;
+        }
+
+        @Override
+        public NetQuotaBuilder router(int router) {
+            model.router = router;
+            return this;
+        }
+
+        @Override
+        public NetQuotaBuilder port(int port) {
+            model.port = port;
+            return this;
+        }
+
+        @Override
+        public NetQuotaBuilder network(int network) {
+            model.network = network;
+            return this;
+        }
+
+        @Override
+        public NetQuotaBuilder floatingIP(int floatingIP) {
+            model.floatingIp = floatingIP;
+            return this;
+        }
+        
+    }
+    
 }
