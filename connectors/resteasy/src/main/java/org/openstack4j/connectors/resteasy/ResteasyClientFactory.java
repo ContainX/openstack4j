@@ -25,7 +25,7 @@ public class ResteasyClientFactory extends ResteasyProviderFactory {
         super();
         
         addContextResolver(new CustomContextResolver());
-
+        
         jsonProvider = new JacksonJsonProvider();
         addMessageBodyReader(jsonProvider);
         addMessageBodyWriter(jsonProvider);

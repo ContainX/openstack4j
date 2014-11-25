@@ -27,7 +27,7 @@ public class ApacheHttpClientExecutor extends ApacheHttpClient4Executor {
         
         if (config.getConnectTimeout() > 0)
             HttpConnectionParams.setConnectionTimeout(params, config.getConnectTimeout());
-
+        
         HttpClient client = new DefaultHttpClient(params);
         
         return new ApacheHttpClientExecutor(client);

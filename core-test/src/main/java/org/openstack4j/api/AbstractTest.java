@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import org.bouncycastle.util.io.Streams;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.identity.domain.Credentials;
@@ -31,7 +32,7 @@ public abstract class AbstractTest {
         IDENTITY(5000),
         NETWORK(9696),
         COMPUTE(8774),
-        OBJECT_STORAGE(8082);
+        OBJECT_STORAGE(8080);
         ;
         private final int port;
 
@@ -57,6 +58,9 @@ public abstract class AbstractTest {
         }
         catch (IOException e) {
             e.printStackTrace();
+        }
+        catch (Throwable t) {
+            t.printStackTrace();
         }
     }
 
@@ -100,7 +104,7 @@ public abstract class AbstractTest {
     }
 
     protected String authURL(String path) {
-        return String.format("http://127.0.0.1:%d%s",service().port, path);
+        return String.format("%s%s", server.getUrl("/"), path);
     }
 
     @AfterClass
@@ -130,7 +134,9 @@ public abstract class AbstractTest {
             mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
             try {
-                KeystoneAccess a = mapper.readValue(getClass().getResourceAsStream(JSON_ACCESS), KeystoneAccess.class);
+                String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
+                json = json.replaceAll("127.0.0.1", server.getUrl("/").getHost());
+                KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
                 a.applyContext(authURL("/v2.0"), new Credentials("test", "test"));
                 os = OSFactory.clientFromAccess(a);
             } catch (Exception e) {
