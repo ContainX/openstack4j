@@ -26,6 +26,7 @@ import org.openstack4j.model.identity.v3.TokenV3;
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
 	private static final Map<Key, String> CACHE = new HashMap<Key, String>();
+	private static final boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
 	private String publicHostIP;
 
 	@Override
@@ -122,14 +123,17 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 	 * @return the endpoint url
 	 */
 	private String getEndpointURL(Access access, Endpoint endpoint) {
-		if (endpoint.getAdminURL() != null)
-		{
-			if (getPublicIP(access) != null && !getPublicIP(access).equals(endpoint.getAdminURL().getHost()))
-			{
-				return endpoint.getAdminURL().toString().replaceAll(endpoint.getAdminURL().getHost(), getPublicIP(access));
-			}
-			return endpoint.getAdminURL().toString();
-		}
+	    if (LEGACY_EP_HANDLING)
+	    {
+    		if (endpoint.getAdminURL() != null)
+    		{
+    			if (getPublicIP(access) != null && !getPublicIP(access).equals(endpoint.getAdminURL().getHost()))
+    			{
+    				return endpoint.getAdminURL().toString().replaceAll(endpoint.getAdminURL().getHost(), getPublicIP(access));
+    			}
+    			return endpoint.getAdminURL().toString();
+    		}
+	    }
 		return endpoint.getPublicURL().toString();
 	}
 
