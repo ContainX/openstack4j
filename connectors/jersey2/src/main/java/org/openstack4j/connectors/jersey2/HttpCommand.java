@@ -50,7 +50,7 @@ public final class HttpCommand<R> {
         Client client = ClientFactory.create(request.getConfig());
         WebTarget target = client.target(request.getEndpoint()).path(request.getPath());
         
-        if (Boolean.getBoolean(HttpLoggingFilter.class.getName()))
+        if (HttpLoggingFilter.isLoggingEnabled())
             target.register(new LoggingFilter(Logger.getLogger("os"), 10000));
 
         target = populateQueryParams(target, request);
