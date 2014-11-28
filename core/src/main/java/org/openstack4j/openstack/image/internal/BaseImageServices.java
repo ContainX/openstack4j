@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.image.internal;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.openstack.common.functions.RemoveVersionFromURL;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 import com.google.common.base.Function;
@@ -13,7 +14,7 @@ import com.google.common.base.Function;
 public class BaseImageServices extends BaseOpenStackService {
 
 	protected BaseImageServices() {
-		super(ServiceType.IMAGE, EndpointFunction.instance);
+		super(ServiceType.IMAGE, EndpointFunction.INSTANCE);
 	}
 	
 	/**
@@ -22,19 +23,16 @@ public class BaseImageServices extends BaseOpenStackService {
 	 */
 	private static class EndpointFunction implements Function<String, String> {
 
-		static final EndpointFunction instance = new EndpointFunction();
-		
+		static final EndpointFunction INSTANCE = new EndpointFunction();
+
 		@Override
 		public String apply(String input) {
 			if (input != null)
 			{
-			  if (input.contains("/v2"))
-				  return input.replace("/v2", "/v1");
-			  else if (!input.contains("/v"))
-			  	return input.concat("/v1");
+			  String url = RemoveVersionFromURL.INSTANCE.apply(input);
+			  return url.concat("/v1");
 			}
 			return input;
 		}
 	}
-	
 }
