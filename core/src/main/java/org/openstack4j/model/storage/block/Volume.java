@@ -112,4 +112,9 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return volume attachment data information. 
 	 */
 	List<? extends VolumeAttachment> getAttachments();
+
+	/**
+	 * @return the status of volume migrate status, default null
+	 */
+	String getMigrateStatus();
 }

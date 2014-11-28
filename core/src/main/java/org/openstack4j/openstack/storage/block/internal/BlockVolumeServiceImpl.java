@@ -11,6 +11,7 @@ import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume.Volumes;
+import org.openstack4j.openstack.storage.block.domain.CinderVolumeMigration;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeType.VolumeTypes;
 
 /**
@@ -75,6 +76,14 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 		return put(ActionResponse.class, uri("/volumes/%s", volumeId))
         		    .entity(Builders.volume().name(name).description(description).build())
         		    .execute();
+	}
+
+	@Override
+	public ActionResponse migrate(String volumeId, String hostService, boolean forceHostCopy) {
+		CinderVolumeMigration migration = new CinderVolumeMigration(hostService, forceHostCopy);
+		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+				.entity(migration)
+				.execute();
 	}
 
 }
