@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.networking.internal;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.openstack.common.functions.RemoveVersionFromURL;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 import com.google.common.base.Function;
@@ -13,7 +14,7 @@ import com.google.common.base.Function;
 public class BaseNetworkingServices extends BaseOpenStackService {
 
 	protected BaseNetworkingServices() {
-		super(ServiceType.NETWORK, EndpointFunction.instance);
+		super(ServiceType.NETWORK, EndpointFunction.INSTANCE);
 	}
 
 	/**
@@ -21,14 +22,16 @@ public class BaseNetworkingServices extends BaseOpenStackService {
 	 */
 	private static class EndpointFunction implements Function<String, String> {
 
-		static final EndpointFunction instance = new EndpointFunction();
+		static final EndpointFunction INSTANCE = new EndpointFunction();
 		
 		@Override
 		public String apply(String input) {
-			if (input == null || input.contains("/v"))
-				return input;
-			return input.concat(input.endsWith("/") ? "v2.0" : "/v2.0");
+		    if (input != null)
+		    {
+		        String url = RemoveVersionFromURL.INSTANCE.apply(input);
+		        return url.concat("/v2.0");
+		    }
+		    return input;
 		}
 	}
-	
 }
