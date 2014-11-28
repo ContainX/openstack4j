@@ -143,6 +143,22 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public boolean supportsHeat() {
         return supports.contains(ServiceType.ORCHESTRATION);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean supportsBlockStorage() {
+        return supports.contains(ServiceType.BLOCK_STORAGE);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean supportsObjectStorage() {
+        return supports.contains(ServiceType.OBJECT_STORAGE);
+    }
 
     /**
      * {@inheritDoc}
