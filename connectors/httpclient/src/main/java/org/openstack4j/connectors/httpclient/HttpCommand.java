@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.openstack4j.api.exceptions.ConnectionException;
@@ -27,8 +28,6 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
-
-import com.google.common.io.ByteStreams;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
@@ -122,17 +121,14 @@ public final class HttpCommand<R> {
         EntityBuilder builder = null;
 
         if (request.getEntity() != null) {
-            builder = EntityBuilder.create();
-            
             if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) 
             {
-                builder
-                	.setContentType(ContentType.create(request.getContentType()))
-                	.setBinary(ByteStreams.toByteArray((InputStream)request.getEntity()));
+                InputStreamEntity ise = new InputStreamEntity((InputStream)request.getEntity(), ContentType.create(request.getContentType()));
+                ((HttpEntityEnclosingRequestBase)clientReq).setEntity(ise);
             }
             else
             {
-                builder
+                builder = EntityBuilder.create()
                 	.setContentType(ContentType.create(request.getContentType(),"UTF-8"))
                     .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity()))
                     .setContentEncoding("UTF-8");
