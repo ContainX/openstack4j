@@ -27,5 +27,12 @@ public class RemoveVersionFromURL implements Function<String, String> {
             return result.substring(0, result.length() - 1);
         return result;
     }
+    
+    public String removeAndApply(String url, String version) {
+        if (url == null)
+            return url;
+        
+        return apply(url).concat(version);
+    }
 
 }
