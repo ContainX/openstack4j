@@ -24,6 +24,14 @@ public interface Keypair extends ModelEntity {
 	String getPublicKey();
 	
 	/**
+	 * The private key associated with this keypair.  Only populated on create when a public key is not specified and is auto-generated
+	 * by the server
+	 * 
+	 * @return the private key
+	 */
+	String getPrivateKey();
+	
+	/**
 	 * @return the server fingerprint
 	 */
 	String getFingerprint();
