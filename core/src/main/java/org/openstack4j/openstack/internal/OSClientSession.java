@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.internal;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Set;
 
 import org.openstack4j.api.Apis;
@@ -181,7 +183,19 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public String getEndpoint(ServiceType service) {
-        return epr.findURL(URLResolverParams.create(access, service).perspective(perspective).region(region));
+        return addNATIfApplicable(epr.findURL(URLResolverParams.create(access, service).perspective(perspective).region(region)));
+    }
+    
+    private String addNATIfApplicable(String url) {
+        if (config != null && config.isBehindNAT()) {
+            try {
+                URI uri = new URI(url);
+                return url.replace(uri.getHost(), config.getEndpointNATResolution());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+        return url;
     }
     
     /**
