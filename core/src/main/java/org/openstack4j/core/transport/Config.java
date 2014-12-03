@@ -17,6 +17,7 @@ public final class Config {
     private SSLContext sslContext;
     private HostnameVerifier hostNameVerifier;
     private boolean ignoreSSLVerification;
+    private String natHostOrIP;
     
     private Config() {
     }
@@ -58,6 +59,27 @@ public final class Config {
      */
     public Config withSSLContext(SSLContext sslContext) {
         this.sslContext = sslContext;
+        return this;
+    }
+    
+    
+    /**
+     * If connecting to an OpenStack deployment is in front of a NAT or Proxy then this option can be provided to dynamically change
+     * the service endpoints hostname/IP to the one NAT is using.  
+     * <p>
+     * Example:<br>
+     * Setting NAT IP to: 24.24.24.24<br>
+     * <br>
+     * Would be substitued in any endpoint for any service.  Let's assume we're looking for Heat endpoint 
+     * which is returning 192.168.0.2:8000<br>
+     * <br>
+     * The result would be translated dynamically to 24.24.24.24:8000 so we can access via NAT
+     * 
+     * @param natHostOrIP the FQDN Host or IP Address
+     * @return Config
+     */
+    public Config withEndpointNATResolution(String natHostOrIP) {
+        this.natHostOrIP = natHostOrIP;
         return this;
     }
     
@@ -104,12 +126,21 @@ public final class Config {
         return ignoreSSLVerification;
     }
     
+    public String getEndpointNATResolution() {
+        return natHostOrIP;
+    }
+    
+    public boolean isBehindNAT() {
+        return natHostOrIP != null;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + connectTimeout;
         result = prime * result + (ignoreSSLVerification ? 1231 : 1237);
+        result = prime * result + ((natHostOrIP == null) ? 0 : natHostOrIP.hashCode());
         result = prime * result + readTimeout;
         return result;
     }
@@ -126,6 +157,11 @@ public final class Config {
         if (connectTimeout != other.connectTimeout)
             return false;
         if (ignoreSSLVerification != other.ignoreSSLVerification)
+            return false;
+        if (natHostOrIP == null) {
+            if (other.natHostOrIP != null)
+                return false;
+        } else if (!natHostOrIP.equals(other.natHostOrIP))
             return false;
         if (readTimeout != other.readTimeout)
             return false;
