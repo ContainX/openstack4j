@@ -37,7 +37,7 @@ public interface Subnet extends Resource, Buildable<SubnetBuilder> {
 	/**
 	 * @return the set of routes that should be used by devices with IPs from this subnet
 	 */
-	List<String> getHostRoutes();
+	List<? extends HostRoute> getHostRoutes();
 
 	/**
 	 * @return the ip version used by this subnet
