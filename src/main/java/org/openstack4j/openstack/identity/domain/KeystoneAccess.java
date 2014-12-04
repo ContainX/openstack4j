@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.identity.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -25,7 +26,7 @@ public class KeystoneAccess implements Access {
 	private static final long serialVersionUID = 1L;
 	private static final String CACHE_FMT = "%s:%s";
 	private KeystoneToken token;
-	private List<AccessService> serviceCatalog;
+	private List<AccessService> serviceCatalog = new ArrayList<AccessService>();
 	private AccessUser user;
 	private String endpoint;
 	private AuthStore credentials;
