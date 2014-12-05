@@ -26,7 +26,7 @@ import org.openstack4j.model.identity.v3.TokenV3;
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
 	private static final Map<Key, String> CACHE = new HashMap<Key, String>();
-	private static final boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
+	private static boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
 	private String publicHostIP;
 
 	@Override
@@ -195,8 +195,10 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 				return false;
 			return true;
 		}
-
-
+	}
+	
+	public static void enableLegacyEndpointHandling(boolean enabled) {
+	    LEGACY_EP_HANDLING = enabled;
 	}
 
 }
