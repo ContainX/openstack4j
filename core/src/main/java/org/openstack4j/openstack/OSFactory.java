@@ -7,6 +7,7 @@ import org.openstack4j.core.transport.internal.HttpLoggingFilter;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.openstack.client.OSClientBuilder;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
+import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.openstack4j.openstack.internal.OSClientSession;
 import org.openstack4j.openstack.logging.internal.FallbackLoggerFactorySupplier;
 
@@ -49,6 +50,18 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      */
     public static void enableHttpLoggingFilter(boolean enabled) {
         System.getProperties().setProperty(HttpLoggingFilter.class.getName(), String.valueOf(enabled));
+    }
+    
+    /**
+     * As of 2.0 of OpenStack4j we have removed a workaround for endpoints that have the admin URL configured wrong by substituting the 
+     * host from the original Keystone connection.  This is not up to specification so we have removed this functionality by default.
+     * 
+     * As a result it has broken some users with development based environments.  Turn this on to go back to original behaviour.
+     * 
+     * @param enabled
+     */
+    public static void enableLegacyEndpointHandling(boolean enabled) {
+        DefaultEndpointURLResolver.enableLegacyEndpointHandling(enabled);
     }
     
     /**
