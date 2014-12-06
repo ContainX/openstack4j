@@ -31,5 +31,14 @@ public interface TemplateService {
      * @return TemplateResponse indicating valid or the error condition if not valid
      */
     TemplateResponse validateTemplateByURL(String templateURL);
+    
+    /**
+     * Retrieves the original template in original String form JSON or YAML
+     * @param stackName the stack name
+     * @param stackId the stack identifier
+     * @return the template
+     * @throws ResponseException if an error occurs
+     */
+    String getTemplateAsString(String stackName, String stackId);
 	
 }
