@@ -13,3 +13,5 @@ target
 Thumbs.db
 test-output
 pom-shade.xml
+*.releaseBackup
+*.versionsBackup
