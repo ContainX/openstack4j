@@ -209,10 +209,10 @@ public interface ServerService {
      * 
      * @param serverId the server identifier
      * @param volumeId the volume identifier
-     * @author octopus zhang
+     * @param device the device to attach the volume to, ex /dev/vda
      * @return volumeAttachment or null if not applicable
      */
-    VolumeAttachment attachVolume(String serverId, String volumeId);
+    VolumeAttachment attachVolume(String serverId, String volumeId, String device);
     
     /**
      * Changes the admin/root password on the server
