@@ -286,9 +286,9 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      * {@inheritDoc}
      */
     @Override
-    public VolumeAttachment attachVolume(String serverId, String volumeId) {
+    public VolumeAttachment attachVolume(String serverId, String volumeId, String device) {
         return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId))
-                .entity(NovaVolumeAttachment.create(volumeId))
+                .entity(NovaVolumeAttachment.create(volumeId, device))
                 .execute();
     }
 

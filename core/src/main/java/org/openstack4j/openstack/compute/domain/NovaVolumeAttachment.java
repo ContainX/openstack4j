@@ -33,12 +33,12 @@ public class NovaVolumeAttachment implements VolumeAttachment {
 	public NovaVolumeAttachment() {
 	}
 	
-	private NovaVolumeAttachment(String volumeId) {
+	private NovaVolumeAttachment(String volumeId, String device) {
 	    this.volumeId = volumeId;
 	}
 	
-	public static NovaVolumeAttachment create(String volumeId) {
-	    return new NovaVolumeAttachment(volumeId);
+	public static NovaVolumeAttachment create(String volumeId, String device) {
+	    return new NovaVolumeAttachment(volumeId, device);
 	}
 
 	@Override
