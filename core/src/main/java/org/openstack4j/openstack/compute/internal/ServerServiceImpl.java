@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
@@ -289,7 +291,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public VolumeAttachment attachVolume(String serverId, String volumeId, String device) {
         return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId))
                 .entity(NovaVolumeAttachment.create(volumeId, device))
-                .execute();
+                .execute(ExecutionOptions.<NovaVolumeAttachment>create(PropagateOnStatus.on(404)));
     }
 
     /**
