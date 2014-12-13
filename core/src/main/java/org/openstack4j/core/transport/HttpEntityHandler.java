@@ -2,13 +2,9 @@ package org.openstack4j.core.transport;
 
 import static org.openstack4j.core.transport.HttpExceptionHandler.mapException;
 
-import java.util.Map;
-
 import org.openstack4j.api.exceptions.ResponseException;
-import org.openstack4j.core.transport.functions.ParseActionResponseFromJsonMap;
+import org.openstack4j.core.transport.functions.ResponseToActionResponse;
 import org.openstack4j.model.compute.ActionResponse;
-
-import com.google.common.base.Function;
 
 /**
  * Handles retrieving an Entity from an HttpResponse while validating resulting status codes. 
@@ -17,17 +13,20 @@ import com.google.common.base.Function;
  */
 public class HttpEntityHandler {
     
-    public static <T> T handle(HttpResponse response, Class<T> returnType, Function<HttpResponse, T> parser) {
-        return handle(response, returnType, parser, Boolean.FALSE);
+    public static <T> T handle(HttpResponse response, Class<T> returnType, ExecutionOptions<T> options) {
+        return handle(response, returnType, options, Boolean.FALSE);
     }
     
     @SuppressWarnings("unchecked")
-    public static <T> T handle(HttpResponse response, Class<T> returnType, Function<HttpResponse, T> parser, boolean requiresVoidBodyHandling) {
+    public static <T> T handle(HttpResponse response, Class<T> returnType, ExecutionOptions<T> options, boolean requiresVoidBodyHandling) {
         if(response.getStatus() >= 400) {
             
             if (requiresVoidBodyHandling && ActionResponse.class == returnType) {
-                return (T) createActionResponse(response);
+                return (T) ResponseToActionResponse.INSTANCE.apply(response);
             }
+            
+            if (options != null)
+                options.propagate(response);
             
             if (response.getStatus() == 404)
             {
@@ -47,7 +46,7 @@ public class HttpEntityHandler {
                 try
                 {
                     
-                    ActionResponse ar = createActionResponse(response);
+                    ActionResponse ar = ResponseToActionResponse.INSTANCE.apply(response);
                     if (returnType == ActionResponse.class)
                         return (T) ar;
                     
@@ -64,8 +63,8 @@ public class HttpEntityHandler {
                     response.getStatus());
         }
 
-        if (parser != null)
-            return parser.apply(response);
+        if (options != null && options.hasParser())
+            return options.getParser().apply(response);
 
         if (returnType == Void.class) 
             return null;
@@ -73,15 +72,4 @@ public class HttpEntityHandler {
             return (T) ActionResponse.actionSuccess();
          return response.readEntity(returnType);
     }
-    
-    @SuppressWarnings("unchecked")
-    private static ActionResponse createActionResponse(HttpResponse response) {
-        Map<String, Object> map = response.readEntity(Map.class);
-        ActionResponse ar = ParseActionResponseFromJsonMap.INSTANCE.apply(map);
-        if (ar != null)
-            return ar;
-        
-        return ActionResponse.actionFailed(String.format("Status: %d, Reason: %s", response.getStatus(), response.getStatusMessage()));
-    }
-    
 }

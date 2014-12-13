@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openstack4j.api.exceptions.ClientResponseException;
+import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
-import com.google.common.base.Function;
 import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.Response;
 
@@ -58,12 +58,12 @@ public class HttpResponseImpl implements HttpResponse {
      *
      * @param <T> the generic type
      * @param returnType the return type
-     * @param parser an optional parser which will handle the HttpResponse and return the corresponding return type.  Error codes are handled and thrown prior to the parser being called
+     * @param options the execution options
      * @return the entity
      */
     @Override
-    public <T> T getEntity(Class<T> returnType, Function<HttpResponse, T> parser) {
-       return HttpEntityHandler.handle(this, returnType, parser, Boolean.TRUE);
+    public <T> T getEntity(Class<T> returnType, ExecutionOptions<T> options) {
+       return HttpEntityHandler.handle(this, returnType, options, Boolean.TRUE);
     }
 
     /**
