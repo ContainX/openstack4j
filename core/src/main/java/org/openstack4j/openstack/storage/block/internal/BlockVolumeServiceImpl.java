@@ -12,6 +12,7 @@ import org.openstack4j.model.storage.block.VolumeType;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume.Volumes;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeType.VolumeTypes;
+import org.openstack4j.openstack.storage.block.domain.ForceDeleteAction;
 
 /**
  * Manages Volumes and Volume Type based operations against Block Storage (Cinder)
@@ -52,6 +53,17 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	public ActionResponse delete(String volumeId) {
 		checkNotNull(volumeId);
 		return deleteWithResponse(uri("/volumes/%s", volumeId)).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse forceDelete(String volumeId) {
+		checkNotNull(volumeId);
+		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+    		    .entity(new ForceDeleteAction())
+    		    .execute();
 	}
 
 	/**
