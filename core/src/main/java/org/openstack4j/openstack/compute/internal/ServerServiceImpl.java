@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openstack4j.api.Apis;
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
@@ -303,6 +305,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
                    delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).executeWithResponse()
                 );
     }
+    
     /**
      * {@inheritDoc}
      */
@@ -409,5 +412,10 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(options);
 
         return put(NovaServer.class, uri("/servers/%s", serverId)).entity(NovaServerUpdate.fromOptions(options)).execute();
+    }
+
+    @Override
+    public InterfaceService interfaces() {
+        return Apis.get(InterfaceService.class);
     }
 }
