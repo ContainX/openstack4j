@@ -30,7 +30,7 @@ public class InterfaceServiceImpl extends BaseComputeServices  implements Interf
     @Override
     public List<? extends InterfaceAttachment> list(String serverId) {
         checkNotNull(serverId, "serverId");
-        return get(NovaInterfaceAttachments.class , uri("/servers/​%s/os-interface", serverId))
+        return get(NovaInterfaceAttachments.class , uri("/servers/%s/os-interface", serverId))
                   .execute().getList();
     }
 
@@ -38,14 +38,14 @@ public class InterfaceServiceImpl extends BaseComputeServices  implements Interf
     public InterfaceAttachment get(String serverId, String attachmentId) {
         checkNotNull(serverId, "serverId");
         checkNotNull(attachmentId, "attachmentId");
-        return get(NovaInterfaceAttachment.class, uri("​/servers/​%s​/os-interface/​%s", serverId, attachmentId)).execute();
+        return get(NovaInterfaceAttachment.class, uri("/servers/%s/os-interface/%s", serverId, attachmentId)).execute();
     }
 
     @Override
     public ActionResponse detach(String serverId, String attachmentId) {
         checkNotNull(serverId, "serverId");
         checkNotNull(attachmentId, "attachmentId");
-        return delete(ActionResponse.class, uri("​/servers/​%s​/os-interface/​%s", serverId, attachmentId)).execute();
+        return delete(ActionResponse.class, uri("/servers/%s/os-interface/%s", serverId, attachmentId)).execute();
     }
 
 }
