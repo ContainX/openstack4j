@@ -56,7 +56,7 @@ public class CinderVolume implements Volume {
 	@JsonProperty("volume_image_metadata")
 	private Map<String, Object> imageMetadata;
 	@JsonProperty("os-vol-mig-status-attr:migstat")
-	private String migrateStatus;
+	private MigrationStatus migrateStatus;
 	/**
 	 * {@inheritDoc}
 	 */
@@ -148,8 +148,8 @@ public class CinderVolume implements Volume {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getMigrateStatus() {
-		return migrateStatus;
+	public MigrationStatus getMigrateStatus() {
+		return migrateStatus != null ? migrateStatus : MigrationStatus.NONE;
 	}
 
 	/**
