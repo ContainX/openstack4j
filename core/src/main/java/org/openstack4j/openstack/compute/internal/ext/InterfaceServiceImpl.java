@@ -22,7 +22,7 @@ public class InterfaceServiceImpl extends BaseComputeServices  implements Interf
     public InterfaceAttachment create(String serverId, String portId) {
         checkNotNull(serverId, "serverId");
         checkNotNull(portId, "portId");
-        return post(NovaInterfaceAttachment.class, uri("/servers/​%s/os-interface", serverId))
+        return post(NovaInterfaceAttachment.class, uri("/servers/%s/os-interface", serverId))
                  .entity(new NovaInterfaceAttachment(portId))
                  .execute();
     }
