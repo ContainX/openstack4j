@@ -59,4 +59,14 @@ public interface BlockVolumeService extends RestService {
 	 * @return the action response
 	 */
 	ActionResponse update(String volumeId, String name, String description);
+
+	/**
+	 * migrate a volume to another host and service
+	 *
+	 * @param volumeId the volume id
+	 * @param forceHostCopy
+	 * @param hostService the destination host and service ,like kvmnode002021.cnsuning.com@lvmdriver
+	 * @return the action response
+	 */
+	ActionResponse migrate(String volumeId, String hostService, boolean forceHostCopy);
 }
