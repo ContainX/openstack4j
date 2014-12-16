@@ -77,6 +77,16 @@ public class SampleCriteria {
     }
     
     /**
+     * Matches the given project identifier
+     * @param projectId the project id
+     * @return SampleCriteria
+     */
+    public SampleCriteria project(String projectId) {
+        checkNotNull(projectId, "projectId must not be null");
+        return add("project_id", Oper.EQUALS, projectId);
+    }
+    
+    /**
      * Adds an adhoc field criteria
      * @param field the field name (must be the JSON name)
      * @param operator the operator
