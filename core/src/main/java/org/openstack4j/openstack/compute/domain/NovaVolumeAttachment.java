@@ -32,11 +32,12 @@ public class NovaVolumeAttachment implements VolumeAttachment {
 	
 	public NovaVolumeAttachment() {
 	}
-	
+
 	private NovaVolumeAttachment(String volumeId, String device) {
 	    this.volumeId = volumeId;
+		this.device = device;
 	}
-	
+
 	public static NovaVolumeAttachment create(String volumeId, String device) {
 	    return new NovaVolumeAttachment(volumeId, device);
 	}
