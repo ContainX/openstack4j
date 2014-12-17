@@ -16,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 /**
@@ -268,6 +270,28 @@ public class NeutronSubnet implements Subnet {
 		protected Subnet reference() {
 			return m;
 		}
+
+        @Override
+        public SubnetBuilder addDNSNameServer(String host) {
+            if (Strings.isNullOrEmpty(host))
+                return this;
+            
+            if (m.dnsNames == null)
+                m.dnsNames = Lists.newArrayList();
+            
+            m.dnsNames.add(host);
+            return this;
+        }
+
+        @Override
+        public SubnetBuilder addHostRoute(String destination, String nexthop) {
+            Preconditions.checkArgument(nexthop != null && destination != null, "NextHop and Destination must have a value");
+            if (m.hostRoutes == null)
+                m.hostRoutes = Lists.newArrayList();
+            
+            m.hostRoutes.add(new NeutronHostRoute(destination, nexthop));
+            return this;
+        }
 
 	}
 	
