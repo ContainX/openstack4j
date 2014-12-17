@@ -9,6 +9,7 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.Subnet;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet.Subnets;
+import org.openstack4j.openstack.networking.domain.NeutronSubnetUpdate;
 
 /**
  * OpenStack (Neutron) Subnet based Operations implementation
@@ -51,6 +52,8 @@ public class SubnetServiceImpl extends BaseNetworkingServices implements SubnetS
 	
 	public Subnet update(Subnet subnet) {
 	  checkNotNull(subnet);
-	  return put(NeutronSubnet.class, uri("/subnets/%s", subnet.getId())).entity(subnet).execute();
+	  return put(NeutronSubnet.class, uri("/subnets/%s", subnet.getId()))
+	            .entity(NeutronSubnetUpdate.createFromSubnet(subnet))
+	            .execute();
 	}
 }
