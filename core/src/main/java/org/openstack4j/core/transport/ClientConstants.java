@@ -14,7 +14,8 @@ public final class ClientConstants
 	public static final String HEADER_CONTENT_ENCODING = "Content-Encoding";
 	public static final String HEADER_OS4J_AUTH = "OS4J-Auth-Command";
 	public static final String HEADER_ACCEPT = "Accept";
-	
+	public static final String HEADER_USER_AGENT = "User-Agent";
+	public static final String USER_AGENT = "OpenStack4j / OpenStack Client";
 	
 	public static final String CONTENT_TYPE_JSON = "application/json";
 	public static final String CONTENT_TYPE_STREAM = "application/stream";

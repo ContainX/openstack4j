@@ -2,6 +2,7 @@ package org.openstack4j.api.compute;
 
 import java.util.List;
 
+import org.openstack4j.api.compute.ext.FloatingIPDNSService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
@@ -90,9 +91,18 @@ public interface ComputeService extends RestService {
 	 */
 	List<? extends Extension> listExtensions();
 	
-	/**ServerGroup Management Service
+	/**
+	 * ServerGroup Management Service
+	 * 
 	 * @return ServerGroup service
 	 */
 	ServerGroupService serverGroups();
+	
+	/**
+	 * Service that manages the extension 'os-floating-ip-dns'
+	 * 
+	 * @return the floating IP DNS Service
+	 */
+	FloatingIPDNSService floatingIPDNS();
 	
 }

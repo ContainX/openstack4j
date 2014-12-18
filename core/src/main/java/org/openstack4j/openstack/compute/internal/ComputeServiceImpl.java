@@ -12,6 +12,7 @@ import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerGroupService;
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.api.compute.ext.FloatingIPDNSService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
@@ -117,4 +118,9 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	public ServerGroupService serverGroups() {
 		 return Apis.get(ServerGroupService.class);
 	}
+
+    @Override
+    public FloatingIPDNSService floatingIPDNS() {
+        return Apis.get(FloatingIPDNSService.class);
+    }
 }

@@ -12,6 +12,9 @@ import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerGroupService;
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.api.compute.ext.FloatingIPDNSDomainService;
+import org.openstack4j.api.compute.ext.FloatingIPDNSEntryService;
+import org.openstack4j.api.compute.ext.FloatingIPDNSService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.api.compute.ext.MigrationService;
@@ -56,6 +59,9 @@ import org.openstack4j.openstack.compute.internal.KeypairServiceImpl;
 import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerGroupServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
+import org.openstack4j.openstack.compute.internal.ext.FloatingIPDNSDomainServiceImpl;
+import org.openstack4j.openstack.compute.internal.ext.FloatingIPDNSEntryServiceImpl;
+import org.openstack4j.openstack.compute.internal.ext.FloatingIPDNSServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.HypervisorServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
@@ -151,6 +157,9 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ObjectStorageObjectService.class, ObjectStorageObjectServiceImpl.class);
 		bind(NetQuotaService.class, NetQuotaServiceImpl.class);
 		bind(InterfaceService.class, InterfaceServiceImpl.class);
+		bind(FloatingIPDNSService.class, FloatingIPDNSServiceImpl.class);
+		bind(FloatingIPDNSDomainService.class, FloatingIPDNSDomainServiceImpl.class);
+		bind(FloatingIPDNSEntryService.class, FloatingIPDNSEntryServiceImpl.class);
 	}
 
 	/**
