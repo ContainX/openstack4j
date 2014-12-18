@@ -2,6 +2,7 @@ package org.openstack4j.api;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -43,6 +44,7 @@ public abstract class AbstractTest {
     protected static final String JSON_ACCESS = "/identity/access.json";
 
     private OSClient os;
+    private String host;
     protected MockWebServer server = new MockWebServer();
 
     /**
@@ -52,7 +54,7 @@ public abstract class AbstractTest {
 
     @BeforeClass
     protected void startServer() {
-        Logger.getLogger(getClass().getName()).info("Tests using connector: " + HttpExecutor.create().getExecutorName());
+        Logger.getLogger(getClass().getName()).info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
         try {
             server.play(service().port);
         }
@@ -104,7 +106,7 @@ public abstract class AbstractTest {
     }
 
     protected String authURL(String path) {
-        return String.format("%s%s", server.getUrl("/"), path);
+        return String.format("http://%s:5000%s", getHost(), path);
     }
 
     @AfterClass
@@ -135,7 +137,7 @@ public abstract class AbstractTest {
 
             try {
                 String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
-                json = json.replaceAll("127.0.0.1", server.getUrl("/").getHost());
+                json = json.replaceAll("127.0.0.1", getHost());
                 KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
                 a.applyContext(authURL("/v2.0"), new Credentials("test", "test"));
                 os = OSFactory.clientFromAccess(a);
@@ -144,5 +146,20 @@ public abstract class AbstractTest {
             } 
         }
         return os;
+    }
+    
+    private String getHost() {
+        try
+        {
+            if (host == null)
+                host = InetAddress.getLocalHost().getHostAddress();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (host == null)
+            return "127.0.0.1";
+        
+        return host;
     }
 }

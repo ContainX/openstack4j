@@ -13,6 +13,7 @@ import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerGroupService;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.compute.ext.HypervisorService;
+import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
@@ -56,6 +57,7 @@ import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerGroupServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.HypervisorServiceImpl;
+import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
 import org.openstack4j.openstack.heat.internal.EventsServiceImpl;
@@ -148,6 +150,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ServerGroupService.class, ServerGroupServiceImpl.class);
 		bind(ObjectStorageObjectService.class, ObjectStorageObjectServiceImpl.class);
 		bind(NetQuotaService.class, NetQuotaServiceImpl.class);
+		bind(InterfaceService.class, InterfaceServiceImpl.class);
 	}
 
 	/**

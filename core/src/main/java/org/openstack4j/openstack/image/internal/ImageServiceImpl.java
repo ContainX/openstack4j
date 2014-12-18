@@ -13,6 +13,7 @@ import org.openstack4j.api.image.ImageService;
 import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_OCTECT_STREAM;
 import static org.openstack4j.core.transport.ClientConstants.HEADER_ACCEPT;
 
+import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.compute.ActionResponse;
@@ -61,7 +62,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     @Override
     public Image get(String imageId) {
         checkNotNull(imageId);
-        return head(Image.class, uri("/images/%s", imageId)).execute(ImageFromHeadersFunction.instance());
+        return head(Image.class, uri("/images/%s", imageId)).execute(ExecutionOptions.create(ImageFromHeadersFunction.instance()));
     }
 
     /**

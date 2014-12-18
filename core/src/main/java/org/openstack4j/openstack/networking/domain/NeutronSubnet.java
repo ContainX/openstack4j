@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.domain;
 import java.util.List;
 
 import org.openstack4j.model.common.builder.ResourceBuilder;
+import org.openstack4j.model.network.HostRoute;
 import org.openstack4j.model.network.IPVersionType;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.Pool;
@@ -15,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 /**
@@ -41,7 +44,7 @@ public class NeutronSubnet implements Subnet {
 	@JsonProperty("allocation_pools")
 	private List<NeutronPool> pools;
 	@JsonProperty("host_routes")
-	private List<String> hostRoutes;
+	private List<NeutronHostRoute> hostRoutes;
 	@JsonProperty("ip_version")
 	private IPVersionType ipVersion;
 	@JsonProperty("gateway_ip")
@@ -143,7 +146,7 @@ public class NeutronSubnet implements Subnet {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<String> getHostRoutes() {
+	public List<? extends HostRoute> getHostRoutes() {
 		return hostRoutes;
 	}
 
@@ -178,7 +181,7 @@ public class NeutronSubnet implements Subnet {
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
 				.add("id", id).add("name", name).add("enableDHCP", enableDHCP).add("network-id", networkId)
-				.add("tenant_id", tenantId).add("dns_nameservers", dnsNames).add("allocation_pools", pools).add("host_routes", pools)
+				.add("tenant_id", tenantId).add("dns_nameservers", dnsNames).add("allocation_pools", pools)
 				.add("host_routes", hostRoutes).add("ip_version", ipVersion).add("gateway_ip", gateway).add("cidr", cidr)
 				.toString();
 	}
@@ -267,6 +270,28 @@ public class NeutronSubnet implements Subnet {
 		protected Subnet reference() {
 			return m;
 		}
+
+        @Override
+        public SubnetBuilder addDNSNameServer(String host) {
+            if (Strings.isNullOrEmpty(host))
+                return this;
+            
+            if (m.dnsNames == null)
+                m.dnsNames = Lists.newArrayList();
+            
+            m.dnsNames.add(host);
+            return this;
+        }
+
+        @Override
+        public SubnetBuilder addHostRoute(String destination, String nexthop) {
+            Preconditions.checkArgument(nexthop != null && destination != null, "NextHop and Destination must have a value");
+            if (m.hostRoutes == null)
+                m.hostRoutes = Lists.newArrayList();
+            
+            m.hostRoutes.add(new NeutronHostRoute(destination, nexthop));
+            return this;
+        }
 
 	}
 	
