@@ -1,5 +1,8 @@
 package org.openstack4j.openstack.internal;
 
+import static org.openstack4j.core.transport.ClientConstants.HEADER_USER_AGENT;
+import static org.openstack4j.core.transport.ClientConstants.USER_AGENT;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -156,6 +159,7 @@ public class BaseOpenStackService {
         }
 
         public R execute(ExecutionOptions<R> options) {
+            header(HEADER_USER_AGENT, USER_AGENT);
             HttpRequest<R> request = req.build();
             return HttpExecutor.create().execute(request).getEntity(request.getReturnType(), options);
         }
