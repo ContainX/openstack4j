@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.compute.domain;
 
+import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.compute.VNCConsole;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,8 +16,6 @@ import com.google.common.base.Objects;
 public class NovaVNCConsole implements VNCConsole {
 
 	private static final long serialVersionUID = 1L;
-	private static final String JSON_REQ_FORMAT = "{ \"os-getVNCConsole\": { \"type\": \"%s\"} }";
-	private static final String JSON_SPICE_FORMAT = "{ \"os-getSPICEConsole\": { \"type\": \"%s\"} }";
 
 	@JsonProperty
 	private Type type;
@@ -48,7 +47,42 @@ public class NovaVNCConsole implements VNCConsole {
 		return Objects.toStringHelper(this).omitNullValues().add("type", type).add("url", url).toString();
 	}
 
-	public static String getJSONAction(Type type) {
-		return String.format((type == Type.SPICE) ? JSON_SPICE_FORMAT : JSON_REQ_FORMAT, type.value());
+	public static NovaConsole getConsoleForType(Type type) {
+	    if (type == Type.SPICE) 
+	        return new NovaConsoleSPICE(type);
+	    
+	    return new NovaConsoleVNC(type);
 	}
+	
+	public static class NovaConsole implements ModelEntity {
+
+        private static final long serialVersionUID = 1L;
+	    
+        @JsonProperty("type")
+        protected String type;
+        
+        public NovaConsole(Type type) {
+            this.type = type.value();
+        }
+	}
+	
+	@JsonRootName("os-getVNCConsole")
+	public static class NovaConsoleVNC extends NovaConsole {
+
+        private static final long serialVersionUID = 1L;
+
+        public NovaConsoleVNC(Type type) {
+            super(type);
+        }
+	}
+	
+	@JsonRootName("os-getSPICEConsole")
+    public static class NovaConsoleSPICE extends NovaConsole {
+
+        private static final long serialVersionUID = 1L;
+
+        public NovaConsoleSPICE(Type type) {
+            super(type);
+        }
+    }
 }
