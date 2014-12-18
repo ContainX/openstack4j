@@ -266,7 +266,9 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         if (type == null)
             type = Type.NOVNC;
 
-        return post(NovaVNCConsole.class, uri("/servers/%s/action", serverId)).json(NovaVNCConsole.getJSONAction(type)).execute();
+        return post(NovaVNCConsole.class, uri("/servers/%s/action", serverId))
+                    .entity(NovaVNCConsole.getConsoleForType(type))
+                    .execute();
     }
 
     /**
