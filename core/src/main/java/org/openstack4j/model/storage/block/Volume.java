@@ -26,7 +26,7 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * 
 	 */
 	public enum Status {
-		AVAILABLE, ATTACHING, BACKING_UP, CREATING, DELETING, DOWNLOADING, ERROR, ERROR_DELETING, ERROR_RESTORING, IN_USE, RESTORING_BACKUP, UNRECOGNIZED;
+		AVAILABLE, ATTACHING, BACKING_UP, CREATING, DELETING, DOWNLOADING, UPLOADING, ERROR, ERROR_DELETING, ERROR_RESTORING, IN_USE, RESTORING_BACKUP, UNRECOGNIZED;
 		
 		@JsonValue
 		public String value() {
@@ -46,6 +46,34 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 				return UNRECOGNIZED;
 			}
 		}
+	}
+	
+	public enum MigrationStatus {
+	    NONE, MIGRATING
+	    ;
+	    
+	    @JsonValue
+        public String value() {
+            return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, name());
+        }
+	    
+	    @Override
+        public String toString() {
+            return value();
+        }
+
+        @JsonCreator
+        public static MigrationStatus fromValue(String migrationStatus) {
+            if (migrationStatus != null)
+            {
+                try {
+                    return valueOf(CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_UNDERSCORE, checkNotNull(migrationStatus, "migrationStatus")));
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                }
+            }
+            return NONE;
+        }
 	}
 	
 	/**
@@ -107,9 +135,14 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return extended meta data information. key value pair of String key, String value
 	 */
 	Map<String, String> getMetaData();
+	
 	/**
-	 * @author octopus zhang
 	 * @return volume attachment data information. 
 	 */
 	List<? extends VolumeAttachment> getAttachments();
+
+	/**
+	 * @return the status of volume migrate status, default null
+	 */
+	MigrationStatus getMigrateStatus();
 }

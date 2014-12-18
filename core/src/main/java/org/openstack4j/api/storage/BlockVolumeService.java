@@ -6,6 +6,8 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
+import org.openstack4j.model.storage.block.VolumeUploadImage;
+import org.openstack4j.model.storage.block.options.UploadImageData;
 
 /**
  * Manages Volumes and Volume Type based operations against Block Storage (Cinder)
@@ -60,6 +62,15 @@ public interface BlockVolumeService extends RestService {
 	Volume create(Volume volume);
 	
 	/**
+	 * Uploads a volume to the image service
+	 * 
+	 * @param volumeId the volume identifier to upload
+	 * @param data the data about the volume being uploaded (required)
+	 * @return the volume upload image containing the current status
+	 */
+	VolumeUploadImage uploadToImage(String volumeId, UploadImageData data);
+	
+	/**
 	 * OpenStack only allows name or description to be updated. This call enforces that based on the API docs.
 	 * 
 	 * @param volumeId the volume id
@@ -69,4 +80,13 @@ public interface BlockVolumeService extends RestService {
 	 */
 	ActionResponse update(String volumeId, String name, String description);
 
+	/**
+	 * migrate a volume to another host and service
+	 *
+	 * @param volumeId the volume id
+	 * @param forceHostCopy
+	 * @param hostService the destination host and service ,like kvmnode002021.cnsuning.com@lvmdriver
+	 * @return the action response
+	 */
+	ActionResponse migrate(String volumeId, String hostService, boolean forceHostCopy);
 }

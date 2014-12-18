@@ -2,12 +2,24 @@ package org.openstack4j.core.transport.internal;
 
 
 /**
- * This class is only here as a place marker for user who were previously using it to turn on filtering.  It will be deprecated and removed
- * soon with new hooks to turn logging on/off.  
+ * Handles turning Http Wire logging on/off for supported connectors.  Some connectors need have specific registration and use this class
+ * to determine if wire logging is enabled
  * 
- * We are now using Jersey's logging filer
+ * @author Jeremy Unruh
  */
 public final class HttpLoggingFilter {
 
     private HttpLoggingFilter() { }
+    
+    public static void toggleLogging(boolean isEnabled) {
+        System.getProperties().setProperty(HttpLoggingFilter.class.getName(), String.valueOf(isEnabled));
+        System.setProperty("org.apache.commons.logging.Log","org.apache.commons.logging.impl.SimpleLog");
+        System.setProperty("org.apache.commons.logging.simplelog.showdatetime", "true");
+        System.setProperty("org.apache.commons.logging.simplelog.log.org.apache.http", isEnabled ? "DEBUG" : "WARN");
+        System.setProperty("org.apache.commons.logging.simplelog.log.httpclient.wire", "ERROR");
+    }
+    
+    public static boolean isLoggingEnabled() {
+        return Boolean.getBoolean(HttpLoggingFilter.class.getName());
+    }
 }

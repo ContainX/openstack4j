@@ -27,6 +27,7 @@ import org.openstack4j.model.network.builder.NetQuotaBuilder;
 import org.openstack4j.model.network.builder.NetSecurityGroupBuilder;
 import org.openstack4j.model.network.builder.NetSecurityGroupRuleBuilder;
 import org.openstack4j.model.network.builder.NetworkBuilder;
+import org.openstack4j.model.network.builder.NetworkUpdateBuilder;
 import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.model.network.builder.RouterBuilder;
 import org.openstack4j.model.network.builder.SubnetBuilder;
@@ -53,6 +54,7 @@ import org.openstack4j.openstack.networking.domain.NeutronExtraDhcpOptCreate;
 import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
 import org.openstack4j.openstack.networking.domain.NeutronNetQuota;
 import org.openstack4j.openstack.networking.domain.NeutronNetwork;
+import org.openstack4j.openstack.networking.domain.NeutronNetworkUpdate;
 import org.openstack4j.openstack.networking.domain.NeutronPort;
 import org.openstack4j.openstack.networking.domain.NeutronRouter;
 import org.openstack4j.openstack.networking.domain.NeutronSecurityGroup;
@@ -297,6 +299,14 @@ public class Builders {
      */
     public static NetQuotaBuilder netQuota() {
         return NeutronNetQuota.builder();
+    }
+    
+    /**
+     * The builder to update a network
+     * @return the NetworkUpdateBuilder
+     */
+    public static NetworkUpdateBuilder networkUpdate() {
+        return NeutronNetworkUpdate.builder();
     }
 
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.ClientConstants;
+import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpRequest.RequestBuilder;
@@ -154,9 +155,9 @@ public class BaseOpenStackService {
             return execute(null);
         }
 
-        public R execute(Function<HttpResponse, R> parser) {
+        public R execute(ExecutionOptions<R> options) {
             HttpRequest<R> request = req.build();
-            return HttpExecutor.create().execute(request).getEntity(request.getReturnType(), parser);
+            return HttpExecutor.create().execute(request).getEntity(request.getReturnType(), options);
         }
 
         public HttpResponse executeWithResponse() {

@@ -9,7 +9,7 @@ import com.google.common.base.Objects;
 
 /**
  * return a description for this volume attachment job
- * 
+ *
  * @author Octopus Zhang
  */
 @JsonRootName("volumeAttachment")
@@ -29,16 +29,17 @@ public class NovaVolumeAttachment implements VolumeAttachment {
 
 	@JsonProperty
 	private String volumeId;
-	
+
 	public NovaVolumeAttachment() {
 	}
-	
-	private NovaVolumeAttachment(String volumeId) {
-	    this.volumeId = volumeId;
-	}
-	
-	public static NovaVolumeAttachment create(String volumeId) {
-	    return new NovaVolumeAttachment(volumeId);
+
+    private NovaVolumeAttachment(String volumeId, String device) {
+        this.volumeId = volumeId;
+        this.device = device;
+    }
+
+	public static NovaVolumeAttachment create(String volumeId, String device) {
+	    return new NovaVolumeAttachment(volumeId, device);
 	}
 
 	@Override

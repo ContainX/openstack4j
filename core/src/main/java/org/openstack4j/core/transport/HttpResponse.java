@@ -3,8 +3,6 @@ package org.openstack4j.core.transport;
 import java.io.InputStream;
 import java.util.Map;
 
-import com.google.common.base.Function;
-
 /**
  * Wraps a Response from the Jersey Client
  * 
@@ -26,10 +24,10 @@ public interface HttpResponse {
 	 *
 	 * @param <T> the generic type
 	 * @param returnType the return type
-	 * @param parser an optional parser which will handle the HttpResponse and return the corresponding return type.  Error codes are handled and thrown prior to the parser being called
+	 * @param options execution options
 	 * @return the entity
 	 */
-	<T> T getEntity(Class<T> returnType, Function<HttpResponse, T> parser);
+	<T> T getEntity(Class<T> returnType, ExecutionOptions<T> options);
 	
 	/**
 	 * Reads the entity as is into the specified type without any exception mapping 

@@ -80,6 +80,20 @@ public interface OSClient {
 	 * @return true if supports Heat
 	 */
 	boolean supportsHeat();
+	
+	/**
+     * Determines if the Block Storage (Cinder) service is supported
+     * 
+     * @return true if supports Block Storage
+     */
+    boolean supportsBlockStorage();
+    
+    /**
+     * Determines if the Object Storage (Swift) service is supported
+     * 
+     * @return true if supports Object Storage
+     */
+    boolean supportsObjectStorage();
 
 	/**
 	 * Gets the token that was assigned during authorization

@@ -9,7 +9,7 @@ import org.openstack4j.model.common.Link;
 /**
  * This interface describes the getter-methods (and thus components) of a event.
  * All getters map to the possible return values of
- * <code> Get /v1/​{tenant_id}​/stacks/​{stack_name}​/​{stack_id}​/resources/​{resource_name}​/events/​{event_id}​</code>
+ * <code> Get /v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}/events/{event_id}</code>
  * 
  * @see http://developer.openstack.org/api-ref-orchestration-v1.html
  * 

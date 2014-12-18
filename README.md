@@ -27,16 +27,6 @@ Maven
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.pacesys/openstack4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.pacesys/openstack4j)
 
-```xml
-<dependency>
-    <groupId>org.pacesys</groupId>
-    <artifactId>openstack4j</artifactId>
-    <version>1.0.2</version>
-</dependency>
-```
-
-#### Current (Master Branch)
-
 OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the ability to choose the connector that you would like to use in your environment.  
 
 **Using OpenStack4j with the default Jersey2 Connector**
@@ -44,13 +34,25 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
 **Using OpenStack4j with one of our connector modules**
 
 To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/gondor/openstack4j/tree/master/connectors)
+
+#### Current (Master Branch)
+
+See notes above about connectors (same rules apply) to development branches.  
+
+```xml
+<dependency>
+    <groupId>org.pacesys</groupId>
+    <artifactId>openstack4j</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
+</dependency>
+```
 
 **A note about referencing Snapshots without Source**
 

@@ -7,8 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openstack4j.api.Apis;
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.api.compute.ext.InterfaceService;
+import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
@@ -286,10 +290,10 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      * {@inheritDoc}
      */
     @Override
-    public VolumeAttachment attachVolume(String serverId, String volumeId) {
+    public VolumeAttachment attachVolume(String serverId, String volumeId, String device) {
         return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId))
-                .entity(NovaVolumeAttachment.create(volumeId))
-                .execute();
+                .entity(NovaVolumeAttachment.create(volumeId, device))
+                .execute(ExecutionOptions.<NovaVolumeAttachment>create(PropagateOnStatus.on(404)));
     }
 
     /**
@@ -301,6 +305,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
                    delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).executeWithResponse()
                 );
     }
+    
     /**
      * {@inheritDoc}
      */
@@ -407,5 +412,10 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(options);
 
         return put(NovaServer.class, uri("/servers/%s", serverId)).entity(NovaServerUpdate.fromOptions(options)).execute();
+    }
+
+    @Override
+    public InterfaceService interfaces() {
+        return Apis.get(InterfaceService.class);
     }
 }

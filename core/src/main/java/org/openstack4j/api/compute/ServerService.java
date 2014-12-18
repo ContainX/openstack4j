@@ -4,14 +4,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
+import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.ServerUpdateOptions;
 import org.openstack4j.model.compute.VNCConsole;
-import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.actions.BackupOptions;
@@ -209,10 +210,10 @@ public interface ServerService {
      * 
      * @param serverId the server identifier
      * @param volumeId the volume identifier
-     * @author octopus zhang
+     * @param device the device to attach the volume to, ex /dev/vda
      * @return volumeAttachment or null if not applicable
      */
-    VolumeAttachment attachVolume(String serverId, String volumeId);
+    VolumeAttachment attachVolume(String serverId, String volumeId, String device);
     
     /**
      * Changes the admin/root password on the server
@@ -231,7 +232,7 @@ public interface ServerService {
      * @return the action response
      */
     ActionResponse detachVolume(String serverId,String attachmentId);
-
+    
     /**
      * Only user with admin role can do this.
      * Migrate a server. The new host will be selected by the scheduler.  Until a resize event is confirmed {@link #confirmResize(String)}, the old server
@@ -304,4 +305,10 @@ public interface ServerService {
      * @return the updated server
      */
     Server update(String serverId, ServerUpdateOptions options);
+    
+    /**
+     * The interface attachment service extension (os-interface)
+     * @return the interface service
+     */
+    InterfaceService interfaces();
 }

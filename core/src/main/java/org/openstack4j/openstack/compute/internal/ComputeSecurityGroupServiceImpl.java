@@ -35,7 +35,7 @@ public class ComputeSecurityGroupServiceImpl extends BaseComputeServices impleme
 	@Override
 	public List<? extends SecGroupExtension> listServerGroups(String serverId) {
 		checkNotNull(serverId);
-		return get(SecurityGroups.class, uri("/os-security-groups/servers/​%s/os-security-groups", serverId)).execute().getList();
+		return get(SecurityGroups.class, uri("/os-security-groups/servers/%s/os-security-groups", serverId)).execute().getList();
 	}
 
 	/**

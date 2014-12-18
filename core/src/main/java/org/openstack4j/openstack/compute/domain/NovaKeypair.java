@@ -23,6 +23,8 @@ public class NovaKeypair implements Keypair {
 	private String name;
 	@JsonProperty("public_key")
 	private String publicKey;
+	@JsonProperty("private_key")
+	private String privateKey;
 	private String fingerprint;
 	
 	/**
@@ -54,6 +56,14 @@ public class NovaKeypair implements Keypair {
 	public String getPublicKey() {
 		return publicKey;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+    public String getPrivateKey() {
+        return privateKey;
+    }
 
 	/**
 	 * {@inheritDoc}
@@ -69,7 +79,7 @@ public class NovaKeypair implements Keypair {
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-				     .add("name", name).add("public_key", publicKey).add("fingerprint", fingerprint).toString();
+				     .add("name", name).add("public_key", publicKey).add("private_key",  privateKey).add("fingerprint", fingerprint).toString();
 	}
 	
 	public static class Keypairs extends ListResult<NovaKeypair> {
@@ -97,5 +107,4 @@ public class NovaKeypair implements Keypair {
 		}
 		
 	}
-	
 }
