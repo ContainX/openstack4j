@@ -44,7 +44,16 @@ public interface BlockVolumeService extends RestService {
 	 * @return the action response
 	 */
 	ActionResponse delete(String volumeId);
-	
+
+	/**
+	 * Attempt forced removal of volume, regardless of the state.
+	 * It's dangerous but useful. It's not 100% success.
+	 * 
+	 * @param volumeId the volume id
+	 * @return the action response
+	 */
+	ActionResponse forceDelete(String volumeId);
+
 	/**
 	 * Creates a new Block Storage Volume
 	 * @param volume the volume for create
