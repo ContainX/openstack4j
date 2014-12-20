@@ -41,4 +41,11 @@ public interface User extends ModelEntity, Buildable<UserBuilder> {
 	 */
 	boolean isEnabled();
 	
+	/**
+	 * The domain identifier of the user.  Only available if using V3
+	 * 
+	 * @return the domain identifier or null
+	 */
+	String getDomainId();
+	
 }
