@@ -23,15 +23,15 @@ branch and include relevant tests, if applicable.
 
 Code should compile and tests should pass under all Java versions 
 which the OpenStack4j currently supports.  Currently we support
-a minimum version of Java 5.
+a minimum version of Java 6.
 
-Please insure all code is formatted like the rest of the API, well documented and same patterns applied.
+Please insure all code is formatted like the rest of the API, well documented and same patterns applied. When configuring your IDE workspace make sure tabs are represented as spaces.
 
 Chat With Me
 ------------
 
 If you want to work on something or have questions / complaints please reach
-out to me by creating a Question issue at (https://github.com/gondor/openstack4j/issues/new).
+out to me by creating a Question issue at (https://github.com/gondor/openstack4j/issues/new) or better yet join our group at (http://groups.google.com/group/openstack4j)
 
 Thank you for your support!
 
