@@ -31,7 +31,7 @@ Chat With Me
 ------------
 
 If you want to work on something or have questions / complaints please reach
-out to me by creating a Question issue at (https://github.com/gondor/openstack4j/issues/new) or better yet join our group at (http://groups.google.com/group/openstack4j)
+out to me by creating a Question issue at https://github.com/gondor/openstack4j/issues/new or better yet join our group at http://groups.google.com/group/openstack4j
 
 Thank you for your support!
 
