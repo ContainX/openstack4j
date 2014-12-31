@@ -29,10 +29,10 @@ public class HeatStackCreate implements StackCreate {
 	private Map<String, String> parameters;
 	@JsonProperty("timeout_mins")
 	private Long timeoutMins;
-
-	// To be added in the future
-	// @JsonProperty("environment")
-	// @JsonProperty("files")
+	@JsonProperty("environment")
+	private String environment;
+	@JsonProperty("files")
+	private Map<String, String> files;
 
 	/**
 	 * Returnes a {@link HeatStackCreateConcreteBuilder} for configuration and
@@ -71,6 +71,14 @@ public class HeatStackCreate implements StackCreate {
 
 	public String getTempateURL() {
 	    return templateURL;
+	}
+	
+	public String environment(){
+	    return environment;
+	}
+	
+	public Map<String, String> files() {
+	    return files;
 	}
 	
 	/**
