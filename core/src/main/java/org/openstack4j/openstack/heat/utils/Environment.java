@@ -39,6 +39,9 @@ public class Environment {
         return (Map<String, String>) content.get("resource_registry");
     }
 
+    /*
+     * Processing the template files located in the resource_registry part in the environment file
+     */
     private void getFileContent() 
             throws JsonParseException, MalformedURLException, UnsupportedEncodingException, IOException, URISyntaxException {
         Map<String, String> rr = getResourceRegistry();
