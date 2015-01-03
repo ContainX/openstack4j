@@ -48,6 +48,10 @@ public interface StackCreateBuilder extends Buildable.Builder<StackCreateBuilder
 	 * @return the modified StackCreateBuilder
 	 */
 	StackCreateBuilder disableRollback(boolean disableRollback);
+
+    StackCreateBuilder enviornment(String enviornment);
+
+    StackCreateBuilder enviornmentFromFile(String envFile);
 	
 
 }

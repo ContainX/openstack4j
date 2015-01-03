@@ -154,10 +154,25 @@ public class HeatStackCreate implements StackCreate {
            return this;
         }
         
+        public StackCreateBuilder templateFromFile(String tplFile) {
+            return this;
+        }
+        
         @Override
         public StackCreateBuilder templateURL(String templateURL) {
            model.templateURL = templateURL;
            return this;
+        }
+        
+        @Override
+        public StackCreateBuilder enviornment(String environment){
+            model.environment = environment;
+            return this;
+        }
+        
+        @Override
+        public StackCreateBuilder enviornmentFromFile(String envFile){
+            return this;
         }
 
 	}
