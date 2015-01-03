@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.openstack4j.model.heat.StackCreate;
@@ -39,7 +40,7 @@ public class HeatStackCreate implements StackCreate {
 	@JsonProperty("environment")
 	private String environment;
 	@JsonProperty("files")
-	private Map<String, String> files;
+	private Map<String, String> files = new HashMap<String, String>();
 
 	/**
 	 * Returnes a {@link HeatStackCreateConcreteBuilder} for configuration and
