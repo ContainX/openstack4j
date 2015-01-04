@@ -49,9 +49,25 @@ public interface StackCreateBuilder extends Buildable.Builder<StackCreateBuilder
 	 */
 	StackCreateBuilder disableRollback(boolean disableRollback);
 
-    StackCreateBuilder enviornment(String enviornment);
+	 /**
+     * Sets the environment in YAML/JSON format.
+     * @param environment the environment
+     * @return StackCreateBuilder
+     */
+    StackCreateBuilder environment(String environment);
 
-    StackCreateBuilder enviornmentFromFile(String envFile);
+    /**
+    * Sets the environment in YAML/JSON format.
+    * @param environment file location
+    * @return StackCreateBuilder
+    */
+    StackCreateBuilder environmentFromFile(String envFile);
+
+    /**
+    * Sets the template in YAML/JSON format.
+    * @param template file location
+    * @return StackCreateBuilder
+    */
+    StackCreateBuilder templateFromFile(String tplFile);
 	
-
 }

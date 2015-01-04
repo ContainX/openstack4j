@@ -163,11 +163,12 @@ public class HeatStackCreate implements StackCreate {
            return this;
         }
         
+        @Override
         public StackCreateBuilder templateFromFile(String tplFile) {
             try {
                 Template tpl = new Template(tplFile);
                 model.template = tpl.getTplContent();
-                model.getFiles().putAll(tpl.getFiles());
+                model.files.putAll(tpl.getFiles());
             } catch (JsonParseException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -194,17 +195,17 @@ public class HeatStackCreate implements StackCreate {
         }
         
         @Override
-        public StackCreateBuilder enviornment(String environment){
+        public StackCreateBuilder environment(String environment){
             model.environment = environment;
             return this;
         }
         
         @Override
-        public StackCreateBuilder enviornmentFromFile(String envFile){
+        public StackCreateBuilder environmentFromFile(String envFile){
             try {
                 Environment env = new Environment(envFile);
                 model.environment = env.getEnvContent();
-                model.getFiles().putAll(env.getFiles());
+                model.files.putAll(env.getFiles());
             } catch (JsonParseException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
