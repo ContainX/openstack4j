@@ -1,11 +1,19 @@
 package org.openstack4j.openstack.heat.domain;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.builder.StackCreateBuilder;
+import org.openstack4j.openstack.heat.utils.Environment;
+import org.openstack4j.openstack.heat.utils.Template;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParseException;
 
 /**
  * This class contains all elements required for the creation of a HeatStack. It
@@ -29,10 +37,10 @@ public class HeatStackCreate implements StackCreate {
 	private Map<String, String> parameters;
 	@JsonProperty("timeout_mins")
 	private Long timeoutMins;
-
-	// To be added in the future
-	// @JsonProperty("environment")
-	// @JsonProperty("files")
+	@JsonProperty("environment")
+	private String environment;
+	@JsonProperty("files")
+	private Map<String, String> files = new HashMap<String, String>();
 
 	/**
 	 * Returnes a {@link HeatStackCreateConcreteBuilder} for configuration and
@@ -72,6 +80,15 @@ public class HeatStackCreate implements StackCreate {
 	public String getTempateURL() {
 	    return templateURL;
 	}
+	
+	public String getEnvironment(){
+	    return environment;
+	}
+	
+	public Map<String, String> getFiles() {
+	    return files;
+	}
+	
 	
 	/**
 	 * A Builder to create a HeatStack. Use {@link #build()} to receive the
@@ -147,9 +164,65 @@ public class HeatStackCreate implements StackCreate {
         }
         
         @Override
+        public StackCreateBuilder templateFromFile(String tplFile) {
+            try {
+                Template tpl = new Template(tplFile);
+                model.template = tpl.getTplContent();
+                model.files.putAll(tpl.getFiles());
+            } catch (JsonParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return this;
+        }
+        
+        @Override
         public StackCreateBuilder templateURL(String templateURL) {
            model.templateURL = templateURL;
            return this;
+        }
+        
+        @Override
+        public StackCreateBuilder environment(String environment){
+            model.environment = environment;
+            return this;
+        }
+        
+        @Override
+        public StackCreateBuilder environmentFromFile(String envFile){
+            try {
+                Environment env = new Environment(envFile);
+                model.environment = env.getEnvContent();
+                model.files.putAll(env.getFiles());
+            } catch (JsonParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (URISyntaxException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return this;
         }
 
 	}
