@@ -73,4 +73,10 @@ public class StackServiceImpl extends BaseHeatServices implements StackService {
                         .entity(stackUpdate)
                         .executeWithResponse());
     }
+
+    @Override
+    public Stack findStack(String stackName) {
+        checkNotNull(stackName);
+        return get(HeatStack.class, uri("/stacks/%s", stackName)).execute();
+    }
 }

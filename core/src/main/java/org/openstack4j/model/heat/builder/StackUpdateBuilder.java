@@ -40,4 +40,10 @@ public interface StackUpdateBuilder extends Buildable.Builder<StackUpdateBuilder
      */
     StackUpdateBuilder timeoutMins(Long timeoutMins);
 
+    StackUpdateBuilder environment(String environment);
+
+    StackUpdateBuilder environmentFromFile(String envFile);
+
+    StackUpdateBuilder templateFromFile(String tplFile);
+
 }
