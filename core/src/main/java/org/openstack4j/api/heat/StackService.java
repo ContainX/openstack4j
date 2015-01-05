@@ -55,6 +55,14 @@ public interface StackService {
 			boolean disableRollback, Long timeOutMins);
 
 	/**
+     * returns details of a {@link Stack}.
+     * @param stackName
+     *            Name of {@link Stack}
+     * @return {@link Stack}
+     */
+	Stack findStack(String name);
+	
+	/**
 	 * Gets a list of currently existing {@link Stack}s.
 	 * 
 	 * @return the list of {@link Stack}s
