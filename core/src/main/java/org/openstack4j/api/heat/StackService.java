@@ -60,7 +60,7 @@ public interface StackService {
      *            Name of {@link Stack}
      * @return {@link Stack}
      */
-	Stack findStack(String name);
+	Stack getStackByName(String name);
 	
 	/**
 	 * Gets a list of currently existing {@link Stack}s.

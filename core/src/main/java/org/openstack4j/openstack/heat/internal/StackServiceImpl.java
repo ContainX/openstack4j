@@ -75,7 +75,7 @@ public class StackServiceImpl extends BaseHeatServices implements StackService {
     }
 
     @Override
-    public Stack findStack(String stackName) {
+    public Stack getStackByName(String stackName) {
         checkNotNull(stackName);
         return get(HeatStack.class, uri("/stacks/%s", stackName)).execute();
     }
