@@ -30,7 +30,9 @@ public class TemplateUtils {
     
     public static URL normaliseFilePathToUrl(String path) 
             throws MalformedURLException, URISyntaxException {
-        if(path.startsWith("file:") || path.startsWith("http:")) {
+        if(path.startsWith("file:") 
+                || path.startsWith("http:") 
+                || path.startsWith("https:")) {
             return new URI(path).toURL();
         } else {
             return new File(path).toURI().toURL();
