@@ -44,7 +44,7 @@ public class Template {
         @SuppressWarnings("unchecked")
         Map<String, Object> content = (Map<String, Object>) yaml.load(getTplContent());
         try {
-            resolveTempalteGetFiles(content);
+            resolveTemplateGetFiles(content);
             resolveTemplateType(content);
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,7 +79,6 @@ public class Template {
                 }
             }
             
-            
             if (value instanceof Map<?,?>){
                 resolveTemplateType((Map<?,?>)value);
             } else if (value instanceof List<?>) {
@@ -92,7 +91,7 @@ public class Template {
         }
     }
     
-    private void resolveTempalteGetFiles(Map<?,?> map) throws IOException  {
+    private void resolveTemplateGetFiles(Map<?,?> map) throws IOException  {
         for(Object key : map.keySet()){
             // Ignore if the key is not string. Actually not happening
             if(!(key instanceof String)) {
@@ -111,11 +110,11 @@ public class Template {
             
             Object subMap = map.get(skey);
             if (subMap instanceof Map<?,?>){
-                resolveTempalteGetFiles((Map<?,?>)subMap);
+                resolveTemplateGetFiles((Map<?,?>)subMap);
             } else if (subMap instanceof List<?>) {
                 for (Object item : (List<?>) subMap) {
                     if (item instanceof Map<?, ?>) {
-                        resolveTempalteGetFiles((Map<?, ?>) item);
+                        resolveTemplateGetFiles((Map<?, ?>) item);
                     }
                 }
             }
@@ -158,5 +157,4 @@ public class Template {
     public void setFiles(Map<String, String> files) {
         this.files = files;
     }
-       
 }

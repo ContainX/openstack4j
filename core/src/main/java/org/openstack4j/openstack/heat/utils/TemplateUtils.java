@@ -1,11 +1,15 @@
 package org.openstack4j.openstack.heat.utils;
 
+import static org.openstack4j.core.transport.ClientConstants.URI_SEP;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+
+import org.openstack4j.core.transport.ClientConstants;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
@@ -21,9 +25,9 @@ public class TemplateUtils {
     }
     
     public static URL baseUrl(String url) throws MalformedURLException {
-        String baseUrl =  url.substring(0, url.lastIndexOf("/") + 1);
-        if(! baseUrl.endsWith("/")) {
-            baseUrl += "/";
+        String baseUrl =  url.substring(0, url.lastIndexOf(URI_SEP) + 1);
+        if(! baseUrl.endsWith(URI_SEP)) {
+            baseUrl += URI_SEP;
         }
         return new URL(baseUrl);
     }
