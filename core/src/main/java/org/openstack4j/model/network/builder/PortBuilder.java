@@ -66,6 +66,26 @@ public interface PortBuilder extends Builder<PortBuilder, Port> {
    */
 	PortBuilder removeFixedIp(String address, String subnetId);
 	
+	
+	/**
+   * Adds an allowed address pair to the current list of allowed addresses
+   * @param address the Subnet Address (i.e. 192.168.1.0/24)
+   * @return PortBuilder
+   * @see Port#getAllowedAddressPairs()
+   */
+	PortBuilder allowedAddressPair(String address);
+	
+	
+
+  /**
+   * Removes an allowed address pair from the current list of allowed addresses
+   * @param address the Subnet Address (i.e. 192.168.1.0/24)
+   * @return PortBuilder
+   * @see Port#getAllowedAddressPairs()
+   */
+	PortBuilder removeAddressPair(String address);
+	
+	
 	/**
 	 * @see Port#isAdminStateUp()
 	 */

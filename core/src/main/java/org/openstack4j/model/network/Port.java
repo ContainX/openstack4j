@@ -43,6 +43,8 @@ public interface Port extends Resource, Buildable<PortBuilder> {
    * @return the set of fixed IPs this port has been assigned
    */
   Set<? extends IP> getFixedIps();
+  
+  Set<? extends AllowedAddressPair> getAllowedAddressPairs();
 
   /**
    * @return the MacAddress of this port
