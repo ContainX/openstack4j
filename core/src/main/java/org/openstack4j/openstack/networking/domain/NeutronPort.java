@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.openstack4j.model.common.builder.ResourceBuilder;
+import org.openstack4j.model.network.AllowedAddressPair;
 import org.openstack4j.model.network.ExtraDhcpOptCreate;
 import org.openstack4j.model.network.IP;
 import org.openstack4j.model.network.Port;
@@ -45,6 +46,9 @@ public class NeutronPort implements Port {
 
 	@JsonProperty("fixed_ips")
 	private Set<NeutronIP> fixedIps;
+	
+	@JsonProperty("allowed_address_pairs")
+	private Set<NeutronAllowedAddressPair> allowedAddressPairs;
 
 	@JsonProperty("mac_address")
 	private String macAddress;
@@ -61,7 +65,7 @@ public class NeutronPort implements Port {
 	@JsonProperty("security_groups")
 	private List<String> securityGroups;
 	
-        @JsonProperty("extra_dhcp_opts")
+	@JsonProperty("extra_dhcp_opts")
 	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates = Lists.newArrayList();
         
 	public static PortBuilder builder() {
@@ -144,6 +148,14 @@ public class NeutronPort implements Port {
 	public Set<? extends IP> getFixedIps() {
 		return fixedIps;
 	}
+	
+	/**
+   * {@inheritDoc}
+   */
+  @Override
+  public Set<? extends AllowedAddressPair> getAllowedAddressPairs() {
+    return allowedAddressPairs;
+  }
 
 	/**
 	 * {@inheritDoc}
@@ -194,6 +206,7 @@ public class NeutronPort implements Port {
 				    .add("id", id).add("name", name).add("adminStateUp", adminStateUp).add("deviceId", deviceId)
 				    .add("deviceOwner", deviceOwner).add("fixedIps", fixedIps).add("macAddress", macAddress)
 				    .add("networkId", networkId).add("tenantId", tenantId).add("securityGroups", securityGroups)
+				    .add("allowed_address_pairs", allowedAddressPairs)
 				    .toString();
 	}
 	
@@ -271,6 +284,33 @@ public class NeutronPort implements Port {
       
       return this;
     }
+    
+    @Override
+    public PortBuilder allowedAddressPair(String address) {
+      if (m.allowedAddressPairs == null)
+        m.allowedAddressPairs = Sets.newHashSet();
+      
+      m.allowedAddressPairs.add(new NeutronAllowedAddressPair(address));
+      return this;
+    }
+    
+    @Override
+    public PortBuilder removeAddressPair(String address) {
+      if (m.allowedAddressPairs == null)
+        m.allowedAddressPairs = Sets.newHashSet();
+      
+      Iterator<NeutronAllowedAddressPair> iter = m.allowedAddressPairs.iterator();
+      
+      while (iter.hasNext()) {
+        NeutronAllowedAddressPair allowedAddress = iter.next();
+        if (allowedAddress.getIpAddress() != null && allowedAddress.getIpAddress().equals(address)) {
+          iter.remove();
+        }
+      }
+      
+      return this;
+    }
+    
 
 		@Override
 		public PortBuilder adminState(boolean adminStateUp) {
@@ -300,11 +340,11 @@ public class NeutronPort implements Port {
 			return m;
 		}
 
-                @Override
-                public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
-                        m.extraDhcpOptCreates.add((NeutronExtraDhcpOptCreate)extraDhcpOptCreate);
-                        return this;
-                }
+    @Override
+    public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
+            m.extraDhcpOptCreates.add((NeutronExtraDhcpOptCreate)extraDhcpOptCreate);
+            return this;
+    }
 
 		@Override
 		public PortBuilder securityGroup(String groupName) {
@@ -314,9 +354,5 @@ public class NeutronPort implements Port {
 			m.securityGroups.add(groupName);
 			return this;
 		}
-		
-		
-                
-                
 	}
 }
