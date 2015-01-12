@@ -1,6 +1,29 @@
 # Change Log
 
-### 2.0.0-SNAPSHOT
+### 2.0.2-SNAPSHOT
+
+### 2.0.1
+
+##### Enhancements/Improvements
+
+* Issue #182 - os-availability-zone support
+* Issue #175 - Implement os-floating-ip-dns resource
+* Issue #174 - Neutron: Ability to set DNS Nameserver and Host Route within SubnetBuilder  
+* Issue #173 - Ceilometer: Ability to specify 'project' in obtaining samples using SampleCriteria
+* Issue #171 - Upload volume to image  
+* Issue #169 - Update a neutron network
+* Issue #165 - volume migrate and force delete support  
+* Issue #164 - Interface attachment support
+
+##### Fixes
+
+* Issue #181 - Can't get VNCConsoleURL using RestEasy connector
+* Issue #172 - ClassCastException with HttpClient-2.0.1 connecter while downloading image
+* Issue #163  - State vs Status in the NeutronPort
+* Issue #161  - Issue with attaching a Volume
+* Issue #160 - Adding users to a tenant is not working
+
+### 2.0.0
 
 ##### Enhancements/Improvements
 
