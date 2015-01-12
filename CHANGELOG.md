@@ -11,6 +11,7 @@
 ##### Enhancements/Improvements
 
 * Issue #182 - os-availability-zone support
+* Issue #177 - Heat: Nested template support - Thanks @magixyu 
 * Issue #175 - Implement os-floating-ip-dns resource
 * Issue #174 - Neutron: Ability to set DNS Nameserver and Host Route within SubnetBuilder  
 * Issue #173 - Ceilometer: Ability to specify 'project' in obtaining samples using SampleCriteria
