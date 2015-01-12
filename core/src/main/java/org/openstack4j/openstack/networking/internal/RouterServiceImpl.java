@@ -10,7 +10,9 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.AttachInterfaceType;
 import org.openstack4j.model.network.Router;
 import org.openstack4j.model.network.RouterInterface;
+import org.openstack4j.model.network.builder.RouterBuilder;
 import org.openstack4j.openstack.networking.domain.AddRouterInterfaceAction;
+import org.openstack4j.openstack.networking.domain.NeutronHostRoute;
 import org.openstack4j.openstack.networking.domain.NeutronRouter;
 import org.openstack4j.openstack.networking.domain.NeutronRouter.Routers;
 import org.openstack4j.openstack.networking.domain.NeutronRouterInterface;
@@ -73,8 +75,18 @@ public class RouterServiceImpl extends BaseNetworkingServices implements RouterS
 	public Router update(Router router) {
 		checkNotNull(router);
 		checkNotNull(router.getId());
+		
+		RouterBuilder rb = NeutronRouter.builder().name(router.getName()).adminStateUp(router.isAdminStateUp()).externalGateway(router.getExternalGatewayInfo());
+		List<NeutronHostRoute> routes = (List<NeutronHostRoute>) router.getRoutes();
+		
+		if (routes != null) {
+		  for (NeutronHostRoute route : routes) {
+		    rb.route(route.getDestination(), route.getNexthop());
+		  }
+		}
+		
 		return put(NeutronRouter.class, uri("/routers/%s", router.getId()))
-				     .entity(NeutronRouter.builder().name(router.getName()).adminStateUp(router.isAdminStateUp()).externalGateway(router.getExternalGatewayInfo()).build())
+				     .entity(rb.build())
 				     .execute();
 	}
 
