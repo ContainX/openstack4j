@@ -81,7 +81,7 @@
 * Issue #93 - Error listing images (Error reading entity from input stream)
 * Issue #92 - Problems in deserializing an object (Heat Stack)
 * Issue #91 - Implementation of the method "getHosts()" in the class availabilityZoneList
-* Issue #90 - Volume Status "downloading" not regonized
+* Issue #90 - Volume Status "downloading" not recognized
 * Issue #75 - NPE in NeutronNetwork
 * Issue #20 - Glance - creating a large image throws out of memory error
 
