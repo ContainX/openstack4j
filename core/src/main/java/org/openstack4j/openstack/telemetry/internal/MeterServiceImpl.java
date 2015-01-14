@@ -62,6 +62,7 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
         }
         
         CeilometerSample[] samples = invocation.execute();
+        //return the wrap list
         return wrapList(samples);
     }
 
