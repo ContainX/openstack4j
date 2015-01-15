@@ -9,6 +9,7 @@ import org.openstack4j.api.identity.TenantService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.identity.Tenant;
 import org.openstack4j.model.identity.TenantUser;
+import org.openstack4j.openstack.common.functions.OneOrNull;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant.Tenants;
 import org.openstack4j.openstack.identity.domain.KeystoneTenantUser.TenantUsers;
@@ -31,7 +32,8 @@ public class TenantServiceImpl extends BaseOpenStackService implements TenantSer
 	@Override
 	public Tenant getByName(String tenantName) {
 		checkNotNull(tenantName);
-		return get(KeystoneTenant.class, PATH_TENANTS).param("name", tenantName).execute();
+		return OneOrNull.<KeystoneTenant>create()
+		         .apply(get(Tenants.class, PATH_TENANTS).param("name", tenantName).execute().getList());
 	}
 
 	@Override
