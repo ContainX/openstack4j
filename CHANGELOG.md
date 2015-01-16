@@ -4,9 +4,11 @@
 
 ##### Enhancements/Improvements
 
+* Issue #203 - Host Aggregate Support (contribution by @liujunpengwork)
+
 ##### Fixes
 
-### 2.0.1
+* Issue #201 - Find a specific Tenant using getByName function raises Exception
 
 ##### Enhancements/Improvements
 
