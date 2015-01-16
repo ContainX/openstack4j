@@ -104,5 +104,8 @@ public interface ComputeService extends RestService {
 	 * @return the floating IP DNS Service
 	 */
 	FloatingIPDNSService floatingIPDNS();
-	
+	/**
+	 * Host Aggregates Management Service
+	 */
+	HostAggregateService hostAggregates();
 }

@@ -8,6 +8,7 @@ import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
+import org.openstack4j.api.compute.HostAggregateService;
 import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerGroupService;
@@ -123,4 +124,11 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
     public FloatingIPDNSService floatingIPDNS() {
         return Apis.get(FloatingIPDNSService.class);
     }
+
+	@Override
+	public HostAggregateService hostAggregates() {
+		
+		return Apis.get(HostAggregateService.class);
+	}
+    
 }
