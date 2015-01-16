@@ -1,6 +1,6 @@
 # Change Log
 
-### 2.0.2-SNAPSHOT
+### 2.0.2-SNAPSHOT (Master)
 
 ##### Enhancements/Improvements
 
@@ -9,6 +9,8 @@
 ##### Fixes
 
 * Issue #201 - Find a specific Tenant using getByName function raises Exception
+
+### 2.0.1 (Latest Release)
 
 ##### Enhancements/Improvements
 
