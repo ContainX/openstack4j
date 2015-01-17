@@ -9,8 +9,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import org.openstack4j.core.transport.ClientConstants;
-
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 

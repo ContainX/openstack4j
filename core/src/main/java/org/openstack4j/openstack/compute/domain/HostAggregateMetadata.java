@@ -1,15 +1,16 @@
 package org.openstack4j.openstack.compute.domain;
 
 import java.util.Map;
+
 import org.openstack4j.model.ModelEntity;
+
 import com.fasterxml.jackson.annotation.JsonRootName;
 /**
  * set metadata for an aggregate.
  * @author liujunpeng
  */
-@SuppressWarnings("serial")
 @JsonRootName("set_metadata")
-public class HostAggregateMetadata  implements ModelEntity {
+public class HostAggregateMetadata implements ModelEntity {
 
 	private static final long serialVersionUID = 1L;
 

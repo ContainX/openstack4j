@@ -1,22 +1,14 @@
 package org.openstack4j.openstack.compute.domain;
 
-import java.security.AlgorithmConstraints;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.compute.HostAggregate;
-import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
 /**
  * The JSON object used to update an existing aggregate
+ * 
  * @author liujunpeng
- *
  */
 @JsonRootName("aggregate")
 @JsonIgnoreProperties(ignoreUnknown=true)
