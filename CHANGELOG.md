@@ -10,7 +10,7 @@
 
 * Issue #201 - Find a specific Tenant using getByName function raises Exception
 
-### 2.0.1 (Latest Release)
+### 2.0.1 (Latest Release / Stable)
 
 ##### Enhancements/Improvements
 
