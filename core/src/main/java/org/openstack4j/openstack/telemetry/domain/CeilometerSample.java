@@ -41,7 +41,7 @@ public class CeilometerSample implements Sample {
 	@JsonProperty("resource_id")
 	private String resourceId;
 	
-	private Date timestamp;
+	private String timestamp;
 	
 	@JsonProperty("message_id")
 	private String messageId;
@@ -50,7 +50,7 @@ public class CeilometerSample implements Sample {
 	private Map<String, Object> metadata;
 	
 	@JsonProperty("recorded_at")
-	private Date recordedAt;
+	private String recordedAt;
 	
 	
 	/**
@@ -113,7 +113,7 @@ public class CeilometerSample implements Sample {
    * {@inheritDoc}
    */
   @Override
-  public Date getRecordedAt() {
+  public String getRecordedAt() {
     return recordedAt;
   }
 
@@ -129,7 +129,7 @@ public class CeilometerSample implements Sample {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Date getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
@@ -162,5 +162,97 @@ public class CeilometerSample implements Sample {
 				    .add("recorded_at", recordedAt)
 				    .toString();
 	}
+
+	@Override
+	public void setCounterName(String counterName) {
+		// TODO Auto-generated method stub
+		this.counterName = counterName;
+		
+	}
+
+	@Override
+	public void setCounterType(Type meterType) {
+		// TODO Auto-generated method stub
+		this.counterType = meterType;
+	}
+
+	@Override
+	public void setCounterUnit(String counterUnit) {
+		// TODO Auto-generated method stub
+		this.counterUnit = counterUnit;
+	}
+
+	@Override
+	public void setCounterVolume(Float counterVolume) {
+		// TODO Auto-generated method stub
+		this.counterVolume = counterVolume;
+	}
+
+	@Override
+	public void setSource(String source) {
+		// TODO Auto-generated method stub
+		this.source = source;
+	}
+
+	@Override
+	public void setProjectId(String projectId) {
+		// TODO Auto-generated method stub
+		this.projectId = projectId;
+	}
+
+	@Override
+	public void setUserId(String userId) {
+		// TODO Auto-generated method stub
+		this.userId = userId;
+	}
+
+	@Override
+	public void setResourceId(String resourceId) {
+		// TODO Auto-generated method stub
+		this.resourceId = resourceId;
+	}
+
+	@Override
+	public void setTimestamp(String timestamp) {
+		// TODO Auto-generated method stub
+		this.timestamp = timestamp;
+	}
+
+	@Override
+	public void setRecordedAt(String recordedAt) {
+		// TODO Auto-generated method stub
+		this.recordedAt = recordedAt;
+	}
+
+	@Override
+	public void setMessageId(String messageId) {
+		// TODO Auto-generated method stub
+		this.messageId = messageId;
+		
+	}
+
+	@Override
+	public void setMetadata(Map<String, Object> metadata) {
+		// TODO Auto-generated method stub
+		this.metadata = metadata;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
