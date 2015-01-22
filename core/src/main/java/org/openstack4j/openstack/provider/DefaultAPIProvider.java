@@ -43,6 +43,7 @@ import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.api.networking.ext.HealthMonitorService;
 import org.openstack4j.api.networking.ext.LbPoolService;
+import org.openstack4j.api.networking.ext.LoadBalancerService;
 import org.openstack4j.api.networking.ext.MemberService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 import org.openstack4j.api.networking.ext.VipService;
@@ -94,6 +95,7 @@ import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.HealthMonitorServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LbPoolServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.LoadBalancerServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.VipServiceImpl;
@@ -175,6 +177,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(VipService.class,VipServiceImpl.class);
 		bind(HealthMonitorService.class,HealthMonitorServiceImpl.class);
 		bind(LbPoolService.class,LbPoolServiceImpl.class);
+		bind(LoadBalancerService.class, LoadBalancerServiceImpl.class);
 	}
 
 	/**

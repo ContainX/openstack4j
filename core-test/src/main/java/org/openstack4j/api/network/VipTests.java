@@ -22,20 +22,20 @@ import static org.testng.Assert.assertTrue;
 @Test(suiteName="Network/vip")
 public class VipTests extends AbstractTest{
 	public void testListVip(){
-		List<? extends Vip> list = os().networking().vip().list();
+		List<? extends Vip> list = os().networking().loadbalancers().vip().list();
 		System.out.println("test lb vip List"+list);
 		assertEquals(1, list.size());
 	}
 	public void testListVipFilter(){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("name", "vip");
-		List<? extends Vip> list = os().networking().vip().list(map);
+		List<? extends Vip> list = os().networking().loadbalancers().vip().list(map);
 		System.out.println("test lb vip List filter"+list);
 		assertEquals(1, list.size());
 	}
 	public void testGetVip(){
 		String id = "dfc5c198-dceb-4f99-8ed7-5ebfdf46946d";
-		Vip vip = os().networking().vip().get(id);
+		Vip vip = os().networking().loadbalancers().vip().get(id);
 		System.out.println("test get a vip"+vip);
 		assertEquals(id, vip.getId());
 
@@ -63,7 +63,7 @@ public class VipTests extends AbstractTest{
 				.subnetId(subnetId)
 				.tenantId(tenantId)
 				.build();
-		Vip result = os().networking().vip().create(create);
+		Vip result = os().networking().loadbalancers().vip().create(create);
 		System.out.println(result);
 		assertEquals(address, result.getAddress());
 		assertEquals(name, result.getName());
@@ -87,7 +87,7 @@ public class VipTests extends AbstractTest{
 						.build())
 				.description("description update")
 				.build();
-		Vip result = os().networking().vip().update(vipId, update);
+		Vip result = os().networking().loadbalancers().vip().update(vipId, update);
 		System.out.println(result);
 		assertEquals(poolId, result.getPoolId());
 		assertEquals(connectionLimit, result.getConnectionLimit());
@@ -99,7 +99,7 @@ public class VipTests extends AbstractTest{
 	
 	public void testDeleteVip(){
 		String id = "50cbd265-fe4f-4c9c-b25c-bb6c773d0366";
-		ActionResponse result = os().networking().vip().delete(id);
+		ActionResponse result = os().networking().loadbalancers().vip().delete(id);
 		assertTrue(result.isSuccess());
 		
 	}

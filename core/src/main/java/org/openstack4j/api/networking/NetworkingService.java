@@ -1,12 +1,8 @@
 package org.openstack4j.api.networking;
 
-import org.openstack4j.api.networking.ext.HealthMonitorService;
-import org.openstack4j.api.networking.ext.LbPoolService;
-import org.openstack4j.api.networking.ext.MemberService;
+import org.openstack4j.api.networking.ext.LoadBalancerService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
-import org.openstack4j.api.networking.ext.VipService;
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.network.ext.LbPool;
 
 /**
  * OpenStack Networking Operations API
@@ -53,26 +49,12 @@ public interface NetworkingService extends RestService {
     SecurityGroupRuleService securityrule();
 
     /**
+     * @return the network quota service
      */
     NetQuotaService quotas();
+   
     /**
-    *
-    * @return the Lbaas member Service API
-    */
-   MemberService member();
-   
-   /**
-    * @return the Lbaas vip Service API
-    */
-   VipService vip();
-   /**
-    * @return the Lbaas healthmonitor Service API
-    */
-   HealthMonitorService healthMonitor();
-   
-   /**
-    * @return the Lbaas pool Service API
-    */
-   LbPoolService lbPool();
-
+     * @return the LBaaS service
+     */
+    LoadBalancerService loadbalancers();
 }
