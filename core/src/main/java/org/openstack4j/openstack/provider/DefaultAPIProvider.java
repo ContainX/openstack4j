@@ -41,7 +41,11 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.HealthMonitorService;
+import org.openstack4j.api.networking.ext.LbPoolService;
+import org.openstack4j.api.networking.ext.MemberService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
+import org.openstack4j.api.networking.ext.VipService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
@@ -88,7 +92,11 @@ import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.HealthMonitorServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.LbPoolServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.VipServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
@@ -163,6 +171,10 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(FloatingIPDNSDomainService.class, FloatingIPDNSDomainServiceImpl.class);
 		bind(FloatingIPDNSEntryService.class, FloatingIPDNSEntryServiceImpl.class);
 		bind(HostAggregateService.class,HostAggregateServiceImpl.class);
+		bind(MemberService.class,MemberServiceImpl.class);
+		bind(VipService.class,VipServiceImpl.class);
+		bind(HealthMonitorService.class,HealthMonitorServiceImpl.class);
+		bind(LbPoolService.class,LbPoolServiceImpl.class);
 	}
 
 	/**

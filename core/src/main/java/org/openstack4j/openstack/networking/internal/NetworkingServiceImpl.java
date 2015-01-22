@@ -9,7 +9,11 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.HealthMonitorService;
+import org.openstack4j.api.networking.ext.LbPoolService;
+import org.openstack4j.api.networking.ext.MemberService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
+import org.openstack4j.api.networking.ext.VipService;
 
 /**
  * OpenStack Networking Operations API
@@ -81,6 +85,39 @@ public class NetworkingServiceImpl implements NetworkingService {
     public NetQuotaService quotas() {
         return Apis.get(NetQuotaService.class);
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MemberService member(){
+    	return Apis.get(MemberService.class);
+    }
+    /**
+     * {@inheritDoc}
+     */
+	@Override
+	public VipService vip() {
+		return Apis.get(VipService.class);
+	}
+	
+    /**
+     * {@inheritDoc}
+     */
+	@Override
+	public HealthMonitorService healthMonitor() {
+		return Apis.get(HealthMonitorService.class);
+	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public LbPoolService lbPool() {
+		// TODO Auto-generated method stub
+		return Apis.get(LbPoolService.class);
+	}
 
+	
 }
