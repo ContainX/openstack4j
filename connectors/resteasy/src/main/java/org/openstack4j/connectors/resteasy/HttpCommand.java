@@ -42,6 +42,8 @@ public final class HttpCommand<R> {
         client = new ClientRequest(UriBuilder.fromUri(new EndpointURIFromRequestFunction().apply(request)), 
                 ApacheHttpClientExecutor.create(request.getConfig()), ResteasyClientFactory.getInstance());
         
+        client.followRedirects(true);
+        
         populateQueryParams(request);
         populateHeaders(request);
     }
