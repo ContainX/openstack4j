@@ -224,6 +224,12 @@ public class HeatStackCreate implements StackCreate {
             }
             return this;
         }
+        
+        @Override
+		public StackCreateBuilder files(Map<String, String> files) {
+			model.files = files;
+			return this;
+		}
 
 	}
 

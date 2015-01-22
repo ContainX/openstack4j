@@ -69,5 +69,12 @@ public interface StackCreateBuilder extends Buildable.Builder<StackCreateBuilder
     * @return StackCreateBuilder
     */
     StackCreateBuilder templateFromFile(String tplFile);
+    
+    /**
+    * Sets the files parameter
+    * @param files map
+    * @return StackCreateBuilder
+    */
+    StackCreateBuilder files(Map<String,String> files);
 	
 }
