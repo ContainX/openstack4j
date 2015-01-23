@@ -48,6 +48,7 @@ import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
+import org.openstack4j.api.telemetry.AlarmService;
 import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
@@ -94,6 +95,7 @@ import org.openstack4j.openstack.storage.object.internal.ObjectStorageAccountSer
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageServiceImpl;
+import org.openstack4j.openstack.telemetry.internal.AlarmServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
@@ -141,6 +143,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
 		bind(TelemetryService.class, TelemetryServiceImpl.class);
 		bind(MeterService.class, MeterServiceImpl.class);
+		bind(AlarmService.class, AlarmServiceImpl.class);
 		bind(HypervisorService.class, HypervisorServiceImpl.class);
 		bind(ZoneService.class, ZoneServiceImpl.class);
 		bind(HeatService.class, HeatServiceImpl.class);

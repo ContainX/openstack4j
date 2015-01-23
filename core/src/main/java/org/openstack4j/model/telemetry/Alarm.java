@@ -46,13 +46,13 @@ public interface Alarm extends ModelEntity {
 	List<String> getAlarmActions();
 	String getAlarmId();
 	
-	String getCombinationRule();
-	String description();
+	//String getCombinationRule();
+	String getDescription();
 	boolean isEnabled();
 	void isEnabled(boolean newValue);
 	List<String> getInsufficientDataActions();
 	/**
-	 * @return the unique name of the meter
+	 * @return the unique name of the alarm
 	 */
 	String getName();
 	List<String> getOkActions();
@@ -63,7 +63,7 @@ public interface Alarm extends ModelEntity {
 	boolean getRepeatActions();
 	String getState();
 	String getStateTimestamp();
-	String getThresholdRule();
+	ThresholdRule getThresholdRule();
 	String getTimestamp();
 	
 	/**
@@ -82,7 +82,7 @@ public interface Alarm extends ModelEntity {
 	
 	
 	/**
-	 * The Meter Type
+	 * The Alarm Type
 	 */
 	public enum Type {
 		THRESHOLD, UNRECOGNIZED;
@@ -106,6 +106,73 @@ public interface Alarm extends ModelEntity {
 			}
 		}
 	}
+	
+	public interface ThresholdRule{
+		String getMeterName();
+		int getEvaluationPeriods();
+		Statistic getStatistic();
+		int getPeriod();
+		float getThreshold();
+		List<? extends Query> getQuery();
+		ComparisonOperator getComparisonOperator();
+		boolean getExcludeOutliers();
+		
+		
+		
+		public enum Statistic {
+			MAX, MIN, AVG, SUM, COUNT, UNRECOGNIZED;
+
+			@JsonValue
+			public String value() {
+				return this.name().toLowerCase();
+			}
+
+			@Override
+			public String toString() {
+				return value();
+			}
+
+			@JsonCreator
+			public static Statistic fromValue(String statistic) {
+				try {
+					return valueOf(statistic.toUpperCase());
+				} catch (IllegalArgumentException e) {
+					return UNRECOGNIZED;
+				}
+			}
+		}
+		
+		public enum ComparisonOperator {
+			LT, LE, EQ, NE, GE, GT, UNRECOGNIZED;
+
+			@JsonValue
+			public String value() {
+				return this.name().toLowerCase();
+			}
+
+			@Override
+			public String toString() {
+				return value();
+			}
+
+			@JsonCreator
+			public static ComparisonOperator fromValue(String operator) {
+				try {
+					return valueOf(operator.toUpperCase());
+				} catch (IllegalArgumentException e) {
+					return UNRECOGNIZED;
+				}
+			}
+		}
+		
+		public interface Query{
+			String getField();
+			String getValue();
+			ComparisonOperator getOp();
+		}
+	}
+	
+	
 
 
 }

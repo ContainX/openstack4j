@@ -1,8 +1,11 @@
 package org.openstack4j.openstack.telemetry.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openstack4j.model.telemetry.Alarm;
+import org.openstack4j.model.telemetry.Alarm.ThresholdRule.ComparisonOperator;
+import org.openstack4j.model.telemetry.Alarm.ThresholdRule.Query;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
@@ -45,8 +48,8 @@ public class CeilometerAlarm implements Alarm {
 	private String alarmId;
 
 
-	@JsonProperty("combination_rule")
-	private String combinationRule;
+	//@JsonProperty("combination_rule")
+	//private String combinationRule;
 
 
 	@JsonProperty("description")
@@ -78,7 +81,7 @@ public class CeilometerAlarm implements Alarm {
 
 
 	@JsonProperty("threshold_rule")
-	private String thresholdRule;
+	private CeilometerThresholdRule thresholdRule;
 
 
 	@JsonProperty("timestamp")
@@ -140,15 +143,16 @@ public class CeilometerAlarm implements Alarm {
 		return alarmId;
 	}
 
-
+	/*
 	@Override
 	public String getCombinationRule() {
 		return combinationRule;
 	}
+	*/
 	
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return description;
 	}
 
@@ -194,7 +198,7 @@ public class CeilometerAlarm implements Alarm {
 
 
 	@Override
-	public String getThresholdRule() {
+	public ThresholdRule getThresholdRule() {
 		return thresholdRule;
 	}
 
@@ -202,5 +206,102 @@ public class CeilometerAlarm implements Alarm {
 	@Override
 	public String getTimestamp() {
 		return timestamp;
+	}
+	
+	public static class CeilometerThresholdRule implements ThresholdRule{
+
+		@JsonProperty("meter_name")
+		String meterName;
+		
+		@JsonProperty("evaluation_periods")
+		int evaluationPeriods;
+		
+		@JsonProperty("statistic")
+		Statistic statistic;
+		
+		@JsonProperty("period")
+		int period;
+		
+		@JsonProperty("threshold")
+		float threshold;
+		
+		@JsonProperty("query")
+		List<CeilometerQuery> query;
+		
+		@JsonProperty("comparison_operator")
+		ComparisonOperator comparisonOperator;
+		
+		@JsonProperty("exclude_outliers")
+		boolean excludeOutliers;
+		
+		@Override
+		public String getMeterName() {
+			return meterName;
+		}
+
+		@Override
+		public int getEvaluationPeriods() {
+			return evaluationPeriods;
+		}
+
+		@Override
+		public Statistic getStatistic() {
+			return statistic;
+		}
+
+		@Override
+		public int getPeriod() {
+			return period;
+		}
+
+		@Override
+		public float getThreshold() {
+			return threshold;
+		}
+
+		@Override
+		public List<? extends Query> getQuery() {
+			return query;
+		}
+
+		@Override
+		public ComparisonOperator getComparisonOperator() {
+			return comparisonOperator;
+		}
+
+		@Override
+		public boolean getExcludeOutliers() {
+			return excludeOutliers;
+		}
+		
+	}
+	
+	public static class CeilometerQuery implements Query{
+		public CeilometerQuery(){}
+		
+		@JsonProperty("field")
+		String field;
+		
+		@JsonProperty("value")
+		String value;
+		
+		@JsonProperty("op")
+		ComparisonOperator op;
+
+		@Override
+		public String getField() {
+			return field;
+		}
+
+		@Override
+		public String getValue() {
+			return value;
+		}
+
+		@Override
+		public ComparisonOperator getOp() {
+			return op;
+		}
+		
 	}
 }
