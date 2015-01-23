@@ -13,6 +13,7 @@ import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
@@ -284,4 +285,13 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public ObjectStorageService objectStorage() {
         return Apis.get(ObjectStorageService.class);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SaharaService sahara() {
+        return Apis.getSaharaServices();
+    }
+
 }

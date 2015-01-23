@@ -42,6 +42,8 @@ import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
+import org.openstack4j.api.sahara.ClusterService;
+import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
@@ -89,6 +91,8 @@ import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImp
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
+import org.openstack4j.openstack.sahara.internal.ClusterServiceImpl;
+import org.openstack4j.openstack.sahara.internal.SaharaServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
@@ -163,6 +167,8 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(FloatingIPDNSDomainService.class, FloatingIPDNSDomainServiceImpl.class);
 		bind(FloatingIPDNSEntryService.class, FloatingIPDNSEntryServiceImpl.class);
 		bind(HostAggregateService.class,HostAggregateServiceImpl.class);
+		bind(SaharaService.class,SaharaServiceImpl.class);
+		bind(ClusterService.class,ClusterServiceImpl.class);
 	}
 
 	/**
