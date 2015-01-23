@@ -16,22 +16,7 @@ public class CeilometerAlarm implements Alarm {
 
 	private static final long serialVersionUID = 1L;
 
-	/*
-	@JsonProperty("meter_id")
-	private String id;
-	private String name;
-	@JsonProperty("resource_id")
-	private String resourceId;
-	@JsonProperty("project_id")
-	private String projectId;
-	private Type type;
-	private String unit;
 	
-	private String source;
-	
-	@JsonProperty("user_id")
-	private String userId;
-	*/
 	
 	@JsonProperty("project_id")
 	private String projectId;
