@@ -92,44 +92,13 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
 	public void putSamples(List<Sample> sampleList, String meterName) {
 		
 		ListEntity<Sample> listEntity= new ListEntity<Sample>(sampleList);
-		/*
-		
-			listEntity.add(sample);
-		}
-		*/
-		
-		
-		
+
 		
 		post(Void.class,uri("/meters/%s",meterName)).entity(listEntity).execute();
 		
-		//post(SampleList.class, uri("/meters/%s",meterName)).entity(sampleListObj).execute();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		// TODO Auto-generated method stub
-		
-//		SampleList sampleListObj = new SampleList(sampleList);
-		
-//		post(SampleList.class, uri("/meters/%s",meterName)).entity(sampleListObj).execute();
-		
-		
-		
-		
+	
 	}
 	
-//	public class SampleList extends ArrayList<Sample>{
-//		public SampleList(List<Sample> sampleList){
-//			super(sampleList);
-//		}
-//	}
+
 
 }

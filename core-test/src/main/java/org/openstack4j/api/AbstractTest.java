@@ -36,7 +36,7 @@ public abstract class AbstractTest {
         COMPUTE(8774),
         METERING(8087),
         TELEMETRY(8087),
-        OBJECT_STORAGE(9000);
+        OBJECT_STORAGE(8080);
         ;
         private final int port;
 
@@ -66,7 +66,6 @@ public abstract class AbstractTest {
         try {
         	Logger.getLogger(getClass().getName()).info("Starting server on port "+service().port);
             server.play(service().port);
-            //Thread.sleep(300000);
         }
         catch (IOException e) {
             e.printStackTrace();

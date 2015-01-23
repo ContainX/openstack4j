@@ -25,9 +25,7 @@ import org.openstack4j.openstack.telemetry.domain.CeilometerStatistics;
  */
 public class AlarmServiceImpl extends BaseTelemetryServices implements AlarmService {
 
-    private static final String FIELD = "q.field";
-    private static final String OPER = "q.op";
-    private static final String VALUE = "q.value";
+    
     
 	/**
 	 * {@inheritDoc}
@@ -39,56 +37,10 @@ public class AlarmServiceImpl extends BaseTelemetryServices implements AlarmServ
 		return wrapList(alarms);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 
-	@Override
-	public List<? extends Sample> samples(String meterName) {
-		checkNotNull(meterName);
-
-		CeilometerSample[] samples = get(CeilometerSample[].class, uri("/meters/%s", meterName)).execute();
-		return wrapList(samples);
-	}
 	
 	/**
-     * {@inheritDoc}
-     
-    @Override
-    public List<? extends Sample> samples(String meterName, SampleCriteria criteria) {
-        checkNotNull(meterName);
-
-        Invocation<CeilometerSample[]> invocation = get(CeilometerSample[].class, uri("/meters/%s", meterName));
-        if (criteria != null && !criteria.getCriteriaParams().isEmpty()) {
-            for (NameOpValue c : criteria.getCriteriaParams()) {
-                invocation.param(FIELD, c.getField());
-                invocation.param(OPER, c.getOperator().getQueryValue());
-                invocation.param(VALUE, c.getValue());
-            }
-        }
-        
-        CeilometerSample[] samples = invocation.execute();
-        return wrapList(samples);
-    }
-
-	/**
 	 * {@inheritDoc}
-	 
-	@Override
-	public List<? extends Statistics> statistics(String meterName) {
-		return statistics(meterName, 0);
-	}
-
-	@Override
-	public List<? extends Statistics> statistics(String meterName, int period) {
-checkNotNull(meterName);
-		
-		CeilometerStatistics[] stats = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName))
-																	  .param(period > 0, "period", period)
-																		.execute();
-		return wrapList(stats);
-	}
-	*/
-	
+	 */
 	@Override
 	public Alarm getById(String alarmId){
 		checkNotNull(alarmId);
@@ -97,6 +49,9 @@ checkNotNull(meterName);
 		
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void update(String alarmId, Alarm alarm){
 		checkNotNull(alarmId);
