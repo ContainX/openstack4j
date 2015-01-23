@@ -52,6 +52,14 @@ public interface TemplateService {
      */
     Map<String, Object> getTemplateAsMap(String stackName, String stackId);
     
+    /**
+     * Retrieves the original template as Map<String,Object> when you know only the stack name or stack id
+     * @param stackNameOrId the stack name or stackId
+     * @return the template
+     * @throws ResponseException if an error occurs
+     */
+    Map<String, Object> getTemplateAsMap(String stackNameOrId);
+    
     
 	
 }

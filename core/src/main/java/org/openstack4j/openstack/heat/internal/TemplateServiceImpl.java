@@ -74,4 +74,15 @@ public class TemplateServiceImpl extends BaseHeatServices implements TemplateSer
     }
     
     
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String,Object> getTemplateAsMap(String stackNameOrId) {
+        checkNotNull(stackNameOrId);
+        return get(Map.class, uri("/stacks/%s/template", stackNameOrId)).execute();
+    }
+    
+    
 }
