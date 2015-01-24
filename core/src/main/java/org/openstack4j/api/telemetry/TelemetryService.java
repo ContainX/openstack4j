@@ -15,5 +15,12 @@ public interface TelemetryService extends RestService {
 	  * @return the Meter Service API
 	  */
    MeterService meters();
+   
+	 /**
+	  * Access to Alarms API
+	  * 
+	  * @return the Alarm Service API
+	  */
+   AlarmService alarms();
 	
 }

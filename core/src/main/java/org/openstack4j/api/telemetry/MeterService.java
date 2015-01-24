@@ -54,4 +54,6 @@ public interface MeterService extends RestService {
 	 * @return List of Statistics
 	 */
 	List<? extends Statistics> statistics(String meterName, int period);
+	
+	void putSamples(List<Sample> sampleList, String meterName);
 }

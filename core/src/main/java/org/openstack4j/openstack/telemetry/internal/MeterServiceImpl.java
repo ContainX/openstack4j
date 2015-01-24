@@ -2,7 +2,9 @@ package org.openstack4j.openstack.telemetry.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.model.telemetry.Meter;
@@ -10,6 +12,9 @@ import org.openstack4j.model.telemetry.Sample;
 import org.openstack4j.model.telemetry.SampleCriteria;
 import org.openstack4j.model.telemetry.SampleCriteria.NameOpValue;
 import org.openstack4j.model.telemetry.Statistics;
+import org.openstack4j.openstack.common.ListEntity;
+import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
+import org.openstack4j.openstack.heat.domain.HeatStack;
 import org.openstack4j.openstack.telemetry.domain.CeilometerMeter;
 import org.openstack4j.openstack.telemetry.domain.CeilometerSample;
 import org.openstack4j.openstack.telemetry.domain.CeilometerStatistics;
@@ -75,12 +80,25 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
 
 	@Override
 	public List<? extends Statistics> statistics(String meterName, int period) {
-checkNotNull(meterName);
+		checkNotNull(meterName);
 		
 		CeilometerStatistics[] stats = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName))
 																	  .param(period > 0, "period", period)
 																		.execute();
 		return wrapList(stats);
 	}
+
+	@Override
+	public void putSamples(List<Sample> sampleList, String meterName) {
+		
+		ListEntity<Sample> listEntity= new ListEntity<Sample>(sampleList);
+
+		
+		post(Void.class,uri("/meters/%s",meterName)).entity(listEntity).execute();
+		
+	
+	}
+	
+
 
 }

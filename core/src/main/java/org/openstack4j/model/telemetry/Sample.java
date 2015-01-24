@@ -55,12 +55,12 @@ public interface Sample extends ModelEntity {
 	/**
 	 * @return UTC date and time when the measurement was made
 	 */
-	Date getTimestamp();
+	String getTimestamp();
 	
 	/**
    * @return UTC date and time when the sample was recorded
    */
-	Date getRecordedAt();
+	String getRecordedAt();
 
 	/**
 	 * @return A unique identifier for the sample
@@ -72,5 +72,77 @@ public interface Sample extends ModelEntity {
 	 */
 	Map<String, Object> getMetadata();
 
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * @return the name of the meter
+	 */
+	void setCounterName(String counterName);
+	
+	/**
+	 * @return the type of meter
+	 */
+	void setCounterType(Meter.Type meterType);
+
+	/**
+	 * @return The unit of measure for the value in the counter volume
+	 */
+	void setCounterUnit(String counterUnit);
+
+	/**
+	 * @return the actual measured value
+	 */
+	void setCounterVolume(Float counterVolume);
+
+	/**
+	 * @return The ID of the source that identifies where the sample comes from
+	 */
+	void setSource(String source);
+
+	/**
+	 * @return he ID of the project or tenant that owns the resource
+	 */
+	void  setProjectId(String projectId);
+
+	/**
+	 * @return The ID of the user who last triggered an update to the resource
+	 */
+	void setUserId(String userId);
+
+	/**
+	 * @return The ID of the Resource for which the measurements are taken
+	 */
+	void setResourceId(String resourceId);
+
+	/**
+	 * @return UTC date and time when the measurement was made
+	 */
+	void setTimestamp(String timestamp);
+	
+	/**
+   * @return UTC date and time when the sample was recorded
+   */
+	void setRecordedAt(String date);
+
+	/**
+	 * @return A unique identifier for the sample
+	 */
+	void  setMessageId(String messageId);
+
+	/**
+	 * @return Arbitrary metadata associated with the resource
+	 */
+	void setMetadata(Map<String, Object> metadata);
+	
+	
+	
 	
 }

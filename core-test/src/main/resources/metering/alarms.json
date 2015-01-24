@@ -1,0 +1,72 @@
+[{
+		"alarm_actions" : ["http://192.168.0.1:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A3c8edb30c13d471d96c9881dee761134%3Astacks%2Fsdfasdf%2F4bb97267-0657-4834-bbe2-eb0a5f40480d%2Fresources%2FWebAS-Sig_group.WebAS-Sig_scale_out?Timestamp=2015-01-20T15%3A06%3A04Z&SignatureMethod=HmacSHA256&AWSAccessKeyId=800c42eb3f4a49218f45688547c77266&SignatureVersion=2&Signature=Hgbvixq0VkVKJIKEyuIIEx7a68ut2eCl0EpxoaahUVU%3D"],
+		"ok_actions" : [],
+		"name" : "sdfasdf-scale_out_WebAS-Sig-l4ue3wfz6otx",
+		"timestamp" : "2015-01-20T15:06:06.625000",
+		"enabled" : true,
+		"state" : "insufficient data",
+		"state_timestamp" : "2015-01-20T15:06:06.625000",
+		"threshold_rule" : {
+			"meter_name" : "cpu",
+			"evaluation_periods" : 2,
+			"period" : 60,
+			"statistic" : "avg",
+			"threshold" : 500.0,
+			"query" : [{
+					"field" : "metadata.metering.metadata.stack_id",
+					"value" : "4bb97267-0657-4834-bbe2-eb0a5f40480d",
+					"op" : "eq"
+				}, {
+					"field" : "metadata.metering.metadata.resource_name",
+					"value" : "WebAS-OeM",
+					"op" : "eq"
+				}
+			],
+			"comparison_operator" : "gt",
+			"exclude_outliers" : false
+		},
+		"alarm_id" : "7de0effc-bf54-4ffd-bb63-dec286d4f17f",
+		"time_constraints" : [],
+		"insufficient_data_actions" : [],
+		"repeat_actions" : true,
+		"user_id" : "de2fd0ebac804ef8970e69ae5a4b4a16",
+		"project_id" : "3c8edb30c13d471d96c9881dee761134",
+		"type" : "threshold",
+		"description" : "scale out"
+	}, {
+		"alarm_actions" : ["http://192.168.0.1:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A3c8edb30c13d471d96c9881dee761134%3Astacks%2Fsdfasdf%2F4bb97267-0657-4834-bbe2-eb0a5f40480d%2Fresources%2FWebAS-Sig_group.WebAS-Sig_scale_in?Timestamp=2015-01-20T15%3A06%3A04Z&SignatureMethod=HmacSHA256&AWSAccessKeyId=aca03ce06e4e4aec97aeea345b817249&SignatureVersion=2&Signature=H743x%2FSH8mLzSW%2BHmQLedflGIv69R6EFsa9VIduT6m8%3D"],
+		"ok_actions" : [],
+		"name" : "sdfasdf-scale_in_WebAS-Sig-ob3jxa7tl6ch",
+		"timestamp" : "2015-01-20T15:06:06.724000",
+		"enabled" : true,
+		"state" : "insufficient data",
+		"state_timestamp" : "2015-01-20T15:06:06.724000",
+		"threshold_rule" : {
+			"meter_name" : "cpu",
+			"evaluation_periods" : 2,
+			"period" : 60,
+			"statistic" : "avg",
+			"threshold" : 100.0,
+			"query" : [{
+					"field" : "metadata.metering.metadata.stack_id",
+					"value" : "4bb97267-0657-4834-bbe2-eb0a5f40480d",
+					"op" : "eq"
+				}, {
+					"field" : "metadata.metering.metadata.resource_name",
+					"value" : "WebAS-OeM",
+					"op" : "eq"
+				}
+			],
+			"comparison_operator" : "lt",
+			"exclude_outliers" : false
+		},
+		"alarm_id" : "ca1ac89f-5dfe-4209-b92f-f9ca4f4eb85b",
+		"time_constraints" : [],
+		"insufficient_data_actions" : [],
+		"repeat_actions" : true,
+		"user_id" : "de2fd0ebac804ef8970e69ae5a4b4a16",
+		"project_id" : "3c8edb30c13d471d96c9881dee761134",
+		"type" : "threshold",
+		"description" : "scale in"
+	}
+]
