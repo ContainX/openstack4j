@@ -1,6 +1,5 @@
 package org.openstack4j.openstack.telemetry.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openstack4j.model.telemetry.Alarm;
@@ -18,8 +17,6 @@ import com.google.common.base.Objects;
 public class CeilometerAlarm implements Alarm {
 
 	private static final long serialVersionUID = 1L;
-
-	
 	
 	@JsonProperty("project_id")
 	private String projectId;
@@ -302,6 +299,5 @@ public class CeilometerAlarm implements Alarm {
 		public ComparisonOperator getOp() {
 			return op;
 		}
-		
 	}
 }

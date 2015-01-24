@@ -1,6 +1,5 @@
 package org.openstack4j.model.telemetry;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.openstack4j.model.ModelEntity;
@@ -72,16 +71,6 @@ public interface Sample extends ModelEntity {
 	 */
 	Map<String, Object> getMetadata();
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * @return the name of the meter
 	 */
@@ -141,8 +130,4 @@ public interface Sample extends ModelEntity {
 	 * @return Arbitrary metadata associated with the resource
 	 */
 	void setMetadata(Map<String, Object> metadata);
-	
-	
-	
-	
 }

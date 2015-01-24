@@ -14,56 +14,38 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public interface Alarm extends ModelEntity {
 
-	/*
-	
-	{
-    "alarm_actions": [
-        "http://site:8000/alarm"
-    ],
-    "alarm_id": null,
-    "combination_rule": null,
-    "description": "An alarm",
-    "enabled": true,
-    "insufficient_data_actions": [
-        "http://site:8000/nodata"
-    ],
-    "name": "SwiftObjectAlarm",
-    "ok_actions": [
-        "http://site:8000/ok"
-    ],
-    "project_id": "c96c887c216949acbdfbd8b494863567",
-    "repeat_actions": false,
-    "state": "ok",
-    "state_timestamp": "2013-11-21T12:33:08.486228",
-    "threshold_rule": null,
-    "timestamp": "2013-11-21T12:33:08.486221",
-    "type": "threshold",
-    "user_id": "c96c887c216949acbdfbd8b494863567"
-}
-	
-	*/
-	
 	List<String> getAlarmActions();
+	
 	String getAlarmId();
 	
-	//String getCombinationRule();
 	String getDescription();
+	
 	boolean isEnabled();
+	
 	void isEnabled(boolean newValue);
+	
 	List<String> getInsufficientDataActions();
+	
 	/**
 	 * @return the unique name of the alarm
 	 */
 	String getName();
+	
 	List<String> getOkActions();
+	
 	/**
 	 * @return the ID of the project/tenant that owns the resource
 	 */
 	String getProjectId();
+	
 	boolean getRepeatActions();
+	
 	String getState();
+	
 	String getStateTimestamp();
+	
 	ThresholdRule getThresholdRule();
+	
 	String getTimestamp();
 	
 	/**
@@ -75,11 +57,6 @@ public interface Alarm extends ModelEntity {
 	 * @return The user id who last modified the resource
 	*/
 	String getUserId();
-	
-	
-	
-	
-	
 	
 	/**
 	 * The Alarm Type
@@ -171,8 +148,4 @@ public interface Alarm extends ModelEntity {
 			ComparisonOperator getOp();
 		}
 	}
-	
-	
-
-
 }

@@ -5,18 +5,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.telemetry.AlarmService;
-import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.model.telemetry.Alarm;
-import org.openstack4j.model.telemetry.Meter;
-import org.openstack4j.model.telemetry.Sample;
-import org.openstack4j.model.telemetry.SampleCriteria;
-import org.openstack4j.model.telemetry.SampleCriteria.NameOpValue;
-import org.openstack4j.model.telemetry.Statistics;
-import org.openstack4j.openstack.heat.domain.HeatStack;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
-import org.openstack4j.openstack.telemetry.domain.CeilometerMeter;
-import org.openstack4j.openstack.telemetry.domain.CeilometerSample;
-import org.openstack4j.openstack.telemetry.domain.CeilometerStatistics;
 
 /**
  * Provides Measurements against Meters within an OpenStack deployment
@@ -24,8 +14,6 @@ import org.openstack4j.openstack.telemetry.domain.CeilometerStatistics;
  * @author Massimiliano Romano
  */
 public class AlarmServiceImpl extends BaseTelemetryServices implements AlarmService {
-
-    
     
 	/**
 	 * {@inheritDoc}
@@ -33,18 +21,15 @@ public class AlarmServiceImpl extends BaseTelemetryServices implements AlarmServ
 	@Override
 	public List<? extends Alarm> list() {
 		CeilometerAlarm[] alarms = get(CeilometerAlarm[].class, uri("/alarms")).execute();
-		//CeilometerMeter[] meters = get(CeilometerMeter[].class, uri("/meters")).execute();
 		return wrapList(alarms);
 	}
 
-	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public Alarm getById(String alarmId){
 		checkNotNull(alarmId);
-        
         return get(CeilometerAlarm.class, uri("/alarms/%s", alarmId)).execute();
 		
 	}
@@ -59,5 +44,4 @@ public class AlarmServiceImpl extends BaseTelemetryServices implements AlarmServ
 		
 		put(CeilometerAlarm.class, uri("/alarms/%s", alarmId)).entity(alarm).execute();
 	}
-
 }

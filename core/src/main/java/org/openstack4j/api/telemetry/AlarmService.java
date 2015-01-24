@@ -4,10 +4,6 @@ import java.util.List;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.telemetry.Alarm;
-import org.openstack4j.model.telemetry.Meter;
-import org.openstack4j.model.telemetry.Sample;
-import org.openstack4j.model.telemetry.SampleCriteria;
-import org.openstack4j.model.telemetry.Statistics;
 
 /**
  * Provides alarms within an OpenStack deployment
@@ -22,9 +18,6 @@ public interface AlarmService extends RestService {
 	 * @return list of all alarms
 	 */
 	List<? extends Alarm> list();
-	
-	
-	
 
 	/**
 	 * Return a specified alarm

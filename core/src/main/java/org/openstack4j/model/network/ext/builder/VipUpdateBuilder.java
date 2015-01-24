@@ -2,7 +2,6 @@ package org.openstack4j.model.network.ext.builder;
 
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.SessionPersistence;
-import org.openstack4j.model.network.ext.Vip;
 import org.openstack4j.model.network.ext.VipUpdate;
 
 /**
