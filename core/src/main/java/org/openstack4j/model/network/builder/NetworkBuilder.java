@@ -40,4 +40,9 @@ public interface NetworkBuilder extends Builder<NetworkBuilder, Network> {
 	 * @see Network#getTenantId()
 	 */
 	NetworkBuilder tenantId(String tenantId);
+
+	/**
+	 * @see Network#isShared()
+	 */
+	NetworkBuilder isShared(boolean shared);
 }

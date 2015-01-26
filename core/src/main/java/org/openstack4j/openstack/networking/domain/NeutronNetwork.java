@@ -256,7 +256,13 @@ public class NeutronNetwork implements Network {
 			m.tenantId = tenantId;
 			return this;
 		}
-		
+
+		@Override
+		public NetworkBuilder isShared(boolean shared) {
+			m.shared = shared;
+			return this;
+		}
+
 		@Override
 		public Network build() {
 			return m;
