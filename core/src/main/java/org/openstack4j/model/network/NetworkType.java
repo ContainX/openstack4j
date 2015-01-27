@@ -13,6 +13,7 @@ public enum NetworkType {
   LOCAL,
   FLAT,
   VLAN,
+  VXLAN,
   GRE
 	;
 	
