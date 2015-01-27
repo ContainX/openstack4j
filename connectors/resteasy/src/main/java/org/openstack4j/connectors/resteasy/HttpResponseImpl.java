@@ -81,7 +81,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the input stream
      */
     public InputStream getInputStream() {
-        return (InputStream) response.getEntity();
+        return response.getEntity(InputStream.class);
     }
 
     /**

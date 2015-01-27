@@ -19,9 +19,13 @@ public class EndpointURIFromRequestFunction implements Function<HttpRequest<?>, 
     @Override
     public String apply(HttpRequest<?> request) {
         if (request.getEndpoint().endsWith(URI_SEP) || request.getPath().startsWith(URI_SEP))
-            return request.getEndpoint() + request.getPath();
+            return escape(request.getEndpoint() + request.getPath());
         
-        return request.getEndpoint() + URI_SEP + request.getPath();
+        return escape(request.getEndpoint() + URI_SEP + request.getPath());
+    }
+    
+    private String escape(String uri) {
+        return uri.replaceAll(" ", "%20");
     }
 
 }
