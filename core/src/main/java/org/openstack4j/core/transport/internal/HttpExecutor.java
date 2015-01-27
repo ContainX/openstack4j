@@ -17,8 +17,8 @@ import org.openstack4j.openstack.logging.LoggerFactory;
  */
 public class HttpExecutor  {
 
-    private static final HttpExecutor INSTANCE = new HttpExecutor();
     private static final Logger LOG = LoggerFactory.getLogger(HttpExecutor.class);
+    private static final HttpExecutor INSTANCE = new HttpExecutor();
     private HttpExecutorService service;
 
     private HttpExecutor() { 
