@@ -50,6 +50,7 @@ import org.openstack4j.api.networking.ext.VipService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
+import org.openstack4j.api.storage.BlockVolumeTransferService;
 import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
@@ -103,6 +104,7 @@ import org.openstack4j.openstack.networking.internal.ext.VipServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.BlockVolumeTransferServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageAccountServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
@@ -181,6 +183,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(HealthMonitorService.class,HealthMonitorServiceImpl.class);
 		bind(LbPoolService.class,LbPoolServiceImpl.class);
 		bind(LoadBalancerService.class, LoadBalancerServiceImpl.class);
+		bind(BlockVolumeTransferService.class, BlockVolumeTransferServiceImpl.class);
 	}
 
 	/**

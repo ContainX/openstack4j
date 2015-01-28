@@ -4,8 +4,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
+import org.openstack4j.api.Apis;
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeService;
+import org.openstack4j.api.storage.BlockVolumeTransferService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
@@ -110,6 +112,11 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
         return post(CinderVolumeUploadImage.class, uri("/volumes/%s/action", volumeId))
                 .entity(CinderUploadImageData.create(data))
                 .execute();
+    }
+
+    @Override
+    public BlockVolumeTransferService transfer() {
+        return Apis.get(BlockVolumeTransferService.class);
     }
 
 }
