@@ -284,4 +284,10 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public ObjectStorageService objectStorage() {
         return Apis.get(ObjectStorageService.class);
     }
+
+    @Override
+    public OSClient perspective(Facing perspective) {
+        this.perspective = perspective;
+        return this;
+    }
 }
