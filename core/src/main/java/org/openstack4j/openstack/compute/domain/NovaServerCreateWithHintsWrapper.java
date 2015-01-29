@@ -17,10 +17,10 @@ public class NovaServerCreateWithHintsWrapper implements ModelEntity {
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("os:scheduler_hints")
-	private Map<String, String> schedulerHints;
+	private Map<String, Object> schedulerHints;
 	private ServerCreate server;
 
-	public Map<String, String> getSchedulerHints() {
+	public Map<String, Object> getSchedulerHints() {
 		return schedulerHints;
 	}
 

@@ -132,7 +132,7 @@ public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder
 	 * 
 	 * @return scheduler hints or null
 	 */
-	Map<String, String> getSchedulerHints();
+	Map<String, Object> getSchedulerHints();
 	
 	/**
 	 * Adds the personality.

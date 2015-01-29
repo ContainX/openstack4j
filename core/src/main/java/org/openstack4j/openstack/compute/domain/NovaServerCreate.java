@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.compute.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,16 +44,16 @@ public class NovaServerCreate implements ServerCreate {
     @JsonProperty("availability_zone")
     private String availabilityZone;
     @JsonProperty("config_drive")
-    private boolean configDrive;
+    private Boolean configDrive;
     
     @JsonIgnore
-    private transient Map<String, String> schedulerHints;
+    private transient Map<String, Object> schedulerHints;
 
     @JsonProperty("security_groups")
     private List<SecurityGroup> securityGroups;
 
     @JsonProperty("networks")
-    private List<NovaNetworkCreate> networks = Lists.newArrayList();
+    private List<NovaNetworkCreate> networks;
 
     private List<Personality> personality;
 
@@ -131,17 +132,20 @@ public class NovaServerCreate implements ServerCreate {
     
     @JsonIgnore
     @Override
-    public Map<String, String> getSchedulerHints() {
+    public Map<String, Object> getSchedulerHints() {
         return schedulerHints;
     }
 
+    @JsonIgnore
     public boolean isConfigDrive() {
-        return configDrive;
+        return configDrive != null && configDrive;
     }
 
+    @SuppressWarnings("unchecked")
+    @JsonIgnore
     @Override
     public List<? extends NetworkCreate> getNetworks() {
-        return networks;
+        return (List<? extends NetworkCreate>) (networks != null ? networks : Collections.emptyList());
     }
 
     public List<Personality> getPersonality() {
@@ -164,14 +168,21 @@ public class NovaServerCreate implements ServerCreate {
 
     @Override
     public void addNetwork(String id, String fixedIP) {
+        initNetworks();
         networks.add(new NovaNetworkCreate(id, fixedIP));
     }
 
     @Override
     public void addNetworkPort(String id) {
+        initNetworks();
         networks.add(new NovaNetworkCreate(null,null,id));
     }
 
+    private void initNetworks() {
+        if (networks == null)
+            networks = Lists.newArrayList();
+    }
+    
     static class SecurityGroupInternal implements SecurityGroup {
 
         private static final long serialVersionUID = 1L;
@@ -316,6 +327,15 @@ public class NovaServerCreate implements ServerCreate {
 
         @Override
         public ServerCreateBuilder addSchedulerHint(String key, String value) {
+            return addSchedulerHintItem(key, value);
+        }
+        
+        @Override
+        public ServerCreateBuilder addSchedulerHint(String key, List<String> value) {
+            return addSchedulerHintItem(key, value);
+        }
+        
+        private ServerCreateBuilder addSchedulerHintItem(String key, Object value) {
             if (m.schedulerHints == null)
                 m.schedulerHints = Maps.newHashMap();
             
@@ -324,7 +344,7 @@ public class NovaServerCreate implements ServerCreate {
         }
 
         @Override
-        public ServerCreateBuilder addSchedulerHints(Map<String, String> schedulerHints) {
+        public ServerCreateBuilder addSchedulerHints(Map<String, Object> schedulerHints) {
             m.schedulerHints = schedulerHints;
             return this;
         }
