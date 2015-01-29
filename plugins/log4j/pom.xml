@@ -9,7 +9,7 @@
 	<artifactId>openstack4j-log4j</artifactId>
 	<name>OpenStack4j Log4j Plugin</name>
 	<url>http://github.com/gondor/openstack4j/</url>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 
 	<dependencies>
 		<dependency>
@@ -30,4 +30,32 @@
 	      <scope>compile</scope>
 	    </dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<!-- 
+						Required for SPI in OSGi:
+						http://aries.apache.org/modules/spi-fly.html#specconf
+						
+						This bundle defines an implementation for following services in META-INF-services:
+						org.openstack4j.openstack.logging.LoggerFactorySupplier
+						 -->
+						<Require-Capability>
+							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
+						</Require-Capability>
+						<Provide-Capability>
+							osgi.serviceloader; osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier
+						</Provide-Capability>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

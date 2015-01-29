@@ -9,7 +9,7 @@
 	<name>OpenStack4j Core</name>
 	<description>OpenStack Java API</description>
 	<url>http://github.com/gondor/openstack4j/</url>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 
 	<build>
 		<finalName>openstack4j-core</finalName>
@@ -32,6 +32,38 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin> 
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<!-- 
+							Required for SPI in OSGi:
+							http://aries.apache.org/modules/spi-fly.html#specconf
+							
+							This bundles uses SPI to locate implementations for: 
+							org.openstack4j.api.APIProvider
+							org.openstack4j.core.transport.HttpExecutorService
+							org.openstack4j.openstack.logging.LoggerFactorySupplier
+
+							This bundle defines an implementation for following services in META-INF-services:
+							org.openstack4j.api.APIProvider
+						-->
+						<Require-Capability>
+							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.api.APIProvider)";cardinality:=multiple,
+							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService)";cardinality:=multiple,
+							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple,
+							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)",
+							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
+						</Require-Capability>
+						<Provide-Capability>
+							osgi.serviceloader; osgi.serviceloader=org.openstack4j.api.APIProvider
+						</Provide-Capability>
+					</instructions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
