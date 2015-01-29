@@ -340,7 +340,26 @@ public class HttpRequest<R> {
 			}
 			return this;
 		}
+        /**
+         * Updates a Key/Value based Query Param     
+         *
+         * @param key the key
+         * @param value the value
+         * @return the request builder
+         */
+        public RequestBuilder<R> updateQueryParam(String key, Object value) {
+            if (value == null)
+                return this;
+            
+            if (request.queryParams == null)
+                request.queryParams = Maps.newHashMap();
 
+            List<Object> values = new ArrayList<Object>();
+            values.add(value);
+            request.queryParams.put(key, values);
+            
+            return this;
+        }
 		/**
 		 * A Provider which will return the current Authorization Token
 		 *
