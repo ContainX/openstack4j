@@ -1,6 +1,5 @@
 package org.openstack4j.openstack.telemetry.domain;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.openstack4j.model.telemetry.Meter.Type;
@@ -41,7 +40,7 @@ public class CeilometerSample implements Sample {
 	@JsonProperty("resource_id")
 	private String resourceId;
 	
-	private Date timestamp;
+	private String timestamp;
 	
 	@JsonProperty("message_id")
 	private String messageId;
@@ -50,7 +49,7 @@ public class CeilometerSample implements Sample {
 	private Map<String, Object> metadata;
 	
 	@JsonProperty("recorded_at")
-	private Date recordedAt;
+	private String recordedAt;
 	
 	
 	/**
@@ -113,7 +112,7 @@ public class CeilometerSample implements Sample {
    * {@inheritDoc}
    */
   @Override
-  public Date getRecordedAt() {
+  public String getRecordedAt() {
     return recordedAt;
   }
 
@@ -129,7 +128,7 @@ public class CeilometerSample implements Sample {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Date getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
@@ -163,4 +162,65 @@ public class CeilometerSample implements Sample {
 				    .toString();
 	}
 
+	@Override
+	public void setCounterName(String counterName) {
+		this.counterName = counterName;
+		
+	}
+
+	@Override
+	public void setCounterType(Type meterType) {
+		this.counterType = meterType;
+	}
+
+	@Override
+	public void setCounterUnit(String counterUnit) {
+		this.counterUnit = counterUnit;
+	}
+
+	@Override
+	public void setCounterVolume(Float counterVolume) {
+		this.counterVolume = counterVolume;
+	}
+
+	@Override
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	@Override
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	@Override
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	@Override
+	public void setResourceId(String resourceId) {
+		this.resourceId = resourceId;
+	}
+
+	@Override
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	@Override
+	public void setRecordedAt(String recordedAt) {
+		this.recordedAt = recordedAt;
+	}
+
+	@Override
+	public void setMessageId(String messageId) {
+		this.messageId = messageId;
+		
+	}
+
+	@Override
+	public void setMetadata(Map<String, Object> metadata) {
+		// TODO Auto-generated method stub
+	}
 }

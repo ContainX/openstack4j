@@ -1,5 +1,7 @@
 package org.openstack4j.api.heat;
 
+import java.util.Map;
+
 import org.openstack4j.model.heat.Template;
 import org.openstack4j.model.heat.TemplateResponse;
 
@@ -40,5 +42,24 @@ public interface TemplateService {
      * @throws ResponseException if an error occurs
      */
     String getTemplateAsString(String stackName, String stackId);
+    
+    /**
+     * Retrieves the original template as Map<String,Object>
+     * @param stackName the stack name
+     * @param stackId the stack identifier
+     * @return the template
+     * @throws ResponseException if an error occurs
+     */
+    Map<String, Object> getTemplateAsMap(String stackName, String stackId);
+    
+    /**
+     * Retrieves the original template as Map<String,Object> when you know only the stack name or stack id
+     * @param stackNameOrId the stack name or stackId
+     * @return the template
+     * @throws ResponseException if an error occurs
+     */
+    Map<String, Object> getTemplateAsMap(String stackNameOrId);
+    
+    
 	
 }

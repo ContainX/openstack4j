@@ -9,6 +9,7 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.LoadBalancerService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 
 /**
@@ -82,5 +83,13 @@ public class NetworkingServiceImpl implements NetworkingService {
         return Apis.get(NetQuotaService.class);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LoadBalancerService loadbalancers() {
+        return Apis.get(LoadBalancerService.class);
+    }
+    
+	
 }

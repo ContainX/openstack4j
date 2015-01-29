@@ -1,5 +1,6 @@
 package org.openstack4j.api.networking;
 
+import org.openstack4j.api.networking.ext.LoadBalancerService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 import org.openstack4j.common.RestService;
 
@@ -48,7 +49,12 @@ public interface NetworkingService extends RestService {
     SecurityGroupRuleService securityrule();
 
     /**
+     * @return the network quota service
      */
     NetQuotaService quotas();
-
+   
+    /**
+     * @return the LBaaS service
+     */
+    LoadBalancerService loadbalancers();
 }

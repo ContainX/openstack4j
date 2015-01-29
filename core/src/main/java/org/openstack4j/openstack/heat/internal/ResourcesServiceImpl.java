@@ -27,6 +27,12 @@ public class ResourcesServiceImpl extends BaseHeatServices implements ResourcesS
 	}
 	
 	@Override
+	public List<? extends Resource> list(String stackNameOrId) {
+	    checkNotNull(stackNameOrId);
+		return get(Resources.class, uri("/stacks/%s/resources", stackNameOrId)).execute().getList();
+	}
+	
+	@Override
 	public Resource show(String stackName, String stackId ,String resourceName) {
 	    checkNotNull(stackName);
         checkNotNull(stackId);

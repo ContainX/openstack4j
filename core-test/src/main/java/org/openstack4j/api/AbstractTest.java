@@ -3,6 +3,7 @@ package org.openstack4j.api;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -33,6 +34,8 @@ public abstract class AbstractTest {
         IDENTITY(5000),
         NETWORK(9696),
         COMPUTE(8774),
+        METERING(8087),
+        TELEMETRY(8087),
         OBJECT_STORAGE(8080);
         ;
         private final int port;
@@ -46,6 +49,7 @@ public abstract class AbstractTest {
     private OSClient os;
     private String host;
     protected MockWebServer server = new MockWebServer();
+    
 
     /**
      * @return the service the API is using
@@ -53,9 +57,14 @@ public abstract class AbstractTest {
     protected abstract Service service();
 
     @BeforeClass
-    protected void startServer() {
+    protected void startServer() throws UnknownHostException {
+    	
+    	InetAddress inetAddress = InetAddress.getByName("localhost");
+    	Logger.getLogger(getClass().getName()).info("localhost inet address: "+inetAddress.toString());
+    	
         Logger.getLogger(getClass().getName()).info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
         try {
+        	Logger.getLogger(getClass().getName()).info("Starting server on port "+service().port);
             server.play(service().port);
         }
         catch (IOException e) {
@@ -137,7 +146,9 @@ public abstract class AbstractTest {
 
             try {
                 String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
+                Logger.getLogger(getClass().getName()).info("JSON Access = " + json);
                 json = json.replaceAll("127.0.0.1", getHost());
+                Logger.getLogger(getClass().getName()).info("JSON Access = " + json);
                 KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
                 a.applyContext(authURL("/v2.0"), new Credentials("test", "test"));
                 os = OSFactory.clientFromAccess(a);
@@ -149,7 +160,8 @@ public abstract class AbstractTest {
     }
     
     private String getHost() {
-        try
+        /*
+    	try
         {
             if (host == null)
                 host = InetAddress.getLocalHost().getHostAddress();
@@ -157,6 +169,7 @@ public abstract class AbstractTest {
         catch (Exception e) {
             e.printStackTrace();
         }
+        */
         if (host == null)
             return "127.0.0.1";
         

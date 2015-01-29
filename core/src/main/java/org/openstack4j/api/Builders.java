@@ -31,6 +31,16 @@ import org.openstack4j.model.network.builder.NetworkUpdateBuilder;
 import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.model.network.builder.RouterBuilder;
 import org.openstack4j.model.network.builder.SubnetBuilder;
+import org.openstack4j.model.network.ext.builder.HealthMonitorAssociateBuilder;
+import org.openstack4j.model.network.ext.builder.HealthMonitorBuilder;
+import org.openstack4j.model.network.ext.builder.HealthMonitorUpdateBuilder;
+import org.openstack4j.model.network.ext.builder.LbPoolBuilder;
+import org.openstack4j.model.network.ext.builder.LbPoolUpdateBuilder;
+import org.openstack4j.model.network.ext.builder.MemberBuilder;
+import org.openstack4j.model.network.ext.builder.MemberUpdateBuilder;
+import org.openstack4j.model.network.ext.builder.SessionPersistenceBuilder;
+import org.openstack4j.model.network.ext.builder.VipBuilder;
+import org.openstack4j.model.network.ext.builder.VipUpdateBuilder;
 import org.openstack4j.model.sahara.builder.ClusterCreateBuilder;
 import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
 import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
@@ -63,6 +73,16 @@ import org.openstack4j.openstack.networking.domain.NeutronRouter;
 import org.openstack4j.openstack.networking.domain.NeutronSecurityGroup;
 import org.openstack4j.openstack.networking.domain.NeutronSecurityGroupRule;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
+import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitor;
+import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorAssociate;
+import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorUpdate;
+import org.openstack4j.openstack.networking.domain.ext.NeutronLbPool;
+import org.openstack4j.openstack.networking.domain.ext.NeutronLbPoolUpdate;
+import org.openstack4j.openstack.networking.domain.ext.NeutronMember;
+import org.openstack4j.openstack.networking.domain.ext.NeutronMemberUpdate;
+import org.openstack4j.openstack.networking.domain.ext.NeutronSessionPersistence;
+import org.openstack4j.openstack.networking.domain.ext.NeutronVip;
+import org.openstack4j.openstack.networking.domain.ext.NeutronVipUpdate;
 import org.openstack4j.openstack.sahara.domain.SaharaClusterCreate;
 import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaServiceConfig;
@@ -314,7 +334,82 @@ public class Builders {
     public static NetworkUpdateBuilder networkUpdate() {
         return NeutronNetworkUpdate.builder();
     }
+    
+    /**
+     * The builder to create a lb member
+     * @return the Member Builder
+     */
+    public static MemberBuilder member() {
+        return NeutronMember.builder();
+    }
+    
+    /**
+     * The builder to update a lb member
+     * @return the MemberUpdate Builder
+     */
+    public static MemberUpdateBuilder memberUpdate() {
+        return NeutronMemberUpdate.builder();
+    }
+    /**
+     * The builder to create and update a sessionPersistence
+     * @return SessionPersistenceBuilder
+     */
+    public static SessionPersistenceBuilder sessionPersistence(){
+    	return NeutronSessionPersistence.builder();
+    }
+    /**
+     * The builder to create a vip.
+     * @return VipBuilder the vip builder
+     */
+    public static VipBuilder vip(){
+    	return NeutronVip.builder();
+    }
+    /**
+     * The builder to update a vip.
+     * @return VipUpdateBuilder
+     */
+    public static VipUpdateBuilder vipUpdate(){
+    	return NeutronVipUpdate.builder();
+    }
 
+    /**
+     * The builder to create a healthMonitor
+     * @return HealthMonitorBuilder
+     */
+    public static HealthMonitorBuilder healthMonitor(){
+    	return NeutronHealthMonitor.builder();
+    }
+    /**
+     * The builder to update a healthMonitor
+     * @return HealthMonitorUpdateBuilder
+     */
+    public static HealthMonitorUpdateBuilder healthMonitorUpdate(){
+    	return NeutronHealthMonitorUpdate.builder();
+    }
+    
+    /**
+     * The builder to create a lbPool
+     * @return LbPoolBuilder
+     */
+    public static LbPoolBuilder lbPool(){
+    	return NeutronLbPool.builder();
+    }
+    /**
+     * The builder to update a lbPool
+     * @return LbPoolUpdateBuilder
+     */
+    public static LbPoolUpdateBuilder lbPoolUpdate(){
+    	return NeutronLbPoolUpdate.builder();
+    }
+    
+    /**
+     * The builder to create a lbPool
+     * @return HealthMonitorAssociateBuilder
+     */
+    public static HealthMonitorAssociateBuilder lbPoolAssociateHealthMonitor(){
+    	return NeutronHealthMonitorAssociate.builder();
+    }
+    
     /**
      * The builder to create a sahara cluster
      * @return the cluster builder

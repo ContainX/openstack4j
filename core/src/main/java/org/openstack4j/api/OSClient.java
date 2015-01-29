@@ -11,6 +11,7 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.Token;
@@ -39,6 +40,14 @@ public interface OSClient {
      * @return OSClient for method chaining
      */
     OSClient removeRegion();
+    
+    /**
+     * Changes the Perspective for the current Session (Client)
+     * 
+     * @param perspective the new perspective
+     * @return OSClient for method chaining
+     */
+    OSClient perspective(Facing perspective);
     
 	/**
 	 * Gets the supported services.  A set of ServiceTypes will be returned identifying the OpenStack services installed and supported

@@ -294,4 +294,9 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
         return Apis.getSaharaServices();
     }
 
+    @Override
+    public OSClient perspective(Facing perspective) {
+        this.perspective = perspective;
+        return this;
+    }
 }

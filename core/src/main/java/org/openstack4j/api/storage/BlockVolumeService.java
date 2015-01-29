@@ -89,4 +89,11 @@ public interface BlockVolumeService extends RestService {
 	 * @return the action response
 	 */
 	ActionResponse migrate(String volumeId, String hostService, boolean forceHostCopy);
+	
+	/**
+	 * Returns the API used to transfer a Volume from one tenant/project to another
+	 * 
+	 * @return the volume transfer service
+	 */
+	BlockVolumeTransferService transfer();
 }

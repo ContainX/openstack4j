@@ -22,6 +22,15 @@ public interface ResourcesService {
 	 */
 	List<? extends Resource> list(String stackName, String stackId);
 	
+	
+	/**
+	 * Gets a list of currently existing {@link Resource}s for a specified stack.
+	 * 
+	 * @param stackNameOrId    Stack name or stack id
+	 * @return the list of {@link Resource}s
+	 */
+	List<? extends Resource> list(String stackNameOrId);
+	
 	/**
 	 * Gets the detail of the specified resource
 	 * 

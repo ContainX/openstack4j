@@ -2,6 +2,7 @@ package org.openstack4j.openstack;
 
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.client.IOSClientBuilder;
+import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.internal.HttpLoggingFilter;
 import org.openstack4j.model.identity.Access;
@@ -37,11 +38,36 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      * or scenarios where a client should not be re-authenticated due to a token lasting 24 hours
      * 
      * @param access an authorized access entity which is to be used to create the API
+     * @param perspective the current endpoint perspective to use
+     * @return the OSCLient
+     */
+    public static OSClient clientFromAccess(Access access, Facing perspective) {
+        return OSClientSession.createSession((KeystoneAccess) access, perspective, null);
+    }
+	
+	/**
+     * Skips Authentication and created the API around a previously cached Access object.  This can be useful in multi-threaded environments
+     * or scenarios where a client should not be re-authenticated due to a token lasting 24 hours
+     * 
+     * @param access an authorized access entity which is to be used to create the API
      * @param config OpenStack4j configuration options
      * @return the OSCLient
      */
     public static OSClient clientFromAccess(Access access, Config config) {
         return OSClientSession.createSession((KeystoneAccess) access, null, config);
+    }
+    
+    /**
+     * Skips Authentication and created the API around a previously cached Access object.  This can be useful in multi-threaded environments
+     * or scenarios where a client should not be re-authenticated due to a token lasting 24 hours
+     * 
+     * @param access an authorized access entity which is to be used to create the API
+     * @param perspective the current endpoint perspective to use
+     * @param config OpenStack4j configuration options
+     * @return the OSCLient
+     */
+    public static OSClient clientFromAccess(Access access, Facing perspective, Config config) {
+        return OSClientSession.createSession((KeystoneAccess) access, perspective, config);
     }
     
     /**

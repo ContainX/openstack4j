@@ -11,6 +11,7 @@ import org.openstack4j.model.network.Subnet;
 import org.openstack4j.model.network.builder.NetworkBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
@@ -33,15 +34,15 @@ public class NeutronNetwork implements Network {
 	@JsonProperty("provider:physical_network")
 	private String providerPhyNet;
 	@JsonProperty("admin_state_up")
-	private boolean adminStateUp;
+	private Boolean adminStateUp;
 	@JsonProperty("tenant_id")
 	private String tenantId;
 	@JsonProperty("provider:network_type")
 	private NetworkType networkType;
 	@JsonProperty("router:external")
-	private boolean routerExternal;
+	private Boolean routerExternal;
 	private String id;
-	private boolean shared;
+	private Boolean shared;
 	@JsonProperty("provider:segmentation_id")
 	private String providerSegID;
 	
@@ -134,7 +135,7 @@ public class NeutronNetwork implements Network {
 	 */
 	@Override
 	public boolean isAdminStateUp() {
-		return adminStateUp;
+		return adminStateUp != null && adminStateUp;
 	}
 	
 	/**
@@ -157,8 +158,9 @@ public class NeutronNetwork implements Network {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@JsonIgnore
 	public boolean isRouterExternal() {
-		return routerExternal;
+		return routerExternal != null && routerExternal;
 	}
 	
 	/**
@@ -174,7 +176,7 @@ public class NeutronNetwork implements Network {
 	 */
 	@Override
 	public boolean isShared() {
-		return shared;
+		return shared != null && shared;
 	}
 	
 	/**
@@ -256,7 +258,13 @@ public class NeutronNetwork implements Network {
 			m.tenantId = tenantId;
 			return this;
 		}
-		
+
+		@Override
+		public NetworkBuilder isShared(boolean shared) {
+			m.shared = shared;
+			return this;
+		}
+
 		@Override
 		public Network build() {
 			return m;
