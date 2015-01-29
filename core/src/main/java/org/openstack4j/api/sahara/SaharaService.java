@@ -18,4 +18,10 @@ public interface SaharaService extends RestService {
 	 */
 	ClusterService clusters();
 	
+	/**
+	 * Node Group Template Service API
+	 *
+	 * @return the node group template service
+	 */
+	NodeGroupTemplateService nodeGroupTemplates();
 }
