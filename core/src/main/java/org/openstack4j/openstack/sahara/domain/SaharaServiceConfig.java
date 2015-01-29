@@ -1,0 +1,94 @@
+package org.openstack4j.openstack.sahara.domain;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+import org.openstack4j.model.sahara.ServiceConfig;
+import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
+import org.openstack4j.openstack.common.ListResult;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
+
+/**
+ * For mapping JSON response to java objects
+ * 
+ * @author Ekasit Kijsipongse 
+ */
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class SaharaServiceConfig extends HashMap<String,String> implements ServiceConfig {
+
+	public static final long serialVersionUID = 1L;
+
+        /**
+         * {@inheritDoc}
+         */
+	@Override
+	public String get(String name) {
+		return this.get(name);
+	}
+
+        /**
+         * {@inheritDoc}
+         */
+	@Override
+	public Map<String,String> getConfigs() {
+		return this;
+	}
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ServiceConfigBuilder toBuilder() {
+                return new ConcreteServiceConfigBuilder(this);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public static ServiceConfigBuilder builder() {
+                return new ConcreteServiceConfigBuilder();
+        }
+
+
+        public static class ConcreteServiceConfigBuilder implements ServiceConfigBuilder {
+
+                private SaharaServiceConfig m;
+
+                ConcreteServiceConfigBuilder() {
+                        this(new SaharaServiceConfig());
+                }
+
+                ConcreteServiceConfigBuilder(SaharaServiceConfig m) {
+                        this.m = m;
+                }
+
+                @Override
+                public ServiceConfigBuilder set(String name, String value) {
+                        m.put(name,value);
+                        return this;
+                }
+
+                @Override
+                public ServiceConfig build() {
+                    return m;
+                }
+
+                @Override
+                public ConcreteServiceConfigBuilder from(ServiceConfig in) {
+                    m = (SaharaServiceConfig)in;
+                    return this;
+                }
+
+        }
+
+}

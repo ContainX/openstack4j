@@ -7,6 +7,7 @@ import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
@@ -166,7 +167,7 @@ public interface OSClient {
 	 * @return the telemetry service
 	 */
 	TelemetryService telemetry();
-	
+
 	/**
 	 * @return the authorized access entity which contains the authorized token, user details and service catalog
 	 */
@@ -178,4 +179,12 @@ public interface OSClient {
 	 * @return the Heat service
 	 */
 	HeatService heat();
+
+	/**
+	 * Returns the Sahara Service API
+	 * 
+	 * @return the Sahara service
+	 */
+	SaharaService sahara();
+	
 }

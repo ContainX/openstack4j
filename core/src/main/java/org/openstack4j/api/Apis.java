@@ -7,6 +7,7 @@ import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.sahara.SaharaService;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -70,6 +71,14 @@ public class Apis {
 	 */
 	public static HeatService getHeatServices() {
 		return get(HeatService.class);
+	}
+	
+	/**
+	 * Gets the (Sahara) Data Processing services API
+	 * @return the sahara services
+	 */
+	public static SaharaService getSaharaServices() {
+		return get(SaharaService.class);
 	}
 	
 	private static APIProvider initializeProvider() {

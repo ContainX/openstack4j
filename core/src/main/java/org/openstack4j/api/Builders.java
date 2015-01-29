@@ -41,6 +41,9 @@ import org.openstack4j.model.network.ext.builder.MemberUpdateBuilder;
 import org.openstack4j.model.network.ext.builder.SessionPersistenceBuilder;
 import org.openstack4j.model.network.ext.builder.VipBuilder;
 import org.openstack4j.model.network.ext.builder.VipUpdateBuilder;
+import org.openstack4j.model.sahara.builder.ClusterCreateBuilder;
+import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
+import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.openstack.common.GenericLink;
@@ -80,6 +83,9 @@ import org.openstack4j.openstack.networking.domain.ext.NeutronMemberUpdate;
 import org.openstack4j.openstack.networking.domain.ext.NeutronSessionPersistence;
 import org.openstack4j.openstack.networking.domain.ext.NeutronVip;
 import org.openstack4j.openstack.networking.domain.ext.NeutronVipUpdate;
+import org.openstack4j.openstack.sahara.domain.SaharaClusterCreate;
+import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
+import org.openstack4j.openstack.sahara.domain.SaharaServiceConfig;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
 
@@ -404,4 +410,28 @@ public class Builders {
     	return NeutronHealthMonitorAssociate.builder();
     }
     
+    /**
+     * The builder to create a sahara cluster
+     * @return the cluster builder
+     */
+    public static ClusterCreateBuilder cluster() {
+        return SaharaClusterCreate.builder();
+    }
+
+    /**
+     * The builder to create a sahara node group template
+     * @return the node group template builder
+     */
+    public static NodeGroupTemplateBuilder nodeGroupTemplate() {
+        return SaharaNodeGroupTemplate.builder();
+    }
+
+    /**
+     * The builder to create a sahara service configuration
+     * @return the service configuration builder
+     */
+    public static ServiceConfigBuilder serviceConfig() {
+        return SaharaServiceConfig.builder();
+    }
+
 }
