@@ -40,6 +40,42 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
+						<Export-Package>
+							!org.openstack4j.core.transport.internal,
+							!org.openstack4j.openstack.compute.internal,
+							!org.openstack4j.openstack.compute.internal.ext,
+							!org.openstack4j.openstack.heat.internal,
+							!org.openstack4j.openstack.identity.internal,
+							!org.openstack4j.openstack.image.internal,
+							!org.openstack4j.openstack.internal,
+							!org.openstack4j.openstack.logging.internal,
+							!org.openstack4j.openstack.networking.internal,
+							!org.openstack4j.openstack.networking.internal.ext,
+							!org.openstack4j.openstack.storage.block.internal,
+							!org.openstack4j.openstack.storage.object.internal,
+							!org.openstack4j.openstack.telemetry.internal,
+							org.openstack4j,
+							org.openstack4j.*
+						</Export-Package>
+						<Private-Package>
+							org.openstack4j.core.transport.internal,
+							org.openstack4j.openstack.compute.internal,
+							org.openstack4j.openstack.compute.internal.ext,
+							org.openstack4j.openstack.heat.internal,
+							org.openstack4j.openstack.identity.internal,
+							org.openstack4j.openstack.image.internal,
+							org.openstack4j.openstack.internal,
+							org.openstack4j.openstack.logging.internal,
+							org.openstack4j.openstack.networking.internal,
+							org.openstack4j.openstack.networking.internal.ext,
+							org.openstack4j.openstack.storage.block.internal,
+							org.openstack4j.openstack.storage.object.internal,
+							org.openstack4j.openstack.telemetry.internal
+						</Private-Package>
+						<Import-Package>
+							!org.openstack*,
+							*
+						</Import-Package>
 						<!-- 
 							Required for SPI in OSGi:
 							http://aries.apache.org/modules/spi-fly.html#specconf
