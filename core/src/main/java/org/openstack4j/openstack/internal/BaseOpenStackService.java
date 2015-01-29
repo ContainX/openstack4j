@@ -102,6 +102,11 @@ public class BaseOpenStackService {
             req.queryParam(name, value);
             return this;
         }
+        
+        public Invocation<R> updateParam(String name, Object value) {
+            req.updateQueryParam(name, value);
+            return this;
+        }
 
         public Invocation<R> params(Map<String, ? extends Object> params) {
             if (params != null) {
