@@ -20,7 +20,7 @@ import org.openstack4j.model.image.ImageMember;
 public interface ImageService extends RestService {
 
     /**
-     * Lists all public VM images
+     * Lists public VM images by the default page size defined by openstack 
      * 
      * @return list of images or empty
      */
@@ -33,6 +33,20 @@ public interface ImageService extends RestService {
      * @return 
      */
     List<? extends Image> list(Map<String, String> filteringParams);
+    /**
+     * Lists all public VM images
+     * 
+     * @return list of images or empty
+     */
+    List<? extends Image> listAll();
+
+    /**
+     * * Returns list of public VM images filtered by parameters when the result greater than the default page size defined by openstack
+     * 
+     * @param filteringParams map (name, value) of filtering parameters
+     * @return 
+     */
+    List<? extends Image> listAll(Map<String, String> filteringParams);
 
     /**
      * Gets an Image by ID
