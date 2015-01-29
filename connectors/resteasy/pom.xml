@@ -41,6 +41,15 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
+						<Export-Package>
+							org.openstack4j.connectors.resteasy,
+							org.openstack4j.connectors.resteasy.executors
+						</Export-Package>
+						<Import-Package>
+							!org.openstack4j.connectors.resteasy,
+							!org.openstack4j.connectors.resteasy.executors,
+							*
+						</Import-Package>
 						<!-- 
 						Required for SPI in OSGi:
 						http://aries.apache.org/modules/spi-fly.html#specconf

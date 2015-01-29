@@ -40,6 +40,13 @@
 				<configuration>
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
+						<Export-Package>
+							org.openstack4j.plugins.log4j
+						</Export-Package>
+						<Import-Package>
+							!org.openstack4j.plugins.log4j,
+							*
+						</Import-Package>
 						<!-- 
 						Required for SPI in OSGi:
 						http://aries.apache.org/modules/spi-fly.html#specconf
