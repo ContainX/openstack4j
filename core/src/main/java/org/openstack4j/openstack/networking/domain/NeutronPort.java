@@ -66,7 +66,7 @@ public class NeutronPort implements Port {
 	private List<String> securityGroups;
 	
 	@JsonProperty("extra_dhcp_opts")
-	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates = Lists.newArrayList();
+	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates;
         
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
@@ -342,6 +342,8 @@ public class NeutronPort implements Port {
 
     @Override
     public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
+            if (m.extraDhcpOptCreates == null)
+                m.extraDhcpOptCreates = Lists.newArrayList();
             m.extraDhcpOptCreates.add((NeutronExtraDhcpOptCreate)extraDhcpOptCreate);
             return this;
     }
