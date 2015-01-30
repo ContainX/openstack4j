@@ -17,7 +17,7 @@ import com.google.common.base.Function;
  */
 public class RemoveVersionFromURL implements Function<String, String> {
 
-    private static final String VERSION_REGEX = "/v[0-9]+(\\.[0-9])*";
+    public static final String VERSION_REGEX = "/v[0-9]+(\\.[0-9])*";
     public static final RemoveVersionFromURL INSTANCE = new RemoveVersionFromURL();
     
     @Override
