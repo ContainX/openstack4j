@@ -12,6 +12,6 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
 public class BaseImageServices extends BaseOpenStackService {
 
 	protected BaseImageServices() {
-		super(ServiceType.IMAGE, EnforceVersionToURL.instance("/v1"));
+		super(ServiceType.IMAGE, EnforceVersionToURL.instance("/v1", true));
 	}
 }

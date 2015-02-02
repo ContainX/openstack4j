@@ -63,7 +63,8 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
         List<GlanceImage> totalList = imageInvocation.execute().getList();
         List<GlanceImage> currList = totalList;
         while (currList.size() == limit) {
-            imageInvocation.param("marker", currList.get(limit - 1).getId());
+          
+            imageInvocation.updateParam("marker", currList.get(limit - 1).getId());
             currList = imageInvocation.execute().getList();
             totalList.addAll(currList);
         }        

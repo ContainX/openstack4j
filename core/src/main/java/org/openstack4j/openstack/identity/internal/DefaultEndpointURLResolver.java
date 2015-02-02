@@ -63,7 +63,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
 	private String resolveV2(URLResolverParams p) {
 		for (Service sc : p.access.getServiceCatalog()) {
-			if (p.type.getServiceName().equals(sc.getName()) || p.type.name().toLowerCase().equals(sc.getType()) || p.type.getServiceName().equals(sc.getType()))
+			if (p.type.getServiceName().equals(sc.getName()) || p.type == ServiceType.forName(sc.getType()))
 			{
 				for (Endpoint ep : sc.getEndpoints())
 				{
