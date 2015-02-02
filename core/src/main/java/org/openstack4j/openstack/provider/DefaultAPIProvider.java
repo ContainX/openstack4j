@@ -48,6 +48,7 @@ import org.openstack4j.api.networking.ext.MemberService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 import org.openstack4j.api.networking.ext.VipService;
 import org.openstack4j.api.sahara.ClusterService;
+import org.openstack4j.api.sahara.ClusterTemplateService;
 import org.openstack4j.api.sahara.NodeGroupTemplateService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -105,6 +106,7 @@ import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.VipServiceImpl;
 import org.openstack4j.openstack.sahara.internal.ClusterServiceImpl;
+import org.openstack4j.openstack.sahara.internal.ClusterTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.NodeGroupTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
@@ -192,6 +194,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(BlockVolumeTransferService.class, BlockVolumeTransferServiceImpl.class);
 		bind(SaharaService.class,SaharaServiceImpl.class);
 		bind(ClusterService.class,ClusterServiceImpl.class);
+		bind(ClusterTemplateService.class,ClusterTemplateServiceImpl.class);
 		bind(NodeGroupTemplateService.class,NodeGroupTemplateServiceImpl.class);
 	}
 

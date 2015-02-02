@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openstack4j.model.sahara.ServiceConfig;
-import org.openstack4j.model.sahara.NodeGroupTemplate;
-import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
+import org.openstack4j.model.sahara.NodeGroup;
+import org.openstack4j.model.sahara.builder.NodeGroupBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -24,40 +24,35 @@ import com.google.common.collect.Lists;
  * 
  * @author Ekasit Kijsipongse
  */
-@JsonRootName("node_group_template")
-public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
+@JsonRootName("node_group")
+public class SaharaNodeGroup implements NodeGroup {
 
 	private static final long serialVersionUID = 1L;
-	
-	private String id;
-	private String name;
-	private String description;
-	@JsonProperty("hadoop_version")
-	private String hadoopVersion;
-	@JsonProperty("tenant_id")
-	private String tenantId;
-	@JsonProperty("created_at")
+
+        private String name;
+	private Integer count;
+        @JsonProperty("node_group_template_id")
+	private String nodeGroupTemplateId;
+        @JsonProperty("created_at")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         public Date createdAt;
-	@JsonProperty("updated_at")
+        @JsonProperty("updated_at")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         public Date updatedAt;
-	@JsonProperty("plugin_name")
-	private String pluginName;
-	@JsonProperty("image_id")
-	private String imageId;
-	@JsonProperty("volumes_size")
-	private Integer volumesSize;
-	@JsonProperty("volumes_per_node")
-	private Integer volumesPerNode;
-	@JsonProperty("floating_ip_pool")
-	private String floatingNetworkId;
-	@JsonProperty("flavor_id")
-	private String flavorId;
-	@JsonProperty("volume_mount_prefix")
-	private String volumeMountPrefix;
-	@JsonProperty("auto_security_group")
-	private Boolean autoSecurityGroup;
+        @JsonProperty("image_id")
+        private String imageId;
+        @JsonProperty("volumes_size")
+        private Integer volumesSize;
+        @JsonProperty("volumes_per_node")
+        private Integer volumesPerNode;
+        @JsonProperty("floating_ip_pool")
+        private String floatingNetworkId;
+        @JsonProperty("flavor_id")
+        private String flavorId;
+        @JsonProperty("volume_mount_prefix")
+        private String volumeMountPrefix;
+        @JsonProperty("auto_security_group")
+        private Boolean autoSecurityGroup;
 
         @JsonProperty("security_groups")
         private List<String> securityGroups;
@@ -65,87 +60,63 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
         @JsonProperty("node_processes")
         private List<String> nodeProcesses;
 
-	@JsonProperty("node_configs")
-	private Map<String, SaharaServiceConfig> serviceConfigs;
+        @JsonProperty("node_configs")
+        private Map<String, SaharaServiceConfig> serviceConfigs;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public NodeGroupTemplateBuilder toBuilder() {
-		return new ConcreteNodeGroupTemplateBuilder(this);
+	public NodeGroupBuilder toBuilder() {
+		return new ConcreteNodeGroupBuilder(this);
 	}
 
 	/**
-	 * @return the node group template Builder
+	 * @return the node group Builder
 	 */
-	public static NodeGroupTemplateBuilder builder() {
-		return new ConcreteNodeGroupTemplateBuilder();
+	public static NodeGroupBuilder builder() {
+		return new ConcreteNodeGroupBuilder();
 	}
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getName() {
+                return name;
+        }
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getId() {
-		return id;
+	public Integer getCount() {
+		return count;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getName() {
-		return name;
+	public String getNodeGroupTemplateId() {
+		return nodeGroupTemplateId;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getDescription() {
-		return description;
-	}
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Date getCreatedAt() {
+                return createdAt;
+        }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getHadoopVersion() {
-		return hadoopVersion;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getPluginName() {
-		return pluginName;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getTenantId() {
-		return tenantId;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Date getUpdatedAt() {
+                return updatedAt;
+        }
 
         /**
          * {@inheritDoc}
@@ -219,34 +190,31 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
                 return nodeProcesses;
         }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Map<String, ? extends ServiceConfig> getServiceConfigs() {
-		return serviceConfigs;
-	}
-	
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Map<String, ? extends ServiceConfig> getServiceConfigs() {
+                return serviceConfigs;
+        }
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-	             .add("id", id)
                      .add("name", name)
-                     .add("description", description)
-                     .add("hadoop_version", hadoopVersion)
-                     .add("tenant_id",tenantId)
+                     .add("count", count)
                      .add("created_at",createdAt)
                      .add("updated_at",updatedAt)
-                     .add("plugin_name",pluginName)
                      .add("image_id", imageId)
                      .add("volumes_size", volumesSize)
                      .add("volumes_per_node", volumesPerNode)
                      .add("float_ip_pool",floatingNetworkId)
                      .add("flavor_id",flavorId)
                      .add("volume_mount_prefix",volumeMountPrefix)
+                     .add("node_group_template_id", imageId)
                      .add("security_groups",securityGroups)
                      .add("auto_security_group",autoSecurityGroup)
                      .add("node_processes",nodeProcesses)
@@ -254,86 +222,80 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
                      .toString();
 	}
 	
-	public static class NodeGroupTemplates extends ListResult<SaharaNodeGroupTemplate> {
+	public static class NodeGroups extends ListResult<SaharaNodeGroup> {
 
 		private static final long serialVersionUID = 1L;
 		
-                @JsonProperty("node_group_templates")
-		private List<SaharaNodeGroupTemplate> nodeGroupTemplates;
+                @JsonProperty("node_groups")
+		private List<SaharaNodeGroup> nodeGroups;
 		
 		@Override
-		protected List<SaharaNodeGroupTemplate> value() {
-			return nodeGroupTemplates;
+		protected List<SaharaNodeGroup> value() {
+			return nodeGroups;
 		}
 	}
 	
-	public static class ConcreteNodeGroupTemplateBuilder implements NodeGroupTemplateBuilder {
+	public static class ConcreteNodeGroupBuilder implements NodeGroupBuilder {
 
-		private SaharaNodeGroupTemplate m;
+		private SaharaNodeGroup m;
 		
-		ConcreteNodeGroupTemplateBuilder() {
-			this(new SaharaNodeGroupTemplate());
+		ConcreteNodeGroupBuilder() {
+			this(new SaharaNodeGroup());
 		}
 		
-		ConcreteNodeGroupTemplateBuilder(SaharaNodeGroupTemplate m) {
+		ConcreteNodeGroupBuilder(SaharaNodeGroup m) {
 			this.m = m;
 		}
 
 		@Override
-		public NodeGroupTemplate build() {
+		public NodeGroup build() {
 			return m;
 		}
 
 		@Override
-		public NodeGroupTemplateBuilder from(NodeGroupTemplate in) {
-			m = (SaharaNodeGroupTemplate) in;
+		public NodeGroupBuilder from(NodeGroup in) {
+			m = (SaharaNodeGroup) in;
 			return this;
                 }
 		
 		@Override
-		public NodeGroupTemplateBuilder name(String name) {
+		public NodeGroupBuilder name(String name) {
 			m.name = name;
 			return this;
 		}
 
 		@Override
-		public NodeGroupTemplateBuilder description(String description) {
-			m.description = description;
+		public NodeGroupBuilder nodeGroupTemplateId(String templateId) {
+			m.nodeGroupTemplateId = templateId;
 			return this;
 		}
 
 		@Override
-		public NodeGroupTemplateBuilder hadoopVersion(String hadoopVersion) {
-			m.hadoopVersion = hadoopVersion;
+		public NodeGroupBuilder count(int count) {
+			m.count = count;
 			return this;
 		}
 
 		@Override
-		public NodeGroupTemplateBuilder pluginName(String pluginName) {
-			m.pluginName = pluginName;
-			return this;
-		}
-
-		@Override
-		public NodeGroupTemplateBuilder floatingIpPool(String networkId) {
+		public NodeGroupBuilder floatingIpPool(String networkId) {
 			m.floatingNetworkId = networkId;
 			return this;
 		}
 
 		@Override
-		public NodeGroupTemplateBuilder flavor(String flavorId) {
+		public NodeGroupBuilder flavor(String flavorId) {
 			m.flavorId = flavorId;
 			return this;
 		}
 
 		@Override
-		public NodeGroupTemplateBuilder setAutoSecurityGroup(boolean isAutoSecurityGroup) {
+		public NodeGroupBuilder setAutoSecurityGroup(boolean isAutoSecurityGroup) {
 			m.autoSecurityGroup = isAutoSecurityGroup;
 			return this;
 		}
 
 		@Override
-		public NodeGroupTemplateBuilder addSecurityGroup(String id) {
+		public NodeGroupBuilder addSecurityGroup(String id) {
                         if (id != null && !id.isEmpty()) {
                            if (m.securityGroups == null) 
                               m.securityGroups = Lists.newArrayList();
@@ -343,7 +305,7 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 		}
 
 		@Override
-		public NodeGroupTemplateBuilder addNodeProcess(String name) {
+		public NodeGroupBuilder addNodeProcess(String name) {
                         if (name != null && !name.isEmpty()) {
                            if (m.nodeProcesses == null)
                               m.nodeProcesses = Lists.newArrayList();
@@ -353,7 +315,7 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 		}
 
 		@Override
-                public NodeGroupTemplateBuilder addServiceConfig(String name, ServiceConfig config) {
+                public NodeGroupBuilder addServiceConfig(String name, ServiceConfig config) {
                         if (name != null && !name.isEmpty()) {
                            if (m.serviceConfigs == null) 
                               m.serviceConfigs = new HashMap<String,SaharaServiceConfig>();

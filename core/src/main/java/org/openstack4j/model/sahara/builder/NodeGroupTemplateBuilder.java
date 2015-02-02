@@ -65,7 +65,15 @@ public interface NodeGroupTemplateBuilder extends Builder<NodeGroupTemplateBuild
         NodeGroupTemplateBuilder flavor(String flavorId);
 
          /**
-          * Adds the security group.
+          * Set the security group.
+          *
+          * @param isAutoSecurityGroup true or false
+          * @return this builder
+          */
+        NodeGroupTemplateBuilder setAutoSecurityGroup(boolean isAutoSecurityGroup);
+
+         /**
+          * Add the security group.
           *
           * @param id the id
           * @return this builder
@@ -73,7 +81,7 @@ public interface NodeGroupTemplateBuilder extends Builder<NodeGroupTemplateBuild
         NodeGroupTemplateBuilder addSecurityGroup(String id);
 
          /**
-          * Adds a node process
+          * Add a node process
           *
           * @param name the name
           * @return this builder
@@ -81,7 +89,7 @@ public interface NodeGroupTemplateBuilder extends Builder<NodeGroupTemplateBuild
         NodeGroupTemplateBuilder addNodeProcess(String name);
 
          /**
-          * Adds a service config
+          * Add a service config
           *
           * @param name the service name
           * @param config the config
