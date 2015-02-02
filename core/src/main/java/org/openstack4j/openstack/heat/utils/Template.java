@@ -40,6 +40,8 @@ public class Template {
      * Save the file name(absolute path) with file content in the files map
      */
     private void getFileContents() {
+        // FIXME find alternative implementation not importing com.fasterxml.jackson.dataformat.yaml.snakeyaml package
+        // this package is not visible in OSGi
         Yaml yaml = new Yaml();
         @SuppressWarnings("unchecked")
         Map<String, Object> content = (Map<String, Object>) yaml.load(getTplContent());
