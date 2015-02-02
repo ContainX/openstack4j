@@ -6,45 +6,30 @@ import java.util.Map;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
+import org.openstack4j.model.sahara.builder.NodeGroupBuilder;
 
 /**
- * A Sahara Node Group Template
+ * A Sahara Node Group 
  * 
  * @author Ekasit Kijsipongse
  */
-public interface NodeGroupTemplate extends ModelEntity, Buildable<NodeGroupTemplateBuilder> {
+public interface NodeGroup extends ModelEntity, Buildable<NodeGroupBuilder> {
 
 	/**
-	 * @return the identifier 
-	 */
-	String getId();
-	
-	/**
-	 * @return the name of the node group template
+	 * @return the name of the node group
 	 */
 	String getName();
-	
-	/**
-	 * @return the description of the node group template
-	 */
-	String getDescription();
-	
-	/**
-	 * @return the hadoop version 
-	 */
-	String getHadoopVersion();
-	
-	/**
-	 * @return the plugin name 
-	 */
-	String getPluginName();
-	
-	/**
-	 * @return the tenant ID 
-	 */
-	String getTenantId();
-	
+
+        /**
+         * @return the number of instances in node groups
+         */
+        Integer getCount();
+
+        /**
+         * @return the id of node group template
+         */
+        String getNodeGroupTemplateId();
+
 	/**
 	 * @return the created date 
 	 */

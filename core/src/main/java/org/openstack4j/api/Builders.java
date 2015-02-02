@@ -42,6 +42,8 @@ import org.openstack4j.model.network.ext.builder.SessionPersistenceBuilder;
 import org.openstack4j.model.network.ext.builder.VipBuilder;
 import org.openstack4j.model.network.ext.builder.VipUpdateBuilder;
 import org.openstack4j.model.sahara.builder.ClusterCreateBuilder;
+import org.openstack4j.model.sahara.builder.ClusterTemplateBuilder;
+import org.openstack4j.model.sahara.builder.NodeGroupBuilder;
 import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
 import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
@@ -84,6 +86,8 @@ import org.openstack4j.openstack.networking.domain.ext.NeutronSessionPersistence
 import org.openstack4j.openstack.networking.domain.ext.NeutronVip;
 import org.openstack4j.openstack.networking.domain.ext.NeutronVipUpdate;
 import org.openstack4j.openstack.sahara.domain.SaharaClusterCreate;
+import org.openstack4j.openstack.sahara.domain.SaharaClusterTemplate;
+import org.openstack4j.openstack.sahara.domain.SaharaNodeGroup;
 import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaServiceConfig;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
@@ -416,6 +420,22 @@ public class Builders {
      */
     public static ClusterCreateBuilder cluster() {
         return SaharaClusterCreate.builder();
+    }
+
+    /**
+     * The builder to create a sahara cluster template
+     * @return the cluster template builder
+     */
+    public static ClusterTemplateBuilder clusterTemplate() {
+        return SaharaClusterTemplate.builder();
+    }
+
+    /**
+     * The builder to create a sahara node group
+     * @return the node group builder
+     */
+    public static NodeGroupBuilder nodeGroup() {
+        return SaharaNodeGroup.builder();
     }
 
     /**
