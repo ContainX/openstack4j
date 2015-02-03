@@ -8,7 +8,7 @@
 	<artifactId>openstack4j-resteasy</artifactId>
 	<name>OpenStack4j RestEasy Connector</name>
 	<url>http://github.com/gondor/openstack4j/</url>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 
 	<properties>
 		<resteasy-version>2.3.7.Final</resteasy-version>

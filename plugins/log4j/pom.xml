@@ -9,7 +9,7 @@
 	<artifactId>openstack4j-log4j</artifactId>
 	<name>OpenStack4j Log4j Plugin</name>
 	<url>http://github.com/gondor/openstack4j/</url>
-	<packaging>bundle</packaging>
+	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
