@@ -91,7 +91,7 @@
 						<Require-Capability>
 							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.api.APIProvider)";cardinality:=multiple,
 							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService)";cardinality:=multiple,
-							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple,
+							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple;resolution:=optional,
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)",
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
 						</Require-Capability>
