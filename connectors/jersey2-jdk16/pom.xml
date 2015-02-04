@@ -31,4 +31,39 @@
 			<version>2.2.3</version>
 		</dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Export-Package>
+							org.openstack4j.connectors.jersey2
+						</Export-Package>
+						<Import-Package>
+							!org.openstack4j.connectors.jersey2,
+							*
+						</Import-Package>
+						<!-- 
+						Required for SPI in OSGi:
+						http://aries.apache.org/modules/spi-fly.html#specconf
+						
+						This bundle defines an implementation for following services in META-INF-services:
+						org.openstack4j.core.transport.HttpExecutorService
+						 -->
+						<Require-Capability>
+							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
+						</Require-Capability>
+						<Provide-Capability>
+							osgi.serviceloader; osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService
+						</Provide-Capability>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
