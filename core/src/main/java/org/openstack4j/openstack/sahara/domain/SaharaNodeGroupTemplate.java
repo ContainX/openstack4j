@@ -38,10 +38,10 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 	private String tenantId;
 	@JsonProperty("created_at")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        public Date createdAt;
+        private Date createdAt;
 	@JsonProperty("updated_at")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        public Date updatedAt;
+        private Date updatedAt;
 	@JsonProperty("plugin_name")
 	private String pluginName;
 	@JsonProperty("image_id")

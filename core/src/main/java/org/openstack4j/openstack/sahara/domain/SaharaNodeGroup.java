@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openstack4j.model.sahara.ServiceConfig;
+import org.openstack4j.model.sahara.Instance;
 import org.openstack4j.model.sahara.NodeGroup;
 import org.openstack4j.model.sahara.builder.NodeGroupBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -35,10 +36,10 @@ public class SaharaNodeGroup implements NodeGroup {
 	private String nodeGroupTemplateId;
         @JsonProperty("created_at")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        public Date createdAt;
+        private Date createdAt;
         @JsonProperty("updated_at")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        public Date updatedAt;
+        private Date updatedAt;
         @JsonProperty("image_id")
         private String imageId;
         @JsonProperty("volumes_size")
@@ -62,6 +63,10 @@ public class SaharaNodeGroup implements NodeGroup {
 
         @JsonProperty("node_configs")
         private Map<String, SaharaServiceConfig> serviceConfigs;
+
+      
+        @JsonProperty("instances")
+        private List<SaharaInstance> instances; // only in cluster json response
 
 	/**
 	 * {@inheritDoc}
@@ -198,6 +203,15 @@ public class SaharaNodeGroup implements NodeGroup {
                 return serviceConfigs;
         }
 
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public List<? extends Instance> getInstances() {
+                return instances;
+        }
+
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -219,6 +233,7 @@ public class SaharaNodeGroup implements NodeGroup {
                      .add("auto_security_group",autoSecurityGroup)
                      .add("node_processes",nodeProcesses)
                      .add("node_configs",serviceConfigs)
+                     .add("instances",instances)
                      .toString();
 	}
 	

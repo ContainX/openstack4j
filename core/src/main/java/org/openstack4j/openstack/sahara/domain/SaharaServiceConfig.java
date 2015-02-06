@@ -1,21 +1,17 @@
 package org.openstack4j.openstack.sahara.domain;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
 import org.openstack4j.model.sahara.ServiceConfig;
 import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
-import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 
 /**
  * For mapping JSON response to java objects

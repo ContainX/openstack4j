@@ -37,7 +37,7 @@ public class SaharaClusterTemplate implements ClusterTemplate {
 	private String name;
 	@JsonProperty("updated_at")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        public Date updatedAt;
+        private Date updatedAt;
 	@JsonProperty("tenant_id")
 	private String tenantId;
 	@JsonProperty("plugin_name")
@@ -48,10 +48,11 @@ public class SaharaClusterTemplate implements ClusterTemplate {
 	private String id;
         @JsonProperty("node_groups")
         private List<SaharaNodeGroup> nodeGroups;
+        @JsonProperty("neutron_management_network")
 	private String managementNetworkId;
 	@JsonProperty("created_at")
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        public Date createdAt;
+        private Date createdAt;
 	@JsonProperty("cluster_configs")
 	private Map<String, SaharaServiceConfig> clusterConfigs;
 

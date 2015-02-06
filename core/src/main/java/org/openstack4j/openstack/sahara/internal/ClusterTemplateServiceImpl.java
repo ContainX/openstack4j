@@ -2,8 +2,8 @@ package org.openstack4j.openstack.sahara.internal;
 
 import java.util.List;
 
-import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.api.sahara.ClusterTemplateService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.sahara.ClusterTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaClusterTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaClusterTemplateUnwrapped;
