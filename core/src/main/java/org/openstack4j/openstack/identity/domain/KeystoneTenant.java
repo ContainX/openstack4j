@@ -214,10 +214,30 @@ public class KeystoneTenant implements Tenant {
 
 		private static final long serialVersionUID = 1L;
 		@JsonProperty("tenants")
-		private List<KeystoneTenant> list;
+		protected List<KeystoneTenant> list;
 		
 		public List<KeystoneTenant> value() {
 			return list;
 		}
+	}
+	
+	/**
+	 * Used for backwards compatibility in fetching a Tenant By Name.  Older deployments return a single object
+	 * or null whereas newer deployments return an [] containing a single element
+	 */
+	public static class BackwardsCompatTenants extends Tenants {
+
+        private static final long serialVersionUID = 1L;
+        
+        @JsonProperty("tenant")
+        private KeystoneTenant tenant;  
+        
+	    public KeystoneTenant getOneOrNull() 
+	    {
+	        if (tenant != null)
+	            return tenant;
+	        
+	        return (list != null && list.size() > 0) ? list.get(0) : null;
+	    }
 	}
 }

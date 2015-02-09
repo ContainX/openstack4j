@@ -34,6 +34,8 @@ public class Environment {
     
     @SuppressWarnings("unchecked")
     private Map<String, String> getResourceRegistry(){
+        // FIXME find alternative implementation not importing com.fasterxml.jackson.dataformat.yaml.snakeyaml package
+        // this package is not visible in OSGi
         Yaml yaml = new Yaml();
         Map<String, Object> content = (Map<String, Object>) yaml.load(getEnvContent());
         return (Map<String, String>) content.get("resource_registry");
