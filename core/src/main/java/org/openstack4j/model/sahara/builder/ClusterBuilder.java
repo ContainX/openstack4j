@@ -2,6 +2,8 @@ package org.openstack4j.model.sahara.builder;
 
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.sahara.Cluster;
+import org.openstack4j.model.sahara.NodeGroup;
+import org.openstack4j.model.sahara.ServiceConfig;
 
 /**
  * Builder interface used for {@link Cluster} object.
@@ -62,4 +64,30 @@ public interface ClusterBuilder extends Builder<ClusterBuilder, Cluster> {
 	 * @return ClusterBuilder
 	 */
 	ClusterBuilder keypairName(String keypairName);
+
+	/**
+	 * See {@link Cluster#getManagementNetworkId()}
+	 * 
+	 * @param networkId the id of management network
+	 * @return ClusterBuilder
+	 */
+	ClusterBuilder managementNetworkId(String networkId);
+
+         /**
+          * Add a cluster config
+          *
+          * @param name the service name
+          * @param config the config
+          * @return this builder
+          */
+        ClusterBuilder addServiceConfig(String name, ServiceConfig config);
+
+         /**
+          * Add a node group
+          *
+          * @param nodeGroup the node group
+          * @return this builder
+          */
+        ClusterBuilder addNodeGroup(NodeGroup nodeGroup);
+
 }

@@ -1,0 +1,46 @@
+package org.openstack4j.openstack.sahara.domain.actions;
+
+import java.util.List;
+
+import org.openstack4j.api.Builders;
+
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.sahara.NodeGroup;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import com.google.common.collect.Lists;
+
+/**
+ * Simple Actions Classes used for Sahara Action 
+ * 
+ * @author ekasit.kijsipongse@nectec.or.th
+ */
+//@SuppressWarnings("serial")
+public final class SaharaActions {
+    
+    public static class ResizeNodeGroupAction implements ModelEntity {
+
+        @JsonProperty("resize_node_groups")
+        List<NodeGroup> nodeGroups; 
+        
+        public ResizeNodeGroupAction(String groupName,int count) { 
+            NodeGroup nodeGroup = Builders.nodeGroup().name(groupName)
+                                     .count(count).build();
+            nodeGroups = Lists.newArrayList();
+            nodeGroups.add(nodeGroup);
+        }
+    }
+    
+    public static class AddNodeGroupAction implements ModelEntity {
+
+        @JsonProperty("add_node_groups")
+        List<NodeGroup> nodeGroups; 
+        
+        public AddNodeGroupAction(NodeGroup nodeGroup) { 
+            nodeGroups = Lists.newArrayList();
+            nodeGroups.add(nodeGroup);
+        }
+    }
+}

@@ -3,6 +3,7 @@ package org.openstack4j.openstack.sahara.domain;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.model.sahara.Cluster;
@@ -34,7 +35,7 @@ public class SaharaCluster implements Cluster {
 
 	private static final long serialVersionUID = 1L;
 
-	private Status status;
+	private String status;
 	@JsonProperty("info")
         private Map<String,SaharaServiceInfo> infos;
 	@JsonProperty("cluster_template_id")
@@ -79,7 +80,7 @@ public class SaharaCluster implements Cluster {
          * {@inheritDoc}
          */
 	@Override
-	public Status getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
@@ -309,44 +310,68 @@ public class SaharaCluster implements Cluster {
             }
 
             @Override
-            public ConcreteClusterBuilder name(String name) {
+            public ClusterBuilder name(String name) {
                 m.name = name;
                 return this;
             }
 
             @Override
-            public ConcreteClusterBuilder hadoopVersion(String hadoopVersion) {
+            public ClusterBuilder hadoopVersion(String hadoopVersion) {
                 m.hadoopVersion = hadoopVersion;
                 return this;
             }
 
             @Override
-            public ConcreteClusterBuilder pluginName(String pluginName) {
+            public ClusterBuilder pluginName(String pluginName) {
                 m.pluginName = pluginName;
                 return this;
             }
 
             @Override
-            public ConcreteClusterBuilder template(String clusterTemplateId) {
+            public ClusterBuilder template(String clusterTemplateId) {
                 m.clusterTemplateId = clusterTemplateId;
                 return this;
             }
 
             @Override
-            public ConcreteClusterBuilder image(String imageId) {
+            public ClusterBuilder image(String imageId) {
                 m.defaultImageId = imageId;
                 return this;
             }
 
-            public ConcreteClusterBuilder image(Image image) {
+            public ClusterBuilder image(Image image) {
                 m.defaultImageId = image.getId();
                 return this;
             }
 
             @Override
-            public ConcreteClusterBuilder keypairName(String keypairName) {
+            public ClusterBuilder keypairName(String keypairName) {
                 m.userKeypairId = keypairName;
                 return this;
+            }
+
+            @Override
+            public ClusterBuilder managementNetworkId(String networkId) {
+                m.managementNetworkId = networkId;
+                return this;
+            }
+
+            @Override
+            public ClusterBuilder addNodeGroup(NodeGroup nodeGroup) {
+                    if (m.nodeGroups == null)
+                       m.nodeGroups = Lists.newArrayList();
+                    m.nodeGroups.add((SaharaNodeGroup) nodeGroup);
+                    return this;
+            }
+
+            @Override
+            public ClusterBuilder addServiceConfig(String name, ServiceConfig config) {
+                    if (name != null && !name.isEmpty()) {
+                       if (m.clusterConfigs == null)
+                          m.clusterConfigs = new HashMap<String,SaharaServiceConfig>();
+                       m.clusterConfigs.put(name,(SaharaServiceConfig) config);
+                    }
+                    return this;
             }
 
             @Override
@@ -355,7 +380,7 @@ public class SaharaCluster implements Cluster {
             }
 
             @Override
-            public ConcreteClusterBuilder from(Cluster in) {
+            public ClusterBuilder from(Cluster in) {
                 m = (SaharaCluster) in;
                 return this;
             }

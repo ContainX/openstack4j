@@ -1,7 +1,5 @@
 package org.openstack4j.model.sahara;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -9,10 +7,6 @@ import java.util.Map;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.ClusterBuilder;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.google.common.base.CaseFormat;
 
 /**
  * An OpenStack Cluster
@@ -22,36 +16,10 @@ import com.google.common.base.CaseFormat;
 public interface Cluster extends ModelEntity, Buildable<ClusterBuilder> {
 
 	/**
-	 * The current cluster Status
-	 * 
-	 */
-	public enum Status {
-		ACTIVE, CREATING, UNRECOGNIZED;
-		
-		@JsonValue
-		public String value() {
-			return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, name());
-		}
-
-		@Override
-		public String toString() {
-			return value();
-		}
-
-		@JsonCreator
-		public static Status fromValue(String status) {
-			try {
-				return valueOf(CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_UNDERSCORE, checkNotNull(status, "status must not be null")));
-			} catch (IllegalArgumentException e) {
-				return UNRECOGNIZED;
-			}
-		}
-	}
-	
-	/**
+         * TODO: Shall this return a Status object?
 	 * @return the status of the cluster
 	 */
-	Status getStatus();
+	String getStatus();
 	
 	/**
 	 * @return the information of the cluster
