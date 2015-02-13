@@ -90,4 +90,8 @@ public interface NodeGroup extends ModelEntity, Buildable<NodeGroupBuilder> {
 	 */
 	Map<String, ? extends ServiceConfig> getServiceConfigs();
 
+	/**
+	 * @return instances in the node group
+	 */
+	List< ? extends Instance> getInstances();
 }
