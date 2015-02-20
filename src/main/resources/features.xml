@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" name="openstack4j">
+
+	<feature name="openstack4j-httpclient-log4j" version="${project.version}">
+		<feature version="${project.version}">openstack4j-httpclient</feature>
+		<feature version="${project.version}">openstack4j-plugin-log4j</feature>
+	</feature>
+	
 	<!-- 
-		Due to SPI in OSGi requirements, at least one provider for an HTTPExecutorService and another for LoggerFactorySupplier 
+		Due to SPI in OSGi requirements, at least one provider for an HTTPExecutorService 
 		must be present in the OSGi container for the core to be successfully resolved.
 	 -->
-	<feature name="openstack4j-httpclient-log4j" version="${project.version}">
+	<feature name="openstack4j-httpclient" version="${project.version}">
 		<feature version="${project.version}">openstack4j-core</feature>
 		<feature version="${project.version}">openstack4j-connector-httpclient</feature>
-		<feature version="${project.version}">openstack4j-plugin-log4j</feature>
 	</feature>
 
 	<!--
