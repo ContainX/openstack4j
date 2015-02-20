@@ -12,6 +12,10 @@ import org.openstack4j.openstack.sahara.domain.SaharaCluster;
 import org.openstack4j.openstack.sahara.domain.SaharaClusterUnwrapped;
 import org.openstack4j.openstack.sahara.domain.SaharaCluster.Clusters;
 
+import java.io.File;
+import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.common.payloads.FilePayload;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -64,20 +68,20 @@ public class ClusterServiceImpl extends BaseSaharaServices implements ClusterSer
      * {@inheritDoc}
      */
     @Override
-    public Cluster resizeNodeGroup(String clusterId, String groupName, int count) {
+    public ActionResponse resizeNodeGroup(String clusterId, String groupName, int count) {
         checkNotNull(clusterId);
         checkNotNull(groupName);
-        return put(SaharaCluster.class, uri("/clusters/%s", clusterId)).entity(new ResizeNodeGroupAction(groupName,count)).execute();
+        return put(ActionResponse.class, uri("/clusters/%s", clusterId)).entity(new ResizeNodeGroupAction(groupName,count)).execute();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Cluster addNodeGroup(String clusterId, NodeGroup nodeGroup) {
+    public ActionResponse addNodeGroup(String clusterId, NodeGroup nodeGroup) {
         checkNotNull(clusterId);
         checkNotNull(nodeGroup);
-        return put(SaharaCluster.class, uri("/clusters/%s", clusterId)).entity(new AddNodeGroupAction(nodeGroup)).execute();
+        return put(ActionResponse.class, uri("/clusters/%s", clusterId)).entity(new AddNodeGroupAction(nodeGroup)).execute();
     }
 
 }
