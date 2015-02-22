@@ -15,6 +15,7 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
 
     public static final ParseActionResponseFromJsonMap INSTANCE = new ParseActionResponseFromJsonMap();
     private static final String KEY_MESSAGE = "message";
+    private static final String NEUTRON_ERROR = "NeutronError";
     
     /**
      * Parses the JSON Map for an Error message.  An OpenStack error response typically is a Map of Map containing a single key
@@ -34,6 +35,10 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
                 Map<String, Object> inner = (Map<String, Object>) map.get(key);
                 if (inner.containsKey(KEY_MESSAGE)) {
                     String msg = String.valueOf(inner.get(KEY_MESSAGE));
+                    return ActionResponse.actionFailed(msg);
+                }
+                if (inner.containsKey(NEUTRON_ERROR)) {
+                    String msg = String.valueOf(inner.get(NEUTRON_ERROR));
                     return ActionResponse.actionFailed(msg);
                 }
             }
