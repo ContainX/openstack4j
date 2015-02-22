@@ -52,6 +52,12 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
            String msg = String.valueOf(map.get("error_message"));    
            return ActionResponse.actionFailed(msg);
         }
+        
+        // Neutron error handling when just a message is present
+        if (map.containsKey(NEUTRON_ERROR)) {
+            String msg = String.valueOf(map.get(NEUTRON_ERROR));
+            return ActionResponse.actionFailed(msg);
+        }
 
         return null;
     }
