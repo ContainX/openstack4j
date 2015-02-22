@@ -43,6 +43,16 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
                 }
             }
         }
+
+        // Try with Sahara fault response which is just a plain Map
+        // { "error_name": "error name",
+        //   "error_message": "error message",
+        //   "error_code": XXX }
+        if (map.containsKey("error_message")) {
+           String msg = String.valueOf(map.get("error_message"));    
+           return ActionResponse.actionFailed(msg);
+        }
+
         return null;
     }
 

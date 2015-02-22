@@ -51,16 +51,17 @@ public interface ClusterService extends RestService {
      * @param clusterId the cluster identifier
      * @param groupName the name of the node group
      * @param count the number of instances in the node group
-     * @return the updated cluster
+     * @return the action response
      */
-     Cluster resizeNodeGroup(String clusterId, String groupName, int count);
+     ActionResponse resizeNodeGroup(String clusterId, String groupName, int count);
 
     /**
      * Add a new node group in the specified cluster 
      * 
      * @param clusterId the cluster identifier
      * @param nodeGroup the new node group
-     * @return the updated cluster
+     * @return the action response
      */
-     Cluster addNodeGroup(String clusterId, NodeGroup nodeGroup);
+     ActionResponse addNodeGroup(String clusterId, NodeGroup nodeGroup);
+
 }
