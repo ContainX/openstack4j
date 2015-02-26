@@ -348,6 +348,12 @@ public class NovaServerCreate implements ServerCreate {
             m.schedulerHints = schedulerHints;
             return this;
         }
-
+        
+        @Override
+        public ServerCreateBuilder addAdminPass(String adminPass){
+        	m.adminPass = adminPass;
+        	return this;
+        }
+        
     }
 }
