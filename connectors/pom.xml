@@ -18,6 +18,7 @@
 		<module>resteasy</module>
 		<module>httpclient</module>
 		<module>okhttp</module>
+                <module>http-connector</module>
 	</modules>
 
 	<dependencies>
