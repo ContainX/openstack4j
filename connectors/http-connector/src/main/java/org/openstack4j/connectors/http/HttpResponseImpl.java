@@ -15,14 +15,15 @@ import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
 public class HttpResponseImpl implements HttpResponse {
+
     private static final Logger LOG = LoggerFactory.getLogger(HttpResponseImpl.class);
-    
+
     private Map<String, List<String>> headers;
     private int responseCode;
     private String responseMessage;
     private String body;
 
-    private HttpResponseImpl(Map<String, List<String>> headers, 
+    private HttpResponseImpl(Map<String, List<String>> headers,
             int responseCode, String responseMessage, String body) {
         this.headers = headers;
         this.responseCode = responseCode;
@@ -33,25 +34,19 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Wrap the given Response
      *
-     * @param response the response
+     * @param headers
+     * @param responseCode
+     * @param responseMessage
      * @return the HttpResponse
      */
-    public static HttpResponseImpl wrap(Map<String, List<String>> headers, 
+    public static HttpResponseImpl wrap(Map<String, List<String>> headers,
             int responseCode, String responseMessage, String body) {
         return new HttpResponseImpl(headers, responseCode, responseMessage, body);
     }
 
     /**
-     * Unwrap and return the original Response
-     *
-     * @return the response
-     */
-//    public Response unwrap() {
-//        return response;
-//    }
-
-    /**
-     * Gets the entity and Maps any errors which will result in a ResponseException
+     * Gets the entity and Maps any errors which will result in a
+     * ResponseException
      *
      * @param <T> the generic type
      * @param returnType the return type
@@ -62,7 +57,8 @@ public class HttpResponseImpl implements HttpResponse {
     }
 
     /**
-     * Gets the entity and Maps any errors which will result in a ResponseException
+     * Gets the entity and Maps any errors which will result in a
+     * ResponseException
      *
      * @param <T> the generic type
      * @param returnType the return type
@@ -71,7 +67,7 @@ public class HttpResponseImpl implements HttpResponse {
      */
     @Override
     public <T> T getEntity(Class<T> returnType, ExecutionOptions<T> options) {
-       return HttpEntityHandler.handle(this, returnType, options, Boolean.TRUE);
+        return HttpEntityHandler.handle(this, returnType, options, Boolean.TRUE);
     }
 
     /**
@@ -80,22 +76,22 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the status code
      */
     public int getStatus() {
-        return responseCode;//response.code();
+        return responseCode;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String getStatusMessage() {
-        return responseMessage; //response.message();
+        return responseMessage;
     }
 
     /**
      * @return the input stream
      */
     public InputStream getInputStream() {
-        return null; //response.body().byteStream();
+        return null;
     }
 
     /**
@@ -109,7 +105,7 @@ public class HttpResponseImpl implements HttpResponse {
         if (values.isEmpty()) {
             return null;
         }
-    
+
         return values.get(0);
     }
 
@@ -120,14 +116,14 @@ public class HttpResponseImpl implements HttpResponse {
         Map<String, String> retHeaders = new HashMap<String, String>();
 
         Set<String> keys = headers.keySet();
-        
+
         for (String key : keys) {
             List<String> values = headers.get(key);
             for (String value : values) {
                 retHeaders.put(key, value);
-            }    
+            }
         }
-        
+
         return retHeaders;
     }
 
