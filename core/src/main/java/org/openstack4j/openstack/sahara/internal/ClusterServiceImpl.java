@@ -3,6 +3,8 @@ package org.openstack4j.openstack.sahara.internal;
 import java.util.List;
 
 import org.openstack4j.api.sahara.ClusterService;
+import org.openstack4j.core.transport.ExecutionOptions;
+import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.sahara.Cluster;
 import org.openstack4j.model.sahara.NodeGroup;
@@ -68,20 +70,20 @@ public class ClusterServiceImpl extends BaseSaharaServices implements ClusterSer
      * {@inheritDoc}
      */
     @Override
-    public ActionResponse resizeNodeGroup(String clusterId, String groupName, int count) {
+    public Cluster resizeNodeGroup(String clusterId, String groupName, int count) {
         checkNotNull(clusterId);
         checkNotNull(groupName);
-        return put(ActionResponse.class, uri("/clusters/%s", clusterId)).entity(new ResizeNodeGroupAction(groupName,count)).execute();
+        return put(SaharaCluster.class, uri("/clusters/%s", clusterId)).entity(new ResizeNodeGroupAction(groupName,count)).execute(ExecutionOptions.<SaharaCluster>create(PropagateOnStatus.on(404))); // Use respongse progagation for "Not found" status to throw exception instead of return null
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ActionResponse addNodeGroup(String clusterId, NodeGroup nodeGroup) {
+    public Cluster addNodeGroup(String clusterId, NodeGroup nodeGroup) {
         checkNotNull(clusterId);
         checkNotNull(nodeGroup);
-        return put(ActionResponse.class, uri("/clusters/%s", clusterId)).entity(new AddNodeGroupAction(nodeGroup)).execute();
+        return put(SaharaCluster.class, uri("/clusters/%s", clusterId)).entity(new AddNodeGroupAction(nodeGroup)).execute(ExecutionOptions.<SaharaCluster>create(PropagateOnStatus.on(404))); // Use respongse progagation for "Not found" status to throw exception instead of return null
     }
 
 }
