@@ -47,4 +47,9 @@ public class LiveMigrationAction implements ServerAction {
         return diskOverCommit;
     }
     
+    @Override
+    public String toString() {
+        return "os-migrateLive";
+    }
+    
 }
