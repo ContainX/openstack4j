@@ -31,4 +31,11 @@ public interface SaharaService extends RestService {
 	 * @return the cluster template service
 	 */
 	ClusterTemplateService clusterTemplates();
+
+	/**
+	 * Image Service API
+	 *
+	 * @return the image service
+	 */
+	SaharaImageService images();
 }
