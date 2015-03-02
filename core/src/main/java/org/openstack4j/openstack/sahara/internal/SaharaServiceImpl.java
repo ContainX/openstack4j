@@ -6,6 +6,7 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.sahara.ClusterService;
 import org.openstack4j.api.sahara.ClusterTemplateService;
 import org.openstack4j.api.sahara.NodeGroupTemplateService;
+import org.openstack4j.api.sahara.SaharaImageService;
 import org.openstack4j.api.sahara.SaharaService;
 
 /**
@@ -37,5 +38,13 @@ public class SaharaServiceImpl extends BaseSaharaServices implements SaharaServi
 	@Override
         public ClusterTemplateService clusterTemplates() {
 		return Apis.get(ClusterTemplateService.class);
+        }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+        public SaharaImageService images() {
+		return Apis.get(SaharaImageService.class);
         }
 }
