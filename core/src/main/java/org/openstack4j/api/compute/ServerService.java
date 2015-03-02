@@ -246,6 +246,7 @@ public interface ServerService {
     
     /**
      * Live-migrates a server identified with {@code serverId} to a new host without rebooting
+     * 
      * @param serverId the server identifier
      * @param options live migration options
      * @return ActionResponse
@@ -253,7 +254,17 @@ public interface ServerService {
     ActionResponse liveMigrate(String serverId, LiveMigrateOptions options); 
     
     /**
+     * Resets the state of a server to a specified {@code state}
+     * 
+     * @param serverId the server identifier
+     * @param state the new server state
+     * @return ActionResponse
+     */
+    ActionResponse resetState(String serverId, Status state); 
+    
+    /**
      * Sets up a new backup schedule service for the given {@code serverId}
+     * 
      * @param serverId the server identifier
      * @param options the backup options
      * @return ActionResponse
@@ -262,6 +273,7 @@ public interface ServerService {
     
     /**
      * Will poll the Server waiting for the {@code Status} to match or an Error state occurs for the {@code maxWait} 
+     * 
      * @param serverId the server identifier
      * @param status the status to wait for
      * @param maxWait the max wait time

@@ -140,5 +140,14 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
      * @return this userdata
      */
     ServerCreateBuilder userData(String userData);
+    
+    /**
+     * Add admin password for launching the server.
+     *
+     * @param password the password
+     * @return this builder
+     */
+    
+    ServerCreateBuilder addAdminPass(String adminPass);
 
 }

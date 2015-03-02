@@ -46,6 +46,7 @@ import org.openstack4j.openstack.compute.domain.actions.BasicActions.RevertResiz
 import org.openstack4j.openstack.compute.domain.actions.CreateSnapshotAction;
 import org.openstack4j.openstack.compute.domain.actions.LiveMigrationAction;
 import org.openstack4j.openstack.compute.domain.actions.RebuildAction;
+import org.openstack4j.openstack.compute.domain.actions.ResetStateAction;
 import org.openstack4j.openstack.compute.domain.actions.SecurityGroupActions;
 import org.openstack4j.openstack.compute.domain.actions.ServerAction;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
@@ -326,6 +327,16 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         if (options == null)
             options = LiveMigrateOptions.create();
         return invokeAction(serverId, LiveMigrationAction.create(options));
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse resetState(String serverId, Status state) {
+        checkNotNull(serverId);
+        checkNotNull(state);
+        return invokeAction(serverId, ResetStateAction.create(state));
     }
     
     /**

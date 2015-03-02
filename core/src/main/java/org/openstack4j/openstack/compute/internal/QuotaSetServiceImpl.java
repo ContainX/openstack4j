@@ -62,7 +62,4 @@ public class QuotaSetServiceImpl extends BaseComputeServices implements QuotaSet
 		checkNotNull(tenantId);
 		return get(NovaSimpleTenantUsage.class, uri("/os-simple-tenant-usage/%s", tenantId)).execute();
 	}
-	
-	
-
 }
