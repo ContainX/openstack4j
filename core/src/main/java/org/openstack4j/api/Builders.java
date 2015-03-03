@@ -4,6 +4,7 @@ import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
 import org.openstack4j.model.compute.builder.FlavorBuilder;
 import org.openstack4j.model.compute.builder.FloatingIPBuilder;
+import org.openstack4j.model.compute.builder.QuotaSetUpdateBuilder;
 import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.model.heat.SoftwareConfig;
@@ -52,6 +53,7 @@ import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.domain.NovaBlockDeviceMappingCreate;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
+import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
@@ -452,6 +454,15 @@ public class Builders {
      */
     public static ServiceConfigBuilder serviceConfig() {
         return SaharaServiceConfig.builder();
+    }
+    
+    /**
+     * This builder which creates a QuotaSet for updates
+     * 
+     * @return the QuotaSet update builder
+     */
+    public static QuotaSetUpdateBuilder quotaSet() {
+        return NovaQuotaSetUpdate.builder();
     }
 
 }

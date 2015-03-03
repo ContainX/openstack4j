@@ -195,7 +195,6 @@ public class NovaServerCreate implements ServerCreate {
         public String getName() {
             return name;
         }
-
     }
 
     public static class ServerCreateConcreteBuilder implements ServerCreateBuilder {

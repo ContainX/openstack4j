@@ -2,9 +2,11 @@ package org.openstack4j.api.compute;
 
 import java.util.List;
 
+import org.openstack4j.api.Builders;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.Limits;
 import org.openstack4j.model.compute.QuotaSet;
+import org.openstack4j.model.compute.QuotaSetUpdate;
 import org.openstack4j.model.compute.SimpleTenantUsage;
 
 /**
@@ -29,6 +31,24 @@ public interface QuotaSetService extends RestService {
 	 * @return the quota set
 	 */
 	QuotaSet get(String tenantId, String userId);
+	
+	/**
+	 * Updates quota for a specified class
+	 * 
+	 * @param classId the class identifier
+	 * @param qs the quota set - see {@link Builders#quotaSet()}
+	 * @return the newly reflected QuotaSet
+	 */
+	QuotaSet updateForClass(String classId, QuotaSetUpdate qs);
+	
+	/**
+     * Updates quota for a specified tenant
+     * 
+     * @param tenantId the tenant identifier
+     * @param qs the quota set - see {@link Builders#quotaSet()}
+     * @return the newly reflected QuotaSet
+     */
+	QuotaSet updateForTenant(String tenantId, QuotaSetUpdate qs);
 	
 	/**
 	 * Accounts may be pre-configured with a set of thresholds (or limits) to manage capacity and prevent system abuse.  This call will

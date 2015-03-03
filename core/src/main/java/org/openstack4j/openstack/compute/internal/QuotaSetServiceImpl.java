@@ -7,6 +7,7 @@ import java.util.List;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.model.compute.Limits;
 import org.openstack4j.model.compute.QuotaSet;
+import org.openstack4j.model.compute.QuotaSetUpdate;
 import org.openstack4j.model.compute.SimpleTenantUsage;
 import org.openstack4j.openstack.compute.domain.NovaLimits;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSet;
@@ -20,46 +21,68 @@ import org.openstack4j.openstack.compute.domain.NovaSimpleTenantUsage.NovaSimple
  */
 public class QuotaSetServiceImpl extends BaseComputeServices implements QuotaSetService {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public QuotaSet get(String tenantId) {
-		return get(tenantId, null);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public QuotaSet get(String tenantId) {
+        return get(tenantId, null);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public QuotaSet get(String tenantId, String userId) {
-		checkNotNull(tenantId);
-		String uri = (userId != null) ? uri("/os-quota-sets/%s?user_id=%s", tenantId, userId) : uri("/os-quota-sets/%s", tenantId);
-		return get(NovaQuotaSet.class, uri).execute();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public QuotaSet get(String tenantId, String userId) {
+        checkNotNull(tenantId);
+        String uri = (userId != null) ? uri("/os-quota-sets/%s?user_id=%s", tenantId, userId) : uri("/os-quota-sets/%s", tenantId);
+        return get(NovaQuotaSet.class, uri).execute();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Limits limits() {
-		return get(NovaLimits.class, uri("/limits")).execute();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public QuotaSet updateForClass(String classId, QuotaSetUpdate qs) {
+        checkNotNull(classId);
+        checkNotNull(qs);
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<? extends SimpleTenantUsage> listTenantUsages() {
-		return get(NovaSimpleTenantUsages.class, uri("/os-simple-tenant-usage")).execute().getList();
-	}
+        return put(NovaQuotaSet.class, uri("/os-quota-class-sets/%s", classId)).entity(qs).execute();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public SimpleTenantUsage getTenantUsage(String tenantId) {
-		checkNotNull(tenantId);
-		return get(NovaSimpleTenantUsage.class, uri("/os-simple-tenant-usage/%s", tenantId)).execute();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public QuotaSet updateForTenant(String tenantId, QuotaSetUpdate qs) {
+        checkNotNull(tenantId);
+        checkNotNull(qs);
+
+        return put(NovaQuotaSet.class, uri("/os-quota-sets/%s", tenantId)).entity(qs).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Limits limits() {
+        return get(NovaLimits.class, uri("/limits")).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends SimpleTenantUsage> listTenantUsages() {
+        return get(NovaSimpleTenantUsages.class, uri("/os-simple-tenant-usage")).execute().getList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SimpleTenantUsage getTenantUsage(String tenantId) {
+        checkNotNull(tenantId);
+        return get(NovaSimpleTenantUsage.class, uri("/os-simple-tenant-usage/%s", tenantId)).execute();
+    }
 }
