@@ -12,7 +12,7 @@
     
     
 	<properties>
-		<http-connector-version>4.3.1</http-connector-version>
+		<http-connector-version>4.3.0</http-connector-version>
 	</properties>
 
 	<dependencies>
