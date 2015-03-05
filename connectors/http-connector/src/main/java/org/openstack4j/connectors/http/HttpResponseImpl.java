@@ -21,14 +21,14 @@ public class HttpResponseImpl implements HttpResponse {
     private Map<String, List<String>> headers;
     private int responseCode;
     private String responseMessage;
-    private String body;
+    private InputStream responseInputStream;
 
     private HttpResponseImpl(Map<String, List<String>> headers,
-            int responseCode, String responseMessage, String body) {
+            int responseCode, String responseMessage, InputStream responseInputStream) {
         this.headers = headers;
         this.responseCode = responseCode;
         this.responseMessage = responseMessage;
-        this.body = body;
+        this.responseInputStream = responseInputStream;
     }
 
     /**
@@ -40,8 +40,8 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the HttpResponse
      */
     public static HttpResponseImpl wrap(Map<String, List<String>> headers,
-            int responseCode, String responseMessage, String body) {
-        return new HttpResponseImpl(headers, responseCode, responseMessage, body);
+            int responseCode, String responseMessage, InputStream responseInputStream) {
+        return new HttpResponseImpl(headers, responseCode, responseMessage, responseInputStream);
     }
 
     /**
@@ -91,7 +91,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the input stream
      */
     public InputStream getInputStream() {
-        return null;
+        return responseInputStream;
     }
 
     /**
@@ -130,7 +130,7 @@ public class HttpResponseImpl implements HttpResponse {
     @Override
     public <T> T readEntity(Class<T> typeToReadAs) {
         try {
-            return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(body);
+            return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(responseInputStream);
         } catch (Exception e) {
             LOG.error(e, e.getMessage());
             throw new ClientResponseException(e.getMessage(), 0, e);

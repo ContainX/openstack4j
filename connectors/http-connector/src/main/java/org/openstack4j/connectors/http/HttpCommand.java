@@ -117,7 +117,7 @@ public final class HttpCommand<R> {
         HttpResponseImpl responseImpl
                 = HttpResponseImpl.wrap(connection.getHeaderFields(),
                         connection.getResponseCode(), connection.getResponseMessage(),
-                        contentBuilder.toString());
+                        connection.getInputStream());
 
         connection.disconnect();
         return responseImpl;
