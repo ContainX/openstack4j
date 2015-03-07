@@ -9,16 +9,7 @@
     <name>OpenStack4j HttpURL Connector</name>
     <artifactId>openstack4j-http-connector</artifactId>
     <packaging>jar</packaging>
-        
-<!--<dependencies>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>http-connector</artifactId>
-			<version>${http-connector-version}</version>
-		</dependency>
-	</dependencies>-->
-	
-	<build>
+ 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
