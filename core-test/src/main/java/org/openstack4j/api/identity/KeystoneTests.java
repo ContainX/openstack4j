@@ -86,7 +86,7 @@ public class KeystoneTests extends AbstractTest {
         assertEquals(role.getName(), "admin");
 
         respondWith(JSON_ROLE);
-        role = os().identity().roles().get("b8e55a37fc3748de887f165954448db5");
+        role = os().identity().roles().get("b80f8d4e28b74188858b654cb1fccf7d");
         assertEquals(role.getName(), "Member");
     }
     
