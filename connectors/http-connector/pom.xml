@@ -9,6 +9,7 @@
     <name>OpenStack4j HttpURL Connector</name>
     <artifactId>openstack4j-http-connector</artifactId>
     <packaging>jar</packaging>
+    
  	<build>
 		<plugins>
 			<plugin>
