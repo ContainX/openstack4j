@@ -1,5 +1,6 @@
 package org.openstack4j.connectors.okhttp;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -12,10 +13,12 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
+import org.openstack4j.core.transport.internal.HttpLoggingFilter;
 import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -53,6 +56,10 @@ public final class HttpCommand<R> {
 
     private void initialize() {
         client = new OkHttpClient();
+        
+        if (HttpLoggingFilter.isLoggingEnabled()) {
+        	client.interceptors().add(new LoggingInterceptor());
+        }
         
         Config config = request.getConfig();
         if (config.getConnectTimeout() > 0)
@@ -145,6 +152,7 @@ public final class HttpCommand<R> {
                 try
                 {
                   url.append(URLEncoder.encode(entry.getKey(), "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(o), "UTF-8"));
+                  url.append("&");
                 }
                 catch (UnsupportedEncodingException e) {
                     LOG.error(e.getMessage(), e);
@@ -161,5 +169,21 @@ public final class HttpCommand<R> {
         for(Map.Entry<String, Object> h : request.getHeaders().entrySet()) {
             clientReq.addHeader(h.getKey(), String.valueOf(h.getValue()));
         }
+    }
+    
+    static class LoggingInterceptor implements Interceptor {
+      @Override public Response intercept(Chain chain) throws IOException {
+        Request request = chain.request();
+
+        long t1 = System.nanoTime();
+        System.err.println(String.format("Sending request %s on %s%n%s",
+            request.url(), chain.connection(), request.headers()));
+        Response response = chain.proceed(request);
+
+        long t2 = System.nanoTime();
+        System.err.println(String.format("Received response for %s in %.1fms%n%s",
+            response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+        return response;
+      }
     }
 }
