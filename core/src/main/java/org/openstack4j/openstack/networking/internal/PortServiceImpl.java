@@ -9,6 +9,7 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.Port;
 import org.openstack4j.openstack.networking.domain.NeutronPort;
 import org.openstack4j.openstack.networking.domain.NeutronPort.Ports;
+import org.openstack4j.openstack.networking.domain.NeutronPortCreate;
 
 /**
  * OpenStack (Neutron) Port based Operations Implementation
@@ -49,7 +50,8 @@ public class PortServiceImpl extends BaseNetworkingServices implements PortServi
 	@Override
 	public Port create(Port port) {
 		checkNotNull(port);
-		return post(NeutronPort.class, uri("/ports")).entity(port).execute();
+		checkNotNull(port.getNetworkId(), "NetworkId is a required field");
+		return post(NeutronPort.class, uri("/ports")).entity(NeutronPortCreate.fromPort(port)).execute();
 	}
 
 	/**
