@@ -1,5 +1,6 @@
 package org.openstack4j.connectors.http;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +22,14 @@ public class HttpResponseImpl implements HttpResponse {
     private Map<String, List<String>> headers;
     private int responseCode;
     private String responseMessage;
-    private InputStream responseInputStream;
+    private byte[] data;
 
     private HttpResponseImpl(Map<String, List<String>> headers,
-            int responseCode, String responseMessage, InputStream responseInputStream) {
+            int responseCode, String responseMessage, byte[] data) {
         this.headers = headers;
         this.responseCode = responseCode;
         this.responseMessage = responseMessage;
-        this.responseInputStream = responseInputStream;
+        this.data = data;
     }
 
     /**
@@ -40,8 +41,8 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the HttpResponse
      */
     public static HttpResponseImpl wrap(Map<String, List<String>> headers,
-            int responseCode, String responseMessage, InputStream responseInputStream) {
-        return new HttpResponseImpl(headers, responseCode, responseMessage, responseInputStream);
+            int responseCode, String responseMessage, byte[] data) {
+        return new HttpResponseImpl(headers, responseCode, responseMessage, data);
     }
 
     /**
@@ -91,7 +92,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the input stream
      */
     public InputStream getInputStream() {
-        return responseInputStream;
+        return new ByteArrayInputStream(data);
     }
 
     /**
@@ -130,7 +131,7 @@ public class HttpResponseImpl implements HttpResponse {
     @Override
     public <T> T readEntity(Class<T> typeToReadAs) {
         try {
-            return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(responseInputStream);
+            return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(data);
         } catch (Exception e) {
             LOG.error(e, e.getMessage());
             throw new ClientResponseException(e.getMessage(), 0, e);

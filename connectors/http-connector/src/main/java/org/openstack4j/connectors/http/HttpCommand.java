@@ -1,9 +1,7 @@
 package org.openstack4j.connectors.http;
 
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -11,12 +9,16 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
+
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
+
+import com.google.common.io.ByteStreams;
+import com.google.common.net.MediaType;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the
@@ -77,8 +79,6 @@ public final class HttpCommand<R> {
             requestBody.append(request.getJson());
         }
 
-        StringBuilder contentBuilder = new StringBuilder();
-        BufferedReader in = null;
         try {
             connection.setRequestMethod(request.getMethod().name());
             if (requestBody.length() > 0) {
@@ -88,39 +88,19 @@ public final class HttpCommand<R> {
                 out.write(requestBody.toString().getBytes());
                 out.flush();
             }
-
-            in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
-            String inputLine;
-
-            while ((inputLine = in.readLine()) != null) {
-                contentBuilder.append(inputLine);
-            }
+            byte[] data = ByteStreams.toByteArray(connection.getInputStream());
+            System.out.println(new String(data));
+            return HttpResponseImpl.wrap(connection.getHeaderFields(),
+                    connection.getResponseCode(), connection.getResponseMessage(),
+                    data);
 
         } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-
-            in = new BufferedReader(new InputStreamReader(
-                    connection.getErrorStream()));
-            String inputLine;
-
-            while ((inputLine = in.readLine()) != null) {
-                contentBuilder.append(inputLine);
-            }
-
+            ex.printStackTrace();
+            throw ex;
         } finally {
-            if (in != null) {
-                in.close();
-            }
+            connection.disconnect();
         }
 
-        HttpResponseImpl responseImpl
-                = HttpResponseImpl.wrap(connection.getHeaderFields(),
-                        connection.getResponseCode(), connection.getResponseMessage(),
-                        connection.getInputStream());
-
-        connection.disconnect();
-        return responseImpl;
     }
 
     /**
@@ -166,6 +146,7 @@ public final class HttpCommand<R> {
             for (Object o : entry.getValue()) {
                 try {
                     url.append(URLEncoder.encode(entry.getKey(), "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(o), "UTF-8"));
+                    url.append("&");
                 } catch (UnsupportedEncodingException e) {
                     LOG.error(e.getMessage(), e);
                 }
@@ -177,6 +158,8 @@ public final class HttpCommand<R> {
     private void populateHeaders() throws IOException {
 
         connection = (HttpURLConnection) connectionUrl.openConnection();
+        connection.setRequestProperty("Content-Type", MediaType.JSON_UTF_8.toString());
+        connection.setRequestProperty("Accept", MediaType.JSON_UTF_8.toString());
 
         if (!request.hasHeaders()) {
             return;
@@ -185,6 +168,5 @@ public final class HttpCommand<R> {
             connection.setRequestProperty(h.getKey(), String.valueOf(h.getValue()));
         }
 
-        connection.setRequestProperty("Content-Type", "application/json");
     }
 }
