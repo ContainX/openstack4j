@@ -19,7 +19,7 @@ import static org.testng.Assert.assertTrue;
  * @author liujunpeng
  *
  */
-@Test(suiteName="Network/vip")
+@Test(suiteName="Network/vip", enabled=false)
 public class VipTests extends AbstractTest{
 	public void testListVip(){
 		List<? extends Vip> list = os().networking().loadbalancers().vip().list();

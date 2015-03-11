@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
  * @author liujunpeng
  *
  */
-@Test(suiteName="Network/lbpool")
+@Test(suiteName="Network/lbpool", enabled=false)
 public class LbPoolTests extends AbstractTest{
 	public void testListPool() {
 		List<? extends LbPool> list = os().networking().loadbalancers().lbPool().list();

@@ -13,26 +13,26 @@ import org.testng.annotations.Test;
  * 
  * @author Jeremy Unruh
  */
-@Test(suiteName="Images")
+@Test(suiteName="Alarms", enabled = false)
 public class AlarmTests extends AbstractTest {
 
-    private static final String JSON_ALARMS = "/metering/alarms.json";
-    
-    public void meterListingTest() throws Exception {
-    	System.out.println("METER LISTING TEST");
-    	
-    	respondWith(JSON_ALARMS);
-        
-        List<? extends Meter> meterList = os().telemetry().meters().list();
-        assertEquals(2, meterList.size());
-        
-        throw new Exception("Alarm test failed by max");
+	private static final String JSON_ALARMS = "/metering/alarms.json";
 
-    }
+	public void meterListingTest() throws Exception {
+		System.out.println("METER LISTING TEST");
 
-    @Override
-    protected Service service() {
-        return Service.METERING;
-    }
+		respondWith(JSON_ALARMS);
+
+		List<? extends Meter> meterList = os().telemetry().meters().list();
+		assertEquals(2, meterList.size());
+
+		throw new Exception("Alarm test failed by max");
+
+	}
+
+	@Override
+	protected Service service() {
+		return Service.METERING;
+	}
 
 }

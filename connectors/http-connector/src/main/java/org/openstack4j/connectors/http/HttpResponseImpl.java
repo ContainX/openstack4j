@@ -92,6 +92,9 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the input stream
      */
     public InputStream getInputStream() {
+    	if (data == null)
+    		return null;
+    	
         return new ByteArrayInputStream(data);
     }
 
@@ -102,12 +105,14 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the header as a String or null if not found
      */
     public String header(String name) {
-        List<String> values = headers.get(name);
-        if (values.isEmpty()) {
-            return null;
-        }
-
-        return values.get(0);
+    	if (name == null) return null;
+    	for (String key : headers.keySet()) {
+    		if (key != null && key.equalsIgnoreCase(name))
+    		{
+    			return headers.get(key).get(0);
+    		}
+    	}
+    	return null;
     }
 
     /**

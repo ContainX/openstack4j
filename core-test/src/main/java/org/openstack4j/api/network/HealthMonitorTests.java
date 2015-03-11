@@ -18,7 +18,7 @@ import static org.testng.Assert.assertTrue;
  * @author liujunpeng
  *
  */
-@Test(suiteName="Network/healthMonitor")
+@Test(suiteName="Network/healthMonitor", enabled = false)
 public class HealthMonitorTests extends AbstractTest{
 	
 

@@ -146,9 +146,9 @@ public abstract class AbstractTest {
 
             try {
                 String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
-                Logger.getLogger(getClass().getName()).info("JSON Access = " + json);
+              //  Logger.getLogger(getClass().getName()).info(getClass().getName() + ", JSON Access = " + json);
                 json = json.replaceAll("127.0.0.1", getHost());
-                Logger.getLogger(getClass().getName()).info("JSON Access = " + json);
+               // Logger.getLogger(getClass().getName()).info("JSON Access = " + json);
                 KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
                 a.applyContext(authURL("/v2.0"), new Credentials("test", "test"));
                 os = OSFactory.clientFromAccess(a);

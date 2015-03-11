@@ -18,6 +18,9 @@ public class MapWithoutMetaPrefixFunction implements Function<Map<String, String
     public Map<String, String> apply(Map<String, String> input) {
         ImmutableMap.Builder<String, String> metadata = ImmutableMap.builder();
         for (String key : input.keySet()) {
+        	  if (key == null) {
+        	  	continue;
+        	  }
             int idx = key.indexOf("-Meta-");
             if (idx > -1) {
                 metadata.put(key.substring(idx + 6), input.get(key));

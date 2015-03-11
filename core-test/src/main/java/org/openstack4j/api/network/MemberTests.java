@@ -16,7 +16,7 @@ import static org.testng.Assert.assertTrue;
  * @author liujunpeng
  *
  */
-@Test(suiteName="Network/member")
+@Test(suiteName="Network/member", enabled=false)
 public class MemberTests extends AbstractTest{
 	public void testListMember(){
 		List<? extends Member> list = os().networking().loadbalancers().member().list();
