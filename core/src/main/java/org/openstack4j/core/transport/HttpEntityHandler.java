@@ -53,13 +53,7 @@ public class HttpEntityHandler {
 		if (returnType == ActionResponse.class) 
 			return (T) ActionResponse.actionSuccess();
 
-		try
-		{
 			return response.readEntity(returnType);
-		}
-		finally {
-			closeQuietly(response);
-		}
 	}
 
 	private static <T> Handle<T> handle404(Handle<T> handle) {
