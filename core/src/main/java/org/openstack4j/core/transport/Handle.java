@@ -35,6 +35,7 @@ public class Handle<T> {
 	 * @return the handle
 	 */
 	Handle<T> complete(T returnObject) {
+		this.complete = true;
 		this.returnObject = returnObject;
 		return this;
 	}

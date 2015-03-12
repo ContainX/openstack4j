@@ -114,6 +114,6 @@ public class HttpResponseImpl implements HttpResponse {
 
 		@Override
 		public void close() throws IOException {
-			 response.close();
+			// Jersey handles this automatically in all cases - no-op
 		}
 }
