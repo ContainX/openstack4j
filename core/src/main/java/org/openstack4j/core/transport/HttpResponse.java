@@ -1,5 +1,6 @@
 package org.openstack4j.core.transport;
 
+import java.io.Closeable;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ import java.util.Map;
  * 
  * @author Jeremy Unruh
  */
-public interface HttpResponse {
+public interface HttpResponse extends Closeable {
 
 	/**
 	 * Gets the entity and Maps any errors which will result in a ResponseException

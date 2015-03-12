@@ -1,5 +1,6 @@
 package org.openstack4j.connectors.jersey2;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,14 +12,15 @@ import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 
 public class HttpResponseImpl implements HttpResponse {
-    private Response response;
+	
+    private final Response response;
 
     private HttpResponseImpl(Response response) {
         this.response = response;
     }
 
     /**
-     * Wrap the given REsponse
+     * Wrap the given Response
      *
      * @param response the response
      * @return the HttpResponse
@@ -109,4 +111,9 @@ public class HttpResponseImpl implements HttpResponse {
     public <T> T readEntity(Class<T> typeToReadAs) {
         return response.readEntity(typeToReadAs);
     }
+
+		@Override
+		public void close() throws IOException {
+			response.close();
+		}
 }

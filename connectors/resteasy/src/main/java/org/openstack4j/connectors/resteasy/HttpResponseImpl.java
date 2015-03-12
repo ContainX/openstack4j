@@ -1,5 +1,6 @@
 package org.openstack4j.connectors.resteasy;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,8 @@ import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 
 public class HttpResponseImpl implements HttpResponse {
-    private ClientResponse<?> response;
+	
+    private final ClientResponse<?> response;
 
     private HttpResponseImpl(ClientResponse<?> response) {
         this.response = response;
@@ -112,4 +114,9 @@ public class HttpResponseImpl implements HttpResponse {
     public <T> T readEntity(Class<T> typeToReadAs) {
         return response.getEntity(typeToReadAs);
     }
+
+		@Override
+		public void close() throws IOException {
+			response.releaseConnection();
+		}
 }

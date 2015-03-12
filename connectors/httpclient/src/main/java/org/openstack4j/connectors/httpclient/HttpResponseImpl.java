@@ -1,5 +1,6 @@
 package org.openstack4j.connectors.httpclient;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -132,4 +133,10 @@ public class HttpResponseImpl implements HttpResponse {
             throw new ClientResponseException(e.getMessage(), 0, e);
         }
     }
+
+		@Override
+		public void close() throws IOException {
+				if (response != null)
+					response.close();
+		}
 }

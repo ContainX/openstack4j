@@ -29,6 +29,8 @@ import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 
+import com.google.common.net.MediaType;
+
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
  * 
@@ -107,6 +109,7 @@ public final class HttpCommand<R> {
             clientReq = new HttpGet(url);
             break;
         }
+        clientReq.setHeader("Accept", MediaType.JSON_UTF_8.toString());
         populateHeaders(request);
     }
 

@@ -1,5 +1,6 @@
 package org.openstack4j.connectors.okhttp;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,8 +17,9 @@ import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.Response;
 
 public class HttpResponseImpl implements HttpResponse {
+	
     private static final Logger LOG = LoggerFactory.getLogger(HttpResponseImpl.class);
-    private Response response;
+    private final Response response;
 
     private HttpResponseImpl(Response response) {
         this.response = response;
@@ -122,4 +124,8 @@ public class HttpResponseImpl implements HttpResponse {
             throw new ClientResponseException(e.getMessage(), 0, e);
         }
     }
+
+		@Override
+		public void close() throws IOException {
+		}
 }
