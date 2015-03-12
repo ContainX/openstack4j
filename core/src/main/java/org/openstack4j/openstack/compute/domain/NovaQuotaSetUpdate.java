@@ -4,8 +4,8 @@ import org.openstack4j.model.compute.QuotaSetUpdate;
 import org.openstack4j.model.compute.builder.QuotaSetUpdateBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
-@SuppressWarnings("unused")
 public class NovaQuotaSetUpdate implements QuotaSetUpdate {
 
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,35 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
     @JsonProperty("key_pairs")
     private Integer keyPairs;
 
-    @Override
+    public NovaQuotaSetUpdate() {
+    	super();
+    }
+    
+    
+    
+    protected NovaQuotaSetUpdate(Integer metadataItems,
+				Integer injectedFileContentBytes, Integer injectedFiles,
+				Integer gigabytes, Integer ram, Integer floatingIps, Integer instances,
+				Integer volumes, Integer cores, Integer securityGroups,
+				Integer securityGroupRules, Integer injectedFilePathBytes,
+				Integer keyPairs) {
+			super();
+			this.metadataItems = metadataItems;
+			this.injectedFileContentBytes = injectedFileContentBytes;
+			this.injectedFiles = injectedFiles;
+			this.gigabytes = gigabytes;
+			this.ram = ram;
+			this.floatingIps = floatingIps;
+			this.instances = instances;
+			this.volumes = volumes;
+			this.cores = cores;
+			this.securityGroups = securityGroups;
+			this.securityGroupRules = securityGroupRules;
+			this.injectedFilePathBytes = injectedFilePathBytes;
+			this.keyPairs = keyPairs;
+		}
+
+		@Override
     public QuotaSetUpdateBuilder toBuilder() {
         return new QuotaSetUpdateConcreteBuilder(this);
     }
@@ -151,6 +179,54 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
             model.keyPairs = keyPairs;
             return this;
         }
+    }
+    
+    @JsonRootName("quota_set")
+    public static class NovaQuotaSetUpdateTenant extends NovaQuotaSetUpdate {
+
+			private static final long serialVersionUID = 1L;
+
+			public NovaQuotaSetUpdateTenant(Integer metadataItems,
+					Integer injectedFileContentBytes, Integer injectedFiles,
+					Integer gigabytes, Integer ram, Integer floatingIps,
+					Integer instances, Integer volumes, Integer cores,
+					Integer securityGroups, Integer securityGroupRules,
+					Integer injectedFilePathBytes, Integer keyPairs) {
+				super(metadataItems, injectedFileContentBytes, injectedFiles, gigabytes, ram,
+						floatingIps, instances, volumes, cores, securityGroups, securityGroupRules,
+						injectedFilePathBytes, keyPairs);
+			}
+    	
+			public static NovaQuotaSetUpdateTenant from(QuotaSetUpdate qs) {
+				NovaQuotaSetUpdate nqs = (NovaQuotaSetUpdate) qs;
+				  return new NovaQuotaSetUpdateTenant(nqs.metadataItems, nqs.injectedFileContentBytes, nqs.injectedFiles,
+				  						nqs.gigabytes, nqs.ram, nqs.floatingIps, nqs.instances, nqs.volumes, nqs.cores, nqs.securityGroups,
+				  						nqs.securityGroupRules, nqs.injectedFilePathBytes, nqs.keyPairs);
+			}
+    }
+    
+    @JsonRootName("quota_class_set")
+    public static class NovaQuotaSetUpdateClass extends NovaQuotaSetUpdate {
+
+			private static final long serialVersionUID = 1L;
+
+			public NovaQuotaSetUpdateClass(Integer metadataItems,
+					Integer injectedFileContentBytes, Integer injectedFiles,
+					Integer gigabytes, Integer ram, Integer floatingIps,
+					Integer instances, Integer volumes, Integer cores,
+					Integer securityGroups, Integer securityGroupRules,
+					Integer injectedFilePathBytes, Integer keyPairs) {
+				super(metadataItems, injectedFileContentBytes, injectedFiles, gigabytes, ram,
+						floatingIps, instances, volumes, cores, securityGroups, securityGroupRules,
+						injectedFilePathBytes, keyPairs);
+			}
+    	
+			public static NovaQuotaSetUpdateClass from(QuotaSetUpdate qs) {
+				NovaQuotaSetUpdate nqs = (NovaQuotaSetUpdate) qs;
+				  return new NovaQuotaSetUpdateClass(nqs.metadataItems, nqs.injectedFileContentBytes, nqs.injectedFiles,
+				  						nqs.gigabytes, nqs.ram, nqs.floatingIps, nqs.instances, nqs.volumes, nqs.cores, nqs.securityGroups,
+				  						nqs.securityGroupRules, nqs.injectedFilePathBytes, nqs.keyPairs);
+			}
     }
     
 }
