@@ -5,8 +5,10 @@ import org.openstack4j.api.client.IOSClientBuilder;
 import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
+import org.openstack4j.model.common.Identifier;
 import org.openstack4j.openstack.identity.domain.Credentials;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth;
+import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth.AuthScope;
 import org.openstack4j.openstack.internal.OSAuthenticator;
 
 /**
@@ -87,25 +89,53 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
     
     public static class ClientV3 extends OSClientBuilder<OSClient, IOSClientBuilder.V3> implements IOSClientBuilder.V3 {
 
-        String domainId;
-        String domainName;
+        Identifier domain;
+        AuthScope scope;
+        String tokenId;
         
         @Override
         public ClientV3 domainName(String domainName) {
-            this.domainName = domainName;
+            this.domain = Identifier.byName(domainName);
             return this;
         }
 
         @Override
         public ClientV3 domainId(String domainId) {
-            this.domainId = domainId;
+            this.domain = Identifier.byId(domainId);
+            return this;
+        }
+        
+        @Override
+        public ClientV3 credentials(String user, String password, Identifier domain) {
+            this.user = user;
+            this.password = password;
+            this.domain = domain;
+            return this;
+        }
+
+        @Override
+        public ClientV3 token(String tokenId) {
+            this.tokenId = tokenId;
             return this;
         }
 
         @Override
         public OSClient authenticate() throws AuthenticationException {
-            return OSAuthenticator.invoke(new KeystoneAuth(user, password, domainName, domainId), endpoint, perspective, config);
+            if (tokenId != null && tokenId.length() > 0)
+                return OSAuthenticator.invoke(new KeystoneAuth(tokenId), endpoint, perspective, config);
+            return OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective, config);
         }
 
+        @Override
+        public ClientV3 scopeToProject(Identifier project, Identifier domain) {
+            this.scope = AuthScope.project(project, domain);
+            return this;
+        }
+
+        @Override
+        public ClientV3 scopeToDomain(Identifier domain) {
+            this.scope = AuthScope.domain(domain);
+            return this;
+        }
     }
 }

@@ -1,7 +1,10 @@
 package org.openstack4j.openstack.identity.domain.v3;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 
+import org.openstack4j.model.common.Identifier;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.v3.Authentication;
@@ -21,12 +24,17 @@ public class KeystoneAuth implements Authentication, AuthStore {
     private AuthIdentity identity;
     private AuthScope scope;
 
+    public KeystoneAuth(String tokenId) {
+        this.identity = AuthIdentity.createTokenType(tokenId);
+    }
+    
     public KeystoneAuth(String username, String password) {
         this(username, password, null, null);
     }
 
-    public KeystoneAuth(String username, String password, String domainName, String domainId) {
-        identity = AuthIdentity.createCredentialType(username, password, domainName, domainId);
+    public KeystoneAuth(String username, String password, Identifier domain, AuthScope scope) {
+        this.identity = AuthIdentity.createCredentialType(username, password, domain);
+        this.scope = scope;
     }
 
     @Override
@@ -52,6 +60,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
         return identity.getPassword().getUser().getName();
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return identity.getPassword().getUser().getPassword();
@@ -75,13 +84,20 @@ public class KeystoneAuth implements Authentication, AuthStore {
         private AuthToken token;
         private List<String> methods = Lists.newArrayList();
 
+        static AuthIdentity createTokenType(String tokenId) {
+            AuthIdentity identity = new AuthIdentity();
+            identity.methods.add("token");
+            identity.token = new AuthToken(tokenId);
+            return identity;
+        }
+        
         static AuthIdentity createCredentialType(String username, String password) {
-            return createCredentialType(username, password, null, null);
+            return createCredentialType(username, password, null);
         }
 
-        static AuthIdentity createCredentialType(String username, String password, String domainName, String domainId) {
+        static AuthIdentity createCredentialType(String username, String password, Identifier domain) {
             AuthIdentity identity = new AuthIdentity();
-            identity.password = new AuthPassword(username, password, domainName, domainId);
+            identity.password = new AuthPassword(username, password, domain);
             identity.methods.add("password");
             return identity;
         }
@@ -103,8 +119,15 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
         public static final class AuthToken implements Token {
 
+            @JsonProperty
             private String id;
 
+            AuthToken() { }
+            
+            AuthToken(String id) {
+                this.id = id;
+            }
+            
             @Override
             public String getId() {
                 return id;
@@ -117,8 +140,8 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
             public AuthPassword() { }
 
-            public AuthPassword(String username, String password, String domainName, String domainId) {
-                this.user = new AuthUser(username, password, domainName, domainId);
+            public AuthPassword(String username, String password, Identifier domain) {
+                this.user = new AuthUser(username, password, domain);
             }
 
             @Override
@@ -136,11 +159,14 @@ public class KeystoneAuth implements Authentication, AuthStore {
                 public AuthUser() {
                 }
 
-                public AuthUser(String username, String password, String domainName, String domainId) {
+                public AuthUser(String username, String password, Identifier domainIdentifier) {
                     this.password = password;
-                    if (domainName != null || domainId != null) {
+                    if (domainIdentifier != null) {
                         domain = new AuthDomain();
-                        domain.setName(domainName);
+                        if (domainIdentifier.isTypeID())
+                            domain.setId(domainIdentifier.getId());
+                        else
+                            domain.setName(domainIdentifier.getId());
                         setName(username);
                     }
                     else
@@ -170,27 +196,94 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
     public static final class AuthScope implements Scope {
 
-        private AuthProject project;
+        @JsonProperty("project")
+        private ScopeProject project;
 
+        @JsonProperty("domain")
+        private AuthDomain domain;
+        
+        public AuthScope(ScopeProject project) {
+            this.project = project;
+        }
+        
+        public AuthScope(AuthDomain domain) {
+            this.domain = domain;
+        }
+        
+        public static AuthScope project(Identifier project, Identifier domain) {
+            return new AuthScope(ScopeProject.create(project, domain));
+        }
+        
+        public static AuthScope domain(Identifier domain) {
+            checkNotNull(domain, "Domain Scope: domain identifier or name cannot be null");
+            return new AuthScope(new AuthDomain(domain));
+        }
+        
         @Override
         public Project getProject() {
             return project;
         }
-
-        public static final class AuthProject extends BasicResourceEntity implements Project {
+        
+        public static final class ScopeProject extends BasicResourceEntity implements Project {
 
             private static final long serialVersionUID = 1L;
             private AuthDomain domain;
+            @JsonProperty
+            private String id;
+            @JsonProperty
+            private String name;
 
+            public static ScopeProject create(Identifier project, Identifier domain) {
+               checkNotNull(project, "Project Scope: project identifier or name cannot be null");
+               checkNotNull(domain, "Project Scope: domain identifier or name cannot be null");
+               
+               ScopeProject scope = new ScopeProject();
+               scope.domain = new AuthDomain(domain);
+               if (project.isTypeID()) {
+                   scope.id = project.getId();
+               }
+               else {
+                   scope.name = project.getId();
+               }
+               return scope;
+            }
+            
             @Override
             public Domain getDomain() {
                 return domain;
             }
+            
+            public String getId() {
+                return id;
+            }
+            
+            public String getName() {
+                return name;
+            }
+        }
+        
+        public static final class AuthDomain extends BasicResourceEntity implements Domain {
 
-            public static final class AuthDomain extends BasicResourceEntity implements Domain {
+            private static final long serialVersionUID = 1L;
 
-                private static final long serialVersionUID = 1L;
-
+            @JsonProperty
+            private String id;
+            @JsonProperty
+            private String name;
+            
+            public AuthDomain(Identifier domain) {
+                if (domain.isTypeID())
+                    this.id = domain.getId();
+                else
+                    this.name = domain.getId();
+            }
+            
+            public String getId() {
+                return id;
+            }
+            
+            public String getName() {
+                return name;
             }
         }
     }

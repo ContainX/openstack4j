@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.sahara.internal;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 
 import org.openstack4j.api.sahara.ClusterService;
@@ -8,17 +10,11 @@ import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.sahara.Cluster;
 import org.openstack4j.model.sahara.NodeGroup;
-import org.openstack4j.openstack.sahara.domain.actions.SaharaActions.ResizeNodeGroupAction;
-import org.openstack4j.openstack.sahara.domain.actions.SaharaActions.AddNodeGroupAction;
 import org.openstack4j.openstack.sahara.domain.SaharaCluster;
-import org.openstack4j.openstack.sahara.domain.SaharaClusterUnwrapped;
 import org.openstack4j.openstack.sahara.domain.SaharaCluster.Clusters;
-
-import java.io.File;
-import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.common.payloads.FilePayload;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.openstack4j.openstack.sahara.domain.SaharaClusterUnwrapped;
+import org.openstack4j.openstack.sahara.domain.actions.SaharaActions.AddNodeGroupAction;
+import org.openstack4j.openstack.sahara.domain.actions.SaharaActions.ResizeNodeGroupAction;
 
 /**
  * Sahara Data Processing Operations

@@ -49,12 +49,10 @@ public interface Authentication extends ModelEntity {
 		public interface Project extends ResourceEntity {
 			
 			Domain getDomain();
-
-			public interface Domain extends ResourceEntity {
-			}
-
 		}
 		
+		public interface Domain extends ResourceEntity {
+        }
 		
 	}
 	

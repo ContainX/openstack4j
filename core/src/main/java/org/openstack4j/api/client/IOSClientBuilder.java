@@ -4,6 +4,7 @@ import org.openstack4j.api.OSClient;
 import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
+import org.openstack4j.model.common.Identifier;
 
 /**
  * OpenStack4j Client Builder
@@ -101,20 +102,61 @@ public interface IOSClientBuilder<R, T extends IOSClientBuilder<R, T>> {
     public interface V3 extends IOSClientBuilder<OSClient, V3> {
         
         /**
+         * The authentication credentials and default scoped domain
+         * 
+         * @param user the user to authenticate with
+         * @param password the password to authenticate with
+         * @param domain the domain if using "default scoped"
+         * @return self for method chaining
+         */
+        V3 credentials(String user, String password, Identifier domain);
+        
+        /**
+         * DEPRECATED: Please use {@link #credentials(String, String, Identifier)
+         * 
          * Authenticates against the specified domain name
          * 
          * @param domainName the domain name to authenticate against
          * @return V3
          */
+        @Deprecated
         V3 domainName(String domainName);        
         
         /**
+         * DEPRECATED: Please use {@link #credentials(String, String, Identifier)}
+         * 
          * Authenticates against the specified domain identifier
          * 
          * @param domainId the domain identifier to authenticate against
          * @return OSFactoryBuilderV3
          */
+        @Deprecated
         V3 domainId(String domainId);
+        
+        /**
+         * A token object. With token authentication, the id uniquely identifies the token. 
+         * This method is typically used in combination with a request to change authorization scope
+         * 
+         * @param tokenId the token identifier
+         * @return OSFactoryBuilderV3
+         */
+        V3 token(String tokenId);
+        
+        /**
+         * Scopes the token to a project level
+         * 
+         * @param project the project ID or Name value
+         * @param domain the domain ID or Name value
+         * @return OSFactoryBuilderV3
+         */
+        V3 scopeToProject(Identifier project, Identifier domain);
+        
+        /**
+         * Scopes the token to a domain level
+         * 
+         * @param domain the domain ID or Name value
+         * @return OSFactoryBuilderV3
+         */
+        V3 scopeToDomain(Identifier domain);
     }
-
 }
