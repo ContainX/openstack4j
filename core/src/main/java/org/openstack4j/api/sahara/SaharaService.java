@@ -1,7 +1,5 @@
 package org.openstack4j.api.sahara;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
 
 /**

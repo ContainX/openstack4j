@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.sahara.internal;
 
-import java.util.ArrayList;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 
 import org.openstack4j.api.sahara.SaharaImageService;
@@ -11,8 +12,6 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.sahara.Image;
 import org.openstack4j.openstack.sahara.domain.SaharaImage;
 import org.openstack4j.openstack.sahara.domain.SaharaImage.SaharaImages;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Sahara Data Processing Operations

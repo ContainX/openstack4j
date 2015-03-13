@@ -1,8 +1,8 @@
 package org.openstack4j.openstack.sahara.domain;
 
 import java.util.Date;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.model.sahara.ClusterTemplate;
@@ -12,11 +12,8 @@ import org.openstack4j.model.sahara.builder.ClusterTemplateBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 

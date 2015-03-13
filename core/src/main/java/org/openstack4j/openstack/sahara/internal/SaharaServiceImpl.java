@@ -1,7 +1,5 @@
 package org.openstack4j.openstack.sahara.internal;
 
-import java.util.List;
-
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.sahara.ClusterService;
 import org.openstack4j.api.sahara.ClusterTemplateService;

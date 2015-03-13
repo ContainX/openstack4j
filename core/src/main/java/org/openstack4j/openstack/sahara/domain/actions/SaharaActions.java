@@ -3,13 +3,10 @@ package org.openstack4j.openstack.sahara.domain.actions;
 import java.util.List;
 
 import org.openstack4j.api.Builders;
-
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.NodeGroup;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 import com.google.common.collect.Lists;
 
 /**
@@ -22,6 +19,8 @@ public final class SaharaActions {
     
     public static class ResizeNodeGroupAction implements ModelEntity {
 
+        private static final long serialVersionUID = 1L;
+        
         @JsonProperty("resize_node_groups")
         List<NodeGroup> nodeGroups; 
         
@@ -35,6 +34,8 @@ public final class SaharaActions {
     
     public static class AddNodeGroupAction implements ModelEntity {
 
+        private static final long serialVersionUID = 1L;
+        
         @JsonProperty("add_node_groups")
         List<NodeGroup> nodeGroups; 
         
