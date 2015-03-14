@@ -179,6 +179,12 @@
 	 <dependency>
 	  <groupId>org.pacesys</groupId>
 	  <artifactId>openstack4j-core</artifactId>
+	  <version>2.0.2-SNAPSHOT</version>
+	  <type>jar</type>
+	 </dependency>
+	 <dependency>
+	  <groupId>org.pacesys</groupId>
+	  <artifactId>openstack4j</artifactId>
 	  <version>2.0.1-SNAPSHOT</version>
 	  <type>jar</type>
 	 </dependency>

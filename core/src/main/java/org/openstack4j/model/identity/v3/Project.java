@@ -3,7 +3,6 @@ package org.openstack4j.model.identity.v3;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.identity.builder.ProjectBuilder;
-import org.openstack4j.model.identity.builder.TenantBuilder;
 
 /**
  * Project Model class use to group/isolate resources and/or identity objects
