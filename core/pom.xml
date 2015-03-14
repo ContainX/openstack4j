@@ -176,6 +176,12 @@
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>
+	 <dependency>
+	  <groupId>org.pacesys</groupId>
+	  <artifactId>openstack4j-core</artifactId>
+	  <version>2.0.1-SNAPSHOT</version>
+	  <type>jar</type>
+	 </dependency>
 	</dependencies>
 	<reporting>
 		<plugins>
