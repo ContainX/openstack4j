@@ -1,6 +1,7 @@
 package org.openstack4j.model.identity.v3;
 
-import org.apache.maven.project.ProjectBuilder;
+
+import org.openstack4j.model.identity.builder.TenantBuilder;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 
@@ -11,7 +12,7 @@ import org.openstack4j.model.ModelEntity;
  * 
  * @author Sujai SD
  */
-public interface Project extends ModelEntity , Buildable<ProjectBuilder>{
+public interface Project extends ModelEntity , Buildable<TenantBuilder>{
     
     /**
      * @return the unique identifier for this project
