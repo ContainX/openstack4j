@@ -8,6 +8,7 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Link;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * A server is a virtual machine instance on a compute based system.  
@@ -75,6 +76,11 @@ public interface Server extends ModelEntity {
 			}
 			return Status.UNRECOGNIZED;
 		}
+		
+		@JsonValue
+	    public String value() {
+	        return name().toLowerCase();
+	    }
 	}
 	
 	enum DiskConfig {
