@@ -36,4 +36,11 @@ public interface SaharaService extends RestService {
 	 * @return the image service
 	 */
 	SaharaImageService images();
+
+	/**
+	 * Plugin Service API
+	 *
+	 * @return the plugin service
+	 */
+	SaharaPluginService plugins();
 }
