@@ -1,0 +1,19 @@
+{
+    "pool": {
+        "admin_state_up": true,
+        "description": "simple pool",
+        "healthmonitor_id": null,
+        "id": "4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5",
+        "lb_method": "ROUND_ROBIN",
+        "listeners": [
+            {
+                "id": "35cb8516-1173-4035-8dae-0dae3453f37f"
+            }
+        ],
+        "members": [],
+        "name": "pool1",
+        "protocol": "HTTP",
+        "subnet_id":"7d1dab60-cf8a-4f75-af5c-44aab98b0c42",
+        "tenant_id":"d7fd03242ffa4933863bc528ed884fb6"
+    }
+}
