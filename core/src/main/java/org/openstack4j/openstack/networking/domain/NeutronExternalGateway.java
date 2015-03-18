@@ -2,6 +2,7 @@ package org.openstack4j.openstack.networking.domain;
 
 import org.openstack4j.model.network.ExternalGateway;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
@@ -21,7 +22,7 @@ public class NeutronExternalGateway implements ExternalGateway {
 	private String networkId;
 	
 	@JsonProperty("enable_snat")
-	private boolean enableSnat = true;
+	private Boolean enableSnat;
 	
 	public NeutronExternalGateway() { }
 	
@@ -45,9 +46,10 @@ public class NeutronExternalGateway implements ExternalGateway {
 	/**
 	 * {@inheritDoc}
 	 */
+	@JsonIgnore
 	@Override
 	public boolean isEnableSnat() {
-		return enableSnat;
+		return enableSnat != null && enableSnat;
 	}
 	
 	/**
