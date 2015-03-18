@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.telemetry.AlarmService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.telemetry.Alarm;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
 
@@ -43,5 +44,23 @@ public class AlarmServiceImpl extends BaseTelemetryServices implements AlarmServ
 		checkNotNull(alarm);
 		
 		put(CeilometerAlarm.class, uri("/alarms/%s", alarmId)).entity(alarm).execute();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Alarm create(Alarm alarm) {
+		checkNotNull(alarm);
+		return post(CeilometerAlarm.class, uri("/alarms")).entity((alarm)).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse delete(String alarmId) {
+		checkNotNull(alarmId);
+		return deleteWithResponse(uri("/alarms/%s", alarmId)).execute();
 	}
 }

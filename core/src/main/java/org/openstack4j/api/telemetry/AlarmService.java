@@ -3,6 +3,7 @@ package org.openstack4j.api.telemetry;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.telemetry.Alarm;
 
 /**
@@ -32,5 +33,15 @@ public interface AlarmService extends RestService {
 	 */
 	void update(String id, Alarm a);
 	
-	
+	/**
+	 * Create an alarm
+	 * 
+	 */
+	Alarm create(Alarm alarm);
+
+	/**
+	 * Delete a specified alarm
+	 * 
+	 */
+	ActionResponse delete(String id);
 }

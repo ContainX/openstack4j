@@ -2,9 +2,11 @@ package org.openstack4j.openstack.telemetry.domain;
 
 import java.util.List;
 
+import org.openstack4j.model.common.builder.BasicResourceBuilder;
 import org.openstack4j.model.telemetry.Alarm;
 import org.openstack4j.model.telemetry.Alarm.ThresholdRule.ComparisonOperator;
 import org.openstack4j.model.telemetry.Alarm.ThresholdRule.Query;
+import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
@@ -84,7 +86,6 @@ public class CeilometerAlarm implements Alarm {
 	@JsonProperty("timestamp")
 	private String timestamp;
 
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -112,11 +113,11 @@ public class CeilometerAlarm implements Alarm {
 	/**
    * {@inheritDoc}
    */
-  @Override
-  public String getUserId() {
-    return userId;
-  }
-	
+	@Override
+	public String getUserId() {
+		return userId;
+	}
+  	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -271,6 +272,45 @@ public class CeilometerAlarm implements Alarm {
 			return excludeOutliers;
 		}
 		
+		@Override
+		public void setMeterName(String meterName) {
+			this.meterName = meterName;
+		}
+
+		@Override
+		public void setEvaluationPeriods(int evaluationPeriod) {
+			this.evaluationPeriods = evaluationPeriod;
+		}
+
+		@Override
+		public void setStatistic(Statistic statistic) {
+			this.statistic = statistic;
+		}
+
+		@Override
+		public void setPeriod(int period) {
+			this.period = period;
+		}
+
+		@Override
+		public void setThreshold(float threshold) {
+			this.threshold = threshold;
+		}
+
+		@Override
+		public void setQuery(List<CeilometerQuery> query) {
+			this.query = query;			
+		}
+
+		@Override
+		public void setComparisonOperator(ComparisonOperator comparisonOperator) {
+			this.comparisonOperator = comparisonOperator;			
+		}
+
+		@Override
+		public void setExcludeOutliers(boolean excludeOutliers) {
+			this.excludeOutliers = excludeOutliers;			
+		}
 	}
 	
 	public static class CeilometerQuery implements Query{
@@ -299,5 +339,160 @@ public class CeilometerAlarm implements Alarm {
 		public ComparisonOperator getOp() {
 			return op;
 		}
+		
+		@Override
+		public void setField(String field) {
+			this.field = field;			
+		}
+
+		@Override
+		public void setValue(String value) {
+			this.value = value;			
+		}
+
+		@Override
+		public void setOp(ComparisonOperator comparisonOperator) {
+			this.op = comparisonOperator;			
+		}
 	}
+	
+	public static AlarmBuilder builder() {
+		return new AlarmConcreteBuilder();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setType(Type type) {
+		 this.type = type;
+	}
+	
+	@Override
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	@Override
+	public void setAlarmActions(List<String> alarmActions) {
+		this.alarmActions = alarmActions;
+		
+	}
+
+	@Override
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public void setInsufficientDataActions(List<String> insufficientDataActions) {
+		this.insufficientDataActions = insufficientDataActions;
+	}
+
+	@Override
+	public void setOkActions(List<String> okActions) {
+		this.okActions = okActions;
+	}
+
+	@Override
+	public void setRepeateActions(Boolean repeatActions) {
+		this.repeatActions = repeatActions;
+	}
+	
+	@Override
+	public String getId() {
+		return this.alarmId;
+	}
+
+
+	@Override
+	public void setId(String id) {
+		this.alarmId = id;
+	}
+
+	@Override
+	public void setThresholdRule(CeilometerThresholdRule tr) {
+		this.thresholdRule = (CeilometerThresholdRule) tr;
+	}
+
+	@Override
+	public AlarmBuilder toBuilder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public static class AlarmConcreteBuilder extends BasicResourceBuilder<Alarm, AlarmConcreteBuilder> implements AlarmBuilder {
+
+		private CeilometerAlarm m;
+		
+		AlarmConcreteBuilder() {
+		 	this(new CeilometerAlarm());
+		}
+		
+		AlarmConcreteBuilder(CeilometerAlarm m) {
+			this.m = m;
+		}
+
+		
+		@Override
+		public Alarm build() {
+			return m;
+		}
+
+		@Override
+		public AlarmBuilder from(Alarm in) {
+			this.m = (CeilometerAlarm) in;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder okActions(List<String> okActions) {
+			this.m.okActions = okActions;
+			return this;
+		}
+
+		@Override
+		protected Alarm reference() {
+			return m;
+		}
+
+		@Override
+		public AlarmBuilder type(Type type) {
+			this.m.type = type;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder thresholeRule(CeilometerThresholdRule tr) {
+			this.m.thresholdRule = tr;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder repeatActions(boolean repeatActions) {
+			m.repeatActions = repeatActions;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder description(String description) {
+			m.description = description;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder alarmActions(List<String> alarmActions) {
+			this.m.alarmActions = alarmActions;
+			return this;
+		}
+
+    }
 }
