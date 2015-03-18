@@ -42,7 +42,8 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     @Override
     public List<? extends SwiftObject> list(String containerName) {
         checkNotNull(containerName);
-        return get(SwiftObjects.class, uri("/%s", containerName)).execute();
+        List<SwiftObjectImpl> objs = get(SwiftObjects.class, uri("/%s", containerName)).execute();
+        return Lists.transform(objs, ApplyContainerToObjectFunction.create(containerName));
     }
 
     @Override

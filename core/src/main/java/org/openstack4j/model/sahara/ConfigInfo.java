@@ -1,7 +1,6 @@
 package org.openstack4j.model.sahara;
 
 import java.util.List;
-import java.util.Map;
 
 import org.openstack4j.model.ModelEntity;
 

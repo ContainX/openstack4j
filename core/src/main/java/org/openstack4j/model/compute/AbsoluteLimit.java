@@ -197,4 +197,17 @@ public interface AbsoluteLimit extends ModelEntity {
 	 */
 	int getTotalFloatingIpsUsed();
 	
+	/**
+	 * Gets the max server group members
+	 * 
+	 * @return the max server group members (-1 indicates no value)
+	 */
+	int getMaxServerGroupMembers();
+	
+	/**
+	 * Gets the max server groups
+	 * 
+	 * @return the max server groups (-1 indicates no value)
+	 */
+	int getMaxServerGroups();
 }
