@@ -46,7 +46,6 @@
 * Issue #211 - NullPointerException: Find Tenant By Name
 * Issue #201 - Find a specific Tenant using getByName function raise exception
 
-
 ### 2.0.1
 
 ##### Enhancements/Improvements
