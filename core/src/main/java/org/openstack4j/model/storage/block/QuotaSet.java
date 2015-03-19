@@ -16,10 +16,21 @@ public interface QuotaSet extends ModelEntity, Buildable<QuotaSetBuilder> {
      */
     String getId();
 
+    /**
+     *
+     * @return the Snapshots.
+     */
     int getSnapshots();
 
+    /**
+     *
+     * @return the Volumes
+     */
     int getVolumes();
 
+    /**
+     *
+     * @return the gigabytes
+     */
     int getGigabytes();
-
 }
