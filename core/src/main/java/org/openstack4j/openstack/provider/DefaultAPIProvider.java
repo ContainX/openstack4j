@@ -74,6 +74,7 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.AgentService;
 import org.openstack4j.api.networking.ext.FirewallAsService;
 import org.openstack4j.api.networking.ext.FirewallPolicyService;
 import org.openstack4j.api.networking.ext.FirewallRuleService;
@@ -129,6 +130,7 @@ import org.openstack4j.api.tacker.TackerServiceImpl;
 import org.openstack4j.api.tacker.VimService;
 import org.openstack4j.api.tacker.VnfService;
 import org.openstack4j.api.tacker.VnfdService;
+import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
 import org.openstack4j.api.telemetry.AlarmService;
 import org.openstack4j.api.telemetry.CapabilitiesService;
 import org.openstack4j.api.telemetry.EventService;
@@ -211,6 +213,7 @@ import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.AgentServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallAsServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallPolicyServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallRuleServiceImpl;
@@ -257,6 +260,7 @@ import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeTransferServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.CinderZoneServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.SchedulerStatsGetPoolServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageAccountServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
@@ -277,8 +281,6 @@ import org.openstack4j.openstack.trove.internal.DBFlavorServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
-import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
-import org.openstack4j.openstack.storage.block.internal.SchedulerStatsGetPoolServiceImpl;
 
 import com.google.common.collect.Maps;
 
@@ -442,7 +444,8 @@ public class DefaultAPIProvider implements APIProvider {
         bind(VnfdService.class, VnfdServiceImpl.class);
         bind(VnfService.class, VnfServiceImpl.class);
         bind(VimService.class, VimServiceImpl.class);
-    }
+        bind(AgentService.class, AgentServiceImpl.class);
+    }   
 
     /**
      * {@inheritDoc}
