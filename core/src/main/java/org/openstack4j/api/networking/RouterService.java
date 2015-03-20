@@ -89,6 +89,7 @@ public interface RouterService extends RestService {
 	 * @param subnetId the subnet identifier
 	 * @param portId the port identifier
 	 * @return the router interface that was detached
+	 * @throws ClientResponseException if one of the specified identifiers does not exist
 	 */
 	RouterInterface detachInterface(String routerId, String subnetId, String portId);
 }

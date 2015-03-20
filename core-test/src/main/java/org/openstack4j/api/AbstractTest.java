@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.common.io.ByteStreams;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
 
@@ -65,7 +66,7 @@ public abstract class AbstractTest {
         Logger.getLogger(getClass().getName()).info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
         try {
         	Logger.getLogger(getClass().getName()).info("Starting server on port "+service().port);
-            server.play(service().port);
+            server.start(service().port);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -84,7 +85,7 @@ public abstract class AbstractTest {
     protected void respondWith(String resource) throws IOException {
         MockResponse r = new MockResponse();
         InputStream is = getClass().getResourceAsStream(resource);
-        r.setBody(is, is.available());
+        r.setBody(new String(ByteStreams.toByteArray(is)));
         r.setHeader("Content-Type", "application/json");
         server.enqueue(r);
     }
@@ -146,6 +147,7 @@ public abstract class AbstractTest {
 
             try {
                 String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
+                Logger.getLogger(getClass().getName()).info(getClass().getName());
               //  Logger.getLogger(getClass().getName()).info(getClass().getName() + ", JSON Access = " + json);
                 json = json.replaceAll("127.0.0.1", getHost());
                // Logger.getLogger(getClass().getName()).info("JSON Access = " + json);

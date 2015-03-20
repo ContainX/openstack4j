@@ -1,16 +1,52 @@
 # Change Log
 
-### 2.0.2-SNAPSHOT (Master)
+### 2.0.2 (Latest Release / Stable)
 
 ##### Enhancements/Improvements
 
-* Issue #203 - Host Aggregate Support (contribution by @liujunpengwork)
+* Issue #290 - Update OKHttp Connector to version 2.3.0
+* Issue #289 - AbsoluteLimit: `maxServerGroups` and `maxServerGroupMembers` are missing
+* Issue #284 - Extending ceilometer alarms functionality (thank you @e3ky)
+* Issue #278 - Filtering of Attached Interfaces
+* Issue #264 - Keystone v3 Authentication for Project Scope
+* Issue #258 - Reset VM State support
+* Issue #255 - HttpURLConnection connector option (thank you @krishnabrucelee)
+* Issue #247 - Support to update Quotas for Tenant and Class
+* Issue #233 - Ability to set criteria on Ceilometer Statistics
+* Issue #217 - Support to build a shared network (thank you @octupszhang)
+* Issue #216 - Telemetry API doesn't support alarms (thank you @e3ky)
+* Issue #216 - Add support for Sahara data processing (thank you @ekasitk)
+* Issue #208 - Support for LBaaS (Load-balancer as a service) (thank you @liujunpengwork)
+* Issue #203 - Support Host aggregates (thank you @liujunpengwork)
+* Issue #187 - Support for Volume Transfer
+* Issue #183 - Heat: Nested templates (Files & Env) support for a Stack (thank you @magixyu)
 
 ##### Fixes
 
-* Issue #201 - Find a specific Tenant using getByName function raises Exception
+* Issue #286 - Error while downloading the object from container
+* Issue #285 - ResetAction not working against a Server
+* Issue #282 - Quota set volume & gigabytes is always 0 and instances and do not update
+* Issue #281 - NeutronError while detaching interface is not caught
+* Issue #277 - Option to clear gateway once set
+* Issue #268 - RouterExternal flag missing in NetworkBuilder interface
+* Issue #263 - Not closing response when 404 happens
+* Issue #262 - Creating a Port by using an existing as a template (cloning) fails
+* Issue #261 - Unable to pass SampleCriteria as a parameter in sample() method
+* Issue #257 - VM Migration Exception (ActionResponse fault)
+* Issue #249 - Unable to capture Create Subnet Error
+* Issue #241 - HttpClient Connector: Assign/Remove floating IP to the server throws JsonMappingException
+* Issue #237 - Rackspace URL for images are incorrectly determined
+* Issue #236 - HP Cloud: Failed to create network port
+* Issue #234 - Volumes cannot be used on HP Cloud
+* Issue #227 - OSFactory.clientFromAccess(access) doesn't fetch admin scoped tenant/users
+* Issue #226 - Creating Network on HP Cloud fails
+* Issue #225 - NullPointerException in HttpExecutor when ServiceLoader finds no HttpExecutorService
+* Issue #222 - ObjectStorage: file download
+* Issue #220 - NetworkType enum doesn't support "vxlan" value
+* Issue #211 - NullPointerException: Find Tenant By Name
+* Issue #201 - Find a specific Tenant using getByName function raise exception
 
-### 2.0.1 (Latest Release / Stable)
+### 2.0.1
 
 ##### Enhancements/Improvements
 

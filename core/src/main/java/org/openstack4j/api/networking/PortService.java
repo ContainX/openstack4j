@@ -5,6 +5,7 @@ import java.util.List;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.Port;
+import org.openstack4j.model.network.options.PortListOptions;
 
 /**
  * OpenStack (Neutron) Port based Operations
@@ -19,6 +20,14 @@ public interface PortService extends RestService {
 	 * @return the list of ports
 	 */
 	List<? extends Port> list();
+
+	/**
+     * Lists all Ports authorized by the current Tenant
+     *
+     * @param options filtering options
+     * @return the list of ports
+     */
+    List<? extends Port> list(PortListOptions options);
 	
 	/**
 	 * Gets the Port by ID

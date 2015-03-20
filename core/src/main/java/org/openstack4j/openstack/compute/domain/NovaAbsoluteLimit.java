@@ -45,6 +45,8 @@ public class NovaAbsoluteLimit implements AbsoluteLimit {
 	private Integer totalFloatingIpsUsed;
 	private Integer maxTotalVolumeGigabytes;
 	private Integer totalVolumeGigabytesUsed;
+	private Integer maxServerGroups;
+	private Integer maxServerGroupMembers;
 	
 	/**
 	 * Gets the max server meta.
@@ -279,6 +281,16 @@ public class NovaAbsoluteLimit implements AbsoluteLimit {
 	public int getTotalVolumeGigabytesUsed() {
 		return wrap(totalVolumeGigabytesUsed);
 	}
+	
+	@Override
+    public int getMaxServerGroupMembers() {
+        return wrap(maxServerGroupMembers);
+    }
+
+    @Override
+    public int getMaxServerGroups() {
+        return wrap(maxServerGroups);
+    }
 
 	/**
 	 * Wrap.
@@ -289,7 +301,6 @@ public class NovaAbsoluteLimit implements AbsoluteLimit {
 	private int wrap(Integer value) {
 		return value != null ? value : -1;
 	}
-	
 	
 	/**
 	 * {@inheritDoc}
@@ -306,6 +317,7 @@ public class NovaAbsoluteLimit implements AbsoluteLimit {
 					  .add("maxTotalVolumes", maxTotalVolumes).add("totalVolumesUsed", totalVolumesUsed).add("maxSecurityGroups", maxSecurityGroups)
 					  .add("totalSecurityGroupsUsed", totalSecurityGroupsUsed).add("maxTotalFloatingIps", maxTotalFloatingIps).add("totalFloatingIpsUsed", totalFloatingIpsUsed)
 					  .add("maxTotalVolumeGigabytes", maxTotalVolumeGigabytes).add("totalVolumeGigabytesUsed", totalVolumeGigabytesUsed)
+					  .add("maxServerGroups", maxSecurityGroups).add("maxServerGroupMembers", maxServerGroupMembers)
 				    .toString();
 	}
 }

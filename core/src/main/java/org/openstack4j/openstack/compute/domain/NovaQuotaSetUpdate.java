@@ -18,17 +18,23 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
 
     @JsonProperty("injected_files")
     private Integer injectedFiles;
-
+    
+    @JsonProperty
     private Integer gigabytes;
+    
+    @JsonProperty
     private Integer ram;
 
     @JsonProperty("floating_ips")
     private Integer floatingIps;
 
+    @JsonProperty
     private Integer instances;
 
+    @JsonProperty
     private Integer volumes;
 
+    @JsonProperty
     private Integer cores;
 
     @JsonProperty("security_groups")

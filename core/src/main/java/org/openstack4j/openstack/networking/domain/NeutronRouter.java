@@ -207,6 +207,16 @@ public class NeutronRouter implements Router {
 			m.externalGatewayInfo = (NeutronExternalGateway) externalGateway;
 			return this;
 		}
+		
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public RouterBuilder clearExternalGateway() {
+		    m.externalGatewayInfo = new NeutronExternalGateway();
+		    return this;
+		}
+		
 
 		/**
 		 * {@inheritDoc}

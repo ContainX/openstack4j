@@ -53,6 +53,10 @@ public interface RouterBuilder extends Builder<RouterBuilder, Router> {
 	RouterBuilder externalGateway(ExternalGateway externalGateway);
 	
 	/**
+	 * Removes the external gateway from the router during an update operation
+	 */
+	RouterBuilder clearExternalGateway();
+	/**
 	 * @see Router#getRoutes()
 	 */
 	RouterBuilder route(String destination, String nexthop);
