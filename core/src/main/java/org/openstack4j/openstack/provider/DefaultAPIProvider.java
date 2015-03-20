@@ -74,6 +74,7 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.AgentService;
 import org.openstack4j.api.networking.ext.FirewallAsService;
 import org.openstack4j.api.networking.ext.FirewallPolicyService;
 import org.openstack4j.api.networking.ext.FirewallRuleService;
@@ -124,6 +125,7 @@ import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
+import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
 import org.openstack4j.api.telemetry.AlarmService;
 import org.openstack4j.api.telemetry.CapabilitiesService;
 import org.openstack4j.api.telemetry.EventService;
@@ -206,6 +208,7 @@ import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.AgentServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallAsServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallPolicyServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallRuleServiceImpl;
@@ -252,6 +255,7 @@ import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeTransferServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.CinderZoneServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.SchedulerStatsGetPoolServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageAccountServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
@@ -430,7 +434,8 @@ public class DefaultAPIProvider implements APIProvider {
         bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
         bind(BarbicanService.class, BarbicanServiceImpl.class);
         bind(ContainerService.class, ContainerServiceImpl.class);
-    }
+        bind(AgentService.class, AgentServiceImpl.class);
+    }   
 
     /**
      * {@inheritDoc}
