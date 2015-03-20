@@ -1,5 +1,6 @@
 package org.openstack4j.api.networking;
 
+import org.openstack4j.api.networking.ext.AgentService;
 import org.openstack4j.api.networking.ext.FirewallAsService;
 import org.openstack4j.api.networking.ext.LbaasV2Service;
 import org.openstack4j.api.networking.ext.LoadBalancerService;
@@ -59,6 +60,12 @@ public interface NetworkingService extends RestService {
      * @return the LBaaS service
      */
     LoadBalancerService loadbalancers();
+    
+    /**
+     * 
+     * @return the Neutron agent API
+     */
+    AgentService agent();
 
     /**
      * @return the LBaaS V2 service
