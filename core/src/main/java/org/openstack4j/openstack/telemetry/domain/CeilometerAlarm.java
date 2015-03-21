@@ -494,5 +494,11 @@ public class CeilometerAlarm implements Alarm {
 			return this;
 		}
 
+		@Override
+		public AlarmBuilder isEnabled(boolean isEnabled) {
+			this.m.isEnabled = isEnabled;
+			return this;
+		}
+
     }
 }

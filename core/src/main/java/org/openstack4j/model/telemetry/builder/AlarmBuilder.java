@@ -28,5 +28,7 @@ public interface AlarmBuilder extends Builder<AlarmBuilder, Alarm>{
 	AlarmBuilder repeatActions(boolean repeatActions);
 	
 	AlarmBuilder description(String description);
+	
+	AlarmBuilder isEnabled(boolean isEnabled);
 
 }
