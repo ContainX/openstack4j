@@ -37,7 +37,7 @@ public abstract class AbstractTest {
         COMPUTE(8774),
         METERING(8087),
         TELEMETRY(8087),
-        OBJECT_STORAGE(8080);
+        OBJECT_STORAGE(8800);
         ;
         private final int port;
 

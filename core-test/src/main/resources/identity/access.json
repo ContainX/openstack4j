@@ -56,7 +56,7 @@
 	      "type": "object-store",
 	      "endpoints": [{
 	        "tenantId": "10108557731121",
-	        "publicURL": "http:\/\/127.0.0.1:8080\/v1\/10108557731121",
+	        "publicURL": "http:\/\/127.0.0.1:8800\/v1\/10108557731121",
 	        "publicURL2": "",
 	        "region": "RegionOne",
 	        "versionId": "1",
