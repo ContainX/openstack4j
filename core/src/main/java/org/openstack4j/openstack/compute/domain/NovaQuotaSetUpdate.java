@@ -20,9 +20,6 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
     private Integer injectedFiles;
     
     @JsonProperty
-    private Integer gigabytes;
-    
-    @JsonProperty
     private Integer ram;
 
     @JsonProperty("floating_ips")
@@ -30,9 +27,6 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
 
     @JsonProperty
     private Integer instances;
-
-    @JsonProperty
-    private Integer volumes;
 
     @JsonProperty
     private Integer cores;
@@ -57,19 +51,17 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
     
     protected NovaQuotaSetUpdate(Integer metadataItems,
 				Integer injectedFileContentBytes, Integer injectedFiles,
-				Integer gigabytes, Integer ram, Integer floatingIps, Integer instances,
-				Integer volumes, Integer cores, Integer securityGroups,
+				Integer ram, Integer floatingIps, Integer instances,
+				Integer cores, Integer securityGroups,
 				Integer securityGroupRules, Integer injectedFilePathBytes,
 				Integer keyPairs) {
 			super();
 			this.metadataItems = metadataItems;
 			this.injectedFileContentBytes = injectedFileContentBytes;
 			this.injectedFiles = injectedFiles;
-			this.gigabytes = gigabytes;
 			this.ram = ram;
 			this.floatingIps = floatingIps;
 			this.instances = instances;
-			this.volumes = volumes;
 			this.cores = cores;
 			this.securityGroups = securityGroups;
 			this.securityGroupRules = securityGroupRules;
@@ -127,12 +119,6 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
         }
 
         @Override
-        public QuotaSetUpdateBuilder gigabytes(int gigabytes) {
-            model.gigabytes = gigabytes;
-            return this;
-        }
-
-        @Override
         public QuotaSetUpdateBuilder ram(int ram) {
             model.ram = ram;
             return this;
@@ -147,12 +133,6 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
         @Override
         public QuotaSetUpdateBuilder instances(int instances) {
             model.instances = instances;
-            return this;
-        }
-
-        @Override
-        public QuotaSetUpdateBuilder volumes(int volumes) {
-            model.volumes = volumes;
             return this;
         }
 
@@ -194,19 +174,19 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
 
 			public NovaQuotaSetUpdateTenant(Integer metadataItems,
 					Integer injectedFileContentBytes, Integer injectedFiles,
-					Integer gigabytes, Integer ram, Integer floatingIps,
-					Integer instances, Integer volumes, Integer cores,
+					Integer ram, Integer floatingIps,
+					Integer instances, Integer cores,
 					Integer securityGroups, Integer securityGroupRules,
 					Integer injectedFilePathBytes, Integer keyPairs) {
-				super(metadataItems, injectedFileContentBytes, injectedFiles, gigabytes, ram,
-						floatingIps, instances, volumes, cores, securityGroups, securityGroupRules,
+				super(metadataItems, injectedFileContentBytes, injectedFiles, ram,
+						floatingIps, instances, cores, securityGroups, securityGroupRules,
 						injectedFilePathBytes, keyPairs);
 			}
     	
 			public static NovaQuotaSetUpdateTenant from(QuotaSetUpdate qs) {
 				NovaQuotaSetUpdate nqs = (NovaQuotaSetUpdate) qs;
 				  return new NovaQuotaSetUpdateTenant(nqs.metadataItems, nqs.injectedFileContentBytes, nqs.injectedFiles,
-				  						nqs.gigabytes, nqs.ram, nqs.floatingIps, nqs.instances, nqs.volumes, nqs.cores, nqs.securityGroups,
+				  						nqs.ram, nqs.floatingIps, nqs.instances, nqs.cores, nqs.securityGroups,
 				  						nqs.securityGroupRules, nqs.injectedFilePathBytes, nqs.keyPairs);
 			}
     }
@@ -218,19 +198,19 @@ public class NovaQuotaSetUpdate implements QuotaSetUpdate {
 
 			public NovaQuotaSetUpdateClass(Integer metadataItems,
 					Integer injectedFileContentBytes, Integer injectedFiles,
-					Integer gigabytes, Integer ram, Integer floatingIps,
-					Integer instances, Integer volumes, Integer cores,
+					Integer ram, Integer floatingIps,
+					Integer instances, Integer cores,
 					Integer securityGroups, Integer securityGroupRules,
 					Integer injectedFilePathBytes, Integer keyPairs) {
-				super(metadataItems, injectedFileContentBytes, injectedFiles, gigabytes, ram,
-						floatingIps, instances, volumes, cores, securityGroups, securityGroupRules,
+				super(metadataItems, injectedFileContentBytes, injectedFiles, ram,
+						floatingIps, instances, cores, securityGroups, securityGroupRules,
 						injectedFilePathBytes, keyPairs);
 			}
     	
 			public static NovaQuotaSetUpdateClass from(QuotaSetUpdate qs) {
 				NovaQuotaSetUpdate nqs = (NovaQuotaSetUpdate) qs;
 				  return new NovaQuotaSetUpdateClass(nqs.metadataItems, nqs.injectedFileContentBytes, nqs.injectedFiles,
-				  						nqs.gigabytes, nqs.ram, nqs.floatingIps, nqs.instances, nqs.volumes, nqs.cores, nqs.securityGroups,
+				  						nqs.ram, nqs.floatingIps, nqs.instances, nqs.cores, nqs.securityGroups,
 				  						nqs.securityGroupRules, nqs.injectedFilePathBytes, nqs.keyPairs);
 			}
     }

@@ -1,12 +1,12 @@
 package org.openstack4j.openstack.networking.internal.ext;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.openstack4j.api.networking.ext.NetQuotaService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.NetQuota;
 import org.openstack4j.openstack.networking.domain.NeutronNetQuota;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
-
-import com.google.common.base.Preconditions;
 
 /**
  * Networking (Neutron) Quota Extension API
@@ -19,16 +19,35 @@ public class NetQuotaServiceImpl extends BaseNetworkingServices implements NetQu
     public NetQuota get() {
         return get(NeutronNetQuota.class, uri("/quotas")).execute();
     }
+    
+    @Override
+    public NetQuota get(String tenantId) {
+        checkNotNull(tenantId, "TenantId must not be null");
+        return get(NeutronNetQuota.class, uri("/quotas/%s", tenantId)).execute();
+    }
+    
+    @Override
+    public NetQuota updateForTenant(String tenantId, NetQuota netQuota) {
+        checkNotNull(tenantId, "TenantId must not be null");
+        checkNotNull(netQuota, "NetQuota must not be null");
+        return put(NeutronNetQuota.class, uri("/quotas/%s", tenantId)).entity(netQuota).execute();
+    }
 
     @Override
     public NetQuota update(NetQuota netQuota) {
-        Preconditions.checkNotNull(netQuota, "NetQuota must not be null");
+        checkNotNull(netQuota, "NetQuota must not be null");
         return put(NeutronNetQuota.class, uri("/quotas")).entity(netQuota).execute();
     }
 
     @Override
     public ActionResponse reset() {
         return deleteWithResponse(uri("/quotas")).execute();
+    }
+    
+    @Override
+    public ActionResponse reset(String tenantId) {
+        checkNotNull(tenantId, "TenantId must not be null");
+        return deleteWithResponse(uri("/quotas/%s", tenantId)).execute();
     }
 
 }

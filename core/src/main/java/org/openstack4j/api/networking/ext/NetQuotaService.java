@@ -20,6 +20,14 @@ public interface NetQuotaService extends RestService {
     NetQuota get();
     
     /**
+     * Fetches the network quotas for the specified tenant
+     * 
+     * @param tenantId the tenant identifier
+     * @return the tenants quota
+     */
+    NetQuota get(String tenantId);
+    
+    /**
      * Updates the network quotas for the current tenant
      * 
      * @param netQuota the net quota to update
@@ -29,9 +37,26 @@ public interface NetQuotaService extends RestService {
     NetQuota update(NetQuota netQuota);
     
     /**
+     * Updates the network quotas for the specified tenant
+     * 
+     * @param tenantId the tenant identifier
+     * @param netQuota the net quota to update
+     * @return the updated network quota
+     * @see NetQuotaBuilder
+     */
+    NetQuota updateForTenant(String tenantId, NetQuota netQuota);
+    
+    /**
      * Resets the current network quota for the current tenant back to defaults
      * @return the action response
      */
     ActionResponse reset();
 
+    /**
+     * Resets the current network quota for the current tenant back to defaults
+     * 
+     * @param netQuota the net quota to update
+     * @return the action response
+     */
+    ActionResponse reset(String tenantId);
 }

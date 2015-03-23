@@ -26,11 +26,6 @@ public interface QuotaSetUpdateBuilder extends Builder<QuotaSetUpdateBuilder, Qu
     QuotaSetUpdateBuilder injectedFiles(int injectedFiles);
 
     /**
-     * the number of gigabytes allowed
-     */
-    QuotaSetUpdateBuilder gigabytes(int gigabytes);
-
-    /**
      * Quantity of instanceable RAM (MBytes)
      */
     QuotaSetUpdateBuilder ram(int ram);
@@ -44,11 +39,6 @@ public interface QuotaSetUpdateBuilder extends Builder<QuotaSetUpdateBuilder, Qu
      * Number of permitted instances
      */
     QuotaSetUpdateBuilder instances(int instances);
-
-    /**
-     * Number of permitted volumes
-     */
-    QuotaSetUpdateBuilder volumes(int volumes);
 
     /**
      * Number of instanceable cores

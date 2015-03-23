@@ -52,7 +52,8 @@ public class NeutronPortCreate implements ModelEntity {
 	 * @param port the port (source)
 	 * @return the port create object
 	 */
-	public static NeutronPortCreate fromPort(Port port) {
+	@SuppressWarnings("unchecked")
+    public static NeutronPortCreate fromPort(Port port) {
 		NeutronPortCreate c = new NeutronPortCreate();
 		c.name = port.getName();
 		c.networkId = port.getNetworkId();
@@ -60,6 +61,7 @@ public class NeutronPortCreate implements ModelEntity {
 		c.macAddress = port.getMacAddress();
 		c.tenantId = port.getTenantId();
 		c.securityGroups = port.getSecurityGroups();
+		c.fixedIps = (Set<NeutronIP>) port.getFixedIps();
 		
 		return c;
 	}
