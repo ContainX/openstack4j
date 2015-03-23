@@ -32,7 +32,7 @@ public class SaharaCluster implements Cluster {
 
 	private static final long serialVersionUID = 1L;
 
-	private String status;
+	private Status status;
 	@JsonProperty("info")
         private Map<String,SaharaServiceInfo> infos;
 	@JsonProperty("cluster_template_id")
@@ -77,7 +77,7 @@ public class SaharaCluster implements Cluster {
          * {@inheritDoc}
          */
 	@Override
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 

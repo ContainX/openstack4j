@@ -15,24 +15,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 public interface Image extends ModelEntity {
 
-        /**
-         * Status can be used while an image is being saved.  It provides state of the progress indicator.  Images with ACTIVE status
-         * are available for install.
-         */
         enum Status {
-                UNRECOGNIZED, UNKNOWN, ACTIVE, SAVING, ERROR, DELETED;
+            UNRECOGNIZED, ACTIVE, SAVING, QUEUED, KILLED, PENDING_DELETE, DELETED, ERROR; // Use Glance Image Status 
 
-                @JsonCreator
-                public static Status forValue(String value) {
-                        if (value != null)
-                        {
-                                for (Status s : Status.values()) {
-                                        if (s.name().equalsIgnoreCase(value))
-                                                return s;
-                                }
-                        }
-                        return Status.UNKNOWN;
+            @JsonCreator
+            public static Status forValue(String v) {
+                if (v == null) return UNRECOGNIZED;
+                try {
+                    return valueOf(v.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    return UNRECOGNIZED;
                 }
+            }
         }
 
 	/**

@@ -8,6 +8,8 @@ import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.ClusterBuilder;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * An OpenStack Cluster
  * 
@@ -15,11 +17,33 @@ import org.openstack4j.model.sahara.builder.ClusterBuilder;
  */
 public interface Cluster extends ModelEntity, Buildable<ClusterBuilder> {
 
+    enum Status {
+        /* 
+         * Since it is being developed, this list is not stable yet. Note 
+         *  also that Sahara cluster status may appear in 2 words, e.g. 
+         *  "Adding Instances", but we match only the first word for simplicity 
+         *  until the list is stable. 
+         *  See http://docs.openstack.org/developer/sahara/userdoc/statuses.html for more info.
+         */
+        UNRECOGNIZED, VALIDATING, INFRAUPDATING, SPAWNING, WAITING, PREPARING, CONFIGURING, STARTING, ACTIVE, SCALING, ADDING, DECOMMISSIONING, DELETING, ERROR; 
+        @JsonCreator
+        public static Status forValue(String value) {
+            if (value != null)
+            {
+                for (Status s : Status.values()) {
+                    if (value.toUpperCase().startsWith(s.name()))
+                        return s;
+                }
+            }
+            return Status.UNRECOGNIZED;
+        }
+    }
+
+
     /**
-     * TODO: Shall this return a Status object?
      * @return the status of the cluster
      */
-    String getStatus();
+    Status getStatus();
 
     /**
      * @return the information of the cluster
