@@ -19,7 +19,6 @@ import org.openstack4j.model.network.ext.LbPool;
 import org.openstack4j.model.network.ext.LbPoolUpdate;
 import org.openstack4j.openstack.networking.domain.ext.LbMethod;
 import org.openstack4j.openstack.networking.domain.ext.Protocol;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(suiteName="Network/lbpool", enabled=true)
