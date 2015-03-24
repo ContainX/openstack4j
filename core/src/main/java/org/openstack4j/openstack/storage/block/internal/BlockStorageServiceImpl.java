@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.storage.block.internal;
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.api.storage.BlockQuotaSetService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
@@ -36,6 +37,14 @@ public class BlockStorageServiceImpl extends BaseBlockStorageServices implements
     @Override
     public BlockLimits getLimits() {
         return get(CinderBlockLimits.class, "/limits").execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BlockQuotaSetService quotaSets() {
+        return Apis.get(BlockQuotaSetService.class);
     }
 
 }

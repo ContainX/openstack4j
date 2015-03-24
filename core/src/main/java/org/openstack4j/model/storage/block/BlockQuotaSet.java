@@ -2,14 +2,14 @@ package org.openstack4j.model.storage.block;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.storage.block.builder.QuotaSetBuilder;
+import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 
 /**
  * An OpenStack Quota-Set
  *
  * @author Jeremy Unruh
  */
-public interface QuotaSet extends ModelEntity, Buildable<QuotaSetBuilder> {
+public interface BlockQuotaSet extends ModelEntity, Buildable<BlockQuotaSetBuilder> {
 
     /**
      * @return the identifier

@@ -26,4 +26,11 @@ public interface BlockStorageService extends RestService {
 	 * @return the absolute limits
 	 */
 	BlockLimits getLimits();
+	
+	/**
+	 * The block storage quota-set service.  
+	 * 
+	 * @return the quota-set service
+	 */
+	BlockQuotaSetService quotaSets();
 }

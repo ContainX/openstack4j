@@ -47,6 +47,7 @@ import org.openstack4j.model.sahara.builder.ClusterTemplateBuilder;
 import org.openstack4j.model.sahara.builder.NodeGroupBuilder;
 import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
 import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
+import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
@@ -93,6 +94,7 @@ import org.openstack4j.openstack.sahara.domain.SaharaClusterTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaNodeGroup;
 import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaServiceConfig;
+import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
@@ -475,4 +477,12 @@ public class Builders {
         return CeilometerAlarm.builder();
     }
 
+    /**
+     * The builder which creates a BlockQuotaSet
+     * 
+     * @return the block quota-set builder
+     */
+    public static BlockQuotaSetBuilder blockQuotaSet() {
+        return CinderBlockQuotaSet.builder();
+    }
 }
