@@ -8,8 +8,10 @@ import org.openstack4j.model.common.Link;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.Endpoint;
+import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.TokenV3;
+import org.openstack4j.model.identity.v3.TokenV3.UserV3;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -60,7 +62,7 @@ public class AccessWrapper implements Access {
 	 */
 	@Override
 	public UserDetails getUser() {
-		return null;
+		return UserWrapper.wrap(token.getUser());
 	}
 
 	/**
@@ -124,6 +126,51 @@ public class AccessWrapper implements Access {
 			return Collections.emptyList();
 		}
 		
+	}
+	
+	public static class UserWrapper implements UserDetails {
+	    
+	    UserV3 user;
+        
+        private UserWrapper(UserV3 user) {
+            this.user = user;
+        }
+        
+        static UserWrapper wrap(UserV3 user) {
+            UserWrapper wrapper = new UserWrapper(user);
+            return wrapper;
+        }
+
+        @Override
+        public String getId() {
+            return user.getId();
+        }
+
+        @Override
+        public String getName() {
+            return user.getName();
+        }
+
+        @Override
+        public String getUsername() {
+            return user.getName();
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return true;
+        }
+
+        @Override
+        public List<? extends Role> getRoles() {
+            return Collections.emptyList();
+        }
+
+        @Override
+        public List<? extends Link> getRolesLinks() {
+            return Collections.emptyList();
+        }
+	    
 	}
 
 
