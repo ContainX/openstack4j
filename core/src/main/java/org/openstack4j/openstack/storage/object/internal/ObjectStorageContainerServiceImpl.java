@@ -38,7 +38,7 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
      */
     @Override
     public List<? extends SwiftContainer> list() {
-          return toList(get(SwiftContainerImpl[].class).execute());
+          return toList(get(SwiftContainerImpl[].class).param("format", "json").execute());
     }
 
     /**
@@ -49,7 +49,7 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
         if (options == null)
             return list();
         
-        return toList(get(SwiftContainerImpl[].class).params(options.getOptions()).execute());
+        return toList(get(SwiftContainerImpl[].class).param("format", "json").params(options.getOptions()).execute());
     }
     
     /**

@@ -42,7 +42,7 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     @Override
     public List<? extends SwiftObject> list(String containerName) {
         checkNotNull(containerName);
-        List<SwiftObjectImpl> objs = get(SwiftObjects.class, uri("/%s", containerName)).execute();
+        List<SwiftObjectImpl> objs = get(SwiftObjects.class, uri("/%s", containerName)).param("format", "json").execute();
         return Lists.transform(objs, ApplyContainerToObjectFunction.create(containerName));
     }
 
@@ -53,7 +53,7 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         
         checkNotNull(containerName);
         
-        List<SwiftObjectImpl> objs = get(SwiftObjects.class, uri("/%s", containerName)).params(options.getOptions()).execute();
+        List<SwiftObjectImpl> objs = get(SwiftObjects.class, uri("/%s", containerName)).param("format", "json").params(options.getOptions()).execute();
         return Lists.transform(objs, ApplyContainerToObjectFunction.create(containerName));
                 
     }
