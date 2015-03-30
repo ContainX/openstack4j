@@ -9,6 +9,7 @@ import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.v3.Authentication;
 import org.openstack4j.openstack.common.BasicResourceEntity;
+import org.openstack4j.openstack.common.IdResourceEntity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -202,12 +203,18 @@ public class KeystoneAuth implements Authentication, AuthStore {
         @JsonProperty("domain")
         private AuthDomain domain;
         
+        @JsonProperty("OS-TRUST:trust")
+        private ScopeTrust trust;
+        
         public AuthScope(ScopeProject project) {
             this.project = project;
         }
         
         public AuthScope(AuthDomain domain) {
             this.domain = domain;
+        }
+        public AuthScope(ScopeTrust trust) {
+            this.trust = trust;
         }
         
         public static AuthScope project(Identifier project, Identifier domain) {
@@ -217,6 +224,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
         public static AuthScope domain(Identifier domain) {
             checkNotNull(domain, "Domain Scope: domain identifier or name cannot be null");
             return new AuthScope(new AuthDomain(domain));
+        }
+        
+        public static AuthScope trust(String id) {
+            checkNotNull(id, "Trust Scope: trust id cannot be null");
+            return new AuthScope(new ScopeTrust(id));
         }
         
         @Override
@@ -285,6 +297,16 @@ public class KeystoneAuth implements Authentication, AuthStore {
             public String getName() {
                 return name;
             }
+        }
+        
+        public static final class ScopeTrust extends IdResourceEntity {
+
+            private static final long serialVersionUID = 1L;
+
+            public ScopeTrust(String id) {
+                this.setId(id);
+            }
+
         }
     }
 
