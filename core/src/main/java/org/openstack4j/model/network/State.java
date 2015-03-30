@@ -12,6 +12,9 @@ public enum State {
   DOWN,
   BUILD,
   ERROR,
+  PENDING_CREATE, 
+  PENDING_UPDATE, 
+  PENDING_DELETE,
   UNRECOGNIZED;
   
 	@JsonCreator
