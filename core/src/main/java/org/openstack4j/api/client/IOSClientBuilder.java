@@ -158,5 +158,13 @@ public interface IOSClientBuilder<R, T extends IOSClientBuilder<R, T>> {
          * @return OSFactoryBuilderV3
          */
         V3 scopeToDomain(Identifier domain);
+        
+        /**
+         * Scopes the token to a specific trust
+         * 
+         * @param id the trust id
+         * @return OSFactoryBuilderV3
+         */
+        V3 scopeToTrust(String id);
     }
 }

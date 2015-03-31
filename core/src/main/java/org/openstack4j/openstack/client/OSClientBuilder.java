@@ -137,5 +137,11 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             this.scope = AuthScope.domain(domain);
             return this;
         }
+        
+        @Override
+        public ClientV3 scopeToTrust(String id) {
+            this.scope = AuthScope.trust(id);
+            return this;
+        }
     }
 }

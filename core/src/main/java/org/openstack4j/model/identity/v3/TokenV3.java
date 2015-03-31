@@ -20,6 +20,8 @@ public interface TokenV3 extends Token {
 	
 	ProjectV3 getProject();
 	
+	UserV3 getUser();
+	
 	List<? extends RoleV3> getRoles();
 	
 	List<? extends Catalog> getCatalog();
@@ -27,12 +29,14 @@ public interface TokenV3 extends Token {
 	public interface RoleV3 extends BasicResource {
 	}
 	
+	public interface DomainV3 extends BasicResource {
+    }
+	
 	public interface ProjectV3 extends BasicResource {
-		  
-		 DomainV3 getDomain();
-		
-		 public interface DomainV3 extends BasicResource {
-		 }
-		
+		DomainV3 getDomain();
+	}
+	
+	public interface UserV3 extends BasicResource {
+	    DomainV3 getDomain();
 	}
 }
