@@ -32,6 +32,8 @@ public class KeystoneTokenV3 implements TokenV3 {
     List<KeystoneRoleV3> roles;
     @JsonProperty("project")
     private KeystoneProjectV3 project;
+    @JsonProperty("user")
+    private KeystoneUserV3 user;
 
     @JsonProperty
     private List<KeystoneCatalog> catalog;
@@ -86,6 +88,12 @@ public class KeystoneTokenV3 implements TokenV3 {
     public ProjectV3 getProject() {
         return project;
     }
+    
+    @JsonIgnore
+    @Override
+    public UserV3 getUser() {
+        return user;
+    }
 
     @JsonIgnore
     @Override
@@ -111,6 +119,9 @@ public class KeystoneTokenV3 implements TokenV3 {
 
     public static class KeystoneRoleV3 extends BasicResourceEntity implements RoleV3 {
     }
+    
+    public static class KeystoneDomainV3 extends BasicResourceEntity implements DomainV3 {
+    }
 
     public static class KeystoneProjectV3 extends BasicResourceEntity implements ProjectV3 {
 
@@ -129,7 +140,23 @@ public class KeystoneTokenV3 implements TokenV3 {
                     .toString();
         }
 
-        public static class KeystoneDomainV3 extends BasicResourceEntity implements DomainV3 {
+    }
+    
+    public static class KeystoneUserV3 extends BasicResourceEntity implements UserV3 {
+        
+        @JsonProperty
+        private KeystoneDomainV3 domain;
+
+        @Override
+        public DomainV3 getDomain() {
+            return domain;
+        }
+
+        @Override
+        public String toString() {
+            return Objects.toStringHelper(getClass()).omitNullValues()
+                    .add("id", getId()).add("name", getName()).add("domain", domain)
+                    .toString();
         }
 
     }
