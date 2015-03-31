@@ -1,6 +1,7 @@
 package org.openstack4j.connectors.okhttp;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.openstack4j.core.transport.internal.HttpLoggingFilter;
 import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
+import com.google.common.io.ByteStreams;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.MediaType;
@@ -95,8 +97,13 @@ public final class HttpCommand<R> {
     public Response execute() throws Exception {
         RequestBody body = null;
         if (request.getEntity() != null) {
-            String content = ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity());
-            body = RequestBody.create(MediaType.parse(request.getContentType()), content);
+            if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) {
+                byte[] content = ByteStreams.toByteArray((InputStream)request.getEntity());
+                body = RequestBody.create(MediaType.parse(request.getContentType()), content);
+            } else {
+                String content = ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity());
+                body = RequestBody.create(MediaType.parse(request.getContentType()), content);
+            }
         }
         else if(request.hasJson()) {
             body = RequestBody.create(MediaType.parse(ClientConstants.CONTENT_TYPE_JSON), request.getJson());
