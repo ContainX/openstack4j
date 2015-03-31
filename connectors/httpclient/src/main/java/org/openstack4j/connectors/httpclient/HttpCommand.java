@@ -82,7 +82,16 @@ public final class HttpCommand<R> {
         if (config.getSslContext() != null)
             cb.setSslcontext(config.getSslContext());
 
+        if (config.getMaxConnections() > 0) {
+            cb.setMaxConnTotal(config.getMaxConnections());
+        }
+        
+        if (config.getMaxConnectionsPerRoute() > 0) {
+            cb.setMaxConnPerRoute(config.getMaxConnectionsPerRoute());
+        }
+        
         RequestConfig.Builder rcb = RequestConfig.custom();
+        
         if (config.getConnectTimeout() > 0)
             rcb.setConnectTimeout(config.getConnectTimeout());
         

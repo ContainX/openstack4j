@@ -18,7 +18,9 @@ public final class Config {
     private HostnameVerifier hostNameVerifier;
     private boolean ignoreSSLVerification;
     private String natHostOrIP;
-    
+    private int maxConnections;
+    private int maxConnectionsPerRoute;
+
     private Config() {
     }
     
@@ -62,6 +64,29 @@ public final class Config {
         return this;
     }
     
+    /**
+     * This sets the max allowed connections for connectors who are using a connection pool.  This option if set will be
+     * a no-op to connectors that don't offer this setting.  
+     * 
+     * @param maxConnections the max connections allowed
+     * @return Config
+     */
+    public Config withMaxConnections(int maxConnections) {
+        this.maxConnections = maxConnections;
+        return this;
+    }
+    
+    /**
+     * This sets the max allowed connections per routefor connectors who are using a connection pool.  This option if set will be
+     * a no-op to connectors that don't offer this setting.  
+     * 
+     * @param maxConnectionsPerRoute the max connections per route
+     * @return Config
+     */
+    public Config withMaxConnectionsPerRoute(int maxConnectionsPerRoute) {
+        this.maxConnectionsPerRoute = maxConnectionsPerRoute;
+        return this;
+    }
     
     /**
      * If connecting to an OpenStack deployment is in front of a NAT or Proxy then this option can be provided to dynamically change
@@ -134,11 +159,21 @@ public final class Config {
         return natHostOrIP != null;
     }
     
+    public int getMaxConnections() {
+        return maxConnections;
+    }
+    
+    public int getMaxConnectionsPerRoute() {
+        return maxConnectionsPerRoute;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + connectTimeout;
+        result = prime * result + maxConnections;
+        result = prime * result + maxConnectionsPerRoute;
         result = prime * result + (ignoreSSLVerification ? 1231 : 1237);
         result = prime * result + ((natHostOrIP == null) ? 0 : natHostOrIP.hashCode());
         result = prime * result + readTimeout;
@@ -155,6 +190,10 @@ public final class Config {
             return false;
         Config other = (Config) obj;
         if (connectTimeout != other.connectTimeout)
+            return false;
+        if (maxConnections != other.maxConnections)
+            return false;
+        if (maxConnectionsPerRoute != other.maxConnectionsPerRoute)
             return false;
         if (ignoreSSLVerification != other.ignoreSSLVerification)
             return false;
