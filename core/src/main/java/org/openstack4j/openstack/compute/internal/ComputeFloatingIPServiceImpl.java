@@ -5,6 +5,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.compute.ComputeFloatingIPService;
+import org.openstack4j.core.transport.ExecutionOptions;
+import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.FloatingIP;
 import org.openstack4j.model.compute.Server;
@@ -43,7 +45,8 @@ public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements
      */
     @Override
     public FloatingIP allocateIP(String pool) {
-        return post(NovaFloatingIP.class, uri("/os-floating-ips")).entity(MapEntity.create("pool", pool)).execute();
+        return post(NovaFloatingIP.class, uri("/os-floating-ips")).entity(MapEntity.create("pool", pool))
+                .execute(ExecutionOptions.<NovaFloatingIP>create(PropagateOnStatus.on(404)));
     }
 
     /**
