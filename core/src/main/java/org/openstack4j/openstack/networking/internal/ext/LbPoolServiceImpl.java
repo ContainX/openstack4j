@@ -1,6 +1,8 @@
 
 package org.openstack4j.openstack.networking.internal.ext;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,12 +11,13 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.ext.HealthMonitor;
 import org.openstack4j.model.network.ext.HealthMonitorAssociate;
 import org.openstack4j.model.network.ext.LbPool;
+import org.openstack4j.model.network.ext.LbPoolStats;
 import org.openstack4j.model.network.ext.LbPoolUpdate;
-import static com.google.common.base.Preconditions.checkNotNull;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitor;
 import org.openstack4j.openstack.networking.domain.ext.NeutronLbPool;
 import org.openstack4j.openstack.networking.domain.ext.NeutronLbPool.LbPools;
+import org.openstack4j.openstack.networking.domain.ext.NeutronLbPoolStats;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
 /**
@@ -84,6 +87,15 @@ public class LbPoolServiceImpl extends BaseNetworkingServices implements
 		checkNotNull(lbPool);
 		return put(NeutronLbPool.class, uri("/lb/pools/%s", lbPoolId)).entity(
 				lbPool).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public LbPoolStats stats(String lbPoolId) {
+		checkNotNull(lbPoolId);
+		return get(NeutronLbPoolStats.class, uri("/lb/pools/%s/stats.json",lbPoolId)).execute();
 	}
 
 	/**
