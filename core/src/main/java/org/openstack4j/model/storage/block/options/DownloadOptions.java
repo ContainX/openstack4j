@@ -40,6 +40,20 @@ public class DownloadOptions {
     }
     
     /**
+     * Adds a user specified header name and value
+     * 
+     * @param name the header name
+     * @param value the header value
+     * @return DownloadOptions for method chaining
+     */
+    public DownloadOptions header(String name, Object value) {
+        if (name != null) {
+            headers.add(new HeaderNameValue(name, value));
+        }
+        return this;
+    }
+    
+    /**
      * Adds one or more If based conditions to the header chain to offer conditional matching 
      * before the data is streamed
      * 

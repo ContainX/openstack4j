@@ -62,6 +62,8 @@ public interface Server extends ModelEntity {
 		STOPPED, 
 		/** The virtual machine (VM) was powered down by the user, but not through the OpenStack Compute API. */
 		SHUTOFF, 
+		/** The server is currently being migrated */
+		MIGRATING,
 		/** OpenStack4j could not find a Status mapping for the current reported Status.  File an issue indicating the missing state */
 		UNRECOGNIZED;
 
