@@ -45,7 +45,7 @@ public interface RouterBuilder extends Builder<RouterBuilder, Router> {
 	/**
 	 * @see Router#getExternalGatewayInfo()
 	 */
-	RouterBuilder externalGateway(String networkId, boolean enableSNAT);
+	RouterBuilder externalGateway(String networkId, Boolean enableSNAT);
 	
 	/**
 	 * @see Router#getExternalGatewayInfo()

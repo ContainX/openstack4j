@@ -10,6 +10,7 @@ import org.openstack4j.model.network.State;
 import org.openstack4j.model.network.builder.RouterBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
@@ -114,6 +115,7 @@ public class NeutronRouter implements Router {
 	/**
 	 * {@inheritDoc}
 	 */
+	@JsonIgnore
 	@Override
 	public boolean isAdminStateUp() {
 		return (adminStateUp != null) ? adminStateUp : false;
@@ -187,14 +189,14 @@ public class NeutronRouter implements Router {
 		 */
 		@Override
 		public RouterBuilder externalGateway(String networkId) {
-			return externalGateway(networkId, Boolean.TRUE);
+			return externalGateway(networkId, null);
 		}
 
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
-		public RouterBuilder externalGateway(String networkId, boolean enableSNAT) {
+		public RouterBuilder externalGateway(String networkId, Boolean enableSNAT) {
 			m.externalGatewayInfo = new NeutronExternalGateway(networkId, enableSNAT);
 			return this;
 		}
