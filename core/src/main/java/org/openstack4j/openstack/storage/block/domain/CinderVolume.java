@@ -9,6 +9,7 @@ import org.openstack4j.model.storage.block.VolumeAttachment;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,6 +47,7 @@ public class CinderVolume implements Volume {
 	private String sourceVolid;
 	@JsonProperty("snapshot_id")
 	private String snapshotId;
+	@JsonProperty("metadata")
 	private Map<String, String> metadata;
 	@JsonProperty("bootable")
 	private Boolean bootable;
@@ -179,6 +181,7 @@ public class CinderVolume implements Volume {
 	/**
 	 * {@inheritDoc}
 	 */
+	@JsonIgnore
 	@Override
 	public Map<String, String> getMetaData() {
 		return metadata;
