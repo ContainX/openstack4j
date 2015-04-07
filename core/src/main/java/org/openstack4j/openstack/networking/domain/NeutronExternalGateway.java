@@ -30,7 +30,7 @@ public class NeutronExternalGateway implements ExternalGateway {
 	  this(networkId, Boolean.TRUE);
 	}
 	
-	public NeutronExternalGateway(String networkId, boolean enableSnat) {
+	public NeutronExternalGateway(String networkId, Boolean enableSnat) {
 		this.networkId = networkId;
 		this.enableSnat = enableSnat;
 	}
