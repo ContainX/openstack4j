@@ -34,8 +34,8 @@ public class ToActionResponseFunction implements Function<HttpResponse, ActionRe
             
             LOG.error(response.getStatus() + COMMA + response.getStatusMessage());
             if (action == null)
-                return ActionResponse.actionFailed("Instance currently is in build state");
-            return ActionResponse.actionFailed(String.format(FAILED_MSG, action, action));
+                return ActionResponse.actionFailed("Instance currently is in build state", 409);
+            return ActionResponse.actionFailed(String.format(FAILED_MSG, action, action), 409);
         }
         if (response.getStatus() >= 400 && response.getStatus() < 409) {
             return ResponseToActionResponse.INSTANCE.apply(response);

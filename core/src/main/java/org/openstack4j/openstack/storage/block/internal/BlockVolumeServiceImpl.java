@@ -89,7 +89,7 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
     public ActionResponse update(String volumeId, String name, String description) {
         checkNotNull(volumeId);
         if (name == null && description == null)
-            return ActionResponse.actionFailed("Name and Description are both required");
+            return ActionResponse.actionFailed("Name and Description are both required", 412);
 
         return put(ActionResponse.class, uri("/volumes/%s", volumeId))
                 .entity(Builders.volume().name(name).description(description).build())

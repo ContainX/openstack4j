@@ -152,7 +152,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         
         ServerAction instance = BasicActions.actionInstanceFor(action);
         if (instance == null)
-            return ActionResponse.actionFailed(String.format("Action %s was not found in the list of invokable actions", action));
+            return ActionResponse.actionFailed(String.format("Action %s was not found in the list of invokable actions", action), 412);
         
         return invokeAction(serverId, instance);
     }

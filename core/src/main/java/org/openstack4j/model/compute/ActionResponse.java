@@ -15,18 +15,31 @@ public class ActionResponse implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	String message;
+	int code;
 	
-	private ActionResponse() { }
-	private ActionResponse(String message) { 
+	private ActionResponse(int code) { 
+	    this.code = code;
+	}
+	private ActionResponse(String message, int code) { 
+	    this(code);
 		this.message = message;
 	}
 	
 	public static ActionResponse actionSuccess() {
-		return new ActionResponse();
+		return new ActionResponse(200);
 	}
 	
-	public static ActionResponse actionFailed(String message) {
-		return new ActionResponse(message);
+	public static ActionResponse actionFailed(String message, int code) {
+		return new ActionResponse(message, code);
+	}
+	
+	/**
+	 * Returns the underlying error code (status code)
+	 * 
+	 * @return the error code
+	 */
+	public int getCode() {
+	    return code;
 	}
 	
 	/**
@@ -44,7 +57,7 @@ public class ActionResponse implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues().add("success", message == null).add("fault", message).toString();
+		return Objects.toStringHelper(this).omitNullValues().add("success", message == null).add("fault", message).add("code", code).toString();
 	}
 	
 }

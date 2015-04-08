@@ -51,7 +51,7 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 	public ActionResponse update(String snapshotId, String name, String description) {
 		checkNotNull(snapshotId);
 		if (name == null && description == null) 
-		    return ActionResponse.actionFailed("Both Name and Description are required");
+		    return ActionResponse.actionFailed("Both Name and Description are required", 412);
 		
 		return put(ActionResponse.class, uri("/snapshots/%s", snapshotId))
     		   .entity(Builders.volumeSnapshot().name(name).description(description).build())

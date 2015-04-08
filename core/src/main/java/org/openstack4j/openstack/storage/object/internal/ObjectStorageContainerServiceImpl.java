@@ -101,7 +101,7 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
         checkNotNull(name);
         HttpResponse resp = delete(Void.class, URI_SEP, name).executeWithResponse();
         if (resp.getStatus() == 409)
-            return ActionResponse.actionFailed(String.format("Container %s is not empty", name));
+            return ActionResponse.actionFailed(String.format("Container %s is not empty", name), 409);
         
         return ToActionResponseFunction.INSTANCE.apply(resp);
     }

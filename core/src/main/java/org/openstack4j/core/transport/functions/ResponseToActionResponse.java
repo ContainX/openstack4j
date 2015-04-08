@@ -24,13 +24,13 @@ public class ResponseToActionResponse implements Function<HttpResponse, ActionRe
     public ActionResponse apply(HttpResponse response, boolean returnNullIfNotMapped) {
         @SuppressWarnings("unchecked")
         Map<String, Object> map = response.readEntity(Map.class);
-        ActionResponse ar = ParseActionResponseFromJsonMap.INSTANCE.apply(map);
+        ActionResponse ar = new ParseActionResponseFromJsonMap(response).apply(map);
         if (ar != null)
             return ar;
 
         if (ar == null && returnNullIfNotMapped)
             return null;
         
-        return ActionResponse.actionFailed(String.format("Status: %d, Reason: %s", response.getStatus(), response.getStatusMessage())); 
+        return ActionResponse.actionFailed(String.format("Status: %d, Reason: %s", response.getStatus(), response.getStatusMessage()), response.getStatus()); 
     }
 }
