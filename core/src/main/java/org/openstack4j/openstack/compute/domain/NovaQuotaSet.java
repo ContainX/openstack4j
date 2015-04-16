@@ -173,4 +173,9 @@ public class NovaQuotaSet implements QuotaSet {
 				     .add("injectedFilePathBytes", injectedFilePathBytes).add("keyPairs", keyPairs)
 				     .toString();
 	}
+
+	@JsonRootName("quota_class_set")
+	public static class NovaQuotaSetClass extends NovaQuotaSet {
+        private static final long serialVersionUID = 1L;
+	}
 }

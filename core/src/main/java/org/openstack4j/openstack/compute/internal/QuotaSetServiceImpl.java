@@ -11,6 +11,7 @@ import org.openstack4j.model.compute.QuotaSetUpdate;
 import org.openstack4j.model.compute.SimpleTenantUsage;
 import org.openstack4j.openstack.compute.domain.NovaLimits;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSet;
+import org.openstack4j.openstack.compute.domain.NovaQuotaSet.NovaQuotaSetClass;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate.NovaQuotaSetUpdateClass;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate.NovaQuotaSetUpdateTenant;
 import org.openstack4j.openstack.compute.domain.NovaSimpleTenantUsage;
@@ -49,7 +50,7 @@ public class QuotaSetServiceImpl extends BaseComputeServices implements QuotaSet
         checkNotNull(classId);
         checkNotNull(qs);
 
-        return put(NovaQuotaSet.class, uri("/os-quota-class-sets/%s", classId)).entity(NovaQuotaSetUpdateClass.from(qs)).execute();
+        return put(NovaQuotaSetClass.class, uri("/os-quota-class-sets/%s", classId)).entity(NovaQuotaSetUpdateClass.from(qs)).execute();
     }
 
     /**
