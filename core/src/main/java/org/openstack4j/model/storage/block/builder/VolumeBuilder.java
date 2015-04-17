@@ -83,4 +83,13 @@ public interface VolumeBuilder extends Builder<VolumeBuilder, Volume> {
 	 * @return VolumeBuilder
 	 */
 	VolumeBuilder metadata(Map<String, String> metadata);
+	
+	/**
+     * The associated availability zone. <b>Optional</b>
+     * 
+     * @param zone The associated availability zone.
+     * @return VolumeBuilder
+     */
+    VolumeBuilder zone(String zone);
+	
 }

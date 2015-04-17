@@ -298,5 +298,11 @@ public class CinderVolume implements Volume {
 			m = (CinderVolume) in;
 			return this;
 		}
+
+        @Override
+        public VolumeBuilder zone(String zone) {
+            m.zone = zone;
+            return this;
+        }
 	}
 }
