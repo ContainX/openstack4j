@@ -1,6 +1,28 @@
 # Change Log
 
-### 2.0.2 (Latest Release / Stable)
+### 2.0.3 (Latest Release / Stable)
+
+##### Enhancements/Improvements
+
+* Issue #322 - Add MIGRATING to the Server Status Enumeration
+* Issue #321 - Option to add headers in requests, esp. 'X-newest' in GET requests in swift
+* Issue #316 - Expose error code in ActionResponse
+* Issue #308 - Add PENDING_CREATE to Neutron Network State Enumeration
+* Issue #294 - NetQuota : updateForTenant support request
+* Issue #272 - Quota-Set for Block Storage 
+* Issue #267 - Configuring connection pooling feature for underlying client connectors
+
+##### Fixes
+
+* Issue #326 - BlockStorageVolumeBuilder : allow availability_zone to be set
+* Issue #329 - Update default quotaSet shows exception
+* Issue #325 - Volumes metadata is not set due to wrong parameter name sent from OS4j 
+* Issue #323 - Setting external gateway to router in api returns not authorized, but the same is allowed via CLI
+* Issue #307 - Unable to catch assign floating IP error
+* Issue #295 - Exception while updating quota for tenant
+* Issue #292 - CreatePort command not working properly
+
+### 2.0.2
 
 ##### Enhancements/Improvements
 
