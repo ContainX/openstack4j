@@ -38,14 +38,14 @@ public interface SecurityGroupRule extends ModelEntity, Buildable<NetSecurityGro
    *
    * @return the port range max
    */
-  int getPortRangeMax();
+  Integer getPortRangeMax();
   
   /**
    * Gets the port range min.
    *
    * @return the port range min
    */
-  int getPortRangeMin();
+  Integer getPortRangeMin();
   
   /**
    * Gets the protocol.
