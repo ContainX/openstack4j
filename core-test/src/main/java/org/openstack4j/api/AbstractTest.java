@@ -35,6 +35,7 @@ public abstract class AbstractTest {
         IDENTITY(5000),
         NETWORK(9696),
         COMPUTE(8774),
+        BLOCK_STORAGE(8776),
         METERING(8087),
         TELEMETRY(8087),
         OBJECT_STORAGE(8800);

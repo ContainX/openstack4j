@@ -1,6 +1,7 @@
 package org.openstack4j.api.storage;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
@@ -16,84 +17,92 @@ import org.openstack4j.model.storage.block.options.UploadImageData;
  */
 public interface BlockVolumeService extends RestService {
 
-	/**
-	 *  The volume type defines the characteristics of a volume
-	 *  
-	 * @return List of VolumeType entities
-	 */
-	List<? extends VolumeType> listVolumeTypes();
+    /**
+     *  The volume type defines the characteristics of a volume
+     *  
+     * @return List of VolumeType entities
+     */
+    List<? extends VolumeType> listVolumeTypes();
 
-	/**
-	 * Lists summary information for all Block Storage volumes that the tenant who submits the request can access.
-	 * 
-	 * @return List of Volumes
-	 */
-	List<? extends Volume> list();
-	
-	/**
-	 * Gets a Block Storage volume by ID
-	 * @param volumeId the volume identifier
-	 * @return the volume or null if not found
-	 */
-	Volume get(String volumeId);
-	
-	/**
-	 * Deletes the specified volume
-	 * 
-	 * @param volumeId the volume identifier
-	 * @return the action response
-	 */
-	ActionResponse delete(String volumeId);
+    /**
+     * Lists summary information for all Block Storage volumes that the tenant who submits the request can access.
+     * 
+     * @return List of Volumes
+     */
+    List<? extends Volume> list();
+        
+    /**
+     * Returns list of Block Storage volumes filtered by parameters.
+     * 
+     * @param filteringParams map (name, value) of filtering parameters
+     * @return 
+    */
+    List<? extends Volume> list(Map<String, String> filteringParams);
+    
+    /**
+     * Gets a Block Storage volume by ID
+     * @param volumeId the volume identifier
+     * @return the volume or null if not found
+     */
+    Volume get(String volumeId);
+    
+    /**
+     * Deletes the specified volume
+     * 
+     * @param volumeId the volume identifier
+     * @return the action response
+     */
+    ActionResponse delete(String volumeId);
 
-	/**
-	 * Attempt forced removal of volume, regardless of the state.
-	 * It's dangerous but useful. It's not 100% success.
-	 * 
-	 * @param volumeId the volume id
-	 * @return the action response
-	 */
-	ActionResponse forceDelete(String volumeId);
+    /**
+     * Attempt forced removal of volume, regardless of the state.
+     * It's dangerous but useful. It's not 100% success.
+     * 
+     * @param volumeId the volume id
+     * @return the action response
+     */
+    ActionResponse forceDelete(String volumeId);
 
-	/**
-	 * Creates a new Block Storage Volume
-	 * @param volume the volume for create
-	 * @return the created volume
-	 */
-	Volume create(Volume volume);
-	
-	/**
-	 * Uploads a volume to the image service
-	 * 
-	 * @param volumeId the volume identifier to upload
-	 * @param data the data about the volume being uploaded (required)
-	 * @return the volume upload image containing the current status
-	 */
-	VolumeUploadImage uploadToImage(String volumeId, UploadImageData data);
-	
-	/**
-	 * OpenStack only allows name or description to be updated. This call enforces that based on the API docs.
-	 * 
-	 * @param volumeId the volume id
-	 * @param name the name to update (null indicates no name update)
-	 * @param description the description to update (null indicates no description update)
-	 * @return the action response
-	 */
-	ActionResponse update(String volumeId, String name, String description);
+    /**
+     * Creates a new Block Storage Volume
+     * @param volume the volume for create
+     * @return the created volume
+     */
+    Volume create(Volume volume);
+    
+    /**
+     * Uploads a volume to the image service
+     * 
+     * @param volumeId the volume identifier to upload
+     * @param data the data about the volume being uploaded (required)
+     * @return the volume upload image containing the current status
+     */
+    VolumeUploadImage uploadToImage(String volumeId, UploadImageData data);
+    
+    /**
+     * OpenStack only allows name or description to be updated. This call enforces that based on the API docs.
+     * 
+     * @param volumeId the volume id
+     * @param name the name to update (null indicates no name update)
+     * @param description the description to update (null indicates no description update)
+     * @return the action response
+     */
+    ActionResponse update(String volumeId, String name, String description);
 
-	/**
-	 * migrate a volume to another host and service
-	 *
-	 * @param volumeId the volume id
-	 * @param forceHostCopy
-	 * @param hostService the destination host and service ,like kvmnode002021.cnsuning.com@lvmdriver
-	 * @return the action response
-	 */
-	ActionResponse migrate(String volumeId, String hostService, boolean forceHostCopy);
-	
-	/**
-	 * Returns the API used to transfer a Volume from one tenant/project to another
-	 * 
-	 * @return the volume transfer service
-	 */
-	BlockVolumeTransferService transfer();
+    /**
+     * migrate a volume to another host and service
+     *
+     * @param volumeId the volume id
+     * @param forceHostCopy
+     * @param hostService the destination host and service ,like kvmnode002021.cnsuning.com@lvmdriver
+     * @return the action response
+     */
+    ActionResponse migrate(String volumeId, String hostService, boolean forceHostCopy);
+    
+    /**
+     * Returns the API used to transfer a Volume from one tenant/project to another
+     * 
+     * @return the volume transfer service
+     */
+    BlockVolumeTransferService transfer();
 }
