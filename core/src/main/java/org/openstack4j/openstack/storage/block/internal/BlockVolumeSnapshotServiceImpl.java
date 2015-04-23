@@ -3,6 +3,7 @@ package org.openstack4j.openstack.storage.block.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
@@ -24,6 +25,15 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 	@Override
 	public List<? extends VolumeSnapshot> list() {
 		return get(VolumeSnapshots.class, uri("/snapshots")).execute().getList();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends VolumeSnapshot> list(Map<String, String> filteringParams) {
+		Invocation<VolumeSnapshots> volumeInvocation = buildInvocation(filteringParams);
+		return volumeInvocation.execute().getList();
 	}
 
 	/**
@@ -66,6 +76,18 @@ public class BlockVolumeSnapshotServiceImpl extends BaseBlockStorageServices imp
 		checkNotNull(snapshot);
 		checkNotNull(snapshot.getVolumeId());
 		return post(CinderVolumeSnapshot.class, uri("/snapshots")).entity(snapshot).execute();
+	}
+
+	private Invocation<VolumeSnapshots> buildInvocation(Map<String, String> filteringParams) {
+		Invocation<VolumeSnapshots> volumeInvocation = get(VolumeSnapshots.class, "/snapshots");
+		if (filteringParams == null) {
+			return volumeInvocation;
+		} else {
+			for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+				volumeInvocation = volumeInvocation.param(entry.getKey(), entry.getValue());
+			}
+		}
+		return volumeInvocation;
 	}
 
 }

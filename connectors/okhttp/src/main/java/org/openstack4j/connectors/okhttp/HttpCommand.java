@@ -166,6 +166,9 @@ public final class HttpCommand<R> {
                 }
             }
         }
+        if (url.charAt(url.length() - 1) == '&') {
+            url.deleteCharAt(url.length() - 1);
+        }
         clientReq.url(url.toString());
     }
 
