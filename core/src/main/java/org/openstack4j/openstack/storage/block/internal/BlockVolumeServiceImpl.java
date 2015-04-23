@@ -3,6 +3,7 @@ package org.openstack4j.openstack.storage.block.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.Builders;
@@ -42,6 +43,15 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
     @Override
     public List<? extends Volume> list() {
         return get(Volumes.class, uri("/volumes/detail")).execute().getList();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends Volume> list(Map<String, String> filteringParams) {
+        Invocation<Volumes> volumeInvocation = buildInvocation(filteringParams);
+        return volumeInvocation.execute().getList();
     }
 
     /**
@@ -117,6 +127,18 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
     @Override
     public BlockVolumeTransferService transfer() {
         return Apis.get(BlockVolumeTransferService.class);
+    }
+
+    private Invocation<Volumes> buildInvocation(Map<String, String> filteringParams) {
+        Invocation<Volumes> volumeInvocation = get(Volumes.class, "/volumes/detail");
+        if (filteringParams == null) {
+            return volumeInvocation;
+        } else {
+            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+                volumeInvocation = volumeInvocation.param(entry.getKey(), entry.getValue());
+            }
+        }
+        return volumeInvocation;
     }
 
 }

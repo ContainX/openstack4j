@@ -5,6 +5,7 @@ import java.util.List;
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.telemetry.Alarm;
 import org.openstack4j.model.telemetry.Alarm.Type;
+import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm.CeilometerCombinationRule;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm.CeilometerThresholdRule;
 
 /**
@@ -24,6 +25,8 @@ public interface AlarmBuilder extends Builder<AlarmBuilder, Alarm>{
 	AlarmBuilder type(Type type);
 	
 	AlarmBuilder thresholeRule(CeilometerThresholdRule te);
+	
+	AlarmBuilder combinationRule(CeilometerCombinationRule ce);
 	
 	AlarmBuilder repeatActions(boolean repeatActions);
 	

@@ -1,6 +1,7 @@
 package org.openstack4j.api.storage;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
@@ -19,7 +20,15 @@ public interface BlockVolumeSnapshotService extends RestService {
 	 * @return List of VolumeSnapshot
 	 */
 	List<? extends VolumeSnapshot> list();
-	
+
+	/**
+	 * Returns list of Block Storage snapshots filtered by parameters.
+	 * 
+	 * @param filteringParams map (name, value) of filtering parameters
+	 * @return 
+	 */
+	List<? extends VolumeSnapshot> list(Map<String, String> filteringParams);
+
 	/**
 	 * Shows information for a specified snapshot.
 	 *

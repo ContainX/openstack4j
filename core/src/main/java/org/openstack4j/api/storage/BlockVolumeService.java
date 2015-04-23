@@ -1,6 +1,7 @@
 package org.openstack4j.api.storage;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
@@ -29,7 +30,15 @@ public interface BlockVolumeService extends RestService {
 	 * @return List of Volumes
 	 */
 	List<? extends Volume> list();
-	
+
+	/**
+	 * Returns list of Block Storage volumes filtered by parameters.
+	 * 
+	 * @param filteringParams map (name, value) of filtering parameters
+	 * @return 
+	*/
+	List<? extends Volume> list(Map<String, String> filteringParams);
+
 	/**
 	 * Gets a Block Storage volume by ID
 	 * @param volumeId the volume identifier

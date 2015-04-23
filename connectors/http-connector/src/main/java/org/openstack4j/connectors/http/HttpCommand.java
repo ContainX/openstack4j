@@ -162,6 +162,9 @@ public final class HttpCommand<R> {
 				}
 			}
 		}
+		if (url.charAt(url.length() - 1) == '&') {
+			url.deleteCharAt(url.length() - 1);
+		}
 		connectionUrl = new URL(url.toString());
 	}
 
