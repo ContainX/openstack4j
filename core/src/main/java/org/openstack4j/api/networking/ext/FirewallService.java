@@ -9,7 +9,19 @@ import org.openstack4j.model.network.ext.Firewall;
 import org.openstack4j.model.network.ext.FirewallUpdate;
 
 /**
- * Networking (Neutron) FwaaS Firewall Extension API
+ * <p>Networking (Neutron) FwaaS Firewall Extension API.</p>
+ * 
+ * <p>Represents a logical firewall resource that a tenant can instantiate and manage. A firewall is associated with one firewall policy.</p>
+ * 
+ * <p>
+	 * The FWaaS extension provides OpenStack users with the ability to deploy firewalls to protect their networks. The FWaaS extension enables you to:
+	 * <ul>
+	 * 		<li>Apply firewall rules on traffic entering and leaving tenant networks.</li>
+	 * 		<li>Support for applying tcp, udp, icmp, or protocol agnostic rules.</li>
+	 * 		<li>Creation and sharing of firewall policies which hold an ordered collection of the firewall rules.</li>
+	 * 		<li>Audit firewall rules and policies.</li>
+	 * </ul>
+ * </p>
  * 
  * @author Vishvesh Deshmukh
  */

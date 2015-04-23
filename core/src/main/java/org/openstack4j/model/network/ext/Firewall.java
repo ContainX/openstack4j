@@ -7,7 +7,9 @@ import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall.FirewallStatus;
 
 /**
- * Represents Firewall of FwaaS
+ * <p>Networking (Neutron) FwaaS Firewall Extension API.</p>
+ * 
+ * <p>Represents a logical firewall resource that a tenant can instantiate and manage. A firewall is associated with one firewall policy.</p>
  * 
  * @author Vishvesh Deshmukh
  */
