@@ -32,6 +32,8 @@ import org.openstack4j.model.network.builder.NetworkUpdateBuilder;
 import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.model.network.builder.RouterBuilder;
 import org.openstack4j.model.network.builder.SubnetBuilder;
+import org.openstack4j.model.network.ext.builder.FirewallBuilder;
+import org.openstack4j.model.network.ext.builder.FirewallUpdateBuilder;
 import org.openstack4j.model.network.ext.builder.HealthMonitorAssociateBuilder;
 import org.openstack4j.model.network.ext.builder.HealthMonitorBuilder;
 import org.openstack4j.model.network.ext.builder.HealthMonitorUpdateBuilder;
@@ -79,6 +81,8 @@ import org.openstack4j.openstack.networking.domain.NeutronRouter;
 import org.openstack4j.openstack.networking.domain.NeutronSecurityGroup;
 import org.openstack4j.openstack.networking.domain.NeutronSecurityGroupRule;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
+import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall;
+import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallUpdate;
 import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitor;
 import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorAssociate;
 import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorUpdate;
@@ -395,6 +399,21 @@ public class Builders {
      */
     public static HealthMonitorUpdateBuilder healthMonitorUpdate(){
     	return NeutronHealthMonitorUpdate.builder();
+    }
+    
+    /**
+     * The builder to create a firewall
+     * @return FirewallBuilder
+     */
+    public static FirewallBuilder firewall() {
+    	return NeutronFirewall.builder();
+    }
+    /**
+     * The builder to update a healthMonitor
+     * @return FirewallUpdateBuilder
+     */
+    public static FirewallUpdateBuilder firewallUpdate() {
+    	return NeutronFirewallUpdate.builder();
     }
     
     /**
