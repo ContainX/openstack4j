@@ -51,6 +51,8 @@ public interface Alarm extends ModelEntity,BasicResource, Buildable<AlarmBuilder
 	
 	ThresholdRule getThresholdRule();
 	
+	CombinationRule getCombinationRule();
+	
 	String getTimestamp();
 	
 	/**
@@ -67,7 +69,7 @@ public interface Alarm extends ModelEntity,BasicResource, Buildable<AlarmBuilder
 	 * The Alarm Type
 	 */
 	public enum Type {
-		THRESHOLD, UNRECOGNIZED;
+		THRESHOLD, COMBINATION, UNRECOGNIZED;
 
 		@JsonValue
 		public String value() {
@@ -85,6 +87,37 @@ public interface Alarm extends ModelEntity,BasicResource, Buildable<AlarmBuilder
 				return valueOf(type.toUpperCase());
 			} catch (IllegalArgumentException e) {
 				return UNRECOGNIZED;
+			}
+		}
+	}
+	
+	public interface CombinationRule{
+		List<String> getAlarmIds();
+		Operator getOperator();
+		
+		void setAlarmIds(List<String> alarmIds);
+		void setOperator(Operator operator);
+		
+		public enum Operator {
+			AND, OR, UNRECOGNIZED;
+
+			@JsonValue
+			public String value() {
+				return this.name().toLowerCase();
+			}
+
+			@Override
+			public String toString() {
+				return value();
+			}
+
+			@JsonCreator
+			public static Operator fromValue(String operator) {
+				try {
+					return valueOf(operator.toUpperCase());
+				} catch (IllegalArgumentException e) {
+					return UNRECOGNIZED;
+				}
 			}
 		}
 	}

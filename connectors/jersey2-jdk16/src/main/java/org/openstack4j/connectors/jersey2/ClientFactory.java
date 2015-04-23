@@ -54,6 +54,7 @@ class ClientFactory {
 
     private static Client buildClientFromConfig(Config config) {
         ClientBuilder cb = ClientBuilder.newBuilder()
+        					.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, "true")
                             .register(RESOLVER)
                             .register(new RequestFilter());
 

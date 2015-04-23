@@ -40,16 +40,11 @@ public class CeilometerAlarm implements Alarm {
 
 
 	@JsonProperty("alarm_actions")
-	private List<String>alarmActions;
+	private List<String> alarmActions;
 
 
 	@JsonProperty("alarm_id")
 	private String alarmId;
-
-
-	//@JsonProperty("combination_rule")
-	//private String combinationRule;
-
 
 	@JsonProperty("description")
 	private String description;
@@ -81,6 +76,9 @@ public class CeilometerAlarm implements Alarm {
 
 	@JsonProperty("threshold_rule")
 	private CeilometerThresholdRule thresholdRule;
+	
+	@JsonProperty("combination_rule")
+	private CeilometerCombinationRule combinationRule;
 
 
 	@JsonProperty("timestamp")
@@ -141,14 +139,6 @@ public class CeilometerAlarm implements Alarm {
 		return alarmId;
 	}
 
-	/*
-	@Override
-	public String getCombinationRule() {
-		return combinationRule;
-	}
-	*/
-	
-
 	@Override
 	public String getDescription() {
 		return description;
@@ -199,11 +189,46 @@ public class CeilometerAlarm implements Alarm {
 	public ThresholdRule getThresholdRule() {
 		return thresholdRule;
 	}
+	
+	@Override
+	public CombinationRule getCombinationRule() {
+		return combinationRule;
+	}
 
 
 	@Override
 	public String getTimestamp() {
 		return timestamp;
+	}
+	
+	public static class CeilometerCombinationRule implements CombinationRule {
+		
+		@JsonProperty("alarm_ids")
+		List<String> alarmIds;
+		
+		@JsonProperty("operator")
+		Operator operator;
+		
+		@Override
+		public List<String> getAlarmIds() {
+			return alarmIds;
+		}
+
+		@Override
+		public Operator getOperator() {
+			return operator;
+		}
+
+		@Override
+		public void setAlarmIds(List<String> alarmIds) {
+			this.alarmIds = alarmIds;
+		}
+
+		@Override
+		public void setOperator(Operator operator) {
+			this.operator = operator;
+		}
+		
 	}
 	
 	public static class CeilometerThresholdRule implements ThresholdRule{
@@ -425,8 +450,7 @@ public class CeilometerAlarm implements Alarm {
 
 	@Override
 	public AlarmBuilder toBuilder() {
-		// TODO Auto-generated method stub
-		return null;
+		return new AlarmConcreteBuilder(this);
 	}
 	
 	public static class AlarmConcreteBuilder extends BasicResourceBuilder<Alarm, AlarmConcreteBuilder> implements AlarmBuilder {
@@ -441,7 +465,6 @@ public class CeilometerAlarm implements Alarm {
 			this.m = m;
 		}
 
-		
 		@Override
 		public Alarm build() {
 			return m;
@@ -497,6 +520,12 @@ public class CeilometerAlarm implements Alarm {
 		@Override
 		public AlarmBuilder isEnabled(boolean isEnabled) {
 			this.m.isEnabled = isEnabled;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder combinationRule(CeilometerCombinationRule ce) {
+			this.m.combinationRule = ce;
 			return this;
 		}
 
