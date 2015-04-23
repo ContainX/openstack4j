@@ -41,6 +41,8 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.FirewallAsService;
+import org.openstack4j.api.networking.ext.FirewallService;
 import org.openstack4j.api.networking.ext.HealthMonitorService;
 import org.openstack4j.api.networking.ext.LbPoolService;
 import org.openstack4j.api.networking.ext.LoadBalancerService;
@@ -50,8 +52,8 @@ import org.openstack4j.api.networking.ext.VipService;
 import org.openstack4j.api.sahara.ClusterService;
 import org.openstack4j.api.sahara.ClusterTemplateService;
 import org.openstack4j.api.sahara.NodeGroupTemplateService;
-import org.openstack4j.api.sahara.SaharaPluginService;
 import org.openstack4j.api.sahara.SaharaImageService;
+import org.openstack4j.api.sahara.SaharaPluginService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockQuotaSetService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -102,6 +104,8 @@ import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.FirewallAsServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.FirewallServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.HealthMonitorServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LbPoolServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LoadBalancerServiceImpl;
@@ -205,6 +209,8 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ClusterTemplateService.class,ClusterTemplateServiceImpl.class);
 		bind(NodeGroupTemplateService.class,NodeGroupTemplateServiceImpl.class);
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
+		bind(FirewallAsService.class, FirewallAsServiceImpl.class);
+		bind(FirewallService.class, FirewallServiceImpl.class);
 	}
 
 	/**
