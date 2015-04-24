@@ -2,7 +2,6 @@ package org.openstack4j.openstack.networking.domain.ext;
 
 import java.util.List;
 
-import org.openstack4j.model.network.State;
 import org.openstack4j.model.network.ext.Firewall;
 import org.openstack4j.model.network.ext.builder.FirewallBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -14,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
- * A Neutron Firewall (FwaaS) Entity.
+ * A Neutron Firewall (FwaaS) : Firewall Entity.
  * 
  * @author Vishvesh Deshmukh
  */
@@ -42,15 +41,15 @@ public class NeutronFirewall implements Firewall {
 		UNRECOGNIZED;
 		  
 		@JsonCreator
-		public static State forValue(String value) {
+		public static FirewallStatus forValue(String value) {
 			if (value != null)
 			{
-				for (State s : State.values()) {
+				for (FirewallStatus s : FirewallStatus.values()) {
 					if (s.name().equalsIgnoreCase(value))
 						return s;
 				}
 			}
-			return State.UNRECOGNIZED;
+			return FirewallStatus.UNRECOGNIZED;
 		}
 	}
 	

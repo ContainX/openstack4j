@@ -1,0 +1,19 @@
+{
+    "firewall_rule": {
+        "action": "allow",
+        "description": "Sample-Firewall-Rule",
+        "destination_ip_address": "2.2.2.0/24",
+        "destination_port": "80",
+        "enabled": true,
+        "firewall_policy_id": "c69933c1-b472-44f9-8226-30dc4ffd454c",
+        "id": "8722e0e0-9cc9-4490-9660-8c9a5732fbb0",
+        "ip_version": 4,
+        "name": "ALLOW_HTTP",
+        "position": 1,
+        "protocol": "tcp",
+        "shared": false,
+        "source_ip_address": "1.1.1.0/24",
+        "source_port": "20",
+        "tenant_id": "45977fa2dbd7482098dd68d0d8970117"
+    }
+}

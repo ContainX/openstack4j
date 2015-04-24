@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
-import org.openstack4j.model.network.ext.Firewall;
-import org.openstack4j.model.network.ext.FirewallUpdate;
+import org.openstack4j.model.network.ext.FirewallRule;
+import org.openstack4j.model.network.ext.FirewallRuleUpdate;
 
 /**
- * <p>Networking (Neutron) FwaaS Firewall Rule Extension API</p>
+ * <p>Networking (Neutron) FwaaS FirewallRule Rule Extension API</p>
  * 
  * <p>Represents a collection of attributes like ports, ip addresses which define match 
  * 		criteria and action (allow, or deny) that needs to be taken on the matched data traffic.</p>
@@ -17,10 +17,10 @@ import org.openstack4j.model.network.ext.FirewallUpdate;
  * <p>
 	 * The FWaaS extension provides OpenStack users with the ability to deploy firewalls to protect their networks. The FWaaS extension enables you to:
 	 * <ul>
-	 * 		<li>Apply firewall rules on traffic entering and leaving tenant networks.</li>
+	 * 		<li>Apply FirewallRule rules on traffic entering and leaving tenant networks.</li>
 	 * 		<li>Support for applying tcp, udp, icmp, or protocol agnostic rules.</li>
-	 * 		<li>Creation and sharing of firewall policies which hold an ordered collection of the firewall rules.</li>
-	 * 		<li>Audit firewall rules and policies.</li>
+	 * 		<li>Creation and sharing of FirewallRule policies which hold an ordered collection of the FirewallRule rules.</li>
+	 * 		<li>Audit FirewallRule rules and policies.</li>
 	 * </ul>
  * </p>
  * 
@@ -28,47 +28,47 @@ import org.openstack4j.model.network.ext.FirewallUpdate;
  */
 public interface FirewallRuleService extends RestService {
     /**
-     * List all Firewall(s) that the current tenant has access to.
+     * List all FirewallRules(s) that the current tenant has access to.
      *
-     * @return list of all Firewall(s)
+     * @return list of all FirewallRules(s)
      */
-    List<? extends Firewall> list();
+    List<? extends FirewallRule> list();
 
     /**
-     * Returns list of Firewall(s) filtered by parameters.
+     * Returns list of FirewallRules(s) filtered by parameters.
      * 
      * @param filteringParams map (name, value) of filtering parameters
-     * @return filtered list of Firewall(s)
+     * @return filtered list of FirewallRules(s)
      */
-    List<? extends Firewall> list(Map<String, String> filteringParams);
+    List<? extends FirewallRule> list(Map<String, String> filteringParams);
 
     /**
-     * Get the specified Firewall by ID
+     * Get the specified FirewallRule by ID
      *
-     * @param firewallId the Firewall identifier
-     * @return the Firewall or null if not found
+     * @param firewallRuleId the FirewallRule identifier
+     * @return the FirewallRule or null if not found
      */
-    Firewall get(String firewallId);
+    FirewallRule get(String firewallRuleId);
     
     /**
-     * Delete the specified Firewall by ID
-     * @param firewallId the Firewall identifier
+     * Delete the specified FirewallRule by ID
+     * @param firewallRuleId the FirewallRule identifier
      * @return the action response
      */
-    ActionResponse delete(String firewallId);
+    ActionResponse delete(String firewallRuleId);
     
     /**
-     * Create a Firewall
-     * @param firewall 
-     * @return Firewall
+     * Create a FirewallRule
+     * @param firewallRule
+     * @return FirewallRule
      */
-    Firewall create(Firewall firewall);
+    FirewallRule create(FirewallRule firewallRule);
     
     /**
-     * Update a Firewall
-     * @param firewallId the Firewall identifier
-     * @param firewallUpdate FirewallUpdate
-     * @return Firewall
+     * Update a FirewallRule
+     * @param firewallRuleId the FirewallRule identifier
+     * @param firewallRuleUpdate firewallRuleUpdate
+     * @return FirewallRule
      */
-    Firewall update(String firewallId, FirewallUpdate firewallUpdate);
+    FirewallRule update(String firewallRuleId, FirewallRuleUpdate firewallRuleUpdate);
 }

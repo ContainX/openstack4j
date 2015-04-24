@@ -4,7 +4,6 @@ import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.network.ext.builder.FirewallBuilder;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall.FirewallStatus;
 
 /**
  * <p>Networking (Neutron) FwaaS Firewall Extension API.</p>
@@ -54,7 +53,7 @@ public interface Firewall extends ModelEntity, Buildable<FirewallBuilder> {
 	public Boolean isShared();
 
 	/**
-	 * @see FirewallStatus
+	 * @see NeutronFirewall.FirewallStatus
 	 * 
 	 * @return status The status of the health monitor. Indicates whether the
 	 *         health monitor is operational.

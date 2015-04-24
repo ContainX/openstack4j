@@ -3,22 +3,18 @@ package org.openstack4j.model.network.ext;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.network.IPVersionType;
-import org.openstack4j.model.network.ext.builder.FirewallRuleBuilder;
+import org.openstack4j.model.network.ext.builder.FirewallRuleUpdateBuilder;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallRule;
 
 /**
- * <p>Networking (Neutron) FwaaS Firewall Rule Extension API</p>
+ * <p>A Builder to Update Firewall Rule of FwaaS</p>
  * 
  * <p>Represents a collection of attributes like ports, ip addresses which define match 
  * 		criteria and action (allow, or deny) that needs to be taken on the matched data traffic.</p>
  * 
  * @author Vishvesh Deshmukh
  */
-public interface FirewallRule extends ModelEntity, Buildable<FirewallRuleBuilder> {
-	/**
-	 * @return id : Unique identifier for the firewall rule object.
-	 */
-	public String getId();
+public interface FirewallRuleUpdate extends ModelEntity, Buildable<FirewallRuleUpdateBuilder> {
 	
 	/**
 	 * @return name : Human readable name for the firewall rule (255 characters limit). Does not have to be unique.
@@ -35,14 +31,6 @@ public interface FirewallRule extends ModelEntity, Buildable<FirewallRuleBuilder
 	 * @return description : Human readable description for the firewall rule (1024 characters limit).
 	 */
 	public String getDescription();
-	
-	/**
-	 * @return policyid : This is a <strong>read-only</strong> attribute which gets populated with the uuid of the firewall policy when this 
-	 * 		firewall rule is associated with a firewall policy. A firewall rule can be associated with one firewall policy at a time. 
-	 * 		The association can however be updated to a different firewall policy. This attribute can be <code>null</code> if the rule is not 
-	 * 		associated with any firewall policy.
-	 */
-	public String getPolicy();
 	
 	/**
 	 * @return shared : When set to True makes this firewall rule visible to tenants other than its owner, 
@@ -84,13 +72,6 @@ public interface FirewallRule extends ModelEntity, Buildable<FirewallRuleBuilder
 	 * 							 In the case of port range, both ends of the range are included.
 	 */
 	public String getDestinationPort();
-	
-	/**
-	 * @return position : This is a <strong>read-only</strong> attribute that gets assigned to this rule when the rule is associated with a firewall policy. 
-	 * 				It indicates the position of this rule in that firewall policy. This position number starts at 1. 
-	 * 				The position can be <code>null</code> if the firewall rule is not associated with any policy.
-	 */
-	public Integer getPosition();
 	
 	/**
 	 * @see NeutronFirewallRule.FirewallRuleAction
