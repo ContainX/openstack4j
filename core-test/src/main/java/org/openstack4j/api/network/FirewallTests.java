@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 import com.google.common.base.Preconditions;
 
 /**
- * Test suite for Firewall As a Service (FwaaS)
+ * Test suite for Firewall As a Service : Firewall {@link Firewall} (FwaaS)
  * 
  * @author Vishvesh Deshmukh
  */

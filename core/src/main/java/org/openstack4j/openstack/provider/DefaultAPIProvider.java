@@ -42,6 +42,7 @@ import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.api.networking.ext.FirewallAsService;
+import org.openstack4j.api.networking.ext.FirewallRuleService;
 import org.openstack4j.api.networking.ext.FirewallService;
 import org.openstack4j.api.networking.ext.HealthMonitorService;
 import org.openstack4j.api.networking.ext.LbPoolService;
@@ -105,6 +106,7 @@ import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImp
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallAsServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.FirewallRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.HealthMonitorServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LbPoolServiceImpl;
@@ -211,6 +213,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
 		bind(FirewallAsService.class, FirewallAsServiceImpl.class);
 		bind(FirewallService.class, FirewallServiceImpl.class);
+		bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
 	}
 
 	/**
