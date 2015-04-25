@@ -7,6 +7,7 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.ext.FirewallPolicy;
 import org.openstack4j.model.network.ext.FirewallPolicyUpdate;
+import org.openstack4j.openstack.networking.domain.ext.FirewallRuleStrategy.RuleInsertStrategyType;
 
 /**
  * <p>Networking (Neutron) FwaaS FirewallPolicy Policy Extension API</p>
@@ -73,4 +74,23 @@ public interface FirewallPolicyService extends RestService {
      * @return FirewallPolicy
      */
     FirewallPolicy update(String firewallPolicyId, FirewallPolicyUpdate firewallPolocyUpdate);
+
+    /**
+     * Inserts a firewall rule in a firewall policy relative to the position of other rules.
+     * @param firewallPolicyId rule inserted in FirewallPolicy
+     * @param firewallRuleId rule to be inserted
+     * @param type {@link RuleInsertStrategyType}
+     * @param insertAfterOrBeforeRuleId rule id where the new firewallRule will be inserted/switched from
+     * @return FirewallPolicy
+     */
+    FirewallPolicy insertFirewallRuleInPolicy(String firewallPolicyId, String firewallRuleId, 
+    		RuleInsertStrategyType type, String insertAfterOrBeforeRuleId);
+
+    /**
+     * Removes a firewall rule from a firewall policy.
+     * @param firewallPolicyId
+     * @param firewallRuleId rule to be deleted.
+     * @return FirewallPolicy
+     */
+	FirewallPolicy removeFirewallRuleFromPolicy(String firewallPolicyId, String firewallRuleId);
 }

@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.networking.internal.ext;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.ext.FirewallPolicy;
 import org.openstack4j.model.network.ext.FirewallPolicyUpdate;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
+import org.openstack4j.openstack.networking.domain.ext.FirewallRuleStrategy;
+import org.openstack4j.openstack.networking.domain.ext.FirewallRuleStrategy.RuleInsertStrategyType;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallPolicy;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallPolicy.FirewallPolicies;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
@@ -81,6 +84,35 @@ public class FirewallPolicyServiceImpl extends BaseNetworkingServices implements
 		checkNotNull(firewallPolicyId);
         checkNotNull(firewallPolicyUpdate);
         return put(NeutronFirewallPolicy.class, uri("/fw/firewall_policies/%s", firewallPolicyId)).entity(firewallPolicyUpdate).execute();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public FirewallPolicy insertFirewallRuleInPolicy(
+			String firewallPolicyId, String firewallRuleId, RuleInsertStrategyType type, String insertAfterOrBeforeRuleId) {
+	  checkNotNull(firewallPolicyId);
+	  checkNotNull(type);
+	  checkNotNull(firewallRuleId);
+	  checkNotNull(insertAfterOrBeforeRuleId);
+		return put(NeutronFirewallPolicy.class, uri("/fw/firewall_policies/%s/insert_rule", firewallPolicyId))
+		          .entity(FirewallRuleStrategy.create(firewallRuleId, type, insertAfterOrBeforeRuleId))
+				  .execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public FirewallPolicy removeFirewallRuleFromPolicy(String firewallPolicyId, String firewallRuleId) {
+		checkNotNull(firewallPolicyId);
+		checkNotNull(firewallRuleId);
+		checkState(!(firewallPolicyId == null && firewallRuleId == null), 
+				"Either a Firewall Policy or Firewall Rule identifier must be set");
+		return put(NeutronFirewallPolicy.class, uri("/fw/firewall_policies/%s/remove_rule", firewallPolicyId))
+		           .entity(FirewallRuleStrategy.remove(firewallRuleId))
+		           .execute(ExecutionOptions.<NeutronFirewallPolicy>create(PropagateOnStatus.on(404)));
 	}
 
 }
