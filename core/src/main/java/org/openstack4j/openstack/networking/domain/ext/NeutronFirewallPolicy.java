@@ -7,12 +7,12 @@ import org.openstack4j.model.network.ext.FirewallPolicy;
 import org.openstack4j.model.network.ext.FirewallRule;
 import org.openstack4j.model.network.ext.builder.FirewallPolicyBuilder;
 import org.openstack4j.openstack.common.ListResult;
-import org.testng.collections.Lists;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 
 /**
  * A Neutron Firewall (FwaaS) : Firewall Policy Entity.
