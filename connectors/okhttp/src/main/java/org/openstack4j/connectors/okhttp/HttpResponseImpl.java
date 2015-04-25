@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.openstack4j.api.exceptions.ClientResponseException;
+import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
@@ -17,7 +18,7 @@ import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.Response;
 
 public class HttpResponseImpl implements HttpResponse {
-	
+
     private static final Logger LOG = LoggerFactory.getLogger(HttpResponseImpl.class);
     private final Response response;
 
@@ -65,7 +66,7 @@ public class HttpResponseImpl implements HttpResponse {
      */
     @Override
     public <T> T getEntity(Class<T> returnType, ExecutionOptions<T> options) {
-       return HttpEntityHandler.handle(this, returnType, options, Boolean.TRUE);
+        return HttpEntityHandler.handle(this, returnType, options, Boolean.TRUE);
     }
 
     /**
@@ -76,7 +77,7 @@ public class HttpResponseImpl implements HttpResponse {
     public int getStatus() {
         return response.code();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -130,7 +131,12 @@ public class HttpResponseImpl implements HttpResponse {
         }
     }
 
-		@Override
-		public void close() throws IOException {
-		}
+    @Override
+    public void close() throws IOException {
+    }
+    
+    @Override
+    public String getContentType() {
+        return header(ClientConstants.HEADER_CONTENT_TYPE);
+    }
 }

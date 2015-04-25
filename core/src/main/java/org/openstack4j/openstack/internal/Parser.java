@@ -9,6 +9,8 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.openstack4j.core.transport.ClientConstants;
+
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 
 /**
@@ -104,42 +106,56 @@ public final class Parser {
             }
         }
     }
-    
+
     public static String toISO8601DateFormat(Date date) {
         synchronized (ISO8601_FORMAT) {
             String parsed = ISO8601_FORMAT.format(date);
             String tz = findTZ(parsed);
             if (tz.equals("+0000")) {
-               parsed = trimTZ(parsed) + "Z";
+                parsed = trimTZ(parsed) + "Z";
             }
             return parsed;
         }
     }
-    
+
     private static String findTZ(String toParse) {
         Matcher matcher = TZ_PATTERN.matcher(toParse);
         if (matcher.find()) {
-           // Remove ':' from the TZ string, as SimpleDateFormat can't handle it
-           String tz = matcher.group(2).replace(":", "");
-           // Append '00; if we only have a two digit TZ, as SimpleDateFormat
-           if (tz.length() == 2) tz += "00";
-           // Replace Z with +0000
-           if (tz.equals("Z")) return "+0000";
-           return tz;
+            // Remove ':' from the TZ string, as SimpleDateFormat can't handle it
+            String tz = matcher.group(2).replace(":", "");
+            // Append '00; if we only have a two digit TZ, as SimpleDateFormat
+            if (tz.length() == 2) tz += "00";
+            // Replace Z with +0000
+            if (tz.equals("Z")) return "+0000";
+            return tz;
         } else {
-           // Return +0000 if no time zone
-           return "+0000";
+            // Return +0000 if no time zone
+            return "+0000";
         }
-     }
-    
+    }
+
     private static String trimTZ(String toParse) {
         Matcher matcher = TZ_PATTERN.matcher(toParse);
         if (matcher.find()) {
-           toParse = matcher.group(1);
+            toParse = matcher.group(1);
         }
         // TODO explain why this check is here
         if (toParse.length() == 25 && SECOND_PATTERN.matcher(toParse).matches())
-           toParse = toParse.substring(0, toParse.length() - 6);
+            toParse = toParse.substring(0, toParse.length() - 6);
         return toParse;
-     }
+    }
+    
+    /**
+     * Determines if the specified content type is text/plain.  If the contentType is null
+     * then false is returned.  
+     * 
+     * @param contentType the content type
+     * @return true if the contentType is text/plain
+     */
+    public static boolean isContentTypeTextPlain(String contentType) {
+        if (contentType == null)
+            return false;
+        
+        return contentType.contains(ClientConstants.CONTENT_TYPE_TEXT);
+    }
 }

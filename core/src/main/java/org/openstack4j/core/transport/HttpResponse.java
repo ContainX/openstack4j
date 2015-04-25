@@ -46,6 +46,13 @@ public interface HttpResponse extends Closeable {
 	int getStatus();
 	
 	/**
+	 * The current content-type within the response
+	 * 
+	 * @return the response content-type
+	 */
+	String getContentType();
+	
+	/**
 	 * The status message which is associated with the current {@link #getStatus()}
 	 * @return the status message or null
 	 */

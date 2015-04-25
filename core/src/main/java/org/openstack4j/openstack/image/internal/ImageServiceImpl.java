@@ -103,7 +103,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     @Override
     public ActionResponse delete(String imageId) {
         checkNotNull(imageId);
-        return deleteWithResponse(uri("/images/%s", imageId)).execute();
+        return deleteWithResponse(uri("/images/%s", imageId)).param("format", "json").execute();
     }
 
     /**

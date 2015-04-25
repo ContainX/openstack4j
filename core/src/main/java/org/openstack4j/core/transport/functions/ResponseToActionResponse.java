@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.openstack.internal.Parser;
 
 import com.google.common.base.Function;
 
@@ -22,6 +23,10 @@ public class ResponseToActionResponse implements Function<HttpResponse, ActionRe
     }
 
     public ActionResponse apply(HttpResponse response, boolean returnNullIfNotMapped) {
+        if (Parser.isContentTypeTextPlain(response.getContentType())) {
+            return ActionResponse.actionFailed(response.getStatusMessage(), response.getStatus());
+        }
+        
         @SuppressWarnings("unchecked")
         Map<String, Object> map = response.readEntity(Map.class);
         ActionResponse ar = new ParseActionResponseFromJsonMap(response).apply(map);

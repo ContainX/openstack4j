@@ -8,12 +8,13 @@ import java.util.Map;
 import javax.ws.rs.core.MultivaluedMap;
 
 import org.jboss.resteasy.client.ClientResponse;
+import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 
 public class HttpResponseImpl implements HttpResponse {
-	
+
     private final ClientResponse<?> response;
 
     private HttpResponseImpl(ClientResponse<?> response) {
@@ -60,7 +61,7 @@ public class HttpResponseImpl implements HttpResponse {
      */
     @Override
     public <T> T getEntity(Class<T> returnType, ExecutionOptions<T> options) {
-       return HttpEntityHandler.handle(this, returnType, options, Boolean.TRUE);
+        return HttpEntityHandler.handle(this, returnType, options, Boolean.TRUE);
     }
 
     /**
@@ -70,7 +71,7 @@ public class HttpResponseImpl implements HttpResponse {
     public int getStatus() {
         return response.getStatus();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -115,8 +116,13 @@ public class HttpResponseImpl implements HttpResponse {
         return response.getEntity(typeToReadAs);
     }
 
-		@Override
-		public void close() throws IOException {
-			response.releaseConnection();
-		}
+    @Override
+    public void close() throws IOException {
+        response.releaseConnection();
+    }
+    
+    @Override
+    public String getContentType() {
+        return header(ClientConstants.HEADER_CONTENT_TYPE);
+    }
 }

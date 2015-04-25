@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.openstack4j.api.exceptions.ClientResponseException;
+import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
@@ -148,4 +149,9 @@ public class HttpResponseImpl implements HttpResponse {
 		public void close() throws IOException {
 			// Not Implemented - closing handle by HttpCommand
 		}
+
+        @Override
+        public String getContentType() {
+            return header(ClientConstants.HEADER_CONTENT_TYPE);
+        }
 }
