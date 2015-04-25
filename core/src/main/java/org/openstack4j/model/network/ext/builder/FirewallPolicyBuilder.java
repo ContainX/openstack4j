@@ -46,12 +46,12 @@ public interface FirewallPolicyBuilder extends Builder<FirewallPolicyBuilder, Fi
 			 * to True through an update operation.
 	 * @return FirewallPolicyBuilder
 	 */
-	public Boolean audited(Boolean audited);
+	public FirewallPolicyBuilder audited(Boolean audited);
 	
 	/**
 	 * @param firewallRules(UUID)List : This is an ordered list of firewall rule uuids. 
 	 	* The firewall applies the rules in the order in which they appear in this list.
 	 * @return FirewallPolicyBuilder
 	 */
-	public List<String> firewallRules(List<String> ruleIdList);
+	public FirewallPolicyBuilder firewallRules(List<String> ruleIdList);
 }
