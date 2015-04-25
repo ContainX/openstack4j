@@ -5,6 +5,7 @@ import java.util.List;
 import org.openstack4j.model.network.ext.FirewallPolicyUpdate;
 import org.openstack4j.model.network.ext.builder.FirewallPolicyUpdateBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -71,6 +72,7 @@ public class NeutronFirewallPolicyUpdate implements FirewallPolicyUpdate {
 		return audited != null && audited;
 	}
 
+	@JsonIgnore
 	@Override
 	public List<String> getFirewallRuleIds() {
 		return firewallRules;

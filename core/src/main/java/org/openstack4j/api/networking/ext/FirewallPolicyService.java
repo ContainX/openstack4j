@@ -73,7 +73,7 @@ public interface FirewallPolicyService extends RestService {
      * @param firewallPolicyUpdate FirewallUpdate
      * @return FirewallPolicy
      */
-    FirewallPolicy update(String firewallPolicyId, FirewallPolicyUpdate firewallPolocyUpdate);
+    FirewallPolicy update(String firewallPolicyId, FirewallPolicyUpdate firewallPolicyUpdate);
 
     /**
      * Inserts a firewall rule in a firewall policy relative to the position of other rules.

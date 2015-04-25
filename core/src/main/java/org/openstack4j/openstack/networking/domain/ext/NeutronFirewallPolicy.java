@@ -91,6 +91,7 @@ public class NeutronFirewallPolicy implements FirewallPolicy {
 		return audited != null && audited;
 	}
 
+	@JsonIgnore
 	@Override
 	public List<String> getFirewallRuleIds() {
 		return firewallRules;

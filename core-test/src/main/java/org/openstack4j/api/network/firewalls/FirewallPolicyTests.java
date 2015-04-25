@@ -14,6 +14,7 @@ import org.openstack4j.api.Builders;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.ext.FirewallPolicy;
 import org.openstack4j.model.network.ext.FirewallPolicyUpdate;
+import org.openstack4j.openstack.networking.domain.ext.FirewallRuleStrategy.RuleInsertStrategyType;
 import org.testng.annotations.Test;
 
 import com.google.common.base.Preconditions;
@@ -79,6 +80,28 @@ public class FirewallPolicyTests extends AbstractTest {
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated FirewallPolicy : "+result);
 		
 		assertEquals("Test-Firewall-Policy-Update", result.getDescription());
+	}
+	
+	public void testInsertRuleInFirewallPolicy() throws IOException {
+		respondWith(FIREWALL_POLICY);
+		
+		FirewallPolicy result = os().networking().firewalls().firewallpolicy()
+				.insertFirewallRuleInPolicy(
+						"c69933c1-b472-44f9-8226-30dc4ffd454c", "7bc34b8c-8d3b-4ada-a9c8-1f4c11c65692",
+						RuleInsertStrategyType.AFTER, "a08ef905-0ff6-4784-8374-175fffe7dade");
+		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Inserted Rule FirewallPolicy : "+result);
+		
+		assertEquals(result.getId(), "c69933c1-b472-44f9-8226-30dc4ffd454c");
+	}
+	
+	public void testRemoveRuleFromFirewallPolicy() throws IOException {
+		respondWith(FIREWALL_POLICY);
+		
+		FirewallPolicy result = os().networking().firewalls().firewallpolicy()
+				.removeFirewallRuleFromPolicy("c69933c1-b472-44f9-8226-30dc4ffd454c", "7bc34b8c-8d3b-4ada-a9c8-1f4c11c65692");
+		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Rule Removed from FirewallPolicy : "+result);
+		
+		assertEquals(result.getId(), "c69933c1-b472-44f9-8226-30dc4ffd454c");
 	}
 	
 	public void testDeleteFirewallPolicy() {
