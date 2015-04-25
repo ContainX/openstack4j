@@ -83,7 +83,7 @@ public class FirewallRuleTests extends AbstractTest {
 	
 	public void testDeleteFirewallRule() {
 	    respondWith(200);
-		ActionResponse result = os().networking().firewalls().firewall().delete("8722e0e0-9cc9-4490-9660-8c9a5732fbb0");
+		ActionResponse result = os().networking().firewalls().firewallrule().delete("8722e0e0-9cc9-4490-9660-8c9a5732fbb0");
 		assertTrue(result.isSuccess());
 	}
 
