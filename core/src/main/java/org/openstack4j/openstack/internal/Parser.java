@@ -1,5 +1,8 @@
 package org.openstack4j.openstack.internal;
 
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT_HTML;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -146,16 +149,16 @@ public final class Parser {
     }
     
     /**
-     * Determines if the specified content type is text/plain.  If the contentType is null
+     * Determines if the specified content type is text/plain or text/html.  If the contentType is null
      * then false is returned.  
      * 
      * @param contentType the content type
-     * @return true if the contentType is text/plain
+     * @return true if the contentType is text/plain or text/html
      */
-    public static boolean isContentTypeTextPlain(String contentType) {
+    public static boolean isContentTypeText(String contentType) {
         if (contentType == null)
             return false;
         
-        return contentType.contains(ClientConstants.CONTENT_TYPE_TEXT);
+        return (contentType.contains(CONTENT_TYPE_TEXT) || contentType.contains(CONTENT_TYPE_TEXT_HTML));
     }
 }

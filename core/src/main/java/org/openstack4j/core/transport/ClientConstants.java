@@ -23,6 +23,7 @@ public final class ClientConstants
     public static final String CONTENT_TYPE_DIRECTORY = "application/directory";
     public static final String CONTENT_TYPE_OCTECT_STREAM = "application/octet-stream";
     public static final String CONTENT_TYPE_TEXT = "text/plain";
+    public static final String CONTENT_TYPE_TEXT_HTML = "text/html";
 
     // Paths
     public static final String PATH_TENANTS = "/tenants";

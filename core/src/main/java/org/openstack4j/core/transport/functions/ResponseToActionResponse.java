@@ -23,7 +23,7 @@ public class ResponseToActionResponse implements Function<HttpResponse, ActionRe
     }
 
     public ActionResponse apply(HttpResponse response, boolean returnNullIfNotMapped) {
-        if (Parser.isContentTypeTextPlain(response.getContentType())) {
+        if (Parser.isContentTypeText(response.getContentType())) {
             return ActionResponse.actionFailed(response.getStatusMessage(), response.getStatus());
         }
         
