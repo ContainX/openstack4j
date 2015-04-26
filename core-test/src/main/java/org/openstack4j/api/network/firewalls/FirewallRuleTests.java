@@ -1,4 +1,4 @@
-package org.openstack4j.api.network;
+package org.openstack4j.api.network.firewalls;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -29,9 +29,9 @@ import com.google.common.base.Preconditions;
 @Test(suiteName="Network/FirewallRule", enabled = true)
 public class FirewallRuleTests extends AbstractTest {
 	
-	private static final String FIREWALL_RULE = "/network/firewallrule.json";
-	private static final String FIREWALL_RULES = "/network/firewallrules.json";
-	private static final String FIREWALL_RULE_UPDATE = "/network/firewallruleupdate.json";
+	private static final String FIREWALL_RULE = "/network/firewalls/firewallrule.json";
+	private static final String FIREWALL_RULES = "/network/firewalls/firewallrules.json";
+	private static final String FIREWALL_RULE_UPDATE = "/network/firewalls/firewallruleupdate.json";
 	
 	public void testListFirewallRules() throws IOException {
 	    respondWith(FIREWALL_RULES);
@@ -83,7 +83,7 @@ public class FirewallRuleTests extends AbstractTest {
 	
 	public void testDeleteFirewallRule() {
 	    respondWith(200);
-		ActionResponse result = os().networking().firewalls().firewall().delete("8722e0e0-9cc9-4490-9660-8c9a5732fbb0");
+		ActionResponse result = os().networking().firewalls().firewallrule().delete("8722e0e0-9cc9-4490-9660-8c9a5732fbb0");
 		assertTrue(result.isSuccess());
 	}
 

@@ -1,4 +1,4 @@
-package org.openstack4j.api.network;
+package org.openstack4j.api.network.firewalls;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -27,9 +27,9 @@ import com.google.common.base.Preconditions;
 @Test(suiteName="Network/Firewall", enabled = true)
 public class FirewallTests extends AbstractTest {
 	
-	private static final String FIREWALL = "/network/firewall.json";
-	private static final String FIREWALLS = "/network/firewalls.json";
-	private static final String FIREWALL_UPDATE = "/network/firewallupdate.json";
+	private static final String FIREWALL = "/network/firewalls/firewall.json";
+	private static final String FIREWALLS = "/network/firewalls/firewalls.json";
+	private static final String FIREWALL_UPDATE = "/network/firewalls/firewallupdate.json";
 	
 	public void testListFirewalls() throws IOException {
 	    respondWith(FIREWALLS);

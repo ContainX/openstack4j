@@ -33,6 +33,8 @@ import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.model.network.builder.RouterBuilder;
 import org.openstack4j.model.network.builder.SubnetBuilder;
 import org.openstack4j.model.network.ext.builder.FirewallBuilder;
+import org.openstack4j.model.network.ext.builder.FirewallPolicyBuilder;
+import org.openstack4j.model.network.ext.builder.FirewallPolicyUpdateBuilder;
 import org.openstack4j.model.network.ext.builder.FirewallRuleBuilder;
 import org.openstack4j.model.network.ext.builder.FirewallRuleUpdateBuilder;
 import org.openstack4j.model.network.ext.builder.FirewallUpdateBuilder;
@@ -84,6 +86,8 @@ import org.openstack4j.openstack.networking.domain.NeutronSecurityGroup;
 import org.openstack4j.openstack.networking.domain.NeutronSecurityGroupRule;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall;
+import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallPolicy;
+import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallPolicyUpdate;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallRule;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallRuleUpdate;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallUpdate;
@@ -433,6 +437,21 @@ public class Builders {
      */
     public static FirewallRuleUpdateBuilder firewallRuleUpdate() {
     	return NeutronFirewallRuleUpdate.builder();
+    }
+    
+    /**
+     * The builder to create a firewallPolicy
+     * @return FirewallPolicyBuilder
+     */
+    public static FirewallPolicyBuilder firewallPolicy() {
+    	return NeutronFirewallPolicy.builder();
+    }
+    /**
+     * The builder to update a firewallPolicy
+     * @return FirewallPolicyUpdateBuilder
+     */
+    public static FirewallPolicyUpdateBuilder firewallPolicyUpdate() {
+    	return NeutronFirewallPolicyUpdate.builder();
     }
     
     /**

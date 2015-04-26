@@ -1,0 +1,12 @@
+{
+    "firewall_policy": {
+        "audited": true,
+        "description": "Test-Firewall-Policy-Update",
+        "firewall_rules": [
+            "8722e0e0-9cc9-4490-9660-8c9a5732fbb0"
+        ],
+        "id": "c69933c1-b472-44f9-8226-30dc4ffd454c",
+        "name": "Test-Firewall-Policy-Update",
+        "shared": true
+    }
+}
