@@ -94,7 +94,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the header as a String or null if not found
      */
     public String header(String name) {
-        return response.getHeaders().getFirst(name).toString();
+        return response.getHeaders().getFirst(name);
     }
 
     /**
