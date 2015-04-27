@@ -2,6 +2,7 @@ package org.openstack4j.model.network.ext.builder;
 
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.HealthMonitor;
+import org.openstack4j.model.network.ext.HealthMonitorType;
 
 /**
  * A builder to create a healthMonitor
@@ -9,8 +10,7 @@ import org.openstack4j.model.network.ext.HealthMonitor;
  * @author liujunpeng
  *
  */
-public interface HealthMonitorBuilder extends
-		Builder<HealthMonitorBuilder, HealthMonitor> {
+public interface HealthMonitorBuilder extends Builder<HealthMonitorBuilder, HealthMonitor> {
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public interface HealthMonitorBuilder extends
 	 *            sent by the load balancer to verify the member state.
 	 * @return HealthMonitorBuilder
 	 */
-	public HealthMonitorBuilder type(String type);
+	public HealthMonitorBuilder type(HealthMonitorType type);
 
 	/**
 	 * 

@@ -3,14 +3,16 @@ package org.openstack4j.api.network;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.network.ext.Protocol;
 import org.openstack4j.model.network.ext.Vip;
 import org.openstack4j.model.network.ext.VipUpdate;
-import org.openstack4j.openstack.networking.domain.ext.Protocol;
 import org.openstack4j.openstack.networking.domain.ext.SessionPersistenceType;
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -53,7 +55,7 @@ public class VipTests extends AbstractTest{
 				.description("vip")
 				.name(name)
 				.poolId(poolId)
-				.protocol(Protocol.HTTP.toString())
+				.protocol(Protocol.HTTP)
 				.protocolPort(port)
 				.sessionPersistence(Builders
 						.sessionPersistence()

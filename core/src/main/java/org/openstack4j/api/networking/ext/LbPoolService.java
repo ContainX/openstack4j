@@ -90,6 +90,17 @@ public interface LbPoolService extends RestService {
 	 */
 	HealthMonitor associateHealthMonitor(String lbPoolId,
 			HealthMonitorAssociate associate);
+	
+	/**
+     * Associates a health monitor with a specified pool.
+     * 
+     * @param lbPoolId
+     *            the lb pool identifier
+     * @param associate
+     *            HealthMonitorAssociate
+     * @return HealthMonitor
+     */
+    HealthMonitor associateHealthMonitor(String lbPoolId, String healthMonitorId);
 
 	/**
 	 * Disassociates a specified health monitor from a pool.

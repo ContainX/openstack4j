@@ -3,14 +3,16 @@ package org.openstack4j.api.network;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.ext.HealthMonitor;
+import org.openstack4j.model.network.ext.HealthMonitorType;
 import org.openstack4j.model.network.ext.HealthMonitorUpdate;
-import org.openstack4j.openstack.networking.domain.ext.HealthMonitorType;
 import org.openstack4j.openstack.networking.domain.ext.HttpMethod;
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 /**
@@ -49,7 +51,7 @@ public class HealthMonitorTests extends AbstractTest{
 		Integer delay = 10;
 		Integer maxRetries = 3;
 		Integer timeout = 3;
-		String type = HealthMonitorType.PING.toString();
+		HealthMonitorType type = HealthMonitorType.PING;
 		HealthMonitor monitor = Builders.healthMonitor()
 				.delay(delay)
 				.maxRetries(maxRetries)
@@ -86,7 +88,7 @@ public class HealthMonitorTests extends AbstractTest{
 		Integer delay = 10;
 		Integer maxRetries = 3;
 		Integer timeout = 3;
-		String type = HealthMonitorType.TCP.toString();
+		HealthMonitorType type = HealthMonitorType.TCP;
 		HealthMonitor monitor = Builders.healthMonitor()
 				.delay(delay)
 				.maxRetries(maxRetries)
@@ -123,7 +125,7 @@ public class HealthMonitorTests extends AbstractTest{
 		Integer timeout = 3;
 		String urlPath = "/";
 		String expectedCodes = "200";
-		String type = HealthMonitorType.HTTP.toString();
+		HealthMonitorType type = HealthMonitorType.HTTP;
 		String httpMethod = HttpMethod.GET.toString();
 		HealthMonitor monitor = Builders.healthMonitor()
 				.delay(delay)
@@ -174,7 +176,7 @@ public class HealthMonitorTests extends AbstractTest{
 		Integer timeout = 3;
 		String urlPath = "/";
 		String expectedCodes = "200";
-		String type = HealthMonitorType.HTTPS.toString();
+		HealthMonitorType type = HealthMonitorType.HTTPS;
 		String httpMethod = HttpMethod.GET.toString();
 		HealthMonitor monitor = Builders.healthMonitor()
 				.delay(delay)

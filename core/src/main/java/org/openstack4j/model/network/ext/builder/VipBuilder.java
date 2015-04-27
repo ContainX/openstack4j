@@ -1,6 +1,7 @@
 package org.openstack4j.model.network.ext.builder;
 
 import org.openstack4j.common.Buildable.Builder;
+import org.openstack4j.model.network.ext.Protocol;
 import org.openstack4j.model.network.ext.SessionPersistence;
 import org.openstack4j.model.network.ext.Vip;
 
@@ -62,7 +63,7 @@ public interface VipBuilder extends Builder<VipBuilder, Vip> {
 	 *            or HTTPS.
 	 * @return VipBuilder
 	 */
-	VipBuilder protocol(String protocol);
+	VipBuilder protocol(Protocol protocol);
 
 	/**
 	 * @param protocolPort

@@ -48,7 +48,7 @@ public interface LbPool extends ModelEntity, Buildable<LbPoolBuilder> {
 	 * 
 	 * @return The protocol of the pool, which is TCP, HTTP, or HTTPS.
 	 */
-	public String getProtocol();
+	public Protocol getProtocol();
 	/**
 	 * 
 	 * @return loadbalance provider,such as haproxy
@@ -58,7 +58,7 @@ public interface LbPool extends ModelEntity, Buildable<LbPoolBuilder> {
 	 * 
 	 * @return The load-balancer algorithm, which is round-robin, least-connections, and so on. This value, which must be supported, is dependent on the load-balancer provider. Round-robin must be supported.
 	 */
-	public String getLbMethod();
+	public LbMethod getLbMethod();
 	/**
 	 * 
 	 * @return List of members that belong to the pool.

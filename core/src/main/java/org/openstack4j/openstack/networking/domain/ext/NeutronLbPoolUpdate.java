@@ -1,8 +1,10 @@
 package org.openstack4j.openstack.networking.domain.ext;
 
 
+import org.openstack4j.model.network.ext.LbMethod;
 import org.openstack4j.model.network.ext.LbPoolUpdate;
 import org.openstack4j.model.network.ext.builder.LbPoolUpdateBuilder;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -21,7 +23,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 	private String name;
 	private String description;
 	@JsonProperty("lb_method")
-	private String lbMethod;
+	private LbMethod lbMethod;
 	@JsonProperty("admin_state_up")
 	private boolean adminStateUp;
 	/**
@@ -66,7 +68,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getLbMethod() {
+	public LbMethod getLbMethod() {
 		return lbMethod;
 	}
 	/**
@@ -79,7 +81,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 	}
 
 
-	public static class LbPoolUpdateContreteBuilder implements LbPoolUpdateBuilder{
+	public static class LbPoolUpdateContreteBuilder implements LbPoolUpdateBuilder {
 
 		private NeutronLbPoolUpdate m;
 		public LbPoolUpdateContreteBuilder (){
@@ -105,7 +107,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public LbPoolUpdateBuilder lbMethod(String lbMethod) {
+		public LbPoolUpdateBuilder lbMethod(LbMethod lbMethod) {
 			m.lbMethod = lbMethod;
 			return this;
 		}

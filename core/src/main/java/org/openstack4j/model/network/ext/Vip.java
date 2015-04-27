@@ -59,7 +59,7 @@ public interface Vip extends ModelEntity, Buildable<VipBuilder> {
 	 * @return The protocol of the VIP address. A valid value is TCP, HTTP, or
 	 *         HTTPS.
 	 */
-	public String getProtocol();
+	public Protocol getProtocol();
 
 	/**
 	 * 

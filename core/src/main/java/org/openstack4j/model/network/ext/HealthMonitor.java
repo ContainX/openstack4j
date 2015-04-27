@@ -31,7 +31,7 @@ public interface HealthMonitor extends ModelEntity,
 	 * @return type The type of probe sent by the load balancer to verify the
 	 *         member state, which is PING, TCP, HTTP, or HTTPS.
 	 */
-	public String getType();
+	public HealthMonitorType getType();
 
 	/**
 	 * 

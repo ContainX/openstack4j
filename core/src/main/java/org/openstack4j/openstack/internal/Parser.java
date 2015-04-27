@@ -12,8 +12,6 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openstack4j.core.transport.ClientConstants;
-
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 
 /**

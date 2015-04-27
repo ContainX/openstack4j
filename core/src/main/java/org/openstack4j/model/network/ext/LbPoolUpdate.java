@@ -26,7 +26,7 @@ public interface LbPoolUpdate extends ModelEntity, Buildable<LbPoolUpdateBuilder
 	 * 
 	 * @return The load-balancer algorithm, which is round-robin, least-connections, and so on. This value, which must be supported, is dependent on the load-balancer provider. Round-robin must be supported.
 	 */
-	public String getLbMethod();
+	public LbMethod getLbMethod();
 	/**
 	 * 
 	 * @return Description for the pool.

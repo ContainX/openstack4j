@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext;
 import java.util.List;
 
 import org.openstack4j.model.network.ext.HealthMonitor;
+import org.openstack4j.model.network.ext.HealthMonitorType;
 import org.openstack4j.model.network.ext.builder.HealthMonitorBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -25,13 +26,8 @@ public class NeutronHealthMonitor implements HealthMonitor {
 	@JsonProperty("tenant_id")
 	private String tenantId;
 
-	/**
-	 * The type of probe sent by the load balancer to verify the member state, which is PING, TCP, HTTP, or HTTPS.
-	 */
-	private String type;
-	
+	private HealthMonitorType type;
 	private Integer delay;
-	
 	private Integer timeout;
 	/**
 	 * Number of allowed connection failures before changing the status of the member to INACTIVE. A valid value is from 1 to 10.
@@ -102,7 +98,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getType() {
+	public HealthMonitorType getType() {
 		return type;
 	}
 
@@ -185,7 +181,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 					.add("healthMonitors", healthMonitors).toString();
 		}
 	}
-	public static class HealthMonitorConcretebuilder implements HealthMonitorBuilder{
+	public static class HealthMonitorConcretebuilder implements HealthMonitorBuilder {
 		NeutronHealthMonitor m;
 		@Override
 		public HealthMonitor build() {
@@ -218,7 +214,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public HealthMonitorBuilder type(String type) {
+		public HealthMonitorBuilder type(HealthMonitorType type) {
 			m.type = type;
 			return this;
 		}

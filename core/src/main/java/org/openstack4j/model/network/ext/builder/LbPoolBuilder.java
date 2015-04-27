@@ -1,7 +1,9 @@
 package org.openstack4j.model.network.ext.builder;
 
 import org.openstack4j.common.Buildable.Builder;
+import org.openstack4j.model.network.ext.LbMethod;
 import org.openstack4j.model.network.ext.LbPool;
+import org.openstack4j.model.network.ext.Protocol;
 /**
  * A Builder to create a lbpool
  * 
@@ -25,7 +27,7 @@ public interface LbPoolBuilder extends Builder<LbPoolBuilder, LbPool> {
 	 *            or HTTPS.
 	 * @return LbPoolBuilder
 	 */
-	public LbPoolBuilder protocol(String protocol);
+	public LbPoolBuilder protocol(Protocol protocol);
 	/**
 	 * 
 	 * @param name
@@ -67,7 +69,7 @@ public interface LbPoolBuilder extends Builder<LbPoolBuilder, LbPool> {
 	 *            robin must be supported.
 	 * @return LbPoolBuilder
 	 */
-	public LbPoolBuilder lbMethod(String lbMethod);
+	public LbPoolBuilder lbMethod(LbMethod lbMethod);
 
 	/**
 	 * 

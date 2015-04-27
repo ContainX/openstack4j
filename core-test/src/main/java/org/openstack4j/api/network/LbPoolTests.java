@@ -15,10 +15,10 @@ import org.openstack4j.api.Builders;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.ext.HealthMonitor;
 import org.openstack4j.model.network.ext.HealthMonitorAssociate;
+import org.openstack4j.model.network.ext.LbMethod;
 import org.openstack4j.model.network.ext.LbPool;
 import org.openstack4j.model.network.ext.LbPoolUpdate;
-import org.openstack4j.openstack.networking.domain.ext.LbMethod;
-import org.openstack4j.openstack.networking.domain.ext.Protocol;
+import org.openstack4j.model.network.ext.Protocol;
 import org.testng.annotations.Test;
 
 @Test(suiteName="Network/lbpool", enabled=true)
@@ -54,9 +54,9 @@ public class LbPoolTests extends AbstractTest {
 	public void testCreatePool() throws IOException {
 	    respondWith(LBPOOL_JSON);
 		String name = "pool1";
-		String protocol = Protocol.HTTP.toString();
+		Protocol protocol = Protocol.HTTP;
 		LbPool create = Builders.lbPool().adminStateUp(true)
-				.description("pool").lbMethod(LbMethod.ROUND_ROBIN.toString())
+				.description("pool").lbMethod(LbMethod.ROUND_ROBIN)
 				.name(name).provider("haproxy")
 				.subnetId("7d1dab60-cf8a-4f75-af5c-44aab98b0c42")
 				.tenantId("d7fd03242ffa4933863bc528ed884fb6")
@@ -72,7 +72,7 @@ public class LbPoolTests extends AbstractTest {
 		String name = "update";
 		LbPoolUpdate update = Builders.lbPoolUpdate().adminStateUp(false)
 				.description("update")
-				.lbMethod(LbMethod.LEAST_CONNECTIONS.toString()).name(name)
+				.lbMethod(LbMethod.LEAST_CONNECTIONS).name(name)
 				.build();
 		LbPool result = os().networking().loadbalancers().lbPool().update(poolId, update);
 		assertEquals(name, result.getName());

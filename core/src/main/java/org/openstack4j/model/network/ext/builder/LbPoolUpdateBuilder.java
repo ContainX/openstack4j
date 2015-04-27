@@ -1,6 +1,7 @@
 package org.openstack4j.model.network.ext.builder;
 
 import org.openstack4j.common.Buildable.Builder;
+import org.openstack4j.model.network.ext.LbMethod;
 import org.openstack4j.model.network.ext.LbPoolUpdate;
 
 /**
@@ -19,7 +20,7 @@ public interface LbPoolUpdateBuilder extends Builder<LbPoolUpdateBuilder, LbPool
 	 *            robin must be supported.
 	 * @return LbPoolUpdateBuilder
 	 */
-	public LbPoolUpdateBuilder lbMethod(String lbMethod);
+	public LbPoolUpdateBuilder lbMethod(LbMethod lbMethod);
 	
 	/**
 	 * 
