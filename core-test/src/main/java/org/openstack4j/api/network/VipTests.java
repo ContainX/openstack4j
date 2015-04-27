@@ -8,9 +8,9 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.network.ext.Protocol;
+import org.openstack4j.model.network.ext.SessionPersistenceType;
 import org.openstack4j.model.network.ext.Vip;
 import org.openstack4j.model.network.ext.VipUpdate;
-import org.openstack4j.openstack.networking.domain.ext.SessionPersistenceType;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -60,7 +60,7 @@ public class VipTests extends AbstractTest{
 				.sessionPersistence(Builders
 						.sessionPersistence()
 						.cookieName("cookie")
-						.type(SessionPersistenceType.APP_COOKIE.toString())
+						.type(SessionPersistenceType.APP_COOKIE)
 						.build())
 				.subnetId(subnetId)
 				.tenantId(tenantId)
@@ -69,7 +69,7 @@ public class VipTests extends AbstractTest{
 		System.out.println(result);
 		assertEquals(address, result.getAddress());
 		assertEquals(name, result.getName());
-		assertEquals(Protocol.HTTP.toString(), result.getProtocol());
+		assertEquals(Protocol.HTTP, result.getProtocol());
 		assertEquals(port, result.getProtocolPort());
 	}
 	
@@ -85,7 +85,7 @@ public class VipTests extends AbstractTest{
 				.poolId(poolId)
 				.sessionPersistence(Builders
 						.sessionPersistence()
-						.type(SessionPersistenceType.SOURCE_IP.toString())
+						.type(SessionPersistenceType.SOURCE_IP)
 						.build())
 				.description("description update")
 				.build();
@@ -94,7 +94,7 @@ public class VipTests extends AbstractTest{
 		assertEquals(poolId, result.getPoolId());
 		assertEquals(connectionLimit, result.getConnectionLimit());
 		assertEquals(name, result.getName());
-		assertEquals(SessionPersistenceType.SOURCE_IP.toString(), result
+		assertEquals(SessionPersistenceType.SOURCE_IP, result
 				.getSessionPersistence().getType());
 	
 	}

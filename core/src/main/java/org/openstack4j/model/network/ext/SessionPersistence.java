@@ -25,6 +25,6 @@ public interface SessionPersistence extends ModelEntity,Buildable<SessionPersist
 	 * required
 	 * @return type. APP_COOKIE,HTTP_COOKIE,SOURCE_IP
 	 */
-	public String getType();
+	public SessionPersistenceType getType();
 
 }

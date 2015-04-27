@@ -63,7 +63,7 @@ public class LbPoolTests extends AbstractTest {
 				.protocol(protocol).build();
 		LbPool result = os().networking().loadbalancers().lbPool().create(create);
 		assertEquals(name, result.getName());
-		assertEquals(result.getLbMethod(), LbMethod.ROUND_ROBIN.toString());
+		assertEquals(result.getLbMethod(), LbMethod.ROUND_ROBIN);
 		assertEquals(protocol, result.getProtocol());
 	}
 	public void testUpdatePool() throws IOException {
@@ -76,7 +76,7 @@ public class LbPoolTests extends AbstractTest {
 				.build();
 		LbPool result = os().networking().loadbalancers().lbPool().update(poolId, update);
 		assertEquals(name, result.getName());
-		assertEquals(LbMethod.LEAST_CONNECTIONS.toString(),
+		assertEquals(LbMethod.LEAST_CONNECTIONS,
 				result.getLbMethod());
 		assertFalse(result.isAdminStateUp());
 	}

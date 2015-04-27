@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.networking.domain.ext;
 
 import org.openstack4j.model.network.ext.SessionPersistence;
+import org.openstack4j.model.network.ext.SessionPersistenceType;
 import org.openstack4j.model.network.ext.builder.SessionPersistenceBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -14,7 +15,7 @@ public class NeutronSessionPersistence implements SessionPersistence {
 	private static final long serialVersionUID = 1L;
 	@JsonProperty("cookie_name")
 	private String cookieName;
-	private String type;
+	private SessionPersistenceType type;
 	/**
 	 * wrap the SessionPersistence to builder
 	 * @return SessionPersistenceBuilder
@@ -36,8 +37,7 @@ public class NeutronSessionPersistence implements SessionPersistence {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getType() {
-
+	public SessionPersistenceType getType() {
 		return type;
 	}
 	/**
@@ -70,7 +70,7 @@ public class NeutronSessionPersistence implements SessionPersistence {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public SessionPersistenceBuilder type(String type) {
+		public SessionPersistenceBuilder type(SessionPersistenceType type) {
 			m.type = type;
 			return this;
 		}
