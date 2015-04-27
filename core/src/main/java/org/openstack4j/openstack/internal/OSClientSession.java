@@ -112,7 +112,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public boolean supportsCompute() {
-        return supports.contains(ServiceType.COMPUTE);
+        return getSupportedServices().contains(ServiceType.COMPUTE);
     }
 
     /**
@@ -120,7 +120,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public boolean supportsIdentity() {
-        return supports.contains(ServiceType.IDENTITY);
+        return getSupportedServices().contains(ServiceType.IDENTITY);
     }
 
     /**
@@ -128,7 +128,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public boolean supportsNetwork() {
-        return supports.contains(ServiceType.NETWORK);
+        return getSupportedServices().contains(ServiceType.NETWORK);
     }
 
     /**
@@ -136,7 +136,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public boolean supportsImage() {
-        return supports.contains(ServiceType.IMAGE);
+        return getSupportedServices().contains(ServiceType.IMAGE);
     }
 
     /**
@@ -144,7 +144,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public boolean supportsHeat() {
-        return supports.contains(ServiceType.ORCHESTRATION);
+        return getSupportedServices().contains(ServiceType.ORCHESTRATION);
     }
     
     /**
@@ -152,7 +152,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public boolean supportsBlockStorage() {
-        return supports.contains(ServiceType.BLOCK_STORAGE);
+        return getSupportedServices().contains(ServiceType.BLOCK_STORAGE);
     }
     
     /**
@@ -160,7 +160,15 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public boolean supportsObjectStorage() {
-        return supports.contains(ServiceType.OBJECT_STORAGE);
+        return getSupportedServices().contains(ServiceType.OBJECT_STORAGE);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean supportsTelemetry() {
+        return getSupportedServices().contains(ServiceType.TELEMETRY);
     }
 
     /**

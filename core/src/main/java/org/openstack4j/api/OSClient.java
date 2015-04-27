@@ -104,6 +104,13 @@ public interface OSClient {
      * @return true if supports Object Storage
      */
     boolean supportsObjectStorage();
+    
+    /**
+     * Determines if the Telemetry (Ceilometer) service is supported
+     * 
+     * @return true if supports Telemetry
+     */
+    boolean supportsTelemetry();
 
 	/**
 	 * Gets the token that was assigned during authorization
