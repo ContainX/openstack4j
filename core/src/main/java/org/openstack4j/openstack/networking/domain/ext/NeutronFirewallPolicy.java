@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.networking.domain.ext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openstack4j.api.Apis;
@@ -13,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 
 /**
  * A Neutron Firewall (FwaaS) : Firewall Policy Entity.
@@ -42,7 +42,6 @@ public class NeutronFirewallPolicy implements FirewallPolicy {
 	@JsonProperty("firewall_rules")
 	private List<String> firewallRules;
 	
-	@JsonIgnore
 	private List<NeutronFirewallRule> neutronFirewallRules;
 		
 	/**
@@ -100,7 +99,7 @@ public class NeutronFirewallPolicy implements FirewallPolicy {
 	@Override
 	public List<? extends FirewallRule> getNeutronFirewallRules() {
         if (neutronFirewallRules == null && (firewallRules != null && firewallRules.size() > 0)) {
-        	neutronFirewallRules = Lists.newArrayList();
+        	neutronFirewallRules = new ArrayList<NeutronFirewallRule>();
             for (String ruleId : firewallRules) {
                 NeutronFirewallRule rule = (NeutronFirewallRule) Apis.getNetworkingServices().
                 		firewalls().firewallrule().get(ruleId);
