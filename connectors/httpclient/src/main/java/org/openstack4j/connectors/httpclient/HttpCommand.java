@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -17,16 +16,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.openstack4j.api.exceptions.ConnectionException;
-import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
-import org.openstack4j.core.transport.UntrustedSSL;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 
 import com.google.common.net.MediaType;
@@ -37,8 +32,6 @@ import com.google.common.net.MediaType;
  * @param <R>
  */
 public final class HttpCommand<R> {
-
-    private static final String USER_AGENT = "OpenStack4j-Agent";
 
     private HttpRequest<R> request;
     private CloseableHttpClient client;
@@ -69,36 +62,7 @@ public final class HttpCommand<R> {
         catch (URISyntaxException e) {
             throw new ConnectionException(e.getMessage(),e.getIndex(), e);
         }
-
-        HttpClientBuilder cb = HttpClientBuilder.create().setUserAgent(USER_AGENT);
-        final Config config = request.getConfig();
-
-        if (config.isIgnoreSSLVerification())
-        {
-            cb.setSslcontext(UntrustedSSL.getSSLContext());
-            cb.setHostnameVerifier(new AllowAllHostnameVerifier());
-        }
-        
-        if (config.getSslContext() != null)
-            cb.setSslcontext(config.getSslContext());
-
-        if (config.getMaxConnections() > 0) {
-            cb.setMaxConnTotal(config.getMaxConnections());
-        }
-        
-        if (config.getMaxConnectionsPerRoute() > 0) {
-            cb.setMaxConnPerRoute(config.getMaxConnectionsPerRoute());
-        }
-        
-        RequestConfig.Builder rcb = RequestConfig.custom();
-        
-        if (config.getConnectTimeout() > 0)
-            rcb.setConnectTimeout(config.getConnectTimeout());
-        
-        if (config.getReadTimeout() > 0)
-            rcb.setSocketTimeout(config.getReadTimeout());
-        
-        client = cb.setDefaultRequestConfig(rcb.build()).build();
+        client = HttpClientFactory.INSTANCE.getClient(request.getConfig());
         
         switch (request.getMethod()) {
         case POST:
