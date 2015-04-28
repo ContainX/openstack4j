@@ -1,5 +1,9 @@
 package org.openstack4j.connectors.httpclient;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -39,6 +43,16 @@ public class HttpClientFactory {
     private CloseableHttpClient buildClient(Config config) {
         HttpClientBuilder cb = HttpClientBuilder.create().setUserAgent(USER_AGENT);
 
+        if (config.getProxy() != null) {
+            try {
+                URL url = new URL(config.getProxy().getHost());
+                HttpHost proxy = new HttpHost(url.getHost(), config.getProxy().getPort(), url.getProtocol());
+                cb.setProxy(proxy);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
+        
         if (config.isIgnoreSSLVerification())
         {
             cb.setSslcontext(UntrustedSSL.getSSLContext());

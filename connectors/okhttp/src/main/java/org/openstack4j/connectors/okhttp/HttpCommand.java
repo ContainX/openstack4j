@@ -3,6 +3,9 @@ package org.openstack4j.connectors.okhttp;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.Proxy.Type;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
@@ -62,8 +65,13 @@ public final class HttpCommand<R> {
         if (HttpLoggingFilter.isLoggingEnabled()) {
         	client.interceptors().add(new LoggingInterceptor());
         }
-        
         Config config = request.getConfig();
+        
+        if (config.getProxy() != null) {
+            client.setProxy(new Proxy(Type.HTTP, 
+                    new InetSocketAddress(config.getProxy().getRawHost(), config.getProxy().getPort())));
+        }
+        
         if (config.getConnectTimeout() > 0)
             client.setConnectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
         

@@ -20,6 +20,7 @@ public final class Config {
     private String natHostOrIP;
     private int maxConnections;
     private int maxConnectionsPerRoute;
+    private ProxyHost proxy;
 
     private Config() {
     }
@@ -85,6 +86,19 @@ public final class Config {
      */
     public Config withMaxConnectionsPerRoute(int maxConnectionsPerRoute) {
         this.maxConnectionsPerRoute = maxConnectionsPerRoute;
+        return this;
+    }
+    
+    /**
+     * Indicates the connector should be using a Proxy host
+     * <p>
+     * (ex: ProxyHost.of("http://myproxy", 8080)) );
+     * 
+     * @param proxy the proxy host
+     * @return Config
+     */
+    public Config withProxy(ProxyHost proxy) {
+        this.proxy = proxy;
         return this;
     }
     
@@ -167,6 +181,10 @@ public final class Config {
         return maxConnectionsPerRoute;
     }
     
+    public ProxyHost getProxy() {
+        return proxy;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -177,6 +195,7 @@ public final class Config {
         result = prime * result + (ignoreSSLVerification ? 1231 : 1237);
         result = prime * result + ((natHostOrIP == null) ? 0 : natHostOrIP.hashCode());
         result = prime * result + readTimeout;
+        result = prime * result + ((proxy == null) ? 0 : proxy.hashCode());
         return result;
     }
 
@@ -203,6 +222,11 @@ public final class Config {
         } else if (!natHostOrIP.equals(other.natHostOrIP))
             return false;
         if (readTimeout != other.readTimeout)
+            return false;
+        if (proxy == null) {
+            if (other.proxy != null)
+                return false;
+        } else if (!proxy.equals(other.proxy))
             return false;
         return true;
     }

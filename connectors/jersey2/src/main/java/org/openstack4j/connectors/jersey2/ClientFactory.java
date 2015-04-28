@@ -1,6 +1,11 @@
 package org.openstack4j.connectors.jersey2;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.Proxy.Type;
+import java.net.URL;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -10,7 +15,10 @@ import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.ext.ContextResolver;
 
+import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
+import org.glassfish.jersey.client.HttpUrlConnectorProvider;
+import org.glassfish.jersey.client.HttpUrlConnectorProvider.ConnectionFactory;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.openstack4j.api.exceptions.ConnectionException;
 import org.openstack4j.core.transport.ClientConstants;
@@ -54,7 +62,14 @@ class ClientFactory {
     }
 
     private static Client buildClientFromConfig(Config config) {
+        ClientConfig clientConfig = new ClientConfig();
+        
+        if (config.getProxy() != null) { 
+            addProxy(clientConfig, config);
+        }
+        
         ClientBuilder cb = ClientBuilder.newBuilder()
+                            .withConfig(clientConfig)
                             .property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, "true")
                             .register(JacksonFeature.class)
                             .register(RESOLVER)
@@ -77,6 +92,22 @@ class ClientFactory {
             cb.property(ClientProperties.CONNECT_TIMEOUT, config.getConnectTimeout());
         
         return cb.build();
+    }
+    
+    private static void addProxy(ClientConfig cc, Config config) {
+        if (config.getProxy() != null) {
+            HttpUrlConnectorProvider cp = new HttpUrlConnectorProvider();
+            cc.connectorProvider(cp);
+            final Proxy proxy = new Proxy(Type.HTTP, 
+                    new InetSocketAddress(config.getProxy().getRawHost(), config.getProxy().getPort()));
+            
+            cp.connectionFactory(new ConnectionFactory() {
+
+                @Override
+                public HttpURLConnection getConnection(URL url) throws IOException {
+                    return (HttpURLConnection) url.openConnection(proxy);
+                }});
+        }
     }
     
     private static final class RequestFilter implements ClientRequestFilter {
