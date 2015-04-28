@@ -60,7 +60,6 @@ public class FirewallPolicyTests extends AbstractTest {
 		FirewallPolicy create = Builders.firewallPolicy()
 				  .name("Test-Firewall-Policy").description("Test-Firewall-Policy")
 				  .shared(Boolean.TRUE).audited(Boolean.FALSE)
-				  .firewallRules(Arrays.asList("8722e0e0-9cc9-4490-9660-8c9a5732fbb0"))
 				  .tenantId("45977fa2dbd7482098dd68d0d8970117").build();
 		FirewallPolicy result = os().networking().firewalls().firewallpolicy().create(create);
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created FirewallPolicy : "+result);
