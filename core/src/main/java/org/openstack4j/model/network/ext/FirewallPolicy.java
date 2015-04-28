@@ -59,6 +59,12 @@ public interface FirewallPolicy extends ModelEntity, Buildable<FirewallPolicyBui
 	 	* The firewall applies the rules in the order in which they appear in this list.
 	 */
 	public List<String> getFirewallRuleIds();
+	
+	/**
+	 * @return firewallList(UUID)List : This is a list of Firewalls associated with Firewall Policy.
+	 * 		This is returned when a firewall rule is added or removed from a firewall policy.
+	 */
+	public List<String> getFirewallList();
 
 	/**
 	 * @see FirewallRule
