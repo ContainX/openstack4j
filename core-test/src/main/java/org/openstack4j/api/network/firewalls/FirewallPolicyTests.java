@@ -29,6 +29,7 @@ public class FirewallPolicyTests extends AbstractTest {
 	
 	private static final String FIREWALL_POLICY = "/network/firewalls/firewallpolicy.json";
 	private static final String FIREWALL_POLICIES = "/network/firewalls/firewallpolicies.json";
+	private static final String FIREWALL_POLICY_RULE = "/network/firewalls/firewallpolicyrule.json";
 	private static final String FIREWALL_POLICY_UPDATE = "/network/firewalls/firewallpolicyupdate.json";
 	
 	public void testListFirewallPolicies() throws IOException {
@@ -82,7 +83,7 @@ public class FirewallPolicyTests extends AbstractTest {
 	}
 	
 	public void testInsertRuleInFirewallPolicy() throws IOException {
-		respondWith(FIREWALL_POLICY);
+		respondWith(FIREWALL_POLICY_RULE);
 		
 		FirewallPolicy result = os().networking().firewalls().firewallpolicy()
 				.insertFirewallRuleInPolicy(
@@ -94,7 +95,7 @@ public class FirewallPolicyTests extends AbstractTest {
 	}
 	
 	public void testRemoveRuleFromFirewallPolicy() throws IOException {
-		respondWith(FIREWALL_POLICY);
+		respondWith(FIREWALL_POLICY_RULE);
 		
 		FirewallPolicy result = os().networking().firewalls().firewallpolicy()
 				.removeFirewallRuleFromPolicy("c69933c1-b472-44f9-8226-30dc4ffd454c", "7bc34b8c-8d3b-4ada-a9c8-1f4c11c65692");
