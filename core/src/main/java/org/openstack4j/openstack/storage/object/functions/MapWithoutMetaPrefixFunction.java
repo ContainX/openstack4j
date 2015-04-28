@@ -25,6 +25,9 @@ public class MapWithoutMetaPrefixFunction implements Function<Map<String, String
             if (idx > -1) {
                 metadata.put(key.substring(idx + 6), input.get(key));
             }
+            if (key.indexOf("X-") > -1) {
+                metadata.put(key, input.get(key));
+            }
         }
         return metadata.build();
     }
