@@ -24,7 +24,7 @@ import com.google.common.base.Preconditions;
  * 
  * @author Vishvesh Deshmukh
  */
-@Test(suiteName="Network/FirewallPolicy", enabled = true)
+@Test(suiteName="Network/FirewallPolicy", enabled = false)
 public class FirewallPolicyTests extends AbstractTest {
 	
 	private static final String FIREWALL_POLICY = "/network/firewalls/firewallpolicy.json";

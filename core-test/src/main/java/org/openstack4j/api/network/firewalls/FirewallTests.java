@@ -24,7 +24,7 @@ import com.google.common.base.Preconditions;
  * 
  * @author Vishvesh Deshmukh
  */
-@Test(suiteName="Network/Firewall", enabled = true)
+@Test(suiteName="Network/Firewall", enabled = false)
 public class FirewallTests extends AbstractTest {
 	
 	private static final String FIREWALL = "/network/firewalls/firewall.json";
