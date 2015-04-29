@@ -1,6 +1,11 @@
 package org.openstack4j.connectors.resteasy.executors;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
@@ -29,6 +34,16 @@ public class ApacheHttpClientExecutor extends ApacheHttpClient4Executor {
             HttpConnectionParams.setConnectionTimeout(params, config.getConnectTimeout());
         
         HttpClient client = new DefaultHttpClient(params);
+        
+        if (config.getProxy() != null) {
+            try {
+                URL url = new URL(config.getProxy().getHost());
+                HttpHost proxy = new HttpHost(url.getHost(), config.getProxy().getPort(), url.getProtocol());
+                client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
         
         return new ApacheHttpClientExecutor(client);
     }
