@@ -102,6 +102,7 @@ public class AbstractNeutronFirewallPolicy implements FirewallPolicy {
 		return firewallRules;
 	}
 
+	@JsonIgnore
 	@Override
 	public List<? extends FirewallRule> getNeutronFirewallRules() {
         if (neutronFirewallRules == null && (firewallRules != null && firewallRules.size() > 0)) {
