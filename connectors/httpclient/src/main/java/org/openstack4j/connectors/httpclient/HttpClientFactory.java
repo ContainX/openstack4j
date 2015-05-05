@@ -42,7 +42,7 @@ public class HttpClientFactory {
     
     private CloseableHttpClient buildClient(Config config) {
         HttpClientBuilder cb = HttpClientBuilder.create().setUserAgent(USER_AGENT);
-
+        
         if (config.getProxy() != null) {
             try {
                 URL url = new URL(config.getProxy().getHost());
