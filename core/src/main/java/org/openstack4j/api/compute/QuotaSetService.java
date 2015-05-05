@@ -72,4 +72,22 @@ public interface QuotaSetService extends RestService {
 	 */
 	SimpleTenantUsage getTenantUsage(String tenantId);
 	
+	/**
+	 * Gets tenant usage information for all tenants in a period of time (os-simple-tenant-usage)
+	 * @param startTime  eg:2015-05-05T23:59:59
+	 * @param endTime
+	 * @return list of usage information for all tenants
+	 */
+	List<? extends SimpleTenantUsage> listTenantUsages(String startTime, String endTime);
+	
+	/**
+	 * Gets the usage information for the specified tenant in a period of time (os-simple-tenant-usage)
+	 * 
+	 * @param tenantId the tenant identifier
+	 * @param startTime  eg:2015-05-05T23:59:59
+	 * @param endTime
+	 * @return Tenant Usage or null if not found
+	 */
+	SimpleTenantUsage getTenantUsage(String tenantId, String startTime, String endTime);
+	
 }
