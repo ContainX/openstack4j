@@ -25,7 +25,9 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	 */
 	@Override
 	public List<? extends Flavor> list() {
-		return get(Flavors.class, uri("/flavors/detail")).execute().getList();
+		return get(Flavors.class, uri("/flavors/detail"))
+				.param("is_public", "None")
+				.execute().getList();
 	}
 
 	/**
