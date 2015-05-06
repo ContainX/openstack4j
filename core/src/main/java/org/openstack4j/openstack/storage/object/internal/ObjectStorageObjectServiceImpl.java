@@ -6,6 +6,8 @@ import static org.openstack4j.model.storage.object.SwiftHeaders.ETAG;
 import static org.openstack4j.model.storage.object.SwiftHeaders.OBJECT_METADATA_PREFIX;
 import static org.openstack4j.model.storage.object.SwiftHeaders.X_COPY_FROM;
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +45,11 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     public List<? extends SwiftObject> list(String containerName) {
         checkNotNull(containerName);
         List<SwiftObjectImpl> objs = get(SwiftObjects.class, uri("/%s", containerName)).param("format", "json").execute();
+        
+        if (objs == null) {
+            return Collections.emptyList();
+        }
+        
         return Lists.transform(objs, ApplyContainerToObjectFunction.create(containerName));
     }
 
@@ -111,7 +118,17 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
                               .headers(options.getOptions())
                               .contentType(options.getContentType())
                               .executeWithResponse();
-        return resp.header(ETAG);
+        try
+        {
+            return resp.header(ETAG);
+        }
+        finally {
+            try {
+                resp.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
