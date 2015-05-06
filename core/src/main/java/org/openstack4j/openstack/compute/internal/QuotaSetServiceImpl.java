@@ -97,7 +97,10 @@ public class QuotaSetServiceImpl extends BaseComputeServices implements QuotaSet
 			String endTime) {
 		checkNotNull(startTime);
 		checkNotNull(endTime);
-		return get(NovaSimpleTenantUsages.class, uri("/os-simple-tenant-usage?start=%s&end=%s", startTime, endTime)).execute().getList();
+		return get(NovaSimpleTenantUsages.class, uri("/os-simple-tenant-usage"))
+				.param("start", startTime)
+				.param("end", endTime)
+				.execute().getList();
 	}
 	
 	/**
@@ -109,6 +112,10 @@ public class QuotaSetServiceImpl extends BaseComputeServices implements QuotaSet
 		checkNotNull(tenantId);
 		checkNotNull(startTime);
 		checkNotNull(endTime);
-        return get(NovaSimpleTenantUsage.class, uri("/os-simple-tenant-usage/%s?start=%s&end=%s&detailed=1", tenantId, startTime, endTime)).execute();
+        return get(NovaSimpleTenantUsage.class, uri("/os-simple-tenant-usage/%s", tenantId))
+        		.param("start", startTime)
+				.param("end", endTime)
+				.param("detailed", "1")
+        		.execute();
 	}
 }
