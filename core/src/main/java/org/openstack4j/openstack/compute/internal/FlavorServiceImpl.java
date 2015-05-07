@@ -9,9 +9,13 @@ import java.util.Map;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Flavor;
+import org.openstack4j.model.compute.FlavorAccess;
 import org.openstack4j.openstack.compute.domain.ExtraSpecsWrapper;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaFlavor.Flavors;
+import org.openstack4j.openstack.compute.domain.NovaFlavorAccess.AddTenantAccess;
+import org.openstack4j.openstack.compute.domain.NovaFlavorAccess.FlavorAccesses;
+import org.openstack4j.openstack.compute.domain.NovaFlavorAccess.RemoveTenantAccess;
 
 /**
  * Flavor service provides CRUD capabilities for Flavor(s).  A flavor is an available hardware configuration/template for a server
@@ -109,4 +113,40 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 		return extraSpec == null ? null : (String) extraSpec.get(key);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends FlavorAccess> listFlavorAccess(String flavorId) {
+		checkNotNull(flavorId);
+		return get(FlavorAccesses.class, uri("/flavors/%s/os-flavor-access", flavorId))
+				.execute().getList();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends FlavorAccess> addTenantAccess(FlavorAccess flavorAccess) {
+		checkNotNull(flavorAccess.getFlavorId());
+		checkNotNull(flavorAccess.getTenant());
+		return post(FlavorAccesses.class, uri("/flavors/%s/action", flavorAccess.getFlavorId()))
+			    .entity((AddTenantAccess)flavorAccess)
+			    .execute()
+			    .getList();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends FlavorAccess> removeTenantAccess(
+			FlavorAccess flavorAccess) {
+		checkNotNull(flavorAccess.getFlavorId());
+		checkNotNull(flavorAccess.getTenant());
+		return delete(FlavorAccesses.class, uri("flavors/%s/action", flavorAccess.getFlavorId()))
+				.entity((RemoveTenantAccess)flavorAccess)
+				.execute()
+				.getList();
+	}
 }

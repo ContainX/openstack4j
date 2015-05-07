@@ -6,6 +6,7 @@ import java.util.Map;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Flavor;
+import org.openstack4j.model.compute.FlavorAccess;
 
 /**
  * Flavor service provides CRUD capabilities for Flavor(s).  A flavor is an available hardware configuration/template for a server
@@ -95,5 +96,29 @@ public interface FlavorService extends RestService {
 	 * @return value
 	 */
 	String getSpec(String flavorId, String key);
+	
+	/**
+	 * List tenants with access to private flavor
+	 * 
+	 * @param flavorId
+	 * @return List tenants with access to private flavor
+	 */
+	List<? extends FlavorAccess> listFlavorAccess(String flavorId);
+	
+	/**
+	 * Add access to private flavor
+	 * 
+	 * @param flavorAccess
+	 * @return List tenants with access to private flavor
+	 */
+	List<? extends FlavorAccess> addTenantAccess(FlavorAccess flavorAccess);
+	
+	/**
+	 * Delete access from private flavor
+	 * 
+	 * @param flavorAccess
+	 * @return List tenants with access to private flavor
+	 */
+	List<? extends FlavorAccess> removeTenantAccess(FlavorAccess flavorAccess);
 	
 }
