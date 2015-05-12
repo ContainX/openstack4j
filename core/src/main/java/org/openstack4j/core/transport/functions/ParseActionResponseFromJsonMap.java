@@ -16,6 +16,7 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
 
     private static final String KEY_MESSAGE = "message";
     private static final String NEUTRON_ERROR = "NeutronError";
+    private static final String COMPUTE_FAULT = "computeFault";
     private HttpResponse response;
     
     public ParseActionResponseFromJsonMap(HttpResponse response) {
@@ -46,6 +47,11 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
                     String msg = String.valueOf(inner.get(NEUTRON_ERROR));
                     return ActionResponse.actionFailed(msg, response.getStatus());
                 }
+                if (inner.containsKey(COMPUTE_FAULT)) {
+                	/** For 'computeFault' Error Message Propagation.. */
+                    String msg = String.valueOf(map.get(COMPUTE_FAULT));
+                    return ActionResponse.actionFailed(msg, response.getStatus());
+                 }
             }
         }
 

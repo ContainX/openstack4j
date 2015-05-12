@@ -26,7 +26,7 @@ public class ToActionResponseFunction implements Function<HttpResponse, ActionRe
     }
     
     public ActionResponse apply(HttpResponse response, String action) {
-        if (response.getStatus() == 409)
+        if (response.getStatus() == 409 || response.getStatus() == 500)
         {
             ActionResponse ar = ResponseToActionResponse.INSTANCE.apply(response, true);
             if (ar != null)
