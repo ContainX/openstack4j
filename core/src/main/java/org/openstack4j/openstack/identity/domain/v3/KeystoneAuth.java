@@ -25,8 +25,9 @@ public class KeystoneAuth implements Authentication, AuthStore {
     private AuthIdentity identity;
     private AuthScope scope;
 
-    public KeystoneAuth(String tokenId) {
+    public KeystoneAuth(String tokenId, AuthScope scope) {
         this.identity = AuthIdentity.createTokenType(tokenId);
+        this.scope = scope;
     }
     
     public KeystoneAuth(String username, String password) {

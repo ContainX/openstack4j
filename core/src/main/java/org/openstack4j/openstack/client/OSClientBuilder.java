@@ -137,7 +137,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         @Override
         public OSClient authenticate() throws AuthenticationException {
             if (tokenId != null && tokenId.length() > 0)
-                return OSAuthenticator.invoke(new KeystoneAuth(tokenId), endpoint, perspective, config);
+                return OSAuthenticator.invoke(new KeystoneAuth(tokenId, scope), endpoint, perspective, config);
             return OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective, config);
         }
 
