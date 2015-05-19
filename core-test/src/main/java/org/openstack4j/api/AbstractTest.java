@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.io.ByteStreams;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
+import java.util.HashMap;
 
 /**
  * Base Test class which handles Mocking a Webserver to fullfill and test against JSON response objects
@@ -78,40 +79,60 @@ public abstract class AbstractTest {
     }
 
     /**
-     * The path to the expected JSON results
+     * Responds with success status code and body from json resource file
      *
-     * @param resource the resource
+     * @param resource the json resource file
      * @throws IOException Signals that an I/O exception has occurred.
      */
     protected void respondWith(String resource) throws IOException {
-        MockResponse r = new MockResponse();
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json");
         InputStream is = getClass().getResourceAsStream(resource);
-        r.setBody(new String(ByteStreams.toByteArray(is)));
-        r.setHeader("Content-Type", "application/json");
-        server.enqueue(r);
+        respondWith(headers, 200, new String(ByteStreams.toByteArray(is)));
     }
     
     /**
-     * Responds with negative based response code and no body
+     * Responds with specified status code and no body
      * @param statusCode the status code to respond with
      */
     protected void respondWith(int statusCode) {
-        respondWith(null, statusCode);
+        respondWith(null, statusCode, "");
     }
     
     /**
-     * Responds with negative based response code and no body and optional headers
+     * Responds with specified status code, no body and optional headers
      * @param headers optional headers
      * @param statusCode the status code to respond with
      */
     protected void respondWith(Map<String,String> headers, int statusCode) {
+        respondWith(headers, statusCode, "");
+    }
+    
+    /**
+     * Responds with specified status code and json body
+     * @param statusCode the status code to respond with
+     * @param body the json body
+     */
+    protected void respondWith(int statusCode, String jsonBody) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json");
+        respondWith(headers, statusCode, jsonBody);
+    }
+    
+    /**
+     * Responds with specified status code, body and optional headers
+     * @param headers optional headers
+     * @param statusCode the status code to respond with
+     * @param body the response body
+     */
+    protected void respondWith(Map<String, String> headers, int statusCode, String body) {
         MockResponse r = new MockResponse();
         if (headers != null) {
             for (String name : headers.keySet()) {
                 r.addHeader(name, headers.get(name));
             }
         }
-        r.setBody("");
+        r.setBody(body);
         r.setResponseCode(statusCode);
         server.enqueue(r);
     }
