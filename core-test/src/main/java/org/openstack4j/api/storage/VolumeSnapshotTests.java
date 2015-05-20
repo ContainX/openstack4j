@@ -17,17 +17,14 @@ import org.testng.annotations.Test;
 @Test(suiteName="Block Storage Tests")
 public class VolumeSnapshotTests extends AbstractTest {
 
-    private static final String JSON_VOLUME_SNAPSHOTS = "/storage/volumesnapshots.json";
-    private static final String JSON_VOLUME_SNAPSHOTS_FILTERED = "/storage/volumesnapshots_filtered.json";
-    
     @Override
     protected Service service() {
         return Service.BLOCK_STORAGE;
     }
     
-    public void listVolumeSnaphots() throws Exception {
+    public void listVolumeSnaphotsV1() throws Exception {
         // Check list volumes
-        respondWith(JSON_VOLUME_SNAPSHOTS);
+        respondWith("/storage/v1/volumesnapshots.json");
         List<? extends VolumeSnapshot> volumes = os().blockStorage().snapshots().list();
         assertEquals(volumes.size(), 2);
         
@@ -37,7 +34,7 @@ public class VolumeSnapshotTests extends AbstractTest {
         assertTrue(listRequest.getPath().matches("/v[12]/\\p{XDigit}*/snapshots"));
         
         // Check list volumes with filters
-        respondWith(JSON_VOLUME_SNAPSHOTS_FILTERED);
+        respondWith("/storage/v1/volumesnapshots_filtered.json");
         final String volName = "snap-vol-test-1";
         Map<String, String> filters = new HashMap<String, String>();
         filters.put("display_name", volName);
