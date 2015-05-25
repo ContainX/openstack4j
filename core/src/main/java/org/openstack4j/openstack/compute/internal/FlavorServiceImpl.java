@@ -127,11 +127,15 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<? extends FlavorAccess> addTenantAccess(FlavorAccess flavorAccess) {
-		checkNotNull(flavorAccess.getFlavorId());
-		checkNotNull(flavorAccess.getTenant());
-		return post(FlavorAccesses.class, uri("/flavors/%s/action", flavorAccess.getFlavorId()))
-			    .entity((AddTenantAccess)flavorAccess)
+	public List<? extends FlavorAccess> addTenantAccess(String flavorId, String tenantId) {
+		checkNotNull(flavorId);
+		checkNotNull(tenantId);
+		
+		AddTenantAccess addTenantAccess = new AddTenantAccess();
+		addTenantAccess.setTenantId(tenantId);
+		
+		return post(FlavorAccesses.class, uri("/flavors/%s/action", flavorId))
+			    .entity(addTenantAccess)
 			    .execute()
 			    .getList();
 	}
@@ -140,13 +144,15 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<? extends FlavorAccess> removeTenantAccess(
-			FlavorAccess flavorAccess) {
-		checkNotNull(flavorAccess.getFlavorId());
-		checkNotNull(flavorAccess.getTenant());
-		return delete(FlavorAccesses.class, uri("flavors/%s/action", flavorAccess.getFlavorId()))
-				.entity((RemoveTenantAccess)flavorAccess)
-				.execute()
-				.getList();
+	public void removeTenantAccess(String flavorId, String tenantId) {
+		checkNotNull(flavorId);
+		checkNotNull(tenantId);
+		
+		RemoveTenantAccess removeTenantAccess = new RemoveTenantAccess();
+		removeTenantAccess.setTenantId(tenantId);
+		
+		delete(FlavorAccesses.class, uri("/flavors/%s/action", flavorId))
+				.entity(removeTenantAccess)
+				.execute();
 	}
 }

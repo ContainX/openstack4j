@@ -108,17 +108,19 @@ public interface FlavorService extends RestService {
 	/**
 	 * Add access to private flavor
 	 * 
-	 * @param flavorAccess
+	 * @param flavorId
+	 * @param tenantId
 	 * @return List tenants with access to private flavor
 	 */
-	List<? extends FlavorAccess> addTenantAccess(FlavorAccess flavorAccess);
+	List<? extends FlavorAccess> addTenantAccess(String flavorId, String tenantId);
 	
 	/**
 	 * Delete access from private flavor
 	 * 
-	 * @param flavorAccess
+	 * @param flavorId
+	 * @param tenantId
 	 * @return List tenants with access to private flavor
 	 */
-	List<? extends FlavorAccess> removeTenantAccess(FlavorAccess flavorAccess);
+	void removeTenantAccess(String flavorId, String tenantId);
 	
 }
