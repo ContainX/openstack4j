@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.client;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.client.IOSClientBuilder;
 import org.openstack4j.api.exceptions.AuthenticationException;
@@ -7,6 +9,7 @@ import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
 import org.openstack4j.openstack.identity.domain.Credentials;
+import org.openstack4j.openstack.identity.domain.TokenAuth;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth.AuthScope;
 import org.openstack4j.openstack.internal.OSAuthenticator;
@@ -68,6 +71,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
 
         String tenantName;
         String tenantId;
+        String tokenId;
         
         @Override
         public ClientV2 tenantName(String tenantName) {
@@ -83,7 +87,18 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         
         @Override
         public OSClient authenticate() throws AuthenticationException {
+            if (tokenId != null) {
+                checkArgument(tenantName != null || tenantId != null, "TenantId or TenantName is required when using Token Auth");
+                return OSAuthenticator.invoke(new TokenAuth(tokenId, tenantName, tenantId), endpoint, perspective, config);
+            }
+            
             return OSAuthenticator.invoke(new Credentials(user, password, tenantName, tenantId), endpoint, perspective, config);
+        }
+
+        @Override
+        public ClientV2 token(String tokenId) {
+            this.tokenId = tokenId;
+            return this;
         }
     }
     
@@ -122,7 +137,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         @Override
         public OSClient authenticate() throws AuthenticationException {
             if (tokenId != null && tokenId.length() > 0)
-                return OSAuthenticator.invoke(new KeystoneAuth(tokenId), endpoint, perspective, config);
+                return OSAuthenticator.invoke(new KeystoneAuth(tokenId, scope), endpoint, perspective, config);
             return OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective, config);
         }
 

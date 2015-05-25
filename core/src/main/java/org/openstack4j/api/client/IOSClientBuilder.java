@@ -94,6 +94,17 @@ public interface IOSClientBuilder<R, T extends IOSClientBuilder<R, T>> {
          * @return self for method chaining
          */
         V2 tenantId(String tenantId);
+        
+        /**
+         * Allows authentication via an existing Token versus {@link #credentials(String, String)}.  Note:  The 
+         * {@link #tenantId(String)} or {@link #tenantName(String)} will required when using this method for
+         * authentication.
+         * 
+         * @param tokenId the token identifier
+         * @return self for method chaining
+         */
+        V2 token(String tokenId);
+        
     }
     
     /**

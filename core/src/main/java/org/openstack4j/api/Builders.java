@@ -50,6 +50,11 @@ import org.openstack4j.model.network.ext.builder.VipBuilder;
 import org.openstack4j.model.network.ext.builder.VipUpdateBuilder;
 import org.openstack4j.model.sahara.builder.ClusterBuilder;
 import org.openstack4j.model.sahara.builder.ClusterTemplateBuilder;
+import org.openstack4j.model.sahara.builder.DataSourceBuilder;
+import org.openstack4j.model.sahara.builder.JobBinaryBuilder;
+import org.openstack4j.model.sahara.builder.JobBuilder;
+import org.openstack4j.model.sahara.builder.JobConfigBuilder;
+import org.openstack4j.model.sahara.builder.JobExecutionBuilder;
 import org.openstack4j.model.sahara.builder.NodeGroupBuilder;
 import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
 import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
@@ -103,6 +108,11 @@ import org.openstack4j.openstack.networking.domain.ext.NeutronVip;
 import org.openstack4j.openstack.networking.domain.ext.NeutronVipUpdate;
 import org.openstack4j.openstack.sahara.domain.SaharaCluster;
 import org.openstack4j.openstack.sahara.domain.SaharaClusterTemplate;
+import org.openstack4j.openstack.sahara.domain.SaharaDataSource;
+import org.openstack4j.openstack.sahara.domain.SaharaJob;
+import org.openstack4j.openstack.sahara.domain.SaharaJobBinary;
+import org.openstack4j.openstack.sahara.domain.SaharaJobConfig;
+import org.openstack4j.openstack.sahara.domain.SaharaJobExecution;
 import org.openstack4j.openstack.sahara.domain.SaharaNodeGroup;
 import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaServiceConfig;
@@ -541,5 +551,51 @@ public class Builders {
      */
     public static BlockQuotaSetBuilder blockQuotaSet() {
         return CinderBlockQuotaSet.builder();
+    }
+
+    /**
+     * The builder which creates a sahara Data Source
+     * 
+     * @return the data source builder
+     */
+    public static DataSourceBuilder dataSource() {
+        return SaharaDataSource.builder();
+    }
+
+    /**
+     * The builder which creates a sahara Job Binary
+     * 
+     * @return the job binary builder
+     */
+    public static JobBinaryBuilder jobBinary() {
+        return SaharaJobBinary.builder();
+    }
+
+
+    /**
+     * The builder which creates a sahara Job
+     * 
+     * @return the job builder
+     */
+    public static JobBuilder job() {
+        return SaharaJob.builder();
+    }
+
+    /**
+     * The builder which creates a job configuration for sahara job execution
+     * 
+     * @return the job config builder
+     */
+    public static JobConfigBuilder jobConfig() {
+        return SaharaJobConfig.builder();
+    }
+
+    /**
+     * The builder which creates a sahara job execution
+     * 
+     * @return the job execution builder
+     */
+    public static JobExecutionBuilder jobExecution() {
+        return SaharaJobExecution.builder();
     }
 }

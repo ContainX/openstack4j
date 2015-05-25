@@ -16,18 +16,23 @@ public class Credentials extends Auth implements AuthStore {
     private PasswordCredentials passwordCreds = new PasswordCredentials();
 
 
-    public Credentials() { }
+    public Credentials() { 
+        super(Type.CREDENTIALS);
+    }
 
     public Credentials(String username, String password) {
+        this();
         passwordCreds.setCredentials(username, password);
     }
 
     public Credentials(String username, String password, String tenantName) {
+        this();
         passwordCreds.setCredentials(username, password);
         setTenantName(tenantName);
     }
 
     public Credentials(String username, String password, String tenantName, String tenantId) {
+        this();
         passwordCreds.setCredentials(username, password);
         setTenantName(tenantName);
         setTenantId(tenantId);

@@ -1,0 +1,33 @@
+{
+    "floating_ips": [{
+            "instance_id": null,
+            "ip": "192.168.0.100",
+            "fixed_ip": null,
+            "id": "f8d696d4-573d-4750-baa5-2cf75771a824",
+            "pool": "floating"
+        }, {
+            "instance_id": null,
+            "ip": "192.168.0.101",
+            "fixed_ip": null,
+            "id": "88b80e99-e719-453d-a16b-9ae8abae3c7c",
+            "pool": "floating"
+        }, {
+            "instance_id": null,
+            "ip": "192.168.0.102",
+            "fixed_ip": null,
+            "id": "05d6f197-57d4-44b7-9ad5-994c8f8fe250",
+            "pool": "floating"
+        }, {
+            "instance_id": null,
+            "ip": "192.168.0.103",
+            "fixed_ip": null,
+            "id": "74db2673-23dd-4f44-8b01-4d92a023bb46",
+            "pool": "floating"
+        }, {
+            "instance_id": null,
+            "ip": "192.168.0.104",
+            "fixed_ip": null,
+            "id": "940484f3-d76e-4c18-9bbe-80901d6dbaa6",
+            "pool": "floating"
+        }]
+}

@@ -29,7 +29,8 @@ public class KeystoneAccess implements Access {
 	private AccessUser user;
 	private String endpoint;
 	private AuthStore credentials;
-
+	private TokenAuth tokenAuth;
+	
 	/**
 	 * @return the token
 	 */
@@ -66,12 +67,25 @@ public class KeystoneAccess implements Access {
 	public AuthStore getCredentials() {
 		return credentials;
 	}
+	
+	public TokenAuth getTokenAuth() {
+	    return tokenAuth;
+	}
+	
+	public boolean isCredentialType() {
+	    return credentials != null;
+	}
 
 	public KeystoneAccess applyContext(String endpoint, AuthStore credentials) {
 		this.credentials = credentials;
 		this.endpoint = endpoint;
 		return this;
 	}
+	
+	public KeystoneAccess applyContext(String endpoint, TokenAuth token) {
+        this.endpoint = endpoint;
+        return this;
+    }
 
 	/**
 	 * {@inheritDoc}
