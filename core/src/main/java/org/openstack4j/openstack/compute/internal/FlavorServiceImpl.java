@@ -9,9 +9,13 @@ import java.util.Map;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.Flavor;
+import org.openstack4j.model.compute.FlavorAccess;
 import org.openstack4j.openstack.compute.domain.ExtraSpecsWrapper;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaFlavor.Flavors;
+import org.openstack4j.openstack.compute.domain.NovaFlavorAccess.AddTenantAccess;
+import org.openstack4j.openstack.compute.domain.NovaFlavorAccess.FlavorAccesses;
+import org.openstack4j.openstack.compute.domain.NovaFlavorAccess.RemoveTenantAccess;
 
 /**
  * Flavor service provides CRUD capabilities for Flavor(s).  A flavor is an available hardware configuration/template for a server
@@ -25,7 +29,9 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	 */
 	@Override
 	public List<? extends Flavor> list() {
-		return get(Flavors.class, uri("/flavors/detail")).execute().getList();
+		return get(Flavors.class, uri("/flavors/detail"))
+				.param("is_public", "None")
+				.execute().getList();
 	}
 
 	/**
@@ -107,4 +113,46 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 		return extraSpec == null ? null : (String) extraSpec.get(key);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends FlavorAccess> listFlavorAccess(String flavorId) {
+		checkNotNull(flavorId);
+		return get(FlavorAccesses.class, uri("/flavors/%s/os-flavor-access", flavorId))
+				.execute().getList();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends FlavorAccess> addTenantAccess(String flavorId, String tenantId) {
+		checkNotNull(flavorId);
+		checkNotNull(tenantId);
+		
+		AddTenantAccess addTenantAccess = new AddTenantAccess();
+		addTenantAccess.setTenantId(tenantId);
+		
+		return post(FlavorAccesses.class, uri("/flavors/%s/action", flavorId))
+			    .entity(addTenantAccess)
+			    .execute()
+			    .getList();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void removeTenantAccess(String flavorId, String tenantId) {
+		checkNotNull(flavorId);
+		checkNotNull(tenantId);
+		
+		RemoveTenantAccess removeTenantAccess = new RemoveTenantAccess();
+		removeTenantAccess.setTenantId(tenantId);
+		
+		delete(FlavorAccesses.class, uri("/flavors/%s/action", flavorId))
+				.entity(removeTenantAccess)
+				.execute();
+	}
 }
