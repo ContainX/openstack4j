@@ -18,6 +18,8 @@ import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.EndpointV3;
 import org.openstack4j.model.identity.v3.TokenV3;
 
+import com.google.common.base.Optional;
+
 /**
  * Resolves an Endpoint URL based on the Service Type and Facing perspective
  * 
@@ -98,19 +100,37 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 		if (p.perspective == null)
 			p.perspective = Facing.PUBLIC;
 
+		
 		for (Catalog catalog : token.getCatalog()) {
 			if (p.type == ServiceType.forName(catalog.getType())) 
 			{
 				for (EndpointV3 ep : catalog.getEndpoints()) {
 					// Since we only support V3 authentication - skip a V3 URL
-					if (ep.getInterface() == p.perspective && !isEndpointV3(ep.getURL()))
+					if (matches(ep, p) && !isEndpointV3(ep.getURL())) {
 						return ep.getURL().toString();
+					}
 				}
 			}
 		}
 		return null;
 	}
 
+	/**
+	 * Returns <code>true</code> for any endpoint that matches a given 
+	 * {@link URLResolverParams}.
+	 * 
+	 * @param endpoint
+	 * @param p
+	 * @return
+	 */
+	private boolean matches(EndpointV3 endpoint, URLResolverParams p) {
+		boolean matches = endpoint.getInterface() == p.perspective;
+		if (Optional.fromNullable(p.region).isPresent()) {
+			matches &= endpoint.getRegion().equals(p.region);
+		}
+		return matches;
+	}
+	
 	private boolean isEndpointV3(URL url) {
 		return url.toString().contains("/v3");
 	}

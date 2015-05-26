@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.identity.domain.v3;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,7 +55,13 @@ public class AccessWrapper implements Access {
 	 */
 	@Override
 	public List<? extends Service> getServiceCatalog() {
-		return null;
+		List<? extends Catalog> catalogs = this.token.getCatalog();
+		List<Service> services = new ArrayList<Service>(catalogs.size());
+		for (Catalog catalog : catalogs) {
+			Service wrappedCatalog = ServiceWrapper.wrap(catalog);
+			services.add(wrappedCatalog);
+		}
+		return services;
 	}
 
 	/**
