@@ -15,6 +15,7 @@ import org.openstack4j.model.identity.v3.TokenV3;
 import org.openstack4j.model.identity.v3.TokenV3.UserV3;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.SortedSetMultimap;
 
 
 /**
@@ -64,6 +65,11 @@ public class AccessWrapper implements Access {
 		return services;
 	}
 
+	@Override
+    public SortedSetMultimap<String, ? extends Service> getAggregatedCatalog() {
+        return null;
+    }
+	
 	/**
 	 * {@inheritDoc}
 	 */

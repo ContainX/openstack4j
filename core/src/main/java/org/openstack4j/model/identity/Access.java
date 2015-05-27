@@ -6,6 +6,8 @@ import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Link;
 
+import com.google.common.collect.SortedSetMultimap;
+
 /**
  * Access is the entity returned when Authenticated by the Identity service
  * 
@@ -22,6 +24,14 @@ public interface Access extends ModelEntity {
 	 * @return the service catalog
 	 */
 	List<? extends Service> getServiceCatalog();
+	
+	/**
+     * A Lazy loading Aggregated Service Catalog Mapping.  The key is a stripped version service type or name with a collection
+     * of Services sorted by version
+     * 
+     * @return sorted aggregate service catalog
+     */
+	SortedSetMultimap<String, ? extends Service> getAggregatedCatalog();
 	
 	/**
 	 * @return the original endpoint used to authenticate

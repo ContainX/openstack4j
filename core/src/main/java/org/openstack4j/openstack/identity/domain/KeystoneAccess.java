@@ -1,5 +1,8 @@
 package org.openstack4j.openstack.identity.domain;
 
+import static org.openstack4j.openstack.identity.functions.ServiceFunctions.TYPE_WITHOUT_VERSION;
+import static org.openstack4j.openstack.identity.functions.ServiceFunctions.VERSION_FROM_TYPE;
+
 import java.util.List;
 
 import org.openstack4j.api.types.ServiceType;
@@ -18,6 +21,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import com.google.common.collect.SortedSetMultimap;
+import com.google.common.collect.TreeMultimap;
 
 @JsonRootName("access")
 public class KeystoneAccess implements Access {
@@ -30,6 +35,8 @@ public class KeystoneAccess implements Access {
 	private String endpoint;
 	private AuthStore credentials;
 	private TokenAuth tokenAuth;
+	@JsonIgnore
+	private volatile SortedSetMultimap<String, AccessService> aggregatedCatalog; 
 	
 	/**
 	 * @return the token
@@ -43,6 +50,31 @@ public class KeystoneAccess implements Access {
 	 */
 	public List<? extends Service> getServiceCatalog() {
 		return serviceCatalog;
+	}
+	
+	/**
+	 * A Lazy loading Aggregated Service Catalog Mapping.  The key is a stripped version service type or name with a collection
+	 * of Services sorted by version
+	 * 
+	 * @return sorted aggregate service catalog
+	 */
+	@Override
+	@JsonIgnore
+	public SortedSetMultimap<String, AccessService> getAggregatedCatalog() {
+	    if (aggregatedCatalog == null) {
+	        synchronized(this) {
+	            if (aggregatedCatalog == null) {
+	                aggregatedCatalog = TreeMultimap.create();
+	                for (AccessService sc : serviceCatalog) {
+	                    String nameKey = TYPE_WITHOUT_VERSION.apply(sc.getName());
+	                    String typeKey = TYPE_WITHOUT_VERSION.apply(sc.getType());
+	                    aggregatedCatalog.put(nameKey, sc);
+                        aggregatedCatalog.put(typeKey, sc);
+	                }
+	            }
+	        }
+	    }
+	    return aggregatedCatalog;
 	}
 
 	/**
@@ -170,12 +202,14 @@ public class KeystoneAccess implements Access {
 	}
 
 
-	public static final class AccessService implements Service
+	public static final class AccessService implements Service, Comparable<AccessService>
 	{
 		private String type;
 		private String name;
 		private List<KeystoneEndpoint> endpoints;
 		private ServiceType serviceType;
+        @JsonIgnore
+        private Integer version;
 
 		@JsonProperty("endpoints_links")
 		private List<GenericLink> endpointsLinks;
@@ -214,15 +248,28 @@ public class KeystoneAccess implements Access {
 		public List<? extends Link> getEndpointsLinks() {
 			return endpointsLinks;
 		}
+		
+		@JsonIgnore
+		public Integer getVersion() {
+		    if (version == null) {
+                version = VERSION_FROM_TYPE.apply(type);
+            }
+		    return version;
+		}
 
 		/**
 		 * {@inheritDoc}
 		 */
 		public String toString() {
 			return Objects.toStringHelper(this).omitNullValues()
-					.add("name", name).add("type", type).add("endpoints", endpoints)
+					.add("name", name).add("type", type).add("endpoints", endpoints).addValue("\n")
 					.toString();
 		}
+
+        @Override
+        public int compareTo(AccessService o) {
+            return getVersion().compareTo(o.getVersion());
+        }
 	}
 
 	@JsonIgnore
