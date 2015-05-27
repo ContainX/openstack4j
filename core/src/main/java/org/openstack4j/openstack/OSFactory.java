@@ -7,7 +7,6 @@ import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.internal.HttpLoggingFilter;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.openstack.client.OSClientBuilder;
-import org.openstack4j.openstack.identity.domain.KeystoneAccess;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.openstack4j.openstack.internal.OSClientSession;
 import org.openstack4j.openstack.logging.internal.FallbackLoggerFactorySupplier;
@@ -30,7 +29,7 @@ public abstract class OSFactory<T extends OSFactory<T>> {
 	 * @return the OSCLient
 	 */
 	public static OSClient clientFromAccess(Access access) {
-		return OSClientSession.createSession((KeystoneAccess) access);
+		return OSClientSession.createSession(access);
 	}
 	
 	/**
@@ -42,7 +41,7 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      * @return the OSCLient
      */
     public static OSClient clientFromAccess(Access access, Facing perspective) {
-        return OSClientSession.createSession((KeystoneAccess) access, perspective, null);
+        return OSClientSession.createSession(access, perspective, null);
     }
 	
 	/**
@@ -54,7 +53,7 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      * @return the OSCLient
      */
     public static OSClient clientFromAccess(Access access, Config config) {
-        return OSClientSession.createSession((KeystoneAccess) access, null, config);
+        return OSClientSession.createSession(access, null, config);
     }
     
     /**
@@ -67,7 +66,7 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      * @return the OSCLient
      */
     public static OSClient clientFromAccess(Access access, Facing perspective, Config config) {
-        return OSClientSession.createSession((KeystoneAccess) access, perspective, config);
+        return OSClientSession.createSession(access, perspective, config);
     }
     
     /**
