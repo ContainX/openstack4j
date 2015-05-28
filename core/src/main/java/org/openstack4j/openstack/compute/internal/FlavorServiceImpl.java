@@ -109,7 +109,7 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	public String getSpec(String flavorId, String key) {
 		checkNotNull(flavorId);
 		checkNotNull(key);
-		Map extraSpec = get(HashMap.class, uri("/flavors/%s/os-extra_specs/%s/", flavorId, key)).execute();
+		Map extraSpec = get(HashMap.class, uri("/flavors/%s/os-extra_specs/%s", flavorId, key)).execute();
 		return extraSpec == null ? null : (String) extraSpec.get(key);
 	}
 
