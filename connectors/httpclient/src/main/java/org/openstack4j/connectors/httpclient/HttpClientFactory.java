@@ -22,6 +22,7 @@ public class HttpClientFactory {
     private static final String USER_AGENT = "OpenStack4j-Agent";
 
     private CloseableHttpClient client;
+    private static HttpClientConfigInterceptor INTERCEPTOR;
     
     /**
      * Creates or Returns an existing HttpClient
@@ -38,6 +39,15 @@ public class HttpClientFactory {
             }
         }
         return client;
+    }
+    
+    /**
+     * Registers a HttpClientConfigInterceptor that is invoked prior to a new HttpClient being created.  
+     * 
+     * @param interceptor the http config interceptor
+     */
+    public static void registerInterceptor(HttpClientConfigInterceptor interceptor) {
+        INTERCEPTOR = interceptor;
     }
     
     private CloseableHttpClient buildClient(Config config) {
@@ -77,6 +87,10 @@ public class HttpClientFactory {
         
         if (config.getReadTimeout() > 0)
             rcb.setSocketTimeout(config.getReadTimeout());
+        
+        if (INTERCEPTOR != null) {
+            INTERCEPTOR.onClientCreate(cb, rcb, config);
+        }
         
         return cb.setDefaultRequestConfig(rcb.build()).build();
     }
