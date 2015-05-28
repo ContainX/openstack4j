@@ -137,6 +137,11 @@ public class HttpResponseImpl implements HttpResponse {
 
     @Override
     public <T> T readEntity(Class<T> typeToReadAs) {
+        
+        if (data == null) {
+            return null;
+        }
+        
         try {
             return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(data);
         } catch (Exception e) {
