@@ -1,0 +1,30 @@
+{
+    "volume": {
+        "status": "in-use",
+        "display_name": "vol-test",
+        "attachments": [{
+                "host_name": "myhost",
+                "device": "/dev/vdd",
+                "server_id": "eaa6a54d-35c1-40ce-831d-bb61f991e1a9",
+                "id": "8a9287b7-4f4d-4213-8d75-63470f19f27c",
+                "volume_id": "8a9287b7-4f4d-4213-8d75-63470f19f27c"
+            }],
+        "availability_zone": "nova",
+        "bootable": "false",
+        "encrypted": false,
+        "created_at": "2015-05-25T15:03:43.104260",
+        "os-vol-tenant-attr:tenant_id": "b0b5ed7ae06049688349fe43737796d4",
+        "os-volume-replication:driver_data": null,
+        "display_description": "a description",
+        "os-volume-replication:extended_status": null,
+        "volume_type": "Gold",
+        "snapshot_id": "22222222-2222-2222-2222-222222222222",
+        "source_volid": "11111111-1111-1111-1111-111111111111",
+        "metadata": {
+            "readonly": "False",
+            "attached_mode": "rw"
+        },
+        "id": "8a9287b7-4f4d-4213-8d75-63470f19f27c",
+        "size": 100
+    }
+}

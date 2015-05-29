@@ -21,45 +21,46 @@ public class HttpEntityHandler {
 
     @SuppressWarnings("unchecked")
     public static <T> T handle(HttpResponse response, Class<T> returnType, ExecutionOptions<T> options, boolean requiresVoidBodyHandling) {
+        try {
+            Handle<T> handle = Handle.create(response, returnType, options, requiresVoidBodyHandling);
 
-        Handle<T> handle = Handle.create(response, returnType, options, requiresVoidBodyHandling);
+            if (response.getStatus() >= 400) {
 
-        if (response.getStatus() >= 400) {
+                if (requiresVoidBodyHandling && ActionResponse.class == returnType) {
+                    return (T) ResponseToActionResponse.INSTANCE.apply(response);
+                }
 
-            if (requiresVoidBodyHandling && ActionResponse.class == returnType) {
-                return (T) ResponseToActionResponse.INSTANCE.apply(response);
+                if (options != null) {
+                    options.propagate(response);
+                }
+
+                if (handle404(handle).isComplete()) {
+                    return handle.getReturnObject();
+                }
+
+                if (handleLessThan500(handle).isComplete()) {
+                    return handle.getReturnObject();
+                }
+
+                throw mapException(response.getStatusMessage(), response.getStatus());
             }
 
-            if (options != null) {
-                options.propagate(response);
+            if (options != null && options.hasParser()) {
+                return options.getParser().apply(response);
             }
 
-            if (handle404(handle).isComplete()) {
-                return handle.getReturnObject();
+            if (returnType == Void.class) {
+                return null;
             }
 
-            if (handleLessThan500(handle).isComplete()) {
-                return handle.getReturnObject();
+            if (returnType == ActionResponse.class) {
+                return (T) ActionResponse.actionSuccess();
             }
 
-            throw mapException(response.getStatusMessage(), response.getStatus());
+            return response.readEntity(returnType);
+        } finally {
+            closeQuietly(response);
         }
-
-        if (options != null && options.hasParser()) {
-            return options.getParser().apply(response);
-        }
-
-        if (returnType == Void.class) {
-            closeQuietly(handle.getResponse());
-            return null;
-        }
-        
-        if (returnType == ActionResponse.class) {
-            closeQuietly(handle.getResponse());
-            return (T) ActionResponse.actionSuccess();
-        }
-
-        return response.readEntity(returnType);
     }
 
     private static <T> Handle<T> handle404(Handle<T> handle) {
@@ -72,13 +73,10 @@ public class HttpEntityHandler {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                } finally {
-                    closeQuietly(handle.getResponse());
                 }
             }
 
             if (handle.getReturnType() != ActionResponse.class) {
-                closeQuietly(handle.getResponse());
                 return handle.complete(null);
             }
         }
@@ -99,8 +97,6 @@ public class HttpEntityHandler {
                 throw re;
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                closeQuietly(handle.getResponse());
             }
         }
         return handle.continueHandling();

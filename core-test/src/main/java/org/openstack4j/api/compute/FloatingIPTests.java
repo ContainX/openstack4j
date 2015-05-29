@@ -1,18 +1,15 @@
 package org.openstack4j.api.compute;
 
+import static org.testng.Assert.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
-
 import java.util.UUID;
-import java.util.logging.Logger;
-
 import org.openstack4j.api.AbstractTest;
+import org.openstack4j.api.SkipTest;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.FloatingIP;
-import static org.testng.Assert.*;
-import org.testng.SkipException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -82,14 +79,7 @@ public class FloatingIPTests extends AbstractTest {
     }
 
     @Test(dataProvider = "floatingIPs")
-    public void deallocateFloatingIP(String ip) throws IOException {
-
-        if (httpExecutorName.equals("Http URL Connector")) {
-            final String errorMessage = "Skipping test due to issue #376";
-            Logger.getLogger(getClass().getName()).warning(errorMessage);
-            throw new SkipException(errorMessage);
-        }
-
+    public void deallocateFloatingIP(String ip) {
         // Test deallocate success
         respondWith(202);
 
