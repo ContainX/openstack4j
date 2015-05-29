@@ -31,6 +31,22 @@
       {
         "endpoints": [
           {
+            "adminURL": "http:\/\/127.0.0.1:8774\/v2.1\/b80f8d4e28b74188858b654cb1fccf7d",
+            "region": "RegionOne",
+            "internalURL": "http:\/\/127.0.0.1:8774\/v2.1\/b80f8d4e28b74188858b654cb1fccf7d",
+            "id": "3d44054fe0ec440e9d4641a7219002dd",
+            "publicURL": "http:\/\/127.0.0.1:8774\/v2.1\/b80f8d4e28b74188858b654cb1fccf7d"
+          }
+        ],
+        "endpoints_links": [
+          
+        ],
+        "type": "computev21",
+        "name": "novav21"
+      },
+      {
+        "endpoints": [
+          {
             "adminURL": "http:\/\/127.0.0.1:9696\/",
             "region": "RegionOne",
             "internalURL": "http:\/\/127.0.0.1:9696\/",

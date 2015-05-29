@@ -87,5 +87,7 @@ public interface Access extends ModelEntity {
 		List<? extends Endpoint> getEndpoints();
 
 		List<? extends Link> getEndpointsLinks();
+		
+		Integer getVersion();
 	}
 }

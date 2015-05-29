@@ -13,6 +13,7 @@ import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.TokenV3;
 import org.openstack4j.model.identity.v3.TokenV3.UserV3;
+import org.openstack4j.openstack.identity.functions.ServiceFunctions;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.SortedSetMultimap;
@@ -138,6 +139,11 @@ public class AccessWrapper implements Access {
 		public List<? extends Link> getEndpointsLinks() {
 			return Collections.emptyList();
 		}
+
+        @Override
+        public Integer getVersion() {
+            return ServiceFunctions.VERSION_FROM_TYPE.apply(catalog.getType());
+        }
 		
 	}
 	

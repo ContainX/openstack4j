@@ -13,6 +13,7 @@ import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.Access.Service;
+import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.model.identity.v3.Catalog;
@@ -55,7 +56,9 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
         if (url != null)
         {
-            CACHE.put(key, url);
+            if (p.access.getVersion() == AuthVersion.V3) {
+                CACHE.put(key, url);
+            }
             return url;
         }
         else if (p.region != null)

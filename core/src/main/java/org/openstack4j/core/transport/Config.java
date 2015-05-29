@@ -3,6 +3,8 @@ package org.openstack4j.core.transport;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 
+import org.openstack4j.model.common.resolvers.ServiceVersionResolver;
+
 /**
  * OpenStack4j Configuration - options that are configured with OpenStack4j clients.
  * 
@@ -21,6 +23,7 @@ public final class Config {
     private int maxConnections;
     private int maxConnectionsPerRoute;
     private ProxyHost proxy;
+    private ServiceVersionResolver resolver;
 
     private Config() {
     }
@@ -31,6 +34,18 @@ public final class Config {
     public static Config newConfig() {
         return new Config();
     }
+    
+    /**
+     * Sets the Service version resolver to use in determining which API version to use with a particular OpenStack service
+     * 
+     * @param resolver the version 2 version resolver
+     * @return Config
+     */
+    public Config withResolver(ServiceVersionResolver resolver) {
+        this.resolver = resolver;
+        return this;
+    }
+
     
     /**
      * Sets the connection timeout in milliseconds
@@ -143,6 +158,10 @@ public final class Config {
     public Config withSSLVerificationDisabled() {
         this.ignoreSSLVerification = Boolean.TRUE;
         return this;
+    }
+    
+    public ServiceVersionResolver getV2Resolver() {
+        return resolver;
     }
     
     public int getConnectTimeout() {

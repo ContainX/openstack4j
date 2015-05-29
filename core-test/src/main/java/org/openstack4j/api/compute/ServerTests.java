@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.api.SkipTest;
 import org.openstack4j.api.exceptions.ServerResponseException;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;
@@ -46,7 +45,7 @@ public class ServerTests extends AbstractTest {
                 + "\"code\": 500}}";
 
         respondWith(500, jsonResponse);
-        Server serv = os().compute().servers().get("05184ba3-00ba-4fbc-b7a2-03b62b884931");
+        os().compute().servers().get("05184ba3-00ba-4fbc-b7a2-03b62b884931");
         Assert.fail("Exception should have been thrown.");
     }
     

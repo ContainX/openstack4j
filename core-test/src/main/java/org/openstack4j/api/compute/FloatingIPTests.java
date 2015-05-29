@@ -1,12 +1,17 @@
 package org.openstack4j.api.compute;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.UUID;
+
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.SkipTest;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.FloatingIP;
@@ -19,6 +24,7 @@ public class FloatingIPTests extends AbstractTest {
 
     private static final String JSON_FIPS = "/compute/floatingips.json";
 
+    @SuppressWarnings("unused")
     private String httpExecutorName;
 
     @DataProvider(name = "floatingIPs")
@@ -42,6 +48,7 @@ public class FloatingIPTests extends AbstractTest {
         return Service.COMPUTE;
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void listFloatingIPs() throws IOException {
         respondWith(JSON_FIPS);

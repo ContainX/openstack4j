@@ -26,6 +26,7 @@ import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.openstack.identity.functions.ServiceToServiceType;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
@@ -71,6 +72,12 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 
     public static OSClientSession getCurrent() {
         return sessions.get();
+    }
+    
+    @VisibleForTesting
+    public OSClientSession useConfig(Config config) {
+        this.config = config;
+        return this;
     }
 
     /**
@@ -192,7 +199,10 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public String getEndpoint(ServiceType service) {
-        return addNATIfApplicable(epr.findURL(URLResolverParams.create(access, service).perspective(perspective).region(region)));
+        return addNATIfApplicable(epr.findURL(URLResolverParams.create(access, service)
+                                                .resolver(config != null ? config.getV2Resolver() : null)
+                                                .perspective(perspective)
+                                                .region(region)));
     }
     
     private String addNATIfApplicable(String url) {
@@ -214,6 +224,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     {
         return config;
     }
+    
     /**
      * {@inheritDoc}
      */
