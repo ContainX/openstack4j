@@ -69,7 +69,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         
         if (!services.isEmpty())
         {
-            Service sc = services.last();
+            Service sc = p.getV2Resolver().resolve(p.type, services);
             
             for (Endpoint ep : sc.getEndpoints())
             {
