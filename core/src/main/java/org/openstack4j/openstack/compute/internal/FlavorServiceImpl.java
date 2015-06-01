@@ -144,15 +144,16 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void removeTenantAccess(String flavorId, String tenantId) {
+	public List<? extends FlavorAccess> removeTenantAccess(String flavorId, String tenantId) {
 		checkNotNull(flavorId);
 		checkNotNull(tenantId);
 		
 		RemoveTenantAccess removeTenantAccess = new RemoveTenantAccess();
 		removeTenantAccess.setTenantId(tenantId);
 		
-		delete(FlavorAccesses.class, uri("/flavors/%s/action", flavorId))
-				.entity(removeTenantAccess)
-				.execute();
+		return post(FlavorAccesses.class, uri("/flavors/%s/action", flavorId))
+    				.entity(removeTenantAccess)
+    				.execute()
+    				.getList();
 	}
 }

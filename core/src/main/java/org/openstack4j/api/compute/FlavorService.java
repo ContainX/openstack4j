@@ -121,6 +121,6 @@ public interface FlavorService extends RestService {
 	 * @param tenantId
 	 * @return List tenants with access to private flavor
 	 */
-	void removeTenantAccess(String flavorId, String tenantId);
+	List<? extends FlavorAccess> removeTenantAccess(String flavorId, String tenantId);
 	
 }
