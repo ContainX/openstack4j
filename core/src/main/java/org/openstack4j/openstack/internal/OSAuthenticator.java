@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.internal;
 
+import static org.openstack4j.core.transport.HttpExceptionHandler.mapException;
+
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.ClientConstants;
@@ -90,7 +92,12 @@ public class OSAuthenticator {
                 .entity(auth)
                 .build();
         
-        KeystoneAccess access = HttpExecutor.create().execute(request).getEntity(KeystoneAccess.class);
+        HttpResponse response = HttpExecutor.create().execute(request);
+        if (response.getStatus() >= 400) {
+            throw mapException(response.getStatusMessage(), response.getStatus());
+        }
+        
+        KeystoneAccess access = response.getEntity(KeystoneAccess.class);
         
         if (auth.getType() == Type.CREDENTIALS) {
             access = access.applyContext(endpoint, (Credentials) auth);
@@ -117,6 +124,11 @@ public class OSAuthenticator {
                 .build();
         
         HttpResponse response = HttpExecutor.create().execute(request);
+        
+        if (response.getStatus() >= 400) {
+            throw mapException(response.getStatusMessage(), response.getStatus());
+        }
+        
         KeystoneTokenV3 access = response.getEntity(KeystoneTokenV3.class);
         access.id = response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN);
         return OSClientSession.createSession(AccessWrapper.wrap(access.applyContext(endpoint, credentials)), perspective, config);
