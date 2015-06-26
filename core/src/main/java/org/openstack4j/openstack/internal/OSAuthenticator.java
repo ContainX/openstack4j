@@ -6,6 +6,7 @@ import org.openstack4j.api.OSClient;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.Config;
+import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
@@ -94,7 +95,12 @@ public class OSAuthenticator {
         
         HttpResponse response = HttpExecutor.create().execute(request);
         if (response.getStatus() >= 400) {
-            throw mapException(response.getStatusMessage(), response.getStatus());
+            try {
+                throw mapException(response.getStatusMessage(), response.getStatus());
+            }
+            finally {
+                HttpEntityHandler.closeQuietly(response);
+            }
         }
         
         KeystoneAccess access = response.getEntity(KeystoneAccess.class);
@@ -126,7 +132,13 @@ public class OSAuthenticator {
         HttpResponse response = HttpExecutor.create().execute(request);
         
         if (response.getStatus() >= 400) {
-            throw mapException(response.getStatusMessage(), response.getStatus());
+            try
+            {
+                throw mapException(response.getStatusMessage(), response.getStatus());
+            }
+            finally {
+                HttpEntityHandler.closeQuietly(response);
+            }
         }
         
         KeystoneTokenV3 access = response.getEntity(KeystoneTokenV3.class);

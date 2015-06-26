@@ -99,6 +99,9 @@ public final class Parser {
      * @return the parsed date
      */
     public static Date toRFC822DateParse(String toParse) {
+        if (toParse == null) {
+            return null;
+        }
         synchronized (RFC822_FORMAT) {
             try {
                 return RFC822_FORMAT.parse(toParse);

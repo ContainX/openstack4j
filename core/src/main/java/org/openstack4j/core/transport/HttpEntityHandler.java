@@ -102,7 +102,7 @@ public class HttpEntityHandler {
         return handle.continueHandling();
     }
 
-    private static void closeQuietly(HttpResponse response) {
+    public static void closeQuietly(HttpResponse response) {
         try {
             response.close();
         } catch (IOException e) {
