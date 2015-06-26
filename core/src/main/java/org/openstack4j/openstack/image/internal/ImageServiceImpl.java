@@ -3,6 +3,7 @@ package org.openstack4j.openstack.image.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_OCTECT_STREAM;
 import static org.openstack4j.core.transport.ClientConstants.HEADER_ACCEPT;
+import static org.openstack4j.core.transport.HttpEntityHandler.statusAndClose;
 
 import java.io.InputStream;
 import java.util.List;
@@ -175,7 +176,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     public boolean addMember(String imageId, String tenantId) {
         checkNotNull(imageId);
         checkNotNull(tenantId);
-        return put(Void.class, uri("/images/%s/members/%s", imageId, tenantId)).executeWithResponse().getStatus() == 204;
+        return statusAndClose(put(Void.class, uri("/images/%s/members/%s", imageId, tenantId)).executeWithResponse()) == 204;
     }
 
     /**
@@ -185,7 +186,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     public boolean addMember(String imageId, String tenantId, boolean canShare) {
         checkNotNull(imageId);
         checkNotNull(tenantId);
-        return put(Void.class, uri("/images/%s/members/%s", imageId, tenantId)).entity(new GlanceImageMember(null, canShare)).executeWithResponse().getStatus() == 204;
+        return statusAndClose(put(Void.class, uri("/images/%s/members/%s", imageId, tenantId)).entity(new GlanceImageMember(null, canShare)).executeWithResponse()) == 204;
     }
 
     /**
@@ -195,7 +196,6 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     public boolean removeMember(String imageId, String tenantId) {
         checkNotNull(imageId);
         checkNotNull(tenantId);
-        return delete(Void.class, uri("/images/%s/members/%s", imageId, tenantId)).executeWithResponse().getStatus() == 204;
+        return statusAndClose(delete(Void.class, uri("/images/%s/members/%s", imageId, tenantId)).executeWithResponse()) == 204;
     }
-
 }

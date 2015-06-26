@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.compute.functions;
 
+import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.functions.ResponseToActionResponse;
 import org.openstack4j.model.compute.ActionResponse;
@@ -7,7 +8,6 @@ import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.google.common.base.Function;
-import java.io.IOException;
 
 /**
  * A Function which consumes the input of an HttpResponse and returns the
@@ -46,11 +46,7 @@ public class ToActionResponseFunction implements Function<HttpResponse, ActionRe
             }
             return ActionResponse.actionSuccess();
         } finally {
-            try {
-                response.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            HttpEntityHandler.closeQuietly(response);
         }
     }
 

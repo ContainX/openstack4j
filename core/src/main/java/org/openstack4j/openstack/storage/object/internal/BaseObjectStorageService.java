@@ -16,6 +16,10 @@ public class BaseObjectStorageService extends BaseOpenStackService {
     }
     
     protected boolean isResponseSuccess(HttpResponse res, int status) {
+        return isResponseSuccess(res, status, true);
+    }
+    
+    protected boolean isResponseSuccess(HttpResponse res, int status, boolean closeResponse) {
         return res.getStatus() == status;
     }
 }

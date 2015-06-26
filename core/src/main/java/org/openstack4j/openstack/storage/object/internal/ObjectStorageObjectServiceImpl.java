@@ -1,12 +1,12 @@
 package org.openstack4j.openstack.storage.object.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.HttpEntityHandler.closeQuietly;
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTENT_LENGTH;
 import static org.openstack4j.model.storage.object.SwiftHeaders.ETAG;
 import static org.openstack4j.model.storage.object.SwiftHeaders.OBJECT_METADATA_PREFIX;
 import static org.openstack4j.model.storage.object.SwiftHeaders.X_COPY_FROM;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -73,10 +73,16 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(location);
 
         HttpResponse resp = head(Void.class, location.getURI()).executeWithResponse();
-        if (resp.getStatus() == 404)
-            return null;
-        
-        return ParseObjectFunction.create(location).apply(resp);
+        try
+        {
+            if (resp.getStatus() == 404)
+                return null;
+            
+            return ParseObjectFunction.create(location).apply(resp);
+        }
+        finally {
+            closeQuietly(resp);
+        }
     }
     
     /**
@@ -123,11 +129,7 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
             return resp.header(ETAG);
         }
         finally {
-            try {
-                resp.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+           closeQuietly(resp);
         }
     }
 
@@ -157,7 +159,13 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
                                 .header(X_COPY_FROM, source.getURI())
                                 .header(CONTENT_LENGTH, 0)
                                 .executeWithResponse();
-        return resp.header(ETAG);
+        try
+        {
+            return resp.header(ETAG);
+        }
+        finally {
+            closeQuietly(resp);
+        }
     }
 
     @Override
@@ -165,7 +173,13 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(location);
 
         HttpResponse resp = head(Void.class, location.getURI()).executeWithResponse();
-        return MapWithoutMetaPrefixFunction.INSTANCE.apply(resp.headers());
+        try
+        {
+            return MapWithoutMetaPrefixFunction.INSTANCE.apply(resp.headers());
+        }
+        finally {
+            closeQuietly(resp);
+        }
     }
 
     @Override

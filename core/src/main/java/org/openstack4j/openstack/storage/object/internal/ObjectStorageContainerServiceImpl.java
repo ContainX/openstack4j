@@ -3,6 +3,7 @@ package org.openstack4j.openstack.storage.object.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_DIRECTORY;
 import static org.openstack4j.core.transport.ClientConstants.URI_SEP;
+import static org.openstack4j.core.transport.HttpEntityHandler.closeQuietly;
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_METADATA_PREFIX;
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_REMOVE_METADATA_PREFIX;
 
@@ -100,8 +101,14 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
     public ActionResponse delete(String name) {
         checkNotNull(name);
         HttpResponse resp = delete(Void.class, URI_SEP, name).executeWithResponse();
-        if (resp.getStatus() == 409)
-            return ActionResponse.actionFailed(String.format("Container %s is not empty", name), 409);
+        
+        try {
+            if (resp.getStatus() == 409)
+                return ActionResponse.actionFailed(String.format("Container %s is not empty", name), 409);
+        }
+        finally {
+            closeQuietly(resp);
+        }
         
         return ToActionResponseFunction.INSTANCE.apply(resp);
     }
@@ -113,7 +120,13 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
     public Map<String, String> getMetadata(String name) {
         checkNotNull(name);
         HttpResponse resp = head(Void.class, URI_SEP, name).executeWithResponse();
-        return MapWithoutMetaPrefixFunction.INSTANCE.apply(resp.headers());
+        try
+        {
+            return MapWithoutMetaPrefixFunction.INSTANCE.apply(resp.headers());
+        }
+        finally {
+            closeQuietly(resp);
+        }
     }
     
     /**

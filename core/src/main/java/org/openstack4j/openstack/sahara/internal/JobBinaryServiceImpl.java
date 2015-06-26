@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.openstack4j.api.sahara.JobBinaryService;
+import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.Payloads;
@@ -68,9 +69,15 @@ public class JobBinaryServiceImpl extends BaseSaharaServices implements JobBinar
     @Override
     public Payload<InputStream> getData(String JobBinaryId) {
         HttpResponse response = get(Void.class, uri("/job-binaries/%s/data", JobBinaryId)).executeWithResponse();
-        if (response.getStatus() < 400)
-            return Payloads.create(response.getInputStream());
-        return null;
+        try
+        {
+            if (response.getStatus() < 400)
+                return Payloads.create(response.getInputStream());
+            return null;
+        }
+        finally {
+            HttpEntityHandler.closeQuietly(response);
+        }
     }
 
 }

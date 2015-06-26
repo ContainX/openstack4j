@@ -102,11 +102,28 @@ public class HttpEntityHandler {
         return handle.continueHandling();
     }
 
+    /**
+     * Closes an HttpResponse ignoring a possible IOException
+     * 
+     * @param response the http response
+     */
     public static void closeQuietly(HttpResponse response) {
         try {
             response.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * Returns the status code and closes the response
+     * 
+     * @param response the http response
+     * @return the status code
+     */
+    public static int statusAndClose(HttpResponse response) {
+        int status = response.getStatus();
+        closeQuietly(response);
+        return status;
     }
 }
