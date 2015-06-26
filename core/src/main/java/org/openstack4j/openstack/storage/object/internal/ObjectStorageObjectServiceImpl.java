@@ -61,6 +61,9 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(containerName);
         
         List<SwiftObjectImpl> objs = get(SwiftObjects.class, uri("/%s", containerName)).param("format", "json").params(options.getOptions()).execute();
+        if (objs == null) {
+            return Collections.emptyList();
+        }
         return Lists.transform(objs, ApplyContainerToObjectFunction.create(containerName));
                 
     }
