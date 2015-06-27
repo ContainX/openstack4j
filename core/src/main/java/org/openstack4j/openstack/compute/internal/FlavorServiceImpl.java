@@ -78,7 +78,8 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	@Override
 	public Map<String, String> listExtraSpecs(String flavorId) {
 		checkNotNull(flavorId);
-		return get(ExtraSpecsWrapper.class, uri("/flavors/%s/os-extra_specs", flavorId)).execute().getExtraSpecs();
+		ExtraSpecsWrapper wrapper = get(ExtraSpecsWrapper.class, uri("/flavors/%s/os-extra_specs", flavorId)).execute();
+		return wrapper != null ? wrapper.getExtraSpecs() : null;
 	}
 
 	/**
