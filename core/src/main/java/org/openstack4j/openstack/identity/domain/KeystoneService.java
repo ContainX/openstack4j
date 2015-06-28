@@ -7,6 +7,7 @@ import org.openstack4j.model.identity.builder.ServiceBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
@@ -15,6 +16,7 @@ import com.google.common.base.Objects;
  *  
  * @author Jeremy Unruh
  */
+@JsonRootName("OS-KSADM:service")
 public class KeystoneService implements Service {
 
 	private static final long serialVersionUID = 1L;

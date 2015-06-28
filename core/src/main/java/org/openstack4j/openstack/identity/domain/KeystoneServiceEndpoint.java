@@ -11,6 +11,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
@@ -19,6 +20,7 @@ import com.google.common.base.Objects;
  * @author Jeremy Unruh
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
+@JsonRootName("endpoint")
 public class KeystoneServiceEndpoint implements ServiceEndpoint {
 
 	private static final long serialVersionUID = 1L;
