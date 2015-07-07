@@ -59,9 +59,15 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
         HttpResponse response = command.execute();
 
         if (command.getRetries() == 0 && response.getStatus() == 401 && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH)) {
-            OSAuthenticator.reAuthenticate();
-            command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
-            return invokeRequest(command.incrementRetriesAndReturn());
+            try
+            {
+                OSAuthenticator.reAuthenticate();
+                command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
+                return invokeRequest(command.incrementRetriesAndReturn());
+            }
+            finally {
+                response.close();
+            }
         }
         return response;
     }
