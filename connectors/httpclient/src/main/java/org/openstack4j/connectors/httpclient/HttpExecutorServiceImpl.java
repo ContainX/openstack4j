@@ -58,11 +58,16 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
 
     private <R> HttpResponse invokeRequest(HttpCommand<R> command) throws Exception {
         CloseableHttpResponse response = command.execute();
-        if (command.getRetries() == 0 && response.getStatusLine().getStatusCode() == 401 && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH))
+        try
         {
-            OSAuthenticator.reAuthenticate();
-            command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
-            return invokeRequest(command.incrementRetriesAndReturn());
+            if (command.getRetries() == 0 && response.getStatusLine().getStatusCode() == 401 && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH))
+            {
+                OSAuthenticator.reAuthenticate();
+                command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
+                return invokeRequest(command.incrementRetriesAndReturn());
+            }
+        } finally {
+            response.close();
         }
         return HttpResponseImpl.wrap(response);
     }
