@@ -43,7 +43,7 @@ public class MetadataToHeadersFunction implements Function<Map<String, String>, 
         for (String key : metadata.keySet()) {
             String keyLower = key.toLowerCase();
             String value = metadata.get(key);
-            if (keyLower.startsWith(prefix))
+            if (keyLower.startsWith(prefix.toLowerCase()))
                 headers.put(keyLower, value);
             else
                 headers.put(String.format("%s%s", prefix, keyLower), value);
