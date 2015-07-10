@@ -105,8 +105,7 @@ public class Template {
             
             if(isGetFile(skey)) {
                 //if key="get_file", the value is the filename
-                String fileFullPath = baseUrl + (String)value;
-                addToFiles(fileFullPath);
+                addToFiles((String)value);
                 continue;
             }
             
@@ -122,10 +121,14 @@ public class Template {
             }
         }
     }
-    
+
     private void addToFiles(String filename) throws IOException {
         if(! files.containsKey(filename)) {
-            files.put(filename, TemplateUtils.readToString(filename));
+        	if (filename.startsWith("/")){
+        	    files.put(filename, TemplateUtils.readToString(filename));
+        	} else {
+        		files.put(filename, TemplateUtils.readToString(baseUrl + filename));
+        	}
         }
     }
     
