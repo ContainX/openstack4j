@@ -1,6 +1,47 @@
 # Change Log
 
-### 2.0.3 (Latest Release / Stable)
+### 2.0.4 (Latest Release / Stable)
+
+##### Enhancements/Improvements
+
+Issue #392 - Allow HttpClient interceptor to allow for custom configuration prior to client creation
+Issue #366 - Identity v3 scoped auth token
+Issue #358 - Create OSClient from auth_token
+Issue #352 - Ability to set Proxy information within OpenStack4j Config
+Issue #350 - Add support to determine if Ceilometer is installed
+Issue #349 - Update LBaaS to use Enums instead of String values
+Issue #348 - Neutron (FwaaS) Firewall Policy API & Test Cases (Completed API)
+Issue #343 - Add filter support when listing Volume and Volume Snapshot
+Issue #340 - Support for Network Extension: Firewall As a Service (FwaaS)
+Issue #337 - Enhancement Request: ability to fetch ALL metadata for objects/containers
+Issue #332 - Refactor HttpClient Connector to use singleton of the Apache HttpClient 
+
+##### Fixes
+
+Issue #420 - Bug fix for the get_files. The key should be the file name
+Issue #418 - Bugs regarding updating object metadata
+Issue #414 - FlavorServiceImpl.listExtraSpecs NullPointerException
+Issue #413 - ObjectStorageObjectServiceImpl.get(ObjectLocation) throws NPE 
+Issue #412 - httpclient connector leaks connections on failed authentication attempts and eventually hangs
+Issue #411 - [Partial Fix] Connection leak from usage of BaseOpenStackService.Invocation.executeWithResponse()
+Issue #403 - The KeystoneServiceEndpoint miss @JsonRootName("endpoint")
+Issue #401 - NullPointerException from listing operation and authentication operation
+Issue #397 - FloatingIPServiceImpl.create don't need floatingIp.getPortId()
+Issue #394 - HttpClient connection leak when processing Server Errors
+Issue #393 - The FlavorServiceImpl.removeTenantAccess method error
+Issue #391 - FlavorServiceImpl.getSpec /flavors/%s/os-extra_specs/%s/ uri error
+Issue #376 - Deserialization error with HttpURL connector 
+Issue #373 - Connection leak when using HttpClient connector
+Issue #365 - Compute: Add/Remove SecGroup 500 exception not caught.
+Issue #360 - Connection leak when using HttpClient connector
+Issue #357 - ObjectService.list(containerDoesNotExist) throws NullPointerException
+Issue #356 - Requests to Swift hang after 2nd request
+Issue #336 - Exception when deleting an unexisting Glance image
+Issue #333 - Default value set to 0 for NetSecurityGroupRules : port range
+Issue #327 - SwiftAccount account = os.objectStorage().account().get()
+Issue #314 - EofSensorInputStream throws JsonParseException for 404s. Also, inconsistent behavior of how 404s are handled
+
+### 2.0.3
 
 ##### Enhancements/Improvements
 
