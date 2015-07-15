@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.storage.object.internal;
 
+import static org.openstack4j.core.transport.HttpEntityHandler.closeQuietly;
+
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
@@ -20,6 +22,10 @@ public class BaseObjectStorageService extends BaseOpenStackService {
     }
     
     protected boolean isResponseSuccess(HttpResponse res, int status, boolean closeResponse) {
-        return res.getStatus() == status;
+        boolean result = res.getStatus() == status;
+        if (closeResponse) {
+            closeQuietly(res);
+        }
+        return result;
     }
 }
