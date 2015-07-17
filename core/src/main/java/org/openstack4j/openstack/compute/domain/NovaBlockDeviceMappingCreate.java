@@ -9,19 +9,13 @@ import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
  * @author jaroslav.sovicka@oracle.com
  */
 public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
-//    {
-//                "device_name": "/dev/sda1",
-//                "source_type": "volume",
-//                "destination_type": "volume",
-//                "uuid": "fake-volume-id-1",
-//                "boot_index": "0"
-//            }
 
 	public String device_name;
 	public String source_type = "volume";
 	public String destination_type = "volume";
 	public String uuid;
 	public String boot_index;
+	public Integer volume_size;
 	public boolean delete_on_termination = false;
 
 	@JsonProperty("snapshot_id")
@@ -95,14 +89,17 @@ public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 		    create.volumeId = volumeId;
 		    return this;
 		}
+		
+		@Override
+        public BlockDeviceMappingBuilder volumeSize(Integer volumeSize) {
+            create.volume_size = volumeSize;
+            return this;
+        }
 
 		@Override
 		public BlockDeviceMappingCreate build() {
 			return create;
 		}
-
-
-
 
 		@Override
 		public BlockDeviceMappingBuilder from(BlockDeviceMappingCreate in) {

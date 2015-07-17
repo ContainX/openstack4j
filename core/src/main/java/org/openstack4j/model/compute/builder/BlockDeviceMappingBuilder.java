@@ -67,9 +67,20 @@ public interface BlockDeviceMappingBuilder extends Buildable.Builder<BlockDevice
 
 	/**
 	 * Set to create a volume from a volume id
+	 * 
 	 * @param volumeId
 	 * @return BlockDeviceMappingBuilder
 	 */
 	BlockDeviceMappingBuilder volumeId(String volumeId);
+	
+	/**
+	 * Used to set the volume size of the destination volume (typically needed when source type is image)
+	 * 
+	 * @param size the size of the volume
+	 * @return BlockDeviceMappingBuilder
+	 */
+	BlockDeviceMappingBuilder volumeSize(Integer size);
+	
+	
 
 }
