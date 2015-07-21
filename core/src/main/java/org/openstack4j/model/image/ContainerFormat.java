@@ -41,6 +41,11 @@ public enum ContainerFormat {
 	AMI,
 
 	/**
+	 * This is the Docker container format
+	 * */
+	DOCKER,
+
+	/**
 	 * Type unknown
 	 */
 	UNRECOGNIZED;
