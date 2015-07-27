@@ -32,10 +32,10 @@ public class SaharaNodeGroup implements NodeGroup {
         @JsonProperty("node_group_template_id")
 	private String nodeGroupTemplateId;
         @JsonProperty("created_at")
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private Date createdAt;
         @JsonProperty("updated_at")
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private Date updatedAt;
         @JsonProperty("image_id")
         private String imageId;
