@@ -19,8 +19,10 @@ import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume.Volumes;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeMigration;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeType.VolumeTypes;
+import org.openstack4j.openstack.storage.block.domain.ExtendAction;
 import org.openstack4j.openstack.storage.block.domain.ForceDeleteAction;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeUploadImage;
+import org.openstack4j.openstack.storage.block.domain.ResetStatusAction;
 
 /**
  * Manages Volumes and Volume Type based operations against Block Storage (Cinder)
@@ -72,25 +74,49 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
         return deleteWithResponse(uri("/volumes/%s", volumeId)).execute();
     }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ActionResponse forceDelete(String volumeId) {
-		checkNotNull(volumeId);
-		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
-    		    .entity(new ForceDeleteAction())
-    		    .execute();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse forceDelete(String volumeId) {
+        checkNotNull(volumeId);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new ForceDeleteAction())
+                .execute();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Volume create(Volume volume) {
-		checkNotNull(volume);
-		return post(CinderVolume.class, uri("/volumes")).entity(volume).execute();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse resetState(String volumeId, Volume.Status status) {
+        checkNotNull(volumeId);
+        checkNotNull(status);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new ResetStatusAction(status))
+                .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse extend(String volumeId, Integer newSize) {
+        checkNotNull(volumeId);
+        checkNotNull(newSize);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new ExtendAction(newSize))
+                .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Volume create(Volume volume) {
+        checkNotNull(volume);
+        return post(CinderVolume.class, uri("/volumes")).entity(volume).execute();
+    }
 
     /**
      * {@inheritDoc}
