@@ -64,6 +64,24 @@ public interface BlockVolumeService extends RestService {
 	ActionResponse forceDelete(String volumeId);
 
 	/**
+	 * Resets the specified volume status.
+	 *
+	 * @param volumeId the volume id
+	 * @param status new volume status
+	 * @return the action response
+	 */
+	ActionResponse resetState(String volumeId, Volume.Status status);
+
+	/**
+	 * Extends the specified volume size.
+	 *
+	 * @param volumeId the volume id
+	 * @param newSize new volume size
+	 * @return the action response
+	 */
+	ActionResponse extend(String volumeId, Integer newSize);
+
+	/**
 	 * Creates a new Block Storage Volume
 	 * @param volume the volume for create
 	 * @return the created volume
