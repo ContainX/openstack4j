@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public abstract class Auth implements ModelEntity {
 
 	private static final long serialVersionUID = 1L;
-	public enum Type { CREDENTIALS, TOKEN };
+	public enum Type { CREDENTIALS, TOKEN, RAX_APIKEY };
 	
 	private String tenantId;
 	private String tenantName;

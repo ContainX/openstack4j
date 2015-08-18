@@ -9,6 +9,7 @@ import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
 import org.openstack4j.openstack.identity.domain.Credentials;
+import org.openstack4j.openstack.identity.domain.RaxApiKeyCredentials;
 import org.openstack4j.openstack.identity.domain.TokenAuth;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth.AuthScope;
@@ -72,6 +73,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         String tenantName;
         String tenantId;
         String tokenId;
+        boolean raxApiKey;
         
         @Override
         public ClientV2 tenantName(String tenantName) {
@@ -86,10 +88,20 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         }
         
         @Override
+        public ClientV2 raxApiKey(boolean raxApiKey) {
+            this.raxApiKey = raxApiKey;
+            return this;
+        }
+        
+        @Override
         public OSClient authenticate() throws AuthenticationException {
             if (tokenId != null) {
                 checkArgument(tenantName != null || tenantId != null, "TenantId or TenantName is required when using Token Auth");
                 return OSAuthenticator.invoke(new TokenAuth(tokenId, tenantName, tenantId), endpoint, perspective, config);
+            }
+            
+            if (raxApiKey) {
+                return OSAuthenticator.invoke(new RaxApiKeyCredentials(user, password), endpoint, perspective, config);
             }
             
             return OSAuthenticator.invoke(new Credentials(user, password, tenantName, tenantId), endpoint, perspective, config);

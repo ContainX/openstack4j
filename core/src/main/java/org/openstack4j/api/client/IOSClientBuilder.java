@@ -96,6 +96,14 @@ public interface IOSClientBuilder<R, T extends IOSClientBuilder<R, T>> {
         V2 tenantId(String tenantId);
         
         /**
+         * Use Rackspace API Key Authentication Admin Extension to authenticate
+         * 
+         * @param raxApiKey true if enabled
+         * @return self for method chaining
+         */
+        V2 raxApiKey(boolean raxApiKey);
+        
+        /**
          * Allows authentication via an existing Token versus {@link #credentials(String, String)}.  Note:  The 
          * {@link #tenantId(String)} or {@link #tenantName(String)} will required when using this method for
          * authentication.
