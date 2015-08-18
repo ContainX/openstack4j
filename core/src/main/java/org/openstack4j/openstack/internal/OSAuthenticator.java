@@ -16,6 +16,7 @@ import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.openstack.identity.domain.Auth;
 import org.openstack4j.openstack.identity.domain.Auth.Type;
 import org.openstack4j.openstack.identity.domain.Credentials;
+import org.openstack4j.openstack.identity.domain.RaxApiKeyCredentials;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
 import org.openstack4j.openstack.identity.domain.TokenAuth;
 import org.openstack4j.openstack.identity.domain.v3.AccessWrapper;
@@ -44,7 +45,7 @@ public class OSAuthenticator {
      */
     public static OSClient invoke(AuthStore auth, String endpoint, Facing perspective, Config config) {
         if (auth.getVersion() == AuthVersion.V2)
-            return authenticateV2((Credentials) auth.unwrap(), endpoint, perspective, false, config);
+            return authenticateV2((Auth) auth.unwrap(), endpoint, perspective, false, config);
 
         return authenticateV3((KeystoneAuth) auth.unwrap(), endpoint, perspective, config);
     }
@@ -107,6 +108,9 @@ public class OSAuthenticator {
         
         if (auth.getType() == Type.CREDENTIALS) {
             access = access.applyContext(endpoint, (Credentials) auth);
+        }
+        else if (auth.getType() == Type.RAX_APIKEY) {
+            access = access.applyContext(endpoint, (RaxApiKeyCredentials) auth);
         }
         else {
             access = access.applyContext(endpoint, (TokenAuth) auth);
