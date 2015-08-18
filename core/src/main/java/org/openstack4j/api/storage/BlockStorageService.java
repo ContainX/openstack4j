@@ -20,6 +20,8 @@ public interface BlockStorageService extends RestService {
 	 */
 	BlockVolumeSnapshotService snapshots();
 	
+	CinderZoneService zones();
+	
 	/**
 	 * Gets the Absolute limits used by this tenant
 	 * 
