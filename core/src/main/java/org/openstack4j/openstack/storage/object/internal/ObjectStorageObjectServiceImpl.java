@@ -21,6 +21,7 @@ import org.openstack4j.model.storage.block.options.DownloadOptions;
 import org.openstack4j.model.storage.object.SwiftObject;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
 import org.openstack4j.model.storage.object.options.ObjectLocation;
+import org.openstack4j.model.storage.object.options.ObjectDeleteOptions;
 import org.openstack4j.model.storage.object.options.ObjectPutOptions;
 import org.openstack4j.openstack.common.DLPayloadEntity;
 import org.openstack4j.openstack.common.functions.HeaderNameValuesToHeaderMap;
@@ -126,6 +127,7 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
                               .entity(payload)
                               .headers(options.getOptions())
                               .contentType(options.getContentType())
+                              .paramLists(options.getQueryParams())
                               .executeWithResponse();
         try
         {
@@ -146,8 +148,16 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
 
     @Override
     public ActionResponse delete(ObjectLocation location) {
+        return delete(location, ObjectDeleteOptions.NONE);
+    }
+
+    @Override
+    public ActionResponse delete(ObjectLocation location, ObjectDeleteOptions options) {
         checkNotNull(location);
-        return deleteWithResponse(location.getURI()).execute();
+        checkNotNull(options);
+        return delete(ActionResponse.class, location.getURI())
+            .paramLists(options.getQueryParams())
+            .execute();
     }
     
     /**
