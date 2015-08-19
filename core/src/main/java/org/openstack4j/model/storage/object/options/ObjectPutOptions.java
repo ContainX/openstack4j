@@ -3,6 +3,8 @@ package org.openstack4j.model.storage.object.options;
 import static org.openstack4j.model.storage.object.SwiftHeaders.OBJECT_METADATA_PREFIX;
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTENT_TYPE;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.openstack.storage.object.functions.MetadataToHeadersFunction;
@@ -18,6 +20,7 @@ public final class ObjectPutOptions {
 
     public static final ObjectPutOptions NONE = new ObjectPutOptions();
     Map<String, String> headers = Maps.newHashMap();
+    private Map<String, List<Object>> queryParams = Maps.newHashMap();
     private String path;
     
     private ObjectPutOptions() { }
@@ -64,5 +67,24 @@ public final class ObjectPutOptions {
     
     public String getPath() {
         return path;
+    }
+    
+    public ObjectPutOptions queryParam(String key, Object value) {
+        if (value == null)
+            return this;
+
+        if (queryParams.containsKey(key)) {
+            List<Object> list = queryParams.get(key);
+            list.add(value);
+        } else {
+            List<Object> list = new ArrayList<Object>();
+            list.add(value);
+            queryParams.put(key, list);
+        }
+        return this;
+    }
+    
+    public Map<String, List<Object>> getQueryParams() {
+        return queryParams;
     }
 }

@@ -122,6 +122,15 @@ public class BaseOpenStackService {
             return this;
         }
 
+        public Invocation<R> paramLists(Map<String, ? extends Iterable<? extends Object>> params) {
+            if (params != null) {
+                for (Map.Entry<String, ? extends Iterable<? extends Object>> pair : params.entrySet())
+                    for (Object value : pair.getValue())
+                        req.queryParam(pair.getKey(), value);
+            }
+            return this;
+        }
+
         public Invocation<R> serviceType(ServiceType serviceType) {
             req.serviceType(serviceType);
             return this;
