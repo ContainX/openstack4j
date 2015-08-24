@@ -1,6 +1,21 @@
 # Change Log
 
-### 2.0.4 (Latest Release / Stable)
+### 2.0.5 (Latest Release / Stable)
+
+##### Enhancements/Improvements
+
+* Issue #439 - Add query parameters to delete and put options for large objects - Thank you - @frsyuki
+* Issue #438 - Add support for RAX API key authentication extension - Thank you - @frsyuki
+* Issue #437 - Add support to list available zone list - Thank you - @csm1sh
+* Issue #436 - New commands for blockVolume - Thank you - @pompinis
+* Issue #431 - Added docker container format - Thank you - @maseev
+
+##### Fixes
+
+* Issue #424 - Create server error through blockDeviceMappingBuilder
+* Issue #410 - Create instance boot from image（create a new volume）
+
+### 2.0.4
 
 ##### Enhancements/Improvements
 
