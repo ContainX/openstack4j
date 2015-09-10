@@ -149,5 +149,14 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
      */
     
     ServerCreateBuilder addAdminPass(String adminPass);
+	
+	/**
+     * Sets the config drive parameter.
+     *
+     * @param configDrive the configDrive value
+     * @return this builder
+     */
+    
+    ServerCreateBuilder configDrive(boolean configDrive);
 
 }

@@ -353,6 +353,12 @@ public class NovaServerCreate implements ServerCreate {
         	m.adminPass = adminPass;
         	return this;
         }
+		
+		@Override
+		public ServerCreateBuilder configDrive(boolean configDrive){
+			m.configDrive=configDrive;
+			return this;
+		}
         
     }
 }
