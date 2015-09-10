@@ -235,7 +235,6 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
                   get(Void.class, location.getURI())
                     .headers(HeaderNameValuesToHeaderMap.INSTANCE.apply(options.getHeaders()))
                     .executeWithResponse()
-                    .getInputStream()
                );
     }
 }
