@@ -354,11 +354,11 @@ public class NovaServerCreate implements ServerCreate {
         	return this;
         }
 		
-		@Override
-		public ServerCreateBuilder configDrive(boolean configDrive){
-			m.configDrive=configDrive;
-			return this;
-		}
+	@Override
+	public ServerCreateBuilder configDrive(boolean configDrive){
+		m.configDrive=configDrive;
+		return this;
+	}
         
     }
 }
