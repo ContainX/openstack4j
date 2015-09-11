@@ -16,7 +16,6 @@ import org.openstack4j.openstack.logging.internal.FallbackLoggerFactorySupplier;
  * A Factory which sets up the APIs to be used a previously non-expired authorization or new authorization.
  * 
  * @author Jeremy Unruh
- *
  */
 public abstract class OSFactory<T extends OSFactory<T>> {
 

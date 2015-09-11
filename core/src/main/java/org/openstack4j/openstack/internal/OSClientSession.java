@@ -72,7 +72,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public static OSClientSession createSession(Access access, Facing perspective, CloudProvider provider, Config config) {
         return new OSClientSession(access, access.getEndpoint(), perspective, provider, config);
     }
-
+    
     public static OSClientSession getCurrent() {
         return sessions.get();
     }
@@ -325,4 +325,5 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public CloudProvider getProvider() {
         return (provider == null) ? CloudProvider.UNKNOWN : provider;
     }
+	
 }

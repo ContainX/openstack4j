@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -12,6 +13,8 @@ import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.identity.domain.Credentials;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
+import org.openstack4j.openstack.identity.domain.v3.AccessWrapper;
+import org.openstack4j.openstack.identity.domain.v3.KeystoneToken;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -22,7 +25,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.io.ByteStreams;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
-import java.util.HashMap;
 
 /**
  * Base Test class which handles Mocking a Webserver to fullfill and test against JSON response objects
@@ -48,6 +50,7 @@ public abstract class AbstractTest {
     }
 
     protected static final String JSON_ACCESS = "/identity/access.json";
+    protected static final String JSON_TOKEN = "/identity.v3/authv3_project.json";
 
     private OSClient os;
     private String host;
@@ -136,7 +139,19 @@ public abstract class AbstractTest {
         r.setResponseCode(statusCode);
         server.enqueue(r);
     }
-
+    
+    /**
+     * Responds with given header, status code, body from json resource file
+     * @param headers the specified header
+     * @param statusCode the status code to respond with
+     * @param resource the json resource file
+     * @throws IOException Signals that an I/O exception has occurred
+     */
+    protected void respondWithHeaderAndResource(Map<String, String> headers, int statusCode, String resource) throws IOException {
+        InputStream is = getClass().getResourceAsStream(resource);
+        respondWith(headers, 200, new String(ByteStreams.toByteArray(is)));
+    }
+    
     protected String authURL(String path) {
         return String.format("http://%s:5000%s", getHost(), path);
     }
@@ -175,6 +190,33 @@ public abstract class AbstractTest {
                // Logger.getLogger(getClass().getName()).info("JSON Access = " + json);
                 KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
                 a.applyContext(authURL("/v2.0"), new Credentials("test", "test"));
+                os = OSFactory.clientFromAccess(a);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } 
+        }
+        return os;
+    }
+    
+    protected OSClient osv3() {
+        if (os == null) {
+            ObjectMapper mapper = new ObjectMapper();	
+            mapper.setSerializationInclusion(Include.NON_NULL);
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+            mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+            mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+            mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+            try {
+                String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_TOKEN)));
+                Logger.getLogger(getClass().getName()).info(getClass().getName());
+                json = json.replaceAll("127.0.0.1", getHost());
+                KeystoneToken t = mapper.readValue(json, KeystoneToken.class);
+                t.applyContext(authURL("/v3"), new Credentials("admin", "test"));
+                
+                //tokenwrapper
+                AccessWrapper a = AccessWrapper.wrap(t);
                 os = OSFactory.clientFromAccess(a);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -17,8 +17,7 @@ import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.model.identity.v3.Catalog;
-import org.openstack4j.model.identity.v3.EndpointV3;
-import org.openstack4j.model.identity.v3.TokenV3;
+import org.openstack4j.model.identity.v3.Token;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.SortedSetMultimap;
@@ -107,7 +106,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
     }
 
     private String resolveV3(URLResolverParams p) {
-        TokenV3 token = p.access.unwrap();
+        Token token = p.access.unwrap();
         if (p.perspective == null)
             p.perspective = Facing.PUBLIC;
 
@@ -115,10 +114,10 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         for (Catalog catalog : token.getCatalog()) {
             if (p.type == ServiceType.forName(catalog.getType())) 
             {
-                for (EndpointV3 ep : catalog.getEndpoints()) {
+                for (org.openstack4j.model.identity.v3.Endpoint ep : catalog.getEndpoints()) {
                     // Since we only support V3 authentication - skip a V3 URL
-                    if (matches(ep, p) && !isEndpointV3(ep.getURL())) {
-                        return ep.getURL().toString();
+                    if (matches(ep, p) && !isEndpointV3(ep.getUrl())) {
+                        return ep.getUrl().toString();
                     }
                 }
             }
@@ -134,8 +133,8 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
      * @param p
      * @return
      */
-    private boolean matches(EndpointV3 endpoint, URLResolverParams p) {
-        boolean matches = endpoint.getInterface() == p.perspective;
+    private boolean matches(org.openstack4j.model.identity.v3.Endpoint endpoint, URLResolverParams p) {
+        boolean matches = endpoint.getIface() == p.perspective;
         if (Optional.fromNullable(p.region).isPresent()) {
             matches &= endpoint.getRegion().equals(p.region);
         }
