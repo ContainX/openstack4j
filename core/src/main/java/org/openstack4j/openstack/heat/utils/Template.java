@@ -68,11 +68,12 @@ public class Template {
                 //Processing the nested template
                 if(isTemplate(skey, valueInString)) {
                     try {
-                        URL templateName =  TemplateUtils.normaliseFilePathToUrl(baseUrl + valueInString);
+                        final String templateName = valueInString;
+                    	final URL fullTemplateName =  TemplateUtils.normaliseFilePathToUrl(baseUrl + templateName);
 
-                        if(! files.containsKey(templateName.toString())) {
-                            Template tpl = new Template(templateName);
-                            files.put(templateName.toString(),tpl.getTplContent());
+                        if(! files.containsKey(templateName)) {
+                            final Template tpl = new Template(fullTemplateName);
+                            files.put(templateName, tpl.getTplContent());
                             files.putAll(tpl.getFiles());
                         }
                     } catch (URISyntaxException e) {
