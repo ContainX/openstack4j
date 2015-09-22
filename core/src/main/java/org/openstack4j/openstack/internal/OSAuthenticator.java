@@ -152,7 +152,7 @@ public class OSAuthenticator {
         	return OSClientSession.createSession(AccessWrapper.wrap(access.applyContext(endpoint, credentials)), perspective, config);
         
         OSClientSession current = OSClientSession.getCurrent();
-        current.access = AccessWrapper.wrap(access);
+        current.access = AccessWrapper.wrap(access.applyContext(endpoint, credentials));
         return current;
 
     }
