@@ -42,6 +42,14 @@ public interface IOSClientBuilder<R, T extends IOSClientBuilder<R, T>> {
     T endpoint(String endpoint);
     
     /**
+     * The OpenStack cloud provider which helps determine compatibility within requests
+     * 
+     * @param provider the cloud provider
+     * @return self for method chaining
+     */
+    T provider(CloudProvider provider);
+    
+    /**
      * Allows for a specific network perspective to be used.  For example to only use AdminURL Endpoints you would want to 
      * set the {@link Facing#ADMIN} as a facing perspective.  
      * 

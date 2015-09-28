@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
 
+import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.ExecutionOptions;
@@ -19,6 +21,7 @@ import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.identity.Access.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -183,10 +186,26 @@ public class BaseOpenStackService {
         }
 
     }
+    
+    protected int getServiceVersion() {
+        OSClientSession session = OSClientSession.getCurrent();
+        SortedSet<? extends Service> services = session.getAccess().getAggregatedCatalog().get(serviceType.getTypeV3());
+        System.out.println(services);
+        if (services.isEmpty()) {
+            return 1;
+        }
+        
+        Service service = session.getAccess().getAggregatedCatalog().get(serviceType.getTypeV3()).first();
+        return service.getVersion();
+    }
 
     protected <T> List<T> toList(T[] arr) {
         if (arr == null)
             return Collections.emptyList();
         return Arrays.asList(arr);
+    }
+    
+    protected CloudProvider getProvider() {
+        return OSClientSession.getCurrent().getProvider();
     }
 }

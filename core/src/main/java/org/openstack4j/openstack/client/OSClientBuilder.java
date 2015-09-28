@@ -3,6 +3,7 @@ package org.openstack4j.openstack.client;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import org.openstack4j.api.OSClient;
+import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.client.IOSClientBuilder;
 import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.api.types.Facing;
@@ -30,6 +31,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
     String user;
     String password;
     Facing perspective;
+    CloudProvider provider = CloudProvider.UNKNOWN;
     
     @SuppressWarnings("unchecked")
     @Override
@@ -37,6 +39,14 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         this.config = config;
         return (T) this;
     }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public T provider(CloudProvider provider) {
+        this.provider = provider;
+        return (T) this;
+    }
+
 
     @SuppressWarnings("unchecked")
     @Override
@@ -97,14 +107,14 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         public OSClient authenticate() throws AuthenticationException {
             if (tokenId != null) {
                 checkArgument(tenantName != null || tenantId != null, "TenantId or TenantName is required when using Token Auth");
-                return OSAuthenticator.invoke(new TokenAuth(tokenId, tenantName, tenantId), endpoint, perspective, config);
+                return OSAuthenticator.invoke(new TokenAuth(tokenId, tenantName, tenantId), endpoint, perspective, config, provider);
             }
             
             if (raxApiKey) {
-                return OSAuthenticator.invoke(new RaxApiKeyCredentials(user, password), endpoint, perspective, config);
+                return OSAuthenticator.invoke(new RaxApiKeyCredentials(user, password), endpoint, perspective, config, provider);
             }
             
-            return OSAuthenticator.invoke(new Credentials(user, password, tenantName, tenantId), endpoint, perspective, config);
+            return OSAuthenticator.invoke(new Credentials(user, password, tenantName, tenantId), endpoint, perspective, config, provider);
         }
 
         @Override
@@ -149,8 +159,8 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         @Override
         public OSClient authenticate() throws AuthenticationException {
             if (tokenId != null && tokenId.length() > 0)
-                return OSAuthenticator.invoke(new KeystoneAuth(tokenId, scope), endpoint, perspective, config);
-            return OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective, config);
+                return OSAuthenticator.invoke(new KeystoneAuth(tokenId, scope), endpoint, perspective, config, provider);
+            return OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective, config, provider);
         }
 
         @Override

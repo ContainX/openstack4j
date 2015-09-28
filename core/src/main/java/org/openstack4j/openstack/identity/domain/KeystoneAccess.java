@@ -232,6 +232,8 @@ public class KeystoneAccess implements Access {
 		public ServiceType getServiceType() {
 			if (serviceType == null)
 				serviceType = ServiceType.forName(name);
+			if (serviceType == ServiceType.UNKNOWN)
+			    serviceType = ServiceType.forName(type);
 			return serviceType;
 		}
 
@@ -262,7 +264,7 @@ public class KeystoneAccess implements Access {
 		 */
 		public String toString() {
 			return Objects.toStringHelper(this).omitNullValues()
-					.add("name", name).add("type", type).add("endpoints", endpoints).addValue("\n")
+					.add("name", name).add("type", type).add("version", getVersion()).add("endpoints", endpoints).addValue("\n")
 					.toString();
 		}
 

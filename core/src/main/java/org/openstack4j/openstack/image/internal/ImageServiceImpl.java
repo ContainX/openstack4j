@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
@@ -39,7 +40,8 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
      */
     @Override
     public List<? extends Image> list() {
-        return get(Images.class, uri("/images/detail")).execute().getList();
+        String uri = getProvider() == CloudProvider.RACKSPACE ? "/images" : "/images/detail";
+        return get(Images.class, uri(uri)).execute().getList();
     }
 
     /**

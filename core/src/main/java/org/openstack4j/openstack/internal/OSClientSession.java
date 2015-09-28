@@ -7,6 +7,7 @@ import java.util.Set;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
+import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
@@ -46,12 +47,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     Facing perspective;
     String region;
     Set<ServiceType> supports;
+    CloudProvider provider;
 
-    private OSClientSession(Access access, String endpoint, Facing perspective, Config config)
+    private OSClientSession(Access access, String endpoint, Facing perspective, CloudProvider provider, Config config)
     {
         this.access = access;
         this.config = config;
         this.perspective = perspective;
+        this.provider = provider;
         sessions.set(this);
     }
 
@@ -63,11 +66,11 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     }
 
     public static OSClientSession createSession(Access access) {
-        return new OSClientSession(access, access.getEndpoint(), null, null);
+        return new OSClientSession(access, access.getEndpoint(), null, null, null);
     }
 
-    public static OSClientSession createSession(Access access, Facing perspective, Config config) {
-        return new OSClientSession(access, access.getEndpoint(), perspective, config);
+    public static OSClientSession createSession(Access access, Facing perspective, CloudProvider provider, Config config) {
+        return new OSClientSession(access, access.getEndpoint(), perspective, provider, config);
     }
 
     public static OSClientSession getCurrent() {
@@ -317,5 +320,9 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public OSClient perspective(Facing perspective) {
         this.perspective = perspective;
         return this;
+    }
+    
+    public CloudProvider getProvider() {
+        return (provider == null) ? CloudProvider.UNKNOWN : provider;
     }
 }
