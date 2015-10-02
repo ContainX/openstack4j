@@ -82,7 +82,7 @@ public class Apis {
 	}
 	
 	private static APIProvider initializeProvider() {
-		APIProvider p = ServiceLoader.load(APIProvider.class).iterator().next();
+		APIProvider p = ServiceLoader.load(APIProvider.class, Apis.class.getClassLoader()).iterator().next();
 		p.initialize();
 		return p;
 	}

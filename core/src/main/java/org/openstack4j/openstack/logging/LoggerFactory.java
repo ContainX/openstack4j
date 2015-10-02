@@ -22,7 +22,7 @@ public class LoggerFactory {
     }
 
     private static LoggerFactorySupplier getSupplier() {
-        Iterator<LoggerFactorySupplier> it = ServiceLoader.load(LoggerFactorySupplier.class).iterator();
+        Iterator<LoggerFactorySupplier> it = ServiceLoader.load(LoggerFactorySupplier.class, LoggerFactory.class.getClassLoader()).iterator();
         if (it != null && it.hasNext())
             return it.next();
         

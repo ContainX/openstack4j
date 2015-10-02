@@ -26,7 +26,7 @@ public class HttpExecutor  {
     }
 
     private void initService() {
-        Iterator<HttpExecutorService> it = ServiceLoader.load(HttpExecutorService.class).iterator();
+        Iterator<HttpExecutorService> it = ServiceLoader.load(HttpExecutorService.class, getClass().getClassLoader()).iterator();
         if (!it.hasNext())
         {
             LOG.error("No OpenStack4j connector found in classpath");
