@@ -22,11 +22,10 @@ public class LoggerFactory {
     }
 
     private static LoggerFactorySupplier getSupplier() {
-        Iterator<LoggerFactorySupplier> it = ServiceLoader.load(LoggerFactorySupplier.class).iterator();
-        if (it != null && it.hasNext())
+        Iterator<LoggerFactorySupplier> it = ServiceLoader.load(LoggerFactorySupplier.class, LoggerFactory.class.getClassLoader()).iterator();
+        if (it.hasNext())
             return it.next();
         
         return FallbackLoggerFactorySupplier.getInstance();
     }
-    
 }
