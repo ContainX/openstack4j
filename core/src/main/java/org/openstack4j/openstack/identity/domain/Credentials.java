@@ -1,5 +1,7 @@
 package org.openstack4j.openstack.identity.domain;
 
+import java.io.Serializable;
+
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
 
@@ -67,9 +69,11 @@ public class Credentials extends Auth implements AuthStore {
         return getTenantName();
     }
 
-    private static final class PasswordCredentials {
+    private static final class PasswordCredentials implements Serializable {
 
-        @JsonProperty
+		private static final long serialVersionUID = 1L;
+		
+		@JsonProperty
         String username;
         @JsonProperty
         String password;
