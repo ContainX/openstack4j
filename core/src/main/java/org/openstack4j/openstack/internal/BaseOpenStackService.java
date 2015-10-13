@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.SortedSet;
 
 import org.openstack4j.api.client.CloudProvider;
+import org.openstack4j.api.exceptions.OS4JException;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.ExecutionOptions;
@@ -88,6 +89,9 @@ public class BaseOpenStackService {
 
     private <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
         OSClientSession ses = OSClientSession.getCurrent();
+        if (ses == null) {
+        	throw new OS4JException("Unable to retrieve current session. Please verify thread has a current session available.");
+        }
         RequestBuilder<R> req = HttpRequest.builder(returnType).endpointTokenProvider(ses).config(ses.getConfig()).method(method).path(path);
         return new Invocation<R>(req, serviceType, endpointFunc);
     }
