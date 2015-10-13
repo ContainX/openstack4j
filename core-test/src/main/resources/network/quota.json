@@ -1,0 +1,11 @@
+{
+  "quota": {
+    "subnet": 10,
+    "router": 11,
+    "port": 12,
+    "network": 13,
+    "floatingip": 14,
+    "security_group": 15,
+    "security_group_rule": 16
+  }
+}
