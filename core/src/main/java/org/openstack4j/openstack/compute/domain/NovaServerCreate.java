@@ -1,7 +1,6 @@
 package org.openstack4j.openstack.compute.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,9 +33,9 @@ public class NovaServerCreate implements ServerCreate {
     private String accessIPv6;
     private Integer min;
     private Integer max;
-    private DiskConfig diskConfig = DiskConfig.MANUAL;
+    private DiskConfig diskConfig;
     @JsonProperty("metadata")
-    private Map<String, String> metadata = new HashMap<String, String>();
+    private Map<String, String> metadata;
     @JsonProperty("user_data")
     private String userData;
     @JsonProperty("key_name")
@@ -58,7 +57,7 @@ public class NovaServerCreate implements ServerCreate {
     private List<Personality> personality;
 
     @JsonProperty("block_device_mapping_v2")
-    private List<BlockDeviceMappingCreate> blockDeviceMapping = Lists.newArrayList();
+    private List<BlockDeviceMappingCreate> blockDeviceMapping;
 
     public static ServerCreateBuilder builder() {
         return new ServerCreateConcreteBuilder();
@@ -299,6 +298,9 @@ public class NovaServerCreate implements ServerCreate {
 
         @Override
         public ServerCreateBuilder blockDevice(BlockDeviceMappingCreate blockDevice) {
+            if (blockDevice != null && m.blockDeviceMapping == null) {
+                m.blockDeviceMapping = Lists.newArrayList();
+            }
             m.blockDeviceMapping.add(blockDevice);
             return this;
         }
