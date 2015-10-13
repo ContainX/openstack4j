@@ -45,4 +45,18 @@ public interface NetQuota extends ModelEntity, Buildable<NetQuotaBuilder> {
      * @return number of float IpAddresses
      */
     int getFloatingIP();
+
+    /**
+     * Number of security groups per tenant
+     *
+     * @return number of security groups
+     */
+    int getSecurityGroup();
+
+    /**
+     * Number of security groups rules per security group per tenant
+     *
+     * @return number of security groups rules
+     */
+    int getSecurityGroupRule();
 }
