@@ -82,7 +82,8 @@ public class Apis {
 	}
 	
 	private static APIProvider initializeProvider() {
-		APIProvider p = ServiceLoader.load(APIProvider.class).iterator().next();
+		// No need to check for emptiness as there is default implementation registered
+		APIProvider p = ServiceLoader.load(APIProvider.class, Apis.class.getClassLoader()).iterator().next();
 		p.initialize();
 		return p;
 	}

@@ -1,9 +1,9 @@
 package org.openstack4j.openstack.storage.block.domain;
 
+import org.openstack4j.model.ModelEntity;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.storage.block.Volume;
 
 @JsonRootName("os-extend")
 public class ExtendAction implements ModelEntity {

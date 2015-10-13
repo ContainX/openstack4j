@@ -21,6 +21,7 @@ import org.openstack4j.model.identity.v3.EndpointV3;
 import org.openstack4j.model.identity.v3.TokenV3;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.SortedSetMultimap;
 
 /**
  * Resolves an Endpoint URL based on the Service Type and Facing perspective
@@ -68,12 +69,16 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
     }
 
     private String resolveV2(URLResolverParams p) {
-        SortedSet<? extends Service> services = p.access.getAggregatedCatalog().get(p.type.getServiceName());
+        SortedSetMultimap<String, ? extends Service> catalog = p.access.getAggregatedCatalog();
+        SortedSet<? extends Service> services = catalog.get(p.type.getServiceName());
+        
+        if (services.isEmpty()) {
+            services = catalog.get(p.type.getTypeV3());
+        }
         
         if (!services.isEmpty())
         {
             Service sc = p.getV2Resolver().resolve(p.type, services);
-            
             for (Endpoint ep : sc.getEndpoints())
             {
                 if (p.region != null && !p.region.equalsIgnoreCase(ep.getRegion()))

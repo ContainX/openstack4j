@@ -3,6 +3,7 @@ package org.openstack4j.openstack.identity.domain;
 import static org.openstack4j.openstack.identity.functions.ServiceFunctions.TYPE_WITHOUT_VERSION;
 import static org.openstack4j.openstack.identity.functions.ServiceFunctions.VERSION_FROM_TYPE;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.openstack4j.api.types.ServiceType;
@@ -129,8 +130,10 @@ public class KeystoneAccess implements Access {
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown=true)
-	public static final class AccessUser implements UserDetails {
+	public static final class AccessUser implements UserDetails, Serializable {
 
+		private static final long serialVersionUID = 1L;
+		
 		private String id;
 		private String name;
 		private String username;
@@ -202,8 +205,10 @@ public class KeystoneAccess implements Access {
 	}
 
 
-	public static final class AccessService implements Service, Comparable<AccessService>
+	public static final class AccessService implements Service, Comparable<AccessService>, Serializable
 	{
+		private static final long serialVersionUID = 1L;
+		
 		private String type;
 		private String name;
 		private List<KeystoneEndpoint> endpoints;
@@ -232,6 +237,8 @@ public class KeystoneAccess implements Access {
 		public ServiceType getServiceType() {
 			if (serviceType == null)
 				serviceType = ServiceType.forName(name);
+			if (serviceType == ServiceType.UNKNOWN)
+			    serviceType = ServiceType.forName(type);
 			return serviceType;
 		}
 
@@ -262,7 +269,7 @@ public class KeystoneAccess implements Access {
 		 */
 		public String toString() {
 			return Objects.toStringHelper(this).omitNullValues()
-					.add("name", name).add("type", type).add("endpoints", endpoints).addValue("\n")
+					.add("name", name).add("type", type).add("version", getVersion()).add("endpoints", endpoints).addValue("\n")
 					.toString();
 		}
 

@@ -29,6 +29,10 @@ public class NeutronNetQuota implements NetQuota {
     private int network;
     @JsonProperty("floatingip")
     private int floatingIp;
+    @JsonProperty("security_group")
+    private int securityGroup;
+    @JsonProperty("security_group_rule")
+    private int securityGroupRule;
 
     public static NetQuotaBuilder builder() {
         return new NetQuotaConcreteBuilder();
@@ -64,7 +68,17 @@ public class NeutronNetQuota implements NetQuota {
     public int getFloatingIP() {
         return floatingIp;
     }
-    
+
+    @Override
+    public int getSecurityGroup() {
+        return securityGroup;
+    }
+
+    @Override
+    public int getSecurityGroupRule() {
+        return securityGroupRule;
+    }
+
     @Override
     public String toString() {
         return toStringHelper(this)
@@ -123,6 +137,18 @@ public class NeutronNetQuota implements NetQuota {
         @Override
         public NetQuotaBuilder floatingIP(int floatingIP) {
             model.floatingIp = floatingIP;
+            return this;
+        }
+
+        @Override
+        public NetQuotaBuilder securityGroup(int securityGroup) {
+            model.securityGroup = securityGroup;
+            return this;
+        }
+
+        @Override
+        public NetQuotaBuilder securityGroupRule(int securityGroupRule) {
+            model.securityGroupRule = securityGroupRule;
             return this;
         }
         

@@ -1,6 +1,7 @@
 package org.openstack4j.openstack;
 
 import org.openstack4j.api.OSClient;
+import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.client.IOSClientBuilder;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
@@ -41,7 +42,7 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      * @return the OSCLient
      */
     public static OSClient clientFromAccess(Access access, Facing perspective) {
-        return OSClientSession.createSession(access, perspective, null);
+        return OSClientSession.createSession(access, perspective, null, null);
     }
 	
 	/**
@@ -53,7 +54,7 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      * @return the OSCLient
      */
     public static OSClient clientFromAccess(Access access, Config config) {
-        return OSClientSession.createSession(access, null, config);
+        return OSClientSession.createSession(access, null, null, config);
     }
     
     /**
@@ -66,7 +67,21 @@ public abstract class OSFactory<T extends OSFactory<T>> {
      * @return the OSCLient
      */
     public static OSClient clientFromAccess(Access access, Facing perspective, Config config) {
-        return OSClientSession.createSession(access, perspective, config);
+        return OSClientSession.createSession(access, perspective, null, config);
+    }
+    
+    /**
+     * Skips Authentication and created the API around a previously cached Access object.  This can be useful in multi-threaded environments
+     * or scenarios where a client should not be re-authenticated due to a token lasting 24 hours
+     * 
+     * @param access an authorized access entity which is to be used to create the API
+     * @param perspective the current endpoint perspective to use
+     * @param provider the cloud provider
+     * @param config OpenStack4j configuration options
+     * @return the OSCLient
+     */
+    public static OSClient clientFromAccess(Access access, Facing perspective, CloudProvider provider, Config config) {
+        return OSClientSession.createSession(access, perspective, provider, config);
     }
     
     /**
