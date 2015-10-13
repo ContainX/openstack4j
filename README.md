@@ -69,6 +69,34 @@ Example POM based repository declaration to grab snapshots:
 </repositories>
 ```
 
+Contributing
+------------
+If you would like to contribute please see our contributing [guidelines](https://github.com/gondor/openstack4j/blob/master/CONTRIBUTING.md)
+
+#### Top 15 Contributors
+
+| Rank | Login | Contributions |
+| :--- | :---- | :------------ |
+| 1  | gondor           | 481 |
+| 2  | octupszhang      | 26 |
+| 3  | ekasitk          | 17 |
+| 4  | magixyu          | 17 |
+| 5  | maxrome          | 12 |
+| 6  | isartcanyameres  | 9 |
+| 7  | n-r-anderson     | 7 |
+| 8  | krishnabrucelee  | 6 |
+| 9  | peter-nordquist  | 4 |
+| 10 | RibeiroAna       | 4 |
+| 11 | olivergondza     | 3 |
+| 12 | NareshkumarCIET  | 2 |
+| 13 | frsyuki          | 2 |
+| 14 | liujunpengwork   | 2 |
+| 15 | symcssn          | 2 |
+
+#### Throughput
+
+[![Throughput Graph](https://graphs.waffle.io/gondor/openstack4j/throughput.svg)](https://waffle.io/gondor/openstack4j/metrics)
+
 Quick Usage Guide
 -----------------
 
@@ -214,31 +242,6 @@ Image image = os.images().create(Builders.image()
 				.build()
 				), Payloads.create(new URL("https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img")));
 ```
-
-Contributing
-------------
-If you would like to contribute please see our contributing [guidelines](https://github.com/gondor/openstack4j/blob/master/CONTRIBUTING.md)
-
-### Top 15 Contributors
-
-| Rank | Login | Contributions |
-| :--- | :---- | :------------ |
-| 1  | gondor           | 481 |
-| 2  | octupszhang      | 26 |
-| 3  | ekasitk          | 17 |
-| 4  | magixyu          | 17 |
-| 5  | maxrome          | 12 |
-| 6  | isartcanyameres  | 9 |
-| 7  | n-r-anderson     | 7 |
-| 8  | krishnabrucelee  | 6 |
-| 9  | peter-nordquist  | 4 |
-| 10 | RibeiroAna       | 4 |
-| 11 | olivergondza     | 3 |
-| 12 | NareshkumarCIET  | 2 |
-| 13 | frsyuki          | 2 |
-| 14 | liujunpengwork   | 2 |
-| 15 | symcssn          | 2 |
-
 
 License
 -------
