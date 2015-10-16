@@ -1,266 +1,339 @@
 package org.openstack4j.openstack.identity.domain;
 
-import java.net.URI;
+import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
+import org.openstack4j.api.types.Facing;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.builder.EndpointBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
- * Endpoint Model is used to describe a network address which is described by URL's and other service
- * information depending on the context it was retrieved in.
- * 
- * @author Jeremy Unruh
- * 
- * @see <a href="http://docs.openstack.org/api/openstack-identity-service/2.0/content/GET_listEndpointsForToken_v2.0_tokens__tokenId__endpoints_Token_Operations.html#GET_listEndpointsForToken_v2.0_tokens__tokenId__endpoints_Token_Operations-Response"
+ * Keystone V3 endpoint model class
+ *
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonRootName("endpoint")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class KeystoneEndpoint implements Endpoint {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    @JsonProperty
+    private String id;
+    private String type;
+    private String description;
+    @JsonProperty("interface")
+    private Facing iface;
+    @JsonProperty("service_id")
+    private String serviceId;
+    private String name;
+    @JsonProperty
+    private String region;
+    @JsonProperty("region_id")
+    private String regionId;
+    @JsonProperty
+    private URL url;
+    private Map<String, String> links;
+    private Boolean enabled = true;
 
-	private String type;
-	private String id;
-  private String name;
-	private String region;
-	private URI publicURL;
-	private URI internalURL;
-	private URI adminURL;
-	private String tenantId;
-	private String versionId;
-	private URI versionInfo;
-	private URI versionList;
-	
-	public static EndpointBuilder builder() {
-		return new EndPointConcreteBuilder();
-	}
-	
-	@Override
-	public EndpointBuilder toBuilder() {
-		return new EndPointConcreteBuilder(this);
-	}
-	
-	public String getType() {
-		return type;
-	}
+    /**
+     * @return the endpoint builder
+     */
+    public static EndpointBuilder builder() {
+        return new EndpointConcreteBuilder();
+    }
 
-	/**
-	 * @return the id for this endpoint (null if a new endpoint is being created)
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public EndpointBuilder toBuilder() {
+        return new EndpointConcreteBuilder();
+    }
 
-	/**
-	 * @return the name of this endpoint, or null when the endpoint is part of the Access ServiceCatalog
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+        return id;
+    }
 
-	/**
-	 * @return the admin URL for this endpoint, or null when the endpoint is part of the Access ServiceCatalog
-	 */
-	public URI getAdminURL() {
-		return adminURL;
-	}
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String getType() {
+        return type;
+    }
 
-	/**
-	 * @return the public URL for this endpoint
-	 */
-	public URI getPublicURL() {
-		return publicURL;
-	}
-	
-	/**
-	 * @return the internal URL for this endpoint
-	 */
-	public URI getInternalURL() {
-		return internalURL;
-	}
-	
-	/**
-   * @return the region of the endpoint or null
-   */
-	public String getRegion() {
-		return region;
-	}
-	
-	/**
-	 * @return the tenant identifier for this endpoint or null
-	 */
-	public String getTenantId() {
-		return tenantId;
-	}
-	
-	/**
-	 * @return the version id or null
-	 */
-	public String getVersionId() {
-		return versionId;
-	}
-	
-	/**
-	 * @return the version information when endpoint is listed as part of Access Service Catalog, otherwise null
-	 */
-	public URI getVersionInfo() {
-		return versionInfo;
-	}
-	
-	/**
-	 * @return the version list when endpoint is listed as part of Access Service Catalog, otherwise null
-	 */
-	public URI getVersionList() {
-		return versionList;
-	}
-	
-	 @Override
-   public int hashCode() {
-      return Objects.hashCode(id, versionId, region, publicURL, internalURL, adminURL, versionInfo, versionList,
-            tenantId, type);
-   }
-	 
-   @Override
-   public boolean equals(Object obj) {
-      if (this == obj)
-         return true;
-      if (obj == null || getClass() != obj.getClass())
-         return false;
-      KeystoneEndpoint that = KeystoneEndpoint.class.cast(obj);
-      return Objects.equal(this.id, that.id) && Objects.equal(this.versionId, that.versionId)
-            && Objects.equal(this.region, that.region) && Objects.equal(this.publicURL, that.publicURL)
-            && Objects.equal(this.internalURL, that.internalURL) && Objects.equal(this.adminURL, that.adminURL)
-            && Objects.equal(this.versionInfo, that.versionInfo) && Objects.equal(this.versionList, that.versionList)
-            && Objects.equal(this.tenantId, that.tenantId) && Objects.equal(this.type, that.type);
-   }
-	
-	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
-				   .add("id", id).add("name", name).add("type", type)
-				   .add("region", region).add("publicURL", publicURL)
-				   .add("internalURL", internalURL).add("adminURL", adminURL)
-				   .add("versionId", versionId).add("versionInfo", versionInfo).add("versionList", versionList)
-				   .toString();
-	}
-	
-	@JsonIgnoreProperties(ignoreUnknown=true)
-	public static class Endpoints extends ListResult<KeystoneEndpoint> {
-		private static final long serialVersionUID = 1L;
-		
-		@JsonProperty("endpoints")
-		private List<KeystoneEndpoint> endpoints;
-		
-		public List<KeystoneEndpoint> value() {
-			return endpoints;
-		}
-	}
-	
-	public static class EndPointConcreteBuilder implements EndpointBuilder {
-		
-		protected KeystoneEndpoint model;
-		
-		protected EndPointConcreteBuilder() {
-			this(new KeystoneEndpoint());
-		}
-		
-		EndPointConcreteBuilder(KeystoneEndpoint model) {
-			this.model = model;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getRegion()
-		 */
-		public EndpointBuilder region(String region) {
-			model.region = region;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getPublicURL()
-		 */
-		public EndpointBuilder publicURL(URI publicURL) {
-			model.publicURL = publicURL;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getInternalURL()
-		 */
-		public EndpointBuilder internalURL(URI internalURL) {
-			model.internalURL = internalURL;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getTenantId()
-		 */
-		public EndpointBuilder tenantId(String tenantId) {
-			model.tenantId = tenantId;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getType()
-		 */
-		public EndpointBuilder type(String type) {
-			model.type = type;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getId()
-		 */
-		public EndpointBuilder id(String id) {
-			model.id = id;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getName()
-		 */
-		public EndpointBuilder name(String name) {
-			model.name = name;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getAdminURL()
-		 */
-		public EndpointBuilder adminURL(URI adminURL) {
-			model.adminURL = adminURL;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getVersionInfo()
-		 */
-		public EndpointBuilder versionInfo(URI versionInfo) {
-			model.versionInfo = versionInfo;
-			return this;
-		}
-		
-		/**
-		 * @see KeystoneEndpoint#getVersionList()
-		 */
-		public EndpointBuilder versionList(URI versionList) {
-			model.versionList = versionList;
-			return this;
-		}
-		
-		@Override
-		public KeystoneEndpoint build() {
-			return model;
-		}
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String getDescription() {
+        return description;
+    }
 
-		@Override
-		public EndpointBuilder from(Endpoint in) {
-			this.model = (KeystoneEndpoint)in;
-			return this;
-		}
-	}
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public Facing getIface() {
+        return iface;
+    }
+
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String getRegion() {
+        return region;
+    }
+
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String getRegionId() {
+        return regionId;
+    }
+
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public URL getUrl() {
+        return url;
+    }
+
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public Map<String, String> getLinks() {
+        return links;
+    }
+
+    /**
+     * @return {@inheritDoc}
+     */
+    @Override
+    public boolean isEnabled() {
+        return (enabled != null && enabled);
+    }
+
+    /**
+     * set endpoint enabled
+     *
+     * @param enabled the new enabled status
+     */
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).omitNullValues()
+                .add("id", id)
+                .add("type", type)
+                .add("name", name)
+                .add("description", description)
+                .add("interface", iface)
+                .add("serviceId", serviceId)
+                .add("region", region)
+                .add("url", url)
+                .add("links", links)
+                .add("enabled", enabled)
+                .toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id, type, name, description, iface, serviceId, region, url, links, enabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        KeystoneEndpoint that = KeystoneEndpoint.class.cast(obj);
+        return Objects.equal(this.id, that.id)
+                && Objects.equal(this.type, that.type)
+                && Objects.equal(this.name, that.name)
+                && Objects.equal(this.description, that.description)
+                && Objects.equal(this.iface, that.iface)
+                && Objects.equal(this.serviceId, that.serviceId)
+                && Objects.equal(this.region, that.region)
+                && Objects.equal(this.url, that.url)
+                && Objects.equal(this.links, that.links)
+                && Objects.equal(this.enabled, that.enabled);
+    }
+
+    public static class Endpoints extends ListResult<KeystoneEndpoint> {
+
+        private static final long serialVersionUID = 1L;
+        @JsonProperty("endpoints")
+        private List<KeystoneEndpoint> list;
+
+        @Override
+        protected List<KeystoneEndpoint> value() {
+            return list;
+        }
+    }
+
+    public static class EndpointConcreteBuilder implements EndpointBuilder {
+
+        KeystoneEndpoint model;
+
+        EndpointConcreteBuilder() {
+            this(new KeystoneEndpoint());
+        }
+
+        EndpointConcreteBuilder(KeystoneEndpoint model) {
+            this.model = model;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getId()
+         */
+        @Override
+        public EndpointBuilder id(String id) {
+            model.id = id;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getType()
+         */
+        @Override
+        public EndpointBuilder type(String type) {
+            model.type = type;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getDescription()
+         */
+        @Override
+        public EndpointBuilder description(String description) {
+            model.description = description;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getIface()
+         */
+        @Override
+        public EndpointBuilder iface(Facing iface) {
+            model.iface = iface;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getServiceId()
+         */
+        @Override
+        public EndpointBuilder serviceId(String serviceId) {
+            model.serviceId = serviceId;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getName()
+         */
+        @Override
+        public EndpointBuilder name(String name) {
+            model.name = name;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getRegion()
+         */
+        @Override
+        public EndpointBuilder region(String region) {
+            model.region = region;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getUrl()
+         */
+        @Override
+        public EndpointBuilder url(URL url) {
+            model.url = url;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getLinks()
+         */
+        @Override
+        public EndpointBuilder links(Map<String, String> links) {
+            model.links = links;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#isEnabled()
+         */
+        @Override
+        public EndpointBuilder enabled(boolean enabled) {
+            model.enabled = enabled;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Endpoint build() {
+            return model;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public EndpointBuilder from(Endpoint in) {
+            this.model = (KeystoneEndpoint) in;
+            return this;
+        }
+
+    }
+
 }

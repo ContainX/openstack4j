@@ -28,9 +28,6 @@ import org.openstack4j.api.heat.SoftwareConfigService;
 import org.openstack4j.api.heat.StackService;
 import org.openstack4j.api.heat.TemplateService;
 import org.openstack4j.api.identity.IdentityService;
-import org.openstack4j.api.identity.RoleService;
-import org.openstack4j.api.identity.ServiceManagerService;
-import org.openstack4j.api.identity.TenantService;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetFloatingIPService;
@@ -99,9 +96,6 @@ import org.openstack4j.openstack.heat.internal.SoftwareConfigServiceImpl;
 import org.openstack4j.openstack.heat.internal.StackServiceImpl;
 import org.openstack4j.openstack.heat.internal.TemplateServiceImpl;
 import org.openstack4j.openstack.identity.internal.IdentityServiceImpl;
-import org.openstack4j.openstack.identity.internal.RoleServiceImpl;
-import org.openstack4j.openstack.identity.internal.ServiceManagerServiceImpl;
-import org.openstack4j.openstack.identity.internal.TenantServiceImpl;
 import org.openstack4j.openstack.identity.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.networking.internal.FloatingIPServiceImpl;
@@ -151,24 +145,21 @@ import com.google.common.collect.Maps;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons
- * 
+ *
  * @author Jeremy Unruh
  */
 public class DefaultAPIProvider implements APIProvider {
 
 	private static final Map<Class<?>, Class<?>> bindings = Maps.newHashMap();
 	private static final Map<Class<?>, Object> instances = Maps.newConcurrentMap();
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void initialize() {
 		bind(IdentityService.class, IdentityServiceImpl.class);
-		bind(TenantService.class, TenantServiceImpl.class);
 		bind(UserService.class, UserServiceImpl.class);
-		bind(RoleService.class, RoleServiceImpl.class);
-		bind(ServiceManagerService.class, ServiceManagerServiceImpl.class);
 		bind(ComputeService.class, ComputeServiceImpl.class);
 		bind(FlavorService.class, FlavorServiceImpl.class);
 		bind(ComputeImageService.class, ComputeImageServiceImpl.class);
@@ -246,7 +237,7 @@ public class DefaultAPIProvider implements APIProvider {
 	public <T> T get(Class<T> api) {
 		if (instances.containsKey(api))
 			return (T) instances.get(api);
-		
+
 		if (bindings.containsKey(api)) {
 			try {
 				T impl = (T) bindings.get(api).newInstance();

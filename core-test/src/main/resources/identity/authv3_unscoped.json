@@ -1,0 +1,17 @@
+{
+    "token": {
+        "methods": ["password"],
+        "expires_at": "2015-08-26T14:14:10.395363Z",
+        "extras": {},
+        "user": {
+            "domain": {
+                "id": "default",
+                "name": "Default"
+            },
+            "id": "aa9f25defa6d4cafb48466df83106065",
+            "name": "admin"
+        },
+        "audit_ids": ["jMpsNK77TA6hwF6bbBHQYA"],
+        "issued_at": "2015-08-26T13:14:10.395414Z"
+    }
+}

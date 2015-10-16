@@ -21,7 +21,6 @@ import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.Config;
-import org.openstack4j.model.identity.Access;
 import org.openstack4j.model.identity.Token;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.openstack.identity.functions.ServiceToServiceType;
@@ -34,7 +33,7 @@ import com.google.common.collect.Sets;
 /**
  * A client which has been identified.  Any calls spawned from this session will automatically utilize the original authentication that was
  * successfully validated and authorized
- * 
+ *
  * @author Jeremy Unruh
  */
 public class OSClientSession implements OSClient, EndpointTokenProvider {
@@ -43,15 +42,15 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 
     EndpointURLResolver epr = new DefaultEndpointURLResolver();
     Config config;
-    Access access;
+    Token token;
     Facing perspective;
     String region;
     Set<ServiceType> supports;
     CloudProvider provider;
 
-    private OSClientSession(Access access, String endpoint, Facing perspective, CloudProvider provider, Config config)
+    private OSClientSession(Token token, String endpoint, Facing perspective, CloudProvider provider, Config config)
     {
-        this.access = access;
+        this.token = token;
         this.config = config;
         this.perspective = perspective;
         this.provider = provider;
@@ -60,23 +59,23 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
 
     private OSClientSession(OSClientSession parent, String region)
     {
-        this.access = parent.access;
+        this.token = parent.token;
         this.perspective = parent.perspective;
         this.region = region;
     }
 
-    public static OSClientSession createSession(Access access) {
-        return new OSClientSession(access, access.getEndpoint(), null, null, null);
+    public static OSClientSession createSession(Token token) {
+        return new OSClientSession(token, token.getEndpoint(), null, null, null);
     }
 
-    public static OSClientSession createSession(Access access, Facing perspective, CloudProvider provider, Config config) {
-        return new OSClientSession(access, access.getEndpoint(), perspective, provider, config);
+    public static OSClientSession createSession(Token token, Facing perspective, CloudProvider provider, Config config) {
+        return new OSClientSession(token, token.getEndpoint(), perspective, provider, config);
     }
-    
+
     public static OSClientSession getCurrent() {
         return sessions.get();
     }
-    
+
     @VisibleForTesting
     public OSClientSession useConfig(Config config) {
         this.config = config;
@@ -106,7 +105,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     @Override
     public Set<ServiceType> getSupportedServices() {
         if (supports == null)
-            supports = Sets.immutableEnumSet(Iterables.transform(access.getServiceCatalog(), new ServiceToServiceType()));
+            supports = Sets.immutableEnumSet(Iterables.transform(token.getCatalog(), new ServiceToServiceType()));
         return supports;
     }
 
@@ -156,7 +155,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public boolean supportsHeat() {
         return getSupportedServices().contains(ServiceType.ORCHESTRATION);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -164,7 +163,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public boolean supportsBlockStorage() {
         return getSupportedServices().contains(ServiceType.BLOCK_STORAGE);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -172,7 +171,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public boolean supportsObjectStorage() {
         return getSupportedServices().contains(ServiceType.OBJECT_STORAGE);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -186,7 +185,15 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public Token getToken() {
-        return access.getToken();
+        return token;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getTokenId() {
+        return token.getId();
     }
 
     /**
@@ -194,7 +201,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public String getEndpoint() {
-        return access.getEndpoint();
+        return token.getEndpoint();
     }
 
     /**
@@ -202,12 +209,12 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public String getEndpoint(ServiceType service) {
-        return addNATIfApplicable(epr.findURL(URLResolverParams.create(access, service)
-                                                .resolver(config != null ? config.getV2Resolver() : null)
+        return addNATIfApplicable(epr.findURL(URLResolverParams.create(token, service)
+                                                .resolver(config != null ? config.getResolver() : null)
                                                 .perspective(perspective)
                                                 .region(region)));
     }
-    
+
     private String addNATIfApplicable(String url) {
         if (config != null && config.isBehindNAT()) {
             try {
@@ -219,21 +226,13 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
         }
         return url;
     }
-    
+
     /**
      * @return the original client configuration associated with this session
      */
     public Config getConfig()
     {
         return config;
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTokenId() {
-        return getToken().getId();
     }
 
     /**
@@ -266,14 +265,6 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     @Override
     public ImageService images() {
         return Apis.getImageService();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Access getAccess() {
-        return access;
     }
 
     /**
@@ -321,9 +312,9 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
         this.perspective = perspective;
         return this;
     }
-    
+
     public CloudProvider getProvider() {
         return (provider == null) ? CloudProvider.UNKNOWN : provider;
     }
-	
+
 }

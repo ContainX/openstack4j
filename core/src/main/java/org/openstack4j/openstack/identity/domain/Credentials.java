@@ -1,7 +1,5 @@
 package org.openstack4j.openstack.identity.domain;
 
-import java.io.Serializable;
-
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
 
@@ -14,11 +12,10 @@ public class Credentials extends Auth implements AuthStore {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonProperty(value="passwordCredentials")
+    @JsonProperty(value = "passwordCredentials")
     private PasswordCredentials passwordCreds = new PasswordCredentials();
 
-
-    public Credentials() { 
+    public Credentials() {
         super(Type.CREDENTIALS);
     }
 
@@ -27,17 +24,10 @@ public class Credentials extends Auth implements AuthStore {
         passwordCreds.setCredentials(username, password);
     }
 
-    public Credentials(String username, String password, String tenantName) {
+    public Credentials(String username, String password, String domainId) {
         this();
         passwordCreds.setCredentials(username, password);
-        setTenantName(tenantName);
-    }
-
-    public Credentials(String username, String password, String tenantName, String tenantId) {
-        this();
-        passwordCreds.setCredentials(username, password);
-        setTenantName(tenantName);
-        setTenantId(tenantId);
+        setDomainId(domainId);
     }
 
     @JsonIgnore
@@ -60,20 +50,18 @@ public class Credentials extends Auth implements AuthStore {
     @JsonIgnore
     @Override
     public String getId() {
-        return getTenantId();
+        return getDomainId();
     }
 
     @JsonIgnore
     @Override
     public String getName() {
-        return getTenantName();
+        return getDomainName();
     }
 
-    private static final class PasswordCredentials implements Serializable {
+    private static final class PasswordCredentials {
 
-		private static final long serialVersionUID = 1L;
-		
-		@JsonProperty
+        @JsonProperty
         String username;
         @JsonProperty
         String password;
@@ -87,6 +75,6 @@ public class Credentials extends Auth implements AuthStore {
     @JsonIgnore
     @Override
     public AuthVersion getVersion() {
-        return AuthVersion.V2;
+        return AuthVersion.V3;
     }
 }

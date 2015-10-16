@@ -1,62 +1,46 @@
 package org.openstack4j.openstack.identity.internal;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.SortedSet;
 
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.model.identity.Access;
-import org.openstack4j.model.identity.Access.Service;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.Endpoint;
+import org.openstack4j.model.identity.Service;
+import org.openstack4j.model.identity.Token;
 import org.openstack4j.model.identity.URLResolverParams;
-import org.openstack4j.model.identity.v3.Catalog;
-import org.openstack4j.model.identity.v3.Token;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.SortedSetMultimap;
 
 /**
  * Resolves an Endpoint URL based on the Service Type and Facing perspective
- * 
+ *
  * @author Jeremy Unruh
  */
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
     private static final Map<Key, String> CACHE = new HashMap<Key, String>();
-    private static boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
-    private String publicHostIP;
 
     @Override
     public String findURL(URLResolverParams p) {
 
         if (p.type == null)
-            return p.access.getEndpoint();
-        Key key = Key.of(p.access.getCacheIdentifier(), p.type, p.perspective, p.region);
+            return p.token.getEndpoint();
+        Key key = Key.of(p.token.getCacheIdentifier(), p.type, p.perspective, p.region);
 
         String url = CACHE.get(key);
 
         if (url != null)
             return url;
 
-        switch (p.access.getVersion()) {
-        case V3:
-            url = resolveV3(p);
-            break;
-        case V2:
-        default:
-            url = resolveV2(p);
-        }
+        url = resolve(p);
 
         if (url != null)
         {
-            if (p.access.getVersion() == AuthVersion.V3) {
+            if (p.token.getVersion() == AuthVersion.V3) {
                 CACHE.put(key, url);
             }
             return url;
@@ -64,61 +48,24 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         else if (p.region != null)
             throw RegionEndpointNotFoundException.create(p.region, p.type.getServiceName());
 
-        return p.access.getEndpoint();
+        return p.token.getEndpoint();
     }
 
-    private String resolveV2(URLResolverParams p) {
-        SortedSetMultimap<String, ? extends Service> catalog = p.access.getAggregatedCatalog();
-        SortedSet<? extends Service> services = catalog.get(p.type.getServiceName());
-        
-        if (services.isEmpty()) {
-            services = catalog.get(p.type.getTypeV3());
-        }
-        
-        if (!services.isEmpty())
-        {
-            Service sc = p.getV2Resolver().resolve(p.type, services);
-            for (Endpoint ep : sc.getEndpoints())
-            {
-                if (p.region != null && !p.region.equalsIgnoreCase(ep.getRegion()))
-                    continue;
+    private String resolve(URLResolverParams p) {
 
-                if (sc.getServiceType() == ServiceType.NETWORK)
-                {
-                    sc.getEndpoints().get(0).toBuilder().type(sc.getServiceType().name());
+        Token token = p.token;
+
+        for (Service service : token.getCatalog()) {
+            if (p.type == ServiceType.forName(service.getType()))
+            {
+                if(p.perspective == null) {
+                    p.perspective = Facing.PUBLIC;
                 }
 
-                if (p.perspective == null)
-                    return getEndpointURL(p.access, ep);
+                for (Endpoint ep : service.getEndpoints()) {
 
-                switch (p.perspective) {
-                case ADMIN:
-                    return ep.getAdminURL().toString();
-                case INTERNAL:
-                    return ep.getInternalURL().toString();
-                case PUBLIC:
-                default:
-                    return ep.getPublicURL().toString();
-                }
-            }
-        }
-        return null;
-    }
-
-    private String resolveV3(URLResolverParams p) {
-        Token token = p.access.unwrap();
-        if (p.perspective == null)
-            p.perspective = Facing.PUBLIC;
-
-
-        for (Catalog catalog : token.getCatalog()) {
-            if (p.type == ServiceType.forName(catalog.getType())) 
-            {
-                for (org.openstack4j.model.identity.v3.Endpoint ep : catalog.getEndpoints()) {
-                    // Since we only support V3 authentication - skip a V3 URL
-                    if (matches(ep, p) && !isEndpointV3(ep.getUrl())) {
+                    if(matches(ep, p))
                         return ep.getUrl().toString();
-                    }
                 }
             }
         }
@@ -126,57 +73,19 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
     }
 
     /**
-     * Returns <code>true</code> for any endpoint that matches a given 
+     * Returns <code>true</code> for any endpoint that matches a given
      * {@link URLResolverParams}.
-     * 
+     *
      * @param endpoint
      * @param p
      * @return
      */
-    private boolean matches(org.openstack4j.model.identity.v3.Endpoint endpoint, URLResolverParams p) {
+    private boolean matches(Endpoint endpoint, URLResolverParams p) {
         boolean matches = endpoint.getIface() == p.perspective;
         if (Optional.fromNullable(p.region).isPresent()) {
             matches &= endpoint.getRegion().equals(p.region);
         }
         return matches;
-    }
-
-    private boolean isEndpointV3(URL url) {
-        return url.toString().contains("/v3");
-    }
-
-    /**
-     * Gets the endpoint url.
-     *
-     * @param access the current access data source
-     * @param endpoint the endpoint
-     * @return the endpoint url
-     */
-    private String getEndpointURL(Access access, Endpoint endpoint) {
-        if (LEGACY_EP_HANDLING)
-        {
-            if (endpoint.getAdminURL() != null)
-            {
-                if (getPublicIP(access) != null && !getPublicIP(access).equals(endpoint.getAdminURL().getHost()))
-                {
-                    return endpoint.getAdminURL().toString().replaceAll(endpoint.getAdminURL().getHost(), getPublicIP(access));
-                }
-                return endpoint.getAdminURL().toString();
-            }
-        }
-        return endpoint.getPublicURL().toString();
-    }
-
-    private String getPublicIP(Access access) {
-        if (publicHostIP == null) {
-            try {
-                publicHostIP = new URI(access.getEndpoint()).getHost();
-            }
-            catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
-        return publicHostIP;
     }
 
     private static final class Key {
@@ -227,8 +136,5 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         }
     }
 
-    public static void enableLegacyEndpointHandling(boolean enabled) {
-        LEGACY_EP_HANDLING = enabled;
-    }
 
 }

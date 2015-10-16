@@ -1,65 +1,67 @@
 package org.openstack4j.model.identity.builder;
 
-import java.net.URI;
+import java.net.URL;
+import java.util.Map;
 
+import org.openstack4j.api.types.Facing;
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.identity.Endpoint;
 
 /**
- * A Builder which creates an Endpoint
- *  
- * @author jeremy
+ * A Builder which creates an identity v3 endpoint.
+ *
+ *
  */
-public interface EndpointBuilder extends Builder<EndpointBuilder, Endpoint>{
+public interface EndpointBuilder extends Builder<EndpointBuilder, Endpoint> {
 
-	/**
-	 * @see Endpoint#getRegion()
-	 */
-	EndpointBuilder region(String region);
-	
-	/**
-	 * @see Endpoint#getPublicURL()
-	 */
-	EndpointBuilder publicURL(URI publicURL);
-	
-	/**
-	 * @see Endpoint#getInternalURL()
-	 */
-	EndpointBuilder internalURL(URI internalURL);
-	
-	/**
-	 * @see Endpoint#getTenantId()
-	 */
-	EndpointBuilder tenantId(String tenantId);
-	
-	/**
-	 * @see Endpoint#getType()
-	 */
-	EndpointBuilder type(String type);
-	
-	/**
-	 * @see Endpoint#getId()
-	 */
-	EndpointBuilder id(String id);
-	
-	/**
-	 * @see Endpoint#getName()
-	 */
-	EndpointBuilder name(String name);
-	
-	/**
-	 * @see Endpoint#getAdminURL()
-	 */
-	EndpointBuilder adminURL(URI adminURL);
-	
-	/**
-	 * @see Endpoint#getVersionInfo()
-	 */
-	EndpointBuilder versionInfo(URI versionInfo);
-	
-	/**
-	 * @see Endpoint#getVersionList()
-	 */
-	EndpointBuilder versionList(URI versionList);
-	
+    /**
+     * @see Endpoint#getId()
+     */
+    EndpointBuilder id(String id);
+
+    /**
+     * @see Endpoint#getType()
+     */
+    EndpointBuilder type(String type);
+
+    /**
+     * @see Endpoint#getDescription()
+     */
+    EndpointBuilder description(String description);
+
+    /**
+     * @see Endpoint#getIface()
+     */
+    EndpointBuilder iface(Facing iface);
+
+    /**
+     * @see Endpoint#getServiceId()
+     */
+    EndpointBuilder serviceId(String serviceId);
+
+    /**
+     * @see Endpoint#getName()
+     */
+    EndpointBuilder name(String name);
+
+    /**
+     * @see Endpoint#getRegion()
+     */
+    EndpointBuilder region(String region);
+
+    /**
+     * @see Endpoint#getUrl()
+     */
+    EndpointBuilder url(URL url);
+
+    /**
+     * @see Endpoint#getLinks()
+     */
+    EndpointBuilder links(Map<String, String> links);
+
+    /**
+     * @see Endpoint#isEnabled()
+     */
+    EndpointBuilder enabled(boolean enabled);
+
 }

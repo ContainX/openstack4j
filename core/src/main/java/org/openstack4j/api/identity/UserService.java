@@ -2,132 +2,204 @@ package org.openstack4j.api.identity;
 
 import java.util.List;
 
+import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.identity.Domain;
+import org.openstack4j.model.identity.Group;
+import org.openstack4j.model.identity.Project;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.User;
 
 /**
- * Identity User based Operations
- * 
- * @author Jeremy Unruh
+ * Identity.v3 User operations
+ *
  */
-public interface UserService {
+public interface UserService extends RestService {
 
-    /**
-     * Gets the detailed User information by ID
-     *
-     * @param userId the user id
-     * @return the user
-     */
-    User get(String userId);
+	/**
+	 * gets detailed information about a specified user by id
+	 *
+	 * @param userId the user id
+	 * @return the user
+	 */
+	User get(String userId);
 
-    /**API added by @ Sandeep Kumar Singh
-     * Gets detailed information about a specified user by name
+	/**
+	 * get detailed information about users matching specified name across all domains
+	 *
+	 * @param userName the user name
+	 * @return the of list users matching the name across all domains
+	 */
+	List<? extends User> getByName(String userName);
+
+	/**
+     * get detailed information about a user specified by username and domain id
      *
      * @param userName the user name
+     * @param domainId the domain identifier
      * @return the user
      */
-    User getByName(String userName);
+	User getByName(String userName, String domainId);
 
     /**
-     * Lists current users
+     * delete a user by id
      *
-     * @return List of User
-     */
-    List<? extends User> list();
-
-    /**
-     * List users who are associated with the given tenant identifier
-     *
-     * @param tenantId the tenant id
-     * @return List of User
-     */
-    List<? extends User> listTenantUsers(String tenantId);
-
-    /**
-     * Creates a new User
-     *
-     * @param tenantId the tenant id
-     * @param name the name of the user
-     * @param password the password for the user
-     * @param email the email address of the user
-     * @param enabled if true the user will be immediately enabled
-     * @return the newly created user
-     */
-    User create(String tenantId, String name, String password, String email, boolean enabled);
-
-    /**
-     * Creates a User
-     * @param user the user to create
-     * @return the newly created user
-     */
-    User create(User user);
-
-    /**
-     * Deletes a user by ID
-     *
-     * @param userId the user id
+     * @param userid the userId
      * @return the action response
      */
-     ActionResponse delete(String userId);
+	ActionResponse delete(String userId);
 
-    /**
-     * Enables/Disables a user by ID
+	/**
+	 * updates the password for or enables or disables a specified user.
+	 *
+	 * @param user the user set to update
+	 * @return the updated user
+	 */
+	User update(User user);
+
+	/**
+	 * create a new user
+	 *
+	 * @param user the user
+	 * @return the newly created user
+	 */
+	User create(User user);
+
+	/**
+	 * creates a new user
+	 *
+	 * @param domainId the domain id
+	 * @param name the name of the new user
+	 * @param password the password of the new user
+	 * @param email the email of the new user
+	 * @param enabled the enabled of the new user
+	 * @return the newly created user
+	 */
+	User create(String domainId, String name, String password, String email, boolean enabled);
+
+	/**
+	 * @param userId the user id
+	 * @return the domain of the user
+	 */
+	Domain getUserDomain(String userId);
+
+	/**
+	 * lists groups for a specified user
+	 *
+	 * @param userId the user id
+	 * @return list of groups for a user
+	 */
+	List<? extends Group> listUserGroups(String userId);
+
+	/**
+	 * lists projects for a specified user
+	 *
+	 * @param user the user
+	 * @return list of projects for a user
+	 */
+	List<? extends Project> listUserProjects(String userId);
+
+	/**
+	 * list role assignments for specified user in project context
+	 *
+	 * @param userId the user id
+	 * @param scope the scope (project,domain)
+	 * @return list of role assignments for specified user
+	 */
+	List<? extends Role> listProjectUserRoles(String userId, String projectId);
+
+	/**
+	 * list role assignment for specified user in domain context
+	 *
+	 * @param userId the user identifier
+	 * @param domainId the domain identifier
+	 * @return list of role assignments for specified user and domain
+	 */
+	List<? extends Role> listDomainUserRoles(String userId, String domainId);
+
+	/**
+	 * grants a role to a specified user in domain context
+	 *
+	 * @param domainId the domain id
+	 * @param userId the user id
+	 * @param roleId the role id
+	 * @return the action response
+	 */
+	ActionResponse grantDomainUserRole(String domainId, String userId, String roleId);
+
+	/**
+	 * revokes a role to a specified user in domain context
+	 *
+	 * @param domainId the domain id
+	 * @param userId the user id
+	 * @param roleId the role id
+	 * @return the action response
+	 */
+	ActionResponse revokeDomainUserRole(String domainId, String userId, String roleId);
+
+	/**
+     * grants a role to a specified user in project context
      *
+     * @param projectId the project id
      * @param userId the user id
-     * @param enabled true to enable the user
-     * @return the updated User
-     */
-    User enableUser(String userId, boolean enabled);
-
-    /**
-     * Updates a User
-     *
-     * @param user the user
-     * @return the updated user
-     */
-    User update(User user);
-
-    /**
-     * Changes a password for the specified user by ID
-     *
-     * @param userId the user id
-     * @param password the new password
+     * @param roleId the role id
      * @return the action response
      */
-    ActionResponse changePassword(String userId, String password);
+	ActionResponse grantProjectUserRole(String projectId, String userId, String roleId);
 
-    /**
-     * Lists global roles for a specified user. Excludes tenant roles
+	/**
+     * revokes a role to a specified user in project context
      *
+     * @param projectId the project id
      * @param userId the user id
-     * @return List of Role
+     * @param roleId the role id
+     * @return the action response
      */
-    List<? extends Role> listRoles(String userId);
+	ActionResponse revokeProjectUserRole(String projectId, String userId, String roleId);
 
-    /**
-     * Lists global roles for a specified user. Excludes tenant roles.
+	/**
+     * checks if a user has a specific role in a given domain-context
      *
-     * @param user the user
-     * @return List of Role
-     */
-    List<? extends Role> listRoles(User user);
-
-    /**
-     * Lists the tenant roles for a specified user. 
-     *
+     * @param domainId the domain id
      * @param userId the user id
-     * @param tenantId the tenant id
-     * @return List of Role
+     * @param roleId the role id
+     * @return the ActionResponse
      */
-    List<? extends Role> listRolesOnTenant(String userId, String tenantId);
+    ActionResponse checkDomainUserRole(String domainId, String userId, String roleId);
 
     /**
-     * List roles on current tenant (default tenant for the given user)
+     * checks if a user has a specific role in a given project-context
      *
-     * @param user the user
-     * @return List of Role
+     * @param projectId the project id
+     * @param userId the user id
+     * @param roleId the role id
+     * @return the ActionResponse
      */
-    List<? extends Role> listRolesOnCurrentTenant(User user);
+    ActionResponse checkProjectUserRole(String projectId, String userId, String roleId);
+
+    /**
+     * adds an existing user to an existing group
+     *
+     * @param groupId the group id
+     * @param userId the user id
+     * @return the ActionResponse
+     */
+    ActionResponse addUserToGroup(String groupId, String userId);
+
+    /**
+     * removes a user from a group
+     *
+     * @param groupId the group id
+     * @param userId the user id
+     * @return the ActionResponse
+     */
+    ActionResponse removeUserFromGroup(String groupId, String userId);
+
+	/**
+	 * lists users.
+	 *
+	 * @return list of users
+	 */
+	List<? extends User> list();
 
 }

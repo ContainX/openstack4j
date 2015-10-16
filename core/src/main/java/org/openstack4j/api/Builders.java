@@ -15,11 +15,13 @@ import org.openstack4j.model.heat.builder.SoftwareConfigBuilder;
 import org.openstack4j.model.heat.builder.StackCreateBuilder;
 import org.openstack4j.model.heat.builder.StackUpdateBuilder;
 import org.openstack4j.model.heat.builder.TemplateBuilder;
+import org.openstack4j.model.identity.builder.DomainBuilder;
 import org.openstack4j.model.identity.builder.EndpointBuilder;
+import org.openstack4j.model.identity.builder.GroupBuilder;
+import org.openstack4j.model.identity.builder.PolicyBuilder;
+import org.openstack4j.model.identity.builder.ProjectBuilder;
 import org.openstack4j.model.identity.builder.RoleBuilder;
 import org.openstack4j.model.identity.builder.ServiceBuilder;
-import org.openstack4j.model.identity.builder.ServiceEndpointBuilder;
-import org.openstack4j.model.identity.builder.TenantBuilder;
 import org.openstack4j.model.identity.builder.UserBuilder;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.network.builder.ExtraDhcpOptBuilder;
@@ -73,11 +75,13 @@ import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatStackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStackUpdate;
 import org.openstack4j.openstack.heat.domain.HeatTemplate;
+import org.openstack4j.openstack.identity.domain.KeystoneDomain;
 import org.openstack4j.openstack.identity.domain.KeystoneEndpoint;
+import org.openstack4j.openstack.identity.domain.KeystoneGroup;
+import org.openstack4j.openstack.identity.domain.KeystonePolicy;
+import org.openstack4j.openstack.identity.domain.KeystoneProject;
 import org.openstack4j.openstack.identity.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.domain.KeystoneService;
-import org.openstack4j.openstack.identity.domain.KeystoneServiceEndpoint;
-import org.openstack4j.openstack.identity.domain.KeystoneTenant;
 import org.openstack4j.openstack.identity.domain.KeystoneUser;
 import org.openstack4j.openstack.image.domain.GlanceImage;
 import org.openstack4j.openstack.networking.domain.NeutronExtraDhcpOptCreate;
@@ -123,7 +127,7 @@ import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
 
 /**
  * A utility class to quickly access available Builders within the OpenStack API
- * 
+ *
  * @author Jeremy Unruh
  */
 public class Builders {
@@ -164,12 +168,48 @@ public class Builders {
     }
 
     /**
+     * The builder to create a Domain.
+     *
+     * @return the domain builder
+     */
+    public static DomainBuilder domain() {
+        return KeystoneDomain.builder();
+    }
+
+    /**
      * The builder to create a Endpoint.
      *
      * @return the endpoint builder
      */
     public static EndpointBuilder endpoint() {
         return KeystoneEndpoint.builder();
+    }
+
+    /**
+     * The builder to create a Group.
+     *
+     * @return the group builder
+     */
+    public static GroupBuilder group() {
+        return KeystoneGroup.builder();
+    }
+
+    /**
+     * The builder to create a Policy.
+     *
+     * @return the policy builder
+     */
+    public static PolicyBuilder policy() {
+        return KeystonePolicy.builder();
+    }
+
+    /**
+     * The builder to create a Project.
+     *
+     * @return the project builder
+     */
+    public static ProjectBuilder project() {
+        return KeystoneProject.builder();
     }
 
     /**
@@ -191,24 +231,6 @@ public class Builders {
     }
 
     /**
-     * The builder to create a Service Endpoint.
-     *
-     * @return the service endpoint builder
-     */
-    public static ServiceEndpointBuilder serviceEndpoint() {
-        return KeystoneServiceEndpoint.builder();
-    }
-
-    /**
-     * The builder to create a Tenant.
-     *
-     * @return the tenant builder
-     */
-    public static TenantBuilder tenant() {
-        return KeystoneTenant.builder();
-    }
-
-    /**
      * The builder to create a User.
      *
      * @return the user builder
@@ -219,7 +241,7 @@ public class Builders {
 
     /**
      * The builder to create a Network
-     * 
+     *
      * @return the network builder
      */
     public static NetworkBuilder network() {
@@ -228,7 +250,7 @@ public class Builders {
 
     /**
      * The builder to create a Subnet
-     * 
+     *
      * @return the subnet builder
      */
     public static SubnetBuilder subnet() {
@@ -333,16 +355,16 @@ public class Builders {
     public static StackCreateBuilder stack(){
         return HeatStackCreate.build();
     }
-    
+
     /**
      * The builder to create a {@link SoftwareConfig}
-     * 
+     *
      * @return the software config builder
      */
     public static SoftwareConfigBuilder softwareConfig() {
         return new HeatSoftwareConfig.Builder();
     }
-    
+
     /**
      * The builder to create a {@link StackUpdate}
      * @return the StackUpdate builder
@@ -350,7 +372,7 @@ public class Builders {
     public static StackUpdateBuilder stackUpdate(){
         return HeatStackUpdate.builder();
     }
-    
+
     /**
      * The builder to create NetQuota entities
      * @return the NetQuota builder
@@ -358,7 +380,7 @@ public class Builders {
     public static NetQuotaBuilder netQuota() {
         return NeutronNetQuota.builder();
     }
-    
+
     /**
      * The builder to update a network
      * @return the NetworkUpdateBuilder
@@ -366,7 +388,7 @@ public class Builders {
     public static NetworkUpdateBuilder networkUpdate() {
         return NeutronNetworkUpdate.builder();
     }
-    
+
     /**
      * The builder to create a lb member
      * @return the Member Builder
@@ -374,7 +396,7 @@ public class Builders {
     public static MemberBuilder member() {
         return NeutronMember.builder();
     }
-    
+
     /**
      * The builder to update a lb member
      * @return the MemberUpdate Builder
@@ -418,7 +440,7 @@ public class Builders {
     public static HealthMonitorUpdateBuilder healthMonitorUpdate(){
     	return NeutronHealthMonitorUpdate.builder();
     }
-    
+
     /**
      * The builder to create a firewall
      * @return FirewallBuilder
@@ -433,7 +455,7 @@ public class Builders {
     public static FirewallUpdateBuilder firewallUpdate() {
     	return NeutronFirewallUpdate.builder();
     }
-    
+
     /**
      * The builder to create a firewallRule
      * @return FirewallRuleBuilder
@@ -448,7 +470,7 @@ public class Builders {
     public static FirewallRuleUpdateBuilder firewallRuleUpdate() {
     	return NeutronFirewallRuleUpdate.builder();
     }
-    
+
     /**
      * The builder to create a firewallPolicy
      * @return FirewallPolicyBuilder
@@ -463,7 +485,7 @@ public class Builders {
     public static FirewallPolicyUpdateBuilder firewallPolicyUpdate() {
     	return NeutronFirewallPolicyUpdate.builder();
     }
-    
+
     /**
      * The builder to create a lbPool
      * @return LbPoolBuilder
@@ -478,7 +500,7 @@ public class Builders {
     public static LbPoolUpdateBuilder lbPoolUpdate(){
     	return NeutronLbPoolUpdate.builder();
     }
-    
+
     /**
      * The builder to create a lbPool
      * @return HealthMonitorAssociateBuilder
@@ -486,7 +508,7 @@ public class Builders {
     public static HealthMonitorAssociateBuilder lbPoolAssociateHealthMonitor(){
     	return NeutronHealthMonitorAssociate.builder();
     }
-    
+
     /**
      * The builder to create a sahara cluster
      * @return the cluster builder
@@ -526,16 +548,16 @@ public class Builders {
     public static ServiceConfigBuilder serviceConfig() {
         return SaharaServiceConfig.builder();
     }
-    
+
     /**
      * This builder which creates a QuotaSet for updates
-     * 
+     *
      * @return the QuotaSet update builder
      */
     public static QuotaSetUpdateBuilder quotaSet() {
         return NovaQuotaSetUpdate.builder();
     }
-    
+
     /**
      * The builder to create an Alarm
      * @return the image builder
@@ -546,7 +568,7 @@ public class Builders {
 
     /**
      * The builder which creates a BlockQuotaSet
-     * 
+     *
      * @return the block quota-set builder
      */
     public static BlockQuotaSetBuilder blockQuotaSet() {
@@ -555,7 +577,7 @@ public class Builders {
 
     /**
      * The builder which creates a sahara Data Source
-     * 
+     *
      * @return the data source builder
      */
     public static DataSourceBuilder dataSource() {
@@ -564,7 +586,7 @@ public class Builders {
 
     /**
      * The builder which creates a sahara Job Binary
-     * 
+     *
      * @return the job binary builder
      */
     public static JobBinaryBuilder jobBinary() {
@@ -574,7 +596,7 @@ public class Builders {
 
     /**
      * The builder which creates a sahara Job
-     * 
+     *
      * @return the job builder
      */
     public static JobBuilder job() {
@@ -583,7 +605,7 @@ public class Builders {
 
     /**
      * The builder which creates a job configuration for sahara job execution
-     * 
+     *
      * @return the job config builder
      */
     public static JobConfigBuilder jobConfig() {
@@ -592,7 +614,7 @@ public class Builders {
 
     /**
      * The builder which creates a sahara job execution
-     * 
+     *
      * @return the job execution builder
      */
     public static JobExecutionBuilder jobExecution() {
