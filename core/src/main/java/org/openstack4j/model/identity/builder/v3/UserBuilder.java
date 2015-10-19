@@ -7,10 +7,9 @@ import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.identity.v3.User;
 
 /**
- * A Builder which creates a identity v3 project
  * 
- * 
- * 
+ * A Builder which creates a identity v3 user
+ *
  */
 public interface UserBuilder extends Builder<UserBuilder, User> {
 

@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import com.google.common.collect.ImmutableMap;
 
 /**
- * Tests the to the Identity/Keystone API version 3
+ * Tests the Identity/Keystone API version 3
  */
 @Test(groups = "idV3", suiteName = "Identity/V3/Keystone")
 public class KeystoneTests extends AbstractTest {
@@ -29,11 +29,6 @@ public class KeystoneTests extends AbstractTest {
     private String projectId = "123ac695d4db400a9001b91bb3b8aa46";
     private String projectDomainId = "default";
     private String password = "test";
-    // private String regionName = "RegionOne";
-    // private String projectDomainName = "Default";
-    // private String projectName = "admin";
-    // private String userDomainId = "default";
-    // private String userDomainName = "Default";
 
     /**
      * @return the identity service
@@ -51,7 +46,7 @@ public class KeystoneTests extends AbstractTest {
      * @throws Exception
      */
     @Test(enabled = true)
-    public void auth_project_Test_A() throws Exception {
+    public void authenticate_userId_password_projectId_projectDomainId_Test() throws Exception {
 
         respondWith(JSON_AUTH_PROJECT);
 
@@ -71,7 +66,7 @@ public class KeystoneTests extends AbstractTest {
      * @throws Exception
      */
     @Test(enabled = true)
-    public void auth_project_Test_B() throws Exception {
+    public void authenticate_userName_password_projectId_projectDomainId_Test() throws Exception {
 
         respondWith(JSON_AUTH_PROJECT);
 
@@ -91,7 +86,7 @@ public class KeystoneTests extends AbstractTest {
      * @throws Exception
      */
     @Test(enabled = true)
-    public void auth_Token_Test() throws Exception {
+    public void authenticate_token_projectId_projectDomainId_Test() throws Exception {
 
         respondWithHeaderAndResource(HEADER_AUTH_PROJECT_RESPONSE, 201, JSON_AUTH_PROJECT);
 
