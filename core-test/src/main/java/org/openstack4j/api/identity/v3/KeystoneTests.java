@@ -42,7 +42,7 @@ public class KeystoneTests extends AbstractTest {
 
     /**
      * authenticates with userId+password+projectId+projectDomainId
-     * 
+     *
      * @throws Exception
      */
     @Test(enabled = true)
@@ -62,7 +62,7 @@ public class KeystoneTests extends AbstractTest {
 
     /**
      * authenticates with userName+password+projectId+projectDomainId
-     * 
+     *
      * @throws Exception
      */
     @Test(enabled = true)
@@ -82,11 +82,11 @@ public class KeystoneTests extends AbstractTest {
 
     /**
      * authenticates with a token+projectId+projectDomainId
-     * 
+     *
      * @throws Exception
      */
     @Test(enabled = true)
-    public void authenticate_token_projectId_projectDomainId_Test() throws Exception {
+    public void auth_Token_Test() throws Exception {
 
         respondWithHeaderAndResource(HEADER_AUTH_PROJECT_RESPONSE, 201, JSON_AUTH_PROJECT);
 
