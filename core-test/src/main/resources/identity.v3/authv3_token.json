@@ -1,0 +1,24 @@
+{
+"token": {
+	"methods": ["token", "password"], 
+	"expires_at": "2015-08-26T14:14:13.719898Z",
+    "extras": {},
+    "project": {
+    	"domain": {
+        	"id": "default",
+            "name": "Default"
+            },
+		"id": "123ac695d4db400a9001b91bb3b8aa46",
+        "name": "admin"
+        }, 
+    "user": {
+    	"domain": {
+    		"id": "default", 
+    		"name": "Default"}, 
+    	"id": "aa9f25defa6d4cafb48466df83106065", 
+    	"name": "admin"
+    	}, 
+    "audit_ids": ["VtEJDKwAS6G1PE1cJZBTGw", "Kb3N3IhxT02fYwHt6964Zg"], 
+    "issued_at": "2015-08-26T13:14:13.779668Z"
+	}
+}

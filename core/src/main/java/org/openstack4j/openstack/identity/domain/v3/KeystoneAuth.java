@@ -8,6 +8,7 @@ import org.openstack4j.model.common.Identifier;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.v3.Authentication;
+import org.openstack4j.openstack.common.Auth.Type;
 import org.openstack4j.openstack.common.BasicResourceEntity;
 import org.openstack4j.openstack.common.IdResourceEntity;
 
@@ -16,20 +17,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Lists;
 
+/**
+ * 
+ * Represents an v3 Auth object.
+ * 
+ * 
+ */
 @JsonRootName("auth")
 public class KeystoneAuth implements Authentication, AuthStore {
 
     private static final long serialVersionUID = 1L;
-
     @JsonProperty
     private AuthIdentity identity;
     private AuthScope scope;
+    @JsonIgnore
+    private transient Type type;
 
     public KeystoneAuth(String tokenId, AuthScope scope) {
         this.identity = AuthIdentity.createTokenType(tokenId);
         this.scope = scope;
     }
-    
+
     public KeystoneAuth(String username, String password) {
         this(username, password, null, null);
     }
@@ -37,6 +45,14 @@ public class KeystoneAuth implements Authentication, AuthStore {
     public KeystoneAuth(String username, String password, Identifier domain, AuthScope scope) {
         this.identity = AuthIdentity.createCredentialType(username, password, domain);
         this.scope = scope;
+    }
+
+    protected KeystoneAuth(Type type) {
+        this.type = type;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     @Override
@@ -92,7 +108,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
             identity.token = new AuthToken(tokenId);
             return identity;
         }
-        
+
         static AuthIdentity createCredentialType(String username, String password) {
             return createCredentialType(username, password, null);
         }
@@ -124,12 +140,13 @@ public class KeystoneAuth implements Authentication, AuthStore {
             @JsonProperty
             private String id;
 
-            AuthToken() { }
-            
+            AuthToken() {
+            }
+
             AuthToken(String id) {
                 this.id = id;
             }
-            
+
             @Override
             public String getId() {
                 return id;
@@ -140,7 +157,8 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
             private AuthUser user;
 
-            public AuthPassword() { }
+            public AuthPassword() {
+            }
 
             public AuthPassword(String username, String password, Identifier domain) {
                 this.user = new AuthUser(username, password, domain);
@@ -175,7 +193,6 @@ public class KeystoneAuth implements Authentication, AuthStore {
                         setId(username);
                 }
 
-
                 @Override
                 public Domain getDomain() {
                     return domain;
@@ -192,7 +209,6 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
                 }
             }
-
         }
     }
 
@@ -203,40 +219,46 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
         @JsonProperty("domain")
         private AuthDomain domain;
-        
+
         @JsonProperty("OS-TRUST:trust")
         private ScopeTrust trust;
-        
+
         public AuthScope(ScopeProject project) {
             this.project = project;
         }
-        
+
         public AuthScope(AuthDomain domain) {
             this.domain = domain;
         }
+
         public AuthScope(ScopeTrust trust) {
             this.trust = trust;
         }
-        
+
         public static AuthScope project(Identifier project, Identifier domain) {
             return new AuthScope(ScopeProject.create(project, domain));
         }
-        
+
         public static AuthScope domain(Identifier domain) {
             checkNotNull(domain, "Domain Scope: domain identifier or name cannot be null");
             return new AuthScope(new AuthDomain(domain));
         }
-        
+
         public static AuthScope trust(String id) {
             checkNotNull(id, "Trust Scope: trust id cannot be null");
             return new AuthScope(new ScopeTrust(id));
         }
-        
+
         @Override
         public Project getProject() {
             return project;
         }
-        
+
+        @Override
+        public Domain getDomain() {
+            return domain;
+        }
+
         public static final class ScopeProject extends BasicResourceEntity implements Project {
 
             private static final long serialVersionUID = 1L;
@@ -247,34 +269,34 @@ public class KeystoneAuth implements Authentication, AuthStore {
             private String name;
 
             public static ScopeProject create(Identifier project, Identifier domain) {
-               checkNotNull(project, "Project Scope: project identifier or name cannot be null");
-               checkNotNull(domain, "Project Scope: domain identifier or name cannot be null");
-               
-               ScopeProject scope = new ScopeProject();
-               scope.domain = new AuthDomain(domain);
-               if (project.isTypeID()) {
-                   scope.id = project.getId();
-               }
-               else {
-                   scope.name = project.getId();
-               }
-               return scope;
+                checkNotNull(project, "Project Scope: project identifier or name cannot be null");
+                checkNotNull(domain, "Project Scope: domain identifier or name cannot be null");
+
+                ScopeProject scope = new ScopeProject();
+                scope.domain = new AuthDomain(domain);
+                if (project.isTypeID()) {
+                    scope.id = project.getId();
+                }
+                else {
+                    scope.name = project.getId();
+                }
+                return scope;
             }
-            
+
             @Override
             public Domain getDomain() {
                 return domain;
             }
-            
+
             public String getId() {
                 return id;
             }
-            
+
             public String getName() {
                 return name;
             }
         }
-        
+
         public static final class AuthDomain extends BasicResourceEntity implements Domain {
 
             private static final long serialVersionUID = 1L;
@@ -283,23 +305,23 @@ public class KeystoneAuth implements Authentication, AuthStore {
             private String id;
             @JsonProperty
             private String name;
-            
+
             public AuthDomain(Identifier domain) {
                 if (domain.isTypeID())
                     this.id = domain.getId();
                 else
                     this.name = domain.getId();
             }
-            
+
             public String getId() {
                 return id;
             }
-            
+
             public String getName() {
                 return name;
             }
         }
-        
+
         public static final class ScopeTrust extends IdResourceEntity {
 
             private static final long serialVersionUID = 1L;
@@ -309,6 +331,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
             }
 
         }
+
     }
 
     @JsonIgnore

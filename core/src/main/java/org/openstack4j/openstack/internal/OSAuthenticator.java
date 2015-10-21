@@ -14,15 +14,15 @@ import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
-import org.openstack4j.openstack.identity.domain.Auth;
-import org.openstack4j.openstack.identity.domain.Auth.Type;
+import org.openstack4j.openstack.common.Auth;
+import org.openstack4j.openstack.common.Auth.Type;
 import org.openstack4j.openstack.identity.domain.Credentials;
-import org.openstack4j.openstack.identity.domain.RaxApiKeyCredentials;
 import org.openstack4j.openstack.identity.domain.KeystoneAccess;
+import org.openstack4j.openstack.identity.domain.RaxApiKeyCredentials;
 import org.openstack4j.openstack.identity.domain.TokenAuth;
 import org.openstack4j.openstack.identity.domain.v3.AccessWrapper;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth;
-import org.openstack4j.openstack.identity.domain.v3.KeystoneTokenV3;
+import org.openstack4j.openstack.identity.domain.v3.KeystoneToken;
 import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
@@ -45,10 +45,10 @@ public class OSAuthenticator {
      * @return the OSClient
      */
     public static OSClient invoke(AuthStore auth, String endpoint, Facing perspective, Config config, CloudProvider provider) {
-        SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
-        if (auth.getVersion() == AuthVersion.V2)
-            return authenticateV2((Auth) auth.unwrap(), info, config);
-
+    	SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
+        if (auth.getVersion() == AuthVersion.V2){
+            return authenticateV2((org.openstack4j.openstack.identity.domain.Auth) auth.unwrap(), info, config);
+        }
         return authenticateV3((KeystoneAuth) auth.unwrap(), info, config);
     }
 
@@ -61,9 +61,23 @@ public class OSAuthenticator {
      * @return the OSClient
      */
     public static OSClient invoke(TokenAuth auth, String endpoint, Facing perspective, Config config, CloudProvider provider) {
-        SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
+    	SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
         return authenticateV2(auth, info, config);
     }
+    
+    /**
+     * Invokes V3 authentication via an existing token
+     * @param auth the token authentication
+     * @param endpoint the identity endpoint
+     * @param perspective the network facing perspective
+     * @param config the client configuration
+     * @return the OSClient
+     */
+    public static OSClient invoke(KeystoneAuth auth, String endpoint, Facing perspective, Config config, CloudProvider provider) {
+    	SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
+        return authenticateV3(auth, info, config);
+    }
+    
     
     /**
      * Re-authenticates/renews the token for the current Session
@@ -73,24 +87,24 @@ public class OSAuthenticator {
         LOG.debug("Re-Authenticating session due to expired Token or invalid response");
         
         OSClientSession session = OSClientSession.getCurrent();
-
+        
         switch (session.getAccess().getVersion()) {
             case V3:
-                KeystoneTokenV3 token = session.getAccess().unwrap();
+                KeystoneToken token = session.getAccess().unwrap();
                 SessionInfo info = new SessionInfo(token.getEndpoint(), session.getPerspective(), true, session.getProvider());
-                authenticateV3(token.getCredentials(), info, session.getConfig());
+                authenticateV3((KeystoneAuth) token.getCredentials().unwrap(), info, session.getConfig());
                 break;
             case V2:
             default:
                 KeystoneAccess access = session.getAccess().unwrap();
                 info = new SessionInfo(access.getEndpoint(), session.getPerspective(), true, session.getProvider());
                 Auth auth = (Auth) ((access.isCredentialType()) ? access.getCredentials().unwrap() : access.getTokenAuth());
-                authenticateV2(auth, info, session.getConfig());
+                authenticateV2((org.openstack4j.openstack.identity.domain.Auth) auth, info, session.getConfig());
                 break;
         }
     }
     
-    private static OSClient authenticateV2(Auth auth, SessionInfo info, Config config) {
+    private static OSClient authenticateV2(org.openstack4j.openstack.identity.domain.Auth auth, SessionInfo info, Config config) {
         HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class)
                 .header(ClientConstants.HEADER_OS4J_AUTH, TOKEN_INDICATOR)
                 .endpoint(info.endpoint)
@@ -130,13 +144,13 @@ public class OSAuthenticator {
         return current;
     }
 
-    private static OSClient authenticateV3(KeystoneAuth credentials, SessionInfo info, Config config) {
-        HttpRequest<KeystoneTokenV3> request = HttpRequest.builder(KeystoneTokenV3.class)
+    private static OSClient authenticateV3(KeystoneAuth auth, SessionInfo info, Config config) {
+        HttpRequest<KeystoneToken> request = HttpRequest.builder(KeystoneToken.class)
                 .header(ClientConstants.HEADER_OS4J_AUTH, TOKEN_INDICATOR)
                 .endpoint(info.endpoint).method(HttpMethod.POST)
                 .path("/auth/tokens")
                 .config(config)
-                .entity(credentials)
+                .entity(auth)
                 .build();
         
         HttpResponse response = HttpExecutor.create().execute(request);
@@ -150,17 +164,31 @@ public class OSAuthenticator {
                 HttpEntityHandler.closeQuietly(response);
             }
         }
-       
-        KeystoneTokenV3 access = response.getEntity(KeystoneTokenV3.class);
-        access.id = response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN);
+        
+        //TODO: proper impl. without accesswrapper
+        KeystoneToken token = response.getEntity(KeystoneToken.class);
+        AccessWrapper accesswr = AccessWrapper.wrap(token);
+        accesswr.setId(response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN));
+        
+        if (auth.getType() == Type.CREDENTIALS) {
+            token = token.applyContext(info.endpoint, new org.openstack4j.openstack.identity.domain.v3.Credentials(auth.getUsername(), auth.getPassword()));
+        }
+// TODO: support for  rackspace apikey extension
+//        else if (t_auth.getType() == Type.RAX_APIKEY) {
+//        	token = token.applyContext(endpoint, new org.openstack4j.openstack.identity.domain.v3.Credentials(auth.getUsername(), auth.getPassword()));
+//        }
+        else {
+        	//TODO v3 TokenAuth or via warpper
+        	token = token.applyContext(	info.endpoint, new TokenAuth(accesswr.getToken().getId(), auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
+        }
         
         if (!info.reLinkToExistingSession)
-        	return OSClientSession.createSession(AccessWrapper.wrap(access.applyContext(info.endpoint, credentials)), info.perspective, info.provider, config);
+            return OSClientSession.createSession(accesswr, info.perspective, info.provider, config);
         
         OSClientSession current = OSClientSession.getCurrent();
-        current.access = AccessWrapper.wrap(access.applyContext(info.endpoint, credentials));
+        current.access = accesswr;
         return current;
-
+        
     }
     
     private static class SessionInfo {
@@ -177,4 +205,5 @@ public class OSAuthenticator {
         }
         
     }
+    
 }

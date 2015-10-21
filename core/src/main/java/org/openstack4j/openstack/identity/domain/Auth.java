@@ -1,13 +1,10 @@
 package org.openstack4j.openstack.identity.domain;
 
-import org.openstack4j.model.ModelEntity;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public abstract class Auth implements ModelEntity {
+public abstract class Auth implements org.openstack4j.openstack.common.Auth {
 
 	private static final long serialVersionUID = 1L;
-	public enum Type { CREDENTIALS, TOKEN, RAX_APIKEY };
 	
 	private String tenantId;
 	private String tenantName;

@@ -15,3 +15,4 @@ test-output
 pom-shade.xml
 *.releaseBackup
 *.versionsBackup
+core-integration-test/
