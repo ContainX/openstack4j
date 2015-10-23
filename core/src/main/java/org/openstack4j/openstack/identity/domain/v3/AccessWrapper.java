@@ -14,6 +14,7 @@ import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.Tenant;
 import org.openstack4j.model.identity.TokenV2;
 import org.openstack4j.model.identity.v3.Catalog;
+import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.identity.v3.Project;
 import org.openstack4j.model.identity.v3.User;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant;
@@ -25,7 +26,7 @@ import com.google.common.collect.SortedSetMultimap;
 /**
  * This class wraps V3 objects and satisfies the original V2 API calls to bridge
  * the differences between V2 and V3
- * 
+ *
  * @author Jeremy Unruh
  */
 public class AccessWrapper implements Access {
@@ -63,17 +64,40 @@ public class AccessWrapper implements Access {
      */
     @Override
     public org.openstack4j.model.identity.Token getToken() {
-        Project project = KeystoneProject.builder()
-                .id(token.getProject().getId())
-                .name(token.getProject().getName())
-                .build();
-        Tenant tenant = KeystoneTenant.builder()
-                .id(project.getId())
-                .name(project.getName())
-                .description(project.getDescription())
-                .enabled(project.isEnabled())
-                .build();
-        return new V2Token(id, token.getExpires(), token.getVersion(), tenant);
+        /*This is only a temporary solution to get authentication with project and domain scope working for now.
+         * Proper implementation coming soon.
+         */
+        if(token.getProject() != null) {
+            Project project = KeystoneProject.builder()
+                    .id(token.getProject().getId())
+                    .name(token.getProject().getName())
+                    .build();
+            Tenant tenant = KeystoneTenant.builder()
+                    .id(project.getId())
+                    .name(project.getName())
+                    .description(project.getDescription())
+                    .enabled(project.isEnabled())
+                    .build();
+
+            return new V2Token(id, token.getExpires(), token.getVersion(), tenant);
+        }
+        else if(token.getDomain() != null) {
+                Domain domain = KeystoneDomain.builder()
+                        .id(token.getDomain().getId())
+                        .name(token.getDomain().getName())
+                        .build();
+                Tenant tenant = KeystoneTenant.builder()
+                        .id(domain.getId())
+                        .name(domain.getName())
+                        .description(domain.getDescription())
+                        .enabled(domain.isEnabled())
+                        .build();
+
+                return new V2Token(id, token.getExpires(), token.getVersion(), tenant);
+        }
+        else {
+            throw new UnsupportedOperationException("Unscoped authentication not yet supported");
+        }
     }
 
     /**

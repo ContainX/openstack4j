@@ -19,6 +19,10 @@ import com.google.common.collect.ImmutableMap;
 public class KeystoneTests extends AbstractTest {
 
     private static final String JSON_AUTH_PROJECT = "/identity.v3/authv3_project.json";
+    private static final String JSON_AUTH_DOMAINID_USERID = "/identity.v3/authv3_domainId_userId.json";
+    private static final String JSON_AUTH_DOMAINID_USERNAME = "/identity.v3/authv3_domainId_userName.json";
+    private static final String JSON_AUTH_DOMAINNAME_USERID = "/identity.v3/authv3_domainName_userId.json";
+    private static final String JSON_AUTH_UNSCOPED = "/identity.v3/authv3_unscoped.json";
     private static final String JSON_AUTH_TOKEN = "/identity.v3/authv3_token.json";
     private static final ImmutableMap<String, String> HEADER_AUTH_PROJECT_RESPONSE = ImmutableMap.of("X-Subject-Token", "763fd7e197ab4e00b2e6e0a8d22a8e87", "Content-Type", "application/json");
     private static final ImmutableMap<String, String> HEADER_AUTH_TOKEN_RESPONSE = ImmutableMap.of("X-Subject-Token", "3ecb5c2063904566be4b10406c0f7568", "Content-Type", "application/json");
@@ -27,6 +31,8 @@ public class KeystoneTests extends AbstractTest {
     private String userName = "admin";
     private String userId = "aa9f25defa6d4cafb48466df83106065";
     private String projectId = "123ac695d4db400a9001b91bb3b8aa46";
+    private String domainId = "default";
+    private String domainName = "Default";
     private String projectDomainId = "default";
     private String password = "test";
 
@@ -45,7 +51,6 @@ public class KeystoneTests extends AbstractTest {
      *
      * @throws Exception
      */
-    @Test(enabled = true)
     public void authenticate_userId_password_projectId_projectDomainId_Test() throws Exception {
 
         respondWith(JSON_AUTH_PROJECT);
@@ -65,14 +70,13 @@ public class KeystoneTests extends AbstractTest {
      *
      * @throws Exception
      */
-    @Test(enabled = true)
     public void authenticate_userName_password_projectId_projectDomainId_Test() throws Exception {
 
         respondWith(JSON_AUTH_PROJECT);
 
         associateClient(OSFactory.builderV3()
                 .endpoint(authURL("/v3"))
-                .credentials(userName, password)
+                .credentials(userName, password, Identifier.byId(projectDomainId))
                 .scopeToProject(Identifier.byId(projectId), Identifier.byId(projectDomainId))
                 .authenticate());
 
@@ -81,11 +85,87 @@ public class KeystoneTests extends AbstractTest {
     }
 
     /**
+     * authenticates with userId+password+domainId
+     *
+     * @throws Exception
+     */
+    public void authenticate_userId_password_domainId_Test() throws Exception {
+
+        respondWith(JSON_AUTH_DOMAINID_USERID);
+
+        associateClient(OSFactory.builderV3()
+                .endpoint(authURL("/v3"))
+                .credentials(userId, password)
+                .scopeToDomain(Identifier.byId(domainId))
+                .authenticate());
+
+        assertEquals(osv3().getToken().getVersion(), AuthVersion.V3);
+        assertEquals(osv3().getAccess().getUser().getId(), userId);
+
+    }
+
+    /**
+     * authenticates with userName+password+domainId
+     *
+     * @throws Exception
+     */
+    public void authenticate_userName_password_domainId_Test() throws Exception {
+
+        respondWith(JSON_AUTH_DOMAINID_USERNAME);
+
+        associateClient(OSFactory.builderV3()
+                .endpoint(authURL("/v3"))
+                .credentials(userId, password, Identifier.byId(domainId))
+                .scopeToDomain(Identifier.byId(domainId))
+                .authenticate());
+
+        assertEquals(osv3().getToken().getVersion(), AuthVersion.V3);
+        assertEquals(osv3().getAccess().getUser().getId(), userId);
+
+    }
+
+    /**
+     * authenticates with userId+password+domainName
+     *
+     * @throws Exception
+     */
+    public void authenticate_userId_password_domainName_Test() throws Exception {
+
+        respondWith(JSON_AUTH_DOMAINNAME_USERID);
+
+        associateClient(OSFactory.builderV3()
+                .endpoint(authURL("/v3"))
+                .credentials(userId, password)
+                .scopeToDomain(Identifier.byName(domainName))
+                .authenticate());
+
+        assertEquals(osv3().getToken().getVersion(), AuthVersion.V3);
+        assertEquals(osv3().getAccess().getUser().getId(), userId);
+
+    }
+
+    /**
+     * try to authenticate unscoped. should return an UnsupportedOperationException saying it's not implemented yet.
+     *
+     * @throws Exception
+     */
+    @Test(expectedExceptions={UnsupportedOperationException.class})
+    public void authenticate_unscoped_exception_Test() throws Exception {
+
+        respondWith(JSON_AUTH_UNSCOPED);
+
+        OSFactory.builderV3()
+                .endpoint(authURL("/v3"))
+                .credentials(userId, password)
+                .authenticate();
+
+    }
+
+    /**
      * authenticates with a token+projectId+projectDomainId
      *
      * @throws Exception
      */
-    @Test(enabled = true)
     public void auth_Token_Test() throws Exception {
 
         respondWithHeaderAndResource(HEADER_AUTH_PROJECT_RESPONSE, 201, JSON_AUTH_PROJECT);
@@ -112,5 +192,6 @@ public class KeystoneTests extends AbstractTest {
         assertEquals(osv3().getToken().getVersion(), AuthVersion.V3);
         assertEquals(osv3().getAccess().getUser().getId(), userId);
     }
+
 
 }

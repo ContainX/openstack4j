@@ -15,10 +15,8 @@ import com.google.common.base.Objects;
 
 /**
  * User model class for identity.v3
- * 
- * @see <a href=
- *      "http://developer.openstack.org/api-ref-identity-v3.html#users-v3">API
- *      reference</a>
+ *
+ * @see <a href= "http://developer.openstack.org/api-ref-identity-v3.html#users-v3">API reference</a>
  */
 @JsonRootName("user")
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -31,10 +29,12 @@ public class KeystoneUser implements User {
     private String name;
     @JsonProperty
     private KeystoneDomain domain;
+    @JsonProperty("domain_id")
     private String domainId;
     private String email;
     private String password;
     private String description;
+    @JsonProperty("default_project_id")
     private String defaultProjectId;
     private Map<String, String> links;
     private Boolean enabled = true;
@@ -54,6 +54,7 @@ public class KeystoneUser implements User {
     /**
      * @return the id of the user
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -61,6 +62,7 @@ public class KeystoneUser implements User {
     /**
      * @return the of the user
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -68,6 +70,7 @@ public class KeystoneUser implements User {
     /**
      * @return the email of the user
      */
+    @Override
     public String getEmail() {
         return email;
     }
@@ -75,6 +78,7 @@ public class KeystoneUser implements User {
     /**
      * @return the password of the user
      */
+    @Override
     public String getPassword() {
         return password;
     }
@@ -82,6 +86,7 @@ public class KeystoneUser implements User {
     /**
      * @return the description of the user
      */
+    @Override
     public String getDescription() {
         return description;
     }
@@ -89,6 +94,7 @@ public class KeystoneUser implements User {
     /**
      * @return the domainId of the user
      */
+    @Override
     public String getDomainId() {
         return domainId;
     }
@@ -96,6 +102,7 @@ public class KeystoneUser implements User {
     /**
      * @return the domain of the user
      */
+    @Override
     public Domain getDomain() {
         return domain;
     }
@@ -103,6 +110,7 @@ public class KeystoneUser implements User {
     /**
      * @return the defaultProjectId of the user
      */
+    @Override
     public String getDefaultProjectId() {
         return defaultProjectId;
     }
@@ -110,6 +118,7 @@ public class KeystoneUser implements User {
     /**
      * @return the links of the user
      */
+    @Override
     public Map<String, String> getLinks() {
         return links;
     }
@@ -117,13 +126,14 @@ public class KeystoneUser implements User {
     /**
      * @return the enabled of the user
      */
+    @Override
     public boolean isEnabled() {
         return enabled != null && enabled;
     }
 
     /**
      * set user enabled
-     * 
+     *
      * @param enabled
      *            the new enabled status
      */
@@ -131,6 +141,7 @@ public class KeystoneUser implements User {
         this.enabled = enabled;
     }
 
+    @Override
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues()
                 .add("name", name)
@@ -151,6 +162,7 @@ public class KeystoneUser implements User {
         @JsonProperty("users")
         private List<KeystoneUser> list;
 
+        @Override
         public List<KeystoneUser> value() {
             return list;
         }
@@ -171,6 +183,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getId()
          */
+        @Override
         public UserBuilder id(String id) {
             model.id = id;
             return this;
@@ -179,6 +192,7 @@ public class KeystoneUser implements User {
         /**
          * @return the KeystoneUser model
          */
+        @Override
         public User build() {
             return model;
         }
@@ -196,6 +210,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getName()
          */
+        @Override
         public UserBuilder name(String name) {
             model.name = name;
             return this;
@@ -204,6 +219,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getDefaultProjectId()
          */
+        @Override
         public UserBuilder defaultProjectId(String defaultProjectId) {
             model.defaultProjectId = defaultProjectId;
             return this;
@@ -212,6 +228,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getDomainId()
          */
+        @Override
         public UserBuilder domainId(String domainId) {
             model.domainId = domainId;
             return this;
@@ -220,6 +237,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getDomain()
          */
+        @Override
         public UserBuilder domain(Domain domain) {
             // model.domain = domain;
             if (domain != null && domain.getId() != null)
@@ -230,6 +248,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getEmail()
          */
+        @Override
         public UserBuilder email(String email) {
             model.email = email;
             return this;
@@ -238,6 +257,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getPassword()
          */
+        @Override
         public UserBuilder password(String password) {
             model.password = password;
             return this;
@@ -246,6 +266,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getLinks()
          */
+        @Override
         public UserBuilder links(Map<String, String> links) {
             model.links = links;
             return this;
@@ -254,6 +275,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#isEnabled()
          */
+        @Override
         public UserBuilder enabled(boolean enabled) {
             model.enabled = enabled;
             return this;
@@ -262,6 +284,7 @@ public class KeystoneUser implements User {
         /**
          * @see KeystoneUser#getDescription()
          */
+        @Override
         public UserBuilder description(String description) {
             model.description = description;
             return this;

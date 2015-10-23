@@ -10,12 +10,14 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
  * V3 OpenStack service
  *
  */
+@JsonRootName("service")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KeystoneService implements Service {
 
@@ -44,6 +46,7 @@ public class KeystoneService implements Service {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -51,6 +54,7 @@ public class KeystoneService implements Service {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getDescription() {
         return description;
     }
@@ -58,6 +62,7 @@ public class KeystoneService implements Service {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -65,6 +70,7 @@ public class KeystoneService implements Service {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getType() {
         return type;
     }
@@ -72,6 +78,7 @@ public class KeystoneService implements Service {
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<? extends Endpoint> getEndpoints() {
         return endpoints;
     }
@@ -79,6 +86,7 @@ public class KeystoneService implements Service {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Map<String, String> getLinks() {
         return links;
     }
