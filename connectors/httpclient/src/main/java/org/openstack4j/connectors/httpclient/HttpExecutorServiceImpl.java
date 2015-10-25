@@ -51,6 +51,8 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
 
         try {
             return invokeRequest(command);
+        } catch (ResponseException re) {
+        	throw re;
         } catch (Exception pe) {
             throw new ConnectionException(pe.getMessage(), 0, pe);
         }
