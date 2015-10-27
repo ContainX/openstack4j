@@ -41,6 +41,13 @@ public interface SwiftObject extends ModelEntity {
      * @return the name of the object
      */
     String getName();
+
+    /**
+     * The name of the directory
+     *
+     * @return the name of the directory
+     */
+    String getDirectoryName();
     
     /**
      * The content type of the object
