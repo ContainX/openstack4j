@@ -1,6 +1,33 @@
 # Change Log
 
-### 2.0.5 (Latest Release / Stable)
+### 2.0.7 (Latest Release / Stable)
+
+##### Enhancements/Improvements
+
+* Issue #479 - Support for Identity V3 - Thank you - @auhlig 
+* Issue #474 - NetQuotaService does not accept/return security_group and security_group_rule quota - Thank you @abareghi
+* Issue #390 - Support for newest Service Versions
+
+##### Fixes
+
+* Issue #485 - Not returning sub-directories under a directory in Swift - Thank you - @sbcd90
+* Issue #470 - Create (boot) server call fails against DevStack due to optional parameters in JSON payload in the request 
+* Issue #458 - java.lang.NullPointerException when getting servers list - Thank you @symcssn 
+* Issue #448 - RACKSPACE: Unable to Find Supported Services
+
+### 2.0.6
+
+##### Enhancements/Improvements
+
+* Issue #450 - Make configDrive() accessible from Server Create builder - Thank you - @imclem 
+
+##### Fixes
+
+* Issue #459 - NPE from keystone v3 re-auths - Thank you - @symcssn 
+* Issue #446 - DLPayload does not return proper response to allow proper handling - Thank you @symcssn 
+* Issue #444 - OSAuthenticator.authenticateV3 does not reauthenticate properly - Thank you @symcssn 
+
+### 2.0.5 
 
 ##### Enhancements/Improvements
 
