@@ -11,7 +11,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 * Website: [OpenStack4j.com](http://www.openstack4j.com)
 * Documentation/Tutorials: [OpenStack4j.com/learn/](http://www.openstack4j.com/learn/)
 * Questions - Use Google Groups: [groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)
-* Questions - Stackoverflow use **openstack4j** tag
+* Questions - [Stackoverflow](http://stackoverflow.com/search?q=openstack4j)
 * Twitter: [@openstack4j](https://twitter.com/openstack4j)
 * Facebook: [facebook.com/openstack4j](http://www.facebook.com/openstack4j)
 * Changelog: [Changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md)
