@@ -18,7 +18,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 
 ## Bug Reports
 
-* GitHub Issues: [/gondor/openstack4j/issues](https://github.com/gondor/openstack4j/issues)
+* GitHub Issues: [Click Here](https://github.com/gondor/openstack4j/issues)
 
 Maven
 -----
@@ -109,6 +109,7 @@ Creating and authenticating against OpenStack is extremely simple. Below is an e
 result with the authorized OSClient.  OSClient allows you to invoke Compute, Identity, Neutron operations fluently. 
 
 ```java
+// Identity V2 Authentication Example
 OSClient os = OSFactory.builder()
                        .endpoint("http://127.0.0.1:5000/v2.0")
                        .credentials("admin","sample")
