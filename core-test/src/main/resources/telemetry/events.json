@@ -1,6 +1,6 @@
 [
   {
-    "event_type": "compute.instance.create.start",
+    "event_type": "compute.instance.create.end",
     "generated": "2015-01-01T12:30:59.123456",
     "message_id": "94834db1-8f1b-404d-b2ec-c35901f1b7f0",
     "raw": {
@@ -24,7 +24,7 @@
     ]
   },
   {
-    "event_type": "compute.instance.create.end",
+    "event_type": "compute.instance.exists",
     "generated": "2015-01-01T12:40:59.123456",
     "message_id": "94834db1-8f1b-404d-b2ec-c35901f1b7f1",
     "raw": {
