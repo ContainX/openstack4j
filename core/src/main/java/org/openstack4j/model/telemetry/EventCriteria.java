@@ -9,9 +9,10 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Query options used in retreiving Samples
+ * Query options used in retrieving Events
  * 
  * @author Jeremy Unruh
+ * @author Miroslav Lacina
  */
 public class EventCriteria {
 
@@ -44,9 +45,9 @@ public class EventCriteria {
     }
 
     /**
-     * Matches the given resource identifier
-     * @param resourceId the resource id
-     * @return SampleCriteria
+     * Matches the given event type
+     * @param eventType the resource id
+     * @return EventCriteria
      */
     public EventCriteria eventType(String eventType) {
         checkNotNull(eventType, "eventType must not be null");
@@ -54,9 +55,9 @@ public class EventCriteria {
     }
 
     /**
-     * Matches the given resource identifier
-     * @param resourceId the resource id
-     * @return SampleCriteria
+     * Matches the given message identifier
+     * @param messageId the message id
+     * @return EventCriteria
      */
     public EventCriteria messageId(String messageId) {
         checkNotNull(messageId, "messageId must not be null");
@@ -64,10 +65,10 @@ public class EventCriteria {
     }
     
     /**
-     * Adds a timestamp sample criteria
+     * Adds the start timestamp event criteria
      * @param operator the operator
      * @param value the date for this timestamp
-     * @return SampleCriteria
+     * @return EventCriteria
      */
     public EventCriteria startTimestamp(Oper operator, Date value) {
         checkNotNull(value, "Date must not be null");
@@ -75,10 +76,10 @@ public class EventCriteria {
     }
 
     /**
-     * Adds a timestamp sample criteria
+     * Adds the end timestamp event criteria
      * @param operator the operator
      * @param value the date for this timestamp
-     * @return SampleCriteria
+     * @return EventCriteria
      */
     public EventCriteria endTimestamp(Oper operator, Date value) {
         checkNotNull(value, "Date must not be null");
@@ -87,16 +88,23 @@ public class EventCriteria {
     
     /**
      * Adds an adhoc field criteria
-     * @param field the field name (must be the JSON name)
+     * @param field the field name (will be treated as trait name and applied on trait)
      * @param operator the operator
      * @param value the value
-     * @return SampleCriteria
+     * @return EventCriteria
      */
     public EventCriteria add(String field, Oper operator, Number value) {
         checkNotNull(value, "Value must not be null");
         return add(field, operator, value.toString());
     }
-    
+
+    /**
+     * Adds an adhoc field criteria
+     * @param field the field name (will be treated as trait name and applied on trait)
+     * @param operator the operator
+     * @param value the value
+     * @return EventCriteria
+     */
     public EventCriteria add(String field, Oper operator, String value) {
         checkNotNull(field, "Field must not be null");
         checkNotNull(operator, "Operator must not be null");

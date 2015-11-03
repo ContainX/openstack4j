@@ -1,13 +1,12 @@
 package org.openstack4j.model.telemetry;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.collect.Lists;
+import org.openstack4j.openstack.internal.Parser;
 
 import java.util.Date;
 import java.util.List;
 
-import org.openstack4j.openstack.internal.Parser;
-
-import com.google.common.collect.Lists;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Query options used in retreiving Samples
