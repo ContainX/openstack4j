@@ -115,8 +115,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
             if (p.type == ServiceType.forName(catalog.getType())) 
             {
                 for (org.openstack4j.model.identity.v3.Endpoint ep : catalog.getEndpoints()) {
-                    // Since we only support V3 authentication - skip a V3 URL
-                    if (matches(ep, p) && !isEndpointV3(ep.getUrl())) {
+                    if (matches(ep, p)) {
                         return ep.getUrl().toString();
                     }
                 }

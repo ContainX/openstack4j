@@ -179,7 +179,8 @@ public class OSAuthenticator {
 //        }
         else {
         	//TODO v3 TokenAuth or via warpper
-        	token = token.applyContext(	info.endpoint, new TokenAuth(accesswr.getToken().getId(), auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
+            //commented for now so that domain scoped authentication will work
+//        	token = token.applyContext(	info.endpoint, new TokenAuth(accesswr.getToken().getId(), auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
         }
         
         if (!info.reLinkToExistingSession)
