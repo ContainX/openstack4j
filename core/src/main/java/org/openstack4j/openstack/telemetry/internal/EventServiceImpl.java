@@ -1,8 +1,13 @@
 package org.openstack4j.openstack.telemetry.internal;
 
 import org.openstack4j.api.telemetry.EventService;
-import org.openstack4j.model.telemetry.*;
+import org.openstack4j.model.telemetry.Event;
+import org.openstack4j.model.telemetry.EventCriteria;
+import org.openstack4j.model.telemetry.Trait;
+import org.openstack4j.model.telemetry.TraitDescription;
 import org.openstack4j.openstack.telemetry.domain.CeilometerEvent;
+import org.openstack4j.openstack.telemetry.domain.CeilometerTrait;
+import org.openstack4j.openstack.telemetry.domain.CeilometerTraitDescription;
 
 import java.util.List;
 
@@ -24,10 +29,10 @@ public class EventServiceImpl extends BaseTelemetryServices implements EventServ
      * {@inheritDoc}
      */
     @Override
-    public List<? extends Event> list(EventQuery eventQuery) {
+    public List<? extends Event> list(EventCriteria eventCriteria) {
         Invocation<CeilometerEvent[]> invocation = get(CeilometerEvent[].class, uri("/events"));
-        if (eventQuery != null && !eventQuery.getCriteriaParams().isEmpty()) {
-            for (EventQuery.NameOpValue c : eventQuery.getCriteriaParams()) {
+        if (eventCriteria != null && !eventCriteria.getCriteriaParams().isEmpty()) {
+            for (EventCriteria.NameOpValue c : eventCriteria.getCriteriaParams()) {
                 invocation.param(FIELD, c.getField());
                 invocation.param(OPER, c.getOperator().getQueryValue());
                 invocation.param(VALUE, c.getValue());
@@ -42,10 +47,10 @@ public class EventServiceImpl extends BaseTelemetryServices implements EventServ
      * {@inheritDoc}
      */
     @Override
-    public List<? extends Event> list(EventQuery eventQuery, int limit) {
+    public List<? extends Event> list(EventCriteria eventCriteria, int limit) {
         Invocation<CeilometerEvent[]> invocation = get(CeilometerEvent[].class, uri("/events"));
-        if (eventQuery != null && !eventQuery.getCriteriaParams().isEmpty()) {
-            for (EventQuery.NameOpValue c : eventQuery.getCriteriaParams()) {
+        if (eventCriteria != null && !eventCriteria.getCriteriaParams().isEmpty()) {
+            for (EventCriteria.NameOpValue c : eventCriteria.getCriteriaParams()) {
                 invocation.param(FIELD, c.getField());
                 invocation.param(OPER, c.getOperator().getQueryValue());
                 invocation.param(VALUE, c.getValue());
@@ -81,7 +86,7 @@ public class EventServiceImpl extends BaseTelemetryServices implements EventServ
     @Override
     public List<? extends TraitDescription> listTraitDescriptions(String eventType) {
         checkNotNull(eventType);
-        TraitDescription[] traitDescriptions = get(TraitDescription[].class, uri("/event_types/%s/traits", eventType)).execute();
+        CeilometerTraitDescription[] traitDescriptions = get(CeilometerTraitDescription[].class, uri("/event_types/%s/traits", eventType)).execute();
         return wrapList(traitDescriptions);
     }
 
@@ -92,7 +97,7 @@ public class EventServiceImpl extends BaseTelemetryServices implements EventServ
     public List<? extends Trait> listTraits(String eventType, String traitName) {
         checkNotNull(eventType);
         checkNotNull(traitName);
-        Trait[] traits = get(Trait[].class, uri("/event_types/%s/traits/%s", eventType, traitName)).execute();
+        CeilometerTrait[] traits = get(CeilometerTrait[].class, uri("/event_types/%s/traits/%s", eventType, traitName)).execute();
         return wrapList(traits);
     }
 

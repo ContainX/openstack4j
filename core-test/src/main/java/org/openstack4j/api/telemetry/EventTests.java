@@ -16,6 +16,9 @@ public class EventTests extends AbstractTest {
 
     private static final String JSON_EVENTS = "/telemetry/events.json";
     private static final String JSON_EVENT = "/telemetry/event.json";
+    private static final String JSON_EVENT_TYPES = "/telemetry/event-types.json";
+    private static final String JSON_TRAIT_DESCRIPTIONS = "/telemetry/trait-descriptions.json";
+    private static final String JSON_TRAITS = "/telemetry/traits.json";
 
     @Override
     protected Service service() {
@@ -27,16 +30,16 @@ public class EventTests extends AbstractTest {
         respondWith(JSON_EVENTS);
 
         List<? extends Event> events = os().telemetry().events().list(null);
-        assertEquals(3, events.size());
+        assertEquals(events.size(), 5);
 
         Event event = events.get(0);
-        assertEquals("compute.instance.create.end", event.getEventType());
-        assertEquals("2015-01-01T12:30:59.123456", event.getGenerated());
-        assertEquals("94834db1-8f1b-404d-b2ec-c35901f1b7f0", event.getMessageId());
-        assertEquals(3, event.getTraits().size());
+        assertEquals(event.getEventType(), "image.create");
+        assertEquals(event.getGenerated(), "2015-11-02T15:34:41.795313");
+        assertEquals(event.getMessageId(), "abd307a1-d4a3-4eae-ab89-6d623e27bebf");
+        assertEquals(event.getTraits().size(), 1);
         Trait trait = event.getTraits().get(0);
-        assertEquals("request_id", trait.getName());
-        assertEquals("req-4e2d67b8-31a4-48af-bb2f-9df72a353a72", trait.getValue());
+        assertEquals(trait.getName(), "service");
+        assertEquals(trait.getValue(), "image.localhost");
 
     }
 
@@ -44,50 +47,60 @@ public class EventTests extends AbstractTest {
     public void getTest() throws IOException {
         respondWith(JSON_EVENT);
 
-        Event event = os().telemetry().events().get("94834db1-8f1b-404d-b2ec-c35901f1b7f0");
+        Event event = os().telemetry().events().get("adeda2eb-31e5-4908-a7dd-7a154abed468");
 
-        assertEquals("compute.instance.create.end", event.getEventType());
-        assertEquals("2015-01-01T12:30:59.123456", event.getGenerated());
-        assertEquals("94834db1-8f1b-404d-b2ec-c35901f1b7f0", event.getMessageId());
-        assertEquals(3, event.getTraits().size());
+        assertEquals(event.getEventType(), "image.upload");
+        assertEquals(event.getGenerated(), "2015-11-02T15:34:42.993281");
+        assertEquals(event.getMessageId(), "adeda2eb-31e5-4908-a7dd-7a154abed468");
+        assertEquals(event.getTraits().size(), 8);
         Trait trait = event.getTraits().get(0);
-        assertEquals("request_id", trait.getName());
-        assertEquals("req-4e2d67b8-31a4-48af-bb2f-9df72a353a72", trait.getValue());
+        assertEquals(trait.getName(), "created_at");
+        assertEquals(trait.getValue(), "2015-11-02T15:34:41.000000");
     }
 
     @Test
     public void listEventTypesTest() throws IOException {
-        respondWith(JSON_EVENTS);
+        respondWith(JSON_EVENT_TYPES);
 
         List<String> eventTypes = os().telemetry().events().listEventTypes();
-        assertEquals(2, eventTypes.size());
+        assertEquals(eventTypes.size(), 46);
 
-        assertEquals("compute.instance.create.start", eventTypes.get(0));
-        assertEquals("compute.instance.exists", eventTypes.get(1));
+        assertEquals(eventTypes.get(0), "compute.instance.create.end");
+        assertEquals(eventTypes.get(1), "compute.instance.create.error");
     }
 
     @Test
     public void listTraitDescriptionsTest() throws IOException {
-        respondWith(JSON_EVENTS);
+        respondWith(JSON_TRAIT_DESCRIPTIONS);
 
         List<? extends TraitDescription> traitDescriptions
-                = os().telemetry().events().listTraitDescriptions("compute.instance.exists");
-        assertEquals(3, traitDescriptions.size());
+                = os().telemetry().events().listTraitDescriptions("image.upload");
+        assertEquals(traitDescriptions.size(), 8);
 
-        assertEquals("request_id", traitDescriptions.get(0).getName());
-        assertEquals("tenant_id", traitDescriptions.get(1).getName());
-        assertEquals("service", traitDescriptions.get(2).getName());
+        assertEquals(traitDescriptions.get(0).getName(), "created_at");
+        assertEquals(traitDescriptions.get(0).getType(), "string");
+        assertEquals(traitDescriptions.get(1).getName(), "name");
+        assertEquals(traitDescriptions.get(1).getType(), "string");
+        assertEquals(traitDescriptions.get(2).getName(), "project_id");
+        assertEquals(traitDescriptions.get(2).getType(), "string");
     }
 
     @Test
     public void listTraitsTest() throws IOException {
-        respondWith(JSON_EVENTS);
+        respondWith(JSON_TRAITS);
 
-        List<? extends Trait> traits = os().telemetry().events().listTraits("compute.instance.exists", "request_id");
-        assertEquals(2, traits.size());
+        List<? extends Trait> traits = os().telemetry().events().listTraits("image.upload", "service");
+        assertEquals(traits.size(), 5);
 
-        assertEquals("req-4e2d67b8-31a4-48af-bb2f-9df72a353a73", traits.get(0).getName());
-        assertEquals("req-4e2d67b8-31a4-48af-bb2f-9df72a353a74", traits.get(1).getName());
+        assertEquals(traits.get(0).getName(), "service");
+        assertEquals(traits.get(0).getType(), "string");
+        assertEquals(traits.get(0).getValue(), "image.localhost");
+        assertEquals(traits.get(1).getName(), "service");
+        assertEquals(traits.get(1).getType(), "string");
+        assertEquals(traits.get(1).getValue(), "image.localhost");
+        assertEquals(traits.get(2).getName(), "service");
+        assertEquals(traits.get(2).getType(), "string");
+        assertEquals(traits.get(2).getValue(), "image.localhost");
     }
 
 }

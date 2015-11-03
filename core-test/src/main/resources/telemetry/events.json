@@ -1,74 +1,137 @@
 [
   {
-    "event_type": "compute.instance.create.end",
-    "generated": "2015-01-01T12:30:59.123456",
-    "message_id": "94834db1-8f1b-404d-b2ec-c35901f1b7f0",
-    "raw": {
-      "status": {
-        "nested": "started"
-      }
-    },
+    "raw": {},
     "traits": [
       {
-        "name": "request_id",
-        "value": "req-4e2d67b8-31a4-48af-bb2f-9df72a353a72"
-      },
-      {
-        "name": "tenant_id",
-        "value": "7f13f2b17917463b9ee21aa92c4b36d6"
-      },
-      {
+        "type": "string",
         "name": "service",
-        "value": "conductor.tem-devstack-01"
+        "value": "image.localhost"
       }
-    ]
+    ],
+    "generated": "2015-11-02T15:34:41.795313",
+    "message_id": "abd307a1-d4a3-4eae-ab89-6d623e27bebf",
+    "event_type": "image.create"
   },
   {
-    "event_type": "compute.instance.exists",
-    "generated": "2015-01-01T12:40:59.123456",
-    "message_id": "94834db1-8f1b-404d-b2ec-c35901f1b7f1",
-    "raw": {
-      "status": {
-        "nested": "started"
-      }
-    },
+    "raw": {},
     "traits": [
       {
-        "name": "request_id",
-        "value": "req-4e2d67b8-31a4-48af-bb2f-9df72a353a73"
-      },
-      {
-        "name": "tenant_id",
-        "value": "7f13f2b17917463b9ee21aa92c4b36d6"
-      },
-      {
+        "type": "string",
         "name": "service",
-        "value": "conductor.tem-devstack-01"
+        "value": "image.localhost"
       }
-    ]
+    ],
+    "generated": "2015-11-02T15:34:42.755340",
+    "message_id": "900dcf9e-4fec-42dd-844d-774505d0b130",
+    "event_type": "image.prepare"
   },
   {
-    "event_type": "compute.instance.exists",
-    "generated": "2015-01-01T12:50:59.123456",
-    "message_id": "94834db1-8f1b-404d-b2ec-c35901f1b7f2",
-    "raw": {
-      "status": {
-        "nested": "started"
-      }
-    },
+    "raw": {},
     "traits": [
       {
-        "name": "request_id",
-        "value": "req-4e2d67b8-31a4-48af-bb2f-9df72a353a74"
+        "type": "string",
+        "name": "created_at",
+        "value": "2015-11-02T15:34:41.000000"
       },
       {
-        "name": "tenant_id",
-        "value": "7f13f2b17917463b9ee21aa92c4b36d6"
+        "type": "string",
+        "name": "name",
+        "value": "cirros-0.3.4-x86_64-uec-kernel"
       },
       {
+        "type": "string",
+        "name": "project_id",
+        "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+      },
+      {
+        "type": "string",
+        "name": "resource_id",
+        "value": "db41e262-294f-41bc-bcef-e37cc8bcaafa"
+      },
+      {
+        "type": "string",
         "name": "service",
-        "value": "conductor.tem-devstack-01"
+        "value": "image.localhost"
+      },
+      {
+        "type": "string",
+        "name": "size",
+        "value": "4979632"
+      },
+      {
+        "type": "string",
+        "name": "status",
+        "value": "saving"
+      },
+      {
+        "type": "string",
+        "name": "user_id",
+        "value": "9e25eb031b8d43e5aac3686b8e7696c6"
       }
-    ]
+    ],
+    "generated": "2015-11-02T15:34:42.993281",
+    "message_id": "adeda2eb-31e5-4908-a7dd-7a154abed468",
+    "event_type": "image.upload"
+  },
+  {
+    "raw": {},
+    "traits": [
+      {
+        "type": "string",
+        "name": "service",
+        "value": "image.localhost"
+      }
+    ],
+    "generated": "2015-11-02T15:34:44.234438",
+    "message_id": "8fd316c6-144f-47ed-a4e2-86d5c1a3bb97",
+    "event_type": "image.activate"
+  },
+  {
+    "raw": {},
+    "traits": [
+      {
+        "type": "string",
+        "name": "created_at",
+        "value": "2015-11-02T15:34:41.000000"
+      },
+      {
+        "type": "string",
+        "name": "name",
+        "value": "cirros-0.3.4-x86_64-uec-kernel"
+      },
+      {
+        "type": "string",
+        "name": "project_id",
+        "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+      },
+      {
+        "type": "string",
+        "name": "resource_id",
+        "value": "db41e262-294f-41bc-bcef-e37cc8bcaafa"
+      },
+      {
+        "type": "string",
+        "name": "service",
+        "value": "image.localhost"
+      },
+      {
+        "type": "string",
+        "name": "size",
+        "value": "4979632"
+      },
+      {
+        "type": "string",
+        "name": "status",
+        "value": "active"
+      },
+      {
+        "type": "string",
+        "name": "user_id",
+        "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+      }
+    ],
+    "generated": "2015-11-02T15:34:44.240624",
+    "message_id": "9f009494-33ab-4610-9174-f19e579c7a40",
+    "event_type": "image.update"
   }
 ]

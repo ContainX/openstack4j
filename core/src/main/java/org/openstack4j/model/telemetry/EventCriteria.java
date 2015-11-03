@@ -13,7 +13,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * 
  * @author Jeremy Unruh
  */
-public class EventQuery {
+public class EventCriteria {
 
     public enum Oper {
         /** Less Than : < */
@@ -39,8 +39,8 @@ public class EventQuery {
     
     private List<NameOpValue> params = Lists.newArrayList();
     
-    public static EventQuery create() {
-        return new EventQuery();
+    public static EventCriteria create() {
+        return new EventCriteria();
     }
 
     /**
@@ -48,7 +48,7 @@ public class EventQuery {
      * @param resourceId the resource id
      * @return SampleCriteria
      */
-    public EventQuery eventType(String eventType) {
+    public EventCriteria eventType(String eventType) {
         checkNotNull(eventType, "eventType must not be null");
         return add("event_type", Oper.EQUALS, eventType);
     }
@@ -58,7 +58,7 @@ public class EventQuery {
      * @param resourceId the resource id
      * @return SampleCriteria
      */
-    public EventQuery messageId(String messageId) {
+    public EventCriteria messageId(String messageId) {
         checkNotNull(messageId, "messageId must not be null");
         return add("message_id", Oper.EQUALS, messageId);
     }
@@ -69,7 +69,7 @@ public class EventQuery {
      * @param value the date for this timestamp
      * @return SampleCriteria
      */
-    public EventQuery startTimestamp(Oper operator, Date value) {
+    public EventCriteria startTimestamp(Oper operator, Date value) {
         checkNotNull(value, "Date must not be null");
         return add("start_timestamp", operator, Parser.toISO8601DateFormat(value));
     }
@@ -80,7 +80,7 @@ public class EventQuery {
      * @param value the date for this timestamp
      * @return SampleCriteria
      */
-    public EventQuery endTimestamp(Oper operator, Date value) {
+    public EventCriteria endTimestamp(Oper operator, Date value) {
         checkNotNull(value, "Date must not be null");
         return add("end_timestamp", operator, Parser.toISO8601DateFormat(value));
     }
@@ -92,12 +92,12 @@ public class EventQuery {
      * @param value the value
      * @return SampleCriteria
      */
-    public EventQuery add(String field, Oper operator, Number value) {
+    public EventCriteria add(String field, Oper operator, Number value) {
         checkNotNull(value, "Value must not be null");
         return add(field, operator, value.toString());
     }
     
-    public EventQuery add(String field, Oper operator, String value) {
+    public EventCriteria add(String field, Oper operator, String value) {
         checkNotNull(field, "Field must not be null");
         checkNotNull(operator, "Operator must not be null");
         checkNotNull(value, "Value must not be null");

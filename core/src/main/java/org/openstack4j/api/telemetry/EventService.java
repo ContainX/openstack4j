@@ -2,7 +2,7 @@ package org.openstack4j.api.telemetry;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.telemetry.Event;
-import org.openstack4j.model.telemetry.EventQuery;
+import org.openstack4j.model.telemetry.EventCriteria;
 import org.openstack4j.model.telemetry.Trait;
 import org.openstack4j.model.telemetry.TraitDescription;
 
@@ -15,9 +15,9 @@ import java.util.List;
  */
 public interface EventService extends RestService {
 
-    List<? extends Event> list(EventQuery eventQuery);
+    List<? extends Event> list(EventCriteria eventCriteria);
 
-    List<? extends Event> list(EventQuery eventQuery, int limit);
+    List<? extends Event> list(EventCriteria eventCriteria, int limit);
 
     Event get(String messageId);
 

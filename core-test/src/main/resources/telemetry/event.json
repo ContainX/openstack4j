@@ -1,24 +1,48 @@
 {
-  "event_type": "compute.instance.create.end",
-  "generated": "2015-01-01T12:30:59.123456",
-  "message_id": "94834db1-8f1b-404d-b2ec-c35901f1b7f0",
-  "raw": {
-    "status": {
-      "nested": "started"
-    }
-  },
+  "raw": {},
   "traits": [
     {
-      "name": "request_id",
-      "value": "req-4e2d67b8-31a4-48af-bb2f-9df72a353a72"
+      "type": "string",
+      "name": "created_at",
+      "value": "2015-11-02T15:34:41.000000"
     },
     {
-      "name": "tenant_id",
-      "value": "7f13f2b17917463b9ee21aa92c4b36d6"
+      "type": "string",
+      "name": "name",
+      "value": "cirros-0.3.4-x86_64-uec-kernel"
     },
     {
+      "type": "string",
+      "name": "project_id",
+      "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+    },
+    {
+      "type": "string",
+      "name": "resource_id",
+      "value": "db41e262-294f-41bc-bcef-e37cc8bcaafa"
+    },
+    {
+      "type": "string",
       "name": "service",
-      "value": "conductor.tem-devstack-01"
+      "value": "image.localhost"
+    },
+    {
+      "type": "string",
+      "name": "size",
+      "value": "4979632"
+    },
+    {
+      "type": "string",
+      "name": "status",
+      "value": "saving"
+    },
+    {
+      "type": "string",
+      "name": "user_id",
+      "value": "9e25eb031b8d43e5aac3686b8e7696c6"
     }
-  ]
+  ],
+  "generated": "2015-11-02T15:34:42.993281",
+  "message_id": "adeda2eb-31e5-4908-a7dd-7a154abed468",
+  "event_type": "image.upload"
 }
