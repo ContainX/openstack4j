@@ -111,10 +111,9 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     @Override
     public String put(String containerName, String name, Payload<?> payload, ObjectPutOptions options) {
         checkNotNull(containerName);
-        checkNotNull(payload);
         checkNotNull(options);
 
-        if (FilePayload.class.isAssignableFrom(payload.getClass()) && name == null)
+        if (payload != null && FilePayload.class.isAssignableFrom(payload.getClass()) && name == null)
             name = FilePayload.class.cast(payload).getRaw().getName();
         else
             checkNotNull(name);
