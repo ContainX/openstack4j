@@ -33,16 +33,10 @@ public class CeilometerTraitDescription implements TraitDescription {
         return type;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setType(String type) {
         this.type = type;
     }

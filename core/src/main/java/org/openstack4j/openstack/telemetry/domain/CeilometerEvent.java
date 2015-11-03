@@ -59,30 +59,18 @@ public class CeilometerEvent implements Event {
         return traits;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setEventType(String eventType) {
         this.eventType = eventType;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setGenerated(String generated) {
         this.generated = generated;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setTraits(List<CeilometerTrait> traits) {
         this.traits = traits;
     }

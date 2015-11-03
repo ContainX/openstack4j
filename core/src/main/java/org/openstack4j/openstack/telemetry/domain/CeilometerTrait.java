@@ -44,23 +44,14 @@ public class CeilometerTrait implements Trait {
         return value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setType(String type) {
         this.type = type;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void setValue(String value) {
         this.value = value;
     }
