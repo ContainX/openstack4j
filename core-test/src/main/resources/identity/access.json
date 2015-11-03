@@ -157,14 +157,14 @@
             "adminURL": "http:\/\/127.0.0.1:8087\/v2.0",
             "region": "RegionOne",
             "internalURL": "http:\/\/127.0.0.1:8087\/v2.0",
-            "id": "35d2204bfe144c35a5b3eb96e78676e8",
+            "id": "9c66xrg3rruv2a3hj8tatd7smmas23fy",
             "publicURL": "http:\/\/127.0.0.1:8087\/v2.0"
           },
           {
             "adminURL": "http:\/\/127.0.0.1:8087\/v2.0",
             "region": "RegionTwo",
             "internalURL": "http:\/\/127.0.0.1:8087\/v2.0",
-            "id": "35d2204bfe144c35a5b3eb96e78676e8",
+            "id": "9c66xrg3rruv2a3hj8tatd7smmas23fy",
             "publicURL": "http:\/\/127.0.0.1:8087\/v2.0"
           }
         ],

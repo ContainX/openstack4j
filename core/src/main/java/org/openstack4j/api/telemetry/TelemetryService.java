@@ -24,9 +24,9 @@ public interface TelemetryService extends RestService {
    AlarmService alarms();
 
      /**
-      * Access to Alarms API
+      * Access to Events API
       *
-      * @return the Alarm Service API
+      * @return the Event Service API
       */
     EventService events();
 	

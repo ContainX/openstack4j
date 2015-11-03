@@ -8,14 +8,15 @@ import org.openstack4j.model.telemetry.Trait;
 import java.util.List;
 
 /**
- * A Meter is a category of Measurement
+ * Event represents the state of an object in an OpenStack service
+ * at a point in time when something of interest has occurred
  *
  * @author Miroslav Lacina
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class CeilometerEvent implements Event {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 	@JsonProperty("event_type")
 	private String eventType;

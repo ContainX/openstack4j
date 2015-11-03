@@ -14,7 +14,7 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Provides Measurements against Meters within an OpenStack deployment
+ * OpenStack (Ceilometer) Event based Operations
  *
  * @author Miroslav Lacina
  */
