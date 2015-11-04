@@ -1,0 +1,48 @@
+{
+  "raw": {},
+  "traits": [
+    {
+      "type": "string",
+      "name": "created_at",
+      "value": "2015-11-02T15:34:41.000000"
+    },
+    {
+      "type": "string",
+      "name": "name",
+      "value": "cirros-0.3.4-x86_64-uec-kernel"
+    },
+    {
+      "type": "string",
+      "name": "project_id",
+      "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+    },
+    {
+      "type": "string",
+      "name": "resource_id",
+      "value": "db41e262-294f-41bc-bcef-e37cc8bcaafa"
+    },
+    {
+      "type": "string",
+      "name": "service",
+      "value": "image.localhost"
+    },
+    {
+      "type": "string",
+      "name": "size",
+      "value": "4979632"
+    },
+    {
+      "type": "string",
+      "name": "status",
+      "value": "saving"
+    },
+    {
+      "type": "string",
+      "name": "user_id",
+      "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+    }
+  ],
+  "generated": "2015-11-02T15:34:42.993281",
+  "message_id": "adeda2eb-31e5-4908-a7dd-7a154abed468",
+  "event_type": "image.upload"
+}

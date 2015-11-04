@@ -1,0 +1,137 @@
+[
+  {
+    "raw": {},
+    "traits": [
+      {
+        "type": "string",
+        "name": "service",
+        "value": "image.localhost"
+      }
+    ],
+    "generated": "2015-11-02T15:34:41.795313",
+    "message_id": "abd307a1-d4a3-4eae-ab89-6d623e27bebf",
+    "event_type": "image.create"
+  },
+  {
+    "raw": {},
+    "traits": [
+      {
+        "type": "string",
+        "name": "service",
+        "value": "image.localhost"
+      }
+    ],
+    "generated": "2015-11-02T15:34:42.755340",
+    "message_id": "900dcf9e-4fec-42dd-844d-774505d0b130",
+    "event_type": "image.prepare"
+  },
+  {
+    "raw": {},
+    "traits": [
+      {
+        "type": "string",
+        "name": "created_at",
+        "value": "2015-11-02T15:34:41.000000"
+      },
+      {
+        "type": "string",
+        "name": "name",
+        "value": "cirros-0.3.4-x86_64-uec-kernel"
+      },
+      {
+        "type": "string",
+        "name": "project_id",
+        "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+      },
+      {
+        "type": "string",
+        "name": "resource_id",
+        "value": "db41e262-294f-41bc-bcef-e37cc8bcaafa"
+      },
+      {
+        "type": "string",
+        "name": "service",
+        "value": "image.localhost"
+      },
+      {
+        "type": "string",
+        "name": "size",
+        "value": "4979632"
+      },
+      {
+        "type": "string",
+        "name": "status",
+        "value": "saving"
+      },
+      {
+        "type": "string",
+        "name": "user_id",
+        "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+      }
+    ],
+    "generated": "2015-11-02T15:34:42.993281",
+    "message_id": "adeda2eb-31e5-4908-a7dd-7a154abed468",
+    "event_type": "image.upload"
+  },
+  {
+    "raw": {},
+    "traits": [
+      {
+        "type": "string",
+        "name": "service",
+        "value": "image.localhost"
+      }
+    ],
+    "generated": "2015-11-02T15:34:44.234438",
+    "message_id": "8fd316c6-144f-47ed-a4e2-86d5c1a3bb97",
+    "event_type": "image.activate"
+  },
+  {
+    "raw": {},
+    "traits": [
+      {
+        "type": "string",
+        "name": "created_at",
+        "value": "2015-11-02T15:34:41.000000"
+      },
+      {
+        "type": "string",
+        "name": "name",
+        "value": "cirros-0.3.4-x86_64-uec-kernel"
+      },
+      {
+        "type": "string",
+        "name": "project_id",
+        "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+      },
+      {
+        "type": "string",
+        "name": "resource_id",
+        "value": "db41e262-294f-41bc-bcef-e37cc8bcaafa"
+      },
+      {
+        "type": "string",
+        "name": "service",
+        "value": "image.localhost"
+      },
+      {
+        "type": "string",
+        "name": "size",
+        "value": "4979632"
+      },
+      {
+        "type": "string",
+        "name": "status",
+        "value": "active"
+      },
+      {
+        "type": "string",
+        "name": "user_id",
+        "value": "9e25eb031b8d43e5aac3686b8e7696c6"
+      }
+    ],
+    "generated": "2015-11-02T15:34:44.240624",
+    "message_id": "9f009494-33ab-4610-9174-f19e579c7a40",
+    "event_type": "image.update"
+  }
+]

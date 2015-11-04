@@ -1,0 +1,34 @@
+[
+  {
+    "type": "string",
+    "name": "created_at"
+  },
+  {
+    "type": "string",
+    "name": "name"
+  },
+  {
+    "type": "string",
+    "name": "project_id"
+  },
+  {
+    "type": "string",
+    "name": "resource_id"
+  },
+  {
+    "type": "string",
+    "name": "service"
+  },
+  {
+    "type": "string",
+    "name": "size"
+  },
+  {
+    "type": "string",
+    "name": "status"
+  },
+  {
+    "type": "string",
+    "name": "user_id"
+  }
+]

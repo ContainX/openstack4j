@@ -9,11 +9,12 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Query options used in retreiving Samples
+ * Query options used in retrieving Events
  * 
  * @author Jeremy Unruh
+ * @author Miroslav Lacina
  */
-public class SampleCriteria {
+public class EventCriteria {
 
     public enum Oper {
         /** Less Than : < */
@@ -28,7 +29,7 @@ public class SampleCriteria {
         EQUALS("eq")
         ;
         private final String queryValue;
-        private Oper(String queryValue) {
+        Oper(String queryValue) {
             this.queryValue = queryValue;
         }
         
@@ -39,65 +40,72 @@ public class SampleCriteria {
     
     private List<NameOpValue> params = Lists.newArrayList();
     
-    public static SampleCriteria create() {
-        return new SampleCriteria();
+    public static EventCriteria create() {
+        return new EventCriteria();
+    }
+
+    /**
+     * Matches the given event type
+     * @param eventType the resource id
+     * @return EventCriteria
+     */
+    public EventCriteria eventType(String eventType) {
+        checkNotNull(eventType, "eventType must not be null");
+        return add("event_type", Oper.EQUALS, eventType);
+    }
+
+    /**
+     * Matches the given message identifier
+     * @param messageId the message id
+     * @return EventCriteria
+     */
+    public EventCriteria messageId(String messageId) {
+        checkNotNull(messageId, "messageId must not be null");
+        return add("message_id", Oper.EQUALS, messageId);
     }
     
     /**
-     * Adds a timestamp sample criteria
+     * Adds the start timestamp event criteria
      * @param operator the operator
      * @param value the date for this timestamp
-     * @return SampleCriteria
+     * @return EventCriteria
      */
-    public SampleCriteria timestamp(Oper operator, Date value) {
+    public EventCriteria startTimestamp(Oper operator, Date value) {
         checkNotNull(value, "Date must not be null");
-        return add("timestamp", operator, Parser.toISO8601DateFormat(value));
+        return add("start_timestamp", operator, Parser.toISO8601DateFormat(value));
     }
-    
+
     /**
-     * Adds a timestamp sample criteria
+     * Adds the end timestamp event criteria
      * @param operator the operator
      * @param value the date for this timestamp
-     * @return SampleCriteria
+     * @return EventCriteria
      */
-    public SampleCriteria timestamp(Oper operator, long value) {
+    public EventCriteria endTimestamp(Oper operator, Date value) {
         checkNotNull(value, "Date must not be null");
-        return add("timestamp", operator, Parser.toISO8601DateFormat(new Date(value)));
-    }
-    
-    /**
-     * Matches the given resource identifier
-     * @param resourceId the resource id
-     * @return SampleCriteria
-     */
-    public SampleCriteria resource(String resourceId) {
-        checkNotNull(resourceId, "resourceId must not be null");
-        return add("resource_id", Oper.EQUALS, resourceId);
-    }
-    
-    /**
-     * Matches the given project identifier
-     * @param projectId the project id
-     * @return SampleCriteria
-     */
-    public SampleCriteria project(String projectId) {
-        checkNotNull(projectId, "projectId must not be null");
-        return add("project_id", Oper.EQUALS, projectId);
+        return add("end_timestamp", operator, Parser.toISO8601DateFormat(value));
     }
     
     /**
      * Adds an adhoc field criteria
-     * @param field the field name (must be the JSON name)
+     * @param field the field name (will be treated as trait name and applied on trait)
      * @param operator the operator
      * @param value the value
-     * @return SampleCriteria
+     * @return EventCriteria
      */
-    public SampleCriteria add(String field, Oper operator, Number value) {
+    public EventCriteria add(String field, Oper operator, Number value) {
         checkNotNull(value, "Value must not be null");
         return add(field, operator, value.toString());
     }
-    
-    public SampleCriteria add(String field, Oper operator, String value) {
+
+    /**
+     * Adds an adhoc field criteria
+     * @param field the field name (will be treated as trait name and applied on trait)
+     * @param operator the operator
+     * @param value the value
+     * @return EventCriteria
+     */
+    public EventCriteria add(String field, Oper operator, String value) {
         checkNotNull(field, "Field must not be null");
         checkNotNull(operator, "Operator must not be null");
         checkNotNull(value, "Value must not be null");
