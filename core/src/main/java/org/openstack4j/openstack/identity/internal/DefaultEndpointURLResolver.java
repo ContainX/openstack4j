@@ -3,9 +3,9 @@ package org.openstack4j.openstack.identity.internal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.identity.EndpointURLResolver;
@@ -29,7 +29,7 @@ import com.google.common.collect.SortedSetMultimap;
  */
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
-    private static final Map<Key, String> CACHE = new HashMap<Key, String>();
+    private static final Map<Key, String> CACHE = new ConcurrentHashMap<Key, String>();
     private static boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
     private String publicHostIP;
 
