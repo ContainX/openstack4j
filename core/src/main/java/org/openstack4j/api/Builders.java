@@ -21,6 +21,7 @@ import org.openstack4j.model.identity.builder.ServiceBuilder;
 import org.openstack4j.model.identity.builder.ServiceEndpointBuilder;
 import org.openstack4j.model.identity.builder.TenantBuilder;
 import org.openstack4j.model.identity.builder.UserBuilder;
+import org.openstack4j.model.identity.builder.v3.ProjectBuilder;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.network.builder.ExtraDhcpOptBuilder;
 import org.openstack4j.model.network.builder.NetFloatingIPBuilder;
@@ -79,6 +80,7 @@ import org.openstack4j.openstack.identity.domain.KeystoneService;
 import org.openstack4j.openstack.identity.domain.KeystoneServiceEndpoint;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant;
 import org.openstack4j.openstack.identity.domain.KeystoneUser;
+import org.openstack4j.openstack.identity.domain.v3.KeystoneProject;
 import org.openstack4j.openstack.image.domain.GlanceImage;
 import org.openstack4j.openstack.networking.domain.NeutronExtraDhcpOptCreate;
 import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
@@ -206,6 +208,15 @@ public class Builders {
      */
     public static TenantBuilder tenant() {
         return KeystoneTenant.builder();
+    }
+
+    /**
+     * The builder to create a Project.
+     *
+     * @return the project builder
+     */
+    public static ProjectBuilder project() {
+        return KeystoneProject.builder();
     }
 
     /**

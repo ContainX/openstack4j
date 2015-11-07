@@ -2,6 +2,9 @@ package org.openstack4j.api.identity;
 
 import java.util.List;
 
+import org.openstack4j.api.identity.v3.ProjectService;
+import org.openstack4j.api.identity.v3.RoleService;
+import org.openstack4j.api.identity.v3.UserService;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.identity.Endpoint;
@@ -25,14 +28,14 @@ public interface IdentityService extends RestService {
 	 *
 	 * @return the user service
 	 */
-	UserService users();
-	
+	org.openstack4j.api.identity.UserService users();
+
 	/**
 	 * Role Service API
 	 *
 	 * @return the role service
 	 */
-	RoleService roles();
+	org.openstack4j.api.identity.RoleService roles();
 	
 	/**
 	 * Service Management API

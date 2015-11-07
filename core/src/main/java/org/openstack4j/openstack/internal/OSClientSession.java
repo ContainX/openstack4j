@@ -249,6 +249,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      * {@inheritDoc}
      */
     @Override
+    public org.openstack4j.api.identity.v3.IdentityService identityV3() {
+        return Apis.getIdentityServicesV3();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public ComputeService compute() {
         return Apis.getComputeServices();
     }

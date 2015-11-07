@@ -37,6 +37,15 @@ public class Apis {
 	public static IdentityService getIdentityServices() {
 		return get(IdentityService.class);
 	}
+
+    /**
+     * Gets the identity services API V3
+     *
+     * @return the identity services
+     */
+    public static org.openstack4j.api.identity.v3.IdentityService getIdentityServicesV3() {
+        return get(org.openstack4j.api.identity.v3.IdentityService.class);
+    }
 	
 	/**
 	 * Gets the compute services API

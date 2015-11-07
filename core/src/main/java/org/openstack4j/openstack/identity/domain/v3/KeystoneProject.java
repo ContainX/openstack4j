@@ -29,6 +29,7 @@ public class KeystoneProject implements Project {
     private String name;
     @JsonProperty
     private KeystoneDomain domain;
+    @JsonProperty("domain_id")
     private String domainId;
     private String description;
     private Map<String, String> links;
@@ -137,9 +138,14 @@ public class KeystoneProject implements Project {
      * {@inheritDoc}
      */
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        String domainId = null;
+        if (domain != null) {
+            domainId = domain.getId();
+        }
+
+        return Objects.toStringHelper(this)
                 .add("id", id)
-                .add("domainId", domain.getId())
+                .add("domainId", domainId)
                 .add("description", description)
                 .add("name", name)
                 .add("links", links)
@@ -147,6 +153,7 @@ public class KeystoneProject implements Project {
                 .add("subtree", subtree)
                 .add("parents", parents)
                 .add("enabled", enabled)
+                .omitNullValues()
                 .toString();
     }
 
@@ -283,8 +290,8 @@ public class KeystoneProject implements Project {
 
         @Override
         public ProjectBuilder domainId(String domainId) {
-            // TODO Auto-generated method stub
-            return null;
+            model.domainId = domainId;
+            return this;
         }
 
     }

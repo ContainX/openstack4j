@@ -27,6 +27,7 @@ public final class ClientConstants
 
     // Paths
     public static final String PATH_TENANTS = "/tenants";
+    public static final String PATH_PROJECTS = "/projects";
     public static final String PATH_ROLES = "/roles";
     public static final String PATH_EXTENSIONS = "/extensions";
     public static final String URI_SEP = "/";

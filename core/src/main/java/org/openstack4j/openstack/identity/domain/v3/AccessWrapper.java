@@ -63,16 +63,23 @@ public class AccessWrapper implements Access {
      */
     @Override
     public org.openstack4j.model.identity.Token getToken() {
-        Project project = KeystoneProject.builder()
-                .id(token.getProject().getId())
-                .name(token.getProject().getName())
-                .build();
-        Tenant tenant = KeystoneTenant.builder()
-                .id(project.getId())
-                .name(project.getName())
-                .description(project.getDescription())
-                .enabled(project.isEnabled())
-                .build();
+
+        Tenant tenant = null;
+
+        if (token.getProject() != null) {
+            Project project = KeystoneProject.builder()
+                    .id(token.getProject().getId())
+                    .name(token.getProject().getName())
+                    .build();
+
+            tenant = KeystoneTenant.builder()
+                    .id(project.getId())
+                    .name(project.getName())
+                    .description(project.getDescription())
+                    .enabled(project.isEnabled())
+                    .build();
+        }
+
         return new V2Token(id, token.getExpires(), token.getVersion(), tenant);
     }
 

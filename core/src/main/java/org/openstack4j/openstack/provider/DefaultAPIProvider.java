@@ -53,7 +53,7 @@ public class DefaultAPIProvider implements APIProvider {
 	public void initialize() {
 		bind(IdentityService.class, IdentityServiceImpl.class);
 		bind(TenantService.class, TenantServiceImpl.class);
-		bind(UserService.class, UserServiceImpl.class);
+        bind(UserService.class, UserServiceImpl.class);
 		bind(RoleService.class, RoleServiceImpl.class);
 		bind(ServiceManagerService.class, ServiceManagerServiceImpl.class);
 		bind(ComputeService.class, ComputeServiceImpl.class);
@@ -124,6 +124,16 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(FirewallService.class, FirewallServiceImpl.class);
 		bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
 		bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
+
+        //keystone v3 bindings
+        bind(org.openstack4j.api.identity.v3.IdentityService.class,
+                org.openstack4j.openstack.identity.internal.v3.IdentityServiceImpl.class);
+        bind(org.openstack4j.api.identity.v3.UserService.class,
+                org.openstack4j.openstack.identity.internal.v3.UserServiceImpl.class);
+        bind(org.openstack4j.api.identity.v3.RoleService.class,
+                org.openstack4j.openstack.identity.internal.v3.RoleServiceImpl.class);
+        bind(org.openstack4j.api.identity.v3.ProjectService.class,
+                org.openstack4j.openstack.identity.internal.v3.ProjectServiceImpl.class);
 	}
 
 	/**

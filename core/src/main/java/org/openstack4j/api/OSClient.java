@@ -132,6 +132,13 @@ public interface OSClient {
 	 * @return the identity service
 	 */
 	IdentityService identity();
+
+    /**
+     * Returns the Identity Service API for V3
+     *
+     * @return the identity service
+     */
+    org.openstack4j.api.identity.v3.IdentityService identityV3();
 	
 	/**
 	 * Returns the Compute Service API
