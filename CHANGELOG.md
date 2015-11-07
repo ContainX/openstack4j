@@ -1,6 +1,18 @@
 # Change Log
 
-### 2.0.7 (Latest Release / Stable)
+### 2.0.8 (Latest Release / Stable)
+
+##### Enhancements/Improvements
+
+* Issue #492 - Telemetry Events API - Thank you - @iviireczech  
+* Issue #500 - Use Enums instead of String for sourceType and destinationType in block mappings
+
+##### Fixes
+
+* Issue #489 - Race Condition in DefaultEndpointURLResolver - Thank you - @rvesselinov
+* Issue #500 - Avoid using printStackTrace() for exception logging
+
+### 2.0.7 
 
 ##### Enhancements/Improvements
 
