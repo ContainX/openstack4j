@@ -1,6 +1,8 @@
 package org.openstack4j.model.compute.builder;
 
 import org.openstack4j.common.Buildable;
+import org.openstack4j.model.compute.BDMDestType;
+import org.openstack4j.model.compute.BDMSourceType;
 import org.openstack4j.model.compute.BlockDeviceMappingCreate;
 
 /**
@@ -40,7 +42,7 @@ public interface BlockDeviceMappingBuilder extends Buildable.Builder<BlockDevice
 	 * @param type the destination type
 	 * @return BlockDeviceMappingBuilder
 	 */
-	BlockDeviceMappingBuilder destinationType(String type);
+	BlockDeviceMappingBuilder destinationType(BDMDestType type);
 
 	/**
 	 * Either snap or any other value, including a blank string. snap means that the volume was created from a snapshot.
@@ -48,7 +50,7 @@ public interface BlockDeviceMappingBuilder extends Buildable.Builder<BlockDevice
 	 * @param type the source type
 	 * @return BlockDeviceMappingBuilder
 	 */
-	BlockDeviceMappingBuilder sourceType(String type);
+	BlockDeviceMappingBuilder sourceType(BDMSourceType type);
 
 	/**
 	 * Set to True to delete the volume when the instance is deleted. Set to False to retain the volume when the instance is deleted.
