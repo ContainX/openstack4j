@@ -7,6 +7,8 @@ import java.io.IOException;
 import org.openstack4j.api.exceptions.ResponseException;
 import org.openstack4j.core.transport.functions.ResponseToActionResponse;
 import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 /**
  * Handles retrieving an Entity from an HttpResponse while validating resulting status codes.
@@ -15,6 +17,9 @@ import org.openstack4j.model.compute.ActionResponse;
  */
 public class HttpEntityHandler {
 
+    private static final Logger LOG = LoggerFactory.getLogger(HttpEntityHandler.class);
+
+    
     public static <T> T handle(HttpResponse response, Class<T> returnType, ExecutionOptions<T> options) {
         return handle(response, returnType, options, Boolean.FALSE);
     }
@@ -70,9 +75,9 @@ public class HttpEntityHandler {
                 try {
                     return handle.complete(handle.getReturnType().newInstance());
                 } catch (InstantiationException e) {
-                    e.printStackTrace();
+                    LOG.error(e.getMessage(), e);
                 } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    LOG.error(e.getMessage(), e);
                 }
             }
 
@@ -96,7 +101,7 @@ public class HttpEntityHandler {
             } catch (ResponseException re) {
                 throw re;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOG.error(e.getMessage(), e);
             }
         }
         return handle.continueHandling();
@@ -111,7 +116,7 @@ public class HttpEntityHandler {
         try {
             response.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
     

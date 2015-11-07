@@ -11,6 +11,8 @@ import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.builder.StackCreateBuilder;
 import org.openstack4j.openstack.heat.utils.Environment;
 import org.openstack4j.openstack.heat.utils.Template;
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -23,7 +25,9 @@ import com.fasterxml.jackson.core.JsonParseException;
  * 
  */
 public class HeatStackCreate implements StackCreate {
+    
 	private static final long serialVersionUID = -8775995682456485275L;
+    private static final Logger LOG = LoggerFactory.getLogger(HeatStackCreate.class);
 
 	@JsonProperty("disableRollback")
 	private boolean disableRollback;
@@ -169,22 +173,9 @@ public class HeatStackCreate implements StackCreate {
                 Template tpl = new Template(tplFile);
                 model.template = tpl.getTplContent();
                 model.files.putAll(tpl.getFiles());
-            } catch (JsonParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
+            } 
             return this;
         }
         
@@ -201,26 +192,13 @@ public class HeatStackCreate implements StackCreate {
         }
         
         @Override
-        public StackCreateBuilder environmentFromFile(String envFile){
+        public StackCreateBuilder environmentFromFile(String envFile) {
             try {
                 Environment env = new Environment(envFile);
                 model.environment = env.getEnvContent();
                 model.files.putAll(env.getFiles());
-            } catch (JsonParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (URISyntaxException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
             }
             return this;
         }

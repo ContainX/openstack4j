@@ -142,7 +142,6 @@ public class DefaultAPIProvider implements APIProvider {
 				return impl;
 			}
 			catch (Exception e) {
-				e.printStackTrace();
 				throw new ApiNotFoundException("API Not found for: " + api.getName(), e);
 			}
 		}

@@ -10,6 +10,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.UntrustedSSL;
+import org.openstack4j.core.transport.internal.HttpExecutor;
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 /**
  * Creates the initial HttpClient and keeps it as a singleton to preserve pooling strategies within the Http Client
@@ -20,6 +23,7 @@ public class HttpClientFactory {
 
     public static final HttpClientFactory INSTANCE = new HttpClientFactory();
     private static final String USER_AGENT = "OpenStack4j-Agent";
+    private static final Logger LOG = LoggerFactory.getLogger(HttpExecutor.class);
 
     private CloseableHttpClient client;
     private static HttpClientConfigInterceptor INTERCEPTOR;
@@ -59,7 +63,7 @@ public class HttpClientFactory {
                 HttpHost proxy = new HttpHost(url.getHost(), config.getProxy().getPort(), url.getProtocol());
                 cb.setProxy(proxy);
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                LOG.error(e.getMessage(), e);
             }
         }
         

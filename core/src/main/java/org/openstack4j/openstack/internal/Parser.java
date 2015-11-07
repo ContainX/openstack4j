@@ -12,6 +12,8 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.openstack4j.openstack.logging.LoggerFactory;
+
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 
 /**
@@ -73,7 +75,7 @@ public final class Parser {
                 return StdDateFormat.instance.parse(date);
         }
         catch (ParseException e) { 
-            e.printStackTrace();
+            LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
         }
         return null;
     }
@@ -143,7 +145,7 @@ public final class Parser {
         if (matcher.find()) {
             toParse = matcher.group(1);
         }
-        // TODO explain why this check is here
+        
         if (toParse.length() == 25 && SECOND_PATTERN.matcher(toParse).matches())
             toParse = toParse.substring(0, toParse.length() - 6);
         return toParse;

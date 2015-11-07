@@ -18,6 +18,7 @@ import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.Token;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.SortedSetMultimap;
@@ -173,7 +174,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
                 publicHostIP = new URI(access.getEndpoint()).getHost();
             }
             catch (URISyntaxException e) {
-                e.printStackTrace();
+                LoggerFactory.getLogger(DefaultEndpointURLResolver.class).error(e.getMessage(), e);
             }
         }
         return publicHostIP;
