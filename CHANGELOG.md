@@ -10,7 +10,7 @@
 ##### Fixes
 
 * Issue #489 - Race Condition in DefaultEndpointURLResolver - Thank you - @rvesselinov
-* Issue #500 - Avoid using printStackTrace() for exception logging
+* Issue #501 - Avoid using printStackTrace() for exception logging
 
 ### 2.0.7 
 
