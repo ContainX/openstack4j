@@ -31,6 +31,7 @@ public class VolumeTests extends AbstractTest {
         respondWith("/storage/v1/volumes.json");
         List<? extends Volume> volumes = os().blockStorage().volumes().list();
         assertEquals(volumes.size(), 3);
+        assertEquals(volumes.get(0).getTenantId(), "b0b5ed7ae06049688349fe43737796d4");
         
         // Check that the list request is the one we expect
         RecordedRequest listRequest = server.takeRequest();
@@ -84,6 +85,8 @@ public class VolumeTests extends AbstractTest {
         assertEquals(attachments.get(0).getId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
         assertEquals(attachments.get(0).getServerId(), "eaa6a54d-35c1-40ce-831d-bb61f991e1a9");
         assertEquals(attachments.get(0).getVolumeId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
+
+        assertEquals(volume.getTenantId(), "b0b5ed7ae06049688349fe43737796d4");
     }
     
     @SuppressWarnings("unchecked")
