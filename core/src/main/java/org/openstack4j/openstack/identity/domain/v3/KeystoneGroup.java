@@ -7,14 +7,18 @@ import org.openstack4j.model.identity.builder.v3.GroupBuilder;
 import org.openstack4j.model.identity.v3.Group;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
  * group model class for identity.v3
- * 
+ *
  * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#groups-v3">API reference</a>
  */
+@JsonRootName("group")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class KeystoneGroup implements Group {
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +43,7 @@ public class KeystoneGroup implements Group {
     /**
      * @return the id of the group
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -46,6 +51,7 @@ public class KeystoneGroup implements Group {
     /**
      * @return the name of the group
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -53,6 +59,7 @@ public class KeystoneGroup implements Group {
     /**
      * @return the description of the group
      */
+    @Override
     public String getDescription() {
         return description;
     }
@@ -60,6 +67,7 @@ public class KeystoneGroup implements Group {
     /**
      * @return the domainId of the group
      */
+    @Override
     public String getDomainId() {
         return domainId;
     }
@@ -67,6 +75,7 @@ public class KeystoneGroup implements Group {
     /**
      * @return the links of the group
      */
+    @Override
     public Map<String, String> getLinks() {
         return links;
     }
@@ -74,6 +83,7 @@ public class KeystoneGroup implements Group {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues()
                 .add("id", id)
@@ -188,6 +198,7 @@ public class KeystoneGroup implements Group {
         @JsonProperty("groups")
         protected List<KeystoneGroup> list;
 
+        @Override
         public List<KeystoneGroup> value() {
             return list;
         }

@@ -15,7 +15,7 @@ import com.google.common.base.Objects;
 
 /**
  * Project model class for identity.v3
- * 
+ *
  * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#projects-v3">API reference</a>
  */
 @JsonRootName("project")
@@ -29,6 +29,7 @@ public class KeystoneProject implements Project {
     private String name;
     @JsonProperty
     private KeystoneDomain domain;
+    @JsonProperty("domain_id")
     private String domainId;
     private String description;
     private Map<String, String> links;
@@ -52,6 +53,7 @@ public class KeystoneProject implements Project {
     /**
      * @return the id of the project
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -59,6 +61,7 @@ public class KeystoneProject implements Project {
     /**
      * @return the domain the project belongs to
      */
+    @Override
     public Domain getDomain() {
         return domain;
     }
@@ -66,6 +69,7 @@ public class KeystoneProject implements Project {
     /**
      * @return the domain id of the project
      */
+    @Override
     public String getDomainId() {
         if (domainId == null && domain != null && domain.getId() != null)
             domainId = domain.getId();
@@ -75,6 +79,7 @@ public class KeystoneProject implements Project {
     /**
      * @return the description of the project
      */
+    @Override
     public String getDescription() {
         return description;
     }
@@ -82,6 +87,7 @@ public class KeystoneProject implements Project {
     /**
      * @return the name of the project
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -97,6 +103,7 @@ public class KeystoneProject implements Project {
     /**
      * @return the parentId of the project
      */
+    @Override
     public String getParentId() {
         return parentId;
     }
@@ -104,6 +111,7 @@ public class KeystoneProject implements Project {
     /**
      * @return the subtree of the project
      */
+    @Override
     public String getSubtree() {
         return subtree;
     }
@@ -111,6 +119,7 @@ public class KeystoneProject implements Project {
     /**
      * @return the parents of the project
      */
+    @Override
     public String getParents() {
         return parents;
     }
@@ -125,7 +134,7 @@ public class KeystoneProject implements Project {
 
     /**
      * set project enabled
-     * 
+     *
      * @param enabled
      *            the new enabled status
      */
@@ -136,6 +145,7 @@ public class KeystoneProject implements Project {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues()
                 .add("id", id)
@@ -193,6 +203,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#getId()
          */
+        @Override
         public ProjectBuilder id(String id) {
             model.id = id;
             return this;
@@ -201,6 +212,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#getDomainId()
          */
+        @Override
         public ProjectBuilder domain(Domain domain) {
             if (domain != null && domain.getId() != null)
                 model.domainId = domain.getId();
@@ -210,6 +222,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#getDescription()
          */
+        @Override
         public ProjectBuilder description(String description) {
             model.description = description;
             return this;
@@ -218,6 +231,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#getName()
          */
+        @Override
         public ProjectBuilder name(String name) {
             model.name = name;
             return this;
@@ -226,6 +240,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#getLinks()
          */
+        @Override
         public ProjectBuilder links(Map<String, String> links) {
             model.links = links;
             return this;
@@ -234,6 +249,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#getParentId()
          */
+        @Override
         public ProjectBuilder parentId(String parentId) {
             model.parentId = parentId;
             return this;
@@ -242,6 +258,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#getSubtree()
          */
+        @Override
         public ProjectBuilder subtree(String subtree) {
             model.subtree = subtree;
             return this;
@@ -250,6 +267,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#getParents()
          */
+        @Override
         public ProjectBuilder parents(String parents) {
             model.parents = parents;
             return this;
@@ -258,6 +276,7 @@ public class KeystoneProject implements Project {
         /**
          * @see KeystoneProject#isEnabled()
          */
+        @Override
         public ProjectBuilder enabled(boolean enabled) {
             model.enabled = enabled;
             return this;
@@ -295,6 +314,7 @@ public class KeystoneProject implements Project {
         @JsonProperty("projects")
         protected List<KeystoneProject> list;
 
+        @Override
         public List<KeystoneProject> value() {
             return list;
         }

@@ -7,12 +7,16 @@ import org.openstack4j.model.identity.builder.v3.RoleBuilder;
 import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
  * v3 role implementation
  */
+@JsonRootName("role")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class KeystoneRole implements Role {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +38,7 @@ public class KeystoneRole implements Role {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getId() {
         return id;
     }
@@ -41,6 +46,7 @@ public class KeystoneRole implements Role {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getName() {
         return name;
     }
@@ -48,6 +54,7 @@ public class KeystoneRole implements Role {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Map<String, String> getLinks() {
         return links;
     }
@@ -124,6 +131,7 @@ public class KeystoneRole implements Role {
         @JsonProperty("roles")
         protected List<KeystoneRole> list;
 
+        @Override
         public List<KeystoneRole> value() {
             return list;
         }
