@@ -4,8 +4,12 @@
 
 ##### Enhancements/Improvements
 
+* Issue #503 - domain scoped authentication with tests - Thank you - @auhlig  
 
 ##### Fixes
+
+* Issue #454 - Tenant and user id not in Volume - Thank you - @iviireczech 
+
 
 
 ### 2.0.8
