@@ -1,7 +1,8 @@
 package org.openstack4j.openstack.identity.internal;
 
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.identity.EndpointURLResolver;
@@ -22,7 +23,7 @@ import com.google.common.base.Optional;
  */
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
-    private static final Map<Key, String> CACHE = new HashMap<Key, String>();
+    private static final Map<Key, String> CACHE = new ConcurrentHashMap<Key, String>();
 
     @Override
     public String findURL(URLResolverParams p) {

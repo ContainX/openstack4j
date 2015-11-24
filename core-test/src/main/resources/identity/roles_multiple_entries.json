@@ -1,0 +1,23 @@
+{
+  "links": {
+    "self": "http://127.0.0.1:5000/v3/roles?name=admin",
+    "previous": null,
+    "next": null
+  },
+  "roles": [
+    {
+      "id": "d164e3440b5741808e5d8ec324b51e0b",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/d164e3440b5741808e5d8ec324b51e0b"
+      },
+      "name": "admin"
+    },
+    {
+      "id": "d164e3440b5741808e5d8ec324b51e0c",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/d164e3440b5741808e5d8ec324b51e0c"
+      },
+      "name": "admin"
+    }
+  ]
+}

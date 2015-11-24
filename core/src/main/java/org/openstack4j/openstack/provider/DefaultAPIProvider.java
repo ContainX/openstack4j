@@ -28,6 +28,8 @@ import org.openstack4j.api.heat.SoftwareConfigService;
 import org.openstack4j.api.heat.StackService;
 import org.openstack4j.api.heat.TemplateService;
 import org.openstack4j.api.identity.IdentityService;
+import org.openstack4j.api.identity.ProjectService;
+import org.openstack4j.api.identity.RoleService;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetFloatingIPService;
@@ -70,6 +72,7 @@ import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.AlarmService;
+import org.openstack4j.api.telemetry.EventService;
 import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
@@ -96,6 +99,8 @@ import org.openstack4j.openstack.heat.internal.SoftwareConfigServiceImpl;
 import org.openstack4j.openstack.heat.internal.StackServiceImpl;
 import org.openstack4j.openstack.heat.internal.TemplateServiceImpl;
 import org.openstack4j.openstack.identity.internal.IdentityServiceImpl;
+import org.openstack4j.openstack.identity.internal.ProjectServiceImpl;
+import org.openstack4j.openstack.identity.internal.RoleServiceImpl;
 import org.openstack4j.openstack.identity.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.networking.internal.FloatingIPServiceImpl;
@@ -138,6 +143,7 @@ import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerS
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.AlarmServiceImpl;
+import org.openstack4j.openstack.telemetry.internal.EventServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
@@ -160,6 +166,8 @@ public class DefaultAPIProvider implements APIProvider {
 	public void initialize() {
 		bind(IdentityService.class, IdentityServiceImpl.class);
 		bind(UserService.class, UserServiceImpl.class);
+        bind(ProjectService.class, ProjectServiceImpl.class);
+		bind(RoleService.class, RoleServiceImpl.class);
 		bind(ComputeService.class, ComputeServiceImpl.class);
 		bind(FlavorService.class, FlavorServiceImpl.class);
 		bind(ComputeImageService.class, ComputeImageServiceImpl.class);
@@ -183,6 +191,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(TelemetryService.class, TelemetryServiceImpl.class);
 		bind(MeterService.class, MeterServiceImpl.class);
 		bind(AlarmService.class, AlarmServiceImpl.class);
+		bind(EventService.class, EventServiceImpl.class);
 		bind(HypervisorService.class, HypervisorServiceImpl.class);
 		bind(ZoneService.class, ZoneServiceImpl.class);
 		bind(CinderZoneService.class, CinderZoneServiceImpl.class);

@@ -27,8 +27,11 @@ public final class ClientConstants
 
     // Paths
     public static final String URI_SEP = "/";
+    public static final String PATH_PROJECTS = "/projects";
+    public static final String PATH_ROLES = "/roles";
     public static final String PATH_USERS = "/users";
     public static final String PATH_SERVICES = "/services";
     public static final String PATH_DOMAINS = "/domains";
+    public static final String PATH_EXTENSIONS = "/extensions";
 
 }

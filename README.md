@@ -1,8 +1,8 @@
 OpenStack4j 
 ===========
 
-[![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)  [![License](https://pypip.in/license/apache-libcloud/badge.png)]()
-
+[![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gondor/openstack4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry, Data Processing as well as many extensions (LBaaS, FWaaS, Quota-Sets, etc)
 
@@ -11,14 +11,14 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 * Website: [OpenStack4j.com](http://www.openstack4j.com)
 * Documentation/Tutorials: [OpenStack4j.com/learn/](http://www.openstack4j.com/learn/)
 * Questions - Use Google Groups: [groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)
-* Questions - Stackoverflow use **openstack4j** tag
+* Questions - [Stackoverflow](http://stackoverflow.com/search?q=openstack4j)
 * Twitter: [@openstack4j](https://twitter.com/openstack4j)
 * Facebook: [facebook.com/openstack4j](http://www.facebook.com/openstack4j)
 * Changelog: [Changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md)
 
 ## Bug Reports
 
-* GitHub Issues: [/gondor/openstack4j/issues](https://github.com/gondor/openstack4j/issues)
+* GitHub Issues: [Click Here](https://github.com/gondor/openstack4j/issues)
 
 Maven
 -----
@@ -77,7 +77,7 @@ If you would like to contribute please see our contributing [guidelines](https:/
 
 | Rank | Login | Contributions |
 | :--- | :---- | :------------ |
-| 1  | @gondor           | 498 |
+| 1  | @gondor           | 489 |
 | 2  | @octupszhang      | 26 |
 | 3  | @ekasitk          | 17 |
 | 4  | @magixyu          | 17 |
@@ -85,15 +85,16 @@ If you would like to contribute please see our contributing [guidelines](https:/
 | 6  | @isartcanyameres  | 9 |
 | 7  | @n-r-anderson     | 7 |
 | 8  | @krishnabrucelee  | 6 |
-| 9 | @iviireczech          | 6 |
-| 10 | @symcssn          | 4 |
-| 11  | @peter-nordquist  | 4 |
-| 12 | @RibeiroAna       | 4 |
-| 13 | @olivergondza     | 3 |
-| 14 | @auhli		     | 3 |
-| 15 | @NareshkumarCIET  | 2 |
+| 9 | @symcssn          | 2 |
+| 10  | @peter-nordquist  | 4 |
+| 11 | @RibeiroAna       | 4 |
+| 12 | @olivergondza     | 3 |
+| 13 | @auhli		     | 3 |
+| 14 | @NareshkumarCIET  | 2 |
+| 15 | @frsyuki          | 2 |
 
-#### Throughput 
+#### Throughput
+>>>>>>> v3_collaboration
 
 [![Throughput Graph](https://graphs.waffle.io/gondor/openstack4j/throughput.svg)](https://waffle.io/gondor/openstack4j/metrics)
 
@@ -134,6 +135,7 @@ OSClient os = OSFactory.builder()
 ```
 (2) authenticate with domain-scope
 ```java
+// Identity V2 Authentication Example
 OSClient os = OSFactory.builder()
                 .endpoint("http://<fqdn>:5000/v3")
                 .credentials("admin", "secret", Identifier.byId("user domain id"))

@@ -104,6 +104,7 @@ public class OSAuthenticator {
         }
         else {
         	token = token.applyContext(	info.endpoint, new TokenAuth(token.getId(), auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
+
         }
 
         if (!info.reLinkToExistingSession)
