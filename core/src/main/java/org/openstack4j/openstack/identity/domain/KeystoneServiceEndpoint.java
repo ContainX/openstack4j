@@ -8,6 +8,7 @@ import org.openstack4j.model.identity.Service;
 import org.openstack4j.model.identity.ServiceEndpoint;
 import org.openstack4j.model.identity.builder.ServiceEndpointBuilder;
 import org.openstack4j.openstack.common.ListResult;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -187,7 +188,7 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 				return new URI(url);
 			}
 			catch (URISyntaxException e) {
-				e.printStackTrace();
+				LoggerFactory.getLogger(ServiceConcreteEndpointBuilder.class).error(e.getMessage(), e);
 			}
 			return null;
 		}

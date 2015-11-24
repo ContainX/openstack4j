@@ -51,6 +51,8 @@ import org.openstack4j.openstack.compute.domain.actions.SecurityGroupActions;
 import org.openstack4j.openstack.compute.domain.actions.ServerAction;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.compute.functions.WrapServerIfApplicableFunction;
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 /**
  * Server Operation API implementation
@@ -59,6 +61,9 @@ import org.openstack4j.openstack.compute.functions.WrapServerIfApplicableFunctio
  */
 public class ServerServiceImpl extends BaseComputeServices implements ServerService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ServerServiceImpl.class);
+
+   
     /**
      * {@inheritDoc}
      */
@@ -414,7 +419,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         try {
             Thread.sleep(ms);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return ms;
     }

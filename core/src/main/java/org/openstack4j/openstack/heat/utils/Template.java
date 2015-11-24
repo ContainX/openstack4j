@@ -9,12 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
 public class Template {
+    
+    private static final Logger LOG = LoggerFactory.getLogger(Template.class);
+
     
     // template Resource is used for represent the template file or template URL
     private String tplContent;
@@ -49,7 +55,7 @@ public class Template {
             resolveTemplateGetFiles(content);
             resolveTemplateType(content);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
     
@@ -77,7 +83,7 @@ public class Template {
                             files.putAll(tpl.getFiles());
                         }
                     } catch (URISyntaxException e) {
-                        e.printStackTrace();
+                        LOG.error(e.getMessage(), e);
                     }
                 }
             }

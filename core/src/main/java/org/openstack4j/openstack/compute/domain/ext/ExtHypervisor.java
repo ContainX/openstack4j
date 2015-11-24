@@ -5,6 +5,7 @@ import java.util.List;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.model.compute.ext.Hypervisor;
 import org.openstack4j.openstack.common.ListResult;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -210,7 +211,7 @@ public class ExtHypervisor implements Hypervisor {
                     return ObjectMapperSingleton.getContext(HypervisorCPUInfo.class)
                               .reader(HypervisorCPUInfo.class).readValue(json);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LoggerFactory.getLogger(HypervisorCPUInfo.class).error(e.getMessage(), e);
                 }
             }
             return null;

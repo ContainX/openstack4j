@@ -9,6 +9,7 @@ import java.util.Map;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -69,7 +70,7 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
                 try {
                     return valueOf(CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_UNDERSCORE, checkNotNull(migrationStatus, "migrationStatus")));
                 } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
+                    LoggerFactory.getLogger(MigrationStatus.class).error(e.getMessage(), e);
                 }
             }
             return NONE;

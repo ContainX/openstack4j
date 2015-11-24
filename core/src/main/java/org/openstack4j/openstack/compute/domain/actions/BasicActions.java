@@ -2,6 +2,7 @@ package org.openstack4j.openstack.compute.domain.actions;
 
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.RebootType;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -13,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
  */
 @SuppressWarnings("serial")
 public final class BasicActions {
-    
+        
     @JsonRootName("pause")
     public static class Pause implements ServerAction { }
     
@@ -128,7 +129,7 @@ public final class BasicActions {
         try {
             sa = action.newInstance();
         } catch (Throwable t) {
-            t.printStackTrace();
+            LoggerFactory.getLogger(ServerAction.class).error(t.getMessage(), t);
         }
         return sa;
     }
