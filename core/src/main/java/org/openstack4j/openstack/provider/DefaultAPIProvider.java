@@ -150,119 +150,119 @@ import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 import com.google.common.collect.Maps;
 
 /**
- * Simple API Provider which keeps internally Maps interface implementations as singletons
+ * Simple API Provider which keeps internally Maps interface implementations as
+ * singletons
  *
  * @author Jeremy Unruh
  */
 public class DefaultAPIProvider implements APIProvider {
 
-	private static final Map<Class<?>, Class<?>> bindings = Maps.newHashMap();
-	private static final Map<Class<?>, Object> instances = Maps.newConcurrentMap();
+    private static final Map<Class<?>, Class<?>> bindings = Maps.newHashMap();
+    private static final Map<Class<?>, Object> instances = Maps.newConcurrentMap();
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize() {
-		bind(IdentityService.class, IdentityServiceImpl.class);
-		bind(UserService.class, UserServiceImpl.class);
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initialize() {
+        bind(IdentityService.class, IdentityServiceImpl.class);
+        bind(UserService.class, UserServiceImpl.class);
         bind(ProjectService.class, ProjectServiceImpl.class);
-		bind(RoleService.class, RoleServiceImpl.class);
-		bind(ComputeService.class, ComputeServiceImpl.class);
-		bind(FlavorService.class, FlavorServiceImpl.class);
-		bind(ComputeImageService.class, ComputeImageServiceImpl.class);
-		bind(ServerService.class, ServerServiceImpl.class);
-		bind(QuotaSetService.class, QuotaSetServiceImpl.class);
-		bind(NetworkingService.class, NetworkingServiceImpl.class);
-		bind(NetworkService.class, NetworkServiceImpl.class);
-		bind(SubnetService.class, SubnetServiceImpl.class);
-		bind(PortService.class, PortServiceImpl.class);
-		bind(RouterService.class, RouterServiceImpl.class);
-		bind(ImageService.class, ImageServiceImpl.class);
-		bind(BlockStorageService.class, BlockStorageServiceImpl.class);
-		bind(BlockVolumeService.class, BlockVolumeServiceImpl.class);
-		bind(BlockVolumeSnapshotService.class, BlockVolumeSnapshotServiceImpl.class);
-		bind(ComputeSecurityGroupService.class, ComputeSecurityGroupServiceImpl.class);
-		bind(KeypairService.class, KeypairServiceImpl.class);
-		bind(NetFloatingIPService.class, FloatingIPServiceImpl.class);
-		bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
-		bind(SecurityGroupService.class, SecurityGroupServiceImpl.class);
-		bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
-		bind(TelemetryService.class, TelemetryServiceImpl.class);
-		bind(MeterService.class, MeterServiceImpl.class);
-		bind(AlarmService.class, AlarmServiceImpl.class);
-		bind(EventService.class, EventServiceImpl.class);
-		bind(HypervisorService.class, HypervisorServiceImpl.class);
-		bind(ZoneService.class, ZoneServiceImpl.class);
-		bind(CinderZoneService.class, CinderZoneServiceImpl.class);
-		bind(HeatService.class, HeatServiceImpl.class);
-		bind(StackService.class, StackServiceImpl.class);
-		bind(TemplateService.class, TemplateServiceImpl.class);
-		bind(EventsService.class, EventsServiceImpl.class);
-		bind(ResourcesService.class, ResourcesServiceImpl.class);
-		bind(MigrationService.class, MigrationServiceImpl.class);
-		bind(SoftwareConfigService.class, SoftwareConfigServiceImpl.class);
-		bind(ObjectStorageService.class, ObjectStorageServiceImpl.class);
-		bind(ObjectStorageAccountService.class, ObjectStorageAccountServiceImpl.class);
-		bind(ObjectStorageContainerService.class, ObjectStorageContainerServiceImpl.class);
-		bind(ServerGroupService.class, ServerGroupServiceImpl.class);
-		bind(ObjectStorageObjectService.class, ObjectStorageObjectServiceImpl.class);
-		bind(NetQuotaService.class, NetQuotaServiceImpl.class);
-		bind(InterfaceService.class, InterfaceServiceImpl.class);
-		bind(FloatingIPDNSService.class, FloatingIPDNSServiceImpl.class);
-		bind(FloatingIPDNSDomainService.class, FloatingIPDNSDomainServiceImpl.class);
-		bind(FloatingIPDNSEntryService.class, FloatingIPDNSEntryServiceImpl.class);
-		bind(HostAggregateService.class,HostAggregateServiceImpl.class);
-		bind(MemberService.class,MemberServiceImpl.class);
-		bind(VipService.class,VipServiceImpl.class);
-		bind(HealthMonitorService.class,HealthMonitorServiceImpl.class);
-		bind(LbPoolService.class,LbPoolServiceImpl.class);
-		bind(LoadBalancerService.class, LoadBalancerServiceImpl.class);
-		bind(BlockVolumeTransferService.class, BlockVolumeTransferServiceImpl.class);
-		bind(SaharaPluginService.class,SaharaPluginServiceImpl.class);
-		bind(SaharaImageService.class,SaharaImageServiceImpl.class);
-		bind(SaharaService.class,SaharaServiceImpl.class);
-		bind(ClusterService.class,ClusterServiceImpl.class);
-		bind(ClusterTemplateService.class,ClusterTemplateServiceImpl.class);
-		bind(NodeGroupTemplateService.class,NodeGroupTemplateServiceImpl.class);
-		bind(DataSourceService.class, DataSourceServiceImpl.class);
-		bind(JobBinaryInternalService.class, JobBinaryInternalServiceImpl.class);
-		bind(JobBinaryService.class, JobBinaryServiceImpl.class);
-		bind(JobService.class, JobServiceImpl.class);
-		bind(JobExecutionService.class, JobExecutionServiceImpl.class);
+        bind(RoleService.class, RoleServiceImpl.class);
+        bind(ComputeService.class, ComputeServiceImpl.class);
+        bind(FlavorService.class, FlavorServiceImpl.class);
+        bind(ComputeImageService.class, ComputeImageServiceImpl.class);
+        bind(ServerService.class, ServerServiceImpl.class);
+        bind(QuotaSetService.class, QuotaSetServiceImpl.class);
+        bind(NetworkingService.class, NetworkingServiceImpl.class);
+        bind(NetworkService.class, NetworkServiceImpl.class);
+        bind(SubnetService.class, SubnetServiceImpl.class);
+        bind(PortService.class, PortServiceImpl.class);
+        bind(RouterService.class, RouterServiceImpl.class);
+        bind(ImageService.class, ImageServiceImpl.class);
+        bind(BlockStorageService.class, BlockStorageServiceImpl.class);
+        bind(BlockVolumeService.class, BlockVolumeServiceImpl.class);
+        bind(BlockVolumeSnapshotService.class, BlockVolumeSnapshotServiceImpl.class);
+        bind(ComputeSecurityGroupService.class, ComputeSecurityGroupServiceImpl.class);
+        bind(KeypairService.class, KeypairServiceImpl.class);
+        bind(NetFloatingIPService.class, FloatingIPServiceImpl.class);
+        bind(ComputeFloatingIPService.class, ComputeFloatingIPServiceImpl.class);
+        bind(SecurityGroupService.class, SecurityGroupServiceImpl.class);
+        bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
+        bind(TelemetryService.class, TelemetryServiceImpl.class);
+        bind(MeterService.class, MeterServiceImpl.class);
+        bind(AlarmService.class, AlarmServiceImpl.class);
+        bind(EventService.class, EventServiceImpl.class);
+        bind(HypervisorService.class, HypervisorServiceImpl.class);
+        bind(ZoneService.class, ZoneServiceImpl.class);
+        bind(CinderZoneService.class, CinderZoneServiceImpl.class);
+        bind(HeatService.class, HeatServiceImpl.class);
+        bind(StackService.class, StackServiceImpl.class);
+        bind(TemplateService.class, TemplateServiceImpl.class);
+        bind(EventsService.class, EventsServiceImpl.class);
+        bind(ResourcesService.class, ResourcesServiceImpl.class);
+        bind(MigrationService.class, MigrationServiceImpl.class);
+        bind(SoftwareConfigService.class, SoftwareConfigServiceImpl.class);
+        bind(ObjectStorageService.class, ObjectStorageServiceImpl.class);
+        bind(ObjectStorageAccountService.class, ObjectStorageAccountServiceImpl.class);
+        bind(ObjectStorageContainerService.class, ObjectStorageContainerServiceImpl.class);
+        bind(ServerGroupService.class, ServerGroupServiceImpl.class);
+        bind(ObjectStorageObjectService.class, ObjectStorageObjectServiceImpl.class);
+        bind(NetQuotaService.class, NetQuotaServiceImpl.class);
+        bind(InterfaceService.class, InterfaceServiceImpl.class);
+        bind(FloatingIPDNSService.class, FloatingIPDNSServiceImpl.class);
+        bind(FloatingIPDNSDomainService.class, FloatingIPDNSDomainServiceImpl.class);
+        bind(FloatingIPDNSEntryService.class, FloatingIPDNSEntryServiceImpl.class);
+        bind(HostAggregateService.class, HostAggregateServiceImpl.class);
+        bind(MemberService.class, MemberServiceImpl.class);
+        bind(VipService.class, VipServiceImpl.class);
+        bind(HealthMonitorService.class, HealthMonitorServiceImpl.class);
+        bind(LbPoolService.class, LbPoolServiceImpl.class);
+        bind(LoadBalancerService.class, LoadBalancerServiceImpl.class);
+        bind(BlockVolumeTransferService.class, BlockVolumeTransferServiceImpl.class);
+        bind(SaharaPluginService.class, SaharaPluginServiceImpl.class);
+        bind(SaharaImageService.class, SaharaImageServiceImpl.class);
+        bind(SaharaService.class, SaharaServiceImpl.class);
+        bind(ClusterService.class, ClusterServiceImpl.class);
+        bind(ClusterTemplateService.class, ClusterTemplateServiceImpl.class);
+        bind(NodeGroupTemplateService.class, NodeGroupTemplateServiceImpl.class);
+        bind(DataSourceService.class, DataSourceServiceImpl.class);
+        bind(JobBinaryInternalService.class, JobBinaryInternalServiceImpl.class);
+        bind(JobBinaryService.class, JobBinaryServiceImpl.class);
+        bind(JobService.class, JobServiceImpl.class);
+        bind(JobExecutionService.class, JobExecutionServiceImpl.class);
 
-		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
-		bind(FirewallAsService.class, FirewallAsServiceImpl.class);
-		bind(FirewallService.class, FirewallServiceImpl.class);
-		bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
-		bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
-	}
+        bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
+        bind(FirewallAsService.class, FirewallAsServiceImpl.class);
+        bind(FirewallService.class, FirewallServiceImpl.class);
+        bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
+        bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T get(Class<T> api) {
-		if (instances.containsKey(api))
-			return (T) instances.get(api);
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T get(Class<T> api) {
+        if (instances.containsKey(api))
+            return (T) instances.get(api);
 
-		if (bindings.containsKey(api)) {
-			try {
-				T impl = (T) bindings.get(api).newInstance();
-				instances.put(api, impl);
-				return impl;
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-				throw new ApiNotFoundException("API Not found for: " + api.getName(), e);
-			}
-		}
-		throw new ApiNotFoundException("API Not found for: " + api.getName());
-	}
+        if (bindings.containsKey(api)) {
+            try {
+                T impl = (T) bindings.get(api).newInstance();
+                instances.put(api, impl);
+                return impl;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                throw new ApiNotFoundException("API Not found for: " + api.getName(), e);
+            }
+        }
+        throw new ApiNotFoundException("API Not found for: " + api.getName());
+    }
 
-	private void bind(Class<?> api, Class<?> impl)
-	{
-		bindings.put(api, impl);
-	}
+    private void bind(Class<?> api, Class<?> impl) {
+        bindings.put(api, impl);
+    }
 }

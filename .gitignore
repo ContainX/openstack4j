@@ -16,8 +16,5 @@ pom-shade.xml
 *.releaseBackup
 *.versionsBackup
 core-integration-test/
-<<<<<<< HEAD
 */bin/*
-=======
 *.iml
->>>>>>> v3_collaboration

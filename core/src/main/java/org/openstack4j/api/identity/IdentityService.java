@@ -15,18 +15,18 @@ public interface IdentityService extends RestService {
      */
     ProjectService projects();
 
-	/**
-	 * Users Service API
-	 *
-	 * @return the user service
-	 */
-	UserService users();
+    /**
+     * Users Service API
+     *
+     * @return the user service
+     */
+    UserService users();
 
-	/**
-	 * Role Service API
-	 *
-	 * @return the role service
-	 */
-	RoleService roles();
+    /**
+     * Role Service API
+     *
+     * @return the role service
+     */
+    RoleService roles();
 
 }

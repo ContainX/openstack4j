@@ -7,6 +7,10 @@ import org.openstack4j.api.identity.RoleService;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
+/**
+ * Identity V3 service implementation
+ *
+ */
 public class IdentityServiceImpl extends BaseOpenStackService implements IdentityService {
 
     @Override

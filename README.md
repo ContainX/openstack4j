@@ -107,6 +107,7 @@ Below are some examples of the API usage.  Please visit [www.OpenStack4j.com](ht
 ### Authenticating
 
 OpenStack4j 3.0.0+ uses Identity (Keystone) V3 as basis.
+
 If you wish to keep using the deprecated Identity V2 API, then you should use Openstack4j 2.0.x .
 
 Creating and authenticating against OpenStack is extremely simple. Below is an example of authenticating which will
