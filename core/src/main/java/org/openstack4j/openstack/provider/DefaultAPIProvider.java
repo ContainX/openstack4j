@@ -239,28 +239,27 @@ public class DefaultAPIProvider implements APIProvider {
         bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> T get(Class<T> api) {
-        if (instances.containsKey(api))
-            return (T) instances.get(api);
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T get(Class<T> api) {
+		if (instances.containsKey(api))
+			return (T) instances.get(api);
 
-        if (bindings.containsKey(api)) {
-            try {
-                T impl = (T) bindings.get(api).newInstance();
-                instances.put(api, impl);
-                return impl;
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                throw new ApiNotFoundException("API Not found for: " + api.getName(), e);
-            }
-        }
-        throw new ApiNotFoundException("API Not found for: " + api.getName());
-    }
+		if (bindings.containsKey(api)) {
+			try {
+				T impl = (T) bindings.get(api).newInstance();
+				instances.put(api, impl);
+				return impl;
+			}
+			catch (Exception e) {
+				throw new ApiNotFoundException("API Not found for: " + api.getName(), e);
+			}
+		}
+		throw new ApiNotFoundException("API Not found for: " + api.getName());
+	}
 
     private void bind(Class<?> api, Class<?> impl) {
         bindings.put(api, impl);

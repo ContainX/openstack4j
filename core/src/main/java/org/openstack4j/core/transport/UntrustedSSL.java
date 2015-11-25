@@ -9,6 +9,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
+
 /**
  * Contains an open SSL Context which allows self signed certs and an open hostname verifier
  * 
@@ -17,7 +20,8 @@ import javax.net.ssl.X509TrustManager;
 public class UntrustedSSL {
 
     private static final UntrustedSSL INSTANCE = new UntrustedSSL();
-    
+    private static final Logger LOG = LoggerFactory.getLogger(UntrustedSSL.class);
+
     private SSLContext context;
     private HostnameVerifier verifier;
     
@@ -42,7 +46,7 @@ public class UntrustedSSL {
                 } };
         }
         catch (Throwable t) {
-            t.printStackTrace();
+            LOG.error(t.getMessage(), t);
         }
     }
     

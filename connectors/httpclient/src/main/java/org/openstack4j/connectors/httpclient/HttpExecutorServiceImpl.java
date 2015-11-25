@@ -9,6 +9,8 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.openstack.internal.OSAuthenticator;
 import org.openstack4j.openstack.internal.OSClientSession;
+import org.openstack4j.openstack.logging.Logger;
+import org.openstack4j.openstack.logging.LoggerFactory;
 
 /**
  * HttpExecutor is the default implementation for HttpExecutorService which is responsible for interfacing with HttpClient and mapping common status codes, requests and responses
@@ -19,6 +21,7 @@ import org.openstack4j.openstack.internal.OSClientSession;
 public class HttpExecutorServiceImpl implements HttpExecutorService {
 
     private static final String NAME = "Apache HttpClient Connector";
+    private static final Logger LOG = LoggerFactory.getLogger(HttpExecutorServiceImpl.class);
 
     /**
      * {@inheritDoc}
@@ -32,7 +35,7 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
             throw re;
         }
         catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
             return null;
         }
     }

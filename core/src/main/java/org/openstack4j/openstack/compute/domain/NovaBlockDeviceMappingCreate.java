@@ -1,8 +1,11 @@
 package org.openstack4j.openstack.compute.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.openstack4j.model.compute.BDMDestType;
+import org.openstack4j.model.compute.BDMSourceType;
 import org.openstack4j.model.compute.BlockDeviceMappingCreate;
 import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
@@ -11,8 +14,8 @@ import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
 public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 
 	public String device_name;
-	public String source_type = "volume";
-	public String destination_type = "volume";
+	public BDMSourceType source_type = BDMSourceType.VOLUME;
+	public BDMDestType destination_type = BDMDestType.VOLUME;
 	public String uuid;
 	public String boot_index;
 	public Integer volume_size;
@@ -61,13 +64,13 @@ public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 		}
 
 		@Override
-		public BlockDeviceMappingBuilder sourceType(String type){
+		public BlockDeviceMappingBuilder sourceType(BDMSourceType type){
 			create.source_type = type;
 			return this;
 		}
 
 		@Override
-		public BlockDeviceMappingBuilder destinationType(String type){
+		public BlockDeviceMappingBuilder destinationType(BDMDestType type){
 			create.destination_type = type;
 			return this;
 		}
