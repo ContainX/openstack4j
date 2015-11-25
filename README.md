@@ -94,7 +94,6 @@ If you would like to contribute please see our contributing [guidelines](https:/
 | 15 | @frsyuki          | 2 |
 
 #### Throughput
->>>>>>> v3_collaboration
 
 [![Throughput Graph](https://graphs.waffle.io/gondor/openstack4j/throughput.svg)](https://waffle.io/gondor/openstack4j/metrics)
 
@@ -168,19 +167,26 @@ OSClient os = OSFactory.builder()
 
 After successful authentication you can invoke any Identity (Keystone) directly from the OSClient. 
 
-Identity Services fully cover Users (for now; more in progess).  The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
+Identity Services fully cover User, Role, Project, Domain, Group,.. service operations (in progess).  
+The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
 
-**Create a User and associate a Role**
+**User operations**
 ```java
 // Create a User associated to the new Project
-User user = os.identity().users().create(Builders.user().domainId("domain id").name("foobar").password("secret").email("foobar@example.com").enabled(true).build());
+User user = os.identity().users().create(Builders.user()
+													.domainId("domain id")
+													.name("foobar")
+													.password("secret")
+													.email("foobar@example.com")
+													.enabled(true)
+													.build());
 //or
 User user = os.identity().users().create("domain id", "foobar", "secret", "foobar@example.org", true);
 
-// Get detailed info on a user
-User user = os.identity().users.get("user id");
-//or
-User user = os.identity().users.getByName("username", "domain id");
+// Get detailed info on a user by id
+os.identity().users.get("user id");
+//or by name and domain identifier
+os.identity().users.getByName("username", "domain id");
 
 // Add a project based role to the user
 os.identity().users().grantProjectUserRole("project id","user id", "role id");
@@ -190,8 +196,27 @@ os.identity().users().grantDomainUserRole("domain id","user id", "role id");
 
 // Add a user to a group
 os.identity().users().addUserToGroup("user id", "group id");
+```
 
+**Role operations**
+```java
+// Get a list of all roles
+os.identity().roles().list();
 
+// Get a role by name
+os.identity().roles().getByName("role name);
+```
+
+**Project operations**
+
+```java
+// Create a project
+os.identity().project().create(Builders.project()
+											.name("project name")
+											.description("project description")
+											.domainId("project domain id")
+											.enabled(true)
+											.build());
 ```
 
 
