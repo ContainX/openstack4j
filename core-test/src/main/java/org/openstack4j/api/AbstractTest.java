@@ -29,7 +29,7 @@ import com.squareup.okhttp.mockwebserver.MockWebServer;
 /**
  * Base Test class which handles Mocking a Webserver to fullfill and test against JSON response objects
  * from an OpenStack deployment
- * 
+ *
  * @author Jeremy Unruh
  */
 public abstract class AbstractTest {
@@ -55,7 +55,7 @@ public abstract class AbstractTest {
     private OSClient os;
     private String host;
     protected MockWebServer server = new MockWebServer();
-    
+
 
     /**
      * @return the service the API is using
@@ -64,10 +64,10 @@ public abstract class AbstractTest {
 
     @BeforeClass
     protected void startServer() throws UnknownHostException {
-    	
+
     	InetAddress inetAddress = InetAddress.getByName("localhost");
     	Logger.getLogger(getClass().getName()).info("localhost inet address: "+inetAddress.toString());
-    	
+
         Logger.getLogger(getClass().getName()).info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
         try {
         	Logger.getLogger(getClass().getName()).info("Starting server on port "+service().port);
@@ -93,7 +93,7 @@ public abstract class AbstractTest {
         InputStream is = getClass().getResourceAsStream(resource);
         respondWith(headers, 200, new String(ByteStreams.toByteArray(is)));
     }
-    
+
     /**
      * Responds with specified status code and no body
      * @param statusCode the status code to respond with
@@ -101,7 +101,7 @@ public abstract class AbstractTest {
     protected void respondWith(int statusCode) {
         respondWith(null, statusCode, "");
     }
-    
+
     /**
      * Responds with specified status code, no body and optional headers
      * @param headers optional headers
@@ -110,7 +110,7 @@ public abstract class AbstractTest {
     protected void respondWith(Map<String,String> headers, int statusCode) {
         respondWith(headers, statusCode, "");
     }
-    
+
     /**
      * Responds with specified status code and json body
      * @param statusCode the status code to respond with
@@ -121,7 +121,7 @@ public abstract class AbstractTest {
         headers.put("Content-Type", "application/json");
         respondWith(headers, statusCode, jsonBody);
     }
-    
+
     /**
      * Responds with specified status code, body and optional headers
      * @param headers optional headers
@@ -139,7 +139,7 @@ public abstract class AbstractTest {
         r.setResponseCode(statusCode);
         server.enqueue(r);
     }
-    
+
     /**
      * Responds with given header, status code, body from json resource file
      * @param headers the specified header
@@ -149,9 +149,16 @@ public abstract class AbstractTest {
      */
     protected void respondWithHeaderAndResource(Map<String, String> headers, int statusCode, String resource) throws IOException {
         InputStream is = getClass().getResourceAsStream(resource);
-        respondWith(headers, 200, new String(ByteStreams.toByteArray(is)));
+        respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
     }
-    
+
+    protected void respondWithCodeAndResource(int statusCode, String resource) throws IOException {
+        InputStream is = getClass().getResourceAsStream(resource);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json");
+        respondWith(headers , statusCode, new String(ByteStreams.toByteArray(is)));
+    }
+
     protected String authURL(String path) {
         return String.format("http://%s:5000%s", getHost(), path);
     }
@@ -174,7 +181,7 @@ public abstract class AbstractTest {
 
     protected OSClient os() {
         if (os == null) {
-            ObjectMapper mapper = new ObjectMapper();	
+            ObjectMapper mapper = new ObjectMapper();
             mapper.setSerializationInclusion(Include.NON_NULL);
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
@@ -193,14 +200,14 @@ public abstract class AbstractTest {
                 os = OSFactory.clientFromAccess(a);
             } catch (Exception e) {
                 e.printStackTrace();
-            } 
+            }
         }
         return os;
     }
-    
+
     protected OSClient osv3() {
         if (os == null) {
-            ObjectMapper mapper = new ObjectMapper();	
+            ObjectMapper mapper = new ObjectMapper();
             mapper.setSerializationInclusion(Include.NON_NULL);
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
@@ -214,17 +221,17 @@ public abstract class AbstractTest {
                 json = json.replaceAll("127.0.0.1", getHost());
                 KeystoneToken t = mapper.readValue(json, KeystoneToken.class);
                 t.applyContext(authURL("/v3"), new Credentials("admin", "test"));
-                
+
                 //tokenwrapper
                 AccessWrapper a = AccessWrapper.wrap(t);
                 os = OSFactory.clientFromAccess(a);
             } catch (Exception e) {
                 e.printStackTrace();
-            } 
+            }
         }
         return os;
     }
-    
+
     private String getHost() {
         /*
     	try
@@ -238,7 +245,7 @@ public abstract class AbstractTest {
         */
         if (host == null)
             return "127.0.0.1";
-        
+
         return host;
     }
 }

@@ -168,18 +168,19 @@ public class OSAuthenticator {
         AccessWrapper accesswr = AccessWrapper.wrap(token);
         accesswr.setId(response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN));
 
+        if(token.getProject() == null && token.getDomain() == null) {
+            throw new UnsupportedOperationException("Unscoped authentication is not supported in OpenStack4j 2.x . Please use OpenStack 3.y .");
+        }
+
         if (auth.getType() == Type.CREDENTIALS) {
-            token = token.applyContext(info.endpoint, new org.openstack4j.openstack.identity.domain.v3.Credentials(auth.getUsername(), auth.getPassword()));
+            token = token.applyContext(info.endpoint, auth );
         }
         else {
             if( token.getProject() != null ) {
                 token = token.applyContext(	info.endpoint, new TokenAuth(accesswr.getToken().getId(), auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
             }
-            else if( token.getDomain() != null) {
-                token = token.applyContext( info.endpoint, new TokenAuth(accesswr.getToken().getId(), auth.getScope().getDomain().getName(), auth.getScope().getDomain().getId()));
-            }
             else {
-                throw new UnsupportedOperationException("Unscoped authentication not yet supported");
+                token = token.applyContext( info.endpoint, new TokenAuth(accesswr.getToken().getId(), auth.getScope().getDomain().getName(), auth.getScope().getDomain().getId()));
             }
         }
 

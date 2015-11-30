@@ -18,10 +18,10 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Lists;
 
 /**
- * 
+ *
  * Represents an v3 Auth object.
- * 
- * 
+ *
+ *
  */
 @JsonRootName("auth")
 public class KeystoneAuth implements Authentication, AuthStore {
@@ -38,13 +38,14 @@ public class KeystoneAuth implements Authentication, AuthStore {
         this.scope = scope;
     }
 
-    public KeystoneAuth(String username, String password) {
-        this(username, password, null, null);
+    public KeystoneAuth(String userId, String password) {
+        this(userId, password, null, null);
     }
 
-    public KeystoneAuth(String username, String password, Identifier domain, AuthScope scope) {
-        this.identity = AuthIdentity.createCredentialType(username, password, domain);
+    public KeystoneAuth(String user, String password, Identifier domain, AuthScope scope) {
+        this.identity = AuthIdentity.createCredentialType(user, password, domain);
         this.scope = scope;
+        this.type = Type.CREDENTIALS;
     }
 
     protected KeystoneAuth(Type type) {
@@ -288,10 +289,12 @@ public class KeystoneAuth implements Authentication, AuthStore {
                 return domain;
             }
 
+            @Override
             public String getId() {
                 return id;
             }
 
+            @Override
             public String getName() {
                 return name;
             }
@@ -313,10 +316,12 @@ public class KeystoneAuth implements Authentication, AuthStore {
                     this.name = domain.getId();
             }
 
+            @Override
             public String getId() {
                 return id;
             }
 
+            @Override
             public String getName() {
                 return name;
             }
