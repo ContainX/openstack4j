@@ -16,4 +16,5 @@ pom-shade.xml
 *.releaseBackup
 *.versionsBackup
 core-integration-test/
+*/bin/*
 *.iml

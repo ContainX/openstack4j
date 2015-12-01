@@ -1,106 +1,177 @@
 package org.openstack4j.openstack.identity.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.ClientConstants.PATH_DOMAINS;
+import static org.openstack4j.core.transport.ClientConstants.PATH_USERS;
 
 import java.util.List;
 
-import org.openstack4j.api.Apis;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.identity.Domain;
+import org.openstack4j.model.identity.Group;
+import org.openstack4j.model.identity.Project;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.User;
+import org.openstack4j.openstack.identity.domain.KeystoneDomain;
 import org.openstack4j.openstack.identity.domain.KeystoneUser;
+import org.openstack4j.openstack.identity.domain.KeystoneGroup.Groups;
+import org.openstack4j.openstack.identity.domain.KeystoneProject.Projects;
+import org.openstack4j.openstack.identity.domain.KeystoneRole.Roles;
 import org.openstack4j.openstack.identity.domain.KeystoneUser.Users;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
- * Identity User based Operations
- * 
- * @author Jeremy Unruh
+ * implementation of v3 user service
+ *
  */
 public class UserServiceImpl extends BaseOpenStackService implements UserService {
-	
-	@Override
-	public List<? extends User> list() {
-		return get(Users.class, uri("/users")).execute().getList();
-	}
-	
+
 	@Override
 	public User get(String userId) {
 		checkNotNull(userId);
-		return get(KeystoneUser.class, uri("/users/%s", userId)).execute();
-	}
-	
-	@Override
-	public List<? extends User> listTenantUsers(String tenantId) {
-		checkNotNull(tenantId);
-		return get(Users.class, uri("/tenants/%s/users", tenantId)).execute().getList();
+		return get(KeystoneUser.class, PATH_USERS, "/", userId).execute();
 	}
 
 	@Override
-	public User create(String tenantId, String name, String password, String email, boolean enabled) {
-		checkNotNull(name);
-		checkNotNull(password);
-		return create(KeystoneUser.builder().name(name).tenantId(tenantId).email(email).password(password).enabled(enabled).build());
+	public List<? extends User> getByName(String userName) {
+		checkNotNull(userName);
+		return get(Users.class, uri(PATH_USERS)).param("name", userName).execute().getList();
 	}
-	
+
 	@Override
-	public User create(User user) {
-		checkNotNull(user);
-		return post(KeystoneUser.class, uri("/users")).entity(user).execute();
+	public User getByName(String userName, String domainId) {
+	    checkNotNull(userName);
+	    checkNotNull(domainId);
+	    return get(Users.class, uri(PATH_USERS)).param("name", userName).param("domain_id", domainId).execute().getList().get(0);
+	}
+
+	@Override
+	public Domain getUserDomain(String userId) {
+	    return get(KeystoneDomain.class, PATH_DOMAINS, "/", get(userId).getDomainId()).execute();
 	}
 
 	@Override
 	public ActionResponse delete(String userId) {
 		checkNotNull(userId);
-		return deleteWithResponse(uri("/users/%s", userId)).execute();
-	}
-
-	@Override
-	public User enableUser(String userId, boolean enabled) {
-		checkNotNull(userId);
-		return put(KeystoneUser.class, uri("/users/%s/OS-KSADM/enabled", userId)).entity(KeystoneUser.builder().enabled(enabled).build()).execute();
+		return deleteWithResponse(PATH_USERS, "/", userId).execute();
 	}
 
 	@Override
 	public User update(User user) {
-		checkNotNull(user);
-		return put(KeystoneUser.class, uri("/users/%s", user.getId())).entity(user).execute();
+	    checkNotNull(user);
+		return patch(KeystoneUser.class, PATH_USERS, "/", user.getId()).entity(user).execute();
 	}
 
 	@Override
-	public ActionResponse changePassword(String userId, String password) {
+	public User create(User user) {
+		checkNotNull(user);
+		return post(KeystoneUser.class, uri(PATH_USERS)).entity(user).execute();
+	}
+
+	@Override
+	public User create(String domainId, String name, String password, String email, boolean enabled) {
+	    checkNotNull(domainId);
+	    checkNotNull(name);
+	    checkNotNull(password);
+	    checkNotNull(email);
+	    checkNotNull(enabled);
+	    return create(KeystoneUser.builder().domainId(domainId).name(name).password(password).email(email).enabled(enabled).build());
+	}
+
+	@Override
+	public List<? extends Group> listUserGroups(String userId) {
 		checkNotNull(userId);
-		checkNotNull(password);
-		return put(ActionResponse.class, uri("/users/%s/OS-KSADM/password", userId)).entity(KeystoneUser.builder().id(userId).password(password).build()).execute();
+		return get(Groups.class, uri("/users/%s/groups", userId)).execute().getList();
 	}
 
 	@Override
-	public List<? extends Role> listRoles(String userId) {
+	public List<? extends Project> listUserProjects(String userId) {
 		checkNotNull(userId);
-		return Apis.getIdentityServices().roles().listRolesForUser(userId);
+        return get(Projects.class, uri("/users/%s/projects", userId)).execute().getList();
 	}
 
 	@Override
-	public List<? extends Role> listRoles(User user) {
-		checkNotNull(user);
-		return listRoles(user.getId());
+	public List<? extends User> list() {
+		return get(Users.class, uri(PATH_USERS)).execute().getList();
 	}
 
 	@Override
-	public List<? extends Role> listRolesOnTenant(String userId, String tenantId) {
-		return Apis.getIdentityServices().roles().listRolesForUser(userId, tenantId);
+	public List<? extends Role> listProjectUserRoles(String userId, String projectId) {
+		checkNotNull(userId);
+		checkNotNull(projectId);
+		return get(Roles.class, uri("projects/%s/users/%s/roles", projectId, userId)).execute().getList();
 	}
 
-	@Override
-	public List<? extends Role> listRolesOnCurrentTenant(User user) {
-		checkNotNull(user);
-		return Apis.getIdentityServices().roles().listRolesForUser(user.getId(), user.getTenantId());
-	}
-	
-	@Override
-	public User getByName(String userName) {
-	    checkNotNull(userName);
-	    return get(KeystoneUser.class, "/users").param("name", userName).execute();   
-	}
+    @Override
+    public List<? extends Role> listDomainUserRoles(String userId, String domainId) {
+        checkNotNull(userId);
+        checkNotNull(domainId);
+        return get(Roles.class, uri("domains/%s/users/%s/roles", domainId, userId)).execute().getList();
+    }
+
+    @Override
+    public ActionResponse grantDomainUserRole(String domainId, String userId, String roleId) {
+        checkNotNull(userId);
+        checkNotNull(domainId);
+        checkNotNull(roleId);
+        return put(ActionResponse.class, uri("domains/%s/users/%s/roles/%s", domainId, userId, roleId)).execute();
+    }
+
+    @Override
+    public ActionResponse revokeDomainUserRole(String domainId, String userId, String roleId) {
+        checkNotNull(userId);
+        checkNotNull(domainId);
+        checkNotNull(roleId);
+        return deleteWithResponse(uri("domains/%s/users/%s/roles/%s", domainId, userId, roleId)).execute();
+    }
+
+    @Override
+    public ActionResponse grantProjectUserRole(String projectId, String userId, String roleId) {
+        checkNotNull(userId);
+        checkNotNull(projectId);
+        checkNotNull(roleId);
+        return put(ActionResponse.class, uri("projects/%s/users/%s/roles/%s", projectId, userId, roleId)).execute();
+    }
+
+    @Override
+    public ActionResponse revokeProjectUserRole(String projectId, String userId, String roleId) {
+        checkNotNull(userId);
+        checkNotNull(projectId);
+        checkNotNull(roleId);
+        return deleteWithResponse(uri("projects/%s/users/%s/roles/%s", projectId, userId, roleId)).execute();
+    }
+
+    @Override
+    public ActionResponse checkDomainUserRole(String domainId, String userId, String roleId) {
+        checkNotNull(domainId);
+        checkNotNull(userId);
+        checkNotNull(roleId);
+        return head(ActionResponse.class, uri("/domains/%s/users/%s/roles/%s", domainId, userId, roleId)).execute();
+    }
+
+    @Override
+    public ActionResponse checkProjectUserRole(String projectId, String userId, String roleId) {
+        checkNotNull(projectId);
+        checkNotNull(userId);
+        checkNotNull(roleId);
+        return head(ActionResponse.class, uri("/projects/%s/users/%s/roles/%s", projectId, userId, roleId)).execute();
+    }
+
+    @Override
+    public ActionResponse addUserToGroup(String groupId, String userId) {
+        checkNotNull(groupId);
+        checkNotNull(userId);
+        return put(ActionResponse.class, uri("groups/%s/users/%s", groupId, userId)).execute();
+    }
+
+    @Override
+    public ActionResponse removeUserFromGroup(String groupId, String userId) {
+        checkNotNull(groupId);
+        checkNotNull(userId);
+        return deleteWithResponse(uri("groups/%s/users/%s", groupId, userId)).execute();
+    }
+
+
+
 }

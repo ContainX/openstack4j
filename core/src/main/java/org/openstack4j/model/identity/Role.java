@@ -1,45 +1,33 @@
 package org.openstack4j.model.identity;
 
+import java.util.Map;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.identity.builder.RoleBuilder;
 
 /**
- * A permission scheme a user is assigned when performing specific operations.  A role includes a set of rights and previleges. Any user who is assigned
- * the role inherits these traits.
+ * identity v3 role model class
  * 
- * @author Jeremy Unruh
+ * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#roles-v3">API reference</a>
  */
 public interface Role extends ModelEntity, Buildable<RoleBuilder> {
 
-	/**
-	 * @return the id of the role
-	 */
-	String getId();
-	
-	/**
-	 * @return the name of the role
-	 */
-	String getName();
-	
-	 /**
-   * @return the service id of the role or null, if not present
-   */
-   String getServiceId();
-   
-   /**
-    * @return the tenant id of the role or null, if not present
-    */
-   String getTenantId();
-	
-	/**
-	 * @return the description of the role
-	 */
-	String getDescription();
-	
-	/**
-	 * @return true if the role is enabled
-	 */
-	boolean isEnabled();
-	
+    /**
+     * Globally unique across all domains.
+     * 
+     * @return the id of the role
+     */
+    String getId();
+
+    /**
+     * @return the name of the role
+     */
+    String getName();
+
+    /**
+     * @return the links of the role
+     */
+    Map<String, String> getLinks();
+
 }

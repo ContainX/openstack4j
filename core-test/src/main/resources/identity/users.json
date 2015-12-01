@@ -1,1 +1,69 @@
-{"users": [{"name": "nova", "id": "196cbcf9de4a40ff9b9292ab5b9e1e8d", "enabled": true, "email": "nova@domain.com", "tenantId": "fae985a544c543dd9a799a7bb4953c69"}, {"name": "jack", "id": "55184f77bc534ab7a2bf73d2cde2701b", "enabled": true, "email": "jack@jack.com", "tenantId": "b0a9abafc4ef41ad9201f891fb88aeb3"}, {"name": "swift", "id": "6485f1f8c5bb45418421c059e0ed0141", "enabled": true, "email": null, "tenantId": "fae985a544c543dd9a799a7bb4953c69"}, {"name": "cinder", "id": "80170078bc2349f9adca922f919fd749", "enabled": true, "email": "cinder@domain.com", "tenantId": "fae985a544c543dd9a799a7bb4953c69"}, {"name": "glance", "id": "917c06253ed1461caa40517453b3ba7c", "enabled": true, "email": "glance@domain.com", "tenantId": "fae985a544c543dd9a799a7bb4953c69"}, {"name": "neutron", "id": "a556c717d7b942a38b8712522f32a013", "enabled": true, "email": "neutron@domain.com", "tenantId": "fae985a544c543dd9a799a7bb4953c69"}, {"name": "user_one", "id": "d4abe4ee7a524d9da957861f3be38f68", "enabled": true, "email": "user_one@domain.com", "tenantId": "b0a9abafc4ef41ad9201f891fb88aeb3"}, {"name": "admin", "enabled": true, "email": "admin@domain.com", "id": "f931208382814e5ab3412f7e02c5e3ae"}]}
+{
+"users": [
+	{
+		"name": "glance", 
+		"links": {
+			"self": "http://devstack.openstack.stack:35357/v3/users/07cfb841cddd46819e3dcd5df238ae04"
+			},
+		"domain_id": "default", 
+		"enabled": true, 
+		"email": null, 
+		"id": "07cfb841cddd46819e3dcd5df238ae04"
+		},
+	{
+		"name": "demo", 
+		"links": {
+			"self": "http://devstack.openstack.stack:35357/v3/users/11ba3db90590446fb6d7e0efe6c1f46a"
+			},
+        "domain_id": "default", 
+        "enabled": true, 
+        "email": "demo@example.com", 
+        "id": "11ba3db90590446fb6d7e0efe6c1f46a"
+		}, 
+	{
+		"name": "cinder", 
+		"links": {
+			"self": "http://devstack.openstack.stack:35357/v3/users/1523e8606bd1400cae36a40e0f3f817e"
+			},
+        "domain_id": "default", 
+        "enabled": true, 
+        "email": null, 
+        "id": "1523e8606bd1400cae36a40e0f3f817e"
+        },
+	{
+		"name": "nova", 
+		"links": {
+			"self": "http://devstack.openstack.stack:35357/v3/users/7afec08993c24bb09df141e513738030"
+			},
+        "domain_id": "default", 
+        "enabled": true, 
+        "email": null, 
+        "id": "7afec08993c24bb09df141e513738030"
+        },
+	{
+		"name": "u-foobar", 
+		"links": {
+			"self": "http://devstack.openstack.stack:35357/v3/users/938bd5585fd145efaadb4a7e588078c1"
+			},
+        "domain_id": "default", 
+        "enabled": true, 
+        "email": "foobar@example.com", 
+        "id": "938bd5585fd145efaadb4a7e588078c1"
+        }, 
+	{
+		"name": "admin", 
+		"links": {
+			"self": "http://devstack.openstack.stack:35357/v3/users/aa9f25defa6d4cafb48466df83106065"
+			},
+		"domain_id": "default", 
+		"enabled": true, 
+		"email": null, 
+		"id": "aa9f25defa6d4cafb48466df83106065"
+		}
+	],
+"links": {
+	"self": "http://devstack.openstack.stack:35357/v3/users", 
+   	"previous": null,
+	"next": null
+	}
+}

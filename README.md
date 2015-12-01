@@ -34,7 +34,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.0.7</version>
+    <version>3.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -50,7 +50,7 @@ See notes above about connectors (same rules apply) to development branches.
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.0.8-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -105,35 +105,118 @@ Below are some examples of the API usage.  Please visit [www.OpenStack4j.com](ht
 
 ### Authenticating
 
+OpenStack4j 3.0.0+ uses Identity (Keystone) V3 as basis.
+
+If you wish to keep using the deprecated Identity V2 API, then you should use Openstack4j 2.0.x .
+
 Creating and authenticating against OpenStack is extremely simple. Below is an example of authenticating which will
 result with the authorized OSClient.  OSClient allows you to invoke Compute, Identity, Neutron operations fluently. 
 
+You can use either pass the users name or id and password in the following way 
+```java
+.credentials("username", "secret", Identifier.byId("domain id"))
+```
+or
+```java
+.credentials("user id", "secret")
+```
+to provide credentials in each of the following cases.
+
+
+Using Identity v3 authentication you basically have 4 options:
+
+(1) authenticate with project-scope
+```java
+OSClient os = OSFactory.builder()
+                .endpoint("http://<fqdn>:5000/v3")
+                .credentials("admin", "secret", Identifier.byId("user domain id"))
+                .scopeToProject(Identifier.byId("project id"))
+                .authenticate());
+```
+(2) authenticate with domain-scope
 ```java
 // Identity V2 Authentication Example
 OSClient os = OSFactory.builder()
-                       .endpoint("http://127.0.0.1:5000/v2.0")
-                       .credentials("admin","sample")
-                       .tenantName("admin")
-                       .authenticate();
+                .endpoint("http://<fqdn>:5000/v3")
+                .credentials("admin", "secret", Identifier.byId("user domain id"))
+                .scopeToDomain(Identifier.byId("domain id"))
+                .authenticate());
 ```
 
-#### Identity Operations (Keystone)
+(3) authenticate unscoped
+```java
+OSClient os = OSFactory.builder()
+				.endpoint("http://<fqdn>:5000/v3")
+                .credentials("user id", "secret")
+                .authenticate();
+```
+
+(4) authenticate with a token
+```java
+OSClient os = OSFactory.builder()
+                .endpoint("http://<fqdn>:5000/v3")
+                .token("token id")
+                .scopeToProject(Identifier.byId("project id"))
+                .authenticate());
+```
+
+
+
+
+#### Identity Operations (Keystone) V3
 
 After successful authentication you can invoke any Identity (Keystone) directly from the OSClient. 
 
-Identity Services fully cover Tenants, Users, Roles, Services, Endpoints and Identity Extension listings.  The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
+Identity Services fully cover User, Role, Project, Domain, Group,.. service operations (in progess).  
+The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
 
-**Create a Tenant, User and associate a Role**
+**User operations**
 ```java
-// Create a Tenant (could also be created fluent within user create)
-Tenant tenant = os.identity().tenants().create(Builders.tenant().name("MyNewTenant").build());
+// Create a User associated to the new Project
+User user = os.identity().users().create(Builders.user()
+													.domainId("domain id")
+													.name("foobar")
+													.password("secret")
+													.email("foobar@example.com")
+													.enabled(true)
+													.build());
+//or
+User user = os.identity().users().create("domain id", "foobar", "secret", "foobar@example.org", true);
 
-// Create a User associated to the new Tenant
-User user = os.identity().users().create(Builders.user().name("jack").password("sample").tenant(tenant).build());
+// Get detailed info on a user by id
+os.identity().users.get("user id");
+//or by name and domain identifier
+os.identity().users.getByName("username", "domain id");
 
-// Add a Tenant based Role to the User
-os.identity().roles().addUserRole(tenant.getId(), user.getId(), os.identity().roles().getByName("Member").getId());
+// Add a project based role to the user
+os.identity().users().grantProjectUserRole("project id","user id", "role id");
 
+// Add a domain based role to the user
+os.identity().users().grantDomainUserRole("domain id","user id", "role id");
+
+// Add a user to a group
+os.identity().users().addUserToGroup("user id", "group id");
+```
+
+**Role operations**
+```java
+// Get a list of all roles
+os.identity().roles().list();
+
+// Get a role by name
+os.identity().roles().getByName("role name);
+```
+
+**Project operations**
+
+```java
+// Create a project
+os.identity().project().create(Builders.project()
+											.name("project name")
+											.description("project description")
+											.domainId("project domain id")
+											.enabled(true)
+											.build());
 ```
 
 

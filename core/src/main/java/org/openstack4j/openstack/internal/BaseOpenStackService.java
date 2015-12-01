@@ -22,7 +22,7 @@ import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.compute.ActionResponse;
-import org.openstack4j.model.identity.Access.Service;
+import org.openstack4j.model.identity.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -57,7 +57,7 @@ public class BaseOpenStackService {
     protected <R> Invocation<R> put(Class<R> returnType, String... path) {
         return builder(returnType, path, HttpMethod.PUT);
     }
-    
+
     protected <R> Invocation<R> patch(Class<R> returnType, String... path) {
         return builder(returnType, path, HttpMethod.PATCH);
     }
@@ -113,7 +113,7 @@ public class BaseOpenStackService {
             req.queryParam(name, value);
             return this;
         }
-        
+
         public Invocation<R> updateParam(String name, Object value) {
             req.updateQueryParam(name, value);
             return this;
@@ -194,16 +194,15 @@ public class BaseOpenStackService {
         }
 
     }
-    
+
     protected int getServiceVersion() {
         OSClientSession session = OSClientSession.getCurrent();
-        SortedSet<? extends Service> services = session.getAccess().getAggregatedCatalog().get(serviceType.getTypeV3());
-        System.out.println(services);
+        SortedSet<? extends Service> services = session.getToken().getAggregatedCatalog().get(serviceType.getType());
         if (services.isEmpty()) {
             return 1;
         }
-        
-        Service service = session.getAccess().getAggregatedCatalog().get(serviceType.getTypeV3()).first();
+
+        Service service = session.getToken().getAggregatedCatalog().get(serviceType.getType()).first();
         return service.getVersion();
     }
 
@@ -212,7 +211,7 @@ public class BaseOpenStackService {
             return Collections.emptyList();
         return Arrays.asList(arr);
     }
-    
+
     protected CloudProvider getProvider() {
         return OSClientSession.getCurrent().getProvider();
     }

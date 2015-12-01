@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
@@ -76,6 +77,9 @@ public final class HttpCommand<R> {
             break;
         case HEAD:
             clientReq = new HttpHead(url);
+            break;
+        case PATCH:
+            clientReq = new HttpPatch(url);
             break;
         case GET:
         default:

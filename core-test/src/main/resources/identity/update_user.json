@@ -1,0 +1,18 @@
+{
+    "user": {
+        "name": "foobar",
+        "links": {
+            "self": "http://devstack.openstack,stack:5000/v3/users/29d5aaaa6d3b471e9c101ae470e649a6"
+        },
+        "extra": {
+            "email": "updatedFoobar@example.org",
+            "links": {
+                "self": "http://devstack.openstack.stack:5000/v3/users/29d5aaaa6d3b471e9c101ae470e649a6"
+            }
+        },
+        "domain_id": "default",
+        "enabled": true,
+        "id": "29d5aaaa6d3b471e9c101ae470e649a6",
+        "email": "updatedFoobar@example.org"
+    }
+}
