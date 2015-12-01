@@ -17,6 +17,10 @@ public class KeystoneRoleServiceTests extends AbstractTest {
     private static final String JSON_ROLES_MULTIPLE_ENTRIES = "/identity/roles_multiple_entries.json";
     private static final String JSON_ROLES_LIST = "/identity/roles_list.json";
     private static final String ROLE_NAME = "admin";
+    private static final String USER_ID = "aa9f25defa6d4cafb48466df83106065";
+    private static final String PROJECT_ID = "123ac695d4db400a9001b91bb3b8aa46";
+    private static final String ROLE_ID = "aae88952465d4c32b0a1140a76601b68";
+    private static final String USER_DOMAIN_ID = "default";
 
     @Override
     protected Service service() {
@@ -50,17 +54,17 @@ public class KeystoneRoleServiceTests extends AbstractTest {
 
     @Test(expectedExceptions = NullPointerException.class)
     public void addRoletoUserInProject_projectIdMustBeNonNull() throws Exception {
-        os().identity().roles().addRoleToUserInProject(null, "fake", "fake");
+        os().identity().roles().grantProjectUserRole(null, "fake", "fake");
     }
 
     @Test(expectedExceptions = NullPointerException.class)
     public void addRoletoUserInProject_userIdMustBeNonNull() throws Exception {
-        os().identity().roles().addRoleToUserInProject("fake", null, "fake");
+        os().identity().roles().grantProjectUserRole("fake", null, "fake");
     }
 
     @Test(expectedExceptions = NullPointerException.class)
     public void addRoletoUserInProject_roleIdMustBeNonNull() throws Exception {
-        os().identity().roles().addRoleToUserInProject("fake", "fake", null);
+        os().identity().roles().grantProjectUserRole("fake", "fake", null);
     }
 
     public void addRoleToUserInProject_check_correct_response() throws Exception {
@@ -68,7 +72,7 @@ public class KeystoneRoleServiceTests extends AbstractTest {
         ActionResponse actionResponse = os().
                 identity().
                 roles().
-                addRoleToUserInProject("fake", "fake", "fake");
+                grantProjectUserRole("fake", "fake", "fake");
         assertTrue(actionResponse.isSuccess());
     }
 
@@ -77,4 +81,70 @@ public class KeystoneRoleServiceTests extends AbstractTest {
         List<? extends Role> list = os().identity().roles().list();
         assertEquals(list.size(), 6);
     }
+
+    /**
+     * checks if a user has a role in project context
+     *
+     * @throws Exception
+     */
+    public void checkProjectUserRole_success_Test() throws Exception {
+
+        respondWith(204);
+
+        ActionResponse response_success = os().identity().roles().checkProjectUserRole(PROJECT_ID, USER_ID, ROLE_ID);
+        assertTrue(response_success.isSuccess());
+    }
+
+    /**
+     * grants and revokes a role to/from a user in project context
+     *
+     * @throws Exception
+     */
+    public void grantRevokeProjectUserRole_Test() throws Exception {
+
+        respondWith(204);
+
+        ActionResponse result_grant = os().identity().roles().grantProjectUserRole(PROJECT_ID, USER_ID, ROLE_ID);
+        assertTrue(result_grant.isSuccess());
+
+        respondWith(204);
+
+        ActionResponse result_revoke = os().identity().roles().revokeProjectUserRole(PROJECT_ID, USER_ID, ROLE_ID);
+        assertTrue(result_revoke.isSuccess());
+
+    }
+
+    /**
+     * checks if a user has a role in domain context
+     *
+     * @throws Exception
+     */
+    public void checkDomainUserRole_success_Test() throws Exception {
+
+        respondWith(204);
+
+        ActionResponse response_success = os().identity().roles().checkDomainUserRole(USER_DOMAIN_ID, USER_ID, ROLE_ID);
+        assertTrue(response_success.isSuccess());
+    }
+
+    /**
+     * grants and revokes a role to/from a user in domain context
+     *
+     * @throws Exception
+     */
+    public void grantRevokeDomainUserRole_Test() throws Exception {
+
+        respondWith(204);
+
+        ActionResponse result_grant = os().identity().roles().grantDomainUserRole(USER_DOMAIN_ID, USER_ID, ROLE_ID);
+        assertTrue(result_grant.isSuccess());
+
+        respondWith(204);
+
+        ActionResponse result_revoke = os().identity().roles().revokeDomainUserRole(USER_DOMAIN_ID, USER_ID, ROLE_ID);
+        assertTrue(result_revoke.isSuccess());
+
+    }
+
+
 }

@@ -41,7 +41,6 @@ public class KeystoneUserServiceTests extends AbstractTest {
     private static final String USER_ID = "aa9f25defa6d4cafb48466df83106065";
     private static final String USER_DOMAIN_ID = "default";
     private static final String PROJECT_ID = "123ac695d4db400a9001b91bb3b8aa46";
-    private static final String ROLE_ID = "aae88952465d4c32b0a1140a76601b68";
     private static final String ANOTHER_GROUP_ID = "ea167b";
 
     /**
@@ -185,32 +184,6 @@ public class KeystoneUserServiceTests extends AbstractTest {
     }
 
     /**
-     * checks if a user has a role in domain context
-     *
-     * @throws Exception
-     */
-    public void checkDomainUserRole_success_Test() throws Exception {
-
-        respondWith(204);
-
-        ActionResponse response_success = os().identity().users().checkDomainUserRole(USER_DOMAIN_ID, USER_ID, ROLE_ID);
-        assertTrue(response_success.isSuccess());
-    }
-
-    /**
-     * checks if a user has a role in project context
-     *
-     * @throws Exception
-     */
-    public void checkProjectUserRole_success_Test() throws Exception {
-
-        respondWith(204);
-
-        ActionResponse response_success = os().identity().users().checkProjectUserRole(PROJECT_ID, USER_ID, ROLE_ID);
-        assertTrue(response_success.isSuccess());
-    }
-
-    /**
      * list roles for a user in domain context
      *
      * @throws Exception
@@ -293,43 +266,4 @@ public class KeystoneUserServiceTests extends AbstractTest {
         assertFalse(result_add_fail.isSuccess());
 
     }
-
-    /**
-     * grants and revokes a role to/from a user in domain context
-     *
-     * @throws Exception
-     */
-    public void grantRevokeDomainUserRole_Test() throws Exception {
-
-        respondWith(204);
-
-        ActionResponse result_grant = os().identity().users().grantDomainUserRole(USER_DOMAIN_ID, USER_ID, ROLE_ID);
-        assertTrue(result_grant.isSuccess());
-
-        respondWith(204);
-
-        ActionResponse result_revoke = os().identity().users().revokeDomainUserRole(USER_DOMAIN_ID, USER_ID, ROLE_ID);
-        assertTrue(result_revoke.isSuccess());
-
-    }
-
-    /**
-     * grants and revokes a role to/from a user in project context
-     *
-     * @throws Exception
-     */
-    public void grantRevokeProjectUserRole_Test() throws Exception {
-
-        respondWith(204);
-
-        ActionResponse result_grant = os().identity().users().grantProjectUserRole(PROJECT_ID, USER_ID, ROLE_ID);
-        assertTrue(result_grant.isSuccess());
-
-        respondWith(204);
-
-        ActionResponse result_revoke = os().identity().users().revokeProjectUserRole(PROJECT_ID, USER_ID, ROLE_ID);
-        assertTrue(result_revoke.isSuccess());
-
-    }
-
 }
