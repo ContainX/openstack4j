@@ -135,7 +135,6 @@ OSClient os = OSFactory.builder()
 ```
 (2) authenticate with domain-scope
 ```java
-// Identity V2 Authentication Example
 OSClient os = OSFactory.builder()
                 .endpoint("http://<fqdn>:5000/v3")
                 .credentials("admin", "secret", Identifier.byId("user domain id"))
@@ -184,15 +183,15 @@ User user = os.identity().users().create(Builders.user()
 User user = os.identity().users().create("domain id", "foobar", "secret", "foobar@example.org", true);
 
 // Get detailed info on a user by id
-os.identity().users.get("user id");
+User user = os.identity().users.get("user id");
 //or by name and domain identifier
-os.identity().users.getByName("username", "domain id");
+User user = os.identity().users.getByName("username", "domain id");
 
 // Add a project based role to the user
-os.identity().users().grantProjectUserRole("project id","user id", "role id");
+os.identity().roles().grantProjectUserRole("project id","user id", "role id");
 
 // Add a domain based role to the user
-os.identity().users().grantDomainUserRole("domain id","user id", "role id");
+os.identity().roles().grantDomainUserRole("domain id","user id", "role id");
 
 // Add a user to a group
 os.identity().users().addUserToGroup("user id", "group id");

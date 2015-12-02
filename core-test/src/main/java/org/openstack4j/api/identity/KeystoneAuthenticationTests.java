@@ -285,7 +285,9 @@ public class KeystoneAuthenticationTests extends AbstractTest {
      */
     @Test(priority=-1)
     public void authenticate_userId_password_domain_region_Test() throws Exception {
+
         try {
+
             os().useRegion(REGION_EUROPE);
 
             respondWith(JSON_USERS);
