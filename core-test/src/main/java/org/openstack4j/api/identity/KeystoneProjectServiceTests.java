@@ -7,6 +7,10 @@ import org.openstack4j.api.Builders;
 import org.openstack4j.model.identity.Project;
 import org.testng.annotations.Test;
 
+/**
+ * Tests the Identity/Keystone API version 3 ProjectService
+ */
+@Test(groups = "idV3", suiteName = "Identity/V3/Keystone")
 public class KeystoneProjectServiceTests extends AbstractTest {
 
     private static final String JSON_PROJECTS_CREATE = "/identity/projects_create_response.json";
