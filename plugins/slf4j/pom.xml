@@ -23,6 +23,12 @@
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.pacesys</groupId>
+			<artifactId>openstack4j-core-integration-test</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
 	    <dependency>
 	      <groupId>org.slf4j</groupId>
 	      <artifactId>slf4j-api</artifactId>
