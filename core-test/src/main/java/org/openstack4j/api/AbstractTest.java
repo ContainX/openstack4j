@@ -154,7 +154,9 @@ public abstract class AbstractTest {
 
     protected void respondWithCodeAndResource(int statusCode, String resource) throws IOException {
         InputStream is = getClass().getResourceAsStream(resource);
-        respondWith(statusCode, new String(ByteStreams.toByteArray(is)));
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json");
+        respondWith(headers , statusCode, new String(ByteStreams.toByteArray(is)));
     }
 
     protected String authURL(String path) {
