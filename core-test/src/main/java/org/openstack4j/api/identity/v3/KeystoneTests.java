@@ -24,7 +24,10 @@ public class KeystoneTests extends AbstractTest {
     private static final String JSON_AUTH_DOMAINNAME_USERID = "/identity.v3/authv3_domainName_userId.json";
     private static final String JSON_AUTH_UNSCOPED = "/identity.v3/authv3_unscoped.json";
     private static final String JSON_AUTH_TOKEN = "/identity.v3/authv3_token.json";
+    private static final String JSON_AUTH_ERROR_401 = "/identity.v3/authv3_authorizationerror.json";
+    private static final String JSON_USER_LIST = "/identity.v3/usersv3_list.json";
     private static final ImmutableMap<String, String> HEADER_AUTH_PROJECT_RESPONSE = ImmutableMap.of("X-Subject-Token", "763fd7e197ab4e00b2e6e0a8d22a8e87", "Content-Type", "application/json");
+    private static final ImmutableMap<String, String> HEADER_REAUTH_PROJECT_RESPONSE = ImmutableMap.of("X-Subject-Token", "8f57cce49fd04b3cb72afdf8c0445b87", "Content-Type", "application/json");
     private static final ImmutableMap<String, String> HEADER_AUTH_TOKEN_RESPONSE = ImmutableMap.of("X-Subject-Token", "3ecb5c2063904566be4b10406c0f7568", "Content-Type", "application/json");
 
     // module test
@@ -145,11 +148,12 @@ public class KeystoneTests extends AbstractTest {
     }
 
     /**
-     * try to authenticate unscoped. should return an UnsupportedOperationException saying it's not implemented yet.
+     * try to authenticate unscoped. should return an
+     * UnsupportedOperationException saying it's not implemented yet.
      *
      * @throws Exception
      */
-    @Test(expectedExceptions={UnsupportedOperationException.class})
+    @Test(expectedExceptions = { UnsupportedOperationException.class })
     public void authenticate_unscoped_exception_Test() throws Exception {
 
         respondWith(JSON_AUTH_UNSCOPED);
@@ -193,5 +197,33 @@ public class KeystoneTests extends AbstractTest {
         assertEquals(osv3().getAccess().getUser().getId(), userId);
     }
 
+    /**
+     * reAuthenticate after authorizationError e.g. the token expired
+     *
+     * @throws Exception
+     */
+    public void reAuthentication_Test() throws Exception {
+
+        respondWithHeaderAndResource(HEADER_AUTH_PROJECT_RESPONSE, 201, JSON_AUTH_PROJECT);
+
+        associateClient(OSFactory.builderV3()
+                .endpoint(authURL("/v3"))
+                .credentials(userId, password)
+                .scopeToProject(Identifier.byId(projectId), Identifier.byId(projectDomainId))
+                .authenticate());
+
+        respondWith(JSON_USER_LIST);
+        assertEquals(os().identity().users().list().size(), 6);
+
+        // 401 Authorization error for example due to expired session..
+        respondWithCodeAndResource(401, JSON_AUTH_ERROR_401);
+
+        // .. triggers re-authentication
+        respondWithHeaderAndResource(HEADER_REAUTH_PROJECT_RESPONSE, 201, JSON_AUTH_PROJECT);
+
+        respondWith(JSON_USER_LIST);
+        assertEquals(os().identity().users().list().size(), 6);
+
+    }
 
 }
