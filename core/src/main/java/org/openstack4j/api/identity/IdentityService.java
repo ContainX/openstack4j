@@ -9,9 +9,16 @@ import org.openstack4j.common.RestService;
 public interface IdentityService extends RestService {
 
     /**
+     * Domain Service API
+     *
+     * @return the domain service
+     */
+    DomainService domains();
+
+    /**
      * Projects Service API
      *
-     * @return the project service for v3
+     * @return the project service
      */
     ProjectService projects();
 
