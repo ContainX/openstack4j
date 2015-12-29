@@ -41,6 +41,7 @@ abstract class AbstractSpec extends Specification {
 
     // add. attr. req. by KeystoneRoleServiceSpec
     def static String ROLE_CRUD_USER_ID = System.getenv('OS_ROLE_CRUD_USER_ID') ?: '7174b49851d64276b72601c67ce347e2' // another user used only for role tests
+    def static String ROLE_CRUD_GROUP_ID = System.getenv('OS_ROLE_CRUD_GROUP_ID') ?: '8ffc0b29008b436b92e114ab27df0288' // another group used only for role tests
     def static String ROLE_CRUD_ROLE_ID = System.getenv('OS_ROLE_CRUD_ROLE_ID') ?: 'd163f290c7b24e568098e75f7ab4b89a'
     def static String ROLE_CRUD_ANOTHER_ROLE_ID = System.getenv('OS_ROLE_CRUD_ANOTHER_ROLE_ID') ?: '9ab55538924d45588fdb62e0e5fcbc40'
 

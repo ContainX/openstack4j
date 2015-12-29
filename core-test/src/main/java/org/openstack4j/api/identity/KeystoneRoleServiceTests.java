@@ -23,18 +23,21 @@ public class KeystoneRoleServiceTests extends AbstractTest {
     private static final String JSON_ROLES_LIST = "/identity/roles_list.json";
     private static final String JSON_ROLES_REVOKEROLE_ERROR = "/identity/roles_revokeRole_error.json";
     private static final String JSON_ROLES_GRANTROLE_ERROR = "/identity/roles_grantRole_error.json";
+    private static final String JSON_ROLES_UPDATE = "/identity/roles_update.json";
+    private static final String JSON_ROLES_GET_BYID = "/identity/roles_get_byId.json";
     private static final String ROLE_NAME = "admin";
     private static final String USER_ID = "aa9f25defa6d4cafb48466df83106065";
     private static final String PROJECT_ID = "123ac695d4db400a9001b91bb3b8aa46";
     private static final String ROLE_ID = "aae88952465d4c32b0a1140a76601b68";
     private static final String USER_DOMAIN_ID = "default";
+    private static final String ROLE_NAME_UPDATE = "cloudAdmin";
 
     @Override
     protected Service service() {
         return Service.IDENTITY;
     }
 
- // ------------ Role Tests ------------
+    // ------------ Role Tests ------------
 
     @Test(expectedExceptions = NullPointerException.class)
     public void roles_getByName_with_null_throws_NullPointerException() {
@@ -50,7 +53,7 @@ public class KeystoneRoleServiceTests extends AbstractTest {
     public void roles_one_entry_in_list_when_one_returned() throws Exception {
         respondWith(JSON_ROLES_ONE_ENTRY);
         List<? extends Role> list = os().identity().roles().getByName(ROLE_NAME);
-        assertTrue(list.size()==1);
+        assertTrue(list.size() == 1);
     }
 
     public void roles_list_with_multiple_entries_for_list_of_roles() throws Exception {
@@ -76,10 +79,7 @@ public class KeystoneRoleServiceTests extends AbstractTest {
 
     public void addRoleToUserInProject_check_correct_response() throws Exception {
         respondWith(204);
-        ActionResponse actionResponse = os().
-                identity().
-                roles().
-                grantProjectUserRole("fake", "fake", "fake");
+        ActionResponse actionResponse = os().identity().roles().grantProjectUserRole("fake", "fake", "fake");
         assertTrue(actionResponse.isSuccess());
     }
 
@@ -102,18 +102,20 @@ public class KeystoneRoleServiceTests extends AbstractTest {
         assertTrue(response_success.isSuccess());
     }
 
-    //TODO: this test is disabled due to a malformed response returned by OpenStack as described in issue #530
+    // TODO: this test is disabled due to a malformed response returned by
+    // OpenStack as described in issue #530
     /**
      * checks if a user has a role in domain context
      *
      * @throws Exception
      */
-    @Test(enabled=false)
+    @Test(enabled = false)
     public void checkProjectUserRole_fail_Test() throws Exception {
 
         respondWith(404);
 
-        ActionResponse response_success = os().identity().roles().checkProjectUserRole(PROJECT_ID, USER_ID, "existingUnassignedRoleId");
+        ActionResponse response_success = os().identity().roles().checkProjectUserRole(PROJECT_ID, USER_ID,
+                "existingUnassignedRoleId");
         assertFalse(response_success.isSuccess());
 
     }
@@ -138,7 +140,8 @@ public class KeystoneRoleServiceTests extends AbstractTest {
     }
 
     /**
-     * try to grant a project role to a user using role that doesn't exist results in failing ActionResponse
+     * try to grant a project role to a user using role that doesn't exist
+     * results in failing ActionResponse
      *
      * @throws Exception
      */
@@ -146,13 +149,15 @@ public class KeystoneRoleServiceTests extends AbstractTest {
 
         respondWithCodeAndResource(404, JSON_ROLES_GRANTROLE_ERROR);
 
-        ActionResponse response_fail = os().identity().roles().grantProjectUserRole(PROJECT_ID, USER_ID, "nonExistingRoleId");
+        ActionResponse response_fail = os().identity().roles().grantProjectUserRole(PROJECT_ID, USER_ID,
+                "nonExistingRoleId");
         assertFalse(response_fail.isSuccess());
 
     }
 
     /**
-     * try to revoke a project role from a user that isn't assigned to him results in failing ActionResponse
+     * try to revoke a project role from a user that isn't assigned to him
+     * results in failing ActionResponse
      *
      * @throws Exception
      */
@@ -160,7 +165,8 @@ public class KeystoneRoleServiceTests extends AbstractTest {
 
         respondWithCodeAndResource(404, JSON_ROLES_REVOKEROLE_ERROR);
 
-        ActionResponse response_fail = os().identity().roles().revokeProjectUserRole(PROJECT_ID, USER_ID, "existingUnassignedRoleId");
+        ActionResponse response_fail = os().identity().roles().revokeProjectUserRole(PROJECT_ID, USER_ID,
+                "existingUnassignedRoleId");
         assertFalse(response_fail.isSuccess());
     }
 
@@ -177,18 +183,20 @@ public class KeystoneRoleServiceTests extends AbstractTest {
         assertTrue(response_success.isSuccess());
     }
 
-    //TODO: this test is disabled due to a malformed response returned by OpenStack as described in issue #530
+    // TODO: this test is disabled due to a malformed response returned by
+    // OpenStack as described in issue #530
     /**
      * checks if a user has a role in domain context
      *
      * @throws Exception
      */
-    @Test(enabled=false)
+    @Test(enabled = false)
     public void checkDomainUserRole_fail_Test() throws Exception {
 
         respondWith(404);
 
-        ActionResponse response_success = os().identity().roles().checkDomainUserRole(USER_DOMAIN_ID, USER_ID, "existingUnassignedRoleId");
+        ActionResponse response_success = os().identity().roles().checkDomainUserRole(USER_DOMAIN_ID, USER_ID,
+                "existingUnassignedRoleId");
         assertFalse(response_success.isSuccess());
 
     }
@@ -213,7 +221,8 @@ public class KeystoneRoleServiceTests extends AbstractTest {
     }
 
     /**
-     * try to grant a domain role to a user using a role that doesn't exist results in failing ActionResponse
+     * try to grant a domain role to a user using a role that doesn't exist
+     * results in failing ActionResponse
      *
      * @throws Exception
      */
@@ -221,13 +230,15 @@ public class KeystoneRoleServiceTests extends AbstractTest {
 
         respondWithCodeAndResource(404, JSON_ROLES_GRANTROLE_ERROR);
 
-        ActionResponse response_fail = os().identity().roles().grantDomainUserRole(USER_DOMAIN_ID, USER_ID, "nonExistingRoleId");
+        ActionResponse response_fail = os().identity().roles().grantDomainUserRole(USER_DOMAIN_ID, USER_ID,"nonExistingRoleId");
+
         assertFalse(response_fail.isSuccess());
 
     }
 
     /**
-     * try to revoke a domain role from a user that isn't assigned to him results in failing ActionResponse
+     * try to revoke a domain role from a user that isn't assigned to him
+     * results in failing ActionResponse
      *
      * @throws Exception
      */
@@ -236,7 +247,23 @@ public class KeystoneRoleServiceTests extends AbstractTest {
         respondWithCodeAndResource(404, JSON_ROLES_REVOKEROLE_ERROR);
 
         ActionResponse response_fail = os().identity().roles().revokeDomainUserRole(USER_DOMAIN_ID, USER_ID, "existingUnassignedRoleId");
+
         assertFalse(response_fail.isSuccess());
+
+    }
+
+    public void updateRole_Test() throws Exception {
+
+        respondWith(JSON_ROLES_GET_BYID);
+
+        Role role_setToUpdate = os().identity().roles().get(ROLE_ID);
+
+        respondWith(JSON_ROLES_UPDATE);
+
+        Role updatedRole = os().identity().roles().update(role_setToUpdate.toBuilder().name(ROLE_NAME_UPDATE).build());
+
+        assertEquals(updatedRole.getId(), ROLE_ID);
+        assertEquals(updatedRole.getName(), ROLE_NAME_UPDATE);
 
     }
 
