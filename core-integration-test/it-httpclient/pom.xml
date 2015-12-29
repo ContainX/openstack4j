@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>org.pacesys.openstack4j.connectors</groupId>
 			<artifactId>openstack4j-httpclient</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

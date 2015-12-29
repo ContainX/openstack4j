@@ -27,10 +27,6 @@
 	<build>
 		<finalName>openstack4j</finalName>
 		<plugins>
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-release-plugin</artifactId> 
-				<version>2.5</version> <configuration> <autoVersionSubmodules>true</autoVersionSubmodules> 
-				<useReleaseProfile>false</useReleaseProfile> <releaseProfiles>release</releaseProfiles> 
-				<goals>deploy</goals> </configuration> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -74,19 +70,12 @@
 							<artifactSet>
 								<includes>
 									<include>org.pacesys:*</include>
-									<!-- <include>org.pacesys.openstack4j.connectors:*</include> -->
 								</includes>
 							</artifactSet>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>build-helper-maven-plugin</artifactId> 
-				<version>1.9.1</version> <executions> <execution> <id>attach-artifacts</id> 
-				<phase>package</phase> <goals> <goal>attach-artifact</goal> </goals> <configuration> 
-				<artifacts> <artifact> <file>../core/target/openstack4j-core-javadoc.jar</file> 
-				<type>jar</type> <classifier>javadoc</classifier> </artifact> </artifacts> 
-				</configuration> </execution> </executions> </plugin> -->
 		</plugins>
 	</build>
 </project>

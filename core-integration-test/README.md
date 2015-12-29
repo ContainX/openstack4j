@@ -1,7 +1,7 @@
 openstack4j-integrationtest
 ===========================
 
-integration tests for openstack4j's identity (keystone) v3 using spock, groovy (and in next commit: betamax to record/replay server-client communication)
+integration tests for openstack4j's identity (keystone) v3 written in groovy using spock testframework and betamax to record/replay server-client communication
 
 HOW TO
 ------
@@ -9,8 +9,9 @@ HOW TO
 
 Important
 ---------
-* required parameters used for integration test are read from your system environment and they are similar to the ones the python openstack-client needs. Make sure they are set or tests will be skipped. 
-* attributes used:
+* the tests work completely without setting the following environment variables. In which case the tapes are used in playback mode.
+* If you want to perform an integration test using another openstack instance you need to provide the following required parameters in your system environment. They are similar to the ones the python openstack-client needs. Make sure they are set or tests will be skipped. 
+* attributes used: (incomplete)
 	* OS_AUTH_URL = ``` "http://<fqdn>:5000/v3" ```
 	* OS_USER_ID
 	* OS_USER_NAME
