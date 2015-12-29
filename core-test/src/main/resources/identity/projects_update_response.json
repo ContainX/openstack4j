@@ -1,7 +1,7 @@
 {
   "project": {
     "is_domain": false,
-    "description": "Project used for CRUD tests",
+    "description": "An updated project used for CRUD tests",
     "links": {
       "self": "http://127.0.0.1:5000/v3/projects/3337151a1c38496c8bffcb280b19c346"
     },
