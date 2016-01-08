@@ -166,7 +166,7 @@ class KeystoneUserServiceSpec extends AbstractSpec {
         projectUserRolesList.isEmpty() == false
 
         when: "an existing user is added to an existing group where he is not a member"
-        ActionResponse result_addUserToGroup_success = os.identity().users().addUserToGroup(ANOTHER_GROUP_ID, USER_CRUD_ID)
+        ActionResponse result_addUserToGroup_success = os.identity().groups().addUserToGroup(ANOTHER_GROUP_ID, USER_CRUD_ID)
 
         then: "the user became a member of that group as indicated by an successful response"
         result_addUserToGroup_success.isSuccess() == true
@@ -178,13 +178,13 @@ class KeystoneUserServiceSpec extends AbstractSpec {
         userGroupsList.isEmpty() == false
 
         when: "the user that has recently been added to the group is removed from it"
-        ActionResponse result_removeUserFromGroup_success = os.identity().users().removeUserFromGroup(ANOTHER_GROUP_ID, USER_CRUD_ID)
+        ActionResponse result_removeUserFromGroup_success = os.identity().groups().removeUserFromGroup(ANOTHER_GROUP_ID, USER_CRUD_ID)
 
         then: "the user is no longer a groupmember as indicated by an successful response"
         result_removeUserFromGroup_success.isSuccess() == true
 
         when: "trying to add an existing user to a non-existing group"
-        ActionResponse result_addUserToGroup_fail = os.identity().users().addUserToGroup("nonExistingGroupId", USER_CRUD_ID)
+        ActionResponse result_addUserToGroup_fail = os.identity().groups().addUserToGroup("nonExistingGroupId", USER_CRUD_ID)
 
         then: "this fails and is indicated by the response"
         result_addUserToGroup_fail.isSuccess() == false
