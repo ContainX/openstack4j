@@ -166,7 +166,7 @@ public class KeystoneEndpoint implements Endpoint {
                 .add("description", description)
                 .add("interface", iface)
                 .add("serviceId", serviceId)
-                .add("region", region)
+                .add("regionId", regionId)
                 .add("url", url)
                 .add("links", links)
                 .add("enabled", enabled)
@@ -178,7 +178,7 @@ public class KeystoneEndpoint implements Endpoint {
      */
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, type, name, description, iface, serviceId, region, url, links, enabled);
+        return Objects.hashCode(id, type, name, description, iface, serviceId, regionId, url, links, enabled);
     }
 
     /**
@@ -197,7 +197,7 @@ public class KeystoneEndpoint implements Endpoint {
                 && Objects.equal(this.description, that.description)
                 && Objects.equal(this.iface, that.iface)
                 && Objects.equal(this.serviceId, that.serviceId)
-                && Objects.equal(this.region, that.region)
+                && Objects.equal(this.regionId, that.regionId)
                 && Objects.equal(this.url, that.url)
                 && Objects.equal(this.links, that.links)
                 && Objects.equal(this.enabled, that.enabled);
@@ -278,6 +278,15 @@ public class KeystoneEndpoint implements Endpoint {
         @Override
         public EndpointBuilder name(String name) {
             model.name = name;
+            return this;
+        }
+
+        /**
+         * @see KeystoneEndpoint#getRegionId()
+         */
+        @Override
+        public EndpointBuilder regionId(String regionId) {
+            model.regionId = regionId;
             return this;
         }
 

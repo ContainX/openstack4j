@@ -7,6 +7,7 @@ import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.identity.PolicyService;
 import org.openstack4j.api.identity.ProjectService;
 import org.openstack4j.api.identity.RoleService;
+import org.openstack4j.api.identity.ServiceEndpointService;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
@@ -44,5 +45,10 @@ public class IdentityServiceImpl extends BaseOpenStackService implements Identit
     @Override
     public PolicyService policies() {
         return Apis.get(PolicyService.class);
+    }
+    
+    @Override
+    public ServiceEndpointService serviceEndpoints() {
+        return Apis.get(ServiceEndpointService.class);
     }
 }

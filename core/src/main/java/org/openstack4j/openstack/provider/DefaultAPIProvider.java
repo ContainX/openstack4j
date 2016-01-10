@@ -33,6 +33,7 @@ import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.identity.PolicyService;
 import org.openstack4j.api.identity.ProjectService;
 import org.openstack4j.api.identity.RoleService;
+import org.openstack4j.api.identity.ServiceEndpointService;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetFloatingIPService;
@@ -107,6 +108,7 @@ import org.openstack4j.openstack.identity.internal.IdentityServiceImpl;
 import org.openstack4j.openstack.identity.internal.PolicyServiceImpl;
 import org.openstack4j.openstack.identity.internal.ProjectServiceImpl;
 import org.openstack4j.openstack.identity.internal.RoleServiceImpl;
+import org.openstack4j.openstack.identity.internal.ServiceEndpointServiceImpl;
 import org.openstack4j.openstack.identity.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.networking.internal.FloatingIPServiceImpl;
@@ -172,6 +174,7 @@ public class DefaultAPIProvider implements APIProvider {
     @Override
     public void initialize() {
         bind(IdentityService.class, IdentityServiceImpl.class);
+        bind(ServiceEndpointService.class, ServiceEndpointServiceImpl.class);
         bind(UserService.class, UserServiceImpl.class);
         bind(ProjectService.class, ProjectServiceImpl.class);
         bind(RoleService.class, RoleServiceImpl.class);
