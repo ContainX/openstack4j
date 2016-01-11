@@ -5,16 +5,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_EXTENSIONS;
 import java.util.List;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.identity.v3.DomainService;
-import org.openstack4j.api.identity.v3.GroupService;
-import org.openstack4j.api.identity.v3.IdentityService;
-import org.openstack4j.api.identity.v3.PolicyService;
-import org.openstack4j.api.identity.v3.ProjectService;
-import org.openstack4j.api.identity.v3.RegionService;
-import org.openstack4j.api.identity.v3.RoleService;
-import org.openstack4j.api.identity.v3.ServiceEndpointService;
-import org.openstack4j.api.identity.v3.TokenService;
-import org.openstack4j.api.identity.v3.UserService;
+import org.openstack4j.api.identity.v3.*;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.openstack.common.ExtensionValue.ExtensionList;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
@@ -24,6 +15,11 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
  *
  */
 public class IdentityServiceImpl extends BaseOpenStackService implements IdentityService {
+
+    @Override
+    public CredentialService credentials() {
+        return Apis.get(CredentialService.class);
+    }
 
     @Override
     public DomainService domains() {
