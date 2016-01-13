@@ -43,4 +43,11 @@ public interface IdentityService extends RestService {
      */
     GroupService groups();
 
+    /**
+     * Policy Service API
+     *
+     * @return the policy service
+     */
+    PolicyService policies();
+
 }

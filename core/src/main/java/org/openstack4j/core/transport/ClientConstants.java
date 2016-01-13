@@ -5,8 +5,7 @@ package org.openstack4j.core.transport;
  *
  * @author Jeremy Unruh
  */
-public final class ClientConstants
-{
+public final class ClientConstants {
 
     public static final String HEADER_X_AUTH_TOKEN = "X-Auth-Token";
     public static final String HEADER_X_SUBJECT_TOKEN = "X-Subject-Token";
@@ -34,5 +33,6 @@ public final class ClientConstants
     public static final String PATH_DOMAINS = "/domains";
     public static final String PATH_EXTENSIONS = "/extensions";
     public static final String PATH_GROUPS = "/groups";
+    public static final String PATH_POLICIES = "/policies";
 
 }

@@ -6,7 +6,7 @@ import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.identity.Policy;
 
 /**
- * 
+ *
  * the policy builder
  *
  */
@@ -25,11 +25,21 @@ public interface PolicyBuilder extends Builder<PolicyBuilder, Policy> {
     /**
      * @see Policy#getBlob()
      */
-    PolicyBuilder blob(Map<String, String> blob);
+    PolicyBuilder blob(String blob);
 
     /**
      * @see Policy#getLinks()
      */
     PolicyBuilder links(Map<String, String> links);
+
+    /**
+     * @see Policy#getProjectId()
+     */
+    PolicyBuilder projectId(String projectId);
+
+    /**
+     * @see Policy#getUserId()
+     */
+    PolicyBuilder userId(String userId);
 
 }
