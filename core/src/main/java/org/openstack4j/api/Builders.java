@@ -153,6 +153,15 @@ public class Builders {
     }
 
     /**
+     * The builder to create a Region
+     *
+     * @return the region builder
+     */
+    public static RegionBuilder regions() {
+        return KeystoneRegion.builder();
+    }
+
+    /**
      * The builder to create a Network
      *
      * @return the network builder
