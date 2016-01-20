@@ -17,7 +17,6 @@ public class NovaFault implements Fault {
 	private String details;
 	private Date created;
 	
-	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -50,4 +49,8 @@ public class NovaFault implements Fault {
 		return created;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("NovaFault %d: %s", code, message);
+	}
 }
