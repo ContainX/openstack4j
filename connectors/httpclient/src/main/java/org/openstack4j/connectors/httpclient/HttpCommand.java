@@ -1,20 +1,8 @@
 package org.openstack4j.connectors.httpclient;
 
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.net.MediaType;
 import org.apache.http.client.entity.EntityBuilder;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpHead;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.methods.*;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.InputStreamEntity;
@@ -24,11 +12,15 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 
-import com.google.common.net.MediaType;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
 
 /**
- * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
- * 
+ * HttpCommand is responsible for executing the actual request driven by the HttpExecutor.
+ *
  * @param <R>
  */
 public final class HttpCommand<R> {
@@ -63,7 +55,7 @@ public final class HttpCommand<R> {
             throw new ConnectionException(e.getMessage(),e.getIndex(), e);
         }
         client = HttpClientFactory.INSTANCE.getClient(request.getConfig());
-        
+
         switch (request.getMethod()) {
         case POST:
             clientReq = new HttpPost(url);
@@ -88,16 +80,16 @@ public final class HttpCommand<R> {
 
     /**
      * Executes the command and returns the Response
-     * 
+     *
      * @return the response
-     * @throws Exception 
+     * @throws Exception
      */
     public CloseableHttpResponse execute() throws Exception {
 
         EntityBuilder builder = null;
 
         if (request.getEntity() != null) {
-            if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) 
+            if (InputStream.class.isAssignableFrom(request.getEntity().getClass()))
             {
                 InputStreamEntity ise = new InputStreamEntity((InputStream)request.getEntity(), ContentType.create(request.getContentType()));
                 ((HttpEntityEnclosingRequestBase)clientReq).setEntity(ise);
@@ -106,15 +98,13 @@ public final class HttpCommand<R> {
             {
                 builder = EntityBuilder.create()
                 	.setContentType(ContentType.create(request.getContentType(),"UTF-8"))
-                    .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity()))
-                    .setContentEncoding("UTF-8");
+                    .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity()));
             }
         }
         else if(request.hasJson()) {
             builder = EntityBuilder.create()
                     .setContentType(ContentType.APPLICATION_JSON)
-                    .setText(request.getJson())
-                    .setContentEncoding("UTF-8");
+                    .setText(request.getJson());
         }
         if (builder != null && clientReq instanceof HttpEntityEnclosingRequestBase)
             ((HttpEntityEnclosingRequestBase)clientReq).setEntity(builder.build());
@@ -152,8 +142,8 @@ public final class HttpCommand<R> {
     private URI populateQueryParams(HttpRequest<R> request) throws URISyntaxException {
 
         URIBuilder uri = new URIBuilder(new EndpointURIFromRequestFunction().apply(request));
-        
-        if (!request.hasQueryParams()) 
+
+        if (!request.hasQueryParams())
             return uri.build();
 
         for(Map.Entry<String, List<Object> > entry : request.getQueryParams().entrySet()) {
