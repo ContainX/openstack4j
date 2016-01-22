@@ -29,6 +29,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import org.openstack4j.core.transport.HttpMethod;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
@@ -115,6 +116,12 @@ public final class HttpCommand<R> {
         }
         else if(request.hasJson()) {
             body = RequestBody.create(MediaType.parse(ClientConstants.CONTENT_TYPE_JSON), request.getJson());
+        }
+        
+        if(request.getEntity() == null && (request.getMethod() == HttpMethod.POST || request.getMethod() == HttpMethod.PUT)) {
+            // In OkHTTP put and post method cannot have an null body
+            body = RequestBody.create(MediaType.parse("text/plain; charset=utf-8"), "");
+            clientReq.addHeader("Content-Length", "0");
         }
         
         clientReq.method(request.getMethod().name(), body);
