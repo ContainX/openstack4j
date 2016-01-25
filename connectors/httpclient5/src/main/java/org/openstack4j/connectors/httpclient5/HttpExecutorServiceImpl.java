@@ -32,11 +32,9 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
     public <R> HttpResponse execute(HttpRequest<R> request) {
         try {
             return invoke(request);
-        }
-        catch (ResponseException re) {
+        } catch (ResponseException re) {
             throw re;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return null;
         }
@@ -57,7 +55,7 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
         try {
             return invokeRequest(command);
         } catch (ResponseException re) {
-        	throw re;
+            throw re;
         } catch (Exception e) {
             throw new ConnectionException(e.getMessage(), 0, e);
         }
@@ -66,10 +64,8 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
     private <R> HttpResponse invokeRequest(HttpCommand<R> command) throws Exception {
         CloseableHttpResponse response = command.execute();
 
-        if (command.getRetries() == 0 && response.getCode() == HttpStatus.SC_UNAUTHORIZED && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH))
-        {
-            try
-            {
+        if (command.getRetries() == 0 && response.getCode() == HttpStatus.SC_UNAUTHORIZED && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH)) {
+            try {
                 OSAuthenticator.reAuthenticate();
                 command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
                 return invokeRequest(command.incrementRetriesAndReturn());

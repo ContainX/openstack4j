@@ -93,23 +93,20 @@ public final class HttpCommand<R> {
         EntityBuilder builder = null;
 
         if (request.getEntity() != null) {
-            if (InputStream.class.isAssignableFrom(request.getEntity().getClass()))
-            {
+            if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) {
                 InputStreamEntity ise = new InputStreamEntity((InputStream)request.getEntity(), ContentType.create(request.getContentType()));
                 clientReq.setEntity(ise);
-            }
-            else
-            {
+            } else {
                 builder = EntityBuilder.create()
                 	.setContentType(ContentType.create(request.getContentType(), StandardCharsets.UTF_8.name()))
                     .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity()));
             }
-        }
-        else if(request.hasJson()) {
+        } else if(request.hasJson()) {
             builder = EntityBuilder.create()
                     .setContentType(ContentType.APPLICATION_JSON)
                     .setText(request.getJson());
         }
+
         if (builder != null)
             clientReq.setEntity(builder.build());
 
