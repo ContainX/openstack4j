@@ -1,20 +1,9 @@
 package org.openstack4j.connectors.jersey2;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.Proxy.Type;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.ClientRequestContext;
-import javax.ws.rs.client.ClientRequestFilter;
-import javax.ws.rs.ext.ContextResolver;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.HttpUrlConnectorProvider;
@@ -25,14 +14,23 @@ import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.client.ClientRequestFilter;
+import javax.ws.rs.ext.ContextResolver;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.Proxy.Type;
+import java.net.URL;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A factory for creating a rest Client which is mapped to Jackson for JSON processing.
- * 
+ *
  * @author Jeremy Unruh
  */
 class ClientFactory {
@@ -48,8 +46,8 @@ class ClientFactory {
 
     /**
      * Creates or Returns a Client
-     * 
-     * @param Config the configuration to use for the given client
+     *
+     * @param config the configuration to use for the given client
      * @return the client
      */
      static Client create(Config config) {
@@ -64,7 +62,7 @@ class ClientFactory {
 
          ClientConfig clientConfig = new ClientConfig();
 
-         if (config.getProxy() != null) { 
+         if (config.getProxy() != null) {
              addProxy(clientConfig, config);
          }
 
@@ -101,7 +99,7 @@ class ClientFactory {
          if (config.getProxy() != null) {
              HttpUrlConnectorProvider cp = new HttpUrlConnectorProvider();
              cc.connectorProvider(cp);
-             final Proxy proxy = new Proxy(Type.HTTP, 
+             final Proxy proxy = new Proxy(Type.HTTP,
                      new InetSocketAddress(config.getProxy().getRawHost(), config.getProxy().getPort()));
 
              cp.connectionFactory(new ConnectionFactory() {
@@ -121,7 +119,7 @@ class ClientFactory {
          @Override
          public void filter(ClientRequestContext requestContext) throws IOException {
              requestContext.getHeaders().remove(ClientConstants.HEADER_CONTENT_LANGUAGE);
-             requestContext.getHeaders().remove(ClientConstants.HEADER_CONTENT_ENCODING);			
+             requestContext.getHeaders().remove(ClientConstants.HEADER_CONTENT_ENCODING);
          }
      }
 
@@ -136,5 +134,4 @@ class ClientFactory {
          }
 
      }
-
 }

@@ -50,8 +50,6 @@
 							!org.openstack4j.openstack.image.internal,
 							<!--  openstack.internal is imported by connectors! -->
 							<!--  !org.openstack4j.openstack.internal, -->
-							<!-- logging.internal is imported by logging plugins! -->
-							<!-- !org.openstack4j.openstack.logging.internal,  -->
 							!org.openstack4j.openstack.networking.internal,
 							!org.openstack4j.openstack.networking.internal.ext,
 							!org.openstack4j.openstack.storage.block.internal,
@@ -76,11 +74,11 @@
 							!org.openstack*,
 							*
 						</Import-Package>
-						<!-- 
+						<!--
 							Required for SPI in OSGi:
 							http://aries.apache.org/modules/spi-fly.html#specconf
-							
-							This bundles uses SPI to locate implementations for: 
+
+							This bundles uses SPI to locate implementations for:
 							org.openstack4j.api.APIProvider
 							org.openstack4j.core.transport.HttpExecutorService
 							org.openstack4j.openstack.logging.LoggerFactorySupplier
@@ -91,7 +89,6 @@
 						<Require-Capability>
 							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.api.APIProvider)";cardinality:=multiple,
 							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService)";cardinality:=multiple,
-							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple;resolution:=optional,
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)",
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
 						</Require-Capability>
@@ -100,7 +97,7 @@
 						</Provide-Capability>
 					</instructions>
 				</configuration>
-			</plugin> 
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>

@@ -1,9 +1,8 @@
 package org.openstack4j.openstack.internal;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Set;
-
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
@@ -26,16 +25,16 @@ import org.openstack4j.model.identity.Token;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.openstack.identity.functions.ServiceToServiceType;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.LoggerFactory;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Set;
 
 /**
  * A client which has been identified.  Any calls spawned from this session will automatically utilize the original authentication that was
  * successfully validated and authorized
- * 
+ *
  * @author Jeremy Unruh
  */
 public class OSClientSession implements OSClient, EndpointTokenProvider {
@@ -73,11 +72,11 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public static OSClientSession createSession(Access access, Facing perspective, CloudProvider provider, Config config) {
         return new OSClientSession(access, access.getEndpoint(), perspective, provider, config);
     }
-    
+
     public static OSClientSession getCurrent() {
         return sessions.get();
     }
-    
+
     @VisibleForTesting
     public OSClientSession useConfig(Config config) {
         this.config = config;
@@ -157,7 +156,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public boolean supportsHeat() {
         return getSupportedServices().contains(ServiceType.ORCHESTRATION);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -165,7 +164,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public boolean supportsBlockStorage() {
         return getSupportedServices().contains(ServiceType.BLOCK_STORAGE);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -173,7 +172,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public boolean supportsObjectStorage() {
         return getSupportedServices().contains(ServiceType.OBJECT_STORAGE);
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -208,7 +207,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
                                                 .perspective(perspective)
                                                 .region(region)));
     }
-    
+
     private String addNATIfApplicable(String url) {
         if (config != null && config.isBehindNAT()) {
             try {
@@ -220,7 +219,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
         }
         return url;
     }
-    
+
     /**
      * @return the original client configuration associated with this session
      */
@@ -228,7 +227,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     {
         return config;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -322,9 +321,9 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
         this.perspective = perspective;
         return this;
     }
-    
+
     public CloudProvider getProvider() {
         return (provider == null) ? CloudProvider.UNKNOWN : provider;
     }
-	
+
 }

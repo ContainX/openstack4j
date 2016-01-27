@@ -16,6 +16,7 @@
     <properties>
         <release.version>2.0.0</release.version>
         <aries.spifly.version>1.0.0</aries.spifly.version>
+        <slf4j.version>1.7.14</slf4j.version>
     </properties>
     <licenses>
         <license>
@@ -49,7 +50,6 @@
         <module>core</module>
         <module>core-test</module>
         <module>connectors</module>
-        <module>plugins</module>
         <module>distribution</module>
     </modules>
     <dependencies>
@@ -72,6 +72,11 @@
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
             <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
 
@@ -214,7 +219,7 @@
             </plugins>
         </pluginManagement>
     </build>
-	
+
     <reporting>
         <plugins>
             <plugin>
@@ -303,5 +308,5 @@
             </build>
         </profile>
     </profiles>
-    
+
 </project>

@@ -1,21 +1,16 @@
 package org.openstack4j.connectors.okhttp;
 
+import com.squareup.okhttp.Headers;
+import com.squareup.okhttp.Response;
+import org.openstack4j.api.exceptions.ClientResponseException;
+import org.openstack4j.core.transport.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.openstack4j.api.exceptions.ClientResponseException;
-import org.openstack4j.core.transport.ClientConstants;
-import org.openstack4j.core.transport.ExecutionOptions;
-import org.openstack4j.core.transport.HttpEntityHandler;
-import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.core.transport.ObjectMapperSingleton;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
-
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.Response;
 
 public class HttpResponseImpl implements HttpResponse {
 
@@ -126,7 +121,7 @@ public class HttpResponseImpl implements HttpResponse {
         try {
             return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(response.body().string());
         } catch (Exception e) {
-            LOG.error(e, e.getMessage());
+            LOG.error(e.getMessage(), e);
             throw new ClientResponseException(e.getMessage(), 0, e);
         }
     }
@@ -134,7 +129,7 @@ public class HttpResponseImpl implements HttpResponse {
     @Override
     public void close() throws IOException {
     }
-    
+
     @Override
     public String getContentType() {
         return header(ClientConstants.HEADER_CONTENT_TYPE);

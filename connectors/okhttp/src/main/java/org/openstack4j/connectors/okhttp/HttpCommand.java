@@ -1,5 +1,13 @@
 package org.openstack4j.connectors.okhttp;
 
+import com.google.common.io.ByteStreams;
+import com.squareup.okhttp.*;
+import org.openstack4j.core.transport.*;
+import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
+import org.openstack4j.core.transport.internal.HttpLoggingFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -11,34 +19,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.openstack4j.core.transport.ClientConstants;
-import org.openstack4j.core.transport.Config;
-import org.openstack4j.core.transport.HttpRequest;
-import org.openstack4j.core.transport.ObjectMapperSingleton;
-import org.openstack4j.core.transport.UntrustedSSL;
-import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
-import org.openstack4j.core.transport.internal.HttpLoggingFilter;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
-
-import com.google.common.io.ByteStreams;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
-
 /**
- * HttpCommand is responsible for executing the actual request driven by the HttpExecutor. 
- * 
+ * HttpCommand is responsible for executing the actual request driven by the HttpExecutor.
+ *
  * @param <R>
  */
 public final class HttpCommand<R> {
 
     private static final Logger LOG = LoggerFactory.getLogger(HttpCommand.class);
-    
+
     private HttpRequest<R> request;
     private OkHttpClient client;
     private Request.Builder clientReq;
@@ -61,46 +50,46 @@ public final class HttpCommand<R> {
 
     private void initialize() {
         client = new OkHttpClient();
-        
+
         if (HttpLoggingFilter.isLoggingEnabled()) {
         	client.interceptors().add(new LoggingInterceptor());
         }
         Config config = request.getConfig();
-        
+
         if (config.getProxy() != null) {
-            client.setProxy(new Proxy(Type.HTTP, 
+            client.setProxy(new Proxy(Type.HTTP,
                     new InetSocketAddress(config.getProxy().getRawHost(), config.getProxy().getPort())));
         }
-        
+
         if (config.getConnectTimeout() > 0)
             client.setConnectTimeout(config.getConnectTimeout(), TimeUnit.MILLISECONDS);
-        
+
         if (config.getReadTimeout() > 0)
             client.setReadTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
-        
+
         if (config.isIgnoreSSLVerification())
         {
             client.setHostnameVerifier(UntrustedSSL.getHostnameVerifier());
             client.setSslSocketFactory(UntrustedSSL.getSSLContext().getSocketFactory());
         }
-        
-        if (config.getSslContext() != null) 
+
+        if (config.getSslContext() != null)
             client.setSslSocketFactory(config.getSslContext().getSocketFactory());
 
         if (config.getHostNameVerifier() != null)
             client.setHostnameVerifier(config.getHostNameVerifier());
-        
+
         clientReq = new Request.Builder();
-        
+
         populateHeaders(request);
         populateQueryParams(request);
     }
 
     /**
      * Executes the command and returns the Response
-     * 
+     *
      * @return the response
-     * @throws Exception 
+     * @throws Exception
      */
     public Response execute() throws Exception {
         RequestBody body = null;
@@ -116,7 +105,7 @@ public final class HttpCommand<R> {
         else if(request.hasJson()) {
             body = RequestBody.create(MediaType.parse(ClientConstants.CONTENT_TYPE_JSON), request.getJson());
         }
-        
+
         clientReq.method(request.getMethod().name(), body);
         Call call = client.newCall(clientReq.build());
         return call.execute();
@@ -154,14 +143,14 @@ public final class HttpCommand<R> {
         StringBuilder url = new StringBuilder();
         url.append(new EndpointURIFromRequestFunction().apply(request));
 
-        if (!request.hasQueryParams()) 
+        if (!request.hasQueryParams())
         {
             clientReq.url(url.toString());
             return;
         }
 
         url.append("?");
-        
+
         for(Map.Entry<String, List<Object> > entry : request.getQueryParams().entrySet()) {
             for (Object o : entry.getValue()) {
                 try
@@ -188,7 +177,7 @@ public final class HttpCommand<R> {
             clientReq.addHeader(h.getKey(), String.valueOf(h.getValue()));
         }
     }
-    
+
     static class LoggingInterceptor implements Interceptor {
       @Override public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();

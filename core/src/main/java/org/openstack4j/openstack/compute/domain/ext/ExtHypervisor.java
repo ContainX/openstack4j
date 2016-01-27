@@ -1,16 +1,15 @@
 package org.openstack4j.openstack.compute.domain.ext;
 
-import java.util.List;
-
-import org.openstack4j.core.transport.ObjectMapperSingleton;
-import org.openstack4j.model.compute.ext.Hypervisor;
-import org.openstack4j.openstack.common.ListResult;
-import org.openstack4j.openstack.logging.LoggerFactory;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import org.openstack4j.core.transport.ObjectMapperSingleton;
+import org.openstack4j.model.compute.ext.Hypervisor;
+import org.openstack4j.openstack.common.ListResult;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class ExtHypervisor implements Hypervisor {
 
@@ -137,8 +136,8 @@ public class ExtHypervisor implements Hypervisor {
     public String getHostIP() {
         return hostIP;
     }
-    
-    
+
+
     @Override
     public CPUInfo getCPUInfo() {
         return cpuInfo;
@@ -216,7 +215,7 @@ public class ExtHypervisor implements Hypervisor {
             }
             return null;
         }
-        
+
         @Override
         public String getVendor() {
             return vendor;
