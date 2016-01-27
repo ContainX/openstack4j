@@ -15,6 +15,7 @@ import co.freeside.betamax.tape.yaml.OrderedPropertyComparator
 import co.freeside.betamax.tape.yaml.TapePropertyUtils
 
 
+
 abstract class AbstractSpec extends Specification {
 
     def static String MODULEROOT = Paths.get("").toAbsolutePath().getParent().toString()
