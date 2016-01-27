@@ -1,17 +1,16 @@
 package org.openstack4j.openstack.sahara.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.openstack4j.model.sahara.ServiceConfig;
 import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * For mapping JSON response to java objects
- * 
- * @author Ekasit Kijsipongse 
+ *
+ * @author Ekasit Kijsipongse
  */
 
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -24,7 +23,7 @@ public class SaharaServiceConfig extends HashMap<String,String> implements Servi
          */
 	@Override
 	public String get(String name) {
-		return this.get(name);
+		return super.get(name);
 	}
 
         /**
