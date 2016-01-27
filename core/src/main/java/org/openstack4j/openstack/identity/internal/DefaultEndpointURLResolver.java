@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
+import com.google.common.base.Optional;
+import com.google.common.collect.SortedSetMultimap;
 
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.identity.EndpointURLResolver;
@@ -14,10 +16,8 @@ import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v2.Endpoint;
 import org.openstack4j.model.identity.URLResolverParams;
-import org.openstack4j.openstack.logging.LoggerFactory;
-
-import com.google.common.base.Optional;
-import com.google.common.collect.SortedSetMultimap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Resolves an Endpoint URL based on the Service Type and Facing perspective
@@ -25,7 +25,8 @@ import com.google.common.collect.SortedSetMultimap;
  * @author Jeremy Unruh
  */
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
-
+    
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultEndpointURLResolver.class);
     private static final Map<Key, String> CACHE = new ConcurrentHashMap<Key, String>();
     private static boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
     private String publicHostIP;
@@ -173,7 +174,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
             try {
                 publicHostIP = new URI(access.getEndpoint()).getHost();
             } catch (URISyntaxException e) {
-                LoggerFactory.getLogger(DefaultEndpointURLResolver.class).error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
         }
         return publicHostIP;
