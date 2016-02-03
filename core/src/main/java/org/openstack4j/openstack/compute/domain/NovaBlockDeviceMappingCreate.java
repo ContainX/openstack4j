@@ -17,7 +17,7 @@ public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 	public BDMSourceType source_type = BDMSourceType.VOLUME;
 	public BDMDestType destination_type = BDMDestType.VOLUME;
 	public String uuid;
-	public String boot_index;
+	public Integer boot_index;
 	public Integer volume_size;
 	public boolean delete_on_termination = false;
 
@@ -59,7 +59,7 @@ public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 
 		@Override
 		public BlockDeviceMappingBuilder bootIndex(int i) {
-			create.boot_index = String.valueOf(i);
+			create.boot_index = i;
 			return this;
 		}
 
