@@ -8,6 +8,7 @@ import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.heat.*;
 import org.openstack4j.api.identity.*;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.*;
 import org.openstack4j.api.networking.ext.*;
 import org.openstack4j.api.sahara.*;
@@ -21,6 +22,7 @@ import org.openstack4j.openstack.compute.internal.ext.*;
 import org.openstack4j.openstack.heat.internal.*;
 import org.openstack4j.openstack.identity.internal.*;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
+import org.openstack4j.openstack.manila.internal.ShareServiceImpl;
 import org.openstack4j.openstack.networking.internal.*;
 import org.openstack4j.openstack.networking.internal.ext.*;
 import org.openstack4j.openstack.sahara.internal.*;
@@ -118,6 +120,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(JobBinaryService.class, JobBinaryServiceImpl.class);
 		bind(JobService.class, JobServiceImpl.class);
 		bind(JobExecutionService.class, JobExecutionServiceImpl.class);
+		bind(ShareService.class, ShareServiceImpl.class);
 
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
 		bind(FirewallAsService.class, FirewallAsServiceImpl.class);

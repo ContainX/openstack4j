@@ -1,9 +1,8 @@
 package org.openstack4j.openstack.internal;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Set;
-
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
@@ -13,6 +12,7 @@ import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -28,9 +28,9 @@ import org.openstack4j.openstack.identity.functions.ServiceToServiceType;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Set;
 
 /**
  * A client which has been identified.  Any calls spawned from this session will automatically utilize the original authentication that was
@@ -186,6 +186,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      * {@inheritDoc}
      */
     @Override
+    public boolean supportsShare() {
+        return getSupportedServices().contains(ServiceType.SHARE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Token getToken() {
         return access.getToken();
     }
@@ -291,6 +299,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     @Override
     public TelemetryService telemetry() {
         return Apis.get(TelemetryService.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ShareService share() {
+        return Apis.get(ShareService.class);
     }
 
     /**
