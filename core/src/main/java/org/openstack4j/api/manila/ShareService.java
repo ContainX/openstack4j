@@ -2,6 +2,7 @@ package org.openstack4j.api.manila;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.Extension;
+import org.openstack4j.model.manila.Limits;
 
 import java.util.List;
 
@@ -15,4 +16,9 @@ public interface ShareService extends RestService {
      * @return a list of available Shared File Systems API extensions
      */
     List<? extends Extension> listExtensions();
+
+    /**
+     * @return the resource limitations allowed for the tenant
+     */
+    Limits limits();
 }
