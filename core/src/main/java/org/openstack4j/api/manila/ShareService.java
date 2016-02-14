@@ -21,4 +21,9 @@ public interface ShareService extends RestService {
      * @return the resource limitations allowed for the tenant
      */
     Limits limits();
+
+    /**
+     * @return service which provides methods to manage security services
+     */
+    SecurityServiceService securityServices();
 }
