@@ -2,6 +2,7 @@ package org.openstack4j.openstack.manila.internal;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.manila.SecurityServiceService;
+import org.openstack4j.api.manila.ShareNetworkService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.manila.Limits;
@@ -38,5 +39,13 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
     @Override
     public SecurityServiceService securityServices() {
         return Apis.get(SecurityServiceService.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ShareNetworkService shareNetworks() {
+        return Apis.get(ShareNetworkService.class);
     }
 }
