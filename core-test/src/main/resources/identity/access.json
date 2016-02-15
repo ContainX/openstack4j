@@ -173,6 +173,29 @@
         ],
         "type": "telemetry",
         "name": "ceilometer"
+      },
+      {
+        "endpoints": [
+          {
+            "adminURL": "http:\/\/127.0.0.1:8779\/v1.0",
+            "region": "RegionOne",
+            "internalURL": "http:\/\/127.0.0.1:8779\/v1.0",
+            "id": "9c66xrg3rruv2a3hj8tatd7smmas23fy",
+            "publicURL": "http:\/\/127.0.0.1:8779\/v1.0"
+          },
+          {
+            "adminURL": "http:\/\/127.0.0.1:8779\/v1.0",
+            "region": "RegionTwo",
+            "internalURL": "http:\/\/127.0.0.1:8779\/v1.0",
+            "id": "9c66xrg3rruv2a3hj8tatd7smmas23fy",
+            "publicURL": "http:\/\/127.0.0.1:8779\/v1.0"
+          }
+        ],
+        "endpoints_links": [
+
+        ],
+        "type": "database",
+        "name": "trove"
       }
     ],
     "user": {

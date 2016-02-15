@@ -11,6 +11,7 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.Access;
@@ -193,5 +194,13 @@ public interface OSClient {
 	 * @return the Sahara service
 	 */
 	SaharaService sahara();
-	
+
+	/**
+	 * Returns the Trove Service API
+	 *
+	 * @return the Trove service
+	 */
+	TroveService trove();
+
+
 }

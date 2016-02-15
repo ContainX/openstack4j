@@ -1,0 +1,35 @@
+{
+  "instances": [
+    {
+      "flavor": {
+        "id": "1",
+        "links": [
+          {
+            "href": "https://openstack.example.com/v1.0/1234/flavors/1",
+            "rel": "self"
+          },
+          {
+            "href": "https://openstack.example.com/flavors/1",
+            "rel": "bookmark"
+          }
+        ]
+      },
+      "id": "28d1b8f3-172a-4f6d-983d-36021508444a",
+      "links": [
+        {
+          "href": "https://openstack.example.com/v1.0/1234/instances/28d1b8f3-172a-4f6d-983d-36021508444a",
+          "rel": "self"
+        },
+        {
+          "href": "https://openstack.example.com/instances/28d1b8f3-172a-4f6d-983d-36021508444a",
+          "rel": "bookmark"
+        }
+      ],
+      "name": "instance-1",
+      "status": "ACTIVE",
+      "volume": {
+        "size": 2
+      }
+    }
+  ]
+}

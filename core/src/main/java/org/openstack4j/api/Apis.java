@@ -8,6 +8,7 @@ import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.trove.TroveService;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -80,6 +81,12 @@ public class Apis {
 	public static SaharaService getSaharaServices() {
 		return get(SaharaService.class);
 	}
+
+	/**
+	 * Gets the (Trove) DBaaS services API
+	 * @return the trove services
+	 */
+	public static TroveService getTroveServices() { return get(TroveService.class); }
 	
 	private static APIProvider initializeProvider() {
 		// No need to check for emptiness as there is default implementation registered

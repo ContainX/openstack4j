@@ -18,6 +18,7 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.Config;
@@ -307,6 +308,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     @Override
     public ObjectStorageService objectStorage() {
         return Apis.get(ObjectStorageService.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TroveService trove() {
+        return Apis.getTroveServices();
     }
 
     /**
