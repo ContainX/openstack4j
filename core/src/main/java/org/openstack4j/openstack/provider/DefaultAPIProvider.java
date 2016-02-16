@@ -11,6 +11,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.SecurityServiceService;
 import org.openstack4j.api.manila.ShareNetworkService;
 import org.openstack4j.api.manila.ShareService;
+import org.openstack4j.api.manila.SharesService;
 import org.openstack4j.api.networking.*;
 import org.openstack4j.api.networking.ext.*;
 import org.openstack4j.api.sahara.*;
@@ -27,6 +28,7 @@ import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;
 import org.openstack4j.openstack.manila.internal.ShareNetworkServiceImpl;
 import org.openstack4j.openstack.manila.internal.ShareServiceImpl;
+import org.openstack4j.openstack.manila.internal.SharesServiceImpl;
 import org.openstack4j.openstack.networking.internal.*;
 import org.openstack4j.openstack.networking.internal.ext.*;
 import org.openstack4j.openstack.sahara.internal.*;
@@ -127,6 +129,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ShareService.class, ShareServiceImpl.class);
 		bind(SecurityServiceService.class, SecurityServiceServiceImpl.class);
 		bind(ShareNetworkService.class, ShareNetworkServiceImpl.class);
+		bind(SharesService.class, SharesServiceImpl.class);
 
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
 		bind(FirewallAsService.class, FirewallAsServiceImpl.class);

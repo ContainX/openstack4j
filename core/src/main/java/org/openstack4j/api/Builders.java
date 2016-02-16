@@ -13,6 +13,7 @@ import org.openstack4j.model.heat.builder.TemplateBuilder;
 import org.openstack4j.model.identity.builder.*;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.manila.builder.SecurityServiceCreateBuilder;
+import org.openstack4j.model.manila.builder.ShareCreateBuilder;
 import org.openstack4j.model.manila.builder.ShareNetworkCreateBuilder;
 import org.openstack4j.model.network.builder.*;
 import org.openstack4j.model.network.ext.builder.*;
@@ -31,6 +32,7 @@ import org.openstack4j.openstack.heat.domain.HeatTemplate;
 import org.openstack4j.openstack.identity.domain.*;
 import org.openstack4j.openstack.image.domain.GlanceImage;
 import org.openstack4j.openstack.manila.domain.ManilaSecurityServiceCreate;
+import org.openstack4j.openstack.manila.domain.ManilaShareCreate;
 import org.openstack4j.openstack.manila.domain.ManilaShareNetworkCreate;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
@@ -534,5 +536,14 @@ public class Builders {
      */
     public static ShareNetworkCreateBuilder shareNetwork() {
         return ManilaShareNetworkCreate.builder();
+    }
+
+    /**
+     * The builder which creates manila shares.
+     *
+     * @return the share builder
+     */
+    public static ShareCreateBuilder share() {
+        return ManilaShareCreate.builder();
     }
 }

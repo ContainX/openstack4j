@@ -23,6 +23,11 @@ public interface ShareService extends RestService {
     Limits limits();
 
     /**
+     * @return service which provides methods to manage shares
+     */
+    SharesService shares();
+
+    /**
      * @return service which provides methods to manage security services
      */
     SecurityServiceService securityServices();
