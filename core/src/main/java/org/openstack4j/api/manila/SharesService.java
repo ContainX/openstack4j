@@ -6,6 +6,7 @@ import org.openstack4j.model.manila.Share;
 import org.openstack4j.model.manila.ShareCreate;
 import org.openstack4j.model.manila.ShareUpdateOptions;
 import org.openstack4j.model.manila.builder.ShareCreateBuilder;
+import org.openstack4j.openstack.common.Metadata;
 
 import java.util.List;
 
@@ -61,6 +62,41 @@ public interface SharesService extends RestService {
      * @return the action response
      */
     ActionResponse delete(String shareId);
+
+    /**
+     * Shows the metadata for a share.
+     *
+     * @param shareId the share ID
+     * @return the shares metadata
+     */
+    Metadata getMetadata(String shareId);
+
+    /**
+     * Updates the metadata for a share.
+     *
+     * @param shareId the share ID
+     * @param metadata the metadata to update
+     * @return the updated metadata
+     */
+    Metadata updateMetadata(String shareId, Metadata metadata);
+
+    /**
+     * Sets the metadata on a share.
+     *
+     * @param shareId the share ID
+     * @param metadata the metadata to set
+     * @return the updated metadata
+     */
+    Metadata setMetadata(String shareId, Metadata metadata);
+
+    /**
+     * Unsets the metadata on a share.
+     *
+     * @param shareId the share ID
+     * @param metadataKey the metadata key to unset
+     * @return the action response
+     */
+    ActionResponse unsetMetadata(String shareId, String metadataKey);
 
     /**
      * @return a builder to create a share

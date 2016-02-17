@@ -6,9 +6,12 @@ import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.manila.Share;
 import org.openstack4j.model.manila.ShareCreate;
 import org.openstack4j.model.manila.ShareUpdateOptions;
+import org.openstack4j.openstack.common.Metadata;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.testng.Assert.*;
 
@@ -24,7 +27,10 @@ public class SharesTests extends AbstractTest{
     private static final String JSON_SHARE_UPDATE = "/manila/share_update.json";
     private static final String JSON_SHARES = "/manila/shares.json";
     private static final String JSON_SHARES_DETAIL = "/manila/shares_detail.json";
-    
+    private static final String JSON_SHARE_METADATA = "/manila/share_metadata.json";
+    private static final String JSON_SHARE_METADATA_UPDATE = "/manila/share_metadata_update.json";
+    private static final String JSON_SHARE_METADATA_SET = "/manila/share_metadata_set.json";
+
     @Override
     protected Service service() {
         return Service.SHARE;
@@ -306,6 +312,72 @@ public class SharesTests extends AbstractTest{
         respondWith(202);
 
         ActionResponse response = os().share().shares().delete("3d503524-a906-4757-8576-77a2029ff0c4");
+        assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void getMetadata() throws Exception {
+        respondWith(JSON_SHARE_METADATA);
+
+        Metadata metadata = os().share().shares().getMetadata("3d503524-a906-4757-8576-77a2029ff0c4");
+
+        assertTrue(metadata.containsKey("project"));
+        assertTrue(metadata.containsKey("aim"));
+        assertEquals(metadata.get("project"), "my_app");
+        assertEquals(metadata.get("aim"), "doc");
+    }
+
+    @Test
+    public void updateMetadata() throws Exception {
+        respondWith(JSON_SHARE_METADATA_UPDATE);
+
+        Map<String, String> metadataMap = new HashMap<String, String>();
+        metadataMap.put("aim", "changed_doc");
+        metadataMap.put("project", "my_app");
+        metadataMap.put("new_metadata_key", "new_information");
+
+        Metadata metadata = os().share().shares().updateMetadata(
+                "3d503524-a906-4757-8576-77a2029ff0c4",
+                Metadata.toMetadata(metadataMap));
+
+        assertTrue(metadata.containsKey("project"));
+        assertTrue(metadata.containsKey("aim"));
+        assertTrue(metadata.containsKey("new_metadata_key"));
+        assertEquals(metadata.get("project"), "my_app");
+        assertEquals(metadata.get("aim"), "changed_doc");
+        assertEquals(metadata.get("new_metadata_key"), "new_information");
+    }
+
+    @Test
+    public void setMetadata() throws Exception {
+        respondWith(JSON_SHARE_METADATA_SET);
+
+        Map<String, String> metadataMap = new HashMap<String, String>();
+        metadataMap.put("key1", "value1");
+
+        Metadata metadata = os().share().shares().setMetadata(
+                "3d503524-a906-4757-8576-77a2029ff0c4",
+                Metadata.toMetadata(metadataMap));
+
+        assertTrue(metadata.containsKey("project"));
+        assertTrue(metadata.containsKey("aim"));
+        assertTrue(metadata.containsKey("new_metadata_key"));
+        assertTrue(metadata.containsKey("key"));
+        assertTrue(metadata.containsKey("key1"));
+        assertEquals(metadata.get("project"), "my_app");
+        assertEquals(metadata.get("aim"), "changed_doc");
+        assertEquals(metadata.get("new_metadata_key"), "new_information");
+        assertEquals(metadata.get("key"), "value");
+        assertEquals(metadata.get("key1"), "value1");
+    }
+
+    @Test
+    public void unsetMetadata() throws Exception {
+        respondWith(200);
+
+        ActionResponse response = os().share().shares().unsetMetadata(
+                "3d503524-a906-4757-8576-77a2029ff0c4",
+                "key");
         assertTrue(response.isSuccess());
     }
 }

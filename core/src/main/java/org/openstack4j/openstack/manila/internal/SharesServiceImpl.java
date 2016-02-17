@@ -6,6 +6,7 @@ import org.openstack4j.model.manila.Share;
 import org.openstack4j.model.manila.ShareCreate;
 import org.openstack4j.model.manila.ShareUpdateOptions;
 import org.openstack4j.model.manila.builder.ShareCreateBuilder;
+import org.openstack4j.openstack.common.Metadata;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.manila.domain.ManilaShare;
 import org.openstack4j.openstack.manila.domain.ManilaShareCreate;
@@ -79,6 +80,53 @@ public class SharesServiceImpl extends BaseShareServices implements SharesServic
         checkNotNull(shareId);
         return ToActionResponseFunction.INSTANCE.apply(
                 delete(Void.class, uri("/shares/%s", shareId)).executeWithResponse());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Metadata getMetadata(String shareId) {
+        checkNotNull(shareId);
+        return get(Metadata.class, uri("/shares/%s/metadata", shareId)).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Metadata updateMetadata(String shareId, Metadata metadata) {
+        checkNotNull(shareId);
+        checkNotNull(metadata);
+
+        return put(Metadata.class, uri("/shares/%s/metadata", shareId))
+                .entity(metadata)
+                .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Metadata setMetadata(String shareId, Metadata metadata) {
+        checkNotNull(shareId);
+        checkNotNull(metadata);
+
+        return post(Metadata.class, uri("/shares/%s/metadata/", shareId))
+                .entity(metadata)
+                .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse unsetMetadata(String shareId, String metadataKey) {
+        checkNotNull(shareId);
+        checkNotNull(metadataKey);
+
+        return ToActionResponseFunction.INSTANCE.apply(
+                delete(Void.class, uri("/shares/%s/metadata/%s", shareId, metadataKey)).executeWithResponse());
     }
 
     /**
