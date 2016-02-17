@@ -3,9 +3,11 @@ package org.openstack4j.api.manila;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.manila.Access;
 import org.openstack4j.model.manila.Share;
 import org.openstack4j.model.manila.ShareCreate;
 import org.openstack4j.model.manila.ShareUpdateOptions;
+import org.openstack4j.model.manila.actions.AccessOptions;
 import org.openstack4j.openstack.common.Metadata;
 import org.testng.annotations.Test;
 
@@ -30,6 +32,8 @@ public class SharesTests extends AbstractTest{
     private static final String JSON_SHARE_METADATA = "/manila/share_metadata.json";
     private static final String JSON_SHARE_METADATA_UPDATE = "/manila/share_metadata_update.json";
     private static final String JSON_SHARE_METADATA_SET = "/manila/share_metadata_set.json";
+    private static final String JSON_SHARE_ACTION_GRANTACCESS = "/manila/share_action_grantaccess.json";
+    private static final String JSON_SHARE_ACTION_LISTACCESS = "/manila/share_action_listaccess.json";
 
     @Override
     protected Service service() {
@@ -378,6 +382,94 @@ public class SharesTests extends AbstractTest{
         ActionResponse response = os().share().shares().unsetMetadata(
                 "3d503524-a906-4757-8576-77a2029ff0c4",
                 "key");
+        assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void grantAccess() throws Exception {
+        respondWith(JSON_SHARE_ACTION_GRANTACCESS);
+
+        Access access = os().share().shares().grantAccess(
+                "406ea93b-32e9-4907-a117-148b3945749f",
+                AccessOptions.create(
+                        Access.Level.RW,
+                        Access.Type.IP,
+                        "0.0.0.0/0"));
+
+        assertEquals(access.getShareId(), "406ea93b-32e9-4907-a117-148b3945749f");
+        assertEquals(access.getCreatedAt(), "2015-09-07T09:14:48.000000");
+        assertNull(access.getUpdatedAt());
+        assertEquals(access.getAccessType(), Access.Type.IP);
+        assertEquals(access.getAccessTo(), "0.0.0.0/0");
+        assertEquals(access.getAccessLevel(), Access.Level.RW);
+        assertEquals(access.getId(), "a25b2df3-90bd-4add-afa6-5f0dbbd50452");
+    }
+
+    @Test
+    public void revokeAccess() throws Exception {
+        respondWith(202);
+
+        ActionResponse response = os().share().shares().revokeAccess(
+                "406ea93b-32e9-4907-a117-148b3945749f",
+                "a25b2df3-90bd-4add-afa6-5f0dbbd50452");
+        assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void listAccess() throws Exception {
+        respondWith(JSON_SHARE_ACTION_LISTACCESS);
+
+        List<? extends Access> accessList = os().share().shares().listAccess("406ea93b-32e9-4907-a117-148b3945749f");
+
+        Access access1 = accessList.get(0);
+        Access access2 = accessList.get(1);
+
+        assertEquals(access1.getAccessLevel(), Access.Level.RW);
+        assertEquals(access1.getState(), Access.State.ERROR);
+        assertEquals(access1.getId(), "507bf114-36f2-4f56-8cf4-857985ca87c1");
+        assertEquals(access1.getAccessType(), Access.Type.CERT);
+        assertEquals(access1.getAccessTo(), "example.com");
+
+        assertEquals(access2.getAccessLevel(), Access.Level.RW);
+        assertEquals(access2.getState(), Access.State.ACTIVE);
+        assertEquals(access2.getId(), "a25b2df3-90bd-4add-afa6-5f0dbbd50452");
+        assertEquals(access2.getAccessType(), Access.Type.IP);
+        assertEquals(access2.getAccessTo(), "0.0.0.0/0");
+
+
+    }
+
+    @Test
+    public void resetState() throws Exception {
+        respondWith(202);
+
+        ActionResponse response = os().share().shares().resetState(
+                "406ea93b-32e9-4907-a117-148b3945749f",
+                Share.Status.ERROR);
+        assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void forceDelete() throws Exception {
+        respondWith(202);
+
+        ActionResponse response = os().share().shares().forceDelete("406ea93b-32e9-4907-a117-148b3945749f");
+        assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void extend() throws Exception {
+        respondWith(202);
+
+        ActionResponse response = os().share().shares().extend("406ea93b-32e9-4907-a117-148b3945749f", 2);
+        assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void shrink() throws Exception {
+        respondWith(202);
+
+        ActionResponse response = os().share().shares().shrink("406ea93b-32e9-4907-a117-148b3945749f", 1);
         assertTrue(response.isSuccess());
     }
 }
