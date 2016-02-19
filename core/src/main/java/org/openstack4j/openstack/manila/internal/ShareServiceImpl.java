@@ -61,4 +61,12 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
     public ShareServerService shareServers() {
         return Apis.get(ShareServerService.class);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ShareInstanceService shareInstances() {
+        return Apis.get(ShareInstanceService.class);
+    }
 }
