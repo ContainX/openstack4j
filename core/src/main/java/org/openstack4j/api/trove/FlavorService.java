@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface FlavorService {
     List<? extends Flavor> list();
+    Flavor get(String id);
 }
