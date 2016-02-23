@@ -1,0 +1,37 @@
+{
+  "share": {
+    "links": [
+      {
+        "href": "http://172.18.198.54:8786/v2/16e1ab15c35a457e9c2b2aa189f544e1/shares/00137b40-ca06-4ae8-83a3-2c5989eebcce",
+        "rel": "self"
+      },
+      {
+        "href": "http://172.18.198.54:8786/16e1ab15c35a457e9c2b2aa189f544e1/shares/00137b40-ca06-4ae8-83a3-2c5989eebcce",
+        "rel": "bookmark"
+      }
+    ],
+    "availability_zone": null,
+    "share_network_id": null,
+    "export_locations": [],
+    "share_server_id": null,
+    "snapshot_id": null,
+    "id": "00137b40-ca06-4ae8-83a3-2c5989eebcce",
+    "size": null,
+    "share_type": "14747856-08e5-494f-ab40-a64b9d20d8f7",
+    "share_type_name": "d",
+    "export_location": "10.254.0.5:/shares/share-42033c24-0261-424f-abda-4fef2f6dbfd5",
+    "consistency_group_id": null,
+    "project_id": "16e1ab15c35a457e9c2b2aa189f544e1",
+    "metadata": {},
+    "status": "manage_starting",
+    "description": "Lets manage share.",
+    "host": "manila2@unmanage1#UNMANAGE1",
+    "is_public": false,
+    "snapshot_support": true,
+    "name": "share_texas1",
+    "created_at": "2015-09-17T16:21:12.000000",
+    "share_proto": "NFS",
+    "volume_type": "d",
+    "source_cgsnapshot_member_id": null
+  }
+}

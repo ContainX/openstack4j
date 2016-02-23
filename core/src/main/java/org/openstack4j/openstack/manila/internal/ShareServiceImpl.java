@@ -3,11 +3,14 @@ package org.openstack4j.openstack.manila.internal;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.manila.*;
 import org.openstack4j.model.common.Extension;
-import org.openstack4j.model.manila.Limits;
-import org.openstack4j.model.manila.Service;
+import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.manila.*;
 import org.openstack4j.openstack.common.ExtensionValue.ManilaExtensions;
+import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
+import org.openstack4j.openstack.manila.domain.ManilaAvailabilityZone;
 import org.openstack4j.openstack.manila.domain.ManilaLimits;
 import org.openstack4j.openstack.manila.domain.ManilaService;
+import org.openstack4j.openstack.manila.domain.ManilaShare;
 import org.openstack4j.openstack.manila.domain.actions.ServiceAction;
 
 import java.util.List;
@@ -115,5 +118,36 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
         return put(ManilaService.ServiceStatus.class, uri("/os-services/disable"))
                 .entity(ServiceAction.disable(binary, host))
                 .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends AvailabilityZone> availabilityZones() {
+        return get(ManilaAvailabilityZone.AvailabilityZones.class, uri("/os-availability-zone")).execute().getList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Share manageShare(ShareManage shareManage) {
+        checkNotNull(shareManage);
+
+        return post(ManilaShare.class, uri("/os-share-manage"))
+                .entity(shareManage)
+                .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse unmanageShare(String shareId) {
+        checkNotNull(shareId);
+
+        return ToActionResponseFunction.INSTANCE.apply(
+                post(Void.class, uri("/os-share-unmanage/%s/unmanage", shareId)).executeWithResponse());
     }
 }

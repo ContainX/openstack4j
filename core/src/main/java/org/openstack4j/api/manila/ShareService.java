@@ -2,8 +2,8 @@ package org.openstack4j.api.manila;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.Extension;
-import org.openstack4j.model.manila.Limits;
-import org.openstack4j.model.manila.Service;
+import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.manila.*;
 import org.openstack4j.openstack.manila.domain.ManilaService;
 
 import java.util.List;
@@ -78,4 +78,27 @@ public interface ShareService extends RestService {
      * @return the status of the disabled service
      */
     ManilaService.ServiceStatus disableService(String binary, String host);
+
+    /**
+     * Lists all availability zones.
+     *
+     * @return a list of all availability zones
+     */
+    List<? extends AvailabilityZone> availabilityZones();
+
+    /**
+     * Configures Shared File Systems to manage a share.
+     *
+     * @param shareManage the share to manage
+     * @return the managed share
+     */
+    Share manageShare(ShareManage shareManage);
+
+    /**
+     * Configures Shared File Systems to stop managing a share.
+     *
+     * @param shareId the share ID
+     * @return the action response
+     */
+    ActionResponse unmanageShare(String shareId);
 }
