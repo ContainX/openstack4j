@@ -150,4 +150,12 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
         return ToActionResponseFunction.INSTANCE.apply(
                 post(Void.class, uri("/os-share-unmanage/%s/unmanage", shareId)).executeWithResponse());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public QuotaSetService quotaSets() {
+        return Apis.get(QuotaSetService.class);
+    }
 }

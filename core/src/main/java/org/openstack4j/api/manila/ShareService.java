@@ -101,4 +101,9 @@ public interface ShareService extends RestService {
      * @return the action response
      */
     ActionResponse unmanageShare(String shareId);
+
+    /**
+     * @return service which provides methods to manage quota sets
+     */
+    QuotaSetService quotaSets();
 }

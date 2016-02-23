@@ -3,6 +3,7 @@ package org.openstack4j.openstack.provider;
 import com.google.common.collect.Maps;
 import org.openstack4j.api.APIProvider;
 import org.openstack4j.api.compute.*;
+import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ext.*;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.heat.*;
@@ -18,6 +19,7 @@ import org.openstack4j.api.telemetry.EventService;
 import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.openstack.compute.internal.*;
+import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.*;
 import org.openstack4j.openstack.heat.internal.*;
 import org.openstack4j.openstack.identity.internal.*;
@@ -127,6 +129,8 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ShareServerService.class, ShareServerServiceImpl.class);
 		bind(ShareInstanceService.class, ShareInstanceServiceImpl.class);
 		bind(SchedulerStatsService.class, SchedulerStatsServiceImpl.class);
+		bind(org.openstack4j.api.manila.QuotaSetService.class,
+				org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
 
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
 		bind(FirewallAsService.class, FirewallAsServiceImpl.class);
