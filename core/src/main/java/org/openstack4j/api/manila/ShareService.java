@@ -46,4 +46,9 @@ public interface ShareService extends RestService {
      * @return service which provides methods to manage share instances
      */
     ShareInstanceService shareInstances();
+
+    /**
+     * @return service which provides methods to query scheduler stats
+     */
+    SchedulerStatsService schedulerStats();
 }

@@ -126,6 +126,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(SharesService.class, SharesServiceImpl.class);
 		bind(ShareServerService.class, ShareServerServiceImpl.class);
 		bind(ShareInstanceService.class, ShareInstanceServiceImpl.class);
+		bind(SchedulerStatsService.class, SchedulerStatsServiceImpl.class);
 
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
 		bind(FirewallAsService.class, FirewallAsServiceImpl.class);
