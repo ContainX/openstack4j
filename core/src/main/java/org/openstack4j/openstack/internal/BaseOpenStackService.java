@@ -29,8 +29,6 @@ import com.google.common.base.Joiner;
 
 public class BaseOpenStackService {
 
-
-
     ServiceType serviceType = ServiceType.IDENTITY;
     Function<String, String> endpointFunc;
 
@@ -78,8 +76,9 @@ public class BaseOpenStackService {
         return builder(returnType, path, method);
     }
 
-    protected String uri(String path, Object...params) {
-        if (params.length == 0) return path;
+    protected String uri(String path, Object... params) {
+        if (params.length == 0)
+            return path;
         return String.format(path, params);
     }
 
@@ -90,16 +89,18 @@ public class BaseOpenStackService {
     private <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
         OSClientSession ses = OSClientSession.getCurrent();
         if (ses == null) {
-        	throw new OS4JException("Unable to retrieve current session. Please verify thread has a current session available.");
+            throw new OS4JException(
+                    "Unable to retrieve current session. Please verify thread has a current session available.");
         }
-        RequestBuilder<R> req = HttpRequest.builder(returnType).endpointTokenProvider(ses).config(ses.getConfig()).method(method).path(path);
+        RequestBuilder<R> req = HttpRequest.builder(returnType).endpointTokenProvider(ses).config(ses.getConfig())
+                .method(method).path(path);
         return new Invocation<R>(req, serviceType, endpointFunc);
     }
 
     protected static class Invocation<R> {
-        RequestBuilder<R>  req;
+        RequestBuilder<R> req;
 
-        protected Invocation(RequestBuilder<R>  req, ServiceType serviceType, Function<String, String> endpointFunc) {
+        protected Invocation(RequestBuilder<R> req, ServiceType serviceType, Function<String, String> endpointFunc) {
             this.req = req;
             req.serviceType(serviceType);
             req.endpointFunction(endpointFunc);

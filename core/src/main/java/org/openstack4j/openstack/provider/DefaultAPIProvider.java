@@ -64,6 +64,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(GroupService.class, GroupServiceImpl.class);
         bind(PolicyService.class, PolicyServiceImpl.class);
         bind(RegionService.class, RegionServiceImpl.class);
+        bind(TokenService.class, TokenServiceImpl.class);
         bind(ComputeService.class, ComputeServiceImpl.class);
         bind(FlavorService.class, FlavorServiceImpl.class);
         bind(ComputeImageService.class, ComputeImageServiceImpl.class);
