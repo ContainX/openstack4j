@@ -35,6 +35,11 @@ public interface ShareService extends RestService {
     SecurityServiceService securityServices();
 
     /**
+     * @return service which provides methods to manage share snapshots
+     */
+    ShareSnapshotService shareSnapshots();
+
+    /**
      * @return service which provides methods to manage share networks
      */
     ShareNetworkService shareNetworks();

@@ -1,0 +1,32 @@
+{
+  "snapshots": [
+    {
+      "id": "086a1aa6-c425-4ecd-9612-391a3b1b9375",
+      "links": [
+        {
+          "href": "http://172.18.198.54:8786/v1/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/086a1aa6-c425-4ecd-9612-391a3b1b9375",
+          "rel": "self"
+        },
+        {
+          "href": "http://172.18.198.54:8786/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/086a1aa6-c425-4ecd-9612-391a3b1b9375",
+          "rel": "bookmark"
+        }
+      ],
+      "name": "snapshot_My_share"
+    },
+    {
+      "id": "6d221c1d-0200-461e-8d20-24b4776b9ddb",
+      "links": [
+        {
+          "href": "http://172.18.198.54:8786/v1/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/6d221c1d-0200-461e-8d20-24b4776b9ddb",
+          "rel": "self"
+        },
+        {
+          "href": "http://172.18.198.54:8786/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/6d221c1d-0200-461e-8d20-24b4776b9ddb",
+          "rel": "bookmark"
+        }
+      ],
+      "name": "snapshot_share1"
+    }
+  ]
+}
