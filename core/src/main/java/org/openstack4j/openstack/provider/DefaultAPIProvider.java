@@ -129,6 +129,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(SharesService.class, SharesServiceImpl.class);
 		bind(ShareServerService.class, ShareServerServiceImpl.class);
 		bind(ShareInstanceService.class, ShareInstanceServiceImpl.class);
+		bind(ShareTypeService.class, ShareTypeServiceImpl.class);
 		bind(SchedulerStatsService.class, SchedulerStatsServiceImpl.class);
 		bind(org.openstack4j.api.manila.QuotaSetService.class,
 				org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);

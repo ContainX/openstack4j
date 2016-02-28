@@ -90,6 +90,14 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      * {@inheritDoc}
      */
     @Override
+    public ShareTypeService shareTypes() {
+        return Apis.get(ShareTypeService.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public SchedulerStatsService schedulerStats() {
         return Apis.get(SchedulerStatsService.class);
     }

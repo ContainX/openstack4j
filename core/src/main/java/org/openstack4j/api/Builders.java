@@ -544,6 +544,15 @@ public class Builders {
     }
 
     /**
+     * The builder which creates share types.
+     *
+     * @return the shae type builder
+     */
+    public static ShareTypeCreateBuilder shareType() {
+        return ManilaShareTypeCreate.builder();
+    }
+
+    /**
      * The builder which creates manila share snapshots.
      *
      * @return the share builder
