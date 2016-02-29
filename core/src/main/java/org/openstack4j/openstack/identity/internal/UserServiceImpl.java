@@ -149,24 +149,4 @@ public class UserServiceImpl extends BaseOpenStackService implements UserService
         return get(Roles.class, uri("domains/%s/users/%s/roles", domainId, userId)).execute().getList();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse addUserToGroup(String groupId, String userId) {
-        checkNotNull(groupId);
-        checkNotNull(userId);
-        return put(ActionResponse.class, uri("groups/%s/users/%s", groupId, userId)).execute();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse removeUserFromGroup(String groupId, String userId) {
-        checkNotNull(groupId);
-        checkNotNull(userId);
-        return deleteWithResponse(uri("groups/%s/users/%s", groupId, userId)).execute();
-    }
-
 }

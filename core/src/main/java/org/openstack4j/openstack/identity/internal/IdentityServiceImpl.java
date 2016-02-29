@@ -2,6 +2,7 @@ package org.openstack4j.openstack.identity.internal;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.identity.DomainService;
+import org.openstack4j.api.identity.GroupService;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.identity.ProjectService;
 import org.openstack4j.api.identity.RoleService;
@@ -33,5 +34,12 @@ public class IdentityServiceImpl extends BaseOpenStackService implements Identit
 	public RoleService roles() {
 		return Apis.get(RoleService.class);
 	}
+
+    @Override
+    public GroupService groups() {
+        return Apis.get(GroupService.class);
+    }
+
+
 
 }

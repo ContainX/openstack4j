@@ -33,7 +33,6 @@ public class KeystoneUserServiceTests extends AbstractTest {
     private static final String JSON_USER_LISTPROJECTUSERROLES = "/identity/list_project_user_roles.json";
     private static final String JSON_USER_LISTUSERGROUPS = "/identity/list_user_groups.json";
     private static final String JSON_USER_LISTUSERPROJECTS = "/identity/list_user_projects.json";
-    private static final String JSON_USER_ADDTOGROUP_FAIL = "/identity/user_add_ToGroup_fail.json";
     private static final String JSON_USER_DELETE_FAIL = "/identity/user_delete_fail.json";
 
     // module test
@@ -41,7 +40,6 @@ public class KeystoneUserServiceTests extends AbstractTest {
     private static final String USER_ID = "aa9f25defa6d4cafb48466df83106065";
     private static final String USER_DOMAIN_ID = "default";
     private static final String PROJECT_ID = "123ac695d4db400a9001b91bb3b8aa46";
-    private static final String ANOTHER_GROUP_ID = "ea167b";
 
     /**
      * @return the identity service
@@ -223,7 +221,7 @@ public class KeystoneUserServiceTests extends AbstractTest {
     }
 
     /**
-     * list the projects given user has acccess to
+     * list the projects given user has access to
      *
      * @throws Exception
      */
@@ -235,35 +233,4 @@ public class KeystoneUserServiceTests extends AbstractTest {
         assertEquals(userProjectsList.size(), 2);
     }
 
-    /**
-     * adds and removes a user to/from a group
-     *
-     * @throws Exception
-     */
-    public void addRemoveUserToGroup_Test() throws Exception {
-
-        respondWith(204);
-
-        ActionResponse result_add = os().identity().users().addUserToGroup(ANOTHER_GROUP_ID, USER_ID);
-        assertTrue(result_add.isSuccess());
-
-        respondWith(204);
-
-        ActionResponse result_remove = os().identity().users().removeUserFromGroup(ANOTHER_GROUP_ID, USER_ID);
-        assertTrue(result_remove.isSuccess());
-    }
-
-    /**
-     * try to add user to an non existent group fails
-     *
-     * @throws Exception
-     */
-    public void addUserToGroup_fail_Test() throws Exception {
-
-        respondWithCodeAndResource(404, JSON_USER_ADDTOGROUP_FAIL);
-
-        ActionResponse result_add_fail = os().identity().users().addUserToGroup("invalidGroup", USER_ID);
-        assertFalse(result_add_fail.isSuccess());
-
-    }
 }

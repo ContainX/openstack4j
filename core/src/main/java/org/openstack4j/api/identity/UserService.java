@@ -117,24 +117,6 @@ public interface UserService extends RestService {
 	 */
 	List<? extends Role> listDomainUserRoles(String userId, String domainId);
 
-    /**
-     * adds an existing user to an existing group
-     *
-     * @param groupId the group id
-     * @param userId the user id
-     * @return the ActionResponse
-     */
-    ActionResponse addUserToGroup(String groupId, String userId);
-
-    /**
-     * removes a user from a group
-     *
-     * @param groupId the group id
-     * @param userId the user id
-     * @return the ActionResponse
-     */
-    ActionResponse removeUserFromGroup(String groupId, String userId);
-
 	/**
 	 * lists users.
 	 *

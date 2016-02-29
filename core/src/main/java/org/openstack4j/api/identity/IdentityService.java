@@ -36,4 +36,11 @@ public interface IdentityService extends RestService {
      */
     RoleService roles();
 
+    /**
+     * Group Service API
+     *
+     * @return thr group service
+     */
+    GroupService groups();
+
 }

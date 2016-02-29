@@ -33,5 +33,6 @@ public final class ClientConstants
     public static final String PATH_SERVICES = "/services";
     public static final String PATH_DOMAINS = "/domains";
     public static final String PATH_EXTENSIONS = "/extensions";
+    public static final String PATH_GROUPS = "/groups";
 
 }
