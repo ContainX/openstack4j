@@ -14,5 +14,10 @@ public interface AllowedAddressPair extends ModelEntity {
    * @return the ip address
    */
   String getIpAddress();
+
+  /**
+   * @return the mac address
+   */
+  String getMacAddress();
 	
 }
