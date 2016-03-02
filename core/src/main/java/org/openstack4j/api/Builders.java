@@ -62,6 +62,8 @@ import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
+import org.openstack4j.model.trove.InstanceCreate;
+import org.openstack4j.model.trove.builder.InstanceCreateBuilder;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.domain.NovaBlockDeviceMappingCreate;
 import org.openstack4j.openstack.compute.domain.NovaFlavor;
@@ -120,6 +122,7 @@ import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
+import org.openstack4j.openstack.trove.domain.TroveInstance;
 
 /**
  * A utility class to quickly access available Builders within the OpenStack API
@@ -598,4 +601,6 @@ public class Builders {
     public static JobExecutionBuilder jobExecution() {
         return SaharaJobExecution.builder();
     }
+
+    public static InstanceCreateBuilder troveInstance() { return ?}
 }

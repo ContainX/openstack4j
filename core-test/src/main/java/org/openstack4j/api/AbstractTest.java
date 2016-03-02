@@ -41,7 +41,8 @@ public abstract class AbstractTest {
         BLOCK_STORAGE(8776),
         METERING(8087),
         TELEMETRY(8087),
-        OBJECT_STORAGE(8800);
+        OBJECT_STORAGE(8800),
+        TROVE(8779);
         ;
         private final int port;
 
