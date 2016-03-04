@@ -1,21 +1,30 @@
 package org.openstack4j.openstack.identity.domain;
 
+import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.model.identity.Policy;
 import org.openstack4j.model.identity.builder.PolicyBuilder;
+import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 @JsonRootName("policy")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class KeystonePolicy implements Policy {
 
     private static final long serialVersionUID = 1L;
     private String id;
+    @JsonProperty("project_id")
+    private String projectId;
+    @JsonProperty("user_id")
+    private String userId;
     private String type;
     private Map<String, String> links;
-    private Map<String, String> blob;
+    private String blob;
 
     /**
      * @return the policy builder
@@ -41,6 +50,22 @@ public class KeystonePolicy implements Policy {
      * {@inheritDoc}
      */
     @Override
+    public String getProjectId() {
+        return projectId;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getType() {
         return type;
     }
@@ -49,7 +74,7 @@ public class KeystonePolicy implements Policy {
      * {@inheritDoc}
      */
     @Override
-    public Map<String, String> getBlob() {
+    public String getBlob() {
         return blob;
     }
 
@@ -68,6 +93,8 @@ public class KeystonePolicy implements Policy {
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues()
                 .add("id", id)
+                .add("projectId", projectId)
+                .add("userId", userId)
                 .add("type", type)
                 .add("blob", blob)
                 .add("links", links)
@@ -79,8 +106,9 @@ public class KeystonePolicy implements Policy {
      */
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, type, blob, links);
+        return Objects.hashCode(id, projectId, userId, type, blob, links);
     }
+
 
     /**
      * {@inheritDoc}
@@ -94,8 +122,23 @@ public class KeystonePolicy implements Policy {
         KeystonePolicy that = KeystonePolicy.class.cast(obj);
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.type, that.type)
+                && Objects.equal(this.projectId, that.projectId)
+                && Objects.equal(this.userId, that.userId)
                 && Objects.equal(this.blob, that.blob)
                 && Objects.equal(this.links, that.links);
+    }
+
+
+    public static class Policies extends ListResult<KeystonePolicy> {
+
+        private static final long serialVersionUID = 1L;
+        @JsonProperty("policies")
+        private List<KeystonePolicy> list;
+
+        @Override
+        public List<KeystonePolicy> value() {
+            return list;
+        }
     }
 
     public static class PolicyConcreteBuilder implements PolicyBuilder {
@@ -135,7 +178,7 @@ public class KeystonePolicy implements Policy {
         }
 
         @Override
-        public PolicyBuilder blob(Map<String, String> blob) {
+        public PolicyBuilder blob(String blob) {
             model.blob = blob;
             return this;
         }
@@ -143,6 +186,18 @@ public class KeystonePolicy implements Policy {
         @Override
         public PolicyBuilder links(Map<String, String> links) {
             model.links = links;
+            return this;
+        }
+
+        @Override
+        public PolicyBuilder projectId(String projectId) {
+            model.projectId = projectId;
+            return this;
+        }
+
+        @Override
+        public PolicyBuilder userId(String userId) {
+            model.userId = userId;
             return this;
         }
 
