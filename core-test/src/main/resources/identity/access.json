@@ -99,6 +99,20 @@
       {
         "endpoints": [
           {
+            "adminURL": "http:\/\/127.0.0.1:8786\/v1\/b80f8d4e28b74188858b654cb1fccf7d",
+            "region": "RegionOne",
+            "internalURL": "http:\/\/127.0.0.1:8786\/v1\/b80f8d4e28b74188858b654cb1fccf7d",
+            "id": "240163b88bcb4222ba96c2483f2b83f9",
+            "publicURL": "http:\/\/127.0.0.1:8786\/v1\/b80f8d4e28b74188858b654cb1fccf7d"
+          }
+        ],
+        "endpoints_links": [],
+        "type": "share",
+        "name": "manila"
+      },
+      {
+        "endpoints": [
+          {
             "adminURL": "http:\/\/127.0.0.1:8776\/v1\/b80f8d4e28b74188858b654cb1fccf7d",
             "region": "RegionOne",
             "internalURL": "http:\/\/127.0.0.1:8776\/v1\/b80f8d4e28b74188858b654cb1fccf7d",

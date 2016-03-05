@@ -1,12 +1,7 @@
 package org.openstack4j.api;
 
 import org.openstack4j.model.common.builder.LinkBuilder;
-import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
-import org.openstack4j.model.compute.builder.FlavorBuilder;
-import org.openstack4j.model.compute.builder.FloatingIPBuilder;
-import org.openstack4j.model.compute.builder.QuotaSetUpdateBuilder;
-import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
-import org.openstack4j.model.compute.builder.ServerCreateBuilder;
+import org.openstack4j.model.compute.builder.*;
 import org.openstack4j.model.heat.SoftwareConfig;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
@@ -15,107 +10,29 @@ import org.openstack4j.model.heat.builder.SoftwareConfigBuilder;
 import org.openstack4j.model.heat.builder.StackCreateBuilder;
 import org.openstack4j.model.heat.builder.StackUpdateBuilder;
 import org.openstack4j.model.heat.builder.TemplateBuilder;
-import org.openstack4j.model.identity.builder.EndpointBuilder;
-import org.openstack4j.model.identity.builder.RoleBuilder;
-import org.openstack4j.model.identity.builder.ServiceBuilder;
-import org.openstack4j.model.identity.builder.ServiceEndpointBuilder;
-import org.openstack4j.model.identity.builder.TenantBuilder;
-import org.openstack4j.model.identity.builder.UserBuilder;
+import org.openstack4j.model.identity.builder.*;
 import org.openstack4j.model.image.builder.ImageBuilder;
-import org.openstack4j.model.network.builder.ExtraDhcpOptBuilder;
-import org.openstack4j.model.network.builder.NetFloatingIPBuilder;
-import org.openstack4j.model.network.builder.NetQuotaBuilder;
-import org.openstack4j.model.network.builder.NetSecurityGroupBuilder;
-import org.openstack4j.model.network.builder.NetSecurityGroupRuleBuilder;
-import org.openstack4j.model.network.builder.NetworkBuilder;
-import org.openstack4j.model.network.builder.NetworkUpdateBuilder;
-import org.openstack4j.model.network.builder.PortBuilder;
-import org.openstack4j.model.network.builder.RouterBuilder;
-import org.openstack4j.model.network.builder.SubnetBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallPolicyBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallPolicyUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallRuleBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallRuleUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.HealthMonitorAssociateBuilder;
-import org.openstack4j.model.network.ext.builder.HealthMonitorBuilder;
-import org.openstack4j.model.network.ext.builder.HealthMonitorUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.LbPoolBuilder;
-import org.openstack4j.model.network.ext.builder.LbPoolUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.MemberBuilder;
-import org.openstack4j.model.network.ext.builder.MemberUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.SessionPersistenceBuilder;
-import org.openstack4j.model.network.ext.builder.VipBuilder;
-import org.openstack4j.model.network.ext.builder.VipUpdateBuilder;
-import org.openstack4j.model.sahara.builder.ClusterBuilder;
-import org.openstack4j.model.sahara.builder.ClusterTemplateBuilder;
-import org.openstack4j.model.sahara.builder.DataSourceBuilder;
-import org.openstack4j.model.sahara.builder.JobBinaryBuilder;
-import org.openstack4j.model.sahara.builder.JobBuilder;
-import org.openstack4j.model.sahara.builder.JobConfigBuilder;
-import org.openstack4j.model.sahara.builder.JobExecutionBuilder;
-import org.openstack4j.model.sahara.builder.NodeGroupBuilder;
-import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
-import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
+import org.openstack4j.model.manila.builder.*;
+import org.openstack4j.model.network.builder.*;
+import org.openstack4j.model.network.ext.builder.*;
+import org.openstack4j.model.sahara.builder.*;
 import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.openstack.common.GenericLink;
-import org.openstack4j.openstack.compute.domain.NovaBlockDeviceMappingCreate;
-import org.openstack4j.openstack.compute.domain.NovaFlavor;
-import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
-import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
+import org.openstack4j.openstack.compute.domain.*;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
-import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatStackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStackUpdate;
 import org.openstack4j.openstack.heat.domain.HeatTemplate;
-import org.openstack4j.openstack.identity.domain.KeystoneEndpoint;
-import org.openstack4j.openstack.identity.domain.KeystoneRole;
-import org.openstack4j.openstack.identity.domain.KeystoneService;
-import org.openstack4j.openstack.identity.domain.KeystoneServiceEndpoint;
-import org.openstack4j.openstack.identity.domain.KeystoneTenant;
-import org.openstack4j.openstack.identity.domain.KeystoneUser;
+import org.openstack4j.openstack.identity.domain.*;
 import org.openstack4j.openstack.image.domain.GlanceImage;
-import org.openstack4j.openstack.networking.domain.NeutronExtraDhcpOptCreate;
-import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
-import org.openstack4j.openstack.networking.domain.NeutronNetQuota;
-import org.openstack4j.openstack.networking.domain.NeutronNetwork;
-import org.openstack4j.openstack.networking.domain.NeutronNetworkUpdate;
-import org.openstack4j.openstack.networking.domain.NeutronPort;
-import org.openstack4j.openstack.networking.domain.NeutronRouter;
-import org.openstack4j.openstack.networking.domain.NeutronSecurityGroup;
-import org.openstack4j.openstack.networking.domain.NeutronSecurityGroupRule;
-import org.openstack4j.openstack.networking.domain.NeutronSubnet;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallPolicy;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallPolicyUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallRule;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallRuleUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitor;
-import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorAssociate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronLbPool;
-import org.openstack4j.openstack.networking.domain.ext.NeutronLbPoolUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronMember;
-import org.openstack4j.openstack.networking.domain.ext.NeutronMemberUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronSessionPersistence;
-import org.openstack4j.openstack.networking.domain.ext.NeutronVip;
-import org.openstack4j.openstack.networking.domain.ext.NeutronVipUpdate;
-import org.openstack4j.openstack.sahara.domain.SaharaCluster;
-import org.openstack4j.openstack.sahara.domain.SaharaClusterTemplate;
-import org.openstack4j.openstack.sahara.domain.SaharaDataSource;
-import org.openstack4j.openstack.sahara.domain.SaharaJob;
-import org.openstack4j.openstack.sahara.domain.SaharaJobBinary;
-import org.openstack4j.openstack.sahara.domain.SaharaJobConfig;
-import org.openstack4j.openstack.sahara.domain.SaharaJobExecution;
-import org.openstack4j.openstack.sahara.domain.SaharaNodeGroup;
-import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
-import org.openstack4j.openstack.sahara.domain.SaharaServiceConfig;
+import org.openstack4j.openstack.manila.domain.*;
+import org.openstack4j.openstack.networking.domain.*;
+import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.sahara.domain.*;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
@@ -597,5 +514,59 @@ public class Builders {
      */
     public static JobExecutionBuilder jobExecution() {
         return SaharaJobExecution.builder();
+    }
+
+    /**
+     * The builder which creates manila security services
+     *
+     * @return the security service builder
+     */
+    public static SecurityServiceCreateBuilder securityService() {
+        return ManilaSecurityServiceCreate.builder();
+    }
+
+    /**
+     * The builder which creates manila share networks.
+     *
+     * @return the share network builder
+     */
+    public static ShareNetworkCreateBuilder shareNetwork() {
+        return ManilaShareNetworkCreate.builder();
+    }
+
+    /**
+     * The builder which creates manila shares.
+     *
+     * @return the share builder
+     */
+    public static ShareCreateBuilder share() {
+        return ManilaShareCreate.builder();
+    }
+
+    /**
+     * The builder which creates share types.
+     *
+     * @return the shae type builder
+     */
+    public static ShareTypeCreateBuilder shareType() {
+        return ManilaShareTypeCreate.builder();
+    }
+
+    /**
+     * The builder which creates manila share snapshots.
+     *
+     * @return the share builder
+     */
+    public static ShareSnapshotCreateBuilder shareSnapshot() {
+        return ManilaShareSnapshotCreate.builder();
+    }
+
+    /**
+     * The builder which creates manila share manages
+     *
+     * @return the share manage builder
+     */
+    public static ShareManageBuilder shareManage() {
+        return ManilaShareManage.builder();
     }
 }

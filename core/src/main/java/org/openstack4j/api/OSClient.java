@@ -6,6 +6,7 @@ import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -113,6 +114,13 @@ public interface OSClient {
     boolean supportsTelemetry();
 
 	/**
+	 * Determines if the Shared File Systems (Manila) service is supported
+	 *
+	 * @return true if supports Shared File Systems
+     */
+	boolean supportsShare();
+
+	/**
 	 * Gets the token that was assigned during authorization
 	 *
 	 * @return the authentication token
@@ -174,6 +182,13 @@ public interface OSClient {
 	 * @return the telemetry service
 	 */
 	TelemetryService telemetry();
+
+	/**
+	 * Returns the Shared File Systems API
+	 *
+	 * @return the share service
+	 */
+	ShareService share();
 
 	/**
 	 * @return the authorized access entity which contains the authorized token, user details and service catalog

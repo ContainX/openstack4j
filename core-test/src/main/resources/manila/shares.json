@@ -1,0 +1,46 @@
+{
+  "shares": [
+    {
+      "id": "3d503524-a906-4757-8576-77a2029ff0c4",
+      "links": [
+        {
+          "href": "http://localhost:8786/v2/d401b6b1f81943e8919f2b6819755fb6/shares/3d503524-a906-4757-8576-77a2029ff0c4",
+          "rel": "self"
+        },
+        {
+          "href": "http://localhost:8786/d401b6b1f81943e8919f2b6819755fb6/shares/3d503524-a906-4757-8576-77a2029ff0c4",
+          "rel": "bookmark"
+        }
+      ],
+      "name": "my_third_share"
+    },
+    {
+      "id": "6cd19e9f-23f2-4f71-b334-ebde804c33de",
+      "links": [
+        {
+          "href": "http://localhost:8786/v2/d401b6b1f81943e8919f2b6819755fb6/shares/6cd19e9f-23f2-4f71-b334-ebde804c33de",
+          "rel": "self"
+        },
+        {
+          "href": "http://localhost:8786/d401b6b1f81943e8919f2b6819755fb6/shares/6cd19e9f-23f2-4f71-b334-ebde804c33de",
+          "rel": "bookmark"
+        }
+      ],
+      "name": "my_second_share"
+    },
+    {
+      "id": "45485ab3-7da5-4521-bf51-477bceb73b38",
+      "links": [
+        {
+          "href": "http://localhost:8786/v2/d401b6b1f81943e8919f2b6819755fb6/shares/45485ab3-7da5-4521-bf51-477bceb73b38",
+          "rel": "self"
+        },
+        {
+          "href": "http://localhost:8786/d401b6b1f81943e8919f2b6819755fb6/shares/45485ab3-7da5-4521-bf51-477bceb73b38",
+          "rel": "bookmark"
+        }
+      ],
+      "name": "my_first_share"
+    }
+  ]
+}

@@ -1,13 +1,14 @@
 package org.openstack4j.api;
 
-import java.util.ServiceLoader;
-
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+
+import java.util.ServiceLoader;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -79,6 +80,14 @@ public class Apis {
 	 */
 	public static SaharaService getSaharaServices() {
 		return get(SaharaService.class);
+	}
+
+	/**
+	 * Gets the (Manila) Shared File Systems services API
+	 * @return the share services
+     */
+	public static ShareService getShareServices() {
+		return get(ShareService.class);
 	}
 	
 	private static APIProvider initializeProvider() {
