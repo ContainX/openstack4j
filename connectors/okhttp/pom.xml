@@ -11,12 +11,12 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<okhttp.version>2.3.0</okhttp.version>
+		<okhttp.version>3.2.0</okhttp.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-	      <groupId>com.squareup.okhttp</groupId>
+	      <groupId>com.squareup.okhttp3</groupId>
 	      <artifactId>okhttp</artifactId>
 	      <version>${okhttp.version}</version>
 	    </dependency>
