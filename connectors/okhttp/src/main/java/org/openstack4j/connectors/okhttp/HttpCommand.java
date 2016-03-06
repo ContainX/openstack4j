@@ -18,8 +18,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.internal.Util;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.Config;
+import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.UntrustedSSL;
@@ -114,7 +116,11 @@ public final class HttpCommand<R> {
         else if(request.hasJson()) {
             body = RequestBody.create(MediaType.parse(ClientConstants.CONTENT_TYPE_JSON), request.getJson());
         }
-        
+        //Added to address https://github.com/square/okhttp/issues/751
+        //Set body as empty byte array if request is POST or PUT and body is sent as null
+        if((request.getMethod() == HttpMethod.POST || request.getMethod() == HttpMethod.PUT) && body == null){
+            body = RequestBody.create(null, Util.EMPTY_BYTE_ARRAY);
+        }
         clientReq.method(request.getMethod().name(), body);
         Call call = client.newCall(clientReq.build());
         return call.execute();
