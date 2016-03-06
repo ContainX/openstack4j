@@ -1,0 +1,22 @@
+{
+  "pools": [
+    {
+      "host": "manila2",
+      "name": "manila2@generic1#GENERIC1",
+      "pool": "GENERIC1",
+      "backend": "generic1"
+    },
+    {
+      "host": "manila2",
+      "name": "manila2@unmanage1#UNMANAGE1",
+      "pool": "UNMANAGE1",
+      "backend": "unmanage1"
+    },
+    {
+      "host": "manila2",
+      "name": "manila2@ams_backend#AMS_BACKEND",
+      "pool": "AMS_BACKEND",
+      "backend": "ams_backend"
+    }
+  ]
+}

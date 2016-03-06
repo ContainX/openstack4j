@@ -1,0 +1,13 @@
+{
+  "share_servers": [
+    {
+      "status": "active",
+      "updated_at": "2015-09-07T08:52:15.000000",
+      "share_network_id": "713df749-aac0-4a54-af52-10f6c991e80c",
+      "host": "manila2@generic1",
+      "share_network_name": "net_my",
+      "project_id": "16e1ab15c35a457e9c2b2aa189f544e1",
+      "id": "ba11930a-bf1a-4aa7-bae4-a8dfbaa3cc73"
+    }
+  ]
+}

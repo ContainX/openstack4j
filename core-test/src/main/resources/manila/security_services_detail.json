@@ -1,0 +1,38 @@
+{
+  "security_services": [
+    {
+      "status": "new",
+      "domain": "my_domain",
+      "password": "***",
+      "name": "SecServ2",
+      "created_at": "2016-02-13T15:29:37.000000",
+      "updated_at": "2016-02-13T21:52:01.000000",
+      "share_networks": [],
+      "dns_ip": "10.0.1.0/24",
+      "project_id": "d401b6b1f81943e8919f2b6819755fb6",
+      "user": "demo",
+      "server": null,
+      "type": "ldap",
+      "id": "7d156ed8-6570-4898-bca4-eac5b6565f0d",
+      "description": "Creating my second Security Service"
+    },
+    {
+      "status": "new",
+      "domain": null,
+      "password": "***",
+      "name": "SecServ1",
+      "created_at": "2016-02-12T20:40:00.000000",
+      "updated_at": null,
+      "share_networks": [
+        "b1fb4828-93a2-4bbe-b388-7c9ccd69c17a"
+      ],
+      "dns_ip": "10.0.0.0/24",
+      "project_id": "d401b6b1f81943e8919f2b6819755fb6",
+      "user": "demo",
+      "server": null,
+      "type": "kerberos",
+      "id": "ec8a2619-faa5-4878-a63d-4c784b0545f1",
+      "description": "Creating my first Security Service"
+    }
+  ]
+}

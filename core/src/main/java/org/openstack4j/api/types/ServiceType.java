@@ -12,6 +12,7 @@ public enum ServiceType {
 	TELEMETRY("ceilometer", "metering"),
 	ORCHESTRATION("heat", "orchestration"),
 	SAHARA("sahara", "data_processing"),
+	SHARE("manila", "share"),
 	UNKNOWN("NA", "NA")
 	;
 	
