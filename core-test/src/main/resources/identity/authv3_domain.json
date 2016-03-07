@@ -91,11 +91,23 @@
 			}, {
 				"endpoints": [
 					{
-						"adminURL": "http://devstack.openstack.stack:8786/v1/b80f8d4e28b74188858b654cb1fccf7d",
+						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:8786/v1/b80f8d4e28b74188858b654cb1fccf7d",
 						"region": "RegionOne",
-						"internalURL": "http://devstack.openstack.stack:8786/v1/b80f8d4e28b74188858b654cb1fccf7d",
-						"id": "240163b88bcb4222ba96c2483f2b83f9",
-						"publicURL": "http://devstack.openstack.stack:8786/v1/b80f8d4e28b74188858b654cb1fccf7d"
+						"interface": "admin",
+						"id": "b80f8d4e28b74188858b654cb1fccf7d"
+					}, {
+						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:8786/v1/b80f8d4e28b74188858b654cb1fccf7d",
+						"region": "RegionOne",
+						"interface": "public",
+						"id": "b80f8d4e28b74188858b654cb1fccf7d"
+					}, {
+						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:8786/v1/b80f8d4e28b74188858b654cb1fccf7d",
+						"region": "RegionOne",
+						"interface": "internal",
+						"id": "b80f8d4e28b74188858b654cb1fccf7d"
 					}
 				],
 				"endpoints_links": [],

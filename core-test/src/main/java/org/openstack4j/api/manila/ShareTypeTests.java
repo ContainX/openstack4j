@@ -46,7 +46,7 @@ public class ShareTypeTests extends AbstractTest {
                 .build();
 
         ShareType shareType = os().share().shareTypes().create(shareTypeCreate);
-
+        
         assertTrue(shareType.getOsShareTypeAccessIsPublic());
         assertEquals(shareType.getRequiredExtraSpecs().get("driver_handles_share_servers"), "true");
         assertEquals(shareType.getExtraSpecs().get("snapshot_support"), "True");
