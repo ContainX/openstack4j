@@ -3,9 +3,7 @@ package org.openstack4j.api.identity;
 import static org.testng.Assert.assertEquals;
 
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders;
 import org.openstack4j.model.identity.Policy;
-import org.openstack4j.model.identity.Role;
 
 public class KeystonePolicyServiceTest extends AbstractTest {
 

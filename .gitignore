@@ -15,5 +15,9 @@ test-output
 pom-shade.xml
 *.releaseBackup
 *.versionsBackup
+<<<<<<< HEAD
 */bin/*
+=======
+core-integration-test/
+>>>>>>> 8b50ba9cb5dc42c9a40cd051f5cde7f9cfca2229
 *.iml

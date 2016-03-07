@@ -39,6 +39,7 @@ public abstract class AbstractTest {
         BLOCK_STORAGE(8776),
         METERING(8087),
         TELEMETRY(8087),
+        SHARE(8786),
         OBJECT_STORAGE(8800);
         ;
         private final int port;
@@ -119,7 +120,6 @@ public abstract class AbstractTest {
         headers.put("Content-Type", "application/json");
         respondWith(headers, statusCode, jsonBody);
     }
-
 
     /**
      * Responds with specified status code, body and optional headers

@@ -1,0 +1,22 @@
+{
+  "share_server": {
+    "status": "active",
+    "backend_details": {
+      "username": "manila",
+      "router_id": "4b62ce91-56c5-45c1-b0ef-8cbbe5dd34f4",
+      "pk_path": "/opt/stack/.ssh/id_rsa",
+      "subnet_id": "16e99ad6-5191-461c-9f34-ac84a39c3adb",
+      "ip": "10.254.0.3",
+      "instance_id": "75f2f282-af65-49ba-a7b1-525705b1bf1a",
+      "public_address": "10.254.0.3",
+      "service_port_id": "8ff21760-961e-4b83-a032-03fd559bb1d3"
+    },
+    "created_at": "2015-09-07T08:37:19.000000",
+    "updated_at": "2015-09-07T08:52:15.000000",
+    "share_network_name": "net_my",
+    "host": "manila2@generic1",
+    "share_network_id": "713df749-aac0-4a54-af52-10f6c991e80c",
+    "project_id": "16e1ab15c35a457e9c2b2aa189f544e1",
+    "id": "ba11930a-bf1a-4aa7-bae4-a8dfbaa3cc73"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "security_services": [
+    {
+      "status": "new",
+      "type": "ldap",
+      "id": "7d156ed8-6570-4898-bca4-eac5b6565f0d",
+      "name": "SecServ2"
+    },
+    {
+      "status": "new",
+      "type": "kerberos",
+      "id": "ec8a2619-faa5-4878-a63d-4c784b0545f1",
+      "name": "SecServ1"
+    }
+  ]
+}

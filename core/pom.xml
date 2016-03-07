@@ -74,6 +74,7 @@
 						</Private-Package>
 						<Import-Package>
 							!org.openstack*,
+							!com.fasterxml.jackson.dataformat.yaml.snakeyaml,
 							*
 						</Import-Package>
 						<!-- 
@@ -98,6 +99,12 @@
 						<Provide-Capability>
 							osgi.serviceloader; osgi.serviceloader=org.openstack4j.api.APIProvider
 						</Provide-Capability>
+						<Embed-Transitive>
+							true
+						</Embed-Transitive>
+						<Embed-Dependency>
+							jackson-dataformat-yaml
+						</Embed-Dependency>
 					</instructions>
 				</configuration>
 			</plugin> 

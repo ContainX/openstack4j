@@ -1,0 +1,32 @@
+{
+  "share_instances": [
+    {
+      "status": "error",
+      "share_id": "406ea93b-32e9-4907-a117-148b3945749f",
+      "availability_zone": "nova",
+      "created_at": "2015-09-07T08:41:20.000000",
+      "export_location": "10.254.0.3:/shares/share-081f7030-c54f-42f5-98ee-93a37393e0f2",
+      "share_network_id": "713df749-aac0-4a54-af52-10f6c991e80c",
+      "export_locations": [
+        "10.254.0.3:/shares/share-081f7030-c54f-42f5-98ee-93a37393e0f2"
+      ],
+      "share_server_id": "ba11930a-bf1a-4aa7-bae4-a8dfbaa3cc73",
+      "host": "manila2@generic1#GENERIC1",
+      "id": "081f7030-c54f-42f5-98ee-93a37393e0f2"
+    },
+    {
+      "status": "available",
+      "share_id": "d94a8548-2079-4be0-b21c-0a887acd31ca",
+      "availability_zone": "nova",
+      "created_at": "2015-09-07T08:51:34.000000",
+      "export_location": "10.254.0.3:/shares/share-75559a8b-c90c-42a7-bda2-edbe86acfb7b",
+      "share_network_id": "713df749-aac0-4a54-af52-10f6c991e80c",
+      "export_locations": [
+        "10.254.0.3:/shares/share-75559a8b-c90c-42a7-bda2-edbe86acfb7b"
+      ],
+      "share_server_id": "ba11930a-bf1a-4aa7-bae4-a8dfbaa3cc73",
+      "host": "manila2@generic1#GENERIC1",
+      "id": "75559a8b-c90c-42a7-bda2-edbe86acfb7b"
+    }
+  ]
+}

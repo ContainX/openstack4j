@@ -1,6 +1,30 @@
 # Change Log
 
-### 2.0.7 (Latest Release / Stable)
+### 2.0.9 (Latest Release / Stable)
+
+##### Enhancements/Improvements
+
+* Issue #503 - domain scoped authentication with tests - Thank you - @auhlig  
+
+##### Fixes
+
+* Issue #454 - Tenant and user id not in Volume - Thank you - @iviireczech 
+
+
+
+### 2.0.8
+
+##### Enhancements/Improvements
+
+* Issue #492 - Telemetry Events API - Thank you - @iviireczech  
+* Issue #500 - Use Enums instead of String for sourceType and destinationType in block mappings
+
+##### Fixes
+
+* Issue #489 - Race Condition in DefaultEndpointURLResolver - Thank you - @rvesselinov
+* Issue #501 - Avoid using printStackTrace() for exception logging
+
+### 2.0.7 
 
 ##### Enhancements/Improvements
 
