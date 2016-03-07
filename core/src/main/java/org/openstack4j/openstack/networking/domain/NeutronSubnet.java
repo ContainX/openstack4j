@@ -2,6 +2,11 @@ package org.openstack4j.openstack.networking.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.HostRoute;
 import org.openstack4j.model.network.IPVersionType;
@@ -11,10 +16,6 @@ import org.openstack4j.model.network.Subnet;
 import org.openstack4j.model.network.builder.SubnetBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -51,10 +52,29 @@ public class NeutronSubnet implements Subnet {
 	private String gateway;
 	private String cidr;
 
-	public static SubnetBuilder builder() {
+    public NeutronSubnet() {
+    }
+
+    public NeutronSubnet(String id, String name, boolean enableDHCP, String networkId, String tenantId, List<String> dnsNames,
+                         List<NeutronPool> pools, List<NeutronHostRoute> hostRoutes, IPVersionType ipVersion,
+                         String gateway, String cidr) {
+        this.id = id;
+        this.name = name;
+        this.enableDHCP = enableDHCP;
+        this.networkId = networkId;
+        this.tenantId = tenantId;
+        this.dnsNames = dnsNames;
+        this.pools = pools;
+        this.hostRoutes = hostRoutes;
+        this.ipVersion = ipVersion;
+        this.gateway = gateway;
+        this.cidr = cidr;
+    }
+
+    public static SubnetBuilder builder() {
 		return new SubnetConcreteBuilder();
 	}
-	
+
 	@Override
 	public SubnetBuilder toBuilder() {
 		return new SubnetConcreteBuilder(this);
@@ -186,6 +206,21 @@ public class NeutronSubnet implements Subnet {
 				.toString();
 	}
 
+    @JsonRootName("subnet")
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class NeutronSubnetNoGateway extends NeutronSubnet {
+
+        @JsonProperty("gateway_ip")
+        @JsonInclude
+        private String gateway;
+
+        public NeutronSubnetNoGateway(String id, String name, boolean enableDHCP, String networkId, String tenantId,
+                                      List<String> dnsNames, List<NeutronPool> pools, List<NeutronHostRoute> hostRoutes,
+                                      IPVersionType ipVersion, String cidr) {
+            super(id, name, enableDHCP, networkId, tenantId, dnsNames, pools, hostRoutes, ipVersion, null, cidr);
+            this.gateway = null;
+        }
+    }
 
 	public static class Subnets extends ListResult<NeutronSubnet> {
 
@@ -203,11 +238,12 @@ public class NeutronSubnet implements Subnet {
 	public static class SubnetConcreteBuilder extends ResourceBuilder<Subnet, SubnetConcreteBuilder> implements SubnetBuilder {
 
 		private NeutronSubnet m;
+        private boolean isNoGateway = false;
 
-		SubnetConcreteBuilder() {
+        SubnetConcreteBuilder() {
 		 this(new NeutronSubnet());
 		}
-		
+
 		SubnetConcreteBuilder(NeutronSubnet m ) {
 			this.m = m;
 		}
@@ -249,16 +285,26 @@ public class NeutronSubnet implements Subnet {
 			m.pools.add(new NeutronPool(start, end));
 			return this;
 		}
-		
-		@Override 
+
+		@Override
 		public SubnetBuilder enableDHCP(boolean enable) {
 		  m.enableDHCP = enable;
 		  return this;
 		}
 
 		@Override
+		public SubnetBuilder noGateway() {
+		  isNoGateway = true;
+		  return this;
+		}
+
+		@Override
 		public Subnet build() {
-			return m;
+            if(isNoGateway) {
+                return new NeutronSubnetNoGateway(m.id, m.name, m.enableDHCP, m.networkId,
+                m.tenantId, m.dnsNames, m.pools, m.hostRoutes, m.ipVersion, m.cidr);
+            }
+            return m;
 		}
 
 		@Override
