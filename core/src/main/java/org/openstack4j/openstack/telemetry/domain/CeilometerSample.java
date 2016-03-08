@@ -221,6 +221,6 @@ public class CeilometerSample implements Sample {
 
 	@Override
 	public void setMetadata(Map<String, Object> metadata) {
-		// TODO Auto-generated method stub
+		this.metadata = metadata;
 	}
 }

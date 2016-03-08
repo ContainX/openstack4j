@@ -1,0 +1,5 @@
+{
+  "disabled": false,
+  "binary": "manila-share",
+  "host": "openstack@cmode"
+}

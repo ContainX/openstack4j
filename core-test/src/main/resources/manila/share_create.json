@@ -1,0 +1,36 @@
+{
+  "share": {
+    "status": "creating",
+    "links": [
+      {
+        "href": "http://localhost:8786/v2/d401b6b1f81943e8919f2b6819755fb6/shares/3d503524-a906-4757-8576-77a2029ff0c4",
+        "rel": "self"
+      },
+      {
+        "href": "http://localhost:8786/d401b6b1f81943e8919f2b6819755fb6/shares/3d503524-a906-4757-8576-77a2029ff0c4",
+        "rel": "bookmark"
+      }
+    ],
+    "export_location": null,
+    "name": "my_third_share",
+    "share_type": "default",
+    "availability_zone": null,
+    "created_at": "2016-02-16T11:03:45.000000",
+    "description": "My third share",
+    "export_locations": [],
+    "share_proto": "NFS",
+    "share_network_id": "b1fb4828-93a2-4bbe-b388-7c9ccd69c17a",
+    "metadata": {
+      "project": "my_app",
+      "aim": "doc"
+    },
+    "share_server_id": null,
+    "host": "",
+    "volume_type": "default",
+    "snapshot_id": null,
+    "is_public": true,
+    "project_id": "d401b6b1f81943e8919f2b6819755fb6",
+    "id": "3d503524-a906-4757-8576-77a2029ff0c4",
+    "size": 1
+  }
+}

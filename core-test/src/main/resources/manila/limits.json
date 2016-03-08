@@ -1,0 +1,31 @@
+{
+  "limits": {
+    "rate": [
+      {
+        "regex": "^/shares",
+        "limit": [
+          {
+            "next-available": "2016-02-11T14:30:06Z",
+            "unit": "MINUTE",
+            "verb": "POST",
+            "remaining": 120,
+            "value": 120
+          }
+        ],
+        "uri": "\"*/shares\""
+      }
+    ],
+    "absolute": {
+      "totalShareNetworksUsed": 0,
+      "maxTotalShareGigabytes": 1000,
+      "maxTotalShareNetworks": 10,
+      "totalSharesUsed": 0,
+      "totalShareGigabytesUsed": 0,
+      "totalShareSnapshotsUsed": 0,
+      "maxTotalShares": 50,
+      "totalSnapshotGigabytesUsed": 0,
+      "maxTotalSnapshotGigabytes": 1000,
+      "maxTotalShareSnapshots": 50
+    }
+  }
+}

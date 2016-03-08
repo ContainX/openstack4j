@@ -27,10 +27,12 @@ public class KeystoneAuthenticationTests extends AbstractTest {
     private static final String JSON_AUTH_DOMAIN = "/identity/authv3_domain.json";
     private static final String JSON_AUTH_TOKEN = "/identity/authv3_token.json";
     private static final String JSON_AUTH_UNSCOPED = "/identity/authv3_unscoped.json";
+    private static final String JSON_AUTH_ERROR_401 = "/identity/authv3_authorizationerror.json";
     private static final String JSON_USERS = "/identity/users.json";
     private static final ImmutableMap<String, String> HEADER_AUTH_PROJECT_RESPONSE = ImmutableMap.of("X-Subject-Token", "763fd7e197ab4e00b2e6e0a8d22a8e87", "Content-Type", "application/json");
     private static final ImmutableMap<String, String> HEADER_AUTH_TOKEN_RESPONSE = ImmutableMap.of("X-Subject-Token", "3ecb5c2063904566be4b10406c0f7568", "Content-Type", "application/json");
     private static final ImmutableMap<String, String> HEADER_REAUTH_TOKEN_RESPONSE = ImmutableMap.of("X-Subject-Token", "3e3f7ec1180e4f1b8ca884d32e04ccfb", "Content-Type", "application/json");
+    private static final ImmutableMap<String, String> HEADER_REAUTH_PROJECT_RESPONSE = ImmutableMap.of("X-Subject-Token", "8f57cce49fd04b3cb72afdf8c0445b87", "Content-Type", "application/json");
 
     private static final String USER_NAME = "admin";
     private static final String USER_ID = "aa9f25defa6d4cafb48466df83106065";
@@ -317,5 +319,36 @@ public class KeystoneAuthenticationTests extends AbstractTest {
         }
 
     }
+
+    /**
+     * reAuthenticate after authorizationError e.g. the token expired
+     *
+     * @throws Exception
+     */
+    public void reAuthentication_Test() throws Exception {
+
+        respondWithHeaderAndResource(HEADER_AUTH_PROJECT_RESPONSE, 201, JSON_AUTH_PROJECT);
+
+        associateClient(OSFactory.builder()
+                .endpoint(authURL("/v3"))
+                .credentials(USER_ID, PASSWORD)
+                .scopeToProject(Identifier.byId(PROJECT_ID), Identifier.byId(PROJECT_ID))
+                .authenticate());
+
+        respondWith(JSON_USERS);
+        assertEquals(os().identity().users().list().size(), 6);
+
+        // 401 Authorization error for example due to expired token..
+        respondWithCodeAndResource(401, JSON_AUTH_ERROR_401);
+
+        // .. triggers re-authentication
+        respondWithHeaderAndResource(HEADER_REAUTH_PROJECT_RESPONSE, 201, JSON_AUTH_PROJECT);
+
+        respondWith(JSON_USERS);
+        assertEquals(os().identity().users().list().size(), 6);
+
+    }
+
+
 
 }

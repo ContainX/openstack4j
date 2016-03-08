@@ -36,7 +36,8 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<!-- Configure plugins so child projects packaged as jars include the bundle manifest -->
+		<!-- Configure plugins so child projects packaged as jars include the bundle 
+			manifest -->
 		<pluginManagement>
 			<plugins>
 				<plugin>

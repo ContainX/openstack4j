@@ -100,11 +100,15 @@ public class OSAuthenticator {
         token.setId(response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN));
 
         if (auth.getType() == Type.CREDENTIALS) {
-            token = token.applyContext(info.endpoint, new org.openstack4j.openstack.identity.domain.Credentials(auth.getUsername(), auth.getPassword()));
+            token = token.applyContext(info.endpoint, auth);
         }
         else {
-        	token = token.applyContext(	info.endpoint, new TokenAuth(token.getId(), auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
-
+            if( token.getProject() != null ) {
+                token = token.applyContext( info.endpoint, new TokenAuth(token.getId(), auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
+            }
+            else {
+                token = token.applyContext( info.endpoint, new TokenAuth(token.getId(), auth.getScope().getDomain().getName(), auth.getScope().getDomain().getId()));
+            }
         }
 
         if (!info.reLinkToExistingSession)

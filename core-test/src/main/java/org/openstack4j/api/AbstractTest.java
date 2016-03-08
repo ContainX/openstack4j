@@ -39,6 +39,7 @@ public abstract class AbstractTest {
         BLOCK_STORAGE(8776),
         METERING(8087),
         TELEMETRY(8087),
+        SHARE(8786),
         OBJECT_STORAGE(8800);
         ;
         private final int port;
@@ -120,7 +121,6 @@ public abstract class AbstractTest {
         respondWith(headers, statusCode, jsonBody);
     }
 
-
     /**
      * Responds with specified status code, body and optional headers
      * @param headers optional headers
@@ -154,7 +154,9 @@ public abstract class AbstractTest {
 
     protected void respondWithCodeAndResource(int statusCode, String resource) throws IOException {
         InputStream is = getClass().getResourceAsStream(resource);
-        respondWith(statusCode, new String(ByteStreams.toByteArray(is)));
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "application/json");
+        respondWith(headers , statusCode, new String(ByteStreams.toByteArray(is)));
     }
 
     protected String authURL(String path) {
