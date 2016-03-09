@@ -69,11 +69,15 @@ public final class HttpCommand<R> {
         case HEAD:
             clientReq = new HttpHead(url);
             break;
+        case PATCH:
+            clientReq = new HttpPatch(url);
+            break;
         case GET:
-        default:
             clientReq = new HttpGet(url);
             break;
-        }
+        default:
+            throw new IllegalArgumentException("Unsupported http method: " + request.getMethod());
+        } 
         clientReq.setHeader("Accept", MediaType.JSON_UTF_8.toString());
         populateHeaders(request);
     }
