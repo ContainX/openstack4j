@@ -171,16 +171,18 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(snapshotName);
 
         HttpResponse response = invokeActionWithResponse(serverId, CreateSnapshotAction.create(snapshotName));
+        String id = null;
         if (response.getStatus() == 202) {
             String location = response.header("location");
             if (location != null && location.contains("/"))
             {
                 String[] s = location.split("/");
-                return s[s.length - 1];
+                id = s[s.length - 1];
             }
 
         }
-        return null;
+        response.getEntity(Void.class);
+        return id;
     }
 
     /**
