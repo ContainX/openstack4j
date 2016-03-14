@@ -1,0 +1,9 @@
+{
+  "quota_set": {
+    "gigabytes": 1000,
+    "snapshot_gigabytes": 999,
+    "shares": 50,
+    "snapshots": 49,
+    "share_networks": 9
+  }
+}

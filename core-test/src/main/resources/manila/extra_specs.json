@@ -1,0 +1,6 @@
+{
+  "extra_specs": {
+    "snapshot_support": "True",
+    "driver_handles_share_servers": "True"
+  }
+}

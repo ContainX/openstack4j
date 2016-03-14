@@ -12,6 +12,7 @@ import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -185,6 +186,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      * {@inheritDoc}
      */
     @Override
+    public boolean supportsShare() {
+        return getSupportedServices().contains(ServiceType.SHARE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Token getToken() {
         return access.getToken();
     }
@@ -290,6 +299,14 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     @Override
     public TelemetryService telemetry() {
         return Apis.get(TelemetryService.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ShareService share() {
+        return Apis.get(ShareService.class);
     }
 
     /**

@@ -34,7 +34,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.10</version>
+    <version>2.11</version>
 </dependency>
 ```
 
@@ -50,7 +50,7 @@ See notes above about connectors (same rules apply) to development branches.
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.11-SNAPSHOT</version>
+    <version>2.20-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -77,21 +77,21 @@ If you would like to contribute please see our contributing [guidelines](https:/
 
 | Rank | Login | Contributions |
 | :--- | :---- | :------------ |
-| 1  | @gondor           | 498 |
+| 1  | @gondor           | 527 |
 | 2  | @octupszhang      | 26 |
-| 3  | @ekasitk          | 17 |
-| 4  | @magixyu          | 17 |
-| 5  | @maxrome          | 12 |
-| 6  | @isartcanyameres  | 9 |
-| 7  | @n-r-anderson     | 7 |
-| 8  | @krishnabrucelee  | 6 |
-| 9 | @iviireczech          | 6 |
-| 10 | @symcssn          | 4 |
-| 11  | @peter-nordquist  | 4 |
-| 12 | @RibeiroAna       | 4 |
-| 13 | @olivergondza     | 3 |
-| 14 | @auhli		     | 3 |
-| 15 | @NareshkumarCIET  | 2 |
+| 3  | @gonzolino        | 18 |
+| 4  | @ekasitk          | 17 |
+| 5  | @magixyu          | 17 |
+| 6  | @maxrome          | 12 |
+| 7  | @isartcanyameres  | 9 |
+| 8  | @iviireczech      | 8 |
+| 9  | @n-r-anderson     | 7 |
+| 10 | @krishnabrucelee  | 6 |
+| 11 | @auhlig       | 6 |
+| 12 | @peter-nordquist  | 4 |
+| 13 | @RibeiroAna       | 4 |
+| 14 | @symcssn          | 4 |
+| 15 | @olivergondza     | 3 |
 
 #### Throughput
 

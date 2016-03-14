@@ -2,8 +2,11 @@ package org.openstack4j.openstack.networking.domain;
 
 import static com.google.common.base.Objects.toStringHelper;
 
+import java.util.List;
+
 import org.openstack4j.model.network.NetQuota;
 import org.openstack4j.model.network.builder.NetQuotaBuilder;
+import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -150,8 +153,20 @@ public class NeutronNetQuota implements NetQuota {
         public NetQuotaBuilder securityGroupRule(int securityGroupRule) {
             model.securityGroupRule = securityGroupRule;
             return this;
-        }
-        
+        }   
+    }
+    
+    public static class NeutronNetQuotas extends ListResult<NeutronNetQuota> {
+
+		private static final long serialVersionUID = 1L;
+		
+		@JsonProperty("quotas")
+    	private List<NeutronNetQuota> quotas;
+    	
+		@Override
+		protected List<NeutronNetQuota> value() {
+			return quotas;
+		}
     }
     
 }

@@ -1,0 +1,23 @@
+{
+  "snapshot": {
+    "status": "creating",
+    "share_id": "406ea93b-32e9-4907-a117-148b3945749f",
+    "name": "snapshot_share1",
+    "links": [
+      {
+        "href": "http://172.18.198.54:8786/v1/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/6d221c1d-0200-461e-8d20-24b4776b9ddb",
+        "rel": "self"
+      },
+      {
+        "href": "http://172.18.198.54:8786/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/6d221c1d-0200-461e-8d20-24b4776b9ddb",
+        "rel": "bookmark"
+      }
+    ],
+    "created_at": "2015-09-07T11:50:39.756808",
+    "description": "Here is a snapshot of share Share1",
+    "share_proto": "NFS",
+    "share_size": 1,
+    "id": "6d221c1d-0200-461e-8d20-24b4776b9ddb",
+    "size": 1
+  }
+}

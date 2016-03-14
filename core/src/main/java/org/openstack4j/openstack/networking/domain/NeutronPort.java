@@ -284,32 +284,33 @@ public class NeutronPort implements Port {
       
       return this;
     }
-    
-    @Override
-    public PortBuilder allowedAddressPair(String address) {
-      if (m.allowedAddressPairs == null)
-        m.allowedAddressPairs = Sets.newHashSet();
-      
-      m.allowedAddressPairs.add(new NeutronAllowedAddressPair(address));
-      return this;
-    }
-    
-    @Override
-    public PortBuilder removeAddressPair(String address) {
-      if (m.allowedAddressPairs == null)
-        m.allowedAddressPairs = Sets.newHashSet();
-      
-      Iterator<NeutronAllowedAddressPair> iter = m.allowedAddressPairs.iterator();
-      
-      while (iter.hasNext()) {
-        NeutronAllowedAddressPair allowedAddress = iter.next();
-        if (allowedAddress.getIpAddress() != null && allowedAddress.getIpAddress().equals(address)) {
-          iter.remove();
-        }
-      }
-      
-      return this;
-    }
+
+		@Override
+		public PortBuilder allowedAddressPair(String ipAddress, String macAddress) {
+			if (m.allowedAddressPairs == null)
+				m.allowedAddressPairs = Sets.newHashSet();
+
+			m.allowedAddressPairs.add(new NeutronAllowedAddressPair(ipAddress, macAddress));
+			return this;
+		}
+
+		@Override
+		public PortBuilder removeAddressPair(String ipAddress, String macAddress) {
+			if (m.allowedAddressPairs == null)
+				m.allowedAddressPairs = Sets.newHashSet();
+
+			Iterator<NeutronAllowedAddressPair> iter = m.allowedAddressPairs.iterator();
+
+			while (iter.hasNext()) {
+				NeutronAllowedAddressPair allowedAddress = iter.next();
+				if (allowedAddress.getIpAddress() != null && allowedAddress.getIpAddress().equals(ipAddress) &&
+						allowedAddress.getMacAddress() != null && allowedAddress.getMacAddress().equals(macAddress)) {
+					iter.remove();
+				}
+			}
+
+			return this;
+		}
     
 
 		@Override
