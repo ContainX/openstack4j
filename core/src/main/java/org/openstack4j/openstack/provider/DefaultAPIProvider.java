@@ -40,6 +40,7 @@ import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
 import java.util.Map;
 
+
 /**
  * Simple API Provider which keeps internally Maps interface implementations as
  * singletons
@@ -57,6 +58,7 @@ public class DefaultAPIProvider implements APIProvider {
     @Override
     public void initialize() {
         bind(IdentityService.class, IdentityServiceImpl.class);
+        bind(ServiceEndpointService.class, ServiceEndpointServiceImpl.class);
         bind(UserService.class, UserServiceImpl.class);
         bind(ProjectService.class, ProjectServiceImpl.class);
         bind(RoleService.class, RoleServiceImpl.class);

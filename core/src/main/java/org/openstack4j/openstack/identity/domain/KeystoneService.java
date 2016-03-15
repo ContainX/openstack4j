@@ -10,12 +10,14 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
  * V3 OpenStack service
  *
  */
+@JsonRootName("service")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KeystoneService implements Service, Comparable<Service> {
 
@@ -30,6 +32,7 @@ public class KeystoneService implements Service, Comparable<Service> {
     @JsonProperty
     private List<KeystoneEndpoint> endpoints;
     private String description;
+    private Boolean enabled = true;
 
     private Map<String, String> links;
 
@@ -91,6 +94,24 @@ public class KeystoneService implements Service, Comparable<Service> {
     }
 
     /**
+     * @return the enabled status of the service
+     */
+    @Override
+    public boolean isEnabled() {
+        return enabled != null && enabled;
+    }
+
+    /**
+     * set service enabled status
+     *
+     * @param enabled the new enabled status
+     */
+    @Override
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -106,7 +127,7 @@ public class KeystoneService implements Service, Comparable<Service> {
                 .add("description", description)
                 .add("type", type)
                 .add("version", version)
-                .add("endpoints", endpoints)
+                .add("enabled", enabled)
                 .add("links", links)
                 .toString();
     }
@@ -182,8 +203,8 @@ public class KeystoneService implements Service, Comparable<Service> {
         }
 
         @Override
-        public ServiceBuilder endpoints(List<KeystoneEndpoint> endpoints) {
-            model.endpoints = endpoints;
+        public ServiceBuilder enabled(boolean enabled) {
+            model.enabled = enabled;
             return this;
         }
 

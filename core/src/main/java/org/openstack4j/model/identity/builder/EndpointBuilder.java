@@ -50,6 +50,11 @@ public interface EndpointBuilder extends Builder<EndpointBuilder, Endpoint> {
     EndpointBuilder region(String region);
 
     /**
+     * @see Endpoint#getRegionId()
+     */
+    EndpointBuilder regionId(String regionId);
+
+    /**
      * @see Endpoint#getUrl()
      */
     EndpointBuilder url(URL url);

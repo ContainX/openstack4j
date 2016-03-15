@@ -50,4 +50,11 @@ public interface IdentityService extends RestService {
      */
     PolicyService policies();
 
+    /**
+     * ServiceEndpoint Service API
+     *
+     * @return the service and endpoint service
+     */
+    ServiceEndpointService serviceEndpoints();
+
 }
