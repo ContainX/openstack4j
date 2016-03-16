@@ -40,10 +40,8 @@ import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
 import java.util.Map;
 
-
 /**
- * Simple API Provider which keeps internally Maps interface implementations as
- * singletons
+ * Simple API Provider which keeps internally Maps interface implementations as singletons
  *
  * @author Jeremy Unruh
  */
@@ -65,6 +63,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(DomainService.class, DomainServiceImpl.class);
         bind(GroupService.class, GroupServiceImpl.class);
         bind(PolicyService.class, PolicyServiceImpl.class);
+        bind(RegionService.class, RegionServiceImpl.class);
         bind(ComputeService.class, ComputeServiceImpl.class);
         bind(FlavorService.class, FlavorServiceImpl.class);
         bind(ComputeImageService.class, ComputeImageServiceImpl.class);
@@ -136,7 +135,8 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ShareInstanceService.class, ShareInstanceServiceImpl.class);
         bind(ShareTypeService.class, ShareTypeServiceImpl.class);
         bind(SchedulerStatsService.class, SchedulerStatsServiceImpl.class);
-        bind(org.openstack4j.api.manila.QuotaSetService.class, org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
+        bind(org.openstack4j.api.manila.QuotaSetService.class,
+                org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
     }
 
     /**

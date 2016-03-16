@@ -35,5 +35,6 @@ public final class ClientConstants {
     public static final String PATH_EXTENSIONS = "/extensions";
     public static final String PATH_GROUPS = "/groups";
     public static final String PATH_POLICIES = "/policies";
+    public static final String PATH_REGIONS = "/regions";
 
 }

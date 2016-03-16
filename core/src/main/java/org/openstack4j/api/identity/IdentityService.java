@@ -57,4 +57,11 @@ public interface IdentityService extends RestService {
      */
     ServiceEndpointService serviceEndpoints();
 
+    /**
+     * Region Service API
+     *
+     * @return the region service
+     */
+    RegionService regions();
+
 }

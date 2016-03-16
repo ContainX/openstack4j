@@ -126,7 +126,7 @@ class KeystoneServiceEndpointServiceSpec extends AbstractSpec {
         //       Therefore update() is tested in core-test.
         //
         //        when: "a service attribute is updated"
-        //        Service service_setToUpdate = os.identity().serviceEndpoints().getBytes(SERVICE_CRUD_ID)
+        //        Service service_setToUpdate = os.identity().serviceEndpoints().get(SERVICE_CRUD_ID)
         //        if(service_setToUpdate != null)
         //            Service updatedService = os.identity().serviceEndpoints().update(service_setToUpdate.toBuilder().description(SERVICE_CRUD_DESCRIPTION_UPDATE).build())
         //
