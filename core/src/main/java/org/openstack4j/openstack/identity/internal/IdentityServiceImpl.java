@@ -9,6 +9,7 @@ import org.openstack4j.api.identity.ProjectService;
 import org.openstack4j.api.identity.RegionService;
 import org.openstack4j.api.identity.RoleService;
 import org.openstack4j.api.identity.ServiceEndpointService;
+import org.openstack4j.api.identity.TokenService;
 import org.openstack4j.api.identity.UserService;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
@@ -28,26 +29,26 @@ public class IdentityServiceImpl extends BaseOpenStackService implements Identit
         return Apis.get(ProjectService.class);
     }
 
-	@Override
-	public UserService users() {
-		return Apis.get(UserService.class);
-	}
+    @Override
+    public UserService users() {
+        return Apis.get(UserService.class);
+    }
 
-	@Override
-	public RoleService roles() {
-		return Apis.get(RoleService.class);
-	}
+    @Override
+    public RoleService roles() {
+        return Apis.get(RoleService.class);
+    }
 
     @Override
     public GroupService groups() {
         return Apis.get(GroupService.class);
     }
-    
+
     @Override
     public PolicyService policies() {
         return Apis.get(PolicyService.class);
     }
-    
+
     @Override
     public ServiceEndpointService serviceEndpoints() {
         return Apis.get(ServiceEndpointService.class);
@@ -56,6 +57,11 @@ public class IdentityServiceImpl extends BaseOpenStackService implements Identit
     @Override
     public RegionService regions() {
         return Apis.get(RegionService.class);
+    }
+
+    @Override
+    public TokenService tokens() {
+        return Apis.get(TokenService.class);
     }
 
 }

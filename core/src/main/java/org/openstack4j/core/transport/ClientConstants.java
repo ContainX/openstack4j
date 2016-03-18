@@ -36,5 +36,6 @@ public final class ClientConstants {
     public static final String PATH_GROUPS = "/groups";
     public static final String PATH_POLICIES = "/policies";
     public static final String PATH_REGIONS = "/regions";
+    public static final String PATH_TOKENS = "/auth/tokens";
 
 }

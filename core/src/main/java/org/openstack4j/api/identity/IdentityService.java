@@ -39,9 +39,16 @@ public interface IdentityService extends RestService {
     /**
      * Group Service API
      *
-     * @return thr group service
+     * @return the group service
      */
     GroupService groups();
+    
+    /**
+     * Token Service API
+     * 
+     * @return the token service
+     */
+    TokenService tokens();
 
     /**
      * Policy Service API
