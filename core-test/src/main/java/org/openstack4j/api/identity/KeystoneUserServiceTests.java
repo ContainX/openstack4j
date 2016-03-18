@@ -8,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Group;
 import org.openstack4j.model.identity.Project;
 import org.openstack4j.model.identity.Role;

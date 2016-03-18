@@ -6,7 +6,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_GROUPS;
 import java.util.List;
 
 import org.openstack4j.api.identity.GroupService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Group;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.model.identity.User;

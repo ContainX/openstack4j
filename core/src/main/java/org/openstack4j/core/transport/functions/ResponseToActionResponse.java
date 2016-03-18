@@ -3,7 +3,7 @@ package org.openstack4j.core.transport.functions;
 import java.util.Map;
 
 import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.internal.Parser;
 
 import com.google.common.base.Function;

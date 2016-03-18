@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.openstack4j.api.exceptions.ResponseException;
 import org.openstack4j.core.transport.functions.ResponseToActionResponse;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 

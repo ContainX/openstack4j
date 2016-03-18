@@ -6,7 +6,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_PROJECTS;
 import java.util.List;
 
 import org.openstack4j.api.identity.ProjectService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Project;
 import org.openstack4j.openstack.identity.domain.KeystoneProject;
 import org.openstack4j.openstack.identity.domain.KeystoneProject.Projects;

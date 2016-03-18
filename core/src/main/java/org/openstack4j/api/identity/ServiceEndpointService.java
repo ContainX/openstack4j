@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.Service;
 

@@ -1,7 +1,7 @@
 package org.openstack4j.api.identity;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Token;
 
 /**

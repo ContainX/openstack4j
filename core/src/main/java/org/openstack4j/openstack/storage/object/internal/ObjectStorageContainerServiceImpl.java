@@ -14,7 +14,7 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.object.SwiftContainer;
 import org.openstack4j.model.storage.object.options.ContainerListOptions;
 import org.openstack4j.model.storage.object.options.CreateUpdateContainerOptions;
