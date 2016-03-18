@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import org.openstack4j.api.compute.KeypairService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.Keypair;
 import org.openstack4j.openstack.compute.domain.NovaKeypair;
 import org.openstack4j.openstack.compute.domain.NovaKeypair.Keypairs;

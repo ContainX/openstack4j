@@ -14,7 +14,7 @@ import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.compute.Action;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;

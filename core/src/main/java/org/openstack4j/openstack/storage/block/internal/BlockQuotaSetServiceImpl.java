@@ -3,7 +3,7 @@ package org.openstack4j.openstack.storage.block.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.openstack4j.api.storage.BlockQuotaSetService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.BlockQuotaSet;
 import org.openstack4j.model.storage.block.BlockQuotaSetUsage;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;

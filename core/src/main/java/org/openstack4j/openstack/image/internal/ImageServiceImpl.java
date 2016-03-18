@@ -16,7 +16,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.image.Image;
 import org.openstack4j.model.image.ImageMember;
 import org.openstack4j.openstack.image.domain.GlanceImage;

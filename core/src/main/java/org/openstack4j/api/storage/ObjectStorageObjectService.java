@@ -6,7 +6,7 @@ import java.util.Map;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.DLPayload;
 import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.options.DownloadOptions;
 import org.openstack4j.model.storage.object.SwiftObject;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;

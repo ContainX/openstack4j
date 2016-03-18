@@ -8,7 +8,7 @@ import java.util.List;
 import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.AttachInterfaceType;
 import org.openstack4j.model.network.HostRoute;
 import org.openstack4j.model.network.Router;

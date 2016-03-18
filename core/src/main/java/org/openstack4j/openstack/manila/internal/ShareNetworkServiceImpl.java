@@ -1,7 +1,7 @@
 package org.openstack4j.openstack.manila.internal;
 
 import org.openstack4j.api.manila.ShareNetworkService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ShareNetwork;
 import org.openstack4j.model.manila.ShareNetworkCreate;
 import org.openstack4j.model.manila.ShareNetworkUpdateOptions;

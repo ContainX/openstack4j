@@ -21,7 +21,7 @@ import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Access.Service;
 
 import com.google.common.base.Function;

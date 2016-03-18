@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.VolumeSnapshot;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot.VolumeSnapshots;

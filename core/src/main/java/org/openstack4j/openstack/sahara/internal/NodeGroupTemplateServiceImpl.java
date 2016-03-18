@@ -3,7 +3,7 @@ package org.openstack4j.openstack.sahara.internal;
 import java.util.List;
 
 import org.openstack4j.api.sahara.NodeGroupTemplateService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.NodeGroupTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplateUnwrapped;
