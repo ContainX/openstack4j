@@ -43,7 +43,7 @@ public class ShareSnapshotTests extends AbstractTest {
                 .description("Here is a snapshot of share Share1")
                 .build();
 
-        ShareSnapshot snapshot = os().share().shareSnapshots().create(snapshotCreate);
+        ShareSnapshot snapshot = osv3().share().shareSnapshots().create(snapshotCreate);
 
         assertEquals(snapshot.getStatus(), ShareSnapshot.Status.CREATING);
         assertEquals(snapshot.getShareId(), "406ea93b-32e9-4907-a117-148b3945749f");
@@ -69,7 +69,7 @@ public class ShareSnapshotTests extends AbstractTest {
     public void list() throws Exception {
         respondWith(JSON_SHARE_SNAPSHOTS);
 
-        List<? extends ShareSnapshot> snapshots = os().share().shareSnapshots().list();
+        List<? extends ShareSnapshot> snapshots = osv3().share().shareSnapshots().list();
 
         ShareSnapshot snapshot1 = snapshots.get(0);
         ShareSnapshot snapshot2 = snapshots.get(1);
@@ -101,7 +101,7 @@ public class ShareSnapshotTests extends AbstractTest {
     public void listDetails() throws Exception {
         respondWith(JSON_SHARE_SNAPSHOTS_DETAIL);
 
-        List<? extends ShareSnapshot> snapshots = os().share().shareSnapshots().listDetails();
+        List<? extends ShareSnapshot> snapshots = osv3().share().shareSnapshots().listDetails();
         assertEquals(snapshots.size(), 2);
 
         ShareSnapshot snapshot1 = snapshots.get(0);
@@ -149,7 +149,7 @@ public class ShareSnapshotTests extends AbstractTest {
     public void get() throws Exception {
         respondWith(JSON_SHARE_SNAPSHOT);
 
-        ShareSnapshot snapshot = os().share().shareSnapshots().get("6d221c1d-0200-461e-8d20-24b4776b9ddb");
+        ShareSnapshot snapshot = osv3().share().shareSnapshots().get("6d221c1d-0200-461e-8d20-24b4776b9ddb");
 
         assertEquals(snapshot.getStatus(), ShareSnapshot.Status.AVAILABLE);
         assertEquals(snapshot.getShareId(), "406ea93b-32e9-4907-a117-148b3945749f");
@@ -175,7 +175,7 @@ public class ShareSnapshotTests extends AbstractTest {
     public void update() throws Exception {
         respondWith(JSON_SHARE_SNAPSHOT_UPDATE);
 
-        ShareSnapshot snapshot = os().share().shareSnapshots().update(
+        ShareSnapshot snapshot = osv3().share().shareSnapshots().update(
                 "6d221c1d-0200-461e-8d20-24b4776b9ddb",
                 ShareSnapshotUpdateOptions
                         .create()
@@ -206,7 +206,7 @@ public class ShareSnapshotTests extends AbstractTest {
     public void delete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareSnapshots().delete("6d221c1d-0200-461e-8d20-24b4776b9ddb");
+        ActionResponse response = osv3().share().shareSnapshots().delete("6d221c1d-0200-461e-8d20-24b4776b9ddb");
         assertTrue(response.isSuccess());
     }
 
@@ -214,7 +214,7 @@ public class ShareSnapshotTests extends AbstractTest {
     public void resetState() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareSnapshots().resetState(
+        ActionResponse response = osv3().share().shareSnapshots().resetState(
                 "6d221c1d-0200-461e-8d20-24b4776b9ddb",
                 ShareSnapshot.Status.ERROR);
         assertTrue(response.isSuccess());
@@ -224,7 +224,7 @@ public class ShareSnapshotTests extends AbstractTest {
     public void forceDelete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareSnapshots().forceDelete("6d221c1d-0200-461e-8d20-24b4776b9ddb");
+        ActionResponse response = osv3().share().shareSnapshots().forceDelete("6d221c1d-0200-461e-8d20-24b4776b9ddb");
         assertTrue(response.isSuccess());
     }
 }

@@ -163,6 +163,10 @@ public final class Config {
     public ServiceVersionResolver getResolver() {
         return resolver;
     }
+    
+    public ServiceVersionResolver getV2Resolver() {
+        return resolver;
+    }
 
     public int getConnectTimeout() {
         return connectTimeout;

@@ -29,7 +29,7 @@ public class ShareServerTests extends AbstractTest {
     public void list() throws Exception {
         respondWith(JSON_SHARE_SERVERS);
 
-        List<? extends ShareServer> shareServers = os().share().shareServers().list();
+        List<? extends ShareServer> shareServers = osv3().share().shareServers().list();
         assertEquals(shareServers.size(), 1);
 
         ShareServer shareServer = shareServers.get(0);
@@ -47,7 +47,7 @@ public class ShareServerTests extends AbstractTest {
     public void get() throws Exception {
         respondWith(JSON_SHARE_SERVER);
 
-        ShareServer shareServer = os().share().shareServers().get("ba11930a-bf1a-4aa7-bae4-a8dfbaa3cc73");
+        ShareServer shareServer = osv3().share().shareServers().get("ba11930a-bf1a-4aa7-bae4-a8dfbaa3cc73");
 
         assertEquals(shareServer.getStatus(), ShareServer.Status.ACTIVE);
         assertEquals(shareServer.getBackendDetails().size(), 8);
@@ -72,7 +72,7 @@ public class ShareServerTests extends AbstractTest {
     public void delete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareServers().delete("ba11930a-bf1a-4aa7-bae4-a8dfbaa3cc73");
+        ActionResponse response = osv3().share().shareServers().delete("ba11930a-bf1a-4aa7-bae4-a8dfbaa3cc73");
         assertTrue(response.isSuccess());
     }
 }

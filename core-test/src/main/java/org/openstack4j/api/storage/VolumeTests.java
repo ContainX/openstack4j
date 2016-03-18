@@ -29,7 +29,7 @@ public class VolumeTests extends AbstractTest {
     public void listVolumesV1() throws Exception {
         // Check list volumes
         respondWith("/storage/v1/volumes.json");
-        List<? extends Volume> volumes = os().blockStorage().volumes().list();
+        List<? extends Volume> volumes = osv3().blockStorage().volumes().list();
         assertEquals(volumes.size(), 3);
         assertEquals(volumes.get(0).getTenantId(), "b0b5ed7ae06049688349fe43737796d4");
         
@@ -43,7 +43,7 @@ public class VolumeTests extends AbstractTest {
         final String volName = "vol-test-1";
         Map<String, String> filters = new HashMap<String, String>();
         filters.put("display_name", volName);
-        List<? extends Volume> filteredVolumes = os().blockStorage().volumes().list(filters);
+        List<? extends Volume> filteredVolumes = osv3().blockStorage().volumes().list(filters);
         assertEquals(filteredVolumes.size(), 2);
         
         // Check that the list request is the one we expect
@@ -57,7 +57,7 @@ public class VolumeTests extends AbstractTest {
     public void getVolumeV1() throws Exception {
         // Check get volume
         respondWith("/storage/v1/volume.json");
-        Volume volume = os().blockStorage().volumes().get("8a9287b7-4f4d-4213-8d75-63470f19f27c");
+        Volume volume = osv3().blockStorage().volumes().get("8a9287b7-4f4d-4213-8d75-63470f19f27c");
         
         RecordedRequest getRequest = server.takeRequest();
         assertTrue(getRequest.getPath().matches("/v[12]/\\p{XDigit}*/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
@@ -95,7 +95,7 @@ public class VolumeTests extends AbstractTest {
     public void getVolumeV2() throws Exception {
         // Check get volume
         respondWith("/storage/v2/volume.json");
-        Volume volume = os().blockStorage().volumes().get("8a9287b7-4f4d-4213-8d75-63470f19f27c");
+        Volume volume = osv3().blockStorage().volumes().get("8a9287b7-4f4d-4213-8d75-63470f19f27c");
         
         RecordedRequest getRequest = server.takeRequest();
         assertTrue(getRequest.getPath().matches("/v[12]/\\p{XDigit}*/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));

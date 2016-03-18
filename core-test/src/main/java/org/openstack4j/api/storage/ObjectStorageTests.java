@@ -27,7 +27,7 @@ public class ObjectStorageTests extends AbstractTest {
     public void containerListingTest() throws Exception {
         respondWith(JSON_CONTAINERS);
         
-        List<? extends SwiftContainer> containers = os().objectStorage().containers().list();
+        List<? extends SwiftContainer> containers = osv3().objectStorage().containers().list();
         assertEquals(2, containers.size());
         assertEquals(containers.get(0).getTotalSize(), 100);
         assertEquals(containers.get(0).getName(), "Test");
@@ -37,7 +37,7 @@ public class ObjectStorageTests extends AbstractTest {
     public void containerMetadataTest() throws Exception {
         respondWith(generateContainerMetadataMap(), 204);
         
-        Map<String, String> metadata = os().objectStorage().containers().getMetadata("Test");
+        Map<String, String> metadata = osv3().objectStorage().containers().getMetadata("Test");
         assertNotNull(metadata);
         assertEquals(metadata.get(NAME_YEAR), "2000");
         assertEquals(metadata.get(NAME_BOOK), "TestBook");

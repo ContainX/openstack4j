@@ -28,7 +28,7 @@ public class SchedulerStatsTests extends AbstractTest {
     public void pools() throws Exception {
         respondWith(JSON_SCHEDULER_STATS);
 
-        List<? extends BackendStoragePool> pools = os().share().schedulerStats().pools();
+        List<? extends BackendStoragePool> pools = osv3().share().schedulerStats().pools();
         assertEquals(pools.size(), 3);
 
         BackendStoragePool pool1 = pools.get(0);
@@ -55,7 +55,7 @@ public class SchedulerStatsTests extends AbstractTest {
     public void poolsDetail() throws Exception {
         respondWith(JSON_SCHEDULER_STATS_DETAIL);
 
-        List<? extends BackendStoragePool> pools = os().share().schedulerStats().poolsDetail();
+        List<? extends BackendStoragePool> pools = osv3().share().schedulerStats().poolsDetail();
         assertEquals(pools.size(), 1);
 
         BackendStoragePool pool = pools.get(0);

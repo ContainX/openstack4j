@@ -1,0 +1,52 @@
+{
+	"users": [
+		{
+			"name": "nova",
+			"id": "196cbcf9de4a40ff9b9292ab5b9e1e8d",
+			"enabled": true,
+			"email": "nova@domain.com",
+			"tenantId": "fae985a544c543dd9a799a7bb4953c69"
+		}, {
+			"name": "jack",
+			"id": "55184f77bc534ab7a2bf73d2cde2701b",
+			"enabled": true,
+			"email": "jack@jack.com",
+			"tenantId": "b0a9abafc4ef41ad9201f891fb88aeb3"
+		}, {
+			"name": "swift",
+			"id": "6485f1f8c5bb45418421c059e0ed0141",
+			"enabled": true,
+			"email": null,
+			"tenantId": "fae985a544c543dd9a799a7bb4953c69"
+		}, {
+			"name": "cinder",
+			"id": "80170078bc2349f9adca922f919fd749",
+			"enabled": true,
+			"email": "cinder@domain.com",
+			"tenantId": "fae985a544c543dd9a799a7bb4953c69"
+		}, {
+			"name": "glance",
+			"id": "917c06253ed1461caa40517453b3ba7c",
+			"enabled": true,
+			"email": "glance@domain.com",
+			"tenantId": "fae985a544c543dd9a799a7bb4953c69"
+		}, {
+			"name": "neutron",
+			"id": "a556c717d7b942a38b8712522f32a013",
+			"enabled": true,
+			"email": "neutron@domain.com",
+			"tenantId": "fae985a544c543dd9a799a7bb4953c69"
+		}, {
+			"name": "user_one",
+			"id": "d4abe4ee7a524d9da957861f3be38f68",
+			"enabled": true,
+			"email": "user_one@domain.com",
+			"tenantId": "b0a9abafc4ef41ad9201f891fb88aeb3"
+		}, {
+			"name": "admin",
+			"enabled": true,
+			"email": "admin@domain.com",
+			"id": "f931208382814e5ab3412f7e02c5e3ae"
+		}
+	]
+}

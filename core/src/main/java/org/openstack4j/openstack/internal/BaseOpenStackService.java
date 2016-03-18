@@ -22,7 +22,9 @@ import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.compute.ActionResponse;
-import org.openstack4j.model.identity.Service;
+import org.openstack4j.model.identity.AuthVersion;
+import org.openstack4j.model.identity.v2.Access;
+import org.openstack4j.model.identity.v3.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -86,6 +88,7 @@ public class BaseOpenStackService {
         return builder(returnType, Joiner.on("").join(path), method);
     }
 
+    @SuppressWarnings("rawtypes")
     private <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
         OSClientSession ses = OSClientSession.getCurrent();
         if (ses == null) {
@@ -196,15 +199,31 @@ public class BaseOpenStackService {
 
     }
 
+    // TODO:
+    @SuppressWarnings("rawtypes")
     protected int getServiceVersion() {
         OSClientSession session = OSClientSession.getCurrent();
-        SortedSet<? extends Service> services = session.getToken().getAggregatedCatalog().get(serviceType.getType());
-        if (services.isEmpty()) {
-            return 1;
+        if (session.getAuthVersion() == AuthVersion.V3) {
+            SortedSet<? extends Service> services = ((OSClientSession.OSClientSessionV3) session).getToken().getAggregatedCatalog().get(serviceType.getType());
+            Service service = ((OSClientSession.OSClientSessionV3) session).getToken().getAggregatedCatalog().get(serviceType.getType()).first();
+
+            if (services.isEmpty()) {
+                return 1;
+            }
+
+            return service.getVersion();
+
+        } else {
+            SortedSet<? extends Access.Service> services = ((OSClientSession.OSClientSessionV2) session).getAccess().getAggregatedCatalog().get(serviceType.getType());
+            Access.Service service = ((OSClientSession.OSClientSessionV2) session).getAccess().getAggregatedCatalog().get(serviceType.getType()).first();
+
+            if (services.isEmpty()) {
+                return 1;
+            }
+
+            return service.getVersion();
         }
 
-        Service service = session.getToken().getAggregatedCatalog().get(serviceType.getType()).first();
-        return service.getVersion();
     }
 
     protected <T> List<T> toList(T[] arr) {

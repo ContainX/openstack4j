@@ -41,14 +41,14 @@ public class ShareTests extends AbstractTest {
     public void listExtensions() throws Exception {
         respondWith(JSON_EXTENSIONS);
 
-        List<? extends Extension> extensions = os().share().listExtensions();
+        List<? extends Extension> extensions = osv3().share().listExtensions();
         assertTrue(extensions.isEmpty());
     }
 
     @Test
     public void limits() throws Exception {
         respondWith(JSON_LIMITS);
-        Limits limits = os().share().limits();
+        Limits limits = osv3().share().limits();
 
         RateLimit rateLimit = limits.getRate().get(0);
         RateLimit.Limit limit = rateLimit.getLimit().get(0);
@@ -80,7 +80,7 @@ public class ShareTests extends AbstractTest {
     public void services() throws Exception {
         respondWith(JSON_SERVICES);
 
-        List<? extends org.openstack4j.model.manila.Service> services = os().share().services();
+        List<? extends org.openstack4j.model.manila.Service> services = osv3().share().services();
         assertEquals(services.size(), 2);
 
         org.openstack4j.model.manila.Service service1 = services.get(0);
@@ -107,7 +107,7 @@ public class ShareTests extends AbstractTest {
     public void enableService() throws Exception {
         respondWith(JSON_SERVICE_ENABLE);
 
-        ManilaService.ServiceStatus status = os().share().enableService("manila-share", "openstack@cmode");
+        ManilaService.ServiceStatus status = osv3().share().enableService("manila-share", "openstack@cmode");
 
         assertFalse(status.getDisabled());
         assertEquals(status.getBinary(), "manila-share");
@@ -118,7 +118,7 @@ public class ShareTests extends AbstractTest {
     public void disableService() throws Exception {
         respondWith(JSON_SERVICE_DISABLE);
 
-        ManilaService.ServiceStatus status = os().share().disableService("manila-share", "openstack@cmode");
+        ManilaService.ServiceStatus status = osv3().share().disableService("manila-share", "openstack@cmode");
 
         assertTrue(status.getDisabled());
         assertEquals(status.getBinary(), "manila-share");
@@ -129,7 +129,7 @@ public class ShareTests extends AbstractTest {
     public void availabilityZones() throws Exception {
         respondWith(JSON_AVAILABILITY_ZONES);
 
-        List<? extends AvailabilityZone> availabilityZones = os().share().availabilityZones();
+        List<? extends AvailabilityZone> availabilityZones = osv3().share().availabilityZones();
         assertEquals(availabilityZones.size(), 1);
 
         AvailabilityZone availabilityZone = availabilityZones.get(0);
@@ -155,7 +155,7 @@ public class ShareTests extends AbstractTest {
                 .description("Lets manage share.")
                 .build();
 
-        Share share = os().share().manageShare(shareManage);
+        Share share = osv3().share().manageShare(shareManage);
 
         assertEquals(share.getLinks().size(), 2);
         assertEquals(
@@ -196,7 +196,7 @@ public class ShareTests extends AbstractTest {
     public void unmanageShare() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().unmanageShare("00137b40-ca06-4ae8-83a3-2c5989eebcce");
+        ActionResponse response = osv3().share().unmanageShare("00137b40-ca06-4ae8-83a3-2c5989eebcce");
         assertTrue(response.isSuccess());
     }
 }
