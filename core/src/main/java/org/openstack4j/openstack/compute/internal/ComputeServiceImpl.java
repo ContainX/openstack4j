@@ -18,7 +18,7 @@ import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.model.common.Extension;
-import org.openstack4j.openstack.common.ExtensionValue.NovaExtensions;
+import org.openstack4j.openstack.common.ExtensionValue.Extensions;
 
 /**
  * Compute (Nova) Operations API implementation
@@ -64,7 +64,7 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	 */
 	@Override
 	public List<? extends Extension> listExtensions() {
-		return get(NovaExtensions.class, uri("/extensions")).execute().getList();
+		return get(Extensions.class, uri("/extensions")).execute().getList();
 	}
 
 	/**
