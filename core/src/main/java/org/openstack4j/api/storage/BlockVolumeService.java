@@ -123,4 +123,14 @@ public interface BlockVolumeService extends RestService {
 	 * @return the volume transfer service
 	 */
 	BlockVolumeTransferService transfer();
+
+	/**
+	 * Updates volume read-only access-mode flag
+	 *
+	 * @param volumeId ID of volume to update
+	 * @param readonly enables or disables update of volume to read-only access mode
+	 * @return the action response
+	 */
+	ActionResponse readOnlyModeUpdate(String volumeId, boolean readonly);
+
 }
