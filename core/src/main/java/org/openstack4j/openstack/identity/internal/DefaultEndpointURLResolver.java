@@ -13,6 +13,7 @@ import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.Token;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
@@ -28,6 +29,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Jeremy Unruh
  */
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
+
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultEndpointURLResolver.class);
 
     private static final Map<Key, String> CACHE = new ConcurrentHashMap<Key, String>();
     private static boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
@@ -173,7 +176,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
                 publicHostIP = new URI(access.getEndpoint()).getHost();
             }
             catch (URISyntaxException e) {
-                LoggerFactory.getLogger(DefaultEndpointURLResolver.class).error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
         }
         return publicHostIP;

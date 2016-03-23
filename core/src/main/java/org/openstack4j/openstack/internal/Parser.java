@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.internal;
 
 import com.fasterxml.jackson.databind.util.StdDateFormat;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
@@ -20,6 +21,8 @@ import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT_H
  * @author Jeremy Unruh
  */
 public final class Parser {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Parser.class);
 
     private static final String PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
     private static SimpleDateFormat DF;
@@ -72,9 +75,8 @@ public final class Parser {
         try {
             if (date != null)
                 return StdDateFormat.instance.parse(date);
-        }
-        catch (ParseException e) {
-            LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
+        } catch (ParseException e) {
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }

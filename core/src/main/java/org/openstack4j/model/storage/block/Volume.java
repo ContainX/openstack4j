@@ -6,6 +6,7 @@ import com.google.common.base.CaseFormat;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
@@ -52,6 +53,8 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	    NONE, MIGRATING
 	    ;
 
+		private static final Logger LOG = LoggerFactory.getLogger(MigrationStatus.class);
+
 	    @JsonValue
         public String value() {
             return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_HYPHEN, name());
@@ -69,7 +72,7 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
                 try {
                     return valueOf(CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_UNDERSCORE, checkNotNull(migrationStatus, "migrationStatus")));
                 } catch (IllegalArgumentException e) {
-                    LoggerFactory.getLogger(MigrationStatus.class).error(e.getMessage(), e);
+                    LOG.error(e.getMessage(), e);
                 }
             }
             return NONE;

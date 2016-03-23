@@ -57,7 +57,7 @@ public final class HttpCommand<R> {
             populateQueryParams();
             populateHeaders();
         } catch (Exception ex) {
-            ex.printStackTrace(System.err);
+            LOG.error(ex.getMessage(), ex);
         }
     }
 
@@ -101,9 +101,9 @@ public final class HttpCommand<R> {
                     status, connection.getResponseMessage(),
                     data);
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw ex;
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+            throw e;
         } finally {
             connection.disconnect();
         }

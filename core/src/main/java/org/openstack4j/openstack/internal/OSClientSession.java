@@ -26,6 +26,7 @@ import org.openstack4j.model.identity.Token;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.openstack.identity.functions.ServiceToServiceType;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
@@ -39,6 +40,8 @@ import java.util.Set;
  * @author Jeremy Unruh
  */
 public class OSClientSession implements OSClient, EndpointTokenProvider {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OSClientSession.class);
 
     private static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
 
@@ -223,7 +226,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
                 URI uri = new URI(url);
                 return url.replace(uri.getHost(), config.getEndpointNATResolution());
             } catch (URISyntaxException e) {
-                LoggerFactory.getLogger(OSClientSession.class).error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
         }
         return url;
