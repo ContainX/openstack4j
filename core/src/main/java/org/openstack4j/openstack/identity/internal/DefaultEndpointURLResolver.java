@@ -1,12 +1,7 @@
 package org.openstack4j.openstack.identity.internal;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.concurrent.ConcurrentHashMap;
-
+import com.google.common.base.Optional;
+import com.google.common.collect.SortedSetMultimap;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.types.Facing;
@@ -18,17 +13,24 @@ import org.openstack4j.model.identity.Endpoint;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.Token;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Optional;
-import com.google.common.collect.SortedSetMultimap;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Resolves an Endpoint URL based on the Service Type and Facing perspective
- * 
+ *
  * @author Jeremy Unruh
  */
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
+
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultEndpointURLResolver.class);
 
     private static final Map<Key, String> CACHE = new ConcurrentHashMap<Key, String>();
     private static boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
@@ -71,11 +73,11 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
     private String resolveV2(URLResolverParams p) {
         SortedSetMultimap<String, ? extends Service> catalog = p.access.getAggregatedCatalog();
         SortedSet<? extends Service> services = catalog.get(p.type.getServiceName());
-        
+
         if (services.isEmpty()) {
             services = catalog.get(p.type.getTypeV3());
         }
-        
+
         if (!services.isEmpty())
         {
             Service sc = p.getV2Resolver().resolve(p.type, services);
@@ -113,7 +115,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
 
         for (Catalog catalog : token.getCatalog()) {
-            if (p.type == ServiceType.forName(catalog.getType())) 
+            if (p.type == ServiceType.forName(catalog.getType()))
             {
                 for (org.openstack4j.model.identity.v3.Endpoint ep : catalog.getEndpoints()) {
                     // Since we only support V3 authentication - skip a V3 URL
@@ -127,9 +129,9 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
     }
 
     /**
-     * Returns <code>true</code> for any endpoint that matches a given 
+     * Returns <code>true</code> for any endpoint that matches a given
      * {@link URLResolverParams}.
-     * 
+     *
      * @param endpoint
      * @param p
      * @return
@@ -174,7 +176,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
                 publicHostIP = new URI(access.getEndpoint()).getHost();
             }
             catch (URISyntaxException e) {
-                LoggerFactory.getLogger(DefaultEndpointURLResolver.class).error(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
         }
         return publicHostIP;

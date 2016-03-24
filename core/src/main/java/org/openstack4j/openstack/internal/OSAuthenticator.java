@@ -1,16 +1,9 @@
 package org.openstack4j.openstack.internal;
 
-import static org.openstack4j.core.transport.HttpExceptionHandler.mapException;
-
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.types.Facing;
-import org.openstack4j.core.transport.ClientConstants;
-import org.openstack4j.core.transport.Config;
-import org.openstack4j.core.transport.HttpEntityHandler;
-import org.openstack4j.core.transport.HttpMethod;
-import org.openstack4j.core.transport.HttpRequest;
-import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.core.transport.*;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
@@ -23,8 +16,10 @@ import org.openstack4j.openstack.identity.domain.TokenAuth;
 import org.openstack4j.openstack.identity.domain.v3.AccessWrapper;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth;
 import org.openstack4j.openstack.identity.domain.v3.KeystoneToken;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.openstack4j.core.transport.HttpExceptionHandler.mapException;
 
 /**
  * Responsible for authenticating and re-authenticating sessions for V2 and V3 of the Identity API
@@ -189,8 +184,8 @@ public class OSAuthenticator {
 
         OSClientSession current = OSClientSession.getCurrent();
         current.access = accesswr;
-        return current;
 
+        return current;
     }
 
     private static class SessionInfo {
@@ -205,7 +200,5 @@ public class OSAuthenticator {
             this.reLinkToExistingSession = reLinkToExistingSession;
             this.provider = provider;
         }
-
     }
-
 }

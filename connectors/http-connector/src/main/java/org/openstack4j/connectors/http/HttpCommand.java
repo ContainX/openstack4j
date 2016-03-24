@@ -1,29 +1,23 @@
 package org.openstack4j.connectors.http;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.net.Proxy.Type;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.io.ByteStreams;
+import com.google.common.net.MediaType;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.google.common.io.ByteStreams;
-import com.google.common.net.MediaType;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.*;
+import java.net.Proxy.Type;
+import java.util.List;
+import java.util.Map;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the
@@ -63,9 +57,8 @@ public final class HttpCommand<R> {
             populateQueryParams();
             populateHeaders();
         } catch (Exception ex) {
-            ex.printStackTrace(System.err);
+            LOG.error(ex.getMessage(), ex);
         }
-
     }
 
     /**
@@ -108,13 +101,12 @@ public final class HttpCommand<R> {
                     status, connection.getResponseMessage(),
                     data);
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            throw ex;
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+            throw e;
         } finally {
             connection.disconnect();
         }
-
     }
 
     /**
@@ -176,7 +168,7 @@ public final class HttpCommand<R> {
 
         if (request.getConfig() != null && request.getConfig().getProxy() != null) {
             Config config = request.getConfig();
-            Proxy proxy = new Proxy(Type.HTTP, 
+            Proxy proxy = new Proxy(Type.HTTP,
                     new InetSocketAddress(config.getProxy().getRawHost(), config.getProxy().getPort()));
             connection = (HttpURLConnection) connectionUrl.openConnection(proxy);
         }

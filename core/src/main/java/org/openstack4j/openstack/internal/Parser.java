@@ -1,7 +1,8 @@
 package org.openstack4j.openstack.internal;
 
-import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT;
-import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT_HTML;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,15 +13,16 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.openstack4j.openstack.logging.LoggerFactory;
-
-import com.fasterxml.jackson.databind.util.StdDateFormat;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT_HTML;
 
 /**
  * Provides common parser routines when dealing with Headers or other non-json payloads
  * @author Jeremy Unruh
  */
 public final class Parser {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Parser.class);
 
     private static final String PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
     private static SimpleDateFormat DF;
@@ -73,9 +75,8 @@ public final class Parser {
         try {
             if (date != null)
                 return StdDateFormat.instance.parse(date);
-        }
-        catch (ParseException e) { 
-            LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
+        } catch (ParseException e) {
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }
@@ -85,7 +86,7 @@ public final class Parser {
      * @param date the date to format
      * @return the formatted date string
      */
-    public static String toRFC1123(Date date) 
+    public static String toRFC1123(Date date)
     {
         if (DF == null) {
             DF = new SimpleDateFormat(PATTERN_RFC1123, Locale.US);
@@ -96,7 +97,7 @@ public final class Parser {
 
     /**
      * Parses a String in RFC 822 format into a Date object
-     * 
+     *
      * @param toParse the date to parse
      * @return the parsed date
      */
@@ -145,23 +146,23 @@ public final class Parser {
         if (matcher.find()) {
             toParse = matcher.group(1);
         }
-        
+
         if (toParse.length() == 25 && SECOND_PATTERN.matcher(toParse).matches())
             toParse = toParse.substring(0, toParse.length() - 6);
         return toParse;
     }
-    
+
     /**
      * Determines if the specified content type is text/plain or text/html.  If the contentType is null
-     * then false is returned.  
-     * 
+     * then false is returned.
+     *
      * @param contentType the content type
      * @return true if the contentType is text/plain or text/html
      */
     public static boolean isContentTypeText(String contentType) {
         if (contentType == null)
             return false;
-        
+
         return (contentType.contains(CONTENT_TYPE_TEXT) || contentType.contains(CONTENT_TYPE_TEXT_HTML));
     }
 }

@@ -8,6 +8,8 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.openstack.internal.OSAuthenticator;
 import org.openstack4j.openstack.internal.OSClientSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * HttpExecutor is the default implementation for HttpExecutorService which is
@@ -17,6 +19,8 @@ import org.openstack4j.openstack.internal.OSClientSession;
  * @author Jeremy Unruh
  */
 public class HttpExecutorServiceImpl implements HttpExecutorService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(HttpExecutorServiceImpl.class);
 
     private static final String NAME = "Http URL Connector";
 
@@ -30,7 +34,7 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
         } catch (ResponseException re) {
             throw re;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
             return null;
         }
     }
@@ -50,7 +54,7 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
         try {
             return invokeRequest(command);
         } catch (Exception pe) {
-            pe.printStackTrace(System.err);
+            LOG.error(pe.getMessage(), pe);
             throw new ConnectionException(pe.getMessage(), 0, pe);
         }
     }
