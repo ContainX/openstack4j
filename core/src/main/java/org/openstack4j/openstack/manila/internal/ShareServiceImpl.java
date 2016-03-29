@@ -5,7 +5,7 @@ import org.openstack4j.api.manila.*;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.*;
-import org.openstack4j.openstack.common.ExtensionValue.ManilaExtensions;
+import org.openstack4j.openstack.common.ExtensionValue;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.manila.domain.ManilaAvailabilityZone;
 import org.openstack4j.openstack.manila.domain.ManilaLimits;
@@ -28,7 +28,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public List<? extends Extension> listExtensions() {
-        return get(ManilaExtensions.class, uri("/extensions")).execute().getList();
+        return get(ExtensionValue.Extensions.class, uri("/extensions")).execute().getList();
     }
 
     /**
