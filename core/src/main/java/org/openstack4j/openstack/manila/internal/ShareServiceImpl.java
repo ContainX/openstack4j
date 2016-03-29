@@ -3,7 +3,7 @@ package org.openstack4j.openstack.manila.internal;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.manila.*;
 import org.openstack4j.model.common.Extension;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.*;
 import org.openstack4j.openstack.common.ExtensionValue.ManilaExtensions;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;

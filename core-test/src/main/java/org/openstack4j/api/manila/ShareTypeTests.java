@@ -3,7 +3,7 @@ package org.openstack4j.api.manila;
 import com.beust.jcommander.internal.Maps;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ExtraSpecs;
 import org.openstack4j.model.manila.ShareType;
 import org.openstack4j.model.manila.ShareTypeAccess;

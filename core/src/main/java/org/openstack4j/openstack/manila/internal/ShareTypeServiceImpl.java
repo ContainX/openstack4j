@@ -3,7 +3,7 @@ package org.openstack4j.openstack.manila.internal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openstack4j.api.manila.ShareTypeService;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ExtraSpecs;
 import org.openstack4j.model.manila.ShareType;
 import org.openstack4j.model.manila.ShareTypeAccess;

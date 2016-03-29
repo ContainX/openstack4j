@@ -10,7 +10,7 @@ import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.Payloads;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.JobBinary;
 import org.openstack4j.openstack.sahara.domain.SaharaJobBinary;
 import org.openstack4j.openstack.sahara.domain.SaharaJobBinary.JobBinaries;

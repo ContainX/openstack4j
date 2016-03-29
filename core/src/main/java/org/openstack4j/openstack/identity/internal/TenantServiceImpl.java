@@ -6,7 +6,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_TENANTS;
 import java.util.List;
 
 import org.openstack4j.api.identity.TenantService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Tenant;
 import org.openstack4j.model.identity.TenantUser;
 import org.openstack4j.openstack.identity.domain.KeystoneTenant;

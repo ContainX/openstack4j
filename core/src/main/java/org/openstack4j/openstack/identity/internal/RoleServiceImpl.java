@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.openstack4j.api.identity.RoleService;
 import org.openstack4j.core.transport.HttpMethod;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Role;
 import org.openstack4j.openstack.identity.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.domain.KeystoneRole.Roles;

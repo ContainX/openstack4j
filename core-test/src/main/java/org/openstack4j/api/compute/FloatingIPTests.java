@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.core.transport.internal.HttpExecutor;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.FloatingIP;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

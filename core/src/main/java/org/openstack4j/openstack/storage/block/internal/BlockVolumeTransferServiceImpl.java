@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.storage.BlockVolumeTransferService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.VolumeTransfer;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeTransfer;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeTransfer.VolumeTransferList;
