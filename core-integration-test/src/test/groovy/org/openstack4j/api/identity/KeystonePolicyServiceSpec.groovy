@@ -6,7 +6,7 @@ import org.junit.Rule
 import org.junit.rules.TestName
 import org.openstack4j.api.OSClient
 import org.openstack4j.model.common.Identifier
-import org.openstack4j.model.compute.ActionResponse
+import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.model.identity.Policy
 import org.openstack4j.model.identity.User
 import org.openstack4j.openstack.OSFactory

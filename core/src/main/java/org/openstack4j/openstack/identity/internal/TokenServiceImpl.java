@@ -5,7 +5,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_TOKENS;
 import static org.openstack4j.core.transport.ClientConstants.HEADER_X_SUBJECT_TOKEN;
 
 import org.openstack4j.api.identity.TokenService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Token;
 import org.openstack4j.openstack.identity.domain.KeystoneToken;
 import org.openstack4j.openstack.internal.BaseOpenStackService;

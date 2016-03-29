@@ -9,7 +9,7 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeTransferService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
 import org.openstack4j.model.storage.block.VolumeUploadImage;

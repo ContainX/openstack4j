@@ -1,8 +1,8 @@
-package org.openstack4j.model.compute;
-
-import java.io.Serializable;
+package org.openstack4j.model.common;
 
 import com.google.common.base.Objects;
+
+import java.io.Serializable;
 
 /**
  * A response that is returned when an Action is performed against the server.  If {@link #isSuccess()} is true then the fault will always be null. The fault

@@ -6,7 +6,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_DOMAINS;
 import java.util.List;
 
 import org.openstack4j.api.identity.DomainService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.Domain;
 import org.openstack4j.openstack.identity.domain.KeystoneDomain;
 import org.openstack4j.openstack.identity.domain.KeystoneDomain.Domains;

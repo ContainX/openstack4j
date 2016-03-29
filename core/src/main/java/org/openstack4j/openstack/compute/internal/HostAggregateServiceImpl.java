@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.openstack4j.api.compute.HostAggregateService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.HostAggregate;
 import org.openstack4j.openstack.compute.domain.AggregateAddHost;
 import org.openstack4j.openstack.compute.domain.AggregateRemoveHost;

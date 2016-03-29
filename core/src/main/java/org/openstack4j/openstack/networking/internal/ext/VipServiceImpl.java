@@ -4,7 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 import java.util.Map;
 import org.openstack4j.api.networking.ext.VipService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.Vip;
 import org.openstack4j.model.network.ext.VipUpdate;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
