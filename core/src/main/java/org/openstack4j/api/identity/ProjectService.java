@@ -52,7 +52,7 @@ public interface ProjectService extends RestService {
 	 *
 	 * @param projectName the project name
 	 * @param domainId the domain id
-	 * @return the project
+	 * @return the project or null if not found
 	 */
 	Project getByName(String projectName, String domainId);
 

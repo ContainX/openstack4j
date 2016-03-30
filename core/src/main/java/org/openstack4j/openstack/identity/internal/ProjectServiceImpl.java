@@ -45,7 +45,7 @@ public class ProjectServiceImpl extends BaseOpenStackService implements ProjectS
     public Project getByName(String projectName, String domainId) {
         checkNotNull(projectName);
         checkNotNull(domainId);
-        return get(Projects.class, uri(PATH_PROJECTS)).param("name", projectName).param("domain_id", domainId).execute().getList().get(0);
+        return get(Projects.class, uri(PATH_PROJECTS)).param("name", projectName).param("domain_id", domainId).execute().first();
     }
 
     @Override
