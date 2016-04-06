@@ -16,7 +16,7 @@
     <properties>
         <release.version>2.0.0</release.version>
         <aries.spifly.version>1.0.0</aries.spifly.version>
-        <slf4j.version>1.7.19</slf4j.version>
+        <slf4j.version>1.7.21</slf4j.version>
     </properties>
     <licenses>
         <license>
