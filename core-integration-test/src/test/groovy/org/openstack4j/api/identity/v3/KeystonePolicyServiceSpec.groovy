@@ -125,7 +125,7 @@ class KeystonePolicyServiceSpec extends AbstractSpec {
         //        when: "a policy is updated"
         //        Policy policy_setToUpdate = os.identity().policies().get(POLICY_CRUD_ID)
         //        if(policy != null)
-        //            Policy updatedPolicy = os.identity().policies().update(policy_setToUpdate.tobuilderV3().blob(POLICY_CRUD_BLOB_UPDATE).build());
+        //            Policy updatedPolicy = os.identity().policies().update(policy_setToUpdate.toBuilder().blob(POLICY_CRUD_BLOB_UPDATE).build());
         //
         //        then: "check if the update was successful"
         //        updatedPolicy.getId() == POLICY_CRUD_ID

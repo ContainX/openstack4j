@@ -199,7 +199,6 @@ public class BaseOpenStackService {
 
     }
 
-    // TODO:
     @SuppressWarnings("rawtypes")
     protected int getServiceVersion() {
         OSClientSession session = OSClientSession.getCurrent();

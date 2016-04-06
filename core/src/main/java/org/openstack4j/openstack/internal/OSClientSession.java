@@ -233,7 +233,6 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return getSupportedServices().contains(ServiceType.SHARE);
     }
 
-    // TODO:
     public Set<ServiceType> getSupportedServices() {
         return null;
     }

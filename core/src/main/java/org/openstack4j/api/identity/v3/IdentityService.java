@@ -1,6 +1,9 @@
 package org.openstack4j.api.identity.v3;
 
+import java.util.List;
+
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.Extension;
 
 /**
  * Identity v3 Service Operations API
@@ -70,5 +73,12 @@ public interface IdentityService extends RestService {
      * @return the region service
      */
     RegionService regions();
+    
+    /**
+     * List extensions currently available on the OpenStack instance
+     *
+     * @return List of extensions
+     */
+    List<? extends Extension> listExtensions();
 
 }

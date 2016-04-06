@@ -12,6 +12,7 @@ import org.openstack4j.api.identity.v2.TenantService;
 import org.openstack4j.api.identity.v2.UserService;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.identity.v2.Endpoint;
+import org.openstack4j.openstack.common.ExtensionValue.ExtensionList;
 import org.openstack4j.openstack.common.ExtensionValue.Extensions;
 import org.openstack4j.openstack.identity.v2.domain.KeystoneEndpoint.Endpoints;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
@@ -31,7 +32,7 @@ public class IdentityServiceImpl extends BaseOpenStackService implements Identit
 
 	@Override
 	public List<? extends Extension> listExtensions() {
-		return get(Extensions.class, PATH_EXTENSIONS).execute().getList();
+		return get(ExtensionList.class, PATH_EXTENSIONS).execute().getList();
 	}
 
 	@Override

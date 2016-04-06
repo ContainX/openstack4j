@@ -123,14 +123,16 @@ class KeystoneDomainServiceSpec extends AbstractSpec {
         then: "this list shouldn't be empty"
         domainList.isEmpty() == false
 
-        // TODO:
-        //        when: "an existing domain's description and enabled status is updated"
-        //        Domain updatedDomain = os.identity().domains().update(Builders.domain()
-        //                                        .id(DOMAIN_CRUD_ID)
-        //                                        .description(DOMAIN_CRUD_DESCRIPTION_UPDATED)
-        //                                        .enabled(false)
-        //                                        .build())
+        // TODO: Commented out, because currently the HttpClient used betamax v1.1.2 does not support HTTP PATCH method.
+        //       See DefaultHttpRequestFactory used in co.freeside.betamax.proxy.handler.TargetConnector .
+        //       Therefore update() is tested in core-test.
         //
+        //        when: "an existing domain's description and enabled status is updated"
+        //        Domain domain_setToUpdate = os.identity().domains().get(DOMAIN_CRUD_ID)
+        //
+        //        if(domain != null)
+        //          Domain updatedDomain = os.identity().domains().update(domain_setToUpdate.toBuilder().description(DOMAIN_CRUD_DESCRIPTION_UPDATED).build())
+        //        
         //        then: "verify the updated attributes"
         //        updatedDomain.getDescription() == DOMAIN_CRUD_DESCRIPTION_UPDATED
         //        updatedDomain.getName() == DOMAIN_CRUD_NAME

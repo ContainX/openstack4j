@@ -141,11 +141,10 @@ class KeystoneUserServiceSpec extends AbstractSpec {
         //       Therefore update() is tested in core-test.
         //
         //        when: "a users attributes are updated"
-        //        User updatedUser = os.identity().users().update(KeystoneUser.builder()
-        //                .id(USER_CRUD_ID)
-        //                .email("updatedFoobar@example.org")
-        //                .enabled(true)
-        //                .build())
+        //        User user_setToUpdate = os.identity().users().get(USER_CRUD_ID)
+        //
+        //        if( user_setToUpdate != null)
+        //          User updatedUser = os.identity().users().update(user_setToUpdate.toBuilder().email("updatedFoobar@example.org").build())
         //
         //        then: "check if the update was successful"
         //        updatedUser.getEmail() == "updatedFoobar@example.org"

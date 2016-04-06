@@ -143,7 +143,7 @@ class KeystoneProjectServiceSpec extends AbstractSpec {
         //        when: "an existing project is updated"
         //        Project project_setToUpdate = os.identity().projects().get(PROJECT_ID)
         //        if (project != null)
-        //            Project updatedProject = os.identity().projects().update(project_setToUpdate.tobuilderV3().description(PROJECT_DESCRIPTION_UPDATED).build());
+        //            Project updatedProject = os.identity().projects().update(project_setToUpdate.toBuilder().description(PROJECT_DESCRIPTION_UPDATED).build());
         //
         //        then: "verify the updated attributes"
         //        updatedProject.getDescription() == PROJECT_DESCRIPTION_UPDATED

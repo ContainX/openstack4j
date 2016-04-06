@@ -146,7 +146,7 @@ class KeystoneGroupServiceSpec extends AbstractSpec {
         //       Therefore update() is tested in core-test.
         //
         //        when: "a groups attributes are updated"
-        //        Group updatedGroup = os.identity().groups().update(group_byId.tobuilderV3().description(GROUP_DESCRIPTION_UPDATED).build());
+        //        Group updatedGroup = os.identity().groups().update(group_byId.toBuilder().description(GROUP_DESCRIPTION_UPDATED).build());
         //
         //        then: "check if the update was successful"
         //        updatedGroup.getId() == GROUP_CRUD_ID
