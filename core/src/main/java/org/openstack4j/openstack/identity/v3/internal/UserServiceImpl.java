@@ -7,7 +7,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_USERS;
 import java.util.List;
 
 import org.openstack4j.api.identity.v3.UserService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.identity.v3.Group;
 import org.openstack4j.model.identity.v3.Project;

@@ -3,10 +3,11 @@ package org.openstack4j.api.identity.v3;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Group;
 import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.identity.v3.User;
+
 
 /**
  * Identity V3 Group Service

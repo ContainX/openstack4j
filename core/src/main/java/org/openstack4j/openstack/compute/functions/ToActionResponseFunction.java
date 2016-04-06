@@ -3,7 +3,7 @@ package org.openstack4j.openstack.compute.functions;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.functions.ResponseToActionResponse;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.logging.Logger;
 import org.openstack4j.openstack.logging.LoggerFactory;
 

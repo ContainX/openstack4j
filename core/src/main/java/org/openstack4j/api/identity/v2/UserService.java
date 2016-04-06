@@ -2,7 +2,7 @@ package org.openstack4j.api.identity.v2;
 
 import java.util.List;
 
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v2.Role;
 import org.openstack4j.model.identity.v2.User;
 

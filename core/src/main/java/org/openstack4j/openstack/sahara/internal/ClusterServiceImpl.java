@@ -7,7 +7,7 @@ import java.util.List;
 import org.openstack4j.api.sahara.ClusterService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.Cluster;
 import org.openstack4j.model.sahara.NodeGroup;
 import org.openstack4j.openstack.sahara.domain.SaharaCluster;

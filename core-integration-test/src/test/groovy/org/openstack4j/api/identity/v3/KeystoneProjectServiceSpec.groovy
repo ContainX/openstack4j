@@ -10,7 +10,7 @@ import org.openstack4j.api.Builders
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.core.transport.Config
 import org.openstack4j.model.common.Identifier
-import org.openstack4j.model.compute.ActionResponse
+import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.model.identity.v3.Project
 import org.openstack4j.openstack.OSFactory
 

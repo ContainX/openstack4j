@@ -75,33 +75,22 @@ public class ExtensionValue implements Extension {
 						.addValue("\n")
 						.toString();
 	}
-	
-	@JsonRootName("extensions")
-	public static class Extensions extends ListResult<ExtensionValue> {
 
+	@JsonRootName("extensions")
+	public static class ExtensionList extends ListResult<ExtensionValue> {
 		private static final long serialVersionUID = 1L;
+
 		@JsonProperty("values")
 		private List<ExtensionValue> list;
-		
-		public List<ExtensionValue> value() {
-			return list;
-		}
-	}
-	
-	public static class NovaExtensions extends ListResult<ExtensionValue> {
 
-		private static final long serialVersionUID = 1L;
-		@JsonProperty("extensions")
-		private List<ExtensionValue> list;
-		
 		public List<ExtensionValue> value() {
 			return list;
 		}
 	}
 
-	// TODO Manila extensions look exactly the same as nova extensions. Maybe they can be merged.
-	public static class ManilaExtensions extends ListResult<ExtensionValue> {
+	public static class Extensions extends ListResult<ExtensionValue> {
 		private static final long serialVersionUID = 1L;
+
 		@JsonProperty("extensions")
 		private List<ExtensionValue> list;
 

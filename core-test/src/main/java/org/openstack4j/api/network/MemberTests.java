@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.Member;
 import org.openstack4j.model.network.ext.MemberUpdate;
 import org.testng.annotations.Test;

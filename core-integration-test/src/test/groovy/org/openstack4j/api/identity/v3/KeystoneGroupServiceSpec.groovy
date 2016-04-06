@@ -11,6 +11,7 @@ import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.compute.ActionResponse
 import org.openstack4j.model.identity.v3.Group
 import org.openstack4j.model.identity.v3.User
+import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.openstack.OSFactory
 
 import spock.lang.IgnoreIf

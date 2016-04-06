@@ -6,7 +6,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_POLICIES;
 import java.util.List;
 
 import org.openstack4j.api.identity.v3.PolicyService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Policy;
 import org.openstack4j.openstack.identity.v3.domain.KeystonePolicy;
 import org.openstack4j.openstack.identity.v3.domain.KeystonePolicy.Policies;

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.Protocol;
 import org.openstack4j.model.network.ext.SessionPersistenceType;
 import org.openstack4j.model.network.ext.Vip;

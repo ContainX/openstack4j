@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.identity.v2.UserService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v2.Role;
 import org.openstack4j.model.identity.v2.User;
 import org.openstack4j.openstack.identity.v2.domain.KeystoneUser;

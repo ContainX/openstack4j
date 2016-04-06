@@ -6,7 +6,7 @@ import static org.openstack4j.core.transport.ClientConstants.PATH_REGIONS;
 import java.util.List;
 
 import org.openstack4j.api.identity.v3.RegionService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Region;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRegion;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRegion.Regions;

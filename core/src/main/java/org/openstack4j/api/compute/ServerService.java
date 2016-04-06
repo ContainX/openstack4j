@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.model.compute.Action;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;

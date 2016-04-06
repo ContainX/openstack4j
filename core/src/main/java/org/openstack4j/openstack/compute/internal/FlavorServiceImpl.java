@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.compute.FlavorService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.FlavorAccess;
 import org.openstack4j.openstack.compute.domain.ExtraSpecsWrapper;

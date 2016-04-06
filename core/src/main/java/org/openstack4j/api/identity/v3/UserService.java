@@ -3,12 +3,13 @@ package org.openstack4j.api.identity.v3;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.identity.v3.Group;
 import org.openstack4j.model.identity.v3.Project;
 import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.identity.v3.User;
+import org.openstack4j.model.common.ActionResponse;
+
 
 /**
  * identity/v3 User operations
