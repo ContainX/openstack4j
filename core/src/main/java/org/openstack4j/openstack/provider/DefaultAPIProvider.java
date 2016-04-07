@@ -139,6 +139,11 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(FirewallService.class, FirewallServiceImpl.class);
 		bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
 		bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
+		bind(MeteringLabelService.class, MeteringLabelServiceImpl.class);
+		bind(MeteringRuleService.class, MeteringRuleServiceImpl.class);
+		bind(MeteringService.class, MeteringServiceImpl.class);
+		
+		
 	}
 
 	/**

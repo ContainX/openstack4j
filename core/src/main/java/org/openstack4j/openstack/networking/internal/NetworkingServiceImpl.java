@@ -11,6 +11,7 @@ import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.api.networking.ext.FirewallAsService;
 import org.openstack4j.api.networking.ext.LoadBalancerService;
+import org.openstack4j.api.networking.ext.MeteringService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 
 /**
@@ -98,5 +99,14 @@ public class NetworkingServiceImpl implements NetworkingService {
     @Override
     public FirewallAsService firewalls() {
         return Apis.get(FirewallAsService.class);
-    }	
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MeteringService metering() {
+        return Apis.get(MeteringService.class);
+    }
+
 }
