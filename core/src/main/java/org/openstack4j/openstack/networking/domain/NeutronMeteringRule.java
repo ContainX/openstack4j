@@ -26,6 +26,7 @@ public class NeutronMeteringRule implements MeteringRule {
     private String meteringLabelId;
     @JsonProperty("remote_ip_prefix")
     private String remoteIpPrefix;
+    private String id;
     private Boolean excluded;
 
     public static MeteringRuleBuilder builder() {
@@ -38,6 +39,14 @@ public class NeutronMeteringRule implements MeteringRule {
      */
     public MeteringRuleBuilder toBuilder() {
         return new MeteringRuleConcreteBuilder(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -70,6 +79,14 @@ public class NeutronMeteringRule implements MeteringRule {
     @Override
     public void setExcluded(Boolean excluded) {
         this.excluded = excluded;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+        return id;
     }
     
     /**
@@ -111,6 +128,7 @@ public class NeutronMeteringRule implements MeteringRule {
     @Override
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues()
+                .add("id", id)
                 .add("meteringLabelId", meteringLabelId)
                 .add("direction", direction)
                 .add("excluded", excluded)

@@ -1,7 +1,7 @@
 package org.openstack4j.model.network;
 
 import org.openstack4j.common.Buildable;
-import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.common.IdEntity;
 import org.openstack4j.model.network.builder.MeteringRuleBuilder;
 
 /**
@@ -9,7 +9,7 @@ import org.openstack4j.model.network.builder.MeteringRuleBuilder;
  * 
  * @author Caio Bergamasco
  */
-public interface MeteringRule extends ModelEntity, Buildable<MeteringRuleBuilder> {
+public interface MeteringRule extends IdEntity, Buildable<MeteringRuleBuilder> {
 
     /**
      * Description for the metering label rule
