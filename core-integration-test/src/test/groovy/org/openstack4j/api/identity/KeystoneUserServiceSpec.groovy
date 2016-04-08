@@ -152,6 +152,12 @@ class KeystoneUserServiceSpec extends AbstractSpec {
         //        updatedUser.isEnabled() == true
         //        updatedUser.getId() == USER_CRUD_ID
         //        updatedUser.getDomainId() == USER_DOMAIN_ID
+		
+		when: "an non-existing user is 'read' by name and domain"
+		User userByName_nonExistent = os.identity().users().getByName("nonExistentUserName", USER_DOMAIN_ID)
+		
+		then: "this should return null"
+		userByName_nonExistent == null
 
         when: "roles for an existing user in domain context are requested"
         List<? extends Role> domainUserRolesList = os.identity().users().listDomainUserRoles(USER_ID, USER_DOMAIN_ID)
