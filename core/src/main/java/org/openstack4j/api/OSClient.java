@@ -5,7 +5,6 @@ import java.util.Set;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.heat.HeatService;
-import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
@@ -15,7 +14,8 @@ import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.model.identity.Token;
+import org.openstack4j.model.identity.v2.Access;
+import org.openstack4j.model.identity.v3.Token;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -24,7 +24,7 @@ import org.openstack4j.model.identity.Token;
  *
  * @author Jeremy Unruh
  */
-public interface OSClient {
+public interface OSClient< T extends OSClient<T>> {
 
     /**
      * Specifies the region that should be used for further invocations with
@@ -35,7 +35,7 @@ public interface OSClient {
      * @param region the region to use
      * @return OSClient for method chaining
      */
-    OSClient useRegion(String region);
+    T useRegion(String region);
 
     /**
      * Removes the current region making all calls no longer resolving to region
@@ -43,16 +43,15 @@ public interface OSClient {
      *
      * @return OSClient for method chaining
      */
-    OSClient removeRegion();
+    T removeRegion();
 
     /**
      * Changes the Perspective for the current Session (Client)
      *
-     * @param perspective
-     *            the new perspective
+     * @param perspective the new perspective
      * @return OSClient for method chaining
      */
-    OSClient perspective(Facing perspective);
+    T perspective(Facing perspective);
 
     /**
      * Gets the supported services. A set of ServiceTypes will be returned
@@ -126,25 +125,11 @@ public interface OSClient {
     boolean supportsShare();
 
     /**
-     * Gets the token that was assigned during authorization
-     *
-     * @return the authentication token
-     */
-    Token getToken();
-
-    /**
      * Gets the current endpoint of the Identity service
      *
      * @return the endpoint
      */
     String getEndpoint();
-
-    /**
-     * Returns the Identity Service API
-     *
-     * @return the identity service
-     */
-    IdentityService identity();
 
     /**
      * Returns the Compute Service API
@@ -208,5 +193,48 @@ public interface OSClient {
      * @return the Sahara service
      */
     SaharaService sahara();
+    
+    /**
+     * OpenStack4j Client which authenticates against version V2
+     */
+    public interface OSClientV2 extends OSClient<OSClient.OSClientV2> {
+        
+        /**
+         * Returns the Identity V2 Access object assigned during authentication
+         * 
+         * @return the Access object
+         */
+        Access getAccess();
+        
+        /**
+         * Returns the Identity Service API V2
+         * 
+         * @return the identity service version 2
+         */
+        org.openstack4j.api.identity.v2.IdentityService identity();
+        
+    }
+    
+    /**
+     * OpenStack4j Client which authenticates against version V3
+     */
+    public interface OSClientV3 extends OSClient<OSClient.OSClientV3> {
+        
+        
+        /**
+         * Gets the token that was assigned during authorization
+         *
+         * @return the authentication token
+         */
+        Token getToken();
+        
+        /**
+         * Returns the Identity Service API V3
+         *
+         * @return the identity service version 3
+         */
+        org.openstack4j.api.identity.v3.IdentityService identity();
+        
+    }
 
 }

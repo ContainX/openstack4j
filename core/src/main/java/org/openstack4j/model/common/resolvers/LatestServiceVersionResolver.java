@@ -3,7 +3,8 @@ package org.openstack4j.model.common.resolvers;
 import java.util.SortedSet;
 
 import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.model.identity.Service;
+import org.openstack4j.model.identity.v3.Service;
+import org.openstack4j.model.identity.v2.Access;
 
 /**
  * Resolves the service version to the latest version found within the Service Catalog
@@ -19,7 +20,12 @@ public final class LatestServiceVersionResolver implements ServiceVersionResolve
     }
 
     @Override
-    public Service resolve(ServiceType type, SortedSet<? extends Service> services) {
+    public Service resolveV3(ServiceType type, SortedSet<? extends Service> services) {
+        return services.last();
+    }
+
+    @Override
+    public Access.Service resolveV2(ServiceType type, SortedSet<? extends Access.Service> services) {
         return services.last();
     }
 

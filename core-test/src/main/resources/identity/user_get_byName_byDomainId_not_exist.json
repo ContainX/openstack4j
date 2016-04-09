@@ -1,8 +1,0 @@
-{
-	"users": [], 
-	"links": {
-		"self": "http://127.0.0.1:5000/v3/users", 
-		"previous": null, 
-		"next": null
-		}
-}

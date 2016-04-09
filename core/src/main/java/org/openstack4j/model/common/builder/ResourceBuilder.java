@@ -1,7 +1,7 @@
 package org.openstack4j.model.common.builder;
 
 import org.openstack4j.model.common.Resource;
-import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.identity.v3.Tenant;
 
 /**
  * Abstract Resource Builder

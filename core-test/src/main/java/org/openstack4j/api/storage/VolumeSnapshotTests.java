@@ -26,7 +26,7 @@ public class VolumeSnapshotTests extends AbstractTest {
     public void listVolumeSnaphotsV1() throws Exception {
         // Check list volumes
         respondWith("/storage/v1/volumesnapshots.json");
-        List<? extends VolumeSnapshot> volumes = os().blockStorage().snapshots().list();
+        List<? extends VolumeSnapshot> volumes = osv3().blockStorage().snapshots().list();
         assertEquals(volumes.size(), 2);
         
         // Check that the list request is the one we expect
@@ -39,7 +39,7 @@ public class VolumeSnapshotTests extends AbstractTest {
         final String volName = "snap-vol-test-1";
         Map<String, String> filters = new HashMap<String, String>();
         filters.put("display_name", volName);
-        List<? extends VolumeSnapshot> filteredVolumes = os().blockStorage().snapshots().list(filters);
+        List<? extends VolumeSnapshot> filteredVolumes = osv3().blockStorage().snapshots().list(filters);
         assertEquals(filteredVolumes.size(), 1);
         
         // Check that the list request is the one we expect

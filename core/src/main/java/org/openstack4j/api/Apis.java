@@ -2,7 +2,6 @@ package org.openstack4j.api;
 
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.heat.HeatService;
-import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
@@ -37,8 +36,17 @@ public class Apis {
      *
      * @return the identity v3 services
      */
-    public static IdentityService getIdentityServices() {
-        return get(IdentityService.class);
+    public static org.openstack4j.api.identity.v3.IdentityService getIdentityV3Services() {
+        return get(org.openstack4j.api.identity.v3.IdentityService.class);
+    }
+    
+    /**
+     * Gets the identity v2 services API
+     *
+     * @return the identity v2 services
+     */
+    public static org.openstack4j.api.identity.v2.IdentityService getIdentityV2Services() {
+        return get(org.openstack4j.api.identity.v2.IdentityService.class);
     }
 
     /**

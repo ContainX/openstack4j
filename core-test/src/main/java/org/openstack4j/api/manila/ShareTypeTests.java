@@ -45,7 +45,7 @@ public class ShareTypeTests extends AbstractTest {
                 .name("my_new_volume_type")
                 .build();
 
-        ShareType shareType = os().share().shareTypes().create(shareTypeCreate);
+        ShareType shareType = osv3().share().shareTypes().create(shareTypeCreate);
         
         assertTrue(shareType.getOsShareTypeAccessIsPublic());
         assertEquals(shareType.getRequiredExtraSpecs().get("driver_handles_share_servers"), "true");
@@ -59,7 +59,7 @@ public class ShareTypeTests extends AbstractTest {
     public void list() throws Exception {
         respondWith(JSON_SHARE_TYPES);
 
-        List<? extends ShareType> shareTypes = os().share().shareTypes().list();
+        List<? extends ShareType> shareTypes = osv3().share().shareTypes().list();
         assertEquals(shareTypes.size(), 2);
 
         ShareType shareType1 = shareTypes.get(0);
@@ -84,7 +84,7 @@ public class ShareTypeTests extends AbstractTest {
     public void listDefault() throws Exception {
         respondWith(JSON_SHARE_TYPES_DEFAULT);
 
-        ShareType shareType = os().share().shareTypes().listDefaults();
+        ShareType shareType = osv3().share().shareTypes().listDefaults();
 
         assertNull(shareType.getOsShareTypeAccessIsPublic());
         assertNull(shareType.getRequiredExtraSpecs());
@@ -98,7 +98,7 @@ public class ShareTypeTests extends AbstractTest {
     public void delete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareTypes().delete("be27425c-f807-4500-a056-d00721db45cf");
+        ActionResponse response = osv3().share().shareTypes().delete("be27425c-f807-4500-a056-d00721db45cf");
         assertTrue(response.isSuccess());
     }
 
@@ -106,7 +106,7 @@ public class ShareTypeTests extends AbstractTest {
     public void listExtraSpecs() throws Exception {
         respondWith(JSON_EXTRA_SPECS);
 
-        ExtraSpecs extraSpecs = os().share().shareTypes().listExtraSpecs("be27425c-f807-4500-a056-d00721db45cf");
+        ExtraSpecs extraSpecs = osv3().share().shareTypes().listExtraSpecs("be27425c-f807-4500-a056-d00721db45cf");
 
         assertEquals(extraSpecs.size(), 2);
         assertEquals(extraSpecs.get("snapshot_support"), "True");
@@ -120,7 +120,7 @@ public class ShareTypeTests extends AbstractTest {
         Map<String, String> extraSpecMap = Maps.newHashMap();
         extraSpecMap.put("my_key", "my_value");
 
-        ExtraSpecs extraSpecs = os().share().shareTypes().setExtraSpec(
+        ExtraSpecs extraSpecs = osv3().share().shareTypes().setExtraSpec(
                 "be27425c-f807-4500-a056-d00721db45cf",
                 ExtraSpecs.toExtraSpecs(extraSpecMap));
 
@@ -132,7 +132,7 @@ public class ShareTypeTests extends AbstractTest {
     public void unsetExtraSpec() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareTypes().unsetExtraSpec(
+        ActionResponse response = osv3().share().shareTypes().unsetExtraSpec(
                 "be27425c-f807-4500-a056-d00721db45cf",
                 "my_key");
         assertTrue(response.isSuccess());
@@ -142,7 +142,7 @@ public class ShareTypeTests extends AbstractTest {
     public void addShareTypeAccess() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareTypes().addShareTypeAccess(
+        ActionResponse response = osv3().share().shareTypes().addShareTypeAccess(
                 "be27425c-f807-4500-a056-d00721db45cf",
                 "e1284adea3ee4d2482af5ed214f3ad90");
         assertTrue(response.isSuccess());
@@ -152,7 +152,7 @@ public class ShareTypeTests extends AbstractTest {
     public void removeShareTypeAccess() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareTypes().removeShareTypeAccess(
+        ActionResponse response = osv3().share().shareTypes().removeShareTypeAccess(
                 "be27425c-f807-4500-a056-d00721db45cf",
                 "e1284adea3ee4d2482af5ed214f3ad90");
         assertTrue(response.isSuccess());
@@ -162,7 +162,7 @@ public class ShareTypeTests extends AbstractTest {
     public void shareTypeAccessDetails() throws Exception {
         respondWith(JSON_SHARE_TYPE_ACCESS_DETAILS);
 
-        List<? extends ShareTypeAccess> shareTypeAccessList = os().share().shareTypes().shareTypeAccessDetails(
+        List<? extends ShareTypeAccess> shareTypeAccessList = osv3().share().shareTypes().shareTypeAccessDetails(
                 "be27425c-f807-4500-a056-d00721db45cf");
         assertEquals(shareTypeAccessList.size(), 2);
 
