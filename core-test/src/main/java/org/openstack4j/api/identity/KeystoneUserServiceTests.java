@@ -1,9 +1,12 @@
 package org.openstack4j.api.identity;
 
+import static org.testng.AssertJUnit.assertNull;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
+
+
 
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class KeystoneUserServiceTests extends AbstractTest {
     private static final String JSON_USER_GET_BYID = "/identity/user_get_byId.json";
     private static final String JSON_USER_GET_BYNAME = "/identity/user_get_byName.json";
     private static final String JSON_USER_GET_BYNAME_BYDOMAINID = "/identity/user_get_byName_byDomainId.json";
+    private static final String JSON_USER_GET_BYNAME_BYDOMAINID_NOT_EXIST = "/identity/user_get_byName_byDomainId_not_exist.json";
     private static final String JSON_USER_CREATE = "/identity/create_user.json";
     private static final String JSON_USER_READ = "/identity/read_user.json";
     private static final String JSON_USER_UPDATE = "/identity/update_user.json";
@@ -40,6 +44,7 @@ public class KeystoneUserServiceTests extends AbstractTest {
     private static final String USER_ID = "aa9f25defa6d4cafb48466df83106065";
     private static final String USER_DOMAIN_ID = "default";
     private static final String PROJECT_ID = "123ac695d4db400a9001b91bb3b8aa46";
+	
 
     /**
      * @return the identity service
@@ -111,6 +116,19 @@ public class KeystoneUserServiceTests extends AbstractTest {
         assertEquals(user.getName(), USER_NAME);
         assertEquals(user.getId(), USER_ID);
         assertEquals(user.getDomainId(), USER_DOMAIN_ID);
+    }
+    
+    /**
+     * returns null for an non-existing user when the user specified by name and domain.
+     *
+     * @throws Exception
+     */
+    public void getUser_byName_byDomainId_NotExist_Test() throws Exception {
+
+        respondWith(JSON_USER_GET_BYNAME_BYDOMAINID_NOT_EXIST);
+
+        User user = os().identity().users().getByName(USER_NAME, USER_DOMAIN_ID);
+        assertNull(user);
     }
 
     /**

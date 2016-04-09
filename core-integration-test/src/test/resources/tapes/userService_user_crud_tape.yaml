@@ -192,6 +192,24 @@ interactions:
       Vary: X-Auth-Token
       x-openstack-request-id: req-c16339db-24bc-48dc-8711-0316a56e95e8
     body: '{"error": {"message": "Could not find user: nonExistentUserId", "code": 404, "title": "Not Found"}}'
+- recorded: 2016-04-08T15:57:50.459Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/users?domain_id=default&name=nonExistentUserName
+    headers:
+      Accept: application/json
+      Host: docker-host:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: e699a84979b64ef9837c492b774ccbfe
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Fri, 08 Apr 2016 16:02:57 GMT
+      Vary: X-Auth-Token
+      X-Distribution: Ubuntu
+    body: '{"users": [], "links": {"self": "http://devstack.openstack.stack:5000/v3/users", "previous": null, "next": null}}'    
 - recorded: 2016-01-15T16:53:00.015Z
   request:
     method: GET

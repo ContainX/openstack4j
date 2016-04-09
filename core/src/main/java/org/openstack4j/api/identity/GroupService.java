@@ -35,7 +35,7 @@ public interface GroupService extends RestService {
      *
      * @param groupName the group name
      * @param domainId the domain id
-     * @return the of list groups matching the name in a specific domain
+     * @return the of list groups matching the name in a specific domain or null if not found
      */
     Group getByName(String groupName, String domainId);
 

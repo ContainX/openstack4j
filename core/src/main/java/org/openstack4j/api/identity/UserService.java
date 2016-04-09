@@ -37,7 +37,7 @@ public interface UserService extends RestService {
      *
      * @param userName the user name
      * @param domainId the domain identifier
-     * @return the user
+     * @return the user or null if not found
      */
 	User getByName(String userName, String domainId);
 

@@ -168,10 +168,10 @@ class KeystoneProjectServiceSpec extends AbstractSpec {
         projectList_byName_empty.isEmpty() == true
 
         when: "details about a nonexistend project specified by name and domain identifier are requested"
-        os.identity().projects().getByName("nonExistentProject", PROJECT_DOMAIN_ID)
+        Project nonExistentProject_ByName = os.identity().projects().getByName("nonExistentProject", PROJECT_DOMAIN_ID)
 
         then: "this should return null"
-        thrown IndexOutOfBoundsException
+		nonExistentProject_ByName == null
 
     }
 
