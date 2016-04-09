@@ -1,5 +1,6 @@
 package org.openstack4j.api.identity.v3;
 
+import static org.testng.AssertJUnit.assertNull;
 import static org.testng.Assert.assertEquals;
 
 import org.openstack4j.api.AbstractTest;
@@ -16,6 +17,7 @@ public class KeystoneGroupServiceTests extends AbstractTest {
     private static final String JSON_GROUPS_CREATE = "/identity/v3/groups_create_response.json";
     private static final String JSON_GROUPS_GET_BYID = "/identity/v3/groups_get_byId.json";
     private static final String JSON_GROUPS_UPDATE = "/identity/v3/groups_update_response.json";
+    private static final String JSON_GROUPS_EMPTY_LIST = "/identity/v3/groups_getByName_empty.json";
     private static final String GROUP_NAME = "GROUP_CRUD";
     private static final String GROUP_DOMAIN_ID = "default";
     private static final String GROUP_DESCRIPTION = "Group used for CRUD tests";
@@ -64,6 +66,14 @@ public class KeystoneGroupServiceTests extends AbstractTest {
         assertEquals(updatedGroup.getDomainId(), GROUP_DOMAIN_ID);
         assertEquals(updatedGroup.getDescription(), GROUP_DESCRIPTION_UPDATE);
 
+    }
+    
+    
+    public void group_get_byName_byDomainId_NotExist_Test() throws Exception {    	
+    	respondWith(JSON_GROUPS_EMPTY_LIST);    
+    	Group group = osv3().identity().groups().getByName(GROUP_NAME, GROUP_DOMAIN_ID);    	
+    	assertNull(group);
+    	
     }
 
 }

@@ -286,6 +286,25 @@ interactions:
       Server: Apache/2.4.7 (Ubuntu)
       Vary: X-Auth-Token
       x-openstack-request-id: req-bf13fc70-8a3d-41ff-881a-880bc8a59f4d
+- recorded: 2016-04-08T15:57:45.354Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/groups?domain_id=default&name=nonExistentGroup
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: 1fe0b81eedd74086b2012e190579ac9e
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Fri, 08 Apr 2016 16:02:52 GMT
+      Vary: X-Auth-Token
+      X-Distribution: Ubuntu
+    body: '{"links": {"self": "http://devstack.openstack.stack:5000/v3/groups", "previous": null, "next": null}, "groups": []}'
+
 - recorded: 2016-02-17T18:17:43.695Z
   request:
     method: DELETE

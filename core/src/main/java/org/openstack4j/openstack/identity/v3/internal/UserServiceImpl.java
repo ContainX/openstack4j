@@ -51,8 +51,8 @@ public class UserServiceImpl extends BaseOpenStackService implements UserService
     @Override
     public User getByName(String userName, String domainId) {
         checkNotNull(userName);
-        checkNotNull(domainId);
-        return get(Users.class, uri(PATH_USERS)).param("name", userName).param("domain_id", domainId).execute().getList().get(0);
+        checkNotNull(domainId);        
+        return get(Users.class, uri(PATH_USERS)).param("name", userName).param("domain_id", domainId).execute().first();
     }
 
     /**

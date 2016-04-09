@@ -33,7 +33,7 @@ public class GroupServiceImpl extends BaseOpenStackService implements GroupServi
     public Group getByName(String groupName, String domainId) {
         checkNotNull(groupName);
         checkNotNull(domainId);
-        return get(Groups.class, uri(PATH_GROUPS)).param("name", groupName).param("domain_id", domainId).execute().getList().get(0);
+        return get(Groups.class, uri(PATH_GROUPS)).param("name", groupName).param("domain_id", domainId).execute().first();
     }
 
     @Override

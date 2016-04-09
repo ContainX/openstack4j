@@ -199,6 +199,12 @@ class KeystoneGroupServiceSpec extends AbstractSpec {
         //
         //		then: "we should no longer find the group used in this scenario"
         //		groupList.contains(group) == false
+		
+		when: "non-existent group is listed by name and domain id"
+		Group nonExistent_group_byName_byDomainId = os.identity().groups().getByName("nonExistentGroup", DOMAIN_ID)
+
+		then: "the return value should be null"
+		nonExistent_group_byName_byDomainId == null
 
         cleanup: "we delete the user used in this scenario"
         ActionResponse response_deleteUser_success = os.identity().users().delete(GROUP_CRUD_USER_ID)

@@ -1,5 +1,6 @@
 package org.openstack4j.api.identity.v3;
 
+import static org.testng.AssertJUnit.assertNull;
 import static org.testng.Assert.assertEquals;
 
 import org.openstack4j.api.AbstractTest;
@@ -16,10 +17,12 @@ public class KeystoneProjectServiceTests extends AbstractTest {
     private static final String JSON_PROJECTS_CREATE = "/identity/v3/projects_create_response.json";
     private static final String JSON_PROJECTS_UPDATE = "/identity/v3/projects_update_response.json";
     private static final String JSON_PROJECTS_GET_BYID = "/identity/v3/projects_get_byId.json";
+    private static final String JSON_PROJECTS_GET_BY_NAME_EMPTY = "/identity/v3/projects_getByName_empty.json";
     private static final String PROJECT_NAME = "ProjectX";
     private static final String PROJECT_DOMAIN_ID = "7a71863c2d1d4444b3e6c2cd36955e1e";
     private static final String PROJECT_DESCRIPTION = "Project used for CRUD tests";
     private static final String PROJECT_DESCRIPTION_UPDATE = "An updated project used for CRUD tests";
+	
     private String PROJECT_ID;
 
     @Override
@@ -69,6 +72,13 @@ public class KeystoneProjectServiceTests extends AbstractTest {
         assertEquals(updatedProject.getDomainId(), PROJECT_DOMAIN_ID);
         assertEquals(updatedProject.getDescription(), PROJECT_DESCRIPTION_UPDATE);
 
+    }
+    
+    public void projects_getByName_not_exist_test() throws Exception {
+        respondWith(JSON_PROJECTS_GET_BY_NAME_EMPTY);
+        Project project = osv3().identity().projects().getByName(PROJECT_NAME, PROJECT_DOMAIN_ID);
+        assertNull(project);
+    
     }
 
 }
