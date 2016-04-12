@@ -14,7 +14,6 @@
 
     <modules>
         <module>jersey2</module>
-        <module>jersey2-jdk16</module>
         <module>resteasy</module>
         <module>httpclient</module>
         <module>okhttp</module>
