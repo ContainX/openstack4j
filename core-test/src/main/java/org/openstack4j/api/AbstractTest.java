@@ -6,7 +6,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.bouncycastle.util.io.Streams;
 import org.openstack4j.api.OSClient.OSClientV2;
@@ -51,6 +52,8 @@ public abstract class AbstractTest {
         }
 
     }
+    
+    private final Logger LOG = LoggerFactory.getLogger(getClass().getName());
 
     protected static final String JSON_ACCESS = "/identity/v2/access.json";
     protected static final String JSON_TOKEN = "/identity/v3/authv3_project.json";
@@ -70,12 +73,11 @@ public abstract class AbstractTest {
     protected void startServer() throws UnknownHostException {
 
         InetAddress inetAddress = InetAddress.getByName("localhost");
-        Logger.getLogger(getClass().getName()).info("localhost inet address: " + inetAddress.toString());
+        LOG.info("localhost inet address: " + inetAddress.toString());
+        LOG.info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
 
-        Logger.getLogger(getClass().getName())
-                .info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
         try {
-            Logger.getLogger(getClass().getName()).info("Starting server on port " + service().port);
+            LOG.info("Starting server on port " + service().port);
             server.start(service().port);
         } catch (IOException e) {
             e.printStackTrace();
@@ -176,7 +178,7 @@ public abstract class AbstractTest {
     protected void afterTest() {
         try {
             server.shutdown();
-            Logger.getLogger(getClass().getName()).info("Stopped server on port " + service().port);
+            LOG.info("Stopped server on port " + service().port);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -202,10 +204,10 @@ public abstract class AbstractTest {
 
             try {
                 String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
-                Logger.getLogger(getClass().getName()).info(getClass().getName());
-                //Logger.getLogger(getClass().getName()).info(getClass().getName() + ", JSON Access = " + json);
+                LOG.info(getClass().getName());
+                //LOG.info(getClass().getName() + ", JSON Access = " + json);
                 json = json.replaceAll("127.0.0.1", getHost());
-                //Logger.getLogger(getClass().getName()).info("JSON Access = " + json);
+                //LOG.info("JSON Access = " + json);
                 KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
                 a.applyContext(authURL("/v2.0"),
                         new org.openstack4j.openstack.identity.v2.domain.Credentials("test", "test"));
@@ -229,7 +231,7 @@ public abstract class AbstractTest {
 
             try {
                 String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_TOKEN)));
-                Logger.getLogger(getClass().getName()).info(getClass().getName());
+                LOG.info(getClass().getName());
                 json = json.replaceAll("devstack.openstack.stack", getHost());
                 KeystoneToken token = mapper.readValue(json, KeystoneToken.class);
                 token.setId(TOKEN_ID);

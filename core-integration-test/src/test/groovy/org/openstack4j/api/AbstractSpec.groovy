@@ -1,21 +1,20 @@
 package org.openstack4j.api
 
 import java.nio.file.Paths
-import java.util.logging.Logger
-
+import org.slf4j.*
+import groovy.util.logging.Slf4j
 import org.apache.http.impl.client.DefaultHttpClient
 import org.openstack4j.core.transport.Config
 import org.openstack4j.core.transport.ProxyHost
 import org.openstack4j.core.transport.internal.HttpExecutor
 import org.yaml.snakeyaml.introspector.Property
-
 import spock.lang.Specification
 import co.freeside.betamax.httpclient.BetamaxRoutePlanner
 import co.freeside.betamax.tape.yaml.OrderedPropertyComparator
 import co.freeside.betamax.tape.yaml.TapePropertyUtils
 
 
-
+@Slf4j
 abstract class AbstractSpec extends Specification {
 
     def static String MODULEROOT = Paths.get("").toAbsolutePath().getParent().toString()
@@ -55,7 +54,9 @@ abstract class AbstractSpec extends Specification {
         final DefaultHttpClient http = new DefaultHttpClient()
         BetamaxRoutePlanner.configure(http)
 
-        Logger.getLogger(this.class.name).info("-> Tests using connector: " + HttpExecutor.create().getExecutorName())
+        log.info("-> Tests using connector: " + HttpExecutor.create().getExecutorName())
+        
+        
 
     }
 
