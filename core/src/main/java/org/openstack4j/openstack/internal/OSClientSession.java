@@ -1,8 +1,9 @@
 package org.openstack4j.openstack.internal;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Set;
+
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
@@ -10,6 +11,7 @@ import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.image.ImageService;
@@ -22,17 +24,17 @@ import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.Config;
-import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.AuthVersion;
-import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.model.identity.URLResolverParams;
+import org.openstack4j.model.identity.v2.Access;
+import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Set;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -79,7 +81,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      * {@inheritDoc}
      */
     public T removeRegion() {
-        return (T) useRegion(null);
+        return useRegion(null);
     }
 
     /**
@@ -243,6 +245,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public GbpService gbp() {
+        return Apis.getGbpServices();
+    }
+        
     public static class OSClientSessionV2 extends OSClientSession<OSClientSessionV2, OSClientV2> implements OSClientV2 {
 
         Access access;
@@ -269,10 +278,12 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
             return new OSClientSessionV2(access, access.getEndpoint(), perspective, provider, config);
         }
 
+        @Override
         public Access getAccess() {
             return access;
         }
 
+        @Override
         public String getEndpoint() {
             return access.getEndpoint();
         }
@@ -297,6 +308,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         /**
          * {@inheritDoc}
          */
+        @Override
         public String getEndpoint(ServiceType service) {
             return addNATIfApplicable(epr.findURLV2(URLResolverParams
                     .create(access, service)
@@ -305,6 +317,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
                     .region(region)));
         }
 
+        @Override
         public String getTokenId() {
             return access.getToken().getId();
         }
@@ -312,6 +325,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         /**
          * {@inheritDoc}
          */
+        @Override
         public org.openstack4j.api.identity.v2.IdentityService identity() {
             return Apis.getIdentityV2Services();
         }
@@ -352,6 +366,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
             return new OSClientSessionV3(token, token.getEndpoint(), perspective, provider, config);
         }
 
+        @Override
         public Token getToken() {
             return token;
         }
@@ -384,6 +399,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         /**
          * {@inheritDoc}
          */
+        @Override
         public String getEndpoint(ServiceType service) {
             return addNATIfApplicable(epr.findURLV3(URLResolverParams
                     .create(token, service)
@@ -403,6 +419,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         /**
          * {@inheritDoc}
          */
+        @Override
         public org.openstack4j.api.identity.v3.IdentityService identity() {
             return Apis.getIdentityV3Services();
         }
@@ -420,13 +437,6 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GbpService gbp() {
-        return Apis.getGbpServices();
-    }
-    
+
     
 }

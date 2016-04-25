@@ -46,4 +46,14 @@ public interface PolicyClassifier extends Buildable<PolicyClassifierBuilder>, Re
      */
     String getDescription();
 
+    boolean isShared();
+
+    String getProtocol();
+
+    String getDirection();
+
+    String getPortRange();
+
+    String getDescription();
+
 }

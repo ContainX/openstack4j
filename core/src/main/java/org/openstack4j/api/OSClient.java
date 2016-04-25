@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
+import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
