@@ -148,6 +148,9 @@ public class DefaultAPIProvider implements APIProvider {
         bind(SchedulerStatsService.class, SchedulerStatsServiceImpl.class);
         bind(org.openstack4j.api.manila.QuotaSetService.class,
                 org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
+		bind(GbpService.class,GbpServiceImpl.class);
+		bind(ExternalPolicyService.class,ExternalPolicyServiceImpl.class);
+
     }
 
     /**

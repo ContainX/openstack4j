@@ -27,7 +27,7 @@ public class GbpExternalPolicy implements ExternalPolicy{
     private List<String> externalSegments;
     private boolean shared;
     
-    @Override
+    @Override 
     public String getTenantId() {
         return tenantId;
     }
@@ -57,68 +57,63 @@ public class GbpExternalPolicy implements ExternalPolicy{
         this.id=id;
     }
     
+    @Override
     public List<PolicyRuleSet> getConsumedPolicyRuleSets() {
         return consumedPolicyRuleSets;
     }
 
-    public void setConsumedPolicyRuleSets(List<PolicyRuleSet> consumedPolicyRuleSets) {
-        this.consumedPolicyRuleSets = consumedPolicyRuleSets;
-    }
 
+    @Override
     public List<PolicyRuleSet> getProvidedPolicyRuleSets() {
         return providedPolicyRuleSets;
     }
 
-    public void setProvidedPolicyRuleSets(List<PolicyRuleSet> providedPolicyRuleSets) {
-        this.providedPolicyRuleSets = providedPolicyRuleSets;
-    }
 
+    @Override
     public List<String> getExternalSegments() {
         return externalSegments;
     }
 
-    public void setExternalSegments(List<String> externalSegments) {
-        this.externalSegments = externalSegments;
-    }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public boolean isShared() {
         return shared;
     }
 
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
 
     @Override
     public ExternalPolicyBuilder toBuilder() {
         return new ExternalPolicyConcreteBuilder(this);
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("", "").toString();
+        return Objects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).add("externalSegments", externalSegments).add("id", id).add("description", description).add("shared", shared).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets).toString();
     }
     
-    public static class ExternalPolicys extends ListResult<GbpExternalPolicy> {
+    public static class ExternalPolicies extends ListResult<GbpExternalPolicy> {
 
         private static final long serialVersionUID = 1L;
 
         @JsonProperty("external_policies")
-        private List<GbpExternalPolicy> ExternalPolicys;
+        private List<GbpExternalPolicy> externalPolicys;
 
         @Override
-        public List<GbpExternalPolicy> value() {
-            return ExternalPolicys;
+        protected List<GbpExternalPolicy> value() {
+            return externalPolicys;
         }
     }
+    
+
+                     
     
     public static class ExternalPolicyConcreteBuilder implements ExternalPolicyBuilder{
 
@@ -142,7 +137,17 @@ public class GbpExternalPolicy implements ExternalPolicy{
             extPolicy = (GbpExternalPolicy)in;
             return this;
         }
+
+        @Override
+        public ExternalPolicyBuilder name(String name) {
+            extPolicy.name=name;
+            return this;
+        }
         
+    }
+
+    public static ExternalPolicyBuilder builder() {
+        return new ExternalPolicyConcreteBuilder();
     }
 
 }

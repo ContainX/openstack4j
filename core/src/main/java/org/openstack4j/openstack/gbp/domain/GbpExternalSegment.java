@@ -68,86 +68,52 @@ public class GbpExternalSegment implements ExternalSegment {
         this.id=id;
     }
     
-
+    @Override
     public List<GbpExternalPolicy> getExternalPolicies() {
         return externalPolicies;
     }
-
+    @Override
     public String getIpVersion() {
         return ipVersion;
     }
 
-    public void setIpVersion(String ipVersion) {
-        this.ipVersion = ipVersion;
-    }
-
+    @Override
     public String getCidr() {
         return cidr;
     }
 
-    public void setCidr(String cidr) {
-        this.cidr = cidr;
-    }
-
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public boolean isShared() {
         return shared;
     }
 
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
+    @Override
     public String getSubnetId() {
         return subnetId;
     }
-
+    @Override
     public List<L3Policy> getL3Policies() {
         return l3Policies;
     }
 
-    public void setL3Policies(List<L3Policy> l3Policies) {
-        this.l3Policies = l3Policies;
-    }
 
     public List<NatPool> getNatpools() {
         return natpools;
     }
 
-    public void setNatpools(List<NatPool> natpools) {
-        this.natpools = natpools;
-    }
-
-    public void setExternalPolicies(List<GbpExternalPolicy> externalPolicies) {
-        this.externalPolicies = externalPolicies;
-    }
-
-    public void setSubnetId(String subnetId) {
-        this.subnetId = subnetId;
-    }
-    
-    
+    @Override    
     public boolean isPortAddressTranslation() {
         return portAddressTranslation;
     }
 
-    public void setPortAddressTranslation(boolean portAddressTranslation) {
-        this.portAddressTranslation = portAddressTranslation;
-    }
-
+    @Override
     public GbpExternalRoutes getExternalRoutes() {
         return externalRoutes;
-    }
-
-    public void setExternalRoutes(GbpExternalRoutes externalRoutes) {
-        this.externalRoutes = externalRoutes;
     }
 
     @Override

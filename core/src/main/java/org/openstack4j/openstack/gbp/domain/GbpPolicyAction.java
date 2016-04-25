@@ -58,39 +58,25 @@ public class GbpPolicyAction implements PolicyAction {
     public void setId(String id) {
         this.id=id;
     }
-
-    public String getDescription() {
+    @Override
+    public String getDescription() { 
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public boolean isShared() {
         return shared;
     }
 
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
+    @Override
     public String getActionType() {
         return actionType;
     }
 
-    public void setActionType(String actionType) {
-        this.actionType = actionType;
-    }
-
+    @Override
     public String getActionValue() {
         return actionValue;
     }
 
-    public void setActionValue(String actionValue) {
-        this.actionValue = actionValue;
-    }
-    
     public static class PolicyActions extends ListResult<GbpPolicyAction>{
         private static final long serialVersionUID = 1L;
         @JsonProperty("policy_actions")

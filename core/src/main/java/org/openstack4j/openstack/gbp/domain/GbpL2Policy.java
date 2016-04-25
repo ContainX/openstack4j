@@ -61,46 +61,31 @@ public class GbpL2Policy implements L2Policy {
     public L2PolicyBuilder toBuilder() {
         return new L2PolicyConcreteBuilder(this) ;
     }
-
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public String getNetworkId() {
         return networkId;
     }
 
-    public void setNetworkId(String networkId) {
-        this.networkId = networkId;
-    }
-
+    @Override
     public String getL3PolicyId() {
         return l3PolicyId;
     }
 
-    public void setL3PolicyId(String l3PolicyId) {
-        this.l3PolicyId = l3PolicyId;
-    }
-
+    @Override
     public boolean isShared() {
         return shared;
     }
 
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
+    @Override
     public List<PolicyTargetGroup> getPolicyTargetGroups() {
         return policyTargetGroups;
     }
 
-    public void setPolicyTargetGroups(List<PolicyTargetGroup> policyTargetGroups) {
-        this.policyTargetGroups = policyTargetGroups;
-    }
     
     public static class L2Policies extends ListResult<GbpL2Policy>{
         private static final long serialVersionUID = 1L;

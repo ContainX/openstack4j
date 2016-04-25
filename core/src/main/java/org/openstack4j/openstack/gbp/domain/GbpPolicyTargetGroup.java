@@ -70,78 +70,51 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
     public void setId(String id) {
         this.id=id;
     }
-
+    @Override
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public List<PolicyRuleSet> getConsumedPolicyRuleSets() {
         return consumedPolicyRuleSets;
     }
 
-    public void setConsumedPolicyRuleSets(List<PolicyRuleSet> consumedPolicyRuleSets) {
-        this.consumedPolicyRuleSets = consumedPolicyRuleSets;
-    }
-
+    @Override
     public List<PolicyRuleSet> getProvidedPolicyRuleSets() {
         return providedPolicyRuleSets;
     }
 
-    public void setProvidedPolicyRuleSets(List<PolicyRuleSet> providedPolicyRuleSets) {
-        this.providedPolicyRuleSets = providedPolicyRuleSets;
-    }
-
+    @Override
     public String getL2PolicyId() {
         return l2PolicyId;
     }
 
-    public void setL2PolicyId(String l2PolicyId) {
-        this.l2PolicyId = l2PolicyId;
-    }
-
+    @Override
     public String getNetworkServicePolicyId() {
         return networkServicePolicyId;
     }
 
-    public void setNetworkServicePolicyId(String networkServicePolicyId) {
-        this.networkServicePolicyId = networkServicePolicyId;
-    }
-
+    @Override
     public List<PolicyTarget> getPolicyTargets() {
         return policyTargets;
     }
 
-    public void setPolicyTargets(List<PolicyTarget> policyTargets) {
-        this.policyTargets = policyTargets;
-    }
-
+    @Override
     public boolean isServiceManagement() {
         return serviceManagement;
     }
 
-    public void setServiceManagement(boolean serviceManagement) {
-        this.serviceManagement = serviceManagement;
-    }
-
+    @Override
     public boolean isShared() {
         return shared;
     }
 
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
+    @Override
     public List<String> getSubnets() {
         return subnets;
     }
 
-    public void setSubnets(List<String> subnets) {
-        this.subnets = subnets;
-    }
+    
     
     public static class PolicyTargetGroups extends ListResult<GbpPolicyTargetGroup>{
         private static final long serialVersionUID = 1L;

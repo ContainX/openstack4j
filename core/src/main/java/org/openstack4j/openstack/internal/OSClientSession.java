@@ -420,4 +420,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GbpService gbp() {
+        return Apis.getGbpServices();
+    }
+    
+    
 }

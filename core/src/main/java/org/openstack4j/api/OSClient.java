@@ -237,4 +237,11 @@ public interface OSClient< T extends OSClient<T>> {
         
     }
 
+	/**
+     * Returns the Gbp Service API
+     * 
+     * @return the Gbp service
+     */
+	GbpService gbp();
+	
 }

@@ -103,6 +103,15 @@ public class Apis {
         return get(ShareService.class);
     }
 
+	/**
+     * Gets the group based policy services API
+     * @return the gbp services
+     */
+    public static GbpService getGbpServices() {
+        return get(GbpService.class);
+    }
+
+
     private static APIProvider initializeProvider() {
         // No need to check for emptiness as there is default implementation registered
         APIProvider p = ServiceLoader.load(APIProvider.class, Apis.class.getClassLoader()).iterator().next();

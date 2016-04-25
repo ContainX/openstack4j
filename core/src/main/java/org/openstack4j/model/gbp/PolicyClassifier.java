@@ -6,4 +6,14 @@ import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
 
 public interface PolicyClassifier extends Buildable<PolicyClassifierBuilder>, Resource {
 
+    boolean isShared();
+
+    String getProtocol();
+
+    String getDirection();
+
+    String getPortRange();
+
+    String getDescription();
+
 }

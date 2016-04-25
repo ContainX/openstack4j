@@ -1,5 +1,11 @@
 package org.openstack4j.api.gbp;
 
+import java.util.List;
+import java.util.Map;
+
+import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.gbp.L3Policy;
+
 /**
  * This interface defines all methods for the manipulation of l3policy
  * 
@@ -7,5 +13,10 @@ package org.openstack4j.api.gbp;
  * 
  */
 public interface L3policyService{
-
+    List<? extends L3Policy> list();
+    List<? extends L3Policy> list(Map<String, String> filteringParams);
+    L3Policy get(String id);
+    ActionResponse delete(String id);
+    L3Policy create(L3Policy l3Policy);
+    L3Policy update(L3Policy l3Policy);
 }
