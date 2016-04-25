@@ -3,6 +3,8 @@ package org.openstack4j.api;
 import java.util.Set;
 
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
+import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
@@ -120,6 +122,12 @@ public interface OSClient {
      */
 	boolean supportsShare();
 
+    /**
+     * Determines if the Group Based Policy service is supported
+     *
+     * @return true if supports Group Based Policy
+     */
+	boolean supportsGbp();
 	/**
 	 * Gets the token that was assigned during authorization
 	 *
@@ -208,5 +216,12 @@ public interface OSClient {
 	 * @return the Sahara service
 	 */
 	SaharaService sahara();
+	
+	/**
+     * Returns the Gbp Service API
+     * 
+     * @return the Gbp service
+     */
+	GbpService gbp();
 	
 }

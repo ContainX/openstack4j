@@ -1,5 +1,11 @@
 package org.openstack4j.api.gbp;
 
+import java.util.List;
+import java.util.Map;
+
+import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.gbp.PolicyAction;
+
 /**
  * This interface defines all methods for the manipulation of policy actions
  * 
@@ -7,5 +13,10 @@ package org.openstack4j.api.gbp;
  * 
  */
 public interface PolicyActionService {
-
+    List<? extends PolicyAction> list();
+    List<? extends PolicyAction> list(Map<String, String> filteringParams);
+    PolicyAction get(String id);
+    ActionResponse delete(String id);
+    PolicyAction create(PolicyAction policyAction);
+    PolicyAction update(PolicyAction policyAction);
 }

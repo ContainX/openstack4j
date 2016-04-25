@@ -1,5 +1,11 @@
 package org.openstack4j.api.gbp;
 
+import java.util.List;
+import java.util.Map;
+
+import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.gbp.PolicyClassifier;
+
 /**
  * This interface defines all methods for the manipulation of policy classifiers
  * 
@@ -7,5 +13,10 @@ package org.openstack4j.api.gbp;
  * 
  */
 public interface PolicyClassifierService {
-
+    List<? extends PolicyClassifier> list();
+    List<? extends PolicyClassifier> list(Map<String, String> filteringParams);
+    PolicyClassifier get(String id);
+    ActionResponse delete(String id);
+    PolicyClassifier create(PolicyClassifier policyClassifier);
+    PolicyClassifier update(PolicyClassifier policyClassifier);
 }

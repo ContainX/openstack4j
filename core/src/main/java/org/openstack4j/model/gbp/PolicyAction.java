@@ -6,5 +6,13 @@ import org.openstack4j.model.gbp.builder.PolicyActionBuilder;
 
 public interface PolicyAction extends Buildable<PolicyActionBuilder>, Resource {
 
+    String getActionValue();
+
+    String getActionType();
+
+    boolean isShared();
+
+    String getDescription();
+
 }
- 
+  

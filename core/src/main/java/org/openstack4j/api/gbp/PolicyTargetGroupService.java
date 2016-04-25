@@ -1,5 +1,16 @@
 package org.openstack4j.api.gbp;
 
-public interface PolicyTargetGroupService {
+import java.util.List;
+import java.util.Map;
 
+import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.gbp.PolicyTargetGroup;
+
+public interface PolicyTargetGroupService {
+    List<? extends PolicyTargetGroup> list();
+    List<? extends PolicyTargetGroup> list(Map<String, String> filteringParams);
+    PolicyTargetGroup get(String id);
+    ActionResponse delete(String id);
+    PolicyTargetGroup create(PolicyTargetGroup policyTargetGroup);
+    PolicyTargetGroup update(PolicyTargetGroup policyTargetGroup);
 }

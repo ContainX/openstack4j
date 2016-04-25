@@ -56,45 +56,27 @@ public class GbpPolicyRule implements PolicyRule {
     public void setId(String id) {
         this.id=id;
     }
-
+    @Override
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public String getPolicyClassifierId() {
         return policyClassifierId;
     }
-
-    public void setPolicyClassifierId(String policyClassifierId) {
-        this.policyClassifierId = policyClassifierId;
-    }
-
+    @Override
     public List<PolicyAction> getPolicyActions() {
         return policyActions;
     }
 
-    public void setPolicyActions(List<PolicyAction> policyActions) {
-        this.policyActions = policyActions;
-    }
-
+    @Override
     public boolean isShared() {
         return shared;
     }
 
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
+    @Override
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     @Override
@@ -104,6 +86,7 @@ public class GbpPolicyRule implements PolicyRule {
     
     public static class PolicyRules extends ListResult<GbpPolicyRule>{
 
+        private static final long serialVersionUID = 1L;
         @JsonProperty("policy_rules")
         private List<GbpPolicyRule> policyRules;
         @Override

@@ -1,14 +1,15 @@
 package org.openstack4j.api;
 
+import java.util.ServiceLoader;
+
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.IdentityService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
-
-import java.util.ServiceLoader;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -89,6 +90,14 @@ public class Apis {
 	public static ShareService getShareServices() {
 		return get(ShareService.class);
 	}
+	
+	/**
+     * Gets the group based policy services API
+     * @return the gbp services
+     */
+    public static GbpService getGbpServices() {
+        return get(GbpService.class);
+    }
 	
 	private static APIProvider initializeProvider() {
 		// No need to check for emptiness as there is default implementation registered

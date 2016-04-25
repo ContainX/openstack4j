@@ -60,69 +60,44 @@ public class GbpL3Policy implements L3Policy {
     public void setId(String id) {
         this.id=id;
     }
-
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public String getExternalSegments() {
         return externalSegments;
     }
 
-    public void setExternalSegments(String externalSegments) {
-        this.externalSegments = externalSegments;
-    }
-
+    @Override
     public String getIpPool() {
         return ipPool;
     }
 
-    public void setIpPool(String ipPool) {
-        this.ipPool = ipPool;
-    }
-
+    @Override
     public String getIpVersion() {
         return ipVersion;
     }
 
-    public void setIpVersion(String ipVersion) {
-        this.ipVersion = ipVersion;
-    }
-
+    @Override
     public List<L2Policy> getL2Policies() {
         return l2Policies;
     }
 
-    public void setL2Policies(List<L2Policy> l2Policies) {
-        this.l2Policies = l2Policies;
-    }
-
+    @Override
     public List<String> getRouters() {
         return routers;
     }
 
-    public void setRouters(List<String> routers) {
-        this.routers = routers;
-    }
-
+    @Override
     public boolean isShared() {
         return shared;
     }
 
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
+    @Override
     public String getSubnetPrefixLength() {
         return subnetPrefixLength;
-    }
-
-    public void setSubnetPrefixLength(String subnetPrefixLength) {
-        this.subnetPrefixLength = subnetPrefixLength;
     }
 
     @Override

@@ -1,5 +1,11 @@
 package org.openstack4j.api.gbp;
 
+import java.util.List;
+import java.util.Map;
+
+import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.gbp.L2Policy;
+
 /**
  * This interface defines all methods for the manipulation of l2policy
  * 
@@ -7,5 +13,10 @@ package org.openstack4j.api.gbp;
  * 
  */
 public interface L2policyService{
-
+    List<? extends L2Policy> list();
+    List<? extends L2Policy> list(Map<String, String> filteringParams);
+    L2Policy get(String id);
+    ActionResponse delete(String id);
+    L2Policy create(L2Policy l2Policy);
+    L2Policy update(L2Policy l2Policy);
 }

@@ -55,53 +55,34 @@ public class GbpNatPool implements NatPool {
     public void setId(String id) {
         this.id=id;
     }
-
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public boolean isShared() {
         return shared;
     }
 
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
+    @Override
     public String getExternalSegmentId() {
         return externalSegmentId;
     }
 
-    public void setExternalSegmentId(String externalSegmentId) {
-        this.externalSegmentId = externalSegmentId;
-    }
-
+    @Override
     public String getIpPool() {
         return ipPool;
     }
 
-    public void setIpPool(String ipPool) {
-        this.ipPool = ipPool;
-    }
-
+    @Override
     public String getIpVersion() {
         return ipVersion;
     }
 
-    public void setIpVersion(String ipVersion) {
-        this.ipVersion = ipVersion;
-    }
-
+    @Override
     public String getSubnetId() {
         return subnetId;
-    }
-
-    public void setSubnetId(String subnetId) {
-        this.subnetId = subnetId;
     }
 
     @Override
@@ -111,6 +92,7 @@ public class GbpNatPool implements NatPool {
     
     public static class NatPools extends ListResult<GbpNatPool>{
 
+        private static final long serialVersionUID = 1L;
         @JsonProperty("nat_pools")
         private List<GbpNatPool> natpools;
         

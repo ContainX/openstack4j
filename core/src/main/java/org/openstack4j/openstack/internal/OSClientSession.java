@@ -1,13 +1,15 @@
 package org.openstack4j.openstack.internal;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Set;
+
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.identity.IdentityService;
@@ -28,9 +30,9 @@ import org.openstack4j.openstack.identity.functions.ServiceToServiceType;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.openstack4j.openstack.logging.LoggerFactory;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Set;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
  * A client which has been identified.  Any calls spawned from this session will automatically utilize the original authentication that was
@@ -194,6 +196,13 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      * {@inheritDoc}
      */
     @Override
+    public boolean supportsGbp() {
+        return getSupportedServices().contains(ServiceType.NETWORK);
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Token getToken() {
         return access.getToken();
     }
@@ -333,6 +342,15 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
         return Apis.getSaharaServices();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GbpService gbp() {
+        return Apis.getGbpServices();
+    }
+    
+    
     @Override
     public OSClient perspective(Facing perspective) {
         this.perspective = perspective;
@@ -342,5 +360,5 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
     public CloudProvider getProvider() {
         return (provider == null) ? CloudProvider.UNKNOWN : provider;
     }
-	
+
 }

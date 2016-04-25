@@ -1,5 +1,11 @@
 package org.openstack4j.api.gbp;
 
+import java.util.List;
+import java.util.Map;
+
+import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.gbp.NatPool;
+
 /**
  * This interface defines all methods for the manipulation of nat-pool
  * 
@@ -7,5 +13,10 @@ package org.openstack4j.api.gbp;
  * 
  */
 public interface NatPoolService {
-
+    List<? extends NatPool> list();
+    List<? extends NatPool> list(Map<String, String> filteringParams);
+    NatPool get(String id);
+    ActionResponse delete(String id);
+    NatPool create(NatPool natpool);
+    NatPool update(NatPool natpool);
 }
