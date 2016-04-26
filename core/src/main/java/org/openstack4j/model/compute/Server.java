@@ -245,7 +245,7 @@ public interface Server extends ModelEntity {
 	 */
 	String getAvailabilityZone();
 
-	/**
+	/** 
 	 * @return the last time the server was launched
 	 */
 	Date getLaunchedAt();
@@ -269,5 +269,10 @@ public interface Server extends ModelEntity {
 	 * @return the administrative password to the VM
 	 */
 	String getAdminPass();
+
+    /**
+     * @return security groups attached to the VM
+     */
+    List<? extends SecurityGroup> getSecurityGroups();
 
 }
