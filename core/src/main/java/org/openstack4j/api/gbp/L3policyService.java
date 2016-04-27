@@ -13,6 +13,11 @@ import org.openstack4j.model.gbp.L3Policy;
  * 
  */
 public interface L3policyService{
+    /**
+     * List all l3 policies
+     * 
+     * @return List of l3 policies
+     */
     List<? extends L3Policy> list();
     List<? extends L3Policy> list(Map<String, String> filteringParams);
     L3Policy get(String id);

@@ -13,6 +13,11 @@ import org.openstack4j.model.gbp.PolicyTargetGroup;
  * 
  */
 public interface GroupService{
+    /**
+     * List all policy target group
+     * 
+     * @return List of policy target group
+     */
     List<? extends PolicyTargetGroup> list();
     List<? extends PolicyTargetGroup> list(Map<String, String> filteringParams);
     PolicyTargetGroup get(String id);

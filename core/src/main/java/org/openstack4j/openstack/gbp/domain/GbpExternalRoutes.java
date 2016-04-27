@@ -4,6 +4,11 @@ import org.openstack4j.model.gbp.ExternalRoutes;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+/**
+ * Model implementation for External Routes
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("external_routes")
 public class GbpExternalRoutes implements ExternalRoutes {
     private static final long serialVersionUID = 1L;

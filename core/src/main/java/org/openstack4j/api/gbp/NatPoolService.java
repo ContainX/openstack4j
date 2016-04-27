@@ -13,6 +13,11 @@ import org.openstack4j.model.gbp.NatPool;
  * 
  */
 public interface NatPoolService {
+    /**
+     * List all nat pool
+     * 
+     * @return List of nat pool
+     */
     List<? extends NatPool> list();
     List<? extends NatPool> list(Map<String, String> filteringParams);
     NatPool get(String id);

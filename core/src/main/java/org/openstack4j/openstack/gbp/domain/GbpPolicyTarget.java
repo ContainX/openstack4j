@@ -8,6 +8,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+/**
+ * Model implementation for Policy Target
+ *  
+ * @author vinod borole
+ */
 @JsonRootName("policy_target")
 public class GbpPolicyTarget implements PolicyTarget {
 

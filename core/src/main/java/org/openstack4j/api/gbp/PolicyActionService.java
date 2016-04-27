@@ -13,6 +13,11 @@ import org.openstack4j.model.gbp.PolicyAction;
  * 
  */
 public interface PolicyActionService {
+    /**
+     * List all policy actions
+     * 
+     * @return List of policy actions
+     */
     List<? extends PolicyAction> list();
     List<? extends PolicyAction> list(Map<String, String> filteringParams);
     PolicyAction get(String id);

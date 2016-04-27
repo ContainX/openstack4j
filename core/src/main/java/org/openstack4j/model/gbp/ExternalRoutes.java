@@ -1,7 +1,11 @@
 package org.openstack4j.model.gbp;
 
 import org.openstack4j.model.ModelEntity;
-
+/**
+ * External Routes Model Entity
+ * 
+ * @author vinod borole
+ */
 public interface ExternalRoutes extends ModelEntity {
     /**
      * Gets the destination for the route
