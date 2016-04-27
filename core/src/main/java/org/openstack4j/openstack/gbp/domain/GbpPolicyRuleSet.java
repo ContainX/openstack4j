@@ -8,6 +8,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+/**
+ * Model implementation for Policy rule set
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("policy_rule_set")
 public class GbpPolicyRuleSet implements PolicyRuleSet {
     private static final long serialVersionUID = 1L;
@@ -22,7 +27,7 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
     @JsonProperty("child_policy_rule_sets")
     private List<String> childPolicyRuleSets;
     @JsonProperty("policy_rules")
-    private List<GbpPolicyRule> policyRules;
+    private List<String> policyRules;
     
     
     @Override
@@ -74,7 +79,7 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
         return childPolicyRuleSets;
     }
     @Override
-    public List<GbpPolicyRule> getPolicyRules() {
+    public List<String> getPolicyRules() {
         return policyRules;
     }
    

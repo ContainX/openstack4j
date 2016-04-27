@@ -9,6 +9,11 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+/**
+ * Model implementation for Policy Action
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("policy_action")
 public class GbpPolicyAction implements PolicyAction {
     private static final long serialVersionUID = 1L;

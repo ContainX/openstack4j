@@ -2,8 +2,6 @@ package org.openstack4j.openstack.gbp.domain;
 
 import java.util.List;
 
-import org.openstack4j.model.gbp.PolicyRuleSet;
-import org.openstack4j.model.gbp.PolicyTarget;
 import org.openstack4j.model.gbp.PolicyTargetGroup;
 import org.openstack4j.model.gbp.builder.PolicyTargetGroupBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -11,6 +9,11 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+/**
+ * Model implementation for Policy target group
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("policy_target_group")
 public class GbpPolicyTargetGroup implements PolicyTargetGroup {
 
@@ -21,15 +24,15 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
     private String id;
     private String description;
     @JsonProperty("consumed_policy_rule_sets")
-    private List<PolicyRuleSet> consumedPolicyRuleSets;
+    private List<String> consumedPolicyRuleSets;
     @JsonProperty("provided_policy_rule_sets")
-    private List<PolicyRuleSet> providedPolicyRuleSets;
+    private List<String> providedPolicyRuleSets;
     @JsonProperty("l2_policy_id")
     private String l2PolicyId;
     @JsonProperty("network_service_policy_id")
     private String networkServicePolicyId;
     @JsonProperty("policy_targets")
-    private List<PolicyTarget> policyTargets;
+    private List<String> policyTargets;
     @JsonProperty("service_management")
     private boolean serviceManagement;
     private boolean shared;
@@ -75,12 +78,12 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
         return description;
     }
     @Override
-    public List<PolicyRuleSet> getConsumedPolicyRuleSets() {
+    public List<String> getConsumedPolicyRuleSets() {
         return consumedPolicyRuleSets;
     }
 
     @Override
-    public List<PolicyRuleSet> getProvidedPolicyRuleSets() {
+    public List<String> getProvidedPolicyRuleSets() {
         return providedPolicyRuleSets;
     }
 
@@ -95,7 +98,7 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
     }
 
     @Override
-    public List<PolicyTarget> getPolicyTargets() {
+    public List<String> getPolicyTargets() {
         return policyTargets;
     }
 

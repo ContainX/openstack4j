@@ -13,6 +13,11 @@ import org.openstack4j.model.gbp.PolicyRule;
  * 
  */
 public interface PolicyRuleService {
+    /**
+     * List all policy rules
+     * 
+     * @return List of policy rules
+     */
     List<? extends PolicyRule> list();
     List<? extends PolicyRule> list(Map<String, String> filteringParams);
     PolicyRule get(String id);

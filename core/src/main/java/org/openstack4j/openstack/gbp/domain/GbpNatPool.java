@@ -8,6 +8,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+/**
+ * Model implementation for nat pool
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("nat_pool")
 public class GbpNatPool implements NatPool {
     private static final long serialVersionUID = 1L;

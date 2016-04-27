@@ -3,12 +3,16 @@ package org.openstack4j.openstack.gbp.domain;
 import java.util.List;
 
 import org.openstack4j.model.gbp.L2Policy;
-import org.openstack4j.model.gbp.PolicyTargetGroup;
 import org.openstack4j.model.gbp.builder.L2PolicyBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+/**
+ * Model implementation for L2 Policy
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("l2_policy")
 public class GbpL2Policy implements L2Policy {
 
@@ -24,7 +28,7 @@ public class GbpL2Policy implements L2Policy {
     private String l3PolicyId;
     private boolean shared;
     @JsonProperty("policy_target_groups")
-    private List<PolicyTargetGroup> policyTargetGroups;
+    private List<String> policyTargetGroups;
     
     
     @Override
@@ -82,7 +86,7 @@ public class GbpL2Policy implements L2Policy {
     }
 
     @Override
-    public List<PolicyTargetGroup> getPolicyTargetGroups() {
+    public List<String> getPolicyTargetGroups() {
         return policyTargetGroups;
     }
 
@@ -97,7 +101,7 @@ public class GbpL2Policy implements L2Policy {
             return l2Policies;
         }
         
-    }
+    } 
     
     public static class L2PolicyConcreteBuilder implements L2PolicyBuilder{
 

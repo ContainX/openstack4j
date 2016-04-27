@@ -3,14 +3,17 @@ package org.openstack4j.openstack.gbp.domain;
 import java.util.List;
 
 import org.openstack4j.model.gbp.ExternalPolicy;
-import org.openstack4j.model.gbp.PolicyRuleSet;
 import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
-
+/**
+ * Model implementation for External Policy
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("external_policy")
 public class GbpExternalPolicy implements ExternalPolicy{
     private static final long serialVersionUID = 1L;
@@ -20,72 +23,107 @@ public class GbpExternalPolicy implements ExternalPolicy{
     private String tenantId;
     private String id;
     @JsonProperty("consumed_policy_rule_sets")
-    private List<PolicyRuleSet> consumedPolicyRuleSets;
+    private List<String> consumedPolicyRuleSets;
     @JsonProperty("provided_policy_rule_sets")
-    private List<PolicyRuleSet> providedPolicyRuleSets;
+    private List<String> providedPolicyRuleSets;
     @JsonProperty("external_segments")
     private List<String> externalSegments;
     private boolean shared;
     
+    /**
+     * {@inheritDoc}
+     */
     @Override 
     public String getTenantId() {
         return tenantId;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setTenantId(String tenantId) {
         this.tenantId=tenantId;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setName(String name) {
         this.name=name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getId() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setId(String id) {
         this.id=id;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<PolicyRuleSet> getConsumedPolicyRuleSets() {
+    public List<String> getConsumedPolicyRuleSets() {
         return consumedPolicyRuleSets;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public List<PolicyRuleSet> getProvidedPolicyRuleSets() {
+    public List<String> getProvidedPolicyRuleSets() {
         return providedPolicyRuleSets;
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getExternalSegments() {
         return externalSegments;
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getDescription() {
         return description;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isShared() {
         return shared;
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ExternalPolicyBuilder toBuilder() {
         return new ExternalPolicyConcreteBuilder(this);

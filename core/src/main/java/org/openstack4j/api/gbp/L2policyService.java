@@ -13,6 +13,11 @@ import org.openstack4j.model.gbp.L2Policy;
  * 
  */
 public interface L2policyService{
+    /**
+     * List all l2 policies
+     * 
+     * @return List of l2 policies
+     */
     List<? extends L2Policy> list();
     List<? extends L2Policy> list(Map<String, String> filteringParams);
     L2Policy get(String id);

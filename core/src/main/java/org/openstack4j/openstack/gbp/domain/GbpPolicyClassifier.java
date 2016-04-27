@@ -9,6 +9,11 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+/**
+ * Model implementation for Policy Classifier
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("policy_classifier")
 public class GbpPolicyClassifier implements PolicyClassifier {
     private static final long serialVersionUID = 1L;

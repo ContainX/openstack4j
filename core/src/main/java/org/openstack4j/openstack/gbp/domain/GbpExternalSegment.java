@@ -3,8 +3,6 @@ package org.openstack4j.openstack.gbp.domain;
 import java.util.List;
 
 import org.openstack4j.model.gbp.ExternalSegment;
-import org.openstack4j.model.gbp.L3Policy;
-import org.openstack4j.model.gbp.NatPool;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -12,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
+/**
+ * Model implementation for External Segments
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("external_segment")
 public class GbpExternalSegment implements ExternalSegment {
     private static final long serialVersionUID = 1L;
@@ -20,11 +23,11 @@ public class GbpExternalSegment implements ExternalSegment {
     private String tenantId;
     private String id;
     @JsonProperty("external_policies")
-    private List<GbpExternalPolicy> externalPolicies;
+    private List<String> externalPolicies;
     @JsonProperty("l3_policies")
-    private List<L3Policy> l3Policies;
+    private List<String> l3Policies;
     @JsonProperty("nat_pools")
-    private List<NatPool> natpools;
+    private List<String> natpools;
     @JsonProperty("ip_version")
     private String ipVersion;
     @JsonProperty("cidr")
@@ -69,7 +72,7 @@ public class GbpExternalSegment implements ExternalSegment {
     }
     
     @Override
-    public List<GbpExternalPolicy> getExternalPolicies() {
+    public List<String> getExternalPolicies() {
         return externalPolicies;
     }
     @Override
@@ -97,12 +100,12 @@ public class GbpExternalSegment implements ExternalSegment {
         return subnetId;
     }
     @Override
-    public List<L3Policy> getL3Policies() {
+    public List<String> getL3Policies() {
         return l3Policies;
     }
 
-
-    public List<NatPool> getNatpools() {
+    @Override
+    public List<String> getNatpools() {
         return natpools;
     }
 

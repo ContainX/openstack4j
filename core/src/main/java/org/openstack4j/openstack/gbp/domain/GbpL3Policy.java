@@ -2,13 +2,17 @@ package org.openstack4j.openstack.gbp.domain;
 
 import java.util.List;
 
-import org.openstack4j.model.gbp.L2Policy;
 import org.openstack4j.model.gbp.L3Policy;
 import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+/**
+ * Model implementation for L3 Policy
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("l3_policy")
 public class GbpL3Policy implements L3Policy {
     private static final long serialVersionUID = 1L;
@@ -24,7 +28,7 @@ public class GbpL3Policy implements L3Policy {
     @JsonProperty("ip_version")
     private String ipVersion;
     @JsonProperty("l2_policies")
-    private List<L2Policy> l2Policies;
+    private List<String> l2Policies;
     private List<String> routers;
     private boolean shared;
     @JsonProperty("subnet_prefix_length")
@@ -81,7 +85,7 @@ public class GbpL3Policy implements L3Policy {
     }
 
     @Override
-    public List<L2Policy> getL2Policies() {
+    public List<String> getL2Policies() {
         return l2Policies;
     }
 

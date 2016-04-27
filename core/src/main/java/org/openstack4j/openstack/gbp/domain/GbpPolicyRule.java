@@ -2,7 +2,6 @@ package org.openstack4j.openstack.gbp.domain;
 
 import java.util.List;
 
-import org.openstack4j.model.gbp.PolicyAction;
 import org.openstack4j.model.gbp.PolicyRule;
 import org.openstack4j.model.gbp.builder.PolicyRuleBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -10,6 +9,11 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+/**
+ * Model implementation for Policy rule
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("policy_rule")
 public class GbpPolicyRule implements PolicyRule {
 
@@ -22,7 +26,7 @@ public class GbpPolicyRule implements PolicyRule {
     @JsonProperty("policy_classifier_id")
     private String policyClassifierId;
     @JsonProperty("policy_actions")
-    private List<PolicyAction> policyActions;
+    private List<String> policyActions;
     private boolean shared;
     private boolean enabled;
     
@@ -65,7 +69,7 @@ public class GbpPolicyRule implements PolicyRule {
         return policyClassifierId;
     }
     @Override
-    public List<PolicyAction> getPolicyActions() {
+    public List<String> getPolicyActions() {
         return policyActions;
     }
 
