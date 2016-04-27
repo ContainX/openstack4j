@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.identity.v2.domain;
 
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -7,17 +8,17 @@ import java.util.List;
 import org.openstack4j.model.identity.v2.builder.ServiceEndpointBuilder;
 import org.openstack4j.model.identity.v2.Service;
 import org.openstack4j.model.identity.v2.ServiceEndpoint;
-import org.openstack4j.openstack.common.ListResult;
-import org.openstack4j.openstack.logging.LoggerFactory;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import org.openstack4j.openstack.common.ListResult;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * OpenStack ServiceEndpoint is an endpoint which is mapped to a {@link Service}
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -39,15 +40,15 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 	@JsonProperty("internalurl")
 	private URI internalURL;
 
-	public static ServiceEndpointBuilder builder() { 
+	public static ServiceEndpointBuilder builder() {
 		return new ServiceConcreteEndpointBuilder();
 	}
-	
+
 	@Override
-	public ServiceEndpointBuilder toBuilder() { 
+	public ServiceEndpointBuilder toBuilder() {
 		return new ServiceConcreteEndpointBuilder(this);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -55,7 +56,7 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 	public String getId() {
 		return id;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -114,7 +115,7 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 		if (obj == null || getClass() != obj.getClass())
 			return false;
 		KeystoneServiceEndpoint that = KeystoneServiceEndpoint.class.cast(obj);
-		return Objects.equal(this.id, that.id) 
+		return Objects.equal(this.id, that.id)
 				&& Objects.equal(this.publicURL, that.publicURL) && Objects.equal(this.region, that.region)
 				&& Objects.equal(this.internalURL, that.internalURL) && Objects.equal(this.adminURL, that.adminURL)
 				&& Objects.equal(this.serviceId, that.serviceId);
@@ -131,59 +132,59 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 				.add("serviceId", serviceId)
 				.toString();
 	}
-	
+
 	public static class ServiceEndpoints extends ListResult<KeystoneServiceEndpoint> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("endpoints")
 		List<KeystoneServiceEndpoint> endpoints;
-		
+
 		public List<KeystoneServiceEndpoint> value() {
 			return endpoints;
 		}
 	}
-	
+
 	public static class ServiceConcreteEndpointBuilder implements ServiceEndpointBuilder {
 
 		private KeystoneServiceEndpoint model;
-		
+
 		ServiceConcreteEndpointBuilder() {
 			this(new KeystoneServiceEndpoint());
 		}
-		
+
 		ServiceConcreteEndpointBuilder(KeystoneServiceEndpoint model) {
 			this.model = model;
 		}
-		
+
 		public ServiceEndpointBuilder region(String region) {
 			model.region = region;
 			return this;
 		}
-		
+
 		public ServiceEndpointBuilder serviceId(String serviceId) {
 			model.serviceId = serviceId;
 			return this;
 		}
-		
+
 		public ServiceEndpointBuilder publicURL(String publicURL) {
 			model.publicURL = uri(publicURL);
 			return this;
 		}
-		
+
 		public ServiceEndpointBuilder adminURL(String adminURL) {
 			model.adminURL = uri(adminURL);
 			return this;
 		}
-		
+
 		public ServiceEndpointBuilder internalURL(String internalURL) {
 			model.internalURL = uri(internalURL);
 			return this;
 		}
-		
+
 		private URI uri(String url) {
 			if (url == null) return null;
-			
+
 			try {
 				return new URI(url);
 			}
@@ -192,7 +193,7 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 			}
 			return null;
 		}
-		
+
 		@Override
 		public ServiceEndpoint build() {
 			return model;
@@ -203,6 +204,6 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
 			model = (KeystoneServiceEndpoint)in;
 			return this;
 		}
-		
+
 	}
 }

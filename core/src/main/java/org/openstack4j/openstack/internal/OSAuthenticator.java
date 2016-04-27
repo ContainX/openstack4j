@@ -7,12 +7,7 @@ import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.types.Facing;
-import org.openstack4j.core.transport.ClientConstants;
-import org.openstack4j.core.transport.Config;
-import org.openstack4j.core.transport.HttpEntityHandler;
-import org.openstack4j.core.transport.HttpMethod;
-import org.openstack4j.core.transport.HttpRequest;
-import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.core.transport.*;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
@@ -27,11 +22,12 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneToken;
 import org.openstack4j.openstack.identity.v3.domain.TokenAuth;
 import org.openstack4j.openstack.internal.OSClientSession.OSClientSessionV2;
 import org.openstack4j.openstack.internal.OSClientSession.OSClientSessionV3;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Responsible for authenticating and re-authenticating sessions for V2 and V3 of the Identity API
+ * Responsible for authenticating and re-authenticating sessions for V2 and V3
+ * of the Identity API
  */
 public class OSAuthenticator {
 
@@ -49,15 +45,14 @@ public class OSAuthenticator {
      * @return the OSClient
      */
     @SuppressWarnings("rawtypes")
-    public static OSClient invoke(AuthStore auth, String endpoint, Facing perspective, Config config, CloudProvider provider) {
+    public static OSClient invoke(AuthStore auth, String endpoint, Facing perspective, Config config,
+            CloudProvider provider) {
         SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
         if (auth.getVersion() == AuthVersion.V2) {
             return authenticateV2((org.openstack4j.openstack.identity.v2.domain.Auth) auth, info, config);
         }
         return authenticateV3((KeystoneAuth) auth, info, config);
     }
-    
-    
 
     /**
      * Invokes V3 authentication via an existing token
@@ -77,6 +72,7 @@ public class OSAuthenticator {
 
     /**
      * Invokes V2 authentication via an existing token
+     * 
      * @param auth the token authentication
      * @param endpoint the identity endpoint
      * @param perspective the network facing perspective
@@ -84,7 +80,8 @@ public class OSAuthenticator {
      * @return the OSClient
      */
     @SuppressWarnings("rawtypes")
-    public static OSClient invoke(org.openstack4j.openstack.identity.v2.domain.TokenAuth auth, String endpoint, Facing perspective, Config config, CloudProvider provider) {
+    public static OSClient invoke(org.openstack4j.openstack.identity.v2.domain.TokenAuth auth, String endpoint,
+            Facing perspective, Config config, CloudProvider provider) {
         SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
         return authenticateV2(auth, info, config);
     }
@@ -116,22 +113,17 @@ public class OSAuthenticator {
         }
     }
 
-    private static OSClientV2 authenticateV2(org.openstack4j.openstack.identity.v2.domain.Auth auth, SessionInfo info, Config config) {
+    private static OSClientV2 authenticateV2(org.openstack4j.openstack.identity.v2.domain.Auth auth, SessionInfo info,
+            Config config) {
         HttpRequest<KeystoneAccess> request = HttpRequest.builder(KeystoneAccess.class)
-                .header(ClientConstants.HEADER_OS4J_AUTH, TOKEN_INDICATOR)
-                .endpoint(info.endpoint)
-                .method(HttpMethod.POST)
-                .path("/tokens")
-                .config(config)
-                .entity(auth)
-                .build();
+                .header(ClientConstants.HEADER_OS4J_AUTH, TOKEN_INDICATOR).endpoint(info.endpoint)
+                .method(HttpMethod.POST).path("/tokens").config(config).entity(auth).build();
 
         HttpResponse response = HttpExecutor.create().execute(request);
         if (response.getStatus() >= 400) {
             try {
                 throw mapException(response.getStatusMessage(), response.getStatus());
-            }
-            finally {
+            } finally {
                 HttpEntityHandler.closeQuietly(response);
             }
         }
@@ -140,11 +132,9 @@ public class OSAuthenticator {
 
         if (auth.getType() == Type.CREDENTIALS) {
             access = access.applyContext(info.endpoint, (Credentials) auth);
-        }
-        else if (auth.getType() == Type.RAX_APIKEY) {
+        } else if (auth.getType() == Type.RAX_APIKEY) {
             access = access.applyContext(info.endpoint, (RaxApiKeyCredentials) auth);
-        }
-        else {
+        } else {
             access = access.applyContext(info.endpoint, (org.openstack4j.openstack.identity.v2.domain.TokenAuth) auth);
         }
 
@@ -191,7 +181,6 @@ public class OSAuthenticator {
         OSClientSessionV3 current = (OSClientSessionV3) OSClientSessionV3.getCurrent();
         current.token = token;
         return current;
-
     }
 
     private static class SessionInfo {
@@ -206,8 +195,5 @@ public class OSAuthenticator {
             this.reLinkToExistingSession = reLinkToExistingSession;
             this.provider = provider;
         }
-
     }
-
-
 }

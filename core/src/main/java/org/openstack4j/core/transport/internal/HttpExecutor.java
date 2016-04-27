@@ -1,14 +1,14 @@
 package org.openstack4j.core.transport.internal;
 
-import java.util.Iterator;
-import java.util.ServiceLoader;
-
 import org.openstack4j.api.exceptions.ConnectorNotFoundException;
 import org.openstack4j.core.transport.HttpExecutorService;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 /**
  * HttpExecutor is a delegate to the underline connector associated to OpenStack4j.
@@ -47,7 +47,7 @@ public class HttpExecutor  {
      * Delegate to {@link HttpExecutorService#execute(HttpRequest)}
      */
     public <R> HttpResponse execute(HttpRequest<R> request) {
-        LOG.debug("Executing Request: %s -> %s", request.getEndpoint(), request.getPath());
+        LOG.debug("Executing Request: {} -> {}", request.getEndpoint(), request.getPath());
         return service().execute(request);
     }
 }

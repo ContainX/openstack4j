@@ -9,13 +9,13 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.openstack.internal.OSAuthenticator;
 import org.openstack4j.openstack.internal.OSClientSession;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * HttpExecutor is the default implementation for HttpExecutorService which is responsible for interfacing with HttpClient and mapping common status codes, requests and responses
  * back to the common API
- * 
+ *
  * @author Jeremy Unruh
  */
 public class HttpExecutorServiceImpl implements HttpExecutorService {
@@ -83,5 +83,4 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
     public String getExecutorDisplayName() {
         return NAME;
     }
-
 }

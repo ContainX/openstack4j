@@ -1,7 +1,7 @@
 package org.openstack4j.api.identity.v3
 
 
-import java.util.logging.Logger
+import groovy.util.logging.Slf4j
 
 import org.junit.Rule
 import org.junit.rules.TestName
@@ -17,7 +17,7 @@ import co.freeside.betamax.Betamax
 import co.freeside.betamax.Recorder
 
 
-
+@Slf4j
 class KeystoneRoleServiceSpec extends AbstractSpec {
 
     @Rule TestName KeystoneRoleServiceTest
@@ -49,19 +49,19 @@ class KeystoneRoleServiceSpec extends AbstractSpec {
     def setupSpec() {
 
         if( skipTest != true ) {
-            Logger.getLogger(this.class.name).info("USER_ID: " + USER_ID)
-            Logger.getLogger(this.class.name).info("AUTH_URL: " + AUTH_URL)
-            Logger.getLogger(this.class.name).info("PASSWORD: " + PASSWORD)
-            Logger.getLogger(this.class.name).info("DOMAIN_ID: " + DOMAIN_ID)
-            Logger.getLogger(this.class.name).info("PROJECT_ID: " + PROJECT_ID)
+            log.info("USER_ID: " + USER_ID)
+            log.info("AUTH_URL: " + AUTH_URL)
+            log.info("PASSWORD: " + PASSWORD)
+            log.info("DOMAIN_ID: " + DOMAIN_ID)
+            log.info("PROJECT_ID: " + PROJECT_ID)
         }
         else {
-            Logger.getLogger(this.class.name).warning("Skipping integration-test cases because not all mandatory attributes are set.")
+            log.warn("Skipping integration-test cases because not all mandatory attributes are set.")
         }
     }
 
     def setup() {
-        Logger.getLogger(this.class.name).info("-> Test: '$KeystoneRoleServiceTest.methodName'")
+        log.info("-> Test: '$KeystoneRoleServiceTest.methodName'")
     }
 
 
