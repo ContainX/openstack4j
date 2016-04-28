@@ -23,5 +23,5 @@ public interface L3policyService{
     L3Policy get(String id);
     ActionResponse delete(String id);
     L3Policy create(L3Policy l3Policy);
-    L3Policy update(L3Policy l3Policy);
+    L3Policy update(String l3PolicyId,L3Policy l3Policy);
 }

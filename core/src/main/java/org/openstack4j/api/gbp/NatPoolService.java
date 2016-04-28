@@ -23,5 +23,5 @@ public interface NatPoolService {
     NatPool get(String id);
     ActionResponse delete(String id);
     NatPool create(NatPool natpool);
-    NatPool update(NatPool natpool);
+    NatPool update(String natpoolId,NatPool natpool);
 }

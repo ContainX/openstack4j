@@ -8,6 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 
 /**
  * Model implementation for Policy Classifier
@@ -28,7 +29,8 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     private String protocol;
     private boolean shared;
     
-    
+
+     
     @Override
     public PolicyClassifierBuilder toBuilder() {
         return new PolicyClassifierConcreteBuilder(this);
@@ -87,7 +89,11 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     public boolean isShared() {
         return shared;
     }
-
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+                .add("tenantId", tenantId).add("portRange", portRange).add("protocol", protocol).add("shared", shared).toString();
+    }
     public static class PolicyClassifiers extends ListResult<GbpPolicyClassifier>{
 
         private static final long serialVersionUID = 1L;

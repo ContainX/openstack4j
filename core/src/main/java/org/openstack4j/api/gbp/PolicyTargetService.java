@@ -23,5 +23,5 @@ public interface PolicyTargetService{
     PolicyTarget get(String id);
     ActionResponse delete(String id);
     PolicyTarget create(PolicyTarget policyTarget);
-    PolicyTarget update(PolicyTarget policyTarget);
+    PolicyTarget update(String policyTargetId,PolicyTarget policyTarget);
 }

@@ -8,6 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 /**
  * Model implementation for L2 Policy
  * 
@@ -29,7 +30,6 @@ public class GbpL2Policy implements L2Policy {
     private boolean shared;
     @JsonProperty("policy_target_groups")
     private List<String> policyTargetGroups;
-    
     
     @Override
     public String getTenantId() {
@@ -90,6 +90,13 @@ public class GbpL2Policy implements L2Policy {
         return policyTargetGroups;
     }
 
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+                .add("tenantId", tenantId).add("networkId", networkId).add("l3PolicyId", l3PolicyId).add("shared", shared)
+                .add("policyTargetGroups", policyTargetGroups).toString();
+    }
+    
     
     public static class L2Policies extends ListResult<GbpL2Policy>{
         private static final long serialVersionUID = 1L;

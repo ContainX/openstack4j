@@ -52,7 +52,6 @@ public class ExternalPolicyServiceImpl extends BaseNetworkingServices implements
 
     @Override
     public ExternalPolicy create(ExternalPolicy externalPolicy) {
-         System.out.println(externalPolicy.toString());
          return post(GbpExternalPolicy.class, uri("/grouppolicy/external_policies")).entity(externalPolicy).execute();
     }
 

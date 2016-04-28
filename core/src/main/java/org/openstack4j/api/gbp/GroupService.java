@@ -23,5 +23,5 @@ public interface GroupService{
     PolicyTargetGroup get(String id);
     ActionResponse delete(String id);
     PolicyTargetGroup create(PolicyTargetGroup policyTargetGroup);
-    PolicyTargetGroup update(PolicyTargetGroup policyTargetGroup);
+    PolicyTargetGroup update(String policyTargetGroupId,PolicyTargetGroup policyTargetGroup);
 }

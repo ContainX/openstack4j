@@ -22,7 +22,19 @@ import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.gbp.ExternalPolicyService;
+import org.openstack4j.api.gbp.ExternalSegmentService;
 import org.openstack4j.api.gbp.GbpService;
+import org.openstack4j.api.gbp.GroupService;
+import org.openstack4j.api.gbp.L2policyService;
+import org.openstack4j.api.gbp.L3policyService;
+import org.openstack4j.api.gbp.NatPoolService;
+import org.openstack4j.api.gbp.PolicyActionService;
+import org.openstack4j.api.gbp.PolicyClassifierService;
+import org.openstack4j.api.gbp.PolicyRuleService;
+import org.openstack4j.api.gbp.PolicyRuleSetService;
+import org.openstack4j.api.gbp.PolicyTargetService;
+import org.openstack4j.api.gbp.ServiceProfileService;
+import org.openstack4j.api.gbp.ServicechainService;
 import org.openstack4j.api.heat.EventsService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.heat.ResourcesService;
@@ -105,7 +117,19 @@ import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalPolicyServiceImpl;
+import org.openstack4j.openstack.gbp.internal.ExternalSegmentServiceImpl;
 import org.openstack4j.openstack.gbp.internal.GbpServiceImpl;
+import org.openstack4j.openstack.gbp.internal.GroupServiceImpl;
+import org.openstack4j.openstack.gbp.internal.L2policyServiceImpl;
+import org.openstack4j.openstack.gbp.internal.L3policyServiceImpl;
+import org.openstack4j.openstack.gbp.internal.NatPoolServiceImpl;
+import org.openstack4j.openstack.gbp.internal.PolicyActionServiceImpl;
+import org.openstack4j.openstack.gbp.internal.PolicyClassifierServiceImpl;
+import org.openstack4j.openstack.gbp.internal.PolicyRuleServiceImpl;
+import org.openstack4j.openstack.gbp.internal.PolicyRuleSetServiceImpl;
+import org.openstack4j.openstack.gbp.internal.PolicyTargetServiceImpl;
+import org.openstack4j.openstack.gbp.internal.ServiceProfileServiceImpl;
+import org.openstack4j.openstack.gbp.internal.ServicechainServiceImpl;
 import org.openstack4j.openstack.heat.internal.EventsServiceImpl;
 import org.openstack4j.openstack.heat.internal.HeatServiceImpl;
 import org.openstack4j.openstack.heat.internal.ResourcesServiceImpl;
@@ -264,9 +288,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ShareInstanceService.class, ShareInstanceServiceImpl.class);
 		bind(ShareTypeService.class, ShareTypeServiceImpl.class);
 		bind(SchedulerStatsService.class, SchedulerStatsServiceImpl.class);
-		bind(org.openstack4j.api.manila.QuotaSetService.class,
-				org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
-		
+		bind(org.openstack4j.api.manila.QuotaSetService.class,org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
 		bind(FirewallAsService.class, FirewallAsServiceImpl.class);
 		bind(FirewallService.class, FirewallServiceImpl.class);
@@ -274,6 +296,19 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
 		bind(GbpService.class,GbpServiceImpl.class);
 		bind(ExternalPolicyService.class,ExternalPolicyServiceImpl.class);
+		bind(ExternalSegmentService.class,ExternalSegmentServiceImpl.class);
+		bind(GroupService.class,GroupServiceImpl.class);
+		bind(L2policyService.class,L2policyServiceImpl.class);
+		bind(L3policyService.class,L3policyServiceImpl.class);
+		bind(NatPoolService.class,NatPoolServiceImpl.class);
+		bind(NetworkService.class,NetworkServiceImpl.class);
+		bind(PolicyActionService.class,PolicyActionServiceImpl.class);
+		bind(PolicyRuleService.class,PolicyRuleServiceImpl.class);
+		bind(PolicyRuleSetService.class,PolicyRuleSetServiceImpl.class);
+		bind(PolicyTargetService.class,PolicyTargetServiceImpl.class);
+		bind(PolicyClassifierService.class,PolicyClassifierServiceImpl.class);
+		bind(ServicechainService.class,ServicechainServiceImpl.class);
+		bind(ServiceProfileService.class,ServiceProfileServiceImpl.class);
 	}
 
 	/**

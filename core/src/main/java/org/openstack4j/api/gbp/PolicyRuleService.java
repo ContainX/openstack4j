@@ -23,5 +23,5 @@ public interface PolicyRuleService {
     PolicyRule get(String id);
     ActionResponse delete(String id);
     PolicyRule create(PolicyRule policyRule);
-    PolicyRule update(PolicyRule policyRule);
+    PolicyRule update(String policyRuleId,PolicyRule policyRule);
 }

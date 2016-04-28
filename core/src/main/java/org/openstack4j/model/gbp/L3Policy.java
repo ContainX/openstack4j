@@ -1,6 +1,7 @@
 package org.openstack4j.model.gbp;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
@@ -25,7 +26,7 @@ public interface L3Policy extends Resource, Buildable<L3PolicyBuilder> {
      *
      * @return the external segment
      */
-    String getExternalSegments();
+    Map<String, List<String>> getExternalSegments();
 
     /**
      * Gets the Ip Pool

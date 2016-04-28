@@ -39,7 +39,7 @@ public class GbpExternalSegment implements ExternalSegment {
     @JsonProperty("port_address_translation")
     private boolean portAddressTranslation;
     @JsonProperty("external_routes")
-    private GbpExternalRoutes externalRoutes;
+    private List<GbpExternalRoutes> externalRoutes;
     
     @Override
     public String getTenantId() {
@@ -115,7 +115,7 @@ public class GbpExternalSegment implements ExternalSegment {
     }
 
     @Override
-    public GbpExternalRoutes getExternalRoutes() {
+    public List<GbpExternalRoutes> getExternalRoutes() {
         return externalRoutes;
     }
 
@@ -125,7 +125,9 @@ public class GbpExternalSegment implements ExternalSegment {
     }
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("", "").toString();
+        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description).add("tenantId", tenantId).add("externalPolicies", externalPolicies)
+                .add("l3Policies", l3Policies).add("natpools", natpools).add("ipVersion", ipVersion).add("cidr", cidr).add("shared", shared)
+                .add("subnetId", subnetId).add("portAddressTranslation", portAddressTranslation).add("externalRoutes", externalRoutes).toString();
     }
     
     public static class ExternalSegments extends ListResult<GbpExternalSegment> {

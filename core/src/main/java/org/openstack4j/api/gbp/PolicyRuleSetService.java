@@ -17,5 +17,5 @@ public interface PolicyRuleSetService {
     PolicyRuleSet get(String id);
     ActionResponse delete(String id);
     PolicyRuleSet create(PolicyRuleSet policyRuleSet);
-    PolicyRuleSet update(PolicyRuleSet policyRuleSet);
+    PolicyRuleSet update(String policyRuleSetId,PolicyRuleSet policyRuleSet);
 }

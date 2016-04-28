@@ -8,6 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 /**
  * Model implementation for Policy rule set
  * 
@@ -29,7 +30,7 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
     @JsonProperty("policy_rules")
     private List<String> policyRules;
     
-    
+
     @Override
     public String getTenantId() {
         return tenantId;
@@ -87,7 +88,12 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
     public PolicyRuleSetBuilder toBuilder() {
         return new PolicyRuleSetConcreteBuilder(this);
     }
-    
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+                .add("tenantId", tenantId).add("parentId", parentId).add("childPolicyRuleSets", childPolicyRuleSets).add("shared", shared).add("policyRules", policyRules).toString();
+    }
+        
     public static class PolicyRuleSets extends ListResult<GbpPolicyRuleSet>{
 
         private static final long serialVersionUID = 1L;

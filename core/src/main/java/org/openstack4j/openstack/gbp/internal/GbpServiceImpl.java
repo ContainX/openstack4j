@@ -12,6 +12,7 @@ import org.openstack4j.api.gbp.NetworkService;
 import org.openstack4j.api.gbp.PolicyActionService;
 import org.openstack4j.api.gbp.PolicyClassifierService;
 import org.openstack4j.api.gbp.PolicyRuleService;
+import org.openstack4j.api.gbp.PolicyRuleSetService;
 import org.openstack4j.api.gbp.PolicyTargetService;
 import org.openstack4j.api.gbp.ServiceProfileService;
 import org.openstack4j.api.gbp.ServicechainService;
@@ -26,74 +27,65 @@ public class GbpServiceImpl extends BaseNetworkingServices implements GbpService
 
     @Override
     public ExternalSegmentService externalSegment() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(ExternalSegmentService.class);
     }
 
     @Override
-    public GroupService group() {
-        // TODO Auto-generated method stub
-        return null;
+    public GroupService group() { 
+        return Apis.get(GroupService.class);
     }
 
     @Override
     public L2policyService l2Policy() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(L2policyService.class);
     }
 
     @Override
     public L3policyService l3Policy() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(L3policyService.class);
     }
 
     @Override
     public NatPoolService natPool() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(NatPoolService.class);
     }
 
     @Override
     public NetworkService networkService() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(NetworkService.class);
     }
 
     @Override
     public PolicyActionService policyAction() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(PolicyActionService.class);
     }
 
     @Override
     public PolicyRuleService policyRule() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(PolicyRuleService.class);
     }
-
+    @Override
+    public PolicyRuleSetService policyRuleSet() {
+        return Apis.get(PolicyRuleSetService.class);
+    }
     @Override
     public PolicyTargetService policyTarget() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(PolicyTargetService.class);
     }
 
     @Override
     public PolicyClassifierService policyClassifier() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(PolicyClassifierService.class);
     }
 
     @Override
     public ServicechainService servicechain() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(ServicechainService.class);
     }
 
     @Override
     public ServiceProfileService serviceProfile() {
-        // TODO Auto-generated method stub
-        return null;
+        return Apis.get(ServiceProfileService.class);
     }
 
 }

@@ -23,5 +23,5 @@ public interface L2policyService{
     L2Policy get(String id);
     ActionResponse delete(String id);
     L2Policy create(L2Policy l2Policy);
-    L2Policy update(L2Policy l2Policy);
+    L2Policy update(String l2PolicyId,L2Policy l2Policy);
 }

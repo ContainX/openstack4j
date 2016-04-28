@@ -65,6 +65,12 @@ public interface GbpService extends RestService {
      */
     PolicyRuleService policyRule();
     /**
+     * Service implementation which provides methods for manipulation of policy rules Sets
+     * 
+     * @return PolicyRuleSetService
+     */
+    PolicyRuleSetService policyRuleSet();
+    /**
      * Service implementation which provides methods for manipulation of policy targets
      * 
      * @return PolicyTargetService
