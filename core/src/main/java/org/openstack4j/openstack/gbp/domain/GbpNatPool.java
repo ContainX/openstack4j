@@ -8,6 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 /**
  * Model implementation for nat pool
  * 
@@ -94,7 +95,14 @@ public class GbpNatPool implements NatPool {
     public NatPoolBuilder toBuilder() {
         return new NatPoolConcreteBuilder(this);
     }
-    
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+                .add("tenantId", tenantId).add("externalSegmentId", externalSegmentId).add("ipPool", ipPool).add("ipVersion", ipVersion)
+                .add("subnetId", subnetId).add("shared", shared).toString();
+    }
+
     public static class NatPools extends ListResult<GbpNatPool>{
 
         private static final long serialVersionUID = 1L;

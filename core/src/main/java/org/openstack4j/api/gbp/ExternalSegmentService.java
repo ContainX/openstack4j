@@ -23,5 +23,5 @@ public interface ExternalSegmentService {
     ExternalSegment get(String id);
     ActionResponse delete(String id);
     ExternalSegment create(ExternalSegment externalSegment);
-    ExternalSegment update(ExternalSegment externalSegment);
+    ExternalSegment update(String externalSegmentId,ExternalSegment externalSegment);
 }

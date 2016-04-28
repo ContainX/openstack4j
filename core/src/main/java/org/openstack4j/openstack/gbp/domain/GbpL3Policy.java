@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.gbp.domain;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.model.gbp.L3Policy;
 import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
@@ -8,6 +9,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 /**
  * Model implementation for L3 Policy
  * 
@@ -22,7 +24,7 @@ public class GbpL3Policy implements L3Policy {
     private String id;
     private String description;
     @JsonProperty("external_segments")
-    private String externalSegments;
+    private Map<String, List<String>> externalSegments;
     @JsonProperty("ip_pool")
     private String ipPool;
     @JsonProperty("ip_version")
@@ -35,6 +37,7 @@ public class GbpL3Policy implements L3Policy {
     private String subnetPrefixLength;
     
     
+
     @Override
     public String getTenantId() {
         return tenantId;
@@ -70,7 +73,7 @@ public class GbpL3Policy implements L3Policy {
     }
 
     @Override
-    public String getExternalSegments() {
+    public Map<String, List<String>> getExternalSegments() {
         return externalSegments;
     }
 
@@ -107,6 +110,13 @@ public class GbpL3Policy implements L3Policy {
     @Override
     public L3PolicyBuilder toBuilder() {
         return new L3PolicyConcreteBuilder(this);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+                .add("tenantId", tenantId).add("externalSegments", externalSegments).add("ipPool", ipPool).add("ipVersion", ipVersion)
+                .add("l2Policies", l2Policies).add("routers", routers).add("shared", shared).add("subnetPrefixLength", subnetPrefixLength).toString();
     }
 
     public static class L3Policies extends ListResult<GbpL3Policy>{

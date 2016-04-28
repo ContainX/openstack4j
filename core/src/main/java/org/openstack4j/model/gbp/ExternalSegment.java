@@ -70,11 +70,11 @@ public interface ExternalSegment extends Resource, Buildable<ExternalSegmentBuil
     boolean isPortAddressTranslation();
 
     /**
-     * Gets the external routes
+     * Gets the list of external routes
      *
-     * @return the external routes
+     * @return the list of external routes
      */
-    GbpExternalRoutes getExternalRoutes();
+    List<GbpExternalRoutes> getExternalRoutes();
 
     /**
      * Gets the list of nat pools

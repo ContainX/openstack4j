@@ -150,6 +150,19 @@ public class DefaultAPIProvider implements APIProvider {
                 org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
 		bind(GbpService.class,GbpServiceImpl.class);
 		bind(ExternalPolicyService.class,ExternalPolicyServiceImpl.class);
+		bind(ExternalSegmentService.class,ExternalSegmentServiceImpl.class);
+		bind(GroupService.class,GroupServiceImpl.class);
+		bind(L2policyService.class,L2policyServiceImpl.class);
+		bind(L3policyService.class,L3policyServiceImpl.class);
+		bind(NatPoolService.class,NatPoolServiceImpl.class);
+		bind(NetworkService.class,NetworkServiceImpl.class);
+		bind(PolicyActionService.class,PolicyActionServiceImpl.class);
+		bind(PolicyRuleService.class,PolicyRuleServiceImpl.class);
+		bind(PolicyRuleSetService.class,PolicyRuleSetServiceImpl.class);
+		bind(PolicyTargetService.class,PolicyTargetServiceImpl.class);
+		bind(PolicyClassifierService.class,PolicyClassifierServiceImpl.class);
+		bind(ServicechainService.class,ServicechainServiceImpl.class);
+		bind(ServiceProfileService.class,ServiceProfileServiceImpl.class);
 
     }
 

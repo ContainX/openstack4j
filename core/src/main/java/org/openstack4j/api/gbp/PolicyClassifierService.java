@@ -23,5 +23,5 @@ public interface PolicyClassifierService {
     PolicyClassifier get(String id);
     ActionResponse delete(String id);
     PolicyClassifier create(PolicyClassifier policyClassifier);
-    PolicyClassifier update(PolicyClassifier policyClassifier);
+    PolicyClassifier update(String policyClassifierId,PolicyClassifier policyClassifier);
 }

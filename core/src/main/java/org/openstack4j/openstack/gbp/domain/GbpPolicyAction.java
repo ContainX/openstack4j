@@ -8,6 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 
 /**
  * Model implementation for Policy Action
@@ -82,6 +83,11 @@ public class GbpPolicyAction implements PolicyAction {
         return actionValue;
     }
 
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+                .add("tenantId", tenantId).add("actionType", actionType).add("actionValue", actionValue).add("shared", shared).toString();
+    }
     public static class PolicyActions extends ListResult<GbpPolicyAction>{
         private static final long serialVersionUID = 1L;
         @JsonProperty("policy_actions")
