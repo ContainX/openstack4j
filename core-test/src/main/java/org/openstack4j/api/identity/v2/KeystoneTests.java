@@ -4,6 +4,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
@@ -24,6 +26,8 @@ import org.testng.annotations.Test;
  */
 @Test(suiteName = "Identity/Keystone_V2")
 public class KeystoneTests extends AbstractTest {
+
+    private static final DateFormat ISO8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
 
     private static final String JSON_ROLES = "/identity/v2/roles.json";
     private static final String JSON_ROLE = "/identity/v2/member-role.json";
@@ -180,7 +184,12 @@ public class KeystoneTests extends AbstractTest {
         respondWith(JSON_EXTENSIONS);
 
         List<? extends Extension> extensions = osv2().identity().listExtensions();
+
         assertEquals(extensions.size(), 4);
+
+        Extension extension0 = extensions.get(0);
+        assertEquals(extension0.getUpdated(), ISO8601.parse("2013-07-07T12:00:0-00:00"));
+
     }
 
     /**
