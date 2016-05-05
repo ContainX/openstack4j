@@ -12,6 +12,13 @@ import org.openstack4j.model.common.Extension;
 public interface IdentityService extends RestService {
 
     /**
+     * Credential Service API
+     *
+     * @return the credential service
+     */
+    CredentialService credentials();
+
+    /**
      * Domain Service API
      *
      * @return the domain service

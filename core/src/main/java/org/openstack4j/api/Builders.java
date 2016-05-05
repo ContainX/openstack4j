@@ -85,6 +85,15 @@ public class Builders {
      *
      * @return the domain builder
      */
+    public static CredentialBuilder credential() {
+        return KeystoneCredential.builder();
+    }
+
+    /**
+     * The builder to create a Domain.
+     *
+     * @return the domain builder
+     */
     public static DomainBuilder domain() {
         return KeystoneDomain.builder();
     }
@@ -181,7 +190,7 @@ public class Builders {
 
     /**
      * The builder to create a Port
-     * 
+     *
      * @return the port builder
      */
     public static PortBuilder port() {
@@ -190,7 +199,7 @@ public class Builders {
 
     /**
      * The builder to create a Router
-     * 
+     *
      * @return the router builder
      */
     public static RouterBuilder router() {
@@ -199,7 +208,7 @@ public class Builders {
 
     /**
      * The builder to create a Glance Image
-     * 
+     *
      * @return the image builder
      */
     public static ImageBuilder image() {
@@ -208,7 +217,7 @@ public class Builders {
 
     /**
      * The builder to create a Block Volume
-     * 
+     *
      * @return the volume builder
      */
     public static VolumeBuilder volume() {
@@ -217,7 +226,7 @@ public class Builders {
 
     /**
      * The builder to create a Block Volume Snapshot
-     * 
+     *
      * @return the snapshot builder
      */
     public static VolumeSnapshotBuilder volumeSnapshot() {
@@ -226,7 +235,7 @@ public class Builders {
 
     /**
      * The builder to create a Compute/Nova Floating IP
-     * 
+     *
      * @return the floating ip builder
      */
     public static FloatingIPBuilder floatingIP() {
@@ -235,7 +244,7 @@ public class Builders {
 
     /**
      * A Builder which creates a Security Group Rule
-     * 
+     *
      * @return the security group rule builder
      */
     public static SecurityGroupRuleBuilder secGroupRule() {
@@ -271,7 +280,7 @@ public class Builders {
 
     /**
      * The builder to create a {@link Template}
-     * 
+     *
      * @return the TemplateBuilder
      */
     public static TemplateBuilder template() {
@@ -280,7 +289,7 @@ public class Builders {
 
     /**
      * The builder to create a {@link StackCreate}
-     * 
+     *
      * @return the StackCreate builder
      */
     public static StackCreateBuilder stack() {
@@ -298,7 +307,7 @@ public class Builders {
 
     /**
      * The builder to create a {@link StackUpdate}
-     * 
+     *
      * @return the StackUpdate builder
      */
     public static StackUpdateBuilder stackUpdate() {
@@ -307,7 +316,7 @@ public class Builders {
 
     /**
      * The builder to create NetQuota entities
-     * 
+     *
      * @return the NetQuota builder
      */
     public static NetQuotaBuilder netQuota() {
@@ -316,7 +325,7 @@ public class Builders {
 
     /**
      * The builder to update a network
-     * 
+     *
      * @return the NetworkUpdateBuilder
      */
     public static NetworkUpdateBuilder networkUpdate() {
@@ -325,7 +334,7 @@ public class Builders {
 
     /**
      * The builder to create a lb member
-     * 
+     *
      * @return the Member Builder
      */
     public static MemberBuilder member() {
@@ -334,7 +343,7 @@ public class Builders {
 
     /**
      * The builder to update a lb member
-     * 
+     *
      * @return the MemberUpdate Builder
      */
     public static MemberUpdateBuilder memberUpdate() {
@@ -343,7 +352,7 @@ public class Builders {
 
     /**
      * The builder to create and update a sessionPersistence
-     * 
+     *
      * @return SessionPersistenceBuilder
      */
     public static SessionPersistenceBuilder sessionPersistence() {
@@ -352,7 +361,7 @@ public class Builders {
 
     /**
      * The builder to create a vip.
-     * 
+     *
      * @return VipBuilder the vip builder
      */
     public static VipBuilder vip() {
@@ -361,7 +370,7 @@ public class Builders {
 
     /**
      * The builder to update a vip.
-     * 
+     *
      * @return VipUpdateBuilder
      */
     public static VipUpdateBuilder vipUpdate() {
@@ -370,7 +379,7 @@ public class Builders {
 
     /**
      * The builder to create a healthMonitor
-     * 
+     *
      * @return HealthMonitorBuilder
      */
     public static HealthMonitorBuilder healthMonitor() {
@@ -379,7 +388,7 @@ public class Builders {
 
     /**
      * The builder to update a healthMonitor
-     * 
+     *
      * @return HealthMonitorUpdateBuilder
      */
     public static HealthMonitorUpdateBuilder healthMonitorUpdate() {
@@ -388,7 +397,7 @@ public class Builders {
 
     /**
      * The builder to create a firewall
-     * 
+     *
      * @return FirewallBuilder
      */
     public static FirewallBuilder firewall() {
@@ -397,7 +406,7 @@ public class Builders {
 
     /**
      * The builder to update a healthMonitor
-     * 
+     *
      * @return FirewallUpdateBuilder
      */
     public static FirewallUpdateBuilder firewallUpdate() {
@@ -406,7 +415,7 @@ public class Builders {
 
     /**
      * The builder to create a firewallRule
-     * 
+     *
      * @return FirewallRuleBuilder
      */
     public static FirewallRuleBuilder firewallRule() {
@@ -415,7 +424,7 @@ public class Builders {
 
     /**
      * The builder to update a firewallRule
-     * 
+     *
      * @return FirewallUpdateBuilder
      */
     public static FirewallRuleUpdateBuilder firewallRuleUpdate() {
@@ -424,7 +433,7 @@ public class Builders {
 
     /**
      * The builder to create a firewallPolicy
-     * 
+     *
      * @return FirewallPolicyBuilder
      */
     public static FirewallPolicyBuilder firewallPolicy() {
@@ -433,7 +442,7 @@ public class Builders {
 
     /**
      * The builder to update a firewallPolicy
-     * 
+     *
      * @return FirewallPolicyUpdateBuilder
      */
     public static FirewallPolicyUpdateBuilder firewallPolicyUpdate() {
@@ -442,7 +451,7 @@ public class Builders {
 
     /**
      * The builder to create a lbPool
-     * 
+     *
      * @return LbPoolBuilder
      */
     public static LbPoolBuilder lbPool() {
@@ -451,7 +460,7 @@ public class Builders {
 
     /**
      * The builder to update a lbPool
-     * 
+     *
      * @return LbPoolUpdateBuilder
      */
     public static LbPoolUpdateBuilder lbPoolUpdate() {
@@ -460,7 +469,7 @@ public class Builders {
 
     /**
      * The builder to create a lbPool
-     * 
+     *
      * @return HealthMonitorAssociateBuilder
      */
     public static HealthMonitorAssociateBuilder lbPoolAssociateHealthMonitor() {
@@ -469,7 +478,7 @@ public class Builders {
 
     /**
      * The builder to create a sahara cluster
-     * 
+     *
      * @return the cluster builder
      */
     public static ClusterBuilder cluster() {
@@ -478,7 +487,7 @@ public class Builders {
 
     /**
      * The builder to create a sahara cluster template
-     * 
+     *
      * @return the cluster template builder
      */
     public static ClusterTemplateBuilder clusterTemplate() {
@@ -487,7 +496,7 @@ public class Builders {
 
     /**
      * The builder to create a sahara node group
-     * 
+     *
      * @return the node group builder
      */
     public static NodeGroupBuilder nodeGroup() {
@@ -496,7 +505,7 @@ public class Builders {
 
     /**
      * The builder to create a sahara node group template
-     * 
+     *
      * @return the node group template builder
      */
     public static NodeGroupTemplateBuilder nodeGroupTemplate() {
@@ -505,7 +514,7 @@ public class Builders {
 
     /**
      * The builder to create a sahara service configuration
-     * 
+     *
      * @return the service configuration builder
      */
     public static ServiceConfigBuilder serviceConfig() {
@@ -523,7 +532,7 @@ public class Builders {
 
     /**
      * The builder to create an Alarm
-     * 
+     *
      * @return the image builder
      */
     public static AlarmBuilder alarm() {
