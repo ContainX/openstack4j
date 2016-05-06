@@ -5,4 +5,6 @@ import org.openstack4j.model.gbp.NatPool;
 
 public interface NatPoolBuilder extends Builder<NatPoolBuilder, NatPool>{
 
+    NatPoolBuilder name(String name);
+
 }

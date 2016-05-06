@@ -5,4 +5,7 @@ import org.openstack4j.model.gbp.ExternalSegment;
 
 public interface ExternalSegmentBuilder extends Builder<ExternalSegmentBuilder, ExternalSegment> {
 
+    ExternalSegmentBuilder name(String name);
+    ExternalSegmentBuilder description(String description);
+
 }

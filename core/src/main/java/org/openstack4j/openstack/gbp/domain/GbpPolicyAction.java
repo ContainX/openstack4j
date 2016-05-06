@@ -25,7 +25,7 @@ public class GbpPolicyAction implements PolicyAction {
     private String description;
     private boolean shared;
     @JsonProperty("action_type")
-    private String actionType;
+    private Protocol actionType;
     @JsonProperty("action_value")
     private String actionValue;
     
@@ -74,7 +74,7 @@ public class GbpPolicyAction implements PolicyAction {
     }
 
     @Override
-    public String getActionType() {
+    public Protocol getActionType() {
         return actionType;
     }
 
@@ -108,6 +108,10 @@ public class GbpPolicyAction implements PolicyAction {
             this.policyAction=gbpPolicyAction;
         }
 
+        public PolicyActionConcreteBuilder() {
+            this(new GbpPolicyAction());
+        }
+ 
         @Override
         public PolicyAction build() {
             return policyAction;
@@ -118,7 +122,35 @@ public class GbpPolicyAction implements PolicyAction {
             this.policyAction=(GbpPolicyAction) in;
             return this;
         }
+
+        @Override
+        public PolicyActionBuilder name(String name) {
+            this.policyAction.name=name;
+            return this;
+        }
+
+        @Override
+        public PolicyActionBuilder description(String description) {
+            this.policyAction.description=description;
+            return this;
+        }
+
+        @Override
+        public PolicyActionBuilder actionType(Protocol actionType) {
+            this.policyAction.actionType=actionType;
+            return this;
+        }
+
+        @Override
+        public PolicyActionBuilder shared(boolean shared) {
+            this.policyAction.shared=shared;
+            return this;
+        }
         
+    }
+
+    public static PolicyActionBuilder builder() {
+        return new PolicyActionConcreteBuilder();
     }
     
 

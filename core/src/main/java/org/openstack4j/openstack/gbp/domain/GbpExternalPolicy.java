@@ -181,6 +181,12 @@ public class GbpExternalPolicy implements ExternalPolicy{
             extPolicy.name=name;
             return this;
         }
+
+        @Override
+        public ExternalPolicyBuilder description(String description) {
+            this.extPolicy.description=description;
+            return this;
+        }
         
     }
 

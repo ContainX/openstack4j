@@ -5,5 +5,7 @@ import org.openstack4j.model.gbp.PolicyTargetGroup;
 
 public interface PolicyTargetGroupBuilder extends Builder<PolicyTargetGroupBuilder, PolicyTargetGroup> {
 
+    PolicyTargetGroupBuilder name(String name);
+
 }
  

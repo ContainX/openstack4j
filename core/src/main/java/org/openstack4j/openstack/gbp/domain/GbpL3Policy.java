@@ -140,6 +140,10 @@ public class GbpL3Policy implements L3Policy {
             this.l3Policy=gbpL3Policy;
         }
 
+        public L3PolicyConcreteBuilder() {
+            this(new GbpL3Policy());
+        }
+
         @Override
         public L3Policy build() { 
             return l3Policy;
@@ -150,6 +154,16 @@ public class GbpL3Policy implements L3Policy {
             this.l3Policy = (GbpL3Policy) in;
             return this;
         }
+
+        @Override
+        public L3PolicyBuilder name(String name) {
+            this.l3Policy.name=name;
+            return this;
+        }
         
+    }
+
+    public static L3PolicyBuilder builder() {
+        return new L3PolicyConcreteBuilder();
     }
 }

@@ -146,6 +146,10 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
             this.policyTargetGroup=gbpPolicyTargetGroup;
         }
 
+        public PolicyTargetConcreteGroupBuilder() {
+            this(new GbpPolicyTargetGroup());
+        }
+
         @Override
         public PolicyTargetGroup build() {
             return policyTargetGroup;
@@ -156,7 +160,17 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
             policyTargetGroup=(GbpPolicyTargetGroup) in;
             return this;
         }
+
+        @Override
+        public PolicyTargetGroupBuilder name(String name) {
+            policyTargetGroup.name=name;
+            return this;
+        }
         
+    }
+
+    public static PolicyTargetGroupBuilder builder() {
+        return new PolicyTargetConcreteGroupBuilder();
     }
     
 }
