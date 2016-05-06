@@ -5,5 +5,7 @@ import org.openstack4j.model.gbp.L3Policy;
 
 public interface L3PolicyBuilder extends Builder<L3PolicyBuilder, L3Policy> {
 
+    L3PolicyBuilder name(String name);
+
 }
  

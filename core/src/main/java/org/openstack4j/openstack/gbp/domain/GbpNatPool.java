@@ -124,6 +124,10 @@ public class GbpNatPool implements NatPool {
            this.natPool=gbpNatPool;
         }
 
+        public NatPoolConcreteBuilder() {
+            this(new GbpNatPool());
+        }
+
         @Override
         public NatPool build() {
             return natPool;
@@ -134,7 +138,17 @@ public class GbpNatPool implements NatPool {
             this.natPool=(GbpNatPool) in;
             return this;
         }
+
+        @Override
+        public NatPoolBuilder name(String name) {
+            this.natPool.name=name;
+            return this;
+        }
         
+    }
+
+    public static NatPoolBuilder builder() {
+        return new NatPoolConcreteBuilder();
     }
 
 }

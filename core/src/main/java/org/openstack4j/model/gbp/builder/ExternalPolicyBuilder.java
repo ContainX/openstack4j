@@ -6,5 +6,5 @@ import org.openstack4j.model.gbp.ExternalPolicy;
 public interface ExternalPolicyBuilder extends Builder<ExternalPolicyBuilder, ExternalPolicy> {
 
     ExternalPolicyBuilder name(String string);
-
+    ExternalPolicyBuilder description(String description);
 }

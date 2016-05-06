@@ -109,6 +109,10 @@ public class GbpPolicyTarget implements PolicyTarget {
             this.policyTarget=gbpPolicyTarget;
         }
 
+        public PolicyTargetConcreteBuilder() {
+            this(new GbpPolicyTarget());
+        }
+
         @Override
         public PolicyTarget build() {
             return policyTarget;
@@ -120,5 +124,9 @@ public class GbpPolicyTarget implements PolicyTarget {
             return this;
         }
         
+    }
+
+    public static PolicyTargetBuilder builder() {
+        return new PolicyTargetConcreteBuilder();
     }
 }

@@ -4,6 +4,9 @@ import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.gbp.builder.PolicyActionBuilder;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Policy Action Model Entity
  * 
@@ -11,6 +14,32 @@ import org.openstack4j.model.gbp.builder.PolicyActionBuilder;
  */
 public interface PolicyAction extends Buildable<PolicyActionBuilder>, Resource {
 
+    public enum Protocol{
+        ALLOW,
+        REDIRECT,
+        COPY,
+        LOG,
+        QoS,
+        UNRECOGNIZED;
+        
+        @JsonCreator
+        public static Protocol forValue(String value) {
+            if (value != null)
+            {
+                for (Protocol s : Protocol.values()) {
+                    if (s.name().equalsIgnoreCase(value))
+                        return s;
+                }
+            }
+            return Protocol.UNRECOGNIZED;
+        }
+        
+        @JsonValue
+        public String value() {
+            return name().toLowerCase();
+        }
+    }
+    
     /**
      * Gets the Action value
      *
@@ -23,7 +52,7 @@ public interface PolicyAction extends Buildable<PolicyActionBuilder>, Resource {
      *
      * @return the Action Type
      */
-    String getActionType();
+    Protocol getActionType();
 
     /**
      * Is Policy Action shared

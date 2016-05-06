@@ -113,6 +113,10 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
             this.policyRuleSet=gbpPolicyRuleSet;
         }
 
+        public PolicyRuleSetConcreteBuilder() {
+            this(new GbpPolicyRuleSet());
+        }
+
         @Override
         public PolicyRuleSet build() {
             return policyRuleSet;
@@ -124,6 +128,9 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
             return this;
         }
         
+    }
+    public static PolicyRuleSetBuilder builder() {
+        return new PolicyRuleSetConcreteBuilder();
     }
 
 }

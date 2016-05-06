@@ -118,6 +118,10 @@ public class GbpL2Policy implements L2Policy {
             this.l2Policy=gbpL2Policy;
         }
 
+        public L2PolicyConcreteBuilder() {
+            this(new GbpL2Policy());
+        }
+
         @Override
         public L2Policy build() {
             return l2Policy;
@@ -129,8 +133,15 @@ public class GbpL2Policy implements L2Policy {
             return this;
         }
 
-        
-        
+        @Override
+        public L2PolicyBuilder name(String name) {
+            l2Policy.name=name;
+            return this;
+        }
+    }
+
+    public static L2PolicyBuilder builder() {
+        return new L2PolicyConcreteBuilder(); 
     }
 
     

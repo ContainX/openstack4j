@@ -165,7 +165,23 @@ public class GbpExternalSegment implements ExternalSegment {
             extSegment = (GbpExternalSegment)in;
             return this;
         }
+
+        @Override
+        public ExternalSegmentBuilder name(String name) {
+            extSegment.name=name;
+            return this;
+        }
+
+        @Override
+        public ExternalSegmentBuilder description(String description) {
+            this.extSegment.description=description;
+            return this;
+        }
         
+    }
+
+    public static ExternalSegmentBuilder builder() {
+        return new ExternalSegmentConcreteBuilder();
     }
 
 }
