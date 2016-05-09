@@ -59,7 +59,7 @@ public interface FlavorService extends RestService {
 	 * @param isPublic makes the flavor accessible to the public (the default is true).
 	 * @return the created flavor
 	 */
-	Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor, boolean isPublic);
+	Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor);
 	
 	/**
 	 * list extra specs

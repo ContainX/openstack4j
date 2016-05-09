@@ -74,20 +74,6 @@ public interface Flavor extends ModelEntity, Buildable<FlavorBuilder> {
 	int getRxtxCap();
 	
 	/**
-	 * Checks if is public.
-	 *
-	 * @return true, if is public
-	 */
-	boolean isPublic();
-	
-	/**
-	 * Checks if is disabled.
-	 *
-	 * @return true, if is disabled
-	 */
-	boolean isDisabled();
-	
-	/**
 	 * Gets the links.
 	 *
 	 * @return the links

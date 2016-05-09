@@ -40,9 +40,4 @@ public interface FlavorBuilder extends Builder<FlavorBuilder, Flavor> {
 	 */
 	FlavorBuilder rxtxFactor(float rxtxFactor);
 
-	/**
-	 * @see Flavor#isPublic()
-	 */
-	FlavorBuilder isPublic(boolean isPublic);
-	
 }
