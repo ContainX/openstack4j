@@ -35,8 +35,8 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
     @JsonProperty("policy_targets")
     private List<String> policyTargets;
     @JsonProperty("service_management")
-    private boolean serviceManagement;
-    private boolean shared;
+    private Boolean serviceManagement;
+    private Boolean shared;
     @JsonProperty("subnets")
     private List<String> subnets;
     @Override
@@ -104,12 +104,12 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
 
     @Override
     public boolean isServiceManagement() {
-        return serviceManagement;
+        return this.serviceManagement == null ? false : shared;
     }
 
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
 
     @Override
@@ -164,6 +164,54 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
         @Override
         public PolicyTargetGroupBuilder name(String name) {
             policyTargetGroup.name=name;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetGroupBuilder description(String description) {
+            this.policyTargetGroup.description=description;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetGroupBuilder isShared(boolean shared) {
+            this.policyTargetGroup.shared=shared;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetGroupBuilder consumedPolicyRuleSets(List<String> policyRuleSet) {
+            this.policyTargetGroup.consumedPolicyRuleSets=policyRuleSet;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetGroupBuilder providedPolicyRuleSets(List<String> policyRuleSet) {
+            this.policyTargetGroup.providedPolicyRuleSets=policyRuleSet;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetGroupBuilder policyTargets(List<String> policyTargets) {
+            this.policyTargetGroup.policyTargets=policyTargets;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetGroupBuilder networkServicePolicyId(String id) {
+            this.policyTargetGroup.networkServicePolicyId=id;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetGroupBuilder l2Policy(String id) {
+            this.policyTargetGroup.l2PolicyId=id;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetGroupBuilder serviceManagement(boolean serviceManagement) {
+            this.policyTargetGroup.serviceManagement=serviceManagement;
             return this;
         }
         

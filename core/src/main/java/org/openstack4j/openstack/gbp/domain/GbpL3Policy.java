@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.gbp.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class GbpL3Policy implements L3Policy {
     @JsonProperty("l2_policies")
     private List<String> l2Policies;
     private List<String> routers;
-    private boolean shared;
+    private Boolean shared;
     @JsonProperty("subnet_prefix_length")
     private String subnetPrefixLength;
     
@@ -100,7 +101,7 @@ public class GbpL3Policy implements L3Policy {
 
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
 
     @Override
@@ -194,7 +195,7 @@ public class GbpL3Policy implements L3Policy {
 
         @Override
         public L3PolicyBuilder externalSegments(List<String> extSegmentIds) {
-            //this.l3Policy.externalSegments=extSegmentIds;
+            extSegmentIds=new ArrayList<String>(this.l3Policy.externalSegments.keySet());
             return this;
         }
         

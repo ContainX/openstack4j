@@ -28,8 +28,8 @@ public class GbpPolicyRule implements PolicyRule {
     private String policyClassifierId;
     @JsonProperty("policy_actions")
     private List<String> policyActions;
-    private boolean shared;
-    private boolean enabled;
+    private Boolean shared;
+    private Boolean enabled;
     
     @Override
     public String toString() {
@@ -80,12 +80,12 @@ public class GbpPolicyRule implements PolicyRule {
 
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return this.enabled == null ? false : shared;
     }
 
     @Override

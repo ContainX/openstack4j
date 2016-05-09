@@ -27,7 +27,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     @JsonProperty("port_range")
     private String portRange;
     private PolicyClassifier.Protocol protocol;
-    private boolean shared;
+    private Boolean shared;
     
 
      
@@ -87,7 +87,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
     @Override
     public String toString() {
