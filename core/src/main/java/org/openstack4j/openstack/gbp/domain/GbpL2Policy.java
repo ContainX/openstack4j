@@ -27,7 +27,7 @@ public class GbpL2Policy implements L2Policy {
     private String networkId;
     @JsonProperty("l3_policy_id")
     private String l3PolicyId;
-    private boolean shared;
+    private Boolean shared;
     @JsonProperty("policy_target_groups")
     private List<String> policyTargetGroups;
     
@@ -82,7 +82,7 @@ public class GbpL2Policy implements L2Policy {
 
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
 
     @Override
@@ -136,6 +136,18 @@ public class GbpL2Policy implements L2Policy {
         @Override
         public L2PolicyBuilder name(String name) {
             l2Policy.name=name;
+            return this;
+        }
+
+        @Override
+        public L2PolicyBuilder description(String description) {
+            l2Policy.description=description;
+            return this;
+        }
+
+        @Override
+        public L2PolicyBuilder isShared(boolean shared) {
+            l2Policy.shared=shared;
             return this;
         }
     }

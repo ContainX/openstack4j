@@ -23,7 +23,7 @@ public class GbpPolicyAction implements PolicyAction {
     private String tenantId;
     private String id;
     private String description;
-    private boolean shared;
+    private Boolean shared;
     @JsonProperty("action_type")
     private Protocol actionType;
     @JsonProperty("action_value")
@@ -70,7 +70,7 @@ public class GbpPolicyAction implements PolicyAction {
     }
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
 
     @Override

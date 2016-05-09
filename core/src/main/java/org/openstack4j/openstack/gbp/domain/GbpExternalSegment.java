@@ -33,7 +33,7 @@ public class GbpExternalSegment implements ExternalSegment {
     @JsonProperty("cidr")
     private String cidr;
     private String description;
-    private boolean shared;
+    private Boolean shared;
     @JsonProperty("subnet_id")
     private String subnetId;
     @JsonProperty("port_address_translation")
@@ -92,7 +92,7 @@ public class GbpExternalSegment implements ExternalSegment {
 
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
 
     @Override

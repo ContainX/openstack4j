@@ -2,7 +2,11 @@ package org.openstack4j.model.gbp.builder;
 
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.gbp.PolicyClassifier;
-
+/**
+ * A builder which produces a Policy Classifier object
+ * 
+ * @author vinod borole
+ */
 public interface PolicyClassifierBuilder extends Builder<PolicyClassifierBuilder, PolicyClassifier> {
     PolicyClassifierBuilder name(String name);
     PolicyClassifierBuilder description(String description);

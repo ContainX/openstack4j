@@ -28,7 +28,7 @@ public class GbpExternalPolicy implements ExternalPolicy{
     private List<String> providedPolicyRuleSets;
     @JsonProperty("external_segments")
     private List<String> externalSegments;
-    private boolean shared;
+    private Boolean shared;
     
     /**
      * {@inheritDoc}
@@ -117,7 +117,7 @@ public class GbpExternalPolicy implements ExternalPolicy{
      */
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
 
 
@@ -185,6 +185,30 @@ public class GbpExternalPolicy implements ExternalPolicy{
         @Override
         public ExternalPolicyBuilder description(String description) {
             this.extPolicy.description=description;
+            return this;
+        }
+
+        @Override
+        public ExternalPolicyBuilder isShared(boolean shared) {
+            this.extPolicy.shared=shared;
+            return this;
+        }
+
+        @Override
+        public ExternalPolicyBuilder consumedPolicyRuleSets(List<String> policyRuleSet) {
+            this.extPolicy.consumedPolicyRuleSets=policyRuleSet;
+            return this;
+        }
+
+        @Override
+        public ExternalPolicyBuilder providedPolicyRuleSets(List<String> policyRuleSet) {
+            this.extPolicy.providedPolicyRuleSets=policyRuleSet;
+            return this;
+        }
+
+        @Override
+        public ExternalPolicyBuilder externalSegments(List<String> externalSegmentIds) {
+            this.extPolicy.externalSegments=externalSegmentIds;
             return this;
         }
         

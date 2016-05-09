@@ -5,7 +5,11 @@ import java.util.List;
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.gbp.IPVersionType;
 import org.openstack4j.model.gbp.L3Policy;
-
+/**
+ * A builder which produces a L3Policies object
+ * 
+ * @author vinod borole
+ */
 public interface L3PolicyBuilder extends Builder<L3PolicyBuilder, L3Policy> {
 
     L3PolicyBuilder name(String name);

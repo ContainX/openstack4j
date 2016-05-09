@@ -23,7 +23,7 @@ public class GbpNatPool implements NatPool {
     private String tenantId;
     private String id;
     private String description;
-    private boolean shared;
+    private Boolean shared;
     @JsonProperty("external_segment_id")
     private String externalSegmentId;
     @JsonProperty("ip_pool")
@@ -69,7 +69,7 @@ public class GbpNatPool implements NatPool {
 
     @Override
     public boolean isShared() {
-        return shared;
+        return this.shared == null ? false : shared;
     }
 
     @Override
