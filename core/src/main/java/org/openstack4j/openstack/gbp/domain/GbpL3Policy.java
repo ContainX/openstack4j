@@ -3,6 +3,7 @@ package org.openstack4j.openstack.gbp.domain;
 import java.util.List;
 import java.util.Map;
 
+import org.openstack4j.model.gbp.IPVersionType;
 import org.openstack4j.model.gbp.L3Policy;
 import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -158,6 +159,42 @@ public class GbpL3Policy implements L3Policy {
         @Override
         public L3PolicyBuilder name(String name) {
             this.l3Policy.name=name;
+            return this;
+        }
+
+        @Override
+        public L3PolicyBuilder description(String description) {
+            this.l3Policy.description=description;
+            return this;
+        }
+
+        @Override
+        public L3PolicyBuilder ipVersion(IPVersionType ipVersion) {
+            this.l3Policy.ipVersion=ipVersion.name();
+            return this;
+        }
+
+        @Override
+        public L3PolicyBuilder ippool(String ippool) {
+            this.l3Policy.ipPool=ippool;
+            return this;
+        }
+
+        @Override
+        public L3PolicyBuilder subnetPrefixLength(String subnetPrefixLength) {
+            this.l3Policy.subnetPrefixLength=subnetPrefixLength;
+            return this;
+        }
+
+        @Override
+        public L3PolicyBuilder isShared(boolean shared) {
+            this.l3Policy.shared=shared;
+            return this;
+        }
+
+        @Override
+        public L3PolicyBuilder externalSegments(List<String> extSegmentIds) {
+            //this.l3Policy.externalSegments=extSegmentIds;
             return this;
         }
         

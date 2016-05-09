@@ -3,7 +3,7 @@ package org.openstack4j.openstack.gbp.domain;
 import java.util.List;
 
 import org.openstack4j.model.gbp.PolicyAction;
-import org.openstack4j.model.gbp.builder.PolicyActionBuilder;
+import org.openstack4j.model.gbp.builder.PolicyActionCreateBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,7 +31,7 @@ public class GbpPolicyAction implements PolicyAction {
     
     
     @Override
-    public PolicyActionBuilder toBuilder() {
+    public PolicyActionCreateBuilder toBuilder() {
         return new PolicyActionConcreteBuilder(this);
     }
 
@@ -100,7 +100,7 @@ public class GbpPolicyAction implements PolicyAction {
         
     }
     
-    public static class PolicyActionConcreteBuilder implements PolicyActionBuilder{
+    public static class PolicyActionConcreteBuilder implements PolicyActionCreateBuilder{
 
         private GbpPolicyAction policyAction;
         
@@ -118,38 +118,38 @@ public class GbpPolicyAction implements PolicyAction {
         }
 
         @Override
-        public PolicyActionBuilder from(PolicyAction in) {
+        public PolicyActionCreateBuilder from(PolicyAction in) {
             this.policyAction=(GbpPolicyAction) in;
             return this;
         }
 
         @Override
-        public PolicyActionBuilder name(String name) {
+        public PolicyActionCreateBuilder name(String name) {
             this.policyAction.name=name;
             return this;
         }
 
         @Override
-        public PolicyActionBuilder description(String description) {
+        public PolicyActionCreateBuilder description(String description) {
             this.policyAction.description=description;
             return this;
         }
 
         @Override
-        public PolicyActionBuilder actionType(Protocol actionType) {
+        public PolicyActionCreateBuilder actionType(Protocol actionType) {
             this.policyAction.actionType=actionType;
             return this;
         }
 
         @Override
-        public PolicyActionBuilder shared(boolean shared) {
+        public PolicyActionCreateBuilder shared(boolean shared) {
             this.policyAction.shared=shared;
             return this;
         }
         
     }
 
-    public static PolicyActionBuilder builder() {
+    public static PolicyActionCreateBuilder builder() {
         return new PolicyActionConcreteBuilder();
     }
     

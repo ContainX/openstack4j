@@ -2,6 +2,7 @@ package org.openstack4j.openstack.gbp.domain;
 
 import java.util.List;
 
+import org.openstack4j.model.gbp.IPVersionType;
 import org.openstack4j.model.gbp.NatPool;
 import org.openstack4j.model.gbp.builder.NatPoolBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -142,6 +143,30 @@ public class GbpNatPool implements NatPool {
         @Override
         public NatPoolBuilder name(String name) {
             this.natPool.name=name;
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder description(String description) {
+            this.natPool.description=description;
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder ipVersion(IPVersionType ipVersion) {
+            this.natPool.ipVersion=ipVersion.name();
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder cidr(String cidr) {
+            this.natPool.ipPool=cidr;
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder isShared(boolean shared) {
+            this.natPool.shared=shared;
             return this;
         }
         
