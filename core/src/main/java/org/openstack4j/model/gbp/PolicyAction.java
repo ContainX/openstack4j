@@ -2,7 +2,7 @@ package org.openstack4j.model.gbp;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
-import org.openstack4j.model.gbp.builder.PolicyActionBuilder;
+import org.openstack4j.model.gbp.builder.PolicyActionCreateBuilder;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * 
  * @author vinod borole
  */
-public interface PolicyAction extends Buildable<PolicyActionBuilder>, Resource {
+public interface PolicyAction extends Buildable<PolicyActionCreateBuilder>, Resource {
 
     public enum Protocol{
         ALLOW,

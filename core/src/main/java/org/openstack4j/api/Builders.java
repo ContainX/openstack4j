@@ -12,7 +12,7 @@ import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
 import org.openstack4j.model.gbp.builder.L2PolicyBuilder;
 import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
 import org.openstack4j.model.gbp.builder.NatPoolBuilder;
-import org.openstack4j.model.gbp.builder.PolicyActionBuilder;
+import org.openstack4j.model.gbp.builder.PolicyActionCreateBuilder;
 import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
 import org.openstack4j.model.gbp.builder.PolicyRuleBuilder;
 import org.openstack4j.model.gbp.builder.PolicyRuleSetBuilder;
@@ -732,7 +732,7 @@ public class Builders {
      *
      * @return the policy action builder
      */
-    public static PolicyActionBuilder policyAction() {
+    public static PolicyActionCreateBuilder policyAction() {
         return GbpPolicyAction.builder();
     }
     /**

@@ -127,6 +127,30 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
             this.policyRuleSet=(GbpPolicyRuleSet) in;
             return this;
         }
+
+        @Override
+        public PolicyRuleSetBuilder name(String name) {
+            this.policyRuleSet.name=name;
+            return this;
+        }
+
+        @Override
+        public PolicyRuleSetBuilder description(String description) {
+            this.policyRuleSet.description=description;
+            return this;
+        }
+
+        @Override
+        public PolicyRuleSetBuilder shared(boolean shared) {
+            this.policyRuleSet.shared=shared;
+            return this;
+        }
+
+        @Override
+        public PolicyRuleSetBuilder rules(List<String> ruleIds) {
+            this.policyRuleSet.policyRules=ruleIds;
+            return this;
+        }
         
     }
     public static PolicyRuleSetBuilder builder() {
