@@ -11,6 +11,7 @@ import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.ServerPassword;
 import org.openstack4j.model.compute.ServerUpdateOptions;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
@@ -323,4 +324,13 @@ public interface ServerService {
      * @return the interface service
      */
     InterfaceService interfaces();
+    
+    /**
+     * Returns the encrypted password for the specified server which can be decrypted with
+     * the private key
+     * 
+     * @param serverId the server identifier
+     * @return the encrypted server password
+     */
+    ServerPassword getPassword(String serverId);
 }
