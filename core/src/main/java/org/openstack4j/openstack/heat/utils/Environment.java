@@ -50,9 +50,12 @@ public class Environment {
         if (rr == null ) return;
         if(rr.get("base_url") != null ) setBaseUrl(new URL(rr.get("base_url")));
         for(String resourceType: rr.keySet()) {
-            if(resourceType.equals("base_url"))
+        	if(resourceType.equals("base_url"))
                 continue;
-
+            
+            if("OS::Heat::None".equals(rr.get(resourceType)))
+            		continue;
+            
             URL tplUrl = new URL(baseUrl, rr.get(resourceType));
 
             Template tpl = new Template(tplUrl);
