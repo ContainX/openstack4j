@@ -22,6 +22,14 @@ public interface NetworkService extends RestService {
 	 */
 	List<? extends Network> list();
 	
+    /**
+     * Lists the networks associated by the specified {@code tenantId} 
+     * 
+     * @param networkId the network identifier
+     * @return List of Network
+     */
+    List<? extends Network> list(String tenantId);
+	
 	/**
 	 * Gets the network by ID
 	 * 
