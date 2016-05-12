@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.gbp.PolicyClassifier;
+import org.openstack4j.model.gbp.PolicyClassifierUpdate;
 
 /**
  * This interface defines all methods for the manipulation of policy classifiers
@@ -23,5 +24,5 @@ public interface PolicyClassifierService {
     PolicyClassifier get(String id);
     ActionResponse delete(String id);
     PolicyClassifier create(PolicyClassifier policyClassifier);
-    PolicyClassifier update(String policyClassifierId,PolicyClassifier policyClassifier);
+    PolicyClassifier update(String policyClassifierId,PolicyClassifierUpdate policyClassifier);
 }

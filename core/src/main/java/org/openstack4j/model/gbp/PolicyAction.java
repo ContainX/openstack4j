@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public interface PolicyAction extends Buildable<PolicyActionCreateBuilder>, Resource {
 
-    public enum Protocol{
+    public enum PolicyActionProtocol{
         ALLOW,
         REDIRECT,
         COPY,
@@ -23,15 +23,15 @@ public interface PolicyAction extends Buildable<PolicyActionCreateBuilder>, Reso
         UNRECOGNIZED;
         
         @JsonCreator
-        public static Protocol forValue(String value) {
+        public static PolicyActionProtocol forValue(String value) {
             if (value != null)
             {
-                for (Protocol s : Protocol.values()) {
+                for (PolicyActionProtocol s : PolicyActionProtocol.values()) {
                     if (s.name().equalsIgnoreCase(value))
                         return s;
                 }
             }
-            return Protocol.UNRECOGNIZED;
+            return PolicyActionProtocol.UNRECOGNIZED;
         }
         
         @JsonValue
@@ -52,7 +52,7 @@ public interface PolicyAction extends Buildable<PolicyActionCreateBuilder>, Reso
      *
      * @return the Action Type
      */
-    Protocol getActionType();
+    PolicyActionProtocol getActionType();
 
     /**
      * Is Policy Action shared

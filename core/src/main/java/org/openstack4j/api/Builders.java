@@ -646,7 +646,7 @@ public class Builders {
     public static ShareManageBuilder shareManage() {
         return ManilaShareManage.builder();
     }
-
+    
     /**
      * The builder which creates external policy for gbp
      *
@@ -696,12 +696,28 @@ public class Builders {
         return GbpPolicyAction.builder();
     }
     /**
+     * The builder which updates policy action for gbp
+     *
+     * @return the policy action builder
+     */
+    public static PolicyActionUpdateBuilder policyActionUpdate() {
+        return GbpPolicyActionUpdate.builder();
+    }
+    /**
      * The builder which creates policy classifier for gbp
      *
      * @return the policy classifier builder
      */
     public static PolicyClassifierBuilder policyClassifier() {
         return GbpPolicyClassifier.builder();
+    }
+    /**
+     * The builder which updates policy classifier for gbp
+     *
+     * @return the policy classifier builder
+     */
+    public static PolicyClassifierUpdateBuilder policyClassifierUpdate() {
+        return GbpPolicyClassifierUpdate.builder(); 
     }
     /**
      * The builder which creates policy rule for gbp

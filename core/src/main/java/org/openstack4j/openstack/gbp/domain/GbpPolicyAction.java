@@ -25,7 +25,7 @@ public class GbpPolicyAction implements PolicyAction {
     private String description;
     private Boolean shared;
     @JsonProperty("action_type")
-    private Protocol actionType;
+    private PolicyActionProtocol actionType;
     @JsonProperty("action_value")
     private String actionValue;
     
@@ -74,7 +74,7 @@ public class GbpPolicyAction implements PolicyAction {
     }
 
     @Override
-    public Protocol getActionType() {
+    public PolicyActionProtocol getActionType() {
         return actionType;
     }
 
@@ -136,7 +136,7 @@ public class GbpPolicyAction implements PolicyAction {
         }
 
         @Override
-        public PolicyActionCreateBuilder actionType(Protocol actionType) {
+        public PolicyActionCreateBuilder actionType(PolicyActionProtocol actionType) {
             this.policyAction.actionType=actionType;
             return this;
         }
