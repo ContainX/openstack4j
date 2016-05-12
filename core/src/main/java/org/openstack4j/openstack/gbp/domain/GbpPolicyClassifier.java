@@ -2,7 +2,9 @@ package org.openstack4j.openstack.gbp.domain;
 
 import java.util.List;
 
+import org.openstack4j.model.gbp.Direction;
 import org.openstack4j.model.gbp.PolicyClassifier;
+import org.openstack4j.model.gbp.Protocol;
 import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -18,7 +20,7 @@ import com.google.common.base.Objects;
 @JsonRootName("policy_classifier")
 public class GbpPolicyClassifier implements PolicyClassifier {
     private static final long serialVersionUID = 1L;
-    private String name;
+    private String name; 
     @JsonProperty("tenant_id")
     private String tenantId;
     private String id;
@@ -26,7 +28,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     private Direction direction;
     @JsonProperty("port_range")
     private String portRange;
-    private PolicyClassifier.Protocol protocol;
+    private Protocol protocol;
     private Boolean shared;
     
 
@@ -131,7 +133,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
         @Override
         public PolicyClassifierBuilder name(String name) {
             this.policyClassfier.name=name;
-            return null;
+            return this;
         }
 
         @Override
@@ -165,13 +167,13 @@ public class GbpPolicyClassifier implements PolicyClassifier {
         }
 
         @Override
-        public PolicyClassifierBuilder direction(PolicyClassifier.Direction direction) {
+        public PolicyClassifierBuilder direction(Direction direction) {
             this.policyClassfier.direction=direction;
             return this;
         }
 
         @Override
-        public PolicyClassifierBuilder protocol(PolicyClassifier.Protocol protocol) {
+        public PolicyClassifierBuilder protocol(Protocol protocol) {
             this.policyClassfier.protocol=protocol;
             return this;
         }

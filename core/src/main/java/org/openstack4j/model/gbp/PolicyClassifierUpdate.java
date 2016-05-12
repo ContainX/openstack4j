@@ -1,16 +1,11 @@
 package org.openstack4j.model.gbp;
 
 import org.openstack4j.common.Buildable;
-import org.openstack4j.model.common.Resource;
-import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
 
-/**
- * Policy Classifier Model Entity
- * 
- * @author vinod borole
- */
-public interface PolicyClassifier extends Buildable<PolicyClassifierBuilder>, Resource {
-    
+public interface PolicyClassifierUpdate extends ModelEntity, Buildable<PolicyClassifierUpdateBuilder>{
+
     /**
      * Is Policy classifier shared
      *
@@ -45,5 +40,4 @@ public interface PolicyClassifier extends Buildable<PolicyClassifierBuilder>, Re
      * @return the description
      */
     String getDescription();
-
-}
+} 

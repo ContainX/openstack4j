@@ -13,6 +13,8 @@ import org.openstack4j.model.gbp.builder.L2PolicyBuilder;
 import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
 import org.openstack4j.model.gbp.builder.NatPoolBuilder;
 import org.openstack4j.model.gbp.builder.PolicyActionCreateBuilder;
+import org.openstack4j.model.gbp.builder.PolicyActionUpdateBuilder;
+import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
 import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
 import org.openstack4j.model.gbp.builder.PolicyRuleBuilder;
 import org.openstack4j.model.gbp.builder.PolicyRuleSetBuilder;
@@ -92,7 +94,9 @@ import org.openstack4j.openstack.gbp.domain.GbpL2Policy;
 import org.openstack4j.openstack.gbp.domain.GbpL3Policy;
 import org.openstack4j.openstack.gbp.domain.GbpNatPool;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyAction;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyActionUpdate;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifier;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifierUpdate;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyRule;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyRuleSet;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyTarget;
@@ -183,7 +187,7 @@ public class Builders {
     public static BlockDeviceMappingBuilder blockDeviceMapping() {
         return NovaBlockDeviceMappingCreate.builder();
     }
-
+ 
     public static ExtraDhcpOptBuilder extraDhcpOpt() {
         return NeutronExtraDhcpOptCreate.builder();
     }
@@ -736,12 +740,28 @@ public class Builders {
         return GbpPolicyAction.builder();
     }
     /**
+     * The builder which updates policy action for gbp
+     *
+     * @return the policy action builder
+     */
+    public static PolicyActionUpdateBuilder policyActionUpdate() {
+        return GbpPolicyActionUpdate.builder();
+    }
+    /**
      * The builder which creates policy classifier for gbp
      *
      * @return the policy classifier builder
      */
     public static PolicyClassifierBuilder policyClassifier() {
         return GbpPolicyClassifier.builder();
+    }
+    /**
+     * The builder which updates policy classifier for gbp
+     *
+     * @return the policy classifier builder
+     */
+    public static PolicyClassifierUpdateBuilder policyClassifierUpdate() {
+        return GbpPolicyClassifierUpdate.builder(); 
     }
     /**
      * The builder which creates policy rule for gbp

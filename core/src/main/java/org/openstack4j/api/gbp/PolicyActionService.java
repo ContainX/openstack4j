@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.gbp.PolicyAction;
+import org.openstack4j.model.gbp.PolicyActionUpdate;
 
 /**
  * This interface defines all methods for the manipulation of policy actions
@@ -23,5 +24,5 @@ public interface PolicyActionService {
     PolicyAction get(String id);
     ActionResponse delete(String id);
     PolicyAction create(PolicyAction policyAction);
-    PolicyAction update(String policyActionId,PolicyAction policyAction);
+    PolicyAction update(String policyActionId,PolicyActionUpdate policyAction);
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.openstack4j.api.gbp.PolicyActionService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.gbp.PolicyAction;
+import org.openstack4j.model.gbp.PolicyActionUpdate;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyAction;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyAction.PolicyActions;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
@@ -57,7 +58,7 @@ public class PolicyActionServiceImpl extends BaseNetworkingServices implements P
 
 
     @Override
-    public PolicyAction update(String policyActionId, PolicyAction policyAction) {
+    public PolicyAction update(String policyActionId, PolicyActionUpdate policyAction) {
         checkNotNull(policyActionId);
         checkNotNull(policyAction);
         return put(GbpPolicyAction.class, uri("/grouppolicy/policy_actions/%s", policyActionId)).entity(policyAction).execute();

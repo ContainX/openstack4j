@@ -8,6 +8,7 @@ import java.util.Map;
 import org.openstack4j.api.gbp.PolicyClassifierService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.gbp.PolicyClassifier;
+import org.openstack4j.model.gbp.PolicyClassifierUpdate;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifier;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifier.PolicyClassifiers;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
@@ -56,7 +57,7 @@ public class PolicyClassifierServiceImpl extends BaseNetworkingServices implemen
     }
 
     @Override
-    public PolicyClassifier update(String policyClassifierId, PolicyClassifier policyClassifier) {
+    public PolicyClassifier update(String policyClassifierId, PolicyClassifierUpdate policyClassifier) {
         checkNotNull(policyClassifierId);
         checkNotNull(policyClassifier);
         return put(GbpPolicyClassifier.class, uri("/grouppolicy/policy_classifiers/%s", policyClassifierId)).entity(policyClassifier).execute();
