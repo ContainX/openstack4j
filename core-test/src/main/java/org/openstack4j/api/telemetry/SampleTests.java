@@ -26,7 +26,7 @@ public class SampleTests extends AbstractTest {
     public void listTest() throws IOException {
         respondWith(JSON_SAMPLES);
 
-        List<? extends Sample> samples = os().telemetry().meters().samples("cpu");
+        List<? extends Sample> samples = osv3().telemetry().meters().samples("cpu");
         assertEquals(samples.size(), 3);
 
         Sample sample = samples.get(0);

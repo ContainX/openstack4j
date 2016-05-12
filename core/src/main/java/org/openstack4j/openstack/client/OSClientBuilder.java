@@ -2,27 +2,26 @@ package org.openstack4j.openstack.client;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import org.openstack4j.api.OSClient;
+import org.openstack4j.api.OSClient.OSClientV2;
+import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.client.IOSClientBuilder;
 import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
-import org.openstack4j.openstack.identity.domain.Credentials;
-import org.openstack4j.openstack.identity.domain.RaxApiKeyCredentials;
-import org.openstack4j.openstack.identity.domain.TokenAuth;
-import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth;
-import org.openstack4j.openstack.identity.domain.v3.KeystoneAuth.AuthScope;
+import org.openstack4j.openstack.identity.v2.domain.Credentials;
+import org.openstack4j.openstack.identity.v2.domain.RaxApiKeyCredentials;
+import org.openstack4j.openstack.identity.v2.domain.TokenAuth;
+import org.openstack4j.openstack.identity.v3.domain.KeystoneAuth;
+import org.openstack4j.openstack.identity.v3.domain.KeystoneAuth.AuthScope;
 import org.openstack4j.openstack.internal.OSAuthenticator;
 
 /**
  * Builder definitions for creating a Client
- * 
+ *
  * @author Jeremy Unruh
  *
- * @param <R> Client Type
- * @param <T> Builder Type
  */
 public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> implements IOSClientBuilder<R, T> {
 
@@ -32,21 +31,20 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
     String password;
     Facing perspective;
     CloudProvider provider = CloudProvider.UNKNOWN;
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public T withConfig(Config config) {
         this.config = config;
         return (T) this;
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public T provider(CloudProvider provider) {
         this.provider = provider;
         return (T) this;
     }
-
 
     @SuppressWarnings("unchecked")
     @Override
@@ -69,7 +67,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         this.perspective = perspective;
         return (T) this;
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public T useNonStrictSSLClient(boolean useNonStrictSSL) {
@@ -77,14 +75,14 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             config = Config.newConfig().withSSLVerificationDisabled();
         return (T) this;
     }
-    
-    public static class ClientV2 extends OSClientBuilder<OSClient, IOSClientBuilder.V2> implements IOSClientBuilder.V2 {
+
+    public static class ClientV2 extends OSClientBuilder<OSClientV2, IOSClientBuilder.V2> implements IOSClientBuilder.V2 {
 
         String tenantName;
         String tenantId;
         String tokenId;
         boolean raxApiKey;
-        
+
         @Override
         public ClientV2 tenantName(String tenantName) {
             this.tenantName = tenantName;
@@ -96,25 +94,27 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             this.tenantId = tenantId;
             return this;
         }
-        
+
         @Override
         public ClientV2 raxApiKey(boolean raxApiKey) {
             this.raxApiKey = raxApiKey;
             return this;
         }
-        
+
         @Override
-        public OSClient authenticate() throws AuthenticationException {
+        public OSClientV2 authenticate() throws AuthenticationException {
             if (tokenId != null) {
-                checkArgument(tenantName != null || tenantId != null, "TenantId or TenantName is required when using Token Auth");
-                return OSAuthenticator.invoke(new TokenAuth(tokenId, tenantName, tenantId), endpoint, perspective, config, provider);
+                checkArgument(tenantName != null || tenantId != null,
+                        "TenantId or TenantName is required when using Token Auth");
+                return (OSClientV2) OSAuthenticator.invoke(new TokenAuth(tokenId, tenantName, tenantId), endpoint, perspective,
+                        config, provider);
             }
-            
+
             if (raxApiKey) {
-                return OSAuthenticator.invoke(new RaxApiKeyCredentials(user, password), endpoint, perspective, config, provider);
+                return (OSClientV2) OSAuthenticator.invoke( new RaxApiKeyCredentials(user, password), endpoint, perspective, config, provider);
             }
-            
-            return OSAuthenticator.invoke(new Credentials(user, password, tenantName, tenantId), endpoint, perspective, config, provider);
+
+            return (OSClientV2) OSAuthenticator.invoke( new Credentials(user, password, tenantName, tenantId), endpoint, perspective, config, provider);
         }
 
         @Override
@@ -122,14 +122,15 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             this.tokenId = tokenId;
             return this;
         }
+        
     }
-    
-    public static class ClientV3 extends OSClientBuilder<OSClient, IOSClientBuilder.V3> implements IOSClientBuilder.V3 {
+
+    public static class ClientV3 extends OSClientBuilder<OSClientV3, IOSClientBuilder.V3> implements IOSClientBuilder.V3 {
 
         Identifier domain;
         AuthScope scope;
         String tokenId;
-        
+
         @Override
         public ClientV3 domainName(String domainName) {
             this.domain = Identifier.byName(domainName);
@@ -141,7 +142,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             this.domain = Identifier.byId(domainId);
             return this;
         }
-        
+
         @Override
         public ClientV3 credentials(String user, String password, Identifier domain) {
             this.user = user;
@@ -157,10 +158,12 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         }
 
         @Override
-        public OSClient authenticate() throws AuthenticationException {
+        public OSClientV3 authenticate() throws AuthenticationException {
             if (tokenId != null && tokenId.length() > 0)
-                return OSAuthenticator.invoke(new KeystoneAuth(tokenId, scope), endpoint, perspective, config, provider);
-            return OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective, config, provider);
+                return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(tokenId, scope), endpoint, perspective, config,
+                        provider);
+            return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective,
+                    config, provider);
         }
 
         @Override
@@ -170,15 +173,16 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         }
 
         @Override
+        public ClientV3 scopeToProject(Identifier project) {
+            this.scope = AuthScope.project(project);
+            return this;
+        }
+
+        @Override
         public ClientV3 scopeToDomain(Identifier domain) {
             this.scope = AuthScope.domain(domain);
             return this;
         }
-        
-        @Override
-        public ClientV3 scopeToTrust(String id) {
-            this.scope = AuthScope.trust(id);
-            return this;
-        }
+
     }
 }

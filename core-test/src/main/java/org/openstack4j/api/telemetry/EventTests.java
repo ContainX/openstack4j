@@ -29,7 +29,7 @@ public class EventTests extends AbstractTest {
     public void listTest() throws IOException {
         respondWith(JSON_EVENTS);
 
-        List<? extends Event> events = os().telemetry().events().list(null);
+        List<? extends Event> events = osv3().telemetry().events().list(null);
         assertEquals(events.size(), 5);
 
         Event event = events.get(0);
@@ -47,7 +47,7 @@ public class EventTests extends AbstractTest {
     public void getTest() throws IOException {
         respondWith(JSON_EVENT);
 
-        Event event = os().telemetry().events().get("adeda2eb-31e5-4908-a7dd-7a154abed468");
+        Event event = osv3().telemetry().events().get("adeda2eb-31e5-4908-a7dd-7a154abed468");
 
         assertEquals(event.getEventType(), "image.upload");
         assertEquals(event.getGenerated(), "2015-11-02T15:34:42.993281");
@@ -62,7 +62,7 @@ public class EventTests extends AbstractTest {
     public void listEventTypesTest() throws IOException {
         respondWith(JSON_EVENT_TYPES);
 
-        List<String> eventTypes = os().telemetry().events().listEventTypes();
+        List<String> eventTypes = osv3().telemetry().events().listEventTypes();
         assertEquals(eventTypes.size(), 46);
 
         assertEquals(eventTypes.get(0), "compute.instance.create.end");
@@ -74,7 +74,7 @@ public class EventTests extends AbstractTest {
         respondWith(JSON_TRAIT_DESCRIPTIONS);
 
         List<? extends TraitDescription> traitDescriptions
-                = os().telemetry().events().listTraitDescriptions("image.upload");
+                = osv3().telemetry().events().listTraitDescriptions("image.upload");
         assertEquals(traitDescriptions.size(), 8);
 
         assertEquals(traitDescriptions.get(0).getName(), "created_at");
@@ -89,7 +89,7 @@ public class EventTests extends AbstractTest {
     public void listTraitsTest() throws IOException {
         respondWith(JSON_TRAITS);
 
-        List<? extends Trait> traits = os().telemetry().events().listTraits("image.upload", "service");
+        List<? extends Trait> traits = osv3().telemetry().events().listTraits("image.upload", "service");
         assertEquals(traits.size(), 5);
 
         assertEquals(traits.get(0).getName(), "service");

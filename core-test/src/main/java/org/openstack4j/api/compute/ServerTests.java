@@ -27,7 +27,7 @@ public class ServerTests extends AbstractTest {
     public void listServer() throws Exception {
         respondWith(JSON_SERVERS);
         
-        List<? extends Server> servers = os().compute().servers().list();
+        List<? extends Server> servers = osv3().compute().servers().list();
         assertEquals(1, servers.size());
         
 
@@ -45,7 +45,7 @@ public class ServerTests extends AbstractTest {
                 + "\"code\": 500}}";
 
         respondWith(500, jsonResponse);
-        os().compute().servers().get("05184ba3-00ba-4fbc-b7a2-03b62b884931");
+        osv3().compute().servers().get("05184ba3-00ba-4fbc-b7a2-03b62b884931");
         Assert.fail("Exception should have been thrown.");
     }
     
@@ -53,7 +53,7 @@ public class ServerTests extends AbstractTest {
     public void createServer() throws Exception {
         respondWith(JSON_SERVER_CREATE);
         
-        Server server = os().compute().servers().boot(Builders.server().name("server-test-1").build());
+        Server server = osv3().compute().servers().boot(Builders.server().name("server-test-1").build());
         assertEquals("server-test-1", server.getName());
     }
     

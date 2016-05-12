@@ -27,7 +27,7 @@ public class ExtensionTests extends AbstractTest {
     public void testExtensions() throws Exception {
         respondWith(JSON_EXTENSIONS);
 
-        List<? extends Extension> extensions = os().compute().listExtensions();
+        List<? extends Extension> extensions = osv3().compute().listExtensions();
         assertEquals(2, extensions.size());
 
         Extension extension1 = extensions.get(0);
