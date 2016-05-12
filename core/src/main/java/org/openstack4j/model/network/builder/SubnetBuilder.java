@@ -68,6 +68,11 @@ public interface SubnetBuilder extends Builder<SubnetBuilder, Subnet> {
     SubnetBuilder gateway(String gateway);
 
     /**
+     * @see Subnet#isNoGateway()
+     */
+    SubnetBuilder noGateway();
+
+    /**
      * @see Subnet#getDnsNames()
      */
 	SubnetBuilder addDNSNameServer(String host);

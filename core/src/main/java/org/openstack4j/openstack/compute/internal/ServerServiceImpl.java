@@ -8,6 +8,9 @@ import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.*;
+import org.openstack4j.model.compute.Action;
+import org.openstack4j.model.compute.RebootType;
+import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.actions.BackupOptions;
@@ -147,16 +150,18 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(snapshotName);
 
         HttpResponse response = invokeActionWithResponse(serverId, CreateSnapshotAction.create(snapshotName));
+        String id = null;
         if (response.getStatus() == 202) {
             String location = response.header("location");
             if (location != null && location.contains("/"))
             {
                 String[] s = location.split("/");
-                return s[s.length - 1];
+                id = s[s.length - 1];
             }
 
         }
-        return null;
+        response.getEntity(Void.class);
+        return id;
     }
 
     /**

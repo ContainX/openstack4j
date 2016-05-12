@@ -23,6 +23,7 @@ import org.openstack4j.openstack.storage.block.domain.ExtendAction;
 import org.openstack4j.openstack.storage.block.domain.ForceDeleteAction;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeUploadImage;
 import org.openstack4j.openstack.storage.block.domain.ResetStatusAction;
+import org.openstack4j.openstack.storage.block.domain.UpdateReadOnlyFlagAction;
 
 /**
  * Manages Volumes and Volume Type based operations against Block Storage (Cinder)
@@ -165,6 +166,17 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
             }
         }
         return volumeInvocation;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse readOnlyModeUpdate(String volumeId, boolean readonly) {
+        checkNotNull(volumeId);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new UpdateReadOnlyFlagAction(readonly))
+                .execute();
     }
 
 }

@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.mockwebserver.RecordedRequest;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.storage.block.VolumeSnapshot;
 import org.testng.annotations.Test;
 
-import com.squareup.okhttp.mockwebserver.RecordedRequest;
 
 
 @Test(suiteName="Block Storage Tests")

@@ -14,7 +14,7 @@
 	<build>
 		<finalName>openstack4j-core</finalName>
 		<plugins>
-				<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>1.3.3</version>
@@ -50,6 +50,8 @@
 							!org.openstack4j.openstack.image.internal,
 							<!--  openstack.internal is imported by connectors! -->
 							<!--  !org.openstack4j.openstack.internal, -->
+							<!-- logging.internal is imported by logging plugins! -->
+							<!-- !org.openstack4j.openstack.logging.internal,  -->
 							!org.openstack4j.openstack.networking.internal,
 							!org.openstack4j.openstack.networking.internal.ext,
 							!org.openstack4j.openstack.storage.block.internal,
@@ -83,13 +85,13 @@
 							org.openstack4j.api.APIProvider
 							org.openstack4j.core.transport.HttpExecutorService
 							org.openstack4j.openstack.logging.LoggerFactorySupplier
-
 							This bundle defines an implementation for following services in META-INF-services:
 							org.openstack4j.api.APIProvider
 						-->
 						<Require-Capability>
 							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.api.APIProvider)";cardinality:=multiple,
 							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService)";cardinality:=multiple,
+							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple;resolution:=optional,
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)",
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
 						</Require-Capability>
