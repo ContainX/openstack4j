@@ -1,7 +1,7 @@
 OpenStack4j
 ===========
 
-[![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
+[![Build Status](https://travis-ci.org/ContainX/openstack4j.svg?branch=master)](https://travis-ci.org/ContainX/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gondor/openstack4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry, Data Processing as well as many extensions (LBaaS, FWaaS, Quota-Sets, etc)
@@ -18,7 +18,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 
 ## Bug Reports
 
-* GitHub Issues: [Click Here](https://github.com/gondor/openstack4j/issues)
+* GitHub Issues: [Click Here](https://github.com/ContainX/openstack4j/issues)
 
 ## Requirements
 
