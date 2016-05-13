@@ -1,7 +1,7 @@
 OpenStack4j
 ===========
 
-[![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
+[![Build Status](https://travis-ci.org/ContainX/openstack4j.svg?branch=2.0-maintenance)](https://travis-ci.org/ContainX/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gondor/openstack4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry, Data Processing as well as many extensions (LBaaS, FWaaS, Quota-Sets, etc)
@@ -18,7 +18,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 
 ## Bug Reports
 
-* GitHub Issues: [Click Here](https://github.com/gondor/openstack4j/issues)
+* GitHub Issues: [Click Here](https://github.com/ContainX/openstack4j/issues)
 
 ## About the 2.0 Branch
 
@@ -42,7 +42,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 
 **Using OpenStack4j with one of our connector modules**
 
-To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/gondor/openstack4j/tree/master/connectors)
+To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/ContainX/openstack4j/tree/master/connectors)
 
 #### Current (Master Branch)
 
