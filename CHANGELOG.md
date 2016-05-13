@@ -1,6 +1,10 @@
 # Change Log
 
-### 2.0.9 (Latest Release / Stable)
+### 2.20 - Maintenance Status
+
+This marks the last of the 2.X OpenStack4j versioning scheme.  Going forward only critical or specific pull requests will justify future release.  It is strongly encourage to consider moving to OpenStack4j 3.0.X which offers the full Identity V3 Support.
+
+### 2.0.9 
 
 ##### Enhancements/Improvements
 
