@@ -1,4 +1,4 @@
-OpenStack4j 
+OpenStack4j
 ===========
 
 [![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
@@ -20,12 +20,14 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 
 * GitHub Issues: [Click Here](https://github.com/gondor/openstack4j/issues)
 
+## About the 2.0 Branch
+
+The 2.0.X version of OpenStack4j is now in maintenance mode.  Only critical fixes will be added and pull requests are also welcome for fixes.  This release will eventually be EOL and it's strongly encouraged to move the the 3.0.X version of OpenStack4j which fully supports the Identity V3 API.  This release does allow for Java 7 where as 3.0.X requires Java 8.
+
 Maven
 -----
 
 #### Latest Release (Stable)
-
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.pacesys/openstack4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.pacesys/openstack4j)
 
 OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the ability to choose the connector that you would like to use in your environment.  
 
@@ -34,7 +36,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.11</version>
+    <version>2.20</version>
 </dependency>
 ```
 
@@ -50,7 +52,7 @@ See notes above about connectors (same rules apply) to development branches.
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.20-SNAPSHOT</version>
+    <version>2.21-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -69,44 +71,10 @@ Example POM based repository declaration to grab snapshots:
 </repositories>
 ```
 
-Contributing
-------------
-If you would like to contribute please see our contributing [guidelines](https://github.com/gondor/openstack4j/blob/master/CONTRIBUTING.md)
-
-#### Top 15 Contributors
-
-| Rank | Login | Contributions |
-| :--- | :---- | :------------ |
-| 1  | @gondor           | 527 |
-| 2  | @octupszhang      | 26 |
-| 3  | @gonzolino        | 18 |
-| 4  | @ekasitk          | 17 |
-| 5  | @magixyu          | 17 |
-| 6  | @maxrome          | 12 |
-| 7  | @isartcanyameres  | 9 |
-| 8  | @iviireczech      | 8 |
-| 9  | @n-r-anderson     | 7 |
-| 10 | @krishnabrucelee  | 6 |
-| 11 | @auhlig       | 6 |
-| 12 | @peter-nordquist  | 4 |
-| 13 | @RibeiroAna       | 4 |
-| 14 | @symcssn          | 4 |
-| 15 | @olivergondza     | 3 |
-
-#### Throughput
-
-[![Throughput Graph](https://graphs.waffle.io/gondor/openstack4j/throughput.svg)](https://waffle.io/gondor/openstack4j/metrics)
-
-Quick Usage Guide
------------------
-
-Below are some examples of the API usage.  Please visit [www.OpenStack4j.com](http://www.openstack4j.com) for the full manual and getting started guides.
-
-
 ### Authenticating
 
 Creating and authenticating against OpenStack is extremely simple. Below is an example of authenticating which will
-result with the authorized OSClient.  OSClient allows you to invoke Compute, Identity, Neutron operations fluently. 
+result with the authorized OSClient.  OSClient allows you to invoke Compute, Identity, Neutron operations fluently.
 
 ```java
 // Identity V2 Authentication Example
@@ -119,7 +87,7 @@ OSClient os = OSFactory.builder()
 
 #### Identity Operations (Keystone)
 
-After successful authentication you can invoke any Identity (Keystone) directly from the OSClient. 
+After successful authentication you can invoke any Identity (Keystone) directly from the OSClient.
 
 Identity Services fully cover Tenants, Users, Roles, Services, Endpoints and Identity Extension listings.  The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
 
@@ -146,7 +114,7 @@ OpenStack4j covers most the major common compute based operations.  With the sim
 // Create a Flavor for a special customer base
 Flavor flavor = os.compute().flavors()
                   .create(Builders.flavor().name("Gold").vcpus(4).disk(80).ram(2048).build());
-                  
+
 // Create and Boot a new Server (minimal builder options shown in example)
 Server server = os.compute().servers()
                   .boot(Builders.server().name("Ubuntu 2").flavor(flavor.getId()).image("imageId").build());
@@ -198,13 +166,13 @@ Subnet subnet = os.networking().subnet().create(Builders.subnet()
 
 **Router Operations**
 ```java
-// List all Routers 
+// List all Routers
 List<? extends Router> = os.networking().router().list();
 
 // Create a Router
 Router router = os.networking().router().create(Builders.router()
                   .name("ext_net").adminStateUp(true).externalGateway("networkId").build());
-                  
+
 ```
 
 ### Image Operations (Glance)
@@ -229,7 +197,7 @@ os.images().update(image.toBuilder()
 
 **Download the Image Data**
 ```java
-InputStream is = os.images().getAsStream("imageId"); 
+InputStream is = os.images().getAsStream("imageId");
 ```
 
 **Create a Image**
@@ -249,7 +217,7 @@ License
 ```
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright 2016 Jeremy Unruh and OpenStack4j
+Copyright 2016 ContainX and OpenStack4j
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
 use this file except in compliance with the License. You may obtain a copy of
