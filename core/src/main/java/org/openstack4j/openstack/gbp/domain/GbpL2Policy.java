@@ -150,6 +150,24 @@ public class GbpL2Policy implements L2Policy {
             l2Policy.shared=shared;
             return this;
         }
+
+        @Override
+        public L2PolicyBuilder networkId(String id) {
+            l2Policy.id=id;
+            return this;
+        }
+
+        @Override
+        public L2PolicyBuilder l3PolicyId(String id) {
+            l2Policy.l3PolicyId=id;
+            return this;
+        }
+
+        @Override
+        public L2PolicyBuilder policyTargetGroups(List<String> ids) {
+            l2Policy.policyTargetGroups=ids;
+            return this;
+        }
     }
 
     public static L2PolicyBuilder builder() {

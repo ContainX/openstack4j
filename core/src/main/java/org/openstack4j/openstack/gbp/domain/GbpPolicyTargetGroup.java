@@ -3,7 +3,6 @@ package org.openstack4j.openstack.gbp.domain;
 import java.util.List;
 
 import org.openstack4j.model.gbp.PolicyTargetGroup;
-import org.openstack4j.model.gbp.builder.PolicyTargetGroupBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -39,10 +38,7 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
     private Boolean shared;
     @JsonProperty("subnets")
     private List<String> subnets;
-    @Override
-    public PolicyTargetGroupBuilder toBuilder() { 
-        return new PolicyTargetConcreteGroupBuilder(this); 
-    }
+   
 
     @Override
     public String getTenantId() {
@@ -104,7 +100,7 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
 
     @Override
     public boolean isServiceManagement() {
-        return this.serviceManagement == null ? false : shared;
+        return this.serviceManagement == null ? false : serviceManagement;
     }
 
     @Override
@@ -139,86 +135,6 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
         }
     }
     
-    public static class PolicyTargetConcreteGroupBuilder implements PolicyTargetGroupBuilder{
-        private GbpPolicyTargetGroup policyTargetGroup;
-        
-        public PolicyTargetConcreteGroupBuilder(GbpPolicyTargetGroup gbpPolicyTargetGroup) {
-            this.policyTargetGroup=gbpPolicyTargetGroup;
-        }
-
-        public PolicyTargetConcreteGroupBuilder() {
-            this(new GbpPolicyTargetGroup());
-        }
-
-        @Override
-        public PolicyTargetGroup build() {
-            return policyTargetGroup;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder from(PolicyTargetGroup in) {
-            policyTargetGroup=(GbpPolicyTargetGroup) in;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder name(String name) {
-            policyTargetGroup.name=name;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder description(String description) {
-            this.policyTargetGroup.description=description;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder isShared(boolean shared) {
-            this.policyTargetGroup.shared=shared;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder consumedPolicyRuleSets(List<String> policyRuleSet) {
-            this.policyTargetGroup.consumedPolicyRuleSets=policyRuleSet;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder providedPolicyRuleSets(List<String> policyRuleSet) {
-            this.policyTargetGroup.providedPolicyRuleSets=policyRuleSet;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder policyTargets(List<String> policyTargets) {
-            this.policyTargetGroup.policyTargets=policyTargets;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder networkServicePolicyId(String id) {
-            this.policyTargetGroup.networkServicePolicyId=id;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder l2Policy(String id) {
-            this.policyTargetGroup.l2PolicyId=id;
-            return this;
-        }
-
-        @Override
-        public PolicyTargetGroupBuilder serviceManagement(boolean serviceManagement) {
-            this.policyTargetGroup.serviceManagement=serviceManagement;
-            return this;
-        }
-        
-    }
-
-    public static PolicyTargetGroupBuilder builder() {
-        return new PolicyTargetConcreteGroupBuilder();
-    }
+  
     
 }

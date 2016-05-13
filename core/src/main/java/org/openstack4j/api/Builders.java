@@ -653,7 +653,7 @@ public class Builders {
      * @return the external policy builder
      */
     public static ExternalPolicyBuilder externalPolicy() {
-        return GbpExternalPolicy.builder();
+        return GbpExternalPolicyCreate.builder();
     }
     /**
      * The builder which creates external segment for gbp
@@ -749,7 +749,16 @@ public class Builders {
      * @return the policy target group builder
      */
     public static PolicyTargetGroupBuilder policyTargetGroup() {
-        return GbpPolicyTargetGroup.builder();
+        return GbpPolicyTargetGroupCreate.builder();
+    }
+    
+    /**
+     * The builder which creates external routes for gbp
+     *
+     * @return the external routes builder
+     */
+    public static ExternalRoutesBuilder externalRoutes(){
+        return GbpExternalRoutes.builder();
     }
     
 }

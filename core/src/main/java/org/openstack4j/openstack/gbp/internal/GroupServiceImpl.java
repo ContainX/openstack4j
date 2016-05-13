@@ -8,6 +8,7 @@ import java.util.Map;
 import org.openstack4j.api.gbp.GroupService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.gbp.PolicyTargetGroup;
+import org.openstack4j.model.gbp.PolicyTargetGroupCreate;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyTargetGroup;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyTargetGroup.PolicyTargetGroups;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
@@ -49,12 +50,12 @@ public class GroupServiceImpl extends BaseNetworkingServices implements GroupSer
     }
 
     @Override
-    public PolicyTargetGroup create(PolicyTargetGroup policyTargetGroup) {
+    public PolicyTargetGroup create(PolicyTargetGroupCreate policyTargetGroup) {
         return post(GbpPolicyTargetGroup.class, uri("/grouppolicy/policy_target_groups")).entity(policyTargetGroup).execute();
     }
 
     @Override
-    public PolicyTargetGroup update(String policyTargetGroupId, PolicyTargetGroup policyTargetGroup) {
+    public PolicyTargetGroup update(String policyTargetGroupId, PolicyTargetGroupCreate policyTargetGroup) {
         checkNotNull(policyTargetGroupId);
         checkNotNull(policyTargetGroup);
         return put(GbpPolicyTargetGroup.class, uri("/grouppolicy/policy_target_groups/%s", policyTargetGroupId)).entity(policyTargetGroup).execute();

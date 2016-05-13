@@ -25,7 +25,7 @@ public interface ExternalSegment extends Resource, Buildable<ExternalSegmentBuil
      *
      * @return the Ip version
      */
-    String getIpVersion();
+    int getIpVersion();
 
     /**
      * Gets the cidr

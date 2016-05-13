@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Protocol {
-    TCP,
-    UDP,
-    ICMP,
-    HTTP,
-    HTTPS,
-    SMTP,
-    DNS,
-    FTP,
-    ANY,  
+    tcp,
+    udp,
+    icmp,
+    http,
+    https,
+    smpt,
+    dns,
+    ftp,
+    None,  
     UNRECOGNIZED;
     
     @JsonCreator

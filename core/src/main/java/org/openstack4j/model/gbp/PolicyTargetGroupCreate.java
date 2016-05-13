@@ -1,15 +1,18 @@
 package org.openstack4j.model.gbp;
 
 import java.util.List;
+import java.util.Map;
 
+import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.gbp.builder.PolicyTargetGroupBuilder;
 
 /**
  * Policy Target group Model Entity
  * 
  * @author vinod borole
  */
-public interface PolicyTargetGroup extends Resource {
+public interface PolicyTargetGroupCreate extends Buildable<PolicyTargetGroupBuilder>, Resource {
 
     /**
      * Gets the subnets
@@ -58,14 +61,14 @@ public interface PolicyTargetGroup extends Resource {
      *
      * @return the provided policy rule sets ids
      */
-    List<String> getProvidedPolicyRuleSets();
+    Map<String,String> getProvidedPolicyRuleSets();
 
     /**
      * Gets the consumed policy rule sets Ids
      *
      * @return the consumed policy rule sets ids
      */
-    List<String> getConsumedPolicyRuleSets();
+    Map<String,String> getConsumedPolicyRuleSets();
 
     /**
      * Gets the description

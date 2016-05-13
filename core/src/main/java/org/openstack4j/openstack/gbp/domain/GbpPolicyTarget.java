@@ -123,6 +123,36 @@ public class GbpPolicyTarget implements PolicyTarget {
             policyTarget=(GbpPolicyTarget) in;
             return this;
         }
+
+        @Override
+        public PolicyTargetBuilder portId(String portId) {
+            policyTarget.portId=portId;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetBuilder policyTargetGroupId(String policyTargetGroupId) {
+            policyTarget.policyTargetGroupId=policyTargetGroupId;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetBuilder clusterId(String clusterId) {
+            policyTarget.clusterId=clusterId;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetBuilder description(String description) {
+            policyTarget.description=description;
+            return this;
+        }
+
+        @Override
+        public PolicyTargetBuilder name(String name) {
+            policyTarget.name=name;
+            return this;
+        }
         
     }
 

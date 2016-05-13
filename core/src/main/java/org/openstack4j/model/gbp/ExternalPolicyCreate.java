@@ -1,27 +1,30 @@
 package org.openstack4j.model.gbp;
 
 import java.util.List;
+import java.util.Map;
 
+import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
 /**
  * External Policy Model Entity
  * 
  * @author vinod borole
  */
-public interface ExternalPolicy extends Resource{
+public interface ExternalPolicyCreate extends Resource , Buildable<ExternalPolicyBuilder>{
     /**
      * Gets the consumed policy rule sets Ids
      *
      * @return the consumed policy rule sets ids
      */
-    List<String> getConsumedPolicyRuleSets();
+    Map<String,String> getConsumedPolicyRuleSets();
 
     /**
      * Gets the provided policy rule sets Ids
      *
      * @return the provided policy rule sets ids
      */
-    List<String> getProvidedPolicyRuleSets();
+    Map<String,String> getProvidedPolicyRuleSets();
 
     /**
      * Gets the external segments associated with this external policy Ids

@@ -169,6 +169,12 @@ public class GbpNatPool implements NatPool {
             this.natPool.shared=shared;
             return this;
         }
+
+        @Override
+        public NatPoolBuilder externalSegmentId(String id) {
+            this.natPool.externalSegmentId=id;
+            return this;
+        }
         
     }
 

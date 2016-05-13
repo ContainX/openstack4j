@@ -8,6 +8,7 @@ import java.util.Map;
 import org.openstack4j.api.gbp.ExternalPolicyService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.gbp.ExternalPolicy;
+import org.openstack4j.model.gbp.ExternalPolicyCreate;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicy;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicy.ExternalPolicies;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
@@ -51,12 +52,12 @@ public class ExternalPolicyServiceImpl extends BaseNetworkingServices implements
     }
 
     @Override
-    public ExternalPolicy create(ExternalPolicy externalPolicy) {
+    public ExternalPolicy create(ExternalPolicyCreate externalPolicy) {
          return post(GbpExternalPolicy.class, uri("/grouppolicy/external_policies")).entity(externalPolicy).execute();
     }
 
     @Override
-    public ExternalPolicy update(String externalPolicyId, ExternalPolicy externalPolicy) {
+    public ExternalPolicy update(String externalPolicyId, ExternalPolicyCreate externalPolicy) {
         checkNotNull(externalPolicyId);
         checkNotNull(externalPolicy);
         return put(GbpExternalPolicy.class, uri("/grouppolicy/external_policies/%s", externalPolicyId)).entity(externalPolicy).execute();

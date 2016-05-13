@@ -3,13 +3,13 @@ package org.openstack4j.model.gbp.builder;
 import java.util.List;
 
 import org.openstack4j.common.Buildable.Builder;
-import org.openstack4j.model.gbp.ExternalPolicy;
+import org.openstack4j.model.gbp.ExternalPolicyCreate;
 /**
  * A builder which produces a External Policy object
  * 
  * @author vinod borole
  */
-public interface ExternalPolicyBuilder extends Builder<ExternalPolicyBuilder, ExternalPolicy> {
+public interface ExternalPolicyBuilder extends Builder<ExternalPolicyBuilder, ExternalPolicyCreate> {
 
     ExternalPolicyBuilder name(String string);
     ExternalPolicyBuilder description(String description);

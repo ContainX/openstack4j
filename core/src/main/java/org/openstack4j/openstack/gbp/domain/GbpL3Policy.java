@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.openstack4j.model.gbp.IPVersionType;
 import org.openstack4j.model.gbp.L3Policy;
 import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -12,6 +11,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import com.google.common.collect.Maps;
 /**
  * Model implementation for L3 Policy
  * 
@@ -30,7 +30,7 @@ public class GbpL3Policy implements L3Policy {
     @JsonProperty("ip_pool")
     private String ipPool;
     @JsonProperty("ip_version")
-    private String ipVersion;
+    private int ipVersion;
     @JsonProperty("l2_policies")
     private List<String> l2Policies;
     private List<String> routers;
@@ -85,7 +85,7 @@ public class GbpL3Policy implements L3Policy {
     }
 
     @Override
-    public String getIpVersion() {
+    public int getIpVersion() {
         return ipVersion;
     }
 
@@ -170,8 +170,8 @@ public class GbpL3Policy implements L3Policy {
         }
 
         @Override
-        public L3PolicyBuilder ipVersion(IPVersionType ipVersion) {
-            this.l3Policy.ipVersion=ipVersion.name();
+        public L3PolicyBuilder ipVersion(int ipVersion) {
+            this.l3Policy.ipVersion=ipVersion;
             return this;
         }
 
@@ -195,7 +195,10 @@ public class GbpL3Policy implements L3Policy {
 
         @Override
         public L3PolicyBuilder externalSegments(List<String> extSegmentIds) {
-            extSegmentIds=new ArrayList<String>(this.l3Policy.externalSegments.keySet());
+            this.l3Policy.externalSegments = Maps.newHashMap();
+            for(String extSegId : extSegmentIds){
+                this.l3Policy.externalSegments.put(extSegId, new ArrayList<String>());
+            }
             return this;
         }
         
