@@ -1,4 +1,4 @@
-OpenStack4j 
+OpenStack4j
 ===========
 
 [![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
@@ -34,7 +34,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
@@ -50,7 +50,7 @@ See notes above about connectors (same rules apply) to development branches.
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -78,20 +78,20 @@ If you would like to contribute please see our contributing [guidelines](https:/
 | Rank | Login | Contributions |
 | :--- | :---- | :------------ |
 | 1  | @gondor           | 527 |
-| 2  | @octupszhang      | 26 |
-| 3  | @gonzolino        | 18 |
-| 4  | @ekasitk          | 17 |
-| 5  | @magixyu          | 17 |
-| 6  | @maxrome          | 12 |
-| 7  | @isartcanyameres  | 9 |
-| 8  | @iviireczech      | 8 |
-| 9  | @n-r-anderson     | 7 |
-| 10 | @krishnabrucelee  | 6 |
-| 11 | @auhlig       	 | 6 |
+| 2  | @auhlig       	   | 57 |
+| 3  | @octupszhang      | 26 |
+| 4  | @gonzolino        | 18 |
+| 5  | @ekasitk          | 17 |
+| 6  | @magixyu          | 17 |
+| 7  | @maxrome          | 12 |
+| 8  | @isartcanyameres  | 9 |
+| 9  | @iviireczech      | 8 |
+| 10  | @n-r-anderson     | 7 |
+| 11 | @krishnabrucelee  | 6 |
 | 12 | @peter-nordquist  | 4 |
 | 13 | @RibeiroAna       | 4 |
 | 14 | @symcssn          | 4 |
-| 15 | @olivergondza     | 3 |
+| 15 | @olivergondza     | 5 |
 
 #### Throughput
 
@@ -123,9 +123,9 @@ OSClientV2 os = OSFactory.builderV2()
 ##### Using Identity V3 authentication
 
 Creating and authenticating against OpenStack is extremely simple. Below is an example of authenticating which will
-result with the authorized OSClient.  OSClient allows you to invoke Compute, Identity, Neutron operations fluently. 
+result with the authorized OSClient.  OSClient allows you to invoke Compute, Identity, Neutron operations fluently.
 
-You can use either pass the users name or id and password in the following way 
+You can use either pass the users name or id and password in the following way
 ```java
 .credentials("username", "secret", Identifier.byId("domain id"))
 ```
@@ -260,7 +260,7 @@ OpenStack4j covers most the major common compute based operations.  With the sim
 // Create a Flavor for a special customer base
 Flavor flavor = os.compute().flavors()
                   .create(Builders.flavor().name("Gold").vcpus(4).disk(80).ram(2048).build());
-                  
+
 // Create and Boot a new Server (minimal builder options shown in example)
 Server server = os.compute().servers()
                   .boot(Builders.server().name("Ubuntu 2").flavor(flavor.getId()).image("imageId").build());
@@ -312,13 +312,13 @@ Subnet subnet = os.networking().subnet().create(Builders.subnet()
 
 **Router Operations**
 ```java
-// List all Routers 
+// List all Routers
 List<? extends Router> = os.networking().router().list();
 
 // Create a Router
 Router router = os.networking().router().create(Builders.router()
                   .name("ext_net").adminStateUp(true).externalGateway("networkId").build());
-                  
+
 ```
 
 ### Image Operations (Glance)
@@ -343,7 +343,7 @@ os.images().update(image.toBuilder()
 
 **Download the Image Data**
 ```java
-InputStream is = os.images().getAsStream("imageId"); 
+InputStream is = os.images().getAsStream("imageId");
 ```
 
 **Create a Image**
@@ -363,7 +363,7 @@ License
 ```
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright 2016 Jeremy Unruh and OpenStack4j
+Copyright 2016 ContainX and OpenStack4j
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
 use this file except in compliance with the License. You may obtain a copy of
