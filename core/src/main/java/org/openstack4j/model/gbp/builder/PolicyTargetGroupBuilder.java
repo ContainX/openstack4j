@@ -3,13 +3,13 @@ package org.openstack4j.model.gbp.builder;
 import java.util.List;
 
 import org.openstack4j.common.Buildable.Builder;
-import org.openstack4j.model.gbp.PolicyTargetGroup;
+import org.openstack4j.model.gbp.PolicyTargetGroupCreate;
 /**
  * A builder which produces a Policy Target Group object
  * 
  * @author vinod borole
  */
-public interface PolicyTargetGroupBuilder extends Builder<PolicyTargetGroupBuilder, PolicyTargetGroup> {
+public interface PolicyTargetGroupBuilder extends Builder<PolicyTargetGroupBuilder, PolicyTargetGroupCreate> {
 
     PolicyTargetGroupBuilder name(String name);
     PolicyTargetGroupBuilder description(String description);

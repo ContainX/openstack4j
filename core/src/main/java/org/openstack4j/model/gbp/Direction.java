@@ -4,9 +4,9 @@ package org.openstack4j.model.gbp;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum Direction { 
-    IN,
-    OUT,
-    BI,
+    in,
+    out,
+    bi,
     UNRECOGNIZED;
     
     @JsonCreator

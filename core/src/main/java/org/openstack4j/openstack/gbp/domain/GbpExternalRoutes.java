@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.gbp.domain;
 
 import org.openstack4j.model.gbp.ExternalRoutes;
+import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
@@ -46,5 +47,50 @@ public class GbpExternalRoutes implements ExternalRoutes {
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues()
                      .add("destination", destination).add("nexthop", nexthop).toString();
+    }
+
+    @Override
+    public ExternalRoutesBuilder toBuilder() {
+        return new ExternalRoutesConcreteBuilder(this);
+    }
+    
+    public static class ExternalRoutesConcreteBuilder implements ExternalRoutesBuilder{
+        private GbpExternalRoutes extRoutes;
+        
+        public ExternalRoutesConcreteBuilder(GbpExternalRoutes gbpExternalRoutes) {
+            this.extRoutes=gbpExternalRoutes;
+        }
+
+        public ExternalRoutesConcreteBuilder() {
+            this(new GbpExternalRoutes());
+        }
+
+        @Override
+        public ExternalRoutes build() {
+            return extRoutes;
+        }
+
+        @Override
+        public ExternalRoutesBuilder from(ExternalRoutes in) {
+            extRoutes=(GbpExternalRoutes) in;
+            return this;
+        }
+
+        @Override
+        public ExternalRoutesBuilder destination(String destination) {
+            extRoutes.destination=destination;
+            return this;
+        }
+
+        @Override
+        public ExternalRoutesBuilder nextHop(String nextHop) {
+            extRoutes.nexthop=nextHop;
+            return this;
+        }
+        
+    }
+
+    public static ExternalRoutesBuilder builder() {
+        return new ExternalRoutesConcreteBuilder();
     }
 }

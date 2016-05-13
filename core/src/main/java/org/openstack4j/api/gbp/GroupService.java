@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.gbp.PolicyTargetGroup;
+import org.openstack4j.model.gbp.PolicyTargetGroupCreate;
 
 /**
  * This interface defines all methods for the manipulation of groups
@@ -22,6 +23,6 @@ public interface GroupService{
     List<? extends PolicyTargetGroup> list(Map<String, String> filteringParams);
     PolicyTargetGroup get(String id);
     ActionResponse delete(String id);
-    PolicyTargetGroup create(PolicyTargetGroup policyTargetGroup);
-    PolicyTargetGroup update(String policyTargetGroupId,PolicyTargetGroup policyTargetGroup);
+    PolicyTargetGroup create(PolicyTargetGroupCreate policyTargetGroup);
+    PolicyTargetGroup update(String policyTargetGroupId,PolicyTargetGroupCreate policyTargetGroup);
 }

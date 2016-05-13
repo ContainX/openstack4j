@@ -1,7 +1,9 @@
 package org.openstack4j.openstack.gbp.domain;
 
+import java.util.Collection;
 import java.util.List;
 
+import org.openstack4j.model.gbp.ExternalRoutes;
 import org.openstack4j.model.gbp.ExternalSegment;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -9,6 +11,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
 
 /**
  * Model implementation for External Segments
@@ -29,7 +32,7 @@ public class GbpExternalSegment implements ExternalSegment {
     @JsonProperty("nat_pools")
     private List<String> natpools;
     @JsonProperty("ip_version")
-    private String ipVersion;
+    private int ipVersion;
     @JsonProperty("cidr")
     private String cidr;
     private String description;
@@ -76,7 +79,7 @@ public class GbpExternalSegment implements ExternalSegment {
         return externalPolicies;
     }
     @Override
-    public String getIpVersion() {
+    public int getIpVersion() {
         return ipVersion;
     }
 
@@ -175,6 +178,49 @@ public class GbpExternalSegment implements ExternalSegment {
         @Override
         public ExternalSegmentBuilder description(String description) {
             this.extSegment.description=description;
+            return this;
+        }
+
+        @Override
+        public ExternalSegmentBuilder externalPolicies(List<String> extPolicyIds) {
+            this.extSegment.externalPolicies=extPolicyIds;
+            return this;
+        }
+
+        @Override
+        public ExternalSegmentBuilder ipVersion(int ipVersion) {
+            this.extSegment.ipVersion=ipVersion;
+            return this;
+        }
+
+        @Override
+        public ExternalSegmentBuilder cidr(String cidr) {
+            this.extSegment.cidr=cidr;
+            return this;
+        }
+
+        @Override
+        public ExternalSegmentBuilder isShared(boolean shared) {
+            this.extSegment.shared=shared;
+            return this;
+        }
+
+        @Override
+        public ExternalSegmentBuilder externalRoutes(List<ExternalRoutes> extRoutes) {
+           this.extSegment.externalRoutes = Lists.newArrayList();
+           this.extSegment.externalRoutes.addAll((Collection<? extends GbpExternalRoutes>) extRoutes);
+           return this;
+        }
+
+        @Override
+        public ExternalSegmentBuilder subnetId(String subnetId) {
+            this.extSegment.subnetId=subnetId;
+            return this;
+        }
+
+        @Override
+        public ExternalSegmentBuilder isPortAddressTranslation(boolean isPortAddressTranslation) {
+            this.extSegment.portAddressTranslation=isPortAddressTranslation;
             return this;
         }
         

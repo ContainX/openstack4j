@@ -8,14 +8,15 @@ import org.openstack4j.model.compute.builder.QuotaSetUpdateBuilder;
 import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
+import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
 import org.openstack4j.model.gbp.builder.L2PolicyBuilder;
 import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
 import org.openstack4j.model.gbp.builder.NatPoolBuilder;
 import org.openstack4j.model.gbp.builder.PolicyActionCreateBuilder;
 import org.openstack4j.model.gbp.builder.PolicyActionUpdateBuilder;
-import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
 import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
+import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
 import org.openstack4j.model.gbp.builder.PolicyRuleBuilder;
 import org.openstack4j.model.gbp.builder.PolicyRuleSetBuilder;
 import org.openstack4j.model.gbp.builder.PolicyTargetBuilder;
@@ -88,7 +89,8 @@ import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
-import org.openstack4j.openstack.gbp.domain.GbpExternalPolicy;
+import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
+import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
 import org.openstack4j.openstack.gbp.domain.GbpL2Policy;
 import org.openstack4j.openstack.gbp.domain.GbpL3Policy;
@@ -100,7 +102,7 @@ import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifierUpdate;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyRule;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyRuleSet;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyTarget;
-import org.openstack4j.openstack.gbp.domain.GbpPolicyTargetGroup;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyTargetGroupCreate;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatStackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStackUpdate;
@@ -697,7 +699,7 @@ public class Builders {
      * @return the external policy builder
      */
     public static ExternalPolicyBuilder externalPolicy() {
-        return GbpExternalPolicy.builder();
+        return GbpExternalPolicyCreate.builder();
     }
     /**
      * The builder which creates external segment for gbp
@@ -793,7 +795,16 @@ public class Builders {
      * @return the policy target group builder
      */
     public static PolicyTargetGroupBuilder policyTargetGroup() {
-        return GbpPolicyTargetGroup.builder();
+        return GbpPolicyTargetGroupCreate.builder();
+    }
+    
+    /**
+     * The builder which creates external routes for gbp
+     *
+     * @return the external routes builder
+     */
+    public static ExternalRoutesBuilder externalRoutes(){
+        return GbpExternalRoutes.builder();
     }
     
 }

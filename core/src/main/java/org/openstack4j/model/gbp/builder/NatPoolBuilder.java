@@ -15,4 +15,5 @@ public interface NatPoolBuilder extends Builder<NatPoolBuilder, NatPool>{
     NatPoolBuilder ipVersion(IPVersionType ipVersion);
     NatPoolBuilder cidr(String cidr);
     NatPoolBuilder isShared(boolean shared);
+    NatPoolBuilder externalSegmentId(String id);
 }

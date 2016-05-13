@@ -6,6 +6,7 @@ import java.util.Map;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.gbp.ExternalPolicy;
+import org.openstack4j.model.gbp.ExternalPolicyCreate;
 
 /**
  * This interface defines all methods for the manipulation of external policies
@@ -47,7 +48,7 @@ public interface ExternalPolicyService extends RestService{
      * @param external policy
      * @return the newly created external policy
      */
-    ExternalPolicy create(ExternalPolicy externalPolicy);
+    ExternalPolicy create(ExternalPolicyCreate externalPolicy);
     /**
      * Updates an existing external policy
      * 
@@ -55,5 +56,5 @@ public interface ExternalPolicyService extends RestService{
      * @param external policy that is be used to updated
      * @return the updated external policy
      */
-    ExternalPolicy update(String externalPolicyId,ExternalPolicy externalPolicy);
+    ExternalPolicy update(String externalPolicyId,ExternalPolicyCreate externalPolicy);
 }

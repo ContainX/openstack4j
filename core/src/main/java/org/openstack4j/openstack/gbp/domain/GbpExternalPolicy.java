@@ -3,7 +3,6 @@ package org.openstack4j.openstack.gbp.domain;
 import java.util.List;
 
 import org.openstack4j.model.gbp.ExternalPolicy;
-import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -125,14 +124,6 @@ public class GbpExternalPolicy implements ExternalPolicy{
      * {@inheritDoc}
      */
     @Override
-    public ExternalPolicyBuilder toBuilder() {
-        return new ExternalPolicyConcreteBuilder(this);
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).add("externalSegments", externalSegments).add("id", id).add("description", description).add("shared", shared).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets).toString();
     }
@@ -149,73 +140,4 @@ public class GbpExternalPolicy implements ExternalPolicy{
             return externalPolicys;
         }
     }
-    
-
-                     
-    
-    public static class ExternalPolicyConcreteBuilder implements ExternalPolicyBuilder{
-
-        private GbpExternalPolicy extPolicy;
-        
-        public ExternalPolicyConcreteBuilder(){
-            this(new GbpExternalPolicy());
-        }
-        
-        public ExternalPolicyConcreteBuilder(GbpExternalPolicy gbpExternalPolicy) {
-            this.extPolicy=gbpExternalPolicy;
-        }
-
-        @Override
-        public ExternalPolicy build() {
-            return extPolicy;
-        }
-
-        @Override
-        public ExternalPolicyBuilder from(ExternalPolicy in) {
-            extPolicy = (GbpExternalPolicy)in;
-            return this;
-        }
-
-        @Override
-        public ExternalPolicyBuilder name(String name) {
-            extPolicy.name=name;
-            return this;
-        }
-
-        @Override
-        public ExternalPolicyBuilder description(String description) {
-            this.extPolicy.description=description;
-            return this;
-        }
-
-        @Override
-        public ExternalPolicyBuilder isShared(boolean shared) {
-            this.extPolicy.shared=shared;
-            return this;
-        }
-
-        @Override
-        public ExternalPolicyBuilder consumedPolicyRuleSets(List<String> policyRuleSet) {
-            this.extPolicy.consumedPolicyRuleSets=policyRuleSet;
-            return this;
-        }
-
-        @Override
-        public ExternalPolicyBuilder providedPolicyRuleSets(List<String> policyRuleSet) {
-            this.extPolicy.providedPolicyRuleSets=policyRuleSet;
-            return this;
-        }
-
-        @Override
-        public ExternalPolicyBuilder externalSegments(List<String> externalSegmentIds) {
-            this.extPolicy.externalSegments=externalSegmentIds;
-            return this;
-        }
-        
-    }
-
-    public static ExternalPolicyBuilder builder() {
-        return new ExternalPolicyConcreteBuilder();
-    }
-
 }

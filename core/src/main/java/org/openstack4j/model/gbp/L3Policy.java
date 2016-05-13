@@ -40,7 +40,7 @@ public interface L3Policy extends Resource, Buildable<L3PolicyBuilder> {
      *
      * @return the Ip version
      */
-    String getIpVersion();
+    int getIpVersion();
 
     /**
      * Gets the list of L2 Policies
