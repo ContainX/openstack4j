@@ -20,6 +20,11 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 
 * GitHub Issues: [Click Here](https://github.com/gondor/openstack4j/issues)
 
+## Requirements
+
+* OpenStack4j 3.0.X - Java 8
+* OpenStack4j 2.0.X - Java 7
+
 Maven
 -----
 
