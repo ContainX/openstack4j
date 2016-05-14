@@ -122,6 +122,7 @@ public class HttpResponseImpl implements HttpResponse {
         Set<String> keys = headers.keySet();
 
         for (String key : keys) {
+            if (key == null) continue; // Ignore null header where HttpURLConnection stores HTTP method info
             List<String> values = headers.get(key);
             for (String value : values) {
                 retHeaders.put(key, value);
