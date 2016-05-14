@@ -1,7 +1,7 @@
 package org.openstack4j.openstack.manila.internal;
 
 import org.openstack4j.api.manila.ShareInstanceService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ShareInstance;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.manila.domain.ManilaShareInstance;

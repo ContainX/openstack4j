@@ -8,7 +8,7 @@ import org.openstack4j.api.sahara.SaharaImageService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.Image;
 import org.openstack4j.openstack.sahara.domain.SaharaImage;
 import org.openstack4j.openstack.sahara.domain.SaharaImage.SaharaImages;

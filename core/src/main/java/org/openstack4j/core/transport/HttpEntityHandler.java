@@ -1,17 +1,18 @@
 package org.openstack4j.core.transport;
 
-import static org.openstack4j.core.transport.HttpExceptionHandler.mapException;
+import org.openstack4j.api.exceptions.ResponseException;
+import org.openstack4j.core.transport.functions.ResponseToActionResponse;
+import org.openstack4j.model.common.ActionResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-import org.openstack4j.api.exceptions.ResponseException;
-import org.openstack4j.core.transport.functions.ResponseToActionResponse;
-import org.openstack4j.model.compute.ActionResponse;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import static org.openstack4j.core.transport.HttpExceptionHandler.mapException;
 
 /**
- * Handles retrieving an Entity from an HttpResponse while validating resulting status codes.
+ * Handles retrieving an Entity from an HttpResponse while validating resulting
+ * status codes.
  *
  * @author Jeremy Unruh
  */
@@ -19,13 +20,13 @@ public class HttpEntityHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(HttpEntityHandler.class);
 
-    
     public static <T> T handle(HttpResponse response, Class<T> returnType, ExecutionOptions<T> options) {
         return handle(response, returnType, options, Boolean.FALSE);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> T handle(HttpResponse response, Class<T> returnType, ExecutionOptions<T> options, boolean requiresVoidBodyHandling) {
+    public static <T> T handle(HttpResponse response, Class<T> returnType, ExecutionOptions<T> options,
+            boolean requiresVoidBodyHandling) {
         try {
             Handle<T> handle = Handle.create(response, returnType, options, requiresVoidBodyHandling);
 
@@ -109,7 +110,7 @@ public class HttpEntityHandler {
 
     /**
      * Closes an HttpResponse ignoring a possible IOException
-     * 
+     *
      * @param response the http response
      */
     public static void closeQuietly(HttpResponse response) {
@@ -119,10 +120,10 @@ public class HttpEntityHandler {
             LOG.error(e.getMessage(), e);
         }
     }
-    
+
     /**
      * Returns the status code and closes the response
-     * 
+     *
      * @param response the http response
      * @return the status code
      */

@@ -8,7 +8,7 @@ import java.util.Map;
 import org.openstack4j.api.networking.ext.FirewallRuleService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.FirewallRule;
 import org.openstack4j.model.network.ext.FirewallRuleUpdate;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;

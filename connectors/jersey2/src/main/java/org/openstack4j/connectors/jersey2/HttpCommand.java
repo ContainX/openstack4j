@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.RequestEntityProcessing;
+import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 import org.glassfish.jersey.filter.LoggingFilter;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpRequest;
@@ -48,6 +49,10 @@ public final class HttpCommand<R> {
 
     private void initialize() {
         Client client = ClientFactory.create(request.getConfig());
+        //try to set unsupported HTTP method. In our case used for PATCH.
+        if( request.getMethod().name()=="PATCH" )
+            client.property(HttpUrlConnectorProvider.SET_METHOD_WORKAROUND, true);
+        
         WebTarget target = client.target(request.getEndpoint()).path(request.getPath());
         
         if (HttpLoggingFilter.isLoggingEnabled())

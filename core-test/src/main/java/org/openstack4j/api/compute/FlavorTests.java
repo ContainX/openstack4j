@@ -21,7 +21,7 @@ public class FlavorTests extends AbstractTest {
 	
 	public void getFlavor() throws Exception {
 		respondWith(JSON_FLAVOR);
-		Flavor f = os().compute().flavors().get("1");
+		Flavor f = osv3().compute().flavors().get("1");
 		
 		assertEquals(512, f.getRam());
 		assertEquals(1, f.getDisk());
@@ -31,7 +31,7 @@ public class FlavorTests extends AbstractTest {
 	
 	public void listFlavors() throws Exception {
 		respondWith(JSON_FLAVORS);
-		List<? extends Flavor> flavors = os().compute().flavors().list();
+		List<? extends Flavor> flavors = osv3().compute().flavors().list();
 		assertEquals(5, flavors.size());
 	}
 	

@@ -2,7 +2,7 @@ package org.openstack4j.api.manila;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.SecurityService;
 import org.openstack4j.model.manila.SecurityServiceCreate;
 import org.openstack4j.model.manila.SecurityServiceUpdateOptions;
@@ -43,7 +43,7 @@ public class SecurityServiceTests extends AbstractTest {
                 .password("***")
                 .build();
 
-        SecurityService securityService = os().share().securityServices().create(securityServiceToCreate);
+        SecurityService securityService = osv3().share().securityServices().create(securityServiceToCreate);
 
         assertEquals(securityService.getName(), "SecServ1");
         assertEquals(securityService.getDescription(), "Creating my first Security Service");
@@ -57,7 +57,7 @@ public class SecurityServiceTests extends AbstractTest {
     public void list() throws Exception {
         respondWith(JSON_SECURITY_SERVICES);
 
-        List<? extends SecurityService> securityServices = os().share().securityServices().list();
+        List<? extends SecurityService> securityServices = osv3().share().securityServices().list();
         assertEquals(securityServices.size(), 2);
 
         SecurityService securityService1 = securityServices.get(0);
@@ -78,7 +78,7 @@ public class SecurityServiceTests extends AbstractTest {
     public void listDetails() throws Exception {
         respondWith(JSON_SECURITY_SERVICES_DETAIL);
 
-        List<? extends SecurityService> securityServices = os().share().securityServices().listDetails();
+        List<? extends SecurityService> securityServices = osv3().share().securityServices().listDetails();
         assertEquals(securityServices.size(), 2);
 
         SecurityService securityService1 = securityServices.get(0);
@@ -119,7 +119,7 @@ public class SecurityServiceTests extends AbstractTest {
     public void get() throws Exception {
         respondWith(JSON_SECURITY_SERVICE);
 
-        SecurityService securityService = os().share().securityServices().get("32e921ed-f399-4e7a-b05b-786f482bd369");
+        SecurityService securityService = osv3().share().securityServices().get("32e921ed-f399-4e7a-b05b-786f482bd369");
 
         assertEquals(securityService.getStatus(), "new");
         assertNull(securityService.getDomain());
@@ -140,7 +140,7 @@ public class SecurityServiceTests extends AbstractTest {
     public void update() throws Exception {
         respondWith(JSON_SECURITY_SERVICE_UPDATE);
 
-        SecurityService securityService = os().share().securityServices().update(
+        SecurityService securityService = osv3().share().securityServices().update(
                 "32e921ed-f399-4e7a-b05b-786f482bd369",
                 SecurityServiceUpdateOptions.create()
                         .domain("my_domain")
@@ -166,7 +166,7 @@ public class SecurityServiceTests extends AbstractTest {
     public void delete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().securityServices().delete("32e921ed-f399-4e7a-b05b-786f482bd369");
+        ActionResponse response = osv3().share().securityServices().delete("32e921ed-f399-4e7a-b05b-786f482bd369");
         assertTrue(response.isSuccess());
     }
 }

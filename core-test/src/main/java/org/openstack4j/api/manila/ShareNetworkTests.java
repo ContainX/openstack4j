@@ -2,7 +2,7 @@ package org.openstack4j.api.manila;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ShareNetwork;
 import org.openstack4j.model.manila.ShareNetworkCreate;
 import org.openstack4j.model.manila.ShareNetworkUpdateOptions;
@@ -40,7 +40,7 @@ public class ShareNetworkTests extends AbstractTest {
                 .description("This is my share network")
                 .build();
 
-        ShareNetwork shareNetwork = os().share().shareNetworks().create(shareNetworkCreate);
+        ShareNetwork shareNetwork = osv3().share().shareNetworks().create(shareNetworkCreate);
 
         assertEquals(shareNetwork.getId(), "b1fb4828-93a2-4bbe-b388-7c9ccd69c17a");
         assertEquals(shareNetwork.getProjectId(), "d401b6b1f81943e8919f2b6819755fb6");
@@ -61,7 +61,7 @@ public class ShareNetworkTests extends AbstractTest {
     public void list() throws Exception {
         respondWith(JSON_SHARE_NETWORKS);
 
-        List<? extends ShareNetwork> shareNetworks = os().share().shareNetworks().list();
+        List<? extends ShareNetwork> shareNetworks = osv3().share().shareNetworks().list();
         assertEquals(shareNetworks.size(), 1);
 
         ShareNetwork shareNetwork = shareNetworks.get(0);
@@ -74,7 +74,7 @@ public class ShareNetworkTests extends AbstractTest {
     public void listDetails() throws Exception {
         respondWith(JSON_SHARE_NETWORKS_DETAIL);
 
-        List<? extends ShareNetwork> shareNetworks = os().share().shareNetworks().listDetails();
+        List<? extends ShareNetwork> shareNetworks = osv3().share().shareNetworks().listDetails();
         assertEquals(shareNetworks.size(), 1);
 
         ShareNetwork shareNetwork = shareNetworks.get(0);
@@ -98,7 +98,7 @@ public class ShareNetworkTests extends AbstractTest {
     public void get() throws Exception {
         respondWith(JSON_SHARE_NETWORK);
 
-        ShareNetwork shareNetwork = os().share().shareNetworks().get("b1fb4828-93a2-4bbe-b388-7c9ccd69c17a");
+        ShareNetwork shareNetwork = osv3().share().shareNetworks().get("b1fb4828-93a2-4bbe-b388-7c9ccd69c17a");
 
         assertEquals(shareNetwork.getId(), "b1fb4828-93a2-4bbe-b388-7c9ccd69c17a");
         assertEquals(shareNetwork.getProjectId(), "d401b6b1f81943e8919f2b6819755fb6");
@@ -119,7 +119,7 @@ public class ShareNetworkTests extends AbstractTest {
     public void update() throws Exception {
         respondWith(JSON_SHARE_NETWORK_UPDATE);
 
-        ShareNetwork shareNetwork = os().share().shareNetworks().update(
+        ShareNetwork shareNetwork = osv3().share().shareNetworks().update(
                 "b1fb4828-93a2-4bbe-b388-7c9ccd69c17a",
                 ShareNetworkUpdateOptions.create().description("This is my updated share network"));
 
@@ -142,7 +142,7 @@ public class ShareNetworkTests extends AbstractTest {
     public void delete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shareNetworks().delete("b1fb4828-93a2-4bbe-b388-7c9ccd69c17a");
+        ActionResponse response = osv3().share().shareNetworks().delete("b1fb4828-93a2-4bbe-b388-7c9ccd69c17a");
         assertTrue(response.isSuccess());
     }
 
@@ -150,7 +150,7 @@ public class ShareNetworkTests extends AbstractTest {
     public void addSecurityService() throws Exception {
         respondWith(JSON_SHARE_NETWORK);
 
-        ShareNetwork shareNetwork = os().share().shareNetworks().addSecurityService(
+        ShareNetwork shareNetwork = osv3().share().shareNetworks().addSecurityService(
                 "b1fb4828-93a2-4bbe-b388-7c9ccd69c17a",
                 "32e921ed-f399-4e7a-b05b-786f482bd369");
 
@@ -173,7 +173,7 @@ public class ShareNetworkTests extends AbstractTest {
     public void removeSecurityService() throws Exception {
         respondWith(JSON_SHARE_NETWORK);
 
-        ShareNetwork shareNetwork = os().share().shareNetworks().removeSecurityService(
+        ShareNetwork shareNetwork = osv3().share().shareNetworks().removeSecurityService(
                 "b1fb4828-93a2-4bbe-b388-7c9ccd69c17a",
                 "32e921ed-f399-4e7a-b05b-786f482bd369");
 

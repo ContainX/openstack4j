@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.Member;
 import org.openstack4j.model.network.ext.MemberUpdate;
 import org.testng.annotations.Test;
@@ -19,20 +19,20 @@ import static org.testng.Assert.assertTrue;
 @Test(suiteName="Network/member", enabled=false)
 public class MemberTests extends AbstractTest{
 	public void testListMember(){
-		List<? extends Member> list = os().networking().loadbalancers().member().list();
+		List<? extends Member> list = osv3().networking().loadbalancers().member().list();
 		System.out.println("test lb member List"+list);
 		assertEquals(1, list.size());
 	}
 	public void testListMemberFilter(){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("address", "100.2.12.32");
-		List<? extends Member> list = os().networking().loadbalancers().member().list(map);
+		List<? extends Member> list = osv3().networking().loadbalancers().member().list(map);
 		System.out.println("test lb member List filter"+list);
 		assertEquals(1, list.size());
 	}
 	public void testGetMember(){
 		String id = "99a28283-97b7-4210-af5c-b2594628217b";
-		Member member = os().networking().loadbalancers().member().get(id);
+		Member member = osv3().networking().loadbalancers().member().get(id);
 		System.out.println("test get a member"+member);
 		assertEquals(id, member.getId());
 
@@ -49,7 +49,7 @@ public class MemberTests extends AbstractTest{
 				.protocolPort(80)
 				.weight(weight)
 				.poolId(poolId).build();
-		Member result = os().networking().loadbalancers().member().create(create);
+		Member result = osv3().networking().loadbalancers().member().create(create);
 		assertTrue(result.isAdminStateUp());
 		assertEquals(weight, result.getWeight());
 		assertEquals(address,result.getAddress());
@@ -65,7 +65,7 @@ public class MemberTests extends AbstractTest{
 				.adminStateUp(true)
 				.weight(weight)
 				.poolId(poolId).build();
-		Member result = os().networking().loadbalancers().member().update(memberId, update);
+		Member result = osv3().networking().loadbalancers().member().update(memberId, update);
 		assertTrue(result.isAdminStateUp());
 		assertEquals(weight, result.getWeight());
 		assertEquals(address,result.getAddress());
@@ -73,7 +73,7 @@ public class MemberTests extends AbstractTest{
 	
 	public void testDeleteMember(){
 		String id = "99a28283-97b7-4210-af5c-b2594628217b";
-		ActionResponse result = os().networking().loadbalancers().member().delete(id);
+		ActionResponse result = osv3().networking().loadbalancers().member().delete(id);
 		System.out.println("test delete a member"+result);
 		assertTrue(result.isSuccess());
 

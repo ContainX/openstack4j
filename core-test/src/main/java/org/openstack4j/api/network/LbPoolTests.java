@@ -12,7 +12,7 @@ import java.util.Map;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.HealthMonitor;
 import org.openstack4j.model.network.ext.HealthMonitorAssociate;
 import org.openstack4j.model.network.ext.LbMethod;
@@ -30,7 +30,7 @@ public class LbPoolTests extends AbstractTest {
     
 	public void testListPool() throws IOException {
 	    respondWith(LBPOOLS_JSON);
-		List<? extends LbPool> list = os().networking().loadbalancers().lbPool().list();
+		List<? extends LbPool> list = osv3().networking().loadbalancers().lbPool().list();
 		assertEquals(1, list.size());
 		assertEquals(list.get(0).getSubnetId(), "8032909d-47a1-4715-90af-5153ffe39861");
 	}
@@ -39,14 +39,14 @@ public class LbPoolTests extends AbstractTest {
 	    respondWith(LBPOOLS_JSON);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("name", "pool");
-		List<? extends LbPool> list = os().networking().loadbalancers().lbPool().list(map);
+		List<? extends LbPool> list = osv3().networking().loadbalancers().lbPool().list(map);
 		assertEquals(1, list.size());
 	}
 
 	public void testGetPool() throws IOException {
 	    respondWith(LBPOOL_JSON);
 		String id = "4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5";
-		LbPool pool = os().networking().loadbalancers().lbPool().get(id);
+		LbPool pool = osv3().networking().loadbalancers().lbPool().get(id);
 		assertNotNull(pool);
 		assertEquals(id, pool.getId());
 	}
@@ -61,7 +61,7 @@ public class LbPoolTests extends AbstractTest {
 				.subnetId("7d1dab60-cf8a-4f75-af5c-44aab98b0c42")
 				.tenantId("d7fd03242ffa4933863bc528ed884fb6")
 				.protocol(protocol).build();
-		LbPool result = os().networking().loadbalancers().lbPool().create(create);
+		LbPool result = osv3().networking().loadbalancers().lbPool().create(create);
 		assertEquals(name, result.getName());
 		assertEquals(result.getLbMethod(), LbMethod.ROUND_ROBIN);
 		assertEquals(protocol, result.getProtocol());
@@ -74,7 +74,7 @@ public class LbPoolTests extends AbstractTest {
 				.description("update")
 				.lbMethod(LbMethod.LEAST_CONNECTIONS).name(name)
 				.build();
-		LbPool result = os().networking().loadbalancers().lbPool().update(poolId, update);
+		LbPool result = osv3().networking().loadbalancers().lbPool().update(poolId, update);
 		assertEquals(name, result.getName());
 		assertEquals(LbMethod.LEAST_CONNECTIONS,
 				result.getLbMethod());
@@ -86,7 +86,7 @@ public class LbPoolTests extends AbstractTest {
 		String poolId = "db083bf7-c455-4758-b1ad-203cf441a73a";
 		String healthId = "8767284a-b542-4db6-8393-0a404a959c1d";
 		HealthMonitorAssociate associate = Builders.lbPoolAssociateHealthMonitor().id(healthId).build();
-		HealthMonitor result = os().networking().loadbalancers().lbPool().associateHealthMonitor(poolId, associate);
+		HealthMonitor result = osv3().networking().loadbalancers().lbPool().associateHealthMonitor(poolId, associate);
 		assertTrue(result != null);
 	}
 	
@@ -94,14 +94,14 @@ public class LbPoolTests extends AbstractTest {
 	public void testDisAssociateHealthMonitor() {
 		String poolId = "db083bf7-c455-4758-b1ad-203cf441a73a";
 		String healthId = "8767284a-b542-4db6-8393-0a404a959c1d";
-		ActionResponse result = os().networking().loadbalancers().lbPool()
+		ActionResponse result = osv3().networking().loadbalancers().lbPool()
 				.disAssociateHealthMonitor(poolId, healthId);
 		assertTrue(result.isSuccess());
 	}
 	
 	public void testDeletePool() {
 	    respondWith(200);
-		ActionResponse result = os().networking().loadbalancers().lbPool().delete("02ae87ec-5502-469e-8c41-f2c57d185054");
+		ActionResponse result = osv3().networking().loadbalancers().lbPool().delete("02ae87ec-5502-469e-8c41-f2c57d185054");
 		assertTrue(result.isSuccess());
 	}
 	

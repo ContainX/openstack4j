@@ -16,7 +16,7 @@ import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.DLPayload;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.payloads.FilePayload;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.options.DownloadOptions;
 import org.openstack4j.model.storage.object.SwiftObject;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
@@ -206,9 +206,11 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(location);
         checkNotNull(metadata);
 
+        //the successfull response state of updateMetadata is 202 instead of 204
+        //I test it by curl and this api
         return isResponseSuccess(post(Void.class, location.getURI())
                   .headers(MetadataToHeadersFunction.create(OBJECT_METADATA_PREFIX).apply(metadata))
-                  .executeWithResponse(), 204);
+                  .executeWithResponse(), 202);
     }
 
     @Override

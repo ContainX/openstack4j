@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.compute.ComputeImageService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.openstack.compute.domain.MetaDataWrapper;
 import org.openstack4j.openstack.compute.domain.NovaImage;

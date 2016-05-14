@@ -3,7 +3,7 @@ package org.openstack4j.openstack.heat.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.openstack4j.api.heat.SoftwareConfigService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.heat.SoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 

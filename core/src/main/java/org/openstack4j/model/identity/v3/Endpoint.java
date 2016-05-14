@@ -6,7 +6,7 @@ import java.util.Map;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.identity.builder.v3.EndpointBuilder;
+import org.openstack4j.model.identity.v3.builder.EndpointBuilder;
 
 /**
  * Endpoint model for identity v3.
@@ -21,6 +21,11 @@ public interface Endpoint extends ModelEntity, Buildable<EndpointBuilder> {
      * @return the Id of the endpoint
      */
     String getId();
+
+    /**
+     * @return the type of the endpoint
+     */
+    String getType();
 
     /**
      * @return the Description of the endpoint
@@ -61,5 +66,10 @@ public interface Endpoint extends ModelEntity, Buildable<EndpointBuilder> {
      * @return the Links of the endpoint
      */
     Map<String, String> getLinks();
+
+    /**
+     * @return true if the endpoint is enabled, otherwise false
+     */
+    boolean isEnabled();
 
 }
