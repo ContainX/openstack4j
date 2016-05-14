@@ -1,5 +1,12 @@
 package org.openstack4j.openstack.compute.internal;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.compute.ServerService;
 import org.openstack4j.api.compute.ext.InterfaceService;
@@ -7,32 +14,47 @@ import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.compute.*;
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;
+import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.ServerPassword;
+import org.openstack4j.model.compute.ServerUpdateOptions;
+import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
+import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.actions.BackupOptions;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.openstack.common.Metadata;
-import org.openstack4j.openstack.compute.domain.*;
+import org.openstack4j.openstack.compute.domain.ConsoleOutput;
+import org.openstack4j.openstack.compute.domain.NovaPassword;
+import org.openstack4j.openstack.compute.domain.NovaServer;
 import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
-import org.openstack4j.openstack.compute.domain.actions.*;
-import org.openstack4j.openstack.compute.domain.actions.BasicActions.*;
+import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.compute.domain.NovaServerUpdate;
+import org.openstack4j.openstack.compute.domain.NovaVNCConsole;
+import org.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
+import org.openstack4j.openstack.compute.domain.actions.BackupAction;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.ChangePassword;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.ConfirmResize;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.Migrate;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.Reboot;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.Resize;
+import org.openstack4j.openstack.compute.domain.actions.BasicActions.RevertResize;
+import org.openstack4j.openstack.compute.domain.actions.CreateSnapshotAction;
+import org.openstack4j.openstack.compute.domain.actions.LiveMigrationAction;
+import org.openstack4j.openstack.compute.domain.actions.RebuildAction;
+import org.openstack4j.openstack.compute.domain.actions.ResetStateAction;
+import org.openstack4j.openstack.compute.domain.actions.SecurityGroupActions;
+import org.openstack4j.openstack.compute.domain.actions.ServerAction;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.compute.functions.WrapServerIfApplicableFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Server Operation API implementation
@@ -417,4 +439,13 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public InterfaceService interfaces() {
         return Apis.get(InterfaceService.class);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ServerPassword getPassword(String serverId) {
+        checkNotNull(serverId);
+        return get(NovaPassword.class, uri("/servers/%s/os-server-password", serverId)).execute();
+    }   
 }
