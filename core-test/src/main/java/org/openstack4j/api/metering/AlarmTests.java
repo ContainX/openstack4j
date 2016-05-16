@@ -23,7 +23,7 @@ public class AlarmTests extends AbstractTest {
 
 		respondWith(JSON_ALARMS);
 
-		List<? extends Meter> meterList = os().telemetry().meters().list();
+		List<? extends Meter> meterList = osv3().telemetry().meters().list();
 		assertEquals(2, meterList.size());
 
 		throw new Exception("Alarm test failed by max");

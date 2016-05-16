@@ -15,31 +15,31 @@ public enum ServiceType {
 	SHARE("manila", "share"),
 	UNKNOWN("NA", "NA")
 	;
-	
+
 	private final String serviceName;
-	private final String typeV3;
-	
-	ServiceType(String serviceName, String typeV3) {
+	private final String type;
+
+	ServiceType(String serviceName, String type) {
 		this.serviceName = serviceName;
-		this.typeV3 = typeV3;
+		this.type = type;
 	}
-	
+
 	public String getServiceName() {
 		return this.serviceName;
 	}
-	
-	public String getTypeV3() {
-		return this.typeV3;
+
+	public String getType() {
+		return this.type;
 	}
-	
+
 	public static ServiceType forName(String name) {
 		for (ServiceType s : ServiceType.values())
 		{
 			if (s.getServiceName().equalsIgnoreCase(name))
-			  return s;
+			    return s;
 			if (s.name().equalsIgnoreCase(name))
 				return s;
-			if (s.typeV3.equalsIgnoreCase(name))
+			if (s.type.equalsIgnoreCase(name))
 				return s;
 		}
 		return ServiceType.UNKNOWN;

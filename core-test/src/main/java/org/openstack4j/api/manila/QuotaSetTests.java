@@ -29,7 +29,7 @@ public class QuotaSetTests extends AbstractTest {
     public void get() throws Exception {
         respondWith(JSON_QUOTA_SET);
 
-        QuotaSet quotaSet = os().share().quotaSets().get("test_tenant");
+        QuotaSet quotaSet = osv3().share().quotaSets().get("test_tenant");
 
         assertEquals((int) quotaSet.getGigabytes(), 1000);
         assertEquals((int) quotaSet.getShares(), 50);
@@ -45,7 +45,7 @@ public class QuotaSetTests extends AbstractTest {
 
 
 
-        QuotaSet quotaSet = os().share().quotaSets().update(
+        QuotaSet quotaSet = osv3().share().quotaSets().update(
                 "test_tenant",
                 "test_user",
                 QuotaSetUpdateOptions
@@ -65,7 +65,7 @@ public class QuotaSetTests extends AbstractTest {
     public void delete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().quotaSets().delete("test_tenant");
+        ActionResponse response = osv3().share().quotaSets().delete("test_tenant");
         assertTrue(response.isSuccess());
     }
 
@@ -73,7 +73,7 @@ public class QuotaSetTests extends AbstractTest {
     public void getDefault() throws Exception {
         respondWith(JSON_QUOTA_SET_DEFAULTS);
 
-        QuotaSet quotaSet = os().share().quotaSets().get("test_tenant");
+        QuotaSet quotaSet = osv3().share().quotaSets().get("test_tenant");
 
         assertEquals((int) quotaSet.getGigabytes(), 1000);
         assertEquals((int) quotaSet.getShares(), 50);

@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.common;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
@@ -49,6 +50,7 @@ public class ExtensionValue implements Extension {
 	/**
 	 * {@inheritDoc}
 	 */
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ssX")
 	public Date getUpdated() {
 		return updated;
 	}
@@ -70,8 +72,12 @@ public class ExtensionValue implements Extension {
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(Extension.class).omitNullValues()
-						.add("name", name).add("namespace", namespace).add("description", description)
-						.add("alias", alias).add("updated", updated).add("links", links)
+						.add("name", name)
+						.add("namespace", namespace)
+						.add("description", description)
+						.add("alias", alias)
+						.add("updated", updated)
+						.add("links", links)
 						.addValue("\n")
 						.toString();
 	}

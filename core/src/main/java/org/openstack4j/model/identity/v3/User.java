@@ -4,11 +4,11 @@ import java.util.Map;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.identity.builder.v3.UserBuilder;
+import org.openstack4j.model.identity.v3.builder.UserBuilder;
 
 /**
- * A Project User
- * 
+ * identity v3 user model class
+ *
  * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#users-v3">API reference</a>
  */
 public interface User extends ModelEntity, Buildable<UserBuilder> {
@@ -64,5 +64,12 @@ public interface User extends ModelEntity, Buildable<UserBuilder> {
      * @return the enabled status of the user
      */
     boolean isEnabled();
+
+    /**
+     * sets the enabled status of the user
+     *
+     * @param enabled the enabled
+     */
+    void setEnabled(Boolean enabled);
 
 }

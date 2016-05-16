@@ -1,0 +1,7 @@
+{
+"error": {
+        "message": "Could not find group: invalidGroup",
+        "code": 404,
+        "title": "Not Found"
+    }
+}

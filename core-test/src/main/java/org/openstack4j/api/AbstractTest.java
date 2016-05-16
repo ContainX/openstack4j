@@ -6,17 +6,16 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
 import org.bouncycastle.util.io.Streams;
+import org.openstack4j.api.OSClient.OSClientV2;
+import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.openstack.OSFactory;
-import org.openstack4j.openstack.identity.domain.Credentials;
-import org.openstack4j.openstack.identity.domain.KeystoneAccess;
-import org.openstack4j.openstack.identity.domain.v3.AccessWrapper;
-import org.openstack4j.openstack.identity.domain.v3.KeystoneToken;
+import org.openstack4j.openstack.identity.v2.domain.KeystoneAccess;
+import org.openstack4j.openstack.identity.v3.domain.KeystoneToken;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -25,38 +24,45 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.io.ByteStreams;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
- * Base Test class which handles Mocking a Webserver to fullfill and test against JSON response objects
- * from an OpenStack deployment
+ * Base Test class which handles Mocking a Webserver to fullfill and test
+ * against JSON response objects from an OpenStack deployment
  *
  * @author Jeremy Unruh
  */
 public abstract class AbstractTest {
 
     protected enum Service {
-        IDENTITY(5000),
-        NETWORK(9696),
-        COMPUTE(8774),
-        BLOCK_STORAGE(8776),
-        METERING(8087),
-        TELEMETRY(8087),
-        SHARE(8786),
+        IDENTITY(5000), 
+        NETWORK(9696), 
+        COMPUTE(8774), 
+        BLOCK_STORAGE(8776), 
+        METERING(8087), 
+        TELEMETRY(8087), 
+        SHARE(8786), 
         OBJECT_STORAGE(8800);
         ;
         private final int port;
 
-        private Service(int port) { this.port = port; }
+        private Service(int port) {
+            this.port = port;
+        }
 
     }
+    
+    private final Logger LOG = LoggerFactory.getLogger(getClass().getName());
 
-    protected static final String JSON_ACCESS = "/identity/access.json";
-    protected static final String JSON_TOKEN = "/identity.v3/authv3_project.json";
+    protected static final String JSON_ACCESS = "/identity/v2/access.json";
+    protected static final String JSON_TOKEN = "/identity/v3/authv3_project.json";
+    protected static final String TOKEN_ID = "123456789";
 
-    private OSClient os;
+    protected OSClientV2 osv2;
+    protected OSClientV3 osv3;
     private String host;
     protected MockWebServer server = new MockWebServer();
-
 
     /**
      * @return the service the API is using
@@ -66,18 +72,16 @@ public abstract class AbstractTest {
     @BeforeClass
     protected void startServer() throws UnknownHostException {
 
-    	InetAddress inetAddress = InetAddress.getByName("localhost");
-    	Logger.getLogger(getClass().getName()).info("localhost inet address: "+inetAddress.toString());
+        InetAddress inetAddress = InetAddress.getByName("localhost");
+        LOG.info("localhost inet address: " + inetAddress.toString());
+        LOG.info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
 
-        Logger.getLogger(getClass().getName()).info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
         try {
-        	Logger.getLogger(getClass().getName()).info("Starting server on port "+service().port);
+            LOG.info("Starting server on port " + service().port);
             server.start(service().port);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        catch (Throwable t) {
+        } catch (Throwable t) {
             t.printStackTrace();
         }
     }
@@ -97,6 +101,7 @@ public abstract class AbstractTest {
 
     /**
      * Responds with specified status code and no body
+     * 
      * @param statusCode the status code to respond with
      */
     protected void respondWith(int statusCode) {
@@ -105,15 +110,17 @@ public abstract class AbstractTest {
 
     /**
      * Responds with specified status code, no body and optional headers
+     * 
      * @param headers optional headers
      * @param statusCode the status code to respond with
      */
-    protected void respondWith(Map<String,String> headers, int statusCode) {
+    protected void respondWith(Map<String, String> headers, int statusCode) {
         respondWith(headers, statusCode, "");
     }
 
     /**
      * Responds with specified status code and json body
+     * 
      * @param statusCode the status code to respond with
      * @param body the json body
      */
@@ -125,6 +132,7 @@ public abstract class AbstractTest {
 
     /**
      * Responds with specified status code, body and optional headers
+     * 
      * @param headers optional headers
      * @param statusCode the status code to respond with
      * @param body the response body
@@ -142,13 +150,15 @@ public abstract class AbstractTest {
     }
 
     /**
-     * Responds with given header, status code, body from json resource file
+     * Responds with given header, status code, body from json resource file.
+     *
      * @param headers the specified header
      * @param statusCode the status code to respond with
      * @param resource the json resource file
      * @throws IOException Signals that an I/O exception has occurred
      */
-    protected void respondWithHeaderAndResource(Map<String, String> headers, int statusCode, String resource) throws IOException {
+    protected void respondWithHeaderAndResource(Map<String, String> headers, int statusCode, String resource)
+            throws IOException {
         InputStream is = getClass().getResourceAsStream(resource);
         respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
     }
@@ -157,31 +167,33 @@ public abstract class AbstractTest {
         InputStream is = getClass().getResourceAsStream(resource);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
-        respondWith(headers , statusCode, new String(ByteStreams.toByteArray(is)));
+        respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
     }
 
     protected String authURL(String path) {
         return String.format("http://%s:5000%s", getHost(), path);
     }
 
-    @AfterClass
-    protected void afterTest()
-    {
+    @AfterClass(alwaysRun = true)
+    protected void afterTest() {
         try {
             server.shutdown();
-        }
-        catch (IOException e) {
+            LOG.info("Stopped server on port " + service().port);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected void associateClient(OSClient os)
-    {
-        this.os = os;
+    protected void associateClientV2(OSClientV2 osv2) {
+        this.osv2 = osv2;
+    }
+    
+    protected void associateClientV3(OSClientV3 osv3) {
+        this.osv3 = osv3;
     }
 
-    protected OSClient os() {
-        if (os == null) {
+    protected OSClientV2 osv2() {
+        if (osv2 == null) {
             ObjectMapper mapper = new ObjectMapper();
             mapper.setSerializationInclusion(Include.NON_NULL);
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -192,22 +204,23 @@ public abstract class AbstractTest {
 
             try {
                 String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
-                Logger.getLogger(getClass().getName()).info(getClass().getName());
-              //  Logger.getLogger(getClass().getName()).info(getClass().getName() + ", JSON Access = " + json);
+                LOG.info(getClass().getName());
+                //LOG.info(getClass().getName() + ", JSON Access = " + json);
                 json = json.replaceAll("127.0.0.1", getHost());
-               // Logger.getLogger(getClass().getName()).info("JSON Access = " + json);
+                //LOG.info("JSON Access = " + json);
                 KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
-                a.applyContext(authURL("/v2.0"), new Credentials("test", "test"));
-                os = OSFactory.clientFromAccess(a);
+                a.applyContext(authURL("/v2.0"),
+                        new org.openstack4j.openstack.identity.v2.domain.Credentials("test", "test"));
+                osv2 = OSFactory.clientFromAccess(a);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return os;
+        return osv2;
     }
 
-    protected OSClient osv3() {
-        if (os == null) {
+    protected OSClientV3 osv3() {
+        if (osv3 == null) {
             ObjectMapper mapper = new ObjectMapper();
             mapper.setSerializationInclusion(Include.NON_NULL);
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -218,32 +231,28 @@ public abstract class AbstractTest {
 
             try {
                 String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_TOKEN)));
-                Logger.getLogger(getClass().getName()).info(getClass().getName());
-                json = json.replaceAll("127.0.0.1", getHost());
-                KeystoneToken t = mapper.readValue(json, KeystoneToken.class);
-                t.applyContext(authURL("/v3"), new Credentials("admin", "test"));
+                LOG.info(getClass().getName());
+                json = json.replaceAll("devstack.openstack.stack", getHost());
+                KeystoneToken token = mapper.readValue(json, KeystoneToken.class);
+                token.setId(TOKEN_ID);
+                token.applyContext(authURL("/v3"),
+                        new org.openstack4j.openstack.identity.v3.domain.Credentials("admin", "test"));
 
-                //tokenwrapper
-                AccessWrapper a = AccessWrapper.wrap(t);
-                os = OSFactory.clientFromAccess(a);
+                osv3 = OSFactory.clientFromToken(token);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return os;
+        return osv3;
     }
 
     private String getHost() {
         /*
-    	try
-        {
-            if (host == null)
-                host = InetAddress.getLocalHost().getHostAddress();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
+         * try { if (host == null) host =
+         * InetAddress.getLocalHost().getHostAddress(); } catch (Exception e) {
+         * e.printStackTrace(); }
+         */
         if (host == null)
             return "127.0.0.1";
 

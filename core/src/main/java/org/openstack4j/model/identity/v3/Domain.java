@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.identity.builder.v3.DomainBuilder;
+import org.openstack4j.model.identity.v3.builder.DomainBuilder;
 
 /**
  * Domain model.
