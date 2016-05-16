@@ -1,6 +1,5 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.openstack4j.model.gbp.ExternalRoutes;
@@ -208,7 +207,9 @@ public class GbpExternalSegment implements ExternalSegment {
         @Override
         public ExternalSegmentBuilder externalRoutes(List<ExternalRoutes> extRoutes) {
            this.extSegment.externalRoutes = Lists.newArrayList();
-           this.extSegment.externalRoutes.addAll((Collection<? extends GbpExternalRoutes>) extRoutes);
+           for(ExternalRoutes externalRoute : extRoutes){
+               this.extSegment.externalRoutes.add((GbpExternalRoutes) externalRoute);
+           }
            return this;
         }
 
