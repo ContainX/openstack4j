@@ -10,7 +10,7 @@ import org.openstack4j.model.gbp.NatPool;
  * This interface defines all methods for the manipulation of nat-pool
  * 
  * @author vinod borole
- * 
+ *  
  */
 public interface NatPoolService {
     /**

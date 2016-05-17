@@ -14,7 +14,7 @@ import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
 public class PolicyTargetServiceImpl extends BaseNetworkingServices implements PolicyTargetService {
 
-    @Override
+    @Override 
     public List<? extends PolicyTarget> list() {
         return get(PolicyTargets.class, uri("/grouppolicy/policy_targets")).execute().getList();
     }

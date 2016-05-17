@@ -14,7 +14,7 @@ import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
 public class NatPoolServiceImpl extends BaseNetworkingServices implements NatPoolService {
 
-    @Override
+    @Override 
     public List<? extends NatPool> list() {
         return get(NatPools.class, uri("/grouppolicy/nat_pools")).execute().getList();
     }

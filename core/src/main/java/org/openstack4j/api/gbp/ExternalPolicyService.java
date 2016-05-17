@@ -7,7 +7,7 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.gbp.ExternalPolicy;
 import org.openstack4j.model.gbp.ExternalPolicyCreate;
-
+ 
 /**
  * This interface defines all methods for the manipulation of external policies
  * 

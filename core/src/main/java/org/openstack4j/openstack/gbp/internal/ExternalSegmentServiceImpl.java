@@ -14,7 +14,7 @@ import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
 public class ExternalSegmentServiceImpl extends BaseNetworkingServices implements ExternalSegmentService {
 
-    @Override
+    @Override 
     public List<? extends ExternalSegment> list() {
         return get(ExternalSegments.class, uri("/grouppolicy/external_segments")).execute().getList();
     }

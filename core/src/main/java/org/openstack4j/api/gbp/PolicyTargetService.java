@@ -13,7 +13,7 @@ import org.openstack4j.model.gbp.PolicyTarget;
  * 
  */
 public interface PolicyTargetService{
-    /**
+    /** 
      * List all policy target
      * 
      * @return List of policy target

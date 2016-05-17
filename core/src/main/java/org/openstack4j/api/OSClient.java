@@ -228,7 +228,7 @@ public interface OSClient< T extends OSClient<T>> {
          * @return the authentication token
          */
         Token getToken();
-        
+         
         /**
          * Returns the Identity Service API V3
          *
@@ -237,7 +237,7 @@ public interface OSClient< T extends OSClient<T>> {
         org.openstack4j.api.identity.v3.IdentityService identity();
         
     }
-
+ 
 	/**
      * Returns the Gbp Service API
      * 

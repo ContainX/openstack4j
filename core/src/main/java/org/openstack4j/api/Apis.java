@@ -106,7 +106,7 @@ public class Apis {
 
 	/**
      * Gets the group based policy services API
-     * @return the gbp services
+     * @return the gbp services 
      */
     public static GbpService getGbpServices() {
         return get(GbpService.class);

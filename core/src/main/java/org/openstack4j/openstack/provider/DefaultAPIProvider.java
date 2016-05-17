@@ -308,7 +308,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ExternalSegmentService.class,ExternalSegmentServiceImpl.class);
 		bind(GroupService.class,GroupServiceImpl.class);
 		bind(L2policyService.class,L2policyServiceImpl.class);
-		bind(L3policyService.class,L3policyServiceImpl.class);
+		bind(L3policyService.class,L3policyServiceImpl.class); 
 		bind(NatPoolService.class,NatPoolServiceImpl.class);
 		bind(NetworkService.class,NetworkServiceImpl.class);
 		bind(PolicyActionService.class,PolicyActionServiceImpl.class);

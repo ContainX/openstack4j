@@ -10,7 +10,7 @@ import org.openstack4j.model.gbp.L2Policy;
  * This interface defines all methods for the manipulation of l2policy
  * 
  * @author vinod borole
- * 
+ *  
  */
 public interface L2policyService{
     /**

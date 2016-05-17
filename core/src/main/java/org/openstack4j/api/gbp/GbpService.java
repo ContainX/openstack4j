@@ -19,7 +19,7 @@ public interface GbpService extends RestService {
      * Service implementation which provides methods for manipulation of external segments
      * 
      * @return ExternalSegmentService
-     */    
+     */     
     ExternalSegmentService externalSegment();
     
     /**

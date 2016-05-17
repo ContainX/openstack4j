@@ -7,7 +7,7 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.gbp.PolicyTargetGroup;
 
 public interface PolicyTargetGroupService {
-    /**
+    /** 
      * List all policy target group
      * 
      * @return List of policy target group

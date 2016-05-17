@@ -11,7 +11,7 @@ import org.openstack4j.model.gbp.ExternalSegment;
  * 
  * @author vinod borole
  * 
- */
+ */ 
 public interface ExternalSegmentService {
     /**
      * List all external segment

@@ -14,7 +14,7 @@ import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
 public class L2policyServiceImpl extends BaseNetworkingServices implements L2policyService {
 
-    @Override
+    @Override 
     public List<? extends L2Policy> list() {
         return get(L2Policies.class, uri("/grouppolicy/l2_policies")).execute().getList();
     }

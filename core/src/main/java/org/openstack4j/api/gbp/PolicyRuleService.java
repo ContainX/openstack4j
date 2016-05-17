@@ -10,7 +10,7 @@ import org.openstack4j.model.gbp.PolicyRule;
  * This interface defines all methods for the manipulation of policy rule
  * 
  * @author vinod borole
- * 
+ *  
  */
 public interface PolicyRuleService {
     /**
