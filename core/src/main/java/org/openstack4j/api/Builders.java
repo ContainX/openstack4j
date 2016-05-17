@@ -7,6 +7,20 @@ import org.openstack4j.model.compute.builder.FloatingIPBuilder;
 import org.openstack4j.model.compute.builder.QuotaSetUpdateBuilder;
 import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
+import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
+import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
+import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
+import org.openstack4j.model.gbp.builder.L2PolicyBuilder;
+import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
+import org.openstack4j.model.gbp.builder.NatPoolBuilder;
+import org.openstack4j.model.gbp.builder.PolicyActionCreateBuilder;
+import org.openstack4j.model.gbp.builder.PolicyActionUpdateBuilder;
+import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
+import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
+import org.openstack4j.model.gbp.builder.PolicyRuleBuilder;
+import org.openstack4j.model.gbp.builder.PolicyRuleSetBuilder;
+import org.openstack4j.model.gbp.builder.PolicyTargetBuilder;
+import org.openstack4j.model.gbp.builder.PolicyTargetGroupBuilder;
 import org.openstack4j.model.heat.SoftwareConfig;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
@@ -80,6 +94,20 @@ import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
+import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
+import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
+import org.openstack4j.openstack.gbp.domain.GbpL2Policy;
+import org.openstack4j.openstack.gbp.domain.GbpL3Policy;
+import org.openstack4j.openstack.gbp.domain.GbpNatPool;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyAction;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyActionUpdate;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifier;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifierUpdate;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyRule;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyRuleSet;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyTarget;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyTargetGroupCreate;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatStackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStackUpdate;
@@ -769,7 +797,7 @@ public class Builders {
     public static ExternalPolicyBuilder externalPolicy() {
         return GbpExternalPolicyCreate.builder();
     }
-    /**
+    /** 
      * The builder which creates external segment for gbp
      *
      * @return the external segment builder
