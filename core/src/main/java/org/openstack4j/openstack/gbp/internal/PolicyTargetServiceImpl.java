@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.gbp.PolicyTargetService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.gbp.PolicyTarget;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyTarget;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyTarget.PolicyTargets;

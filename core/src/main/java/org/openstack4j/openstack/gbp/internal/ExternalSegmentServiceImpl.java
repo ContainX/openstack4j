@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.gbp.ExternalSegmentService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.gbp.ExternalSegment;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment.ExternalSegments;

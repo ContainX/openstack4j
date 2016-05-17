@@ -68,13 +68,5 @@ public interface PolicyAction extends Buildable<PolicyActionCreateBuilder>, Reso
      */
     String getDescription();
 
-    String getActionValue();
-
-    String getActionType();
-
-    boolean isShared();
-
-    String getDescription();
-
 }
   
