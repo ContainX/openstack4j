@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
+import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
@@ -227,7 +228,7 @@ public interface OSClient< T extends OSClient<T>> {
          * @return the authentication token
          */
         Token getToken();
-        
+         
         /**
          * Returns the Identity Service API V3
          *
@@ -236,5 +237,12 @@ public interface OSClient< T extends OSClient<T>> {
         org.openstack4j.api.identity.v3.IdentityService identity();
         
     }
-
+ 
+	/**
+     * Returns the Gbp Service API
+     * 
+     * @return the Gbp service
+     */
+	GbpService gbp();
+	
 }
