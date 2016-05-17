@@ -306,7 +306,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(GbpService.class,GbpServiceImpl.class);
 		bind(ExternalPolicyService.class,ExternalPolicyServiceImpl.class);
 		bind(ExternalSegmentService.class,ExternalSegmentServiceImpl.class);
-		bind(GroupService.class,GroupServiceImpl.class);
+		bind(org.openstack4j.api.gbp.GroupService.class,org.openstack4j.openstack.gbp.internal.GroupServiceImpl.class);
 		bind(L2policyService.class,L2policyServiceImpl.class);
 		bind(L3policyService.class,L3policyServiceImpl.class); 
 		bind(NatPoolService.class,NatPoolServiceImpl.class);
