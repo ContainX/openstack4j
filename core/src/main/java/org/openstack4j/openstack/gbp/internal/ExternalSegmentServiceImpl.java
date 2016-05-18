@@ -11,15 +11,25 @@ import org.openstack4j.model.gbp.ExternalSegment;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment.ExternalSegments;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
-
+/**
+ * External Segment API Implementation
+ * 
+ * @author vinod borole
+ */
 public class ExternalSegmentServiceImpl extends BaseNetworkingServices implements ExternalSegmentService {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override 
     public List<? extends ExternalSegment> list() {
         return get(ExternalSegments.class, uri("/grouppolicy/external_segments")).execute().getList();
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
+   @Override
     public List<? extends ExternalSegment> list(Map<String, String> filteringParams) {
         Invocation<ExternalSegments> externalSegmentInvocation = buildInvocation(filteringParams);
         return externalSegmentInvocation.execute().getList();
@@ -36,24 +46,36 @@ public class ExternalSegmentServiceImpl extends BaseNetworkingServices implement
         }
         return externalSegmentInvocation;
     }
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ExternalSegment get(String id) {
         checkNotNull(id);
         return get(GbpExternalSegment.class, uri("/grouppolicy/external_segments/%s", id)).execute();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ActionResponse delete(String id) {
         checkNotNull(id);
         return deleteWithResponse(uri("/grouppolicy/external_segments/%s", id)).execute();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ExternalSegment create(ExternalSegment externalSegment) {
         return post(GbpExternalSegment.class, uri("/grouppolicy/external_segments")).entity(externalSegment).execute();
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
+   @Override
     public ExternalSegment update(String externalSegmentId, ExternalSegment externalSegment) {
         checkNotNull(externalSegmentId);
         checkNotNull(externalSegment);

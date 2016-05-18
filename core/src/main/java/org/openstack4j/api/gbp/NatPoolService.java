@@ -19,9 +19,39 @@ public interface NatPoolService {
      * @return List of nat pool
      */
     List<? extends NatPool> list();
+    /**
+     * Returns list of nat pool filtered by parameters.
+     * 
+     * @param filteringParams map (name, value) of filtering parameters
+     * @return 
+     */
     List<? extends NatPool> list(Map<String, String> filteringParams);
+    /**
+     * Get the specified nat pool by ID
+     *
+     * @param id the nat pool id
+     * @return nat pool or null if not found
+     */
     NatPool get(String id);
+    /**
+     * Delete of the nat pool
+     * @param id the nat pool id
+     * @return the action response
+     */
     ActionResponse delete(String id);
+    /**
+     * Create a new nat pool
+     *
+     * @param nat pool
+     * @return the newly created nat pool
+     */
     NatPool create(NatPool natpool);
-    NatPool update(String natpoolId,NatPool natpool);
+    /**
+     * Updates an existing nat pool
+     * 
+     * @param nat pool identifier
+     * @param nat pool that is be used to updated
+     * @return the updated nat pool
+     */
+   NatPool update(String natpoolId,NatPool natpool);
 }

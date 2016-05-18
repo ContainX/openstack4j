@@ -25,10 +25,10 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     private String tenantId;
     private String id;
     private String description;
-    private Direction direction;
+    private String direction;
     @JsonProperty("port_range")
     private String portRange;
-    private Protocol protocol;
+    private String protocol;
     private Boolean shared;
     
 
@@ -74,7 +74,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
     @Override
     public Direction getDirection() {
-        return direction;
+        return Direction.forValue(direction);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
     @Override
     public Protocol getProtocol() {
-        return protocol;
+        return Protocol.forValue(protocol);
     }
 
     @Override
@@ -168,13 +168,13 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
         @Override
         public PolicyClassifierBuilder direction(Direction direction) {
-            this.policyClassfier.direction=direction;
+            this.policyClassfier.direction=direction.value();
             return this;
         }
 
         @Override
         public PolicyClassifierBuilder protocol(Protocol protocol) {
-            this.policyClassfier.protocol=protocol;
+            this.policyClassfier.protocol=protocol.value();
             return this;
         }
 

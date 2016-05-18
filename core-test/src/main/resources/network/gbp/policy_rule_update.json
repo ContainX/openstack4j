@@ -1,0 +1,14 @@
+{
+   "policy_rule":{
+      "description":"icmp-rule-desc-update",
+      "policy_actions":[
+         "b25bbad7-224b-4810-ae1c-7d10fb4468b5"
+      ],
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "policy_classifier_id":"36e41adb-0b9b-4a11-abd5-66e5386139d4",
+      "enabled":true,
+      "shared":false,
+      "id":"059909d1-7f20-40cf-a78a-27c340a5aaac",
+      "name":"icmp-rule-update"
+   }
+}

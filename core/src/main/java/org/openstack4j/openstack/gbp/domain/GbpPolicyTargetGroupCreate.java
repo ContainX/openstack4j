@@ -13,7 +13,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 
 /**
- * Model implementation for Policy target group
+ * Model implementation for Policy target group create
  * 
  * @author vinod borole
  */

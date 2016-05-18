@@ -1,0 +1,52 @@
+{
+   "l3_policies":[
+      {
+         "description":"Implicitly created L3 policy",
+         "routers":[
+
+         ],
+         "subnet_prefix_length":24,
+         "l2_policies":[
+            "65fc10d2-f173-48db-ad50-72f29790c4d1"
+         ],
+         "id":"8a45f76f-888b-4f3b-ad00-88c3b0ba9e6d",
+         "ip_pool":"192.168.0.0/16",
+         "name":"default",
+         "tenant_id":"abc0b828ace347049b0835f4a4d10040",
+         "ip_version":4,
+         "shared":false,
+         "external_segments":{
+
+         }
+      },
+      {
+         "description":"Implicitly created L3 policy",
+         "routers":[
+            "d0b07840-a86c-4848-b61c-a8febc196feb"
+         ],
+         "subnet_prefix_length":24,
+         "l2_policies":[
+            "08c1c093-6337-4383-938e-2d9c6cac531a",
+            "138305c9-2749-4291-b9ff-adb901a660f1",
+            "36af9906-300e-465a-85fc-716694de38c7",
+            "7dc44fbd-bc2b-4aa3-808c-0498183f5e21",
+            "7eea106a-714d-41aa-ac69-de4c3f2e4b44",
+            "9fe34254-28fd-4db2-bba6-f8c35c51617e",
+            "a8aea144-92d8-4830-ae9f-41af291adb42",
+            "c1cc9bd8-49a5-4699-aa26-b276ced4cc67",
+            "d02b17ad-ef26-4a04-9071-82a5cfa100a6"
+         ],
+         "id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "ip_pool":"192.168.0.0/16",
+         "name":"default",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "ip_version":4,
+         "shared":false,
+         "external_segments":{
+            "fff89eb8-8f9d-49a2-b66c-ad75d9a95287":[
+               "169.254.0.2"
+            ]
+         }
+      }
+   ]
+}

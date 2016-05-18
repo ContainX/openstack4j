@@ -2,7 +2,11 @@ package org.openstack4j.model.gbp;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-
+/**
+ * IP Version enum
+ * 
+ * @author vinod borole
+ */
 public enum IPVersionType {
     V4(4),
     V6(6)

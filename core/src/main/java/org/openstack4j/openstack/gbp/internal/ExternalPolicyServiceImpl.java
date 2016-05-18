@@ -12,14 +12,24 @@ import org.openstack4j.model.gbp.ExternalPolicyCreate;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicy;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicy.ExternalPolicies;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
-
+/**
+ * External Policy API Implementation
+ * 
+ * @author vinod borole
+ */
 public class ExternalPolicyServiceImpl extends BaseNetworkingServices implements ExternalPolicyService {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override 
     public List<? extends ExternalPolicy> list() {
         return get(ExternalPolicies.class, uri("/grouppolicy/external_policies")).execute().getList();
     }
    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<? extends ExternalPolicy> list(Map<String, String> filteringParams) {
         Invocation<ExternalPolicies> externalPolicyInvocation = buildInvocation(filteringParams);
@@ -39,23 +49,35 @@ public class ExternalPolicyServiceImpl extends BaseNetworkingServices implements
         return externalPolicyInvocation;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ExternalPolicy get(String id) {
         checkNotNull(id);
         return get(GbpExternalPolicy.class, uri("/grouppolicy/external_policies/%s", id)).execute();
     }
 
-    @Override
+    /**
+     * {@inheritDoc}
+     */
+   @Override
     public ActionResponse delete(String id) {
         checkNotNull(id);
         return deleteWithResponse(uri("/grouppolicy/external_policies/%s", id)).execute();
     }
 
-    @Override
+   /**
+    * {@inheritDoc}
+    */
+   @Override
     public ExternalPolicy create(ExternalPolicyCreate externalPolicy) {
          return post(GbpExternalPolicy.class, uri("/grouppolicy/external_policies")).entity(externalPolicy).execute();
     }
 
+   /**
+    * {@inheritDoc}
+    */
     @Override
     public ExternalPolicy update(String externalPolicyId, ExternalPolicyCreate externalPolicy) {
         checkNotNull(externalPolicyId);

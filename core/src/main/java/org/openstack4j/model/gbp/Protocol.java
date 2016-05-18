@@ -2,17 +2,21 @@ package org.openstack4j.model.gbp;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-
+/**
+ * Protocol enum
+ * 
+ * @author vinod borole
+ */
 public enum Protocol {
-    tcp,
-    udp,
-    icmp,
-    http,
-    https,
-    smpt,
-    dns,
-    ftp,
-    None,  
+    TCP,
+    UDP,
+    ICMP,
+    HTTP,
+    HTTPS,
+    SMTP,
+    DNS,
+    FTP,
+    NONE,  
     UNRECOGNIZED;
     
     @JsonCreator

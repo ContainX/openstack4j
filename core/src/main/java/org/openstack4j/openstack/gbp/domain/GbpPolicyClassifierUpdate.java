@@ -7,7 +7,11 @@ import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
+/**
+ * Model implementation for Policy Classifier Update
+ * 
+ * @author vinod borole
+ */
 @JsonRootName("policy_classifier")
 public class GbpPolicyClassifierUpdate implements PolicyClassifierUpdate {
 

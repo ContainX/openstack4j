@@ -3,7 +3,11 @@ package org.openstack4j.model.gbp;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
-
+/**
+ * Policy Classifier Update Model Entity
+ * 
+ * @author vinod borole
+ */
 public interface PolicyClassifierUpdate extends ModelEntity, Buildable<PolicyClassifierUpdateBuilder>{
 
     /**

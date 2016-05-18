@@ -1,0 +1,38 @@
+{
+   "policy_target_group":{
+      "subnets":[
+         "a9eb39d9-9dd4-4ad5-be9d-b96456d64078"
+      ],
+      "description":"test-policy-target-group-desc-update",
+      "network_service_policy_id":null,
+      "provided_policy_rule_sets":[
+         "1bbc10a8-aeb2-4e53-ab31-a1fed18763f4",
+         "ec0b5a7d-f963-45de-b4e4-864d59dc8c0b",
+         "c3207474-19ee-4241-81e5-9e20995f2065",
+         "f19a90af-0103-429d-8118-3920bf2f27db",
+         "590f005f-de21-4466-905f-457487cc9a60",
+         "b8a116d4-d674-438c-9fc6-973f2d6f5019",
+         "408a5153-efc5-4bea-a3ef-2c838e330254",
+         "de829eb3-4867-442f-bac7-c59906c610b0"
+      ],
+      "l2_policy_id":"a8aea144-92d8-4830-ae9f-41af291adb42",
+      "id":"61073812-3994-40c2-96f0-6bff03804e47",
+      "consumed_policy_rule_sets":[
+         "1bbc10a8-aeb2-4e53-ab31-a1fed18763f4",
+         "ec0b5a7d-f963-45de-b4e4-864d59dc8c0b",
+         "c3207474-19ee-4241-81e5-9e20995f2065",
+         "f19a90af-0103-429d-8118-3920bf2f27db",
+         "590f005f-de21-4466-905f-457487cc9a60",
+         "b8a116d4-d674-438c-9fc6-973f2d6f5019",
+         "408a5153-efc5-4bea-a3ef-2c838e330254",
+         "de829eb3-4867-442f-bac7-c59906c610b0"
+      ],
+      "name":"test-policy-target-group-update",
+      "service_management":false,
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "policy_targets":[
+
+      ],
+      "shared":false
+   }
+}

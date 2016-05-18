@@ -11,14 +11,24 @@ import org.openstack4j.model.gbp.L3Policy;
 import org.openstack4j.openstack.gbp.domain.GbpL3Policy;
 import org.openstack4j.openstack.gbp.domain.GbpL3Policy.L3Policies;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
-
+/**
+ * L3 Policy API Implementation
+ * 
+ * @author vinod borole
+ */
 public class L3policyServiceImpl extends BaseNetworkingServices implements L3policyService {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override 
     public List<? extends L3Policy> list() {
         return get(L3Policies.class, uri("/grouppolicy/l3_policies")).execute().getList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<? extends L3Policy> list(Map<String, String> filteringParams) {
         Invocation<L3Policies> l3PoliciesInvocation = buildInvocation(filteringParams);
@@ -37,23 +47,35 @@ public class L3policyServiceImpl extends BaseNetworkingServices implements L3pol
         return l3PoliciesInvocation;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public L3Policy get(String id) {
         checkNotNull(id);
         return get(GbpL3Policy.class, uri("/grouppolicy/l3_policies/%s", id)).execute();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ActionResponse delete(String id) {
         checkNotNull(id);
         return deleteWithResponse(uri("/grouppolicy/l3_policies/%s", id)).execute();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public L3Policy create(L3Policy l3Policy) {
         return post(GbpL3Policy.class, uri("/grouppolicy/l3_policies")).entity(l3Policy).execute();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public L3Policy update(String l3PolicyId, L3Policy l3Policy) {
         checkNotNull(l3PolicyId);

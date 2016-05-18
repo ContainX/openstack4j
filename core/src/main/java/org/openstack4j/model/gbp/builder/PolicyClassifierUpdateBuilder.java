@@ -4,7 +4,11 @@ import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.gbp.Direction;
 import org.openstack4j.model.gbp.PolicyClassifierUpdate;
 import org.openstack4j.model.gbp.Protocol;
-
+/**
+ * A builder which produces a Policy Classifier Update object
+ * 
+ * @author vinod borole
+ */
 public interface PolicyClassifierUpdateBuilder extends Builder<PolicyClassifierUpdateBuilder, PolicyClassifierUpdate> {
     PolicyClassifierUpdateBuilder name(String name);
     PolicyClassifierUpdateBuilder description(String description);
