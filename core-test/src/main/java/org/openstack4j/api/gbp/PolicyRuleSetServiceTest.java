@@ -34,7 +34,7 @@ public class PolicyRuleSetServiceTest extends AbstractTest {
     @Test
     public void testListPolicyRuleSet() throws Exception{
         respondWith(POLICY_RULE_SETS);
-        List<? extends PolicyRuleSet> policyRuleSetList = osv2.gbp().policyRuleSet().list();
+        List<? extends PolicyRuleSet> policyRuleSetList = osv2().gbp().policyRuleSet().list();
         assertEquals(10, policyRuleSetList.size()); 
         Preconditions.checkNotNull(policyRuleSetList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy Rule Set from List : "+policyRuleSetList.get(0));
@@ -44,7 +44,7 @@ public class PolicyRuleSetServiceTest extends AbstractTest {
     public void testGetPolicyRuleSet() throws Exception{
         respondWith(POLICY_RULE_SET);
         String id = "1bbc10a8-aeb2-4e53-ab31-a1fed18763f4";
-        PolicyRuleSet policyruleSet = osv2.gbp().policyRuleSet().get(id);
+        PolicyRuleSet policyruleSet = osv2().gbp().policyRuleSet().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy Rule Set by ID : "+policyruleSet);
         assertNotNull(policyruleSet);
         assertEquals(id, policyruleSet.getId());
@@ -53,7 +53,7 @@ public class PolicyRuleSetServiceTest extends AbstractTest {
     public void testCreatePolicyRuleSet() throws Exception{
         respondWith(POLICY_RULE_SET);
         PolicyRuleSet policyRuleSetCreate= Builders.policyRuleSet().name("test-rule-set").description("test-rule-set-desc").build();
-        PolicyRuleSet policyRuleSet = osv2.gbp().policyRuleSet().create(policyRuleSetCreate);
+        PolicyRuleSet policyRuleSet = osv2().gbp().policyRuleSet().create(policyRuleSetCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Create Policy Rule Set : "+policyRuleSet);
         assertEquals(5, policyRuleSet.getChildPolicyRuleSets().size());
         assertEquals("test-rule-set", policyRuleSet.getName());
@@ -63,7 +63,7 @@ public class PolicyRuleSetServiceTest extends AbstractTest {
         respondWith(POLICY_RULE_SET_UPDATE);
         String id = "1bbc10a8-aeb2-4e53-ab31-a1fed18763f4";
         PolicyRuleSet policyRuleSetUpdate= Builders.policyRuleSet().name("test-rule-set-update").description("test-rule-set-desc-update").build();
-        PolicyRuleSet policyRuleSet =osv2.gbp().policyRuleSet().update(id, policyRuleSetUpdate);
+        PolicyRuleSet policyRuleSet =osv2().gbp().policyRuleSet().update(id, policyRuleSetUpdate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Upate Policy Rule Set : "+policyRuleSet);
         assertEquals("test-rule-set-desc-update", policyRuleSet.getDescription());
 
@@ -72,7 +72,7 @@ public class PolicyRuleSetServiceTest extends AbstractTest {
     public void testDeletePolicyRuleSet() {
         respondWith(200);
         String id = "1bbc10a8-aeb2-4e53-ab31-a1fed18763f4";
-        ActionResponse result = osv2.gbp().policyRuleSet().delete(id);
+        ActionResponse result = osv2().gbp().policyRuleSet().delete(id);
         assertTrue(result.isSuccess());
     }
 

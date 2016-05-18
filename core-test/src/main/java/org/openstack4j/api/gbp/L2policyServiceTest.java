@@ -33,7 +33,7 @@ public class L2policyServiceTest extends AbstractTest {
     @Test
     public void testListl2Policy() throws Exception{
         respondWith(L2_POLICIES);
-        List<? extends L2Policy> l2policyList = osv2.gbp().l2Policy().list();
+        List<? extends L2Policy> l2policyList = osv2().gbp().l2Policy().list();
         assertEquals(9, l2policyList.size()); 
         Preconditions.checkNotNull(l2policyList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : L2 Policy from List : "+l2policyList.get(0));
@@ -43,7 +43,7 @@ public class L2policyServiceTest extends AbstractTest {
     public void testGetl2Policy() throws Exception{
         respondWith(L2_POLICY);
         String id = "08c1c093-6337-4383-938e-2d9c6cac531a";
-        L2Policy l2policy = osv2.gbp().l2Policy().get(id);
+        L2Policy l2policy = osv2().gbp().l2Policy().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : L2 Policy by ID : "+l2policy);
         assertNotNull(l2policy);
         assertEquals(id, l2policy.getId());
@@ -52,7 +52,7 @@ public class L2policyServiceTest extends AbstractTest {
     public void testCreatel2Policy() throws Exception{
         respondWith(L2_POLICY);
         L2Policy l2PolicyCreate= Builders.l2Policy().name("test-policy-target-group").description("Implicitly created L2 policy").build();
-        L2Policy l2Policy = osv2.gbp().l2Policy().create(l2PolicyCreate);
+        L2Policy l2Policy = osv2().gbp().l2Policy().create(l2PolicyCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created L2 Policy : "+l2Policy);
         assertEquals("test-policy-target-group", l2Policy.getName());
         assertEquals("f9c1f545-6ea6-4b05-99d5-50f02ed3c640", l2Policy.getNetworkId());
@@ -62,7 +62,7 @@ public class L2policyServiceTest extends AbstractTest {
         respondWith(L2_POLICY_UPDATE);
         String id = "08c1c093-6337-4383-938e-2d9c6cac531a";
         L2Policy l2PolicyUpdate= Builders.l2Policy().name("test-policy-target-group-update").description("Implicitly created L2 policy-update").build();
-        L2Policy l2Policy =osv2.gbp().l2Policy().update(id, l2PolicyUpdate);
+        L2Policy l2Policy =osv2().gbp().l2Policy().update(id, l2PolicyUpdate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated L2 Policy : "+l2Policy);
         assertEquals("Implicitly created L2 policy-update", l2Policy.getDescription());
 
@@ -71,7 +71,7 @@ public class L2policyServiceTest extends AbstractTest {
     public void testDeletel2Policy() {
         respondWith(200);
         String id = "08c1c093-6337-4383-938e-2d9c6cac531a";
-        ActionResponse result = osv2.gbp().l2Policy().delete(id);
+        ActionResponse result = osv2().gbp().l2Policy().delete(id);
         assertTrue(result.isSuccess());
     }
 

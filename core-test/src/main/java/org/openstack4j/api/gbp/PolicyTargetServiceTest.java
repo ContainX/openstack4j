@@ -34,7 +34,7 @@ public class PolicyTargetServiceTest extends AbstractTest {
     @Test
     public void testListPolicyTarget() throws Exception{
         respondWith(POLICY_TARGETS);
-        List<? extends PolicyTarget> policytargetList = osv2.gbp().policyTarget().list();
+        List<? extends PolicyTarget> policytargetList = osv2().gbp().policyTarget().list();
         assertEquals(10, policytargetList.size());
         Preconditions.checkNotNull(policytargetList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy target from List : "+policytargetList.get(0));
@@ -44,7 +44,7 @@ public class PolicyTargetServiceTest extends AbstractTest {
     public void testGetPolicyTarget() throws Exception{
         respondWith(POLICY_TARGET);
         String id = "0d65eebe-4efe-456e-aec3-7856e4e839b4";
-        PolicyTarget policyTarget = osv2.gbp().policyTarget().get(id);
+        PolicyTarget policyTarget = osv2().gbp().policyTarget().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy target by ID : "+policyTarget);
         assertNotNull(policyTarget);
         assertEquals(id, policyTarget.getId());
@@ -53,7 +53,7 @@ public class PolicyTargetServiceTest extends AbstractTest {
     public void testCreatePolicyTarget() throws Exception{
         respondWith(POLICY_TARGET);
         PolicyTarget policyTargetCreate= Builders.policyTarget().name("test-policytarget").description("test-policytarget-desc").build();
-        PolicyTarget policyTarget = osv2.gbp().policyTarget().create(policyTargetCreate);
+        PolicyTarget policyTarget = osv2().gbp().policyTarget().create(policyTargetCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created Policy Target : "+policyTarget);
         assertEquals("test-policytarget", policyTarget.getName());
         assertEquals("36af8850-3514-4343-8293-9f9faae980d6", policyTarget.getPortId());
@@ -64,7 +64,7 @@ public class PolicyTargetServiceTest extends AbstractTest {
         respondWith(POLICY_TARGET_UPDATE);
         String id = "0d65eebe-4efe-456e-aec3-7856e4e839b4";
         PolicyTarget policyTargetCreate= Builders.policyTarget().name("test-policytarget-update").description("test-policytarget-desc-update").build();
-        PolicyTarget policyTarget =osv2.gbp().policyTarget().update(id, policyTargetCreate);
+        PolicyTarget policyTarget =osv2().gbp().policyTarget().update(id, policyTargetCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated Policy Target : "+policyTarget);
         assertEquals("test-policytarget-desc-update", policyTarget.getDescription());
 
@@ -73,7 +73,7 @@ public class PolicyTargetServiceTest extends AbstractTest {
     public void testDeletePolicyTarget() {
         respondWith(200);
         String id = "0d65eebe-4efe-456e-aec3-7856e4e839b4";
-        ActionResponse result = osv2.gbp().policyTarget().delete(id);
+        ActionResponse result = osv2().gbp().policyTarget().delete(id);
         assertTrue(result.isSuccess());
     }
 

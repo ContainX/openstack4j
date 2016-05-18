@@ -34,7 +34,7 @@ public class GroupServiceTest extends AbstractTest {
     @Test
     public void testListPolicyTargetGroup() throws Exception{
         respondWith(POLICY_TARGET_GROUPS);
-        List<? extends PolicyTargetGroup> policytargetGroupList = osv2.gbp().group().list();
+        List<? extends PolicyTargetGroup> policytargetGroupList = osv2().gbp().group().list();
         assertEquals(2, policytargetGroupList.size());
         Preconditions.checkNotNull(policytargetGroupList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy target group from List : "+policytargetGroupList.get(0));
@@ -44,7 +44,7 @@ public class GroupServiceTest extends AbstractTest {
     public void testGetPolicyTargetGroup() throws Exception{
         respondWith(POLICY_TARGET_GROUP);
         String id = "61073812-3994-40c2-96f0-6bff03804e47";
-        PolicyTargetGroup policyTargetGroup = osv2.gbp().group().get(id);
+        PolicyTargetGroup policyTargetGroup = osv2().gbp().group().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy target Group by ID : "+policyTargetGroup);
         assertNotNull(policyTargetGroup);
         assertEquals(id, policyTargetGroup.getId());
@@ -53,7 +53,7 @@ public class GroupServiceTest extends AbstractTest {
     public void testCreatePolicyTargetGroup() throws Exception{
         respondWith(POLICY_TARGET_GROUP);
         PolicyTargetGroupCreate policyTargetGroupCreate= Builders.policyTargetGroup().name("test-policy-target-group").description("test-policy-target-group-desc").build();
-        PolicyTargetGroup policyTargetGroup = osv2.gbp().group().create(policyTargetGroupCreate);
+        PolicyTargetGroup policyTargetGroup = osv2().gbp().group().create(policyTargetGroupCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created Policy Target group : "+policyTargetGroup);
         assertEquals("test-policy-target-group", policyTargetGroup.getName());
         assertEquals(8, policyTargetGroup.getConsumedPolicyRuleSets().size());
@@ -64,7 +64,7 @@ public class GroupServiceTest extends AbstractTest {
         respondWith(POLICY_TARGET_GROUP_UPDATE);
         String id = "61073812-3994-40c2-96f0-6bff03804e47";
         PolicyTargetGroupCreate policyTargetGroupCreate= Builders.policyTargetGroup().name("test-policy-target-group-update").description("test-policy-target-group-desc-update").build();
-        PolicyTargetGroup policyTargetGroup =osv2.gbp().group().update(id, policyTargetGroupCreate);
+        PolicyTargetGroup policyTargetGroup =osv2().gbp().group().update(id, policyTargetGroupCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated Policy Target group : "+policyTargetGroup);
         assertEquals("test-policy-target-group-desc-update", policyTargetGroup.getDescription());
 
@@ -73,7 +73,7 @@ public class GroupServiceTest extends AbstractTest {
     public void testDeletePolicyTargetGroup() {
         respondWith(200);
         String id = "61073812-3994-40c2-96f0-6bff03804e47";
-        ActionResponse result = osv2.gbp().group().delete(id);
+        ActionResponse result = osv2().gbp().group().delete(id);
         assertTrue(result.isSuccess());
     }
 

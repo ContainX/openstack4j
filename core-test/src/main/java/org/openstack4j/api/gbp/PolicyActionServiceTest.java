@@ -35,7 +35,7 @@ public class PolicyActionServiceTest extends AbstractTest {
     @Test
     public void testListPolicyAction() throws Exception{
         respondWith(POLICY_ACTIONS);
-        List<? extends PolicyAction> policyActionList = osv2.gbp().policyAction().list();
+        List<? extends PolicyAction> policyActionList = osv2().gbp().policyAction().list();
         assertEquals(2, policyActionList.size()); 
         Preconditions.checkNotNull(policyActionList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy Action from List : "+policyActionList.get(0));
@@ -45,7 +45,7 @@ public class PolicyActionServiceTest extends AbstractTest {
     public void testGetPolicyAction() throws Exception{
         respondWith(POLICY_ACTION);
         String id = "b25bbad7-224b-4810-ae1c-7d10fb4468b5";
-        PolicyAction policyAction = osv2.gbp().policyAction().get(id);
+        PolicyAction policyAction = osv2().gbp().policyAction().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy Action by ID : "+policyAction);
         assertNotNull(policyAction);
         assertEquals(id, policyAction.getId());
@@ -54,7 +54,7 @@ public class PolicyActionServiceTest extends AbstractTest {
     public void testCreatePolicyAction() throws Exception{
         respondWith(POLICY_ACTION);
         PolicyAction policyActionCreate= Builders.policyAction().name("allow").actionType(PolicyActionProtocol.ALLOW).build();
-        PolicyAction policyAction = osv2.gbp().policyAction().create(policyActionCreate);
+        PolicyAction policyAction = osv2().gbp().policyAction().create(policyActionCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Create Policy Action : "+policyAction);
         assertEquals(PolicyActionProtocol.ALLOW.value(), policyAction.getActionType().value());
         assertEquals("allow", policyAction.getName());
@@ -64,7 +64,7 @@ public class PolicyActionServiceTest extends AbstractTest {
         respondWith(POLICY_ACTION_UPDATE);
         String id = "b25bbad7-224b-4810-ae1c-7d10fb4468b5";
         PolicyActionUpdate policyActionUpdate= Builders.policyActionUpdate().name("redirect").build();
-        PolicyAction policyAction =osv2.gbp().policyAction().update(id, policyActionUpdate);
+        PolicyAction policyAction =osv2().gbp().policyAction().update(id, policyActionUpdate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Upate Policy Action : "+policyAction);
         assertEquals("redirect", policyAction.getName());
 
@@ -73,7 +73,7 @@ public class PolicyActionServiceTest extends AbstractTest {
     public void testDeletePolicyAction() {
         respondWith(200);
         String id = "b25bbad7-224b-4810-ae1c-7d10fb4468b5";
-        ActionResponse result = osv2.gbp().policyAction().delete(id);
+        ActionResponse result = osv2().gbp().policyAction().delete(id);
         assertTrue(result.isSuccess());
     }
 

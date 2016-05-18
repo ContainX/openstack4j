@@ -33,7 +33,7 @@ public class L3policyServiceTest extends AbstractTest {
     @Test
     public void testListl3Policy() throws Exception{
         respondWith(L3_POLICIES);
-        List<? extends L3Policy> l3policyList = osv2.gbp().l3Policy().list();
+        List<? extends L3Policy> l3policyList = osv2().gbp().l3Policy().list();
         assertEquals(9, l3policyList.size()); 
         Preconditions.checkNotNull(l3policyList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : L3 Policy from List : "+l3policyList.get(0));
@@ -43,7 +43,7 @@ public class L3policyServiceTest extends AbstractTest {
     public void testGetl3Policy() throws Exception{
         respondWith(L3_POLICY);
         String id = "8a45f76f-888b-4f3b-ad00-88c3b0ba9e6d";
-        L3Policy l3policy = osv2.gbp().l3Policy().get(id);
+        L3Policy l3policy = osv2().gbp().l3Policy().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : L3 Policy by ID : "+l3policy);
         assertNotNull(l3policy);
         assertEquals(id, l3policy.getId());
@@ -52,7 +52,7 @@ public class L3policyServiceTest extends AbstractTest {
     public void testCreatel3Policy() throws Exception{
         respondWith(L3_POLICY);
         L3Policy l3PolicyCreate= Builders.l3Policy().name("default").description("Implicitly created L3 policy").build();
-        L3Policy l3Policy = osv2.gbp().l3Policy().create(l3PolicyCreate);
+        L3Policy l3Policy = osv2().gbp().l3Policy().create(l3PolicyCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created L3 Policy : "+l3Policy);
         assertEquals("default", l3Policy.getName());
         assertEquals("24", l3Policy.getSubnetPrefixLength());
@@ -62,7 +62,7 @@ public class L3policyServiceTest extends AbstractTest {
         respondWith(L3_POLICY_UPDATE);
         String id = "8a45f76f-888b-4f3b-ad00-88c3b0ba9e6d";
         L3Policy l3PolicyUpdate= Builders.l3Policy().name("default-update").description("Implicitly created L3 policy-update").build();
-        L3Policy l3Policy =osv2.gbp().l3Policy().update(id, l3PolicyUpdate);
+        L3Policy l3Policy =osv2().gbp().l3Policy().update(id, l3PolicyUpdate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated L3 Policy : "+l3Policy);
         assertEquals("Implicitly created L3 policy-update", l3Policy.getDescription());
 
@@ -71,7 +71,7 @@ public class L3policyServiceTest extends AbstractTest {
     public void testDeletel3Policy() {
         respondWith(200);
         String id = "8a45f76f-888b-4f3b-ad00-88c3b0ba9e6d";
-        ActionResponse result = osv2.gbp().l3Policy().delete(id);
+        ActionResponse result = osv2().gbp().l3Policy().delete(id);
         assertTrue(result.isSuccess());
     }
 

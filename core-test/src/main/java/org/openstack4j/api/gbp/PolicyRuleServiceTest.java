@@ -34,7 +34,7 @@ public class PolicyRuleServiceTest extends AbstractTest {
     @Test
     public void testListPolicyRule() throws Exception{
         respondWith(POLICY_RULES);
-        List<? extends PolicyRule> policyRuleList = osv2.gbp().policyRule().list();
+        List<? extends PolicyRule> policyRuleList = osv2().gbp().policyRule().list();
         assertEquals(10, policyRuleList.size()); 
         Preconditions.checkNotNull(policyRuleList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy Rule from List : "+policyRuleList.get(0));
@@ -44,7 +44,7 @@ public class PolicyRuleServiceTest extends AbstractTest {
     public void testGetPolicyRule() throws Exception{
         respondWith(POLICY_RULE);
         String id = "059909d1-7f20-40cf-a78a-27c340a5aaac";
-        PolicyRule policyrule = osv2.gbp().policyRule().get(id);
+        PolicyRule policyrule = osv2().gbp().policyRule().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy Rule by ID : "+policyrule);
         assertNotNull(policyrule);
         assertEquals(id, policyrule.getId());
@@ -53,7 +53,7 @@ public class PolicyRuleServiceTest extends AbstractTest {
     public void testCreatePolicyRule() throws Exception{
         respondWith(POLICY_RULE);
         PolicyRule policyRuleCreate= Builders.policyRule().name("icmp-rule").build();
-        PolicyRule policyRule = osv2.gbp().policyRule().create(policyRuleCreate);
+        PolicyRule policyRule = osv2().gbp().policyRule().create(policyRuleCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Create Policy Rule : "+policyRule);
         assertEquals("36e41adb-0b9b-4a11-abd5-66e5386139d4", policyRule.getPolicyClassifierId());
         assertEquals("icmp-rule", policyRule.getName());
@@ -63,7 +63,7 @@ public class PolicyRuleServiceTest extends AbstractTest {
         respondWith(POLICY_RULE_UPDATE);
         String id = "059909d1-7f20-40cf-a78a-27c340a5aaac";
         PolicyRule policyRuleUpdate= Builders.policyRule().name("icmp-rule-update").description("icmp-rule-desc-update").build();
-        PolicyRule policyRule =osv2.gbp().policyRule().update(id, policyRuleUpdate);
+        PolicyRule policyRule =osv2().gbp().policyRule().update(id, policyRuleUpdate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Upate Policy Rule : "+policyRule);
         assertEquals("icmp-rule-update", policyRule.getDescription());
 
@@ -72,7 +72,7 @@ public class PolicyRuleServiceTest extends AbstractTest {
     public void testDeletePolicyRule() {
         respondWith(200);
         String id = "059909d1-7f20-40cf-a78a-27c340a5aaac";
-        ActionResponse result = osv2.gbp().policyRule().delete(id);
+        ActionResponse result = osv2().gbp().policyRule().delete(id);
         assertTrue(result.isSuccess());
     }
 

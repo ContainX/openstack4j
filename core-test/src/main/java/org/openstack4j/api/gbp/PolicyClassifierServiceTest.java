@@ -37,7 +37,7 @@ public class PolicyClassifierServiceTest extends AbstractTest {
     @Test
     public void testListPolicyClassifier() throws Exception{
         respondWith(POLICY_CLASSIFIERS);
-        List<? extends PolicyClassifier> policyClasifierList = osv2.gbp().policyClassifier().list();
+        List<? extends PolicyClassifier> policyClasifierList = osv2().gbp().policyClassifier().list();
         assertEquals(2, policyClasifierList.size()); 
         Preconditions.checkNotNull(policyClasifierList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy Classifier from List : "+policyClasifierList.get(0));
@@ -47,7 +47,7 @@ public class PolicyClassifierServiceTest extends AbstractTest {
     public void testGetPolicyClassifier() throws Exception{
         respondWith(POLICY_CLASSIFIER);
         String id = "36e41adb-0b9b-4a11-abd5-66e5386139d4";
-        PolicyClassifier policyclassifier = osv2.gbp().policyClassifier().get(id);
+        PolicyClassifier policyclassifier = osv2().gbp().policyClassifier().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy Classifier by ID : "+policyclassifier);
         assertNotNull(policyclassifier);
         assertEquals(id, policyclassifier.getId());
@@ -56,7 +56,7 @@ public class PolicyClassifierServiceTest extends AbstractTest {
     public void testCreatePolicyClassifier() throws Exception{
         respondWith(POLICY_CLASSIFIER);
         PolicyClassifier policyClassifierCreate= Builders.policyClassifier().name("icmp").direction(Direction.BI).protocol(Protocol.ICMP).build();
-        PolicyClassifier policyClassifier = osv2.gbp().policyClassifier().create(policyClassifierCreate);
+        PolicyClassifier policyClassifier = osv2().gbp().policyClassifier().create(policyClassifierCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Create Policy Classifier : "+policyClassifier);
         assertEquals("ICMP", policyClassifier.getProtocol());
         assertEquals("icmp", policyClassifier.getName());
@@ -66,7 +66,7 @@ public class PolicyClassifierServiceTest extends AbstractTest {
         respondWith(POLICY_CLASSIFIER_UPDATE);
         String id = "36e41adb-0b9b-4a11-abd5-66e5386139d4";
         PolicyClassifierUpdate policyClassifierUpdate= Builders.policyClassifierUpdate().name("icmp").description("icmp-update").build();
-        PolicyClassifier policyClassifier =osv2.gbp().policyClassifier().update(id, policyClassifierUpdate);
+        PolicyClassifier policyClassifier =osv2().gbp().policyClassifier().update(id, policyClassifierUpdate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Upate Policy Action : "+policyClassifier);
         assertEquals("icmp-update", policyClassifier.getDescription());
 
@@ -75,7 +75,7 @@ public class PolicyClassifierServiceTest extends AbstractTest {
     public void testDeletePolicyClassifier() {
         respondWith(200);
         String id = "36e41adb-0b9b-4a11-abd5-66e5386139d4";
-        ActionResponse result = osv2.gbp().policyClassifier().delete(id);
+        ActionResponse result = osv2().gbp().policyClassifier().delete(id);
         assertTrue(result.isSuccess());
     }
 

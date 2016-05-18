@@ -34,7 +34,7 @@ public class ExternalPolicyServiceTest extends AbstractTest {
     @Test
     public void testListExternalPolicy() throws Exception{
         respondWith(EXTERNAL_POLICIES);
-        List<? extends ExternalPolicy> externalPolicyList = osv2.gbp().externalPolicy().list();
+        List<? extends ExternalPolicy> externalPolicyList = osv2().gbp().externalPolicy().list();
         assertEquals(2, externalPolicyList.size());
         Preconditions.checkNotNull(externalPolicyList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : External Policyfrom List : "+externalPolicyList.get(0));
@@ -45,7 +45,7 @@ public class ExternalPolicyServiceTest extends AbstractTest {
     public void testGetExternalPolicy() throws Exception{
         respondWith(EXTERNAL_POLICY);
         String id = "8d14b663-c67d-4fa7-b23f-0732cb9aa292";
-        ExternalPolicy externalPolicy = osv2.gbp().externalPolicy().get(id);
+        ExternalPolicy externalPolicy = osv2().gbp().externalPolicy().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : External Policy by ID : "+externalPolicy);
         assertNotNull(externalPolicy);
         assertEquals(id, externalPolicy.getId());
@@ -76,7 +76,7 @@ public class ExternalPolicyServiceTest extends AbstractTest {
         providedPolicyRuleSet.add("408a5153-efc5-4bea-a3ef-2c838e330254");
         providedPolicyRuleSet.add("de829eb3-4867-442f-bac7-c59906c610b0");
         
-        ExternalPolicy externalPolicy = osv2.gbp().externalPolicy().create(Builders.externalPolicy().consumedPolicyRuleSets(consumedPolicyRuleSet).providedPolicyRuleSets(providedPolicyRuleSet).externalSegments(externalSegmentIds ).name("test-ext-policy").description("test-ext-policy-desc").build());
+        ExternalPolicy externalPolicy = osv2().gbp().externalPolicy().create(Builders.externalPolicy().consumedPolicyRuleSets(consumedPolicyRuleSet).providedPolicyRuleSets(providedPolicyRuleSet).externalSegments(externalSegmentIds ).name("test-ext-policy").description("test-ext-policy-desc").build());
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created External Policy : "+externalPolicy);
         assertEquals("Sample-External Policy", externalPolicy.getName());
         assertEquals(8, externalPolicy.getConsumedPolicyRuleSets().size());
@@ -86,7 +86,7 @@ public class ExternalPolicyServiceTest extends AbstractTest {
     public void testUpdateExternalPolicy() throws Exception{
         respondWith(EXTERNAL_POLICY_UPDATE);
         String id = "8d14b663-c67d-4fa7-b23f-0732cb9aa292";
-        ExternalPolicy externalPolicy =osv2.gbp().externalPolicy().update(id, Builders.externalPolicy().name("test-ext-policy-update").description("test-ext-policy-desc-update").build());
+        ExternalPolicy externalPolicy =osv2().gbp().externalPolicy().update(id, Builders.externalPolicy().name("test-ext-policy-update").description("test-ext-policy-desc-update").build());
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated External Policy : "+externalPolicy);
         assertEquals("test-ext-policy-desc-update", externalPolicy.getDescription());
     }
@@ -94,7 +94,7 @@ public class ExternalPolicyServiceTest extends AbstractTest {
     public void testDeleteExternalPolicy() {
         respondWith(200);
         String id = "8d14b663-c67d-4fa7-b23f-0732cb9aa292";
-        ActionResponse result = osv2.gbp().externalPolicy().delete(id);
+        ActionResponse result = osv2().gbp().externalPolicy().delete(id);
         assertTrue(result.isSuccess());
     }
 

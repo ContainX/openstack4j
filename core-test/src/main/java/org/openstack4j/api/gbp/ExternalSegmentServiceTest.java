@@ -32,7 +32,7 @@ public class ExternalSegmentServiceTest extends AbstractTest {
     @Test
     public void testListExternalSegment() throws Exception{
         respondWith(EXTERNAL_SEGMENTS);
-        List<? extends ExternalSegment> externalSegList = osv2.gbp().externalSegment().list();
+        List<? extends ExternalSegment> externalSegList = osv2().gbp().externalSegment().list();
         assertEquals(2, externalSegList.size());
         Preconditions.checkNotNull(externalSegList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : External Segment from List : "+externalSegList.get(0));
@@ -42,7 +42,7 @@ public class ExternalSegmentServiceTest extends AbstractTest {
     public void testGetExternalSegment() throws Exception{
         respondWith(EXTERNAL_SEGMENT);
         String id = "fff89eb8-8f9d-49a2-b66c-ad75d9a95287";
-        ExternalSegment externalSegment = osv2.gbp().externalSegment().get(id);
+        ExternalSegment externalSegment = osv2().gbp().externalSegment().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : External Segment by ID : "+externalSegment);
         assertNotNull(externalSegment);
         assertEquals(id, externalSegment.getId());
@@ -50,7 +50,7 @@ public class ExternalSegmentServiceTest extends AbstractTest {
     @Test
     public void testCreateExternalSegment() throws Exception{
         respondWith(EXTERNAL_SEGMENT);
-        ExternalSegment externalSegment = osv2.gbp().externalSegment().create(Builders.externalSegment().ipVersion(4).cidr("172.16.0.0/12").name("extSeg01").description("extSeg01-desc").build());
+        ExternalSegment externalSegment = osv2().gbp().externalSegment().create(Builders.externalSegment().ipVersion(4).cidr("172.16.0.0/12").name("extSeg01").description("extSeg01-desc").build());
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created External Policy : "+externalSegment);
         assertEquals("extSeg01", externalSegment.getName());
         assertEquals(4, externalSegment.getIpVersion());
@@ -60,7 +60,7 @@ public class ExternalSegmentServiceTest extends AbstractTest {
     public void testUpdateExternalSegment() throws Exception{
         respondWith(EXTERNAL_SEGMENT_UPDATE);
         String id = "fff89eb8-8f9d-49a2-b66c-ad75d9a95287";
-        ExternalSegment externalSegment =osv2.gbp().externalSegment().update(id, Builders.externalSegment().name("extSeg01-update").description("extSeg01-desc-update").build());
+        ExternalSegment externalSegment =osv2().gbp().externalSegment().update(id, Builders.externalSegment().name("extSeg01-update").description("extSeg01-desc-update").build());
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated External Segment : "+externalSegment);
         assertEquals("extSeg01-desc-update", externalSegment.getDescription());
 
@@ -69,7 +69,7 @@ public class ExternalSegmentServiceTest extends AbstractTest {
     public void testDeleteExternalSegment() {
         respondWith(200);
         String id = "fff89eb8-8f9d-49a2-b66c-ad75d9a95287";
-        ActionResponse result = osv2.gbp().externalSegment().delete(id);
+        ActionResponse result = osv2().gbp().externalSegment().delete(id);
         assertTrue(result.isSuccess());
     }
 

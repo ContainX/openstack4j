@@ -33,7 +33,7 @@ public class NatPoolServiceTest extends AbstractTest {
     @Test
     public void testListNatPool() throws Exception{
         respondWith(NAT_POOLS);
-        List<? extends NatPool> natpoolList = osv2.gbp().natPool().list();
+        List<? extends NatPool> natpoolList = osv2().gbp().natPool().list();
         assertEquals(2, natpoolList.size()); 
         Preconditions.checkNotNull(natpoolList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Nat Pool from List : "+natpoolList.get(0));
@@ -43,7 +43,7 @@ public class NatPoolServiceTest extends AbstractTest {
     public void testGetNatPool() throws Exception{
         respondWith(NAT_POOL);
         String id = "e2d4fce7-4c55-497b-ac4c-290dd202c71a";
-        NatPool natPool = osv2.gbp().natPool().get(id);
+        NatPool natPool = osv2().gbp().natPool().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Nat Pool by ID : "+natPool);
         assertNotNull(natPool);
         assertEquals(id, natPool.getId());
@@ -52,7 +52,7 @@ public class NatPoolServiceTest extends AbstractTest {
     public void testCreateNatPool() throws Exception{
         respondWith(NAT_POOL);
         NatPool natPool= Builders.natPool().name("ptg_nat_pool").build();
-        NatPool npool = osv2.gbp().natPool().create(natPool);
+        NatPool npool = osv2().gbp().natPool().create(natPool);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created Nat Pool : "+npool);
         assertEquals("ptg_nat_pool", npool.getName());
     }
@@ -61,7 +61,7 @@ public class NatPoolServiceTest extends AbstractTest {
         respondWith(NAT_POOL_UPDATE);
         String id = "e2d4fce7-4c55-497b-ac4c-290dd202c71a";
         NatPool natPoolUpdate= Builders.natPool().name("ptg_nat_pool-update").build();
-        NatPool natPool =osv2.gbp().natPool().update(id, natPoolUpdate);
+        NatPool natPool =osv2().gbp().natPool().update(id, natPoolUpdate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated Nat Pool : "+natPool);
         assertEquals("ptg_nat_pool-update", natPool.getName());
 
@@ -70,7 +70,7 @@ public class NatPoolServiceTest extends AbstractTest {
     public void testDeleteNatPool() {
         respondWith(200);
         String id = "e2d4fce7-4c55-497b-ac4c-290dd202c71a";
-        ActionResponse result = osv2.gbp().natPool().delete(id);
+        ActionResponse result = osv2().gbp().natPool().delete(id);
         assertTrue(result.isSuccess());
     }
 
