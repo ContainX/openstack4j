@@ -1,12 +1,7 @@
 package org.openstack4j.api;
 
 import org.openstack4j.model.common.builder.LinkBuilder;
-import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
-import org.openstack4j.model.compute.builder.FlavorBuilder;
-import org.openstack4j.model.compute.builder.FloatingIPBuilder;
-import org.openstack4j.model.compute.builder.QuotaSetUpdateBuilder;
-import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
-import org.openstack4j.model.compute.builder.ServerCreateBuilder;
+import org.openstack4j.model.compute.builder.*;
 import org.openstack4j.model.heat.SoftwareConfig;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
@@ -15,129 +10,33 @@ import org.openstack4j.model.heat.builder.SoftwareConfigBuilder;
 import org.openstack4j.model.heat.builder.StackCreateBuilder;
 import org.openstack4j.model.heat.builder.StackUpdateBuilder;
 import org.openstack4j.model.heat.builder.TemplateBuilder;
+import org.openstack4j.model.identity.v2.builder.ServiceEndpointBuilder;
 import org.openstack4j.model.identity.v2.builder.TenantBuilder;
-import org.openstack4j.model.identity.v3.builder.CredentialBuilder;
-import org.openstack4j.model.identity.v3.builder.DomainBuilder;
-import org.openstack4j.model.identity.v3.builder.EndpointBuilder;
-import org.openstack4j.model.identity.v3.builder.GroupBuilder;
-import org.openstack4j.model.identity.v3.builder.PolicyBuilder;
-import org.openstack4j.model.identity.v3.builder.ProjectBuilder;
-import org.openstack4j.model.identity.v3.builder.RegionBuilder;
-import org.openstack4j.model.identity.v3.builder.RoleBuilder;
-import org.openstack4j.model.identity.v3.builder.ServiceBuilder;
-import org.openstack4j.model.identity.v3.builder.UserBuilder;
+import org.openstack4j.model.identity.v3.builder.*;
 import org.openstack4j.model.image.builder.ImageBuilder;
-import org.openstack4j.model.manila.builder.SecurityServiceCreateBuilder;
-import org.openstack4j.model.manila.builder.ShareCreateBuilder;
-import org.openstack4j.model.manila.builder.ShareManageBuilder;
-import org.openstack4j.model.manila.builder.ShareNetworkCreateBuilder;
-import org.openstack4j.model.manila.builder.ShareSnapshotCreateBuilder;
-import org.openstack4j.model.manila.builder.ShareTypeCreateBuilder;
-import org.openstack4j.model.network.builder.ExtraDhcpOptBuilder;
-import org.openstack4j.model.network.builder.NetFloatingIPBuilder;
-import org.openstack4j.model.network.builder.NetQuotaBuilder;
-import org.openstack4j.model.network.builder.NetSecurityGroupBuilder;
-import org.openstack4j.model.network.builder.NetSecurityGroupRuleBuilder;
-import org.openstack4j.model.network.builder.NetworkBuilder;
-import org.openstack4j.model.network.builder.NetworkUpdateBuilder;
-import org.openstack4j.model.network.builder.PortBuilder;
-import org.openstack4j.model.network.builder.RouterBuilder;
-import org.openstack4j.model.network.builder.SubnetBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallPolicyBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallPolicyUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallRuleBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallRuleUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.FirewallUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.HealthMonitorAssociateBuilder;
-import org.openstack4j.model.network.ext.builder.HealthMonitorBuilder;
-import org.openstack4j.model.network.ext.builder.HealthMonitorUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.LbPoolBuilder;
-import org.openstack4j.model.network.ext.builder.LbPoolUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.MemberBuilder;
-import org.openstack4j.model.network.ext.builder.MemberUpdateBuilder;
-import org.openstack4j.model.network.ext.builder.SessionPersistenceBuilder;
-import org.openstack4j.model.network.ext.builder.VipBuilder;
-import org.openstack4j.model.network.ext.builder.VipUpdateBuilder;
-import org.openstack4j.model.sahara.builder.ClusterBuilder;
-import org.openstack4j.model.sahara.builder.ClusterTemplateBuilder;
-import org.openstack4j.model.sahara.builder.DataSourceBuilder;
-import org.openstack4j.model.sahara.builder.JobBinaryBuilder;
-import org.openstack4j.model.sahara.builder.JobBuilder;
-import org.openstack4j.model.sahara.builder.JobConfigBuilder;
-import org.openstack4j.model.sahara.builder.JobExecutionBuilder;
-import org.openstack4j.model.sahara.builder.NodeGroupBuilder;
-import org.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
-import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
+import org.openstack4j.model.manila.builder.*;
+import org.openstack4j.model.network.builder.*;
+import org.openstack4j.model.network.ext.builder.*;
+import org.openstack4j.model.sahara.builder.*;
 import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.openstack.common.GenericLink;
-import org.openstack4j.openstack.compute.domain.NovaBlockDeviceMappingCreate;
-import org.openstack4j.openstack.compute.domain.NovaFlavor;
-import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
-import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
+import org.openstack4j.openstack.compute.domain.*;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
-import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatStackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStackUpdate;
 import org.openstack4j.openstack.heat.domain.HeatTemplate;
+import org.openstack4j.openstack.identity.v2.domain.KeystoneServiceEndpoint;
 import org.openstack4j.openstack.identity.v2.domain.KeystoneTenant;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneCredential;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneDomain;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneEndpoint;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneGroup;
-import org.openstack4j.openstack.identity.v3.domain.KeystonePolicy;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneProject;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneRegion;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneRole;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneService;
-import org.openstack4j.openstack.identity.v3.domain.KeystoneUser;
+import org.openstack4j.openstack.identity.v3.domain.*;
 import org.openstack4j.openstack.image.domain.GlanceImage;
-import org.openstack4j.openstack.manila.domain.ManilaSecurityServiceCreate;
-import org.openstack4j.openstack.manila.domain.ManilaShareCreate;
-import org.openstack4j.openstack.manila.domain.ManilaShareManage;
-import org.openstack4j.openstack.manila.domain.ManilaShareNetworkCreate;
-import org.openstack4j.openstack.manila.domain.ManilaShareSnapshotCreate;
-import org.openstack4j.openstack.manila.domain.ManilaShareTypeCreate;
-import org.openstack4j.openstack.networking.domain.NeutronExtraDhcpOptCreate;
-import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
-import org.openstack4j.openstack.networking.domain.NeutronNetQuota;
-import org.openstack4j.openstack.networking.domain.NeutronNetwork;
-import org.openstack4j.openstack.networking.domain.NeutronNetworkUpdate;
-import org.openstack4j.openstack.networking.domain.NeutronPort;
-import org.openstack4j.openstack.networking.domain.NeutronRouter;
-import org.openstack4j.openstack.networking.domain.NeutronSecurityGroup;
-import org.openstack4j.openstack.networking.domain.NeutronSecurityGroupRule;
-import org.openstack4j.openstack.networking.domain.NeutronSubnet;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallPolicy;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallPolicyUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallRule;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallRuleUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitor;
-import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorAssociate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronLbPool;
-import org.openstack4j.openstack.networking.domain.ext.NeutronLbPoolUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronMember;
-import org.openstack4j.openstack.networking.domain.ext.NeutronMemberUpdate;
-import org.openstack4j.openstack.networking.domain.ext.NeutronSessionPersistence;
-import org.openstack4j.openstack.networking.domain.ext.NeutronVip;
-import org.openstack4j.openstack.networking.domain.ext.NeutronVipUpdate;
-import org.openstack4j.openstack.sahara.domain.SaharaCluster;
-import org.openstack4j.openstack.sahara.domain.SaharaClusterTemplate;
-import org.openstack4j.openstack.sahara.domain.SaharaDataSource;
-import org.openstack4j.openstack.sahara.domain.SaharaJob;
-import org.openstack4j.openstack.sahara.domain.SaharaJobBinary;
-import org.openstack4j.openstack.sahara.domain.SaharaJobConfig;
-import org.openstack4j.openstack.sahara.domain.SaharaJobExecution;
-import org.openstack4j.openstack.sahara.domain.SaharaNodeGroup;
-import org.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
-import org.openstack4j.openstack.sahara.domain.SaharaServiceConfig;
+import org.openstack4j.openstack.manila.domain.*;
+import org.openstack4j.openstack.networking.domain.*;
+import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.sahara.domain.*;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
@@ -183,96 +82,6 @@ public class Builders {
      */
     public static FlavorBuilder flavor() {
         return NovaFlavor.builder();
-    }
-
-    /**
-     * The builder to create a Domain.
-     *
-     * @return the domain builder
-     */
-    public static CredentialBuilder credential() {
-        return KeystoneCredential.builder();
-    }
-
-    /**
-     * The builder to create a Domain.
-     *
-     * @return the domain builder
-     */
-    public static DomainBuilder domain() {
-        return KeystoneDomain.builder();
-    }
-
-    /**
-     * The builder to create a Endpoint.
-     *
-     * @return the endpoint builder
-     */
-    public static EndpointBuilder endpoint() {
-        return KeystoneEndpoint.builder();
-    }
-
-    /**
-     * The builder to create a Group.
-     *
-     * @return the group builder
-     */
-    public static GroupBuilder group() {
-        return KeystoneGroup.builder();
-    }
-
-    /**
-     * The builder to create a Policy.
-     *
-     * @return the policy builder
-     */
-    public static PolicyBuilder policy() {
-        return KeystonePolicy.builder();
-    }
-
-    /**
-     * The builder to create a Project.
-     *
-     * @return the project builder
-     */
-    public static ProjectBuilder project() {
-        return KeystoneProject.builder();
-    }
-
-    /**
-     * The builder to create a Role.
-     *
-     * @return the role builder
-     */
-    public static RoleBuilder role() {
-        return KeystoneRole.builder();
-    }
-
-    /**
-     * The builder to create a Service.
-     *
-     * @return the service builder
-     */
-    public static ServiceBuilder service() {
-        return KeystoneService.builder();
-    }
-
-    /**
-     * The builder to create a User.
-     *
-     * @return the user builder
-     */
-    public static UserBuilder user() {
-        return KeystoneUser.builder();
-    }
-
-    /**
-     * The builder to create a Region
-     *
-     * @return the region builder
-     */
-    public static RegionBuilder regions() {
-        return KeystoneRegion.builder();
     }
 
     /**
@@ -751,13 +560,162 @@ public class Builders {
     public static ShareManageBuilder shareManage() {
         return ManilaShareManage.builder();
     }
+
+
     /**
-     * The builder which creates tenant
-     *
-     * @return the tenant builder
+     * Builders when using Identity V2
      */
-    public static TenantBuilder tenant() {
-        return KeystoneTenant.builder();
+    public static class BuildersV2 extends Builders {
+
+        /**
+         * The builder to create a v2 User
+         *
+         * @return the user builder
+         */
+        public static org.openstack4j.model.identity.v2.builder.UserBuilder user() {
+            return org.openstack4j.openstack.identity.v2.domain.KeystoneUser.builder();
+        }
+
+        /**
+         * The builder to create a v2 Tenant
+         *
+         * @return the tenant builder
+         */
+        public static TenantBuilder tenant() {
+            return KeystoneTenant.builder();
+        }
+
+        /**
+         * The builder to create a v2 Role
+         *
+         * @return the role builder
+         */
+        public static org.openstack4j.model.identity.v2.builder.RoleBuilder role() {
+            return org.openstack4j.openstack.identity.v2.domain.KeystoneRole.builder();
+        }
+
+        /**
+         * The builder to create v2 Service
+         *
+         * @return the service builder
+         */
+        public static org.openstack4j.model.identity.v2.builder.ServiceBuilder service() {
+            return org.openstack4j.openstack.identity.v2.domain.KeystoneService.builder();
+        }
+
+        /**
+         * The builder to create a v2 Endpoint
+         *
+         * @return the endpoint builder
+         */
+        public static org.openstack4j.model.identity.v2.builder.EndpointBuilder endpoint() {
+            return org.openstack4j.openstack.identity.v2.domain.KeystoneEndpoint.builder();
+        }
+
+        /**
+         * The builder to create a Service Endpoint.
+         *
+         * @return the service endpoint builder
+         */
+        public static ServiceEndpointBuilder serviceEndpoint() {
+            return KeystoneServiceEndpoint.builder();
+        }
     }
-    
+
+    /**
+     * Builders when using Identity V3
+     */
+    public static class BuildersV3 extends Builders {
+
+        /**
+         * The builder to create a Region
+         *
+         * @return the region builder
+         */
+        public static RegionBuilder region() {
+            return KeystoneRegion.builder();
+        }
+
+        /**
+         * The builder to create a Domain.
+         *
+         * @return the domain builder
+         */
+        public static CredentialBuilder credential() {
+            return KeystoneCredential.builder();
+        }
+
+        /**
+         * The builder to create a Domain.
+         *
+         * @return the domain builder
+         */
+        public static DomainBuilder domain() {
+            return KeystoneDomain.builder();
+        }
+
+        /**
+         * The builder to create a Endpoint.
+         *
+         * @return the endpoint builder
+         */
+        public static EndpointBuilder endpoint() {
+            return KeystoneEndpoint.builder();
+        }
+
+        /**
+         * The builder to create a Group.
+         *
+         * @return the group builder
+         */
+        public static GroupBuilder group() {
+            return KeystoneGroup.builder();
+        }
+
+        /**
+         * The builder to create a Policy.
+         *
+         * @return the policy builder
+         */
+        public static PolicyBuilder policy() {
+            return KeystonePolicy.builder();
+        }
+
+        /**
+         * The builder to create a Project.
+         *
+         * @return the project builder
+         */
+        public static ProjectBuilder project() {
+            return KeystoneProject.builder();
+        }
+
+        /**
+         * The builder to create a Role.
+         *
+         * @return the role builder
+         */
+        public static RoleBuilder role() {
+            return KeystoneRole.builder();
+        }
+
+        /**
+         * The builder to create a Service.
+         *
+         * @return the service builder
+         */
+        public static ServiceBuilder service() {
+            return KeystoneService.builder();
+        }
+
+        /**
+         * The builder to create a User.
+         *
+         * @return the user builder
+         */
+        public static UserBuilder user() {
+            return KeystoneUser.builder();
+        }
+
+    }
 }
