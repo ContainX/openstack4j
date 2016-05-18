@@ -189,7 +189,7 @@ The examples below are only a small fraction of the existing API so please refer
 **User operations**
 ```java
 // Create a User associated to the new Project
-User user = os.identity().users().create(Builders.user()
+User user = os.identity().users().create(BuildersV3.user()
 													.domainId("domain id")
 													.name("foobar")
 													.password("secret")
@@ -227,7 +227,7 @@ os.identity().roles().getByName("role name);
 
 ```java
 // Create a project
-os.identity().project().create(Builders.project()
+os.identity().project().create(BuildersV3.project()
 											.name("project name")
 											.description("project description")
 											.domainId("project domain id")
@@ -246,10 +246,10 @@ Identity V2 Services fully cover Tenants, Users, Roles, Services, Endpoints and 
 **Create a Tenant, User and associate a Role**
 ```java
 // Create a Tenant (could also be created fluent within user create)
-Tenant tenant = os.identity().tenants().create(Builders.tenant().name("MyNewTenant").build());
+Tenant tenant = os.identity().tenants().create(BuildersV2.tenant().name("MyNewTenant").build());
 
 // Create a User associated to the new Tenant
-User user = os.identity().users().create(Builders.user().name("jack").password("sample").tenant(tenant).build());
+User user = os.identity().users().create(BuildersV2.user().name("jack").password("sample").tenant(tenant).build());
 
 // Add a Tenant based Role to the User
 os.identity().roles().addUserRole(tenant.getId(), user.getId(), os.identity().roles().getByName("Member").getId());
