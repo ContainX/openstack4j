@@ -34,7 +34,7 @@ public class L3policyServiceTest extends AbstractTest {
     public void testListl3Policy() throws Exception{
         respondWith(L3_POLICIES);
         List<? extends L3Policy> l3policyList = osv2().gbp().l3Policy().list();
-        assertEquals(9, l3policyList.size()); 
+        assertEquals(2, l3policyList.size()); 
         Preconditions.checkNotNull(l3policyList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : L3 Policy from List : "+l3policyList.get(0));
         assertEquals(l3policyList.get(0).getId(), "8a45f76f-888b-4f3b-ad00-88c3b0ba9e6d");

@@ -55,7 +55,7 @@ public class PolicyRuleSetServiceTest extends AbstractTest {
         PolicyRuleSet policyRuleSetCreate= Builders.policyRuleSet().name("test-rule-set").description("test-rule-set-desc").build();
         PolicyRuleSet policyRuleSet = osv2().gbp().policyRuleSet().create(policyRuleSetCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Create Policy Rule Set : "+policyRuleSet);
-        assertEquals(5, policyRuleSet.getChildPolicyRuleSets().size());
+        assertEquals(0, policyRuleSet.getChildPolicyRuleSets().size());
         assertEquals("test-rule-set", policyRuleSet.getName());
    }
     @Test

@@ -78,7 +78,7 @@ public class ExternalPolicyServiceTest extends AbstractTest {
         
         ExternalPolicy externalPolicy = osv2().gbp().externalPolicy().create(Builders.externalPolicy().consumedPolicyRuleSets(consumedPolicyRuleSet).providedPolicyRuleSets(providedPolicyRuleSet).externalSegments(externalSegmentIds ).name("test-ext-policy").description("test-ext-policy-desc").build());
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created External Policy : "+externalPolicy);
-        assertEquals("Sample-External Policy", externalPolicy.getName());
+        assertEquals("test-ext-policy", externalPolicy.getName());
         assertEquals(8, externalPolicy.getConsumedPolicyRuleSets().size());
         assertEquals(8, externalPolicy.getProvidedPolicyRuleSets().size());
     }

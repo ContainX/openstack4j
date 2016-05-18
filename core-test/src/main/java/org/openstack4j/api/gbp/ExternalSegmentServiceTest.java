@@ -41,7 +41,7 @@ public class ExternalSegmentServiceTest extends AbstractTest {
     @Test
     public void testGetExternalSegment() throws Exception{
         respondWith(EXTERNAL_SEGMENT);
-        String id = "fff89eb8-8f9d-49a2-b66c-ad75d9a95287";
+        String id = "df9e5238-084e-4053-8871-81b63167e2f4";
         ExternalSegment externalSegment = osv2().gbp().externalSegment().get(id);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : External Segment by ID : "+externalSegment);
         assertNotNull(externalSegment);

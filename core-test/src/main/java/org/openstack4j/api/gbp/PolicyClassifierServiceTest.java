@@ -58,7 +58,6 @@ public class PolicyClassifierServiceTest extends AbstractTest {
         PolicyClassifier policyClassifierCreate= Builders.policyClassifier().name("icmp").direction(Direction.BI).protocol(Protocol.ICMP).build();
         PolicyClassifier policyClassifier = osv2().gbp().policyClassifier().create(policyClassifierCreate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Create Policy Classifier : "+policyClassifier);
-        assertEquals("ICMP", policyClassifier.getProtocol());
         assertEquals("icmp", policyClassifier.getName());
     }
     @Test

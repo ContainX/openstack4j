@@ -65,7 +65,7 @@ public class PolicyRuleServiceTest extends AbstractTest {
         PolicyRule policyRuleUpdate= Builders.policyRule().name("icmp-rule-update").description("icmp-rule-desc-update").build();
         PolicyRule policyRule =osv2().gbp().policyRule().update(id, policyRuleUpdate);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Upate Policy Rule : "+policyRule);
-        assertEquals("icmp-rule-update", policyRule.getDescription());
+        assertEquals("icmp-rule-desc-update", policyRule.getDescription());
 
     }
     @Test

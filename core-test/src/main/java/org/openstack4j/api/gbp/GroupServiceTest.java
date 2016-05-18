@@ -35,7 +35,7 @@ public class GroupServiceTest extends AbstractTest {
     public void testListPolicyTargetGroup() throws Exception{
         respondWith(POLICY_TARGET_GROUPS);
         List<? extends PolicyTargetGroup> policytargetGroupList = osv2().gbp().group().list();
-        assertEquals(2, policytargetGroupList.size());
+        assertEquals(8, policytargetGroupList.size());
         Preconditions.checkNotNull(policytargetGroupList.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Policy target group from List : "+policytargetGroupList.get(0));
         assertEquals(policytargetGroupList.get(0).getId(), "1fb00129-06cf-48e5-8282-d15dbf4be60b");
