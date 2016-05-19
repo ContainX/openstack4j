@@ -4,7 +4,7 @@ import static org.testng.AssertJUnit.assertNull;
 import static org.testng.Assert.assertEquals;
 
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders.BuildersV3;
+import org.openstack4j.api.Builders;
 import org.openstack4j.model.identity.v3.Group;
 import org.testng.annotations.Test;
 
@@ -37,7 +37,7 @@ public class KeystoneGroupServiceTests extends AbstractTest {
 
     public void group_crud_test() throws Exception {
 
-        Group group = BuildersV3.group()
+        Group group = Builders.group()
                 .name(GROUP_NAME)
                 .description(GROUP_DESCRIPTION)
                 .domainId(GROUP_DOMAIN_ID)

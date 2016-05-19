@@ -4,7 +4,7 @@ import static org.testng.AssertJUnit.assertNull;
 import static org.testng.Assert.assertEquals;
 
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders.BuildersV3;
+import org.openstack4j.api.Builders;
 import org.openstack4j.model.identity.v3.Project;
 import org.testng.annotations.Test;
 
@@ -45,7 +45,7 @@ public class KeystoneProjectServiceTests extends AbstractTest {
 
     public void projects_crud_test() throws Exception {
 
-        Project project = BuildersV3.project().name(PROJECT_NAME).description(PROJECT_DESCRIPTION)
+        Project project = Builders.project().name(PROJECT_NAME).description(PROJECT_DESCRIPTION)
                 .domainId(PROJECT_DOMAIN_ID).enabled(true).build();
 
         respondWith(JSON_PROJECTS_CREATE);

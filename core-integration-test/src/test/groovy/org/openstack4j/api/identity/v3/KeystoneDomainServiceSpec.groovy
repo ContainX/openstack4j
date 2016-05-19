@@ -5,7 +5,7 @@ import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
 import org.openstack4j.api.AbstractSpec
-import org.openstack4j.api.Builders.BuildersV3
+import org.openstack4j.api.Builders
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.common.ActionResponse
@@ -85,7 +85,7 @@ class KeystoneDomainServiceSpec extends AbstractSpec {
         thrown NullPointerException
 
         when: "a new domain is created using DomainBuilder with valid arguments"
-        Domain domain = BuildersV3.domain()
+        Domain domain = Builders.domain()
                 .name(DOMAIN_CRUD_NAME)
                 .description(DOMAIN_CRUD_DESCRIPTION)
                 .enabled(false)

@@ -5,7 +5,7 @@ import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
 import org.openstack4j.api.AbstractSpec
-import org.openstack4j.api.Builders.BuildersV3
+import org.openstack4j.api.Builders
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.api.types.Facing
 import org.openstack4j.model.common.Identifier
@@ -89,7 +89,7 @@ class KeystoneServiceEndpointServiceSpec extends AbstractSpec {
                 .authenticate()
 
         when: "a service is created using the service builder"
-        Service service = os.identity().serviceEndpoints().create(BuildersV3.service()
+        Service service = os.identity().serviceEndpoints().create(Builders.service()
                 .type(SERVICE_CRUD_TYPE)
                 .name(SERVICE_CRUD_NAME)
                 .description(SERVICE_CRUD_DESCRIPTION)

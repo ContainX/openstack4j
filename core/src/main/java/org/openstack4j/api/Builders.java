@@ -6,12 +6,8 @@ import org.openstack4j.model.heat.SoftwareConfig;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
 import org.openstack4j.model.heat.Template;
-import org.openstack4j.model.heat.builder.SoftwareConfigBuilder;
-import org.openstack4j.model.heat.builder.StackCreateBuilder;
-import org.openstack4j.model.heat.builder.StackUpdateBuilder;
-import org.openstack4j.model.heat.builder.TemplateBuilder;
-import org.openstack4j.model.identity.v2.builder.ServiceEndpointBuilder;
-import org.openstack4j.model.identity.v2.builder.TenantBuilder;
+import org.openstack4j.model.heat.builder.*;
+import org.openstack4j.model.identity.v2.builder.IdentityV2Builders;
 import org.openstack4j.model.identity.v3.builder.*;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.manila.builder.*;
@@ -19,27 +15,36 @@ import org.openstack4j.model.network.builder.*;
 import org.openstack4j.model.network.ext.builder.*;
 import org.openstack4j.model.sahara.builder.*;
 import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
+import org.openstack4j.model.storage.block.builder.StorageBuilders;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
+import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
 import org.openstack4j.openstack.common.GenericLink;
+import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.*;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
+import org.openstack4j.openstack.heat.builder.HeatBuilders;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatStackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStackUpdate;
 import org.openstack4j.openstack.heat.domain.HeatTemplate;
-import org.openstack4j.openstack.identity.v2.domain.KeystoneServiceEndpoint;
-import org.openstack4j.openstack.identity.v2.domain.KeystoneTenant;
+import org.openstack4j.openstack.identity.v2.builder.KeystoneV2Builders;
+import org.openstack4j.openstack.identity.v3.builder.KeystoneV3Builders;
 import org.openstack4j.openstack.identity.v3.domain.*;
 import org.openstack4j.openstack.image.domain.GlanceImage;
+import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.*;
+import org.openstack4j.openstack.networking.builder.NeutronBuilders;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.sahara.builder.SaharaBuilders;
 import org.openstack4j.openstack.sahara.domain.*;
+import org.openstack4j.openstack.storage.block.builder.CinderBuilders;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
+import org.openstack4j.openstack.telemetry.builder.CeilometerBuilders;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
 
 /**
@@ -561,161 +566,163 @@ public class Builders {
         return ManilaShareManage.builder();
     }
 
-
     /**
-     * Builders when using Identity V2
+     * The builder to create a Region
+     *
+     * @return the region builder
      */
-    public static class BuildersV2 extends Builders {
-
-        /**
-         * The builder to create a v2 User
-         *
-         * @return the user builder
-         */
-        public static org.openstack4j.model.identity.v2.builder.UserBuilder user() {
-            return org.openstack4j.openstack.identity.v2.domain.KeystoneUser.builder();
-        }
-
-        /**
-         * The builder to create a v2 Tenant
-         *
-         * @return the tenant builder
-         */
-        public static TenantBuilder tenant() {
-            return KeystoneTenant.builder();
-        }
-
-        /**
-         * The builder to create a v2 Role
-         *
-         * @return the role builder
-         */
-        public static org.openstack4j.model.identity.v2.builder.RoleBuilder role() {
-            return org.openstack4j.openstack.identity.v2.domain.KeystoneRole.builder();
-        }
-
-        /**
-         * The builder to create v2 Service
-         *
-         * @return the service builder
-         */
-        public static org.openstack4j.model.identity.v2.builder.ServiceBuilder service() {
-            return org.openstack4j.openstack.identity.v2.domain.KeystoneService.builder();
-        }
-
-        /**
-         * The builder to create a v2 Endpoint
-         *
-         * @return the endpoint builder
-         */
-        public static org.openstack4j.model.identity.v2.builder.EndpointBuilder endpoint() {
-            return org.openstack4j.openstack.identity.v2.domain.KeystoneEndpoint.builder();
-        }
-
-        /**
-         * The builder to create a Service Endpoint.
-         *
-         * @return the service endpoint builder
-         */
-        public static ServiceEndpointBuilder serviceEndpoint() {
-            return KeystoneServiceEndpoint.builder();
-        }
+    public static RegionBuilder region() {
+        return KeystoneRegion.builder();
     }
 
     /**
-     * Builders when using Identity V3
+     * The builder to create a Credential.
+     *
+     * @return the credential builder
      */
-    public static class BuildersV3 extends Builders {
-
-        /**
-         * The builder to create a Region
-         *
-         * @return the region builder
-         */
-        public static RegionBuilder region() {
-            return KeystoneRegion.builder();
-        }
-
-        /**
-         * The builder to create a Domain.
-         *
-         * @return the domain builder
-         */
-        public static CredentialBuilder credential() {
-            return KeystoneCredential.builder();
-        }
-
-        /**
-         * The builder to create a Domain.
-         *
-         * @return the domain builder
-         */
-        public static DomainBuilder domain() {
-            return KeystoneDomain.builder();
-        }
-
-        /**
-         * The builder to create a Endpoint.
-         *
-         * @return the endpoint builder
-         */
-        public static EndpointBuilder endpoint() {
-            return KeystoneEndpoint.builder();
-        }
-
-        /**
-         * The builder to create a Group.
-         *
-         * @return the group builder
-         */
-        public static GroupBuilder group() {
-            return KeystoneGroup.builder();
-        }
-
-        /**
-         * The builder to create a Policy.
-         *
-         * @return the policy builder
-         */
-        public static PolicyBuilder policy() {
-            return KeystonePolicy.builder();
-        }
-
-        /**
-         * The builder to create a Project.
-         *
-         * @return the project builder
-         */
-        public static ProjectBuilder project() {
-            return KeystoneProject.builder();
-        }
-
-        /**
-         * The builder to create a Role.
-         *
-         * @return the role builder
-         */
-        public static RoleBuilder role() {
-            return KeystoneRole.builder();
-        }
-
-        /**
-         * The builder to create a Service.
-         *
-         * @return the service builder
-         */
-        public static ServiceBuilder service() {
-            return KeystoneService.builder();
-        }
-
-        /**
-         * The builder to create a User.
-         *
-         * @return the user builder
-         */
-        public static UserBuilder user() {
-            return KeystoneUser.builder();
-        }
-
+    public static CredentialBuilder credential() {
+        return KeystoneCredential.builder();
     }
+
+    /**
+     * The builder to create a Domain.
+     *
+     * @return the domain builder
+     */
+    public static DomainBuilder domain() {
+        return KeystoneDomain.builder();
+    }
+
+    /**
+     * The builder to create a Endpoint.
+     *
+     * @return the endpoint builder
+     */
+    public static EndpointBuilder endpoint() {
+        return KeystoneEndpoint.builder();
+    }
+
+    /**
+     * The builder to create a Group.
+     *
+     * @return the group builder
+     */
+    public static GroupBuilder group() {
+        return KeystoneGroup.builder();
+    }
+
+    /**
+     * The builder to create a Policy.
+     *
+     * @return the policy builder
+     */
+    public static PolicyBuilder policy() {
+        return KeystonePolicy.builder();
+    }
+
+    /**
+     * The builder to create a Project.
+     *
+     * @return the project builder
+     */
+    public static ProjectBuilder project() {
+        return KeystoneProject.builder();
+    }
+
+    /**
+     * The builder to create a Role.
+     *
+     * @return the role builder
+     */
+    public static RoleBuilder role() {
+        return KeystoneRole.builder();
+    }
+
+    /**
+     * The builder to create a Service.
+     *
+     * @return the service builder
+     */
+    public static ServiceBuilder service() {
+        return KeystoneService.builder();
+    }
+
+    /**
+     * The builder to create a User.
+     *
+     * @return the user builder
+     */
+    public static UserBuilder user() {
+        return KeystoneUser.builder();
+    }
+
+    /**
+     * Identity V2 builders
+     *
+     * @return the keystone v2 builders
+     */
+    public static IdentityV2Builders identityV2() {
+        return new KeystoneV2Builders();
+    }
+
+    /**
+     * The Identity V3 builders
+     *
+     * @return the keystone v3 builders
+     */
+    public static IdentityV3Builders identityV3() {
+        return new KeystoneV3Builders();
+    }
+
+    /**
+     * The Compute builders
+     *
+     * @return the nova builders
+     */
+    public static ComputeBuilders compute() { return new NovaBuilders(); }
+
+    /**
+     * The Storage builders
+     *
+     * @return the cinder builders
+     */
+    public static StorageBuilders storage() { return new CinderBuilders(); }
+
+    /**
+     * The Orchestration builders
+     *
+     * @return the heat builders
+     */
+    public static OrchestrationBuilders heat() { return new HeatBuilders(); }
+
+    /**
+     * The Network builders
+     *
+     * @return the neutron builders
+     */
+    public static NetworkBuilders neutron() { return new NeutronBuilders(); }
+
+    /**
+     * The Sahara builders
+     *
+     * @return the sahara builders
+     */
+    public static DataProcessingBuilders sahara() { return new SaharaBuilders(); }
+
+    /**
+     * The Ceilometer builders
+     *
+     * @return the ceilometer builders
+     */
+    public static TelemetryBuilders ceilometer() { return new CeilometerBuilders(); }
+
+    /**
+     * The Manila builders
+     *
+     * @return the manila builders
+     */
+    public static SharedFileSystemBuilders manila() {return new ManilaBuilders(); }
+
+
+
 }

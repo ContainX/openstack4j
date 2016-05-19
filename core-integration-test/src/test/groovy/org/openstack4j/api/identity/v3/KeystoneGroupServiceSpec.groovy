@@ -5,17 +5,15 @@ import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
 import org.openstack4j.api.AbstractSpec
-import org.openstack4j.api.Builders.BuildersV3
+import org.openstack4j.api.Builders
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.model.common.Identifier
-import org.openstack4j.model.compute.ActionResponse
 import org.openstack4j.model.identity.v3.Group
 import org.openstack4j.model.identity.v3.User
 import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.openstack.OSFactory
 
 import spock.lang.IgnoreIf
-import spock.lang.Stepwise
 import co.freeside.betamax.Betamax
 import co.freeside.betamax.Recorder
 
@@ -87,7 +85,7 @@ class KeystoneGroupServiceSpec extends AbstractSpec {
                 .authenticate()
 
         and: "a user for the following test scenario is created"
-        User user = os.identity().users().create(BuildersV3.user()
+        User user = os.identity().users().create(Builders.user()
                 .domainId(DOMAIN_ID)
                 .name(GROUP_CRUD_USER_NAME)
                 .password("secret")

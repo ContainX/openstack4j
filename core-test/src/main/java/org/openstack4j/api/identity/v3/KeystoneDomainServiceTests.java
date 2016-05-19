@@ -3,7 +3,7 @@ package org.openstack4j.api.identity.v3;
 import static org.testng.Assert.assertEquals;
 
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders.BuildersV3;
+import org.openstack4j.api.Builders;
 import org.openstack4j.model.identity.v3.Domain;
 import org.testng.annotations.Test;
 
@@ -34,7 +34,7 @@ public class KeystoneDomainServiceTests extends AbstractTest {
 
         // create a new domain
 
-        Domain domain = BuildersV3.domain()
+        Domain domain = Builders.domain()
                 .name(DOMAIN_NAME)
                 .description(DOMAIN_DESCRIPTION)
                 .enabled(true)
@@ -53,7 +53,7 @@ public class KeystoneDomainServiceTests extends AbstractTest {
 
         respondWith(JSON_DOMAINS_UPDATE);
 
-        Domain updatedDomain = osv3().identity().domains().update(BuildersV3.domain()
+        Domain updatedDomain = osv3().identity().domains().update(Builders.domain()
                 .id(DOMAIN_ID)
                 .description(DOMAIN_DESCRIPTION_UPDATED)
                 .enabled(true)

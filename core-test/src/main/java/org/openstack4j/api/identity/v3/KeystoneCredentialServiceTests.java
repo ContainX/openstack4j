@@ -3,7 +3,7 @@ package org.openstack4j.api.identity.v3;
 import static org.testng.Assert.assertEquals;
 
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders.BuildersV3;
+import org.openstack4j.api.Builders;
 import org.openstack4j.model.identity.v3.Credential;
 import org.testng.annotations.Test;
 
@@ -35,7 +35,7 @@ public class KeystoneCredentialServiceTests extends AbstractTest {
 
         respondWith(JSON_CREDENTIALS_UPDATE);
 
-        Credential updatedCredential = osv3().identity().credentials().update(BuildersV3.credential()
+        Credential updatedCredential = osv3().identity().credentials().update(Builders.credential()
                 .id(CREDENTIAL_CRUD_ID)
                 .blob(CREDENTIAL_CRUD_BLOB_UPDATE)
                 .build());
