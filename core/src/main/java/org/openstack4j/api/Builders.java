@@ -7,6 +7,20 @@ import org.openstack4j.model.compute.builder.FloatingIPBuilder;
 import org.openstack4j.model.compute.builder.QuotaSetUpdateBuilder;
 import org.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
+import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
+import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
+import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
+import org.openstack4j.model.gbp.builder.L2PolicyBuilder;
+import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
+import org.openstack4j.model.gbp.builder.NatPoolBuilder;
+import org.openstack4j.model.gbp.builder.PolicyActionCreateBuilder;
+import org.openstack4j.model.gbp.builder.PolicyActionUpdateBuilder;
+import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
+import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
+import org.openstack4j.model.gbp.builder.PolicyRuleBuilder;
+import org.openstack4j.model.gbp.builder.PolicyRuleSetBuilder;
+import org.openstack4j.model.gbp.builder.PolicyTargetBuilder;
+import org.openstack4j.model.gbp.builder.PolicyTargetGroupBuilder;
 import org.openstack4j.model.heat.SoftwareConfig;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
@@ -80,6 +94,20 @@ import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
+import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
+import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
+import org.openstack4j.openstack.gbp.domain.GbpL2Policy;
+import org.openstack4j.openstack.gbp.domain.GbpL3Policy;
+import org.openstack4j.openstack.gbp.domain.GbpNatPool;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyAction;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyActionUpdate;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifier;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyClassifierUpdate;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyRule;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyRuleSet;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyTarget;
+import org.openstack4j.openstack.gbp.domain.GbpPolicyTargetGroupCreate;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatStackCreate;
 import org.openstack4j.openstack.heat.domain.HeatStackUpdate;
@@ -758,6 +786,121 @@ public class Builders {
      */
     public static TenantBuilder tenant() {
         return KeystoneTenant.builder();
+    }
+    
+    
+    /**
+     * The builder which creates external policy for gbp
+     *
+     * @return the external policy builder
+     */
+    public static ExternalPolicyBuilder externalPolicy() {
+        return GbpExternalPolicyCreate.builder();
+    }
+    /** 
+     * The builder which creates external segment for gbp
+     *
+     * @return the external segment builder
+     */
+    public static ExternalSegmentBuilder externalSegment() {
+        return GbpExternalSegment.builder();
+    }    
+    /**
+     * The builder which creates L2 policy for gbp
+     *
+     * @return the L2 policy builder
+     */
+    public static L2PolicyBuilder l2Policy() {
+        return GbpL2Policy.builder();
+    }
+    /**
+     * The builder which creates L3 policy for gbp
+     *
+     * @return the L3 policy builder
+     */
+    public static L3PolicyBuilder l3Policy() {
+        return GbpL3Policy.builder();
+    }
+    /**
+     * The builder which creates nat pool for gbp
+     *
+     * @return the nat pool builder
+     */
+    public static NatPoolBuilder natPool() {
+        return GbpNatPool.builder();
+    }
+    /**
+     * The builder which creates policy action for gbp
+     *
+     * @return the policy action builder
+     */
+    public static PolicyActionCreateBuilder policyAction() {
+        return GbpPolicyAction.builder();
+    }
+    /**
+     * The builder which updates policy action for gbp
+     *
+     * @return the policy action builder
+     */
+    public static PolicyActionUpdateBuilder policyActionUpdate() {
+        return GbpPolicyActionUpdate.builder();
+    }
+    /**
+     * The builder which creates policy classifier for gbp
+     *
+     * @return the policy classifier builder
+     */
+    public static PolicyClassifierBuilder policyClassifier() {
+        return GbpPolicyClassifier.builder();
+    }
+    /**
+     * The builder which updates policy classifier for gbp
+     *
+     * @return the policy classifier builder
+     */
+    public static PolicyClassifierUpdateBuilder policyClassifierUpdate() {
+        return GbpPolicyClassifierUpdate.builder(); 
+    }
+    /**
+     * The builder which creates policy rule for gbp
+     *
+     * @return the policy rule builder
+     */
+    public static PolicyRuleBuilder policyRule() {
+        return GbpPolicyRule.builder();
+    }
+    /**
+     * The builder which creates policy rule set for gbp
+     *
+     * @return the policy rule set builder
+     */ 
+    public static PolicyRuleSetBuilder policyRuleSet() {
+        return GbpPolicyRuleSet.builder();
+    }
+    /**
+     * The builder which creates policy target for gbp
+     *
+     * @return the policy target builder
+     */
+    public static PolicyTargetBuilder policyTarget() {
+        return GbpPolicyTarget.builder();
+    }
+    /**
+     * The builder which creates policy target group for gbp
+     *
+     * @return the policy target group builder
+     */
+    public static PolicyTargetGroupBuilder policyTargetGroup() {
+        return GbpPolicyTargetGroupCreate.builder();
+    }
+    
+    /**
+     * The builder which creates external routes for gbp
+     *
+     * @return the external routes builder
+     */
+    public static ExternalRoutesBuilder externalRoutes(){
+        return GbpExternalRoutes.builder();
     }
     
 }

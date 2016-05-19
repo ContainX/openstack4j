@@ -1,0 +1,42 @@
+{
+   "external_policies":[
+      {
+         "consumed_policy_rule_sets":[
+            "590f005f-de21-4466-905f-457487cc9a60",
+            "de829eb3-4867-442f-bac7-c59906c610b0"
+         ],
+         "description":"test-ext-grp-desc-1",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "provided_policy_rule_sets":[
+            "590f005f-de21-4466-905f-457487cc9a60",
+            "de829eb3-4867-442f-bac7-c59906c610b0"
+         ],
+         "shared":false,
+         "external_segments":[
+            "fff89eb8-8f9d-49a2-b66c-ad75d9a95287"
+         ],
+         "id":"6294837a-8f35-4071-b766-3a4ff3d8afbb",
+         "name":"test-ext-grp-1"
+      },
+      {
+         "consumed_policy_rule_sets":[
+            "590f005f-de21-4466-905f-457487cc9a60",
+            "de829eb3-4867-442f-bac7-c59906c610b0"
+         ],
+         "description":"test-ext-grp-desc-2",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "provided_policy_rule_sets":[
+            "590f005f-de21-4466-905f-457487cc9a60",
+            "de829eb3-4867-442f-bac7-c59906c610b0"
+         ],
+         "shared":false,
+         "external_segments":[
+            "fff89eb8-8f9d-49a2-b66c-ad75d9a95287"
+         ],
+         "id":"7294837a-8f35-4071-b766-3a4ff3d8afbb",
+         "name":"test-ext-grp-2"
+      }
+      
+      
+   ]
+}
