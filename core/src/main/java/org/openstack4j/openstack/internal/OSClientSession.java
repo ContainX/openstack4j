@@ -1,9 +1,8 @@
 package org.openstack4j.openstack.internal;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Set;
-
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
@@ -18,6 +17,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
@@ -32,9 +32,9 @@ import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Set;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -145,6 +145,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public HeatService heat() {
         return Apis.getHeatServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SenlinService senlin() {
+        return Apis.getSenlinServices();
     }
 
     /**
