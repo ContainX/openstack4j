@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.identity.builder.v3.PolicyBuilder;
+import org.openstack4j.model.identity.v3.builder.PolicyBuilder;
 
 /**
  * policy model class
@@ -15,10 +15,20 @@ public interface Policy extends ModelEntity, Buildable<PolicyBuilder> {
 
     /**
      * the unique identifier
-     * 
+     *
      * @return the id of the policy
      */
     String getId();
+
+    /**
+     * @return the uuid for the associated project
+     */
+    String getProjectId();
+
+    /**
+     * @return the id of the user who owns the policy
+     */
+    String getUserId();
 
     /**
      * @return the type of the policy
@@ -28,7 +38,7 @@ public interface Policy extends ModelEntity, Buildable<PolicyBuilder> {
     /**
      * @return the BLOB of the policy
      */
-    Map<String, String> getBlob();
+    String getBlob();
 
     /**
      * @return the links of the policy

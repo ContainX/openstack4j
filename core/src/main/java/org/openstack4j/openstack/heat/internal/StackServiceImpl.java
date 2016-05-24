@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.heat.StackService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;

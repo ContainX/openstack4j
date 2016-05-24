@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.HealthMonitor;
 import org.openstack4j.model.network.ext.HealthMonitorType;
 import org.openstack4j.model.network.ext.HealthMonitorUpdate;
@@ -25,20 +25,20 @@ public class HealthMonitorTests extends AbstractTest{
 	
 
 	public void testListHealtMonitor(){
-		List<? extends HealthMonitor> list = os().networking().loadbalancers().healthMonitor().list();
+		List<? extends HealthMonitor> list = osv3().networking().loadbalancers().healthMonitor().list();
 		System.out.println("test lb HealtMonitor List"+list);
 		assertEquals(4, list.size());
 	}
 	public void testListHealtMonitorFilter(){
 		Map <String, String> map = new HashMap<String, String>();
 		map.put("type", "ping");
-		List<? extends HealthMonitor> list = os().networking().loadbalancers().healthMonitor().list(map);
+		List<? extends HealthMonitor> list = osv3().networking().loadbalancers().healthMonitor().list(map);
 		System.out.println("test lb HealtMonitor List filter"+list);
 		assertEquals(1, list.size());
 	}
 	public void testGetHealtMonitor(){
 		String id = "48de592b-aab4-4727-9c45-7c7587fde20d";
-		HealthMonitor healthMonitor = os().networking().loadbalancers().healthMonitor().get(id);
+		HealthMonitor healthMonitor = osv3().networking().loadbalancers().healthMonitor().get(id);
 		System.out.println("test get a HealtMonitor"+healthMonitor);
 		assertEquals(id, healthMonitor.getId());
 
@@ -58,7 +58,7 @@ public class HealthMonitorTests extends AbstractTest{
 				.timeout(timeout)
 				.type(type)
 				.build();
-		HealthMonitor result = os().networking().loadbalancers().healthMonitor().create(monitor);
+		HealthMonitor result = osv3().networking().loadbalancers().healthMonitor().create(monitor);
 		assertEquals(delay, result.getDelay());
 		assertEquals(maxRetries, result.getMaxRetries());
 		assertEquals(timeout, result.getTimeout());
@@ -76,7 +76,7 @@ public class HealthMonitorTests extends AbstractTest{
 				.maxRetries(maxRetries)
 				.timeout(timeout)
 				.build();
-		HealthMonitor result = os().networking().loadbalancers().healthMonitor().update(monitorId,update);
+		HealthMonitor result = osv3().networking().loadbalancers().healthMonitor().update(monitorId,update);
 		assertEquals(delay, result.getDelay());
 		assertEquals(maxRetries, result.getMaxRetries());
 		assertEquals(timeout, result.getTimeout());
@@ -95,7 +95,7 @@ public class HealthMonitorTests extends AbstractTest{
 				.timeout(timeout)
 				.type(type)
 				.build();
-		HealthMonitor result = os().networking().loadbalancers().healthMonitor().create(monitor);
+		HealthMonitor result = osv3().networking().loadbalancers().healthMonitor().create(monitor);
 		assertEquals(delay, result.getDelay());
 		assertEquals(maxRetries, result.getMaxRetries());
 		assertEquals(timeout, result.getTimeout());
@@ -111,7 +111,7 @@ public class HealthMonitorTests extends AbstractTest{
 				.maxRetries(maxRetries)
 				.timeout(timeout)
 				.build();
-		HealthMonitor result = os().networking().loadbalancers().healthMonitor().update(monitorId,update);
+		HealthMonitor result = osv3().networking().loadbalancers().healthMonitor().update(monitorId,update);
 		assertEquals(delay, result.getDelay());
 		assertEquals(maxRetries, result.getMaxRetries());
 		assertEquals(timeout, result.getTimeout());
@@ -136,7 +136,7 @@ public class HealthMonitorTests extends AbstractTest{
 				.expectedCodes(expectedCodes)
 				.httpMethod(httpMethod)
 				.build();
-		HealthMonitor result = os().networking().loadbalancers().healthMonitor().create(monitor);
+		HealthMonitor result = osv3().networking().loadbalancers().healthMonitor().create(monitor);
 		assertEquals(delay, result.getDelay());
 		assertEquals(maxRetries, result.getMaxRetries());
 		assertEquals(timeout, result.getTimeout());
@@ -160,7 +160,7 @@ public class HealthMonitorTests extends AbstractTest{
 				.expectedCodes(expectedCodes)
 				.httpMethod(httpMethod)
 				.build();
-		HealthMonitor result = os().networking().loadbalancers().healthMonitor().update(monitorId,update);
+		HealthMonitor result = osv3().networking().loadbalancers().healthMonitor().update(monitorId,update);
 		assertEquals(delay, result.getDelay());
 		assertEquals(maxRetries, result.getMaxRetries());
 		assertEquals(timeout, result.getTimeout());
@@ -187,7 +187,7 @@ public class HealthMonitorTests extends AbstractTest{
 				.expectedCodes(expectedCodes)
 				.httpMethod(httpMethod)
 				.build();
-		HealthMonitor result = os().networking().loadbalancers().healthMonitor().create(monitor);
+		HealthMonitor result = osv3().networking().loadbalancers().healthMonitor().create(monitor);
 		assertEquals(delay, result.getDelay());
 		assertEquals(maxRetries, result.getMaxRetries());
 		assertEquals(timeout, result.getTimeout());
@@ -211,7 +211,7 @@ public class HealthMonitorTests extends AbstractTest{
 				.expectedCodes(expectedCodes)
 				.httpMethod(httpMethod)
 				.build();
-		HealthMonitor result = os().networking().loadbalancers().healthMonitor().update(monitorId,update);
+		HealthMonitor result = osv3().networking().loadbalancers().healthMonitor().update(monitorId,update);
 		assertEquals(delay, result.getDelay());
 		assertEquals(maxRetries, result.getMaxRetries());
 		assertEquals(timeout, result.getTimeout());
@@ -219,7 +219,7 @@ public class HealthMonitorTests extends AbstractTest{
 	}
 	public void testDeleteHealtMonitor(){
 		String id = "48de592b-aab4-4727-9c45-7c7587fde20d";
-		ActionResponse result = os().networking().loadbalancers().healthMonitor().delete(id);
+		ActionResponse result = osv3().networking().loadbalancers().healthMonitor().delete(id);
 		assertTrue(result.isSuccess());
 
 	}

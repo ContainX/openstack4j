@@ -1,0 +1,17 @@
+{
+  "share_network": {
+    "name": "my_network",
+    "segmentation_id": null,
+    "created_at": "2016-02-12T20:40:23.242421",
+    "neutron_subnet_id": "9fe6a763-0f0e-4b6c-b1e7-339eb61f0694",
+    "updated_at": null,
+    "network_type": null,
+    "neutron_net_id": "9ae26d09-f4a3-4ee0-a1e4-6ab11b2bb77e",
+    "ip_version": null,
+    "nova_net_id": null,
+    "cidr": null,
+    "project_id": "d401b6b1f81943e8919f2b6819755fb6",
+    "id": "b1fb4828-93a2-4bbe-b388-7c9ccd69c17a",
+    "description": "This is my share network"
+  }
+}

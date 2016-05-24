@@ -5,7 +5,7 @@ import static org.openstack4j.core.transport.HttpExceptionHandler.mapException;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.PropagateResponse;
 import org.openstack4j.core.transport.functions.ResponseToActionResponse;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 
 /**
  * Propagates an exception based on the specified Status code

@@ -1,0 +1,22 @@
+{
+	"roles": [
+		{
+			"id": "2cce246750cf4e0da09ada919702e30c",
+			"name": "KeystoneServiceAdmin"
+		}, {
+			"id": "3e9245e5660344e39328aa68fc9eb6e0",
+			"name": "admin"
+		}, {
+			"id": "71713b8306ad4566996286ed8afda89e",
+			"name": "KeystoneAdmin"
+		}, {
+			"enabled": "True",
+			"description": "Default role for project membership",
+			"name": "_member_",
+			"id": "9fe2ff9ee4384b1894a90878d3e92bab"
+		}, {
+			"id": "b8e55a37fc3748de887f165954448db5",
+			"name": "Member"
+		}
+	]
+}

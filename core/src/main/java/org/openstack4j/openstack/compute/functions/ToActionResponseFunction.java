@@ -1,13 +1,13 @@
 package org.openstack4j.openstack.compute.functions;
 
+import com.google.common.base.Function;
+
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.functions.ResponseToActionResponse;
-import org.openstack4j.model.compute.ActionResponse;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
-
-import com.google.common.base.Function;
+import org.openstack4j.model.common.ActionResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A Function which consumes the input of an HttpResponse and returns the
@@ -19,7 +19,6 @@ public class ToActionResponseFunction implements Function<HttpResponse, ActionRe
 
     public static final ToActionResponseFunction INSTANCE = new ToActionResponseFunction();
     private static final Logger LOG = LoggerFactory.getLogger(ToActionResponseFunction.class);
-    private static final String COMMA = ",";
     private static final String FAILED_MSG = "Cannot '%s' while instance in in state of %s";
 
     @Override
@@ -35,7 +34,7 @@ public class ToActionResponseFunction implements Function<HttpResponse, ActionRe
                     return ar;
                 }
 
-                LOG.error(response.getStatus() + COMMA + response.getStatusMessage());
+                LOG.error("{}, {}", response.getStatus(), response.getStatusMessage());
                 if (action == null) {
                     return ActionResponse.actionFailed("Instance currently is in build state", 409);
                 }

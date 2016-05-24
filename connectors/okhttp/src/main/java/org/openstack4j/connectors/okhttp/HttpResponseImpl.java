@@ -5,17 +5,17 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Headers;
+import okhttp3.Response;
 import org.openstack4j.api.exceptions.ClientResponseException;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.Response;
 
 public class HttpResponseImpl implements HttpResponse {
 
@@ -90,12 +90,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the input stream
      */
     public InputStream getInputStream() {
-        try {
-            return response.body().byteStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return response.body().byteStream();
     }
 
     /**
@@ -126,7 +121,7 @@ public class HttpResponseImpl implements HttpResponse {
         try {
             return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(response.body().string());
         } catch (Exception e) {
-            LOG.error(e, e.getMessage());
+            LOG.error(e.getMessage(), e);
             throw new ClientResponseException(e.getMessage(), 0, e);
         }
     }
@@ -134,7 +129,7 @@ public class HttpResponseImpl implements HttpResponse {
     @Override
     public void close() throws IOException {
     }
-    
+
     @Override
     public String getContentType() {
         return header(ClientConstants.HEADER_CONTENT_TYPE);

@@ -21,7 +21,7 @@ public class ImageTests extends AbstractTest {
     public void serverListingTest() throws Exception {
         respondWith(JSON_IMAGES);
         
-        List<? extends Image> images = os().compute().images().list();
+        List<? extends Image> images = osv3().compute().images().list();
         assertEquals(7, images.size());
 
     }

@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.networking.NetworkService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.NetworkUpdate;
 import org.openstack4j.openstack.networking.domain.NeutronNetwork;

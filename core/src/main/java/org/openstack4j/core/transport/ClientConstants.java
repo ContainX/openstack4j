@@ -2,11 +2,10 @@ package org.openstack4j.core.transport;
 
 /**
  * Common String Constants
- * 
+ *
  * @author Jeremy Unruh
  */
-public final class ClientConstants 
-{
+public final class ClientConstants {
 
     public static final String HEADER_X_AUTH_TOKEN = "X-Auth-Token";
     public static final String HEADER_X_SUBJECT_TOKEN = "X-Subject-Token";
@@ -26,10 +25,19 @@ public final class ClientConstants
     public static final String CONTENT_TYPE_TEXT_HTML = "text/html";
 
     // Paths
-    public static final String PATH_TENANTS = "/tenants";
-    public static final String PATH_ROLES = "/roles";
-    public static final String PATH_EXTENSIONS = "/extensions";
     public static final String URI_SEP = "/";
-
+    public static final String PATH_PROJECTS = "/projects";
+    public static final String PATH_ROLES = "/roles";
+    public static final String PATH_USERS = "/users";
+    public static final String PATH_SERVICES = "/services";
+    public static final String PATH_DOMAINS = "/domains";
+    public static final String PATH_ENDPOINTS = "/endpoints";
+    public static final String PATH_EXTENSIONS = "/extensions";
+    public static final String PATH_GROUPS = "/groups";
+    public static final String PATH_POLICIES = "/policies";
+    public static final String PATH_REGIONS = "/regions";
+    public static final String PATH_CREDENTIALS = "/credentials";
+    public static final String PATH_TOKENS = "/auth/tokens";
+    public static final String PATH_TENANTS = "/tenants";
 
 }

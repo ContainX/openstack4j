@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.HealthMonitor;
 import org.openstack4j.model.network.ext.HealthMonitorAssociate;
 import org.openstack4j.model.network.ext.LbPool;

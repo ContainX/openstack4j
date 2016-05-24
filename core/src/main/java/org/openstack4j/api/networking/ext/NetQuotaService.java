@@ -1,7 +1,9 @@
 package org.openstack4j.api.networking.ext;
 
+import java.util.List;
+
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.NetQuota;
 import org.openstack4j.model.network.builder.NetQuotaBuilder;
 
@@ -13,11 +15,11 @@ import org.openstack4j.model.network.builder.NetQuotaBuilder;
 public interface NetQuotaService extends RestService {
     
     /**
-     * Fetches the network quotas for the current tenant
+     * Lists quotas for tenants who have non-default quota values, and lists, updates, and resets quotas for a tenan
      * 
-     * @return the tenants quota
+     * @return the list of quotas
      */
-    NetQuota get();
+    List<? extends NetQuota> get();
     
     /**
      * Fetches the network quotas for the specified tenant

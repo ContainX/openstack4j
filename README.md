@@ -1,7 +1,7 @@
-OpenStack4j 
+OpenStack4j
 ===========
 
-[![Build Status](https://travis-ci.org/gondor/openstack4j.svg?branch=master)](https://travis-ci.org/gondor/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
+[![Build Status](https://travis-ci.org/ContainX/openstack4j.svg?branch=master)](https://travis-ci.org/ContainX/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gondor/openstack4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry, Data Processing as well as many extensions (LBaaS, FWaaS, Quota-Sets, etc)
@@ -18,7 +18,12 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 
 ## Bug Reports
 
-* GitHub Issues: [Click Here](https://github.com/gondor/openstack4j/issues)
+* GitHub Issues: [Click Here](https://github.com/ContainX/openstack4j/issues)
+
+## Requirements
+
+* OpenStack4j 3.0.X - Java 8
+* OpenStack4j 2.0.X - Java 7
 
 Maven
 -----
@@ -34,7 +39,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.10</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
@@ -50,7 +55,7 @@ See notes above about connectors (same rules apply) to development branches.
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>2.11-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -77,21 +82,21 @@ If you would like to contribute please see our contributing [guidelines](https:/
 
 | Rank | Login | Contributions |
 | :--- | :---- | :------------ |
-| 1  | @gondor           | 498 |
-| 2  | @octupszhang      | 26 |
-| 3  | @ekasitk          | 17 |
-| 4  | @magixyu          | 17 |
-| 5  | @maxrome          | 12 |
-| 6  | @isartcanyameres  | 9 |
-| 7  | @n-r-anderson     | 7 |
-| 8  | @krishnabrucelee  | 6 |
-| 9 | @iviireczech          | 6 |
-| 10 | @symcssn          | 4 |
-| 11  | @peter-nordquist  | 4 |
-| 12 | @RibeiroAna       | 4 |
-| 13 | @olivergondza     | 3 |
-| 14 | @auhli		     | 3 |
-| 15 | @NareshkumarCIET  | 2 |
+| 1  | @gondor           | 527 |
+| 2  | @auhlig       	   | 57 |
+| 3  | @octupszhang      | 26 |
+| 4  | @gonzolino        | 18 |
+| 5  | @ekasitk          | 17 |
+| 6  | @magixyu          | 17 |
+| 7  | @maxrome          | 12 |
+| 8  | @isartcanyameres  | 9 |
+| 9  | @iviireczech      | 8 |
+| 10  | @n-r-anderson     | 7 |
+| 11 | @krishnabrucelee  | 6 |
+| 12 | @peter-nordquist  | 4 |
+| 13 | @RibeiroAna       | 4 |
+| 14 | @symcssn          | 4 |
+| 15 | @olivergondza     | 5 |
 
 #### Throughput
 
@@ -105,23 +110,138 @@ Below are some examples of the API usage.  Please visit [www.OpenStack4j.com](ht
 
 ### Authenticating
 
-Creating and authenticating against OpenStack is extremely simple. Below is an example of authenticating which will
-result with the authorized OSClient.  OSClient allows you to invoke Compute, Identity, Neutron operations fluently. 
+OpenStack4j 3.0.0+ supports Identity (Keystone) V3 and V2.
 
+OpenStack4j 3.0.0 introduced some breaking changes.
+The legacy Identity V2 API now uses the class ```OSClientV2``` in place of the class OSClient.
+
+##### Using Identity V2 authentication:
 ```java
 // Identity V2 Authentication Example
-OSClient os = OSFactory.builder()
+OSClientV2 os = OSFactory.builderV2()
                        .endpoint("http://127.0.0.1:5000/v2.0")
                        .credentials("admin","sample")
                        .tenantName("admin")
                        .authenticate();
 ```
 
-#### Identity Operations (Keystone)
+##### Using Identity V3 authentication
 
-After successful authentication you can invoke any Identity (Keystone) directly from the OSClient. 
+Creating and authenticating against OpenStack is extremely simple. Below is an example of authenticating which will
+result with the authorized OSClient.  OSClient allows you to invoke Compute, Identity, Neutron operations fluently.
 
-Identity Services fully cover Tenants, Users, Roles, Services, Endpoints and Identity Extension listings.  The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
+You can use either pass the users name or id and password in the following way
+```java
+.credentials("username", "secret", Identifier.byId("domain id"))
+```
+or
+```java
+.credentials("user id", "secret")
+```
+to provide credentials in each of the following cases.
+
+
+Using Identity V3 authentication you basically have 4 options:
+
+(1) authenticate with project-scope
+```java
+OSClientV3 os = OSFactory.builderV3()
+                .endpoint("http://<fqdn>:5000/v3")
+                .credentials("admin", "secret", Identifier.byId("user domain id"))
+                .scopeToProject(Identifier.byId("project id"))
+                .authenticate());
+```
+(2) authenticate with domain-scope
+```java
+OSClientV3 os = OSFactory.builderV3()
+                .endpoint("http://<fqdn>:5000/v3")
+                .credentials("admin", "secret", Identifier.byId("user domain id"))
+                .scopeToDomain(Identifier.byId("domain id"))
+                .authenticate());
+```
+
+(3) authenticate unscoped
+```java
+OSClientV3 os = OSFactory.builderV3()
+                .endpoint("http://<fqdn>:5000/v3")
+                .credentials("user id", "secret")
+                .authenticate();
+```
+
+(4) authenticate with a token
+```java
+OSClientV3 os = OSFactory.builderV3()
+                .endpoint("http://<fqdn>:5000/v3")
+                .token("token id")
+                .scopeToProject(Identifier.byId("project id"))
+                .authenticate());
+```
+
+#### Identity Operations (Keystone) V3
+
+After successful v3 - authentication you can invoke any Identity (Keystone) V3 directly from the OSClientV3.
+
+Identity Services fully cover User, Role, Project, Domain, Group,.. service operations (in progess).  
+The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
+
+**NOTE**: The ```os``` used here is an instance of ```org.openstack4j.api.OSClient.OSClientV3```.
+
+**User operations**
+```java
+// Create a User associated to the new Project
+User user = os.identity().users().create(Builders.user()
+													.domainId("domain id")
+													.name("foobar")
+													.password("secret")
+													.email("foobar@example.com")
+													.enabled(true)
+													.build());
+//or
+User user = os.identity().users().create("domain id", "foobar", "secret", "foobar@example.org", true);
+
+// Get detailed info on a user by id
+User user = os.identity().users.get("user id");
+//or by name and domain identifier
+User user = os.identity().users.getByName("username", "domain id");
+
+// Add a project based role to the user
+os.identity().roles().grantProjectUserRole("project id","user id", "role id");
+
+// Add a domain based role to the user
+os.identity().roles().grantDomainUserRole("domain id","user id", "role id");
+
+// Add a user to a group
+os.identity().users().addUserToGroup("user id", "group id");
+```
+
+**Role operations**
+```java
+// Get a list of all roles
+os.identity().roles().list();
+
+// Get a role by name
+os.identity().roles().getByName("role name);
+```
+
+**Project operations**
+
+```java
+// Create a project
+os.identity().project().create(Builders.project()
+											.name("project name")
+											.description("project description")
+											.domainId("project domain id")
+											.enabled(true)
+											.build());
+```
+
+#### Identity Operations (Keystone) V2
+
+After successful v2 - authentication you can invoke any Identity (Keystone) V2 directly from the OSClientV2.
+
+Identity V2 Services fully cover Tenants, Users, Roles, Services, Endpoints and Identity Extension listings.  The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
+
+**NOTE**: The ```os``` used here is an instance of ```org.openstack4j.api.OSClient.OSClientV2```.
 
 **Create a Tenant, User and associate a Role**
 ```java
@@ -136,7 +256,6 @@ os.identity().roles().addUserRole(tenant.getId(), user.getId(), os.identity().ro
 
 ```
 
-
 ### Compute Operations (Nova)
 
 OpenStack4j covers most the major common compute based operations.  With the simplistic API approach you can fully manage Servers, Flavors, Images, Quota-Sets, Diagnostics, Tenant Usage and more.  As the API evolves additional providers and extensions will be covered and documented within the API.
@@ -146,7 +265,7 @@ OpenStack4j covers most the major common compute based operations.  With the sim
 // Create a Flavor for a special customer base
 Flavor flavor = os.compute().flavors()
                   .create(Builders.flavor().name("Gold").vcpus(4).disk(80).ram(2048).build());
-                  
+
 // Create and Boot a new Server (minimal builder options shown in example)
 Server server = os.compute().servers()
                   .boot(Builders.server().name("Ubuntu 2").flavor(flavor.getId()).image("imageId").build());
@@ -198,13 +317,13 @@ Subnet subnet = os.networking().subnet().create(Builders.subnet()
 
 **Router Operations**
 ```java
-// List all Routers 
+// List all Routers
 List<? extends Router> = os.networking().router().list();
 
 // Create a Router
 Router router = os.networking().router().create(Builders.router()
                   .name("ext_net").adminStateUp(true).externalGateway("networkId").build());
-                  
+
 ```
 
 ### Image Operations (Glance)
@@ -229,7 +348,7 @@ os.images().update(image.toBuilder()
 
 **Download the Image Data**
 ```java
-InputStream is = os.images().getAsStream("imageId"); 
+InputStream is = os.images().getAsStream("imageId");
 ```
 
 **Create a Image**
@@ -249,7 +368,7 @@ License
 ```
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright 2014 Jeremy Unruh and OpenStack4j
+Copyright 2016 ContainX and OpenStack4j
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
 use this file except in compliance with the License. You may obtain a copy of

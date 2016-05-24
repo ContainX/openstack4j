@@ -1,0 +1,14 @@
+{
+   "l2_policy":{
+      "description":"Implicitly created L2 policy",
+      "network_id":"f9c1f545-6ea6-4b05-99d5-50f02ed3c640",
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+      "policy_target_groups":[
+         "1fb00129-06cf-48e5-8282-d15dbf4be60b"
+      ],
+      "shared":false,
+      "id":"08c1c093-6337-4383-938e-2d9c6cac531a",
+      "name":"test-policy-target-group"
+   }
+}

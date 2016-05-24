@@ -1,0 +1,20 @@
+{
+  "volume_type": {
+    "required_extra_specs": null,
+    "extra_specs": {
+      "snapshot_support": "True",
+      "driver_handles_share_servers": "True"
+    },
+    "name": "default",
+    "id": "be27425c-f807-4500-a056-d00721db45cf"
+  },
+  "share_type": {
+    "required_extra_specs": null,
+    "extra_specs": {
+      "snapshot_support": "True",
+      "driver_handles_share_servers": "True"
+    },
+    "name": "default",
+    "id": "be27425c-f807-4500-a056-d00721db45cf"
+  }
+}

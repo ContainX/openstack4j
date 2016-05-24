@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * HttpCommand is responsible for executing the actual request driven by the HttpExecutor.
+ * HttpCommand is responsible for executing the actual request driven by the
+ * HttpExecutor.
  *
  * @param <R>
  */
@@ -36,7 +37,9 @@ public final class HttpCommand<R> {
 
     /**
      * Creates a new HttpCommand from the given request
-     * @param request the request
+     * 
+     * @param request
+     *            the request
      * @return the command
      */
     public static <R> HttpCommand<R> create(HttpRequest<R> request) {
@@ -47,12 +50,10 @@ public final class HttpCommand<R> {
 
     private void initialize() {
         URI url = null;
-        try
-        {
+        try {
             url = populateQueryParams(request);
-        }
-        catch (URISyntaxException e) {
-            throw new ConnectionException(e.getMessage(),e.getIndex(), e);
+        } catch (URISyntaxException e) {
+            throw new ConnectionException(e.getMessage(), e.getIndex(), e);
         }
         client = HttpClientFactory.INSTANCE.getClient(request.getConfig());
 
@@ -69,11 +70,15 @@ public final class HttpCommand<R> {
         case HEAD:
             clientReq = new HttpHead(url);
             break;
+        case PATCH:
+            clientReq = new HttpPatch(url);
+            break;
         case GET:
-        default:
             clientReq = new HttpGet(url);
             break;
-        }
+        default:
+            throw new IllegalArgumentException("Unsupported http method: " + request.getMethod());
+        } 
         clientReq.setHeader("Accept", MediaType.JSON_UTF_8.toString());
         populateHeaders(request);
     }
@@ -89,25 +94,20 @@ public final class HttpCommand<R> {
         EntityBuilder builder = null;
 
         if (request.getEntity() != null) {
-            if (InputStream.class.isAssignableFrom(request.getEntity().getClass()))
-            {
-                InputStreamEntity ise = new InputStreamEntity((InputStream)request.getEntity(), ContentType.create(request.getContentType()));
-                ((HttpEntityEnclosingRequestBase)clientReq).setEntity(ise);
+            if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) {
+                InputStreamEntity ise = new InputStreamEntity((InputStream) request.getEntity(),
+                        ContentType.create(request.getContentType()));
+                ((HttpEntityEnclosingRequestBase) clientReq).setEntity(ise);
+            } else {
+                builder = EntityBuilder.create().setContentType(ContentType.create(request.getContentType(), "UTF-8"))
+                        .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer()
+                                .writeValueAsString(request.getEntity()));
             }
-            else
-            {
-                builder = EntityBuilder.create()
-                	.setContentType(ContentType.create(request.getContentType(),"UTF-8"))
-                    .setText(ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity()));
-            }
-        }
-        else if(request.hasJson()) {
-            builder = EntityBuilder.create()
-                    .setContentType(ContentType.APPLICATION_JSON)
-                    .setText(request.getJson());
+        } else if (request.hasJson()) {
+            builder = EntityBuilder.create().setContentType(ContentType.APPLICATION_JSON).setText(request.getJson());
         }
         if (builder != null && clientReq instanceof HttpEntityEnclosingRequestBase)
-            ((HttpEntityEnclosingRequestBase)clientReq).setEntity(builder.build());
+            ((HttpEntityEnclosingRequestBase) clientReq).setEntity(builder.build());
 
         return client.execute(clientReq);
     }
@@ -146,7 +146,7 @@ public final class HttpCommand<R> {
         if (!request.hasQueryParams())
             return uri.build();
 
-        for(Map.Entry<String, List<Object> > entry : request.getQueryParams().entrySet()) {
+        for (Map.Entry<String, List<Object>> entry : request.getQueryParams().entrySet()) {
             for (Object o : entry.getValue()) {
                 uri.addParameter(entry.getKey(), String.valueOf(o));
             }
@@ -156,9 +156,10 @@ public final class HttpCommand<R> {
 
     private void populateHeaders(HttpRequest<R> request) {
 
-        if (!request.hasHeaders()) return;
+        if (!request.hasHeaders())
+            return;
 
-        for(Map.Entry<String, Object> h : request.getHeaders().entrySet()) {
+        for (Map.Entry<String, Object> h : request.getHeaders().entrySet()) {
             clientReq.addHeader(h.getKey(), String.valueOf(h.getValue()));
         }
     }

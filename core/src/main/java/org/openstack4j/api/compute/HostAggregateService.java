@@ -3,7 +3,7 @@ package org.openstack4j.api.compute;
 import java.util.List;
 import java.util.Map;
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.HostAggregate;
 /**
  * Host aggregate Operations API

@@ -1,0 +1,11 @@
+{
+   "policy_action":{
+      "action_value":null,
+      "description":"",
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "action_type":"redirect",
+      "shared":false,
+      "id":"b25bbad7-224b-4810-ae1c-7d10fb4468b5",
+      "name":"redirect"
+   }
+}
