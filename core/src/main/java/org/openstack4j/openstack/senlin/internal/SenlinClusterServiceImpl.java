@@ -27,6 +27,7 @@ public class SenlinClusterServiceImpl extends BaseSenlinServices implements Senl
 
 	@Override
 	public Cluster get(String clusterID) {
+		checkNotNull(clusterID);
 		return get(SenlinCluster.class, uri("/clusters/%s", clusterID)).execute();
 	}
 
@@ -40,6 +41,13 @@ public class SenlinClusterServiceImpl extends BaseSenlinServices implements Senl
 	public ActionResponse delete(String clusterID) {
 		checkNotNull(clusterID);
 		return deleteWithResponse(uri("/clusters/%s", clusterID)).execute();
+	}
+
+	@Override
+	public Cluster update(String clusterID, ClusterActionCreate newClusterAction) {
+		checkNotNull(clusterID);
+		checkNotNull(newClusterAction);
+		return patch(SenlinCluster.class, "/clusters/%s", clusterID).entity(newClusterAction).execute();
 	}
 
 	@Override

@@ -18,17 +18,17 @@ public interface PolicyCreateBuilder extends Buildable.Builder<PolicyCreateBuild
 
 	PolicyCreateBuilder properties(Map<String, Object> properties);
 
-	PolicyCreateBuilder adjustment(Map<String, Object> adjustment);
+	PolicyCreateBuilder adjustment(Map<String, String> adjustment);
 
-	PolicyCreateBuilder min_step(String min_step);
+	PolicyCreateBuilder minStep(int minStep);
 
-	PolicyCreateBuilder number(String number);
+	PolicyCreateBuilder number(int number);
 
-	PolicyCreateBuilder adjustment_type(String adjustment_type);
+	PolicyCreateBuilder adjustmentType(String adjustmentType);
 
 	PolicyCreateBuilder event(String event);
 
-	PolicyCreateBuilder spec_type(String spec_type);
+	PolicyCreateBuilder specType(String specType);
 
 	PolicyCreateBuilder version(String version);
 

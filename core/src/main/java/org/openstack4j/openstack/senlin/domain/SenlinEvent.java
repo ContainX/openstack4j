@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.senlin.Event;
 import org.openstack4j.openstack.common.ListResult;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,25 +24,25 @@ public class SenlinEvent implements Event {
 	@JsonProperty("action")
 	private String action;
 	@JsonProperty("cluster_id")
-	private String cluster_id;
+	private String clusterID;
 	@JsonProperty("id")
 	private String id;
 	@JsonProperty("level")
-	private String level;
+	private Integer level;
 	@JsonProperty("obj_id")
-	private String obj_id;
+	private String objID;
 	@JsonProperty("obj_name")
-	private String obj_name;
+	private String objName;
 	@JsonProperty("obj_type")
-	private String obj_type;
+	private String objType;
 	@JsonProperty("project")
 	private String project;
 	@JsonProperty("status")
 	private String status;
 	@JsonProperty("status_reason")
-	private String status_reason;
+	private String statusReason;
 	@JsonProperty("timestamp")
-	private String timestamp;
+	private Date timestamp;
 	@JsonProperty("user")
 	private String user;
 
@@ -54,15 +55,15 @@ public class SenlinEvent implements Event {
 	public String toString() {
 		return "SenlinEvent{" +
 				"action='" + action + '\'' +
-				", cluster_id='" + cluster_id + '\'' +
+				", cluster_id='" + clusterID + '\'' +
 				", id='" + id + '\'' +
 				", level='" + level + '\'' +
-				", obj_id='" + obj_id + '\'' +
-				", obj_name='" + obj_name + '\'' +
-				", obj_type='" + obj_type + '\'' +
+				", obj_id='" + objID + '\'' +
+				", obj_name='" + objName + '\'' +
+				", obj_type='" + objType + '\'' +
 				", project='" + project + '\'' +
 				", status='" + status + '\'' +
-				", status_reason='" + status_reason + '\'' +
+				", status_reason='" + statusReason + '\'' +
 				", timestamp='" + timestamp + '\'' +
 				", user='" + user + '\'' +
 				'}';

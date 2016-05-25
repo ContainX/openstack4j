@@ -42,7 +42,7 @@ public interface SenlinPolicyService {
 	Policy get(String policyID);
 
 	/**
-	 * <code>PATCH /v1/profiles/​{profile_id}</code><br \>
+	 * <code>PATCH /v1/policies/​{policy_id}​</code><br \>
 	 *
 	 * Update a {@link Policy} out of a {@link PolicyCreate} object
 	 *

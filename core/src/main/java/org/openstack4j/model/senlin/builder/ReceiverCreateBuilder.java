@@ -14,12 +14,12 @@ public interface ReceiverCreateBuilder extends Buildable.Builder<ReceiverCreateB
 
 	ReceiverCreateBuilder action(String action);
 
-	ReceiverCreateBuilder cluster_id(String cluster_id);
+	ReceiverCreateBuilder clusterID(String clusterID);
 
 	ReceiverCreateBuilder name(String name);
 
 	ReceiverCreateBuilder type(String type);
 
-	ReceiverCreateBuilder params(Map<String, Object> params);
+	ReceiverCreateBuilder params(Map<String, String> params);
 
 }

@@ -37,6 +37,7 @@ public class SenlinProfileServiceImpl extends BaseSenlinServices implements Senl
 	@Override
 	public Profile update(String policyID, ProfileCreate newPolicy) {
 		checkNotNull(policyID);
+		checkNotNull(newPolicy);
 		return patch(SenlinProfile.class, uri("/profiles/%s", policyID)).entity(newPolicy).execute();
 	}
 

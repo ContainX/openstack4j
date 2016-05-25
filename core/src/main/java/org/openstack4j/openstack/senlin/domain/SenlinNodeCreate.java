@@ -85,13 +85,13 @@ public class SenlinNodeCreate implements NodeCreate {
 		}
 
 		@Override
-		public NodeCreateBuilder cluster_id(String cluster_id) {
-			model.node.put("cluster_id", cluster_id);
+		public NodeCreateBuilder clusterID(String clusterID) {
+			model.node.put("cluster_id", clusterID);
 			return this;
 		}
 
 		@Override
-		public NodeCreateBuilder metadata(Map<String, Object> metadata) {
+		public NodeCreateBuilder metadata(Map<String, String> metadata) {
 			model.node.put("metadata", metadata);
 			return this;
 		}
@@ -103,8 +103,8 @@ public class SenlinNodeCreate implements NodeCreate {
 		}
 
 		@Override
-		public NodeCreateBuilder profile_id(String profile_id) {
-			model.node.put("profile_id", profile_id);
+		public NodeCreateBuilder profileID(String profileID) {
+			model.node.put("profile_id", profileID);
 			return this;
 		}
 

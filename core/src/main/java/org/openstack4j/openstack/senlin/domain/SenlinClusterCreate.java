@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import org.openstack4j.model.senlin.ClusterCreate;
 import org.openstack4j.model.senlin.builder.ClusterCreateBuilder;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -70,7 +69,7 @@ public class SenlinClusterCreate implements ClusterCreate {
 			this.model = model;
 
 			this.model.cluster = Maps.newHashMap();
-			HashMap<String, Object> metadata = Maps.newHashMap();
+			Map<String, String> metadata = Maps.newHashMap();
 			this.model.cluster.put("metadata", metadata);
 		}
 
@@ -92,37 +91,37 @@ public class SenlinClusterCreate implements ClusterCreate {
 		}
 
 		@Override
-		public ClusterCreateBuilder metadata(Map<String, Object> metadata) {
+		public ClusterCreateBuilder metadata(Map<String, String> metadata) {
 			model.cluster.put("metadata", metadata);
 			return this;
 		}
 
 		@Override
-		public ClusterCreateBuilder desired_capacity(String desired_capacity) {
-			model.cluster.put("desired_capacity", desired_capacity);
+		public ClusterCreateBuilder desiredCapacity(int desiredCapacity) {
+			model.cluster.put("desired_capacity", desiredCapacity);
 			return this;
 		}
 
 		@Override
-		public ClusterCreateBuilder max_size(String max_size) {
-			model.cluster.put("max_size", max_size);
+		public ClusterCreateBuilder maxSize(int maxSize) {
+			model.cluster.put("max_size", maxSize);
 			return this;
 		}
 
 		@Override
-		public ClusterCreateBuilder min_size(String min_size) {
-			model.cluster.put("min_size", min_size);
+		public ClusterCreateBuilder minSize(int minSize) {
+			model.cluster.put("min_size", minSize);
 			return this;
 		}
 
 		@Override
-		public ClusterCreateBuilder profile_id(String profile_id) {
-			model.cluster.put("profile_id", profile_id);
+		public ClusterCreateBuilder profileID(String profileID) {
+			model.cluster.put("profile_id", profileID);
 			return this;
 		}
 
 		@Override
-		public ClusterCreateBuilder timeout(String timeout) {
+		public ClusterCreateBuilder timeout(int timeout) {
 			model.cluster.put("timeout", timeout);
 			return this;
 		}

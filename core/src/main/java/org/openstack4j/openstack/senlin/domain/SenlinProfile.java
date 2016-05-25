@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.senlin.Profile;
 import org.openstack4j.openstack.common.ListResult;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class SenlinProfile implements Profile {
 	private static final long serialVersionUID = 5188248340362305141L;
 
 	@JsonProperty("created_at")
-	private String created_at;
+	private Date createdAt;
 	@JsonProperty("domain")
 	private String domain;
 	@JsonProperty("id")
@@ -32,7 +33,7 @@ public class SenlinProfile implements Profile {
 	@JsonProperty("project")
 	private String project;
 	@JsonProperty("metadata")
-	private Map<String, Object> metadata;
+	private Map<String, Map> metadata;
 	@JsonProperty("spec")
 	private Map<String, Object> spec;
 
@@ -49,7 +50,7 @@ public class SenlinProfile implements Profile {
 	@Override
 	public String toString() {
 		return "SenlinProfile{" +
-				"created_at='" + created_at + '\'' +
+				"created_at='" + createdAt + '\'' +
 				", domain='" + domain + '\'' +
 				", id='" + id + '\'' +
 				", name='" + name + '\'' +

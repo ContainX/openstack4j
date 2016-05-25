@@ -12,8 +12,8 @@ import java.util.Map;
  */
 public interface NodeActionCreateBuilder extends Buildable.Builder<NodeActionCreateBuilder, NodeActionCreate> {
 
-	NodeActionCreateBuilder check(Map<String, Object> check);
+	NodeActionCreateBuilder check(Map<String, String> check);
 
-	NodeActionCreateBuilder recover(Map<String, Object> recover);
+	NodeActionCreateBuilder recover(Map<String, String> recover);
 
 }

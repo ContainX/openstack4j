@@ -7,6 +7,7 @@ import org.openstack4j.model.senlin.ProfileType;
 import org.openstack4j.openstack.common.ListResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * This is a model of a senlinProfile_type. It uses Jackson annotations for
@@ -23,7 +24,7 @@ public class SenlinProfileType implements ProfileType {
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("schema")
-	private String schema;
+	private Map<String, Map> schema;
 
 	@Override
 	public String getName() {

@@ -21,19 +21,19 @@ public class SenlinClusterPolicy implements ClusterPolicy {
 	private static final long serialVersionUID = 5451213592273429432L;
 
 	@JsonProperty("cluster_id")
-	private String cluster_id;
+	private String clusterID;
 	@JsonProperty("cluster_name")
-	private String cluster_name;
+	private String clusterName;
 	@JsonProperty("enabled")
-	private String enabled;
+	private Boolean enabled;
 	@JsonProperty("id")
 	private String id;
 	@JsonProperty("policy_id")
-	private String policy_id;
+	private String policyID;
 	@JsonProperty("policy_name")
-	private String policy_name;
+	private String policyName;
 	@JsonProperty("policy_type")
-	private String policy_type;
+	private String policyType;
 	@JsonProperty("name")
 
 	@Override
@@ -44,13 +44,13 @@ public class SenlinClusterPolicy implements ClusterPolicy {
 	@Override
 	public String toString() {
 		return "SenlinClusterPolicy{" +
-				"cluster_id='" + cluster_id + '\'' +
-				", cluster_name='" + cluster_name + '\'' +
+				"cluster_id='" + clusterID + '\'' +
+				", cluster_name='" + clusterName + '\'' +
 				", enabled='" + enabled + '\'' +
 				", id='" + id + '\'' +
-				", policy_id='" + policy_id + '\'' +
-				", policy_name='" + policy_name + '\'' +
-				", policy_type='" + policy_type + '\'' +
+				", policy_id='" + policyID + '\'' +
+				", policy_name='" + policyName + '\'' +
+				", policy_type='" + policyType + '\'' +
 				'}';
 	}
 

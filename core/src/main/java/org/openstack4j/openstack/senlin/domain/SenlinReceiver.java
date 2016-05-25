@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.senlin.Receiver;
 import org.openstack4j.openstack.common.ListResult;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,9 +26,9 @@ public class SenlinReceiver implements Receiver {
 	@JsonProperty("action")
 	private String action;
 	@JsonProperty("cluster_id")
-	private String cluster_id;
+	private String clusterID;
 	@JsonProperty("created_at")
-	private String created_at;
+	private Date createdAt;
 	@JsonProperty("domain")
 	private String domain;
 	@JsonProperty("id")
@@ -38,28 +40,28 @@ public class SenlinReceiver implements Receiver {
 	@JsonProperty("type")
 	private String type;
 	@JsonProperty("updated_at")
-	private String updated_at;
+	private Date updatedAt;
 	@JsonProperty("user")
 	private String user;
 	@JsonProperty("actor")
-	private Map<String, Object> actor;
+	private Map<String, ArrayList<String>> actor;
 	@JsonProperty("channel")
-	private Map<String, Object> channel;
+	private Map<String, String> channel;
 	@JsonProperty("params")
-	private Map<String, Object> params;
+	private Map<String, String> params;
 
 	@Override
 	public String toString() {
 		return "SenlinReceiver{" +
 				"action='" + action + '\'' +
-				", cluster_id='" + cluster_id + '\'' +
-				", created_at='" + created_at + '\'' +
+				", cluster_id='" + clusterID + '\'' +
+				", created_at='" + createdAt + '\'' +
 				", domain='" + domain + '\'' +
 				", id='" + id + '\'' +
 				", name='" + name + '\'' +
 				", project='" + project + '\'' +
 				", type='" + type + '\'' +
-				", updated_at='" + updated_at + '\'' +
+				", updated_at='" + updatedAt + '\'' +
 				", user='" + user + '\'' +
 				", actor=" + actor +
 				", channel=" + channel +

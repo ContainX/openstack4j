@@ -33,7 +33,7 @@ public interface SenlinClusterService {
 	Cluster get(String clusterID);
 
 	/**
-	 * <code>POST /v1/policies</code><br \>
+	 * <code>POST /v1/clusters</code><br \>
 	 *
 	 * Creates a new {@link Cluster} out of a {@link ClusterCreate} object
 	 *
@@ -51,6 +51,19 @@ public interface SenlinClusterService {
 	 * @return the action response
 	 */
 	ActionResponse delete(String clusterID);
+
+	/**
+	 * <code>PATCH /v1/clusters/​{cluster_id}​</code><br \>
+	 *
+	 * Update a {@link Cluster} out of a {@link ClusterCreate} object
+	 *
+	 * @param clusterID
+	 *             Id of {@link Cluster}
+	 * @param newClusterAction
+	 *            {@link ClusterCreate} object out of which stack is to be update
+	 * @return new {@link Cluster} as returned from the server
+	 */
+	Cluster update(String clusterID, ClusterActionCreate newClusterAction);
 
 	/**
 	 * Service implementation which provides methods for manipulation of action

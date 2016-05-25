@@ -53,6 +53,19 @@ public interface SenlinNodeService {
 	ActionResponse delete(String nodeID);
 
 	/**
+	 * <code>PATCH /v1/nodes/​{node_id}​</code><br \>
+	 *
+	 * Update a {@link Node} out of a {@link NodeCreate} object
+	 *
+	 * @param nodeID
+	 *             Id of {@link Node}
+	 * @param newNode
+	 *            {@link NodeCreate} object out of which stack is to be update
+	 * @return new {@link Node} as returned from the server
+	 */
+	Node update(String nodeID, NodeCreate newNode);
+
+	/**
 	 * Service implementation which provides methods for manipulation of action
 	 *
 	 * @return Action

@@ -6,6 +6,8 @@ import org.openstack4j.openstack.senlin.domain.SenlinAction;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * This class contains getters for all implementation of the available action services
  * 
@@ -20,6 +22,7 @@ public class SenlinActionServiceImpl extends BaseSenlinServices implements Senli
 
 	@Override
 	public Action get(String actionID) {
+		checkNotNull(actionID);
 		return get(SenlinAction.class, uri("/actions/%s", actionID)).execute();
 	}
 }

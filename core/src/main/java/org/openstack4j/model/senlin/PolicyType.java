@@ -7,7 +7,7 @@ import org.openstack4j.model.ModelEntity;
  * All getters map to the possible return values of
  * <code> GET /v1/policy-types/​{policy_type}​</code>
  * 
- * @see http://developer.openstack.org/api-ref-orchestration-v1.html
+ * @see http://developer.openstack.org/api-ref-clustering-v1.html
  * 
  * @author lion
  * 

@@ -23,6 +23,8 @@ public class SenlinClusterPolicyServiceImpl extends BaseSenlinServices implement
 
 	@Override
 	public ClusterPolicy get(String clusterID, String policyID) {
+		checkNotNull(clusterID);
+		checkNotNull(policyID);
 		return get(SenlinClusterPolicy.class, uri("/clusters/%s/policies/%s", clusterID, policyID)).execute();
 	}
 

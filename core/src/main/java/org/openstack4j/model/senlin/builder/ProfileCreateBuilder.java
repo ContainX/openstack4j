@@ -16,7 +16,7 @@ public interface ProfileCreateBuilder extends Buildable.Builder<ProfileCreateBui
 
 	ProfileCreateBuilder spec(Map<String, Object> spec);
 
-	ProfileCreateBuilder metadata(Map<String, Object> properties);
+	ProfileCreateBuilder metadata(Map<String, Map> metadata);
 
 
 }

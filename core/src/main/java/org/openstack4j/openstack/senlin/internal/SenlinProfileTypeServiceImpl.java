@@ -6,6 +6,8 @@ import org.openstack4j.openstack.senlin.domain.SenlinProfileType;
 
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * This class contains getters for all implementation of the available profile-type services
  * 
@@ -20,6 +22,7 @@ public class SenlinProfileTypeServiceImpl extends BaseSenlinServices implements 
 
 	@Override
 	public ProfileType get(String ProfileType) {
+		checkNotNull(ProfileType);
 		return get(SenlinProfileType.class, uri("/profile-types/%s", ProfileType)).execute();
 	}
 }

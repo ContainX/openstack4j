@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openstack4j.model.senlin.Action;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This is a model of a senlinAction. It uses Jackson annotations for
@@ -25,37 +25,37 @@ public class SenlinAction implements Action {
 	@JsonProperty("cause")
 	private String cause;
 	@JsonProperty("created_at")
-	private String created_at;
+	private Date createdAt;
 	@JsonProperty("depended_by")
-	private ArrayList depended_by;
+	private List<String> dependedBy;
 	@JsonProperty("depended_on")
-	private ArrayList depended_on;
+	private List<String> dependedOn;
 	@JsonProperty("end_time")
-	private String end_time;
+	private Float endTime;
 	@JsonProperty("id")
 	private String id;
 	@JsonProperty("inputs")
-	private HashMap inputs;
+	private Map<String, String> inputs;
 	@JsonProperty("interval")
-	private String interval;
+	private Integer interval;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("outputs")
-	private HashMap outputs;
+	private Map<String, String> outputs;
 	@JsonProperty("owner")
 	private String owner;
 	@JsonProperty("start_time")
-	private String start_time;
+	private Float startTime;
 	@JsonProperty("status")
 	private String status;
 	@JsonProperty("status_reason")
-	private String status_reason;
+	private String statusReason;
 	@JsonProperty("target")
 	private String target;
 	@JsonProperty("timeout")
-	private String timeout;
+	private Integer timeout;
 	@JsonProperty("updated_at")
-	private String updated_at;
+	private Date updatedAt;
 
 	@Override
 	public String getId() {
@@ -72,22 +72,22 @@ public class SenlinAction implements Action {
 		return "SenlinAction{" +
 				"action='" + action + '\'' +
 				", cause='" + cause + '\'' +
-				", created_at='" + created_at + '\'' +
-				", depended_by=" + depended_by +
-				", depended_on=" + depended_on +
-				", end_time='" + end_time + '\'' +
+				", created_at='" + createdAt + '\'' +
+				", depended_by=" + dependedBy +
+				", depended_on=" + dependedOn +
+				", end_time='" + endTime + '\'' +
 				", id='" + id + '\'' +
 				", inputs=" + inputs +
 				", interval='" + interval + '\'' +
 				", name='" + name + '\'' +
 				", outputs=" + outputs +
 				", owner='" + owner + '\'' +
-				", start_time='" + start_time + '\'' +
+				", start_time='" + startTime + '\'' +
 				", status='" + status + '\'' +
-				", status_reason='" + status_reason + '\'' +
+				", status_reason='" + statusReason + '\'' +
 				", target='" + target + '\'' +
 				", timeout='" + timeout + '\'' +
-				", updated_at='" + updated_at + '\'' +
+				", updated_at='" + updatedAt + '\'' +
 				'}';
 	}
 

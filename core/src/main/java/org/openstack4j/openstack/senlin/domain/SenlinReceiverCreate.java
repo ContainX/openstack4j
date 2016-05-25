@@ -91,8 +91,8 @@ public class SenlinReceiverCreate implements ReceiverCreate {
 		}
 
 		@Override
-		public ReceiverCreateBuilder cluster_id(String cluster_id) {
-			model.receiver.put("cluster_id", cluster_id);
+		public ReceiverCreateBuilder clusterID(String clusterID) {
+			model.receiver.put("cluster_id", clusterID);
 			return this;
 		}
 
@@ -109,7 +109,7 @@ public class SenlinReceiverCreate implements ReceiverCreate {
 		}
 
 		@Override
-		public ReceiverCreateBuilder params(Map<String, Object> params) {
+		public ReceiverCreateBuilder params(Map<String, String> params) {
 			model.receiver.put("params", params);
 			return this;
 		}

@@ -108,22 +108,22 @@ public class SenlinPolicyCreate implements PolicyCreate {
 		}
 
 		@Override
-		public PolicyCreateBuilder adjustment(Map<String, Object> adjustment) {
+		public PolicyCreateBuilder adjustment(Map<String, String> adjustment) {
 			HashMap<String, Object> properties = (HashMap<String, Object>)(((HashMap<String, Object>)(model.policy.get("spec"))).get("properties"));
 			properties.put("adjustment", adjustment);
 			return this;
 		}
 
 		@Override
-		public PolicyCreateBuilder min_step(String min_step) {
+		public PolicyCreateBuilder minStep(int minStep) {
 			HashMap<String, Object> adjustment = (HashMap<String, Object>)(((HashMap<String, Object>)((HashMap<String, Object>)model.policy
 					.get("spec")).get("properties")).get("adjustment"));
-			adjustment.put("min_step", min_step);
+			adjustment.put("min_step", minStep);
 			return this;
 		}
 
 		@Override
-		public PolicyCreateBuilder number(String number) {
+		public PolicyCreateBuilder number(int number) {
 			HashMap<String, Object> adjustment = (HashMap<String, Object>)(((HashMap<String, Object>)((HashMap<String, Object>)model.policy
 					.get("spec")).get("properties")).get("adjustment"));
 			adjustment.put("number", number);
@@ -131,10 +131,10 @@ public class SenlinPolicyCreate implements PolicyCreate {
 		}
 
 		@Override
-		public PolicyCreateBuilder adjustment_type(String adjustment_type) {
+		public PolicyCreateBuilder adjustmentType(String adjustmentType) {
 			HashMap<String, Object> adjustment = (HashMap<String, Object>)(((HashMap<String, Object>)((HashMap<String, Object>)model.policy
 					.get("spec")).get("properties")).get("adjustment"));
-			adjustment.put("type", adjustment_type);
+			adjustment.put("type", adjustmentType);
 			return this;
 		}
 
@@ -147,10 +147,10 @@ public class SenlinPolicyCreate implements PolicyCreate {
 		}
 
 		@Override
-		public PolicyCreateBuilder spec_type(String spec_type) {
+		public PolicyCreateBuilder specType(String specType) {
 			HashMap<String, Object> spec = (HashMap<String, Object>)model.policy
 					.get("spec");
-			spec.put("type", spec_type);
+			spec.put("type", specType);
 			return this;
 		}
 

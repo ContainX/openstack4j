@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.senlin.Policy;
 import org.openstack4j.openstack.common.ListResult;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,15 +33,15 @@ public class SenlinPolicy implements Policy {
 	@JsonProperty("user")
 	private String user;
 	@JsonProperty("data")
-	private Map<String, Object> data;
+	private Map<String, String> data;
 	@JsonProperty("spec")
 	private Map<String, Object> spec;
 	@JsonProperty("type")
 	private String type;
 	@JsonProperty("created_at")
-	private String created_at;
+	private Date createdAt;
 	@JsonProperty("updated_at")
-	private String updated_at;
+	private Date updatedAt;
 
 	@Override
 	public String getId() {
@@ -63,8 +64,8 @@ public class SenlinPolicy implements Policy {
 				", data=" + data +
 				", spec=" + spec +
 				", type='" + type + '\'' +
-				", created_at='" + created_at + '\'' +
-				", updated_at='" + updated_at + '\'' +
+				", created_at='" + createdAt + '\'' +
+				", updated_at='" + updatedAt + '\'' +
 				'}';
 	}
 

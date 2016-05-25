@@ -14,16 +14,16 @@ public interface ClusterCreateBuilder extends Buildable.Builder<ClusterCreateBui
 
 	ClusterCreateBuilder name(String name);
 
-	ClusterCreateBuilder metadata(Map<String, Object> metadata);
+	ClusterCreateBuilder metadata(Map<String, String> metadata);
 
-	ClusterCreateBuilder desired_capacity(String desired_capacity);
+	ClusterCreateBuilder desiredCapacity(int desiredCapacity);
 
-	ClusterCreateBuilder max_size(String max_size);
+	ClusterCreateBuilder maxSize(int maxSize);
 
-	ClusterCreateBuilder min_size(String min_size);
+	ClusterCreateBuilder minSize(int minSize);
 
-	ClusterCreateBuilder profile_id(String profile_id);
+	ClusterCreateBuilder profileID(String profileID);
 
-	ClusterCreateBuilder timeout(String timeout);
+	ClusterCreateBuilder timeout(int timeout);
 
 }

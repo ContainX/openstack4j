@@ -5,6 +5,7 @@ import org.openstack4j.model.senlin.ClusterActionCreate;
 import org.openstack4j.model.senlin.ClusterCreate;
 import org.openstack4j.model.senlin.builder.ClusterActionCreateBuilder;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -18,25 +19,25 @@ public class SenlinClusterActionCreate implements ClusterActionCreate {
 	private static final long serialVersionUID = 8159175788259631363L;
 
 	@JsonProperty("add_nodes")
-	private Map<String, Object> add_nodes;
+	private Map<String, ArrayList<String>> addNodes;
 	@JsonProperty("del_nodes")
-	private Map<String, Object> del_nodes;
+	private Map<String, ArrayList<String>> delNodes;
 	@JsonProperty("scale_out")
-	private Map<String, Object> scale_out;
+	private Map<String, String> scaleOut;
 	@JsonProperty("scale_in")
-	private Map<String, Object> scale_in;
+	private Map<String, String> scaleIn;
 	@JsonProperty("resize")
-	private Map<String, Object> resize;
+	private Map<String, String> resize;
 	@JsonProperty("check")
-	private Map<String, Object> check;
+	private Map<String, String> check;
 	@JsonProperty("recover")
-	private Map<String, Object> recover;
+	private Map<String, String> recover;
 	@JsonProperty("policy_attach")
-	private Map<String, Object> policy_attach;
+	private Map<String, String> policyAttach;
 	@JsonProperty("policy_detach")
-	private Map<String, Object> policy_detach;
+	private Map<String, String> policyDetach;
 	@JsonProperty("policy_update")
-	private Map<String, Object> policy_update;
+	private Map<String, String> policyUpdate;
 
 	/**
 	 * Returnes a {@link SenlinClusterActionCreateConcreteBuilder} for configuration and
@@ -99,62 +100,62 @@ public class SenlinClusterActionCreate implements ClusterActionCreate {
 		}
 
 		@Override
-		public ClusterActionCreateBuilder add_nodes(Map<String, Object> add_nodes) {
-			model.add_nodes = add_nodes;
+		public ClusterActionCreateBuilder addNodes(Map<String, ArrayList<String>> addNodes) {
+			model.addNodes = addNodes;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder del_nodes(Map<String, Object> del_nodes) {
-			model.del_nodes = del_nodes;
+		public ClusterActionCreateBuilder delNodes(Map<String, ArrayList<String>> delNodes) {
+			model.delNodes = delNodes;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder scale_out(Map<String, Object> scale_out) {
-			model.scale_out = scale_out;
+		public ClusterActionCreateBuilder scaleOut(Map<String, String> scaleOut) {
+			model.scaleOut = scaleOut;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder scale_in(Map<String, Object> scale_in) {
-			model.scale_in = scale_in;
+		public ClusterActionCreateBuilder scaleIn(Map<String, String> scaleIn) {
+			model.scaleIn = scaleIn;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder resize(Map<String, Object> resize) {
+		public ClusterActionCreateBuilder resize(Map<String, String> resize) {
 			model.resize = resize;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder check(Map<String, Object> check) {
+		public ClusterActionCreateBuilder check(Map<String, String> check) {
 			model.check = check;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder recover(Map<String, Object> recover) {
+		public ClusterActionCreateBuilder recover(Map<String, String> recover) {
 			model.recover = recover;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder policy_attach(Map<String, Object> policy_attach) {
-			model.policy_attach = policy_attach;
+		public ClusterActionCreateBuilder policyAttach(Map<String, String> policyAttach) {
+			model.policyAttach = policyAttach;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder policy_detach(Map<String, Object> policy_detach) {
-			model.policy_detach = policy_detach;
+		public ClusterActionCreateBuilder policyDetach(Map<String, String> policyDetach) {
+			model.policyDetach = policyDetach;
 			return this;
 		}
 
 		@Override
-		public ClusterActionCreateBuilder policy_update(Map<String, Object> policy_update) {
-			model.policy_update = policy_update;
+		public ClusterActionCreateBuilder policyUpdate(Map<String, String> policyUpdate) {
+			model.policyUpdate = policyUpdate;
 			return this;
 		}
 

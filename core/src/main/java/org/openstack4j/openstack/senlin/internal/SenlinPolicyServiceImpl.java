@@ -37,6 +37,7 @@ public class SenlinPolicyServiceImpl extends BaseSenlinServices implements Senli
 	@Override
 	public Policy update(String policyID, PolicyCreate newPolicy) {
 		checkNotNull(policyID);
+		checkNotNull(newPolicy);
 		return patch(SenlinPolicy.class, uri("/policies/%s", policyID)).entity(newPolicy).execute();
 	}
 

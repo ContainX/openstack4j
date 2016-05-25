@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.senlin.Node;
 import org.openstack4j.openstack.common.ListResult;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,31 +23,31 @@ public class SenlinNode implements Node {
 	private static final long serialVersionUID = 4953618741806882198L;
 
 	@JsonProperty("cluster_id")
-	private String cluster_id;
+	private String clusterID;
 	@JsonProperty("created_at")
-	private String created_at;
+	private Date createdAt;
 	@JsonProperty("domain")
 	private String domain;
 	@JsonProperty("id")
 	private String id;
 	@JsonProperty("index")
-	private String index;
+	private Integer index;
 	@JsonProperty("data")
 	private Map<String, Object> data;
 	@JsonProperty("details")
 	private Map<String, Object> details;
 	@JsonProperty("init_at")
-	private String init_at;
+	private Date initAt;
 	@JsonProperty("metadata")
-	private Map<String, Object> metadata;
+	private Map<String, String> metadata;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("physical_id")
-	private String physical_id;
+	private String physicalID;
 	@JsonProperty("profile_id")
-	private String profile_id;
+	private String profileID;
 	@JsonProperty("profile_name")
-	private String profile_name;
+	private String profileName;
 	@JsonProperty("project")
 	private String project;
 	@JsonProperty("role")
@@ -54,9 +55,9 @@ public class SenlinNode implements Node {
 	@JsonProperty("status")
 	private String status;
 	@JsonProperty("status_reason")
-	private String status_reason;
+	private String statusReason;
 	@JsonProperty("updated_at")
-	private String updated_at;
+	private Date updatedAt;
 	@JsonProperty("user")
 	private String user;
 
@@ -73,24 +74,24 @@ public class SenlinNode implements Node {
 	@Override
 	public String toString() {
 		return "SenlinNode{" +
-				"cluster_id='" + cluster_id + '\'' +
-				", created_at='" + created_at + '\'' +
+				"clusterID='" + clusterID + '\'' +
+				", createdAt='" + createdAt + '\'' +
 				", domain='" + domain + '\'' +
 				", id='" + id + '\'' +
 				", index='" + index + '\'' +
 				", data=" + data +
 				", details=" + details +
-				", init_at='" + init_at + '\'' +
+				", initAt='" + initAt + '\'' +
 				", metadata=" + metadata +
 				", name='" + name + '\'' +
-				", physical_id='" + physical_id + '\'' +
-				", profile_id='" + profile_id + '\'' +
-				", profile_name='" + profile_name + '\'' +
+				", physicalID='" + physicalID + '\'' +
+				", profileID='" + profileID + '\'' +
+				", profileName='" + profileName + '\'' +
 				", project='" + project + '\'' +
 				", role='" + role + '\'' +
 				", status='" + status + '\'' +
-				", status_reason='" + status_reason + '\'' +
-				", updated_at='" + updated_at + '\'' +
+				", statusReason='" + statusReason + '\'' +
+				", updatedAt='" + updatedAt + '\'' +
 				", user='" + user + '\'' +
 				'}';
 	}

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.senlin.BuildInfo;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This is a model of a senlinBuild_info. It uses Jackson annotations for
@@ -20,9 +20,9 @@ public class SenlinBuildInfo implements BuildInfo {
 	private static final long serialVersionUID = -7596480972776554810L;
 
 	@JsonProperty("api")
-	private HashMap api;
+	private Map<String, String> api;
 	@JsonProperty("engine")
-	private HashMap engine;
+	private Map<String, String> engine;
 
 	@Override
 	public String toString() {

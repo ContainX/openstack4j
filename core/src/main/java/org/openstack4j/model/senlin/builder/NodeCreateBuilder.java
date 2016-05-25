@@ -12,13 +12,13 @@ import java.util.Map;
  */
 public interface NodeCreateBuilder extends Buildable.Builder<NodeCreateBuilder, NodeCreate> {
 
-	NodeCreateBuilder cluster_id(String cluster_id);
+	NodeCreateBuilder clusterID(String clusterID);
 
-	NodeCreateBuilder metadata(Map<String, Object> metadata);
+	NodeCreateBuilder metadata(Map<String, String> metadata);
 
 	NodeCreateBuilder name(String name);
 
-	NodeCreateBuilder profile_id(String profile_id);
+	NodeCreateBuilder profileID(String profileID);
 
 	NodeCreateBuilder role(String role);
 }

@@ -99,7 +99,7 @@ public class SenlinProfileCreate implements ProfileCreate {
 		}
 
 		@Override
-		public ProfileCreateBuilder metadata(Map<String, Object> metadata) {
+		public ProfileCreateBuilder metadata(Map<String, Map> metadata) {
 			model.profile.put("metadata", metadata);
 			return this;
 		}

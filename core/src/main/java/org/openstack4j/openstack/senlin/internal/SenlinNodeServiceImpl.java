@@ -44,6 +44,13 @@ public class SenlinNodeServiceImpl extends BaseSenlinServices implements SenlinN
 	}
 
 	@Override
+	public Node update(String nodeID, NodeCreate newNode) {
+		checkNotNull(nodeID);
+		checkNotNull(newNode);
+		return patch(SenlinNode.class, "/nodes/%s", nodeID).entity(newNode).execute();
+	}
+
+	@Override
 	public Action action(String nodeID, NodeActionCreate newNodeAction) {
 		checkNotNull(nodeID);
 		checkNotNull(newNodeAction);

@@ -18,9 +18,9 @@ public class SenlinNodeActionCreate implements NodeActionCreate {
 	private static final long serialVersionUID = 7461515803108018710L;
 
 	@JsonProperty("check")
-	private Map<String, Object> check;
+	private Map<String, String> check;
 	@JsonProperty("recover")
-	private Map<String, Object> recover;
+	private Map<String, String> recover;
 
 	/**
 	 * Returnes a {@link SenlinNodeActionCreateConcreteBuilder} for configuration and
@@ -83,13 +83,13 @@ public class SenlinNodeActionCreate implements NodeActionCreate {
 		}
 
 		@Override
-		public NodeActionCreateBuilder check(Map<String, Object> check) {
+		public NodeActionCreateBuilder check(Map<String, String> check) {
 			model.check = check;
 			return this;
 		}
 
 		@Override
-		public NodeActionCreateBuilder recover(Map<String, Object> recover) {
+		public NodeActionCreateBuilder recover(Map<String, String> recover) {
 			model.recover = recover;
 			return this;
 		}
