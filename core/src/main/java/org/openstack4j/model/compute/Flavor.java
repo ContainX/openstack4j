@@ -78,14 +78,14 @@ public interface Flavor extends ModelEntity, Buildable<FlavorBuilder> {
 	 *
 	 * @return true, if is public
 	 */
-	boolean isPublic();
+	Boolean isPublic();
 	
 	/**
 	 * Checks if is disabled.
 	 *
 	 * @return true, if is disabled
 	 */
-	boolean isDisabled();
+	Boolean isDisabled();
 	
 	/**
 	 * Gets the links.
