@@ -1,0 +1,11 @@
+{
+   "policy_target":{
+      "description":"test-policytarget-desc-update",
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "policy_target_group_id":"1fb00129-06cf-48e5-8282-d15dbf4be60b",
+      "cluster_id":"",
+      "port_id":"36af8850-3514-4343-8293-9f9faae980d6",
+      "id":"0d65eebe-4efe-456e-aec3-7856e4e839b4",
+      "name":"test-policytarget-update"
+   }
+}
