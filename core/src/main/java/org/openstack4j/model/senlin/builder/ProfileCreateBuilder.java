@@ -12,10 +12,28 @@ import java.util.Map;
  */
 public interface ProfileCreateBuilder extends Buildable.Builder<ProfileCreateBuilder, ProfileCreate> {
 
+	/**
+	 *  Add the name for the profile.
+	 *
+	 * @param name The name for the profile.
+	 * @return ProfileCreateBuilder
+	 */
 	ProfileCreateBuilder name(String name);
 
+	/**
+	 *  Add detailed specification based on the chosen profile type.
+	 *
+	 * @param spec The detailed specification based on the chosen profile type.
+	 * @return ProfileCreateBuilder
+	 */
 	ProfileCreateBuilder spec(Map<String, Object> spec);
 
+	/**
+	 *  Add a list of key and value pairs to associate with the profile.
+	 *
+	 * @param metadata The list of key and value pairs to associate with the profile.
+	 * @return ProfileCreateBuilder
+	 */
 	ProfileCreateBuilder metadata(Map<String, Map> metadata);
 
 
