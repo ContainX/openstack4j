@@ -583,22 +583,6 @@ public class Builders {
     }
 
     /**
-     * The builder to create a meteringLabel
-     * @return MeteringLabelBuilder
-     */
-    public static MeteringLabelBuilder meteringLabel(){
-        return NeutronMeteringLabel.builder();
-    }
-    
-    /**
-     * The builder to create a meteringRule
-     * @return MeteringRuleBuilder
-     */
-    public static MeteringRuleBuilder meteringRule(){
-        return NeutronMeteringRule.builder();
-    }
-    
-    /**
      * The builder to create a lbPool
      *
      * @return LbPoolBuilder
