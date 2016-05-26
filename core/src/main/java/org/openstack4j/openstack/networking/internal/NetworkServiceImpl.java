@@ -25,6 +25,14 @@ public class NetworkServiceImpl extends BaseNetworkingServices implements Networ
 	public List<? extends Network> list() {
 		return get(Networks.class, uri("/networks")).execute().getList();
 	}
+	
+	   /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends Network> list(String tenantId) {
+        return get(Networks.class, uri("/networks?tenant_id="+tenantId)).execute().getList();
+    }
 
 	/**
 	 * {@inheritDoc}
