@@ -75,7 +75,7 @@ public class Template {
                 if(isTemplate(skey, valueInString)) {
                     try {
                         final String templateName = valueInString;
-                    	final URL fullTemplateName =  TemplateUtils.normaliseFilePathToUrl(baseUrl + templateName);
+                    	final URL fullTemplateName =  TemplateUtils.normaliseFilePathToUrl(baseUrl.toString(), templateName);
 
                         if(! files.containsKey(templateName)) {
                             final Template tpl = new Template(fullTemplateName);
