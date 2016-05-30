@@ -18,7 +18,7 @@ import co.freeside.betamax.tape.yaml.TapePropertyUtils
 abstract class AbstractSpec extends Specification {
 
     def static String MODULEROOT = Paths.get("").toAbsolutePath().getParent().toString()
-    def static String TAPEROOT = String.join("/", MODULEROOT , "src/test/resources/tapes/")
+    def static String TAPEROOT = "/" + MODULEROOT + "src/test/resources/tapes/"
     def static Config CONFIG_PROXY_BETAMAX = Config.newConfig().withProxy(ProxyHost.of("http://localhost", 5555))
 
     // get required attributes from system environment according to python-openstackclient specification
@@ -55,9 +55,5 @@ abstract class AbstractSpec extends Specification {
         BetamaxRoutePlanner.configure(http)
 
         log.info("-> Tests using connector: " + HttpExecutor.create().getExecutorName())
-        
-        
-
     }
-
 }
