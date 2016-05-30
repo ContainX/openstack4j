@@ -59,11 +59,11 @@ public interface SenlinClusterService {
 	 *
 	 * @param clusterID
 	 *             Id of {@link Cluster}
-	 * @param newClusterAction
+	 * @param newCluster
 	 *            {@link ClusterCreate} object out of which stack is to be update
 	 * @return new {@link Cluster} as returned from the server
 	 */
-	Cluster update(String clusterID, ClusterActionCreate newClusterAction);
+	Cluster update(String clusterID, ClusterCreate newCluster);
 
 	/**
 	 * Service implementation which provides methods for manipulation of action

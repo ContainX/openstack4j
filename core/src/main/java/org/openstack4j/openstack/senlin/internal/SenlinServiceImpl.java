@@ -12,7 +12,7 @@ import org.openstack4j.api.senlin.*;
 public class SenlinServiceImpl extends BaseSenlinServices implements SenlinService {
 
 	@Override
-	public SenlinPolicyService Policy() {
+	public SenlinPolicyService policy() {
 		return Apis.get(SenlinPolicyService.class);
 	}
 
@@ -24,6 +24,11 @@ public class SenlinServiceImpl extends BaseSenlinServices implements SenlinServi
 	@Override
 	public SenlinBuildInfoService buildInfo() {
 		return Apis.get(SenlinBuildInfoService.class);
+	}
+
+	@Override
+	public SenlinClusterPolicyService clusterPolicy() {
+		return Apis.get(SenlinClusterPolicyService.class);
 	}
 
 	@Override

@@ -44,10 +44,10 @@ public class SenlinClusterServiceImpl extends BaseSenlinServices implements Senl
 	}
 
 	@Override
-	public Cluster update(String clusterID, ClusterActionCreate newClusterAction) {
+	public Cluster update(String clusterID, ClusterCreate newCluster) {
 		checkNotNull(clusterID);
-		checkNotNull(newClusterAction);
-		return patch(SenlinCluster.class, "/clusters/%s", clusterID).entity(newClusterAction).execute();
+		checkNotNull(newCluster);
+		return patch(SenlinCluster.class, uri("/clusters/%s", clusterID)).entity(newCluster).execute();
 	}
 
 	@Override

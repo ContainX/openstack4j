@@ -14,4 +14,10 @@ import org.openstack4j.model.ResourceEntity;
  */
 public interface Action extends ResourceEntity {
 
+    /**
+     * Returns the action name of the action
+     *
+     * @return the action name of the action
+     */
+    String getAction();
 }

@@ -14,7 +14,7 @@ public interface SenlinService extends RestService {
 	 * 
 	 * @return PolicyService
 	 */
-	SenlinPolicyService Policy();
+	SenlinPolicyService policy();
 
 	/**
 	 * Service implementation which provides methods for manipulation of action
@@ -36,6 +36,13 @@ public interface SenlinService extends RestService {
 	 * @return ClusterService
 	 */
 	SenlinClusterService cluster();
+
+	/**
+	 * Service implementation which provides methods for manipulation of clusterPolicy
+	 *
+	 * @return ClusterPolicyService
+	 */
+	SenlinClusterPolicyService clusterPolicy();
 
 	/**
 	 * Service implementation which provides methods for manipulation of event

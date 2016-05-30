@@ -68,6 +68,11 @@ public class SenlinAction implements Action {
 	}
 
 	@Override
+	public String getAction() {
+		return action;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinAction{" +
 				"action='" + action + '\'' +
