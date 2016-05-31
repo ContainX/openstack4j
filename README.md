@@ -246,10 +246,10 @@ Identity V2 Services fully cover Tenants, Users, Roles, Services, Endpoints and 
 **Create a Tenant, User and associate a Role**
 ```java
 // Create a Tenant (could also be created fluent within user create)
-Tenant tenant = os.identity().tenants().create(Builders.tenant().name("MyNewTenant").build());
+Tenant tenant = os.identity().tenants().create(Builders.identityV2().tenant().name("MyNewTenant").build());
 
 // Create a User associated to the new Tenant
-User user = os.identity().users().create(Builders.user().name("jack").password("sample").tenant(tenant).build());
+User user = os.identity().users().create(Builders.identityV2().user().name("jack").password("sample").tenant(tenant).build());
 
 // Add a Tenant based Role to the User
 os.identity().roles().addUserRole(tenant.getId(), user.getId(), os.identity().roles().getByName("Member").getId());

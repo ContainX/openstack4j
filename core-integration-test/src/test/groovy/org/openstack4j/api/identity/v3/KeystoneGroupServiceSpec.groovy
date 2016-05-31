@@ -8,14 +8,12 @@ import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.Builders
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.model.common.Identifier
-import org.openstack4j.model.compute.ActionResponse
 import org.openstack4j.model.identity.v3.Group
 import org.openstack4j.model.identity.v3.User
 import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.openstack.OSFactory
 
 import spock.lang.IgnoreIf
-import spock.lang.Stepwise
 import co.freeside.betamax.Betamax
 import co.freeside.betamax.Recorder
 

@@ -86,6 +86,7 @@ import org.openstack4j.api.sahara.NodeGroupTemplateService;
 import org.openstack4j.api.sahara.SaharaImageService;
 import org.openstack4j.api.sahara.SaharaPluginService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.storage.BlockQuotaSetService;
 import org.openstack4j.api.senlin.SenlinActionService;
 import org.openstack4j.api.senlin.SenlinBuildInfoService;
 import org.openstack4j.api.senlin.SenlinClusterPolicyService;
@@ -195,6 +196,7 @@ import org.openstack4j.openstack.sahara.internal.NodeGroupTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaImageServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaPluginServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.BlockQuotaSetServiceImpl;
 import org.openstack4j.openstack.senlin.internal.SenlinActionServiceImpl;
 import org.openstack4j.openstack.senlin.internal.SenlinBuildInfoServiceImpl;
 import org.openstack4j.openstack.senlin.internal.SenlinClusterPolicyServiceImpl;
@@ -356,7 +358,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(PolicyClassifierService.class,PolicyClassifierServiceImpl.class);
 		bind(ServicechainService.class,ServicechainServiceImpl.class);
 		bind(ServiceProfileService.class,ServiceProfileServiceImpl.class);
-
+		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
     }
 
     /**
