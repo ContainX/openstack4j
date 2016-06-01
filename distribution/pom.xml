@@ -19,7 +19,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.pacesys.openstack4j.connectors</groupId>
-			<artifactId>openstack4j-jersey2</artifactId>
+			<artifactId>openstack4j-resteasy</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
