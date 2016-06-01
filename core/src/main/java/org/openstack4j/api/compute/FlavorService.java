@@ -56,10 +56,9 @@ public interface FlavorService extends RestService {
 	 * @param  the space in GB that will disappear when the VM is terminated (default is 0) [OPTIONAL]
 	 * @param swap the Swap space in MB
 	 * @param rxtxFactor the RX/TX factor (default is 1) [OPTIONAL]
-	 * @param isPublic makes the flavor accessible to the public (the default is true).
 	 * @return the created flavor
 	 */
-	Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor, boolean isPublic);
+	Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor);
 	
 	/**
 	 * list extra specs

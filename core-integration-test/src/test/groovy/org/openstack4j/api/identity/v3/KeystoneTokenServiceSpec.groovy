@@ -10,13 +10,10 @@ import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.v3.Token
 import org.openstack4j.openstack.OSFactory
-import org.openstack4j.openstack.internal.OSClientSession
 
 import spock.lang.IgnoreIf
 import co.freeside.betamax.Recorder
 import co.freeside.betamax.Betamax
-import org.openstack4j.core.transport.Config
-import org.openstack4j.core.transport.ProxyHost
 
 
 @Slf4j
