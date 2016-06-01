@@ -70,6 +70,10 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.FirewallAsService;
+import org.openstack4j.api.networking.ext.FirewallPolicyService;
+import org.openstack4j.api.networking.ext.FirewallRuleService;
+import org.openstack4j.api.networking.ext.FirewallService;
 import org.openstack4j.api.networking.ext.HealthMonitorService;
 import org.openstack4j.api.networking.ext.LbPoolService;
 import org.openstack4j.api.networking.ext.LoadBalancerService;
@@ -167,6 +171,10 @@ import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.FirewallAsServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.FirewallPolicyServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.FirewallRuleServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.FirewallServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.HealthMonitorServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LbPoolServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LoadBalancerServiceImpl;
@@ -321,7 +329,12 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ServicechainService.class,ServicechainServiceImpl.class);
 		bind(ServiceProfileService.class,ServiceProfileServiceImpl.class);
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
-    }
+	    bind(FirewallAsService.class, FirewallAsServiceImpl.class);
+	    bind(FirewallService.class, FirewallServiceImpl.class);
+	    bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
+	    bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
+
+    }   
 
     /**
      * {@inheritDoc}
