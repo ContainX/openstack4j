@@ -6,6 +6,8 @@ jdk:
 notifications:
   email: false
 
+script: "mvn verify"
+
 # whitelist
 branches:
   only:
