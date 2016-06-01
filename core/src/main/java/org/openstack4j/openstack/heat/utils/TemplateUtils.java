@@ -41,4 +41,15 @@ public class TemplateUtils {
         }
         
     }
+
+    public static URL normaliseFilePathToUrl(String baseUrl, String templateName)
+            throws MalformedURLException, URISyntaxException {
+        if (templateName.startsWith("file:")
+                || templateName.startsWith("http:")
+                || templateName.startsWith("https:")) {
+            return normaliseFilePathToUrl(templateName);
+        } else {
+            return normaliseFilePathToUrl(baseUrl + templateName);
+        }
+    }
 }
