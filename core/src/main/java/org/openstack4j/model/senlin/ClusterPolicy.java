@@ -22,4 +22,45 @@ public interface ClusterPolicy extends ModelEntity {
 	 */
 	String getId();
 
+	/**
+	 * Returns the policy type of the ClusterPolicy
+	 *
+	 * @return the policy type of the ClusterPolicy
+	 */
+	String getPolicyType();
+
+	/**
+	 * Returns the cluster id of the ClusterPolicy
+	 *
+	 * @return the cluster id of the ClusterPolicy
+	 */
+	String getClusterID();
+
+	/**
+	 * Returns the cluster name of the ClusterPolicy
+	 *
+	 * @return the cluster name of the ClusterPolicy
+	 */
+	String getClusterName();
+
+	/**
+	 * Returns the enabled or not of the ClusterPolicy
+	 *
+	 * @return the enabled or not of the ClusterPolicy
+	 */
+	Boolean getEnabled();
+
+	/**
+	 * Returns the policy id of the ClusterPolicy
+	 *
+	 * @return the policy id of the ClusterPolicy
+	 */
+	String getPolicyID();
+
+	/**
+	 * Returns the policy name of the ClusterPolicy
+	 *
+	 * @return the policy name of the ClusterPolicy
+	 */
+	String getPolicyName();
 }

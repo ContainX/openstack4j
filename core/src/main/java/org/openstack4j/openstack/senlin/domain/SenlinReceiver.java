@@ -51,6 +51,76 @@ public class SenlinReceiver implements Receiver {
 	private Map<String, String> params;
 
 	@Override
+	public String getAction() {
+		return action;
+	}
+
+	@Override
+	public String getClusterID() {
+		return clusterID;
+	}
+
+	@Override
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@Override
+	public String getDomain() {
+		return domain;
+	}
+
+	@Override
+	public String getProject() {
+		return project;
+	}
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@Override
+	public String getUser() {
+		return user;
+	}
+
+	@Override
+	public Map<String, ArrayList<String>> getActor() {
+		return actor;
+	}
+
+	@Override
+	public Map<String, String> getChannel() {
+		return channel;
+	}
+
+	@Override
+	public Map<String, String> getParams() {
+		return params;
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getWebHook() {
+		return channel.get("alarm_url").toString();
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinReceiver{" +
 				"action='" + action + '\'' +
@@ -67,21 +137,6 @@ public class SenlinReceiver implements Receiver {
 				", channel=" + channel +
 				", params=" + params +
 				'}';
-	}
-
-	@Override
-	public String getId() {
-		return id;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public String getWebHook() {
-		return channel.get("alarm_url").toString();
 	}
 
 	/**

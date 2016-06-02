@@ -73,6 +73,81 @@ public class SenlinAction implements Action {
 	}
 
 	@Override
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@Override
+	public String getCause() {
+		return cause;
+	}
+
+	@Override
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@Override
+	public List<String> getDependedBy() {
+		return dependedBy;
+	}
+
+	@Override
+	public List<String> getDependedOn() {
+		return dependedOn;
+	}
+
+	@Override
+	public Float getEndTime() {
+		return endTime;
+	}
+
+	@Override
+	public Map<String, String> getInputs() {
+		return inputs;
+	}
+
+	@Override
+	public Integer getInterval() {
+		return interval;
+	}
+
+	@Override
+	public Map<String, String> getOutputs() {
+		return outputs;
+	}
+
+	@Override
+	public String getOwner() {
+		return owner;
+	}
+
+	@Override
+	public Float getStartTime() {
+		return startTime;
+	}
+
+	@Override
+	public String getStatus() {
+		return status;
+	}
+
+	@Override
+	public String getStatusReason() {
+		return statusReason;
+	}
+
+	@Override
+	public String getTarget() {
+		return target;
+	}
+
+	@Override
+	public Integer getTimeout() {
+		return timeout;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinAction{" +
 				"action='" + action + '\'' +

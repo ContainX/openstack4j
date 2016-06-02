@@ -32,6 +32,11 @@ public class SenlinProfileType implements ProfileType {
 	}
 
 	@Override
+	public Map<String, Map> getSchema() {
+		return schema;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinProfileType{" +
 				"name='" + name + '\'' +

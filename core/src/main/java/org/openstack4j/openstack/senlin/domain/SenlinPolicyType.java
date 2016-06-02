@@ -32,6 +32,11 @@ public class SenlinPolicyType implements PolicyType {
 	}
 
 	@Override
+	public Map<String, Object> getSchema() {
+		return schema;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinPolicyType{" +
 				"name='" + name + '\'' +

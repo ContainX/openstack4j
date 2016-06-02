@@ -48,6 +48,31 @@ public class SenlinProfile implements Profile {
 	}
 
 	@Override
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@Override
+	public String getDomain() {
+		return domain;
+	}
+
+	@Override
+	public String getProject() {
+		return project;
+	}
+
+	@Override
+	public Map<String, Map> getMetadata() {
+		return metadata;
+	}
+
+	@Override
+	public Map<String, Object> getSpec() {
+		return spec;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinProfile{" +
 				"created_at='" + createdAt + '\'' +

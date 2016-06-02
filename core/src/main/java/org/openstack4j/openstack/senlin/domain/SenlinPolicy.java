@@ -54,6 +54,46 @@ public class SenlinPolicy implements Policy {
 	}
 
 	@Override
+	public String getDomain() {
+		return domain;
+	}
+
+	@Override
+	public String getProject() {
+		return project;
+	}
+
+	@Override
+	public String getUser() {
+		return user;
+	}
+
+	@Override
+	public Map<String, String> getData() {
+		return data;
+	}
+
+	@Override
+	public Map<String, Object> getSpec() {
+		return spec;
+	}
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@Override
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinPolicy{" +
 				"id='" + id + '\'' +

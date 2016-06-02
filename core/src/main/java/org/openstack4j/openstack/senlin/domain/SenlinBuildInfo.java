@@ -25,6 +25,16 @@ public class SenlinBuildInfo implements BuildInfo {
 	private Map<String, String> engine;
 
 	@Override
+	public Map<String, String> getApi() {
+		return api;
+	}
+
+	@Override
+	public Map<String, String> getEngine() {
+		return engine;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinBuildInfo{" +
 				"api=" + api +

@@ -52,6 +52,61 @@ public class SenlinEvent implements Event {
 	}
 
 	@Override
+	public String getAction() {
+		return action;
+	}
+
+	@Override
+	public String getClusterID() {
+		return clusterID;
+	}
+
+	@Override
+	public Integer getLevel() {
+		return level;
+	}
+
+	@Override
+	public String getObjID() {
+		return objID;
+	}
+
+	@Override
+	public String getObjName() {
+		return objName;
+	}
+
+	@Override
+	public String getObjType() {
+		return objType;
+	}
+
+	@Override
+	public String getProject() {
+		return project;
+	}
+
+	@Override
+	public String getStatus() {
+		return status;
+	}
+
+	@Override
+	public String getStatusReason() {
+		return statusReason;
+	}
+
+	@Override
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	@Override
+	public String getUser() {
+		return user;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinEvent{" +
 				"action='" + action + '\'' +

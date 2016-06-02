@@ -1,6 +1,9 @@
 package org.openstack4j.model.senlin;
 
-import org.openstack4j.model.ResourceEntity;
+import org.openstack4j.model.ModelEntity;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * This interface describes the getter-methods (and thus components) of the version of senlin.
@@ -12,13 +15,26 @@ import org.openstack4j.model.ResourceEntity;
  * @author lion
  * 
  */
-public interface version extends ResourceEntity {
+public interface Version extends ModelEntity {
 
 	/**
-	 * Returns the version of the senlin
+	 * Returns the status of the senlin version
 	 * 
-	 * @return the version of the senlin
+	 * @return the status of the senlin version
 	 */
-	String getVersion();
+	String getStatus();
 
+	/**
+	 * Returns the id of the senlin version
+	 *
+	 * @return the id of the senlin version
+	 */
+	String getId();
+
+	/**
+	 * Returns the links of the senlin version
+	 *
+	 * @return the links of the senlin version
+	 */
+	ArrayList<Map<String, String>> getLinks();
 }

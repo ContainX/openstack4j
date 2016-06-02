@@ -42,6 +42,36 @@ public class SenlinClusterPolicy implements ClusterPolicy {
 	}
 
 	@Override
+	public String getPolicyType() {
+		return policyType;
+	}
+
+	@Override
+	public String getClusterID() {
+		return clusterID;
+	}
+
+	@Override
+	public String getClusterName() {
+		return clusterName;
+	}
+
+	@Override
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	@Override
+	public String getPolicyID() {
+		return policyID;
+	}
+
+	@Override
+	public String getPolicyName() {
+		return policyName;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinClusterPolicy{" +
 				"cluster_id='" + clusterID + '\'' +

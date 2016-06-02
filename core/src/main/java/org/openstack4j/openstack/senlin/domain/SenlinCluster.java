@@ -76,6 +76,96 @@ public class SenlinCluster implements Cluster {
 	}
 
 	@Override
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@Override
+	public Map<String, String> getData() {
+		return data;
+	}
+
+	@Override
+	public Integer getDesiredCapacity() {
+		return desiredCapacity;
+	}
+
+	@Override
+	public String getDomain() {
+		return domain;
+	}
+
+	@Override
+	public Date getInitAt() {
+		return initAt;
+	}
+
+	@Override
+	public Integer getMaxSize() {
+		return maxSize;
+	}
+
+	@Override
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	@Override
+	public Integer getMinSize() {
+		return minSize;
+	}
+
+	@Override
+	public ArrayList<String> getNodes() {
+		return nodes;
+	}
+
+	@Override
+	public ArrayList<String> getPolicies() {
+		return policies;
+	}
+
+	@Override
+	public String getProfileID() {
+		return profileID;
+	}
+
+	@Override
+	public String getProfileName() {
+		return profileName;
+	}
+
+	@Override
+	public String getProject() {
+		return project;
+	}
+
+	@Override
+	public ClusterStatus getStatus() {
+		return status;
+	}
+
+	@Override
+	public String getStatusReason() {
+		return statusReason;
+	}
+
+	@Override
+	public Integer getTimeout() {
+		return timeout;
+	}
+
+	@Override
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@Override
+	public String getUser() {
+		return user;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinCluster{" +
 				"created_at='" + createdAt + '\'' +

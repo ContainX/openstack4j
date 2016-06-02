@@ -72,6 +72,91 @@ public class SenlinNode implements Node {
 	}
 
 	@Override
+	public String getClusterID() {
+		return clusterID;
+	}
+
+	@Override
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	@Override
+	public String getDomain() {
+		return domain;
+	}
+
+	@Override
+	public Integer getIndex() {
+		return index;
+	}
+
+	@Override
+	public Map<String, Object> getData() {
+		return data;
+	}
+
+	@Override
+	public Map<String, Object> getDetails() {
+		return details;
+	}
+
+	@Override
+	public Date getInitAt() {
+		return initAt;
+	}
+
+	@Override
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	@Override
+	public String getPhysicalID() {
+		return physicalID;
+	}
+
+	@Override
+	public String getProfileID() {
+		return profileID;
+	}
+
+	@Override
+	public String getProfileName() {
+		return profileName;
+	}
+
+	@Override
+	public String getProject() {
+		return project;
+	}
+
+	@Override
+	public String getRole() {
+		return role;
+	}
+
+	@Override
+	public String getStatus() {
+		return status;
+	}
+
+	@Override
+	public String getStatusReason() {
+		return statusReason;
+	}
+
+	@Override
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@Override
+	public String getUser() {
+		return user;
+	}
+
+	@Override
 	public String toString() {
 		return "SenlinNode{" +
 				"clusterID='" + clusterID + '\'' +

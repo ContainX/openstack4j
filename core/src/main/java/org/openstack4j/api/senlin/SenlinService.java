@@ -93,4 +93,11 @@ public interface SenlinService extends RestService {
 	 */
 	SenlinWebHookService webHook();
 
+	/**
+	 * Service implementation which provides methods for manipulation of Version
+	 *
+	 * @return Version
+	 */
+	SenlinVersionService version();
+
 }

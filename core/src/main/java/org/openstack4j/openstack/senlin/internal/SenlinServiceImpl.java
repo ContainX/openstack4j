@@ -71,4 +71,8 @@ public class SenlinServiceImpl extends BaseSenlinServices implements SenlinServi
 		return Apis.get(SenlinWebHookService.class);
 	}
 
+	@Override
+	public SenlinVersionService version() {
+		return Apis.get(SenlinVersionService.class);
+	}
 }
