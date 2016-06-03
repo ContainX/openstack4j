@@ -181,7 +181,7 @@ interactions:
 - recorded: 2016-02-17T18:17:43.166Z
   request:
     method: GET
-    uri: http://devstack.openstack.stack:5000/v3/groups?domain_id=default&name=GROUP_GRUD
+    uri: http://devstack.openstack.stack:5000/v3/groups?name=GROUP_GRUD&domain_id=default
     headers:
       Accept: application/json
       Host: devstack.openstack.stack:5000
@@ -289,7 +289,7 @@ interactions:
 - recorded: 2016-04-08T15:57:45.354Z
   request:
     method: GET
-    uri: http://devstack.openstack.stack:5000/v3/groups?domain_id=default&name=nonExistentGroup
+    uri: http://devstack.openstack.stack:5000/v3/groups?name=nonExistentGroup&domain_id=default
     headers:
       Accept: application/json
       Host: devstack.openstack.stack:5000

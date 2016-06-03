@@ -117,7 +117,7 @@ interactions:
 - recorded: 2016-01-15T16:52:59.841Z
   request:
     method: GET
-    uri: http://devstack.openstack.stack:5000/v3/users?domain_id=default&name=foobar
+    uri: http://devstack.openstack.stack:5000/v3/users?name=foobar&domain_id=default
     headers:
       Accept: application/json
       Host: devstack.openstack.stack:5000
@@ -195,7 +195,7 @@ interactions:
 - recorded: 2016-04-08T15:57:50.459Z
   request:
     method: GET
-    uri: http://devstack.openstack.stack:5000/v3/users?domain_id=default&name=nonExistentUserName
+    uri: http://devstack.openstack.stack:5000/v3/users?name=nonExistentUserName&domain_id=default
     headers:
       Accept: application/json
       Host: docker-host:5000
