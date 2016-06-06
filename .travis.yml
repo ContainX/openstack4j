@@ -7,6 +7,9 @@ jdk:
 notifications:
   email: false
 
+
+install: /bin/true
+
 script: "mvn clean verify -pl '!org.pacesys.openstack4j.connectors:openstack4j-http-connector,!org.pacesys.openstack4j.connectors:openstack4j-jersey2,!org.pacesys:it-jersey2'"
 
 # whitelist
