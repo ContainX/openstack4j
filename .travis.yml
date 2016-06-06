@@ -4,13 +4,22 @@ jdk:
   - oraclejdk7
   - openjdk7
 
+env:
+  global:
+    - SKIP_JDK8_MODULES='-pl !org.pacesys.openstack4j.connectors:openstack4j-http-connector,!org.pacesys.openstack4j.connectors:openstack4j-jersey2,!org.pacesys:it-jersey2'
+
+matrix:
+  include:
+    - jdk: "oraclejdk8"
+      env: SKIP_JDK8_MODULES=""
+
 notifications:
   email: false
 
-
 install: /bin/true
 
-script: "mvn clean verify -pl '!org.pacesys.openstack4j.connectors:openstack4j-http-connector,!org.pacesys.openstack4j.connectors:openstack4j-jersey2,!org.pacesys:it-jersey2'"
+# When run on JDK7, modules that require JDK8 needs to be skipped
+script: mvn clean verify -B $SKIP_JDK8_MODULES
 
 # whitelist
 branches:
