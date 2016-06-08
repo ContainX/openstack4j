@@ -43,8 +43,7 @@ public abstract class AbstractTest {
         METERING(8087), 
         TELEMETRY(8087), 
         SHARE(8786), 
-        OBJECT_STORAGE(8800),
-        CLUSTERING(8778);
+        OBJECT_STORAGE(8800);
         ;
         private final int port;
 
