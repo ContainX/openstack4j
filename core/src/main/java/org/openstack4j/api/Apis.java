@@ -1,7 +1,5 @@
 package org.openstack4j.api;
 
-import java.util.ServiceLoader;
-
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
@@ -9,6 +7,9 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.senlin.SenlinService;
+
+import java.util.ServiceLoader;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -112,6 +113,14 @@ public class Apis {
         return get(GbpService.class);
     }
 
+	/**
+	 * Gets the (Senlin) Orchestration services API
+	 * @return the Senlin services
+	 */
+	public static SenlinService getSenlinServices() {
+		return get(SenlinService.class);
+	}
+	
 
     private static APIProvider initializeProvider() {
         // No need to check for emptiness as there is default implementation registered
