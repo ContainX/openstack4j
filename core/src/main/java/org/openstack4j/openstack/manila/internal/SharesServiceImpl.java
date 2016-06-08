@@ -88,6 +88,15 @@ public class SharesServiceImpl extends BaseShareServices implements SharesServic
                 delete(Void.class, uri("/shares/%s", shareId)).executeWithResponse());
     }
 
+    @Override
+    public ActionResponse delete(String shareId, String consistencyGroupId) {
+        checkNotNull(shareId);
+        return ToActionResponseFunction.INSTANCE.apply(
+                delete(Void.class, uri("/shares/%s", shareId))
+                        .param(consistencyGroupId != null, "consistency_group_id ", consistencyGroupId)
+                        .executeWithResponse());
+    }
+
     /**
      * {@inheritDoc}
      */

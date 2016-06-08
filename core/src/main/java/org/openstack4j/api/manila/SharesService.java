@@ -66,6 +66,15 @@ public interface SharesService extends RestService {
     ActionResponse delete(String shareId);
 
     /**
+     * Deletes a share.
+     *
+     * @param shareId the share ID
+     * @param consistencyGroupId the UUID of the consistency group where the share was created
+     * @return the action response
+     */
+    ActionResponse delete(String shareId, String consistencyGroupId);
+
+    /**
      * Shows the metadata for a share.
      *
      * @param shareId the share ID
