@@ -1,0 +1,21 @@
+{
+	"tenants_links": [],
+	"tenants": [
+		{
+			"description": "",
+			"enabled": true,
+			"id": "b0a9abafc4ef41ad9201f891fb88aeb3",
+			"name": "project_one"
+		}, {
+			"description": null,
+			"enabled": true,
+			"id": "b80f8d4e28b74188858b654cb1fccf7d",
+			"name": "admin"
+		}, {
+			"description": null,
+			"enabled": true,
+			"id": "fae985a544c543dd9a799a7bb4953c69",
+			"name": "service"
+		}
+	]
+}

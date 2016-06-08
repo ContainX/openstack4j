@@ -1,7 +1,7 @@
 package org.openstack4j.model.network.builder;
 
 import org.openstack4j.common.Buildable.Builder;
-import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.identity.v3.Tenant;
 import org.openstack4j.model.network.ExtraDhcpOptCreate;
 import org.openstack4j.model.network.Port;
 import org.openstack4j.model.network.State;
@@ -68,22 +68,24 @@ public interface PortBuilder extends Builder<PortBuilder, Port> {
 	
 	
 	/**
-   * Adds an allowed address pair to the current list of allowed addresses
-   * @param address the Subnet Address (i.e. 192.168.1.0/24)
-   * @return PortBuilder
-   * @see Port#getAllowedAddressPairs()
-   */
-	PortBuilder allowedAddressPair(String address);
+	 * Adds an allowed address pair to the current list of allowed addresses
+	 * @param ipAddress the Subnet Address (i.e. 192.168.1.0/24)
+	 * @param macAddress the MAC Address
+	 * @return PortBuilder
+	 * @see Port#getAllowedAddressPairs()
+	 */
+	PortBuilder allowedAddressPair(String ipAddress, String macAddress);
 	
 	
 
-  /**
-   * Removes an allowed address pair from the current list of allowed addresses
-   * @param address the Subnet Address (i.e. 192.168.1.0/24)
-   * @return PortBuilder
-   * @see Port#getAllowedAddressPairs()
-   */
-	PortBuilder removeAddressPair(String address);
+	/**
+	 * Removes an allowed address pair from the current list of allowed addresses
+	 * @param ipAddress the Subnet Address (i.e. 192.168.1.0/24)
+	 * @param macAddress the MAC address
+	 * @return PortBuilder
+	 * @see Port#getAllowedAddressPairs()
+	 */
+	PortBuilder removeAddressPair(String ipAddress, String macAddress);
 	
 	
 	/**

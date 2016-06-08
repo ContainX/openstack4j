@@ -163,13 +163,5 @@ public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder
 	 */
 	void addNetworkPort(String id);
 	
-	public interface SecurityGroup extends ModelEntity {
-		
-		/**
-		 * Gets the name.
-		 *
-		 * @return the name
-		 */
-		String getName();
-	}
+
 }

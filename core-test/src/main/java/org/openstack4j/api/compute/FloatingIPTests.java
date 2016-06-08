@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.core.transport.internal.HttpExecutor;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.FloatingIP;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -52,13 +52,13 @@ public class FloatingIPTests extends AbstractTest {
     @Test
     public void listFloatingIPs() throws IOException {
         respondWith(JSON_FIPS);
-        List<FloatingIP> fips = (List<FloatingIP>) os().compute().floatingIps().list();
+        List<FloatingIP> fips = (List<FloatingIP>) osv3().compute().floatingIps().list();
         assertNotNull(fips);
         assertEquals(fips.size(), 5);
 
         // Test empty list
         respondWith(200, "{\"floating_ips\": []}");
-        List<FloatingIP> fipsEmpty = (List<FloatingIP>) os().compute().floatingIps().list();
+        List<FloatingIP> fipsEmpty = (List<FloatingIP>) osv3().compute().floatingIps().list();
         assertNotNull(fipsEmpty);
         assertEquals(fipsEmpty.size(), 0);
     }
@@ -76,7 +76,7 @@ public class FloatingIPTests extends AbstractTest {
 
         respondWith(200, jsonResponse);
 
-        FloatingIP fip = os().compute().floatingIps().allocateIP(POOL);
+        FloatingIP fip = osv3().compute().floatingIps().allocateIP(POOL);
         assertNotNull(fip);
         assertEquals(fip.getFloatingIpAddress(), ip);
         assertEquals(fip.getPool(), POOL);
@@ -90,7 +90,7 @@ public class FloatingIPTests extends AbstractTest {
         // Test deallocate success
         respondWith(202);
 
-        ActionResponse successResponse = os().compute().floatingIps().deallocateIP(ip);
+        ActionResponse successResponse = osv3().compute().floatingIps().deallocateIP(ip);
         assertNotNull(successResponse);
         assertTrue(successResponse.isSuccess());
 
@@ -102,7 +102,7 @@ public class FloatingIPTests extends AbstractTest {
         // Test deallocate error
         respondWith(404, jsonResponse);
 
-        ActionResponse failureResponse = os().compute().floatingIps().deallocateIP(ip);
+        ActionResponse failureResponse = osv3().compute().floatingIps().deallocateIP(ip);
         assertNotNull(failureResponse);
         assertFalse(failureResponse.isSuccess());
         assertEquals(failureResponse.getCode(), 404);

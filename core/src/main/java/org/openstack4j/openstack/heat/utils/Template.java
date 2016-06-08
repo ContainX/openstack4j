@@ -1,5 +1,12 @@
 package org.openstack4j.openstack.heat.utils;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -9,34 +16,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-
 public class Template {
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(Template.class);
 
-    
+
     // template Resource is used for represent the template file or template URL
     private String tplContent;
     private Map<String, String> files = new HashMap<String, String>();
     private URL baseUrl;
-    
+
     private final static String GET_FILE = "get_file";
-    
+
     public Template(URL templateRes) throws JsonParseException, IOException{
         setTplContent(Resources.toString(templateRes, Charsets.UTF_8));
         baseUrl = TemplateUtils.baseUrl(templateRes.toString());
         getFileContents();
     }
-    
-    public Template(String templateLoc) 
-            throws JsonParseException, MalformedURLException, 
+
+    public Template(String templateLoc)
+            throws JsonParseException, MalformedURLException,
                    UnsupportedEncodingException, IOException, URISyntaxException {
         this(TemplateUtils.normaliseFilePathToUrl(templateLoc));
     }
@@ -58,14 +57,14 @@ public class Template {
             LOG.error(e.getMessage(), e);
         }
     }
-    
+
     private void resolveTemplateType(Map<?,?> map) throws MalformedURLException, IOException {
         for(Object key : map.keySet()) {
             // Ignore if the key is not string. Actually not happening
             if(!(key instanceof String)) {
                 continue;
-            } 
-            
+            }
+
             String skey = (String) key;
             Object value = map.get(skey);
 
@@ -75,7 +74,7 @@ public class Template {
                 if(isTemplate(skey, valueInString)) {
                     try {
                         final String templateName = valueInString;
-                    	final URL fullTemplateName =  TemplateUtils.normaliseFilePathToUrl(baseUrl + templateName);
+                    	final URL fullTemplateName =  TemplateUtils.normaliseFilePathToUrl(baseUrl.toString(), templateName);
 
                         if(! files.containsKey(templateName)) {
                             final Template tpl = new Template(fullTemplateName);
@@ -87,7 +86,7 @@ public class Template {
                     }
                 }
             }
-            
+
             if (value instanceof Map<?,?>){
                 resolveTemplateType((Map<?,?>)value);
             } else if (value instanceof List<?>) {
@@ -99,23 +98,23 @@ public class Template {
             }
         }
     }
-    
+
     private void resolveTemplateGetFiles(Map<?,?> map) throws IOException  {
         for(Object key : map.keySet()){
             // Ignore if the key is not string. Actually not happening
             if(!(key instanceof String)) {
                 continue;
             }
-            
+
             String skey = (String) key;
             Object value = map.get(skey);
-            
+
             if(isGetFile(skey)) {
                 //if key="get_file", the value is the filename
                 addToFiles((String)value);
                 continue;
             }
-            
+
             Object subMap = map.get(skey);
             if (subMap instanceof Map<?,?>){
                 resolveTemplateGetFiles((Map<?,?>)subMap);
@@ -138,22 +137,22 @@ public class Template {
         	}
         }
     }
-    
+
     private boolean isGetFile(String tag) {
         return tag.equals(GET_FILE);
     }
-    
+
     private boolean isTemplate(String key, String value) {
         if (! key.equals("type")) {
             return false;
-        } 
+        }
         if (value.endsWith(".yaml") || value.endsWith(".template")) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     public String getTplContent() {
         return tplContent;
     }

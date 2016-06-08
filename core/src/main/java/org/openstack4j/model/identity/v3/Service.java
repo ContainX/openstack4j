@@ -5,14 +5,19 @@ import java.util.Map;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.identity.builder.v3.ServiceBuilder;
+import org.openstack4j.model.identity.v3.builder.ServiceBuilder;
 
 /**
- * service v3 role model class
- * 
- * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#service-catalog-v3">API reference</a>
+ * Identity V3 Service model
+ *
+ * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#service-catalog-v3"> API reference</a>
  */
-public interface Service extends ModelEntity, Buildable<ServiceBuilder> {
+public interface Service extends ModelEntity, Buildable<ServiceBuilder>, Comparable<Service> {
+
+    /**
+     * @return the version of the service
+     */
+    Integer getVersion();
 
     /**
      * @return the id of the service
@@ -35,13 +40,25 @@ public interface Service extends ModelEntity, Buildable<ServiceBuilder> {
     String getType();
 
     /**
+     * @return the links of the service
+     */
+    Map<String, String> getLinks();
+
+    /**
      * @return the list of endpoints
      */
     List<? extends Endpoint> getEndpoints();
 
     /**
-     * @return the links of the service
+     * @return the enabled status of the service
      */
-    Map<String, String> getLinks();
+    boolean isEnabled();
+
+    /**
+     * sets the enabled status of the service
+     *
+     * @param enabled the enabled
+     */
+    void setEnabled(Boolean enabled);
 
 }

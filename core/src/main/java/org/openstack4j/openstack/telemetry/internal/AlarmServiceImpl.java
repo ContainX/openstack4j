@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.telemetry.AlarmService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.telemetry.Alarm;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
 

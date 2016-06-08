@@ -13,12 +13,13 @@ import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.Action;
-import org.openstack4j.model.compute.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.ServerPassword;
 import org.openstack4j.model.compute.ServerUpdateOptions;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
@@ -29,6 +30,7 @@ import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.openstack.common.Metadata;
 import org.openstack4j.openstack.compute.domain.ConsoleOutput;
+import org.openstack4j.openstack.compute.domain.NovaPassword;
 import org.openstack4j.openstack.compute.domain.NovaServer;
 import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
@@ -51,19 +53,18 @@ import org.openstack4j.openstack.compute.domain.actions.SecurityGroupActions;
 import org.openstack4j.openstack.compute.domain.actions.ServerAction;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.compute.functions.WrapServerIfApplicableFunction;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Server Operation API implementation
- * 
+ *
  * @author Jeremy Unruh
  */
 public class ServerServiceImpl extends BaseComputeServices implements ServerService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ServerServiceImpl.class);
 
-   
     /**
      * {@inheritDoc}
      */
@@ -154,11 +155,11 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public ActionResponse action(String serverId, Action action) {
         checkNotNull(serverId);
-        
+
         ServerAction instance = BasicActions.actionInstanceFor(action);
         if (instance == null)
             return ActionResponse.actionFailed(String.format("Action %s was not found in the list of invokable actions", action), 412);
-        
+
         return invokeAction(serverId, instance);
     }
 
@@ -171,16 +172,18 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(snapshotName);
 
         HttpResponse response = invokeActionWithResponse(serverId, CreateSnapshotAction.create(snapshotName));
+        String id = null;
         if (response.getStatus() == 202) {
             String location = response.header("location");
             if (location != null && location.contains("/"))
             {
                 String[] s = location.split("/");
-                return s[s.length - 1];
+                id = s[s.length - 1];
             }
 
         }
-        return null;
+        response.getEntity(Void.class);
+        return id;
     }
 
     /**
@@ -208,7 +211,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public ActionResponse resize(String serverId, String flavorId) {
         checkNotNull(serverId);
         checkNotNull(flavorId);
-        
+
         return invokeAction(serverId, new Resize(flavorId));
     }
 
@@ -285,7 +288,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public Map<String, ? extends Number> diagnostics(String serverId) {
         return get(HashMap.class, uri("/servers/%s/diagnostics", serverId)).execute();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -313,7 +316,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
                    delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).executeWithResponse()
                 );
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -333,7 +336,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
             options = LiveMigrateOptions.create();
         return invokeAction(serverId, LiveMigrationAction.create(options));
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -343,7 +346,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(state);
         return invokeAction(serverId, ResetStateAction.create(state));
     }
-    
+
     /**
      * {{@link #invokeAction(String, String)}
      */
@@ -353,7 +356,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(options);
         return invokeAction(serverId, BackupAction.create(options));
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -363,7 +366,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(adminPassword);
         return invokeAction(serverId, new ChangePassword(adminPassword));
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -375,15 +378,15 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         long maxTime = maxWaitUnit.toMillis(maxWait);
         while ( duration < maxTime ) {
             server = get(serverId);
-            
+
             if (server == null || server.getStatus() == status || server.getStatus() == Status.ERROR)
                 break;
-            
+
             duration += sleep(1000);
         }
         return server;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -436,4 +439,13 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public InterfaceService interfaces() {
         return Apis.get(InterfaceService.class);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ServerPassword getPassword(String serverId) {
+        checkNotNull(serverId);
+        return get(NovaPassword.class, uri("/servers/%s/os-server-password", serverId)).execute();
+    }   
 }

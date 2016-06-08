@@ -1,0 +1,13 @@
+{
+   "nat_pool":{
+      "subnet_id":"0703a1f7-f641-41a5-abd0-c8302bf01af8",
+      "name":"ptg_nat_pool",
+      "external_segment_id":"fff89eb8-8f9d-49a2-b66c-ad75d9a95287",
+      "shared":true,
+      "ip_version":4,
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "ip_pool":"1.101.2.112/28",
+      "id":"e2d4fce7-4c55-497b-ac4c-290dd202c71a",
+      "description":""
+   }
+}

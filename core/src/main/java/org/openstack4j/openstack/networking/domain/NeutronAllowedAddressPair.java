@@ -14,14 +14,18 @@ public class NeutronAllowedAddressPair implements AllowedAddressPair {
 
 	private static final long serialVersionUID = 1L;
 
-  @JsonProperty("ip_address")
-  private String ipAddress;
-	
-  public NeutronAllowedAddressPair() { }
-  
-  public NeutronAllowedAddressPair(String address) {
-  	this.ipAddress = address;
-  }
+	@JsonProperty("ip_address")
+	private String ipAddress;
+
+	@JsonProperty("mac_address")
+	private String macAddress;
+
+	public NeutronAllowedAddressPair() { }
+
+	public NeutronAllowedAddressPair(String ipAddress, String macAddress) {
+		this.ipAddress = ipAddress;
+		this.macAddress = macAddress;
+	}
   
 	/**
 	 * {@inheritDoc}
@@ -30,13 +34,19 @@ public class NeutronAllowedAddressPair implements AllowedAddressPair {
 	public String getIpAddress() {
 		return ipAddress;
 	}
-	
+
+	@Override
+	public String getMacAddress() {
+		return macAddress;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues().add("ipAddress", ipAddress).toString();
+		return Objects.toStringHelper(this).omitNullValues()
+				.add("ipAddress", ipAddress).add("macAddress", macAddress).toString();
 	}
 
 }

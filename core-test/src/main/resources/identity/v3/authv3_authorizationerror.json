@@ -1,0 +1,7 @@
+{
+    "error": {
+        "message": "The request you have made requires authentication. (Disable debug mode to suppress these details.)",
+        "code": 401,
+        "title": "Unauthorized"
+    }
+}

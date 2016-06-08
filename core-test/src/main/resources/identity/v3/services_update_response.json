@@ -1,0 +1,12 @@
+{
+    "service": {
+        "name": "Service_CRUD",
+        "links": {
+            "self": "http://127.0.0.1:5000/v3/services/5439da9864004dd088fce14c1c626a4b"
+        },
+        "enabled": true,
+        "type": "identity",
+        "id": "5439da9864004dd088fce14c1c626a4b",
+        "description": "An updated service used for tests"
+    }
+}

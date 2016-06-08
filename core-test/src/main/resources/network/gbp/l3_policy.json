@@ -1,0 +1,21 @@
+{
+   "l3_policy":{
+      "description":"Implicitly created L3 policy",
+      "routers":[
+
+      ],
+      "subnet_prefix_length":24,
+      "l2_policies":[
+         "65fc10d2-f173-48db-ad50-72f29790c4d1"
+      ],
+      "id":"8a45f76f-888b-4f3b-ad00-88c3b0ba9e6d",
+      "ip_pool":"192.168.0.0/16",
+      "name":"default",
+      "tenant_id":"abc0b828ace347049b0835f4a4d10040",
+      "ip_version":4,
+      "shared":false,
+      "external_segments":{
+
+      }
+   }
+}

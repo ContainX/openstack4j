@@ -1,0 +1,17 @@
+{
+  "security_service": {
+    "status": "new",
+    "domain": "my_domain",
+    "password": "***",
+    "name": "SecServ2",
+    "created_at": "2016-02-13T21:51:02.000000",
+    "updated_at": "2016-02-13T21:52:01.403251",
+    "dns_ip": "10.0.1.0/24",
+    "project_id": "d401b6b1f81943e8919f2b6819755fb6",
+    "user": "new_user",
+    "server": null,
+    "type": "ldap",
+    "id": "32e921ed-f399-4e7a-b05b-786f482bd369",
+    "description": "Updating my second Security Service"
+  }
+}

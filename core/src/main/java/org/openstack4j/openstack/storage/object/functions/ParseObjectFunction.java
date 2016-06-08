@@ -1,6 +1,9 @@
 package org.openstack4j.openstack.storage.object.functions;
 
-import static org.openstack4j.model.storage.object.SwiftHeaders.*;
+import static org.openstack4j.model.storage.object.SwiftHeaders.CONTENT_LENGTH;
+import static org.openstack4j.model.storage.object.SwiftHeaders.CONTENT_TYPE;
+import static org.openstack4j.model.storage.object.SwiftHeaders.LAST_MODIFIED;
+import static org.openstack4j.openstack.internal.Parser.asLong;
 
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.storage.object.SwiftObject;
@@ -34,7 +37,7 @@ public class ParseObjectFunction implements Function<HttpResponse, SwiftObject> 
                   .name(location.getObjectName())
                   .containerName(location.getContainerName())
                   .mimeType(resp.header(CONTENT_TYPE))
-                  .sizeBytes(Long.valueOf(resp.header(CONTENT_LENGTH)))
+                  .sizeBytes(asLong(resp.header(CONTENT_LENGTH)))
                   .metadata(MapWithoutMetaPrefixFunction.INSTANCE.apply(resp.headers()))
                   .lastModified(Parser.toRFC822DateParse(resp.header(LAST_MODIFIED)))
                   .build();

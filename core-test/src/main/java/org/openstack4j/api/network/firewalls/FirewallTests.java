@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.Firewall;
 import org.openstack4j.model.network.ext.FirewallUpdate;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFirewall.FirewallStatus;
@@ -33,7 +33,7 @@ public class FirewallTests extends AbstractTest {
 	
 	public void testListFirewalls() throws IOException {
 	    respondWith(FIREWALLS);
-		List<? extends Firewall> list = os().networking().firewalls().firewall().list();
+		List<? extends Firewall> list = osv3().networking().firewalls().firewall().list();
 		assertEquals(1, list.size());
 		Preconditions.checkNotNull(list.get(0));
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Firewall from List : "+list.get(0));
@@ -43,7 +43,7 @@ public class FirewallTests extends AbstractTest {
 	public void testGetFirewall() throws IOException {
 	    respondWith(FIREWALL);
 		String id = "3b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
-		Firewall firewall = os().networking().firewalls().firewall().get(id);
+		Firewall firewall = osv3().networking().firewalls().firewall().get(id);
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Firewall by ID : "+firewall);
 		assertNotNull(firewall);
 		assertEquals(id, firewall.getId());
@@ -56,7 +56,7 @@ public class FirewallTests extends AbstractTest {
 				  .description("Sample-Description").name("Sample-Firewall")
 				  .policy("c69933c1-b472-44f9-8226-30dc4ffd454c").shared(true)
 				  .tenantId("45977fa2dbd7482098dd68d0d8970117").build();
-		Firewall result = os().networking().firewalls().firewall().create(create);
+		Firewall result = osv3().networking().firewalls().firewall().create(create);
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created Firewall : "+result);
 		
 		assertEquals("Sample-Firewall", result.getName());
@@ -68,7 +68,7 @@ public class FirewallTests extends AbstractTest {
 		FirewallUpdate update = Builders.firewallUpdate().adminStateUp(false)
 				.description("Test-Firewall-Update").build();
 		
-		Firewall result = os().networking().firewalls().firewall().update("3b0ef8f4-82c7-44d4-a4fb-6177f9a21977", update);
+		Firewall result = osv3().networking().firewalls().firewall().update("3b0ef8f4-82c7-44d4-a4fb-6177f9a21977", update);
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated Firewall : "+result);
 		
 		assertEquals("Test-Firewall-Update", result.getDescription());
@@ -77,7 +77,7 @@ public class FirewallTests extends AbstractTest {
 	
 	public void testDeleteFirewall() {
 	    respondWith(200);
-		ActionResponse result = os().networking().firewalls().firewall().delete("3b0ef8f4-82c7-44d4-a4fb-6177f9a21977");
+		ActionResponse result = osv3().networking().firewalls().firewall().delete("3b0ef8f4-82c7-44d4-a4fb-6177f9a21977");
 		assertTrue(result.isSuccess());
 	}
 
