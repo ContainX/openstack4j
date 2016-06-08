@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.provider;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
+
 import org.openstack4j.api.APIProvider;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
@@ -90,20 +91,6 @@ import org.openstack4j.api.sahara.NodeGroupTemplateService;
 import org.openstack4j.api.sahara.SaharaImageService;
 import org.openstack4j.api.sahara.SaharaPluginService;
 import org.openstack4j.api.sahara.SaharaService;
-import org.openstack4j.api.senlin.SenlinActionService;
-import org.openstack4j.api.senlin.SenlinBuildInfoService;
-import org.openstack4j.api.senlin.SenlinClusterPolicyService;
-import org.openstack4j.api.senlin.SenlinClusterService;
-import org.openstack4j.api.senlin.SenlinEventService;
-import org.openstack4j.api.senlin.SenlinNodeService;
-import org.openstack4j.api.senlin.SenlinPolicyService;
-import org.openstack4j.api.senlin.SenlinPolicyTypeService;
-import org.openstack4j.api.senlin.SenlinProfileService;
-import org.openstack4j.api.senlin.SenlinProfileTypeService;
-import org.openstack4j.api.senlin.SenlinReceiverService;
-import org.openstack4j.api.senlin.SenlinService;
-import org.openstack4j.api.senlin.SenlinVersionService;
-import org.openstack4j.api.senlin.SenlinWebHookService;
 import org.openstack4j.api.storage.BlockQuotaSetService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeService;
@@ -205,20 +192,6 @@ import org.openstack4j.openstack.sahara.internal.NodeGroupTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaImageServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaPluginServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinActionServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinBuildInfoServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinClusterPolicyServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinClusterServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinEventServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinNodeServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinPolicyServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinPolicyTypeServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinProfileServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinProfileTypeServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinReceiverServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinVersionServiceImpl;
-import org.openstack4j.openstack.senlin.internal.SenlinWebHookServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockQuotaSetServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
@@ -234,7 +207,7 @@ import org.openstack4j.openstack.telemetry.internal.EventServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
-import java.util.Map;
+import com.google.common.collect.Maps;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons
@@ -295,20 +268,6 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ZoneService.class, ZoneServiceImpl.class);
         bind(CinderZoneService.class, CinderZoneServiceImpl.class);
         bind(HeatService.class, HeatServiceImpl.class);
-		bind(SenlinService.class, SenlinServiceImpl.class);
-		bind(SenlinPolicyService.class, SenlinPolicyServiceImpl.class);
-        bind(SenlinVersionService.class, SenlinVersionServiceImpl.class);
-		bind(SenlinActionService.class, SenlinActionServiceImpl.class);
-		bind(SenlinBuildInfoService.class, SenlinBuildInfoServiceImpl.class);
-		bind(SenlinClusterService.class, SenlinClusterServiceImpl.class);
-        bind(SenlinClusterPolicyService.class, SenlinClusterPolicyServiceImpl.class);
-		bind(SenlinEventService.class, SenlinEventServiceImpl.class);
-		bind(SenlinNodeService.class, SenlinNodeServiceImpl.class);
-		bind(SenlinProfileService.class, SenlinProfileServiceImpl.class);
-		bind(SenlinProfileTypeService.class, SenlinProfileTypeServiceImpl.class);
-		bind(SenlinPolicyTypeService.class, SenlinPolicyTypeServiceImpl.class);
-		bind(SenlinReceiverService.class, SenlinReceiverServiceImpl.class);
-		bind(SenlinWebHookService.class, SenlinWebHookServiceImpl.class);
         bind(StackService.class, StackServiceImpl.class);
         bind(TemplateService.class, TemplateServiceImpl.class);
         bind(EventsService.class, EventsServiceImpl.class);
