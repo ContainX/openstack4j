@@ -85,7 +85,7 @@ public class NodeServiceTest extends AbstractTest {
     public void testNodeAction() throws Exception{
         respondWith(RASPACTION);
         NodeActionCreate newNodeAction = new SenlinNodeActionCreate();
-        newNodeAction.toBuilder().check(new HashMap<>());
+        newNodeAction.toBuilder().check(new HashMap<String, String>());
         Action respAction = osv3().senlin().node().action("573aa1ba-bf45-49fd-907d-6b5d6e6adfd3", newNodeAction);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Trigger node action : " + respAction);
         assertEquals("40a436b1-28d1-4de6-b2c3-0a34f478e2c9", respAction.getAction());

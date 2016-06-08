@@ -72,7 +72,7 @@ public class ClusterServiceTest extends AbstractTest {
         newCluster.toBuilder()
                 .name(clusterName)
                 .profileID("aaaaaaa")
-                .metadata(new HashMap<>());
+                .metadata(new HashMap<String, String>());
         Cluster cluster = osv3().senlin().cluster().update(ID, newCluster);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated Cluster : " + cluster);
         assertEquals(clusterName, cluster.getName());
@@ -87,7 +87,7 @@ public class ClusterServiceTest extends AbstractTest {
     public void testNodeAction() throws Exception{
         respondWith(RASPACTION);
         ClusterActionCreate newClusterAction = new SenlinClusterActionCreate();
-        newClusterAction.toBuilder().check(new HashMap<>());
+        newClusterAction.toBuilder().check(new HashMap<String, String>());
         Action respAction = osv3().senlin().cluster().action("573aa1ba-bf45-49fd-907d-6b5d6e6adfd3", newClusterAction);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Trigger node action : " + respAction);
         assertEquals("40a436b1-28d1-4de6-b2c3-0a34f478e2c9", respAction.getAction());
