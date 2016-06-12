@@ -17,17 +17,17 @@ import org.openstack4j.openstack.compute.internal.BaseComputeServices;
  */
 public class InstanceActionsServiceImpl extends BaseComputeServices implements InstanceActionsService {
 
-	@Override
-	public List<? extends InstanceAction> list(String serverId) {
-		checkNotNull(serverId, "serverId");
-		return get(NovaInstanceActions.class, uri("/servers/%s/os-instance-actions", serverId)).execute().getList();
-	}
+    @Override
+    public List<? extends InstanceAction> list(String serverId) {
+        checkNotNull(serverId, "serverId");
+        return get(NovaInstanceActions.class, uri("/servers/%s/os-instance-actions", serverId)).execute().getList();
+    }
 
-	@Override
-	public InstanceAction get(String serverId, String requestId) {
-		checkNotNull(serverId, "serverId");
-		checkNotNull(requestId, "requestId");
-		return get(NovaInstanceAction.class, uri("/servers/%s/os-instance-actions//%s", serverId, requestId)).execute();
-	}
+    @Override
+    public InstanceAction get(String serverId, String requestId) {
+        checkNotNull(serverId, "serverId");
+        checkNotNull(requestId, "requestId");
+        return get(NovaInstanceAction.class, uri("/servers/%s/os-instance-actions//%s", serverId, requestId)).execute();
+    }
 
 }

@@ -9,38 +9,38 @@ import java.util.Date;
  */
 public interface InstanceAction {
 
-	/**
-	 * @return the action
-	 */
-	String getAction();
+    /**
+     * @return the action
+     */
+    String getAction();
 
-	/**
-	 * @return the instance uuid
-	 */
-	String getInstanceUuid();
+    /**
+     * @return the instance uuid
+     */
+    String getInstanceUuid();
 
-	/**
-	 * @return the message
-	 */
-	String getMessage();
+    /**
+     * @return the message
+     */
+    String getMessage();
 
-	/**
-	 * @return the project id
-	 */
-	String getProjectId();
+    /**
+     * @return the project id
+     */
+    String getProjectId();
 
-	/**
-	 * @return the request id
-	 */
-	String getRequestId();
+    /**
+     * @return the request id
+     */
+    String getRequestId();
 
-	/**
-	 * @return the start time
-	 */
-	Date getStartTime();
+    /**
+     * @return the start time
+     */
+    Date getStartTime();
 
-	/**
-	 * @return the user id
-	 */
-	String getUserId();
+    /**
+     * @return the user id
+     */
+    String getUserId();
 }
