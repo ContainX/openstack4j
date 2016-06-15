@@ -26,6 +26,13 @@ public interface Action extends ResourceEntity {
     String getAction();
 
     /**
+     * Returns the context of the action
+     *
+     * @return the context of the action
+     */
+    Map<String, Object> getContext();
+
+    /**
      * Returns the action name of the action
      *
      * @return the action name of the action
@@ -72,7 +79,7 @@ public interface Action extends ResourceEntity {
      *
      * @return the inputs of the action
      */
-    Map<String, String> getInputs();
+    Map<String, Object> getInputs();
 
     /**
      * Returns the interval of the action
@@ -86,7 +93,7 @@ public interface Action extends ResourceEntity {
      *
      * @return the outputs of the action
      */
-    Map<String, String> getOutputs();
+    Map<String, Object> getOutputs();
 
     /**
      * Returns the owner of the action

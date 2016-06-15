@@ -71,7 +71,7 @@ public interface Node extends ResourceEntity {
      *
      * @return the metadata of the Event
      */
-    Map<String, String> getMetadata();
+    Map<String, Object> getMetadata();
 
     /**
      * Returns the physical id of the Event

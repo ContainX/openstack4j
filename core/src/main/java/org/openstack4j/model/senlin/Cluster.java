@@ -31,7 +31,7 @@ public interface Cluster extends ResourceEntity {
      *
      * @return the data of the cluster
      */
-    Map<String, String> getData();
+    Map<String, Object> getData();
 
     /**
      * Returns the desired capacity of the cluster
@@ -66,7 +66,7 @@ public interface Cluster extends ResourceEntity {
      *
      * @return the metadata of the cluster
      */
-    Map<String, String> getMetadata();
+    Map<String, Object> getMetadata();
 
     /**
      * Returns the min size of the cluster

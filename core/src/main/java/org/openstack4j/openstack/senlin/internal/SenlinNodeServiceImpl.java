@@ -2,11 +2,11 @@ package org.openstack4j.openstack.senlin.internal;
 
 import org.openstack4j.api.senlin.SenlinNodeService;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.senlin.Action;
+import org.openstack4j.model.senlin.ActionID;
 import org.openstack4j.model.senlin.Node;
 import org.openstack4j.model.senlin.NodeActionCreate;
 import org.openstack4j.model.senlin.NodeCreate;
-import org.openstack4j.openstack.senlin.domain.SenlinAction;
+import org.openstack4j.openstack.senlin.domain.SenlinActionID;
 import org.openstack4j.openstack.senlin.domain.SenlinNode;
 
 import java.util.List;
@@ -51,10 +51,10 @@ public class SenlinNodeServiceImpl extends BaseSenlinServices implements SenlinN
 	}
 
 	@Override
-	public Action action(String nodeID, NodeActionCreate newNodeAction) {
+	public ActionID action(String nodeID, NodeActionCreate newNodeAction) {
 		checkNotNull(nodeID);
 		checkNotNull(newNodeAction);
-		return post(SenlinAction.class, uri("/nodes/%s/actions", nodeID)).entity(newNodeAction).execute();
+		return post(SenlinActionID.class, uri("/nodes/%s/actions", nodeID)).entity(newNodeAction).execute();
 	}
 
 }

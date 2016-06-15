@@ -1,7 +1,7 @@
 package org.openstack4j.api.senlin;
 
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.senlin.Action;
+import org.openstack4j.model.senlin.ActionID;
 import org.openstack4j.model.senlin.Node;
 import org.openstack4j.model.senlin.NodeActionCreate;
 import org.openstack4j.model.senlin.NodeCreate;
@@ -70,5 +70,5 @@ public interface SenlinNodeService {
 	 *
 	 * @return Action
 	 */
-	Action action(String nodeID, NodeActionCreate newNodeAction);
+	ActionID action(String nodeID, NodeActionCreate newNodeAction);
 }

@@ -43,7 +43,7 @@ public interface Profile extends ResourceEntity {
      *
      * @return the metadata of the profile
      */
-    Map<String, Map> getMetadata();
+    Map<String, Object> getMetadata();
 
     /**
      * Returns the spec of the profile
@@ -51,4 +51,25 @@ public interface Profile extends ResourceEntity {
      * @return the spec of the profile
      */
     Map<String, Object> getSpec();
+
+    /**
+     * Returns the type of the profile
+     *
+     * @return the type of the profile
+     */
+    String getType();
+
+    /**
+     * Returns the updated at time of the profile
+     *
+     * @return the updated at time of the profile
+     */
+    Date getUpdatedAt();
+
+    /**
+     * Returns the user of the profile
+     *
+     * @return the user of the profile
+     */
+    String getUser();
 }

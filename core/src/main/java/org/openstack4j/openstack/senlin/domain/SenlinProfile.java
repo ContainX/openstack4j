@@ -33,9 +33,30 @@ public class SenlinProfile implements Profile {
 	@JsonProperty("project")
 	private String project;
 	@JsonProperty("metadata")
-	private Map<String, Map> metadata;
+	private Map<String, Object> metadata;
 	@JsonProperty("spec")
 	private Map<String, Object> spec;
+	@JsonProperty("type")
+	private String type;
+	@JsonProperty("updated_at")
+	private Date updated_at;
+	@JsonProperty("user")
+	private String user;
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public Date getUpdatedAt() {
+		return updated_at;
+	}
+
+	@Override
+	public String getUser() {
+		return user;
+	}
 
 	@Override
 	public String getId() {
@@ -63,7 +84,7 @@ public class SenlinProfile implements Profile {
 	}
 
 	@Override
-	public Map<String, Map> getMetadata() {
+	public Map<String, Object> getMetadata() {
 		return metadata;
 	}
 
@@ -75,13 +96,16 @@ public class SenlinProfile implements Profile {
 	@Override
 	public String toString() {
 		return "SenlinProfile{" +
-				"created_at='" + createdAt + '\'' +
+				"createdAt=" + createdAt +
 				", domain='" + domain + '\'' +
 				", id='" + id + '\'' +
 				", name='" + name + '\'' +
 				", project='" + project + '\'' +
 				", metadata=" + metadata +
 				", spec=" + spec +
+				", type='" + type + '\'' +
+				", updated_at=" + updated_at +
+				", user='" + user + '\'' +
 				'}';
 	}
 

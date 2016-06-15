@@ -79,21 +79,21 @@ public interface Receiver extends ResourceEntity {
 	 *
 	 * @return the actor of the receiver
 	 */
-	Map<String, ArrayList<String>> getActor();
+	Map<String, Object> getActor();
 
 	/**
 	 * Returns the channel of the receiver
 	 *
 	 * @return the channel of the receiver
 	 */
-	Map<String, String> getChannel();
+	Map<String, Object> getChannel();
 
 	/**
 	 * Returns the params of the receiver
 	 *
 	 * @return the params of the receiver
 	 */
-	Map<String, String> getParams();
+	Map<String, Object> getParams();
 
 	/**
 	 * Returns the WebHook of the receiver

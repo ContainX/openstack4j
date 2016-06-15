@@ -2,11 +2,11 @@ package org.openstack4j.openstack.senlin.internal;
 
 import org.openstack4j.api.senlin.SenlinClusterService;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.senlin.Action;
+import org.openstack4j.model.senlin.ActionID;
 import org.openstack4j.model.senlin.Cluster;
 import org.openstack4j.model.senlin.ClusterActionCreate;
 import org.openstack4j.model.senlin.ClusterCreate;
-import org.openstack4j.openstack.senlin.domain.SenlinAction;
+import org.openstack4j.openstack.senlin.domain.SenlinActionID;
 import org.openstack4j.openstack.senlin.domain.SenlinCluster;
 
 import java.util.List;
@@ -51,10 +51,10 @@ public class SenlinClusterServiceImpl extends BaseSenlinServices implements Senl
 	}
 
 	@Override
-	public Action action(String clusterID, ClusterActionCreate newClusterAction) {
+	public ActionID action(String clusterID, ClusterActionCreate newClusterAction) {
 		checkNotNull(clusterID);
 		checkNotNull(newClusterAction);
-		return post(SenlinAction.class, uri("/clusters/%s/actions", clusterID)).entity(newClusterAction).execute();
+		return post(SenlinActionID.class, uri("/clusters/%s/actions", clusterID)).entity(newClusterAction).execute();
 	}
 
 }

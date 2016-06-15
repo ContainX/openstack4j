@@ -1,6 +1,6 @@
 package org.openstack4j.api.senlin;
 
-import org.openstack4j.model.senlin.Action;
+import org.openstack4j.model.senlin.ActionID;
 
 /**
  * This interface defines all methods for the manipulation of WebHook
@@ -15,5 +15,5 @@ public interface SenlinWebHookService {
 	 *
 	 * @return Action
 	 */
-	Action action(String webHookUrl);
+	ActionID action(String webHookUrl);
 }

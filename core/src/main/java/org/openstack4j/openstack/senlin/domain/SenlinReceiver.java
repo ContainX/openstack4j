@@ -44,11 +44,11 @@ public class SenlinReceiver implements Receiver {
 	@JsonProperty("user")
 	private String user;
 	@JsonProperty("actor")
-	private Map<String, ArrayList<String>> actor;
+	private Map<String, Object> actor;
 	@JsonProperty("channel")
-	private Map<String, String> channel;
+	private Map<String, Object> channel;
 	@JsonProperty("params")
-	private Map<String, String> params;
+	private Map<String, Object> params;
 
 	@Override
 	public String getAction() {
@@ -91,17 +91,17 @@ public class SenlinReceiver implements Receiver {
 	}
 
 	@Override
-	public Map<String, ArrayList<String>> getActor() {
+	public Map<String, Object> getActor() {
 		return actor;
 	}
 
 	@Override
-	public Map<String, String> getChannel() {
+	public Map<String, Object> getChannel() {
 		return channel;
 	}
 
 	@Override
-	public Map<String, String> getParams() {
+	public Map<String, Object> getParams() {
 		return params;
 	}
 

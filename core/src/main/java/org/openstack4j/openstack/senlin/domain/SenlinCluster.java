@@ -7,7 +7,6 @@ import org.openstack4j.model.senlin.Cluster;
 import org.openstack4j.model.senlin.ClusterStatus;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class SenlinCluster implements Cluster {
 	@JsonProperty("created_at")
 	private Date createdAt;
 	@JsonProperty("data")
-	private Map<String, String> data;
+	private Map<String, Object> data;
 	@JsonProperty("desired_capacity")
 	private Integer desiredCapacity;
 	@JsonProperty("domain")
@@ -39,7 +38,7 @@ public class SenlinCluster implements Cluster {
 	@JsonProperty("max_size")
 	private Integer maxSize;
 	@JsonProperty("metadata")
-	private Map<String, String> metadata;
+	private Map<String, Object> metadata;
 	@JsonProperty("min_size")
 	private Integer minSize;
 	@JsonProperty("name")
@@ -81,7 +80,7 @@ public class SenlinCluster implements Cluster {
 	}
 
 	@Override
-	public Map<String, String> getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 
@@ -106,7 +105,7 @@ public class SenlinCluster implements Cluster {
 	}
 
 	@Override
-	public Map<String, String> getMetadata() {
+	public Map<String, Object> getMetadata() {
 		return metadata;
 	}
 

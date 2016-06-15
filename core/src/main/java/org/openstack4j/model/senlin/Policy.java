@@ -43,7 +43,7 @@ public interface Policy extends ResourceEntity {
      *
      * @return the data of the policy
      */
-    Map<String, String> getData();
+    Map<String, Object> getData();
 
     /**
      * Returns the spec of the policy

@@ -1,7 +1,7 @@
 package org.openstack4j.api.senlin;
 
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.senlin.Action;
+import org.openstack4j.model.senlin.ActionID;
 import org.openstack4j.model.senlin.Cluster;
 import org.openstack4j.model.senlin.ClusterActionCreate;
 import org.openstack4j.model.senlin.ClusterCreate;
@@ -70,5 +70,5 @@ public interface SenlinClusterService {
 	 *
 	 * @return Action
 	 */
-	Action action(String clusterID, ClusterActionCreate newClusterAction);
+	ActionID action(String clusterID, ClusterActionCreate newClusterAction);
 }

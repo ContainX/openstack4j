@@ -2,6 +2,7 @@ package org.openstack4j.openstack.senlin.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.senlin.Action;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -17,6 +18,7 @@ import java.util.Map;
  * 
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonRootName("action")
 public class SenlinAction implements Action {
 	private static final long serialVersionUID = -1125919503657762374L;
 
@@ -24,6 +26,8 @@ public class SenlinAction implements Action {
 	private String action;
 	@JsonProperty("cause")
 	private String cause;
+	@JsonProperty("context")
+	private Map<String, Object> context;
 	@JsonProperty("created_at")
 	private Date createdAt;
 	@JsonProperty("depended_by")
@@ -35,13 +39,13 @@ public class SenlinAction implements Action {
 	@JsonProperty("id")
 	private String id;
 	@JsonProperty("inputs")
-	private Map<String, String> inputs;
+	private Map<String, Object> inputs;
 	@JsonProperty("interval")
 	private Integer interval;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("outputs")
-	private Map<String, String> outputs;
+	private Map<String, Object> outputs;
 	@JsonProperty("owner")
 	private String owner;
 	@JsonProperty("start_time")
@@ -65,6 +69,11 @@ public class SenlinAction implements Action {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public Map<String, Object> getContext() {
+		return context;
 	}
 
 	@Override
@@ -103,7 +112,7 @@ public class SenlinAction implements Action {
 	}
 
 	@Override
-	public Map<String, String> getInputs() {
+	public Map<String, Object> getInputs() {
 		return inputs;
 	}
 
@@ -113,7 +122,7 @@ public class SenlinAction implements Action {
 	}
 
 	@Override
-	public Map<String, String> getOutputs() {
+	public Map<String, Object> getOutputs() {
 		return outputs;
 	}
 
@@ -152,22 +161,23 @@ public class SenlinAction implements Action {
 		return "SenlinAction{" +
 				"action='" + action + '\'' +
 				", cause='" + cause + '\'' +
-				", created_at='" + createdAt + '\'' +
-				", depended_by=" + dependedBy +
-				", depended_on=" + dependedOn +
-				", end_time='" + endTime + '\'' +
+				", context=" + context +
+				", createdAt=" + createdAt +
+				", dependedBy=" + dependedBy +
+				", dependedOn=" + dependedOn +
+				", endTime=" + endTime +
 				", id='" + id + '\'' +
 				", inputs=" + inputs +
-				", interval='" + interval + '\'' +
+				", interval=" + interval +
 				", name='" + name + '\'' +
 				", outputs=" + outputs +
 				", owner='" + owner + '\'' +
-				", start_time='" + startTime + '\'' +
+				", startTime=" + startTime +
 				", status='" + status + '\'' +
-				", status_reason='" + statusReason + '\'' +
+				", statusReason='" + statusReason + '\'' +
 				", target='" + target + '\'' +
-				", timeout='" + timeout + '\'' +
-				", updated_at='" + updatedAt + '\'' +
+				", timeout=" + timeout +
+				", updatedAt=" + updatedAt +
 				'}';
 	}
 

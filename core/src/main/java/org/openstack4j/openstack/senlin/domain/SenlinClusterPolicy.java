@@ -34,7 +34,6 @@ public class SenlinClusterPolicy implements ClusterPolicy {
 	private String policyName;
 	@JsonProperty("policy_type")
 	private String policyType;
-	@JsonProperty("name")
 
 	@Override
 	public String getId() {

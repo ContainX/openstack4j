@@ -33,7 +33,7 @@ public class SenlinPolicy implements Policy {
 	@JsonProperty("user")
 	private String user;
 	@JsonProperty("data")
-	private Map<String, String> data;
+	private Map<String, Object> data;
 	@JsonProperty("spec")
 	private Map<String, Object> spec;
 	@JsonProperty("type")
@@ -69,7 +69,7 @@ public class SenlinPolicy implements Policy {
 	}
 
 	@Override
-	public Map<String, String> getData() {
+	public Map<String, Object> getData() {
 		return data;
 	}
 

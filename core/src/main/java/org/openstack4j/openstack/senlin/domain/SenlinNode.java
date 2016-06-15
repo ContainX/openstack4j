@@ -39,7 +39,7 @@ public class SenlinNode implements Node {
 	@JsonProperty("init_at")
 	private Date initAt;
 	@JsonProperty("metadata")
-	private Map<String, String> metadata;
+	private Map<String, Object> metadata;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("physical_id")
@@ -107,7 +107,7 @@ public class SenlinNode implements Node {
 	}
 
 	@Override
-	public Map<String, String> getMetadata() {
+	public Map<String, Object> getMetadata() {
 		return metadata;
 	}
 

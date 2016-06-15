@@ -3,7 +3,7 @@ package org.openstack4j.api.senlin.v1;
 import com.google.common.base.Preconditions;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.senlin.Action;
+import org.openstack4j.model.senlin.ActionID;
 import org.openstack4j.model.senlin.Node;
 import org.openstack4j.model.senlin.NodeActionCreate;
 import org.openstack4j.model.senlin.NodeCreate;
@@ -86,9 +86,9 @@ public class NodeServiceTest extends AbstractTest {
         respondWith(RASPACTION);
         NodeActionCreate newNodeAction = new SenlinNodeActionCreate();
         newNodeAction.toBuilder().check(new HashMap<String, String>());
-        Action respAction = osv3().senlin().node().action("573aa1ba-bf45-49fd-907d-6b5d6e6adfd3", newNodeAction);
+        ActionID respAction = osv3().senlin().node().action("573aa1ba-bf45-49fd-907d-6b5d6e6adfd3", newNodeAction);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Trigger node action : " + respAction);
-        assertEquals("40a436b1-28d1-4de6-b2c3-0a34f478e2c9", respAction.getAction());
+        assertEquals("40a436b1-28d1-4de6-b2c3-0a34f478e2c9", respAction.getActionID());
     }
 
 }
