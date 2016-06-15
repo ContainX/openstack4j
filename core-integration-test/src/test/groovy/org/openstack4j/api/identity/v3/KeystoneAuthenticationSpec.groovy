@@ -8,22 +8,28 @@ import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException
 import org.openstack4j.api.types.ServiceType
-import org.openstack4j.core.transport.Config
 import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.AuthVersion
 import org.openstack4j.model.identity.v3.User
 import org.openstack4j.openstack.OSFactory
 
 import spock.lang.IgnoreIf
-import co.freeside.betamax.Betamax
-import co.freeside.betamax.Recorder
+import software.betamax.Configuration
+import software.betamax.MatchRules
+import software.betamax.junit.RecorderRule
+import software.betamax.junit.Betamax
+import software.betamax.junit.RecorderRule
 
 
 @Slf4j
 class KeystoneAuthenticationSpec extends AbstractSpec {
 
     @Rule TestName KeystoneAuthenticationTest
-    @Rule Recorder recorder = new Recorder(tapeRoot: new File(TAPEROOT+"identity.v3"))
+    @Rule public RecorderRule recorder = new RecorderRule(
+            Configuration.builder()
+                    .tapeRoot(new File(TAPEROOT + "identity.v3"))
+                    .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
+                    .build());
 
     static final boolean skipTest
 

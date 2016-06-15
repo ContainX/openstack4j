@@ -11,7 +11,9 @@
 	<packaging>pom</packaging>
 	<properties>
 		<skipTests>false</skipTests>
-		<it-root>${session.executionRootDirectory}</it-root>
+		<!--<it-root>${session.executionRootDirectory}</it-root>-->
+		<betamax.core.version>2.1.0-20160705.041750-6</betamax.core.version>
+		<betamax.junit.version>2.1.0-SNAPSHOT</betamax.junit.version>
 	</properties>
 
 	<!-- dedicated module per connector to test -->
@@ -27,6 +29,12 @@
 			<groupId>org.pacesys</groupId>
 			<artifactId>openstack4j</artifactId>
 			<version>${project.version}</version>
+			<exclusions>
+				<exclusion> <!-- excluded to solve AbstractMethodError due to duplication of javax.ws.rs-api in the above mentioned modules -->
+					<groupId>org.pacesys.openstack4j.connectors</groupId>
+					<artifactId>openstack4j-resteasy</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -47,9 +55,15 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>co.freeside</groupId>
-			<artifactId>betamax</artifactId>
-			<version>1.1.2</version>
+			<groupId>software.betamax</groupId>
+			<artifactId>betamax-junit</artifactId>
+			<version>${betamax.junit.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>software.betamax</groupId>
+			<artifactId>betamax-core</artifactId>
+			<version>${betamax.core.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
