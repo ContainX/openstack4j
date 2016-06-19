@@ -1,0 +1,41 @@
+{
+  "role_assignments": [
+    {
+      "links": {
+        "assignment": "http://identity:35357/v3/domains/161718/users/313233/roles/123456"
+      },
+      "role": {
+        "id": "aae88952465d4c32b0a1140a76601b68"
+      },
+      "scope": {
+        "project": {
+          "id": "123ac695d4db400a9001b91bb3b8aa46"
+        }
+      },
+      "user": {
+        "id": "aa9f25defa6d4cafb48466df83106065"
+      }
+    },
+    {
+      "group": {
+        "id": "101112"
+      },
+      "links": {
+        "assignment": "http://identity:35357/v3/projects/456789/groups/101112/roles/123456"
+      },
+      "role": {
+        "id": "aae88952465d4c32b0a1140a76601b68"
+      },
+      "scope": {
+        "project": {
+          "id": "123ac695d4db400a9001b91bb3b8aa46"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": "http://identity:35357/v3/role_assignments",
+    "previous": null,
+    "next": null
+  }
+}
