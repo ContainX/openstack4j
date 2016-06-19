@@ -71,4 +71,9 @@ public interface ProjectBuilder extends Builder<ProjectBuilder, Project> {
      */
     ProjectBuilder parents(String parents);
 
+    /**
+     *
+     * @see Project#getExtra(String)
+     */
+    ProjectBuilder setExtra(String name, String value);
 }
