@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.telemetry.Meter;
-import org.openstack4j.model.telemetry.Sample;
+import org.openstack4j.model.telemetry.MeterSample;
 import org.openstack4j.model.telemetry.SampleCriteria;
 import org.openstack4j.model.telemetry.Statistics;
 
@@ -28,7 +28,7 @@ public interface MeterService extends RestService {
 	 * 
 	 * @return List of Samples
 	 */
-	List<? extends Sample> samples(String meterName);
+	List<? extends MeterSample> samples(String meterName);
 	
 	/**
      * Returns samples for the specified Meter
@@ -37,7 +37,7 @@ public interface MeterService extends RestService {
      * 
      * @return List of Samples
      */
-    List<? extends Sample> samples(String meterName, SampleCriteria criteria);
+    List<? extends MeterSample> samples(String meterName, SampleCriteria criteria);
 	
 	/**
 	 * Returns computed statistics for the given meterName
@@ -75,5 +75,5 @@ public interface MeterService extends RestService {
 	 */
 	List<? extends Statistics> statistics(String meterName, int period);
 	
-	void putSamples(List<Sample> sampleList, String meterName);
+	void putSamples(List<MeterSample> sampleList, String meterName);
 }

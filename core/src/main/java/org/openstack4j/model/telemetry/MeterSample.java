@@ -9,7 +9,7 @@ import org.openstack4j.model.ModelEntity;
  * 
  * @author Jeremy Unruh
  */
-public interface Sample extends ModelEntity {
+public interface MeterSample extends ModelEntity {
 
 	/**
 	 * @return the name of the meter
