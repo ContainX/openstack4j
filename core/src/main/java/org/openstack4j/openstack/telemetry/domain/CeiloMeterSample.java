@@ -39,7 +39,7 @@ public class CeiloMeterSample implements Sample {
 
     private String timestamp;
 
-    @JsonProperty("resource_metadata")
+    @JsonProperty("metadata")
     private Map<String, Object> metadata;
 
     @JsonProperty("recorded_at")

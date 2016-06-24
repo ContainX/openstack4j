@@ -25,13 +25,11 @@ public class SampleTests extends AbstractTest {
         respondWith(JSON_SAMPLES);
 
         List<? extends Sample> samples = osv2().telemetry().samples().list();
-        assertEquals(samples.size(), 3);
+        assertEquals(samples.size(), 2);
 
         Sample sample = samples.get(0);
         assertEquals(sample.getMeter(), "image.size");
         assertNotNull(sample.getMetadata());
-        assertNotNull(sample.getMetadata());
-
     }
 
     @Test
@@ -40,8 +38,6 @@ public class SampleTests extends AbstractTest {
         Sample sample = osv2().telemetry().samples().get("1e93a890-3732-11e6-a491-005056ac9b87");
         assertEquals(sample.getMeter(), "image.size");
         assertNotNull(sample.getMetadata());
-        assertNotNull(sample.getMetadata());
-
     }
 
 }
