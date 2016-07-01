@@ -1,6 +1,6 @@
 package org.openstack4j.api.manila;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ShareNetwork;
 import org.openstack4j.model.manila.ShareNetworkCreate;
@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public interface ShareNetworkService extends RestService {
+public interface ShareNetworkService extends MicroVersionedRestService {
 
     /**
      * Creates a share network.

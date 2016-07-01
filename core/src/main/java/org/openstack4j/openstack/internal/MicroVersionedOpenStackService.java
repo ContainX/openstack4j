@@ -2,6 +2,7 @@ package org.openstack4j.openstack.internal;
 
 import com.google.common.base.Function;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.model.common.ActionResponse;
 
@@ -10,8 +11,9 @@ import org.openstack4j.model.common.ActionResponse;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public abstract class MicroVersionedOpenStackService extends BaseOpenStackService {
-    private final MicroVersion microVersion;
+public abstract class MicroVersionedOpenStackService extends BaseOpenStackService
+        implements MicroVersionedRestService {
+    private MicroVersion microVersion;
 
     protected MicroVersionedOpenStackService(MicroVersion microVersion) {
         this.microVersion = microVersion;
@@ -28,8 +30,14 @@ public abstract class MicroVersionedOpenStackService extends BaseOpenStackServic
         this.microVersion = microVersion;
     }
 
-    private MicroVersion getMicroVersion() {
+    @Override
+    public MicroVersion getMicroVersion() {
         return microVersion;
+    }
+
+    @Override
+    public void setMicroVersion(MicroVersion microVersion) {
+        this.microVersion = microVersion;
     }
 
     protected abstract String getApiVersionHeader();

@@ -106,6 +106,7 @@ import org.openstack4j.api.telemetry.EventService;
 import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.api.telemetry.SampleService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;

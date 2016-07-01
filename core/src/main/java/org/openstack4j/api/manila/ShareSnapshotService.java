@@ -1,6 +1,6 @@
 package org.openstack4j.api.manila;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ShareSnapshot;
 import org.openstack4j.model.manila.ShareSnapshotCreate;
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public interface ShareSnapshotService extends RestService {
+public interface ShareSnapshotService extends MicroVersionedRestService {
     /**
      * Creates a snapshot from a share.
      *

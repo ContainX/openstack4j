@@ -1,6 +1,6 @@
 package org.openstack4j.api.manila;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ShareInstance;
 
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public interface ShareInstanceService extends RestService {
+public interface ShareInstanceService extends MicroVersionedRestService {
     /**
      * Lists all share instances.
      *
