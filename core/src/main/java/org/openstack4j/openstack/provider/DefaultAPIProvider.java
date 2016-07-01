@@ -156,6 +156,7 @@ import org.openstack4j.openstack.identity.v3.internal.ServiceEndpointServiceImpl
 import org.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
+import org.openstack4j.openstack.internal.MicroVersion;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;
 import org.openstack4j.openstack.manila.internal.ShareInstanceServiceImpl;
@@ -221,6 +222,8 @@ public class DefaultAPIProvider implements APIProvider {
 
     private static final Map<Class<?>, Class<?>> bindings = Maps.newHashMap();
     private static final Map<Class<?>, Object> instances = Maps.newConcurrentMap();
+    private static final Map<Class<?>, Map<MicroVersion, Object>> versionedInstances
+            = Maps.newConcurrentMap();
 
     /**
      * {@inheritDoc}
@@ -359,6 +362,35 @@ public class DefaultAPIProvider implements APIProvider {
             }
         }
         throw new ApiNotFoundException("API Not found for: " + api.getName());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends MicroVersionedRestService> T get(Class<T> api, MicroVersion version) {
+        if (!versionedInstances.containsKey(api)) {
+            versionedInstances.put(api, Maps.<MicroVersion, Object>newHashMap());
+        }
+
+        if (versionedInstances.get(api).containsKey(version))
+            return (T) versionedInstances.get(api).get(version);
+        else if (bindings.containsKey(api)) {
+            T impl;
+            try {
+                impl = (T) bindings.get(api).newInstance();
+            } catch (Exception e) {
+                throw new ApiNotFoundException("API Not found for: " + api.getName()
+                        + ", version: " + version, e);
+            }
+            impl.setMicroVersion(version);
+            versionedInstances.get(api).put(version, impl);
+            return impl;
+        }
+
+        throw new ApiNotFoundException("API Not found for: " + api.getName()
+                + ", version: " + version);
     }
 
     private void bind(Class<?> api, Class<?> impl) {

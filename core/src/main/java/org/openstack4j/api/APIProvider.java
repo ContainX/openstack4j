@@ -1,5 +1,8 @@
 package org.openstack4j.api;
 
+import org.openstack4j.common.MicroVersionedRestService;
+import org.openstack4j.openstack.internal.MicroVersion;
+
 /**
  * To keep our dependencies simple in the current Openstack4J, we utilize ServiceLoader to load a provider who is responsible
  * for loading the implementation for any of the defined API interfaces.  This allows us to avoid pulling in extra 3rd party 
@@ -24,4 +27,15 @@ public interface APIProvider {
 	 * @throws ApiNotFoundException if the API cannot be found
 	 */
 	<T> T get(Class<T> api);
+
+	/**
+	 * Gets the implementation for the specified interface type in the given micro version
+	 *
+	 * @param <T> the Openstack4j API type
+	 * @param api the API interface
+	 * @param version the micro version to use
+	 * @return the implementation for T
+	 * @throws ApiNotFoundException if the API cannot be found
+	 */
+	<T extends MicroVersionedRestService> T get(Class<T> api, MicroVersion version);
 }

@@ -9,6 +9,8 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.common.MicroVersionedRestService;
+import org.openstack4j.openstack.internal.MicroVersion;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -30,6 +32,21 @@ public class Apis {
      */
     public static <T> T get(Class<T> api) {
         return provider.get(api);
+    }
+
+    /**
+     * Gets the API implementation based on Type and version
+     *
+     * @param <T>
+     *            the API type
+     * @param api
+     *            the API implementation
+     * @param version
+     *            the API micro version
+     * @return the API implementation
+     */
+    public static <T extends MicroVersionedRestService> T get(Class<T> api, MicroVersion version) {
+        return provider.get(api, version);
     }
 
     /**
@@ -102,6 +119,16 @@ public class Apis {
      */
     public static ShareService getShareServices() {
         return get(ShareService.class);
+    }
+
+    /**
+     * Gets the (Manila) Shared File Systems services API with the given micro version
+     *
+     * @param version the micro version to use for the service
+     * @return the share services
+     */
+    public static ShareService getShareServices(MicroVersion version) {
+        return get(ShareService.class, version);
     }
 
 	/**

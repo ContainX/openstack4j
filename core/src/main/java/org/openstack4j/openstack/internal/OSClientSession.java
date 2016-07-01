@@ -143,6 +143,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public ShareService share(MicroVersion version) {
+        return Apis.get(ShareService.class, version);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public HeatService heat() {
         return Apis.getHeatServices();
     }
