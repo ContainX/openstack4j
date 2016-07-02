@@ -1,16 +1,15 @@
 package org.openstack4j.openstack.identity.v3.domain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.*;
 import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.identity.v3.Project;
 import org.openstack4j.model.identity.v3.builder.ProjectBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
 /**
@@ -19,7 +18,8 @@ import com.google.common.base.Objects;
  * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#projects-v3">API reference</a>
  */
 @JsonRootName("project")
-@JsonIgnoreProperties(ignoreUnknown = true)
+/** If we don't explicitly set extra as an ignore property, it will methods with @JsonAnyGetter/Setter will not work **/
+@JsonIgnoreProperties(value = "extra" , ignoreUnknown = true)
 public class KeystoneProject implements Project {
 
     private static final long serialVersionUID = 1L;
@@ -32,12 +32,14 @@ public class KeystoneProject implements Project {
     @JsonProperty("domain_id")
     private String domainId;
     private String description;
+    @JsonIgnore
     private Map<String, String> links;
     @JsonProperty("parent_id")
     private String parentId;
     private String subtree;
     private String parents;
     private Boolean enabled = true;
+    private Map<String, String> extra = new HashMap<String, String>();
 
     /**
      * @return the Project builder
@@ -96,9 +98,18 @@ public class KeystoneProject implements Project {
     /**
      * {@inheritDoc}
      */
+    @JsonIgnore
     @Override
     public Map<String, String> getLinks() {
         return links;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsonProperty("links")
+    public void setLinks(Map<String, String> links) {
+        this.links = links;
     }
 
     /**
@@ -131,6 +142,29 @@ public class KeystoneProject implements Project {
     @Override
     public boolean isEnabled() {
         return (enabled != null && enabled);
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getExtra(String key) {
+        return extra.get(key);
+    }
+
+    @JsonAnyGetter
+    public Map<String, String> getExtra() {
+        return extra;
+    }
+
+    @JsonAnySetter
+    public void setExtra(String key, String value) {
+        // is_domain is not necessary
+        // if we don't ignore this, this will be set into extra field.
+        if (Objects.equal(key, "is_domain")) {
+            return;
+        }
+        extra.put(key, value);
     }
 
     /**
@@ -278,6 +312,16 @@ public class KeystoneProject implements Project {
         @Override
         public ProjectBuilder parents(String parents) {
             model.parents = parents;
+            return this;
+        }
+
+
+        /**
+         * @see KeystoneProject#setExtra(String, String)
+         */
+        @Override
+        public ProjectBuilder setExtra(String key, String value) {
+            model.extra.put(key, value);
             return this;
         }
 

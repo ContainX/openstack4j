@@ -72,4 +72,9 @@ public interface Project extends ModelEntity, Buildable<ProjectBuilder> {
      */
     boolean isEnabled();
 
+    /**
+     *
+     * @return value for the given key
+     */
+    String getExtra(String key);
 }
