@@ -29,5 +29,11 @@ public interface TelemetryService extends RestService {
       * @return the Event Service API
       */
     EventService events();
+
+    /**
+     * Access to Samples API 
+     * @return the Sample Service API
+     */
+	SampleService samples();
 	
 }

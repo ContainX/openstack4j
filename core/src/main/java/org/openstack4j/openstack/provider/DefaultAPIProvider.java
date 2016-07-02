@@ -104,6 +104,7 @@ import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.AlarmService;
 import org.openstack4j.api.telemetry.EventService;
 import org.openstack4j.api.telemetry.MeterService;
+import org.openstack4j.api.telemetry.SampleService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
@@ -205,6 +206,7 @@ import org.openstack4j.openstack.storage.object.internal.ObjectStorageServiceImp
 import org.openstack4j.openstack.telemetry.internal.AlarmServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.EventServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
+import org.openstack4j.openstack.telemetry.internal.SampleServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
 import com.google.common.collect.Maps;
@@ -262,6 +264,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
         bind(TelemetryService.class, TelemetryServiceImpl.class);
         bind(MeterService.class, MeterServiceImpl.class);
+        bind(SampleService.class, SampleServiceImpl.class);
         bind(AlarmService.class, AlarmServiceImpl.class);
         bind(EventService.class, EventServiceImpl.class);
         bind(HypervisorService.class, HypervisorServiceImpl.class);
@@ -333,7 +336,7 @@ public class DefaultAPIProvider implements APIProvider {
 	    bind(FirewallService.class, FirewallServiceImpl.class);
 	    bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
 	    bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
-
+	    
     }   
 
     /**
