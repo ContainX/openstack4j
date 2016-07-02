@@ -8,8 +8,10 @@ import java.util.List;
 import org.openstack4j.api.identity.v3.RoleService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Role;
+import org.openstack4j.model.identity.v3.RoleAssignment;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRole.Roles;
+import org.openstack4j.openstack.identity.v3.domain.KeystoneRoleAssignment.RoleAssignments;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
@@ -130,6 +132,15 @@ public class RoleServiceImpl extends BaseOpenStackService implements RoleService
     public Role get(String roleId) {
         checkNotNull(roleId);
         return get(KeystoneRole.class, PATH_ROLES, "/", roleId).execute();
+    }
+
+    @Override
+    public List<? extends RoleAssignment> listRoleAssignments(String projectId) {
+        checkNotNull(projectId);
+        return get(RoleAssignments.class, "role_assignments")
+                .param("scope.project.id", projectId)
+                .param("effective", "true")
+                .execute().getList();
     }
 
     @Override
