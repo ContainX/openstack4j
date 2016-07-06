@@ -43,7 +43,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      * {@inheritDoc}
      */
     public SharesService shares() {
-        return Apis.get(SharesService.class);
+        return Apis.get(SharesService.class, getMicroVersion());
     }
 
     /**
@@ -51,7 +51,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public SecurityServiceService securityServices() {
-        return Apis.get(SecurityServiceService.class);
+        return Apis.get(SecurityServiceService.class, getMicroVersion());
     }
 
     /**
@@ -59,7 +59,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public ShareSnapshotService shareSnapshots() {
-        return Apis.get(ShareSnapshotService.class);
+        return Apis.get(ShareSnapshotService.class, getMicroVersion());
     }
 
     /**
@@ -67,7 +67,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public ShareNetworkService shareNetworks() {
-        return Apis.get(ShareNetworkService.class);
+        return Apis.get(ShareNetworkService.class, getMicroVersion());
     }
 
     /**
@@ -75,7 +75,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public ShareServerService shareServers() {
-        return Apis.get(ShareServerService.class);
+        return Apis.get(ShareServerService.class, getMicroVersion());
     }
 
     /**
@@ -83,7 +83,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public ShareInstanceService shareInstances() {
-        return Apis.get(ShareInstanceService.class);
+        return Apis.get(ShareInstanceService.class, getMicroVersion());
     }
 
     /**
@@ -91,7 +91,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public ShareTypeService shareTypes() {
-        return Apis.get(ShareTypeService.class);
+        return Apis.get(ShareTypeService.class, getMicroVersion());
     }
 
     /**
@@ -99,7 +99,7 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public SchedulerStatsService schedulerStats() {
-        return Apis.get(SchedulerStatsService.class);
+        return Apis.get(SchedulerStatsService.class, getMicroVersion());
     }
 
     /**
@@ -172,6 +172,6 @@ public class ShareServiceImpl extends BaseShareServices implements ShareService 
      */
     @Override
     public QuotaSetService quotaSets() {
-        return Apis.get(QuotaSetService.class);
+        return Apis.get(QuotaSetService.class, getMicroVersion());
     }
 }

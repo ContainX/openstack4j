@@ -17,6 +17,7 @@ import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+import org.openstack4j.openstack.internal.MicroVersion;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -180,6 +181,14 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the share service
      */
     ShareService share();
+
+    /**
+     * Returns the Shared File Systems API for the given API micro version
+     *
+     * @param version the micro version to use for the API
+     * @return the share service
+     */
+    ShareService share(MicroVersion version);
 
     /**
      * Returns the Heat Service API

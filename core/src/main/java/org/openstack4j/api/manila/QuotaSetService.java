@@ -1,6 +1,6 @@
 package org.openstack4j.api.manila;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.QuotaSet;
 import org.openstack4j.model.manila.QuotaSetUpdateOptions;
@@ -10,7 +10,7 @@ import org.openstack4j.model.manila.QuotaSetUpdateOptions;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public interface QuotaSetService extends RestService {
+public interface QuotaSetService extends MicroVersionedRestService {
     /**
      * Shows quotas for a tenant.
      *

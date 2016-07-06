@@ -1,6 +1,6 @@
 package org.openstack4j.api.manila;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ShareServer;
 
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public interface ShareServerService extends RestService {
+public interface ShareServerService extends MicroVersionedRestService {
     /**
      * Lists all share servers.
      *

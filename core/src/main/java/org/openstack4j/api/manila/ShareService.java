@@ -1,8 +1,8 @@
 package org.openstack4j.api.manila;
 
-import org.openstack4j.common.RestService;
-import org.openstack4j.model.common.Extension;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.manila.*;
 import org.openstack4j.openstack.manila.domain.ManilaService;
 
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public interface ShareService extends RestService {
+public interface ShareService extends MicroVersionedRestService {
     /**
      * @return a list of available Shared File Systems API extensions
      */

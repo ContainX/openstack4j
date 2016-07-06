@@ -1,6 +1,6 @@
 package org.openstack4j.api.manila;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.common.MicroVersionedRestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.manila.ExtraSpecs;
 import org.openstack4j.model.manila.ShareType;
@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public interface ShareTypeService extends RestService {
+public interface ShareTypeService extends MicroVersionedRestService {
     /**
      * Creates a share type.
      *
