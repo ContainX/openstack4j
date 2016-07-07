@@ -11,6 +11,7 @@ public enum ServiceType {
 	EC2("ec2", "ec2"),
 	TELEMETRY("ceilometer", "metering"),
 	ORCHESTRATION("heat", "orchestration"),
+	CLUSTERING("senlin", "clustering"),
 	SAHARA("sahara", "data_processing"),
 	SHARE("manila", "share"),
 	UNKNOWN("NA", "NA")
