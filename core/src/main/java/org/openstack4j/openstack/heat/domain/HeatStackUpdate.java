@@ -142,5 +142,11 @@ public class HeatStackUpdate implements StackUpdate {
             return this;
         }
 
+        @Override
+        public StackUpdateBuilder files(Map<String, String> files) {
+            model.files = files;
+            return this;
+        }
+
     }
 }

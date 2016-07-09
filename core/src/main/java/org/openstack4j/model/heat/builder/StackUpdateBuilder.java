@@ -21,7 +21,7 @@ public interface StackUpdateBuilder extends Buildable.Builder<StackUpdateBuilder
     
     /**
      * Sets the template URL
-     * @param template the template URL
+     * @param templateURL the template URL
      * @return StackUpdateBuilder
      */
     StackUpdateBuilder templateURL(String templateURL);
@@ -45,5 +45,8 @@ public interface StackUpdateBuilder extends Buildable.Builder<StackUpdateBuilder
     StackUpdateBuilder environmentFromFile(String envFile);
 
     StackUpdateBuilder templateFromFile(String tplFile);
+
+    StackUpdateBuilder files(Map<String, String> files);
+
 
 }
