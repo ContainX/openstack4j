@@ -27,6 +27,7 @@ import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.gbp.L2policyService;
 import org.openstack4j.api.gbp.L3policyService;
 import org.openstack4j.api.gbp.NatPoolService;
+import org.openstack4j.api.gbp.NetworkPolicyService;
 import org.openstack4j.api.gbp.PolicyActionService;
 import org.openstack4j.api.gbp.PolicyClassifierService;
 import org.openstack4j.api.gbp.PolicyRuleService;
@@ -150,6 +151,7 @@ import org.openstack4j.openstack.gbp.internal.PolicyRuleSetServiceImpl;
 import org.openstack4j.openstack.gbp.internal.PolicyTargetServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ServiceProfileServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ServicechainServiceImpl;
+import org.openstack4j.openstack.gbp.internal.NetworkPolicyServiceImpl;
 import org.openstack4j.openstack.heat.internal.EventsServiceImpl;
 import org.openstack4j.openstack.heat.internal.HeatServiceImpl;
 import org.openstack4j.openstack.heat.internal.ResourcesServiceImpl;
@@ -378,6 +380,7 @@ public class DefaultAPIProvider implements APIProvider {
 	    bind(FirewallService.class, FirewallServiceImpl.class);
 	    bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
 	    bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
+        bind(NetworkPolicyService.class, NetworkPolicyServiceImpl.class);
 	    
     }   
 
