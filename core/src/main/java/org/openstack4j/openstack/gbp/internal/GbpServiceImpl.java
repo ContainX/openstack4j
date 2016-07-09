@@ -8,7 +8,7 @@ import org.openstack4j.api.gbp.GroupService;
 import org.openstack4j.api.gbp.L2policyService;
 import org.openstack4j.api.gbp.L3policyService;
 import org.openstack4j.api.gbp.NatPoolService;
-import org.openstack4j.api.gbp.NetworkService;
+import org.openstack4j.api.gbp.NetworkPolicyService;
 import org.openstack4j.api.gbp.PolicyActionService;
 import org.openstack4j.api.gbp.PolicyClassifierService;
 import org.openstack4j.api.gbp.PolicyRuleService;
@@ -76,8 +76,8 @@ public class GbpServiceImpl extends BaseNetworkingServices implements GbpService
      * {@inheritDoc}
      */
     @Override
-    public NetworkService networkService() {
-        return Apis.get(NetworkService.class);
+    public NetworkPolicyService networkPolicyService() {
+        return Apis.get(NetworkPolicyService.class);
     }
 
     /**
