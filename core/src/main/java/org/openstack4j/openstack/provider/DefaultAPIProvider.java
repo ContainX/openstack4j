@@ -102,10 +102,8 @@ import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.AlarmService;
-import org.openstack4j.api.telemetry.CapabilitiesService;
 import org.openstack4j.api.telemetry.EventService;
 import org.openstack4j.api.telemetry.MeterService;
-import org.openstack4j.api.telemetry.ResourceService;
 import org.openstack4j.api.telemetry.SampleService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
@@ -206,10 +204,8 @@ import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerS
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.AlarmServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.CapabilitiesServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.EventServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.ResourceServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.SampleServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
@@ -269,8 +265,6 @@ public class DefaultAPIProvider implements APIProvider {
         bind(TelemetryService.class, TelemetryServiceImpl.class);
         bind(MeterService.class, MeterServiceImpl.class);
         bind(SampleService.class, SampleServiceImpl.class);
-        bind(ResourceService.class, ResourceServiceImpl.class);
-        bind(CapabilitiesService.class, CapabilitiesServiceImpl.class);
         bind(AlarmService.class, AlarmServiceImpl.class);
         bind(EventService.class, EventServiceImpl.class);
         bind(HypervisorService.class, HypervisorServiceImpl.class);
@@ -320,29 +314,30 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ShareInstanceService.class, ShareInstanceServiceImpl.class);
         bind(ShareTypeService.class, ShareTypeServiceImpl.class);
         bind(SchedulerStatsService.class, SchedulerStatsServiceImpl.class);
-        bind(org.openstack4j.api.manila.QuotaSetService.class, org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
-        bind(GbpService.class, GbpServiceImpl.class);
-        bind(ExternalPolicyService.class, ExternalPolicyServiceImpl.class);
-        bind(ExternalSegmentService.class, ExternalSegmentServiceImpl.class);
-        bind(org.openstack4j.api.gbp.GroupService.class, org.openstack4j.openstack.gbp.internal.GroupServiceImpl.class);
-        bind(L2policyService.class, L2policyServiceImpl.class);
-        bind(L3policyService.class, L3policyServiceImpl.class);
-        bind(NatPoolService.class, NatPoolServiceImpl.class);
-        bind(NetworkService.class, NetworkServiceImpl.class);
-        bind(PolicyActionService.class, PolicyActionServiceImpl.class);
-        bind(PolicyRuleService.class, PolicyRuleServiceImpl.class);
-        bind(PolicyRuleSetService.class, PolicyRuleSetServiceImpl.class);
-        bind(PolicyTargetService.class, PolicyTargetServiceImpl.class);
-        bind(PolicyClassifierService.class, PolicyClassifierServiceImpl.class);
-        bind(ServicechainService.class, ServicechainServiceImpl.class);
-        bind(ServiceProfileService.class, ServiceProfileServiceImpl.class);
-        bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
-        bind(FirewallAsService.class, FirewallAsServiceImpl.class);
-        bind(FirewallService.class, FirewallServiceImpl.class);
-        bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
-        bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
-
-    }
+        bind(org.openstack4j.api.manila.QuotaSetService.class,
+                org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
+		bind(GbpService.class,GbpServiceImpl.class);
+		bind(ExternalPolicyService.class,ExternalPolicyServiceImpl.class);
+		bind(ExternalSegmentService.class,ExternalSegmentServiceImpl.class);
+		bind(org.openstack4j.api.gbp.GroupService.class,org.openstack4j.openstack.gbp.internal.GroupServiceImpl.class);
+		bind(L2policyService.class,L2policyServiceImpl.class);
+		bind(L3policyService.class,L3policyServiceImpl.class); 
+		bind(NatPoolService.class,NatPoolServiceImpl.class);
+		bind(NetworkService.class,NetworkServiceImpl.class);
+		bind(PolicyActionService.class,PolicyActionServiceImpl.class);
+		bind(PolicyRuleService.class,PolicyRuleServiceImpl.class);
+		bind(PolicyRuleSetService.class,PolicyRuleSetServiceImpl.class);
+		bind(PolicyTargetService.class,PolicyTargetServiceImpl.class);
+		bind(PolicyClassifierService.class,PolicyClassifierServiceImpl.class);
+		bind(ServicechainService.class,ServicechainServiceImpl.class);
+		bind(ServiceProfileService.class,ServiceProfileServiceImpl.class);
+		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
+	    bind(FirewallAsService.class, FirewallAsServiceImpl.class);
+	    bind(FirewallService.class, FirewallServiceImpl.class);
+	    bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
+	    bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
+	    
+    }   
 
     /**
      * {@inheritDoc}
