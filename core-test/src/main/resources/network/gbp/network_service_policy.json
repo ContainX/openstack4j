@@ -1,0 +1,19 @@
+{
+  "network_service_policy": {
+      "description":"Second network service profile",
+      "tenant_id":"abc0b828ace347049b0835f4a4d10040",
+      "network_service_params":[
+        {
+          "type":"ip_pool",
+          "name":"param2",
+          "value":"nat_pool"
+        }
+      ],
+      "policy_target_groups":[
+
+      ],
+      "shared":false,
+      "id":"d98e3cd5-3eb4-41ba-9069-6f5867ceb162",
+      "name":"Test2"
+    }
+}

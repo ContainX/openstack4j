@@ -353,7 +353,34 @@
 				"type": "telemetry",
 				"id": "1236500210a24c38a3702b6825e12345",
 				"name": "ceilometeter"
-			}
+			}, {
+			"endpoints": [
+			  {
+				"region_id": "RegionOne",
+				"url": "http://127.0.0.1:8778",
+				"region": "RegionOne",
+				"interface": "admin",
+				"id": "002ac55c6cf344cc9023d2841b45ffa3"
+			  },
+			  {
+				"region_id": "RegionOne",
+				"url": "http://127.0.0.1:8778",
+				"region": "RegionOne",
+				"interface": "internal",
+				"id": "296b3aafebfb469c8c3154930a5d7548"
+			  },
+			  {
+				"region_id": "RegionOne",
+				"url": "http://127.0.0.1:8778",
+				"region": "RegionOne",
+				"interface": "public",
+				"id": "952f509aa8ce4e2ba46d59e0e52e2e46"
+			  }
+			],
+			"type": "clustering",
+			"id": "1fafaecc7eb2475fb2cf50d420f88cfa",
+			"name": "senlin"
+		  }
 		],
 		"extras": {},
 		"user": {

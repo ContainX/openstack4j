@@ -16,6 +16,7 @@ import org.openstack4j.model.gbp.builder.PolicyRuleBuilder;
 import org.openstack4j.model.gbp.builder.PolicyRuleSetBuilder;
 import org.openstack4j.model.gbp.builder.PolicyTargetBuilder;
 import org.openstack4j.model.gbp.builder.PolicyTargetGroupBuilder;
+import org.openstack4j.model.gbp.builder.NetworkServicePolicyBuilder;
 import org.openstack4j.model.heat.SoftwareConfig;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
@@ -53,6 +54,7 @@ import org.openstack4j.openstack.gbp.domain.GbpPolicyRule;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyRuleSet;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyTarget;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyTargetGroupCreate;
+import org.openstack4j.openstack.gbp.domain.GbpNetworkServicePolicy;
 import org.openstack4j.openstack.heat.builder.HeatBuilders;
 import org.openstack4j.openstack.heat.domain.HeatSoftwareConfig;
 import org.openstack4j.openstack.heat.domain.HeatStackCreate;
@@ -724,6 +726,13 @@ public class Builders {
      */
     public static NatPoolBuilder natPool() {
         return GbpNatPool.builder();
+    }
+    /**
+     * The builder which creates network service policy for gbp
+     * @return
+     */
+    public static NetworkServicePolicyBuilder networkServicePolicy(){
+        return GbpNetworkServicePolicy.builder();
     }
     /**
      * The builder which creates policy action for gbp

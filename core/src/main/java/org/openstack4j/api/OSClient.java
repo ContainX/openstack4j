@@ -10,6 +10,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
@@ -245,4 +246,10 @@ public interface OSClient< T extends OSClient<T>> {
      */
 	GbpService gbp();
 	
+	/**
+	 * Returns the Senlin Service API
+	 *
+	 * @return the Senlin service
+	 */
+	SenlinService senlin();
 }

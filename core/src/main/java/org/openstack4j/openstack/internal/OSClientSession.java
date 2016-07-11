@@ -18,6 +18,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
@@ -145,6 +146,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public HeatService heat() {
         return Apis.getHeatServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SenlinService senlin() {
+        return Apis.getSenlinServices();
     }
 
     /**

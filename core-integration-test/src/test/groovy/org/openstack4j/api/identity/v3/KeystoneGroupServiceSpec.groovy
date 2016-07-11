@@ -14,15 +14,22 @@ import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.openstack.OSFactory
 
 import spock.lang.IgnoreIf
-import co.freeside.betamax.Betamax
-import co.freeside.betamax.Recorder
+import software.betamax.Configuration
+import software.betamax.MatchRules
+import software.betamax.junit.RecorderRule
+import software.betamax.junit.Betamax
+import software.betamax.junit.RecorderRule
 
 
 @Slf4j
 class KeystoneGroupServiceSpec extends AbstractSpec {
 
     @Rule TestName KeystoneGroupServiceTest
-    @Rule Recorder recorder = new Recorder(tapeRoot: new File(TAPEROOT+"identity.v3"))
+    @Rule public RecorderRule recorder = new RecorderRule(
+            Configuration.builder()
+                    .tapeRoot(new File(TAPEROOT + "identity.v3"))
+                    .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
+                    .build());
 
     // additional attributes for group service tests
     def static final String GROUP_CRUD_NAME = "GROUP_GRUD"

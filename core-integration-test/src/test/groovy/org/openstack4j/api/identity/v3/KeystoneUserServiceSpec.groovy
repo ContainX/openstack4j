@@ -1,7 +1,6 @@
 package org.openstack4j.api.identity.v3
 
 import groovy.util.logging.Slf4j
-
 import org.junit.Rule
 import org.junit.rules.TestName
 import org.openstack4j.api.AbstractSpec
@@ -14,15 +13,21 @@ import org.openstack4j.model.identity.v3.User
 import org.openstack4j.openstack.OSFactory
 
 import spock.lang.IgnoreIf
-import co.freeside.betamax.Betamax
-import co.freeside.betamax.Recorder
-
+import software.betamax.Configuration
+import software.betamax.MatchRules
+import software.betamax.junit.RecorderRule
+import software.betamax.junit.Betamax
+import software.betamax.junit.RecorderRule
 
 @Slf4j
 class KeystoneUserServiceSpec extends AbstractSpec {
 
     @Rule TestName KeystoneUserServiceTest
-    @Rule Recorder recorder = new Recorder(tapeRoot: new File(TAPEROOT+"identity.v3"))
+    @Rule public RecorderRule recorder = new RecorderRule(
+            Configuration.builder()
+                    .tapeRoot(new File(TAPEROOT + "identity.v3"))
+                    .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
+                    .build());
 
     // additional attributes for user service tests
     def static final String USER_CRUD_NAME = "foobar"
@@ -33,18 +38,17 @@ class KeystoneUserServiceSpec extends AbstractSpec {
     static final boolean skipTest
 
     static {
-        if(
+        if (
         USER_ID == null ||
-        AUTH_URL == null ||
-        PASSWORD == null ||
-        DOMAIN_ID == null ||
-        USER_DOMAIN_ID == null ||
-        PROJECT_ID == null ||
-        ANOTHER_GROUP_ID == null ) {
+                AUTH_URL == null ||
+                PASSWORD == null ||
+                DOMAIN_ID == null ||
+                USER_DOMAIN_ID == null ||
+                PROJECT_ID == null ||
+                ANOTHER_GROUP_ID == null) {
 
             skipTest = true
-        }
-        else{
+        } else {
             skipTest = false
         }
     }
@@ -52,15 +56,14 @@ class KeystoneUserServiceSpec extends AbstractSpec {
     // run before the first feature method; similar to JUnit's @BeforeClass
     def setupSpec() {
 
-        if( skipTest != true ) {
+        if (skipTest != true) {
             log.info("USER_ID: " + USER_ID)
             log.info("AUTH_URL: " + AUTH_URL)
             log.info("PASSWORD: " + PASSWORD)
             log.info("DOMAIN_ID: " + DOMAIN_ID)
             log.info("USER_DOMAIN_ID: " + USER_DOMAIN_ID)
             log.info("PROJECT_ID: " + PROJECT_ID)
-        }
-        else {
+        } else {
             log.warn("Skipping integration-test cases because not all mandatory attributes are set.")
         }
     }
@@ -69,11 +72,10 @@ class KeystoneUserServiceSpec extends AbstractSpec {
         log.info("-> Test: '$KeystoneUserServiceTest.methodName'")
     }
 
-
     // ------------ UserService Tests ------------
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="userService_user_crud.tape")
+    @Betamax(tape = "userService_user_crud.tape")
     def "create, read, update, delete user-service test cases"() {
 
         given: "authenticated v3 OSClient"
@@ -108,7 +110,7 @@ class KeystoneUserServiceSpec extends AbstractSpec {
 
         then: "check if the user is the same as requested "
         user_byName.getId() == newUser.getId()
-        user_byName.getName() ==  USER_CRUD_NAME
+        user_byName.getName() == USER_CRUD_NAME
         user_byName.getEmail() == USER_CRUD_EMAIL
         user_byName.isEnabled() == true
         user_byName.getDomainId() == USER_DOMAIN_ID
@@ -152,12 +154,12 @@ class KeystoneUserServiceSpec extends AbstractSpec {
         //        updatedUser.isEnabled() == true
         //        updatedUser.getId() == USER_CRUD_ID
         //        updatedUser.getDomainId() == USER_DOMAIN_ID
-		
-		when: "an non-existing user is 'read' by name and domain"
-		User userByName_nonExistent = os.identity().users().getByName("nonExistentUserName", USER_DOMAIN_ID)
-		
-		then: "this should return null"
-		userByName_nonExistent == null
+
+        when: "an non-existing user is 'read' by name and domain"
+        User userByName_nonExistent = os.identity().users().getByName("nonExistentUserName", USER_DOMAIN_ID)
+
+        then: "this should return null"
+        userByName_nonExistent == null
 
         when: "roles for an existing user in domain context are requested"
         List<? extends Role> domainUserRolesList = os.identity().users().listDomainUserRoles(USER_ID, USER_DOMAIN_ID)

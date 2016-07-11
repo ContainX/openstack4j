@@ -49,9 +49,9 @@ public interface GbpService extends RestService {
     /**
      * Service implementation which provides methods for manipulation of network services
      * 
-     * @return NetworkService
+     * @return NetworkPolicyService
      */
-    NetworkService networkService();
+    NetworkPolicyService networkPolicyService();
     /**
      * Service implementation which provides methods for manipulation of policy actions
      * 

@@ -9,6 +9,7 @@ import java.util.List;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Role;
+import org.openstack4j.model.identity.v3.RoleAssignment;
 import org.testng.annotations.Test;
 
 /**
@@ -23,6 +24,7 @@ public class KeystoneRoleServiceTests extends AbstractTest {
     private static final String JSON_ROLES_LIST = "/identity/v3/roles_list.json";
     private static final String JSON_ROLES_REVOKEROLE_ERROR = "/identity/v3/roles_revokeRole_error.json";
     private static final String JSON_ROLES_GRANTROLE_ERROR = "/identity/v3/roles_grantRole_error.json";
+    private static final String JSON_ROLES_ASSIGNMENT_LIST = "/identity/v3/roles_assignment_list.json";
     private static final String JSON_ROLES_UPDATE = "/identity/v3/roles_update.json";
     private static final String JSON_ROLES_GET_BYID = "/identity/v3/roles_get_byId.json";
     private static final String ROLE_NAME = "admin";
@@ -265,6 +267,26 @@ public class KeystoneRoleServiceTests extends AbstractTest {
         assertEquals(updatedRole.getId(), ROLE_ID);
         assertEquals(updatedRole.getName(), ROLE_NAME_UPDATE);
 
+    }
+
+
+    public void listRoleAssignments_Test() throws Exception {
+
+        respondWith(JSON_ROLES_ASSIGNMENT_LIST);
+
+        List<? extends RoleAssignment> roleAssignments = osv3().identity().roles().listRoleAssignments(PROJECT_ID);
+
+        assertTrue(roleAssignments.size() > 1);
+        for (RoleAssignment each : roleAssignments) {
+            assertTrue(isNotEmpty(each.getGroupId()) || isNotEmpty(each.getUserId()));
+            assertTrue(isNotEmpty(each.getDomainId()) || isNotEmpty(each.getProjectId()));
+            assertEquals(each.getRoleId(), ROLE_ID);
+            assertEquals(each.getProjectId(), PROJECT_ID);
+        }
+    }
+
+    private boolean isNotEmpty(String value) {
+        return (value != null && value.length() != 0);
     }
 
 }

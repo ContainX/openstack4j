@@ -5,6 +5,7 @@ import java.util.List;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.identity.v3.RoleAssignment;
 
 /**
  * Identity Role based Operations
@@ -66,6 +67,15 @@ public interface RoleService extends RestService {
      * @return the list<? extends Role>
      */
     List<? extends Role> getByName(String name);
+
+    /**
+     * list a role assignment list in project context
+     *
+     * @param projectId the project id
+     * @return the list<? extends RoleAssignment>
+     */
+    List<? extends RoleAssignment> listRoleAssignments(String projectId);
+
 
     /**
      * grants a role to a specified user in project context

@@ -18,7 +18,7 @@ public class SchedulerStatsServiceImpl extends BaseShareServices implements Sche
     }
 
     private List<? extends BackendStoragePool> list(boolean detail) {
-        return get(ManilaBackendStoragePool.BackendStoragePools.class, uri("/pools" +  (detail ? "/detail" : "")))
+        return get(ManilaBackendStoragePool.BackendStoragePools.class, uri("/scheduler-stats/pools" +  (detail ? "/detail" : "")))
                 .execute()
                 .getList();
     }

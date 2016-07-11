@@ -61,7 +61,9 @@ See notes above about connectors (same rules apply) to development branches.
 
 **A note about referencing Snapshots without Source**
 
-Snapshots are deploys to sonatype.  You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
+Snapshots are deploys to sonatype.  We automatically deploy snapshots on every merge into the master branch.  Typically 5 - 10 snapshot releases before an official release.
+
+You will need to add the repository to your POM or Settings file.  Releases (above) are deployed to maven central and this step is not required.
 
 Example POM based repository declaration to grab snapshots:
 ```xml

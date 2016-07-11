@@ -90,7 +90,7 @@ interactions:
 - recorded: 2016-01-12T13:10:45.982Z
   request:
     method: GET
-    uri: http://devstack.openstack.stack:5000/v3/projects?domain_id=default&name=Project_CRUD
+    uri: http://devstack.openstack.stack:5000/v3/projects?name=Project_CRUD&domain_id=default
     headers:
       Accept: application/json
       Host: devstack.openstack.stack:5000
@@ -212,7 +212,7 @@ interactions:
 - recorded: 2016-01-12T13:10:46.377Z
   request:
     method: GET
-    uri: http://devstack.openstack.stack:5000/v3/projects?domain_id=default&name=nonExistentProject
+    uri: http://devstack.openstack.stack:5000/v3/projects?name=nonExistentProject&domain_id=default
     headers:
       Accept: application/json
       Host: devstack.openstack.stack:5000
