@@ -1,0 +1,29 @@
+{  
+   "api":{  
+      "statistics:aggregation:selectable:count":true,
+      "samples:query:metadata":true,
+      "samples:query:complex":true,
+      "statistics:aggregation:standard":true,
+      "statistics:query:metadata":true,
+      "statistics:aggregation:selectable:sum":true,
+      "events:query:simple":true,
+      "meters:query:metadata":true,
+      "statistics:aggregation:selectable:stddev":true,
+      "resources:query:simple":true,
+      "resources:query:metadata":true,
+      "statistics:groupby":true,
+      "samples:query:simple":true,
+      "statistics:query:simple":true,
+      "statistics:aggregation:selectable:cardinality":true,
+      "statistics:aggregation:selectable:min":true,
+      "statistics:aggregation:selectable:max":true,
+      "statistics:aggregation:selectable:avg":true,
+      "meters:query:simple":true
+   },
+   "storage":{  
+      "storage:production_ready":true
+   },
+   "event_storage":{  
+      "storage:production_ready":true
+   }
+}
