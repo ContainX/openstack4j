@@ -1,0 +1,11 @@
+package org.openstack4j.api.networking.ext;
+
+import org.openstack4j.common.RestService;
+
+/**
+ * Networking (Neutron Lbaas) V2 healthmonitor Extention API
+ * @author emjburns
+ */
+public interface HealthMonitorV2Service extends RestService {
+    // TODO: add support for lbaas v2 health monitors
+}
