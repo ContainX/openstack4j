@@ -27,7 +27,7 @@ public class InstanceActionsServiceImpl extends BaseComputeServices implements I
     public InstanceAction get(String serverId, String requestId) {
         checkNotNull(serverId, "serverId");
         checkNotNull(requestId, "requestId");
-        return get(NovaInstanceAction.class, uri("/servers/%s/os-instance-actions//%s", serverId, requestId)).execute();
+        return get(NovaInstanceAction.class, uri("/servers/%s/os-instance-actions/%s", serverId, requestId)).execute();
     }
 
 }
