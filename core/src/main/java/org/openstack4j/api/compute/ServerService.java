@@ -330,7 +330,7 @@ public interface ServerService {
      * The instance actions service extension (os-instance-actions)
      * @return the instance actions service
      */
-    InstanceActionsService instanceActions();    
+    InstanceActionsService instanceActions();
     
     /**
      * Returns the encrypted password for the specified server which can be decrypted with
