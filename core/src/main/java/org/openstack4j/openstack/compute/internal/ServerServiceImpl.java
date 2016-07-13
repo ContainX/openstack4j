@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.api.compute.ext.InstanceActionsService;
 import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
@@ -438,6 +439,11 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public InterfaceService interfaces() {
         return Apis.get(InterfaceService.class);
+    }
+
+    @Override
+    public InstanceActionsService instanceActions() {
+        return Apis.get(InstanceActionsService.class);
     }
 
     /**

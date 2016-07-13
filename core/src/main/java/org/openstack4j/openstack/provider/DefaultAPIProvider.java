@@ -17,6 +17,7 @@ import org.openstack4j.api.compute.ext.FloatingIPDNSDomainService;
 import org.openstack4j.api.compute.ext.FloatingIPDNSEntryService;
 import org.openstack4j.api.compute.ext.FloatingIPDNSService;
 import org.openstack4j.api.compute.ext.HypervisorService;
+import org.openstack4j.api.compute.ext.InstanceActionsService;
 import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ZoneService;
@@ -135,6 +136,7 @@ import org.openstack4j.openstack.compute.internal.ext.FloatingIPDNSDomainService
 import org.openstack4j.openstack.compute.internal.ext.FloatingIPDNSEntryServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.FloatingIPDNSServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.HypervisorServiceImpl;
+import org.openstack4j.openstack.compute.internal.ext.InstanceActionsServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
@@ -328,6 +330,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ObjectStorageObjectService.class, ObjectStorageObjectServiceImpl.class);
         bind(NetQuotaService.class, NetQuotaServiceImpl.class);
         bind(InterfaceService.class, InterfaceServiceImpl.class);
+        bind(InstanceActionsService.class, InstanceActionsServiceImpl.class);
         bind(FloatingIPDNSService.class, FloatingIPDNSServiceImpl.class);
         bind(FloatingIPDNSDomainService.class, FloatingIPDNSDomainServiceImpl.class);
         bind(FloatingIPDNSEntryService.class, FloatingIPDNSEntryServiceImpl.class);
