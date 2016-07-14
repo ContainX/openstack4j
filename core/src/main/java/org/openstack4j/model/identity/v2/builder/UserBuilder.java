@@ -50,5 +50,5 @@ public interface UserBuilder extends Builder<UserBuilder, User> {
 	 * @see User#getTenantId()
 	 */
 	UserBuilder tenant(Tenant tenant);
-	
+
 }

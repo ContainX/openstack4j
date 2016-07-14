@@ -39,6 +39,6 @@ public interface User extends ModelEntity, Buildable<UserBuilder> {
 	/**
 	 * @return true, if the user is enabled (active)
 	 */
-	boolean isEnabled();
+	Boolean isEnabled();
 
 }

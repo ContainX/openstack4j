@@ -63,8 +63,8 @@ public class KeystoneUser implements User
 		return email;
 	}
 	
-	public boolean isEnabled() {
-		return enabled != null && enabled;
+	public Boolean isEnabled() {
+		return enabled;
 	}
 
 	public List<? extends Role> getRoles() {
