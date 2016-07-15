@@ -20,8 +20,7 @@ public interface ComputeFloatingIPService extends RestService {
 	 * @return the list<? extends floating i p>
 	 */
 	List<? extends FloatingIP> list();
-	
-	
+
 	/**
 	 * Lists the current Floating IP Pool Names
 	 * @return List of floating IP pool names
@@ -39,11 +38,10 @@ public interface ComputeFloatingIPService extends RestService {
 	/**
 	 * Deallocate ip address from tenant.
 	 *
-	 * @param tenantId the tenant id
 	 * @param id the id of floating ip address
 	 * @return the action response
 	 */
-     ActionResponse deallocateIP(String id);
+	ActionResponse deallocateIP(String id);
 	
 	
 	/**
