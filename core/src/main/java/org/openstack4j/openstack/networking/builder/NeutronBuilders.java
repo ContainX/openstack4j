@@ -139,4 +139,29 @@ public class NeutronBuilders implements NetworkBuilders {
     public HealthMonitorAssociateBuilder lbPoolAssociateHealthMonitor() {
         return NeutronHealthMonitorAssociate.builder();
     }
+
+    @Override
+    public MemberV2Builder memberV2(){
+        return NeutronMemberV2.builder();
+    }
+
+    @Override
+    public LoadBalancerV2Builder lbV2(){
+        return NeutronLoadBalancerV2.builder();
+    }
+
+    @Override
+    public HealthMonitorV2Builder healthMonitorV2(){
+        return NeutronHealthMonitorV2.builder();
+    }
+
+    @Override
+    public LbPoolV2Builder lbPoolV2(){
+        return NeutronLbPoolV2.builder();
+    }
+
+    @Override
+    public ListenerBuilder listenerV2(){
+        return NeutronListenerV2.builder();
+    }
 }
