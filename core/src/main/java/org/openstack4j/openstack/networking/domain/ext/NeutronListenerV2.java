@@ -14,7 +14,7 @@ import java.util.List;
  * lbaas v2 listener
  * @author emjburns
  */
-@JsonRootName("listenerv2")
+@JsonRootName("listener_v2")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronListenerV2 implements Listener {
     private String id;

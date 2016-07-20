@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.networking.internal.ext;
 
+import org.openstack4j.api.Apis;
 import org.openstack4j.api.networking.ext.HealthMonitorV2Service;
 import org.openstack4j.api.networking.ext.LbPoolV2Service;
 import org.openstack4j.api.networking.ext.LbaasV2Service;
@@ -18,7 +19,7 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      */
     @Override
     public MemberV2Service memberV2(){
-        return null;
+        return Apis.get(MemberV2Service.class);
     }
 
     /**
@@ -26,7 +27,7 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      */
     @Override
     public ListenerService listener(){
-        return null;
+        return Apis.get(ListenerService.class);
     }
 
     /**
@@ -34,7 +35,7 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      */
     @Override
     public LbPoolV2Service lbPoolV2(){
-        return null;
+        return Apis.get(LbPoolV2Service.class);
     }
 
     /**
@@ -42,7 +43,7 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      */
     @Override
     public HealthMonitorV2Service healthMonitorV2(){
-        return null;
+        return Apis.get(HealthMonitorV2Service.class);
     }
 
     /**
@@ -50,6 +51,6 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      */
     @Override
     public LoadBalancerV2Service loadbalancerV2(){
-        return null;
+        return Apis.get(LoadBalancerV2Service.class);
     }
 }
