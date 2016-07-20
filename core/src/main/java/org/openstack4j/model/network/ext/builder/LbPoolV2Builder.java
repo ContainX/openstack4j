@@ -17,7 +17,7 @@ public interface LbPoolV2Builder extends Buildable.Builder<LbPoolV2Builder, LbPo
      * @param tenantId
      *            Owner of the pool. Only an administrative user can specify a
      *            tenant ID other than its own.
-     * @return LbPoolBuilder
+     * @return LbPoolV2Builder
      */
     LbPoolV2Builder tenantId(String tenantId);
 
@@ -26,7 +26,7 @@ public interface LbPoolV2Builder extends Buildable.Builder<LbPoolV2Builder, LbPo
      *
      * @param name
      *            Pool name. Does not have to be unique.
-     * @return LbPoolBuilder
+     * @return LbPoolV2Builder
      */
     LbPoolV2Builder name(String name);
 
@@ -35,7 +35,7 @@ public interface LbPoolV2Builder extends Buildable.Builder<LbPoolV2Builder, LbPo
      *
      * @param description
      *            Description for the pool.
-     * @return LbPoolBuilder
+     * @return LbPoolV2Builder
      */
     LbPoolV2Builder description(String description);
 
@@ -43,7 +43,7 @@ public interface LbPoolV2Builder extends Buildable.Builder<LbPoolV2Builder, LbPo
      * @param protocol
      *            The protocol of the VIP address. A valid value is TCP, HTTP,
      *            or HTTPS.
-     * @return LbPoolBuilder
+     * @return LbPoolV2Builder
      */
     LbPoolV2Builder protocol(Protocol protocol);
 
@@ -54,16 +54,16 @@ public interface LbPoolV2Builder extends Buildable.Builder<LbPoolV2Builder, LbPo
      *            supported, is dependent on the load-balancer provider. Round
      *            robin must be supported.
      *            Must be one of ROUND_ROBIN, LEAST_CONNECTIONS, or SOURCE_IP.
-     * @return LbPoolBuilder
+     * @return LbPoolV2Builder
      */
-    LbPoolBuilder lbMethod(LbMethod lbMethod);
+    LbPoolV2Builder lbMethod(LbMethod lbMethod);
 
     /**
      * Optional
      *
      * @param sessionPersistence
      *            Default value empty dictionary
-     * @return VipBuilder
+     * @return LbPoolV2Builder
      */
     LbPoolV2Builder sessionPersistence(SessionPersistence sessionPersistence);
 
@@ -73,7 +73,7 @@ public interface LbPoolV2Builder extends Buildable.Builder<LbPoolV2Builder, LbPo
      * @param adminStateUp
      *            The administrative state of the lb pool, which is up (true) or
      *            down (false). Default value true.
-     * @return LbPoolBuilder
+     * @return LbPoolV2Builder
      */
     LbPoolV2Builder adminStateUp(boolean adminStateUp);
 
@@ -81,7 +81,7 @@ public interface LbPoolV2Builder extends Buildable.Builder<LbPoolV2Builder, LbPo
      * The listener in which this pool will become the default pool.
      * There can only be on default pool for a listener.
      * @param listenerId
-     * @return
+     * @return LbPoolV2Builder
      */
     LbPoolV2Builder listenerId(String listenerId);
 }
