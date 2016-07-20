@@ -109,13 +109,25 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
                     return ep.getPublicURL().toString();
                 }
             }
+        } else {
+            //if no catalog returned, if is identity service, just return endpoint
+            if (ServiceType.IDENTITY.equals(p.type)) {
+                return p.access.getEndpoint();
+            }
         }
         return null;
     }
 
     private String resolveV3(URLResolverParams p) {
-
         Token token = p.token;
+
+        //in v3 api, if user has no default project, and token is unscoped, no catalog will be returned
+        //then if service is Identity service, should directly return the endpoint back
+        if (token.getCatalog() == null) {
+            if (ServiceType.IDENTITY.equals(p.type)) {
+                return token.getEndpoint();
+            }
+        }
 
         for (org.openstack4j.model.identity.v3.Service service : token.getCatalog()) {
             if (p.type == ServiceType.forName(service.getType())) {
@@ -125,11 +137,29 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
                 for (org.openstack4j.model.identity.v3.Endpoint ep : service.getEndpoints()) {
 
-                    if (matches(ep, p))
-                        return ep.getUrl().toString();
+                    if (matches(ep, p)) {
+                        //some installation have v2.0 url in catalog for v3 identity api
+                        //some other the url does not have version in it
+                        //so we do an additional check here for identity service only
+                        if (ServiceType.IDENTITY.equals(ServiceType.forName(service.getType()))) {
+                            String v3Url = ep.getUrl().toString();
+                            if (v3Url.endsWith("/v3") || v3Url.endsWith("/v3/") ) {
+                            } else if (v3Url.endsWith("/v2.0") || v3Url.endsWith("/v2.0/") ) {
+                                v3Url =  v3Url.replace("v2.0", "v3");
+                            } else {
+                                v3Url = v3Url + "/v3";
+                            }
+                            LOG.trace("resolved v3 endpoint for identity service: {}", v3Url);
+                            return v3Url;
+                        } else {
+                            return ep.getUrl().toString();
+                        }
+                    }
                 }
             }
         }
+
+
         return null;
     }
 
