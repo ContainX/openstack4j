@@ -18,6 +18,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author emjburns
  */
 public class ListenerServiceImpl extends BaseNetworkingServices implements ListenerService{
+
     /**
      * {@inheritDoc}
      */
