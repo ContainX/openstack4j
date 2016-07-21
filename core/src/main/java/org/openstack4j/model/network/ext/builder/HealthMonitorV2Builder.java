@@ -3,6 +3,9 @@ package org.openstack4j.model.network.ext.builder;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.network.ext.HealthMonitorV2;
 import org.openstack4j.model.network.ext.HealthMonitorV2Type;
+import org.openstack4j.model.network.ext.LbPoolV2;
+
+import java.util.List;
 
 public interface HealthMonitorV2Builder extends Buildable.Builder<HealthMonitorV2Builder, HealthMonitorV2> {
     /**
@@ -49,11 +52,11 @@ public interface HealthMonitorV2Builder extends Buildable.Builder<HealthMonitorV
 
     /**
      *
-     * @param poolId
-     *             The pool that this health monitor will monitor
+     * @param pools
+     *             List of pools that this health monitor will monitor
      * @return HealthMonitorV2Builder
      */
-    HealthMonitorV2Builder poolId(String poolId);
+    HealthMonitorV2Builder pools(List<LbPoolV2> pools);
 
     /**
      * Optional

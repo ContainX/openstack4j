@@ -2,6 +2,7 @@ package org.openstack4j.api.networking.ext;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.network.ext.HealthMonitorUpdateV2;
 import org.openstack4j.model.network.ext.HealthMonitorV2;
 
 import java.util.List;
@@ -41,18 +42,19 @@ public interface HealthMonitorV2Service extends RestService {
      * @return the action response
      */
     ActionResponse delete(String healthMonitorId);
+
     /**
      * Create a healthMonitorV2
      * @param healthMonitor
      * @return HealthMonitorV2
      */
     HealthMonitorV2 create(HealthMonitorV2 healthMonitor);
+
     /**
      * Update a healthMonitorV2
      * @param healthMonitorId the healthMonitorV2 identifier
      * @param healthMonitor HealthMonitorV2Update
      * @return HealthMonitorV2
      */
-//    TODO: impl update
-//    HealthMonitorV2 update(String healthMonitorId,HealthMonitorV2Update healthMonitor);
+    HealthMonitorV2 update(String healthMonitorId, HealthMonitorUpdateV2 healthMonitor);
 }
