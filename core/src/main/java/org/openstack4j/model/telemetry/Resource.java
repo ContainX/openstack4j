@@ -11,7 +11,7 @@ public interface Resource {
 
     String getSource();
 
-    Date getFirstSanpleTimestamp();
+    Date getFirstSampleTimestamp();
 
     Date getLastSampleTimestamp();
 

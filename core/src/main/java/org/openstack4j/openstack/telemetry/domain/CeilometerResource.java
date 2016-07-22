@@ -66,7 +66,7 @@ public class CeilometerResource implements Resource {
      * {@inheritDoc}
      */
     @Override
-    public Date getFirstSanpleTimestamp() {
+    public Date getFirstSampleTimestamp() {
         return firstSampleTimestamp;
     }
 
