@@ -50,13 +50,5 @@ public interface UserBuilder extends Builder<UserBuilder, User> {
 	 * @see User#getTenantId()
 	 */
 	UserBuilder tenant(Tenant tenant);
-	
-	/**
-	 * The domain identifier for the user.  Only applicable if using V3
-	 * 
-	 * @param domainId the domain identifier
-	 * @return user builder
-	 */
-	UserBuilder domainId(String domainId);
 
 }

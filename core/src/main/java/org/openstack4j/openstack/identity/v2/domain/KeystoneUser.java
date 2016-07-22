@@ -29,8 +29,6 @@ public class KeystoneUser implements User
 	private Boolean enabled;
 	@JsonProperty("OS-ROLE:roles")
 	private List<KeystoneRole> roles;
-	@JsonProperty("domain_id")
-	private String domainId;
 	
 	public static UserBuilder builder() {
 		return new UserConcreteBuilder();
@@ -65,22 +63,23 @@ public class KeystoneUser implements User
 		return email;
 	}
 	
-	public boolean isEnabled() {
-		return enabled != null && enabled;
+	public Boolean isEnabled() {
+		return enabled;
 	}
-	
-	public String getDomainId() {
-	    return domainId;
-	}
-	
+
 	public List<? extends Role> getRoles() {
 		return roles;
 	}
 
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-				    .add("name", name).add("id", id).add("username", username).add("password", password)
-				    .add("tenantId", tenantId).add("domainId", domainId).add("email", email).add("enabled", enabled)
+				    .add("name", name)
+					.add("id", id)
+					.add("username", username)
+					.add("password", password)
+				    .add("tenantId", tenantId)
+					.add("email", email)
+					.add("enabled", enabled)
 				    .add("roles", roles)
 				    .toString();
 	}
@@ -159,12 +158,6 @@ public class KeystoneUser implements User
 			model = (KeystoneUser) in;
 			return this;
 		}
-
-        @Override
-        public UserBuilder domainId(String domainId) {
-            model.domainId = domainId;
-            return this;
-        }
 		
 	}
 }
