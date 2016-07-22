@@ -24,7 +24,7 @@ public class HealthMonitorV2ServiceImpl extends BaseNetworkingServices implement
      */
     @Override
     public List<? extends HealthMonitorV2> list(){
-        return null;
+        return get(HealthMonitorsV2.class, uri("/lbaas/healthmonitors")).execute().getList();
     }
 
     /**
@@ -32,7 +32,7 @@ public class HealthMonitorV2ServiceImpl extends BaseNetworkingServices implement
      */
     @Override
     public List<? extends HealthMonitorV2> list(Map<String, String> filteringParams){
-        Invocation<HealthMonitorsV2> req = get(HealthMonitorsV2.class, uri("/lbaas/health_monitors"));
+        Invocation<HealthMonitorsV2> req = get(HealthMonitorsV2.class, uri("/lbaas/healthmonitors"));
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
                 req = req.param(entry.getKey(), entry.getValue());
@@ -47,7 +47,7 @@ public class HealthMonitorV2ServiceImpl extends BaseNetworkingServices implement
     @Override
     public HealthMonitorV2 get(String healthMonitorId){
         checkNotNull(healthMonitorId);
-        return get(NeutronHealthMonitorV2.class, uri("/lbaas/health_monitors/%s", healthMonitorId)).execute();
+        return get(NeutronHealthMonitorV2.class, uri("/lbaas/healthmonitors/%s", healthMonitorId)).execute();
     }
 
     /**
@@ -56,7 +56,7 @@ public class HealthMonitorV2ServiceImpl extends BaseNetworkingServices implement
     @Override
     public ActionResponse delete(String healthMonitorId){
         checkNotNull(healthMonitorId);
-        return ToActionResponseFunction.INSTANCE.apply(delete(Void.class, uri("/lbaas/health_monitors/%s", healthMonitorId)).executeWithResponse());
+        return ToActionResponseFunction.INSTANCE.apply(delete(Void.class, uri("/lbaas/healthmonitors/%s", healthMonitorId)).executeWithResponse());
     }
 
     /**
@@ -65,7 +65,7 @@ public class HealthMonitorV2ServiceImpl extends BaseNetworkingServices implement
     @Override
     public HealthMonitorV2 create(HealthMonitorV2 healthMonitor){
         checkNotNull(healthMonitor);
-        return post(NeutronHealthMonitorV2.class,uri("/lbaas/health_monitors")).entity(healthMonitor).execute();
+        return post(NeutronHealthMonitorV2.class,uri("/lbaas/healthmonitors")).entity(healthMonitor).execute();
     }
 
     /**
@@ -76,6 +76,6 @@ public class HealthMonitorV2ServiceImpl extends BaseNetworkingServices implement
                                 HealthMonitorUpdateV2 healthMonitor) {
         checkNotNull(healthMonitorId);
         checkNotNull(healthMonitor);
-        return put(NeutronHealthMonitorV2.class,uri("/lbaas/health_monitors/%s",healthMonitorId)).entity(healthMonitor).execute();
+        return put(NeutronHealthMonitorV2.class,uri("/lbaas/healthmonitors/%s",healthMonitorId)).entity(healthMonitor).execute();
     }
 }
