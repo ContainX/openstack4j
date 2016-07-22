@@ -30,7 +30,7 @@ public class CeilometerResource implements Resource {
     private String projectId;
 
     @JsonProperty("first_sample_timestamp")
-    private Date firstSanpleTimestamp;
+    private Date firstSampleTimestamp;
 
     @JsonProperty("last_sample_timestamp")
     private Date lastSampleTimeStamp;
@@ -67,7 +67,7 @@ public class CeilometerResource implements Resource {
      */
     @Override
     public Date getFirstSanpleTimestamp() {
-        return firstSanpleTimestamp;
+        return firstSampleTimestamp;
     }
 
     /**
@@ -99,7 +99,7 @@ public class CeilometerResource implements Resource {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("userId", userId).add("projectId", projectId).add("source", source).add("firstSanpleTimestamp", firstSanpleTimestamp)
+        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("userId", userId).add("projectId", projectId).add("source", source).add("firstSanpleTimestamp", firstSampleTimestamp)
                 .add("lastSanpleTimestamp", lastSampleTimeStamp).toString();
     }
 
