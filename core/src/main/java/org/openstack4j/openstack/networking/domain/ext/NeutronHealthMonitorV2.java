@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import org.openstack4j.model.network.ext.HealthMonitorType;
 import org.openstack4j.model.network.ext.HealthMonitorV2;
-import org.openstack4j.model.network.ext.HealthMonitorV2Type;
-import org.openstack4j.model.network.ext.LbPoolV2;
 import org.openstack4j.model.network.ext.builder.HealthMonitorV2Builder;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -24,7 +23,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
     @JsonProperty("tenant_id")
     private String tenantId;
 
-    private HealthMonitorV2Type type;
+    private HealthMonitorType type;
     private Integer delay;
     private Integer timeout;
 
@@ -50,7 +49,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
      * default 200
      */
     @JsonProperty("expected_codes")
-    private String expectedCodes  ;
+    private String expectedCodes;
 
     /**
      * The administrative state of the health monitor, which is up (true) or down (false)
@@ -58,7 +57,10 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
     @JsonProperty("admin_state_up")
     private boolean adminStateUp ;
 
-    private List<LbPoolV2> pools;
+    private List<ListItem> pools;
+
+    @JsonProperty("pool_id")
+    private String poolId;
 
     @Override
     public String getId(){
@@ -71,7 +73,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
     }
 
     @Override
-    public HealthMonitorV2Type getType(){
+    public HealthMonitorType getType(){
         return type;
     }
 
@@ -111,10 +113,9 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
     }
 
     @Override
-    public List<LbPoolV2> getPools(){
+    public List<ListItem> getPools(){
         return pools;
     }
-
 
     /**
      * wrap this healthMonitorV2 to a builder
@@ -151,7 +152,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
 
     public static class HealthMonitorsV2 extends ListResult<NeutronHealthMonitorV2> {
 
-        @JsonProperty("health_monitors_v2")
+        @JsonProperty("healthmonitors")
         List<NeutronHealthMonitorV2> healthMonitors;
         @Override
         public List<NeutronHealthMonitorV2> value() {
@@ -160,7 +161,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
         @Override
         public String toString() {
             return Objects.toStringHelper(this).omitNullValues()
-                    .add("healthMonitorsV2", healthMonitors).toString();
+                    .add("healthMonitors", healthMonitors).toString();
         }
     }
 
@@ -196,7 +197,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2Builder type(HealthMonitorV2Type type) {
+        public HealthMonitorV2Builder type(HealthMonitorType type) {
             m.type = type;
             return this;
         }
@@ -276,8 +277,8 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2{
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2Builder pools(List<LbPoolV2> pools) {
-            m.pools = pools;
+        public HealthMonitorV2Builder poolId(String poolId){
+            m.poolId = poolId;
             return this;
         }
     }
