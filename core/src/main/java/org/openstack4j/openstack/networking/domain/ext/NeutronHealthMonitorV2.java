@@ -16,7 +16,7 @@ import java.util.List;
  * A lbaas v2 health monitor entity
  * @author ashleykasim
  */
-@JsonRootName("health_monitor_v2")
+@JsonRootName("healthmonitor")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronHealthMonitorV2 implements HealthMonitorV2{
     private String id;

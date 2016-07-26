@@ -10,7 +10,7 @@ import org.openstack4j.model.network.ext.builder.MemberV2Builder;
  * A member of a v2 lbaas pool
  * @author emjburns
  */
-@JsonRootName("member_v2")
+@JsonRootName("member")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronMemberV2 implements MemberV2 {
     private String id;
@@ -91,17 +91,6 @@ public class NeutronMemberV2 implements MemberV2 {
     }
 
     @Override
-    public MemberV2Builder toBuilder(){
-        //TODO: implement builder
-        return null;
-    }
-
-    public static MemberV2Builder builder(){
-        //TODO: implement builder
-        return null;
-    }
-
-    @Override
     public String toString(){
         return "NeutronMemberV2{" +
                 "id='" + id + '\'' +
@@ -112,5 +101,94 @@ public class NeutronMemberV2 implements MemberV2 {
                 ", adminStateUp=" + adminStateUp +
                 ", subnetId='" + subnetId + '\'' +
                 '}';
+    }
+
+    /**
+     * MemberV2 create builder
+     */
+    public static class MemberV2ConcreteBuilder implements MemberV2Builder {
+        private NeutronMemberV2 m;
+
+        public MemberV2ConcreteBuilder() {
+            this(new NeutronMemberV2());
+        }
+
+        public MemberV2ConcreteBuilder(NeutronMemberV2 m) {
+            this.m = m;
+        }
+
+        @Override
+        public MemberV2 build(){
+            return m;
+        }
+
+        @Override
+        public MemberV2Builder from(MemberV2 in){
+            m = (NeutronMemberV2) in;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public MemberV2Builder tenantId(String tenantId){
+            m.tenantId = tenantId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public MemberV2Builder address(String address){
+            m.address = address;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public MemberV2Builder protocolPort(Integer protocolPort){
+            m.protocolPort = protocolPort;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public MemberV2Builder subnetId(String subnetId){
+            m.subnetId = subnetId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public MemberV2Builder weight(Integer weight){
+            m.weight = weight;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public MemberV2Builder adminStateUp(boolean adminStateUp){
+            m.adminStateUp = adminStateUp;
+            return this;
+        }
+    }
+
+    @Override
+    public MemberV2Builder toBuilder(){
+        return new MemberV2ConcreteBuilder(this);
+    }
+
+    public static MemberV2Builder builder(){
+        return new MemberV2ConcreteBuilder();
     }
 }

@@ -3,10 +3,11 @@ package org.openstack4j.openstack.networking.domain.ext;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.Listener;
-import org.openstack4j.model.network.ext.LoadBalancerV2;
 import org.openstack4j.model.network.ext.Protocol;
 import org.openstack4j.model.network.ext.builder.ListenerBuilder;
+import org.openstack4j.openstack.common.ListResult;
 
 import java.util.List;
 
@@ -14,9 +15,11 @@ import java.util.List;
  * lbaas v2 listener
  * @author emjburns
  */
-@JsonRootName("listener_v2")
+@JsonRootName("listener")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronListenerV2 implements Listener {
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     @JsonProperty("tenant_id")
@@ -39,7 +42,7 @@ public class NeutronListenerV2 implements Listener {
     private Integer protocolPort;
 
     /**
-     * The maximum number of connections allowed for the VIP. Default is -1, meaning no limit.
+     * The maximum number of connections allowed for the listener. Default is -1, meaning no limit.
      */
     @JsonProperty("connection_limit")
     private Integer connectionLimit;
@@ -47,7 +50,11 @@ public class NeutronListenerV2 implements Listener {
     @JsonProperty("default_pool_id")
     private String defaultPoolId;
 
-    private List<LoadBalancerV2> loadbalancers;
+    // TODO: is this the right approach?
+    @JsonProperty("loadbalancer_id")
+    private String loadbalancerId;
+
+    private List<ListItem> loadbalancers;
 
     @JsonProperty("admin_state_up")
     private boolean adminStateUp;
@@ -57,16 +64,7 @@ public class NeutronListenerV2 implements Listener {
      * {@inheritDoc}
      */
     @Override
-    public ListenerBuilder toBuilder(){
-        //TODO: implement builder
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<LoadBalancerV2> getLoadBalancers(){
+    public List<ListItem> getLoadBalancers(){
         return loadbalancers;
     }
 
@@ -142,24 +140,142 @@ public class NeutronListenerV2 implements Listener {
         return id;
     }
 
-    public static ListenerBuilder builder(){
-        //TODO: implement builder
-        return null;
+    @Override
+    public String toString(){
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("adminStateUp", adminStateUp)
+                .add("tenantId", tenantId)
+                .add("description", description)
+                .add("loadbalancers", loadbalancers)
+                .add("name", name)
+                .add("protocol", protocol)
+                .add("protocolPort", protocolPort)
+                .add("connectionLImit", connectionLimit)
+                .add("defaultPoolId", defaultPoolId)
+                .toString();
+    }
+
+    public static class ListenerConcreteBuilder implements ListenerBuilder {
+        private NeutronListenerV2 m;
+
+        public ListenerConcreteBuilder() {
+            this(new NeutronListenerV2());
+        }
+
+        public ListenerConcreteBuilder(NeutronListenerV2 m) {
+            this.m = m;
+        }
+
+        @Override
+        public Listener build(){
+            return m;
+        }
+
+        @Override
+        public ListenerBuilder from(Listener in){
+            m = (NeutronListenerV2) in;
+            return this;
+        }
+
+        @Override
+        public ListenerBuilder loadBalancerId(String loadbalancerId){
+            m.loadbalancerId = loadbalancerId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerBuilder tenantId(String tenantId){
+            m.tenantId = tenantId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerBuilder protocol(Protocol protocol){
+            m.protocol = protocol;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerBuilder protocolPort(Integer protocolPort){
+            m.protocolPort = protocolPort;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerBuilder adminStateUp(boolean adminStateUp){
+            m.adminStateUp = adminStateUp;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerBuilder name(String name){
+            m.name = name;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerBuilder description(String description){
+            m.description = description;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerBuilder connectionLimit(Integer connectionLimit){
+            m.connectionLimit = connectionLimit;
+            return this;
+        }
     }
 
     @Override
-    public String toString(){
-        return "NeutronListenerV2{" +
-                "id='" + id + '\'' +
-                ", tenantId='" + tenantId + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", protocol=" + protocol +
-                ", protocolPort=" + protocolPort +
-                ", connectionLimit=" + connectionLimit +
-                ", defaultPoolId='" + defaultPoolId + '\'' +
-                ", loadbalancers=" + loadbalancers +
-                ", adminStateUp=" + adminStateUp +
-                '}';
+    public ListenerBuilder toBuilder(){
+        return new ListenerConcreteBuilder(this);
+    }
+
+    public static ListenerBuilder builder(){
+        return new ListenerConcreteBuilder();
+    }
+    
+    public static class Listeners extends ListResult<NeutronListenerV2> {
+        private static final long serialVersionUID = 1L;
+
+        @JsonProperty("listeners")
+        List<NeutronListenerV2> listeners;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected List<NeutronListenerV2> value() {
+            return listeners;
+        }
+
+        @Override
+        public String toString(){
+            return Objects.toStringHelper(this)
+                    .add("listeners", listeners)
+                    .toString();
+        }
     }
 }

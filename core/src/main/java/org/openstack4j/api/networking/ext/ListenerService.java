@@ -3,6 +3,7 @@ package org.openstack4j.api.networking.ext;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.Listener;
+import org.openstack4j.model.network.ext.ListenerUpdate;
 
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,5 @@ public interface ListenerService extends RestService {
      *            ListenerUpdate
      * @return Listener
      */
-//    TODO: implement update
-//    Listener update(String listenerId, ListenerUpdate listener);
+    Listener update(String listenerId, ListenerUpdate listener);
 }

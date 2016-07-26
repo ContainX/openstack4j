@@ -3,6 +3,7 @@ package org.openstack4j.model.network.ext;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.network.ext.builder.LoadBalancerV2Builder;
+import org.openstack4j.openstack.networking.domain.ext.ListItem;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
     /**
      * @return The listeners of the loadbalancer.
      */
-    List<Listener> getListeners();
+    List<ListItem> getListeners();
 
     /**
      * @return provisioningStatus.The provisioning status of the loadbalancer. Indicates whether the

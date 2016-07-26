@@ -3,9 +3,10 @@ package org.openstack4j.openstack.networking.domain.ext;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import org.openstack4j.model.network.ext.Listener;
+import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.LoadBalancerV2;
 import org.openstack4j.model.network.ext.builder.LoadBalancerV2Builder;
+import org.openstack4j.openstack.common.ListResult;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * lbaas v2 loadbalancer
  * @author emjburns
  */
-@JsonRootName("load_balancer_v2")
+@JsonRootName("loadbalancer")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
 
@@ -25,6 +26,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     private String name;
 
     private String description;
+
     /**
      * The ID of the subnet on which to allocate the VIP address.
      */
@@ -34,6 +36,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     /**
      * The IP address of the VIP.
      */
+    @JsonProperty("vip_address")
     private String vipAddress;
 
     @JsonProperty("admin_state_up")
@@ -43,7 +46,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     private String provisioningStatus;
     private String operatingStatus;
 
-    private List<Listener> listeners;
+    private List<ListItem> listeners;
 
     /**
      * {@inheritDoc}
@@ -80,6 +83,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     /**
      * {@inheritDoc}
      */
+    @JsonProperty("vip_subnet_id")
     @Override
     public String getVIPSubnetId(){
         return vipSubnetId;
@@ -98,14 +102,14 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      */
     @Override
     public boolean isAdminStateUp(){
-        return isAdminStateUp();
+        return adminStateUp;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Listener> getListeners(){
+    public List<ListItem> getListeners(){
         return listeners;
     }
 
@@ -130,13 +134,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      */
     @Override
     public LoadBalancerV2Builder toBuilder(){
-        //TODO: implement builder
-        return null;
-    }
-
-    public static LoadBalancerV2Builder builder(){
-        //TODO: implement builder
-        return null;
+        return new LoadBalancerV2ConcreteBuilder(this);
     }
 
     @Override
@@ -154,4 +152,110 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
                 ", listeners=" + listeners +
                 '}';
     }
+
+    public static class LoadBalancersV2 extends ListResult<NeutronLoadBalancerV2> {
+        private static final long serialVersionUID = 1L;
+
+        @JsonProperty("loadbalancers")
+        List<NeutronLoadBalancerV2> loadbalancers;
+
+        @Override
+        public List<NeutronLoadBalancerV2> value() {
+            return loadbalancers;
+        }
+
+        @Override
+        public String toString() {
+            return Objects.toStringHelper(this).omitNullValues()
+                    .add("loadbalancers", loadbalancers).toString();
+        }
+    }
+
+    public static class LoadBalancerV2ConcreteBuilder implements LoadBalancerV2Builder {
+        private NeutronLoadBalancerV2 m;
+
+        public LoadBalancerV2ConcreteBuilder() {
+            this(new NeutronLoadBalancerV2());
+        }
+
+        public LoadBalancerV2ConcreteBuilder(NeutronLoadBalancerV2 m) {
+            this.m = m;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2 build() {
+            return m;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2Builder from(LoadBalancerV2 in){
+            m = (NeutronLoadBalancerV2) in;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2Builder tenantId(String tenantId){
+            m.tenantId = tenantId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2Builder name(String name){
+            m.name = name;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2Builder description(String description){
+            m.description = description;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2Builder subnetId(String vipSubnetId){
+            m.vipSubnetId = vipSubnetId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2Builder address(String vipAddress){
+            m.vipAddress = vipAddress;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2Builder adminStateUp(boolean adminStateUp){
+            m.adminStateUp = adminStateUp;
+            return this;
+        }
+    }
+
+    public static LoadBalancerV2Builder builder() {
+        return new LoadBalancerV2ConcreteBuilder();
+    }
 }
+

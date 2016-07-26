@@ -2,7 +2,7 @@ package org.openstack4j.api.networking.ext;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.network.ext.HealthMonitorUpdateV2;
+import org.openstack4j.model.network.ext.HealthMonitorV2Update;
 import org.openstack4j.model.network.ext.HealthMonitorV2;
 
 import java.util.List;
@@ -56,5 +56,5 @@ public interface HealthMonitorV2Service extends RestService {
      * @param healthMonitor HealthMonitorV2Update
      * @return HealthMonitorV2
      */
-    HealthMonitorV2 update(String healthMonitorId, HealthMonitorUpdateV2 healthMonitor);
+    HealthMonitorV2 update(String healthMonitorId, HealthMonitorV2Update healthMonitor);
 }
