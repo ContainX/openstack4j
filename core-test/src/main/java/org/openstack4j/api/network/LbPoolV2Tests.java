@@ -33,7 +33,7 @@ public class LbPoolV2Tests extends AbstractTest {
     public void testListPoolV2() throws IOException {
         respondWith(LBPOOLSV2_JSON);
         List<? extends LbPoolV2> list = osv3().networking().lbaasV2().lbPoolV2().list();
-        assertEquals(2, list.size());
+        assertEquals(list.size(), 2);
         assertEquals(list.get(0).getId(), "b7f6a49f-ebd8-43c5-b792-5748366eff21");
     }
 
@@ -42,7 +42,7 @@ public class LbPoolV2Tests extends AbstractTest {
         Map<String, String> map = new HashMap<String, String>();
         map.put("protocol", "HTTP");
         List<? extends LbPoolV2> list = osv3().networking().lbaasV2().lbPoolV2().list(map);
-        assertEquals(2, list.size());
+        assertEquals(list.size(), 2);
     }
 
     public void testGetPoolV2() throws IOException {
@@ -50,7 +50,7 @@ public class LbPoolV2Tests extends AbstractTest {
         String id = "b7f6a49f-ebd8-43c5-b792-5748366eff21";
         LbPoolV2 pool = osv3().networking().lbaasV2().lbPoolV2().get(id);
         assertNotNull(pool);
-        assertEquals(id, pool.getId());
+        assertEquals(pool.getId(), id);
     }
 
     public void testCreatePoolV2() throws IOException {
@@ -66,9 +66,9 @@ public class LbPoolV2Tests extends AbstractTest {
                 .protocol(protocol)
                 .build();
         LbPoolV2 result = osv3().networking().lbaasV2().lbPoolV2().create(create);
-        assertEquals(name, result.getName());
+        assertEquals(result.getName(), name);
         assertEquals(result.getLbMethod(), LbMethod.LEAST_CONNECTIONS);
-        assertEquals(protocol, result.getProtocol());
+        assertEquals(result.getProtocol(), protocol);
     }
 
     public void testUpdatePoolV2() throws IOException {
@@ -82,8 +82,8 @@ public class LbPoolV2Tests extends AbstractTest {
                 .name(name)
                 .build();
         LbPoolV2 result = osv3().networking().lbaasV2().lbPoolV2().update(poolId, update);
-        assertEquals(name, result.getName());
-        assertEquals(LbMethod.ROUND_ROBIN, result.getLbMethod());
+        assertEquals(result.getName(), name);
+        assertEquals(result.getLbMethod(), LbMethod.ROUND_ROBIN);
         assertFalse(result.isAdminStateUp());
     }
 
