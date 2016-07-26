@@ -3,6 +3,7 @@ package org.openstack4j.model.network.ext;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.network.ext.builder.HealthMonitorV2Builder;
+import org.openstack4j.openstack.networking.domain.ext.ListItem;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2B
      * @return type The type of probe sent by the load balancer to verify the
      *         member state, which is TCP, HTTP, or HTTPS.
      */
-    HealthMonitorV2Type getType();
+    HealthMonitorType getType();
 
     /**
      * @return delay The time, in seconds, between sending probes to members.
@@ -83,6 +84,6 @@ public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2B
      * The pools that this health monitor will monitor.
      * @return pools
      */
-    List<LbPoolV2> getPools();
+    List<ListItem> getPools();
 
 }

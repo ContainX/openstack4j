@@ -7,7 +7,6 @@ import org.openstack4j.model.network.ext.ListenerUpdate;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.networking.domain.ext.NeutronListenerV2;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
-
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +17,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author emjburns
  */
 public class ListenerServiceImpl extends BaseNetworkingServices implements ListenerService{
-
     /**
      * {@inheritDoc}
      */
@@ -67,7 +65,6 @@ public class ListenerServiceImpl extends BaseNetworkingServices implements Liste
     public Listener create(Listener listener){
         checkNotNull(listener);
         return post(NeutronListenerV2.class, uri("lbaas/listeners")).entity(listener).execute();
-
     }
 
     @Override
