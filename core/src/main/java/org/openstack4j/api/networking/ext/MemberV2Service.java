@@ -3,6 +3,7 @@ package org.openstack4j.api.networking.ext;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.MemberV2;
+import org.openstack4j.model.network.ext.MemberV2Update;
 
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,5 @@ public interface MemberV2Service extends RestService {
      * @param member MemberUpdate
      * @return Member
      */
-//    TODO: Impl of update
-//    MemberV2 update(String memberId,MemberV2Update member);
+    MemberV2 update(String memberId, MemberV2Update member);
 }

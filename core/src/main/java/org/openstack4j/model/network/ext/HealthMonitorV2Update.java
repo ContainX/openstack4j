@@ -2,14 +2,14 @@ package org.openstack4j.model.network.ext;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.network.ext.builder.HealthMonitorUpdateV2Builder;
+import org.openstack4j.model.network.ext.builder.HealthMonitorV2UpdateBuilder;
 
 /**
  * An entity used to update a healthMonitorV2
  *
  * @author ashleykasim
  */
-public interface HealthMonitorUpdateV2 extends ModelEntity, Buildable<HealthMonitorUpdateV2Builder> {
+public interface HealthMonitorV2Update extends ModelEntity, Buildable<HealthMonitorV2UpdateBuilder> {
     /**
      * Optional.
      *

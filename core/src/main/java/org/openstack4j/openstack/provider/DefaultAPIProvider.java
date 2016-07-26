@@ -406,9 +406,8 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ListenerService.class, ListenerServiceImpl.class);
         bind(HealthMonitorV2Service.class, HealthMonitorV2ServiceImpl.class);
         bind(LbPoolV2Service.class, LbPoolV2ServiceImpl.class);
+    }   
 
-    }
-    
     /**
      * {@inheritDoc}
      */

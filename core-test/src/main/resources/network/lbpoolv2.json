@@ -1,0 +1,21 @@
+{
+  "pool": {
+    "lb_algorithm": "LEAST_CONNECTIONS",
+    "protocol": "HTTP",
+    "description": "im a swimming pool",
+    "admin_state_up": true,
+    "tenant_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
+    "session_persistence": null,
+    "healthmonitor_id": "350576d8-5015-4d4e-b73f-23df2397e4c4",
+    "listeners": [
+      {
+        "id": "c07058a9-8d84-4443-b8f5-508d0facfe10"
+      }
+    ],
+    "members": [
+
+    ],
+    "id": "b7f6a49f-ebd8-43c5-b792-5748366eff21",
+    "name": "testlbpool"
+  }
+}

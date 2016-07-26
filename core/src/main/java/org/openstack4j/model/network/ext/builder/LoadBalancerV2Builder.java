@@ -33,22 +33,22 @@ public interface LoadBalancerV2Builder extends Buildable.Builder<LoadBalancerV2B
     /**
      * Optional
      *
-     * @param VipSubnetId
+     * @param vipSubnetId
      *            The network on which to allocate the load balancer's vip address.
      *            A tenant can only create load balancer vips on networks authorized by policy (e.g. her own networks or shared/provider networks).
      * @return LoadBalancerV2Builder
      */
-    LoadBalancerV2Builder subnetId(String VipSubnetId);
+    LoadBalancerV2Builder subnetId(String vipSubnetId);
 
     /**
      * Optional
      *
-     * @param VipAddress
+     * @param vipAddress
      *            The IP address of the VIP.
      *            If provided, the system will attempt to assign the load balancer's vip address to this.
      * @return LoadBalancerV2Builder
      */
-    LoadBalancerV2Builder address(String VipAddress);
+    LoadBalancerV2Builder address(String vipAddress);
 
     /**
      * Optional

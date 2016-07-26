@@ -18,8 +18,7 @@ import java.util.List;
  * Lbaas V2 load balancer pool
  * @author emjburns
  */
-//TODO: is this the right json root name?
-@JsonRootName("pool_V2")
+@JsonRootName("pool")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronLbPoolV2 implements LbPoolV2{
 
@@ -37,13 +36,16 @@ public class NeutronLbPoolV2 implements LbPoolV2{
 
     private Protocol protocol;
 
-    @JsonProperty("lb_method")
+    @JsonProperty("lb_algorithm")
     private LbMethod lbMethod;
 
     private SessionPersistence sessionPersistence;
 
     @JsonProperty("admin_state_up")
     private boolean adminStateUp;
+
+    @JsonProperty("listener_id")
+    private String listenerId;
 
     //should these be strings?
     private List<Listener> listeners;
@@ -259,8 +261,8 @@ public class NeutronLbPoolV2 implements LbPoolV2{
          */
         @Override
         public LbPoolV2Builder listenerId(String listenerId){
-            // TODO: how do we get listener id into the listeners list?
-            return null;
+            m.listenerId = listenerId;
+            return this;
         }
     }
 

@@ -2,7 +2,7 @@ package org.openstack4j.openstack.networking.internal.ext;
 
 import org.openstack4j.api.networking.ext.HealthMonitorV2Service;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.network.ext.HealthMonitorUpdateV2;
+import org.openstack4j.model.network.ext.HealthMonitorV2Update;
 import org.openstack4j.model.network.ext.HealthMonitorV2;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitorV2;
@@ -73,7 +73,7 @@ public class HealthMonitorV2ServiceImpl extends BaseNetworkingServices implement
      */
     @Override
     public HealthMonitorV2 update(String healthMonitorId,
-                                HealthMonitorUpdateV2 healthMonitor) {
+                                HealthMonitorV2Update healthMonitor) {
         checkNotNull(healthMonitorId);
         checkNotNull(healthMonitor);
         return put(NeutronHealthMonitorV2.class,uri("/lbaas/healthmonitors/%s",healthMonitorId)).entity(healthMonitor).execute();

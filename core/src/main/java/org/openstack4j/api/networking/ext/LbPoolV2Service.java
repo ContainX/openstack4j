@@ -3,6 +3,7 @@ package org.openstack4j.api.networking.ext;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.LbPoolV2;
+import org.openstack4j.model.network.ext.LbPoolV2Update;
 
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,5 @@ public interface LbPoolV2Service extends RestService {
      *            LbPoolV2Update
      * @return LbPoolV2
      */
-//    TODO: impl update
-//    LbPoolV2 update(String lbPoolId, LbPoolV2Update lbPool);
+    LbPoolV2 update(String lbPoolId, LbPoolV2Update lbPool);
 }

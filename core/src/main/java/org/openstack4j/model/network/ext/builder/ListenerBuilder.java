@@ -14,15 +14,6 @@ public interface ListenerBuilder extends Buildable.Builder<ListenerBuilder, List
     ListenerBuilder tenantId(String tenantId);
 
     /**
-     * The load balancer this listener will be provisioned on.
-     * A tenant can only create listeners on load balancers authorized by policy
-     * (e.g. her own load balancers).
-     * @param loadBalancerId
-     * @return ListenerBuilder
-     */
-    ListenerBuilder loadBalancerId(String loadBalancerId);
-
-    /**
      * @param protocol
      *            The protocol of the VIP address. A valid value is TCP, HTTP,
      *            or HTTPS.
@@ -36,6 +27,14 @@ public interface ListenerBuilder extends Buildable.Builder<ListenerBuilder, List
      * @return ListenerBuilder
      */
     ListenerBuilder protocolPort(Integer protocolPort);
+
+    /**
+     * The load balancer this listener will be provisioned on. A tenant can only create listeners on
+     * load balancers authorized by policy (e.g. her own load balancers).
+     * @param loadbalancerId
+     * @return ListenerBuilder
+     */
+    ListenerBuilder loadBalancerId(String loadbalancerId);
 
     /**
      * Optional

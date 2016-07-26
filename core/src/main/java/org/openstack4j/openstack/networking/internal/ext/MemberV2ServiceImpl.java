@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.internal.ext;
 import org.openstack4j.api.networking.ext.MemberV2Service;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.MemberV2;
+import org.openstack4j.model.network.ext.MemberV2Update;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
 import java.util.List;
@@ -50,6 +51,14 @@ public class MemberV2ServiceImpl extends BaseNetworkingServices implements Membe
      */
     @Override
     public MemberV2 create(MemberV2 member){
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MemberV2 update(String memberId, MemberV2Update member){
         return null;
     }
 }
