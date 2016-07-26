@@ -3,8 +3,12 @@ package org.openstack4j.openstack.networking.domain.ext;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.MemberV2;
 import org.openstack4j.model.network.ext.builder.MemberV2Builder;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * A member of a v2 lbaas pool
@@ -28,11 +32,11 @@ public class NeutronMemberV2 implements MemberV2 {
      */
     private Integer weight;
 
-    @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
-
     @JsonProperty("subnet_id")
     private String subnetId;
+
+    @JsonProperty("admin_state_up")
+    private boolean adminStateUp;
 
     /**
      * {@inheritDoc}
@@ -101,6 +105,26 @@ public class NeutronMemberV2 implements MemberV2 {
                 ", adminStateUp=" + adminStateUp +
                 ", subnetId='" + subnetId + '\'' +
                 '}';
+    }
+
+    public static class MembersV2 extends ListResult<NeutronMemberV2> {
+        @JsonProperty("members")
+        List<NeutronMemberV2> members;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected List<NeutronMemberV2> value() {
+            return members;
+        }
+
+        @Override
+        public String toString() {
+            return Objects.toStringHelper(this)
+                    .add("members", members)
+                    .toString();
+        }
     }
 
     /**

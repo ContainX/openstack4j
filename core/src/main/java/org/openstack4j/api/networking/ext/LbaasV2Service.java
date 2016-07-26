@@ -24,10 +24,4 @@ public interface LbaasV2Service {
      * @return the Lbaas V2 listener Service API
      */
     ListenerService listener();
-
-    /**
-     *
-     * @return the Lbaas V2 member Service API
-     */
-    MemberV2Service memberV2();
 }

@@ -6,7 +6,6 @@ import org.openstack4j.api.networking.ext.LbPoolV2Service;
 import org.openstack4j.api.networking.ext.LbaasV2Service;
 import org.openstack4j.api.networking.ext.ListenerService;
 import org.openstack4j.api.networking.ext.LoadBalancerV2Service;
-import org.openstack4j.api.networking.ext.MemberV2Service;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
 /**
@@ -14,14 +13,6 @@ import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
  * @author emjburns
  */
 public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV2Service{
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MemberV2Service memberV2(){
-        return Apis.get(MemberV2Service.class);
-    }
-
     /**
      * {@inheritDoc}
      */

@@ -4,6 +4,8 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.LbPoolV2;
 import org.openstack4j.model.network.ext.LbPoolV2Update;
+import org.openstack4j.model.network.ext.MemberV2;
+import org.openstack4j.model.network.ext.MemberV2Update;
 
 import java.util.List;
 import java.util.Map;
@@ -66,4 +68,56 @@ public interface LbPoolV2Service extends RestService {
      * @return LbPoolV2
      */
     LbPoolV2 update(String lbPoolId, LbPoolV2Update lbPool);
+
+    /**
+     * List all members  that the current tenant has access to
+     *
+     * @param lbPoolId the load balancer pool
+     * @return list of all Member
+     */
+    List<? extends MemberV2> listMembers(String lbPoolId);
+
+    /**
+     * Returns list of member filtered by parameters.
+     *
+     * @param lbPoolId the load balancer pool
+     * @param filteringParams map (name, value) of filtering parameters
+     * @return
+     */
+    List<? extends MemberV2> listMembers(String lbPoolId, Map<String, String> filteringParams);
+
+
+    /**
+     * Get the specified member by ID
+     *
+     * @param lbPoolId the load balancer pool
+     * @param memberId the member identifier
+     * @return the member or null if not found
+     */
+    MemberV2 getMember(String lbPoolId, String memberId);
+
+    /**
+     * Create a member
+     * @param lbPoolId the load balancer pool
+     * @param member Member
+     * @return Member
+     */
+    MemberV2 createMember(String lbPoolId, MemberV2 member);
+
+    /**
+     * Delete the specified member by ID
+     * @param lbPoolId the load balancer pool
+     * @param memberId the member identifier
+     * @return the action response
+     */
+    ActionResponse deleteMember(String lbPoolId, String memberId);
+
+    /**
+     * Update a member
+     * @param lbPoolId the load balancer pool
+     * @param memberId the member identifier
+     * @param member MemberUpdate
+     * @return Member
+     */
+    MemberV2 updateMember(String lbPoolId, String memberId, MemberV2Update member);
 }
