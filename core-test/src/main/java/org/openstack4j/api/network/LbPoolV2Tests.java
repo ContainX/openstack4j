@@ -88,7 +88,7 @@ public class LbPoolV2Tests extends AbstractTest {
     }
 
     public void testDeletePoolV2() {
-        respondWith(200);
+        respondWith(204);
         ActionResponse result = osv3().networking().lbaasV2().lbPoolV2().delete("b7f6a49f-ebd8-43c5-b792-5748366eff21");
         assertTrue(result.isSuccess());
     }
