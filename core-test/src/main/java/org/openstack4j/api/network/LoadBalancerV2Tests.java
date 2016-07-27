@@ -5,6 +5,8 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.LoadBalancerV2;
+import org.openstack4j.model.network.ext.LoadBalancerV2Stats;
+import org.openstack4j.model.network.ext.LoadBalancerV2StatusTree;
 import org.openstack4j.model.network.ext.LoadBalancerV2Update;
 import org.testng.annotations.Test;
 
@@ -28,6 +30,8 @@ public class LoadBalancerV2Tests extends AbstractTest {
     private static final String LOADBALANCERSV2_JSON = "/network/loadbalancersv2.json";
     private static final String LOADBALANCERV2_JSON = "/network/loadbalancerv2.json";
     private static final String LOADBALANCERV2_UPDATE_JSON = "/network/loadbalancerv2_update.json";
+    private static final String LOADBALANCERV2_STATS_JSON = "/network/loadbalancerv2_stats.json";
+    private static final String LOADBALANCERV2_STATUSES_JSON = "/network/loadbalancerv2_statuses.json";
 
     public void testListLoadBalancersV2() throws IOException {
         respondWith(LOADBALANCERSV2_JSON);
@@ -92,6 +96,23 @@ public class LoadBalancerV2Tests extends AbstractTest {
         respondWith(204);
         ActionResponse result = osv3().networking().lbaasV2().loadbalancerV2().delete("282b71ea-9ceb-4cd6-8881-cb511af2edb5");
         assertTrue(result.isSuccess());
+    }
+
+    public void testGetLoadBalancerV2Stats() throws IOException {
+        respondWith(LOADBALANCERV2_STATS_JSON);
+        String id = "d8b09924-d223-42a8-b7e7-410e60fd04c5";
+        LoadBalancerV2Stats stats = osv3().networking().lbaasV2().loadbalancerV2().stats(id);
+        assertNotNull(stats);
+    }
+
+    public void testGetLoadBalancerV2Statuses() throws IOException {
+        respondWith(LOADBALANCERV2_STATUSES_JSON);
+        String id = "d8b09924-d223-42a8-b7e7-410e60fd04c5";
+        LoadBalancerV2StatusTree statuses = osv3().networking().lbaasV2().loadbalancerV2().statusTree(id);
+        assertNotNull(statuses);
+        assertNotNull(statuses.getLoadBalancerV2Status());
+        assertNotNull(statuses.getLoadBalancerV2Status().getListenerStatuses());
+        assertEquals(statuses.getLoadBalancerV2Status().getId(), id);
     }
 
     @Override
