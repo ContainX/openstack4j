@@ -2,34 +2,34 @@ package org.openstack4j.model.network.ext;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.network.ext.builder.ListenerUpdateBuilder;
+import org.openstack4j.model.network.ext.builder.ListenerV2UpdateBuilder;
 
 /**
  * An entity used to update an lbaas v2 listener
  * @author emjburns
  */
-public interface ListenerUpdate extends ModelEntity, Buildable<ListenerUpdateBuilder> {
+public interface ListenerV2Update extends ModelEntity, Buildable<ListenerV2UpdateBuilder> {
     /**
      * Optional
-     * @see Listener#isAdminStateUp()
+     * @see ListenerV2#isAdminStateUp()
      */
     public boolean isAdminStateUp();
 
     /**
      * Optional
-     * @see Listener#getDescription()
+     * @see ListenerV2#getDescription()
      */
     public String getDescription();
 
     /**
      * Optional
-     * @see Listener#getName()
+     * @see ListenerV2#getName()
      */
     public String getName();
 
     /**
      * Optional
-     * @see Listener#getConnectionLimit()
+     * @see ListenerV2#getConnectionLimit()
      */
     public Integer getConnectionLimit();
 

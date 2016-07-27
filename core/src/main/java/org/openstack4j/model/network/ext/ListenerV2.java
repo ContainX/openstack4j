@@ -3,7 +3,7 @@ package org.openstack4j.model.network.ext;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.network.ext.builder.ListenerBuilder;
+import org.openstack4j.model.network.ext.builder.ListenerV2Builder;
 import org.openstack4j.openstack.networking.domain.ext.ListItem;
 import org.openstack4j.openstack.networking.domain.ext.NeutronListenerV2;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author emjburns
  */
 @JsonDeserialize(as = NeutronListenerV2.class)
-public interface Listener extends ModelEntity, Buildable<ListenerBuilder> {
+public interface ListenerV2 extends ModelEntity, Buildable<ListenerV2Builder> {
 
     /**
      * @return id. The unique ID for the listener.

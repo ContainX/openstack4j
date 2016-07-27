@@ -13,7 +13,7 @@ import org.openstack4j.model.network.ext.builder.MemberV2UpdateBuilder;
  */
 @JsonRootName("member")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NeutronMemberV2Update implements MemberV2Update{
+public class NeutronMemberV2Update implements MemberV2Update {
 
     private static final long serialVersionUID = 1L;
 

@@ -17,7 +17,7 @@ import java.util.List;
  */
 @JsonRootName("healthmonitor")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NeutronHealthMonitorV2 implements HealthMonitorV2{
+public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
     private String id;
 
     @JsonProperty("tenant_id")

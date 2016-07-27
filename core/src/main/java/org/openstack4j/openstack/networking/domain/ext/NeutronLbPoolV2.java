@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.LbMethod;
 import org.openstack4j.model.network.ext.LbPoolV2;
-import org.openstack4j.model.network.ext.Listener;
 import org.openstack4j.model.network.ext.Protocol;
 import org.openstack4j.model.network.ext.SessionPersistence;
 import org.openstack4j.model.network.ext.builder.LbPoolV2Builder;
@@ -20,10 +19,7 @@ import java.util.List;
  */
 @JsonRootName("pool")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NeutronLbPoolV2 implements LbPoolV2{
-
-    @JsonProperty("health_monitors")
-    private List<String> healthMonitors;
+public class NeutronLbPoolV2 implements LbPoolV2 {
 
     private String id;
 
@@ -47,11 +43,11 @@ public class NeutronLbPoolV2 implements LbPoolV2{
     @JsonProperty("listener_id")
     private String listenerId;
 
-    //should these be strings?
-    private List<Listener> listeners;
+    private List<ListItem> listeners;
 
-    private List<String> members;
+    private List<ListItem> members;
 
+    @JsonProperty("healthmonitor_id")
     private String healthMonitorId;
 
     /**
@@ -131,7 +127,7 @@ public class NeutronLbPoolV2 implements LbPoolV2{
      * {@inheritDoc}
      */
     @Override
-    public List<Listener> getListeners(){
+    public List<ListItem> getListeners(){
         return listeners;
     }
 
@@ -139,7 +135,7 @@ public class NeutronLbPoolV2 implements LbPoolV2{
      * {@inheritDoc}
      */
     @Override
-    public List<String> getMembers(){
+    public List<ListItem> getMembers(){
         return members;
     }
 
@@ -154,8 +150,7 @@ public class NeutronLbPoolV2 implements LbPoolV2{
     @Override
     public String toString(){
         return "NeutronLbPoolV2{" +
-                "healthMonitors=" + healthMonitors +
-                ", id='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", tenantId='" + tenantId + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +

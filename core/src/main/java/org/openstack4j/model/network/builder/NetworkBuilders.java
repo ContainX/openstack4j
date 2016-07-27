@@ -228,16 +228,16 @@ public interface NetworkBuilders {
 
     /**
      * The builder to createa v2 lbaas listener
-     * @return ListenerBuilder
+     * @return ListenerV2Builder
      */
-    public ListenerBuilder listenerV2();
+    public ListenerV2Builder listenerV2();
 
     /**
      * The builder to update a lbaas v2 lbaas listener
      *
-     * @return ListenerUpdateBuilder
+     * @return ListenerV2UpdateBuilder
      */
-    public ListenerUpdateBuilder listenerV2Update();
+    public ListenerV2UpdateBuilder listenerV2Update();
 
     /**
      * The builder to create a v2 healthMonitor

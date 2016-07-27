@@ -3,6 +3,7 @@ package org.openstack4j.model.network.ext;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.network.ext.builder.LbPoolV2Builder;
+import org.openstack4j.openstack.networking.domain.ext.ListItem;
 
 import java.util.List;
 
@@ -58,13 +59,13 @@ public interface LbPoolV2 extends ModelEntity, Buildable<LbPoolV2Builder> {
      * Listeners associated with the pool
      * @return listeners associated with the pool
      */
-    List<Listener> getListeners();
+    List<ListItem> getListeners();
 
 
     /**
      * @return List of members that belong to the pool.
      */
-    List<String> getMembers();
+    List<ListItem> getMembers();
 
     /**
      * @return Health monitor associated with the pool.

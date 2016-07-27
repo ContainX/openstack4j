@@ -4,7 +4,7 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.networking.ext.HealthMonitorV2Service;
 import org.openstack4j.api.networking.ext.LbPoolV2Service;
 import org.openstack4j.api.networking.ext.LbaasV2Service;
-import org.openstack4j.api.networking.ext.ListenerService;
+import org.openstack4j.api.networking.ext.ListenerV2Service;
 import org.openstack4j.api.networking.ext.LoadBalancerV2Service;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
@@ -12,13 +12,13 @@ import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
  * OpenStack (Neutron) lbaas v2 service implementation
  * @author emjburns
  */
-public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV2Service{
+public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV2Service {
     /**
      * {@inheritDoc}
      */
     @Override
-    public ListenerService listener(){
-        return Apis.get(ListenerService.class);
+    public ListenerV2Service listenerV2(){
+        return Apis.get(ListenerV2Service.class);
     }
 
     /**

@@ -1,31 +1,31 @@
 package org.openstack4j.model.network.ext.builder;
 
 import org.openstack4j.common.Buildable;
-import org.openstack4j.model.network.ext.ListenerUpdate;
+import org.openstack4j.model.network.ext.ListenerV2Update;
 
 /**
  * A Builder to update a lbaas v2 listener
  * @author emjburns
  */
-public interface ListenerUpdateBuilder extends Buildable.Builder<ListenerUpdateBuilder, ListenerUpdate> {
+public interface ListenerV2UpdateBuilder extends Buildable.Builder<ListenerV2UpdateBuilder, ListenerV2Update> {
 
     /**
      * Optional
      *
      * @param name
      *            Human-readable name for the listener. Does not have to be unique.
-     * @return ListenerUpdateBuilder
+     * @return ListenerV2UpdateBuilder
      */
-    ListenerUpdateBuilder name(String name);
+    ListenerV2UpdateBuilder name(String name);
 
     /**
      * Optional
      *
      * @param description
      *            Human-readable description for the listener.
-     * @return ListenerUpdateBuilder
+     * @return ListenerV2UpdateBuilder
      */
-    ListenerUpdateBuilder description(String description);
+    ListenerV2UpdateBuilder description(String description);
 
     /**
      * Optional
@@ -33,15 +33,15 @@ public interface ListenerUpdateBuilder extends Buildable.Builder<ListenerUpdateB
      * @param adminStateUp
      *            The administrative state of the listener. A valid value is true
      *            (UP) or false (DOWN).
-     * @return ListenerUpdateBuilder
+     * @return ListenerV2UpdateBuilder
      */
-    ListenerUpdateBuilder adminStateUp(boolean adminStateUp);
+    ListenerV2UpdateBuilder adminStateUp(boolean adminStateUp);
 
     /**
      * Optional
      * The maximum number of connections allowed for the listener. Default is -1, meaning no limit.
      * @param connectionLimit
-     * @return ListenerUpdate Builder
+     * @return ListenerV2Update Builder
      */
-    ListenerUpdateBuilder connectionLimit(Integer connectionLimit);
+    ListenerV2UpdateBuilder connectionLimit(Integer connectionLimit);
 }

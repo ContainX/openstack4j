@@ -27,7 +27,6 @@ import org.openstack4j.model.identity.v3.builder.*;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.manila.builder.*;
 import org.openstack4j.model.network.builder.*;
-import org.openstack4j.model.network.ext.HealthMonitor;
 import org.openstack4j.model.network.ext.builder.*;
 import org.openstack4j.model.sahara.builder.*;
 import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
@@ -915,7 +914,7 @@ public class Builders {
      * LbaasV2 listener builder
      * @return the listener builder
      */
-    public static ListenerBuilder listenerV2() {
+    public static ListenerV2Builder listenerV2() {
         return NeutronListenerV2.builder();
     }
 
@@ -924,7 +923,7 @@ public class Builders {
      * LbaasV2 listener update builder
      * @return the listener v2 update builder
      */
-    public static ListenerUpdateBuilder listenerV2Update() {
+    public static ListenerV2UpdateBuilder listenerV2Update() {
         return NeutronListenerV2Update.builder();
     }
 

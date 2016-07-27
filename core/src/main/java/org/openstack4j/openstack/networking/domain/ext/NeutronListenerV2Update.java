@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
-import org.openstack4j.model.network.ext.ListenerUpdate;
-import org.openstack4j.model.network.ext.builder.ListenerUpdateBuilder;
+import org.openstack4j.model.network.ext.ListenerV2Update;
+import org.openstack4j.model.network.ext.builder.ListenerV2UpdateBuilder;
 
 /**
  * Entity for updating lbaas v2 listener
@@ -13,7 +13,7 @@ import org.openstack4j.model.network.ext.builder.ListenerUpdateBuilder;
  */
 @JsonRootName("listener")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NeutronListenerV2Update implements ListenerUpdate{
+public class NeutronListenerV2Update implements ListenerV2Update {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,8 +34,8 @@ public class NeutronListenerV2Update implements ListenerUpdate{
      * {@inheritDoc}
      */
     @Override
-    public ListenerUpdateBuilder toBuilder(){
-        return new ListenerUpdateConcreteBuilder(this);
+    public ListenerV2UpdateBuilder toBuilder(){
+        return new ListenerV2UpdateConcreteBuilder(this);
     }
 
     /**
@@ -80,14 +80,14 @@ public class NeutronListenerV2Update implements ListenerUpdate{
                 .toString();
     }
 
-    public static class ListenerUpdateConcreteBuilder implements ListenerUpdateBuilder{
+    public static class ListenerV2UpdateConcreteBuilder implements ListenerV2UpdateBuilder {
         private NeutronListenerV2Update m;
 
-        public ListenerUpdateConcreteBuilder(){
+        public ListenerV2UpdateConcreteBuilder(){
             this(new NeutronListenerV2Update());
         }
 
-        public ListenerUpdateConcreteBuilder(NeutronListenerV2Update m){
+        public ListenerV2UpdateConcreteBuilder(NeutronListenerV2Update m){
             this.m = m;
         }
 
@@ -95,7 +95,7 @@ public class NeutronListenerV2Update implements ListenerUpdate{
          * {@inheritDoc}
          */
         @Override
-        public ListenerUpdate build(){
+        public ListenerV2Update build(){
             return m;
         }
 
@@ -103,7 +103,7 @@ public class NeutronListenerV2Update implements ListenerUpdate{
          * {@inheritDoc}
          */
         @Override
-        public ListenerUpdateBuilder from(ListenerUpdate in){
+        public ListenerV2UpdateBuilder from(ListenerV2Update in){
             m = (NeutronListenerV2Update) in;
             return this;
         }
@@ -112,7 +112,7 @@ public class NeutronListenerV2Update implements ListenerUpdate{
          * {@inheritDoc}
          */
         @Override
-        public ListenerUpdateBuilder name(String name){
+        public ListenerV2UpdateBuilder name(String name){
             m.name = name;
             return this;
         }
@@ -121,7 +121,7 @@ public class NeutronListenerV2Update implements ListenerUpdate{
          * {@inheritDoc}
          */
         @Override
-        public ListenerUpdateBuilder description(String description){
+        public ListenerV2UpdateBuilder description(String description){
             m.description = description;
             return this;
         }
@@ -130,7 +130,7 @@ public class NeutronListenerV2Update implements ListenerUpdate{
          * {@inheritDoc}
          */
         @Override
-        public ListenerUpdateBuilder adminStateUp(boolean adminStateUp){
+        public ListenerV2UpdateBuilder adminStateUp(boolean adminStateUp){
             m.adminStateUp = adminStateUp;
             return this;
         }
@@ -139,13 +139,13 @@ public class NeutronListenerV2Update implements ListenerUpdate{
          * {@inheritDoc}
          */
         @Override
-        public ListenerUpdateBuilder connectionLimit(Integer connectionLimit){
+        public ListenerV2UpdateBuilder connectionLimit(Integer connectionLimit){
             m.connectionLimit = connectionLimit;
             return this;
         }
     }
 
-    public static ListenerUpdateBuilder builder() {
-        return new ListenerUpdateConcreteBuilder();
+    public static ListenerV2UpdateBuilder builder() {
+        return new ListenerV2UpdateConcreteBuilder();
     }
 }

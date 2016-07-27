@@ -3,6 +3,8 @@ package org.openstack4j.api.networking.ext;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.LoadBalancerV2;
+import org.openstack4j.model.network.ext.LoadBalancerV2Stats;
+import org.openstack4j.model.network.ext.LoadBalancerV2StatusTree;
 import org.openstack4j.model.network.ext.LoadBalancerV2Update;
 
 import java.util.List;
@@ -54,11 +56,19 @@ public interface LoadBalancerV2Service extends RestService {
      * @param loadbalancer LoadBalancerV2Update
      * @return loadbalancer
      */
-//    TODO: implement update
     LoadBalancerV2 update(String loadbalancerId, LoadBalancerV2Update loadbalancer);
 
-    // TODO: loadbalancer status tree
-    //      https://wiki.openstack.org/wiki/Neutron/LBaaS/API_2.0#Retrieve_a_specific_Load_Balancer.27s_Status_Tree
-    // TODO: loadbalancer statistics
-    //      https://wiki.openstack.org/wiki/Neutron/LBaaS/API_2.0#Retrieve_a_specific_Load_Balancer.27s_Statistics
+    /**
+     * Retrieve statistics on a loadbalancer
+     * @param loadbalancerId
+     * @return LoadBalancerV2Stats
+     */
+    LoadBalancerV2Stats stats(String loadbalancerId);
+
+    /**
+     * Retrieve the status tree of a loadbalancer
+     * @param loadbalancerId
+     * @return status
+     */
+    LoadBalancerV2StatusTree statusTree(String loadbalancerId);
 }
