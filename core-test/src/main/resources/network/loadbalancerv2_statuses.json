@@ -1,0 +1,40 @@
+{
+  "statuses": {
+    "loadbalancer": {
+      "name": "lb44",
+      "listeners": [
+        {
+          "pools": [
+            {
+              "name": "testlbpool44",
+              "provisioning_status": "ACTIVE",
+              "healthmonitor": {
+                "type": "HTTP",
+                "id": "0fe91da6-7815-44e2-9413-33f30f82b98b",
+                "provisioning_status": "ACTIVE"
+              },
+              "members": [
+                {
+                  "protocol_port": 80,
+                  "address": "10.0.0.17",
+                  "id": "7abeda80-b9ff-4dfe-b4ee-1b7b9f8d70b1",
+                  "operating_status": "DISABLED",
+                  "provisioning_status": "ACTIVE"
+                }
+              ],
+              "id": "c245c7ed-9a58-4215-9572-39f767234e0c",
+              "operating_status": "DISABLED"
+            }
+          ],
+          "name": "listener44",
+          "id": "4e1dc45b-31b1-480d-850c-8ee86dd3713d",
+          "operating_status": "DISABLED",
+          "provisioning_status": "ACTIVE"
+        }
+      ],
+      "id": "d8b09924-d223-42a8-b7e7-410e60fd04c5",
+      "operating_status": "DISABLED",
+      "provisioning_status": "ACTIVE"
+    }
+  }
+}
