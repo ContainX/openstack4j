@@ -42,8 +42,10 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     @JsonProperty("admin_state_up")
     private boolean adminStateUp;
 
-    // TODO: Should these be enums?
+    @JsonProperty("provisioning_status")
     private String provisioningStatus;
+
+    @JsonProperty("operating_status")
     private String operatingStatus;
 
     private List<ListItem> listeners;

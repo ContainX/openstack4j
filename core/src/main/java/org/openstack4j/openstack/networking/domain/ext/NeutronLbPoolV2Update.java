@@ -15,7 +15,7 @@ import org.openstack4j.model.network.ext.builder.LbPoolV2UpdateBuilder;
  */
 @JsonRootName("pool")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NeutronLbPoolV2Update implements LbPoolV2Update{
+public class NeutronLbPoolV2Update implements LbPoolV2Update {
     private static final long serialVersionUID = 1L;
 
     private String name;

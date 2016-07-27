@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
-import org.openstack4j.model.network.ext.Listener;
+import org.openstack4j.model.network.ext.ListenerV2;
 import org.openstack4j.model.network.ext.Protocol;
-import org.openstack4j.model.network.ext.builder.ListenerBuilder;
+import org.openstack4j.model.network.ext.builder.ListenerV2Builder;
 import org.openstack4j.openstack.common.ListResult;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @JsonRootName("listener")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NeutronListenerV2 implements Listener {
+public class NeutronListenerV2 implements ListenerV2 {
     private static final long serialVersionUID = 1L;
 
     private String id;
@@ -50,7 +50,6 @@ public class NeutronListenerV2 implements Listener {
     @JsonProperty("default_pool_id")
     private String defaultPoolId;
 
-    // TODO: is this the right approach?
     @JsonProperty("loadbalancer_id")
     private String loadbalancerId;
 
@@ -156,7 +155,7 @@ public class NeutronListenerV2 implements Listener {
                 .toString();
     }
 
-    public static class ListenerConcreteBuilder implements ListenerBuilder {
+    public static class ListenerConcreteBuilder implements ListenerV2Builder {
         private NeutronListenerV2 m;
 
         public ListenerConcreteBuilder() {
@@ -168,18 +167,18 @@ public class NeutronListenerV2 implements Listener {
         }
 
         @Override
-        public Listener build(){
+        public ListenerV2 build(){
             return m;
         }
 
         @Override
-        public ListenerBuilder from(Listener in){
+        public ListenerV2Builder from(ListenerV2 in){
             m = (NeutronListenerV2) in;
             return this;
         }
 
         @Override
-        public ListenerBuilder loadBalancerId(String loadbalancerId){
+        public ListenerV2Builder loadBalancerId(String loadbalancerId){
             m.loadbalancerId = loadbalancerId;
             return this;
         }
@@ -188,7 +187,7 @@ public class NeutronListenerV2 implements Listener {
          * {@inheritDoc}
          */
         @Override
-        public ListenerBuilder tenantId(String tenantId){
+        public ListenerV2Builder tenantId(String tenantId){
             m.tenantId = tenantId;
             return this;
         }
@@ -197,7 +196,7 @@ public class NeutronListenerV2 implements Listener {
          * {@inheritDoc}
          */
         @Override
-        public ListenerBuilder protocol(Protocol protocol){
+        public ListenerV2Builder protocol(Protocol protocol){
             m.protocol = protocol;
             return this;
         }
@@ -206,7 +205,7 @@ public class NeutronListenerV2 implements Listener {
          * {@inheritDoc}
          */
         @Override
-        public ListenerBuilder protocolPort(Integer protocolPort){
+        public ListenerV2Builder protocolPort(Integer protocolPort){
             m.protocolPort = protocolPort;
             return this;
         }
@@ -215,7 +214,7 @@ public class NeutronListenerV2 implements Listener {
          * {@inheritDoc}
          */
         @Override
-        public ListenerBuilder adminStateUp(boolean adminStateUp){
+        public ListenerV2Builder adminStateUp(boolean adminStateUp){
             m.adminStateUp = adminStateUp;
             return this;
         }
@@ -224,7 +223,7 @@ public class NeutronListenerV2 implements Listener {
          * {@inheritDoc}
          */
         @Override
-        public ListenerBuilder name(String name){
+        public ListenerV2Builder name(String name){
             m.name = name;
             return this;
         }
@@ -233,7 +232,7 @@ public class NeutronListenerV2 implements Listener {
          * {@inheritDoc}
          */
         @Override
-        public ListenerBuilder description(String description){
+        public ListenerV2Builder description(String description){
             m.description = description;
             return this;
         }
@@ -242,18 +241,18 @@ public class NeutronListenerV2 implements Listener {
          * {@inheritDoc}
          */
         @Override
-        public ListenerBuilder connectionLimit(Integer connectionLimit){
+        public ListenerV2Builder connectionLimit(Integer connectionLimit){
             m.connectionLimit = connectionLimit;
             return this;
         }
     }
 
     @Override
-    public ListenerBuilder toBuilder(){
+    public ListenerV2Builder toBuilder(){
         return new ListenerConcreteBuilder(this);
     }
 
-    public static ListenerBuilder builder(){
+    public static ListenerV2Builder builder(){
         return new ListenerConcreteBuilder();
     }
     

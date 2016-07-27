@@ -80,7 +80,7 @@ import org.openstack4j.api.networking.ext.HealthMonitorV2Service;
 import org.openstack4j.api.networking.ext.LbPoolService;
 import org.openstack4j.api.networking.ext.LbPoolV2Service;
 import org.openstack4j.api.networking.ext.LbaasV2Service;
-import org.openstack4j.api.networking.ext.ListenerService;
+import org.openstack4j.api.networking.ext.ListenerV2Service;
 import org.openstack4j.api.networking.ext.LoadBalancerService;
 import org.openstack4j.api.networking.ext.LoadBalancerV2Service;
 import org.openstack4j.api.networking.ext.MemberService;
@@ -205,7 +205,7 @@ import org.openstack4j.openstack.networking.internal.ext.HealthMonitorV2ServiceI
 import org.openstack4j.openstack.networking.internal.ext.LbPoolServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LbPoolV2ServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LbaasV2ServiceImpl;
-import org.openstack4j.openstack.networking.internal.ext.ListenerServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.ListenerV2ServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LoadBalancerServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LoadBalancerV2ServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
@@ -400,7 +400,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(NetworkPolicyService.class, NetworkPolicyServiceImpl.class);
         bind(LbaasV2Service.class, LbaasV2ServiceImpl.class);
         bind(LoadBalancerV2Service.class, LoadBalancerV2ServiceImpl.class);
-        bind(ListenerService.class, ListenerServiceImpl.class);
+        bind(ListenerV2Service.class, ListenerV2ServiceImpl.class);
         bind(HealthMonitorV2Service.class, HealthMonitorV2ServiceImpl.class);
         bind(LbPoolV2Service.class, LbPoolV2ServiceImpl.class);
     }   

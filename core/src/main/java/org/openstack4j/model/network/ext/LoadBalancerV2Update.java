@@ -6,6 +6,7 @@ import org.openstack4j.model.network.ext.builder.LoadBalancerV2UpdateBuilder;
 
 /**
  * an entity used to update an lbaas v2 loadbalancer
+ * @author emjburns
  */
 public interface LoadBalancerV2Update extends ModelEntity, Buildable<LoadBalancerV2UpdateBuilder> {
     /**

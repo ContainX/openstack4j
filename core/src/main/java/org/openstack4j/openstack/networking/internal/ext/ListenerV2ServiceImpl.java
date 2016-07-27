@@ -1,9 +1,9 @@
 package org.openstack4j.openstack.networking.internal.ext;
 
-import org.openstack4j.api.networking.ext.ListenerService;
+import org.openstack4j.api.networking.ext.ListenerV2Service;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.network.ext.Listener;
-import org.openstack4j.model.network.ext.ListenerUpdate;
+import org.openstack4j.model.network.ext.ListenerV2;
+import org.openstack4j.model.network.ext.ListenerV2Update;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.networking.domain.ext.NeutronListenerV2;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
@@ -16,12 +16,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Lbaas listener imlementation
  * @author emjburns
  */
-public class ListenerServiceImpl extends BaseNetworkingServices implements ListenerService{
+public class ListenerV2ServiceImpl extends BaseNetworkingServices implements ListenerV2Service {
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<? extends Listener> list(){
+    public List<? extends ListenerV2> list(){
         return get(NeutronListenerV2.Listeners.class, uri("/lbaas/listeners")).execute().getList();
     }
 
@@ -29,7 +29,7 @@ public class ListenerServiceImpl extends BaseNetworkingServices implements Liste
      * {@inheritDoc}
      */
     @Override
-    public List<? extends Listener> list(Map<String, String> filteringParams){
+    public List<? extends ListenerV2> list(Map<String, String> filteringParams){
         Invocation<NeutronListenerV2.Listeners> req = get(NeutronListenerV2.Listeners.class, uri("/lb/listeners"));
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
@@ -43,7 +43,7 @@ public class ListenerServiceImpl extends BaseNetworkingServices implements Liste
      * {@inheritDoc}
      */
     @Override
-    public Listener get(String listenerId){
+    public ListenerV2 get(String listenerId){
         checkNotNull(listenerId);
         return get(NeutronListenerV2.class, uri("/lbaas/listeners/%s",listenerId)).execute();
     }
@@ -62,13 +62,13 @@ public class ListenerServiceImpl extends BaseNetworkingServices implements Liste
      * {@inheritDoc}
      */
     @Override
-    public Listener create(Listener listener){
+    public ListenerV2 create(ListenerV2 listener){
         checkNotNull(listener);
         return post(NeutronListenerV2.class, uri("lbaas/listeners")).entity(listener).execute();
     }
 
     @Override
-    public Listener update(String listenerId, ListenerUpdate listener){
+    public ListenerV2 update(String listenerId, ListenerV2Update listener){
         checkNotNull(listenerId);
         checkNotNull(listener);
         return put(NeutronListenerV2.class, uri("lbaas/listeners/%s",listenerId)).entity(listener).execute();

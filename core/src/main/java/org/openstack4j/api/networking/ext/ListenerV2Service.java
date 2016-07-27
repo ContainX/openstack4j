@@ -2,8 +2,8 @@ package org.openstack4j.api.networking.ext;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.network.ext.Listener;
-import org.openstack4j.model.network.ext.ListenerUpdate;
+import org.openstack4j.model.network.ext.ListenerV2;
+import org.openstack4j.model.network.ext.ListenerV2Update;
 
 import java.util.List;
 import java.util.Map;
@@ -12,13 +12,13 @@ import java.util.Map;
  * Networking (Neutron) Lbaas V2 listener Extension API
  * @author emjburns
  */
-public interface ListenerService extends RestService {
+public interface ListenerV2Service extends RestService {
     /**
      * List all listeners that the current tenant has access to
      *
      * @return list of all listeners
      */
-    List<? extends Listener> list();
+    List<? extends ListenerV2> list();
 
     /**
      * Returns list of listeners filtered by parameters.
@@ -27,7 +27,7 @@ public interface ListenerService extends RestService {
      *            map (name, value) of filtering parameters
      * @return List
      */
-    List<? extends Listener> list(Map<String, String> filteringParams);
+    List<? extends ListenerV2> list(Map<String, String> filteringParams);
 
     /**
      * Get the specified listener by ID
@@ -36,7 +36,7 @@ public interface ListenerService extends RestService {
      *            the listener identifier
      * @return the listener or null if not found
      */
-    Listener get(String listenerId);
+    ListenerV2 get(String listenerId);
 
     /**
      * Delete the specified listener by ID
@@ -51,19 +51,19 @@ public interface ListenerService extends RestService {
      * Create a listener
      *
      * @param listener
-     *            Listener
-     * @return Listener
+     *            ListenerV2
+     * @return ListenerV2
      */
-    Listener create(Listener listener);
+    ListenerV2 create(ListenerV2 listener);
 
     /**
      * Update a listener
      *
      * @param listenerId
      *            the listener identifier
-     * @param Listener
-     *            ListenerUpdate
-     * @return Listener
+     * @param listener
+     *            ListenerV2Update
+     * @return ListenerV2
      */
-    Listener update(String listenerId, ListenerUpdate listener);
+    ListenerV2 update(String listenerId, ListenerV2Update listener);
 }

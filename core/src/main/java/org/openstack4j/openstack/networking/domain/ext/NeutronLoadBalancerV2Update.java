@@ -13,7 +13,7 @@ import org.openstack4j.model.network.ext.builder.LoadBalancerV2UpdateBuilder;
  */
 @JsonRootName("loadbalancer")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update{
+public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
 
     private String name;
 

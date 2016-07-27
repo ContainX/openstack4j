@@ -20,7 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * OpenStack (Neutron) lbaas v2 lb pool operations
  * @author emjburns
  */
-public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoolV2Service{
+public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoolV2Service {
     /**
      * {@inheritDoc}
      */

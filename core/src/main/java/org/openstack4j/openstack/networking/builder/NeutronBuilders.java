@@ -1,7 +1,6 @@
 package org.openstack4j.openstack.networking.builder;
 
 import org.openstack4j.model.network.builder.*;
-import org.openstack4j.model.network.ext.HealthMonitorV2;
 import org.openstack4j.model.network.ext.builder.*;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
@@ -183,12 +182,12 @@ public class NeutronBuilders implements NetworkBuilders {
     }
 
     @Override
-    public ListenerBuilder listenerV2(){
+    public ListenerV2Builder listenerV2(){
         return NeutronListenerV2.builder();
     }
 
     @Override
-    public ListenerUpdateBuilder listenerV2Update(){
+    public ListenerV2UpdateBuilder listenerV2Update(){
         return NeutronListenerV2Update.builder();
     }
 }

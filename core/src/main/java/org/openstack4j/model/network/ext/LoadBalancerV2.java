@@ -7,6 +7,10 @@ import org.openstack4j.openstack.networking.domain.ext.ListItem;
 
 import java.util.List;
 
+/**
+ * An entity used to update an lbaas v2 loadbalancer
+ * @author emjburns
+ */
 public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Builder> {
     /**
      * @return id. The unique ID for the loadbalancer.
