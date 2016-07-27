@@ -29,7 +29,7 @@ public class MemberV2Tests extends AbstractTest {
 
     public void testListMembersV2() throws IOException {
         respondWith(MEMBERSV2_JSON);
-        List<? extends MemberV2> list = osv3().networking().lbaasV2().lbPoolV2().listMembers("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5");
+        List<? extends MemberV2> list = osv3().networking().lbaasV2().lbPool().listMembers("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5");
         assertEquals(list.size(), 2);
         assertEquals("9a7aff27-fd41-4ec1-ba4c-3eb92c629313", list.get(0).getId());
     }
@@ -38,14 +38,14 @@ public class MemberV2Tests extends AbstractTest {
         respondWith(MEMBERSV2_JSON);
         Map<String, String> map = new HashMap<>();
         map.put("weight", "1");
-        List<? extends MemberV2> list = osv3().networking().lbaasV2().lbPoolV2().listMembers("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", map);
+        List<? extends MemberV2> list = osv3().networking().lbaasV2().lbPool().listMembers("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", map);
         assertEquals(list.size(), 2);
     }
 
     public void testGetMemberV2() throws IOException {
         respondWith(MEMBERV2_JSON);
         String id = "9a7aff27-fd41-4ec1-ba4c-3eb92c629313";
-        MemberV2 hm = osv3().networking().lbaasV2().lbPoolV2().getMember("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", id);
+        MemberV2 hm = osv3().networking().lbaasV2().lbPool().getMember("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", id);
         assertNotNull(hm);
         assertEquals(hm.getId(), id);
     }
@@ -61,7 +61,7 @@ public class MemberV2Tests extends AbstractTest {
                 .protocolPort(port)
                 .weight(weight)
                 .build();
-        MemberV2 result = osv3().networking().lbaasV2().lbPoolV2().createMember("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", create);
+        MemberV2 result = osv3().networking().lbaasV2().lbPool().createMember("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", create);
         assertEquals(result.getAddress(), address);
         assertEquals(result.getProtocolPort(), port);
         assertEquals(result.getWeight(), weight);
@@ -76,14 +76,14 @@ public class MemberV2Tests extends AbstractTest {
                 .weight(weight)
                 .adminStateUp(false)
                 .build();
-        MemberV2 result = osv3().networking().lbaasV2().lbPoolV2().updateMember("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", id, update);
+        MemberV2 result = osv3().networking().lbaasV2().lbPool().updateMember("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", id, update);
         assertEquals(result.getWeight(), weight);
         assertFalse(result.isAdminStateUp());
     }
 
     public void testDeleteMemberV2() {
         respondWith(204);
-        ActionResponse result = osv3().networking().lbaasV2().lbPoolV2().deleteMember("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", "9a7aff27-fd41-4ec1-ba4c-3eb92c629313");
+        ActionResponse result = osv3().networking().lbaasV2().lbPool().deleteMember("4c0a0a5f-cf8f-44b7-b912-957daa8ce5e5", "9a7aff27-fd41-4ec1-ba4c-3eb92c629313");
         assertTrue(result.isSuccess());
     }
 

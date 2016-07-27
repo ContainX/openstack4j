@@ -17,7 +17,7 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      * {@inheritDoc}
      */
     @Override
-    public ListenerV2Service listenerV2(){
+    public ListenerV2Service listener(){
         return Apis.get(ListenerV2Service.class);
     }
 
@@ -25,7 +25,7 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      * {@inheritDoc}
      */
     @Override
-    public LbPoolV2Service lbPoolV2(){
+    public LbPoolV2Service lbPool(){
         return Apis.get(LbPoolV2Service.class);
     }
 
@@ -33,7 +33,7 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      * {@inheritDoc}
      */
     @Override
-    public HealthMonitorV2Service healthMonitorV2(){
+    public HealthMonitorV2Service healthMonitor(){
         return Apis.get(HealthMonitorV2Service.class);
     }
 
@@ -41,7 +41,7 @@ public class LbaasV2ServiceImpl extends BaseNetworkingServices implements LbaasV
      * {@inheritDoc}
      */
     @Override
-    public LoadBalancerV2Service loadbalancerV2(){
+    public LoadBalancerV2Service loadbalancer(){
         return Apis.get(LoadBalancerV2Service.class);
     }
 }

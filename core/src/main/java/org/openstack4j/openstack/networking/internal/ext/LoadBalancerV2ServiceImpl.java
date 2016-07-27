@@ -59,7 +59,7 @@ public class LoadBalancerV2ServiceImpl extends BaseNetworkingServices implements
     @Override
     public LoadBalancerV2 create(LoadBalancerV2 loadbalancer){
         checkNotNull(loadbalancer);
-        return post(NeutronLoadBalancerV2.class,uri("lbaas/loadbalancers")).entity(loadbalancer).execute();
+        return post(NeutronLoadBalancerV2.class,uri("/lbaas/loadbalancers")).entity(loadbalancer).execute();
     }
 
     /**
@@ -69,7 +69,7 @@ public class LoadBalancerV2ServiceImpl extends BaseNetworkingServices implements
     public LoadBalancerV2 update(String loadbalancerId, LoadBalancerV2Update loadbalancer){
         checkNotNull(loadbalancerId);
         checkNotNull(loadbalancer);
-        return put(NeutronLoadBalancerV2.class, uri("lbaas/loadbalancers/%s",loadbalancerId)).entity(loadbalancer).execute();
+        return put(NeutronLoadBalancerV2.class, uri("/lbaas/loadbalancers/%s",loadbalancerId)).entity(loadbalancer).execute();
     }
 
     /**
@@ -78,7 +78,7 @@ public class LoadBalancerV2ServiceImpl extends BaseNetworkingServices implements
     @Override
     public ActionResponse delete(String loadbalancerId){
         checkNotNull(loadbalancerId);
-        return ToActionResponseFunction.INSTANCE.apply(delete(Void.class, uri("lbaas/loadbalancers/%s",loadbalancerId)).executeWithResponse());
+        return ToActionResponseFunction.INSTANCE.apply(delete(Void.class, uri("/lbaas/loadbalancers/%s",loadbalancerId)).executeWithResponse());
     }
 
     /**
@@ -87,7 +87,7 @@ public class LoadBalancerV2ServiceImpl extends BaseNetworkingServices implements
     @Override
     public LoadBalancerV2Stats stats(String loadbalancerId){
         checkNotNull(loadbalancerId);
-        return get(NeutronLoadBalancerV2Stats.class, uri("lbaas/loadbalancers/%s/stats",loadbalancerId)).execute();
+        return get(NeutronLoadBalancerV2Stats.class, uri("/lbaas/loadbalancers/%s/stats",loadbalancerId)).execute();
     }
 
     /**
@@ -96,6 +96,6 @@ public class LoadBalancerV2ServiceImpl extends BaseNetworkingServices implements
     @Override
     public LoadBalancerV2StatusTree statusTree(String loadbalancerId){
         checkNotNull(loadbalancerId);
-        return get(NeutronLoadBalancerV2StatusTree.class, uri("lbaas/loadbalancers/%s/statuses", loadbalancerId)).execute();
+        return get(NeutronLoadBalancerV2StatusTree.class, uri("/lbaas/loadbalancers/%s/statuses", loadbalancerId)).execute();
     }
 }

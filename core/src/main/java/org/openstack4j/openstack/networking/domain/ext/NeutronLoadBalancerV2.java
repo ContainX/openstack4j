@@ -40,7 +40,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     private String vipAddress;
 
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
+    private boolean adminStateUp = true;
 
     @JsonProperty("provisioning_status")
     private String provisioningStatus;
@@ -49,6 +49,8 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     private String operatingStatus;
 
     private List<ListItem> listeners;
+
+    private String provider;
 
     /**
      * {@inheritDoc}
@@ -135,24 +137,33 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      * {@inheritDoc}
      */
     @Override
+    public String getProvider(){
+        return provider;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public LoadBalancerV2Builder toBuilder(){
         return new LoadBalancerV2ConcreteBuilder(this);
     }
 
     @Override
     public String toString(){
-        return "NeutronLoadBalancerV2{" +
-                "id='" + id + '\'' +
-                ", tenantId='" + tenantId + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", vipSubnetId='" + vipSubnetId + '\'' +
-                ", vipAddress='" + vipAddress + '\'' +
-                ", adminStateUp=" + adminStateUp +
-                ", provisioningStatus='" + provisioningStatus + '\'' +
-                ", operatingStatus='" + operatingStatus + '\'' +
-                ", listeners=" + listeners +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("tenantId", tenantId)
+                .add("name", name)
+                .add("description", description)
+                .add("vipSubnetId", vipSubnetId)
+                .add("vipAddress", vipAddress)
+                .add("adminStateUp", adminStateUp)
+                .add("provisioningStatus", provisioningStatus)
+                .add("operatingStatus", operatingStatus)
+                .add("listeners", listeners)
+                .add("provider", provider)
+                .toString();
     }
 
     public static class LoadBalancersV2 extends ListResult<NeutronLoadBalancerV2> {
@@ -252,6 +263,12 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
         @Override
         public LoadBalancerV2Builder adminStateUp(boolean adminStateUp){
             m.adminStateUp = adminStateUp;
+            return this;
+        }
+
+        @Override
+        public LoadBalancerV2Builder provider(String provider){
+            m.provider = provider;
             return this;
         }
     }

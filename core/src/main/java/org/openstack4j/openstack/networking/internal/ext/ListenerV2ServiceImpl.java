@@ -30,7 +30,7 @@ public class ListenerV2ServiceImpl extends BaseNetworkingServices implements Lis
      */
     @Override
     public List<? extends ListenerV2> list(Map<String, String> filteringParams){
-        Invocation<NeutronListenerV2.Listeners> req = get(NeutronListenerV2.Listeners.class, uri("/lb/listeners"));
+        Invocation<NeutronListenerV2.Listeners> req = get(NeutronListenerV2.Listeners.class, uri("/lbaas/listeners"));
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
                 req = req.param(entry.getKey(), entry.getValue());
@@ -64,13 +64,13 @@ public class ListenerV2ServiceImpl extends BaseNetworkingServices implements Lis
     @Override
     public ListenerV2 create(ListenerV2 listener){
         checkNotNull(listener);
-        return post(NeutronListenerV2.class, uri("lbaas/listeners")).entity(listener).execute();
+        return post(NeutronListenerV2.class, uri("/lbaas/listeners")).entity(listener).execute();
     }
 
     @Override
     public ListenerV2 update(String listenerId, ListenerV2Update listener){
         checkNotNull(listenerId);
         checkNotNull(listener);
-        return put(NeutronListenerV2.class, uri("lbaas/listeners/%s",listenerId)).entity(listener).execute();
+        return put(NeutronListenerV2.class, uri("/lbaas/listeners/%s",listenerId)).entity(listener).execute();
     }
 }

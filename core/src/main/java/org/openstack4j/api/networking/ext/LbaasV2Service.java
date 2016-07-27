@@ -9,20 +9,20 @@ public interface LbaasV2Service {
     /**
      * @return the Lbaas loadbalancer Service API
      */
-    LoadBalancerV2Service loadbalancerV2();
+    LoadBalancerV2Service loadbalancer();
 
     /**
      * @return the Lbaas healthmonitor V2 Service API
      */
-    HealthMonitorV2Service healthMonitorV2();
+    HealthMonitorV2Service healthMonitor();
 
     /**
      * @return the Lbaas pool Service API
      */
-    LbPoolV2Service lbPoolV2();
+    LbPoolV2Service lbPool();
 
     /**
      * @return the Lbaas V2 listener Service API
      */
-    ListenerV2Service listenerV2();
+    ListenerV2Service listener();
 }

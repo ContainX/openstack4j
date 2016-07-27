@@ -36,7 +36,7 @@ public class NeutronMemberV2 implements MemberV2 {
     private String subnetId;
 
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
+    private boolean adminStateUp = true;
 
     /**
      * {@inheritDoc}
@@ -96,15 +96,15 @@ public class NeutronMemberV2 implements MemberV2 {
 
     @Override
     public String toString(){
-        return "NeutronMemberV2{" +
-                "id='" + id + '\'' +
-                ", tenantId='" + tenantId + '\'' +
-                ", address='" + address + '\'' +
-                ", protocolPort=" + protocolPort +
-                ", weight=" + weight +
-                ", adminStateUp=" + adminStateUp +
-                ", subnetId='" + subnetId + '\'' +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("tenantId", tenantId)
+                .add("address", address)
+                .add("protocolPort", protocolPort)
+                .add("adminStateUp", adminStateUp)
+                .add("weight",weight)
+                .add("subnetId",subnetId)
+                .toString();
     }
 
     public static class MembersV2 extends ListResult<NeutronMemberV2> {

@@ -24,7 +24,7 @@ public class NeutronMemberV2Update implements MemberV2Update {
     private Integer weight;
 
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
+    private boolean adminStateUp = true;
 
     @Override
     public boolean isAdminStateUp(){

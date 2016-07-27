@@ -35,7 +35,7 @@ public class LoadBalancerV2Tests extends AbstractTest {
 
     public void testListLoadBalancersV2() throws IOException {
         respondWith(LOADBALANCERSV2_JSON);
-        List<? extends LoadBalancerV2> list = osv3().networking().lbaasV2().loadbalancerV2().list();
+        List<? extends LoadBalancerV2> list = osv3().networking().lbaasV2().loadbalancer().list();
         assertEquals(list.size(), 3);
         assertEquals(list.get(0).getName(), "lb1");
     }
@@ -44,14 +44,14 @@ public class LoadBalancerV2Tests extends AbstractTest {
         respondWith(LOADBALANCERSV2_JSON);
         Map<String, String> map = new HashMap<>();
         map.put("provider", "octavia");
-        List<? extends LoadBalancerV2> list = osv3().networking().lbaasV2().loadbalancerV2().list(map);
+        List<? extends LoadBalancerV2> list = osv3().networking().lbaasV2().loadbalancer().list(map);
         assertEquals(list.size(), 3);
     }
 
     public void testGetLoadBalancerV2() throws IOException {
         respondWith(LOADBALANCERV2_JSON);
         String id = "282b71ea-9ceb-4cd6-8881-cb511af2edb5";
-        LoadBalancerV2 lb = osv3().networking().lbaasV2().loadbalancerV2().get(id);
+        LoadBalancerV2 lb = osv3().networking().lbaasV2().loadbalancer().get(id);
         assertNotNull(lb);
         assertEquals(lb.getId(), id);
     }
@@ -69,7 +69,7 @@ public class LoadBalancerV2Tests extends AbstractTest {
                 .address(address)
                 .subnetId(subnetId)
                 .build();
-        LoadBalancerV2 result = osv3().networking().lbaasV2().loadbalancerV2().create(create);
+        LoadBalancerV2 result = osv3().networking().lbaasV2().loadbalancer().create(create);
         assertEquals(result.getName(), name);
         assertEquals(result.getDescription(), description);
         assertEquals(result.getVIPAddress(), address);
@@ -86,7 +86,7 @@ public class LoadBalancerV2Tests extends AbstractTest {
                 .description(description)
                 .name(name)
                 .build();
-        LoadBalancerV2 result = osv3().networking().lbaasV2().loadbalancerV2().update("282b71ea-9ceb-4cd6-8881-cb511af2edb5", update);
+        LoadBalancerV2 result = osv3().networking().lbaasV2().loadbalancer().update("282b71ea-9ceb-4cd6-8881-cb511af2edb5", update);
         assertTrue(result.isAdminStateUp());
         assertEquals(result.getName(), name);
         assertEquals(result.getDescription(), description);
@@ -94,21 +94,21 @@ public class LoadBalancerV2Tests extends AbstractTest {
 
     public void testDeleteLoadbalancerV2() {
         respondWith(204);
-        ActionResponse result = osv3().networking().lbaasV2().loadbalancerV2().delete("282b71ea-9ceb-4cd6-8881-cb511af2edb5");
+        ActionResponse result = osv3().networking().lbaasV2().loadbalancer().delete("282b71ea-9ceb-4cd6-8881-cb511af2edb5");
         assertTrue(result.isSuccess());
     }
 
     public void testGetLoadBalancerV2Stats() throws IOException {
         respondWith(LOADBALANCERV2_STATS_JSON);
         String id = "d8b09924-d223-42a8-b7e7-410e60fd04c5";
-        LoadBalancerV2Stats stats = osv3().networking().lbaasV2().loadbalancerV2().stats(id);
+        LoadBalancerV2Stats stats = osv3().networking().lbaasV2().loadbalancer().stats(id);
         assertNotNull(stats);
     }
 
     public void testGetLoadBalancerV2Statuses() throws IOException {
         respondWith(LOADBALANCERV2_STATUSES_JSON);
         String id = "d8b09924-d223-42a8-b7e7-410e60fd04c5";
-        LoadBalancerV2StatusTree statuses = osv3().networking().lbaasV2().loadbalancerV2().statusTree(id);
+        LoadBalancerV2StatusTree statuses = osv3().networking().lbaasV2().loadbalancer().statusTree(id);
         assertNotNull(statuses);
         assertNotNull(statuses.getLoadBalancerV2Status());
         assertNotNull(statuses.getLoadBalancerV2Status().getListenerStatuses());

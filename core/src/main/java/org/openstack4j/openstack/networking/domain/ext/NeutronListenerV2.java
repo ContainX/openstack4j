@@ -56,7 +56,7 @@ public class NeutronListenerV2 implements ListenerV2 {
     private List<ListItem> loadbalancers;
 
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
+    private boolean adminStateUp = true;
 
 
     /**

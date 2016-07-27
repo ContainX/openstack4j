@@ -24,7 +24,7 @@ import static org.testng.Assert.assertFalse;
  * @author ashleykasim
  *
  */
-@Test(suiteName="Network/listenerV2", enabled = true)
+@Test(suiteName="Network/listener", enabled = true)
 public class ListenerV2Tests extends AbstractTest {
     private static final String LISTENERSV2_JSON = "/network/listenersv2.json";
     private static final String LISTENERV2_JSON = "/network/listenerv2.json";
@@ -32,7 +32,7 @@ public class ListenerV2Tests extends AbstractTest {
 
     public void testListListenersV2() throws IOException {
         respondWith(LISTENERSV2_JSON);
-        List<? extends ListenerV2> list = osv3().networking().lbaasV2().listenerV2().list();
+        List<? extends ListenerV2> list = osv3().networking().lbaasV2().listener().list();
         assertEquals(list.size(), 2);
         assertEquals(list.get(0).getName(), "listener1");
     }
@@ -41,14 +41,14 @@ public class ListenerV2Tests extends AbstractTest {
         respondWith(LISTENERSV2_JSON);
         Map<String, String> map = new HashMap<>();
         map.put("tenantId", "6f759d84e3ca496ab77f8c0ffaa0311e");
-        List<? extends ListenerV2> list = osv3().networking().lbaasV2().listenerV2().list(map);
+        List<? extends ListenerV2> list = osv3().networking().lbaasV2().listener().list(map);
         assertEquals(list.size(), 2);
     }
 
     public void testGetListenerV2() throws IOException {
         respondWith(LISTENERV2_JSON);
         String id = "c07058a9-8d84-4443-b8f5-508d0facfe10";
-        ListenerV2 listener = osv3().networking().lbaasV2().listenerV2().get(id);
+        ListenerV2 listener = osv3().networking().lbaasV2().listener().get(id);
         assertNotNull(listener);
         assertEquals(listener.getId(), id);
     }
@@ -64,7 +64,7 @@ public class ListenerV2Tests extends AbstractTest {
                 .description(description)
                 .protocol(protocol)
                 .build();
-        ListenerV2 result = osv3().networking().lbaasV2().listenerV2().create(create);
+        ListenerV2 result = osv3().networking().lbaasV2().listener().create(create);
         assertEquals(result.getName(), name);
         assertEquals(result.getDescription(), description);
         assertEquals(result.getProtocol(), protocol);
@@ -82,7 +82,7 @@ public class ListenerV2Tests extends AbstractTest {
                 .name(name)
                 .connectionLimit(connectionLimit)
                 .build();
-        ListenerV2 result = osv3().networking().lbaasV2().listenerV2().update("c07058a9-8d84-4443-b8f5-508d0facfe10", update);
+        ListenerV2 result = osv3().networking().lbaasV2().listener().update("c07058a9-8d84-4443-b8f5-508d0facfe10", update);
         assertFalse(result.isAdminStateUp());
         assertEquals(result.getName(), name);
         assertEquals(result.getDescription(), description);
@@ -91,7 +91,7 @@ public class ListenerV2Tests extends AbstractTest {
 
     public void testDeleteListenerV2() {
         respondWith(204);
-        ActionResponse result = osv3().networking().lbaasV2().listenerV2().delete("c07058a9-8d84-4443-b8f5-508d0facfe10");
+        ActionResponse result = osv3().networking().lbaasV2().listener().delete("c07058a9-8d84-4443-b8f5-508d0facfe10");
         assertTrue(result.isSuccess());
     }
 

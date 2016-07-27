@@ -15,7 +15,6 @@ import java.util.Map;
 public interface ListenerV2Service extends RestService {
     /**
      * List all listeners that the current tenant has access to
-     *
      * @return list of all listeners
      */
     List<? extends ListenerV2> list();
@@ -23,8 +22,7 @@ public interface ListenerV2Service extends RestService {
     /**
      * Returns list of listeners filtered by parameters.
      *
-     * @param filteringParams
-     *            map (name, value) of filtering parameters
+     * @param filteringParams map (name, value) of filtering parameters
      * @return List
      */
     List<? extends ListenerV2> list(Map<String, String> filteringParams);
@@ -33,7 +31,6 @@ public interface ListenerV2Service extends RestService {
      * Get the specified listener by ID
      *
      * @param listenerId
-     *            the listener identifier
      * @return the listener or null if not found
      */
     ListenerV2 get(String listenerId);
@@ -42,7 +39,6 @@ public interface ListenerV2Service extends RestService {
      * Delete the specified listener by ID
      *
      * @param listenerId
-     *            the listener identifier
      * @return the action response
      */
     ActionResponse delete(String listenerId);
@@ -51,7 +47,6 @@ public interface ListenerV2Service extends RestService {
      * Create a listener
      *
      * @param listener
-     *            ListenerV2
      * @return ListenerV2
      */
     ListenerV2 create(ListenerV2 listener);
@@ -60,9 +55,7 @@ public interface ListenerV2Service extends RestService {
      * Update a listener
      *
      * @param listenerId
-     *            the listener identifier
      * @param listener
-     *            ListenerV2Update
      * @return ListenerV2
      */
     ListenerV2 update(String listenerId, ListenerV2Update listener);

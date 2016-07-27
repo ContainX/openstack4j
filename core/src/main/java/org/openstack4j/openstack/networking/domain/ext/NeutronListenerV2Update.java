@@ -22,7 +22,7 @@ public class NeutronListenerV2Update implements ListenerV2Update {
     private String description;
 
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
+    private boolean adminStateUp = true;
 
     /**
      * The maximum number of connections allowed for the listener. Default is -1, meaning no limit.

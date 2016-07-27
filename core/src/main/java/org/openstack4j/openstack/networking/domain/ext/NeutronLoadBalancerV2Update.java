@@ -20,7 +20,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
     private String description;
 
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
+    private boolean adminStateUp = true;
 
     /**
      * {@inheritDoc}

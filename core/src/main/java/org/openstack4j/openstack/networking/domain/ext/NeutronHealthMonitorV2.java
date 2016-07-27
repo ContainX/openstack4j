@@ -55,7 +55,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
      * The administrative state of the health monitor, which is up (true) or down (false)
      */
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp ;
+    private boolean adminStateUp = true;
 
     private List<ListItem> pools;
 
@@ -135,19 +135,20 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
 
     @Override
     public String toString(){
-        return "NeutronHealthMonitorV2{" +
-                "id='" + id + '\'' +
-                ", tenantId='" + tenantId + '\'' +
-                ", type=" + type +
-                ", delay=" + delay +
-                ", timeout=" + timeout +
-                ", maxRetries=" + maxRetries +
-                ", httpMethod='" + httpMethod + '\'' +
-                ", urlPath='" + urlPath + '\'' +
-                ", expectedCodes='" + expectedCodes + '\'' +
-                ", adminStateUp=" + adminStateUp +
-                ", pools=" + pools +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("tenantId", tenantId)
+                .add("type", type)
+                .add("delay", delay)
+                .add("timeout", timeout)
+                .add("maxRetries", maxRetries)
+                .add("httpMethod", httpMethod)
+                .add("urlPath", urlPath)
+                .add("expectedCodes", expectedCodes)
+                .add("adminStateUp", adminStateUp)
+                .add("pools", pools)
+                .add("poolId", poolId)
+                .toString();
     }
 
     public static class HealthMonitorsV2 extends ListResult<NeutronHealthMonitorV2> {
@@ -254,7 +255,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
 
         /**
          *
-         * {@inheritDoc}2
+         * {@inheritDoc}
          */
         @Override
         public HealthMonitorV2Builder httpMethod(String httpMethod) {

@@ -59,4 +59,12 @@ public interface LoadBalancerV2Builder extends Buildable.Builder<LoadBalancerV2B
      * @return LoadBalancerV2Builder
      */
     LoadBalancerV2Builder adminStateUp(boolean adminStateUp);
+
+    /**
+     * Optional
+     *
+     * @param provider
+     *             Set the provider the load balancer will be provisioned with
+     */
+    LoadBalancerV2Builder provider(String provider);
 }

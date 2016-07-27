@@ -23,7 +23,7 @@ public class NeutronLbPoolV2Update implements LbPoolV2Update {
     private String description;
 
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
+    private boolean adminStateUp = true;
 
     @JsonProperty("lb_algorithm")
     private LbMethod lbMethod;

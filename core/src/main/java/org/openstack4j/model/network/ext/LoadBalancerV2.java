@@ -66,4 +66,10 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
      *         loadbalancer is operational.
      */
     String getOperatingStatus();
+
+    /**
+     * Retrieve provider the load balancer is provisioned with
+     * @return provider
+     */
+    String getProvider();
 }

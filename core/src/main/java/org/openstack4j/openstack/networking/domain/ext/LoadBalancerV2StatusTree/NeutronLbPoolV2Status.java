@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext.LoadBalancerV2StatusTree
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.status.HealthMonitorV2Status;
 import org.openstack4j.model.network.ext.status.LbPoolV2Status;
 import org.openstack4j.model.network.ext.status.MemberV2Status;
@@ -42,13 +43,13 @@ public class NeutronLbPoolV2Status extends Status implements LbPoolV2Status {
 
     @Override
     public String toString(){
-        return "poolStatus{" +
-                "id='" + id + '\'' +
-                "name='" + name + '\'' +
-                ", operatingStatus='" + operatingStatus + '\'' +
-                ", provisioningStatus='" + provisioningStatus + '\'' +
-                ", memberStatuses='" + memberStatuses + '\'' +
-                ", healthMonitorStatus='" + healthMonitorStatus + '\'' +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("memberStatuses", memberStatuses)
+                .add("healthMonitorStatus", healthMonitorStatus)
+                .add("operatingStatus", operatingStatus)
+                .add("provisioningStatus", provisioningStatus)
+                .toString();
     }
 }

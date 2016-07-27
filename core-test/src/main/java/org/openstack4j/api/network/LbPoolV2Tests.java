@@ -32,7 +32,7 @@ public class LbPoolV2Tests extends AbstractTest {
 
     public void testListPoolV2() throws IOException {
         respondWith(LBPOOLSV2_JSON);
-        List<? extends LbPoolV2> list = osv3().networking().lbaasV2().lbPoolV2().list();
+        List<? extends LbPoolV2> list = osv3().networking().lbaasV2().lbPool().list();
         assertEquals(list.size(), 2);
         assertEquals(list.get(0).getId(), "b7f6a49f-ebd8-43c5-b792-5748366eff21");
     }
@@ -41,14 +41,14 @@ public class LbPoolV2Tests extends AbstractTest {
         respondWith(LBPOOLSV2_JSON);
         Map<String, String> map = new HashMap<String, String>();
         map.put("protocol", "HTTP");
-        List<? extends LbPoolV2> list = osv3().networking().lbaasV2().lbPoolV2().list(map);
+        List<? extends LbPoolV2> list = osv3().networking().lbaasV2().lbPool().list(map);
         assertEquals(list.size(), 2);
     }
 
     public void testGetPoolV2() throws IOException {
         respondWith(LBPOOLV2_JSON);
         String id = "b7f6a49f-ebd8-43c5-b792-5748366eff21";
-        LbPoolV2 pool = osv3().networking().lbaasV2().lbPoolV2().get(id);
+        LbPoolV2 pool = osv3().networking().lbaasV2().lbPool().get(id);
         assertNotNull(pool);
         assertEquals(pool.getId(), id);
     }
@@ -65,7 +65,7 @@ public class LbPoolV2Tests extends AbstractTest {
                 .tenantId("6f759d84e3ca496ab77f8c0ffaa0311e")
                 .protocol(protocol)
                 .build();
-        LbPoolV2 result = osv3().networking().lbaasV2().lbPoolV2().create(create);
+        LbPoolV2 result = osv3().networking().lbaasV2().lbPool().create(create);
         assertEquals(result.getName(), name);
         assertEquals(result.getLbMethod(), LbMethod.LEAST_CONNECTIONS);
         assertEquals(result.getProtocol(), protocol);
@@ -81,7 +81,7 @@ public class LbPoolV2Tests extends AbstractTest {
                 .lbMethod(LbMethod.ROUND_ROBIN)
                 .name(name)
                 .build();
-        LbPoolV2 result = osv3().networking().lbaasV2().lbPoolV2().update(poolId, update);
+        LbPoolV2 result = osv3().networking().lbaasV2().lbPool().update(poolId, update);
         assertEquals(result.getName(), name);
         assertEquals(result.getLbMethod(), LbMethod.ROUND_ROBIN);
         assertFalse(result.isAdminStateUp());
@@ -89,7 +89,7 @@ public class LbPoolV2Tests extends AbstractTest {
 
     public void testDeletePoolV2() {
         respondWith(204);
-        ActionResponse result = osv3().networking().lbaasV2().lbPoolV2().delete("b7f6a49f-ebd8-43c5-b792-5748366eff21");
+        ActionResponse result = osv3().networking().lbaasV2().lbPool().delete("b7f6a49f-ebd8-43c5-b792-5748366eff21");
         assertTrue(result.isSuccess());
     }
 

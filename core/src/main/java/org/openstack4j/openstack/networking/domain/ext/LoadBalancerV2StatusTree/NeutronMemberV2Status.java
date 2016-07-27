@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext.LoadBalancerV2StatusTree
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.status.MemberV2Status;
 
 /**
@@ -29,12 +30,12 @@ public class NeutronMemberV2Status extends Status implements MemberV2Status {
 
     @Override
     public String toString(){
-        return "memberStatus{" +
-                "id='" + id + '\'' +
-                ", protocolPort='" + protocolPort + '\'' +
-                ", address='" + address + '\'' +
-                ", operatingStatus='" + operatingStatus + '\'' +
-                ", provisioningStatus='" + provisioningStatus + '\'' +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("protocolPort", protocolPort)
+                .add("address", address)
+                .add("operatingStatus", operatingStatus)
+                .add("provisioningStatus", provisioningStatus)
+                .toString();
     }
 }

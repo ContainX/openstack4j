@@ -2,6 +2,7 @@ package org.openstack4j.openstack.networking.domain.ext;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.LoadBalancerV2Stats;
 
 /**
@@ -54,5 +55,15 @@ public class NeutronLoadBalancerV2Stats implements LoadBalancerV2Stats {
     @Override
     public Integer getActiveConnections() {
         return activeConnections;
+    }
+
+    @Override
+    public String toString(){
+        return Objects.toStringHelper(this)
+                .add("bytesIn", bytesIn)
+                .add("bytesOut", bytesOut)
+                .add("totalConnections", totalConnections)
+                .add("activeConnections", activeConnections)
+                .toString();
     }
 }

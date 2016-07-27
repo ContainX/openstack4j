@@ -38,7 +38,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
     private SessionPersistence sessionPersistence;
 
     @JsonProperty("admin_state_up")
-    private boolean adminStateUp;
+    private boolean adminStateUp = true;
 
     @JsonProperty("listener_id")
     private String listenerId;
@@ -149,21 +149,21 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
 
     @Override
     public String toString(){
-        return "NeutronLbPoolV2{" +
-                "id='" + id + '\'' +
-                ", tenantId='" + tenantId + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", protocol=" + protocol +
-                ", lbMethod=" + lbMethod +
-                ", sessionPersistence=" + sessionPersistence +
-                ", adminStateUp=" + adminStateUp +
-                ", listeners=" + listeners +
-                ", members=" + members +
-                ", healthMonitorId='" + healthMonitorId + '\'' +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("tenantId", tenantId)
+                .add("name", name)
+                .add("description", description)
+                .add("protocol", protocol)
+                .add("lbMethod", lbMethod)
+                .add("sessionPersistence", sessionPersistence)
+                .add("adminStateUp", adminStateUp)
+                .add("listenerId", listenerId)
+                .add("listeners", listeners)
+                .add("members", members)
+                .add("healthMonitorId", healthMonitorId)
+                .toString();
     }
-
 
     public static class LbPoolV2ConcreteBuilder implements LbPoolV2Builder{
 

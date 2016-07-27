@@ -4,6 +4,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 
+/**
+ * Lbaas V2 lists of objects take the form
+ *      "id":"the_id"
+ * This class is used to hold these list items in the proper format
+ * @author emjburns
+ */
 @JsonAutoDetect
 public class ListItem {
     @JsonProperty("id")

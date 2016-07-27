@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext.LoadBalancerV2StatusTree
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.LoadBalancerV2StatusTree;
 import org.openstack4j.model.network.ext.status.LoadBalancerV2Status;
 
@@ -24,8 +25,8 @@ public class NeutronLoadBalancerV2StatusTree implements LoadBalancerV2StatusTree
 
     @Override
     public String toString(){
-        return "NeutronLoadBalancerV2StatusTree{" +
-                "loadBalancerStatus=" + loadBalancerStatus +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("loadbalancer", loadBalancerStatus)
+                .toString();
     }
 }

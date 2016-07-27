@@ -26,7 +26,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
      */
     @Override
     public List<? extends LbPoolV2> list(){
-        return get(NeutronLbPoolV2.LbPoolsV2.class, uri("lbaas/pools")).execute().getList();
+        return get(NeutronLbPoolV2.LbPoolsV2.class, uri("/lbaas/pools")).execute().getList();
     }
 
     /**
@@ -34,7 +34,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
      */
     @Override
     public List<? extends LbPoolV2> list(Map<String, String> filteringParams){
-        Invocation<NeutronLbPoolV2.LbPoolsV2> req = get(NeutronLbPoolV2.LbPoolsV2.class, uri("lbaas/pools"));
+        Invocation<NeutronLbPoolV2.LbPoolsV2> req = get(NeutronLbPoolV2.LbPoolsV2.class, uri("/lbaas/pools"));
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
                 req = req.param(entry.getKey(), entry.getValue());
@@ -49,7 +49,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
     @Override
     public LbPoolV2 get(String lbPoolId){
         checkNotNull(lbPoolId);
-        return get(NeutronLbPoolV2.class, uri("lbaas/pools/%s",lbPoolId)).execute();
+        return get(NeutronLbPoolV2.class, uri("/lbaas/pools/%s",lbPoolId)).execute();
     }
 
     /**
@@ -58,7 +58,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
     @Override
     public LbPoolV2 create(LbPoolV2 lbPool){
         checkNotNull(lbPool);
-        return post(NeutronLbPoolV2.class, uri("lbaas/pools")).entity(lbPool).execute();
+        return post(NeutronLbPoolV2.class, uri("/lbaas/pools")).entity(lbPool).execute();
     }
 
     /**
@@ -68,7 +68,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
     public LbPoolV2 update(String lbPoolId, LbPoolV2Update lbPool){
         checkNotNull(lbPoolId);
         checkNotNull(lbPool);
-        return put(NeutronLbPoolV2.class, uri("lbaas/pools/%s",lbPoolId)).entity(lbPool).execute();
+        return put(NeutronLbPoolV2.class, uri("/lbaas/pools/%s",lbPoolId)).entity(lbPool).execute();
     }
 
     /**
@@ -77,7 +77,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
     @Override
     public ActionResponse delete(String lbPoolId){
         checkNotNull(lbPoolId);
-        return ToActionResponseFunction.INSTANCE.apply(delete(void.class, uri("lbaas/pools/%s",lbPoolId)).executeWithResponse());
+        return ToActionResponseFunction.INSTANCE.apply(delete(void.class, uri("/lbaas/pools/%s",lbPoolId)).executeWithResponse());
     }
 
     /**
@@ -85,7 +85,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
      */
     @Override
     public List<? extends MemberV2> listMembers(String lbPoolId){
-        return get(NeutronMemberV2.MembersV2.class, uri("lbaas/pools/%s/members",lbPoolId)).execute().getList();
+        return get(NeutronMemberV2.MembersV2.class, uri("/lbaas/pools/%s/members",lbPoolId)).execute().getList();
     }
 
     /**
@@ -93,7 +93,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
      */
     @Override
     public List<? extends MemberV2> listMembers(String lbPoolId, Map<String, String> filteringParams){
-        Invocation<NeutronMemberV2.MembersV2> req = get(NeutronMemberV2.MembersV2.class, uri("lbaas/pools/%s/members", lbPoolId));
+        Invocation<NeutronMemberV2.MembersV2> req = get(NeutronMemberV2.MembersV2.class, uri("/lbaas/pools/%s/members", lbPoolId));
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
                 req = req.param(entry.getKey(), entry.getValue());
@@ -109,7 +109,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
     public MemberV2 getMember(String lbPoolId, String memberId){
         checkNotNull(lbPoolId);
         checkNotNull(memberId);
-        return get(NeutronMemberV2.class, uri("lbaas/pools/%s/members/%s",lbPoolId,memberId)).execute();
+        return get(NeutronMemberV2.class, uri("/lbaas/pools/%s/members/%s",lbPoolId,memberId)).execute();
     }
 
     /**
@@ -119,7 +119,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
     public MemberV2 createMember(String lbPoolId, MemberV2 member){
         checkNotNull(lbPoolId);
         checkNotNull(member);
-        return post(NeutronMemberV2.class, uri("lbaas/pools/%s/members",lbPoolId)).entity(member).execute();
+        return post(NeutronMemberV2.class, uri("/lbaas/pools/%s/members",lbPoolId)).entity(member).execute();
     }
 
     /**
@@ -130,7 +130,7 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
         checkNotNull(lbPoolId);
         checkNotNull(memberId);
         checkNotNull(member);
-        return put(NeutronMemberV2.class, uri("lbaas/pools/%s/members/%s",lbPoolId,memberId)).entity(member).execute();
+        return put(NeutronMemberV2.class, uri("/lbaas/pools/%s/members/%s",lbPoolId,memberId)).entity(member).execute();
     }
 
     /**
@@ -140,6 +140,6 @@ public class LbPoolV2ServiceImpl extends BaseNetworkingServices implements LbPoo
     public ActionResponse deleteMember(String lbPoolId, String memberId){
         checkNotNull(lbPoolId);
         checkNotNull(memberId);
-        return ToActionResponseFunction.INSTANCE.apply(delete(void.class, uri("lbaas/pools/%s/members/%s", lbPoolId, memberId)).executeWithResponse());
+        return ToActionResponseFunction.INSTANCE.apply(delete(void.class, uri("/lbaas/pools/%s/members/%s", lbPoolId, memberId)).executeWithResponse());
     }
 }
