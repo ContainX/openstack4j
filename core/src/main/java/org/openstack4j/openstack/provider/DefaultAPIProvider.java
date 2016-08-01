@@ -135,6 +135,7 @@ public class DefaultAPIProvider implements APIProvider {
 				org.openstack4j.openstack.manila.internal.QuotaSetServiceImpl.class);
 
 		bind(BlockQuotaSetService.class, BlockQuotaSetServiceImpl.class);
+		bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
 		bind(FirewallAsService.class, FirewallAsServiceImpl.class);
 		bind(FirewallService.class, FirewallServiceImpl.class);
 		bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);

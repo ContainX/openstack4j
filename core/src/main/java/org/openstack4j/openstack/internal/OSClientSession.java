@@ -290,7 +290,7 @@ public class OSClientSession implements OSClient, EndpointTokenProvider {
      */
     @Override
     public BlockStorageService blockStorage() {
-        return Apis.get(BlockStorageService.class);
+        return Apis.getBlockStorageServices();
     }
 
     /**
