@@ -10,6 +10,7 @@ import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.api.networking.ext.FirewallAsService;
+import org.openstack4j.api.networking.ext.LbaasV2Service;
 import org.openstack4j.api.networking.ext.LoadBalancerService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 
@@ -91,7 +92,15 @@ public class NetworkingServiceImpl implements NetworkingService {
     public LoadBalancerService loadbalancers() {
         return Apis.get(LoadBalancerService.class);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LbaasV2Service lbaasV2(){
+        return Apis.get(LbaasV2Service.class);
+    }
+
     /**
      * {@inheritDoc}
      */

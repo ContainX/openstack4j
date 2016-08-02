@@ -1,0 +1,18 @@
+{
+  "loadbalancer": {
+    "description": "im no longer a baby lb",
+    "admin_state_up": true,
+    "tenant_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
+    "provisioning_status": "ACTIVE",
+    "listeners": [
+
+    ],
+    "vip_address": "10.0.0.13",
+    "vip_port_id": "82fbaa1c-a8af-47d3-94fe-a0ac1a33257b",
+    "provider": "octavia",
+    "vip_subnet_id": "388c5684-86b0-49ab-90ef-944b1f7328f8",
+    "id": "282b71ea-9ceb-4cd6-8881-cb511af2edb5",
+    "operating_status": "ONLINE",
+    "name": "lb_updated"
+  }
+}

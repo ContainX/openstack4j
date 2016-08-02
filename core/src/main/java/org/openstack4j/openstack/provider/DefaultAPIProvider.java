@@ -1,7 +1,6 @@
 package org.openstack4j.openstack.provider;
 
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import org.openstack4j.api.APIProvider;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
@@ -77,8 +76,13 @@ import org.openstack4j.api.networking.ext.FirewallPolicyService;
 import org.openstack4j.api.networking.ext.FirewallRuleService;
 import org.openstack4j.api.networking.ext.FirewallService;
 import org.openstack4j.api.networking.ext.HealthMonitorService;
+import org.openstack4j.api.networking.ext.HealthMonitorV2Service;
 import org.openstack4j.api.networking.ext.LbPoolService;
+import org.openstack4j.api.networking.ext.LbPoolV2Service;
+import org.openstack4j.api.networking.ext.LbaasV2Service;
+import org.openstack4j.api.networking.ext.ListenerV2Service;
 import org.openstack4j.api.networking.ext.LoadBalancerService;
+import org.openstack4j.api.networking.ext.LoadBalancerV2Service;
 import org.openstack4j.api.networking.ext.MemberService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 import org.openstack4j.api.networking.ext.VipService;
@@ -197,8 +201,13 @@ import org.openstack4j.openstack.networking.internal.ext.FirewallPolicyServiceIm
 import org.openstack4j.openstack.networking.internal.ext.FirewallRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.HealthMonitorServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.HealthMonitorV2ServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LbPoolServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.LbPoolV2ServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.LbaasV2ServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.ListenerV2ServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.LoadBalancerServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.LoadBalancerV2ServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.VipServiceImpl;
@@ -245,7 +254,7 @@ import org.openstack4j.openstack.telemetry.internal.ResourceServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.SampleServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons
@@ -389,8 +398,12 @@ public class DefaultAPIProvider implements APIProvider {
         bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
         bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
         bind(NetworkPolicyService.class, NetworkPolicyServiceImpl.class);
-
-    }
+        bind(LbaasV2Service.class, LbaasV2ServiceImpl.class);
+        bind(LoadBalancerV2Service.class, LoadBalancerV2ServiceImpl.class);
+        bind(ListenerV2Service.class, ListenerV2ServiceImpl.class);
+        bind(HealthMonitorV2Service.class, HealthMonitorV2ServiceImpl.class);
+        bind(LbPoolV2Service.class, LbPoolV2ServiceImpl.class);
+    }   
 
     /**
      * {@inheritDoc}

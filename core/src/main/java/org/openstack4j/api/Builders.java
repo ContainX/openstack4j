@@ -878,4 +878,85 @@ public class Builders {
      */
     public static SharedFileSystemBuilders manila() {return new ManilaBuilders(); }
 
+    /**
+     * LbaasV2 pool builder
+     * @return the lb pool v2 builder
+     */
+    public static LbPoolV2Builder lbpoolV2() {
+        return NeutronLbPoolV2.builder();
+    }
+
+    /**
+     * LbaasV2 pool update builder
+     * @return the lb pool v2 update builder
+     */
+    public static LbPoolV2UpdateBuilder lbPoolV2Update() {
+        return NeutronLbPoolV2Update.builder();
+    }
+
+    /**
+     * LbaasV2 member builder
+     * @return the member v2 builder
+     */
+    public static MemberV2Builder memberV2() {
+        return NeutronMemberV2.builder();
+    }
+
+    /**
+     * LbaasV2 member update builder
+     * @return the member v2 update builder
+     */
+    public static MemberV2UpdateBuilder memberV2Update() {
+        return NeutronMemberV2Update.builder();
+    }
+
+    /**
+     * LbaasV2 listener builder
+     * @return the listener builder
+     */
+    public static ListenerV2Builder listenerV2() {
+        return NeutronListenerV2.builder();
+    }
+
+
+    /**
+     * LbaasV2 listener update builder
+     * @return the listener v2 update builder
+     */
+    public static ListenerV2UpdateBuilder listenerV2Update() {
+        return NeutronListenerV2Update.builder();
+    }
+
+    /**
+     * LbaasV2 health monitor builder
+     * @return the health monitor v2 builder
+     */
+    public static HealthMonitorV2Builder healthmonitorV2() {
+        return NeutronHealthMonitorV2.builder();
+    }
+
+
+    /**
+     * LbaasV2 healthmonitor update builder
+     * @return the health monitor v2 update builder
+     */
+    public static HealthMonitorV2UpdateBuilder healthMonitorV2Update() {
+        return NeutronHealthMonitorV2Update.builder();
+    }
+    /**
+     * LbaasV2 loadbalancer builder
+     * @return the loadbalancer v2 builder
+     */
+    public static LoadBalancerV2Builder loadbalancerV2() {
+        return NeutronLoadBalancerV2.builder();
+    }
+
+
+    /**
+     * LbaasV2 loadbalancer update builder
+     * @return the loadbalancer v2 update builder
+     */
+    public static LoadBalancerV2UpdateBuilder loadBalancerV2Update() {
+        return NeutronLoadBalancerV2Update.builder();
+    }
 }

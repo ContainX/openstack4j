@@ -184,4 +184,72 @@ public interface NetworkBuilders {
      */
     public HealthMonitorAssociateBuilder lbPoolAssociateHealthMonitor();
 
+    /**
+     * The builder to create a lb v2 member
+     *
+     * @return the Member Builder v2
+     */
+    public MemberV2Builder memberV2();
+
+    /**
+     * The builder to update a lbaas v2 member
+     *
+     * @return MemberV2UpdateBuilder
+     */
+    public MemberV2UpdateBuilder memberV2Update();
+
+    /**
+     * The builder to create a v2 loadbalancer.
+     *
+     * @return LoadBalancerV2Builder the loadbalancer v2 builder
+     */
+    public LoadBalancerV2Builder lbV2();
+
+    /**
+     * The builder to update a lbaas v2 loadbalancer
+     *
+     * @return LoadBalancerV2UpdateBuilder
+     */
+    public LoadBalancerV2UpdateBuilder loadBalancerV2Update();
+
+    /**
+     * The builder to create a v2 lbPool
+     *
+     * @return LbPoolV2Builder
+     */
+    public LbPoolV2Builder lbPoolV2();
+
+    /**
+     * The builder to update a lbaas v2 lbPool
+     *
+     * @return LbPoolV2UpdateBuilder
+     */
+    public LbPoolV2UpdateBuilder lbPoolV2Update();
+
+    /**
+     * The builder to createa v2 lbaas listener
+     * @return ListenerV2Builder
+     */
+    public ListenerV2Builder listenerV2();
+
+    /**
+     * The builder to update a lbaas v2 lbaas listener
+     *
+     * @return ListenerV2UpdateBuilder
+     */
+    public ListenerV2UpdateBuilder listenerV2Update();
+
+    /**
+     * The builder to create a v2 healthMonitor
+     *
+     * @return HealthMonitorV2Builder
+     */
+    public HealthMonitorV2Builder healthMonitorV2();
+
+    /**
+     * The builder to update a lbaas v2 health monitor
+     *
+     * @return HealthMonitorV2UpdateBuilder
+     */
+    public HealthMonitorV2UpdateBuilder healthMonitorV2Update();
 }
