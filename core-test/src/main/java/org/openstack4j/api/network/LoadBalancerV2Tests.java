@@ -72,8 +72,8 @@ public class LoadBalancerV2Tests extends AbstractTest {
         LoadBalancerV2 result = osv3().networking().lbaasV2().loadbalancer().create(create);
         assertEquals(result.getName(), name);
         assertEquals(result.getDescription(), description);
-        assertEquals(result.getVIPAddress(), address);
-        assertEquals(result.getVIPSubnetId(), subnetId);
+        assertEquals(result.getVipAddress(), address);
+        assertEquals(result.getVipSubnetId(), subnetId);
         assertFalse(result.isAdminStateUp());
     }
 

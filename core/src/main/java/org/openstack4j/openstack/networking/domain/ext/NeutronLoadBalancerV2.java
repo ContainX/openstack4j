@@ -89,7 +89,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      */
     @JsonProperty("vip_subnet_id")
     @Override
-    public String getVIPSubnetId(){
+    public String getVipSubnetId(){
         return vipSubnetId;
     }
 
@@ -97,7 +97,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getVIPAddress(){
+    public String getVipAddress(){
         return vipAddress;
     }
 
