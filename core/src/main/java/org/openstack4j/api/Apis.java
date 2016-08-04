@@ -7,6 +7,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.storage.BlockStorageService;
 
 import java.util.ServiceLoader;
 
@@ -46,6 +47,10 @@ public class Apis {
 	 */
 	public static ComputeService getComputeServices() {
 		return get(ComputeService.class);
+	}
+
+	public static BlockStorageService getBlockStorageServices() {
+		return get(BlockStorageService.class);
 	}
 	
 	/**
