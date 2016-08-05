@@ -44,7 +44,7 @@ public interface VolumeBackendPool extends ModelEntity {
         /**
          * @return the provisioned capacity in GB
          */
-        Float getProvisionedcapacitygb();
+        Integer getProvisionedcapacitygb();
 
         /**
          * @return the timestamp of creation
@@ -105,12 +105,12 @@ public interface VolumeBackendPool extends ModelEntity {
         /**
          * @return the total capacity for the back end, in GBs, or 'unkown'
          */
-        Float getTotalCapacityGb();
+        Integer getTotalCapacityGb();
 
         /**
          * @return the amount of free capacity for the back end, in GBs, or 'unknown'
          */
-        Float getFreeCapacityGb();
+        Integer getFreeCapacityGb();
 
         /**
          * @return the percentage of the total capacity that is reserved for the internal use by the back end
