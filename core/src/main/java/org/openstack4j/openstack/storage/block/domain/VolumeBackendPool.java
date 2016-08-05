@@ -74,7 +74,7 @@ public interface VolumeBackendPool extends ModelEntity {
         /**
          * @return the ratio of Max over subscription
          */
-        Float getMaxoversubscription_ratio();
+        Integer getMaxoversubscription_ratio();
 
         /**
          * @return the vendor name

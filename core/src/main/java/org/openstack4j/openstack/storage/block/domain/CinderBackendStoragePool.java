@@ -37,7 +37,7 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         @JsonProperty("multiattach")
         private Boolean multiattach;
         @JsonProperty("provisioned_capacity_gb")
-        private Float provisionedcapacitygb;
+        private Integer provisionedcapacitygb;
         @JsonProperty("timestamp")
         private String timestamp;
         @JsonProperty("allocated_capacity_gb")
@@ -47,13 +47,13 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         @JsonProperty("thin_provisioning_support")
         private Boolean thinprovisioningsupport;
         @JsonProperty("free_capacity_gb")
-        private Float freeCapacityGb;
+        private Integer freeCapacityGb;
         @JsonProperty("driver_version")
         private String driverVersion;
         @JsonProperty("location_info")
         private String locationinfo;
         @JsonProperty("total_capacity_gb")
-        private Float totalCapacityGb;
+        private Integer totalCapacityGb;
         @JsonProperty("thick_provisioning_support")
         private Boolean thickprovisioningsupport;
         @JsonProperty("reserved_percentage")
@@ -61,7 +61,7 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         @JsonProperty("QoS_support")
         private Boolean qosSupport;
         @JsonProperty("max_over_subscription_ratio")
-        private Float maxoversubscription_ratio;
+        private Integer maxoversubscription_ratio;
         @JsonProperty("vendor_name")
         private String vendorname;
         private String pools;
@@ -84,7 +84,7 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         @Override
         public Boolean getMultiattach() { return multiattach; }
         @Override
-        public Float getProvisionedcapacitygb() { return provisionedcapacitygb; }
+        public Integer getProvisionedcapacitygb() { return provisionedcapacitygb; }
         @Override
         public String getTimestamp() { return timestamp; }
         @Override
@@ -97,7 +97,7 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         @Override
         public Boolean getThickprovisioningsupport() { return thickprovisioningsupport; }
         @Override
-        public Float getMaxoversubscription_ratio() { return maxoversubscription_ratio; }
+        public Integer getMaxoversubscription_ratio() { return maxoversubscription_ratio; }
         @Override
         public String getvendorname() { return vendorname; }
         @Override
@@ -118,12 +118,12 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         }
 
         @Override
-        public Float getTotalCapacityGb() {
+        public Integer getTotalCapacityGb() {
             return totalCapacityGb;
         }
 
         @Override
-        public Float getFreeCapacityGb() {
+        public Integer getFreeCapacityGb() {
             return freeCapacityGb;
         }
 
