@@ -64,13 +64,13 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
      *         loadbalancer is provisioning.
      *         Either ACTIVE, PENDING_CREATE or ERROR.
      */
-    String getProvisioningStatus();
+    LbProvisioningStatus getProvisioningStatus();
 
     /**
      * @return operatingStatus.The operating status of the loadbalancer. Indicates whether the
      *         loadbalancer is operational.
      */
-    String getOperatingStatus();
+    LbOperatingStatus getOperatingStatus();
 
     /**
      * Retrieve provider the load balancer is provisioned with

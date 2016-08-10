@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import org.openstack4j.model.network.ext.LbOperatingStatus;
+import org.openstack4j.model.network.ext.LbProvisioningStatus;
 import org.openstack4j.model.network.ext.LoadBalancerV2;
 import org.openstack4j.model.network.ext.builder.LoadBalancerV2Builder;
 import org.openstack4j.openstack.common.ListResult;
@@ -43,10 +45,10 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     private boolean adminStateUp = true;
 
     @JsonProperty("provisioning_status")
-    private String provisioningStatus;
+    private LbProvisioningStatus provisioningStatus;
 
     @JsonProperty("operating_status")
-    private String operatingStatus;
+    private LbOperatingStatus operatingStatus;
 
     private List<ListItem> listeners;
 
@@ -124,7 +126,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getProvisioningStatus(){
+    public LbProvisioningStatus getProvisioningStatus(){
         return provisioningStatus;
     }
 
@@ -132,7 +134,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getOperatingStatus(){
+    public LbOperatingStatus getOperatingStatus(){
         return operatingStatus;
     }
 
