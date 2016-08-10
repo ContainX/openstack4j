@@ -33,4 +33,9 @@ public interface ListenerV2Update extends ModelEntity, Buildable<ListenerV2Updat
      */
     public Integer getConnectionLimit();
 
+    /**
+     * Optional
+     * @see ListenerV2#getDefaultTlsContainerRef()
+     */
+    public String getDefaultTlsContainerRef();
 }

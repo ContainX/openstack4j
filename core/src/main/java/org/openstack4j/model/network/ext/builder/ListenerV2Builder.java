@@ -4,6 +4,8 @@ import org.openstack4j.common.Buildable;
 import org.openstack4j.model.network.ext.ListenerV2;
 import org.openstack4j.model.network.ext.Protocol;
 
+import java.util.List;
+
 public interface ListenerV2Builder extends Buildable.Builder<ListenerV2Builder, ListenerV2> {
     /**
      * @param tenantId
@@ -71,4 +73,22 @@ public interface ListenerV2Builder extends Buildable.Builder<ListenerV2Builder, 
      * @return ListenerV2Builder
      */
     ListenerV2Builder connectionLimit(Integer connectionLimit);
+
+    /**
+     * Optional
+     *
+     * Barbican container with tls policy
+     * @param tlsContainerRef
+     * @return ListenerV2Builder
+     */
+    ListenerV2Builder defaultTlsContainerRef(String tlsContainerRef);
+
+    /**
+     * Optional
+     *
+     * Barbican container(s) with sni certificates
+     * @param sniContainerRefs
+     * @return ListenerV2Builder
+     */
+    ListenerV2Builder sniContainerRefs(List<String> sniContainerRefs);
 }

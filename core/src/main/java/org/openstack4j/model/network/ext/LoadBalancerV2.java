@@ -43,6 +43,11 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
      */
     String getVipAddress();
 
+    /***
+     * @return the vip port id of the loadbalancer
+     */
+    String getVipPortId();
+
     /**
      * @return The administrative state of the loadbalancer, which is up (true) or
      *         down (false).

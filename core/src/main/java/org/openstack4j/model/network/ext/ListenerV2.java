@@ -59,6 +59,16 @@ public interface ListenerV2 extends ModelEntity, Buildable<ListenerV2Builder> {
     String getDefaultPoolId();
 
     /**
+     * @return the default tls container ref
+     */
+    String getDefaultTlsContainerRef();
+
+    /**
+     * @return the sni container refs
+     */
+    List<String> getSniContainerRefs();
+
+    /**
      * @return The administrative state of the listener, which is up (true) or
      *         down (false).
      */

@@ -30,6 +30,9 @@ public class NeutronListenerV2Update implements ListenerV2Update {
     @JsonProperty("connection_limit")
     private Integer connectionLimit;
 
+    @JsonProperty("default_tls_container_ref")
+    private String defaultTlsContainerRef;
+
     /**
      * {@inheritDoc}
      */
@@ -70,6 +73,14 @@ public class NeutronListenerV2Update implements ListenerV2Update {
         return connectionLimit;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDefaultTlsContainerRef(){
+        return defaultTlsContainerRef;
+    }
+
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
@@ -77,6 +88,7 @@ public class NeutronListenerV2Update implements ListenerV2Update {
                 .add("description", description)
                 .add("name", name)
                 .add("connectionLimit", connectionLimit)
+                .add("defaultTlsContainerRef", defaultTlsContainerRef)
                 .toString();
     }
 
@@ -141,6 +153,15 @@ public class NeutronListenerV2Update implements ListenerV2Update {
         @Override
         public ListenerV2UpdateBuilder connectionLimit(Integer connectionLimit){
             m.connectionLimit = connectionLimit;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerV2UpdateBuilder defaultTlsContainerRef(String defaultTlsContainerRef){
+            m.defaultTlsContainerRef = defaultTlsContainerRef;
             return this;
         }
     }

@@ -53,6 +53,7 @@ public class LoadBalancerV2Tests extends AbstractTest {
         String id = "282b71ea-9ceb-4cd6-8881-cb511af2edb5";
         LoadBalancerV2 lb = osv3().networking().lbaasV2().loadbalancer().get(id);
         assertNotNull(lb);
+        assertNotNull(lb.getVipPortId());
         assertEquals(lb.getId(), id);
     }
 

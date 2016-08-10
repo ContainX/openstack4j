@@ -50,6 +50,9 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
 
     private List<ListItem> listeners;
 
+    @JsonProperty("vip_port_id")
+    private String vipPortId;
+
     private String provider;
 
     /**
@@ -137,6 +140,14 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      * {@inheritDoc}
      */
     @Override
+    public String getVipPortId(){
+        return vipPortId;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getProvider(){
         return provider;
     }
@@ -162,6 +173,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
                 .add("provisioningStatus", provisioningStatus)
                 .add("operatingStatus", operatingStatus)
                 .add("listeners", listeners)
+                .add("vipPortId", vipPortId)
                 .add("provider", provider)
                 .toString();
     }
