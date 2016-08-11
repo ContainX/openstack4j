@@ -3,7 +3,7 @@
     "protocol_port": 80,
     "protocol": "HTTP",
     "description": "",
-    "default_tls_container_ref": null,
+    "default_tls_container_ref": "http://0.0.0.0:9311/v1/containers/52594300-d996-49e4-8bf1-a4e000171ad8",
     "admin_state_up": true,
     "loadbalancers": [
       {
@@ -12,7 +12,7 @@
     ],
     "tenant_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
     "sni_container_refs": [
-
+      "http://0.0.0.0:9311/v1/containers/907f400c-d970-47f8-9900-db5796505e1f"
     ],
     "connection_limit": -1,
     "default_pool_id": "b7f6a49f-ebd8-43c5-b792-5748366eff21",

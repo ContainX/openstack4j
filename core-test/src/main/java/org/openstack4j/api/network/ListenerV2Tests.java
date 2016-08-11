@@ -58,16 +58,19 @@ public class ListenerV2Tests extends AbstractTest {
         String name = "listener1";
         String description = "";
         Protocol protocol = Protocol.HTTP;
+        String tlsContainerRef = "http://0.0.0.0:9311/v1/containers/52594300-d996-49e4-8bf1-a4e000171ad8";
         ListenerV2 create = Builders.listenerV2()
                 .adminStateUp(true)
                 .name(name)
                 .description(description)
                 .protocol(protocol)
+                .defaultTlsContainerRef(tlsContainerRef)
                 .build();
         ListenerV2 result = osv3().networking().lbaasV2().listener().create(create);
         assertEquals(result.getName(), name);
         assertEquals(result.getDescription(), description);
         assertEquals(result.getProtocol(), protocol);
+        assertEquals(result.getDefaultTlsContainerRef(), tlsContainerRef);
         assertTrue(result.isAdminStateUp());
     }
 
@@ -76,17 +79,21 @@ public class ListenerV2Tests extends AbstractTest {
         String name = "listener_updated";
         String description = "im a good listener";
         Integer connectionLimit = 20;
+        String tlsContainerRef = "http://0.0.0.0:9311/v1/containers/52594300-d996-49e4-8bf1-a4e000171ad9";
         ListenerV2Update update = Builders.listenerV2Update()
                 .adminStateUp(false)
                 .description(description)
                 .name(name)
                 .connectionLimit(connectionLimit)
+                .defaultTlsContainerRef(tlsContainerRef)
                 .build();
         ListenerV2 result = osv3().networking().lbaasV2().listener().update("c07058a9-8d84-4443-b8f5-508d0facfe10", update);
         assertFalse(result.isAdminStateUp());
         assertEquals(result.getName(), name);
         assertEquals(result.getDescription(), description);
         assertEquals(result.getConnectionLimit(), connectionLimit);
+        assertEquals(result.getDefaultTlsContainerRef(), tlsContainerRef);
+
     }
 
     public void testDeleteListenerV2() {

@@ -43,6 +43,11 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
      */
     String getVipAddress();
 
+    /***
+     * @return the vip port id of the loadbalancer
+     */
+    String getVipPortId();
+
     /**
      * @return The administrative state of the loadbalancer, which is up (true) or
      *         down (false).
@@ -59,13 +64,13 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
      *         loadbalancer is provisioning.
      *         Either ACTIVE, PENDING_CREATE or ERROR.
      */
-    String getProvisioningStatus();
+    LbProvisioningStatus getProvisioningStatus();
 
     /**
      * @return operatingStatus.The operating status of the loadbalancer. Indicates whether the
      *         loadbalancer is operational.
      */
-    String getOperatingStatus();
+    LbOperatingStatus getOperatingStatus();
 
     /**
      * Retrieve provider the load balancer is provisioned with

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
+import org.openstack4j.model.network.ext.LbOperatingStatus;
+import org.openstack4j.model.network.ext.LbProvisioningStatus;
 import org.openstack4j.model.network.ext.LoadBalancerV2;
 import org.openstack4j.model.network.ext.builder.LoadBalancerV2Builder;
 import org.openstack4j.openstack.common.ListResult;
@@ -43,12 +45,15 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
     private boolean adminStateUp = true;
 
     @JsonProperty("provisioning_status")
-    private String provisioningStatus;
+    private LbProvisioningStatus provisioningStatus;
 
     @JsonProperty("operating_status")
-    private String operatingStatus;
+    private LbOperatingStatus operatingStatus;
 
     private List<ListItem> listeners;
+
+    @JsonProperty("vip_port_id")
+    private String vipPortId;
 
     private String provider;
 
@@ -121,7 +126,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getProvisioningStatus(){
+    public LbProvisioningStatus getProvisioningStatus(){
         return provisioningStatus;
     }
 
@@ -129,8 +134,16 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getOperatingStatus(){
+    public LbOperatingStatus getOperatingStatus(){
         return operatingStatus;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getVipPortId(){
+        return vipPortId;
     }
 
     /**
@@ -162,6 +175,7 @@ public class NeutronLoadBalancerV2 implements LoadBalancerV2 {
                 .add("provisioningStatus", provisioningStatus)
                 .add("operatingStatus", operatingStatus)
                 .add("listeners", listeners)
+                .add("vipPortId", vipPortId)
                 .add("provider", provider)
                 .toString();
     }

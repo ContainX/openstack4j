@@ -58,6 +58,11 @@ public class NeutronListenerV2 implements ListenerV2 {
     @JsonProperty("admin_state_up")
     private boolean adminStateUp = true;
 
+    @JsonProperty("default_tls_container_ref")
+    private String defaultTlsContainerRef;
+
+    @JsonProperty("sni_container_refs")
+    private List<String> sniContainerRefs;
 
     /**
      * {@inheritDoc}
@@ -135,6 +140,22 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
+    public String getDefaultTlsContainerRef(){
+        return defaultTlsContainerRef;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getSniContainerRefs(){
+        return sniContainerRefs;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String getId(){
         return id;
     }
@@ -152,6 +173,8 @@ public class NeutronListenerV2 implements ListenerV2 {
                 .add("protocolPort", protocolPort)
                 .add("connectionLImit", connectionLimit)
                 .add("defaultPoolId", defaultPoolId)
+                .add("defaultTlsContainerRef", defaultTlsContainerRef)
+                .add("sniContainerRefs", sniContainerRefs)
                 .toString();
     }
 
@@ -243,6 +266,24 @@ public class NeutronListenerV2 implements ListenerV2 {
         @Override
         public ListenerV2Builder connectionLimit(Integer connectionLimit){
             m.connectionLimit = connectionLimit;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerV2Builder sniContainerRefs(List<String> sniContainerRefs){
+            m.sniContainerRefs = sniContainerRefs;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ListenerV2Builder defaultTlsContainerRef(String tlsContainerRef){
+            m.defaultTlsContainerRef = tlsContainerRef;
             return this;
         }
     }
