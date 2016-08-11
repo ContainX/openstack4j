@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 import org.openstack4j.model.network.ext.ListenerV2;
-import org.openstack4j.model.network.ext.Protocol;
+import org.openstack4j.model.network.ext.ListenerProtocol;
 import org.openstack4j.model.network.ext.builder.ListenerV2Builder;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -32,7 +32,7 @@ public class NeutronListenerV2 implements ListenerV2 {
     /**
      * The protocol of the VIP address. A valid value is TCP, HTTP, or HTTPS
      */
-    private Protocol protocol;
+    private ListenerProtocol protocol;
 
     /**
      * The port on which to listen to client traffic that is associated with the
@@ -108,7 +108,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public Protocol getProtocol(){
+    public ListenerProtocol getProtocol(){
         return protocol;
     }
 
@@ -219,7 +219,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder protocol(Protocol protocol){
+        public ListenerV2Builder protocol(ListenerProtocol protocol){
             m.protocol = protocol;
             return this;
         }
