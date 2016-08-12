@@ -124,7 +124,8 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      * {@inheritDoc}
      */
     public BlockStorageService blockStorage() {
-        return Apis.getBlockStorageServices();
+        return Apis.get(BlockStorageService.class);
+
     }
 
     /**
