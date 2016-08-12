@@ -6,7 +6,7 @@ import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.ListenerV2;
 import org.openstack4j.model.network.ext.ListenerV2Update;
-import org.openstack4j.model.network.ext.Protocol;
+import org.openstack4j.model.network.ext.ListenerProtocol;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 /**
  *
@@ -57,7 +57,7 @@ public class ListenerV2Tests extends AbstractTest {
         respondWith(LISTENERV2_JSON);
         String name = "listener1";
         String description = "";
-        Protocol protocol = Protocol.HTTP;
+        ListenerProtocol protocol = ListenerProtocol.HTTP;
         String tlsContainerRef = "http://0.0.0.0:9311/v1/containers/52594300-d996-49e4-8bf1-a4e000171ad8";
         ListenerV2 create = Builders.listenerV2()
                 .adminStateUp(true)

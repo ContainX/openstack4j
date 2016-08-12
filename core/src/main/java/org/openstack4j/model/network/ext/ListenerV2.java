@@ -40,7 +40,7 @@ public interface ListenerV2 extends ModelEntity, Buildable<ListenerV2Builder> {
     /**
      * @return The protocol of the listener, which is TCP, HTTP, or HTTPS.
      */
-    Protocol getProtocol();
+    ListenerProtocol getProtocol();
 
     /**
      * @return The protocol of the listener.

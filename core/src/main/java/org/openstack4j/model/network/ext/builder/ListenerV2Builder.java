@@ -2,7 +2,7 @@ package org.openstack4j.model.network.ext.builder;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.network.ext.ListenerV2;
-import org.openstack4j.model.network.ext.Protocol;
+import org.openstack4j.model.network.ext.ListenerProtocol;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public interface ListenerV2Builder extends Buildable.Builder<ListenerV2Builder, 
      *            or HTTPS.
      * @return ListenerV2Builder
      */
-    ListenerV2Builder protocol(Protocol protocol);
+    ListenerV2Builder protocol(ListenerProtocol protocol);
 
     /**
      * The port in which the frontend will be listening. Must be an integer in the range of 1-65535
