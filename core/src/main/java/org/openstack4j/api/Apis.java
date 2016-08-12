@@ -10,6 +10,8 @@ import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
+import org.openstack4j.api.storage.BlockStorageService;
+
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -59,6 +61,13 @@ public class Apis {
     public static ComputeService getComputeServices() {
         return get(ComputeService.class);
     }
+
+    /**
+     * Gets the block storage services API
+     *
+     * @return the block storage services
+     */
+    public static BlockStorageService getBlockStorageServices() { return get(BlockStorageService.class); }
 
     /**
      * Gets the Network services API

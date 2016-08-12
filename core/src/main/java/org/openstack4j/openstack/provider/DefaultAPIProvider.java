@@ -113,6 +113,7 @@ import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
 import org.openstack4j.api.storage.BlockVolumeTransferService;
 import org.openstack4j.api.storage.CinderZoneService;
+import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
 import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
@@ -233,6 +234,7 @@ import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeTransferServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.CinderZoneServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.SchedulerStatsGetPoolServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageAccountServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
@@ -389,6 +391,8 @@ public class DefaultAPIProvider implements APIProvider {
         bind(FirewallRuleService.class, FirewallRuleServiceImpl.class);
         bind(FirewallPolicyService.class, FirewallPolicyServiceImpl.class);
         bind(NetworkPolicyService.class, NetworkPolicyServiceImpl.class);
+        bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
+
 
     }
 
