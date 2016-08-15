@@ -126,6 +126,8 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         if (token.getCatalog() == null) {
             if (ServiceType.IDENTITY.equals(p.type)) {
                 return token.getEndpoint();
+            } else {
+                return null;
             }
         }
 
@@ -137,24 +139,8 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
 
                 for (org.openstack4j.model.identity.v3.Endpoint ep : service.getEndpoints()) {
 
-                    if (matches(ep, p)) {
-                        //some installation have v2.0 url in catalog for v3 identity api
-                        //some other the url does not have version in it
-                        //so we do an additional check here for identity service only
-                        if (ServiceType.IDENTITY.equals(ServiceType.forName(service.getType()))) {
-                            String v3Url = ep.getUrl().toString();
-                            if (v3Url.endsWith("/v3") || v3Url.endsWith("/v3/") ) {
-                            } else if (v3Url.endsWith("/v2.0") || v3Url.endsWith("/v2.0/") ) {
-                                v3Url =  v3Url.replace("v2.0", "v3");
-                            } else {
-                                v3Url = v3Url + "/v3";
-                            }
-                            LOG.trace("resolved v3 endpoint for identity service: {}", v3Url);
-                            return v3Url;
-                        } else {
-                            return ep.getUrl().toString();
-                        }
-                    }
+                    if (matches(ep, p))
+                        return ep.getUrl().toString();
                 }
             }
         }
