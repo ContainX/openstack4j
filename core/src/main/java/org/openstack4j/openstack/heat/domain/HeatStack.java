@@ -47,6 +47,8 @@ public class HeatStack implements Stack {
 	private List<GenericLink> links;
 	@JsonProperty("updated_time")
 	private String updatedTime;
+	@JsonProperty("tags")
+	private List<String> tags;
 
 	@Override
 	public String getId() {
@@ -105,6 +107,11 @@ public class HeatStack implements Stack {
 	}
 
 	@Override
+	public List<String> getTags() {
+		return tags;
+	}
+
+	@Override
 	public String getStackStatusReason() {
 		return stackStatusReason;
 	}
@@ -116,7 +123,7 @@ public class HeatStack implements Stack {
 				+ templateDescription + ", timeoutMins=" + timeoutMins
 				+ ", outputs=" + outputs + ", parameters=" + parameters
 				+ ", creationTime=" + creationTime + ", links=" + links
-				+ ", updatedTime=" + updatedTime + "]";
+				+ ", updatedTime=" + updatedTime + ", tags=" + tags + "]";
 	}
 
 	/**

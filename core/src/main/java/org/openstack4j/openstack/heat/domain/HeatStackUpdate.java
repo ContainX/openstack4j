@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +34,8 @@ public class HeatStackUpdate implements StackUpdate {
     private String environment;
     @JsonProperty("files")
     private Map<String, String> files = new HashMap<String, String>();
+    @JsonProperty("tags")
+    private String tags;
 
     public static StackUpdateBuilder builder() {
         return new HeatStackUpdateConcreteBuilder();
@@ -58,6 +61,10 @@ public class HeatStackUpdate implements StackUpdate {
 
     public Map<String, String> getFiles() {
         return files;
+    }
+
+    public String getTags() {
+        return tags;
     }
 
     @Override
@@ -145,6 +152,12 @@ public class HeatStackUpdate implements StackUpdate {
         @Override
         public StackUpdateBuilder files(Map<String, String> files) {
             model.files = files;
+            return this;
+        }
+
+        @Override
+        public StackUpdateBuilder tags(String tags) {
+            model.tags = tags;
             return this;
         }
 

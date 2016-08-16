@@ -39,6 +39,8 @@ public class HeatStackCreate implements StackCreate {
 	private String environment;
 	@JsonProperty("files")
 	private Map<String, String> files = new HashMap<String, String>();
+	@JsonProperty("tags")
+	private String tags;
 
 	/**
 	 * Returnes a {@link HeatStackCreateConcreteBuilder} for configuration and
@@ -87,6 +89,9 @@ public class HeatStackCreate implements StackCreate {
 	    return files;
 	}
 
+	public String getTags() {
+		return tags;
+	}
 
 	/**
 	 * A Builder to create a HeatStack. Use {@link #build()} to receive the
@@ -200,6 +205,12 @@ public class HeatStackCreate implements StackCreate {
         @Override
 		public StackCreateBuilder files(Map<String, String> files) {
 			model.files = files;
+			return this;
+		}
+
+		@Override
+		public StackCreateBuilder tags(String tags) {
+			model.tags = tags;
 			return this;
 		}
 
