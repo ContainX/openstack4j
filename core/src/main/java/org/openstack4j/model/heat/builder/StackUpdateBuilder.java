@@ -1,9 +1,9 @@
 package org.openstack4j.model.heat.builder;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.heat.StackUpdate;
+
+import java.util.Map;
 
 /**
  * A builder which creates a StackUpdate entity
@@ -47,6 +47,13 @@ public interface StackUpdateBuilder extends Buildable.Builder<StackUpdateBuilder
     StackUpdateBuilder templateFromFile(String tplFile);
 
     StackUpdateBuilder files(Map<String, String> files);
+
+    /**
+     * Set the tags for the stack, separated by a comma.
+     * @param tags
+     * @return StackUpdateBuilder
+     */
+    StackUpdateBuilder tags(String tags);
 
 
 }

@@ -99,4 +99,10 @@ public interface Stack extends ModelEntity {
 	 * @return Timestamp formated like this: 2014-06-03T20:59:46Z
 	 */
 	String getUpdatedTime();
+
+	/**
+	 * Returns the tags associated with the stack.
+	 * @return The list of tags, separated by a comma.
+	 */
+	List<String> getTags();
 }
