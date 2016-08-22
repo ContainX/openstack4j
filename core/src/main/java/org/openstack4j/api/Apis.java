@@ -1,7 +1,5 @@
 package org.openstack4j.api;
 
-import java.util.ServiceLoader;
-
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
@@ -13,6 +11,8 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.tacker.TackerService;
+
+import java.util.ServiceLoader;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -88,6 +88,14 @@ public class Apis {
      */
     public static ImageService getImageService() {
         return get(ImageService.class);
+    }
+
+    /**
+     * Gets the (Glance) Image v2 services API
+     * @return the image v2 services
+     */
+    public static org.openstack4j.api.image.v2.ImageService getImageV2Service() {
+        return get(org.openstack4j.api.image.v2.ImageService.class);
     }
 
     /**

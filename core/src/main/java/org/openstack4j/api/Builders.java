@@ -1179,12 +1179,21 @@ public class Builders {
     public static ContainerSecretBuilder containerSecret() {
         return BarbicanContainerSecret.builder();
     }
-    
+
     /**
      * The Tacker builders
      * @return the tacker builders
      */
     public static NfvBuilders tacker() {
-    	return new TackerBuilders(); 
+        return new TackerBuilders();
+    }
+
+    /**
+     * Images V2 builder
+     * @return the glance v2 image builder
+     */
+    public static org.openstack4j.model.image.v2.builder.ImageBuilder imageBuilder() {
+        //TODO: fix name. it's not obvious that this is version 2
+        return org.openstack4j.openstack.image.v2.GlanceImage.builder();
     }
 }

@@ -1,7 +1,5 @@
 package org.openstack4j.api;
 
-import java.util.Set;
-
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
@@ -21,6 +19,8 @@ import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+
+import java.util.Set;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -177,6 +177,12 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the image service
      */
     ImageService images();
+
+    /**
+     * Returns the Image V2 Service API
+     * @return the image v2 service
+     */
+    org.openstack4j.api.image.v2.ImageService imagesV2();
 
     /**
      * Returns the Telemetry Service API
