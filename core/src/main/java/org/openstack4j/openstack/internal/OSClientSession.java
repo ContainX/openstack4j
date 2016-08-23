@@ -22,6 +22,7 @@ import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.Config;
@@ -119,6 +120,8 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     public ImageService images() {
         return Apis.getImageService();
     }
+
+
 
     /**
      * {@inheritDoc}
@@ -245,6 +248,12 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return getSupportedServices().contains(ServiceType.SHARE);
     }
 
+    /**
+     *
+     * @return
+     */
+    public boolean supportsTrove() { return getSupportedServices().contains(ServiceType.DATABASE); }
+
     public Set<ServiceType> getSupportedServices() {
         return null;
     }
@@ -258,6 +267,14 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public GbpService gbp() {
         return Apis.getGbpServices();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public TroveService trove(){
+        return Apis.getTroveServices();
     }
         
     public static class OSClientSessionV2 extends OSClientSession<OSClientSessionV2, OSClientV2> implements OSClientV2 {
