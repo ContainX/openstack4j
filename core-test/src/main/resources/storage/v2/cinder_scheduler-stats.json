@@ -1,0 +1,13 @@
+{
+  "pools": [
+    {
+      "name": "cinder1@generic1#GENERIC1"
+    },
+    {
+      "name": "cinder2@unmanage1#UNMANAGE1"
+    },
+    {
+      "name": "cinder3@ams_backend#AMS_BACKEND"
+    }
+  ]
+}
