@@ -35,4 +35,11 @@ public interface BlockStorageService extends RestService {
 	 * @return the quota-set service
 	 */
 	BlockQuotaSetService quotaSets();
+
+	/**
+	 * The block storage get_pools service.
+	 *
+	 * @return the scheduler stats service
+	 */
+	SchedulerStatsGetPoolService schedulerStatsPools();
 }

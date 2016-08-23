@@ -253,6 +253,8 @@ import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.ResourceServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.SampleServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
+import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
+import org.openstack4j.openstack.storage.block.internal.SchedulerStatsGetPoolServiceImpl;
 
 import java.util.Map;
 
@@ -403,6 +405,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ListenerV2Service.class, ListenerV2ServiceImpl.class);
         bind(HealthMonitorV2Service.class, HealthMonitorV2ServiceImpl.class);
         bind(LbPoolV2Service.class, LbPoolV2ServiceImpl.class);
+        bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
     }   
 
     /**
