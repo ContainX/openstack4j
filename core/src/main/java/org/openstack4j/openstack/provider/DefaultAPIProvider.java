@@ -121,6 +121,11 @@ import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
+import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.tacker.TackerServiceImpl;
+import org.openstack4j.api.tacker.VimService;
+import org.openstack4j.api.tacker.VnfService;
+import org.openstack4j.api.tacker.VnfdService;
 import org.openstack4j.api.telemetry.AlarmService;
 import org.openstack4j.api.telemetry.CapabilitiesService;
 import org.openstack4j.api.telemetry.EventService;
@@ -246,6 +251,9 @@ import org.openstack4j.openstack.storage.object.internal.ObjectStorageAccountSer
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageObjectServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageServiceImpl;
+import org.openstack4j.openstack.tacker.internal.VimServiceImpl;
+import org.openstack4j.openstack.tacker.internal.VnfServiceImpl;
+import org.openstack4j.openstack.tacker.internal.VnfdServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.AlarmServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.CapabilitiesServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.EventServiceImpl;
@@ -406,6 +414,10 @@ public class DefaultAPIProvider implements APIProvider {
         bind(HealthMonitorV2Service.class, HealthMonitorV2ServiceImpl.class);
         bind(LbPoolV2Service.class, LbPoolV2ServiceImpl.class);
         bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
+        bind(TackerService.class, TackerServiceImpl.class);
+        bind(VnfdService.class, VnfdServiceImpl.class);
+        bind(VnfService.class, VnfServiceImpl.class);
+        bind(VimService.class, VimServiceImpl.class);
     }   
 
     /**
