@@ -13,6 +13,7 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
+import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
@@ -146,6 +147,13 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the networking service
      */
     NetworkingService networking();
+    
+    /**
+     * Returns the Tacker Service API
+     *
+     * @return the tacker service
+     */
+    TackerService tacker();
 
     /**
      * Returns the Block Storage Service API

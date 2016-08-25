@@ -21,6 +21,7 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
+import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
@@ -111,6 +112,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public NetworkingService networking() {
         return Apis.getNetworkingServices();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public TackerService tacker() {
+        return Apis.getTackerServices();
     }
 
     /**
