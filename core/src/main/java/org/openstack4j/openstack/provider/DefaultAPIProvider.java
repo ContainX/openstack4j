@@ -417,7 +417,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(DBInstanceFlavorService.class, DBFlavorServiceImpl.class);
         bind(DatastoreService.class, DBDatastoreServiceImpl.class);
         bind(DatabaseService.class, DBDatabaseServiceImpl.class);
-        bind(UserService.class, DBUserServiceImpl.class);
+        bind(org.openstack4j.api.trove.UserService.class, DBUserServiceImpl.class);
     }   
 
     /**

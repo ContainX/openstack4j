@@ -380,6 +380,31 @@
 			"type": "clustering",
 			"id": "1fafaecc7eb2475fb2cf50d420f88cfa",
 			"name": "senlin"
+		  }, {
+			"endpoints": [
+			  {
+				"region_id": "RegionOne",
+				"url": "http://127.0.0.1:8779/v1.0/26decac97b67478f9f64ff2c2c1b778e",
+				"region": "RegionOne",
+				"interface": "admin",
+				"id": "7202c1c716f74468b6d22a1a5f83e38d"
+			  }, {
+				"region_id": "RegionOne",
+				"url": "http://127.0.0.1:8779/v1.0/26decac97b67478f9f64ff2c2c1b778e",
+				"region": "RegionOne",
+				"interface": "internal",
+				"id": "373cf9b0185c4406bd7cae1a1e9e1b95"
+			  }, {
+				"region_id": "RegionOne",
+				"url": "http://127.0.0.1:8779/v1.0/26decac97b67478f9f64ff2c2c1b778e",
+				"region": "RegionOne",
+				"interface": "public",
+				"id": "58bc7c3c2c66464b99ec20a398492bce"
+			  }
+			],
+			"type": "database",
+			"id": "511b94ce0482484ea09028091dd5e9a5",
+			"name": "trove"
 		  }
 		],
 		"extras": {},
