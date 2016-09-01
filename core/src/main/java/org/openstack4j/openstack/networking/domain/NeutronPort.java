@@ -67,6 +67,9 @@ public class NeutronPort implements Port {
 	
 	@JsonProperty("extra_dhcp_opts")
 	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates;
+	
+	@JsonProperty("port_security_enabled")
+	private boolean portSecurityEnabled = true; 
         
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
@@ -197,6 +200,15 @@ public class NeutronPort implements Port {
 		this.tenantId = tenantId;
 	}
 	
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isPortSecurityEnabled() {
+        return portSecurityEnabled;
+    }
+
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -206,7 +218,7 @@ public class NeutronPort implements Port {
 				    .add("id", id).add("name", name).add("adminStateUp", adminStateUp).add("deviceId", deviceId)
 				    .add("deviceOwner", deviceOwner).add("fixedIps", fixedIps).add("macAddress", macAddress)
 				    .add("networkId", networkId).add("tenantId", tenantId).add("securityGroups", securityGroups)
-				    .add("allowed_address_pairs", allowedAddressPairs)
+				    .add("allowed_address_pairs", allowedAddressPairs).add("port_security_enabled ", portSecurityEnabled)
 				    .toString();
 	}
 	
@@ -268,7 +280,7 @@ public class NeutronPort implements Port {
 		}
 		
     @Override
-    public PortBuilder removeFixedIp(String address, String subnetId) {
+        public PortBuilder removeFixedIp(String address, String subnetId) {
       if (m.fixedIps == null)
         m.fixedIps = Sets.newHashSet();
       
@@ -342,7 +354,7 @@ public class NeutronPort implements Port {
 		}
 
     @Override
-    public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
+        public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
             if (m.extraDhcpOptCreates == null)
                 m.extraDhcpOptCreates = Lists.newArrayList();
             m.extraDhcpOptCreates.add((NeutronExtraDhcpOptCreate)extraDhcpOptCreate);
@@ -357,5 +369,12 @@ public class NeutronPort implements Port {
 			m.securityGroups.add(groupName);
 			return this;
 		}
+
+        @Override
+        public PortBuilder portSecurityEnabled(boolean portSecurityEnabled) {
+            m.portSecurityEnabled=portSecurityEnabled;
+            return this;
+        }
 	}
+
 }
