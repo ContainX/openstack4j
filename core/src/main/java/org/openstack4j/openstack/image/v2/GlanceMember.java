@@ -10,6 +10,10 @@ import org.openstack4j.openstack.common.ListResult;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Implementation of Glance V2 member
+ * @author emjburns
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GlanceMember implements Member {

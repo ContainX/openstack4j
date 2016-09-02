@@ -29,7 +29,7 @@ public class GlanceImage implements Image {
 
     private List<String> tags;
 
-    private Status status;
+    private ImageStatus imageStatus;
 
     @JsonProperty("container_format")
     private ContainerFormat containerFormat;
@@ -112,8 +112,8 @@ public class GlanceImage implements Image {
      * {@inheritDoc}
      */
     @Override
-    public Status getStatus() {
-        return status;
+    public ImageStatus getStatus() {
+        return imageStatus;
     }
 
     /**
@@ -342,7 +342,7 @@ public class GlanceImage implements Image {
                 .add("id", id)
                 .add("name", name)
                 .add("tags", tags)
-                .add("status", status)
+                .add("imageStatus", imageStatus)
                 .add("containerFormat", containerFormat)
                 .add("diskFormat", diskFormat)
                 .add("createdAt", createdAt)

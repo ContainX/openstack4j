@@ -2,16 +2,12 @@ package org.openstack4j.model.image.v2;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import org.omg.PortableInterceptor.ACTIVE;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.BasicResource;
 import org.openstack4j.model.image.v2.builder.ImageBuilder;
 
 import java.util.Date;
 import java.util.List;
-
-import static com.sun.jmx.snmp.EnumRowStatus.active;
-import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte1.other;
 
 /**
  * A Glance v2.0-2.3 Image
@@ -20,7 +16,7 @@ import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStat
  */
 public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
-    public enum Status {
+    public enum ImageStatus {
         /**
          * Image status is not one of the documented options.
          * http://docs.openstack.org/developer/glance/statuses.html
@@ -67,7 +63,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
         PENDING_DELETE;
 
         @JsonCreator
-        public static Status value(String v)
+        public static ImageStatus value(String v)
         {
             if (v == null) return UNRECOGNIZED;
             try {
@@ -110,7 +106,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
     /**
      * @return image status
      */
-    Status getStatus();
+    ImageStatus getStatus();
 
     /**
      * @return image name.
@@ -120,8 +116,6 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
     /**
      * @return a list of tag objects
      */
-    //TODO: should this be tag objects? they seem to me like just strings
-    // but they could change in the future...?
     List<String> getTags();
 
     /**
@@ -132,7 +126,6 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
     /**
      * @return the ISO 8601 date and time when the resource was created
      */
-    // TODO: correct format? this should be iso 8601
     Date getCreatedAt();
 
     /**

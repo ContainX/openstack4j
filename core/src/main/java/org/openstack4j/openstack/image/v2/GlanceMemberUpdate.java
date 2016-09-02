@@ -4,6 +4,10 @@ import org.openstack4j.model.image.v2.Member;
 import org.openstack4j.model.image.v2.MemberUpdate;
 import org.openstack4j.model.image.v2.builder.MemberUpdateBuilder;
 
+/**
+ * Implementation of Glance V2 member update
+ * @author emjburns
+ */
 public class GlanceMemberUpdate implements MemberUpdate {
 
     Member.MemberStatus status;

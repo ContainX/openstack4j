@@ -8,6 +8,10 @@ import org.openstack4j.openstack.image.v2.GlanceMember;
 
 import java.util.Date;
 
+/**
+ * A Glance V2 Member
+ * @author emjburns
+ */
 @JsonDeserialize(as = GlanceMember.class)
 public interface Member extends ModelEntity {
 
@@ -26,7 +30,7 @@ public interface Member extends ModelEntity {
          */
         REJECTED,
         /**
-         * Status is not one of the reccognized statuses
+         * ImageStatus is not one of the reccognized statuses
          */
         UNKNOWN;
 

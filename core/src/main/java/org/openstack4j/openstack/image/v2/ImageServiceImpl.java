@@ -6,6 +6,10 @@ import org.openstack4j.api.image.v2.ImagesService;
 import org.openstack4j.api.image.v2.TaskService;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
+/**
+ * Implementation of Glance V2 Image Service
+ * @author emjburns
+ */
 public class ImageServiceImpl extends BaseNetworkingServices implements ImageService {
     /**
      * {@inheritDoc}

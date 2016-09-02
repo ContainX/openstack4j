@@ -9,6 +9,7 @@ import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.Member;
 import org.openstack4j.model.image.v2.MemberCreate;
 import org.openstack4j.model.image.v2.MemberUpdate;
+import org.openstack4j.model.image.v2.Task;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -31,6 +32,9 @@ public class ImageV2Tests extends AbstractTest {
     private static final String MEMBER_JSON = "/image/v2/member.json";
     private static final String MEMBER_UPDATE_JSON = "/image/v2/member-update.json";
     private static final String MEMBERS_JSON = "/image/v2/members.json";
+    private static final String TASK_JSON = "/image/v2/task.json";
+    private static final String TASKS_JSON = "/image/v2/tasks.json";
+    private static final String TASKS_FILTERED_JSON = "/image/v2/tasks-filtered.json";
 
     public void testListImages() throws IOException {
         respondWith(IMAGES_JSON);
@@ -171,6 +175,44 @@ public class ImageV2Tests extends AbstractTest {
         String imageId = "8a2ea42d-06b5-42c2-a54d-97105420f2bb";
         ActionResponse deleteTag = osv3().imagesV2().images().deleteTag(imageId, tag);
         assertTrue(deleteTag.isSuccess());
+    }
+
+    public void getTask() throws IOException {
+        respondWith(TASK_JSON);
+        String id = "78925244-2951-462d-b979-773a49274d7f";
+        Task task = osv3().imagesV2().tasks().get(id);
+        assertNotNull(task);
+        assertEquals(task.getId(), id);
+        assertEquals(task.getType(), "import");
+    }
+
+    public void createTask() throws IOException {
+        respondWith(TASK_JSON);
+        Map<String, Object> input = new HashMap<>();
+        input.put("test", "hi");
+        String type = "import";
+        Task t = Builders.taskBuilder().type(type).input(input).build();
+        Task task = osv3().imagesV2().tasks().create(t);
+        assertNotNull(task);
+        assertEquals(task.getType(), type);
+    }
+
+    public void listTasks() throws IOException {
+        respondWith(TASKS_JSON);
+        List<? extends Task> list = osv3().imagesV2().tasks().list();
+        assertNotNull(list);
+        assertTrue(list.size() == 2);
+    }
+
+    public void listTaskWithParams() throws IOException {
+        respondWith(TASKS_FILTERED_JSON);
+        String id = "78925244-2951-462d-b979-773a49274d7f";
+        Map<String,String> params = new HashMap<>();
+        params.put("id", id);
+        List<? extends Task> list = osv3().imagesV2().tasks().list(params);
+        assertNotNull(list);
+        assertTrue(list.size() == 1);
+        assertEquals(list.get(0).getId(), id);
     }
 
     @Override
