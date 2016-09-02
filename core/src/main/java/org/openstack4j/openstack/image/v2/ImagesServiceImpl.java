@@ -2,8 +2,14 @@ package org.openstack4j.openstack.image.v2;
 
 import org.openstack4j.api.image.v2.ImagesService;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.image.v2.Image;
+import org.openstack4j.model.image.v2.Member;
+import org.openstack4j.model.image.v2.MemberCreate;
+import org.openstack4j.model.image.v2.MemberUpdate;
 
+import javax.annotation.Nullable;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author emjburns
  */
 public class ImagesServiceImpl extends BaseImageServices implements ImagesService {
-
-    private static final int DEFAULT_PAGE_SIZE = 25;
 
     /**
      * {@inheritDoc}
@@ -30,31 +34,7 @@ public class ImagesServiceImpl extends BaseImageServices implements ImagesServic
      */
     @Override
     public List<? extends Image> list(Map<String, String> filteringParams) {
-        Invocation<GlanceImage.Images> req = get(GlanceImage.Images.class, uri("/images"));
-        if (filteringParams != null) {
-            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
-                req = req.param(entry.getKey(), entry.getValue());
-            }
-        }
-        return req.execute().getList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends Image> listAll() {
-        return listAll(null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends Image> listAll(Map<String, String> filteringParams) {
-        //TODO: does this exist in the new api?
-        return null;
-
+        return get(GlanceImage.Images.class, uri("/images")).params(filteringParams).execute().getList();
     }
 
     /**
@@ -110,5 +90,110 @@ public class ImagesServiceImpl extends BaseImageServices implements ImagesServic
     public ActionResponse reactivate(String imageId) {
         checkNotNull(imageId);
         return post(ActionResponse.class, uri("/images/%s/actions/reactivate",imageId)).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Image upload(String imageId, Payload<?> payload, @Nullable Image image) {
+        //TODO: this. see v1
+        checkNotNull(imageId);
+        checkNotNull(payload);
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse download(String imageId, File filename) {
+        //TODO: this. see v1
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse updateTag(String imageId, String tag) {
+        checkNotNull(imageId);
+        checkNotNull(tag);
+        return put(ActionResponse.class, uri("/images/%s/tags/%s", imageId, tag)).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse deleteTag(String imageId, String tag) {
+        checkNotNull(imageId);
+        checkNotNull(tag);
+        return deleteWithResponse(uri("/images/%s/tags/%s", imageId, tag)).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends Member> listMembers(String imageId) {
+        checkNotNull(imageId);
+        return get(GlanceMember.Members.class, uri("/images/%s/members", imageId)).execute().getList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends Member> listMembers(String imageId, Map<String, String> filteringParams) {
+        checkNotNull(imageId);
+        Invocation<GlanceMember.Members> req = get(GlanceMember.Members.class, uri("/images/%s/members", imageId));
+        if (filteringParams != null) {
+            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+                req = req.param(entry.getKey(), entry.getValue());
+            }
+        }
+        return req.execute().getList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Member getMember(String imageId, String memberId) {
+        checkNotNull(imageId);
+        checkNotNull(memberId);
+        return get(Member.class, uri("/images/%s/members/%s", imageId, memberId)).execute();
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Member createMember(String imageId, MemberCreate memberCreate) {
+        checkNotNull(imageId);
+        checkNotNull(memberCreate);
+        return post(Member.class, uri("/images/%s/members",imageId)).entity(memberCreate).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Member updateMember(String imageId, String memberId, MemberUpdate memberUpdate) {
+        checkNotNull(imageId);
+        checkNotNull(memberId);
+        return put(Member.class, uri("/images/%s/members/%s", imageId, memberId)).entity(memberUpdate).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse deleteMember(String imageId, String memberId) {
+        checkNotNull(imageId);
+        checkNotNull(memberId);
+        return deleteWithResponse(uri("/images/%s/members/%s",imageId, memberId)).execute();
     }
 }

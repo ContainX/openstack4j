@@ -83,6 +83,29 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
         }
     }
 
+    public enum ImageVisibility {
+        PUBLIC,
+        PRIVATE,
+        UNKNOWN;
+
+        @JsonCreator
+        public static ImageVisibility forValue(String value) {
+            if (value != null)
+            {
+                for (ImageVisibility s : ImageVisibility.values()) {
+                    if (s.name().equalsIgnoreCase(value)) {
+                        return s;
+                    }
+                }
+            }
+            return ImageVisibility.UNKNOWN;
+        }
+
+        @JsonValue
+        public String value() {
+            return name().toLowerCase();
+        }
+    }
 
     /**
      * @return image status
@@ -158,8 +181,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
      * @return image visibility (public or private)
      * Default is private
      */
-    //TODO: switch to enum? valid values are public and private
-    String getVisibility();
+    ImageVisibility getVisibility();
 
     /**
      * @return the size of the image data, in bytes
@@ -173,17 +195,6 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
      * set to true in the Image service's configuration file.
      */
     List<String> getLocations();
-
-    /**
-     * @return the location metadata
-     */
-    // todo: how to show metadata? json doesn't show
-    String getLocationMetadata();
-
-    /**
-     * @return the image properties, if any
-     */
-    String getProperties();
 
     /**
      * @return the URL to access the image file kept in external store
@@ -206,4 +217,43 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
      * @return the URL for the schema of teh virtual machine image
      */
     String getSchema();
+
+    /**
+     * Pattern: ^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$
+     * @return ID of image stored in Glance that should be used as the ramdisk when booting an AMI-style image.
+     */
+    String getRamdiskId();
+
+    /**
+     * @return Common name of operating system distribution as specified in
+     * http://docs.openstack.org/trunk/openstack-compute/admin/content/adding-images.html
+     */
+    String getOsDistro();
+
+    /**
+     * @return Operating system version as specified by the distributor
+     */
+    String getOsVersion();
+
+    /**
+     * Pattern: ^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$
+     * @return ID of image stored in Glance that should be used as the kernel when booting an AMI-style image
+     */
+    String getKernelId();
+
+    /**
+     * @return ID of instance used to create this image
+     */
+    String getInstanceUuid();
+
+    /**
+     * @return Operating system architecture as specified in
+     * http://docs.openstack.org/trunk/openstack-compute/admin/content/adding-images.html
+     */
+    String getArchitecture();
+
+    /**
+     * @return Virtual size of image in bytes (READ-ONLY)
+     */
+    Integer getVirtualSize();
 }

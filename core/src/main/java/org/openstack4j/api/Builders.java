@@ -154,6 +154,8 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser;
 import org.openstack4j.openstack.image.domain.GlanceImage;
+import org.openstack4j.openstack.image.v2.GlanceMemberCreate;
+import org.openstack4j.openstack.image.v2.GlanceMemberUpdate;
 import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.ManilaSecurityServiceCreate;
 import org.openstack4j.openstack.manila.domain.ManilaShareCreate;
@@ -1192,8 +1194,23 @@ public class Builders {
      * Images V2 builder
      * @return the glance v2 image builder
      */
-    public static org.openstack4j.model.image.v2.builder.ImageBuilder imageBuilder() {
-        //TODO: fix name. it's not obvious that this is version 2
+    public static org.openstack4j.model.image.v2.builder.ImageBuilder imageV2() {
         return org.openstack4j.openstack.image.v2.GlanceImage.builder();
+    }
+
+    /**
+     * Image V2 member builder
+     * @return the glance v2 member builder
+     */
+    public static org.openstack4j.model.image.v2.builder.MemberCreateBuilder imageMemberV2() {
+        return GlanceMemberCreate.builder();
+    }
+
+    /**
+     * Image V2 member update builder
+     * @return the glance v2 member update builder
+     */
+    public static org.openstack4j.model.image.v2.builder.MemberUpdateBuilder imageMemberUpdateV2() {
+        return GlanceMemberUpdate.builder();
     }
 }

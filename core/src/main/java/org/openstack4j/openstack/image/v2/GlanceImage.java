@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.image.v2;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 import org.openstack4j.model.common.builder.BasicResourceBuilder;
@@ -17,6 +18,7 @@ import java.util.List;
  *
  * @author emjburns
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class GlanceImage implements Image {
 
     private static final long serialVersionUID = 1L;
@@ -54,17 +56,11 @@ public class GlanceImage implements Image {
 
     private String owner;
 
-    private String visibility;
+    private ImageVisibility visibility;
 
     private Integer size;
 
     private List<String> locations;
-
-    //TODO: location metadata
-    @JsonProperty("location_metadata")
-    private String locationMetadata;
-
-    private String properties;
 
     @JsonProperty("direct_url")
     private String directUrl;
@@ -74,6 +70,27 @@ public class GlanceImage implements Image {
     private String file;
 
     private String schema;
+
+    private String architecture;
+
+    @JsonProperty("instance_uuid")
+    private String instanceUuid;
+
+    @JsonProperty("kernel_id")
+    private String kernelId;
+
+    @JsonProperty("os_version")
+    private String osVersion;
+
+    @JsonProperty("os_distro")
+    private String osDistro;
+
+    @JsonProperty("ramdisk_id")
+    private String ramdiskId;
+
+    @JsonProperty("virtual_size")
+    private Integer virtualSize;
+
 
     /**
      * {@inheritDoc}
@@ -199,7 +216,7 @@ public class GlanceImage implements Image {
      * {@inheritDoc}
      */
     @Override
-    public String getVisibility() {
+    public ImageVisibility getVisibility() {
         return visibility;
     }
 
@@ -214,14 +231,6 @@ public class GlanceImage implements Image {
     @Override
     public List<String> getLocations() {
         return locations;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getProperties() {
-        return properties;
     }
 
     /**
@@ -260,8 +269,56 @@ public class GlanceImage implements Image {
      * {@inheritDoc}
      */
     @Override
-    public String getLocationMetadata() {
-        return locationMetadata;
+    public String getRamdiskId() {
+        return ramdiskId;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getOsDistro() {
+        return osDistro;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getOsVersion() {
+        return osVersion;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getKernelId() {
+        return kernelId;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getInstanceUuid() {
+        return instanceUuid;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getArchitecture() {
+        return architecture;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Integer getVirtualSize() {
+        return virtualSize;
     }
 
     /**
@@ -298,8 +355,6 @@ public class GlanceImage implements Image {
                 .add("visibility", visibility)
                 .add("size", size)
                 .add("locations", locations)
-                .add("locationMetadata", locationMetadata)
-                .add("properties", properties)
                 .add("directUrl", directUrl)
                 .add("self", self)
                 .add("file", file)
@@ -307,6 +362,7 @@ public class GlanceImage implements Image {
                 .toString();
     }
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Images extends ListResult<GlanceImage> {
         private static final long serialVersionUID = 1L;
         @JsonProperty("images")
@@ -333,7 +389,7 @@ public class GlanceImage implements Image {
          * {@inheritDoc}
          */
         @Override
-        public ImageBuilder visibility(String visibility) {
+        public ImageBuilder visibility(ImageVisibility visibility) {
             m.visibility = visibility;
             return this;
         }
@@ -396,9 +452,53 @@ public class GlanceImage implements Image {
          * {@inheritDoc}
          */
         @Override
-        public ImageBuilder properties(String properties) {
-            //does this need to chainge? look at domain/GlanceImage
-            m.properties = properties;
+        public ImageBuilder architecture(String architecture) {
+            m.architecture = architecture;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ImageBuilder instanceUuid(String instanceUuid) {
+            m.instanceUuid = instanceUuid;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ImageBuilder kernelId(String kernelId) {
+            m.kernelId = kernelId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ImageBuilder osVersion(String osVersion) {
+            m.osVersion = osVersion;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ImageBuilder osDistro(String osDistro) {
+            m.osDistro = osDistro;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ImageBuilder ramdiskId(String ramdiskId) {
+            m.ramdiskId = ramdiskId;
             return this;
         }
 

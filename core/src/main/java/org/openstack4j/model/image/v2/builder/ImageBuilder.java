@@ -26,7 +26,7 @@ public interface ImageBuilder extends Buildable.Builder<ImageBuilder, Image> {
     /**
      * @see Image#getVisibility()
      */
-    ImageBuilder visibility(String visibility);
+    ImageBuilder visibility(Image.ImageVisibility visibility);
 
     /**
      * @see Image#getTags()
@@ -59,8 +59,32 @@ public interface ImageBuilder extends Buildable.Builder<ImageBuilder, Image> {
     ImageBuilder isProtected(Boolean isProtected);
 
     /**
-     * @see Image#getProperties()
+     * @see Image#getArchitecture()
      */
-    // TODO: fix type?
-    ImageBuilder properties(String properties);
+    ImageBuilder architecture(String architecture);
+
+    /**
+     * @see Image#getInstanceUuid()
+     */
+    ImageBuilder instanceUuid(String instanceUuid);
+
+    /**
+     * @see Image#getKernelId()
+     */
+    ImageBuilder kernelId(String kernelId);
+
+    /**
+     * @see Image#getOsVersion()
+     */
+    ImageBuilder osVersion(String osVersion);
+
+    /**
+     * @see Image#getOsDistro()
+     */
+    ImageBuilder osDistro(String osDistro);
+
+    /**
+     * @see Image#getRamdiskId()
+     */
+    ImageBuilder ramdiskId(String ramdiskId);
 }
