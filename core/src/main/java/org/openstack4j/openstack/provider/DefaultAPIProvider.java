@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.provider;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
+
 import org.openstack4j.api.APIProvider;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
@@ -128,9 +129,10 @@ import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.api.telemetry.ResourceService;
 import org.openstack4j.api.telemetry.SampleService;
 import org.openstack4j.api.telemetry.TelemetryService;
-import org.openstack4j.api.trove.DBInstanceFlavorService;
+import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.DatabaseService;
 import org.openstack4j.api.trove.DatastoreService;
+import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
@@ -261,10 +263,10 @@ import org.openstack4j.openstack.trove.internal.DBDatabaseServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBDatastoreServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBFlavorServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
+import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
 
-
-import java.util.Map;
+import com.google.common.collect.Maps;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons
@@ -414,11 +416,12 @@ public class DefaultAPIProvider implements APIProvider {
         bind(HealthMonitorV2Service.class, HealthMonitorV2ServiceImpl.class);
         bind(LbPoolV2Service.class, LbPoolV2ServiceImpl.class);
         bind(TroveService.class, TroveServiceImpl.class);
-        bind(DBInstanceFlavorService.class, DBFlavorServiceImpl.class);
+        bind(InstanceFlavorService.class, DBFlavorServiceImpl.class);
         bind(DatastoreService.class, DBDatastoreServiceImpl.class);
         bind(DatabaseService.class, DBDatabaseServiceImpl.class);
         bind(org.openstack4j.api.trove.UserService.class, DBUserServiceImpl.class);
-    }   
+        bind(InstanceService.class, DBInstanceServiceImpl.class);
+    }
 
     /**
      * {@inheritDoc}

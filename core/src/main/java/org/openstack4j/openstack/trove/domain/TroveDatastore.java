@@ -1,11 +1,12 @@
 package org.openstack4j.openstack.trove.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.List;
+
 import org.openstack4j.model.trove.Datastore;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * Model implementation for Datastore
@@ -16,8 +17,11 @@ import java.util.List;
 @JsonRootName("datastore")
 public class TroveDatastore implements Datastore {
 
+    private static final long serialVersionUID = 1L;
+
     private String id;
     private String name;
+    private String type;
     private String default_version;
     @JsonProperty("versions")
     private List<TroveDatastoreVersion> troveDatastoreVersionList;
@@ -36,6 +40,14 @@ public class TroveDatastore implements Datastore {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getId() {
@@ -66,6 +78,5 @@ public class TroveDatastore implements Datastore {
         }
 
     }
-
 
 }

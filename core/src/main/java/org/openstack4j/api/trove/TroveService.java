@@ -36,6 +36,13 @@ public interface TroveService extends RestService {
      *
      * @return DBInstanceFlavorService
      */
-    DBInstanceFlavorService flavorService();
+    InstanceFlavorService flavorService();
+
+    /**
+     * Service implementation which provides methods for manipulation of database instances
+     *
+     * @return InstanceService
+     */
+    InstanceService instanceService();
 
 }

@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.trove.internal;
 
-import org.openstack4j.api.trove.DBInstanceFlavorService;
+import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.model.trove.Flavor;
 import org.openstack4j.openstack.trove.domain.TroveInstanceFlavor;
 import org.openstack4j.openstack.trove.domain.TroveInstanceFlavor.Flavors;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author sumit gandhi
  */
-public class DBFlavorServiceImpl extends BaseTroveServices implements DBInstanceFlavorService {
+public class DBFlavorServiceImpl extends BaseTroveServices implements InstanceFlavorService {
 
     /**
      * {@inheritDoc}

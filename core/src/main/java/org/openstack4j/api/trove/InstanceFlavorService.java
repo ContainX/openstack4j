@@ -10,7 +10,7 @@ import java.util.List;
  * @author sumit gandhi
  */
 
-public interface DBInstanceFlavorService {
+public interface InstanceFlavorService {
 
     /**
      * Returns all the available database instance flavors
