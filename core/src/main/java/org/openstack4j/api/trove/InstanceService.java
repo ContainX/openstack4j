@@ -2,6 +2,7 @@ package org.openstack4j.api.trove;
 
 import java.util.List;
 
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.trove.Instance;
 import org.openstack4j.model.trove.InstanceCreate;
 
@@ -13,6 +14,6 @@ public interface InstanceService {
 
     Instance create(InstanceCreate instanceCreate);
 
-    Instance update(InstanceCreate instanceCreate);
+    ActionResponse delete(String id);
 
 }

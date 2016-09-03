@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.trove.InstanceService;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.trove.Instance;
 import org.openstack4j.model.trove.InstanceCreate;
 import org.openstack4j.openstack.trove.domain.TroveInstance;
@@ -49,8 +50,8 @@ public class DBInstanceServiceImpl extends BaseTroveServices implements Instance
      * {@inheritDoc}
      */
     @Override
-    public Instance update(InstanceCreate instanceCreate) {
-        return put(TroveInstance.class, uri("/instances")).entity(instanceCreate).execute();
+    public ActionResponse delete(String id) {
+        checkNotNull(id);
+        return deleteWithResponse(uri("/instances/%s", id)).execute();
     }
-
 }
