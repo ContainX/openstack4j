@@ -380,7 +380,34 @@
 			"type": "clustering",
 			"id": "1fafaecc7eb2475fb2cf50d420f88cfa",
 			"name": "senlin"
-		  }
+			}, {
+			"endpoints": [
+				{
+					"region_id": "RegionOne",
+					"url": "http://127.0.0.1:9311",
+					"region": "RegionOne",
+					"interface": "admin",
+					"id": "002ac55c6cf344cc9023d2841b45ffa9"
+				},
+				{
+					"region_id": "RegionOne",
+					"url": "http://127.0.0.1:9311",
+					"region": "RegionOne",
+					"interface": "internal",
+					"id": "002ac55c6cf344cc9023d2841b45ffa8"
+				},
+				{
+					"region_id": "RegionOne",
+					"url": "http://127.0.0.1:9311",
+					"region": "RegionOne",
+					"interface": "public",
+					"id": "002ac55c6cf344cc9023d2841b45ffa7"
+				}
+			],
+			"type": "key-manager",
+			"id": "002ac55c6cf344cc9023d2841b45ffa6",
+			"name": "barbican"
+			}
 		],
 		"extras": {},
 		"user": {

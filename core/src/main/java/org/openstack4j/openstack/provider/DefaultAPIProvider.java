@@ -2,6 +2,8 @@ package org.openstack4j.openstack.provider;
 
 import com.google.common.collect.Maps;
 import org.openstack4j.api.APIProvider;
+import org.openstack4j.api.barbican.BarbicanService;
+import org.openstack4j.api.barbican.ContainerService;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
@@ -128,6 +130,8 @@ import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.api.telemetry.ResourceService;
 import org.openstack4j.api.telemetry.SampleService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
+import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
@@ -406,6 +410,8 @@ public class DefaultAPIProvider implements APIProvider {
         bind(HealthMonitorV2Service.class, HealthMonitorV2ServiceImpl.class);
         bind(LbPoolV2Service.class, LbPoolV2ServiceImpl.class);
         bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
+        bind(BarbicanService.class, BarbicanServiceImpl.class);
+        bind(ContainerService.class, ContainerServiceImpl.class);
     }   
 
     /**
