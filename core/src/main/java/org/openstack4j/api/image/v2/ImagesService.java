@@ -4,6 +4,7 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.image.v2.Image;
+import org.openstack4j.model.image.v2.ImageUpdate;
 import org.openstack4j.model.image.v2.Member;
 import org.openstack4j.model.image.v2.MemberCreate;
 import org.openstack4j.model.image.v2.MemberUpdate;
@@ -54,9 +55,22 @@ public interface ImagesService extends RestService {
      */
     Image create(Image image);
 
-    //TODO: is update different?
-//    http://developer.openstack.org/api-ref-image-v2.html#updateImage-v2
+    /**
+     * Update image by providing the changed image object.
+     * @param image
+     * @return image
+     */
     Image update(Image image);
+
+    /**
+     * Update an image by building the string of json operations
+     * that represent the json transformation
+     * instead of the building the whole image
+     * @param imageId
+     * @param imageUpdate
+     * @return Image
+     */
+    Image update(String imageId, ImageUpdate imageUpdate);
 
     /**
      * Deletes an image.
@@ -146,8 +160,6 @@ public interface ImagesService extends RestService {
      * @param tag
      * @return
      */
-    //todo check if this is true about using update
-    //todo fix formating with how to ref another funct javadoc
     ActionResponse deleteTag(String imageId, String tag);
 
 //    UPLOADS AND DOWNLOADS raw image data.
@@ -163,8 +175,7 @@ public interface ImagesService extends RestService {
 //            (Since Image API v2.0) Downloads binary image data.
 
     //need content-type header of: application/octet-stream
-    Image upload(String imageId, Payload<?> payload, @Nullable Image image);
+    ActionResponse upload(String imageId, Payload<?> payload, @Nullable Image image);
 
-    // TODO: what does download return?
     ActionResponse download(String imageId, File filename);
 }

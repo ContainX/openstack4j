@@ -359,8 +359,16 @@ public class GlanceImage implements Image {
                 .add("self", self)
                 .add("file", file)
                 .add("schema", schema)
+                .add("architecture", architecture)
+                .add("instanceUuid", instanceUuid)
+                .add("kernelId", kernelId)
+                .add("osVersion", osVersion)
+                .add("osDistro", osDistro)
+                .add("ramdiskId", ramdiskId)
+                .add("virtualSize", virtualSize)
                 .toString();
     }
+
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Images extends ListResult<GlanceImage> {

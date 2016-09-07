@@ -1,19 +1,33 @@
 package org.openstack4j.openstack.image.v2;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.github.fge.jsonpatch.diff.JsonDiff;
 import org.openstack4j.api.image.v2.ImagesService;
+import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.image.v2.Image;
+import org.openstack4j.model.image.v2.ImageUpdate;
 import org.openstack4j.model.image.v2.Member;
 import org.openstack4j.model.image.v2.MemberCreate;
 import org.openstack4j.model.image.v2.MemberUpdate;
 
 import javax.annotation.Nullable;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_IMAGE_V2_PATCH;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_OCTECT_STREAM;
+import static org.openstack4j.core.transport.ClientConstants.HEADER_ACCEPT;
+import static org.openstack4j.core.transport.ClientConstants.HEADER_CONTENT_TYPE;
 
 /**
  * OpenStack (Glance) V2 Image based Operations
@@ -60,9 +74,38 @@ public class ImagesServiceImpl extends BaseImageServices implements ImagesServic
      */
     @Override
     public Image update(Image image) {
-        //TODO: figure out patching
-        //http://specs.openstack.org/openstack/glance-specs/specs/api/v2/http-patch-image-api-v2.html
-        return null;
+        checkNotNull(image);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Image origImage = get(image.getId());
+        ObjectNode origJson;
+        ObjectNode newJson;
+
+        try {
+            String oImg = objectMapper.writeValueAsString(origImage);
+            origJson = (ObjectNode) objectMapper.readTree(oImg);
+
+            String img = objectMapper.writeValueAsString(image);
+            newJson = (ObjectNode) objectMapper.readTree(img);
+
+            JsonNode jsonDiff = JsonDiff.asJson(origJson, newJson);
+            GlanceImageUpdate giu = new GlanceImageUpdate(jsonDiff);
+            return update(image.getId(), giu);
+
+        }catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Image update(String imageId, ImageUpdate imageUpdate) {
+        checkNotNull(imageId);
+        checkNotNull(imageUpdate);
+        return patch(GlanceImage.class, uri("/images/%s", imageId)).header(HEADER_CONTENT_TYPE, CONTENT_TYPE_IMAGE_V2_PATCH).entity(imageUpdate).execute();
     }
 
     /**
@@ -96,11 +139,10 @@ public class ImagesServiceImpl extends BaseImageServices implements ImagesServic
      * {@inheritDoc}
      */
     @Override
-    public Image upload(String imageId, Payload<?> payload, @Nullable Image image) {
-        //TODO: this. see v1
+    public ActionResponse upload(String imageId, Payload<?> payload, @Nullable Image image) {
         checkNotNull(imageId);
         checkNotNull(payload);
-        return null;
+        return put(ActionResponse.class, uri("/images/%s/file",imageId)).header(HEADER_CONTENT_TYPE,CONTENT_TYPE_OCTECT_STREAM).entity(payload).execute();
     }
 
     /**
@@ -108,7 +150,29 @@ public class ImagesServiceImpl extends BaseImageServices implements ImagesServic
      */
     @Override
     public ActionResponse download(String imageId, File filename) {
-        //TODO: this. see v1
+        checkNotNull(imageId);
+        checkNotNull(filename);
+
+        HttpResponse response = get(Void.class, uri("/images/%s/file", imageId)).header(HEADER_ACCEPT, CONTENT_TYPE_OCTECT_STREAM).executeWithResponse();
+        if (response.getStatus() < 400) {
+            InputStream inputStream = response.getInputStream();
+            OutputStream outputStream;
+            try {
+                outputStream = new FileOutputStream(filename);
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while((bytesRead = inputStream.read(buffer)) !=-1){
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                inputStream.close();
+                outputStream.flush();
+                outputStream.close();
+                return ActionResponse.actionSuccess();
+            }catch (Exception e) {
+                e.printStackTrace();
+                 return ActionResponse.actionFailed("Failed to write to file " + e.getMessage(), 400);
+            }
+        }
         return null;
     }
 
@@ -164,7 +228,6 @@ public class ImagesServiceImpl extends BaseImageServices implements ImagesServic
         checkNotNull(imageId);
         checkNotNull(memberId);
         return get(Member.class, uri("/images/%s/members/%s", imageId, memberId)).execute();
-
     }
 
     /**

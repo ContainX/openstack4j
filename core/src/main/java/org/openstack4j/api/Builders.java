@@ -47,6 +47,8 @@ import org.openstack4j.model.identity.v3.builder.RoleBuilder;
 import org.openstack4j.model.identity.v3.builder.ServiceBuilder;
 import org.openstack4j.model.identity.v3.builder.UserBuilder;
 import org.openstack4j.model.image.builder.ImageBuilder;
+import org.openstack4j.model.image.v2.builder.ImageUpdateBuilder;
+import org.openstack4j.model.image.v2.builder.PatchOperationBuilder;
 import org.openstack4j.model.image.v2.builder.TaskBuilder;
 import org.openstack4j.model.manila.builder.SecurityServiceCreateBuilder;
 import org.openstack4j.model.manila.builder.ShareCreateBuilder;
@@ -155,8 +157,10 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser;
 import org.openstack4j.openstack.image.domain.GlanceImage;
+import org.openstack4j.openstack.image.v2.GlanceImageUpdate;
 import org.openstack4j.openstack.image.v2.GlanceMemberCreate;
 import org.openstack4j.openstack.image.v2.GlanceMemberUpdate;
+import org.openstack4j.openstack.image.v2.GlancePatchOperation;
 import org.openstack4j.openstack.image.v2.GlanceTask;
 import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.ManilaSecurityServiceCreate;
@@ -1222,5 +1226,22 @@ public class Builders {
      */
     public static TaskBuilder taskBuilder() {
         return GlanceTask.builder();
+    }
+
+    /**
+     * Image V2 json patch update builder
+     * @return the image patch update builder
+     */
+    public static ImageUpdateBuilder imageUpdateV2() {
+        return GlanceImageUpdate.builder();
+    }
+
+    /**
+     * Patch operation builder for Json Patch operation
+     * Used in Image V2
+     * @return the patch operation builder
+     */
+    public static PatchOperationBuilder patchOperation() {
+        return GlancePatchOperation.builder();
     }
 }
