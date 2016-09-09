@@ -27,4 +27,9 @@ public interface RoleBuilder extends Builder<RoleBuilder, Role> {
      */
     RoleBuilder links(Map<String, String> links);
 
+    /**
+     * @see Role#getLinks()
+     */
+	RoleBuilder domainId(String domainId);
+
 }
