@@ -1,31 +1,25 @@
 package org.openstack4j.openstack.heat.domain;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.builder.StackCreateBuilder;
 import org.openstack4j.openstack.heat.utils.Environment;
 import org.openstack4j.openstack.heat.utils.Template;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonParseException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class contains all elements required for the creation of a HeatStack. It
  * uses Jackson annotation for (de)serialization into JSON
- * 
+ *
  * @author Matthias Reisser
- * 
+ *
  */
 public class HeatStackCreate implements StackCreate {
-    
+
 	private static final long serialVersionUID = -8775995682456485275L;
     private static final Logger LOG = LoggerFactory.getLogger(HeatStackCreate.class);
 
@@ -45,11 +39,13 @@ public class HeatStackCreate implements StackCreate {
 	private String environment;
 	@JsonProperty("files")
 	private Map<String, String> files = new HashMap<String, String>();
+	@JsonProperty("tags")
+	private String tags;
 
 	/**
 	 * Returnes a {@link HeatStackCreateConcreteBuilder} for configuration and
 	 * creation of a {@link HeatStackCreate} object.
-	 * 
+	 *
 	 * @return a {@link HeatStackCreateConcreteBuilder}
 	 */
 	public static HeatStackCreateConcreteBuilder build() {
@@ -84,22 +80,25 @@ public class HeatStackCreate implements StackCreate {
 	public String getTempateURL() {
 	    return templateURL;
 	}
-	
+
 	public String getEnvironment(){
 	    return environment;
 	}
-	
+
 	public Map<String, String> getFiles() {
 	    return files;
 	}
-	
-	
+
+	public String getTags() {
+		return tags;
+	}
+
 	/**
 	 * A Builder to create a HeatStack. Use {@link #build()} to receive the
 	 * {@link StackCreate} object.
-	 * 
+	 *
 	 * @author Matthias Reisser
-	 * 
+	 *
 	 */
 	public static class HeatStackCreateConcreteBuilder implements
 			StackCreateBuilder {
@@ -117,7 +116,7 @@ public class HeatStackCreate implements StackCreate {
 		/**
 		 * Constructor for manipulation of an existing {@link HeatStackCreate}
 		 * object.
-		 * 
+		 *
 		 * @param model
 		 *            the {@link HeatStackCreate} object which is to be
 		 *            modified.
@@ -166,7 +165,7 @@ public class HeatStackCreate implements StackCreate {
            model.template = template;
            return this;
         }
-        
+
         @Override
         public StackCreateBuilder templateFromFile(String tplFile) {
             try {
@@ -175,22 +174,22 @@ public class HeatStackCreate implements StackCreate {
                 model.files.putAll(tpl.getFiles());
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
-            } 
+            }
             return this;
         }
-        
+
         @Override
         public StackCreateBuilder templateURL(String templateURL) {
            model.templateURL = templateURL;
            return this;
         }
-        
+
         @Override
         public StackCreateBuilder environment(String environment){
             model.environment = environment;
             return this;
         }
-        
+
         @Override
         public StackCreateBuilder environmentFromFile(String envFile) {
             try {
@@ -202,10 +201,16 @@ public class HeatStackCreate implements StackCreate {
             }
             return this;
         }
-        
+
         @Override
 		public StackCreateBuilder files(Map<String, String> files) {
 			model.files = files;
+			return this;
+		}
+
+		@Override
+		public StackCreateBuilder tags(String tags) {
+			model.tags = tags;
 			return this;
 		}
 

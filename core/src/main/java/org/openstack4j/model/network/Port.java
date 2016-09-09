@@ -56,5 +56,10 @@ public interface Port extends Resource, Buildable<PortBuilder> {
    */
   List<String> getSecurityGroups();
 
+  /**
+   * @return The port security status. A valid value is enabled (true) or disabled (false).
+   */
+  boolean isPortSecurityEnabled();
+
 	
 }

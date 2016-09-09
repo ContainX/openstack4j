@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openstack4j.api.compute.ext.InstanceActionsService;
 import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.common.ActionResponse;
@@ -11,6 +12,7 @@ import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.ServerPassword;
 import org.openstack4j.model.compute.ServerUpdateOptions;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
@@ -323,4 +325,19 @@ public interface ServerService {
      * @return the interface service
      */
     InterfaceService interfaces();
+    
+    /**
+     * The instance actions service extension (os-instance-actions)
+     * @return the instance actions service
+     */
+    InstanceActionsService instanceActions();
+
+    /**
+     * Returns the encrypted password for the specified server which can be decrypted with
+     * the private key
+     * 
+     * @param serverId the server identifier
+     * @return the encrypted server password
+     */
+    ServerPassword getPassword(String serverId);
 }

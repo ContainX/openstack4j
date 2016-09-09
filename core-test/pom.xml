@@ -2,7 +2,7 @@
 	<parent>
 		<groupId>org.pacesys</groupId>
 		<artifactId>openstack4j-parent</artifactId>
-		<version>2.20-SNAPSHOT</version>
+		<version>3.0.3-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-core-test</artifactId>
@@ -14,34 +14,34 @@
 	</properties>
 	<dependencies>
 		<dependency>
-					<groupId>org.pacesys</groupId>
-					<artifactId>openstack4j-core</artifactId>
-					<version>${project.version}</version>
-				</dependency>
-				<dependency>
-						<groupId>com.squareup.okhttp3</groupId>
-						<artifactId>mockwebserver</artifactId>
-						<version>3.2.0</version>
-						<scope>provided</scope>
-					</dependency>
-					<dependency>
-						<groupId>org.mockito</groupId>
-						<artifactId>mockito-core</artifactId>
-						<version>1.9.0</version>
-						<scope>provided</scope>
-					</dependency>
-					<dependency>
-						<groupId>org.testng</groupId>
-						<artifactId>testng</artifactId>
-						<version>6.8</version>
-						<scope>provided</scope>
-						<exclusions>
-							<exclusion>
-								<groupId>junit</groupId>
-								<artifactId>junit</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-    </dependencies>
+			<groupId>org.pacesys</groupId>
+			<artifactId>openstack4j-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>mockwebserver</artifactId>
+			<version>3.2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
 
 </project>

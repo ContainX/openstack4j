@@ -1,0 +1,24 @@
+{
+   "policy_classifiers":[
+      {
+         "direction":"bi",
+         "protocol":"icmp",
+         "name":"icmp",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "port_range":null,
+         "shared":false,
+         "id":"36e41adb-0b9b-4a11-abd5-66e5386139d4",
+         "description":""
+      },
+      {
+         "direction":"bi",
+         "protocol":"tcp",
+         "name":"tcp-22-classifier",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "port_range":"22",
+         "shared":false,
+         "id":"48c702a8-80e0-4781-a8d5-80ae7de53cdc",
+         "description":""
+      }
+   ]
+}

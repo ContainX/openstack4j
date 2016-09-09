@@ -54,8 +54,8 @@ public class NovaServer implements Server {
 	public Date created;
 	public Map<String, String> metadata;
 
-//	@JsonProperty("security_groups")
-//	private List<SecurityGroup> securityGroups;
+	@JsonProperty("security_groups")
+	private List<NovaSecurityGroup> securityGroups;
 
 	@JsonProperty("OS-EXT-STS:task_state")
 	private String taskState;
@@ -202,6 +202,11 @@ public class NovaServer implements Server {
 		return metadata;
 	}
 
+    @Override
+    public List<? extends NovaSecurityGroup> getSecurityGroups() {
+        return securityGroups;
+    }
+     
 	@Override
 	public String getTaskState() {
 		return taskState;
@@ -291,7 +296,8 @@ public class NovaServer implements Server {
 		@JsonProperty("servers")
 		private List<NovaServer> servers;
 		
-		public List<NovaServer> value() {
+		@Override
+        public List<NovaServer> value() {
 			return servers;
 		}
 	}

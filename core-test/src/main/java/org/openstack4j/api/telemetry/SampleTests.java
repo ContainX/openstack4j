@@ -1,21 +1,19 @@
 package org.openstack4j.api.telemetry;
 
-import org.openstack4j.api.AbstractTest;
-import org.openstack4j.model.telemetry.Event;
-import org.openstack4j.model.telemetry.Sample;
-import org.openstack4j.model.telemetry.Trait;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import org.openstack4j.api.AbstractTest;
+import org.openstack4j.model.telemetry.Sample;
+import org.testng.annotations.Test;
 
-@Test(suiteName="Sample Tests")
+@Test(suiteName = "Sample Tests")
 public class SampleTests extends AbstractTest {
-
     private static final String JSON_SAMPLES = "/telemetry/samples.json";
+    private static final String JSON_SAMPLE = "/telemetry/sample.json";
 
     @Override
     protected Service service() {
@@ -23,17 +21,23 @@ public class SampleTests extends AbstractTest {
     }
 
     @Test
-    public void listTest() throws IOException {
+    public void listSampleTest() throws IOException {
         respondWith(JSON_SAMPLES);
 
-        List<? extends Sample> samples = os().telemetry().meters().samples("cpu");
-        assertEquals(samples.size(), 3);
+        List<? extends Sample> samples = osv2().telemetry().samples().list();
+        assertEquals(samples.size(), 2);
 
         Sample sample = samples.get(0);
-        assertEquals(sample.getCounterName(), "cpu");
+        assertEquals(sample.getMeter(), "image.size");
         assertNotNull(sample.getMetadata());
-        assertEquals(sample.getMetadata().size(), 26);
+    }
 
+    @Test
+    public void getSampleTest() throws IOException {
+        respondWith(JSON_SAMPLE);
+        Sample sample = osv2().telemetry().samples().get("1e93a890-3732-11e6-a491-005056ac9b87");
+        assertEquals(sample.getMeter(), "image.size");
+        assertNotNull(sample.getMetadata());
     }
 
 }

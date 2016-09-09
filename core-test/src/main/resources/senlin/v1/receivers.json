@@ -1,0 +1,109 @@
+{
+    "receivers": [
+        {
+            "action": "CLUSTER_SCALE_OUT",
+            "actor": {
+                "trust_id": "b48a20f764eb40c7b2ad501f16f59fec"
+            },
+            "channel": {
+                "alarm_url": "http://10.158.247.76:8778/v1/webhooks/05f72ca7-d0cd-4e9c-9f84-caec408e7580/trigger?V=1&count=1"
+            },
+            "cluster_id": "5938380f-6903-4322-bdd9-d0597a0b6f41",
+            "created_at": "2016-05-25T08:34:24",
+            "domain": null,
+            "id": "05f72ca7-d0cd-4e9c-9f84-caec408e7580",
+            "name": "lion-test",
+            "params": {
+                "count": "1"
+            },
+            "project": "7b2171b528bb48ba8a0c180ea135e224",
+            "type": "webhook",
+            "updated_at": null,
+            "user": "fa465946d3aa4b4caa411da77632d6b6"
+        },
+        {
+            "action": "CLUSTER_SCALE_OUT",
+            "actor": {
+                "trust_id": "b48a20f764eb40c7b2ad501f16f59fec"
+            },
+            "channel": {
+                "alarm_url": "http://10.158.247.76:8778/v1/webhooks/18bfa817-394c-4cd2-a37a-9947add37ef5/trigger?V=1&count=1"
+            },
+            "cluster_id": "07e2e41b-7aa7-42c8-9318-87ef94c78bd7",
+            "created_at": "2016-05-26T08:29:52",
+            "domain": null,
+            "id": "18bfa817-394c-4cd2-a37a-9947add37ef5",
+            "name": "lion-test",
+            "params": {
+                "count": "1"
+            },
+            "project": "7b2171b528bb48ba8a0c180ea135e224",
+            "type": "webhook",
+            "updated_at": null,
+            "user": "fa465946d3aa4b4caa411da77632d6b6"
+        },
+        {
+            "action": "CLUSTER_SCALE_OUT",
+            "actor": {
+                "trust_id": "b48a20f764eb40c7b2ad501f16f59fec"
+            },
+            "channel": {
+                "alarm_url": "http://10.158.247.76:8778/v1/webhooks/2eb369be-359b-4df0-89de-bf49f3c76620/trigger?V=1&count=1"
+            },
+            "cluster_id": "250d1077-d68d-4b1b-979b-079cf601e4a8",
+            "created_at": "2016-05-29T07:34:37",
+            "domain": null,
+            "id": "2eb369be-359b-4df0-89de-bf49f3c76620",
+            "name": "lion-test",
+            "params": {
+                "count": "1"
+            },
+            "project": "7b2171b528bb48ba8a0c180ea135e224",
+            "type": "webhook",
+            "updated_at": null,
+            "user": "fa465946d3aa4b4caa411da77632d6b6"
+        },
+        {
+            "action": "CLUSTER_SCALE_OUT",
+            "actor": {
+                "trust_id": "b48a20f764eb40c7b2ad501f16f59fec"
+            },
+            "channel": {
+                "alarm_url": "http://10.158.247.76:8778/v1/webhooks/51575fae-a83c-44ac-9214-337663dd04f9/trigger?V=1&count=1"
+            },
+            "cluster_id": "8c596d52-5657-4f09-a825-c6140231d961",
+            "created_at": "2016-05-25T08:45:10",
+            "domain": null,
+            "id": "51575fae-a83c-44ac-9214-337663dd04f9",
+            "name": "lion-test",
+            "params": {
+                "count": "1"
+            },
+            "project": "7b2171b528bb48ba8a0c180ea135e224",
+            "type": "webhook",
+            "updated_at": null,
+            "user": "fa465946d3aa4b4caa411da77632d6b6"
+        },
+        {
+            "action": "CLUSTER_SCALE_OUT",
+            "actor": {
+                "trust_id": "b48a20f764eb40c7b2ad501f16f59fec"
+            },
+            "channel": {
+                "alarm_url": "http://10.158.247.76:8778/v1/webhooks/b23308f5-c4c3-4b30-9726-bdd1857a5db8/trigger?V=1&count=1"
+            },
+            "cluster_id": "17192bab-aca9-4a81-98d7-822f4d62c28b",
+            "created_at": "2016-05-25T08:38:41",
+            "domain": null,
+            "id": "b23308f5-c4c3-4b30-9726-bdd1857a5db8",
+            "name": "lion-test",
+            "params": {
+                "count": "1"
+            },
+            "project": "7b2171b528bb48ba8a0c180ea135e224",
+            "type": "webhook",
+            "updated_at": null,
+            "user": "fa465946d3aa4b4caa411da77632d6b6"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "users": [{
+        "name": "foobar",
+        "links": {
+            "self": "http://devstack.openstack.stack:5000/v3/users/29d5aaaa6d3b471e9c101ae470e649a6"
+        },
+        "domain_id": "default",
+        "enabled": true,
+        "email": "foobar@example.org",
+        "id": "29d5aaaa6d3b471e9c101ae470e649a6"
+    }],
+    "links": {
+        "self": "http://devstack.openstack.stack:5000/v3/users?domain_id=default&name=foobar",
+        "previous": null,
+        "next": null
+    }
+}

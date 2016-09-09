@@ -5,129 +5,101 @@ import java.util.Map;
 import org.openstack4j.model.ModelEntity;
 
 /**
- * A single measurement for a given meter and resource.
+ * A single measurement for Sample.
  * 
- * @author Jeremy Unruh
+ * @author Shital Patil
  */
+
 public interface Sample extends ModelEntity {
 
-	/**
-	 * @return the name of the meter
-	 */
-	String getCounterName();
-	
-	/**
-	 * @return the type of meter
-	 */
-	Meter.Type getCounterType();
+    /**
+     * @return the idof the meter
+     */
+    String getId();
 
-	/**
-	 * @return The unit of measure for the value in the counter volume
-	 */
-	String getCounterUnit();
+    /**
+     * @return Arbitrary metadata associated with the resource
+     */
+    Map<String, Object> getMetadata();
 
-	/**
-	 * @return the actual measured value
-	 */
-	Float getCounterVolume();
+    /**
+     * @return Arbitrary metadata associated with the resource
+     */
+    void setMetadata(Map<String, Object> metadata);
 
-	/**
-	 * @return The ID of the source that identifies where the sample comes from
-	 */
-	String getSource();
+    /**
+     * @return the meter
+     */
+    String getMeter();
 
-	/**
-	 * @return he ID of the project or tenant that owns the resource
-	 */
-	String getProjectId();
+    /**
+     * @return the actual measured value
+     */
+    Float getVolume();
 
-	/**
-	 * @return The ID of the user who last triggered an update to the resource
-	 */
-	String getUserId();
+    /**
+     * @return The ID of the source that identifies where the sample comes from
+     */
+    String getSource();
 
-	/**
-	 * @return The ID of the Resource for which the measurements are taken
-	 */
-	String getResourceId();
+    /**
+     * @return The ID of the source that identifies where the sample comes from
+     */
+    void setSource(String source);
 
-	/**
-	 * @return UTC date and time when the measurement was made
-	 */
-	String getTimestamp();
-	
-	/**
-   * @return UTC date and time when the sample was recorded
-   */
-	String getRecordedAt();
+    /**
+     * @return The ID of the Resource for which the measurements are taken
+     */
+    String getResourceId();
 
-	/**
-	 * @return A unique identifier for the sample
-	 */
-	String getMessageId();
+    /**
+     * @return The ID of the Resource for which the measurements are taken
+     */
+    void setResourceId(String resourceId);
 
-	/**
-	 * @return Arbitrary metadata associated with the resource
-	 */
-	Map<String, Object> getMetadata();
+    /**
+     * @return UTC date and time when the measurement was made
+     */
+    String getTimestamp();
 
-	/**
-	 * @return the name of the meter
-	 */
-	void setCounterName(String counterName);
-	
-	/**
-	 * @return the type of meter
-	 */
-	void setCounterType(Meter.Type meterType);
+    /**
+     * @return UTC date and time when the measurement was made
+     */
+    void setTimestamp(String timestamp);
 
-	/**
-	 * @return The unit of measure for the value in the counter volume
-	 */
-	void setCounterUnit(String counterUnit);
+    /**
+     * @return UTC date and time when the sample was recorded
+     */
+    String getRecordedAt();
 
-	/**
-	 * @return the actual measured value
-	 */
-	void setCounterVolume(Float counterVolume);
+    /**
+     * @return UTC date and time when the sample was recorded
+     */
+    void setRecordedAt(String date);
 
-	/**
-	 * @return The ID of the source that identifies where the sample comes from
-	 */
-	void setSource(String source);
+    /**
+     * @return he ID of the project or tenant that owns the resource
+     */
+    String getProjectId();
 
-	/**
-	 * @return he ID of the project or tenant that owns the resource
-	 */
-	void  setProjectId(String projectId);
+    /**
+     * @return he ID of the project or tenant that owns the resource
+     */
+    void setProjectId(String projectId);
 
-	/**
-	 * @return The ID of the user who last triggered an update to the resource
-	 */
-	void setUserId(String userId);
+    /**
+     * @return the type of meter
+     */
+    Meter.Type getType();
 
-	/**
-	 * @return The ID of the Resource for which the measurements are taken
-	 */
-	void setResourceId(String resourceId);
+    /**
+     * @return The ID of the user who last triggered an update to the resource
+     */
+    String getUserId();
 
-	/**
-	 * @return UTC date and time when the measurement was made
-	 */
-	void setTimestamp(String timestamp);
-	
-	/**
-   * @return UTC date and time when the sample was recorded
-   */
-	void setRecordedAt(String date);
+    /**
+     * @return Returns unit
+     */
+    String getUnit();
 
-	/**
-	 * @return A unique identifier for the sample
-	 */
-	void  setMessageId(String messageId);
-
-	/**
-	 * @return Arbitrary metadata associated with the resource
-	 */
-	void setMetadata(Map<String, Object> metadata);
 }

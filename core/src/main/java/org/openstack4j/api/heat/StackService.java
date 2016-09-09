@@ -70,6 +70,15 @@ public interface StackService {
 	List<? extends Stack> list();
 
 	/**
+	 * Gets a list of currently existing {@link Stack} objects, filtered by parameters.
+	 *
+	 * @param filteringParams The parameters used to filter the stacks returned.
+	 *
+	 * @return the list of {@link Stack} objects.
+	 */
+	public List<? extends Stack> list(Map<String, String> filteringParams);
+
+	/**
 	 * returns details of a {@link Stack}.
 	 * 
 	 * @param stackName

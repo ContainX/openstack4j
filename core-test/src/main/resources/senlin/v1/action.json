@@ -1,0 +1,23 @@
+{
+    "action": {
+        "action": "CLUSTER_SCALE_IN",
+        "cause": "RPC Request",
+        "created_at": "2016-06-15T02:42:38.000000",
+        "data": {},
+        "depended_by": [],
+        "depends_on": [],
+        "end_time": 1465958528,
+        "id": "ffbb9175-d510-4bc1-b676-c6aba2a4ca81",
+        "inputs": {},
+        "interval": -1,
+        "name": "webhook_991e3872",
+        "outputs": {},
+        "owner": null,
+        "start_time": 1465958528,
+        "status": "FAILED",
+        "status_reason": "The target capacity (0) is less than the cluster's min_size (1).",
+        "target": "aff44f0d-5078-4e06-974e-5d2bc8ac1856",
+        "timeout": 3600,
+        "updated_at": null
+    }
+}

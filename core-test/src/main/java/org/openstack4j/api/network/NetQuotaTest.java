@@ -16,7 +16,7 @@ public class NetQuotaTest extends AbstractTest {
 
     public void testListQuota() throws IOException {
         respondWith(QUOTA_JSON);
-        NetQuota netQuota = os().networking().quotas().get("tenant-id");
+        NetQuota netQuota = osv3().networking().quotas().get("tenant-id");
         assertEquals(10, netQuota.getSubnet());
         assertEquals(11, netQuota.getRouter());
         assertEquals(12, netQuota.getPort());

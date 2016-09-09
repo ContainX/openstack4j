@@ -1,25 +1,20 @@
 package org.openstack4j.openstack.heat.domain;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openstack4j.model.heat.StackUpdate;
 import org.openstack4j.model.heat.builder.StackUpdateBuilder;
 import org.openstack4j.openstack.heat.utils.Environment;
 import org.openstack4j.openstack.heat.utils.Template;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonParseException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Model Entity used for updating a Stack
- * 
+ *
  * @author Jeremy Unruh
  */
 public class HeatStackUpdate implements StackUpdate {
@@ -39,11 +34,13 @@ public class HeatStackUpdate implements StackUpdate {
     private String environment;
     @JsonProperty("files")
     private Map<String, String> files = new HashMap<String, String>();
- 
+    @JsonProperty("tags")
+    private String tags;
+
     public static StackUpdateBuilder builder() {
         return new HeatStackUpdateConcreteBuilder();
     }
-    
+
     @Override
     public Map<String, String> getParameters() {
         return parameters;
@@ -57,32 +54,36 @@ public class HeatStackUpdate implements StackUpdate {
     public String getTempateURL() {
         return templateURL;
     }
-    
+
     public String getEnvironment(){
         return environment;
     }
-    
+
     public Map<String, String> getFiles() {
         return files;
+    }
+
+    public String getTags() {
+        return tags;
     }
 
     @Override
     public StackUpdateBuilder toBuilder() {
         return new HeatStackUpdateConcreteBuilder(this);
     }
-    
+
     public static class HeatStackUpdateConcreteBuilder implements StackUpdateBuilder {
 
         private HeatStackUpdate model;
-        
+
         public HeatStackUpdateConcreteBuilder() {
             this(new HeatStackUpdate());
         }
-        
+
         public HeatStackUpdateConcreteBuilder(HeatStackUpdate model) {
             this.model = model;
         }
-        
+
         @Override
         public StackUpdate build() {
             return model;
@@ -99,7 +100,7 @@ public class HeatStackUpdate implements StackUpdate {
             model.template = template;
             return this;
         }
-        
+
         @Override
         public StackUpdateBuilder templateFromFile(String tplFile) {
             try {
@@ -108,10 +109,10 @@ public class HeatStackUpdate implements StackUpdate {
                 model.files.putAll(tpl.getFiles());
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
-            } 
+            }
             return this;
         }
-        
+
         @Override
         public StackUpdateBuilder templateURL(String templateURL) {
             model.templateURL = templateURL;
@@ -129,13 +130,13 @@ public class HeatStackUpdate implements StackUpdate {
             model.timeoutMins = timeoutMins;
             return this;
         }
-        
+
         @Override
         public StackUpdateBuilder environment(String environment){
             model.environment = environment;
             return this;
         }
-        
+
         @Override
         public StackUpdateBuilder environmentFromFile(String envFile){
             try {
@@ -144,7 +145,19 @@ public class HeatStackUpdate implements StackUpdate {
                 model.files.putAll(env.getFiles());
             } catch (Exception e) {
                 LOG.error(e.getMessage(), e);
-            } 
+            }
+            return this;
+        }
+
+        @Override
+        public StackUpdateBuilder files(Map<String, String> files) {
+            model.files = files;
+            return this;
+        }
+
+        @Override
+        public StackUpdateBuilder tags(String tags) {
+            model.tags = tags;
             return this;
         }
 

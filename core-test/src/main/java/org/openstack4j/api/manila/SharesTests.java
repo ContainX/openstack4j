@@ -53,7 +53,7 @@ public class SharesTests extends AbstractTest{
                 .size(1)
                 .build();
 
-        Share share = os().share().shares().create(shareCreate);
+        Share share = osv3().share().shares().create(shareCreate);
 
         assertEquals(share.getStatus(), Share.Status.CREATING);
         assertEquals(share.getLinks().size(), 2);
@@ -93,7 +93,7 @@ public class SharesTests extends AbstractTest{
     public void list() throws Exception {
         respondWith(JSON_SHARES);
 
-        List<? extends Share> shares = os().share().shares().list();
+        List<? extends Share> shares = osv3().share().shares().list();
         assertEquals(shares.size(), 3);
 
         Share share1 = shares.get(0);
@@ -138,7 +138,7 @@ public class SharesTests extends AbstractTest{
     public void listDetails() throws Exception {
         respondWith(JSON_SHARES_DETAIL);
 
-        List<? extends Share> shares = os().share().shares().listDetails();
+        List<? extends Share> shares = osv3().share().shares().listDetails();
         assertEquals(shares.size(), 3);
 
         Share share1 = shares.get(0);
@@ -236,7 +236,7 @@ public class SharesTests extends AbstractTest{
     public void get() throws Exception {
         respondWith(JSON_SHARE);
 
-        Share share = os().share().shares().get("3d503524-a906-4757-8576-77a2029ff0c4");
+        Share share = osv3().share().shares().get("3d503524-a906-4757-8576-77a2029ff0c4");
 
         assertEquals(share.getStatus(), Share.Status.ERROR);
         assertEquals(
@@ -273,7 +273,7 @@ public class SharesTests extends AbstractTest{
     public void update() throws Exception {
         respondWith(JSON_SHARE_UPDATE);
 
-        Share share = os().share().shares().update(
+        Share share = osv3().share().shares().update(
                 "3d503524-a906-4757-8576-77a2029ff0c4",
                 ShareUpdateOptions
                         .create()
@@ -315,7 +315,7 @@ public class SharesTests extends AbstractTest{
     public void delete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shares().delete("3d503524-a906-4757-8576-77a2029ff0c4");
+        ActionResponse response = osv3().share().shares().delete("3d503524-a906-4757-8576-77a2029ff0c4");
         assertTrue(response.isSuccess());
     }
 
@@ -323,7 +323,7 @@ public class SharesTests extends AbstractTest{
     public void getMetadata() throws Exception {
         respondWith(JSON_SHARE_METADATA);
 
-        Metadata metadata = os().share().shares().getMetadata("3d503524-a906-4757-8576-77a2029ff0c4");
+        Metadata metadata = osv3().share().shares().getMetadata("3d503524-a906-4757-8576-77a2029ff0c4");
 
         assertTrue(metadata.containsKey("project"));
         assertTrue(metadata.containsKey("aim"));
@@ -340,7 +340,7 @@ public class SharesTests extends AbstractTest{
         metadataMap.put("project", "my_app");
         metadataMap.put("new_metadata_key", "new_information");
 
-        Metadata metadata = os().share().shares().updateMetadata(
+        Metadata metadata = osv3().share().shares().updateMetadata(
                 "3d503524-a906-4757-8576-77a2029ff0c4",
                 Metadata.toMetadata(metadataMap));
 
@@ -359,7 +359,7 @@ public class SharesTests extends AbstractTest{
         Map<String, String> metadataMap = new HashMap<String, String>();
         metadataMap.put("key1", "value1");
 
-        Metadata metadata = os().share().shares().setMetadata(
+        Metadata metadata = osv3().share().shares().setMetadata(
                 "3d503524-a906-4757-8576-77a2029ff0c4",
                 Metadata.toMetadata(metadataMap));
 
@@ -379,7 +379,7 @@ public class SharesTests extends AbstractTest{
     public void unsetMetadata() throws Exception {
         respondWith(200);
 
-        ActionResponse response = os().share().shares().unsetMetadata(
+        ActionResponse response = osv3().share().shares().unsetMetadata(
                 "3d503524-a906-4757-8576-77a2029ff0c4",
                 "key");
         assertTrue(response.isSuccess());
@@ -389,7 +389,7 @@ public class SharesTests extends AbstractTest{
     public void grantAccess() throws Exception {
         respondWith(JSON_SHARE_ACTION_GRANTACCESS);
 
-        Access access = os().share().shares().grantAccess(
+        Access access = osv3().share().shares().grantAccess(
                 "406ea93b-32e9-4907-a117-148b3945749f",
                 AccessOptions.create(
                         Access.Level.RW,
@@ -409,7 +409,7 @@ public class SharesTests extends AbstractTest{
     public void revokeAccess() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shares().revokeAccess(
+        ActionResponse response = osv3().share().shares().revokeAccess(
                 "406ea93b-32e9-4907-a117-148b3945749f",
                 "a25b2df3-90bd-4add-afa6-5f0dbbd50452");
         assertTrue(response.isSuccess());
@@ -419,7 +419,7 @@ public class SharesTests extends AbstractTest{
     public void listAccess() throws Exception {
         respondWith(JSON_SHARE_ACTION_LISTACCESS);
 
-        List<? extends Access> accessList = os().share().shares().listAccess("406ea93b-32e9-4907-a117-148b3945749f");
+        List<? extends Access> accessList = osv3().share().shares().listAccess("406ea93b-32e9-4907-a117-148b3945749f");
 
         Access access1 = accessList.get(0);
         Access access2 = accessList.get(1);
@@ -443,7 +443,7 @@ public class SharesTests extends AbstractTest{
     public void resetState() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shares().resetState(
+        ActionResponse response = osv3().share().shares().resetState(
                 "406ea93b-32e9-4907-a117-148b3945749f",
                 Share.Status.ERROR);
         assertTrue(response.isSuccess());
@@ -453,7 +453,7 @@ public class SharesTests extends AbstractTest{
     public void forceDelete() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shares().forceDelete("406ea93b-32e9-4907-a117-148b3945749f");
+        ActionResponse response = osv3().share().shares().forceDelete("406ea93b-32e9-4907-a117-148b3945749f");
         assertTrue(response.isSuccess());
     }
 
@@ -461,7 +461,7 @@ public class SharesTests extends AbstractTest{
     public void extend() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shares().extend("406ea93b-32e9-4907-a117-148b3945749f", 2);
+        ActionResponse response = osv3().share().shares().extend("406ea93b-32e9-4907-a117-148b3945749f", 2);
         assertTrue(response.isSuccess());
     }
 
@@ -469,7 +469,7 @@ public class SharesTests extends AbstractTest{
     public void shrink() throws Exception {
         respondWith(202);
 
-        ActionResponse response = os().share().shares().shrink("406ea93b-32e9-4907-a117-148b3945749f", 1);
+        ActionResponse response = osv3().share().shares().shrink("406ea93b-32e9-4907-a117-148b3945749f", 1);
         assertTrue(response.isSuccess());
     }
 }

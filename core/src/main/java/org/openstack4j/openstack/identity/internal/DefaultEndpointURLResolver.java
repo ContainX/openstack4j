@@ -2,90 +2,97 @@ package org.openstack4j.openstack.identity.internal;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.concurrent.ConcurrentHashMap;
+import com.google.common.base.Optional;
+import com.google.common.collect.SortedSetMultimap;
 
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.model.identity.Access;
-import org.openstack4j.model.identity.Access.Service;
-import org.openstack4j.model.identity.AuthVersion;
-import org.openstack4j.model.identity.Endpoint;
-import org.openstack4j.model.identity.URLResolverParams;
-import org.openstack4j.model.identity.v3.Catalog;
 import org.openstack4j.model.identity.v3.Token;
-import org.openstack4j.openstack.logging.LoggerFactory;
-
-import com.google.common.base.Optional;
-import com.google.common.collect.SortedSetMultimap;
+import org.openstack4j.model.identity.v2.Access;
+import org.openstack4j.model.identity.v2.Endpoint;
+import org.openstack4j.model.identity.URLResolverParams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Resolves an Endpoint URL based on the Service Type and Facing perspective
- * 
+ *
  * @author Jeremy Unruh
  */
 public class DefaultEndpointURLResolver implements EndpointURLResolver {
-
+    
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultEndpointURLResolver.class);
     private static final Map<Key, String> CACHE = new ConcurrentHashMap<Key, String>();
     private static boolean LEGACY_EP_HANDLING = Boolean.getBoolean(LEGACY_EP_RESOLVING_PROP);
     private String publicHostIP;
+    
+    @Override
+    public String findURLV2(URLResolverParams p) {
+        if (p.type == null) {
+            return p.access.getEndpoint();
+        }
+
+        Key key = Key.of(p.access.getCacheIdentifier(), p.type, p.perspective, p.region);
+        String url = CACHE.get(key);
+
+        if (url != null)
+            return url;
+
+        url = resolveV2(p);
+
+        if (url != null) {
+            return url;
+        } else if (p.region != null)
+            throw RegionEndpointNotFoundException.create(p.region, p.type.getServiceName());
+
+        return p.access.getEndpoint();
+    }
 
     @Override
-    public String findURL(URLResolverParams p) {
+    public String findURLV3(URLResolverParams p) {
 
-        if (p.type == null)
-            return p.access.getEndpoint();
-        Key key = Key.of(p.access.getCacheIdentifier(), p.type, p.perspective, p.region);
+        if (p.type == null) {
+            return p.token.getEndpoint();
+        }
+
+        Key key = Key.of(p.token.getCacheIdentifier(), p.type, p.perspective, p.region);
 
         String url = CACHE.get(key);
 
         if (url != null)
             return url;
 
-        switch (p.access.getVersion()) {
-        case V3:
-            url = resolveV3(p);
-            break;
-        case V2:
-        default:
-            url = resolveV2(p);
-        }
+        url = resolveV3(p);
 
-        if (url != null)
-        {
-            if (p.access.getVersion() == AuthVersion.V3) {
-                CACHE.put(key, url);
-            }
+        if (url != null) {
+            CACHE.put(key, url);
             return url;
-        }
-        else if (p.region != null)
+        } else if (p.region != null)
             throw RegionEndpointNotFoundException.create(p.region, p.type.getServiceName());
 
-        return p.access.getEndpoint();
+        return p.token.getEndpoint();
     }
 
     private String resolveV2(URLResolverParams p) {
-        SortedSetMultimap<String, ? extends Service> catalog = p.access.getAggregatedCatalog();
-        SortedSet<? extends Service> services = catalog.get(p.type.getServiceName());
-        
+        SortedSetMultimap<String, ? extends Access.Service> catalog = p.access.getAggregatedCatalog();
+        SortedSet<? extends Access.Service> services = catalog.get(p.type.getServiceName());
+
         if (services.isEmpty()) {
-            services = catalog.get(p.type.getTypeV3());
+            services = catalog.get(p.type.getType());
         }
-        
-        if (!services.isEmpty())
-        {
-            Service sc = p.getV2Resolver().resolve(p.type, services);
-            for (Endpoint ep : sc.getEndpoints())
-            {
+
+        if (!services.isEmpty()) {
+            Access.Service sc = p.getV2Resolver().resolveV2(p.type, services);
+            for (org.openstack4j.model.identity.v2.Endpoint ep : sc.getEndpoints()) {
                 if (p.region != null && !p.region.equalsIgnoreCase(ep.getRegion()))
                     continue;
 
-                if (sc.getServiceType() == ServiceType.NETWORK)
-                {
+                if (sc.getServiceType() == ServiceType.NETWORK) {
                     sc.getEndpoints().get(0).toBuilder().type(sc.getServiceType().name());
                 }
 
@@ -102,34 +109,50 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
                     return ep.getPublicURL().toString();
                 }
             }
-        }
-        return null;
-    }
-
-    private String resolveV3(URLResolverParams p) {
-        Token token = p.access.unwrap();
-        if (p.perspective == null)
-            p.perspective = Facing.PUBLIC;
-
-
-        for (Catalog catalog : token.getCatalog()) {
-            if (p.type == ServiceType.forName(catalog.getType())) 
-            {
-                for (org.openstack4j.model.identity.v3.Endpoint ep : catalog.getEndpoints()) {
-                    // Since we only support V3 authentication - skip a V3 URL
-                    if (matches(ep, p) && !isEndpointV3(ep.getUrl())) {
-                        return ep.getUrl().toString();
-                    }
-                }
+        } else {
+            //if no catalog returned, if is identity service, just return endpoint
+            if (ServiceType.IDENTITY.equals(p.type)) {
+                return p.access.getEndpoint();
             }
         }
         return null;
     }
 
+    private String resolveV3(URLResolverParams p) {
+        Token token = p.token;
+
+        //in v3 api, if user has no default project, and token is unscoped, no catalog will be returned
+        //then if service is Identity service, should directly return the endpoint back
+        if (token.getCatalog() == null) {
+            if (ServiceType.IDENTITY.equals(p.type)) {
+                return token.getEndpoint();
+            } else {
+                return null;
+            }
+        }
+
+        for (org.openstack4j.model.identity.v3.Service service : token.getCatalog()) {
+            if (p.type == ServiceType.forName(service.getType())) {
+                if (p.perspective == null) {
+                    p.perspective = Facing.PUBLIC;
+                }
+
+                for (org.openstack4j.model.identity.v3.Endpoint ep : service.getEndpoints()) {
+
+                    if (matches(ep, p))
+                        return ep.getUrl().toString();
+                }
+            }
+        }
+
+
+        return null;
+    }
+
     /**
-     * Returns <code>true</code> for any endpoint that matches a given 
+     * Returns <code>true</code> for any endpoint that matches a given
      * {@link URLResolverParams}.
-     * 
+     *
      * @param endpoint
      * @param p
      * @return
@@ -142,10 +165,6 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         return matches;
     }
 
-    private boolean isEndpointV3(URL url) {
-        return url.toString().contains("/v3");
-    }
-
     /**
      * Gets the endpoint url.
      *
@@ -154,13 +173,11 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
      * @return the endpoint url
      */
     private String getEndpointURL(Access access, Endpoint endpoint) {
-        if (LEGACY_EP_HANDLING)
-        {
-            if (endpoint.getAdminURL() != null)
-            {
-                if (getPublicIP(access) != null && !getPublicIP(access).equals(endpoint.getAdminURL().getHost()))
-                {
-                    return endpoint.getAdminURL().toString().replaceAll(endpoint.getAdminURL().getHost(), getPublicIP(access));
+        if (LEGACY_EP_HANDLING) {
+            if (endpoint.getAdminURL() != null) {
+                if (getPublicIP(access) != null && !getPublicIP(access).equals(endpoint.getAdminURL().getHost())) {
+                    return endpoint.getAdminURL().toString().replaceAll(endpoint.getAdminURL().getHost(),
+                            getPublicIP(access));
                 }
                 return endpoint.getAdminURL().toString();
             }
@@ -172,9 +189,8 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         if (publicHostIP == null) {
             try {
                 publicHostIP = new URI(access.getEndpoint()).getHost();
-            }
-            catch (URISyntaxException e) {
-                LoggerFactory.getLogger(DefaultEndpointURLResolver.class).error(e.getMessage(), e);
+            } catch (URISyntaxException e) {
+                LOG.error(e.getMessage(), e);
             }
         }
         return publicHostIP;
@@ -192,15 +208,14 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         }
 
         static Key of(String uid, ServiceType type, Facing perspective, String region) {
-            return new Key((region == null) ? uid : uid+region, type, perspective);
+            return new Key((region == null) ? uid : uid + region, type, perspective);
         }
 
         @Override
         public int hashCode() {
             final int prime = 31;
             int result = 1;
-            result = prime * result
-                    + ((perspective == null) ? 0 : perspective.hashCode());
+            result = prime * result + ((perspective == null) ? 0 : perspective.hashCode());
             result = prime * result + ((type == null) ? 0 : type.hashCode());
             result = prime * result + ((uid == null) ? 0 : uid.hashCode());
             return result;
@@ -226,10 +241,6 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
                 return false;
             return true;
         }
-    }
-
-    public static void enableLegacyEndpointHandling(boolean enabled) {
-        LEGACY_EP_HANDLING = enabled;
     }
 
 }

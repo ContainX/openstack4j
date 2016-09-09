@@ -1,0 +1,16 @@
+{
+  "project": {
+    "is_domain": false,
+    "description": "An updated project used for CRUD tests",
+    "links": {
+      "self": "http://127.0.0.1:5000/v3/projects/3337151a1c38496c8bffcb280b19c346"
+    },
+    "enabled": true,
+    "id": "3337151a1c38496c8bffcb280b19c346",
+    "parent_id": null,
+    "domain_id": "7a71863c2d1d4444b3e6c2cd36955e1e",
+    "name": "ProjectX",
+    "extra_key1": "value1",
+    "extra_key2": "value2"
+  }
+}

@@ -1,7 +1,7 @@
 package org.openstack4j.model.network.builder;
 
 import org.openstack4j.common.Buildable.Builder;
-import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.identity.v3.Tenant;
 import org.openstack4j.model.network.ExtraDhcpOptCreate;
 import org.openstack4j.model.network.Port;
 import org.openstack4j.model.network.State;
@@ -98,8 +98,11 @@ public interface PortBuilder extends Builder<PortBuilder, Port> {
 	 */
 	PortBuilder state(State state);
 	
-        PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate);
+    PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate);
 	
 	PortBuilder securityGroup(String groupName);
+	
+	PortBuilder portSecurityEnabled(boolean portSecurityEnabled); 
+	
 	
 }

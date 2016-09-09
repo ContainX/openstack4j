@@ -9,6 +9,7 @@ import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.model.compute.NetworkCreate;
 import org.openstack4j.model.compute.Personality;
+import org.openstack4j.model.compute.SecurityGroup;
 import org.openstack4j.model.compute.Server.DiskConfig;
 import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
@@ -68,15 +69,19 @@ public class NovaServerCreate implements ServerCreate {
         return new ServerCreateConcreteBuilder(this);
     }
 
+    @Override
     public String getName() {
         return name;
     }
+    @Override
     public String getAdminPass() {
         return adminPass;
     }
+    @Override
     public String getImageRef() {
         return imageRef;
     }
+    @Override
     public String getFlavorRef() {
         return flavorRef;
     }
@@ -135,6 +140,7 @@ public class NovaServerCreate implements ServerCreate {
         return schedulerHints;
     }
 
+    @Override
     @JsonIgnore
     public boolean isConfigDrive() {
         return configDrive != null && configDrive;
@@ -147,6 +153,7 @@ public class NovaServerCreate implements ServerCreate {
         return (List<? extends NetworkCreate>) (networks != null ? networks : Collections.emptyList());
     }
 
+    @Override
     public List<Personality> getPersonality() {
         return personality;
     }
@@ -208,26 +215,31 @@ public class NovaServerCreate implements ServerCreate {
             this.m = m;
         }
 
+        @Override
         public ServerCreateConcreteBuilder name(String name) {
             m.name = name;
             return this;
         }
 
+        @Override
         public ServerCreateConcreteBuilder flavor(String flavorId) {
             m.flavorRef = flavorId;
             return this;
         }
 
+        @Override
         public ServerCreateConcreteBuilder flavor(Flavor flavor) {
             m.flavorRef = flavor.getId();
             return this;
         }
 
+        @Override
         public ServerCreateConcreteBuilder image(String imageId) {
             m.imageRef = imageId;
             return this;
         }
 
+        @Override
         public ServerCreateConcreteBuilder image(Image image) {
             m.imageRef = image.getId();
             return this;

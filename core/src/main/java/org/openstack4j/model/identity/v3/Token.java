@@ -7,6 +7,8 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
 
+import com.google.common.collect.SortedSetMultimap;
+
 /**
  * V3 token model
  *
@@ -15,9 +17,14 @@ import org.openstack4j.model.identity.AuthVersion;
 public interface Token extends ModelEntity {
 
     /**
+     * @return the id of the token
+     */
+    String getId();
+
+    /**
      * @return the catalog of the token
      */
-    List<? extends Catalog> getCatalog();
+    List<? extends Service> getCatalog();
 
     /**
      * @return the timestamp when the token expires
@@ -73,5 +80,25 @@ public interface Token extends ModelEntity {
      * @return the authentication version
      */
     AuthVersion getVersion();
+
+    /**
+     * @return the internal UUID used for cache lookups
+     */
+    String getCacheIdentifier();
+
+    /**
+     * sets the id of the token from response header value
+     *
+     * @param id the token id
+     */
+    void setId(String id);
+
+    /**
+     * A Lazy loading Aggregated Service Catalog Mapping.  The key is a stripped version service type or name with a collection
+     * of Services sorted by version
+     *
+     * @return sorted aggregate service catalog
+     */
+    SortedSetMultimap<String, Service> getAggregatedCatalog();
 
 }
