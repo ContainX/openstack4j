@@ -56,6 +56,9 @@ public class KeystoneRoleServiceTests extends AbstractTest {
         respondWith(JSON_ROLES_ONE_ENTRY);
         List<? extends Role> list = osv3().identity().roles().getByName(ROLE_NAME);
         assertTrue(list.size() == 1);
+        assertEquals(list.get(0).getId(),ROLE_ID);
+        assertEquals(list.get(0).getName(), ROLE_NAME);
+        assertEquals(list.get(0).getDomainId(), USER_DOMAIN_ID);
     }
 
     public void roles_list_with_multiple_entries_for_list_of_roles() throws Exception {

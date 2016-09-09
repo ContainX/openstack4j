@@ -29,5 +29,10 @@ public interface Role extends ModelEntity, Buildable<RoleBuilder> {
      * @return the links of the role
      */
     Map<String, String> getLinks();
+    
+    /**
+     * @return the domain id of the role
+     */
+    String getDomainId();
 
 }
