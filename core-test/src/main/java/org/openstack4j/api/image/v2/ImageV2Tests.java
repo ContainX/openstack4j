@@ -51,7 +51,7 @@ public class ImageV2Tests extends AbstractTest {
 
     public void testListImages() throws IOException {
         respondWith(IMAGES_JSON);
-        List<? extends Image> list = osv3().imagesV2().images().list();
+        List<? extends Image> list = osv3().imagesV2().list();
         assertEquals(list.size(), 2);
         assertEquals(list.get(0).getId(), "7541b8be-c62b-46c3-b5a5-5bb5ce43ce01");
     }
@@ -60,14 +60,14 @@ public class ImageV2Tests extends AbstractTest {
         respondWith(IMAGES_JSON);
         Map<String, String> map = new HashMap<>();
         map.put("container_format", "bare");
-        List<? extends Image> list = osv3().imagesV2().images().list(map);
+        List<? extends Image> list = osv3().imagesV2().list(map);
         assertEquals(list.size(), 2);
     }
 
     public void testGetImage() throws IOException {
         respondWith(IMAGE_JSON);
         String id = "8a2ea42d-06b5-42c2-a54d-97105420f2bb";
-        Image image = osv3().imagesV2().images().get(id);
+        Image image = osv3().imagesV2().get(id);
         assertNotNull(image);
         assertNotNull(image.getId());
         assertEquals(image.getId(),id);
@@ -91,7 +91,7 @@ public class ImageV2Tests extends AbstractTest {
                 .minRam(minram)
                 .visibility(vis)
                 .build();
-        Image image = osv3().imagesV2().images().create(im);
+        Image image = osv3().imagesV2().create(im);
         assertNotNull(image);
         assertEquals(image.getId(), id);
         assertEquals(image.getName(), name);
@@ -104,19 +104,19 @@ public class ImageV2Tests extends AbstractTest {
 
     public void testDeleteImage() throws IOException {
         respondWith(204);
-        ActionResponse delete = osv3().imagesV2().images().delete("8a2ea42d-06b5-42c2-a54d-97105420f2bb");
+        ActionResponse delete = osv3().imagesV2().delete("8a2ea42d-06b5-42c2-a54d-97105420f2bb");
         assertTrue(delete.isSuccess());
     }
 
     public void testDeactivateImage() throws IOException {
         respondWith(204);
-        ActionResponse deactivate = osv3().imagesV2().images().deactivate("8a2ea42d-06b5-42c2-a54d-97105420f2bb");
+        ActionResponse deactivate = osv3().imagesV2().deactivate("8a2ea42d-06b5-42c2-a54d-97105420f2bb");
         assertTrue(deactivate.isSuccess());
     }
 
     public void testReactivateImage() throws IOException {
         respondWith(204);
-        ActionResponse reactivate = osv3().imagesV2().images().reactivate("8a2ea42d-06b5-42c2-a54d-97105420f2bb");
+        ActionResponse reactivate = osv3().imagesV2().reactivate("8a2ea42d-06b5-42c2-a54d-97105420f2bb");
         assertTrue(reactivate.isSuccess());
     }
 
@@ -125,7 +125,7 @@ public class ImageV2Tests extends AbstractTest {
         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
         String memberId = "66cabdfb14bd48d48402f7464bda7733";
         MemberCreate mc = Builders.imageMemberV2().member(memberId).build();
-        Member member = osv3().imagesV2().images().createMember(imageId, mc);
+        Member member = osv3().imagesV2().createMember(imageId, mc);
         assertEquals(member.getStatus(), Member.MemberStatus.PENDING);
         assertEquals(member.getImageId(), imageId);
         assertEquals(member.getMemberId(), memberId);
@@ -136,7 +136,7 @@ public class ImageV2Tests extends AbstractTest {
         respondWith(MEMBER_JSON);
         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
         String memberId = "66cabdfb14bd48d48402f7464bda7733";
-        Member member = osv3().imagesV2().images().getMember(imageId, memberId);
+        Member member = osv3().imagesV2().getMember(imageId, memberId);
         assertEquals(member.getStatus(), Member.MemberStatus.PENDING);
         assertEquals(member.getImageId(), imageId);
         assertEquals(member.getMemberId(), memberId);
@@ -145,7 +145,7 @@ public class ImageV2Tests extends AbstractTest {
     public void testListMembers() throws IOException {
         respondWith(MEMBERS_JSON);
         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
-        List<? extends Member> members = osv3().imagesV2().images().listMembers(imageId);
+        List<? extends Member> members = osv3().imagesV2().listMembers(imageId);
         assertNotNull(members);
 
         Member member = members.get(0);
@@ -159,7 +159,7 @@ public class ImageV2Tests extends AbstractTest {
         String memberId = "66cabdfb14bd48d48402f7464bda7733";
         Member.MemberStatus ms = Member.MemberStatus.ACCEPTED;
         MemberUpdate memberUpdate = Builders.imageMemberUpdateV2().status(ms).build();
-        Member member = osv3().imagesV2().images().updateMember(imageId, memberId, memberUpdate);
+        Member member = osv3().imagesV2().updateMember(imageId, memberId, memberUpdate);
         assertNotNull(member);
         assertEquals(member.getImageId(), imageId);
         assertEquals(member.getMemberId(), memberId);
@@ -170,7 +170,7 @@ public class ImageV2Tests extends AbstractTest {
         respondWith(204);
         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
         String memberId = "66cabdfb14bd48d48402f7464bda7733";
-        ActionResponse deleteMember = osv3().imagesV2().images().deleteMember(imageId, memberId);
+        ActionResponse deleteMember = osv3().imagesV2().deleteMember(imageId, memberId);
         assertTrue(deleteMember.isSuccess());
     }
 
@@ -178,7 +178,7 @@ public class ImageV2Tests extends AbstractTest {
         respondWith(204);
         String tag = "tag1";
         String imageId = "8a2ea42d-06b5-42c2-a54d-97105420f2bb";
-        ActionResponse ur = osv3().imagesV2().images().updateTag(imageId, tag);
+        ActionResponse ur = osv3().imagesV2().updateTag(imageId, tag);
         assertTrue(ur.isSuccess());
     }
 
@@ -186,7 +186,7 @@ public class ImageV2Tests extends AbstractTest {
         respondWith(204);
         String tag = "tag1";
         String imageId = "8a2ea42d-06b5-42c2-a54d-97105420f2bb";
-        ActionResponse deleteTag = osv3().imagesV2().images().deleteTag(imageId, tag);
+        ActionResponse deleteTag = osv3().imagesV2().deleteTag(imageId, tag);
         assertTrue(deleteTag.isSuccess());
     }
 
@@ -233,7 +233,7 @@ public class ImageV2Tests extends AbstractTest {
         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
         InputStream s = new ByteArrayInputStream(BINARY_IMAGE_DATA.getBytes(StandardCharsets.UTF_8));
         Payload<InputStream> payload = Payloads.create(s);
-        ActionResponse upload  = osv3().imagesV2().images().upload(imageId, payload, null);
+        ActionResponse upload  = osv3().imagesV2().upload(imageId, payload, null);
         assertTrue(upload.isSuccess());
     }
 
@@ -247,7 +247,7 @@ public class ImageV2Tests extends AbstractTest {
              e.printStackTrace();
          }
          File file = new File(uri);
-         ActionResponse download = osv3().imagesV2().images().download(imageId, file);
+         ActionResponse download = osv3().imagesV2().download(imageId, file);
          // Should fail to write to file
          assertEquals(download.getCode(), 400);
      }

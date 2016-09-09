@@ -1,4 +1,4 @@
-package org.openstack4j.openstack.image.v2;
+package org.openstack4j.openstack.image.v2.internal;
 
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.openstack.common.functions.EnforceVersionToURL;

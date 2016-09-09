@@ -157,11 +157,11 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser;
 import org.openstack4j.openstack.image.domain.GlanceImage;
-import org.openstack4j.openstack.image.v2.GlanceImageUpdate;
-import org.openstack4j.openstack.image.v2.GlanceMemberCreate;
-import org.openstack4j.openstack.image.v2.GlanceMemberUpdate;
-import org.openstack4j.openstack.image.v2.GlancePatchOperation;
-import org.openstack4j.openstack.image.v2.GlanceTask;
+import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
+import org.openstack4j.openstack.image.v2.domain.GlanceMemberCreate;
+import org.openstack4j.openstack.image.v2.domain.GlanceMemberUpdate;
+import org.openstack4j.openstack.image.v2.domain.GlancePatchOperation;
+import org.openstack4j.openstack.image.v2.domain.GlanceTask;
 import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.ManilaSecurityServiceCreate;
 import org.openstack4j.openstack.manila.domain.ManilaShareCreate;
@@ -1201,7 +1201,7 @@ public class Builders {
      * @return the glance v2 image builder
      */
     public static org.openstack4j.model.image.v2.builder.ImageBuilder imageV2() {
-        return org.openstack4j.openstack.image.v2.GlanceImage.builder();
+        return org.openstack4j.openstack.image.v2.domain.GlanceImage.builder();
     }
 
     /**

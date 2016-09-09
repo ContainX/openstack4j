@@ -1,10 +1,12 @@
-package org.openstack4j.openstack.image.v2;
+package org.openstack4j.openstack.image.v2.internal;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jsonpatch.diff.JsonDiff;
-import org.openstack4j.api.image.v2.ImagesService;
+import org.openstack4j.api.Apis;
+import org.openstack4j.api.image.v2.ImageService;
+import org.openstack4j.api.image.v2.TaskService;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Payload;
@@ -13,6 +15,9 @@ import org.openstack4j.model.image.v2.ImageUpdate;
 import org.openstack4j.model.image.v2.Member;
 import org.openstack4j.model.image.v2.MemberCreate;
 import org.openstack4j.model.image.v2.MemberUpdate;
+import org.openstack4j.openstack.image.v2.domain.GlanceImage;
+import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
+import org.openstack4j.openstack.image.v2.domain.GlanceMember;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -30,11 +35,10 @@ import static org.openstack4j.core.transport.ClientConstants.HEADER_ACCEPT;
 import static org.openstack4j.core.transport.ClientConstants.HEADER_CONTENT_TYPE;
 
 /**
- * OpenStack (Glance) V2 Image based Operations
+ * Implementation of Glance V2 Image Service
  * @author emjburns
  */
-public class ImagesServiceImpl extends BaseImageServices implements ImagesService {
-
+public class ImageServiceImpl extends BaseImageServices implements ImageService {
     /**
      * {@inheritDoc}
      */
@@ -170,7 +174,7 @@ public class ImagesServiceImpl extends BaseImageServices implements ImagesServic
                 return ActionResponse.actionSuccess();
             }catch (Exception e) {
                 e.printStackTrace();
-                 return ActionResponse.actionFailed("Failed to write to file " + e.getMessage(), 400);
+                return ActionResponse.actionFailed("Failed to write to file " + e.getMessage(), 400);
             }
         }
         return null;
@@ -258,5 +262,12 @@ public class ImagesServiceImpl extends BaseImageServices implements ImagesServic
         checkNotNull(imageId);
         checkNotNull(memberId);
         return deleteWithResponse(uri("/images/%s/members/%s",imageId, memberId)).execute();
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TaskService tasks() {
+        return Apis.get(TaskService.class);
     }
 }

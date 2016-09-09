@@ -1,4 +1,4 @@
-package org.openstack4j.openstack.image.v2;
+package org.openstack4j.openstack.image.v2.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.openstack4j.model.image.v2.PatchOperation;

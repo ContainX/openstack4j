@@ -1,4 +1,4 @@
-package org.openstack4j.openstack.image.v2;
+package org.openstack4j.openstack.image.v2.domain;
 
 import org.openstack4j.model.image.v2.Member;
 import org.openstack4j.model.image.v2.MemberUpdate;

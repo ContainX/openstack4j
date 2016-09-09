@@ -1,7 +1,8 @@
-package org.openstack4j.openstack.image.v2;
+package org.openstack4j.openstack.image.v2.internal;
 
 import org.openstack4j.api.image.v2.TaskService;
 import org.openstack4j.model.image.v2.Task;
+import org.openstack4j.openstack.image.v2.domain.GlanceTask;
 
 import java.util.List;
 import java.util.Map;

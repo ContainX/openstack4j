@@ -49,7 +49,6 @@ public abstract class AbstractTest {
     	TACKER(9890),
         IMAGE(9292),
         CLUSTERING(8778);
-        ;
 
         private final int port;
 

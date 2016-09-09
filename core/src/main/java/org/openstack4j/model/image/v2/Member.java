@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.image.v2.GlanceMember;
+import org.openstack4j.openstack.image.v2.domain.GlanceMember;
 
 import java.util.Date;
 

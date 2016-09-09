@@ -2,7 +2,7 @@ package org.openstack4j.model.image.v2.builder;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.image.v2.PatchOperation;
-import org.openstack4j.openstack.image.v2.GlancePatchOperation;
+import org.openstack4j.openstack.image.v2.domain.GlancePatchOperation;
 
 
 public interface PatchOperationBuilder extends Buildable.Builder<PatchOperationBuilder, PatchOperation> {

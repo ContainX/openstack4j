@@ -196,7 +196,7 @@ import org.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.image.v2.ImagesServiceImpl;
-import org.openstack4j.openstack.image.v2.TaskServiceImpl;
+import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;
 import org.openstack4j.openstack.manila.internal.ShareInstanceServiceImpl;
@@ -444,8 +444,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(VnfdService.class, VnfdServiceImpl.class);
         bind(VnfService.class, VnfServiceImpl.class);
         bind(VimService.class, VimServiceImpl.class);
-        bind(org.openstack4j.api.image.v2.ImageService.class, org.openstack4j.openstack.image.v2.ImageServiceImpl.class);
-        bind(org.openstack4j.api.image.v2.ImagesService.class, ImagesServiceImpl.class);
+        bind(org.openstack4j.api.image.v2.ImageService.class, org.openstack4j.openstack.image.v2.internal.ImageServiceImpl.class);
         bind(TaskService.class, TaskServiceImpl.class);
     }
 
