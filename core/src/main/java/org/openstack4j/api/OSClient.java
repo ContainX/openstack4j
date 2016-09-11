@@ -2,6 +2,7 @@ package org.openstack4j.api;
 
 import java.util.Set;
 
+import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.gbp.GbpService;
@@ -252,4 +253,12 @@ public interface OSClient< T extends OSClient<T>> {
 	 * @return the Senlin service
 	 */
 	SenlinService senlin();
+
+    /**
+     * Returns the Barbican Service API
+     *
+     * @return the Barbican service
+     */
+    BarbicanService barbican();
+
 }

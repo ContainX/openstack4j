@@ -1,5 +1,7 @@
 package org.openstack4j.api;
 
+import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
+import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.*;
 import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
@@ -35,6 +37,8 @@ import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
+import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
+import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.*;
@@ -695,14 +699,16 @@ public class Builders {
     public static ExternalPolicyBuilder externalPolicy() {
         return GbpExternalPolicyCreate.builder();
     }
-    /** 
+
+    /**
      * The builder which creates external segment for gbp
      *
      * @return the external segment builder
      */
     public static ExternalSegmentBuilder externalSegment() {
         return GbpExternalSegment.builder();
-    }    
+    }
+
     /**
      * The builder which creates L2 policy for gbp
      *
@@ -711,6 +717,7 @@ public class Builders {
     public static L2PolicyBuilder l2Policy() {
         return GbpL2Policy.builder();
     }
+
     /**
      * The builder which creates L3 policy for gbp
      *
@@ -719,6 +726,7 @@ public class Builders {
     public static L3PolicyBuilder l3Policy() {
         return GbpL3Policy.builder();
     }
+
     /**
      * The builder which creates nat pool for gbp
      *
@@ -727,13 +735,16 @@ public class Builders {
     public static NatPoolBuilder natPool() {
         return GbpNatPool.builder();
     }
+
     /**
      * The builder which creates network service policy for gbp
+     *
      * @return
      */
-    public static NetworkServicePolicyBuilder networkServicePolicy(){
+    public static NetworkServicePolicyBuilder networkServicePolicy() {
         return GbpNetworkServicePolicy.builder();
     }
+
     /**
      * The builder which creates policy action for gbp
      *
@@ -742,6 +753,7 @@ public class Builders {
     public static PolicyActionCreateBuilder policyAction() {
         return GbpPolicyAction.builder();
     }
+
     /**
      * The builder which updates policy action for gbp
      *
@@ -750,6 +762,7 @@ public class Builders {
     public static PolicyActionUpdateBuilder policyActionUpdate() {
         return GbpPolicyActionUpdate.builder();
     }
+
     /**
      * The builder which creates policy classifier for gbp
      *
@@ -758,14 +771,16 @@ public class Builders {
     public static PolicyClassifierBuilder policyClassifier() {
         return GbpPolicyClassifier.builder();
     }
+
     /**
      * The builder which updates policy classifier for gbp
      *
      * @return the policy classifier builder
      */
     public static PolicyClassifierUpdateBuilder policyClassifierUpdate() {
-        return GbpPolicyClassifierUpdate.builder(); 
+        return GbpPolicyClassifierUpdate.builder();
     }
+
     /**
      * The builder which creates policy rule for gbp
      *
@@ -774,14 +789,16 @@ public class Builders {
     public static PolicyRuleBuilder policyRule() {
         return GbpPolicyRule.builder();
     }
+
     /**
      * The builder which creates policy rule set for gbp
      *
      * @return the policy rule set builder
-     */ 
+     */
     public static PolicyRuleSetBuilder policyRuleSet() {
         return GbpPolicyRuleSet.builder();
     }
+
     /**
      * The builder which creates policy target for gbp
      *
@@ -790,6 +807,7 @@ public class Builders {
     public static PolicyTargetBuilder policyTarget() {
         return GbpPolicyTarget.builder();
     }
+
     /**
      * The builder which creates policy target group for gbp
      *
@@ -798,13 +816,13 @@ public class Builders {
     public static PolicyTargetGroupBuilder policyTargetGroup() {
         return GbpPolicyTargetGroupCreate.builder();
     }
-    
+
     /**
      * The builder which creates external routes for gbp
      *
      * @return the external routes builder
      */
-    public static ExternalRoutesBuilder externalRoutes(){
+    public static ExternalRoutesBuilder externalRoutes() {
         return GbpExternalRoutes.builder();
     }
 
@@ -834,52 +852,67 @@ public class Builders {
      *
      * @return the nova builders
      */
-    public static ComputeBuilders compute() { return new NovaBuilders(); }
+    public static ComputeBuilders compute() {
+        return new NovaBuilders();
+    }
 
     /**
      * The Storage builders
      *
      * @return the cinder builders
      */
-    public static StorageBuilders storage() { return new CinderBuilders(); }
+    public static StorageBuilders storage() {
+        return new CinderBuilders();
+    }
 
     /**
      * The Orchestration builders
      *
      * @return the heat builders
      */
-    public static OrchestrationBuilders heat() { return new HeatBuilders(); }
+    public static OrchestrationBuilders heat() {
+        return new HeatBuilders();
+    }
 
     /**
      * The Network builders
      *
      * @return the neutron builders
      */
-    public static NetworkBuilders neutron() { return new NeutronBuilders(); }
+    public static NetworkBuilders neutron() {
+        return new NeutronBuilders();
+    }
 
     /**
      * The Sahara builders
      *
      * @return the sahara builders
      */
-    public static DataProcessingBuilders sahara() { return new SaharaBuilders(); }
+    public static DataProcessingBuilders sahara() {
+        return new SaharaBuilders();
+    }
 
     /**
      * The Ceilometer builders
      *
      * @return the ceilometer builders
      */
-    public static TelemetryBuilders ceilometer() { return new CeilometerBuilders(); }
+    public static TelemetryBuilders ceilometer() {
+        return new CeilometerBuilders();
+    }
 
     /**
      * The Manila builders
      *
      * @return the manila builders
      */
-    public static SharedFileSystemBuilders manila() {return new ManilaBuilders(); }
+    public static SharedFileSystemBuilders manila() {
+        return new ManilaBuilders();
+    }
 
     /**
      * LbaasV2 pool builder
+     *
      * @return the lb pool v2 builder
      */
     public static LbPoolV2Builder lbpoolV2() {
@@ -888,6 +921,7 @@ public class Builders {
 
     /**
      * LbaasV2 pool update builder
+     *
      * @return the lb pool v2 update builder
      */
     public static LbPoolV2UpdateBuilder lbPoolV2Update() {
@@ -896,6 +930,7 @@ public class Builders {
 
     /**
      * LbaasV2 member builder
+     *
      * @return the member v2 builder
      */
     public static MemberV2Builder memberV2() {
@@ -904,6 +939,7 @@ public class Builders {
 
     /**
      * LbaasV2 member update builder
+     *
      * @return the member v2 update builder
      */
     public static MemberV2UpdateBuilder memberV2Update() {
@@ -912,6 +948,7 @@ public class Builders {
 
     /**
      * LbaasV2 listener builder
+     *
      * @return the listener builder
      */
     public static ListenerV2Builder listenerV2() {
@@ -921,6 +958,7 @@ public class Builders {
 
     /**
      * LbaasV2 listener update builder
+     *
      * @return the listener v2 update builder
      */
     public static ListenerV2UpdateBuilder listenerV2Update() {
@@ -929,34 +967,53 @@ public class Builders {
 
     /**
      * LbaasV2 health monitor builder
+     *
      * @return the health monitor v2 builder
      */
     public static HealthMonitorV2Builder healthmonitorV2() {
         return NeutronHealthMonitorV2.builder();
     }
 
-
     /**
      * LbaasV2 healthmonitor update builder
+     *
      * @return the health monitor v2 update builder
      */
     public static HealthMonitorV2UpdateBuilder healthMonitorV2Update() {
         return NeutronHealthMonitorV2Update.builder();
     }
+
     /**
      * LbaasV2 loadbalancer builder
+     *
      * @return the loadbalancer v2 builder
      */
     public static LoadBalancerV2Builder loadbalancerV2() {
         return NeutronLoadBalancerV2.builder();
     }
 
-
     /**
      * LbaasV2 loadbalancer update builder
+     *
      * @return the loadbalancer v2 update builder
      */
     public static LoadBalancerV2UpdateBuilder loadBalancerV2Update() {
         return NeutronLoadBalancerV2Update.builder();
+    }
+
+    /**
+     * Barbican container builder
+     * @return the container builder
+     */
+    public static ContainerCreateBuilder container() {
+        return BarbicanContainer.builder();
+    }
+
+    /**
+     * Barbican secret builder
+     * @return the secret builder
+     */
+    public static ContainerSecretBuilder containerSecret() {
+        return BarbicanContainerSecret.builder();
     }
 }
