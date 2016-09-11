@@ -21,15 +21,17 @@ public class DBDatabaseServiceImpl extends BaseTroveServices implements Database
      */
     @Override
     public List<? extends Database> list(String instanceId) {
-        return get(Databases.class, uri("/instances/%s/databases",instanceId)).execute().getTroveDatabaseList();
+        return get(Databases.class, uri("/instances/%s/databases",instanceId)).execute().getList();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Databases create(String instanceId, Databases databases) {
-        return post(Databases.class, uri("/instances/%s/databases",instanceId)).entity(databases).execute();
+    public ActionResponse create(String instanceId, Databases databases) {
+        checkNotNull(instanceId);
+        checkNotNull(databases);
+        return post(ActionResponse.class,uri("/instances/%s/databases", instanceId)).entity(databases).execute();
     }
 
     /**

@@ -14,10 +14,6 @@ public interface Datastore extends ModelEntity {
 
     String getName();
 
-    void setType(String type);
-
-    String getType();
-
     String getId();
 
     String getDefault_version();

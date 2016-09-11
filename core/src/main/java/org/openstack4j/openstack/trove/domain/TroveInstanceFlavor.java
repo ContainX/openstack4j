@@ -26,24 +26,12 @@ public class TroveInstanceFlavor implements Flavor {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getRam() {
         return ram;
-    }
-
-    public void setRam(int ram) {
-        this.ram = ram;
     }
 
     public static class Flavors extends ListResult<TroveInstanceFlavor> {

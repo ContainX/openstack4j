@@ -6,4 +6,6 @@ public interface DBServiceBuilders {
 
     DatabaseBuilder databaseCreate();
 
+    DatabaseUserBuilder databaseUserCreate();
+
 }

@@ -2,7 +2,7 @@ package org.openstack4j.api.trove;
 
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.trove.Database;
-import org.openstack4j.openstack.trove.domain.TroveDatabase;
+import org.openstack4j.openstack.trove.domain.TroveDatabase.Databases;
 
 import java.util.List;
 
@@ -25,9 +25,9 @@ public interface DatabaseService {
      * Create a new database
      * @param id
      * @param databases
-     * @return the list of databases for an instance including the newly created one
+     * @return the action response
      */
-    TroveDatabase.Databases create(String id, TroveDatabase.Databases databases);
+    ActionResponse create(String id, Databases databases);
 
     /**
      * Deletes the database

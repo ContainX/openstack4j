@@ -16,41 +16,40 @@ import java.util.List;
 public class TroveDatabase implements Database {
 
     private String name;
-    private String id;
+    @JsonProperty("character_set")
+    private String dbCharacterSet;
+    @JsonProperty("collate")
+    private String dbCollation;
 
-    @Override
-    public DatabaseBuilder toBuilder() {
-        return null;
-    }
-
-    @Override
-    public String getTenantId() {
-        return null;
-    }
-
-    @Override
-    public void setTenantId(String tenantId) {
-
-    }
-
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
     @Override
-    public String getId() {
-        return id;
+    public String getDbCharacterSet() {
+        return dbCharacterSet;
+    }
+
+    public void setDbCharacterSet(String dbCharacterSet) {
+        this.dbCharacterSet = dbCharacterSet;
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public String getDbCollation() {
+        return dbCollation;
+    }
+
+    public void setDbCollation(String dbCollation) {
+        this.dbCollation = dbCollation;
+    }
+
+    @Override
+    public DatabaseBuilder toBuilder() {
+        return new DatabaseConcreteBuilder();
     }
 
     public static class Databases extends ListResult<TroveDatabase> {
@@ -73,6 +72,53 @@ public class TroveDatabase implements Database {
             return troveDatabaseList;
         }
 
+    }
+
+    public static class DatabaseConcreteBuilder implements DatabaseBuilder {
+
+        private TroveDatabase database;
+
+        public DatabaseConcreteBuilder(TroveDatabase troveDatabase) {
+            this.database = troveDatabase;
+        }
+
+        public DatabaseConcreteBuilder() {
+            this(new TroveDatabase());
+        }
+
+        @Override
+        public Database build() {
+            return database;
+        }
+
+        @Override
+        public DatabaseBuilder from(Database in) {
+            this.database = (TroveDatabase)in;
+            return this;
+        }
+
+        @Override
+        public DatabaseBuilder name(String name) {
+            this.database.name = name;
+            return this;
+        }
+
+        @Override
+        public DatabaseBuilder dbCharacterSet(String dbCharacterSet) {
+            this.database.dbCharacterSet = dbCharacterSet;
+            return this;
+        }
+
+        @Override
+        public DatabaseBuilder dbCollation(String dbCollation) {
+            this.database.dbCollation = dbCollation;
+            return this;
+        }
+
+    }
+
+    public static DatabaseBuilder builder() {
+        return new DatabaseConcreteBuilder();
     }
 
 }

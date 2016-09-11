@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Created by sumigand on 8/22/2016.
+ * Created by sumit gandhi on 8/22/2016.
  */
 
 @Test(suiteName="trove/flavors")

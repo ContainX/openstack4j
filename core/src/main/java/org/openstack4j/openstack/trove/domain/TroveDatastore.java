@@ -21,7 +21,6 @@ public class TroveDatastore implements Datastore {
 
     private String id;
     private String name;
-    private String type;
     private String default_version;
     @JsonProperty("versions")
     private List<TroveDatastoreVersion> troveDatastoreVersionList;
@@ -30,40 +29,16 @@ public class TroveDatastore implements Datastore {
         return default_version;
     }
 
-    public void setDefault_version(String default_version) {
-        this.default_version = default_version;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public List<TroveDatastoreVersion> getTroveDatastoreVersionList() {
         return troveDatastoreVersionList;
-    }
-
-    public void setTroveDatastoreVersionList(List<TroveDatastoreVersion> troveDatastoreVersionList) {
-        this.troveDatastoreVersionList = troveDatastoreVersionList;
     }
 
     public static class Datastores extends ListResult<TroveDatastore> {

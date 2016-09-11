@@ -23,7 +23,7 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
      */
     @Override
     public List<? extends DatabaseUser> list(String instanceId) {
-        return get(DatabaseUsers.class, uri("/instances/%s/users",instanceId)).execute().getTroveDatabaseUserList();
+        return get(DatabaseUsers.class, uri("/instances/%s/users",instanceId)).execute().getList();
     }
 
     /**
@@ -31,7 +31,7 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
      */
     @Override
     public List<? extends Database> listUserDatabases(String instanceId, String userName) {
-        return get(Databases.class, uri("/instances/%s/users/%s/databases",instanceId,userName)).execute().getTroveDatabaseList();
+        return get(Databases.class, uri("/instances/%s/users/%s/databases",instanceId,userName)).execute().getList();
     }
 
     /**
@@ -57,6 +57,9 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
      */
     @Override
     public ActionResponse grantUserDBAccess(String instanceId, String userName, Databases databases) {
+        checkNotNull(instanceId);
+        checkNotNull(userName);
+        checkNotNull(databases);
         return put(ActionResponse.class, uri("/instances/%s/users/%s/databases",instanceId,userName)).entity(databases).execute();
     }
 

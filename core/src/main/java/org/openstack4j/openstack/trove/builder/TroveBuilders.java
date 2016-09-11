@@ -2,7 +2,10 @@ package org.openstack4j.openstack.trove.builder;
 
 import org.openstack4j.model.trove.builder.DBServiceBuilders;
 import org.openstack4j.model.trove.builder.DatabaseBuilder;
+import org.openstack4j.model.trove.builder.DatabaseUserBuilder;
 import org.openstack4j.model.trove.builder.InstanceCreateBuilder;
+import org.openstack4j.openstack.trove.domain.TroveDatabase;
+import org.openstack4j.openstack.trove.domain.TroveDatabaseUser;
 import org.openstack4j.openstack.trove.domain.TroveInstanceCreate;
 
 /**
@@ -20,8 +23,12 @@ public class TroveBuilders implements DBServiceBuilders {
 
     @Override
     public DatabaseBuilder databaseCreate() {
-        // TODO Auto-generated method stub
-        return null;
+        return TroveDatabase.builder();
+    }
+
+    @Override
+    public DatabaseUserBuilder databaseUserCreate() {
+        return TroveDatabaseUser.builder();
     }
 
 }

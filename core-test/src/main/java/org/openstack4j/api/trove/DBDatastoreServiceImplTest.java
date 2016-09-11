@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Created by sumigand on 8/22/2016.
+ * Created by sumit gandhi on 8/22/2016.
  */
 
 @Test(suiteName="trove/datastores")
@@ -34,32 +34,36 @@ public class DBDatastoreServiceImplTest extends AbstractTest{
         List<? extends Datastore> datastores = osv2().trove().datastoreService().list();
         assertEquals(2, datastores.size());
         Preconditions.checkNotNull(datastores.get(0));
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Database from List : "+ datastores.get(0));
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Datastore from List : "+ datastores.get(0));
     }
 
     @Test
-    public void testGetOneDatabases() throws Exception{
+    public void testGetOneDatabastore() throws Exception{
+        String datastoreId = "648d260d-c346-4145-8a2d-bbd4d78aedf6";
         respondWith(TROVE_DATASTORE);
-        Datastore datastore = osv2().trove().datastoreService().get("648d260d-c346-4145-8a2d-bbd4d78aedf6");
+        Datastore datastore = osv2().trove().datastoreService().get(datastoreId);
         Preconditions.checkNotNull(datastore);
-        assertEquals(datastore.getId(), "648d260d-c346-4145-8a2d-bbd4d78aedf6");
+        assertEquals(datastore.getId(), datastoreId);
     }
 
     @Test
     public void testListDatastoreVersions() throws Exception{
+        String datastoreId = "648d260d-c346-4145-8a2d-bbd4d78aedf6";
         respondWith(TROVE_DATASTORE_VERSIONS);
-        List<? extends DatastoreVersion> datastoreVersions = osv2().trove().datastoreService().listDatastoreVersions("648d260d-c346-4145-8a2d-bbd4d78aedf6");
+        List<? extends DatastoreVersion> datastoreVersions = osv2().trove().datastoreService().listDatastoreVersions(datastoreId);
         assertEquals(2, datastoreVersions.size());
         Preconditions.checkNotNull(datastoreVersions.get(0));
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Database from List : "+ datastoreVersions.get(0));
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Datastore version from List : "+ datastoreVersions.get(0));
     }
 
     @Test
     public void testGetOneDatastoreVersion() throws Exception{
+        String datastoreId = "648d260d-c346-4145-8a2d-bbd4d78aedf6";
+        String datastoreVersionId = "15b7d828-49a5-4d05-af65-e974e0aca7eb";
         respondWith(TROVE_DATASTORE_VERSION);
-        DatastoreVersion datastoreVersion = osv2().trove().datastoreService().getDatastoreVersion("648d260d-c346-4145-8a2d-bbd4d78aedf6", "15b7d828-49a5-4d05-af65-e974e0aca7eb");
+        DatastoreVersion datastoreVersion = osv2().trove().datastoreService().getDatastoreVersion(datastoreId, datastoreVersionId);
         Preconditions.checkNotNull(datastoreVersion);
-        assertEquals(datastoreVersion.getId(), "15b7d828-49a5-4d05-af65-e974e0aca7eb");
+        assertEquals(datastoreVersion.getId(), datastoreVersionId);
     }
 
 }
