@@ -2,6 +2,7 @@ package org.openstack4j.api;
 
 import java.util.ServiceLoader;
 
+import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
@@ -129,7 +130,15 @@ public class Apis {
 	public static SenlinService getSenlinServices() {
 		return get(SenlinService.class);
 	}
-	
+
+
+    /**
+     * Gets the (BarbicanService) Orchestration services API
+     * @return the BarbicanService services
+     */
+    public static BarbicanService getBarbicanServices() {
+        return get(BarbicanService.class);
+    }
 
     private static APIProvider initializeProvider() {
         // No need to check for emptiness as there is default implementation registered

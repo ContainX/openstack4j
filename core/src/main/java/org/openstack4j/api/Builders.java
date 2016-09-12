@@ -1,5 +1,7 @@
 package org.openstack4j.api;
 
+import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
+import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
 import org.openstack4j.model.compute.builder.ComputeBuilders;
@@ -107,6 +109,8 @@ import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
 import org.openstack4j.model.trove.builder.DBServiceBuilders;
+import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
+import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.NovaBlockDeviceMappingCreate;
@@ -867,7 +871,8 @@ public class Builders {
 
     /**
      * The builder which creates network service policy for gbp
-     * 
+     *
+     *
      * @return
      */
     public static NetworkServicePolicyBuilder networkServicePolicy() {
@@ -1049,7 +1054,7 @@ public class Builders {
 
     /**
      * LbaasV2 pool builder
-     * 
+     *
      * @return the lb pool v2 builder
      */
     public static LbPoolV2Builder lbpoolV2() {
@@ -1058,7 +1063,8 @@ public class Builders {
 
     /**
      * LbaasV2 pool update builder
-     * 
+     *
+     *
      * @return the lb pool v2 update builder
      */
     public static LbPoolV2UpdateBuilder lbPoolV2Update() {
@@ -1067,7 +1073,8 @@ public class Builders {
 
     /**
      * LbaasV2 member builder
-     * 
+     *
+     *
      * @return the member v2 builder
      */
     public static MemberV2Builder memberV2() {
@@ -1076,7 +1083,8 @@ public class Builders {
 
     /**
      * LbaasV2 member update builder
-     * 
+     *
+     *
      * @return the member v2 update builder
      */
     public static MemberV2UpdateBuilder memberV2Update() {
@@ -1085,7 +1093,8 @@ public class Builders {
 
     /**
      * LbaasV2 listener builder
-     * 
+     *
+     *
      * @return the listener builder
      */
     public static ListenerV2Builder listenerV2() {
@@ -1094,7 +1103,8 @@ public class Builders {
 
     /**
      * LbaasV2 listener update builder
-     * 
+     *
+     *
      * @return the listener v2 update builder
      */
     public static ListenerV2UpdateBuilder listenerV2Update() {
@@ -1103,7 +1113,8 @@ public class Builders {
 
     /**
      * LbaasV2 health monitor builder
-     * 
+     *
+     *
      * @return the health monitor v2 builder
      */
     public static HealthMonitorV2Builder healthmonitorV2() {
@@ -1112,7 +1123,8 @@ public class Builders {
 
     /**
      * LbaasV2 healthmonitor update builder
-     * 
+     *
+     *
      * @return the health monitor v2 update builder
      */
     public static HealthMonitorV2UpdateBuilder healthMonitorV2Update() {
@@ -1121,7 +1133,8 @@ public class Builders {
 
     /**
      * LbaasV2 loadbalancer builder
-     * 
+     *
+     *
      * @return the loadbalancer v2 builder
      */
     public static LoadBalancerV2Builder loadbalancerV2() {
@@ -1130,10 +1143,27 @@ public class Builders {
 
     /**
      * LbaasV2 loadbalancer update builder
-     * 
+     *
+     *
      * @return the loadbalancer v2 update builder
      */
     public static LoadBalancerV2UpdateBuilder loadBalancerV2Update() {
         return NeutronLoadBalancerV2Update.builder();
+    }
+
+    /**
+     * Barbican container builder
+     * @return the container builder
+     */
+    public static ContainerCreateBuilder container() {
+        return BarbicanContainer.builder();
+    }
+
+    /**
+     * Barbican secret builder
+     * @return the secret builder
+     */
+    public static ContainerSecretBuilder containerSecret() {
+        return BarbicanContainerSecret.builder();
     }
 }

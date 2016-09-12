@@ -3,6 +3,8 @@ package org.openstack4j.openstack.provider;
 import java.util.Map;
 
 import org.openstack4j.api.APIProvider;
+import org.openstack4j.api.barbican.BarbicanService;
+import org.openstack4j.api.barbican.ContainerService;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
@@ -134,6 +136,8 @@ import org.openstack4j.api.trove.DatabaseService;
 import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
+import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
+import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
@@ -265,6 +269,8 @@ import org.openstack4j.openstack.trove.internal.DBFlavorServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
+import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
+import org.openstack4j.openstack.storage.block.internal.SchedulerStatsGetPoolServiceImpl;
 
 import com.google.common.collect.Maps;
 
@@ -421,6 +427,9 @@ public class DefaultAPIProvider implements APIProvider {
         bind(DatabaseService.class, DBDatabaseServiceImpl.class);
         bind(org.openstack4j.api.trove.UserService.class, DBUserServiceImpl.class);
         bind(InstanceService.class, DBInstanceServiceImpl.class);
+        bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
+        bind(BarbicanService.class, BarbicanServiceImpl.class);
+        bind(ContainerService.class, ContainerServiceImpl.class);
     }
 
     /**

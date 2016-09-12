@@ -1,0 +1,21 @@
+{
+  "status": "ACTIVE",
+  "updated": "2016-09-08T16:45:37",
+  "name": "test_container",
+  "consumers": [],
+  "created": "2016-09-08T16:45:37",
+  "container_ref": "http://192.168.198.16:9311/v1/containers/eecf6cad-65af-4a11-9e6f-692b23ffac08",
+  "creator_id": "e1aa4a0373364e9db8a36bf339e64f31",
+  "secret_refs": [
+    {
+      "secret_ref": "http://192.168.198.16:9311/v1/secrets/d576889a-b11c-420d-94af-11168229deca",
+      "name": "certificate"
+    },
+    {
+      "secret_ref": "http://192.168.198.16:9311/v1/secrets/db55c9a5-ae1c-4e1a-9fbb-d0c2d7063541",
+      "name": "private_key"
+    }
+  ],
+  "type": "certificate"
+}
+

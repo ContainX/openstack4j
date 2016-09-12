@@ -9,6 +9,7 @@ import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
+import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
@@ -170,6 +171,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public SaharaService sahara() {
         return Apis.getSaharaServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public BarbicanService barbican() {
+        return Apis.getBarbicanServices();
     }
 
     /**

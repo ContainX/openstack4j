@@ -15,6 +15,7 @@ public enum ServiceType {
 	SAHARA("sahara", "data_processing"),
 	SHARE("manila", "share"),
 	DATABASE("trove","database"),
+	BARBICAN("barbican", "key-manager"),
 	UNKNOWN("NA", "NA")
 	;
 

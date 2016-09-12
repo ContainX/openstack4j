@@ -109,13 +109,27 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
                     return ep.getPublicURL().toString();
                 }
             }
+        } else {
+            //if no catalog returned, if is identity service, just return endpoint
+            if (ServiceType.IDENTITY.equals(p.type)) {
+                return p.access.getEndpoint();
+            }
         }
         return null;
     }
 
     private String resolveV3(URLResolverParams p) {
-
         Token token = p.token;
+
+        //in v3 api, if user has no default project, and token is unscoped, no catalog will be returned
+        //then if service is Identity service, should directly return the endpoint back
+        if (token.getCatalog() == null) {
+            if (ServiceType.IDENTITY.equals(p.type)) {
+                return token.getEndpoint();
+            } else {
+                return null;
+            }
+        }
 
         for (org.openstack4j.model.identity.v3.Service service : token.getCatalog()) {
             if (p.type == ServiceType.forName(service.getType())) {
@@ -130,6 +144,8 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
                 }
             }
         }
+
+
         return null;
     }
 

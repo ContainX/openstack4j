@@ -1,8 +1,8 @@
 package org.openstack4j.api.heat;
 
-import java.util.List;
-
 import org.openstack4j.model.heat.Resource;
+
+import java.util.List;
 
 
 /**
@@ -30,6 +30,15 @@ public interface ResourcesService {
 	 * @return the list of {@link Resource}s
 	 */
 	List<? extends Resource> list(String stackNameOrId);
+
+	/**
+	 * Gets a list of currently existing {@link Resource}s for a specified stack with filtern parameters.
+	 *
+	 * @param stackNameOrId  	Stack name or stack id
+	 * @param depth   			The recursion level for which resources will be listed.
+	 * @return the list of {@link Resource}s
+	 */
+	List<? extends Resource> list(String stackNameOrId, int depth);
 	
 	/**
 	 * Gets the detail of the specified resource
