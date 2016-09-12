@@ -15,6 +15,7 @@ import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.v2.Access;
@@ -253,6 +254,13 @@ public interface OSClient< T extends OSClient<T>> {
 	 * @return the Senlin service
 	 */
 	SenlinService senlin();
+
+    /**
+     *  Returns the Trove Service API
+     *
+     * @return the Trove service
+     */
+    TroveService trove();
 
     /**
      * Returns the Barbican Service API

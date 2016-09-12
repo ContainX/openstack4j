@@ -11,6 +11,7 @@ import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
+import org.openstack4j.api.trove.TroveService;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -112,6 +113,14 @@ public class Apis {
      */
     public static GbpService getGbpServices() {
         return get(GbpService.class);
+    }
+
+    /**
+     * Gets the trove services API
+     * @return the trove services
+     */
+    public static TroveService getTroveServices(){
+        return get(TroveService.class);
     }
 
 	/**

@@ -45,7 +45,10 @@ public abstract class AbstractTest {
         SHARE(8786), 
         OBJECT_STORAGE(8800),
         CLUSTERING(8778),
-        BARBICAN(9311);
+        BARBICAN(9311),
+        DATABASE(8779),
+        ;
+
         private final int port;
 
         private Service(int port) {
