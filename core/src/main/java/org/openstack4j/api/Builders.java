@@ -106,6 +106,7 @@ import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 import org.openstack4j.model.storage.block.builder.StorageBuilders;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
+import org.openstack4j.model.storage.block.builder.VolumeTypeBuilder;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
 import org.openstack4j.model.trove.builder.DBServiceBuilders;
@@ -118,7 +119,6 @@ import org.openstack4j.openstack.compute.domain.NovaFlavor;
 import org.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
-import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
 import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
@@ -211,6 +211,7 @@ import org.openstack4j.openstack.storage.block.builder.CinderBuilders;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
+import org.openstack4j.openstack.storage.block.domain.CinderVolumeType;
 import org.openstack4j.openstack.telemetry.builder.CeilometerBuilders;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
 import org.openstack4j.openstack.trove.builder.TroveBuilders;
@@ -309,6 +310,15 @@ public class Builders {
      */
     public static VolumeBuilder volume() {
         return CinderVolume.builder();
+    }
+
+    /**
+     * The builder to create a Volume Type
+     * 
+     * @return the volume type builder
+     */
+    public static VolumeTypeBuilder volumeType() {
+        return CinderVolumeType.builder();
     }
 
     /**
