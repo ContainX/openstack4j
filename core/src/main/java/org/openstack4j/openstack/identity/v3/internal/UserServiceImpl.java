@@ -4,7 +4,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static org.openstack4j.core.transport.ClientConstants.PATH_DOMAINS;
 import static org.openstack4j.core.transport.ClientConstants.PATH_USERS;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.identity.v3.UserService;
 import org.openstack4j.model.common.ActionResponse;
@@ -13,6 +15,7 @@ import org.openstack4j.model.identity.v3.Group;
 import org.openstack4j.model.identity.v3.Project;
 import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.identity.v3.User;
+import org.openstack4j.openstack.common.MapEntity;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneDomain;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneGroup.Groups;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneProject.Projects;
@@ -147,6 +150,21 @@ public class UserServiceImpl extends BaseOpenStackService implements UserService
         checkNotNull(userId);
         checkNotNull(domainId);
         return get(Roles.class, uri("domains/%s/users/%s/roles", domainId, userId)).execute().getList();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse changePassword(String userId,String originalPassword,String password) {
+        checkNotNull(userId);
+        checkNotNull(originalPassword);
+        checkNotNull(password);
+        Map<String,Object> passwordMap = new HashMap<String,Object>();
+        passwordMap.put("original_password", originalPassword);
+        passwordMap.put("password", password);
+        MapEntity mapEntity =  MapEntity.create("user", passwordMap);
+        return post(ActionResponse.class, uri("/users/%s/password",userId)).entity(mapEntity).execute();
     }
 
 }
