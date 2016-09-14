@@ -18,7 +18,7 @@ public class GlanceTask implements Task {
     @JsonProperty("created_at")
     Date createdAt;
 
-    @JsonProperty("expires_")
+    @JsonProperty("expires_at")
     Date expiresAt;
 
     @JsonProperty("updated_at")

@@ -4,13 +4,16 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Objects;
 import org.openstack4j.model.image.v2.ImageUpdate;
-import org.openstack4j.model.image.v2.PatchOperation;
 import org.openstack4j.model.image.v2.builder.ImageUpdateBuilder;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Implementation of updating a glance image
+ * @author emjburns
+ */
 public class GlanceImageUpdate implements ImageUpdate {
 
     List<PatchOperation> ops = new ArrayList<>();
@@ -23,8 +26,8 @@ public class GlanceImageUpdate implements ImageUpdate {
             for(Iterator<JsonNode> iterator = value.iterator(); iterator.hasNext();) {
                 JsonNode next = iterator.next();
                 iterator.remove();
-                GlancePatchOperation p = new GlancePatchOperation(
-                        GlancePatchOperation.OperationType.value(next.get("op").textValue()),
+                PatchOperation p = new PatchOperation(
+                        PatchOperation.OperationType.value(next.get("op").textValue()),
                         next.get("path").textValue(),
                         next.get("value")
                 );
@@ -82,6 +85,13 @@ public class GlanceImageUpdate implements ImageUpdate {
         @Override
         public ImageUpdateBuilder ops(List<PatchOperation> ops) {
             m.ops = ops;
+            return this;
+        }
+
+        @Override
+        public ImageUpdateBuilder ops(PatchOperation op) {
+            if (m.ops == null) m.ops = new ArrayList<>();
+            m.ops.add(op);
             return this;
         }
 

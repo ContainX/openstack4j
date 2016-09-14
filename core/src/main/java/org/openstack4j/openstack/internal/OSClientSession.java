@@ -129,13 +129,9 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return Apis.getImageService();
     }
 
-<<<<<<< a61f68917766d590081f6e9ed7ce4a982a1c8bfe
-
-=======
     public org.openstack4j.api.image.v2.ImageService imagesV2() {
         return Apis.getImageV2Service();
     }
->>>>>>> images service working except update
 
     /**
      * {@inheritDoc}

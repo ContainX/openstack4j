@@ -195,7 +195,6 @@ import org.openstack4j.openstack.identity.v3.internal.ServiceEndpointServiceImpl
 import org.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
-import org.openstack4j.openstack.image.v2.ImagesServiceImpl;
 import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;

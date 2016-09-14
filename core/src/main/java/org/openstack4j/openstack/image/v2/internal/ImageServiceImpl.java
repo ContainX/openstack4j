@@ -13,8 +13,6 @@ import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.ImageUpdate;
 import org.openstack4j.model.image.v2.Member;
-import org.openstack4j.model.image.v2.MemberCreate;
-import org.openstack4j.model.image.v2.MemberUpdate;
 import org.openstack4j.openstack.image.v2.domain.GlanceImage;
 import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
 import org.openstack4j.openstack.image.v2.domain.GlanceMember;
@@ -238,20 +236,20 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
      * {@inheritDoc}
      */
     @Override
-    public Member createMember(String imageId, MemberCreate memberCreate) {
+    public Member createMember(String imageId, String memberId) {
         checkNotNull(imageId);
-        checkNotNull(memberCreate);
-        return post(Member.class, uri("/images/%s/members",imageId)).entity(memberCreate).execute();
+        checkNotNull(memberId);
+        return post(Member.class, uri("/images/%s/members",imageId)).entity(new GlanceMember(memberId)).execute();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Member updateMember(String imageId, String memberId, MemberUpdate memberUpdate) {
+    public Member updateMember(String imageId, String memberId, Member.MemberStatus memberStatus) {
         checkNotNull(imageId);
         checkNotNull(memberId);
-        return put(Member.class, uri("/images/%s/members/%s", imageId, memberId)).entity(memberUpdate).execute();
+        return put(Member.class, uri("/images/%s/members/%s", imageId, memberId)).entity(new GlanceMember(memberStatus)).execute();
     }
 
     /**

@@ -9,8 +9,6 @@ import org.openstack4j.model.image.v2.ContainerFormat;
 import org.openstack4j.model.image.v2.DiskFormat;
 import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.Member;
-import org.openstack4j.model.image.v2.MemberCreate;
-import org.openstack4j.model.image.v2.MemberUpdate;
 import org.openstack4j.model.image.v2.Task;
 import org.testng.annotations.Test;
 
@@ -124,8 +122,7 @@ public class ImageV2Tests extends AbstractTest {
         respondWith(MEMBER_JSON);
         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
         String memberId = "66cabdfb14bd48d48402f7464bda7733";
-        MemberCreate mc = Builders.imageMemberV2().member(memberId).build();
-        Member member = osv3().imagesV2().createMember(imageId, mc);
+        Member member = osv3().imagesV2().createMember(imageId, memberId);
         assertEquals(member.getStatus(), Member.MemberStatus.PENDING);
         assertEquals(member.getImageId(), imageId);
         assertEquals(member.getMemberId(), memberId);
@@ -158,8 +155,7 @@ public class ImageV2Tests extends AbstractTest {
         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
         String memberId = "66cabdfb14bd48d48402f7464bda7733";
         Member.MemberStatus ms = Member.MemberStatus.ACCEPTED;
-        MemberUpdate memberUpdate = Builders.imageMemberUpdateV2().status(ms).build();
-        Member member = osv3().imagesV2().updateMember(imageId, memberId, memberUpdate);
+        Member member = osv3().imagesV2().updateMember(imageId, memberId, ms);
         assertNotNull(member);
         assertEquals(member.getImageId(), imageId);
         assertEquals(member.getMemberId(), memberId);

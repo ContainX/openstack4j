@@ -48,7 +48,6 @@ import org.openstack4j.model.identity.v3.builder.ServiceBuilder;
 import org.openstack4j.model.identity.v3.builder.UserBuilder;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.image.v2.builder.ImageUpdateBuilder;
-import org.openstack4j.model.image.v2.builder.PatchOperationBuilder;
 import org.openstack4j.model.image.v2.builder.TaskBuilder;
 import org.openstack4j.model.manila.builder.SecurityServiceCreateBuilder;
 import org.openstack4j.model.manila.builder.ShareCreateBuilder;
@@ -158,9 +157,6 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneService;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser;
 import org.openstack4j.openstack.image.domain.GlanceImage;
 import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
-import org.openstack4j.openstack.image.v2.domain.GlanceMemberCreate;
-import org.openstack4j.openstack.image.v2.domain.GlanceMemberUpdate;
-import org.openstack4j.openstack.image.v2.domain.GlancePatchOperation;
 import org.openstack4j.openstack.image.v2.domain.GlanceTask;
 import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.ManilaSecurityServiceCreate;
@@ -1205,22 +1201,6 @@ public class Builders {
     }
 
     /**
-     * Image V2 member builder
-     * @return the glance v2 member builder
-     */
-    public static org.openstack4j.model.image.v2.builder.MemberCreateBuilder imageMemberV2() {
-        return GlanceMemberCreate.builder();
-    }
-
-    /**
-     * Image V2 member update builder
-     * @return the glance v2 member update builder
-     */
-    public static org.openstack4j.model.image.v2.builder.MemberUpdateBuilder imageMemberUpdateV2() {
-        return GlanceMemberUpdate.builder();
-    }
-
-    /**
      * Image V2 task builder
      * @return the glance v2 task builder
      */
@@ -1234,14 +1214,5 @@ public class Builders {
      */
     public static ImageUpdateBuilder imageUpdateV2() {
         return GlanceImageUpdate.builder();
-    }
-
-    /**
-     * Patch operation builder for Json Patch operation
-     * Used in Image V2
-     * @return the patch operation builder
-     */
-    public static PatchOperationBuilder patchOperation() {
-        return GlancePatchOperation.builder();
     }
 }

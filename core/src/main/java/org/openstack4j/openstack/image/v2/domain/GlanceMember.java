@@ -30,11 +30,31 @@ public class GlanceMember implements Member {
     @JsonProperty("updated_at")
     private Date updatedAt;
 
-    private MemberStatus status;
+    private MemberStatus status = null;
 
     private String schema;
 
+    @JsonProperty("member")
     private String member;
+
+    public GlanceMember() {
+    }
+
+    /**
+     * Constructor used in createMember
+     * @param memberId
+     */
+    public GlanceMember(String memberId) {
+        this.member = memberId;
+    }
+
+    /**
+     * Constructor used in updateMember
+     * @param status
+     */
+    public GlanceMember(MemberStatus status) {
+        this.status = status;
+    }
 
     /**
      * {@inheritDoc}

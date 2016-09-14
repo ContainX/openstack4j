@@ -6,8 +6,6 @@ import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.ImageUpdate;
 import org.openstack4j.model.image.v2.Member;
-import org.openstack4j.model.image.v2.MemberCreate;
-import org.openstack4j.model.image.v2.MemberUpdate;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -109,10 +107,10 @@ public interface ImageService extends RestService {
      * The image must exist, be private, and be owned by the author of the request.
      * Otherwise, this will fail.
      * @param imageId the image to share
-     * @param memberCreate
+     * @param memberId
      * @return  member
      */
-    Member createMember(String imageId, MemberCreate memberCreate);
+    Member createMember(String imageId, String memberId);
 
     /**
      * Get details about a member
@@ -123,14 +121,14 @@ public interface ImageService extends RestService {
     Member getMember(String imageId, String memberId);
 
     /**
-     * This call is for an image member to change their member status.
+     * Change status of an image member
      * For more details see http://specs.openstack.org/openstack/glance-specs/specs/api/v2/sharing-image-api-v2.html
      * @param imageId
      * @param memberId
-     * @param memberUpdate
+     * @param memberStatus
      * @return member
      */
-    Member updateMember(String imageId, String memberId, MemberUpdate memberUpdate);
+    Member updateMember(String imageId, String memberId, Member.MemberStatus memberStatus);
 
     /**
      * You must be the owner of the image to delete the member
