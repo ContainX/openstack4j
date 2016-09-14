@@ -9,6 +9,7 @@ import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
+import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
@@ -23,6 +24,7 @@ import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.Config;
@@ -128,6 +130,8 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return Apis.getImageService();
     }
 
+
+
     /**
      * {@inheritDoc}
      */
@@ -175,6 +179,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public SaharaService sahara() {
         return Apis.getSaharaServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public BarbicanService barbican() {
+        return Apis.getBarbicanServices();
     }
 
     /**
@@ -253,6 +264,12 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return getSupportedServices().contains(ServiceType.SHARE);
     }
 
+    /**
+     *
+     * @return
+     */
+    public boolean supportsTrove() { return getSupportedServices().contains(ServiceType.DATABASE); }
+
     public Set<ServiceType> getSupportedServices() {
         return null;
     }
@@ -266,6 +283,14 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public GbpService gbp() {
         return Apis.getGbpServices();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public TroveService trove(){
+        return Apis.getTroveServices();
     }
         
     public static class OSClientSessionV2 extends OSClientSession<OSClientSessionV2, OSClientV2> implements OSClientV2 {

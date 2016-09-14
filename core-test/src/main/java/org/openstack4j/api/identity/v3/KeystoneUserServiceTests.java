@@ -1,12 +1,10 @@
 package org.openstack4j.api.identity.v3;
 
-import static org.testng.AssertJUnit.assertNull;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
-
-
+import static org.testng.AssertJUnit.assertNull;
 
 import java.util.List;
 
@@ -38,6 +36,7 @@ public class KeystoneUserServiceTests extends AbstractTest {
     private static final String JSON_USER_LISTUSERGROUPS = "/identity/v3/list_user_groups.json";
     private static final String JSON_USER_LISTUSERPROJECTS = "/identity/v3/list_user_projects.json";
     private static final String JSON_USER_DELETE_FAIL = "/identity/v3/user_delete_fail.json";
+    private static final String JSON_USER_CHANGE_PASSWORD_FAIL = "/identity/v3/user_changeUserPassword_fail.json";
 
     // module test
     private static final String USER_NAME = "admin";
@@ -249,6 +248,32 @@ public class KeystoneUserServiceTests extends AbstractTest {
 
         List<? extends Project> userProjectsList = osv3().identity().users().listUserProjects(USER_ID);
         assertEquals(userProjectsList.size(), 2);
+    } 
+    
+    /**
+     * Changes the password for a user
+     *
+     * @throws Exception
+     */
+    public void changeUserPassword_Test() throws Exception {
+    	
+    	respondWith(204);
+
+        ActionResponse response_changeUserPassword = osv3().identity().users().changePassword("aa9f25defa6d4cafb48466df83106065", "originalPassword", "password");
+        assertTrue(response_changeUserPassword.isSuccess());
+    }
+    
+    /**
+     * tries to change the password for an non existent user fails
+     *
+     * @throws Exception
+     */
+    public void changeUserPassword_fail_Test() throws Exception {
+
+        respondWithCodeAndResource(404, JSON_USER_CHANGE_PASSWORD_FAIL);
+
+        ActionResponse response_changePassword_fail = osv3().identity().users().changePassword("invalidUser", "OriginalPassword", "password");
+        assertFalse(response_changePassword_fail.isSuccess());
     }
 
 }

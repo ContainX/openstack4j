@@ -14,6 +14,8 @@ public enum ServiceType {
 	CLUSTERING("senlin", "clustering"),
 	SAHARA("sahara", "data_processing"),
 	SHARE("manila", "share"),
+	DATABASE("trove","database"),
+	BARBICAN("barbican", "key-manager"),
 	TACKER("tacker", "nfv-orchestration"),
 	UNKNOWN("NA", "NA")
 	;

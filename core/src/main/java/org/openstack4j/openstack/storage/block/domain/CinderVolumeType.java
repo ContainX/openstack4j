@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.model.storage.block.VolumeType;
+import org.openstack4j.model.storage.block.builder.VolumeTypeBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -51,6 +52,18 @@ public class CinderVolumeType implements VolumeType {
 	public Map<String, String> getExtraSpecs() {
 		return extraSpecs;
 	}
+
+    @Override
+    public VolumeTypeBuilder toBuilder() {
+        return new ConcreteVolumeTypeBuilder(this);
+    }
+
+    /**
+     * @return the Volume Type Builder
+     */
+    public static VolumeTypeBuilder builder() {
+        return new ConcreteVolumeTypeBuilder();
+    }
 	
 	/**
 	 * {@inheritDoc}
@@ -75,5 +88,41 @@ public class CinderVolumeType implements VolumeType {
 		}
 		
 	}
-	
+
+    public static class ConcreteVolumeTypeBuilder implements VolumeTypeBuilder {
+
+        private CinderVolumeType m;
+
+        ConcreteVolumeTypeBuilder() {
+            this(new CinderVolumeType());
+        }
+
+        ConcreteVolumeTypeBuilder(CinderVolumeType volumeType) {
+            this.m = volumeType;
+        }
+
+        @Override
+        public VolumeType build() {
+            return m;
+        }
+
+        @Override
+        public VolumeTypeBuilder from(VolumeType in) {
+            m = (CinderVolumeType) in;
+            return this;
+        }
+
+        @Override
+        public VolumeTypeBuilder name(String name) {
+            m.name = name;
+            return this;
+        }
+
+        @Override
+        public VolumeTypeBuilder extraSpecs(Map<String, String> extraSpecs) {
+            m.extraSpecs = extraSpecs;
+            return this;
+        }
+    }
+
 }
