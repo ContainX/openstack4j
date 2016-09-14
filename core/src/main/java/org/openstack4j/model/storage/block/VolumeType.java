@@ -2,7 +2,9 @@ package org.openstack4j.model.storage.block;
 
 import java.util.Map;
 
+import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.storage.block.builder.VolumeTypeBuilder;
 
 /**
  * The volume type defines the characteristics of a volume. It usually maps to a set of capabilities
@@ -11,7 +13,7 @@ import org.openstack4j.model.ModelEntity;
  * 
  * @author Jeremy Unruh
  */
-public interface VolumeType extends ModelEntity {
+public interface VolumeType extends ModelEntity, Buildable<VolumeTypeBuilder> {
 
 	/**
 	 * @return the identifier for the volume type

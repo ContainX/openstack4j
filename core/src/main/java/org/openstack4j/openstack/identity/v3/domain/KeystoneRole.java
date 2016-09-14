@@ -24,6 +24,8 @@ public class KeystoneRole implements Role {
     private String id;
     @JsonProperty
     private String name;
+    @JsonProperty("domain_id")
+    private String domainId;
     private Map<String, String> links;
 
     @Override
@@ -50,6 +52,14 @@ public class KeystoneRole implements Role {
     public String getName() {
         return name;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getDomainId() {
+        return domainId;
+    }
 
     /**
      * {@inheritDoc}
@@ -64,6 +74,7 @@ public class KeystoneRole implements Role {
         return Objects.toStringHelper(this).omitNullValues()
                 .add("id", id)
                 .add("name", name)
+                .add("domain_id", domainId)
                 .add("links", links)
                 .toString();
     }
@@ -100,6 +111,12 @@ public class KeystoneRole implements Role {
         @Override
         public RoleBuilder name(String name) {
             model.name = name;
+            return this;
+        }
+        
+        @Override
+        public RoleBuilder domainId(String domainId) {
+            model.domainId = domainId;
             return this;
         }
 

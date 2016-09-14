@@ -124,5 +124,16 @@ public interface UserService extends RestService {
 	 * @return list of users
 	 */
 	List<? extends User> list();
+	
+	/**
+     * change password for user.
+     *
+     * @param userId the user identifier
+     * @param originalPassword the original password
+     * @param password the new password
+     * @return the action response
+     */
+    ActionResponse changePassword(String userId, String originalPassword, String password);
+
 
 }

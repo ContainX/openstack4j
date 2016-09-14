@@ -1,16 +1,16 @@
 package org.openstack4j.openstack.heat.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.heat.ResourcesService;
 import org.openstack4j.model.heat.Resource;
 import org.openstack4j.openstack.heat.domain.HeatResource;
 import org.openstack4j.openstack.heat.domain.HeatResource.Resources;
 
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
- * This class implements some methods for manipulation of {@link HeatResources} objects. The
+ * This class implements some methods for manipulation of {@link HeatResource} objects. The
  * non-exhaustive list of methods is oriented along
  * http://developer.openstack.org/api-ref-orchestration-v1.html
  * 
@@ -28,8 +28,14 @@ public class ResourcesServiceImpl extends BaseHeatServices implements ResourcesS
 	
 	@Override
 	public List<? extends Resource> list(String stackNameOrId) {
-	    checkNotNull(stackNameOrId);
-		return get(Resources.class, uri("/stacks/%s/resources", stackNameOrId)).execute().getList();
+		return list(stackNameOrId, 1);
+	}
+
+	@Override
+	public List<? extends Resource> list(String stackNameOrId, int depth) {
+		checkNotNull(stackNameOrId);
+		return get(HeatResource.Resources.class, uri("/stacks/%s/resources", stackNameOrId))
+				.param("nested_depth", depth).execute().getList();
 	}
 	
 	@Override
