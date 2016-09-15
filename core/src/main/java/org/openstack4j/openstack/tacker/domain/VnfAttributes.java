@@ -29,6 +29,65 @@ public class VnfAttributes {
 	@JsonProperty("failure_policy")
 	private String failurePolicy;
 	
+	public static VnfAttributes create() {
+		return new VnfAttributes();
+	}
+	
+	/**
+	 * serviceType to Set..
+	 * 
+	 * @param serviceType the serviceType to set
+	 * @return VnfAttributes
+	 */
+	public VnfAttributes serviceType(String serviceType) {
+		this.serviceType = serviceType;
+		return this;
+	}
+	
+	/**
+	 * paramValues to Set..
+	 * 
+	 * @param paramValues the paramValues to set
+	 * @return VnfAttributes
+	 */
+	public VnfAttributes paramValues(String paramValues) {
+		this.paramValues = paramValues;
+		return this;
+	}
+	
+	/**
+	 * heatTemplate to Set..
+	 * 
+	 * @param heatTemplate the heatTemplate to set
+	 * @return VnfAttributes
+	 */
+	public VnfAttributes heatTemplate(String heatTemplate) {
+		this.heatTemplate = heatTemplate;
+		return this;
+	}
+	
+	/**
+	 * monitoringPolicy to Set..
+	 * 
+	 * @param monitoringPolicy the monitoringPolicy to set
+	 * @return VnfAttributes
+	 */
+	public VnfAttributes monitoringPolicy(String monitoringPolicy) {
+		this.monitoringPolicy = monitoringPolicy;
+		return this;
+	}
+	
+	/**
+	 * failurePolicy to Set..
+	 * 
+	 * @param failurePolicy the failurePolicy to set
+	 * @return VnfAttributes
+	 */
+	public VnfAttributes failurePolicy(String failurePolicy) {
+		this.failurePolicy = failurePolicy;
+		return this;
+	}
+	
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
@@ -48,24 +107,10 @@ public class VnfAttributes {
 	}
 
 	/**
-	 * @param serviceType the serviceType to set
-	 */
-	public void setServiceType(String serviceType) {
-		this.serviceType = serviceType;
-	}
-
-	/**
 	 * @return the paramValues
 	 */
 	public String getParamValues() {
 		return paramValues;
-	}
-
-	/**
-	 * @param paramValues the paramValues to set
-	 */
-	public void setParamValues(String paramValues) {
-		this.paramValues = paramValues;
 	}
 
 	/**
@@ -76,13 +121,6 @@ public class VnfAttributes {
 	}
 
 	/**
-	 * @param heatTemplate the heatTemplate to set
-	 */
-	public void setHeatTemplate(String heatTemplate) {
-		this.heatTemplate = heatTemplate;
-	}
-
-	/**
 	 * @return the monitoringPolicy
 	 */
 	public String getMonitoringPolicy() {
@@ -90,23 +128,9 @@ public class VnfAttributes {
 	}
 
 	/**
-	 * @param monitoringPolicy the monitoringPolicy to set
-	 */
-	public void setMonitoringPolicy(String monitoringPolicy) {
-		this.monitoringPolicy = monitoringPolicy;
-	}
-
-	/**
 	 * @return the failurePolicy
 	 */
 	public String getFailurePolicy() {
 		return failurePolicy;
-	}
-
-	/**
-	 * @param failurePolicy the failurePolicy to set
-	 */
-	public void setFailurePolicy(String failurePolicy) {
-		this.failurePolicy = failurePolicy;
 	}
 }
