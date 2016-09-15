@@ -1,0 +1,19 @@
+{  
+   "vnf":{  
+      "status":"PENDING_UPDATE",
+      "description":"test-update-vnf-description",
+      "tenant_id":"b631e143cf734202a71b2b79e2b15037",
+      "vim_id":"f8a5d081-2aff-4382-86e1-d0830c4324a0",
+      "instance_id":"ec47814a-eb23-4a18-ac55-67547e3f61b6",
+      "mgmt_url":"{\"vdu1\": \"15.0.0.4\"}",
+      "placement_attr":{  
+         "vim_name":"VIM-1"
+      },
+      "error_reason":null,
+      "attributes":{  
+         "config":"vdus:\n  vdu1:\n    auto-scaling: noop\n    id: vdu1\n    instance_type: m1.tiny\n    network_interfaces:\n      management: {management: true, network: net_mgmt}\n      pkt_in: {network: net0}\n      pkt_out: {network: net1}\n    placement_policy: {availability_zone: nova}\n    vm_image: cirros-0.3.4-x86_64-uec\n"
+      },
+      "id":"4043f4bd-a728-4ee3-91d6-a11a6bb89030",
+      "name":"test-update-vnf"
+   }
+}

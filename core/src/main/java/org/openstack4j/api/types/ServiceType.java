@@ -16,6 +16,7 @@ public enum ServiceType {
 	SHARE("manila", "share"),
 	DATABASE("trove","database"),
 	BARBICAN("barbican", "key-manager"),
+	TACKER("tacker", "nfv-orchestration"),
 	UNKNOWN("NA", "NA")
 	;
 
