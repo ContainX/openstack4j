@@ -432,7 +432,34 @@
 			"type": "key-manager",
 			"id": "002ac55c6cf344cc9023d2841b45ffa6",
 			"name": "barbican"
-			}
+		  }, {
+		  "endpoints": [
+		    {
+		      "region_id": "RegionOne",
+		      "url": "http://127.0.0.1:9890",
+		      "region": "RegionOne",
+		      "interface": "admin",
+		      "id": "0c2f6e9ed7bd499ba445103cb91e80da"
+		    },
+		    {
+		      "region_id": "RegionOne",
+		      "url": "http://127.0.0.1:9890",
+		      "region": "RegionOne",
+		      "interface": "public",
+		      "id": "5328f25a0e584ba392fa5cac3e9b6ee6"
+		    },
+		    {
+		      "region_id": "RegionOne",
+		      "url": "http://127.0.0.1:9890",
+		      "region": "RegionOne",
+		      "interface": "internal",
+		      "id": "c1f3e92aa5284fd999a113502ba4052d"
+		    }
+		  ],
+		  "type": "nfv-orchestration",
+		  "id": "83dd97cc45b7417886ad4940189b2b86",
+		  "name": "tacker"
+		 }
 		],
 		"extras": {},
 		"user": {

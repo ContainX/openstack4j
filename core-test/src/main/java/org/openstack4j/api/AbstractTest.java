@@ -47,6 +47,7 @@ public abstract class AbstractTest {
         CLUSTERING(8778),
         BARBICAN(9311),
         DATABASE(8779),
+    	TACKER(9890)
         ;
 
         private final int port;
