@@ -38,8 +38,6 @@ public class TackerVnfdTests extends AbstractTest {
 
 	@Test
 	public void testListVnfds() throws Exception {
-		OSFactory.enableHttpLoggingFilter(true);
-		
 		respondWith(TACKER_VNFDS);
 		List<? extends Vnfd> vnfds = osv3().tacker().vnfd().list();
 		assertEquals(1, vnfds.size());
