@@ -1,15 +1,12 @@
 package org.openstack4j.openstack.networking.domain;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.network.Agent;
 import org.openstack4j.model.network.builder.AgentBuilder;
 import org.openstack4j.openstack.common.ListResult;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openstack4j.openstack.internal.Parser;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,6 +17,7 @@ import com.google.common.base.Objects;
  * Neutron Agent
  *
  * @author Yin Zhang
+ * @author Qin An
  */
 @JsonRootName("agent")
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -54,30 +52,7 @@ public class NeutronAgent implements Agent {
     private String createdAt;
     @JsonProperty("started_at")
     private String startedAt;
-
     private String id;
-
-    private static final Logger LOG = LoggerFactory.getLogger(NeutronAgent.class);
-
-    /**
-     * local help method to parse a string with format "yyyy-MM-dd HH:mm:ss" into a Date
-     * @param str - string to be parsed
-     * @return Date
-     */
-    private Date parseDate(String str) {
-        if (str == null) {
-            str = "";
-        }
-        Date date = null;
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            date = format.parse(str);
-        } catch (ParseException e) {
-            LOG.error("Could not parse date from string " + str);
-            e.printStackTrace();
-        }
-        return date;
-    }
 
     @Override
     public boolean getAdminStateUp() {
@@ -101,7 +76,7 @@ public class NeutronAgent implements Agent {
 
     @Override
     public Date getCreatedAt() {
-        return parseDate(createdAt);
+        return Parser.parseSimpleDate(createdAt);
     }
 
     @Override
@@ -111,7 +86,7 @@ public class NeutronAgent implements Agent {
 
     @Override
     public Date getHeartbeatTimestamp() {
-        return parseDate(heartbeatTimeStamp);
+        return Parser.parseSimpleDate(heartbeatTimeStamp);
     }
 
     @Override
@@ -126,7 +101,7 @@ public class NeutronAgent implements Agent {
 
     @Override
     public Date getStartedAt() {
-        return parseDate(startedAt);
+        return Parser.parseSimpleDate(startedAt);
     }
 
     @Override

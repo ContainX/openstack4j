@@ -2,6 +2,7 @@ package org.openstack4j.api.network;
 
 import static org.testng.Assert.assertEquals;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
@@ -59,6 +60,7 @@ public class NetworkTests extends AbstractTest {
         assertEquals(agent.getAgentType(), Type.DHCP);
         assertEquals(agent.getHost(), "cic-0-3");
         assertEquals(agent.getId(), "086d8a3d-ef23-4708-909b-0c459528e2a6");
+		assertEquals(agent.getCreatedAt(), (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).parse("2015-03-18 20:28:02"));
         assertEquals(agent.getAgentType(), Type.DHCP);
         assertEquals(agent.getAgentType(), Type.DHCP);
     }
