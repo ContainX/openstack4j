@@ -12,7 +12,6 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.tacker.Vim;
-import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.tacker.domain.AuthCredentials;
 import org.openstack4j.openstack.tacker.domain.VimProject;
 import org.testng.annotations.Test;
@@ -37,8 +36,6 @@ public class TackerVimTests extends AbstractTest {
 
 	@Test
 	public void testListVims() throws Exception {
-		OSFactory.enableHttpLoggingFilter(true);
-		
 		respondWith(TACKER_VIMS);
 		List<? extends Vim> vims = osv3().tacker().vim().list();
 		assertEquals(1, vims.size());

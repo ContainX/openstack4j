@@ -12,7 +12,6 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.tacker.Vnfd;
-import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.tacker.domain.VnfdAttributes;
 import org.openstack4j.openstack.tacker.domain.VnfdServiceTypes;
 import org.testng.annotations.Test;
