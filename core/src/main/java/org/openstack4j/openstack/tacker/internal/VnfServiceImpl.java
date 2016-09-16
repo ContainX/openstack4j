@@ -67,7 +67,7 @@ public class VnfServiceImpl extends BaseTackerServices implements VnfService {
 	 */
 	@Override
 	public Vnf create(Vnf vnf) {
-		return post(TackerVnf.class, uri("/vnfs")).entity(vnf).execute(ExecutionOptions.<TackerVnf>create(PropagateOnStatus.on(404)));
+		return post(TackerVnf.class, uri("/vnfs")).entity(vnf).execute(ExecutionOptions.<TackerVnf>create(PropagateOnStatus.on(500)));
 	}
 
 	/**
