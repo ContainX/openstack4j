@@ -17,6 +17,7 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
     private static final String KEY_MESSAGE = "message";
     private static final String NEUTRON_ERROR = "NeutronError";
     private static final String COMPUTE_FAULT = "computeFault";
+    private static final String TACKER_ERROR = "TackerError";
     private HttpResponse response;
     
     public ParseActionResponseFromJsonMap(HttpResponse response) {
@@ -52,6 +53,11 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
                     String msg = String.valueOf(map.get(COMPUTE_FAULT));
                     return ActionResponse.actionFailed(msg, response.getStatus());
                  }
+                if (inner.containsKey(TACKER_ERROR)) {
+                	/** For 'TackerError' Error Message Propagation.. */
+                    String msg = String.valueOf(inner.get(TACKER_ERROR));
+                    return ActionResponse.actionFailed(msg, response.getStatus());
+                }
             }
         }
 
