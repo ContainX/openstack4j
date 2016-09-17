@@ -67,9 +67,9 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor) {
+	public Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor, boolean isPublic) {
 		checkNotNull(name);
-		return create(NovaFlavor.builder().name(name).ram(ram).vcpus(vcpus).disk(disk).swap(swap).rxtxFactor(rxtxFactor).build());
+		return create(NovaFlavor.builder().name(name).ram(ram).vcpus(vcpus).disk(disk).swap(swap).ephemeral(ephemeral).rxtxFactor(rxtxFactor).isPublic(isPublic).build());
 	}
 
 	/**

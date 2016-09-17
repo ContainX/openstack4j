@@ -14,6 +14,10 @@
         ],
         "name": "m1.tiny",
         "ram": 512,
+        "os-flavor-access:is_public": true,
+        "OS-FLV-EXT-DATA:ephemeral": 0,
+        "OS-FLV-DISABLED:disabled": false,
+        "rxtx_factor": 2.0,
         "vcpus": 1
     }
 }
