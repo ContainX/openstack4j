@@ -23,6 +23,8 @@ public final class ClientConstants {
     public static final String CONTENT_TYPE_OCTECT_STREAM = "application/octet-stream";
     public static final String CONTENT_TYPE_TEXT = "text/plain";
     public static final String CONTENT_TYPE_TEXT_HTML = "text/html";
+    public static final String CONTENT_TYPE_IMAGE_V2_PATCH = "application/openstack-images-v2.1-json-patch";
+
 
     // Paths
     public static final String URI_SEP = "/";

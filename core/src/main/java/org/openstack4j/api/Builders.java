@@ -47,6 +47,8 @@ import org.openstack4j.model.identity.v3.builder.RoleBuilder;
 import org.openstack4j.model.identity.v3.builder.ServiceBuilder;
 import org.openstack4j.model.identity.v3.builder.UserBuilder;
 import org.openstack4j.model.image.builder.ImageBuilder;
+import org.openstack4j.model.image.v2.builder.ImageUpdateBuilder;
+import org.openstack4j.model.image.v2.builder.TaskBuilder;
 import org.openstack4j.model.manila.builder.SecurityServiceCreateBuilder;
 import org.openstack4j.model.manila.builder.ShareCreateBuilder;
 import org.openstack4j.model.manila.builder.ShareManageBuilder;
@@ -154,6 +156,8 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser;
 import org.openstack4j.openstack.image.domain.GlanceImage;
+import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
+import org.openstack4j.openstack.image.v2.domain.GlanceTask;
 import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.ManilaSecurityServiceCreate;
 import org.openstack4j.openstack.manila.domain.ManilaShareCreate;
@@ -1179,12 +1183,36 @@ public class Builders {
     public static ContainerSecretBuilder containerSecret() {
         return BarbicanContainerSecret.builder();
     }
-    
+
     /**
      * The Tacker builders
      * @return the tacker builders
      */
     public static NfvBuilders tacker() {
-    	return new TackerBuilders(); 
+        return new TackerBuilders();
+    }
+
+    /**
+     * Images V2 builder
+     * @return the glance v2 image builder
+     */
+    public static org.openstack4j.model.image.v2.builder.ImageBuilder imageV2() {
+        return org.openstack4j.openstack.image.v2.domain.GlanceImage.builder();
+    }
+
+    /**
+     * Image V2 task builder
+     * @return the glance v2 task builder
+     */
+    public static TaskBuilder taskBuilder() {
+        return GlanceTask.builder();
+    }
+
+    /**
+     * Image V2 json patch update builder
+     * @return the image patch update builder
+     */
+    public static ImageUpdateBuilder imageUpdateV2() {
+        return GlanceImageUpdate.builder();
     }
 }
