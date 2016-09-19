@@ -57,6 +57,7 @@ import org.openstack4j.api.identity.v3.ServiceEndpointService;
 import org.openstack4j.api.identity.v3.TokenService;
 import org.openstack4j.api.identity.v3.UserService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.image.v2.TaskService;
 import org.openstack4j.api.manila.SchedulerStatsService;
 import org.openstack4j.api.manila.SecurityServiceService;
 import org.openstack4j.api.manila.ShareInstanceService;
@@ -196,6 +197,7 @@ import org.openstack4j.openstack.identity.v3.internal.ServiceEndpointServiceImpl
 import org.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
+import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;
 import org.openstack4j.openstack.manila.internal.ShareInstanceServiceImpl;
@@ -445,7 +447,9 @@ public class DefaultAPIProvider implements APIProvider {
         bind(VnfService.class, VnfServiceImpl.class);
         bind(VimService.class, VimServiceImpl.class);
         bind(AgentService.class, AgentServiceImpl.class);
-    }   
+        bind(org.openstack4j.api.image.v2.ImageService.class, org.openstack4j.openstack.image.v2.internal.ImageServiceImpl.class);
+        bind(TaskService.class, TaskServiceImpl.class);
+    }
 
     /**
      * {@inheritDoc}

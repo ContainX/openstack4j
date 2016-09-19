@@ -273,6 +273,18 @@ public class NovaFlavor implements Flavor {
 			m = (NovaFlavor) in;
 			return this;
 		}
+
+        @Override
+        public FlavorBuilder ephemeral(int ephemeral) {
+            m.ephemeral = ephemeral;
+            return this;
+        }
+
+        @Override
+        public FlavorBuilder id(String id) {
+            m.id = id;
+            return this;
+        }
 		
 	}
 
