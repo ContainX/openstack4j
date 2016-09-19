@@ -1,0 +1,271 @@
+{
+   "agents":[
+      {
+         "binary":"neutron-dhcp-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:22",
+         "alive":true,
+         "topic":"dhcp_agent",
+         "host":"cic-0-3",
+         "agent_type":"DHCP agent",
+         "created_at":"2015-03-18 20:28:02",
+         "started_at":"2015-03-18 20:28:02",
+         "id":"086d8a3d-ef23-4708-909b-0c459528e2a6",
+         "configurations":{
+            "subnets":6,
+            "use_namespaces":true,
+            "dhcp_lease_duration":120,
+            "dhcp_driver":"neutron.agent.linux.dhcp.Dnsmasq",
+            "networks":6,
+            "ports":8
+         }
+      },
+      {
+         "binary":"neutron-l3-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:23",
+         "alive":true,
+         "topic":"l3_agent",
+         "host":"cic-0-2",
+         "agent_type":"L3 agent",
+         "created_at":"2015-03-18 20:02:02",
+         "started_at":"2015-03-18 20:02:02",
+         "id":"190ecbc2-77e0-4e4f-a96b-aa849edb357b",
+         "configurations":{
+            "router_id":"",
+            "gateway_external_network_id":"",
+            "handle_internal_only_routers":false,
+            "use_namespaces":true,
+            "routers":0,
+            "interfaces":0,
+            "floating_ips":0,
+            "interface_driver":"neutron.agent.linux.interface.OVSInterfaceDriver",
+            "ex_gw_ports":0
+         }
+      },
+      {
+         "binary":"neutron-openvswitch-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:21",
+         "alive":true,
+         "topic":"N/A",
+         "host":"compute-0-8",
+         "agent_type":"Open vSwitch agent",
+         "created_at":"2015-03-18 20:38:39",
+         "started_at":"2015-03-18 20:38:56",
+         "id":"342d52e4-f253-443e-ab68-b7147b6b01ba",
+         "configurations":{
+            "tunnel_types":[
+
+            ],
+            "tunneling_ip":"",
+            "bridge_mappings":{
+               "default":"br-prv"
+            },
+            "l2_population":false,
+            "devices":1
+         }
+      },
+      {
+         "binary":"neutron-openvswitch-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:22",
+         "alive":true,
+         "topic":"N/A",
+         "host":"compute-0-7",
+         "agent_type":"Open vSwitch agent",
+         "created_at":"2015-03-18 20:38:39",
+         "started_at":"2015-03-18 20:38:56",
+         "id":"4604070d-cb78-4500-8af8-97b346b5ccca",
+         "configurations":{
+            "tunnel_types":[
+
+            ],
+            "tunneling_ip":"",
+            "bridge_mappings":{
+               "default":"br-prv"
+            },
+            "l2_population":false,
+            "devices":0
+         }
+      },
+      {
+         "binary":"neutron-openvswitch-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:23",
+         "alive":true,
+         "topic":"N/A",
+         "host":"cic-0-4",
+         "agent_type":"Open vSwitch agent",
+         "created_at":"2015-03-18 20:20:57",
+         "started_at":"2015-03-18 20:25:42",
+         "id":"862ad7e5-11f0-4c3c-86e7-0995b6c66d11",
+         "configurations":{
+            "tunnel_types":[
+
+            ],
+            "tunneling_ip":"",
+            "bridge_mappings":{
+               "default":"br-prv"
+            },
+            "l2_population":false,
+            "devices":0
+         }
+      },
+      {
+         "binary":"neutron-openvswitch-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:25",
+         "alive":true,
+         "topic":"N/A",
+         "host":"cic-0-3",
+         "agent_type":"Open vSwitch agent",
+         "created_at":"2015-03-18 20:20:46",
+         "started_at":"2015-03-18 20:25:35",
+         "id":"a594869e-cef0-49c9-a06e-54eb3ce74730",
+         "configurations":{
+            "tunnel_types":[
+
+            ],
+            "tunneling_ip":"",
+            "bridge_mappings":{
+               "default":"br-prv"
+            },
+            "l2_population":false,
+            "devices":7
+         }
+      },
+      {
+         "binary":"neutron-openvswitch-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:24",
+         "alive":true,
+         "topic":"N/A",
+         "host":"compute-0-5",
+         "agent_type":"Open vSwitch agent",
+         "created_at":"2015-03-18 20:38:42",
+         "started_at":"2015-03-18 20:38:59",
+         "id":"c98d1a7a-e972-4bcf-844c-dfb764e806c6",
+         "configurations":{
+            "tunnel_types":[
+
+            ],
+            "tunneling_ip":"",
+            "bridge_mappings":{
+               "default":"br-prv"
+            },
+            "l2_population":false,
+            "devices":2
+         }
+      },
+      {
+         "binary":"neutron-openvswitch-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:25",
+         "alive":true,
+         "topic":"N/A",
+         "host":"cic-0-2",
+         "agent_type":"Open vSwitch agent",
+         "created_at":"2015-03-18 19:57:10",
+         "started_at":"2015-03-18 19:59:05",
+         "id":"cbccc4f9-9083-4a31-bfba-705556c2c898",
+         "configurations":{
+            "tunnel_types":[
+
+            ],
+            "tunneling_ip":"",
+            "bridge_mappings":{
+               "default":"br-prv"
+            },
+            "l2_population":false,
+            "devices":0
+         }
+      },
+      {
+         "binary":"neutron-metadata-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:25",
+         "alive":true,
+         "topic":"N/A",
+         "host":"cic-0-3",
+         "agent_type":"Metadata agent",
+         "created_at":"2015-03-18 20:26:45",
+         "started_at":"2015-03-18 20:26:45",
+         "id":"d228eaae-1690-4d5e-b991-929f00df00ae",
+         "configurations":{
+            "nova_metadata_port":8775,
+            "nova_metadata_ip":"192.168.2.20",
+            "metadata_proxy_socket":"/var/lib/neutron/metadata_proxy"
+         }
+      },
+      {
+         "binary":"neutron-openvswitch-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:21",
+         "alive":true,
+         "topic":"N/A",
+         "host":"compute-0-6",
+         "agent_type":"Open vSwitch agent",
+         "created_at":"2015-03-18 20:38:39",
+         "started_at":"2015-03-18 20:38:56",
+         "id":"d30479f4-52a0-4664-aafa-820889edcc05",
+         "configurations":{
+            "tunnel_types":[
+
+            ],
+            "tunneling_ip":"",
+            "bridge_mappings":{
+               "default":"br-prv"
+            },
+            "l2_population":false,
+            "devices":5
+         }
+      },
+      {
+         "binary":"neutron-metadata-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:23",
+         "alive":true,
+         "topic":"N/A",
+         "host":"cic-0-2",
+         "agent_type":"Metadata agent",
+         "created_at":"2015-03-18 19:59:48",
+         "started_at":"2015-03-18 19:59:48",
+         "id":"d4700160-9945-428b-994c-4570e255e2ee",
+         "configurations":{
+            "nova_metadata_port":8775,
+            "nova_metadata_ip":"192.168.2.20",
+            "metadata_proxy_socket":"/var/lib/neutron/metadata_proxy"
+         }
+      },
+      {
+         "binary":"neutron-metadata-agent",
+         "description":null,
+         "admin_state_up":true,
+         "heartbeat_timestamp":"2015-03-19 15:55:23",
+         "alive":true,
+         "topic":"N/A",
+         "host":"cic-0-4",
+         "agent_type":"Metadata agent",
+         "created_at":"2015-03-18 20:26:53",
+         "started_at":"2015-03-18 20:26:53",
+         "id":"e06c1445-abee-49e2-9f2c-769257f8b989",
+         "configurations":{
+            "nova_metadata_port":8775,
+            "nova_metadata_ip":"192.168.2.20",
+            "metadata_proxy_socket":"/var/lib/neutron/metadata_proxy"
+         }
+      }
+   ]
+}

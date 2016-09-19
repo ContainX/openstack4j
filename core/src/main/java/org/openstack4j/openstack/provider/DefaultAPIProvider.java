@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.provider;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
+
 import org.openstack4j.api.APIProvider;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.barbican.ContainerService;
@@ -74,6 +75,7 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
+import org.openstack4j.api.networking.ext.AgentService;
 import org.openstack4j.api.networking.ext.FirewallAsService;
 import org.openstack4j.api.networking.ext.FirewallPolicyService;
 import org.openstack4j.api.networking.ext.FirewallRuleService;
@@ -124,12 +126,12 @@ import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
+import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
 import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.tacker.TackerServiceImpl;
 import org.openstack4j.api.tacker.VimService;
 import org.openstack4j.api.tacker.VnfService;
 import org.openstack4j.api.tacker.VnfdService;
-import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
 import org.openstack4j.api.telemetry.AlarmService;
 import org.openstack4j.api.telemetry.CapabilitiesService;
 import org.openstack4j.api.telemetry.EventService;
@@ -213,6 +215,7 @@ import org.openstack4j.openstack.networking.internal.RouterServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupRuleServiceImpl;
 import org.openstack4j.openstack.networking.internal.SecurityGroupServiceImpl;
 import org.openstack4j.openstack.networking.internal.SubnetServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.AgentServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallAsServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallPolicyServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.FirewallRuleServiceImpl;
@@ -281,7 +284,7 @@ import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
 
-import java.util.Map;
+import com.google.common.collect.Maps;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons
@@ -443,6 +446,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(VnfdService.class, VnfdServiceImpl.class);
         bind(VnfService.class, VnfServiceImpl.class);
         bind(VimService.class, VimServiceImpl.class);
+        bind(AgentService.class, AgentServiceImpl.class);
         bind(org.openstack4j.api.image.v2.ImageService.class, org.openstack4j.openstack.image.v2.internal.ImageServiceImpl.class);
         bind(TaskService.class, TaskServiceImpl.class);
     }
