@@ -1,0 +1,20 @@
+{  
+   "vnf":{  
+      "status":"PENDING_CREATE",
+      "description":"test-vnf-description",
+      "tenant_id":"b631e143cf734202a71b2b79e2b15037",
+      "vim_id":"f8a5d081-2aff-4382-86e1-d0830c4324a0",
+      "name":"test-vnf",
+      "instance_id":"ec47814a-eb23-4a18-ac55-67547e3f61b6",
+      "mgmt_url":null,
+      "placement_attr":{  
+         "vim_name":"VIM-1"
+      },
+      "error_reason":null,
+      "attributes":{  
+
+      },
+      "id":"4043f4bd-a728-4ee3-91d6-a11a6bb89030",
+      "vnfd_id":"1363e776-6c79-4e53-8074-4e32e49f156a"
+   }
+}

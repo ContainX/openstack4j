@@ -1,0 +1,21 @@
+{
+  "vnfds": [
+    {
+      "service_types": [
+        {
+          "service_type": "vnfd",
+          "id": "bd722929-93fa-421d-8ce4-0421fd9960ba"
+        }
+      ],
+      "description": "test-vnfd",
+      "tenant_id": "b631e143cf734202a71b2b79e2b15037",
+      "mgmt_driver": "noop",
+      "infra_driver": "heat",
+      "attributes": {
+        "vnfd": "template_name: sample-vnfd\r\ndescription: vnfd-example\r\n\r\nservice_properties:\r\n  Id: sample-vnfd\r\n  vendor: tacker\r\n  version: 1\r\n\r\nvdus:\r\n  vdu1:\r\n    id: vdu1\r\n    vm_image: cirros\r\n    instance_type: m1.tiny\r\n\r\n    network_interfaces:\r\n      management:\r\n        network: net1\r\n        management: true\r\n\r\n    placement_policy:\r\n      availability_zone: nova\r\n\r\n    auto-scaling: noop"
+      },
+      "id": "1363e776-6c79-4e53-8074-4e32e49f156a",
+      "name": "test-vnfd"
+    }
+  ]
+}

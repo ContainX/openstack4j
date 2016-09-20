@@ -1,0 +1,19 @@
+{  
+   "vnf":{  
+      "status":"ACTIVE",
+      "description":"test-vnf-description",
+      "tenant_id":"b631e143cf734202a71b2b79e2b15037",
+      "vim_id":"f8a5d081-2aff-4382-86e1-d0830c4324a0",
+      "instance_id":"4ddcc0c9-639a-418f-9781-a53dd5958b3b",
+      "mgmt_url":"{\"vdu1\": \"15.0.0.3\"}",
+      "placement_attr":{  
+         "vim_name":"VIM-1"
+      },
+      "error_reason":null,
+      "attributes":{  
+
+      },
+      "id":"afbbf7f4-59c2-45ed-b158-8c4e2e1d9104",
+      "name":"test-vnf"
+   }
+}

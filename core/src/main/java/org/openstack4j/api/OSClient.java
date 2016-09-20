@@ -1,7 +1,6 @@
 package org.openstack4j.api;
 
-import java.util.Set;
-
+import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.gbp.GbpService;
@@ -13,11 +12,15 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
+import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+
+import java.util.Set;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -146,6 +149,13 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the networking service
      */
     NetworkingService networking();
+    
+    /**
+     * Returns the Tacker Service API
+     *
+     * @return the tacker service
+     */
+    TackerService tacker();
 
     /**
      * Returns the Block Storage Service API
@@ -167,6 +177,12 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the image service
      */
     ImageService images();
+
+    /**
+     * Returns the Image V2 Service API
+     * @return the image v2 service
+     */
+    org.openstack4j.api.image.v2.ImageService imagesV2();
 
     /**
      * Returns the Telemetry Service API
@@ -252,4 +268,19 @@ public interface OSClient< T extends OSClient<T>> {
 	 * @return the Senlin service
 	 */
 	SenlinService senlin();
+
+    /**
+     *  Returns the Trove Service API
+     *
+     * @return the Trove service
+     */
+    TroveService trove();
+
+    /**
+     * Returns the Barbican Service API
+     *
+     * @return the Barbican service
+     */
+    BarbicanService barbican();
+
 }

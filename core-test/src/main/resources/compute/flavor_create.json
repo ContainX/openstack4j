@@ -1,0 +1,13 @@
+{  
+   "flavor":{  
+      "vcpus":1,
+      "disk":2,
+      "name":"m1.tiny",
+      "os-flavor-access:is_public":true,
+      "rxtx_factor":2.0,
+      "OS-FLV-EXT-DATA:ephemeral":1,
+      "ram":128,
+      "id":"1",
+      "swap":1
+   }
+}

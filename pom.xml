@@ -18,6 +18,7 @@
         <aries.spifly.version>1.0.0</aries.spifly.version>
         <slf4j.version>1.7.21</slf4j.version>
         <jackson.version>2.7.3</jackson.version>
+        <maven.jar.plugin.version>2.6</maven.jar.plugin.version>
         <additionalparam>-Xdoclint:none</additionalparam>
     </properties>
     <licenses>
@@ -81,6 +82,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.fge</groupId>
+            <artifactId>json-patch</artifactId>
+            <version>1.9</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -99,7 +105,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.5</version>
+                <version>${maven.jar.plugin.version}</version>
                 <configuration>
                     <finalName>${project.artifactId}-${release.version}</finalName>
                 </configuration>

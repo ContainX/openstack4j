@@ -1,0 +1,32 @@
+{  
+   "vims":[  
+      {  
+	      "status":"REACHABLE",
+	      "description":"test-vim-description",
+	      "tenant_id":"b631e143cf734202a71b2b79e2b15037",
+	      "name":"test-vim",
+	      "is_default":true,
+	      "auth_url":"http://openstack.os4j.com:35357/v3",
+	      "placement_attr":{  
+	         "regions":[  
+	            "RegionOne"
+	         ]
+	      },
+	      "auth_cred":{  
+	         "username":"admin",
+	         "project_name":"admin",
+	         "user_domain_name":"default",
+	         "project_id":null,
+	         "auth_url":"http://openstack.os4j.com:35357/v3",
+	         "password":"***",
+	         "project_domain_name":"default"
+	      },
+	      "type":"openstack",
+	      "id":"bad2f397-7436-4fc7-8043-726e173c5d30",
+	      "vim_project":{  
+	         "name":"admin",
+	         "project_domain_name":"default"
+	      }
+	   }
+   ]
+}

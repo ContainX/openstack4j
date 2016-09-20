@@ -18,6 +18,7 @@ import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT_H
 /**
  * Provides common parser routines when dealing with Headers or other non-json payloads
  * @author Jeremy Unruh
+ * @author Qin An - Added parser function for Neutron Agent List
  */
 public final class Parser {
 
@@ -78,6 +79,25 @@ public final class Parser {
         }
         return null;
     }
+    
+    /**
+     * Parse a string with format "yyyy-MM-dd HH:mm:ss" into a Date
+     * The string format is used in Neutron Agent-List
+     * 
+     * @param date - string to be parsed
+     * @return Date
+     */
+    public static Date parseSimpleDate(String date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+        	if (date != null) {
+        		return format.parse(date);
+        	}
+        } catch (ParseException e) {
+        	LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
+        }
+        return null;
+    }    
 
     /**
      * Takes a Date and returns it's equivalent in RFC 1123

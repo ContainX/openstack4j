@@ -58,7 +58,7 @@ public interface FlavorService extends RestService {
 	 * @param rxtxFactor the RX/TX factor (default is 1) [OPTIONAL]
 	 * @return the created flavor
 	 */
-	Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor);
+	Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor, boolean isPublic);
 	
 	/**
 	 * list extra specs

@@ -1,14 +1,14 @@
 package org.openstack4j.openstack.internal;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Set;
-
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
+import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
@@ -21,7 +21,9 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
+import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.Config;
@@ -33,9 +35,9 @@ import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Set;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -112,12 +114,23 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     public NetworkingService networking() {
         return Apis.getNetworkingServices();
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public TackerService tacker() {
+        return Apis.getTackerServices();
+    }
 
     /**
      * {@inheritDoc}
      */
     public ImageService images() {
         return Apis.getImageService();
+    }
+
+    public org.openstack4j.api.image.v2.ImageService imagesV2() {
+        return Apis.getImageV2Service();
     }
 
     /**
@@ -167,6 +180,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public SaharaService sahara() {
         return Apis.getSaharaServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public BarbicanService barbican() {
+        return Apis.getBarbicanServices();
     }
 
     /**
@@ -245,6 +265,12 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return getSupportedServices().contains(ServiceType.SHARE);
     }
 
+    /**
+     *
+     * @return
+     */
+    public boolean supportsTrove() { return getSupportedServices().contains(ServiceType.DATABASE); }
+
     public Set<ServiceType> getSupportedServices() {
         return null;
     }
@@ -258,6 +284,14 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public GbpService gbp() {
         return Apis.getGbpServices();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public TroveService trove(){
+        return Apis.getTroveServices();
     }
         
     public static class OSClientSessionV2 extends OSClientSession<OSClientSessionV2, OSClientV2> implements OSClientV2 {
