@@ -33,6 +33,15 @@ public class BaseOpenStackService {
 
     ServiceType serviceType = ServiceType.IDENTITY;
     Function<String, String> endpointFunc;
+    
+    private static ThreadLocal<String> reqIdContainer = new ThreadLocal<String>();
+    
+    public static final String X_OPENSTACK_REQUEST_ID = "x-openstack-request-id";
+    public static final String X_COMPUTE_REQUEST_ID = "X-Compute-Request-Id";
+    
+    public String getXOpenstackRequestId() {
+    	return reqIdContainer.get();
+    }
 
     protected BaseOpenStackService() {
     }
@@ -190,7 +199,19 @@ public class BaseOpenStackService {
         public R execute(ExecutionOptions<R> options) {
             header(HEADER_USER_AGENT, USER_AGENT);
             HttpRequest<R> request = req.build();
-            return HttpExecutor.create().execute(request).getEntity(request.getReturnType(), options);
+            HttpResponse res = HttpExecutor.create().execute(request);
+            
+            reqIdContainer.remove();
+             
+            String reqId = null;
+            if(res.headers().containsKey(X_COMPUTE_REQUEST_ID)) {
+            	reqId = res.header(X_COMPUTE_REQUEST_ID);
+            } else {
+            	reqId = res.header(X_OPENSTACK_REQUEST_ID);
+            }
+             
+            reqIdContainer.set(reqId);
+            return res.getEntity(request.getReturnType(), options);
         }
 
         public HttpResponse executeWithResponse() {
