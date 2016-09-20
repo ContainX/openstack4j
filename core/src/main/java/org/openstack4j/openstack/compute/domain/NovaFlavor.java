@@ -141,6 +141,7 @@ public class NovaFlavor implements Flavor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@JsonIgnore
 	@Override
 	public Boolean isPublic() {
 		return isPublic;
