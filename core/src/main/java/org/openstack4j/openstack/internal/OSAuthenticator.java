@@ -175,7 +175,7 @@ public class OSAuthenticator {
             }
         }
 
-        String reqId = response.header(BaseOpenStackService.X_OPENSTACK_REQUEST_ID);
+        String reqId = response.header(ClientConstants.X_OPENSTACK_REQUEST_ID);
 
         if (!info.reLinkToExistingSession) {
         	OSClientSessionV3 v3 = OSClientSessionV3.createSession(token, info.perspective, info.provider, config);

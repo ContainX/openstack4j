@@ -36,9 +36,6 @@ public class BaseOpenStackService {
     
     private static ThreadLocal<String> reqIdContainer = new ThreadLocal<String>();
     
-    public static final String X_OPENSTACK_REQUEST_ID = "x-openstack-request-id";
-    public static final String X_COMPUTE_REQUEST_ID = "X-Compute-Request-Id";
-    
     public String getXOpenstackRequestId() {
     	return reqIdContainer.get();
     }
@@ -204,10 +201,10 @@ public class BaseOpenStackService {
             reqIdContainer.remove();
              
             String reqId = null;
-            if(res.headers().containsKey(X_COMPUTE_REQUEST_ID)) {
-            	reqId = res.header(X_COMPUTE_REQUEST_ID);
+            if(res.headers().containsKey(ClientConstants.X_COMPUTE_REQUEST_ID)) {
+            	reqId = res.header(ClientConstants.X_COMPUTE_REQUEST_ID);
             } else {
-            	reqId = res.header(X_OPENSTACK_REQUEST_ID);
+            	reqId = res.header(ClientConstants.X_OPENSTACK_REQUEST_ID);
             }
              
             reqIdContainer.set(reqId);
