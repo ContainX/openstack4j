@@ -385,6 +385,8 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     public static class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClientV3> implements OSClientV3 {
 
         Token token;
+        
+        protected String reqId;
 
         private OSClientSessionV3(Token token, String endpoint, Facing perspective, CloudProvider provider, Config config) {
             this.token = token;
@@ -406,6 +408,10 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
         public static OSClientSessionV3 createSession(Token token, Facing perspective, CloudProvider provider, Config config) {
             return new OSClientSessionV3(token, token.getEndpoint(), perspective, provider, config);
+        }
+        
+        public String getXOpenstackRequestId() {
+        	return reqId;
         }
 
         @Override

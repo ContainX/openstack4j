@@ -175,11 +175,18 @@ public class OSAuthenticator {
             }
         }
 
-        if (!info.reLinkToExistingSession)
-            return OSClientSessionV3.createSession(token, info.perspective, info.provider, config);
+        String reqId = response.header(ClientConstants.X_OPENSTACK_REQUEST_ID);
+
+        if (!info.reLinkToExistingSession) {
+        	OSClientSessionV3 v3 = OSClientSessionV3.createSession(token, info.perspective, info.provider, config);
+        	v3.reqId = reqId;
+            return v3;
+        }
 
         OSClientSessionV3 current = (OSClientSessionV3) OSClientSessionV3.getCurrent();
         current.token = token;
+       
+        current.reqId = reqId;
         return current;
     }
 
