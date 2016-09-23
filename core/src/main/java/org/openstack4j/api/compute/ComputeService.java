@@ -59,6 +59,13 @@ public interface ComputeService extends RestService {
 	QuotaSetService quotaSets();
 
 	/**
+	 * Compute Os-Host API
+	 *
+	 * @return the compute os-host service
+	 */
+	HostService host();
+
+	/**
 	 * Floating IP Service API
 	 *
 	 * @return the floating-ip service
