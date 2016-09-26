@@ -1,0 +1,22 @@
+{
+  "environments" : [
+    {
+      "version" : 0,
+      "name" : "some_env",
+      "id" : "e1c1b5a0b3284f188c5d91ab18bf0451",
+      "tenant_id" : "e62d6f1538074da1a56c5e393398c999",
+      "status" : "ready",
+      "created" : "2016-09-27T11:35:19",
+      "updated" : "2016-09-27T11:35:19"
+    },
+    {
+      "updated" : "2016-09-18T15:30:34",
+      "created" : "2016-09-18T14:16:34",
+      "status" : "deploy failure",
+      "id" : "721f76f9a9d64ebcacc76189cb8978a9",
+      "tenant_id" : "e62d6f1538074da1a56c5e393398c999",
+      "version" : 1,
+      "name" : "test"
+    }
+  ]
+}

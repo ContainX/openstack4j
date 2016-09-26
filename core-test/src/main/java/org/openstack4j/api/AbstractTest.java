@@ -48,7 +48,8 @@ public abstract class AbstractTest {
         DATABASE(8779),
     	TACKER(9890),
         IMAGE(9292),
-        CLUSTERING(8778);
+        CLUSTERING(8778),
+        APP_CATALOG(8082);
 
         private final int port;
 
