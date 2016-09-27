@@ -6,8 +6,8 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-core-integration-test</artifactId>
-	<name>OpenStack4j Integrationtest Cases</name>
-	<url>http://github.com/gondor/openstack4j/</url>
+	<name>OpenStack4j Integration test Cases</name>
+	<url>http://github.com/ContainX/openstack4j/</url>
 	<packaging>pom</packaging>
 	<properties>
 		<skipTests>false</skipTests>

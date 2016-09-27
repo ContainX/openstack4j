@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-httpclient</artifactId>
 	<name>OpenStack4j HttpComponents-HttpClient Connector</name>
-	<url>http://github.com/gondor/openstack4j/</url>
+	<url>http://github.com/ContainX/openstack4j/</url>
 	<packaging>jar</packaging>
 
 	<properties>

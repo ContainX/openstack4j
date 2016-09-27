@@ -8,7 +8,7 @@
 	<artifactId>openstack4j-core</artifactId>
 	<name>OpenStack4j Core</name>
 	<description>OpenStack Java API</description>
-	<url>http://github.com/gondor/openstack4j/</url>
+	<url>http://github.com/ContainX/openstack4j/</url>
 	<packaging>jar</packaging>
 
 	<build>

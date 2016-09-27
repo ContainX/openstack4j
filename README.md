@@ -14,7 +14,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 * Questions - [Stackoverflow](http://stackoverflow.com/search?q=openstack4j)
 * Twitter: [@openstack4j](https://twitter.com/openstack4j)
 * Facebook: [facebook.com/openstack4j](http://www.facebook.com/openstack4j)
-* Changelog: [Changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md)
+* Changelog: [Changelog](https://github.com/ContainX/openstack4j/blob/master/CHANGELOG.md)
 
 ## Bug Reports
 
@@ -45,7 +45,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 
 **Using OpenStack4j with one of our connector modules**
 
-To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/gondor/openstack4j/tree/master/connectors)
+To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/ContainX/openstack4j/tree/master/connectors)
 
 #### Current (Master Branch)
 
@@ -78,7 +78,7 @@ Example POM based repository declaration to grab snapshots:
 
 Contributing
 ------------
-If you would like to contribute please see our contributing [guidelines](https://github.com/gondor/openstack4j/blob/master/CONTRIBUTING.md)
+If you would like to contribute please see our contributing [guidelines](https://github.com/ContainX/openstack4j/blob/master/CONTRIBUTING.md)
 
 #### Top 15 Contributors
 
@@ -102,7 +102,7 @@ If you would like to contribute please see our contributing [guidelines](https:/
 
 #### Throughput
 
-[![Throughput Graph](https://graphs.waffle.io/gondor/openstack4j/throughput.svg)](https://waffle.io/gondor/openstack4j/metrics)
+[![Throughput Graph](https://graphs.waffle.io/ContainX/openstack4j/throughput.svg)](https://waffle.io/ContainX/openstack4j/metrics)
 
 Quick Usage Guide
 -----------------
