@@ -15,4 +15,11 @@ public interface AppCatalogService extends RestService {
      * @return the environments service
      */
     MuranoEnvironmentService environments();
+
+    /**
+     * Murano Sessions API
+     *
+     * @return the sessions API
+     */
+    MuranoSessionService sessions();
 }
