@@ -2,6 +2,7 @@ package org.openstack4j.openstack.murano.v1.internal;
 
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.api.murano.v1.MuranoApplicationService;
 import org.openstack4j.api.murano.v1.MuranoEnvironmentService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.murano.v1.MuranoSessionService;
@@ -21,5 +22,10 @@ public class MuranoService extends BaseMuranoServices implements AppCatalogServi
     @Override
     public MuranoSessionService sessions() {
         return Apis.get(MuranoSessionService.class);
+    }
+
+    @Override
+    public MuranoApplicationService services() {
+        return Apis.get(MuranoApplicationService.class);
     }
 }

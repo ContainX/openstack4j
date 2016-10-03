@@ -3,6 +3,7 @@ package org.openstack4j.openstack.murano.v1.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
 import org.openstack4j.model.murano.v1.builder.EnvironmentBuilder;
+import org.openstack4j.model.murano.v1.domain.Application;
 import org.openstack4j.model.murano.v1.domain.Environment;
 import org.openstack4j.openstack.common.ListResult;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -35,12 +36,22 @@ public class MuranoEnvironment implements Environment {
     @JsonProperty("tenant_id")
     private String tenantId;
 
+    private List<MuranoApplication> services;
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String getId() {
         return this.id;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<MuranoApplication> getServices() {
+        return this.services;
     }
 
     /**
@@ -113,7 +124,7 @@ public class MuranoEnvironment implements Environment {
     }
 
     /**
-     * @return the cluster Builder
+     * @return the environment Builder
      */
     public static EnvironmentBuilder builder() {
         return new MuranoEnvironmentConcreteBuilder();

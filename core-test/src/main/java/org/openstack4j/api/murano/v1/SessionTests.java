@@ -1,7 +1,6 @@
 package org.openstack4j.api.murano.v1;
 
 import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.murano.v1.domain.AppCatalogSession;
 import org.testng.annotations.Test;
@@ -23,10 +22,10 @@ public class SessionTests extends AbstractTest {
     public void testGetSession() throws IOException {
         respondWith(SESSION_JSON);
         String id = "b8f4006064d24c10a33d9ed68e554f0f";
-        AppCatalogSession env = osv3().murano().sessions().get(envId, id);
-        assertNotNull(env);
-        assertNotNull(env.getId());
-        assertEquals(env.getId(), id);
+        AppCatalogSession ses = osv3().murano().sessions().get(envId, id);
+        assertNotNull(ses);
+        assertNotNull(ses.getId());
+        assertEquals(ses.getId(), id);
     }
 
     public void testConfigureSession() throws IOException {

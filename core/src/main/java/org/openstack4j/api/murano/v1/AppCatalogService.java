@@ -22,4 +22,11 @@ public interface AppCatalogService extends RestService {
      * @return the sessions API
      */
     MuranoSessionService sessions();
+
+    /**
+     * Murano Services API
+     *
+     * @return the servces API
+     */
+    MuranoApplicationService services();
 }
