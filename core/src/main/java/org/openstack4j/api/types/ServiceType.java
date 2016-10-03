@@ -3,7 +3,7 @@ package org.openstack4j.api.types;
 public enum ServiceType {
 
 	IDENTITY("keystone", "identity"),
-	APP_CATALOG("murano", "application_catalog"),
+	APP_CATALOG("murano", "application-catalog"),
 	COMPUTE("nova", "compute"),
 	IMAGE("glance", "image"),
 	BLOCK_STORAGE("cinder", "volume"),
