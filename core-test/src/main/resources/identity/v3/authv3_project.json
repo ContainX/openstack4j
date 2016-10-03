@@ -375,7 +375,7 @@
 						"id": "123450a4597040849c03bc1358857654"
 					}
 				],
-				"type": "application_catalog",
+				"type": "application-catalog",
 				"id": "1236500210a24c38a3702b6825e56789",
 				"name": "murano"
 			}, {
