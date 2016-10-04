@@ -2,7 +2,6 @@ OpenStack4j
 ===========
 
 [![Build Status](https://travis-ci.org/ContainX/openstack4j.svg?branch=master)](https://travis-ci.org/ContainX/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gondor/openstack4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry, Data Processing as well as many extensions (LBaaS, FWaaS, Quota-Sets, etc)
 
@@ -12,8 +11,8 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 * Documentation/Tutorials: [OpenStack4j.com/learn/](http://www.openstack4j.com/learn/)
 * Questions - Use Google Groups: [groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)
 * Questions - [Stackoverflow](http://stackoverflow.com/search?q=openstack4j)
+* Chat on Slack: [containx.slack.com](https://containx.slack.com)
 * Twitter: [@openstack4j](https://twitter.com/openstack4j)
-* Facebook: [facebook.com/openstack4j](http://www.facebook.com/openstack4j)
 * Changelog: [Changelog](https://github.com/ContainX/openstack4j/blob/master/CHANGELOG.md)
 
 ## Bug Reports
