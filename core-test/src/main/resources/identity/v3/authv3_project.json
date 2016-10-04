@@ -354,6 +354,31 @@
 				"id": "1236500210a24c38a3702b6825e12345",
 				"name": "ceilometeter"
 			}, {
+				"endpoints": [
+					{
+						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:8082",
+						"region": "RegionOne",
+						"interface": "public",
+						"id": "123458912d3f49a09df51035681d6789"
+					}, {
+						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:8082",
+						"region": "RegionOne",
+						"interface": "admin",
+						"id": "12345321ae80457abc3728fa1e6f4567"
+					}, {
+						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:8082",
+						"region": "RegionOne",
+						"interface": "internal",
+						"id": "123450a4597040849c03bc1358857654"
+					}
+				],
+				"type": "application-catalog",
+				"id": "1236500210a24c38a3702b6825e56789",
+				"name": "murano"
+			}, {
 			"endpoints": [
 			  {
 				"region_id": "RegionOne",

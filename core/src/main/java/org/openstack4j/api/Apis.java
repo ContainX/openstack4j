@@ -6,6 +6,7 @@ import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
+import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
@@ -105,6 +106,15 @@ public class Apis {
      */
     public static HeatService getHeatServices() {
         return get(HeatService.class);
+    }
+
+    /**
+     * Gets the (Murano) App Catalog services API
+     *
+     * @return the murano services
+     */
+    public static AppCatalogService getMuranoServices() {
+        return get(AppCatalogService.class);
     }
 
     /**

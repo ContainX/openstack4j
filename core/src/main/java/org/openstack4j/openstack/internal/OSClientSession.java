@@ -16,6 +16,7 @@ import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
+import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
@@ -164,6 +165,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public AppCatalogService murano() {
+        return Apis.getMuranoServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public SenlinService senlin() {
         return Apis.getSenlinServices();
     }
@@ -235,6 +243,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public boolean supportsHeat() {
         return getSupportedServices().contains(ServiceType.ORCHESTRATION);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean supportsMurano() {
+        return getSupportedServices().contains(ServiceType.APP_CATALOG);
     }
 
     /**
