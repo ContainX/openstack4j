@@ -9,7 +9,7 @@
     <artifactId>openstack4j-connectors</artifactId>
     <name>OpenStack4j Connectors</name>
     <description>OpenStack Java API Connectors</description>
-    <url>http://github.com/gondor/openstack4j/</url>
+    <url>http://github.com/ContainX/openstack4j/</url>
     <packaging>pom</packaging>
 
     <modules>
