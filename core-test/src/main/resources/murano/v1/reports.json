@@ -1,0 +1,92 @@
+{
+  "reports" : [
+    {
+      "level" : "info",
+      "updated" : "2016-10-03T10:59:15",
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "details" : null,
+      "created" : "2016-10-03T10:59:15",
+      "text" : "Action deploy is scheduled",
+      "entity_id" : null,
+      "id" : "62ab8549892641ad9c7a2dc67d4ae19e",
+      "entity" : null
+    },
+    {
+      "entity" : null,
+      "entity_id" : "5c2a7dae-097d-4a1c-85cb-e7db2ed62d90",
+      "id" : "ad4b8072a06f46a8889f3844eb2a5854",
+      "text" : "Create VM for Docker Server",
+      "created" : "2016-10-03T10:59:19",
+      "details" : null,
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "level" : "info",
+      "updated" : "2016-10-03T10:59:19"
+    },
+    {
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "level" : "info",
+      "updated" : "2016-10-03T11:02:15",
+      "details" : null,
+      "created" : "2016-10-03T11:02:15",
+      "text" : "Docker Server is up and running",
+      "id" : "bcaae839106341cca9c09b336c3b225c",
+      "entity_id" : "5c2a7dae-097d-4a1c-85cb-e7db2ed62d90",
+      "entity" : null
+    },
+    {
+      "entity" : null,
+      "text" : "Installing HTTPd and site from https://github.com/nmakhotkin/example-web.git",
+      "id" : "79b9e64e0b1f4e42b27acb7a147ac43b",
+      "entity_id" : "7c449c3c-ccdf-45ba-bf3c-496149918df7",
+      "level" : "info",
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "updated" : "2016-10-03T11:02:16",
+      "details" : null,
+      "created" : "2016-10-03T11:02:16"
+    },
+    {
+      "entity" : null,
+      "updated" : "2016-10-03T11:02:16",
+      "level" : "info",
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "details" : null,
+      "created" : "2016-10-03T11:02:16",
+      "text" : "Pulling app image stanlagun/httpdgitsite",
+      "entity_id" : "5c2a7dae-097d-4a1c-85cb-e7db2ed62d90",
+      "id" : "e5558d941efb4371a8a316c29cb77cf0"
+    },
+    {
+      "entity_id" : "7c449c3c-ccdf-45ba-bf3c-496149918df7",
+      "id" : "c6118ba64013414fab387f627506c711",
+      "text" : "Error: The murano-agent did not respond within 3600 seconds",
+      "created" : "2016-10-03T12:02:16",
+      "details" : null,
+      "level" : "error",
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "updated" : "2016-10-03T12:02:16",
+      "entity" : null
+    },
+    {
+      "text" : "[murano.common.exceptions.TimeoutException]: The murano-agent did not respond within 3600 seconds",
+      "id" : "9a794a79c1ea43bd8adbafeae430de32",
+      "entity_id" : "3e57cee8b55448f6af0752d31d7e27d6",
+      "level" : "error",
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "updated" : "2016-10-03T12:02:16",
+      "created" : "2016-10-03T12:02:16",
+      "details" : null,
+      "entity" : null
+    },
+    {
+      "entity" : null,
+      "created" : "2016-10-03T12:02:16",
+      "details" : null,
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "level" : "info",
+      "updated" : "2016-10-03T12:02:16",
+      "entity_id" : null,
+      "id" : "b49accc24f5944e3a2cf0f620d48fe85",
+      "text" : "Deployment finished with errors"
+    }
+  ]
+}

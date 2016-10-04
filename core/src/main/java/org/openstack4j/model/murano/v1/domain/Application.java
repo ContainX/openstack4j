@@ -2,13 +2,15 @@ package org.openstack4j.model.murano.v1.domain;
 
 import org.openstack4j.model.ModelEntity;
 
+import java.util.Map;
+
 /**
  * @author Nikolay Mahotkin.
  */
 public interface Application extends ModelEntity {
     /**
      *
-     * @return data in raw format (json-string).
+     * @return data in map format (Map<String, Object>).
      */
-    Object getData();
+    Map<String, Object> getData();
 }
