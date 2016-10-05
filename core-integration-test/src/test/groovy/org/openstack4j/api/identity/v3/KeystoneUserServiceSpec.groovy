@@ -3,30 +3,33 @@ package org.openstack4j.api.identity.v3
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
+
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.OSClient.OSClientV3
-import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.common.ActionResponse
+import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.v3.Group
 import org.openstack4j.model.identity.v3.Role
 import org.openstack4j.model.identity.v3.User
 import org.openstack4j.openstack.OSFactory
 
-import spock.lang.IgnoreIf
 import software.betamax.Configuration
 import software.betamax.MatchRules
-import software.betamax.junit.RecorderRule
+import software.betamax.TapeMode
 import software.betamax.junit.Betamax
 import software.betamax.junit.RecorderRule
+
+import spock.lang.IgnoreIf
 
 @Slf4j
 class KeystoneUserServiceSpec extends AbstractSpec {
 
     @Rule TestName KeystoneUserServiceTest
-    @Rule public RecorderRule recorder = new RecorderRule(
+    @Rule public RecorderRule recorderRule = new RecorderRule(
             Configuration.builder()
                     .tapeRoot(new File(TAPEROOT + "identity.v3"))
                     .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
+                    .defaultMode(TapeMode.READ_WRITE)
                     .build());
 
     // additional attributes for user service tests
@@ -34,6 +37,7 @@ class KeystoneUserServiceSpec extends AbstractSpec {
     def static final String USER_CRUD_EMAIL = "foobar@example.com"
     def static final String USER_CRUD_PASSWORD = "secret"
     def String USER_CRUD_ID
+    def String ANOTHER_GROUP_ID
 
     static final boolean skipTest
 
@@ -44,9 +48,7 @@ class KeystoneUserServiceSpec extends AbstractSpec {
                 PASSWORD == null ||
                 DOMAIN_ID == null ||
                 USER_DOMAIN_ID == null ||
-                PROJECT_ID == null ||
-                ANOTHER_GROUP_ID == null) {
-
+                PROJECT_ID == null) {
             skipTest = true
         } else {
             skipTest = false
@@ -75,7 +77,7 @@ class KeystoneUserServiceSpec extends AbstractSpec {
     // ------------ UserService Tests ------------
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape = "userService_user_crud.tape")
+    @Betamax(tape = "userService_user_crud")
     def "create, read, update, delete user-service test cases"() {
 
         given: "authenticated v3 OSClient"
@@ -85,6 +87,12 @@ class KeystoneUserServiceSpec extends AbstractSpec {
                 .scopeToDomain(Identifier.byId(DOMAIN_ID))
                 .withConfig(CONFIG_PROXY_BETAMAX)
                 .authenticate()
+
+        and: "another group used in the following test scenario"
+        def anotherGroup = os.identity().groups().create(DOMAIN_ID, "anotherGroupForUserServiceTest", "group used for user service integration test")
+
+        and: "get the id of the recently created group"
+        ANOTHER_GROUP_ID = anotherGroup.getId()
 
         when: "a new user is created"
         User newUser = os.identity().users().create(USER_DOMAIN_ID, USER_CRUD_NAME, USER_CRUD_PASSWORD, USER_CRUD_EMAIL, true)
@@ -120,7 +128,7 @@ class KeystoneUserServiceSpec extends AbstractSpec {
 
         then: "check if the list contains at least the newly created user and if the name matches with the one requested"
         user_byName_list.size() >= 1
-        user_byName_list.get(0).getName() == USER_CRUD_NAME
+        user_byName_list.first().getName() == USER_CRUD_NAME
 
         when: "an existing user is 'read' by its unique identifier"
         User user_byId = os.identity().users().get(USER_CRUD_ID)
@@ -173,14 +181,14 @@ class KeystoneUserServiceSpec extends AbstractSpec {
         then: "check that there's at least one assignment"
         projectUserRolesList.isEmpty() == false
 
-        when: "an existing user is added to an existing group where he is not a member"
+        when: "an existing user is added to an existing group where he is not already a member"
         ActionResponse result_addUserToGroup_success = os.identity().groups().addUserToGroup(ANOTHER_GROUP_ID, USER_CRUD_ID)
 
-        then: "the user became a member of that group as indicated by an successful response"
+        then: "the user became a member of that group as indicated by the successful response"
         result_addUserToGroup_success.isSuccess() == true
 
-        when: "the a user's groups are requested"
-        List<? extends Group> userGroupsList = os.identity().users().listUserGroups(USER_CRUD_ID)
+        when: "the users groups are requested"
+        List<? extends Group> userGroupsList = os.identity().users().listUserGroups(USER_ID)
 
         then: "the user should be a member in at least one group"
         userGroupsList.isEmpty() == false
@@ -208,6 +216,9 @@ class KeystoneUserServiceSpec extends AbstractSpec {
 
         then: "the user is not present, therefore the response evaluates to false"
         response_deleteUser_nonExistent_success.isSuccess() == false
+
+        cleanup:
+        os.identity().groups().delete(ANOTHER_GROUP_ID)
     }
 
 }

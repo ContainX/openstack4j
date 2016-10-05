@@ -43,6 +43,9 @@ public final class ClientConstants {
     public static final String PATH_REGIONS = "/regions";
     public static final String PATH_CREDENTIALS = "/credentials";
     public static final String PATH_TOKENS = "/auth/tokens";
+    public static final String PATH_PROJECT_SCOPES = "auth/projects";
+    public static final String PATH_DOMAIN_SCOPES = "auth/domains";
+    public static final String PATH_SERVICE_CATALOGS = "auth/catalog";
     public static final String PATH_TENANTS = "/tenants";
 
 }
