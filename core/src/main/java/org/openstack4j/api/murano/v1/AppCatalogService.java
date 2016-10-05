@@ -29,4 +29,11 @@ public interface AppCatalogService extends RestService {
      * @return the servces API
      */
     MuranoApplicationService services();
+
+    /**
+     * Murano deployments API
+     *
+     * @return the deployments API
+     */
+    MuranoDeploymentService deployments();
 }
