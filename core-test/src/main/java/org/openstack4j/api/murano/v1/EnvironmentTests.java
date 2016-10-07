@@ -3,6 +3,7 @@ package org.openstack4j.api.murano.v1;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.murano.v1.domain.Application;
 import org.openstack4j.model.murano.v1.domain.Environment;
 import org.testng.annotations.Test;
 
@@ -37,6 +38,18 @@ public class EnvironmentTests extends AbstractTest {
         assertNotNull(env);
         assertNotNull(env.getId());
         assertEquals(env.getId(), id);
+    }
+
+    public void testGetEnvironmentCheckServices() throws IOException {
+        respondWith(ENVIRONMENT_JSON);
+        String id = "721f76f9a9d64ebcacc76189cb8978a9";
+        Environment env = osv3().murano().environments().get(id);
+        assertNotNull(env);
+
+        List<? extends Application> services = env.getServices();
+
+        assertEquals(services.size(), 2);
+        assertEquals(services.get(0).getService().getId(), "2614f193-f13e-42b1-af7e-01729bb5af75");
     }
 
     public void testCreateEnvironment() throws IOException {

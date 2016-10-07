@@ -1,6 +1,5 @@
 package org.openstack4j.openstack.murano.v1.internal;
 
-import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.openstack4j.api.murano.v1.MuranoApplicationService;
 import org.openstack4j.model.common.ActionResponse;
@@ -24,8 +23,8 @@ public class MuranoApplicationServiceImpl extends BaseMuranoServices implements 
         Invocation<MuranoApplication.ApplicationList> invocation;
 
         invocation = get(
-                MuranoApplication.ApplicationList.class,
-                uri("/environments/%s/services", environmentId)
+            MuranoApplication.ApplicationList.class,
+            uri("/environments/%s/services", environmentId)
         );
 
         if (sessionId != null) {
@@ -51,8 +50,8 @@ public class MuranoApplicationServiceImpl extends BaseMuranoServices implements 
         Invocation<JsonNode> invocation;
 
         invocation = get(
-                JsonNode.class,
-                uri("/environments/%s/services/%s", environmentId, path)
+            JsonNode.class,
+            uri("/environments/%s/services/%s", environmentId, path)
         );
 
         if (sessionId != null) {
@@ -81,8 +80,8 @@ public class MuranoApplicationServiceImpl extends BaseMuranoServices implements 
         Invocation<MuranoApplication> invocation;
 
         invocation = post(MuranoApplication.class, uri("/environments/%s/services//", environmentId))
-                .header("X-Configuration-Session", sessionId)
-                .entity(entity);
+            .header("X-Configuration-Session", sessionId)
+            .entity(entity);
 
         return invocation.execute();
     }
@@ -96,8 +95,8 @@ public class MuranoApplicationServiceImpl extends BaseMuranoServices implements 
         MuranoApplication.ApplicationList toCreate = MuranoApplicationUtils.toApplications(jsonString);
 
         invocation = post(MuranoApplication.ApplicationList.class, uri("/environments/%s/services//", environmentId))
-                .header("X-Configuration-Session", sessionId)
-                .entity(toCreate);
+            .header("X-Configuration-Session", sessionId)
+            .entity(toCreate);
 
         return invocation.execute();
     }
@@ -113,8 +112,8 @@ public class MuranoApplicationServiceImpl extends BaseMuranoServices implements 
         Invocation<MuranoApplication> invocation;
 
         invocation = put(MuranoApplication.class, uri("/environments/%s/services//", environmentId))
-                .header("X-Configuration-Session", sessionId)
-                .entity(entity);
+            .header("X-Configuration-Session", sessionId)
+            .entity(entity);
 
         return invocation.execute();
     }
@@ -128,8 +127,8 @@ public class MuranoApplicationServiceImpl extends BaseMuranoServices implements 
         MuranoApplication.ApplicationList toUpdate = MuranoApplicationUtils.toApplications(jsonString);
 
         invocation = put(MuranoApplication.ApplicationList.class, uri("/environments/%s/services//", environmentId))
-                .header("X-Configuration-Session", sessionId)
-                .entity(toUpdate);
+            .header("X-Configuration-Session", sessionId)
+            .entity(toUpdate);
 
         return invocation.execute();
     }
@@ -140,7 +139,7 @@ public class MuranoApplicationServiceImpl extends BaseMuranoServices implements 
     @Override
     public ActionResponse delete(String environmentId, String path, String sessionId) {
         return deleteWithResponse(uri("/environments/%s/services/%s", environmentId, path))
-                .header("X-Configuration-Session", sessionId)
-                .execute();
+            .header("X-Configuration-Session", sessionId)
+            .execute();
     }
 }
