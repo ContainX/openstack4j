@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.ByteStreams;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.murano.v1.domain.ActionInfo;
 import org.openstack4j.model.murano.v1.domain.Application;
+import org.openstack4j.model.murano.v1.domain.ServiceInfo;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -45,6 +47,34 @@ public class ServicesTests extends AbstractTest {
         assertEquals(apps.size(), 1);
     }
 
+    public void testGetOneService() throws IOException {
+        respondWith(SERVICE_JSON);
+        List<? extends Application> apps = osv3().murano().services().get(envId, sessionId);
+        assertNotNull(apps);
+        assertEquals(apps.size(), 1);
+    }
+
+    public void testGetServiceCheckActions() throws IOException {
+        respondWith(SERVICE_JSON);
+        List<? extends Application> apps = osv3().murano().services().get(envId, sessionId);
+        assertNotNull(apps);
+        assertEquals(apps.size(), 1);
+
+        ServiceInfo service = apps.get(0).getService();
+
+        assertEquals(service.getId(), "2614f193-f13e-42b1-af7e-01729bb5af75");
+        assertEquals(service.getType(), "com.mirantis.docker.DockerStandaloneHost");
+
+        List<? extends ActionInfo> actions = service.getActions();
+
+        assertEquals(actions.size(), 2);
+
+        ActionInfo action = actions.get(0);
+
+        assertEquals(action.getName(), "getTest");
+        assertEquals(action.getId(), "2614f193-f13e-42b1-af7e-01729bb5af75_getTest");
+    }
+
     public void testGetServicesListResponse() throws IOException {
         respondWith(SERVICES_JSON);
         List<? extends Application> apps = osv3().murano().services().get(envId, sessionId);
@@ -74,6 +104,9 @@ public class ServicesTests extends AbstractTest {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> serviceMap = mapper.readValue(json, Map.class);
 
+        // Need to remove internal service info from test json string.
+        serviceMap.remove("?");
+
         Application app = osv3().murano().services().create(envId, sessionId, serviceMap);
         assertNotNull(app);
         assertEquals(app.getData(), serviceMap);
@@ -101,6 +134,9 @@ public class ServicesTests extends AbstractTest {
 
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> serviceMap = mapper.readValue(json, Map.class);
+
+        // Need to remove internal service info from test json string.
+        serviceMap.remove("?");
 
         Application app = osv3().murano().services().update(envId, sessionId, serviceMap);
         assertNotNull(app);

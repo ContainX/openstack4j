@@ -1,0 +1,6 @@
+{
+  "isException": false,
+  "result": {
+    "tomcat_admin": "http://172.16.167.194:8080"
+  }
+}
