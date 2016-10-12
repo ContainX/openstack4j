@@ -66,7 +66,7 @@ public class VimServiceImpl extends BaseTackerServices implements VimService {
 	 */
 	@Override
 	public Vim register(Vim vim) {
-		return post(TackerVim.class, uri("/vims")).entity(vim).execute(ExecutionOptions.<TackerVim>create(PropagateOnStatus.on(404)));
+		return post(TackerVim.class, uri("/vims")).entity(vim).execute(ExecutionOptions.<TackerVim>create(PropagateOnStatus.on(500)));
 	}
 
 	/**

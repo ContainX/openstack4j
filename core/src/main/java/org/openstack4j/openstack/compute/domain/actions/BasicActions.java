@@ -62,6 +62,9 @@ public final class BasicActions {
 
     @JsonRootName("migrate")
     public static class Migrate implements ServerAction { }
+    
+    @JsonRootName("forceDelete")
+    public static class ForceDelete implements ServerAction { }
 
     @JsonRootName("reboot")
     public static class Reboot implements ServerAction {
@@ -119,6 +122,7 @@ public final class BasicActions {
             case SHELVE_OFFLOAD: return instanceFor(ShelveOffload.class);
             case UNSHELVE: return instanceFor(UnShelve.class);
             case SUSPEND: return instanceFor(Suspend.class);
+            case FORCEDELETE: return instanceFor(ForceDelete.class);
             default:
                 return null;
         }

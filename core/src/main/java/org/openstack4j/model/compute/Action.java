@@ -31,5 +31,7 @@ public enum Action {
 	/** Remove a shelved instance from the compute node */
 	SHELVE_OFFLOAD, 
 	/** Unshelve the server */
-	UNSHELVE 
+	UNSHELVE,
+ 	/** Force delete the server */
+ 	FORCEDELETE
 }

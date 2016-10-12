@@ -7,6 +7,7 @@ import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
+import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
@@ -100,6 +101,13 @@ public interface OSClient< T extends OSClient<T>> {
      * @return true if supports Heat
      */
     boolean supportsHeat();
+
+    /**
+     * Determines if the App Catalog (Murano) service is supported
+     *
+     * @return true if supports Murano
+     */
+    boolean supportsMurano();
 
     /**
      * Determines if the Block Storage (Cinder) service is supported
@@ -204,6 +212,13 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the Heat service
      */
     HeatService heat();
+
+    /**
+     * Returns the Murano Service API
+     *
+     * @return the Murano service
+     */
+    AppCatalogService murano();
 
     /**
      * Returns the Sahara Service API

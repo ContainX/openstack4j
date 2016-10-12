@@ -2,7 +2,6 @@ OpenStack4j
 ===========
 
 [![Build Status](https://travis-ci.org/ContainX/openstack4j.svg?branch=master)](https://travis-ci.org/ContainX/openstack4j)  [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)]()
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gondor/openstack4j?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 OpenStack4j is a fluent OpenStack client that allows provisioning and control of an OpenStack deployment.   This includes support for Identity, Compute, Image, Network, Block Storage, Telemetry, Data Processing as well as many extensions (LBaaS, FWaaS, Quota-Sets, etc)
 
@@ -12,9 +11,9 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 * Documentation/Tutorials: [OpenStack4j.com/learn/](http://www.openstack4j.com/learn/)
 * Questions - Use Google Groups: [groups.google.com/group/openstack4j](http://groups.google.com/group/openstack4j)
 * Questions - [Stackoverflow](http://stackoverflow.com/search?q=openstack4j)
+* Chat on Slack: [containx.slack.com](https://containx.slack.com)
 * Twitter: [@openstack4j](https://twitter.com/openstack4j)
-* Facebook: [facebook.com/openstack4j](http://www.facebook.com/openstack4j)
-* Changelog: [Changelog](https://github.com/gondor/openstack4j/blob/master/CHANGELOG.md)
+* Changelog: [Changelog](https://github.com/ContainX/openstack4j/blob/master/CHANGELOG.md)
 
 ## Bug Reports
 
@@ -45,7 +44,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 
 **Using OpenStack4j with one of our connector modules**
 
-To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/gondor/openstack4j/tree/master/connectors)
+To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/ContainX/openstack4j/tree/master/connectors)
 
 #### Current (Master Branch)
 
@@ -78,7 +77,7 @@ Example POM based repository declaration to grab snapshots:
 
 Contributing
 ------------
-If you would like to contribute please see our contributing [guidelines](https://github.com/gondor/openstack4j/blob/master/CONTRIBUTING.md)
+If you would like to contribute please see our contributing [guidelines](https://github.com/ContainX/openstack4j/blob/master/CONTRIBUTING.md)
 
 #### Top 15 Contributors
 
@@ -102,7 +101,7 @@ If you would like to contribute please see our contributing [guidelines](https:/
 
 #### Throughput
 
-[![Throughput Graph](https://graphs.waffle.io/gondor/openstack4j/throughput.svg)](https://waffle.io/gondor/openstack4j/metrics)
+[![Throughput Graph](https://graphs.waffle.io/ContainX/openstack4j/throughput.svg)](https://waffle.io/ContainX/openstack4j/metrics)
 
 Quick Usage Guide
 -----------------

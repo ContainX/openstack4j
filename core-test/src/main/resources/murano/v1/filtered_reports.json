@@ -1,0 +1,37 @@
+{
+  "reports" : [
+    {
+      "created" : "2016-10-03T10:59:19",
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "entity" : null,
+      "entity_id" : "5c2a7dae-097d-4a1c-85cb-e7db2ed62d90",
+      "text" : "Create VM for Docker Server",
+      "updated" : "2016-10-03T10:59:19",
+      "level" : "info",
+      "details" : null,
+      "id" : "ad4b8072a06f46a8889f3844eb2a5854"
+    },
+    {
+      "level" : "info",
+      "id" : "bcaae839106341cca9c09b336c3b225c",
+      "details" : null,
+      "updated" : "2016-10-03T11:02:15",
+      "entity_id" : "5c2a7dae-097d-4a1c-85cb-e7db2ed62d90",
+      "entity" : null,
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "text" : "Docker Server is up and running",
+      "created" : "2016-10-03T11:02:15"
+    },
+    {
+      "updated" : "2016-10-03T11:02:16",
+      "details" : null,
+      "id" : "e5558d941efb4371a8a316c29cb77cf0",
+      "level" : "info",
+      "created" : "2016-10-03T11:02:16",
+      "text" : "Pulling app image stanlagun/httpdgitsite",
+      "entity" : null,
+      "task_id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "entity_id" : "5c2a7dae-097d-4a1c-85cb-e7db2ed62d90"
+    }
+  ]
+}

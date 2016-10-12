@@ -63,6 +63,6 @@ public class VnfdServiceImpl extends BaseTackerServices implements VnfdService {
 
 	@Override
 	public Vnfd create(Vnfd vnfd) {
-		return post(TackerVnfd.class, uri("/vnfds")).entity(vnfd).execute(ExecutionOptions.<TackerVnfd>create(PropagateOnStatus.on(404)));
+		return post(TackerVnfd.class, uri("/vnfds")).entity(vnfd).execute(ExecutionOptions.<TackerVnfd>create(PropagateOnStatus.on(500)));
 	}
 }

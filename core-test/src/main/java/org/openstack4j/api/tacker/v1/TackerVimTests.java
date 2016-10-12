@@ -10,10 +10,12 @@ import java.util.logging.Logger;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
+import org.openstack4j.api.exceptions.ServerResponseException;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.tacker.Vim;
 import org.openstack4j.openstack.tacker.domain.AuthCredentials;
 import org.openstack4j.openstack.tacker.domain.VimProject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.google.common.base.Preconditions;
@@ -78,6 +80,36 @@ public class TackerVimTests extends AbstractTest {
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created Tacker Vim : "+vim);
 		
 		assertEquals("test-vim", vim.getName());
+	}
+	
+	@Test(expectedExceptions = ServerResponseException.class)
+	public void testRegisterVimWithTackerError() throws IOException {
+		String jsonResponse = "{\"TackerError\": {"
+                + "\"message\": \"'project_domain_name' is missing.\", "
+                + "\"code\": 500}}";
+		
+		respondWith(500, jsonResponse);
+		
+		VimProject vimProject = VimProject.create().name("admin");
+		
+		AuthCredentials authCredentials = AuthCredentials.create()
+				.username("admin")
+				.password("password")
+				.userDomainName("default");
+		
+		Vim vim = Builders.tacker().vim()
+				.name("test-vim")
+				.description("test-vim-description")
+				.authUrl("http://openstack.os4j.com:35357/v3")
+				.isDefault(Boolean.TRUE)
+				.type("openstack")
+				.vimProject(vimProject)
+				.authCredentials(authCredentials)
+				.build();
+		
+		vim = osv3().tacker().vim().register(vim);
+		System.out.println("THROWING EXCEPTIONNNNNNNNN");
+		Assert.fail("Exception should have been thrown.");
 	}
 	
 	public void testDeleteVim() throws IOException {
