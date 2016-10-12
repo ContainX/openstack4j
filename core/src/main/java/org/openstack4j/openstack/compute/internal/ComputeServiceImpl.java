@@ -10,6 +10,7 @@ import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.api.compute.HostAggregateService;
 import org.openstack4j.api.compute.KeypairService;
+import org.openstack4j.api.compute.HostService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerGroupService;
 import org.openstack4j.api.compute.ServerService;
@@ -57,6 +58,14 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	@Override
 	public QuotaSetService quotaSets() {
 		return Apis.get(QuotaSetService.class);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HostService host() {
+		return Apis.get(HostService.class);
 	}
 
 	/**

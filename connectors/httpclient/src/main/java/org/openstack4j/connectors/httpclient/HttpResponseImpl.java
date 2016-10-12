@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class HttpResponseImpl implements HttpResponse {
 
     private static final Logger LOG = LoggerFactory.getLogger(HttpResponseImpl.class);
@@ -123,8 +125,13 @@ public class HttpResponseImpl implements HttpResponse {
     @Override
     public <T> T readEntity(Class<T> typeToReadAs) {
         HttpEntity entity = response.getEntity();
+        if (entity == null) {
+            // Normal case if the response has no content, e.g. for a HEAD request
+            return null;
+        }
         try {
-            return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(entity.getContent());
+            InputStream content = checkNotNull(entity.getContent(), "Entity content should not be null.");
+            return ObjectMapperSingleton.getContext(typeToReadAs).readerFor(typeToReadAs).readValue(content);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             throw new ClientResponseException(e.getMessage(), 0, e);

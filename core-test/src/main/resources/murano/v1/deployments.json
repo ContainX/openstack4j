@@ -1,0 +1,75 @@
+{
+  "deployments" : [
+    {
+      "state" : "completed_w_errors",
+      "environment_id" : "3e57cee8b55448f6af0752d31d7e27d6",
+      "started" : "2016-10-03T10:59:16",
+      "id" : "ccfd5e951c70428c852bee3b2a9a132e",
+      "created" : "2016-10-03T10:59:16",
+      "description" : {
+        "defaultNetworks" : {
+          "flat" : null,
+          "environment" : {
+            "?" : {
+              "id" : "382b25faadc34d879f7d8ff00ff5f5a7",
+              "type" : "io.murano.resources.NeutronNetwork"
+            },
+            "name" : "test-network"
+          }
+        },
+        "services" : [
+          {
+            "instance" : {
+              "availabilityZone" : "nova",
+              "assignFloatingIp" : true,
+              "?" : {
+                "type" : "io.murano.resources.LinuxMuranoInstance",
+                "id" : "3adbc662-e6a8-4914-ba22-edc46ba2b3b4"
+              },
+              "flavor" : "m1.medium",
+              "name" : "jpehxitty1jcc1",
+              "keyname" : "ssh-key",
+              "image" : "1d35715f-cbca-48ec-9397-82a3fed7d253"
+            },
+            "name" : "Docker Standalone Host",
+            "?" : {
+              "id" : "5c2a7dae-097d-4a1c-85cb-e7db2ed62d90",
+              "type" : "com.mirantis.docker.DockerStandaloneHost",
+              "_26411a1861294160833743e45d0eaad9" : {
+                "name" : "Docker Standalone Host"
+              }
+            },
+            "dockerRegistry" : ""
+          },
+          {
+            "name" : "DockerHTTPdSite",
+            "?" : {
+              "type" : "com.example.docker.DockerHTTPdSite",
+              "_26411a1861294160833743e45d0eaad9" : {
+                "name" : "Docker HTTPd Site"
+              },
+              "id" : "7c449c3c-ccdf-45ba-bf3c-496149918df7"
+            },
+            "siteRepo" : "https://github.com/nmakhotkin/example-web.git",
+            "host" : "5c2a7dae-097d-4a1c-85cb-e7db2ed62d90",
+            "publish" : true
+          }
+        ],
+        "name" : "test",
+        "?" : {
+          "id" : "3e57cee8b55448f6af0752d31d7e27d6",
+          "type" : "io.murano.Environment"
+        }
+      },
+      "finished" : "2016-10-03T12:02:16",
+      "result" : {
+        "result" : {
+          "message" : "[murano.common.exceptions.TimeoutException]: The murano-agent did not respond within 3600 seconds",
+          "details" : "murano.common.exceptions.TimeoutException: The murano-agent did not respond within 3600 seconds\nTraceback (most recent call last):\n  File \"/tmp/murano-packages-cache/io.murano/0.0.0/e5fe46b0-ba10-4f97-aa0e-ca25b18b7e3d/Classes/Environment.yaml\", <cut for test>"
+        },
+        "isException" : true
+      },
+      "updated" : "2016-10-03T12:02:16"
+    }
+  ]
+}

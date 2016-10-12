@@ -11,7 +11,7 @@
     <version>3.0.3-SNAPSHOT</version>
     <name>OpenStack4j Parent</name>
     <description>OpenStack Java API</description>
-    <url>http://github.com/gondor/openstack4j/</url>
+    <url>http://github.com/ContainX/openstack4j/</url>
     <packaging>pom</packaging>
     <properties>
         <release.version>2.0.0</release.version>
@@ -35,9 +35,9 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git@github.com:gondor/openstack4j.git</connection>
-        <developerConnection>scm:git:git@github.com:gondor/openstack4j.git</developerConnection>
-        <url>http://github.com/gondor/openstack4j/</url>
+        <connection>scm:git:git@github.com:ContainX/openstack4j.git</connection>
+        <developerConnection>scm:git:git@github.com:ContainX/openstack4j.git</developerConnection>
+        <url>http://github.com/ContainX/openstack4j/</url>
         <tag>HEAD</tag>
     </scm>
     <mailingLists>

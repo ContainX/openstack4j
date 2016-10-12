@@ -9,8 +9,8 @@ Bug Fixes and New Features
 --------------------------
 
 Before starting to write code, look for existing [tickets]
-(https://github.com/gondor/openstack4j/issues?state=open) or [create one]
-(https://github.com/gondor/openstack4j/issues/new) 
+(https://github.com/ContainX/openstack4j/issues?state=open) or [create one]
+(https://github.com/ContainX/openstack4j/issues/new) 
 for your bug, issue, or feature request. This helps the community
 avoid working on something that might not be of interest or which
 has already been addressed.
@@ -31,7 +31,7 @@ Chat With Me
 ------------
 
 If you want to work on something or have questions / complaints please reach
-out to me by creating a Question issue at https://github.com/gondor/openstack4j/issues/new or better yet join our group at http://groups.google.com/group/openstack4j
+out to me by creating a Question issue at https://github.com/ContainX/openstack4j/issues/new or better yet join our group at http://groups.google.com/group/openstack4j
 
 Thank you for your support!
 
