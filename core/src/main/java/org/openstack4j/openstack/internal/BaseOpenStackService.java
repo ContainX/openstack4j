@@ -1,7 +1,14 @@
 package org.openstack4j.openstack.internal;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
+import static org.openstack4j.core.transport.ClientConstants.HEADER_USER_AGENT;
+import static org.openstack4j.core.transport.ClientConstants.USER_AGENT;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.exceptions.OS4JException;
 import org.openstack4j.api.types.ServiceType;
@@ -19,14 +26,8 @@ import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Service;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
-
-import static org.openstack4j.core.transport.ClientConstants.HEADER_USER_AGENT;
-import static org.openstack4j.core.transport.ClientConstants.USER_AGENT;
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 
 
 public class BaseOpenStackService {
@@ -212,7 +213,18 @@ public class BaseOpenStackService {
         }
 
         public HttpResponse executeWithResponse() {
-            return HttpExecutor.create().execute(req.build());
+        	HttpResponse res = HttpExecutor.create().execute(req.build());
+        	reqIdContainer.remove();
+            
+            String reqId = null;
+            if(res.headers().containsKey(ClientConstants.X_COMPUTE_REQUEST_ID)) {
+            	reqId = res.header(ClientConstants.X_COMPUTE_REQUEST_ID);
+            } else {
+            	reqId = res.header(ClientConstants.X_OPENSTACK_REQUEST_ID);
+            }
+             
+            reqIdContainer.set(reqId);
+            return res;
         }
 
     }
