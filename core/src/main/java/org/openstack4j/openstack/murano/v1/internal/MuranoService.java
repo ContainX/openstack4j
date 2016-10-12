@@ -30,4 +30,9 @@ public class MuranoService extends BaseMuranoServices implements AppCatalogServi
     public MuranoDeploymentService deployments() {
         return Apis.get(MuranoDeploymentService.class);
     }
+
+    @Override
+    public MuranoActionService actions() {
+        return Apis.get(MuranoActionService.class);
+    }
 }

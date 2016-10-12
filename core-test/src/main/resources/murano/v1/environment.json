@@ -79,7 +79,18 @@
         },
         "name" : null,
         "package" : "com.example.docker.DockerHTTPdSite",
-        "_actions" : { },
+        "_actions" : {
+          "e8d61b75-df6a-42c6-be2c-5b6aeaa60f5c_getTest": {
+            "name": "getTest",
+            "title": "getTest",
+            "enabled": true
+          },
+          "e8d61b75-df6a-42c6-be2c-5b6aeaa60f5c_getCredentials": {
+            "name": "getCredentials",
+            "title": "getCredentials",
+            "enabled": true
+          }
+        },
         "status" : "pending",
         "type" : "com.example.docker.DockerHTTPdSite",
         "id" : "e8d61b75-df6a-42c6-be2c-5b6aeaa60f5c"
