@@ -32,6 +32,10 @@ public class KeystoneAuth implements Authentication, AuthStore {
     private AuthScope scope;
     @JsonIgnore
     private transient Type type;
+    
+    public KeystoneAuth() {
+    	super();
+    }
 
     public KeystoneAuth(String tokenId, AuthScope scope) {
         this.identity = AuthIdentity.createTokenType(tokenId);
