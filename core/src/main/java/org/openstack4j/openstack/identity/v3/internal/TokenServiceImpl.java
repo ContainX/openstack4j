@@ -12,7 +12,7 @@ import org.openstack4j.model.identity.v3.Service;
 import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneDomain.Domains;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneProject.Projects;
-//import org.openstack4j.openstack.identity.v3.domain.KeystoneService.Catalog;
+import org.openstack4j.openstack.identity.v3.domain.KeystoneService.Catalog;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneToken;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
@@ -38,11 +38,11 @@ public class TokenServiceImpl extends BaseOpenStackService implements TokenServi
         return deleteWithResponse(PATH_TOKENS).header(HEADER_X_SUBJECT_TOKEN, tokenId).execute();
     }
 
-    /*@Override
+    @Override
     public List<? extends Service> getServiceCatalog(String tokenId) {
         checkNotNull(tokenId);
         return get(Catalog.class, uri(PATH_SERVICE_CATALOGS)).header(HEADER_X_SUBJECT_TOKEN, tokenId).execute().getList();
-    }*/
+    }
 
     @Override
     public List<? extends Project> getProjectScopes(String tokenId) {

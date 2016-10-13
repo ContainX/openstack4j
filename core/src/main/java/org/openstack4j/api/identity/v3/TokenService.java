@@ -45,7 +45,7 @@ public interface TokenService extends RestService {
      * @param tokenId the identifier of the token, of which the catalog of services is requested
      * @return the service catalog for the token provided in the request
      */
-    //List<? extends Service> getServiceCatalog(String tokenId);
+    List<? extends Service> getServiceCatalog(String tokenId);
 
     /**
      * Get available project scopes for specified token

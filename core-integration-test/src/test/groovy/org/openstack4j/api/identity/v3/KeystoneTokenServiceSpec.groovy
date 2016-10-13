@@ -6,10 +6,12 @@ import org.junit.rules.TestName
 
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.OSClient.OSClientV3
+import org.openstack4j.api.types.ServiceType
 import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.v3.Domain
 import org.openstack4j.model.identity.v3.Project
+import org.openstack4j.model.identity.v3.Service
 import org.openstack4j.model.identity.v3.Token
 import org.openstack4j.openstack.OSFactory
 
@@ -24,8 +26,7 @@ import spock.lang.Shared
 import spock.lang.Stepwise
 
 @Slf4j
-@Stepwise
-// Needs to be stepwise in order to ensure USER_TOKEN_ID is acquired first
+@Stepwise // Needs to be stepwise to ensure USER_TOKEN_ID is acquired first
 class KeystoneTokenServiceSpec extends AbstractSpec {
 
     @Rule TestName KeystoneTokenServiceTest
@@ -87,10 +88,10 @@ class KeystoneTokenServiceSpec extends AbstractSpec {
                 .withConfig(CONFIG_PROXY_BETAMAX)
                 .authenticate()
 
-        and:
+        and: "get the id of the user token"
         USER_TOKEN_ID = os_user.getToken().getId()
 
-        then:
+        then: "this shouldn't be null"
         USER_TOKEN_ID != null
     }
 
@@ -109,7 +110,6 @@ class KeystoneTokenServiceSpec extends AbstractSpec {
         and: "getting the id of the token used in the current session which has a different id"
         ADMIN_TOKEN_ID = os.getToken().getId()
         ADMIN_TOKEN_ID != USER_TOKEN_ID
-        log.info("############# user_token_id: " + USER_TOKEN_ID)
 
         when: "validate and get details on an existing token"
         Token token = os.identity().tokens().get(USER_TOKEN_ID)
@@ -123,18 +123,20 @@ class KeystoneTokenServiceSpec extends AbstractSpec {
         then: "this should be successful"
         response_tokenCheck_success.isSuccess() == true
 
-//        when: "getting the service catalog for another token"
-//        List<? extends Service> serviceCatalog = os.identity().tokens().getServiceCatalog(USER_TOKEN_ID);
-//
-//        then: "this should contain at least contain one service"
-//        serviceCatalog.isEmpty() == false
+        when: "getting the service catalog for another token"
+        List<? extends Service> serviceCatalog = os.identity().tokens().getServiceCatalog(USER_TOKEN_ID);
+
+        then: "this should contain at least contain one service"
+        serviceCatalog.isEmpty() == false
+        serviceCatalog.find{ it.getName() == "keystone" }
 
         when: "getting available project scopes"
         List<? extends Project> availableProjectScopes = os.identity().tokens().getProjectScopes(USER_TOKEN_ID);
 
-        then: "the list should contain at least one available project scope"
+        then: "the list should contain at least the project scope used for initial authentication"
         availableProjectScopes.isEmpty() == false
         availableProjectScopes.first().getName() != null
+        availableProjectScopes.find { it.getId() == PROJECT_ID }
 
         when: "getting available domain scopes"
         List<? extends Domain> availableDomainScopes = os.identity().tokens().getDomainScopes(USER_TOKEN_ID);

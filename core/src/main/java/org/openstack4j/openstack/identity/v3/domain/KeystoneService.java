@@ -149,7 +149,7 @@ public class KeystoneService implements Service, Comparable<Service> {
         }
     }
 
-    /*public static class Catalog extends ListResult<KeystoneService> {
+    public static class Catalog extends ListResult<KeystoneService> {
 
         private static final long serialVersionUID = 1L;
         @JsonProperty("catalog")
@@ -159,7 +159,7 @@ public class KeystoneService implements Service, Comparable<Service> {
         protected List<KeystoneService> value() {
             return list;
         }
-    }*/
+    }
 
     public static class ServiceConcreteBuilder implements ServiceBuilder {
 
