@@ -2,6 +2,7 @@ package org.openstack4j.openstack.identity.v3.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.openstack4j.model.common.Identifier;
@@ -95,9 +96,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
         return identity.getPassword().getUser().getDomain().getName();
     }
 
-    public static final class AuthIdentity implements Identity {
+    public static final class AuthIdentity implements Identity, Serializable {
 
-        private AuthPassword password;
+		private static final long serialVersionUID = 1L;
+		
+		private AuthPassword password;
         private AuthToken token;
         private List<String> methods = Lists.newArrayList();
 
@@ -134,9 +137,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
             return methods;
         }
 
-        public static final class AuthToken implements Token {
+        public static final class AuthToken implements Token, Serializable {
 
-            @JsonProperty
+			private static final long serialVersionUID = 1L;
+			
+			@JsonProperty
             private String id;
 
             AuthToken() {
@@ -152,9 +157,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
             }
         }
 
-        public static final class AuthPassword implements Password {
+        public static final class AuthPassword implements Password, Serializable {
 
-            private AuthUser user;
+			private static final long serialVersionUID = 1L;
+			
+			private AuthUser user;
 
             public AuthPassword() {
             }
@@ -211,9 +218,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
         }
     }
 
-    public static final class AuthScope implements Scope {
+    public static final class AuthScope implements Scope, Serializable {
 
-        @JsonProperty("project")
+		private static final long serialVersionUID = 1L;
+
+		@JsonProperty("project")
         private ScopeProject project;
 
         @JsonProperty("domain")
