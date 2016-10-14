@@ -458,6 +458,33 @@
 			"id": "002ac55c6cf344cc9023d2841b45ffa6",
 			"name": "barbican"
 		  }, {
+            "endpoints": [
+                {
+                    "region_id": "RegionOne",
+                    "url": "http://127.0.0.1:8004",
+                    "region": "RegionOne",
+                    "interface": "admin",
+                    "id": "002ac55c6cf344cc9023d2841b45ffa9"
+                },
+                {
+                    "region_id": "RegionOne",
+                    "url": "http://127.0.0.1:8004",
+                    "region": "RegionOne",
+                    "interface": "internal",
+                    "id": "002ac55c6cf344cc9023d2841b45ffa8"
+                },
+                {
+                    "region_id": "RegionOne",
+                    "url": "http://127.0.0.1:8004",
+                    "region": "RegionOne",
+                    "interface": "public",
+                    "id": "002ac55c6cf344cc9023d2841b45ffa7"
+                }
+            ],
+            "type": "orchestration",
+            "id": "002ac55c6cf344cc9023d2841b45ffa6",
+            "name": "heat"
+			}, {
 		  "endpoints": [
 		    {
 		      "region_id": "RegionOne",

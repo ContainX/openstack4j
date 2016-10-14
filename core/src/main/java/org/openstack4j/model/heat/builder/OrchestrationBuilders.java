@@ -33,4 +33,11 @@ public interface OrchestrationBuilders {
      */
     public StackUpdateBuilder stackUpdate();
 
+    /**
+     * The builder to create a resource health update
+     *
+     * @return
+     */
+    public ResourceHealthBuilder resourceHealth();
+
 }
