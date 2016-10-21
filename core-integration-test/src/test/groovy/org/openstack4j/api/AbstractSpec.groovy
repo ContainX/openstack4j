@@ -1,11 +1,12 @@
 package org.openstack4j.api
 
-import java.nio.file.Paths
 import groovy.util.logging.Slf4j
 import org.openstack4j.core.transport.Config
 import org.openstack4j.core.transport.ProxyHost
 import org.openstack4j.core.transport.internal.HttpExecutor
 import spock.lang.Specification
+
+import java.nio.file.Paths
 
 @Slf4j
 abstract class AbstractSpec extends Specification {
@@ -27,15 +28,6 @@ abstract class AbstractSpec extends Specification {
     def static String PROJECT_NAME = System.getenv('OS_PROJECT_NAME') ?: 'admin'
     def static String PROJECT_DOMAIN_ID = System.getenv('OS_PROJECT_DOMAIN_ID') ?: DOMAIN_ID
     def static String REGION_ONE = System.getenv('OS_REGION_NAME') ?: 'europe'
-
-    // add. attr. req. by KeystoneUserServiceSpec
-    def static String ANOTHER_GROUP_ID = System.getenv('OS_ANOTHER_GROUP_ID') ?: 'd26804e7813b4dcd9712781832f1fac1'
-
-    // add. attr. req. by KeystoneRoleServiceSpec
-    def static String ROLE_CRUD_USER_ID = System.getenv('OS_ROLE_CRUD_USER_ID') ?: '7174b49851d64276b72601c67ce347e2' // another user used only for role tests
-    def static String ROLE_CRUD_GROUP_ID = System.getenv('OS_ROLE_CRUD_GROUP_ID') ?: '8ffc0b29008b436b92e114ab27df0288' // another group used only for role tests
-    def static String ROLE_CRUD_ROLE_ID = System.getenv('OS_ROLE_CRUD_ROLE_ID') ?: 'd163f290c7b24e568098e75f7ab4b89a'
-    def static String ROLE_CRUD_ANOTHER_ROLE_ID = System.getenv('OS_ROLE_CRUD_ANOTHER_ROLE_ID') ?: '9ab55538924d45588fdb62e0e5fcbc40'
 
     def setupSpec() {
         log.info("Using connector: " + HttpExecutor.create().getExecutorName())

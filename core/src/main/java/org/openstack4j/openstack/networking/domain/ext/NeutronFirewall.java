@@ -73,6 +73,9 @@ public class NeutronFirewall implements Firewall {
 	@JsonProperty("firewall_policy_id")
 	private String policyId;
 	
+	@JsonProperty("router_ids")
+	private List<String> routerIds;
+	
 	/**
 	 * Wrap this Firewall to a builder
 	 * @return FirewallBuilder
@@ -123,6 +126,11 @@ public class NeutronFirewall implements Firewall {
 	public FirewallStatus getStatus() {
 		return status;
 	}
+	
+	@Override
+	public List<String> getRouterIds() {
+		return routerIds;
+	}
 
 	@JsonIgnore
 	@Override
@@ -137,6 +145,7 @@ public class NeutronFirewall implements Firewall {
 				.add("status", status).add("policyId", policyId)
 				.add("shared", shared).add("adminStateUp", adminStateUp)
 				.add("tenantId", tenantId).add("description", description)
+				.add("routerIds", routerIds)
 				.toString();
 	}
 	
@@ -214,6 +223,12 @@ public class NeutronFirewall implements Firewall {
 		@Override
 		public FirewallBuilder policy(String policyId) {
 			f.policyId = policyId;
+			return this;
+		}
+		
+		@Override
+		public FirewallBuilder routerIds(List<String> routerIds) {
+			f.routerIds = routerIds;
 			return this;
 		}
 	}

@@ -29,5 +29,24 @@
   "name" : "DockerVM",
   "dockerRegistry" : null,
   "containers" : [ "DockerHTTPdSite" ],
-  "applicationEndpoints" : []
+  "applicationEndpoints" : [],
+  "?": {
+    "_26411a1861294160833743e45d0eaad9": {
+      "name": "Docker VM Service"
+    },
+    "_actions" : {
+      "2614f193-f13e-42b1-af7e-01729bb5af75_getTest": {
+        "name": "getTest",
+        "title": "getTest",
+        "enabled": true
+      },
+      "2614f193-f13e-42b1-af7e-01729bb5af75_getCredentials": {
+        "name": "getCredentials",
+        "title": "getCredentials",
+        "enabled": true
+      }
+    },
+    "type": "com.mirantis.docker.DockerStandaloneHost",
+    "id": "2614f193-f13e-42b1-af7e-01729bb5af75"
+  }
 }

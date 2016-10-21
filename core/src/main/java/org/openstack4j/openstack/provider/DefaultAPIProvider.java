@@ -400,6 +400,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(MuranoSessionService.class, MuranoSessionServiceImpl.class);
         bind(MuranoApplicationService.class, MuranoApplicationServiceImpl.class);
         bind(MuranoDeploymentService.class, MuranoDeploymentServiceImpl.class);
+        bind(MuranoActionService.class, MuranoActionServiceImpl.class);
         bind(ClusterTemplateService.class, ClusterTemplateServiceImpl.class);
         bind(NodeGroupTemplateService.class, NodeGroupTemplateServiceImpl.class);
         bind(DataSourceService.class, DataSourceServiceImpl.class);
