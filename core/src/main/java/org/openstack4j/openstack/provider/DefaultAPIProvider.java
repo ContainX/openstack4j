@@ -45,6 +45,7 @@ import org.openstack4j.api.heat.ResourcesService;
 import org.openstack4j.api.heat.SoftwareConfigService;
 import org.openstack4j.api.heat.StackService;
 import org.openstack4j.api.heat.TemplateService;
+import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.identity.v2.ServiceManagerService;
 import org.openstack4j.api.identity.v2.TenantService;
 import org.openstack4j.api.identity.v3.CredentialService;
@@ -187,6 +188,7 @@ import org.openstack4j.openstack.heat.internal.ResourcesServiceImpl;
 import org.openstack4j.openstack.heat.internal.SoftwareConfigServiceImpl;
 import org.openstack4j.openstack.heat.internal.StackServiceImpl;
 import org.openstack4j.openstack.heat.internal.TemplateServiceImpl;
+import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.openstack4j.openstack.identity.v2.internal.ServiceManagerServiceImpl;
 import org.openstack4j.openstack.identity.v2.internal.TenantServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.CredentialServiceImpl;
@@ -460,6 +462,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(AgentService.class, AgentServiceImpl.class);
         bind(org.openstack4j.api.image.v2.ImageService.class, org.openstack4j.openstack.image.v2.internal.ImageServiceImpl.class);
         bind(TaskService.class, TaskServiceImpl.class);
+        bind(EndpointURLResolver.class, DefaultEndpointURLResolver.class);
     }
 
     /**

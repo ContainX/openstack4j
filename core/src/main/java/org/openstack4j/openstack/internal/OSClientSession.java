@@ -53,7 +53,6 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     @SuppressWarnings("rawtypes")
     private static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
 
-    EndpointURLResolver epr = new DefaultEndpointURLResolver();
     Config config;
     Facing perspective;
     String region;
@@ -308,6 +307,10 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     public TroveService trove(){
         return Apis.getTroveServices();
     }
+    
+    EndpointURLResolver getEndpointURLResolver() {
+    	return Apis.getEndpointURLResolver();
+    }
         
     public static class OSClientSessionV2 extends OSClientSession<OSClientSessionV2, OSClientV2> implements OSClientV2 {
 
@@ -367,7 +370,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
          */
         @Override
         public String getEndpoint(ServiceType service) {
-            return addNATIfApplicable(epr.findURLV2(URLResolverParams
+            return addNATIfApplicable(getEndpointURLResolver().findURLV2(URLResolverParams
                     .create(access, service)
                     .resolver(config != null ? config.getV2Resolver() : null)
                     .perspective(perspective)
@@ -464,7 +467,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
          */
         @Override
         public String getEndpoint(ServiceType service) {
-            return addNATIfApplicable(epr.findURLV3(URLResolverParams
+            return addNATIfApplicable(getEndpointURLResolver().findURLV3(URLResolverParams
                     .create(token, service)
                     .resolver(config != null ? config.getResolver() : null)
                     .perspective(perspective)

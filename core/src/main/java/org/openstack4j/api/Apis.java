@@ -4,6 +4,7 @@ import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
+import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
@@ -166,6 +167,14 @@ public class Apis {
      */
     public static BarbicanService getBarbicanServices() {
         return get(BarbicanService.class);
+    }
+    
+    /**
+     * Gets the endpoint URL resolver services API
+     * @return the EndpointURLResolver services
+     */
+    public static EndpointURLResolver getEndpointURLResolver() {
+    	return get(EndpointURLResolver.class);
     }
 
     private static APIProvider initializeProvider() {
