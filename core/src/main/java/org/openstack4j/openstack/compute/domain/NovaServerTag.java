@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.google.common.base.Objects;
+
 public class NovaServerTag implements ModelEntity {
 	private static final long serialVersionUID = 1L;
 	
@@ -22,6 +24,11 @@ public class NovaServerTag implements ModelEntity {
 		for(String tag: tags) {
 			this.tags.add(tag);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this).omitNullValues().add("tags", tags).toString();
 	}
 	
 }
