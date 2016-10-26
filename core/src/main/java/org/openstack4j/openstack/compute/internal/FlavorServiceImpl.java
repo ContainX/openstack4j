@@ -20,7 +20,7 @@ import org.openstack4j.openstack.compute.domain.NovaFlavorAccess.RemoveTenantAcc
 /**
  * Flavor service provides CRUD capabilities for Flavor(s).  A flavor is an available hardware configuration/template for a server
  * 
- * @author Jeremy Unruh
+ * @author Jeremy Unruh, whaon
  */
 public class FlavorServiceImpl extends BaseComputeServices implements FlavorService {
 
@@ -29,9 +29,38 @@ public class FlavorServiceImpl extends BaseComputeServices implements FlavorServ
 	 */
 	@Override
 	public List<? extends Flavor> list() {
-		return get(Flavors.class, uri("/flavors/detail"))
-				.param("is_public", "None")
-				.execute().getList();
+		return this.list(null);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Flavor> list(boolean detail) {
+		return this.list(detail, null);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Flavor> list(Map<String, String> filteringParams) {
+		return this.list(true, filteringParams);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Flavor> list(boolean detail, Map<String, String> filteringParams) {
+		Invocation<Flavors> flavorInvocation = get(Flavors.class, uri("/flavors" + ((detail) ? "/detail" : "")));
+		if (filteringParams != null) {
+            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+            	flavorInvocation = flavorInvocation.param(entry.getKey(), entry.getValue());
+            }
+        }
+		
+		return flavorInvocation.execute().getList();
 	}
 
 	/**
