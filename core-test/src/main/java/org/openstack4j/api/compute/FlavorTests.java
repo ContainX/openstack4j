@@ -45,7 +45,7 @@ public class FlavorTests extends AbstractTest {
 	public void listDetailedAllFlavors() throws Exception {
 		respondWith(JSON_FLAVORS_DETAILED);
 		List<? extends Flavor> flavors = osv3().compute().flavors().list();
-		assertEquals(5, flavors.size());
+		assertEquals(2, flavors.size());
 	}
 	
 	public void listDetailedParamFlavors() throws Exception {
