@@ -48,7 +48,7 @@ public interface Keypair extends ModelEntity {
 	 * 
 	 * @return is deleted
 	 */
-	boolean getDeleted();
+	Boolean getDeleted();
 	
 	/**
 	 * time created

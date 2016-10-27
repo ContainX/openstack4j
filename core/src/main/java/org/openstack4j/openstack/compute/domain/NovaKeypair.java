@@ -30,7 +30,7 @@ public class NovaKeypair implements Keypair {
 	
 	@JsonProperty("user_id")
 	private String userId;
-	private boolean deleted;
+	private Boolean deleted;
 	@JsonProperty("created_at")
 	private Date createdAt;
 	@JsonProperty("updated_at")
@@ -97,7 +97,7 @@ public class NovaKeypair implements Keypair {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean getDeleted() {
+	public Boolean getDeleted() {
 		return this.deleted;
 	}
 
