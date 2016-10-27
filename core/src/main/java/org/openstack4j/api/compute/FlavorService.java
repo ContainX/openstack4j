@@ -11,12 +11,12 @@ import org.openstack4j.model.compute.FlavorAccess;
 /**
  * Flavor service provides CRUD capabilities for Flavor(s).  A flavor is an available hardware configuration/template for a server
  * 
- * @author Jeremy Unruh
+ * @author Jeremy Unruh, whaon
  */
 public interface FlavorService extends RestService {
 	
 	/**
-	 * List all Flavors
+	 * List all Flavors with details
 	 * 
 	 * @return List of Flavor
 	 */
@@ -121,5 +121,27 @@ public interface FlavorService extends RestService {
 	 * @return List tenants with access to private flavor
 	 */
 	List<? extends FlavorAccess> removeTenantAccess(String flavorId, String tenantId);
+
+	/**
+	 * list flavors
+	 * @param detail is detailed
+	 * @param filteringParams parameters affect the response data,availbed are:sort_key,sort_dir,limit,marker,minDisk,minRam,is_public
+	 * @return
+	 */
+	List<? extends Flavor> list(boolean detail, Map<String, String> filteringParams);
+
+	/**
+	 * list flavors with detailed
+	 * @param filteringParams
+	 * @return
+	 */
+	List<? extends Flavor> list(Map<String, String> filteringParams);
+
+	/**
+	 * list flavors with non filtering parameters
+	 * @param detail
+	 * @return
+	 */
+	List<? extends Flavor> list(boolean detail);
 	
 }

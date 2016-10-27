@@ -1,11 +1,13 @@
 package org.openstack4j.api.compute;
 
-import static org.testng.AssertJUnit.assertFalse;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertFalse;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
@@ -23,6 +25,7 @@ public class FlavorTests extends AbstractTest {
 
 	private static final String JSON_FLAVOR = "/compute/flavor.json";
 	private static final String JSON_FLAVORS = "/compute/flavors.json";
+	private static final String JSON_FLAVORS_DETAILED = "/compute/flavors_detailed.json";
 	private static final String JSON_FLAVOR_CREATE = "/compute/flavor_create.json";
 	
 	public void getFlavor() throws Exception {
@@ -39,10 +42,34 @@ public class FlavorTests extends AbstractTest {
 	}
 	
 	
-	public void listFlavors() throws Exception {
-		respondWith(JSON_FLAVORS);
+	public void listDetailedAllFlavors() throws Exception {
+		respondWith(JSON_FLAVORS_DETAILED);
 		List<? extends Flavor> flavors = osv3().compute().flavors().list();
+		assertEquals(2, flavors.size());
+	}
+	
+	public void listDetailedParamFlavors() throws Exception {
+		respondWith(JSON_FLAVORS_DETAILED);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("sort_key", "name");
+		map.put("sort_dir", "asc");
+		List<? extends Flavor> flavors = osv3().compute().flavors().list(map);
+		assertEquals(2, flavors.size());
+	}
+	
+	public void listSimpleAllFlavors() throws Exception {
+		respondWith(JSON_FLAVORS);
+		List<? extends Flavor> flavors = osv3().compute().flavors().list(false);
 		assertEquals(5, flavors.size());
+	}
+	
+	public void listComplexFlavors() throws Exception {
+		respondWith(JSON_FLAVORS_DETAILED);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("sort_key", "name");
+		map.put("sort_dir", "asc");
+		List<? extends Flavor> flavors = osv3().compute().flavors().list(true, map);
+		assertEquals(2, flavors.size());
 	}
 	
 	public void createFlavor() throws IOException {
