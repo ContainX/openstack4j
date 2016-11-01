@@ -1,8 +1,8 @@
 package org.openstack4j.openstack.image.v2.domain;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import java.util.Date;
+import java.util.List;
+
 import org.openstack4j.model.common.builder.BasicResourceBuilder;
 import org.openstack4j.model.image.v2.ContainerFormat;
 import org.openstack4j.model.image.v2.DiskFormat;
@@ -10,8 +10,9 @@ import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.builder.ImageBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Objects;
 
 /**
  * A glance v2.0-2.3 image model implementation
@@ -44,10 +45,10 @@ public class GlanceImage implements Image {
     private Date updatedAt;
 
     @JsonProperty("min_disk")
-    private Integer minDisk;
+    private Long minDisk;
 
     @JsonProperty("min_ram")
-    private Integer minRam;
+    private Long minRam;
 
     @JsonProperty("protected")
     private Boolean isProtected;
@@ -58,7 +59,7 @@ public class GlanceImage implements Image {
 
     private ImageVisibility visibility;
 
-    private Integer size;
+    private Long size;
 
     private List<String> locations;
 
@@ -89,7 +90,7 @@ public class GlanceImage implements Image {
     private String ramdiskId;
 
     @JsonProperty("virtual_size")
-    private Integer virtualSize;
+    private Long virtualSize;
 
 
     /**
@@ -168,7 +169,7 @@ public class GlanceImage implements Image {
      * {@inheritDoc}
      */
     @Override
-    public Integer getMinDisk() {
+    public Long getMinDisk() {
         return minDisk;
     }
 
@@ -192,7 +193,7 @@ public class GlanceImage implements Image {
      * {@inheritDoc}
      */
     @Override
-    public Integer getMinRam() {
+    public Long getMinRam() {
         return minRam;
     }
 
@@ -224,7 +225,7 @@ public class GlanceImage implements Image {
      * {@inheritDoc}
      */
     @Override
-    public Integer getSize() {
+    public Long getSize() {
         return size;
     }
 
@@ -317,7 +318,7 @@ public class GlanceImage implements Image {
      * {@inheritDoc}
      */
     @Override
-    public Integer getVirtualSize() {
+    public Long getVirtualSize() {
         return virtualSize;
     }
 
@@ -433,7 +434,7 @@ public class GlanceImage implements Image {
          * {@inheritDoc}
          */
         @Override
-        public ImageBuilder minDisk(Integer minDisk) {
+        public ImageBuilder minDisk(Long minDisk) {
             m.minDisk = minDisk;
             return this;
         }
@@ -442,7 +443,7 @@ public class GlanceImage implements Image {
          * {@inheritDoc}
          */
         @Override
-        public ImageBuilder minRam(Integer minRam) {
+        public ImageBuilder minRam(Long minRam) {
             m.minRam = minRam;
             return this;
         }
