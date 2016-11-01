@@ -28,6 +28,7 @@ public class NeutronLbPoolV2Update implements LbPoolV2Update {
     @JsonProperty("lb_algorithm")
     private LbMethod lbMethod;
 
+    @JsonProperty("session_persistence")
     private SessionPersistence sessionPersistence;
 
     /**
