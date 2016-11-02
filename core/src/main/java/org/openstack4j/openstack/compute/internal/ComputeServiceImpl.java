@@ -9,11 +9,12 @@ import org.openstack4j.api.compute.ComputeSecurityGroupService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.api.compute.HostAggregateService;
-import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.HostService;
+import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerGroupService;
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.api.compute.ServerTagService;
 import org.openstack4j.api.compute.ext.FloatingIPDNSService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.MigrationService;
@@ -138,6 +139,11 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	public HostAggregateService hostAggregates() {
 		
 		return Apis.get(HostAggregateService.class);
+	}
+
+	@Override
+	public ServerTagService serverTags() {
+		return Apis.get(ServerTagService.class);
 	}
     
 }

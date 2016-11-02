@@ -41,6 +41,8 @@ public class NeutronFloatingIP implements NetFloatingIP {
   @JsonProperty("port_id")
   private String portId;
   
+  private String status;
+  
   /**
    * {@inheritDoc}
    */
@@ -162,15 +164,30 @@ public class NeutronFloatingIP implements NetFloatingIP {
   public void setPortId(String portId) {
     this.portId = portId;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getStatus() {
+	return status;
+  }
 
   /**
+   * {@inheritDoc}
+   */
+  public void setStatus(String status) {
+	this.status = status;
+  }
+
+/**
    * {@inheritDoc}
    */
   @Override
   public String toString() {
     return Objects.toStringHelper(this).omitNullValues()
             .add("id", id).add("routerId", routerId).add("tenantId", tenantId).add("floatingNetworkId", floatingNetworkId)
-            .add("floatingIpAddress", floatingIpAddress).add("fixedIpAddress", fixedIpAddress).add("portId", portId)
+            .add("floatingIpAddress", floatingIpAddress).add("fixedIpAddress", fixedIpAddress).add("portId", portId).add("status", status)
             .addValue("\n")
             .toString();
   }
@@ -258,4 +275,6 @@ public class NeutronFloatingIP implements NetFloatingIP {
       return this;
     }
   }
+
+
 }
