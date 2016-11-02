@@ -53,12 +53,12 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     @SuppressWarnings("rawtypes")
     private static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
 
-    EndpointURLResolver epr = new DefaultEndpointURLResolver();
     Config config;
     Facing perspective;
     String region;
     Set<ServiceType> supports;
     CloudProvider provider;
+    EndpointURLResolver fallbackEndpointUrlResolver = new DefaultEndpointURLResolver();
 
     @SuppressWarnings("rawtypes")
     public static OSClientSession getCurrent() {
@@ -367,7 +367,10 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
          */
         @Override
         public String getEndpoint(ServiceType service) {
-            return addNATIfApplicable(epr.findURLV2(URLResolverParams
+        	
+        	final EndpointURLResolver eUrlResolver = (config != null && config.getEndpointURLResolver() != null) ? config.getEndpointURLResolver() : fallbackEndpointUrlResolver;
+        	
+            return addNATIfApplicable(eUrlResolver.findURLV2(URLResolverParams
                     .create(access, service)
                     .resolver(config != null ? config.getV2Resolver() : null)
                     .perspective(perspective)
@@ -464,7 +467,10 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
          */
         @Override
         public String getEndpoint(ServiceType service) {
-            return addNATIfApplicable(epr.findURLV3(URLResolverParams
+        	
+        	final EndpointURLResolver eUrlResolver = (config != null && config.getEndpointURLResolver() != null) ? config.getEndpointURLResolver() : fallbackEndpointUrlResolver;
+        	
+            return addNATIfApplicable(eUrlResolver.findURLV3(URLResolverParams
                     .create(token, service)
                     .resolver(config != null ? config.getResolver() : null)
                     .perspective(perspective)
