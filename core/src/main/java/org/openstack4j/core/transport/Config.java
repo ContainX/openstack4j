@@ -5,7 +5,6 @@ import javax.net.ssl.SSLContext;
 
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.model.common.resolvers.ServiceVersionResolver;
-import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 
 /**
  * OpenStack4j Configuration - options that are configured with OpenStack4j clients.
