@@ -85,7 +85,7 @@ public class NovaInterfaceAttachment implements InterfaceAttachment {
 
         @JsonProperty("ip_address")
         private String ipAddress;
-        @JsonProperty("subnetId")
+        @JsonProperty("subnet_id")
         private String subnetId;
         
         
