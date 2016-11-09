@@ -19,7 +19,7 @@ import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 
 /**
  * OpenStack Floating-IP API Implementation
- * 
+ *
  * @author Nathan Anderson
  */
 public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements ComputeFloatingIPService {
@@ -89,5 +89,35 @@ public class ComputeFloatingIPServiceImpl extends BaseComputeServices implements
 
         return invokeAction(server.getId(), FloatingIpActions.Remove.create(ipAddress));
     }
+
+    /**
+     * {@inheritDoc}
+     */
+	  @Override
+	  public ActionResponse addFloatingIP(String serverId, String fixedIpAddress, String ipAddress) {
+		    checkNotNull(serverId);
+        checkNotNull(ipAddress);
+        return invokeAction(serverId, FloatingIpActions.Add.create(ipAddress, fixedIpAddress));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+	  @Override
+	  public ActionResponse addFloatingIP(String serverId, String ipAddress) {
+		    return addFloatingIP(serverId, null,  ipAddress);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse removeFloatingIP(String serverId, String ipAddress) {
+        checkNotNull(serverId);
+        checkNotNull(ipAddress);
+
+        return invokeAction(serverId, FloatingIpActions.Remove.create(ipAddress));
+    }
+
 
 }
