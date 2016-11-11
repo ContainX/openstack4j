@@ -111,7 +111,7 @@ public class NovaServer implements Server {
 			Map<String, String> map = (Map<String, String>) image;
 			return map.get("id");
 		}
-		return getImage().getId();
+		return null;
 	}
 	
 	@SuppressWarnings("rawtypes")
