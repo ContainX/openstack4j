@@ -105,8 +105,13 @@ public class NovaServer implements Server {
 	@JsonIgnore
 	@Override
 	public String getImageId() {
-		Image image = getImage();
-		return (image != null) ? image.getId() : null;
+		/*Image image = getImage();
+		return (image != null) ? image.getId() : null;*/
+		if(image instanceof Map) {
+			Map<String, String> map = (Map<String, String>) image;
+			return map.get("id");
+		}
+		return getImage().getId();
 	}
 	
 	@SuppressWarnings("rawtypes")

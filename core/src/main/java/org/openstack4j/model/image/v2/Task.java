@@ -1,13 +1,14 @@
 package org.openstack4j.model.image.v2;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Date;
+import java.util.Map;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.image.v2.builder.TaskBuilder;
 
-import java.util.Date;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * An object representing a Glance V2 task.
@@ -110,7 +111,7 @@ public interface Task extends ModelEntity, Buildable<TaskBuilder> {
      * outcome of the task.
      * @return
      */
-    String getResult();
+    Map<String, String> getResult();
 
     /**
      * The URI for the schema describing an image task.
