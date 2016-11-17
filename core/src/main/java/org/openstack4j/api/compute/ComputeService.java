@@ -115,4 +115,10 @@ public interface ComputeService extends RestService {
 	 * Host Aggregates Management Service
 	 */
 	HostAggregateService hostAggregates();
+	
+	/**
+	 * Server Tag Management Service
+	 * @return ServerTag Service
+	 */
+	ServerTagService serverTags();
 }

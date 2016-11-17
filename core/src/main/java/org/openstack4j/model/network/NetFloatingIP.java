@@ -60,5 +60,13 @@ public interface NetFloatingIP extends ModelEntity, Buildable<NetFloatingIPBuild
    * @return the port id
    */
    String getPortId();
+   
+   /**
+    * Gets the floating ip status
+    * 
+    * @return the floating ip status
+    */
+   String getStatus();
+   
 
 }

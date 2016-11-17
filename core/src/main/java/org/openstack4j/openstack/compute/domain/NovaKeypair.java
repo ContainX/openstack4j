@@ -1,5 +1,6 @@
 package org.openstack4j.openstack.compute.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.compute.Keypair;
@@ -26,6 +27,17 @@ public class NovaKeypair implements Keypair {
 	@JsonProperty("private_key")
 	private String privateKey;
 	private String fingerprint;
+	
+	@JsonProperty("user_id")
+	private String userId;
+	private Boolean deleted;
+	@JsonProperty("created_at")
+	private Date createdAt;
+	@JsonProperty("updated_at")
+	private Date updatedAt;
+	@JsonProperty("deleted_at")
+	private Date deletedAt;
+	private Integer id;
 	
 	/**
 	 * Used internally by the domain side of the API to create a new Keypair on an OpenStack server
@@ -72,6 +84,54 @@ public class NovaKeypair implements Keypair {
 	public String getFingerprint() {
 		return fingerprint;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getUserId() {
+		return this.userId;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean getDeleted() {
+		return this.deleted;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Date getCreatedAt() {
+		return this.createdAt;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Date getUpdatedAt() {
+		return this.updatedAt;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Date getDeletedAt() {
+		return this.deletedAt;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer getId() {
+		return this.id;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -79,7 +139,9 @@ public class NovaKeypair implements Keypair {
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-				     .add("name", name).add("public_key", publicKey).add("private_key",  privateKey).add("fingerprint", fingerprint).toString();
+				     .add("name", name).add("public_key", publicKey).add("private_key",  privateKey).add("fingerprint", fingerprint)
+				     .add("user_id", userId).add("deleted", deleted).add("created_at", createdAt).add("updated_at", updatedAt)
+				     .add("deleted_at", deletedAt).add("id", id).toString();
 	}
 	
 	public static class Keypairs extends ListResult<NovaKeypair> {

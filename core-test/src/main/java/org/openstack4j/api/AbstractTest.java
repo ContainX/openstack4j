@@ -1,31 +1,21 @@
 package org.openstack4j.api;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.bouncycastle.util.io.Streams;
-import org.openstack4j.api.OSClient.OSClientV2;
-import org.openstack4j.api.OSClient.OSClientV3;
-import org.openstack4j.core.transport.internal.HttpExecutor;
-import org.openstack4j.openstack.OSFactory;
-import org.openstack4j.openstack.identity.v2.domain.KeystoneAccess;
+import com.fasterxml.jackson.annotation.JsonInclude.*;
+import com.fasterxml.jackson.databind.*;
+import com.google.common.io.*;
+import okhttp3.mockwebserver.*;
+import org.bouncycastle.util.io.*;
+import org.openstack4j.api.OSClient.*;
+import org.openstack4j.core.transport.internal.*;
+import org.openstack4j.openstack.*;
+import org.openstack4j.openstack.identity.v2.domain.*;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneToken;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.slf4j.*;
+import org.testng.annotations.*;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.common.io.ByteStreams;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 /**
  * Base Test class which handles Mocking a Webserver to fullfill and test
@@ -45,6 +35,7 @@ public abstract class AbstractTest {
         SHARE(8786), 
         OBJECT_STORAGE(8800),
         BARBICAN(9311),
+        ORCHESTRATION(8004),
         DATABASE(8779),
     	TACKER(9890),
         IMAGE(9292),
@@ -101,8 +92,7 @@ public abstract class AbstractTest {
     protected void respondWith(String resource) throws IOException {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
-        InputStream is = getClass().getResourceAsStream(resource);
-        respondWith(headers, 200, new String(ByteStreams.toByteArray(is)));
+        respondWith(headers, 200, getResource(resource));
     }
 
     /**
@@ -251,6 +241,11 @@ public abstract class AbstractTest {
             }
         }
         return osv3;
+    }
+
+    protected String getResource(String resource) throws IOException {
+        InputStream is = getClass().getResourceAsStream(resource);
+        return new String(ByteStreams.toByteArray(is));
     }
 
     private String getHost() {

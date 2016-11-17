@@ -1,0 +1,398 @@
+!tape
+name: userService_user_crud.tape
+interactions:
+- recorded: 2016-10-10T20:40:23.236Z
+  request:
+    method: POST
+    uri: http://devstack.openstack.stack:5000/v3/auth/tokens
+    headers:
+      Accept: application/json
+      Content-Type: application/json
+      Host: devstack.openstack.stack:5000
+      OS4J-Auth-Command: Tokens
+      Proxy-Connection: keep-alive
+      User-Agent: Jersey/2.22.1 (HttpUrlConnection 1.8.0_66)
+    body: |-
+      {
+        "auth" : {
+          "identity" : {
+            "password" : {
+              "user" : {
+                "id" : "71a7dcb0d60a43088a6c8e9b69a39e69",
+                "password" : "devstack"
+              }
+            },
+            "methods" : [ "password" ]
+          },
+          "scope" : {
+            "domain" : {
+              "id" : "default"
+            }
+          }
+        }
+      }
+  response:
+    status: 201
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:23 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      X-Subject-Token: c9445f4c4a58496f942a377928d6ef00
+      x-openstack-request-id: req-66a777a4-6d2d-4d6b-9ff8-8765edf3fbf4
+    body: '{"token": {"domain": {"id": "default", "name": "Default"}, "methods": ["password"], "roles": [{"id": "2e18ac09cfda45059969efffaba6adf8", "name": "admin"}], "expires_at": "2016-10-10T21:40:23.207628Z", "catalog": [{"endpoints": [{"region_id": "RegionOne",
+      "url": "http://devstack.openstack.stack:9696/", "region": "RegionOne", "interface": "admin", "id": "a22c5fb9dc5e4e009fc120264742b4b2"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9696/", "region": "RegionOne", "interface": "public", "id": "ddb07575d31c4c158e1cf9c243d03388"},
+      {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9696/", "region": "RegionOne", "interface": "internal", "id": "f6f6ca8e72a24d45adc1afed4d104a97"}], "type": "network", "id": "1f5a058073e045e58a11706b538d9201", "name": "neutron"}, {"endpoints": [{"region_id":
+      "RegionOne", "url": "http://devstack.openstack.stack:9292", "region": "RegionOne", "interface": "admin", "id": "483c914d91e44d598d3e8b98b54852b5"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9292", "region": "RegionOne", "interface": "internal", "id":
+      "5d59432b670f4145b263eb7fb2d1dfb7"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9292", "region": "RegionOne", "interface": "public", "id": "708f2aab567d4d1d927e49a5755bc21c"}], "type": "image", "id": "26c481e9a88d405388d7179d581fd7a6", "name":
+      "glance"}, {"endpoints": [], "type": "volumev2", "id": "5c432c568733450e9c33f642cc30a22f", "name": "cinderv2"}, {"endpoints": [], "type": "volume", "id": "8c6b275833f24614bcb320d537edf273", "name": "cinder"}, {"endpoints": [], "type": "compute_legacy",
+      "id": "c723c11732314f97993f68bb590998d5", "name": "nova_legacy"}, {"endpoints": [{"region_id": "RegionOne", "url": "http://devstack.openstack.stack:35357/v3", "region": "RegionOne", "interface": "admin", "id": "8ce6854252674bb1baa45c5a20e4c760"}, {"region_id": "RegionOne",
+      "url": "http://devstack.openstack.stack:5000/v3", "region": "RegionOne", "interface": "public", "id": "f4eca07c52814e39b43e8106a8f06df9"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:5000/v3", "region": "RegionOne", "interface": "internal", "id": "f845e3338ce94fc684233659c7274bee"}],
+      "type": "identity", "id": "dc2a2f1ea51047508cadf4b7fde71dfb", "name": "keystone"}, {"endpoints": [], "type": "compute", "id": "f48f4f5b299440d09400e0e4094aefa3", "name": "nova"}], "user": {"domain": {"id": "default", "name": "Default"}, "id": "71a7dcb0d60a43088a6c8e9b69a39e69",
+      "name": "admin"}, "audit_ids": ["m7Z4uGQdRmi8bGGlNytsLA"], "issued_at": "2016-10-10T20:40:23.207692Z"}}'
+- recorded: 2016-10-10T20:40:23.505Z
+  request:
+    method: POST
+    uri: http://devstack.openstack.stack:5000/v3/groups
+    headers:
+      Accept: application/json
+      Content-Type: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+    body: |-
+      {
+        "group" : {
+          "name" : "anotherGroupForUserServiceTest",
+          "description" : "group used for user service integration test",
+          "domain_id" : "default"
+        }
+      }
+  response:
+    status: 201
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:23 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-388417c5-7569-4419-88d8-3f0c95e99525
+    body: '{"group": {"domain_id": "default", "description": "group used for user service integration test", "id": "76f08693dc124bb88c90939e6c3b8ae6", "links": {"self": "http://devstack.openstack.stack:5000/v3/groups/76f08693dc124bb88c90939e6c3b8ae6"}, "name": "anotherGroupForUserServiceTest"}}'
+- recorded: 2016-10-10T20:40:23.604Z
+  request:
+    method: POST
+    uri: http://devstack.openstack.stack:5000/v3/users
+    headers:
+      Accept: application/json
+      Content-Type: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+    body: |-
+      {
+        "user" : {
+          "name" : "foobar",
+          "email" : "foobar@example.com",
+          "password" : "secret",
+          "enabled" : true,
+          "domain_id" : "default"
+        }
+      }
+  response:
+    status: 201
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:23 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-76904744-5344-447f-9635-b5749724fa10
+    body: '{"user": {"name": "foobar", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/0836af5c5d174e8f87cabbf2062cf859"}, "domain_id": "default", "enabled": true, "email": "foobar@example.com", "id": "0836af5c5d174e8f87cabbf2062cf859"}}'
+- recorded: 2016-10-10T20:40:23.696Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/users
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:23 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-a19c5eb6-40e5-4a50-8054-40ec6ed6dc47
+    body: '{"users": [{"name": "admin", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/71a7dcb0d60a43088a6c8e9b69a39e69"}, "enabled": true, "id": "71a7dcb0d60a43088a6c8e9b69a39e69", "domain_id": "default"}, {"name": "demo", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/1e464f5161c341618bec952775e83748"},
+      "domain_id": "default", "enabled": true, "email": "demo@example.com", "id": "1e464f5161c341618bec952775e83748"}, {"name": "alt_demo", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/67b304c4d4db4ee9a55985010ddb6efe"}, "domain_id": "default", "enabled":
+      true, "email": "alt_demo@example.com", "id": "67b304c4d4db4ee9a55985010ddb6efe"}, {"name": "nova", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/0f5f36de578e4080b375e8da368c4782"}, "enabled": true, "id": "0f5f36de578e4080b375e8da368c4782", "domain_id":
+      "default"}, {"name": "glance", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/8170dfc8911642e3b52633349fd300e1"}, "enabled": true, "id": "8170dfc8911642e3b52633349fd300e1", "domain_id": "default"}, {"name": "cinder", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/9de45d08af8746ab8c35a4673a3e23b9"},
+      "enabled": true, "id": "9de45d08af8746ab8c35a4673a3e23b9", "domain_id": "default"}, {"name": "neutron", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/f90bc956012e40338adefb3b1ffe08e2"}, "enabled": true, "id": "f90bc956012e40338adefb3b1ffe08e2",
+      "domain_id": "default"}, {"name": "foobar", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/0836af5c5d174e8f87cabbf2062cf859"}, "domain_id": "default", "enabled": true, "email": "foobar@example.com", "id": "0836af5c5d174e8f87cabbf2062cf859"}], "links":
+      {"self": "http://devstack.openstack.stack:5000/v3/users", "previous": null, "next": null}}'
+- recorded: 2016-10-10T20:40:23.781Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/users?domain_id=default&name=foobar
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:23 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-2ca53ded-c270-4d96-bf6c-91a808432032
+    body: '{"users": [{"name": "foobar", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/0836af5c5d174e8f87cabbf2062cf859"}, "domain_id": "default", "enabled": true, "email": "foobar@example.com", "id": "0836af5c5d174e8f87cabbf2062cf859"}], "links": {"self":
+      "http://devstack.openstack.stack:5000/v3/users?domain_id=default&name=foobar", "previous": null, "next": null}}'
+- recorded: 2016-10-10T20:40:23.864Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/users?name=foobar
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:23 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-f89c8354-394f-43a0-ad8e-3a12349f3f5d
+    body: '{"users": [{"name": "foobar", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/0836af5c5d174e8f87cabbf2062cf859"}, "domain_id": "default", "enabled": true, "email": "foobar@example.com", "id": "0836af5c5d174e8f87cabbf2062cf859"}], "links": {"self":
+      "http://devstack.openstack.stack:5000/v3/users?name=foobar", "previous": null, "next": null}}'
+- recorded: 2016-10-10T20:40:23.950Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/users/0836af5c5d174e8f87cabbf2062cf859
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:23 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-91db7759-7ff1-40fd-8f46-f618a85dde9a
+    body: '{"user": {"name": "foobar", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/0836af5c5d174e8f87cabbf2062cf859"}, "domain_id": "default", "enabled": true, "email": "foobar@example.com", "id": "0836af5c5d174e8f87cabbf2062cf859"}}'
+- recorded: 2016-10-10T20:40:24.024Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/users/nonExistentUserId
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 404
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:23 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-2a49afa2-c5fe-4fb1-93e3-2891862e871d
+    body: '{"error": {"message": "Could not find user: nonExistentUserId", "code": 404, "title": "Not Found"}}'
+- recorded: 2016-10-10T20:40:24.139Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/users?domain_id=default&name=nonExistentUserName
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-69efe86e-786a-4917-a3cf-62b1f9182bb3
+    body: '{"users": [], "links": {"self": "http://devstack.openstack.stack:5000/v3/users?domain_id=default&name=nonExistentUserName", "previous": null, "next": null}}'
+- recorded: 2016-10-10T20:40:24.212Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/domains/default/users/71a7dcb0d60a43088a6c8e9b69a39e69/roles
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-dfd11bad-a807-452c-b18e-e5f9282a235b
+    body: '{"links": {"self": "http://devstack.openstack.stack:5000/v3/domains/default/users/71a7dcb0d60a43088a6c8e9b69a39e69/roles", "previous": null, "next": null}, "roles": [{"domain_id": null, "id": "2e18ac09cfda45059969efffaba6adf8", "links": {"self": "http://devstack.openstack.stack:5000/v3/roles/2e18ac09cfda45059969efffaba6adf8"},
+      "name": "admin"}]}'
+- recorded: 2016-10-10T20:40:24.286Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/projects/194dfdddb6bc43e09701035b52edb0d9/users/71a7dcb0d60a43088a6c8e9b69a39e69/roles
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-1c3424d0-f1c6-4871-bfd4-8c9c61e49b31
+    body: '{"links": {"self": "http://devstack.openstack.stack:5000/v3/projects/194dfdddb6bc43e09701035b52edb0d9/users/71a7dcb0d60a43088a6c8e9b69a39e69/roles", "previous": null, "next": null}, "roles": [{"domain_id": null, "id": "2e18ac09cfda45059969efffaba6adf8", "links":
+      {"self": "http://devstack.openstack.stack:5000/v3/roles/2e18ac09cfda45059969efffaba6adf8"}, "name": "admin"}]}'
+- recorded: 2016-10-10T20:40:24.386Z
+  request:
+    method: PUT
+    uri: http://devstack.openstack.stack:5000/v3/groups/76f08693dc124bb88c90939e6c3b8ae6/users/0836af5c5d174e8f87cabbf2062cf859
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 204
+    headers:
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-26080fb8-7897-44d1-9caa-6aa431e456d8
+- recorded: 2016-10-10T20:40:24.475Z
+  request:
+    method: GET
+    uri: http://devstack.openstack.stack:5000/v3/users/71a7dcb0d60a43088a6c8e9b69a39e69/groups
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 200
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-60b72227-6bd6-4aa3-a5f6-818d1dce4b24
+    body: '{"links": {"self": "http://devstack.openstack.stack:5000/v3/users/71a7dcb0d60a43088a6c8e9b69a39e69/groups", "previous": null, "next": null}, "groups": [{"domain_id": "default", "description": "openstack admin group", "id": "f9ee0d204fa647d983715f217a79db6b",
+      "links": {"self": "http://devstack.openstack.stack:5000/v3/groups/f9ee0d204fa647d983715f217a79db6b"}, "name": "admins"}]}'
+- recorded: 2016-10-10T20:40:24.583Z
+  request:
+    method: DELETE
+    uri: http://devstack.openstack.stack:5000/v3/groups/76f08693dc124bb88c90939e6c3b8ae6/users/0836af5c5d174e8f87cabbf2062cf859
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 204
+    headers:
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-e8f45df5-c6e0-4e9a-aa62-97a73a14b48f
+- recorded: 2016-10-10T20:40:24.661Z
+  request:
+    method: PUT
+    uri: http://devstack.openstack.stack:5000/v3/groups/nonExistingGroupId/users/0836af5c5d174e8f87cabbf2062cf859
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 404
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-40d955d4-819b-4c51-9d6b-36015349ee4c
+    body: '{"error": {"message": "Could not find group: nonExistingGroupId", "code": 404, "title": "Not Found"}}'
+- recorded: 2016-10-10T20:40:24.789Z
+  request:
+    method: DELETE
+    uri: http://devstack.openstack.stack:5000/v3/users/0836af5c5d174e8f87cabbf2062cf859
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 204
+    headers:
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-60c2d01d-57e3-4968-9925-7bd780b9a88b
+- recorded: 2016-10-10T20:40:24.871Z
+  request:
+    method: DELETE
+    uri: http://devstack.openstack.stack:5000/v3/users/nonExistentUser_Id
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 404
+    headers:
+      Content-Type: application/json
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-f0f84bd6-4391-48c5-af6e-0afdedab5c96
+    body: '{"error": {"message": "Could not find user: nonExistentUser_Id", "code": 404, "title": "Not Found"}}'
+- recorded: 2016-10-10T20:40:24.966Z
+  request:
+    method: DELETE
+    uri: http://devstack.openstack.stack:5000/v3/groups/76f08693dc124bb88c90939e6c3b8ae6
+    headers:
+      Accept: application/json
+      Host: devstack.openstack.stack:5000
+      Proxy-Connection: keep-alive
+      User-Agent: OpenStack4j / OpenStack Client
+      X-Auth-Token: c9445f4c4a58496f942a377928d6ef00
+  response:
+    status: 204
+    headers:
+      Date: Mon, 10 Oct 2016 20:40:24 GMT
+      Server: Apache/2.4.7 (Ubuntu)
+      Vary: X-Auth-Token
+      x-openstack-request-id: req-95e19a36-adbe-47a7-9d90-1ce6af6ae93b

@@ -43,12 +43,23 @@ public class MuranoApplication implements Application {
 
     private Map<String, Object> data;
 
+    private MuranoServiceInfo service;
+
+    /**
+     * All except for internal service info will be added to data.
+     */
     @JsonAnySetter
     public void appendData(String key, Object value) {
         if (this.data == null) {
             this.data = new HashMap<>();
         }
-        this.data.put(key, value);
+
+        if (key.equals("?")) {
+            ObjectMapper mapper = new ObjectMapper();
+            this.service = mapper.convertValue(value, MuranoServiceInfo.class);
+        } else {
+            this.data.put(key, value);
+        }
     }
 
     /**
@@ -67,9 +78,20 @@ public class MuranoApplication implements Application {
         return writer.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Map<String, Object> getData() {
         return this.data;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MuranoServiceInfo getService() {
+        return this.service;
     }
 
     /**

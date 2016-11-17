@@ -149,6 +149,18 @@ public class KeystoneService implements Service, Comparable<Service> {
         }
     }
 
+    public static class Catalog extends ListResult<KeystoneService> {
+
+        private static final long serialVersionUID = 1L;
+        @JsonProperty("catalog")
+        private List<KeystoneService> list;
+
+        @Override
+        protected List<KeystoneService> value() {
+            return list;
+        }
+    }
+
     public static class ServiceConcreteBuilder implements ServiceBuilder {
 
         private KeystoneService model;
