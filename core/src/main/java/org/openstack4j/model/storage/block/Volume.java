@@ -150,4 +150,15 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return the tenant id
 	 */
 	String getTenantId();
+	
+	/**
+	 * @return whether the volume is bootable
+	 */
+	boolean bootable();
+	
+	/**
+	 * 
+	 * @return whether this volume is encrypted.
+	 */
+	boolean encrypted();
 }
