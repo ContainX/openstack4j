@@ -124,4 +124,22 @@ public class VolumeTests extends AbstractTest {
         assertEquals(attachments.get(0).getServerId(), "eaa6a54d-35c1-40ce-831d-bb61f991e1a9");
         assertEquals(attachments.get(0).getVolumeId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
     }
+    
+    
+    @Test
+    public void testVolumesWithBootableAndEncyrpted() throws Exception {
+        // Check list volumes
+        respondWith("/storage/v1/volumes-bootable.json");
+        List<? extends Volume> volumes = osv3().blockStorage().volumes().list();
+        assertEquals(volumes.size(), 2);
+        assertEquals(volumes.get(0).getTenantId(), "b0b5ed7ae06049688349fe43737796d4");
+        assertEquals(volumes.get(0).bootable(), false);
+        assertEquals(volumes.get(0).encrypted(), false);
+        
+        assertEquals(volumes.get(1).getTenantId(), "b0b5ed7ae06049688349fe43737796d4");
+        assertEquals(volumes.get(1).bootable(), true);
+        assertEquals(volumes.get(1).encrypted(), true);
+        
+        
+    }
 }

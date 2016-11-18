@@ -60,7 +60,9 @@ public class CinderVolume implements Volume {
 	@JsonProperty("os-vol-mig-status-attr:migstat")
 	private MigrationStatus migrateStatus;
 	@JsonProperty("os-vol-tenant-attr:tenant_id")
-	private String tenantId;
+	private String tenantId;	
+	@JsonProperty("encrypted")
+	private Boolean encrypted;
 	/**
 	 * {@inheritDoc}
 	 */
@@ -205,6 +207,22 @@ public class CinderVolume implements Volume {
 		return tenantId;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean bootable(){
+		return bootable;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean encrypted(){
+		return encrypted;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
