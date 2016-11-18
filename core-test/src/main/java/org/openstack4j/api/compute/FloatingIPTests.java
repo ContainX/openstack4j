@@ -107,4 +107,78 @@ public class FloatingIPTests extends AbstractTest {
         assertFalse(failureResponse.isSuccess());
         assertEquals(failureResponse.getCode(), 404);
     }
+    
+    @Test(dataProvider = "floatingIPs")
+    public void removeFloatingIP(String ip) {
+    	String serverId = "255b83fd-1193-44a8-aba5-9887b347a41d" ;
+        // Test remove floatingIP success
+        respondWith(202);
+
+        ActionResponse successResponse = osv3().compute().floatingIps().removeFloatingIP(serverId, ip);
+        assertNotNull(successResponse);
+        assertTrue(successResponse.isSuccess());
+
+        // Test remove floatingIP fail -- Floating ip existed but not bind to server or server instance not existed
+        String jsonResponse = String.format("{\"itemNotFound\": {"
+                + "\"message\": \"Floating ip %s is not associated with instance %s.\", "
+                + "\"code\": 409}}",
+                ip, serverId);
+       
+        respondWith(409, jsonResponse);
+
+        ActionResponse failureResponse = osv3().compute().floatingIps().removeFloatingIP(serverId, ip);
+        assertNotNull(failureResponse);
+        assertFalse(failureResponse.isSuccess());
+        assertEquals(failureResponse.getCode(), 409);
+        
+        
+        // Test remove floatingIP fail -- floatingIP not existed
+        String jsonResponse2 = String.format("{\"itemNotFound\": {"
+                + "\"message\": \"floating ip not found\", "
+                + "\"code\": 404}}");
+
+        respondWith(404, jsonResponse2);
+
+        ActionResponse failureResponse2 = osv3().compute().floatingIps().removeFloatingIP(serverId, ip);
+        assertNotNull(failureResponse2);
+        assertFalse(failureResponse2.isSuccess());
+        assertEquals(failureResponse2.getCode(), 404);
+    }
+    
+    @Test(dataProvider = "floatingIPs")
+    public void addFloatingIP( String ip) {
+    	String serverId = "255b83fd-1193-44a8-aba5-9887b347a41d" ;
+        // Test add floatingIP success
+        respondWith(202);
+
+        ActionResponse successResponse = osv3().compute().floatingIps().addFloatingIP(serverId, ip);
+        assertNotNull(successResponse);
+        assertTrue(successResponse.isSuccess());
+   
+        // Test add floatingIP fail -- server instance not existed
+        String jsonResponse = String.format("{\"itemNotFound\": {"
+                + "\"message\": \"Instance %s could not be found.\", "
+                + "\"code\": 404}}",
+                serverId);
+
+        respondWith(404, jsonResponse);
+
+        ActionResponse failureResponse = osv3().compute().floatingIps().addFloatingIP(serverId, ip);
+        assertNotNull(failureResponse);
+        assertFalse(failureResponse.isSuccess());
+        assertEquals(failureResponse.getCode(), 404);
+        
+       // Test add floatingIP fail -- floatingIP not existed
+        String jsonResponse2 = String.format("{\"itemNotFound\": {"
+                + "\"message\": \"floating ip not found\", "
+                + "\"code\": 404}}");
+
+    
+        respondWith(404, jsonResponse2);
+
+        ActionResponse failureResponse2 = osv3().compute().floatingIps().addFloatingIP(serverId, ip);
+        assertNotNull(failureResponse2);
+        assertFalse(failureResponse2.isSuccess());
+        assertEquals(failureResponse2.getCode(), 404);
+    }
 }
