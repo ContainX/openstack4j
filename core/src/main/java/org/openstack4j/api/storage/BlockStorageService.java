@@ -42,4 +42,9 @@ public interface BlockStorageService extends RestService {
 	 * @return the scheduler stats service
 	 */
 	SchedulerStatsGetPoolService schedulerStatsPools();
+	
+	/**
+	 * @return the Volume Service API
+	 */
+	BlockVolumeBackupService backups();
 }
