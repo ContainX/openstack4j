@@ -34,6 +34,7 @@ import org.openstack4j.model.network.ext.builder.*;
 import org.openstack4j.model.sahara.builder.*;
 import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 import org.openstack4j.model.storage.block.builder.StorageBuilders;
+import org.openstack4j.model.storage.block.builder.VolumeBackupCreateBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeSnapshotBuilder;
 import org.openstack4j.model.storage.block.builder.VolumeTypeBuilder;
@@ -83,6 +84,7 @@ import org.openstack4j.openstack.sahara.domain.*;
 import org.openstack4j.openstack.storage.block.builder.CinderBuilders;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
+import org.openstack4j.openstack.storage.block.domain.CinderVolumeBackupCreate;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeSnapshot;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeType;
 import org.openstack4j.openstack.tacker.builders.TackerBuilders;
@@ -202,6 +204,14 @@ public class Builders {
      */
     public static VolumeSnapshotBuilder volumeSnapshot() {
         return CinderVolumeSnapshot.builder();
+    }
+    
+    /**
+     * The builder to create a Block Volume Backup
+     * @return the volume backup builder
+     */
+    public static VolumeBackupCreateBuilder volumeBackupCreate(){
+    	return CinderVolumeBackupCreate.builder();
     }
 
     /**

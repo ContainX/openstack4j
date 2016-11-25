@@ -1,0 +1,16 @@
+{
+    "networks": [{
+        "status": "ACTIVE",
+        "subnets": ["0c4faf33-8c23-4dc9-8bf5-30dd1ab452f9"],
+        "name": "netOK",
+        "provider:physical_network": null,
+        "admin_state_up": true,
+        "tenant_id": "9712d107d5f9445a9fc5b4108502e312",
+        "mtu": 0,
+        "router:external": true,
+        "shared": true,
+        "provider:network_type": "vxlan",
+        "id": "73f6f1ac-5e58-4801-88c3-7e12c6ddfb39",
+        "provider:segmentation_id": 101101
+    }]
+}

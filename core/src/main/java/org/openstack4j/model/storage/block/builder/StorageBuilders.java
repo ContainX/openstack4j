@@ -1,6 +1,6 @@
 package org.openstack4j.model.storage.block.builder;
 
-import org.openstack4j.model.storage.block.BlockQuotaSet;
+ 
 
 /**
  * The Storage builders
@@ -27,5 +27,11 @@ public interface StorageBuilders {
      * @return the snapshot builder
      */
     public VolumeSnapshotBuilder volumeSnapshot();
+    
+    /**
+     * The builder to create a volume backup
+     * @return the backup creation builder
+     */
+    public VolumeBackupCreateBuilder volumeBackupCreate();
 
 }
