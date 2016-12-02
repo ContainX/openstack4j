@@ -16,4 +16,8 @@ public interface VolumeBackupCreateBuilder  extends Builder<VolumeBackupCreateBu
  
 	VolumeBackupCreateBuilder incremental(boolean  incremental);
 
+	VolumeBackupCreateBuilder force(boolean force);
+
+	VolumeBackupCreateBuilder snapshotId(String snapshotId);
+
 }
