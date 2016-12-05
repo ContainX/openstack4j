@@ -128,6 +128,9 @@ public class HttpResponseImpl implements HttpResponse {
 
     @Override
     public void close() throws IOException {
+        if (response != null) {
+            response.body().close();
+        }
     }
 
     @Override

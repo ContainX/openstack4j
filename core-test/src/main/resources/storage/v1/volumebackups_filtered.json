@@ -1,0 +1,24 @@
+{
+    "backups": [{
+        "status": "available",
+        "description": "by API",
+        "links": [{
+            "href": "https://192.168.100.3:8776/v1/aec84f30304745c1b568593eee763eb4/backups/7069c687-c85c-45ca-befa-aa78a971fdfe",
+            "rel": "self"
+        }, {
+            "href": "https://192.168.100.3:8776/aec84f30304745c1b568593eee763eb4/backups/7069c687-c85c-45ca-befa-aa78a971fdfe",
+            "rel": "bookmark"
+        }],
+        "availability_zone": "nova",
+        "has_dependent_backups": false,
+        "volume_id": "999b49ff-a813-45cc-aef3-3ec82f089490",
+        "fail_reason": null,
+        "id": "7069c687-c85c-45ca-befa-aa78a971fdfe",
+        "size": 1,
+        "object_count": 22,
+        "container": "container1122",
+        "name": "backup1122",
+        "created_at": "2016-11-22T07:24:12.000000",
+        "is_incremental": false
+    }]
+}

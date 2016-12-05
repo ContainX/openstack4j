@@ -3,6 +3,7 @@ package org.openstack4j.openstack.storage.block.internal;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.storage.BlockQuotaSetService;
 import org.openstack4j.api.storage.BlockStorageService;
+import org.openstack4j.api.storage.BlockVolumeBackupService;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
 import org.openstack4j.api.storage.CinderZoneService;
@@ -60,5 +61,13 @@ public class BlockStorageServiceImpl extends BaseBlockStorageServices implements
 	 */
 	@Override
 	public SchedulerStatsGetPoolService schedulerStatsPools() { return Apis.get(SchedulerStatsGetPoolService.class); }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BlockVolumeBackupService backups() { 
+		return Apis.get(BlockVolumeBackupService.class); 
+	}
 
 }
