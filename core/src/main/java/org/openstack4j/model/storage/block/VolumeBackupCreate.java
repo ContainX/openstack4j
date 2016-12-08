@@ -36,4 +36,15 @@ public interface VolumeBackupCreate extends ModelEntity, Buildable<VolumeBackupC
 	 */
 	boolean isIncremental();
 
+	/**
+	 * @return Force mode. True to do backup while a volume is attached. Default is false.
+	 */
+	boolean isForce();
+
+	/**
+	 * @return Force mode. True to do backup while a volume is attached. Default is false.
+	 */
+	String getSnapshotId();
+
+
 }

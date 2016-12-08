@@ -46,6 +46,10 @@ public class CinderVolumeBackup  implements  VolumeBackup{
 	@JsonProperty("is_incremental")
 	@Nullable
 	private Boolean incremental;
+
+	@JsonProperty("snapshot_id")
+	@Nullable
+	private String snapshotId;
 	
 	/**
 	 * {@inheritDoc}
@@ -143,12 +147,23 @@ public class CinderVolumeBackup  implements  VolumeBackup{
 		return objectCount;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Boolean hasDependent() {
 		return hasDependent;
 	}
-	
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getSnapshotId() {
+		return snapshotId;
+	}
+
+
 	public static class VolumeBackups extends ListResult<CinderVolumeBackup> {
 
 		private static final long serialVersionUID = 1L;

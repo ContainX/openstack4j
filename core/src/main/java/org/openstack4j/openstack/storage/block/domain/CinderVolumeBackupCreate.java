@@ -17,6 +17,11 @@ public class CinderVolumeBackupCreate implements VolumeBackupCreate {
 	private String volumeId;
 	@JsonProperty("incremental")
 	private boolean incremental;
+	@JsonProperty("force")
+	private boolean force;
+	@JsonProperty("snapshot_id")
+	private String snapshotId;
+
 
 	/**
 	 * {@inheritDoc}
@@ -48,6 +53,22 @@ public class CinderVolumeBackupCreate implements VolumeBackupCreate {
 	@Override
 	public boolean isIncremental() {
 		return incremental;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isForce() {
+		return force;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getSnapshotId() {
+		return snapshotId;
 	}
 
 	/**
@@ -117,6 +138,18 @@ public class CinderVolumeBackupCreate implements VolumeBackupCreate {
 		@Override
 		public VolumeBackupCreateBuilder incremental(boolean incremental) {
 			model.incremental = incremental;
+			return this;
+		}
+
+		@Override
+		public VolumeBackupCreateBuilder force(boolean force) {
+			model.force = force;
+			return this;
+		}
+
+		@Override
+		public VolumeBackupCreateBuilder snapshotId(String snapshotId) {
+			model.snapshotId = snapshotId;
 			return this;
 		}
 	}

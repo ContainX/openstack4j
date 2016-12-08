@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okio.Buffer;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
@@ -41,11 +42,38 @@ public class VolumeBackupTests extends AbstractTest {
 		assertNotNull(request.getHeader("X-Auth-Token"));	
 		assertTrue(request.getPath().matches("/v[123]/\\p{XDigit}*/backups" ));
 		assertEquals( request.getMethod(), "POST");
-		
+
+		String requestBody = request.getBody().readUtf8();
+		assertTrue(requestBody.contains("\"volume_id\" : \"999b49ff-a813-45cc-aef3-3ec82f089490\""));
+
 		assertEquals(backup.getName(), name);
 		assertNotNull(backup.getId());
 		assertEquals(backup.getId(), "7069c687-c85c-45ca-befa-aa78a971fdfe");	 	 
 	}
+
+	@Test
+	public void createVolumeBackupFromSnapshotV1() throws Exception {
+		respondWith("/storage/v1/volumebackup_create_response.json");
+		final String name = "backup1122";
+
+		VolumeBackupCreate create = Builders.volumeBackupCreate().volumeId("999b49ff-a813-45cc-aef3-3ec82f089490").container("container123")
+				.description("description123").name(name).incremental(false).snapshotId("b4b3258d-555a-4fce-8f53-69cc2ae96d3c").build();
+		VolumeBackup backup = osv3().blockStorage().backups().create(create);
+
+		RecordedRequest request = server.takeRequest();
+		assertNotNull(request.getHeader("X-Auth-Token"));
+		assertTrue(request.getPath().matches("/v[123]/\\p{XDigit}*/backups" ));
+		assertEquals( request.getMethod(), "POST");
+
+		String requestBody = request.getBody().readUtf8();
+		assertTrue(requestBody.contains("\"volume_id\" : \"999b49ff-a813-45cc-aef3-3ec82f089490\""));
+		assertTrue(requestBody.contains("\"snapshot_id\" : \"b4b3258d-555a-4fce-8f53-69cc2ae96d3c\""));
+
+		assertEquals(backup.getName(), name);
+		assertNotNull(backup.getId());
+		assertEquals(backup.getId(), "7069c687-c85c-45ca-befa-aa78a971fdfe");
+	}
+
 	
 	@Test
 	public void deleteVolumeBackupV1() throws Exception {
@@ -135,6 +163,34 @@ public class VolumeBackupTests extends AbstractTest {
 		assertEquals(backup.getContainer(), "test999b49ff-a813-45cc-aef3-3ec82f089490");
 		assertEquals(backup.getVolumeId(), "999b49ff-a813-45cc-aef3-3ec82f089490");
 		assertEquals(backup.getName(), "backup999b49ff-a813-45cc-aef3-3ec82f089490");
+		assertEquals(backup.getStatus(), VolumeBackup.Status.AVAILABLE);
+		assertEquals(backup.getSize(), 1);
+		assertEquals(backup.getObjectCount(), 22);
+		assertEquals(backup.getZone(), "nova");
+		assertNotNull(backup.getCreated());
+		assertEquals(backup.getDescription(), "by API999b49ff-a813-45cc-aef3-3ec82f089490");
+		assertFalse(backup.hasDependent());
+		assertFalse(backup.isIncremental());
+
+	}
+
+
+	@Test
+	public void getVolumeBackupFromSnapshotV1() throws Exception {
+		// Check get volume
+		respondWith("/storage/v1/volumebackup_from_snapshot.json");
+		String id="735359d5-9584-4046-94d3-5ffc47be84f5";
+		VolumeBackup backup = osv3().blockStorage().backups().get(id);
+
+		RecordedRequest getRequest = server.takeRequest();
+		assertNotNull(getRequest.getHeader("X-Auth-Token"));
+		assertTrue(getRequest.getPath().matches("/v[123]/\\p{XDigit}*/backups/"+id));
+
+		assertEquals(backup.getId(), "735359d5-9584-4046-94d3-5ffc47be84f5");
+		assertEquals(backup.getContainer(), "test999b49ff-a813-45cc-aef3-3ec82f089490");
+		assertEquals(backup.getVolumeId(), "999b49ff-a813-45cc-aef3-3ec82f089490");
+		assertEquals(backup.getName(), "backup999b49ff-a813-45cc-aef3-3ec82f089490");
+		assertEquals(backup.getSnapshotId(), "b4b3258d-555a-4fce-8f53-69cc2ae96d3c");
 		assertEquals(backup.getStatus(), VolumeBackup.Status.AVAILABLE);
 		assertEquals(backup.getSize(), 1);
 		assertEquals(backup.getObjectCount(), 22);
