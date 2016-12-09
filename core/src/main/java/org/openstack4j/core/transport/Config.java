@@ -3,6 +3,7 @@ package org.openstack4j.core.transport;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 
+import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.model.common.resolvers.ServiceVersionResolver;
 
 /**
@@ -24,6 +25,7 @@ public final class Config {
     private int maxConnectionsPerRoute;
     private ProxyHost proxy;
     private ServiceVersionResolver resolver;
+    private EndpointURLResolver endpointURLResolver;
 
     private Config() {
     }
@@ -44,6 +46,17 @@ public final class Config {
     public Config withResolver(ServiceVersionResolver resolver) {
         this.resolver = resolver;
         return this;
+    }
+    
+    /**
+     * Sets the Endpoint URL resolver for providing the URL resolution strategy
+     *
+     * @param endpointURLResolver the endpoint URL resolver
+     * @return Config
+     */
+    public Config withEndpointURLResolver(EndpointURLResolver endpointURLResolver) {
+    	this.endpointURLResolver = endpointURLResolver;
+    	return this;
     }
 
 
@@ -166,6 +179,10 @@ public final class Config {
     
     public ServiceVersionResolver getV2Resolver() {
         return resolver;
+    }
+    
+    public EndpointURLResolver getEndpointURLResolver() {
+    	return endpointURLResolver;
     }
 
     public int getConnectTimeout() {
