@@ -69,7 +69,7 @@ public class NeutronPort implements Port {
 	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates;
 	
 	@JsonProperty("port_security_enabled")
-	private boolean portSecurityEnabled = true; 
+	private Boolean portSecurityEnabled; 
         
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
@@ -204,7 +204,7 @@ public class NeutronPort implements Port {
      * {@inheritDoc}
      */
     @Override
-    public boolean isPortSecurityEnabled() {
+    public Boolean isPortSecurityEnabled() {
         return portSecurityEnabled;
     }
 
@@ -364,14 +364,14 @@ public class NeutronPort implements Port {
 		@Override
 		public PortBuilder securityGroup(String groupName) {
 			if(m.securityGroups==null){
-				m.securityGroups = new ArrayList<String>();
+				m.securityGroups = new ArrayList<>();
 			}
 			m.securityGroups.add(groupName);
 			return this;
 		}
 
         @Override
-        public PortBuilder portSecurityEnabled(boolean portSecurityEnabled) {
+        public PortBuilder portSecurityEnabled(Boolean portSecurityEnabled) {
             m.portSecurityEnabled=portSecurityEnabled;
             return this;
         }

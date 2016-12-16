@@ -59,7 +59,7 @@ public interface Port extends Resource, Buildable<PortBuilder> {
   /**
    * @return The port security status. A valid value is enabled (true) or disabled (false).
    */
-  boolean isPortSecurityEnabled();
+  Boolean isPortSecurityEnabled();
 
 	
 }

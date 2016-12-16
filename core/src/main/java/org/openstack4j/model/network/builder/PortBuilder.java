@@ -102,7 +102,7 @@ public interface PortBuilder extends Builder<PortBuilder, Port> {
 	
 	PortBuilder securityGroup(String groupName);
 	
-	PortBuilder portSecurityEnabled(boolean portSecurityEnabled); 
+	PortBuilder portSecurityEnabled(Boolean portSecurityEnabled); 
 	
 	
 }

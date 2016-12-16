@@ -44,7 +44,7 @@ public class NeutronPortCreate implements ModelEntity {
 	private List<String> securityGroups;
 	
     @JsonProperty("port_security_enabled")
-    private boolean portSecurityEnabled; 
+    private Boolean portSecurityEnabled; 
 	
 	public NeutronPortCreate() {
 	}
