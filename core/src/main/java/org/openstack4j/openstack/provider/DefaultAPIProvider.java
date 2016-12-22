@@ -141,13 +141,7 @@ import org.openstack4j.api.tacker.TackerServiceImpl;
 import org.openstack4j.api.tacker.VimService;
 import org.openstack4j.api.tacker.VnfService;
 import org.openstack4j.api.tacker.VnfdService;
-import org.openstack4j.api.telemetry.AlarmService;
-import org.openstack4j.api.telemetry.CapabilitiesService;
-import org.openstack4j.api.telemetry.EventService;
-import org.openstack4j.api.telemetry.MeterService;
-import org.openstack4j.api.telemetry.ResourceService;
-import org.openstack4j.api.telemetry.SampleService;
-import org.openstack4j.api.telemetry.TelemetryService;
+import org.openstack4j.api.telemetry.*;
 import org.openstack4j.api.trove.DatabaseService;
 import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceFlavorService;
@@ -288,13 +282,7 @@ import org.openstack4j.openstack.storage.object.internal.ObjectStorageServiceImp
 import org.openstack4j.openstack.tacker.internal.VimServiceImpl;
 import org.openstack4j.openstack.tacker.internal.VnfServiceImpl;
 import org.openstack4j.openstack.tacker.internal.VnfdServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.AlarmServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.CapabilitiesServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.EventServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.MeterServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.ResourceServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.SampleServiceImpl;
-import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
+import org.openstack4j.openstack.telemetry.internal.*;
 import org.openstack4j.openstack.trove.internal.DBDatabaseServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBDatastoreServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBFlavorServiceImpl;
@@ -477,6 +465,9 @@ public class DefaultAPIProvider implements APIProvider {
         bind(TaskService.class, TaskServiceImpl.class);
         bind(TaskService.class, TaskServiceImpl.class);
         bind(ServerTagService.class, ServerTagServiceImpl.class);
+        bind(TelemetryAodhService.class,TelemetryAodhServiceImpl.class);
+        bind(AlarmAodhService.class, AlarmAodhServiceImpl.class);
+
     }
 
     /**

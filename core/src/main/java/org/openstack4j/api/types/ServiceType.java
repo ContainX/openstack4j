@@ -11,6 +11,7 @@ public enum ServiceType {
 	NETWORK("neutron", "network"),
 	EC2("ec2", "ec2"),
 	TELEMETRY("ceilometer", "metering"),
+	TELEMETRY_AODH("aodh", "alarming"),
 	ORCHESTRATION("heat", "orchestration"),
 	CLUSTERING("senlin", "clustering"),
 	SAHARA("sahara", "data_processing"),

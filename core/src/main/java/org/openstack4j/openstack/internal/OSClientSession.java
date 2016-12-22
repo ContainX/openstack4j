@@ -23,6 +23,7 @@ import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.telemetry.TelemetryAodhService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
@@ -273,6 +274,10 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return getSupportedServices().contains(ServiceType.TELEMETRY);
     }
 
+    public boolean supportsTelemetry_aodh() {
+        return getSupportedServices().contains(ServiceType.TELEMETRY_AODH);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -502,6 +507,11 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
                 supports = Sets.immutableEnumSet(Iterables.transform(token.getCatalog(),
                         new org.openstack4j.openstack.identity.v3.functions.ServiceToServiceType()));
             return supports;
+        }
+
+        @Override
+        public TelemetryService telemetry() {
+            return Apis.get(TelemetryAodhService.class);
         }
 
     }
