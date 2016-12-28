@@ -35,6 +35,8 @@ public class DBFlavorServiceImplTest extends AbstractTest {
 
         for(int i=0; i<flavors.size(); i++){
             Flavor flavor = flavors.get(i);
+            assertEquals(flavor.getId(), Integer.toString(i+1));
+            assertEquals(flavor.getStrId(), Integer.toString(i+1));
             assertEquals(flavor.getDisk(), (i+1) * 11);
             assertEquals(flavor.getVcpus(), (i+1) * 111);
         }
