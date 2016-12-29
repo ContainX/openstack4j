@@ -64,6 +64,14 @@ public class TroveInstance implements Instance {
             return size;
         }
 
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("Volume{");
+            sb.append("type='").append(type).append('\'');
+            sb.append(", size=").append(size);
+            sb.append('}');
+            return sb.toString();
+        }
     }
 
     public class InstanceDatastore {
@@ -76,6 +84,14 @@ public class TroveInstance implements Instance {
 
         public String getVersion() { return version; }
 
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("InstanceDatastore{");
+            sb.append("type='").append(type).append('\'');
+            sb.append(", version='").append(version).append('\'');
+            sb.append('}');
+            return sb.toString();
+        }
     }
 
     @Override
@@ -153,5 +169,21 @@ public class TroveInstance implements Instance {
         protected List<TroveInstance> value() {
             return instances;
         }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TroveInstance{");
+        sb.append("created=").append(created);
+        sb.append(", flavor=").append(flavor);
+        sb.append(", hostname='").append(hostname).append('\'');
+        sb.append(", id='").append(id).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", status='").append(status).append('\'');
+        sb.append(", updated=").append(updated);
+        sb.append(", volume=").append(volume);
+        sb.append(", datastore=").append(datastore);
+        sb.append('}');
+        return sb.toString();
     }
 }
