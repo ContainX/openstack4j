@@ -1,6 +1,7 @@
 package org.openstack4j.model.trove;
 
 import java.util.Date;
+import java.util.List;
 
 public interface Instance {
 
@@ -17,6 +18,8 @@ public interface Instance {
     Date getUpdated();
 
     String getHostname();
+
+    List<String> getIp();
 
     String getId();
 

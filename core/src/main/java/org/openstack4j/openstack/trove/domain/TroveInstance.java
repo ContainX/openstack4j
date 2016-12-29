@@ -26,6 +26,8 @@ public class TroveInstance implements Instance {
 
     private String hostname;
 
+    private List<String> ip;
+
     private String id;
 
     private String name;
@@ -125,6 +127,9 @@ public class TroveInstance implements Instance {
     }
 
     @Override
+    public List<String> getIp() { return ip; }
+
+    @Override
     public String getId() {
         return id;
     }
@@ -178,6 +183,7 @@ public class TroveInstance implements Instance {
         sb.append("created=").append(created);
         sb.append(", flavor=").append(flavor);
         sb.append(", hostname='").append(hostname).append('\'');
+        sb.append(", ip='").append(ip).append('\'');
         sb.append(", id='").append(id).append('\'');
         sb.append(", name='").append(name).append('\'');
         sb.append(", status='").append(status).append('\'');
