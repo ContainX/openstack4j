@@ -54,8 +54,8 @@ public class TroveInstance implements Instance {
 
         /**
          *
-         * @param size
-         *            The size
+         * @return
+         *         The size
          */
 
         public int getSize() {
