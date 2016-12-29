@@ -36,6 +36,8 @@ public class TroveInstance implements Instance {
 
     private Volume volume;
 
+    private InstanceDatastore datastore;
+
     public class Volume {
 
         private String type;
@@ -61,6 +63,18 @@ public class TroveInstance implements Instance {
         public int getSize() {
             return size;
         }
+
+    }
+
+    public class InstanceDatastore {
+
+        private String type;
+
+        private String version;
+
+        public String getType() { return type; }
+
+        public String getVersion() { return version; }
 
     }
 
@@ -111,6 +125,21 @@ public class TroveInstance implements Instance {
 
     public Volume getVolume() {
         return volume;
+    }
+
+    public InstanceDatastore getDatastore() { return datastore; }
+
+    public String getDatastoreType() {
+        return getDatastore() != null
+                ? getDatastore().getType()
+                : null;
+    }
+
+    @Override
+    public String getDatastoreVersion() {
+        return getDatastore() != null
+                ? getDatastore().getVersion()
+                : null;
     }
 
     public static class DBInstances extends ListResult<TroveInstance> {

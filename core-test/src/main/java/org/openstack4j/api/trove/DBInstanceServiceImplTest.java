@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 
 @Test(suiteName="trove/instances")
@@ -29,6 +30,8 @@ public class DBInstanceServiceImplTest extends AbstractTest{
         assertEquals(instance.getHostname(), "e09ad9a3f73309469cf1f43d11e79549caf9acf2.troveexampledb.com");
         assertEquals(instance.getId(), "44b277eb-39be-4921-be31-3d61b43651d7");
         assertEquals(instance.getName(), "json_rack_instance");
+        assertEquals(instance.getDatastoreType(), "mysql");
+        assertEquals(instance.getDatastoreVersion(), "5.5");
     }
 
 }

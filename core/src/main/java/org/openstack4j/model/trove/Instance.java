@@ -22,4 +22,8 @@ public interface Instance {
 
     String getStatus();
 
+    String getDatastoreType();
+
+    String getDatastoreVersion();
+
 }
