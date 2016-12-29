@@ -145,6 +145,7 @@ public class TroveInstance implements Instance {
 
     public InstanceDatastore getDatastore() { return datastore; }
 
+    @Override
     public String getDatastoreType() {
         return getDatastore() != null
                 ? getDatastore().getType()
