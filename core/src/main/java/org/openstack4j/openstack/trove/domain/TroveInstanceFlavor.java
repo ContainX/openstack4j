@@ -18,9 +18,13 @@ public class TroveInstanceFlavor implements Flavor {
 
     private static final long serialVersionUID = 1L;
     private String name;
-    @JsonProperty("str_id")
     private String id;
+    @JsonProperty("str_id")
+    private String strId;
+
     private int ram;
+    private int vcpus;
+    private int disk;
 
     public String getName() {
         return name;
@@ -30,8 +34,20 @@ public class TroveInstanceFlavor implements Flavor {
         return id;
     }
 
+    public String getStrId() {
+        return strId;
+    }
+
     public int getRam() {
         return ram;
+    }
+
+    public int getVcpus() {
+        return vcpus;
+    }
+
+    public int getDisk() {
+        return disk;
     }
 
     public static class Flavors extends ListResult<TroveInstanceFlavor> {

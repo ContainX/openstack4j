@@ -26,6 +26,8 @@ public class TroveInstance implements Instance {
 
     private String hostname;
 
+    private List<String> ip;
+
     private String id;
 
     private String name;
@@ -35,6 +37,8 @@ public class TroveInstance implements Instance {
     private Date updated;
 
     private Volume volume;
+
+    private InstanceDatastore datastore;
 
     public class Volume {
 
@@ -54,14 +58,42 @@ public class TroveInstance implements Instance {
 
         /**
          *
-         * @param size
-         *            The size
+         * @return
+         *         The size
          */
 
         public int getSize() {
             return size;
         }
 
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("Volume{");
+            sb.append("type='").append(type).append('\'');
+            sb.append(", size=").append(size);
+            sb.append('}');
+            return sb.toString();
+        }
+    }
+
+    public class InstanceDatastore {
+
+        private String type;
+
+        private String version;
+
+        public String getType() { return type; }
+
+        public String getVersion() { return version; }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("InstanceDatastore{");
+            sb.append("type='").append(type).append('\'');
+            sb.append(", version='").append(version).append('\'');
+            sb.append('}');
+            return sb.toString();
+        }
     }
 
     @Override
@@ -95,6 +127,9 @@ public class TroveInstance implements Instance {
     }
 
     @Override
+    public List<String> getIp() { return ip; }
+
+    @Override
     public String getId() {
         return id;
     }
@@ -113,6 +148,22 @@ public class TroveInstance implements Instance {
         return volume;
     }
 
+    public InstanceDatastore getDatastore() { return datastore; }
+
+    @Override
+    public String getDatastoreType() {
+        return getDatastore() != null
+                ? getDatastore().getType()
+                : null;
+    }
+
+    @Override
+    public String getDatastoreVersion() {
+        return getDatastore() != null
+                ? getDatastore().getVersion()
+                : null;
+    }
+
     public static class DBInstances extends ListResult<TroveInstance> {
 
         private static final long serialVersionUID = 1L;
@@ -124,5 +175,22 @@ public class TroveInstance implements Instance {
         protected List<TroveInstance> value() {
             return instances;
         }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TroveInstance{");
+        sb.append("created=").append(created);
+        sb.append(", flavor=").append(flavor);
+        sb.append(", hostname='").append(hostname).append('\'');
+        sb.append(", ip='").append(ip).append('\'');
+        sb.append(", id='").append(id).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", status='").append(status).append('\'');
+        sb.append(", updated=").append(updated);
+        sb.append(", volume=").append(volume);
+        sb.append(", datastore=").append(datastore);
+        sb.append('}');
+        return sb.toString();
     }
 }

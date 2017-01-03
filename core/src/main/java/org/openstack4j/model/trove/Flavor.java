@@ -11,5 +11,8 @@ public interface Flavor extends ModelEntity {
 
     String getName();
     String getId();
+    String getStrId();
     int getRam();
+    int getVcpus();
+    int getDisk();
 }

@@ -32,6 +32,14 @@ public class DBFlavorServiceImplTest extends AbstractTest {
         assertEquals(2, flavors.size());
         Preconditions.checkNotNull(flavors.get(0));
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Flavor from List : "+flavors.get(0));
+
+        for(int i=0; i<flavors.size(); i++){
+            Flavor flavor = flavors.get(i);
+            assertEquals(flavor.getId(), Integer.toString(i+1));
+            assertEquals(flavor.getStrId(), Integer.toString(i+1));
+            assertEquals(flavor.getDisk(), (i+1) * 11);
+            assertEquals(flavor.getVcpus(), (i+1) * 111);
+        }
     }
 
     @Test
@@ -44,6 +52,8 @@ public class DBFlavorServiceImplTest extends AbstractTest {
         assertEquals(flavor.getId(), id);
         assertEquals(flavor.getName(), name);
         assertEquals(flavor.getRam(), 512);
+        assertEquals(flavor.getDisk(), 50);
+        assertEquals(flavor.getVcpus(), 10);
     }
 
 
