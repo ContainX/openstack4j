@@ -24,6 +24,7 @@ import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.InstanceActionsService;
 import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.api.compute.ext.MigrationService;
+import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.gbp.ExternalPolicyService;
@@ -160,6 +161,7 @@ import org.openstack4j.openstack.compute.internal.KeypairServiceImpl;
 import org.openstack4j.openstack.compute.internal.QuotaSetServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerGroupServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerServiceImpl;
+import org.openstack4j.openstack.compute.internal.ServicesServiceImpl;
 import org.openstack4j.openstack.compute.internal.ServerTagServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.FloatingIPDNSDomainServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.FloatingIPDNSEntryServiceImpl;
@@ -467,7 +469,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ServerTagService.class, ServerTagServiceImpl.class);
         bind(TelemetryAodhService.class,TelemetryAodhServiceImpl.class);
         bind(AlarmAodhService.class, AlarmAodhServiceImpl.class);
-
+        bind(ServicesService.class, ServicesServiceImpl.class);
     }
 
     /**
