@@ -236,8 +236,8 @@ public class NeutronRouter implements Router {
 		*/
 		@Override
 		public RouterBuilder noRoutes() {
-		  m.routes = Lists.newArrayList();
-		  return this;
+			m.routes = Lists.newArrayList();
+			return this;
 		}
 
 		/**
