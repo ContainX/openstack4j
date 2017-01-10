@@ -9,7 +9,7 @@ import org.openstack4j.model.compute.ext.Service;
  *
  * @author Stephan Latour
  */
-public interface ServicesService{
+public interface ServicesService {
 
     /**
      * List services info
