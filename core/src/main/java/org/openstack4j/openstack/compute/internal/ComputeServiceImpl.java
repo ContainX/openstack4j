@@ -18,6 +18,7 @@ import org.openstack4j.api.compute.ServerTagService;
 import org.openstack4j.api.compute.ext.FloatingIPDNSService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.MigrationService;
+import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.openstack.common.ExtensionValue.Extensions;
@@ -145,5 +146,10 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	public ServerTagService serverTags() {
 		return Apis.get(ServerTagService.class);
 	}
+	
+    @Override
+    public ServicesService services() {
+        return Apis.get(ServicesService.class);
+    }
     
 }
