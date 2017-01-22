@@ -236,6 +236,8 @@ public final class Config {
         result = prime * result + ((natHostOrIP == null) ? 0 : natHostOrIP.hashCode());
         result = prime * result + readTimeout;
         result = prime * result + ((proxy == null) ? 0 : proxy.hashCode());
+        result = prime * result + ((sslContext == null) ? 0 : sslContext.hashCode());
+        result = prime * result + ((hostNameVerifier == null) ? 0 : hostNameVerifier.hashCode());
         return result;
     }
 
@@ -268,6 +270,21 @@ public final class Config {
                 return false;
         } else if (!proxy.equals(other.proxy))
             return false;
+        if(sslContext == null) {
+        	if(other.getSslContext() != null) {
+        		return false;
+        	}
+        } else if(!sslContext.equals(other.getSslContext())) {
+        	return false;
+        }
+        if(hostNameVerifier == null) {
+        	if(other.getHostNameVerifier() != null) {
+        		return false;
+        	}
+        } else if(!hostNameVerifier.equals(other.getHostNameVerifier())) {
+        	return false;
+        }
+        
         return true;
     }
 
