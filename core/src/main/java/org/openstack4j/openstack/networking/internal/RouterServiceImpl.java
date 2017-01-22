@@ -81,10 +81,12 @@ public class RouterServiceImpl extends BaseNetworkingServices implements RouterS
 		RouterBuilder rb = NeutronRouter.builder().name(router.getName()).adminStateUp(router.isAdminStateUp()).externalGateway(router.getExternalGatewayInfo());
 		List<? extends HostRoute> routes = router.getRoutes();
 		
-		if (routes != null) {
+		if (routes != null && !routes.isEmpty()) {
 		  for (HostRoute route : routes) {
-		    rb.route(route.getDestination(), route.getNexthop());
+			rb.route(route.getDestination(), route.getNexthop());
 		  }
+		} else {
+			rb.noRoutes();
 		}
 		
 		return put(NeutronRouter.class, uri("/routers/%s", router.getId()))

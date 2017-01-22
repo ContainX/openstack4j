@@ -232,6 +232,15 @@ public class NeutronRouter implements Router {
 		}
 
 		/**
+		* {@inheritDoc}
+		*/
+		@Override
+		public RouterBuilder noRoutes() {
+			m.routes = Lists.newArrayList();
+			return this;
+		}
+
+		/**
 		 * {@inheritDoc}
 		 */
 		@Override
