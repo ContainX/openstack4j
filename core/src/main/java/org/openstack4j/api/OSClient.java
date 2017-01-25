@@ -1,5 +1,6 @@
 package org.openstack4j.api;
 
+import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
@@ -157,6 +158,13 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the networking service
      */
     NetworkingService networking();
+
+    /**
+     * Returns the Artifact Service API
+     *
+     * @return the artifact service
+     */
+    ArtifactService artifact();
     
     /**
      * Returns the Tacker Service API

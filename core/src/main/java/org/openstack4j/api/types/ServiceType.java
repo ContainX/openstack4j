@@ -19,6 +19,7 @@ public enum ServiceType {
 	DATABASE("trove","database"),
 	BARBICAN("barbican", "key-manager"),
 	TACKER("tacker", "nfv-orchestration"),
+	ARTIFACT("artifact", "glare"),
 	UNKNOWN("NA", "NA")
 	;
 
