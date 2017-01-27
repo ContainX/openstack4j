@@ -14,99 +14,13 @@ import java.util.List;
  *
  * @author Pavan Vadavi
  */
-public class ToscaTemplates implements ToscaTemplatesArtifact {
+public class ToscaTemplates extends ArtifactImpl implements ToscaTemplatesArtifact {
 
-    @JsonProperty("status")
-    private String status;
-    @JsonProperty("icon")
-    private Object icon;
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("license")
-    private Object license;
     @JsonProperty("template_format")
     private String templateFormat;
-    @JsonProperty("created_at")
-    private String createdAt;
-    @JsonProperty("activated_at")
-    private String activatedAt;
-    @JsonProperty("updated_at")
-    private String updatedAt;
-    @JsonProperty("visibility")
-    private String visibility;
-    @JsonProperty("provided_by")
-    private Object providedBy;
-    @JsonProperty("version")
-    private String version;
-    @JsonProperty("license_url")
-    private Object licenseUrl;
-    @JsonProperty("supported_by")
-    private Object supportedBy;
     @JsonProperty("template")
     private TemplateImpl template;
-    @JsonProperty("owner")
-    private String owner;
-    @JsonProperty("release")
-    private List<Object> release = null;
-    @JsonProperty("metadata")
-    private MetadataImpl metadata;
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("tags")
-    private List<Object> tags = null;
-    @JsonProperty("description")
-    private String description;
 
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Object> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Object> tags) {
-        this.tags = tags;
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public MetadataImpl getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(MetadataImpl metadata) {
-        this.metadata = metadata;
-    }
-
-    public List<Object> getRelease() {
-        return release;
-    }
-
-    public void setRelease(List<Object> release) {
-        this.release = release;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
 
     @Override
     public TemplateImpl getTemplate() {
@@ -117,70 +31,6 @@ public class ToscaTemplates implements ToscaTemplatesArtifact {
         this.template = template;
     }
 
-    public Object getSupportedBy() {
-        return supportedBy;
-    }
-
-    public void setSupportedBy(Object supportedBy) {
-        this.supportedBy = supportedBy;
-    }
-
-    public Object getLicenseUrl() {
-        return licenseUrl;
-    }
-
-    public void setLicenseUrl(Object licenseUrl) {
-        this.licenseUrl = licenseUrl;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public Object getProvidedBy() {
-        return providedBy;
-    }
-
-    public void setProvidedBy(Object providedBy) {
-        this.providedBy = providedBy;
-    }
-
-    public String getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(String visibility) {
-        this.visibility = visibility;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getActivatedAt() {
-        return activatedAt;
-    }
-
-    public void setActivatedAt(String activatedAt) {
-        this.activatedAt = activatedAt;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public String getTemplateFormat() {
         return templateFormat;
     }
@@ -189,39 +39,6 @@ public class ToscaTemplates implements ToscaTemplatesArtifact {
         this.templateFormat = templateFormat;
     }
 
-    public Object getLicense() {
-        return license;
-    }
-
-    public void setLicense(Object license) {
-        this.license = license;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Object getIcon() {
-        return icon;
-    }
-
-    public void setIcon(Object icon) {
-        this.icon = icon;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     @Override
     public ToscaTemplatesArtifactBuilder toBuilder() {
@@ -269,97 +86,97 @@ public class ToscaTemplates implements ToscaTemplatesArtifact {
 
         @Override
         public ToscaTemplatesArtifactBuilder description(String description) {
-            artifact.description = description;
+            artifact.setDescription(description);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder tags(List<Object> tags) {
-            artifact.tags = tags;
+            artifact.setTags(tags);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder metadata(Metadata metadata) {
-            artifact.metadata = (MetadataImpl) metadata;
+            artifact.setMetadata((MetadataImpl) metadata);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder release(List<Object> release) {
-            artifact.release = release;
+            artifact.setRelease(release);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder owner(String owner) {
-            artifact.owner = owner;
+            artifact.setOwner(owner);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder supportedBy(Object supportedBy) {
-            artifact.supportedBy = supportedBy;
+            artifact.setSupportedBy(supportedBy);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder licenseUrl(Object licenseUrl) {
-            artifact.licenseUrl = licenseUrl;
+            artifact.setLicenseUrl(licenseUrl);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder version(String version) {
-            artifact.version = version;
+            artifact.setVersion(version);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder providedBy(Object providedBy) {
-            artifact.providedBy = providedBy;
+            artifact.setProvidedBy(providedBy);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder visibility(String visibility) {
-            artifact.visibility = visibility;
+            artifact.setVisibility(visibility);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder updatedAt(String updatedAt) {
-            artifact.updatedAt = updatedAt;
+            artifact.setUpdatedAt(updatedAt);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder activatedAt(String activatedAt) {
-            artifact.activatedAt = activatedAt;
+            artifact.setActivatedAt(activatedAt);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder createdAt(String createdAt) {
-            artifact.createdAt = createdAt;
+            artifact.setCreatedAt(createdAt);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder license(Object license) {
-            artifact.license = license;
+            artifact.setLicense(license);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder icon(Object icon) {
-            artifact.icon = icon;
+            artifact.setIcon(icon);
             return this;
         }
 
         @Override
         public ToscaTemplatesArtifactBuilder status(String status) {
-            artifact.status = status;
+            artifact.setStatus(status);
             return this;
         }
 

@@ -1,7 +1,5 @@
 package org.openstack4j.model.artifact.builder;
 
-import org.openstack4j.common.Buildable.Builder;
-import org.openstack4j.model.artifact.Artifact;
 import org.openstack4j.model.artifact.Metadata;
 
 import java.util.List;

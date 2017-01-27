@@ -9,7 +9,7 @@ import org.openstack4j.model.common.BasicResource;
  *
  * @author Pavan Vadavi
  */
-public interface ToscaTemplatesArtifact extends Artifact, BasicResource, Buildable<ToscaTemplatesArtifactBuilder> {
+public interface ToscaTemplatesArtifact extends Artifact, Buildable<ToscaTemplatesArtifactBuilder> {
 
     Template getTemplate();
 

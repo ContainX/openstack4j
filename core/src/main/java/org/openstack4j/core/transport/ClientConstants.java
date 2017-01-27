@@ -24,6 +24,7 @@ public final class ClientConstants {
     public static final String CONTENT_TYPE_TEXT = "text/plain";
     public static final String CONTENT_TYPE_TEXT_HTML = "text/html";
     public static final String CONTENT_TYPE_IMAGE_V2_PATCH = "application/openstack-images-v2.1-json-patch";
+    public static final String CONTENT_TYPE_ARTIFACT_PATCH = "application/json-patch+json";
     
     public static final String X_OPENSTACK_REQUEST_ID = "x-openstack-request-id";
 	public static final String X_COMPUTE_REQUEST_ID = "X-Compute-Request-Id";

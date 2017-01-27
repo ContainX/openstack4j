@@ -7,6 +7,7 @@ import org.openstack4j.model.artifact.ToscaTemplatesArtifacts;
 import org.openstack4j.model.common.ActionResponse;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public interface BaseArtifactService extends RestService {
 
     ToscaTemplatesArtifact upload(String artifactId, File file);
 
-    ToscaTemplatesArtifact download(String artifactId, File file);
+    InputStream download(String artifactId);
 
     ActionResponse delete(String artifactId);
 
