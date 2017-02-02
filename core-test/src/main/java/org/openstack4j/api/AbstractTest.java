@@ -27,7 +27,7 @@ public abstract class AbstractTest {
 
     protected enum Service {
         IDENTITY(5000), 
-        NETWORK(9696), 
+        NETWORK(9696),
         COMPUTE(8774), 
         BLOCK_STORAGE(8776), 
         METERING(8087), 
@@ -39,6 +39,7 @@ public abstract class AbstractTest {
         DATABASE(8779),
     	TACKER(9890),
         IMAGE(9292),
+        ARTIFACT(9494),
         CLUSTERING(8778),
         APP_CATALOG(8082);
 
