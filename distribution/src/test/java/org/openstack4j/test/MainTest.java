@@ -86,16 +86,16 @@ public class MainTest {
         }
 
         //activate artifact
-        osClient.artifact().toscaTemplatesArtifact().activate(toscaTemplatesArtifact.getId());
+        toscaTemplatesArtifact = osClient.artifact().toscaTemplatesArtifact().activate(toscaTemplatesArtifact.getId());
 
         //deactivate artifact
-        osClient.artifact().toscaTemplatesArtifact().deactivate(toscaTemplatesArtifact.getId());
+        toscaTemplatesArtifact = osClient.artifact().toscaTemplatesArtifact().deactivate(toscaTemplatesArtifact.getId());
 
         //reactivate artifact
-        osClient.artifact().toscaTemplatesArtifact().reactivate(toscaTemplatesArtifact.getId());
+        toscaTemplatesArtifact = osClient.artifact().toscaTemplatesArtifact().reactivate(toscaTemplatesArtifact.getId());
 
         //publish artifact
-        osClient.artifact().toscaTemplatesArtifact().publish(toscaTemplatesArtifact.getId());
+        toscaTemplatesArtifact = osClient.artifact().toscaTemplatesArtifact().publish(toscaTemplatesArtifact.getId());
 
         //delete artifact
         osClient.artifact().toscaTemplatesArtifact().delete(toscaTemplatesArtifact.getId());
