@@ -5,7 +5,9 @@ import org.openstack4j.model.artifact.Metadata;
 import java.util.List;
 
 /**
- * Created by vadavi on 19-01-2017.
+ * A Builder which creates a Artifact
+ *
+ * @author Pavan Vadavi
  */
 public interface ArtifactBuilder {
 

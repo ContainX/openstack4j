@@ -5,7 +5,9 @@ import org.openstack4j.model.artifact.Template;
 import org.openstack4j.model.artifact.ToscaTemplatesArtifact;
 
 /**
- * Created by vadavi on 19-01-2017.
+ * A Builder which creates a Tosca Template Artifact Builder
+ *
+ * @author Pavan Vadavi
  */
 public interface ToscaTemplatesArtifactBuilder extends ArtifactBuilder,  Builder<ToscaTemplatesArtifactBuilder, ToscaTemplatesArtifact> {
 

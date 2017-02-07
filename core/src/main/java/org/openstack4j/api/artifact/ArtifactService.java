@@ -5,11 +5,16 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.artifact.Artifacts;
 
 /**
- * OpenStack (Glare) Artifact based Operations
+ * OpenStack (Glare) Artifact Type
  *
  * @author Pavan Vadavi
  */
 public interface ArtifactService extends RestService {
 
+    /**
+     * Tosca Template Service
+     *
+     * @return Tosca Template Service
+     */
     ToscaTemplatesArtifactService toscaTemplatesArtifact();
 }

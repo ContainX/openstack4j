@@ -5,7 +5,9 @@ import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
 import java.util.List;
 
 /**
- * Created by vadavi on 18-01-2017.
+ * A Glare Tosca Templates Artifact
+ *
+ * @author Pavan Vadavi
  */
 public interface ToscaTemplatesArtifacts extends Artifacts {
 

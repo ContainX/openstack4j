@@ -5,7 +5,9 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
 
 /**
- * Created by vadavi on 20-01-2017.
+ * A Glare ArtifactUpdate
+ *
+ * @author Pavan Vadavi
  */
 public interface ArtifactUpdate extends ModelEntity, Buildable<ArtifactUpdateBuilder> {
 

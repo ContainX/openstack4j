@@ -4,7 +4,9 @@ import org.openstack4j.common.Buildable;
 import org.openstack4j.model.artifact.ArtifactUpdate;
 
 /**
- * Created by vadavi on 20-01-2017.
+ * A Builder which creates a ArtifactUpdate
+ *
+ * @author Pavan Vadavi
  */
 public interface ArtifactUpdateBuilder extends Buildable.Builder<ArtifactUpdateBuilder, ArtifactUpdate> {
 
