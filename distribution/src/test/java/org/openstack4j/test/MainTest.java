@@ -1,5 +1,6 @@
 package org.openstack4j.test;
 
+import org.openstack4j.api.Builders;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.client.IOSClientBuilder;
 import org.openstack4j.model.artifact.ArtifactUpdate;
@@ -37,12 +38,12 @@ public class MainTest {
         ToscaTemplatesArtifact toscaTemplates = osClient.artifact().toscaTemplatesArtifact().get(id);
 
         //create artifact
-        ToscaTemplatesArtifactBuilder builder = ToscaTemplates.builder();
+        ToscaTemplatesArtifactBuilder builder = Builders.toscaTemplatesArtifact();
         builder.name("ttt");
         ToscaTemplatesArtifact toscaTemplatesArtifact = osClient.artifact().toscaTemplatesArtifact().create(builder.build());
 
         //update artifact
-        ArtifactUpdateBuilder updateBuilder = ArtifactUpdateModel.builder();
+        ArtifactUpdateBuilder updateBuilder = Builders.artifactUpdate();
         updateBuilder.op("replace");
         updateBuilder.path("/name");
         updateBuilder.value("rrr");

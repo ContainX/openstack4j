@@ -1,0 +1,31 @@
+{
+  "status": "deactivated",
+  "icon": null,
+  "name": "sample",
+  "license": null,
+  "template_format": "yaml",
+  "created_at": "2016-12-22T06:17:52Z",
+  "activated_at": "2017-01-24T05:04:53Z",
+  "updated_at": "2017-01-24T05:04:53Z",
+  "visibility": "private",
+  "provided_by": null,
+  "version": "0.0.0",
+  "license_url": null,
+  "supported_by": null,
+  "template": {
+    "status": "active",
+    "sha1": "9df7d72e69ad3a2f057a1381a820e624244e187e",
+    "url": "/artifacts/tosca_templates/b8f88696-80e7-4f89-abbc-1975991ba879/template",
+    "external": false,
+    "content_type": "application/octet-stream",
+    "sha256": "65dd05482a3c2aa63438618556e124c3223efd8dbd21aa84244a90b755dcfdbd",
+    "md5": "de86b5144f3a500a28c066da11297d56",
+    "size": 1732
+  },
+  "owner": "12abc998271944cea08e5b9485330cda",
+  "release": [],
+  "metadata": {},
+  "id": "b8f88696-80e7-4f89-abbc-1975991ba879",
+  "tags": [],
+  "description": ""
+}

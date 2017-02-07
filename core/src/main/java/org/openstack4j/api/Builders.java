@@ -1,5 +1,7 @@
 package org.openstack4j.api;
 
+import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
+import org.openstack4j.model.artifact.builder.ToscaTemplatesArtifactBuilder;
 import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
 import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
 import org.openstack4j.model.common.builder.LinkBuilder;
@@ -42,6 +44,8 @@ import org.openstack4j.model.tacker.builder.NfvBuilders;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
 import org.openstack4j.model.trove.builder.DBServiceBuilders;
+import org.openstack4j.openstack.artifact.domain.ArtifactUpdateModel;
+import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
 import org.openstack4j.openstack.common.GenericLink;
@@ -132,6 +136,24 @@ public class Builders {
      */
     public static FlavorBuilder flavor() {
         return NovaFlavor.builder();
+    }
+
+    /**
+     * The builder to create a ToscaTemplatesArtifact
+     *
+     * @return the ToscaTemplatesArtifactBuilder
+     */
+    public static ToscaTemplatesArtifactBuilder toscaTemplatesArtifact() {
+        return ToscaTemplates.builder();
+    }
+
+    /**
+     * The builder to update an Artifact
+     *
+     * @return the ArtifactUpdateBuilder
+     */
+    public static ArtifactUpdateBuilder artifactUpdate() {
+        return ArtifactUpdateModel.builder();
     }
 
     /**
