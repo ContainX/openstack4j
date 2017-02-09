@@ -26,10 +26,12 @@ import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.actions.BackupOptions;
+import org.openstack4j.model.compute.actions.EvacuateOptions;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.openstack.common.Metadata;
+import org.openstack4j.openstack.compute.domain.AdminPass;
 import org.openstack4j.openstack.compute.domain.ConsoleOutput;
 import org.openstack4j.openstack.compute.domain.NovaPassword;
 import org.openstack4j.openstack.compute.domain.NovaServer;
@@ -47,6 +49,7 @@ import org.openstack4j.openstack.compute.domain.actions.BasicActions.Reboot;
 import org.openstack4j.openstack.compute.domain.actions.BasicActions.Resize;
 import org.openstack4j.openstack.compute.domain.actions.BasicActions.RevertResize;
 import org.openstack4j.openstack.compute.domain.actions.CreateSnapshotAction;
+import org.openstack4j.openstack.compute.domain.actions.EvacuateAction;
 import org.openstack4j.openstack.compute.domain.actions.LiveMigrationAction;
 import org.openstack4j.openstack.compute.domain.actions.RebuildAction;
 import org.openstack4j.openstack.compute.domain.actions.ResetStateAction;
@@ -454,4 +457,16 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
         checkNotNull(serverId);
         return get(NovaPassword.class, uri("/servers/%s/os-server-password", serverId)).execute();
     }   
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ServerPassword evacuate(String serverId, EvacuateOptions options) {
+        checkNotNull(serverId);
+      
+        return post(AdminPass.class, uri("/servers/%s/action", serverId))
+                    .entity(EvacuateAction.create(options))
+                    .execute();            
+    }
 }
