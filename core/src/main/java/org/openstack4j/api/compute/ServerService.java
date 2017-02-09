@@ -18,6 +18,7 @@ import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.actions.BackupOptions;
+import org.openstack4j.model.compute.actions.EvacuateOptions;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
@@ -340,4 +341,13 @@ public interface ServerService {
      * @return the encrypted server password
      */
     ServerPassword getPassword(String serverId);
+
+    /**
+     * Evacuates a server identified with {@code serverId} from a failed host to a new host
+     * 
+     * @param serverId the server identifier
+     * @param options evaucate options
+     * @return ActionResponse
+     */
+    ServerPassword evacuate(String serverId, EvacuateOptions options);
 }
