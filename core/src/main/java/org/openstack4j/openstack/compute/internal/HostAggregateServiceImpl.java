@@ -1,10 +1,10 @@
 package org.openstack4j.openstack.compute.internal;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nullable;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.openstack4j.api.compute.HostAggregateService;
 import org.openstack4j.model.common.ActionResponse;
@@ -14,6 +14,7 @@ import org.openstack4j.openstack.compute.domain.AggregateRemoveHost;
 import org.openstack4j.openstack.compute.domain.HostAggregateMetadata;
 import org.openstack4j.openstack.compute.domain.NovaHostAggregate;
 import org.openstack4j.openstack.compute.domain.NovaHostAggregate.NovaHostAggregates;
+import org.openstack4j.openstack.compute.domain.NovaHostAggregateCreate;
 import org.openstack4j.openstack.compute.domain.NovaHostAggregateUpdate;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 /**
@@ -75,7 +76,9 @@ public class HostAggregateServiceImpl extends BaseComputeServices implements
 	public HostAggregate create(String name,String availabilityZone) {
 		checkNotNull(name);
 		checkNotNull(availabilityZone);
-		return post(NovaHostAggregate.class, uri("/os-aggregates")).entity(NovaHostAggregate.create(name, availabilityZone)).execute();
+		// modify by chenyan 2017.02.13
+		//return post(NovaHostAggregate.class, uri("/os-aggregates")).entity(NovaHostAggregate.create(name, availabilityZone)).execute();
+		return post(NovaHostAggregate.class, uri("/os-aggregates")).entity(new NovaHostAggregateCreate(name, availabilityZone)).execute();
 	}
 	/**
      * {@inheritDoc}
