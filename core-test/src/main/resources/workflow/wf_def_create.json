@@ -1,0 +1,14 @@
+{
+  "workflows": [
+    {
+      "id": "68d49c72-1297-44d2-a686-0296a45241cb",
+      "name": "with_items_40",
+      "tags": ["test", "private"],
+      "project_id": "<default-project>",
+      "scope": "private",
+      "created_at": "2017-05-02 09:30:21",
+      "definition": "---\nversion: '2.0'\n\nwith_items_40:\n  tasks:\n    task1:\n      with-items: i in <% range(0, 40) %>\n      action: std.echo output=<% $.i %>\n",
+      "input": ""
+    }
+  ]
+}
