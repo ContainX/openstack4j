@@ -25,6 +25,7 @@ public class ServerTests extends AbstractTest {
 
     private static final String JSON_SERVERS = "/compute/servers.json";
     private static final String JSON_SERVER_CREATE = "/compute/server_create.json";
+    private static final String JSON_SERVER_EVACUATE = "/compute/server_evacuate.json";
 
     @Test
     public void listServer() throws Exception {
@@ -67,7 +68,7 @@ public class ServerTests extends AbstractTest {
     
     @Test
     public void evacuateServer() throws Exception {
-        respondWith(JSON_SERVER_CREATE);
+        respondWith(JSON_SERVER_EVACUATE);
         
         ServerPassword password =  osv3().compute().servers().evacuate("e565cbdb-8e74-4044-ba6e-0155500b2c46", EvacuateOptions.create().host("server-test-1").onSharedStorage(false));
         assertNotNull(password.getPassword());        
