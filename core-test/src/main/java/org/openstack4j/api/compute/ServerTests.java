@@ -70,8 +70,8 @@ public class ServerTests extends AbstractTest {
     public void evacuateServer() throws Exception {
         respondWith(JSON_SERVER_EVACUATE);
         
-        ServerPassword password =  osv3().compute().servers().evacuate("e565cbdb-8e74-4044-ba6e-0155500b2c46", EvacuateOptions.create().host("server-test-1").onSharedStorage(false));
-        assertNotNull(password.getPassword());        
+        ServerPassword password =  osv3().compute().servers().evacuate("e565cbdb-8e74-4044-ba6e-0155500b2c46", EvacuateOptions.create().host("server-test-1").onSharedStorage(false));          
+        assertEquals(password.getPassword(), "MySecretPass");        
     }
 
 }
