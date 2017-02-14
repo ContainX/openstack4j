@@ -70,6 +70,9 @@ public class NeutronPort implements Port {
 	
 	@JsonProperty("port_security_enabled")
 	private Boolean portSecurityEnabled; 
+	
+	@JsonProperty("binding:vnic_type")
+	private String vnicType;
         
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
@@ -207,8 +210,15 @@ public class NeutronPort implements Port {
     public Boolean isPortSecurityEnabled() {
         return portSecurityEnabled;
     }
-
-	
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getVnicType() {
+		return vnicType;
+	}
+    
 	/**
 	 * {@inheritDoc}
 	 */
@@ -219,6 +229,7 @@ public class NeutronPort implements Port {
 				    .add("deviceOwner", deviceOwner).add("fixedIps", fixedIps).add("macAddress", macAddress)
 				    .add("networkId", networkId).add("tenantId", tenantId).add("securityGroups", securityGroups)
 				    .add("allowed_address_pairs", allowedAddressPairs).add("port_security_enabled ", portSecurityEnabled)
+				    .add("vnicType", vnicType)
 				    .toString();
 	}
 	
@@ -353,13 +364,13 @@ public class NeutronPort implements Port {
 			return m;
 		}
 
-    @Override
-        public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
-            if (m.extraDhcpOptCreates == null)
-                m.extraDhcpOptCreates = Lists.newArrayList();
-            m.extraDhcpOptCreates.add((NeutronExtraDhcpOptCreate)extraDhcpOptCreate);
-            return this;
-    }
+	    @Override
+	        public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
+	            if (m.extraDhcpOptCreates == null)
+	                m.extraDhcpOptCreates = Lists.newArrayList();
+	            m.extraDhcpOptCreates.add((NeutronExtraDhcpOptCreate)extraDhcpOptCreate);
+	            return this;
+	    }
 
 		@Override
 		public PortBuilder securityGroup(String groupName) {
@@ -375,6 +386,17 @@ public class NeutronPort implements Port {
             m.portSecurityEnabled=portSecurityEnabled;
             return this;
         }
+        
+        @Override
+        public PortBuilder vnicType(String vnicType) {
+        	m.vnicType = vnicType;
+        	return this;
+        }
+        
+        @Override
+        public PortConcreteBuilder id(String id) {
+        	m.id = id;
+        	return this;
+        }
 	}
-
 }

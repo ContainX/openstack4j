@@ -61,5 +61,9 @@ public interface Port extends Resource, Buildable<PortBuilder> {
    */
   Boolean isPortSecurityEnabled();
 
+  /**
+   * @return The type of vNIC which this port should be attached to. This is used to determine which mechanism driver(s) to be used to bind the port. The valid values are normal, macvtap, direct, baremetal, and direct-physical. What type of vNIC is actually available depends on deployments.
+   */
+  String  getVnicType();
 	
 }

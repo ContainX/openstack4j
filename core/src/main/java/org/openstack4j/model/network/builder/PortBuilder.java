@@ -104,5 +104,7 @@ public interface PortBuilder extends Builder<PortBuilder, Port> {
 	
 	PortBuilder portSecurityEnabled(Boolean portSecurityEnabled); 
 	
+	PortBuilder vnicType(String vnicType);
 	
+	PortBuilder id(String id);
 }
