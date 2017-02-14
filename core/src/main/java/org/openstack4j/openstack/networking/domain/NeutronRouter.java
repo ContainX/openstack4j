@@ -47,6 +47,9 @@ public class NeutronRouter implements Router {
 	@JsonProperty("routes")
 	private List<NeutronHostRoute> routes;
 	
+	@JsonProperty("distributed")
+	private Boolean distributed;
+	
 	public static RouterBuilder builder() {
 		return new RouterConcreteBuilder();
 	}
@@ -137,6 +140,11 @@ public class NeutronRouter implements Router {
 		return externalGatewayInfo;
 	}
 	
+	@Override
+	public Boolean getDistributed() {
+		return distributed;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -145,6 +153,7 @@ public class NeutronRouter implements Router {
 		return Objects.toStringHelper(this).omitNullValues()
 				    .add("id", id).add("name", name).add("tenantId", tenantId).add("admin_state_up", adminStateUp)
 				    .add("external_gateway_info", externalGatewayInfo).add("routes", routes)
+				    .add("distributed", distributed)
 				    .addValue("\n")
 				    .toString();
 	}
@@ -176,93 +185,102 @@ public class NeutronRouter implements Router {
   	}
   	
   	/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public RouterBuilder adminStateUp(boolean isAdminStateUp) {
-			m.adminStateUp = isAdminStateUp;
-			return this;
-		}
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RouterBuilder adminStateUp(boolean isAdminStateUp) {
+		m.adminStateUp = isAdminStateUp;
+		return this;
+	}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public RouterBuilder externalGateway(String networkId) {
-			return externalGateway(networkId, null);
-		}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RouterBuilder externalGateway(String networkId) {
+		return externalGateway(networkId, null);
+	}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public RouterBuilder externalGateway(String networkId, Boolean enableSNAT) {
-			m.externalGatewayInfo = new NeutronExternalGateway(networkId, enableSNAT);
-			return this;
-		}
-		
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public RouterBuilder externalGateway(ExternalGateway externalGateway) {
-			m.externalGatewayInfo = (NeutronExternalGateway) externalGateway;
-			return this;
-		}
-		
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public RouterBuilder clearExternalGateway() {
-		    m.externalGatewayInfo = new NeutronExternalGateway();
-		    return this;
-		}
-		
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RouterBuilder externalGateway(String networkId, Boolean enableSNAT) {
+		m.externalGatewayInfo = new NeutronExternalGateway(networkId, enableSNAT);
+		return this;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RouterBuilder externalGateway(ExternalGateway externalGateway) {
+		m.externalGatewayInfo = (NeutronExternalGateway) externalGateway;
+		return this;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RouterBuilder clearExternalGateway() {
+	    m.externalGatewayInfo = new NeutronExternalGateway();
+	    return this;
+	}
+	
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public RouterBuilder route(String destination, String nexthop) {
-			if (m.routes == null)
-				m.routes = Lists.newArrayList();
-			m.routes.add(new NeutronHostRoute(destination, nexthop));
-			return this;
-		}
-
-		/**
-		* {@inheritDoc}
-		*/
-		@Override
-		public RouterBuilder noRoutes() {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RouterBuilder route(String destination, String nexthop) {
+		if (m.routes == null)
 			m.routes = Lists.newArrayList();
-			return this;
-		}
+		m.routes.add(new NeutronHostRoute(destination, nexthop));
+		return this;
+	}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		protected Router reference() {
-			return m;
-		}
-		
-		/**
-		 * {@inheritDoc}
-		 */		
-		@Override
-		public Router build() {
-			return m;
-		}
+	/**
+	* {@inheritDoc}
+	*/
+	@Override
+	public RouterBuilder noRoutes() {
+		m.routes = Lists.newArrayList();
+		return this;
+	}
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public RouterBuilder from(Router in) {
-			m = (NeutronRouter) in;
-			return this;
-		}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected Router reference() {
+		return m;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */		
+	@Override
+	public Router build() {
+		return m;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RouterBuilder from(Router in) {
+		m = (NeutronRouter) in;
+		return this;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public RouterBuilder distributed(Boolean distributed){
+		m.distributed = distributed;
+		return this;
+	}
   }
 }
