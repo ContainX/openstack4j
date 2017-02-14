@@ -137,6 +137,20 @@ public interface Hypervisor extends ModelEntity {
     CPUInfo getCPUInfo();
 	
 	/**
+	 * <br/>Description:Gets the host status
+	 * <p>Author:Wang Ting/王婷</p>
+	 * @return the host status
+	 */
+	String getStatus();
+	
+	/**
+	 * Gets the host state
+	 * <p>Author:Wang Ting/王婷</p>
+	 * @return the host state
+	 */
+	String getState();
+	
+	/**
 	 * The Hypervisor Services Detail
 	 */
 	public interface Service extends ModelEntity {
