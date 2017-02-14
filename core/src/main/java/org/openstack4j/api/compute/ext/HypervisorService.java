@@ -31,5 +31,12 @@ public interface HypervisorService extends RestService {
 		 * @return the hypervisor statistics
 		 */
 		HypervisorStatistics statistics();
-	
+		
+		/**
+	     * Get the specified Hypervisor by ID
+	     * Author:Wang Ting 
+	     * @param hypervisorId the hypervisor identifier
+	     * @return the Hypervisor or null if not found
+	     */
+		Hypervisor get(String hypervisorId);
 }

@@ -51,6 +51,17 @@ public class ExtHypervisor implements Hypervisor {
 
     @JsonProperty("cpu_info")
     private HypervisorCPUInfo cpuInfo;
+    /**
+     * The status of the hypervisor. One of enabled or disabled.
+     * Author:Wang Ting/王婷
+     */
+    private String status;
+    
+    /**
+     * The state of the hypervisor. One of up or down
+     * Author:Wang Ting/王婷
+     */
+    private String state;
 
     @Override
     public String getId() {
@@ -142,6 +153,16 @@ public class ExtHypervisor implements Hypervisor {
     public CPUInfo getCPUInfo() {
         return cpuInfo;
     }
+   
+    @Override
+    public String getStatus() {
+    	return status;
+    }
+    
+    @Override
+    public String getState() {
+    	return state;
+    }
 
     @Override
     public String toString() {
@@ -152,6 +173,8 @@ public class ExtHypervisor implements Hypervisor {
                 .add("localMemory", localMemory).add("localMemoryUsed", localMemoryUsed).add("currentWorkload",currentWorkload)
                 .add("leastDiskAvail", leastDiskAvailable).add("running_vms", runningVM).add("service", service)
                 .add("cpuInfo", cpuInfo)
+                .add("status", status)
+                .add("state", state)
                 .toString();
     }
 
