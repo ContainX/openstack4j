@@ -1,5 +1,6 @@
 package org.openstack4j.api.compute;
 
+import static org.junit.Assert.assertNotNull;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -8,7 +9,9 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.exceptions.ServerResponseException;
 import org.openstack4j.model.compute.Server;
+import org.openstack4j.model.compute.ServerPassword;
 import org.openstack4j.model.compute.Server.Status;
+import org.openstack4j.model.compute.actions.EvacuateOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,6 +25,7 @@ public class ServerTests extends AbstractTest {
 
     private static final String JSON_SERVERS = "/compute/servers.json";
     private static final String JSON_SERVER_CREATE = "/compute/server_create.json";
+    private static final String JSON_SERVER_EVACUATE = "/compute/server_evacuate.json";
 
     @Test
     public void listServer() throws Exception {
@@ -60,6 +64,14 @@ public class ServerTests extends AbstractTest {
     @Override
     protected Service service() {
         return Service.COMPUTE;
+    }
+    
+    @Test
+    public void evacuateServer() throws Exception {
+        respondWith(JSON_SERVER_EVACUATE);
+        
+        ServerPassword password =  osv3().compute().servers().evacuate("e565cbdb-8e74-4044-ba6e-0155500b2c46", EvacuateOptions.create().host("server-test-1").onSharedStorage(false));          
+        assertEquals(password.getPassword(), "MySecretPass");        
     }
 
 }
