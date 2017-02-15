@@ -347,7 +347,7 @@ public interface ServerService {
      * 
      * @param serverId the server identifier
      * @param options evaucate options
-     * @return ActionResponse
+     * @return an administrative password to access the evacuated or rebuilt instance.
      */
     ServerPassword evacuate(String serverId, EvacuateOptions options);
 }
