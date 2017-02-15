@@ -90,5 +90,9 @@ public interface Service extends ModelEntity {
      * @return the zone for this service
      */
     String getZone();
-
+    
+    /**
+     * @return Whether or not this service was forced down manually by an administrator
+     */
+    String getDorcedDown();
 }
