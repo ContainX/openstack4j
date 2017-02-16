@@ -135,7 +135,16 @@ public interface Hypervisor extends ModelEntity {
      * @return CPUInfo
      */
     CPUInfo getCPUInfo();
-	
+    /**
+      * Gets The Hypervisor State
+      * @return the state
+      */
+    String getState();
+     /**
+       * Gets The Hypervisor status
+       * @return the status
+       */
+    String getStatus();
 	/**
 	 * The Hypervisor Services Detail
 	 */
