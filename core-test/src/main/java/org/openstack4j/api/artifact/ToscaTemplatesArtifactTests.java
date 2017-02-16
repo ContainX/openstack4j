@@ -35,7 +35,6 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
     private static final String JSON_PUBLISH_ARTIFACT = "/artifact/tosca_templates_publish_artifact.json";
     private static final String ARTIFACT_ID = "b8f88696-80e7-4f89-abbc-1975991ba879";
     private static final String JSON_ARTIFACTS = "/artifact/tosca_templates_artifacts.json";
-    private static final String ZIP_FILE_PATH = ".s /artifact/test.zip";
 
     @Override
     protected Service service() {
@@ -46,7 +45,6 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
     public void getArtifact() throws Exception {
         respondWith(JSON_GET_ARTIFACT);
         ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().get(ARTIFACT_ID);
-        server.takeRequest();
         assertEquals(toscaTemplatesArtifact.getName(), "test.zip");
         assertEquals(toscaTemplatesArtifact.getStatus(), "active");
     }
@@ -55,7 +53,6 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
     public void getAllArtifacts() throws Exception {
         respondWith(JSON_ARTIFACTS);
         ToscaTemplatesArtifacts toscaTemplatesArtifacts = osv3().artifact().toscaTemplatesArtifact().list();
-        server.takeRequest();
         assertEquals(toscaTemplatesArtifacts.getToscaTemplates().get(0).getName(), "test.zip");
         assertEquals(toscaTemplatesArtifacts.getToscaTemplates().get(0).getStatus(), "active");
     }
@@ -66,7 +63,6 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
         ToscaTemplatesArtifactBuilder builder = Builders.toscaTemplatesArtifact();
         builder.name("sample");
         ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().create(builder.build());
-        server.takeRequest();
         assertEquals(toscaTemplatesArtifact.getName(), "sample");
         assertEquals(toscaTemplatesArtifact.getStatus(), "drafted");
         assertEquals(toscaTemplatesArtifact.getVisibility(), "private");
@@ -81,29 +77,17 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
         builder.value("yaml");
         List<ArtifactUpdate> updates = new ArrayList<>();
         ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().update("b8f88696-80e7-4f89-abbc-1975991ba879",updates);
-        server.takeRequest();
         assertEquals(toscaTemplatesArtifact.getName(), "sample");
         assertEquals(toscaTemplatesArtifact.getTemplateFormat(), "yaml");
         assertEquals(toscaTemplatesArtifact.getStatus(), "drafted");
         assertEquals(toscaTemplatesArtifact.getVisibility(), "private");
     }
 
-    /*@Test
-    public void uploadArtifact() throws Exception {
-        respondWith(JSON_UPLOAD_ARTIFACT);
-        ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().upload("b8f88696-80e7-4f89-abbc-1975991ba879",null);
-        server.takeRequest();
-        assertEquals(toscaTemplatesArtifact.getName(), "sample");
-        assertEquals(toscaTemplatesArtifact.getStatus(), "drafted");
-        assertEquals(toscaTemplatesArtifact.getVisibility(), "private");
-        assertEquals(toscaTemplatesArtifact.getTemplate().getStatus(), "active");
-        assertEquals(toscaTemplatesArtifact.getTemplate().getUrl(), "/artifacts/tosca_templates/b8f88696-80e7-4f89-abbc-1975991ba879/template");
-    }*/
+
     @Test
     public void activateArtifact() throws Exception {
         respondWith(JSON_ACTIVATE_ARTIFACT);
         ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().activate("b8f88696-80e7-4f89-abbc-1975991ba879");
-        server.takeRequest();
         assertEquals(toscaTemplatesArtifact.getName(), "sample");
         assertEquals(toscaTemplatesArtifact.getStatus(), "active");
         assertEquals(toscaTemplatesArtifact.getVisibility(), "private");
@@ -113,7 +97,6 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
     public void deactivateArtifact() throws Exception {
         respondWith(JSON_DEACTIVATE_ARTIFACT);
         ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().deactivate("b8f88696-80e7-4f89-abbc-1975991ba879");
-        server.takeRequest();
         assertEquals(toscaTemplatesArtifact.getName(), "sample");
         assertEquals(toscaTemplatesArtifact.getStatus(), "deactivated");
         assertEquals(toscaTemplatesArtifact.getVisibility(), "private");
@@ -123,7 +106,6 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
     public void reactivateArtifact() throws Exception {
         respondWith(JSON_ACTIVATE_ARTIFACT);
         ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().reactivate("b8f88696-80e7-4f89-abbc-1975991ba879");
-        server.takeRequest();
         assertEquals(toscaTemplatesArtifact.getName(), "sample");
         assertEquals(toscaTemplatesArtifact.getStatus(), "active");
         assertEquals(toscaTemplatesArtifact.getVisibility(), "private");
@@ -133,7 +115,6 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
     public void publishArtifact() throws Exception {
         respondWith(JSON_PUBLISH_ARTIFACT);
         ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().publish("b8f88696-80e7-4f89-abbc-1975991ba879");
-        server.takeRequest();
         assertEquals(toscaTemplatesArtifact.getName(), "sample");
         assertEquals(toscaTemplatesArtifact.getStatus(), "active");
         assertEquals(toscaTemplatesArtifact.getVisibility(), "public");

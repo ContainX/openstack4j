@@ -48,5 +48,6 @@ public final class ClientConstants {
     public static final String PATH_DOMAIN_SCOPES = "auth/domains";
     public static final String PATH_SERVICE_CATALOGS = "auth/catalog";
     public static final String PATH_TENANTS = "/tenants";
+    public static final String PATH_ARTIFACTS = "/artifacts";
 
 }
