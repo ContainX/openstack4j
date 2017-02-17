@@ -1,6 +1,7 @@
 package org.openstack4j.api.networking;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
@@ -20,6 +21,13 @@ public interface SecurityGroupService extends RestService {
    * @return the list<? extends security group>
    */
   List<? extends SecurityGroup> list();
+  
+  /**
+   * Get list of security groups with fields
+   *
+   * @return the list<? extends security group>
+   */
+  List<? extends SecurityGroup> list(Map<String, Object> params);
   
   /**
    * Gets the Security Group by id.
