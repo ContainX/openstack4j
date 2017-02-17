@@ -1,0 +1,35 @@
+{
+    "aggregates": [
+        {
+            "availability_zone": "uec_zone_1",
+            "create": 1485163578000,
+            "created_at": 1485163578000,
+            "deleted": false,
+            "hosts": [
+                "node-70.domain.tld",
+                "node-68.domain.tld",
+                "node-69.domain.tld"
+            ],
+            "id": "8",
+            "metadata": {
+                "availability_zone": "uec_zone_1"
+            },
+            "name": "aggregate_zl_test"
+        },
+        {
+            "availability_zone": "uec_zone_1",
+            "create": 1486968614000,
+            "created_at": 1486968614000,
+            "deleted": false,
+            "hosts": [
+                "node-70.domain.tld",
+                "node-69.domain.tld"
+            ],
+            "id": "9",
+            "metadata": {
+                "availability_zone": "uec_zone_1"
+            },
+            "name": "cyTest01"
+        }
+    ]
+}
