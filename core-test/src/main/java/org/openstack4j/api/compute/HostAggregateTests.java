@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 public class HostAggregateTests extends AbstractTest {
 	
 	private static final String JSON_HOST_AGGREGATES = "/compute/aggregates.json";
+	private static final String JSON_HOST_AGGREGATE_CREATE = "/compute/aggregate_create.json";
 	
 	@Test
 	public void serviceListingTest() throws Exception {
@@ -30,7 +31,19 @@ public class HostAggregateTests extends AbstractTest {
         assertEquals(aggregate.getId(),"8");
         assertEquals(aggregate.getName(),"aggregate_zl_test");
     }
-
+	
+	@Test
+	public void createTest() throws Exception {
+		respondWith(JSON_HOST_AGGREGATE_CREATE);
+		
+		String name = "testAggregate01";
+		String availabilityZone = "nova";
+		HostAggregate hostAggregate = osv3().compute().hostAggregates().create(name, availabilityZone);
+		assertEquals(null != hostAggregate, true);
+		assertEquals(hostAggregate.getName(),name);
+		assertEquals(hostAggregate.getAvailabilityZone(),availabilityZone);
+	}
+	
 	@Override
 	protected Service service() {
 		return Service.COMPUTE;
