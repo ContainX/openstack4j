@@ -8,6 +8,7 @@ import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
+import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
@@ -115,6 +116,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public NetworkingService networking() {
         return Apis.getNetworkingServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ArtifactService artifact() {
+        return Apis.getArtifactServices();
     }
     
     /**

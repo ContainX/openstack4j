@@ -1,5 +1,6 @@
 package org.openstack4j.api;
 
+import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
@@ -73,6 +74,15 @@ public class Apis {
         return get(NetworkingService.class);
     }
     
+    /**
+     * Gets the Artifact services API
+     *
+     * @return the artifact services
+     */
+    public static ArtifactService getArtifactServices() {
+        return get(ArtifactService.class);
+    }
+
     /**
      * Gets the Tacker services API
      *
