@@ -58,7 +58,7 @@ The following fragments might be helpful.
 
 #####Keystone V2:
     
-    # Add to service catalaog in /resources/idenity/v2/access.json
+    # Add to service catalog in /resources/idenity/v2/access.json
 
     {
 	"endpoints": [
@@ -78,7 +78,7 @@ The following fragments might be helpful.
 
 #####Keystone V3:
 
-    # Add catalog in to /resources/idenity/v3/auth_v3_project.json
+    # Add to catalog in /resources/idenity/v3/auth_v3_project.json
 
     {
     "endpoints": [
