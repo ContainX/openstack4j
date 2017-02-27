@@ -206,7 +206,7 @@ public class KeystoneProject implements Project {
      */
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, domain.getId(), description, name, links, parentId, subtree, parents);
+        return Objects.hashCode(id, domain != null ? domain.getId() : domainId, description, name, links, parentId, subtree, parents);
     }
 
     /**
