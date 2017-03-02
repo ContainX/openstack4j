@@ -33,6 +33,7 @@ import org.openstack4j.model.compute.builder.ServerCreateBuilder;
 import org.openstack4j.openstack.common.Metadata;
 import org.openstack4j.openstack.compute.domain.AdminPass;
 import org.openstack4j.openstack.compute.domain.ConsoleOutput;
+import org.openstack4j.openstack.compute.domain.ConsoleOutputOptions;
 import org.openstack4j.openstack.compute.domain.NovaPassword;
 import org.openstack4j.openstack.compute.domain.NovaServer;
 import org.openstack4j.openstack.compute.domain.NovaServer.Servers;
@@ -263,10 +264,16 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public String getConsoleOutput(String serverId, int numLines) {
         checkNotNull(serverId);
-        if (numLines <= 0)
-            numLines = 50;
 
-        ConsoleOutput c = post(ConsoleOutput.class, uri("/servers/%s/action", serverId)).json(ConsoleOutput.getJSONAction(numLines)).execute();
+        // Build options with the given numLines or default to full output
+        ConsoleOutputOptions consoleOutputOptions;
+        if (numLines <= 0)
+        	consoleOutputOptions = new ConsoleOutputOptions();
+        else
+        	consoleOutputOptions = new ConsoleOutputOptions(numLines);
+
+        ConsoleOutput c = post(ConsoleOutput.class, uri("/servers/%s/action", serverId))
+                .entity(consoleOutputOptions).execute();
         return (c != null) ? c.getOutput() : null;
     }
 

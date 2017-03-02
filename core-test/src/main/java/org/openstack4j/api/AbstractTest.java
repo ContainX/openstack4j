@@ -167,6 +167,21 @@ public abstract class AbstractTest {
         respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
     }
 
+    /**
+     * Awaits, removes and returns the next request made to the mock server.
+     * Callers should use this to verify the request was sent as intended.
+     * This method will block until the request is available, possibly forever.
+     * <br/>
+     * <b>Be aware that this method will catch all the previous requests made 
+     * to the mock server, also from other previous tests!
+     * Make sure to take all the requests made by methods in the same test class.</b>
+     * 
+     * @return the head of the request queue
+     */
+    protected RecordedRequest takeRequest() throws InterruptedException {
+        return server.takeRequest();
+    }
+    
     protected String authURL(String path) {
         return String.format("http://%s:5000%s", getHost(), path);
     }

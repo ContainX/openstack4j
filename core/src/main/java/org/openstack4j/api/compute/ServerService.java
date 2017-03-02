@@ -194,7 +194,8 @@ public interface ServerService {
     /**
      * Will attempt to tail and return the last {@code numLines} from the given servers console.
      * @param serverId the server identifier
-     * @param numLines the number of console lines to return
+     * @param numLines the number of console lines to return.
+     * 				   If lower or equal than zero, the whole console content will be returned.
      * @return console output as string or null
      */
     String getConsoleOutput(String serverId, int numLines);
