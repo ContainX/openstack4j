@@ -44,5 +44,6 @@ public class ParseObjectFunction implements Function<HttpResponse, SwiftObject> 
                   .lastModified(Parser.toRFC822DateParse(resp.header(LAST_MODIFIED)))
                   .build();
     }
+    
 
 }
