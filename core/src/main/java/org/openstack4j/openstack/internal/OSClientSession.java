@@ -25,6 +25,7 @@ import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.telemetry.TelemetryAodhService;
+import org.openstack4j.api.telemetry.TelemetryGnocchiService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
@@ -160,6 +161,11 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public TelemetryGnocchiService gnocchiTelemetry() {return Apis.get(TelemetryGnocchiService.class);}
+
+    /**
+     * {@inheritDoc}
+     */
     public ShareService share() {
         return Apis.get(ShareService.class);
     }
@@ -284,6 +290,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
     public boolean supportsTelemetry_aodh() {
         return getSupportedServices().contains(ServiceType.TELEMETRY_AODH);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean supportsTelemetry_gnocchi() {
+        return getSupportedServices().contains(ServiceType.TELEMETRY_GNOCCHI);
     }
 
     /**

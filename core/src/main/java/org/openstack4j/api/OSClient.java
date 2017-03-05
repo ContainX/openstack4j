@@ -15,6 +15,7 @@ import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.telemetry.TelemetryGnocchiService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
@@ -132,6 +133,13 @@ public interface OSClient< T extends OSClient<T>> {
     boolean supportsTelemetry();
 
     /**
+     * Determines if the Telemetry (Gnocchi) service is supported
+     *
+     * @return true if supports Telemetry
+     */
+    boolean supportsTelemetry_gnocchi();
+
+    /**
      * Determines if the Shared File Systems (Manila) service is supported
      *
      * @return true if supports Shared File Systems
@@ -206,6 +214,14 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the telemetry service
      */
     TelemetryService telemetry();
+
+    /**
+     * Returns the Gnocchi Telemetry Service API
+     *
+     * @return the Gnocchi telemetry service
+     */
+    TelemetryGnocchiService gnocchiTelemetry();
+
 
     /**
      * Returns the Shared File Systems API

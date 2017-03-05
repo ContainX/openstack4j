@@ -355,6 +355,8 @@ public class DefaultAPIProvider implements APIProvider {
         bind(SecurityGroupRuleService.class, SecurityGroupRuleServiceImpl.class);
         bind(TelemetryService.class, TelemetryServiceImpl.class);
         bind(MeterService.class, MeterServiceImpl.class);
+        bind(TelemetryGnocchiService.class, TelemetryGnocchiServiceImpl.class);
+        bind(MetricGnocchiService.class, MetricGnocchiServiceImpl.class);
         bind(SampleService.class, SampleServiceImpl.class);
         bind(AlarmService.class, AlarmServiceImpl.class);
         bind(EventService.class, EventServiceImpl.class);
