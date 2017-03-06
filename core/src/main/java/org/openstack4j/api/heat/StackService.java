@@ -3,7 +3,7 @@ package org.openstack4j.api.heat;
 import java.util.List;
 import java.util.Map;
 
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
@@ -68,6 +68,15 @@ public interface StackService {
 	 * @return the list of {@link Stack}s
 	 */
 	List<? extends Stack> list();
+
+	/**
+	 * Gets a list of currently existing {@link Stack} objects, filtered by parameters.
+	 *
+	 * @param filteringParams The parameters used to filter the stacks returned.
+	 *
+	 * @return the list of {@link Stack} objects.
+	 */
+	public List<? extends Stack> list(Map<String, String> filteringParams);
 
 	/**
 	 * returns details of a {@link Stack}.

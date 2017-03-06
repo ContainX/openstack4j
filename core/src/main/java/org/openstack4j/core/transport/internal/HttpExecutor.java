@@ -1,18 +1,18 @@
 package org.openstack4j.core.transport.internal;
 
-import java.util.Iterator;
-import java.util.ServiceLoader;
-
 import org.openstack4j.api.exceptions.ConnectorNotFoundException;
 import org.openstack4j.core.transport.HttpExecutorService;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.openstack.logging.Logger;
-import org.openstack4j.openstack.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 /**
  * HttpExecutor is a delegate to the underline connector associated to OpenStack4j.
- * 
+ *
  * @author Jeremy Unruh
  */
 public class HttpExecutor  {
@@ -21,33 +21,33 @@ public class HttpExecutor  {
     private static final HttpExecutor INSTANCE = new HttpExecutor();
     private HttpExecutorService service;
 
-    private HttpExecutor() { 
-        initService();
-    }
+    private HttpExecutor() {}
 
-    private void initService() {
-        Iterator<HttpExecutorService> it = ServiceLoader.load(HttpExecutorService.class).iterator();
+    private HttpExecutorService service() {
+        if (service != null) return service;
+
+        Iterator<HttpExecutorService> it = ServiceLoader.load(HttpExecutorService.class, getClass().getClassLoader()).iterator();
         if (!it.hasNext())
         {
             LOG.error("No OpenStack4j connector found in classpath");
             throw new ConnectorNotFoundException("No OpenStack4j connector found in classpath");
         }
-        service = it.next();
+        return service = it.next();
     }
 
     public static HttpExecutor create() {
         return INSTANCE;
     }
-    
+
     public String getExecutorName() {
-        return service.getExecutorDisplayName();
+        return service().getExecutorDisplayName();
     }
 
     /**
-     * Delegate to {@link HttpExecutorService#execute(HttpRequest)} 
+     * Delegate to {@link HttpExecutorService#execute(HttpRequest)}
      */
     public <R> HttpResponse execute(HttpRequest<R> request) {
-        LOG.debug("Executing Request: %s -> %s", request.getEndpoint(), request.getPath());
-        return service.execute(request);
+        LOG.debug("Executing Request: {} -> {}", request.getEndpoint(), request.getPath());
+        return service().execute(request);
     }
 }

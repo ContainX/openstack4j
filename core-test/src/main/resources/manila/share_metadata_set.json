@@ -1,0 +1,9 @@
+{
+  "metadata": {
+    "aim": "changed_doc",
+    "project": "my_app",
+    "key1": "value1",
+    "new_metadata_key": "new_information",
+    "key": "value"
+  }
+}

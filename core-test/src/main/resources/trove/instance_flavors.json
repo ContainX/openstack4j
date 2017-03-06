@@ -1,0 +1,40 @@
+{
+  "flavors":[
+    {
+      "name":"m1.tiny",
+      "links":[
+        {
+          "href":"https://172.20.75.130:8779/v1.0/d6ac65efd0e14ef3b9c9bc33f8f809fa/flavors/1",
+          "rel":"self"
+        },
+        {
+          "href":"https://172.20.75.130:8779/flavors/1",
+          "rel":"bookmark"
+        }
+      ],
+      "ram":512,
+      "str_id":"1",
+      "id":1,
+      "disk":11,
+      "vcpus": 111
+    },
+    {
+      "name":"test.tiny-3",
+      "links":[
+        {
+          "href":"https://172.20.75.130:8779/v1.0/d6ac65efd0e14ef3b9c9bc33f8f809fa/flavors/10",
+          "rel":"self"
+        },
+        {
+          "href":"https://172.20.75.130:8779/flavors/10",
+          "rel":"bookmark"
+        }
+      ],
+      "ram":1024,
+      "str_id":"2",
+      "id":2,
+      "disk":22,
+      "vcpus": 222
+    }
+  ]
+}

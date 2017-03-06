@@ -1,0 +1,13 @@
+{
+    "backup": {
+        "id": "7069c687-c85c-45ca-befa-aa78a971fdfe",
+        "links": [{
+            "href": "https://192.168.100.3:8776/v1/aec84f30304745c1b568593eee763eb4/backups/7069c687-c85c-45ca-befa-aa78a971fdfe",
+            "rel": "self"
+        }, {
+            "href": "https://192.168.100.3:8776/aec84f30304745c1b568593eee763eb4/backups/7069c687-c85c-45ca-befa-aa78a971fdfe",
+            "rel": "bookmark"
+        }],
+        "name": "backup1122"
+    }
+}

@@ -1,7 +1,7 @@
 package org.openstack4j.openstack.internal;
 
-import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT;
-import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT_HTML;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
+import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,11 +12,13 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fasterxml.jackson.databind.util.StdDateFormat;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT;
+import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT_HTML;
 
 /**
  * Provides common parser routines when dealing with Headers or other non-json payloads
  * @author Jeremy Unruh
+ * @author Qin An - Added parser function for Neutron Agent List
  */
 public final class Parser {
 
@@ -72,18 +74,37 @@ public final class Parser {
             if (date != null)
                 return StdDateFormat.instance.parse(date);
         }
-        catch (ParseException e) { 
-            e.printStackTrace();
+        catch (ParseException e) {
+            LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
         }
         return null;
     }
+    
+    /**
+     * Parse a string with format "yyyy-MM-dd HH:mm:ss" into a Date
+     * The string format is used in Neutron Agent-List
+     * 
+     * @param date - string to be parsed
+     * @return Date
+     */
+    public static Date parseSimpleDate(String date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+        	if (date != null) {
+        		return format.parse(date);
+        	}
+        } catch (ParseException e) {
+        	LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
+        }
+        return null;
+    }    
 
     /**
      * Takes a Date and returns it's equivalent in RFC 1123
      * @param date the date to format
      * @return the formatted date string
      */
-    public static String toRFC1123(Date date) 
+    public static String toRFC1123(Date date)
     {
         if (DF == null) {
             DF = new SimpleDateFormat(PATTERN_RFC1123, Locale.US);
@@ -94,7 +115,7 @@ public final class Parser {
 
     /**
      * Parses a String in RFC 822 format into a Date object
-     * 
+     *
      * @param toParse the date to parse
      * @return the parsed date
      */
@@ -143,23 +164,23 @@ public final class Parser {
         if (matcher.find()) {
             toParse = matcher.group(1);
         }
-        // TODO explain why this check is here
+
         if (toParse.length() == 25 && SECOND_PATTERN.matcher(toParse).matches())
             toParse = toParse.substring(0, toParse.length() - 6);
         return toParse;
     }
-    
+
     /**
      * Determines if the specified content type is text/plain or text/html.  If the contentType is null
-     * then false is returned.  
-     * 
+     * then false is returned.
+     *
      * @param contentType the content type
      * @return true if the contentType is text/plain or text/html
      */
     public static boolean isContentTypeText(String contentType) {
         if (contentType == null)
             return false;
-        
+
         return (contentType.contains(CONTENT_TYPE_TEXT) || contentType.contains(CONTENT_TYPE_TEXT_HTML));
     }
 }

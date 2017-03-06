@@ -1,0 +1,62 @@
+[
+  {
+    "user_id": null,
+    "resource_id": "9c15560b-39f2-4e05-98a3-5015091fe66a",
+    "timestamp": "2016-06-20T21:58:28.205082",
+    "meter": "image.size",
+    "volume": 388709888,
+    "source": "openstack",
+    "recorded_at": "2016-06-20T21:58:28.242074",
+    "project_id": "ae87747b1501457ea6f79dc98c84e0e8",
+    "type": "gauge",
+    "id": "1e92e086-3732-11e6-8bc8-005056ac9b87",
+    "unit": "B",
+    "metadata": {
+      "status": "active",
+      "name": "manila-service-image-master",
+      "deleted": "False",
+      "checksum": "2b50d24d1996bb871eca2a87d93b6644",
+      "created_at": "2016-06-10T17:55:43.000000",
+      "disk_format": "qcow2",
+      "updated_at": "2016-06-10T17:56:02.000000",
+      "protected": "False",
+      "container_format": "bare",
+      "min_disk": "0",
+      "is_public": "True",
+      "deleted_at": "None",
+      "min_ram": "0",
+      "size": "388709888"
+    }
+  },
+  {
+    "user_id": null,
+    "resource_id": "8fe27948-1f4e-412d-b9f7-64bb5ffd1f53",
+    "timestamp": "2016-06-20T21:58:28.205082",
+    "meter": "image.size",
+    "volume": 25165824,
+    "source": "openstack",
+    "recorded_at": "2016-06-20T21:58:28.242266",
+    "project_id": "ae87747b1501457ea6f79dc98c84e0e8",
+    "type": "gauge",
+    "id": "1e93a890-3732-11e6-a491-005056ac9b87",
+    "unit": "B",
+    "metadata": {
+      "status": "active",
+      "name": "cirros-0.3.4-x86_64-uec",
+      "deleted": "False",
+      "checksum": "eb9139e4942121f22bbc2afc0400b2a4",
+      "created_at": "2016-06-10T17:49:10.000000",
+      "disk_format": "ami",
+      "updated_at": "2016-06-10T17:49:10.000000",
+      "properties.ramdisk_id": "3d1eaa5e-eed9-4d2b-9865-260243bc42d4",
+      "properties.kernel_id": "d245ae05-062c-477b-9022-876dda99f45c",
+      "protected": "False",
+      "container_format": "ami",
+      "min_disk": "0",
+      "is_public": "True",
+      "deleted_at": "None",
+      "min_ram": "0",
+      "size": "25165824"
+    }
+  }
+]

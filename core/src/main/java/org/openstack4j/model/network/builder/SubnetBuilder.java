@@ -1,7 +1,7 @@
 package org.openstack4j.model.network.builder;
 
 import org.openstack4j.common.Buildable.Builder;
-import org.openstack4j.model.identity.Tenant;
+import org.openstack4j.model.identity.v3.Tenant;
 import org.openstack4j.model.network.IPVersionType;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.Subnet;
@@ -66,6 +66,11 @@ public interface SubnetBuilder extends Builder<SubnetBuilder, Subnet> {
      * @see Subnet#gateway()
      */
     SubnetBuilder gateway(String gateway);
+
+    /**
+     * @see Subnet#isNoGateway()
+     */
+    SubnetBuilder noGateway();
 
     /**
      * @see Subnet#getDnsNames()

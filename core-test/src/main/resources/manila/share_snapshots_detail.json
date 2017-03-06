@@ -1,0 +1,46 @@
+{
+  "snapshots": [
+    {
+      "status": "creating",
+      "share_id": "d94a8548-2079-4be0-b21c-0a887acd31ca",
+      "name": "snapshot_My_share",
+      "links": [
+        {
+          "href": "http://172.18.198.54:8786/v1/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/086a1aa6-c425-4ecd-9612-391a3b1b9375",
+          "rel": "self"
+        },
+        {
+          "href": "http://172.18.198.54:8786/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/086a1aa6-c425-4ecd-9612-391a3b1b9375",
+          "rel": "bookmark"
+        }
+      ],
+      "created_at": "2015-09-07T11:55:09.000000",
+      "description": "Here is a snapshot of share My_share",
+      "share_proto": "NFS",
+      "share_size": 1,
+      "id": "086a1aa6-c425-4ecd-9612-391a3b1b9375",
+      "size": 1
+    },
+    {
+      "status": "available",
+      "share_id": "406ea93b-32e9-4907-a117-148b3945749f",
+      "name": "snapshot_share1",
+      "links": [
+        {
+          "href": "http://172.18.198.54:8786/v1/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/6d221c1d-0200-461e-8d20-24b4776b9ddb",
+          "rel": "self"
+        },
+        {
+          "href": "http://172.18.198.54:8786/16e1ab15c35a457e9c2b2aa189f544e1/snapshots/6d221c1d-0200-461e-8d20-24b4776b9ddb",
+          "rel": "bookmark"
+        }
+      ],
+      "created_at": "2015-09-07T11:50:39.000000",
+      "description": "Here is a snapshot of share Share1",
+      "share_proto": "NFS",
+      "share_size": 1,
+      "id": "6d221c1d-0200-461e-8d20-24b4776b9ddb",
+      "size": 1
+    }
+  ]
+}

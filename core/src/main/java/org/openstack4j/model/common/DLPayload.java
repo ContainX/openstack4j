@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.openstack4j.core.transport.HttpResponse;
+
 /**
  * A Payload which encapsulates downstream data
  * 
@@ -11,6 +13,13 @@ import java.io.InputStream;
  */
 public interface DLPayload {
 
+    /**
+     * The HttpResponse
+     * 
+     * @return the HttpResponse
+     */
+	HttpResponse getHttpResponse();
+	
     /**
      * The raw inputstream
      * 

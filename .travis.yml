@@ -2,12 +2,31 @@ language: java
 
 jdk:
   - oraclejdk7
-  - openjdk7
+
+env:
+  global:
+    - SKIP_JDK8_MODULES='-pl !org.pacesys.openstack4j.connectors:openstack4j-http-connector,!org.pacesys.openstack4j.connectors:openstack4j-jersey2,!org.pacesys:it-jersey2'
+    - DEPLOY=0
+
+matrix:
+  include:
+    - jdk: "oraclejdk8"
+      env:
+        - SKIP_JDK8_MODULES=""
+        - DEPLOY=1
 
 notifications:
   email: false
 
-# whitelist
-branches:
-  only:
-    - master
+install: /bin/true
+
+# When run on JDK7, modules that require JDK8 needs to be skipped
+script: mvn clean verify -B $SKIP_JDK8_MODULES
+
+after_success:
+  - "[[ $DEPLOY == 1 && $TRAVIS_BRANCH == \"master\" ]] && { mvn deploy --settings distribution/settings.xml -DskipTests=true -B; };"
+
+# disable sudo to ensure that this build runs on the travis container-based
+# infrastructure. This should prevent the buffer overflow from
+# https://github.com/travis-ci/travis-ci/issues/5227
+sudo: false

@@ -10,6 +10,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
@@ -35,13 +36,15 @@ public class NovaFlavor implements Flavor {
 	@JsonProperty("rxtx_factor")
 	private float rxtxFactor = 1.0f;
 	@JsonProperty("OS-FLV-DISABLED:disabled")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Boolean disabled;
 	@JsonProperty("rxtx_quota")
 	private Integer rxtxQuota;
 	@JsonProperty("rxtx_cap")
 	private Integer rxtxCap;
 	@JsonProperty("os-flavor-access:is_public")
-	private boolean isPublic = Boolean.TRUE;	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Boolean isPublic;	
 	private List<GenericLink> links;
 
 	public static FlavorBuilder builder() {
@@ -138,8 +141,9 @@ public class NovaFlavor implements Flavor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@JsonIgnore
 	@Override
-	public boolean isPublic() {
+	public Boolean isPublic() {
 		return isPublic;
 	}
 
@@ -147,8 +151,8 @@ public class NovaFlavor implements Flavor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isDisabled() {
-		return (disabled == null) ? false : disabled;
+	public Boolean isDisabled() {
+		return disabled;
 	}
 
 	/**
@@ -180,7 +184,8 @@ public class NovaFlavor implements Flavor {
 		@JsonProperty("flavors")
 		List<NovaFlavor> flavors;
 		
-		public List<NovaFlavor> value() {
+		@Override
+        public List<NovaFlavor> value() {
 			return flavors;
 		}
 	}
@@ -200,7 +205,8 @@ public class NovaFlavor implements Flavor {
 		/**
 		 * @see Flavor#getName()
 		 */
-		public FlavorBuilder name(String name) {
+		@Override
+        public FlavorBuilder name(String name) {
 			m.name = name;
 			return this;
 		}
@@ -208,7 +214,8 @@ public class NovaFlavor implements Flavor {
 		/**
 		 * @see Flavor#getRam()
 		 */
-		public FlavorBuilder ram(int ram) {
+		@Override
+        public FlavorBuilder ram(int ram) {
 			m.ram = ram;
 			return this;
 		}
@@ -216,7 +223,8 @@ public class NovaFlavor implements Flavor {
 		/**
 		 * @see Flavor#getVcpus()
 		 */
-		public FlavorBuilder vcpus(int vcpus) {
+		@Override
+        public FlavorBuilder vcpus(int vcpus) {
 			m.vcpus = vcpus;
 			return this;
 		}
@@ -224,7 +232,8 @@ public class NovaFlavor implements Flavor {
 		/**
 		 * @see Flavor#getDisk()
 		 */
-		public FlavorBuilder disk(int disk) {
+		@Override
+        public FlavorBuilder disk(int disk) {
 			m.disk = disk;
 			return this;
 		}
@@ -232,7 +241,8 @@ public class NovaFlavor implements Flavor {
 		/**
 		 * @see Flavor#getSwap()
 		 */
-		public FlavorBuilder swap(int swap) {
+		@Override
+        public FlavorBuilder swap(int swap) {
 			m.swap = swap;
 			return this;
 		}
@@ -240,7 +250,8 @@ public class NovaFlavor implements Flavor {
 		/**
 		 * @see Flavor#getRxtxFactor();
 		 */
-		public FlavorBuilder rxtxFactor(float rxtxFactor) {
+		@Override
+        public FlavorBuilder rxtxFactor(float rxtxFactor) {
 			m.rxtxFactor = rxtxFactor;
 			return this;
 		}
@@ -263,6 +274,18 @@ public class NovaFlavor implements Flavor {
 			m = (NovaFlavor) in;
 			return this;
 		}
+
+        @Override
+        public FlavorBuilder ephemeral(int ephemeral) {
+            m.ephemeral = ephemeral;
+            return this;
+        }
+
+        @Override
+        public FlavorBuilder id(String id) {
+            m.id = id;
+            return this;
+        }
 		
 	}
 

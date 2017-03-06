@@ -1,0 +1,10 @@
+{
+    "role": {
+        "id": "aae88952465d4c32b0a1140a76601b68",
+        "domain_id" : "default",
+        "links": {
+            "self": "http://127.0.0.1:5000/v3/roles/aae88952465d4c32b0a1140a76601b68"
+        },
+        "name": "admin"
+    }
+}

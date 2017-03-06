@@ -1,0 +1,17 @@
+{
+  "links": {
+    "self": "http://127.0.0.1:5000/v3/roles",
+    "previous": null,
+    "next": null
+  },
+  "roles": [
+    {
+      "domain_id" : "default",
+      "id": "aae88952465d4c32b0a1140a76601b68",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/d164e3440b5741808e5d8ec324b51e0b"
+      },
+      "name": "admin"
+    }
+  ]
+}

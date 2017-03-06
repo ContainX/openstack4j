@@ -1,0 +1,48 @@
+{
+    "flavors": [
+        {
+            "name": "m1.nano",
+            "links": [
+                {
+                    "href": "http://openstack.example.com:8774/v2.1/8fd2b4f2b5cf4fa184e5c3c5020408c7/flavors/0",
+                    "rel": "self"
+                },
+                {
+                    "href": "http://openstack.example.com:8774/8fd2b4f2b5cf4fa184e5c3c5020408c7/flavors/0",
+                    "rel": "bookmark"
+                }
+            ],
+            "ram": 64,
+            "OS-FLV-DISABLED:disabled": false,
+            "vcpus": 1,
+            "swap": "",
+            "os-flavor-access:is_public": true,
+            "rxtx_factor": 1,
+            "OS-FLV-EXT-DATA:ephemeral": 0,
+            "disk": 1,
+            "id": "0"
+        },
+        {
+            "name": "m1.tiny",
+            "links": [
+                {
+                    "href": "http://openstack.example.com:8774/v2.1/8fd2b4f2b5cf4fa184e5c3c5020408c7/flavors/1",
+                    "rel": "self"
+                },
+                {
+                    "href": "http://openstack.example.com:8774/8fd2b4f2b5cf4fa184e5c3c5020408c7/flavors/1",
+                    "rel": "bookmark"
+                }
+            ],
+            "ram": 512,
+            "OS-FLV-DISABLED:disabled": false,
+            "vcpus": 1,
+            "swap": "",
+            "os-flavor-access:is_public": true,
+            "rxtx_factor": 1,
+            "OS-FLV-EXT-DATA:ephemeral": 0,
+            "disk": 1,
+            "id": "1"
+        }
+    ]
+}

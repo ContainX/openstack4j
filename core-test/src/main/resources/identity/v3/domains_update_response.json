@@ -1,0 +1,11 @@
+{
+    "domain": {
+        "links": {
+            "self": "http://127.0.0.1:5000/v3/domains/98c110ae41c249189c9d5c25d8377b65"
+        },
+        "enabled": true,
+        "description": "An updated domain used for CRUD tests",
+        "name": "Domain_CRUD",
+        "id": "98c110ae41c249189c9d5c25d8377b65"
+    }
+}

@@ -1,0 +1,57 @@
+{
+  "links": {
+    "self": "http://127.0.0.1:5000/v3/roles",
+    "previous": null,
+    "next": null
+  },
+  "roles": [
+    {
+      "domain_id" : "default",
+      "id": "1106df77e969413ca2a24aca5d5af0a6",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/1106df77e969413ca2a24aca5d5af0a6"
+      },
+      "name": "ResellerAdmin"
+    },
+    {
+      "domain_id" : "default",
+      "id": "4585a09447dd4eeea1ffcf495e0003a9",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/4585a09447dd4eeea1ffcf495e0003a9"
+      },
+      "name": "Member"
+    },
+    {
+      "domain_id" : "default",
+      "id": "9fe2ff9ee4384b1894a90878d3e92bab",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/9fe2ff9ee4384b1894a90878d3e92bab"
+      },
+      "name": "_member_"
+    },
+    {
+      "domain_id" : "default",
+      "id": "c85149ed1b5548549289a576f1ab946e",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/c85149ed1b5548549289a576f1ab946e"
+      },
+      "name": "service"
+    },
+    {
+      "domain_id" : "default",
+      "id": "d164e3440b5741808e5d8ec324b51e0b",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/d164e3440b5741808e5d8ec324b51e0b"
+      },
+      "name": "admin"
+    },
+    {
+      "domain_id" : "default",
+      "id": "f2b9666d7c41407b8a56fda3c76379ec",
+      "links": {
+        "self": "http://127.0.0.1:5000/v3/roles/f2b9666d7c41407b8a56fda3c76379ec"
+      },
+      "name": "anotherrole"
+    }
+  ]
+}

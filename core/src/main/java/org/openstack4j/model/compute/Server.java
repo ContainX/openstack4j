@@ -64,6 +64,10 @@ public interface Server extends ModelEntity {
 		SHUTOFF, 
 		/** The server is currently being migrated */
 		MIGRATING,
+		/** The server is shelved*/
+		SHELVED,
+		/** The server is shelved_offloaded, server removed from the hypervisor to minimize resource usage. */
+		SHELVED_OFFLOADED,
 		/** OpenStack4j could not find a Status mapping for the current reported Status.  File an issue indicating the missing state */
 		UNRECOGNIZED;
 
@@ -245,7 +249,7 @@ public interface Server extends ModelEntity {
 	 */
 	String getAvailabilityZone();
 
-	/**
+	/** 
 	 * @return the last time the server was launched
 	 */
 	Date getLaunchedAt();
@@ -269,5 +273,10 @@ public interface Server extends ModelEntity {
 	 * @return the administrative password to the VM
 	 */
 	String getAdminPass();
+
+    /**
+     * @return security groups attached to the VM
+     */
+    List<? extends SecurityGroup> getSecurityGroups();
 
 }

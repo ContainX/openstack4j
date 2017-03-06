@@ -1,0 +1,20 @@
+{
+   "policy_rule_set":{
+      "description":"test-rule-set-desc",
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "policy_rules":[
+         "059909d1-7f20-40cf-a78a-27c340a5aaac",
+         "1fc1a2fc-4701-49dc-95b1-01aac2101eee",
+         "8f993007-1f2a-4ae1-9882-2fddec5f3bd2",
+         "ab3e99cc-ffb4-48c4-9111-c4c4721c9d06",
+         "e3c53e40-2035-47e1-9fef-90e7f4178207"
+      ],
+      "parent_id":null,
+      "shared":false,
+      "id":"1bbc10a8-aeb2-4e53-ab31-a1fed18763f4",
+      "child_policy_rule_sets":[
+
+      ],
+      "name":"test-rule-set"
+   }
+}

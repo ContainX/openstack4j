@@ -1,0 +1,22 @@
+{
+  "listener": {
+    "protocol_port": 80,
+    "protocol": "HTTP",
+    "description": "im a good listener",
+    "default_tls_container_ref": "http://0.0.0.0:9311/v1/containers/52594300-d996-49e4-8bf1-a4e000171ad9",
+    "admin_state_up": false,
+    "loadbalancers": [
+      {
+        "id": "bca64d34-945f-4282-9587-8f95722b58f1"
+      }
+    ],
+    "tenant_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
+    "sni_container_refs": [
+      "http://0.0.0.0:9311/v1/containers/907f400c-d970-47f8-9900-db5796505e1f"
+    ],
+    "connection_limit": 20,
+    "default_pool_id": "b7f6a49f-ebd8-43c5-b792-5748366eff21",
+    "id": "c07058a9-8d84-4443-b8f5-508d0facfe10",
+    "name": "listener_updated"
+  }
+}

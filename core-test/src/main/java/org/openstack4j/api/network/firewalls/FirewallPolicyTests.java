@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.FirewallPolicy;
 import org.openstack4j.model.network.ext.FirewallPolicyUpdate;
 import org.openstack4j.openstack.networking.domain.ext.FirewallRuleStrategy.RuleInsertStrategyType;
@@ -34,7 +34,7 @@ public class FirewallPolicyTests extends AbstractTest {
 	
 	public void testListFirewallPolicies() throws IOException {
 	    respondWith(FIREWALL_POLICIES);
-		List<? extends FirewallPolicy> list = os().networking().firewalls().firewallpolicy().list();
+		List<? extends FirewallPolicy> list = osv3().networking().firewalls().firewallpolicy().list();
 		assertEquals(1, list.size());
 		Preconditions.checkNotNull(list.get(0));
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : FirewallPolicy from List : "+list.get(0));
@@ -44,7 +44,7 @@ public class FirewallPolicyTests extends AbstractTest {
 	public void testGetFirewallPolicy() throws IOException {
 	    respondWith(FIREWALL_POLICY);
 		String id = "c69933c1-b472-44f9-8226-30dc4ffd454c";
-		FirewallPolicy firewallPolicy = os().networking().firewalls().firewallpolicy().get(id);
+		FirewallPolicy firewallPolicy = osv3().networking().firewalls().firewallpolicy().get(id);
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : FirewallPolicy by ID : "+firewallPolicy);
 		assertNotNull(firewallPolicy);
 		assertEquals(firewallPolicy.getId(), id);
@@ -62,7 +62,7 @@ public class FirewallPolicyTests extends AbstractTest {
 				  .name("Test-Firewall-Policy").description("Test-Firewall-Policy")
 				  .shared(Boolean.TRUE).audited(Boolean.FALSE)
 				  .tenantId("45977fa2dbd7482098dd68d0d8970117").build();
-		FirewallPolicy result = os().networking().firewalls().firewallpolicy().create(create);
+		FirewallPolicy result = osv3().networking().firewalls().firewallpolicy().create(create);
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created FirewallPolicy : "+result);
 		
 		assertEquals(result.getName(), "Test-Firewall-Policy");
@@ -76,7 +76,7 @@ public class FirewallPolicyTests extends AbstractTest {
 				.firewallRules(Arrays.asList("8722e0e0-9cc9-4490-9660-8c9a5732fbb0"))
 				.description("Test-Firewall-Policy-Update").build();
 		
-		FirewallPolicy result = os().networking().firewalls().firewallpolicy().update("c69933c1-b472-44f9-8226-30dc4ffd454c", update);
+		FirewallPolicy result = osv3().networking().firewalls().firewallpolicy().update("c69933c1-b472-44f9-8226-30dc4ffd454c", update);
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated FirewallPolicy : "+result);
 		
 		assertEquals("Test-Firewall-Policy-Update", result.getDescription());
@@ -85,7 +85,7 @@ public class FirewallPolicyTests extends AbstractTest {
 	public void testInsertRuleInFirewallPolicy() throws IOException {
 		respondWith(FIREWALL_POLICY_RULE);
 		
-		FirewallPolicy result = os().networking().firewalls().firewallpolicy()
+		FirewallPolicy result = osv3().networking().firewalls().firewallpolicy()
 				.insertFirewallRuleInPolicy(
 						"c69933c1-b472-44f9-8226-30dc4ffd454c", "7bc34b8c-8d3b-4ada-a9c8-1f4c11c65692",
 						RuleInsertStrategyType.AFTER, "a08ef905-0ff6-4784-8374-175fffe7dade");
@@ -97,7 +97,7 @@ public class FirewallPolicyTests extends AbstractTest {
 	public void testRemoveRuleFromFirewallPolicy() throws IOException {
 		respondWith(FIREWALL_POLICY_RULE);
 		
-		FirewallPolicy result = os().networking().firewalls().firewallpolicy()
+		FirewallPolicy result = osv3().networking().firewalls().firewallpolicy()
 				.removeFirewallRuleFromPolicy("c69933c1-b472-44f9-8226-30dc4ffd454c", "7bc34b8c-8d3b-4ada-a9c8-1f4c11c65692");
 		Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Rule Removed from FirewallPolicy : "+result);
 		
@@ -106,7 +106,7 @@ public class FirewallPolicyTests extends AbstractTest {
 	
 	public void testDeleteFirewallPolicy() {
 	    respondWith(200);
-		ActionResponse result = os().networking().firewalls().firewallpolicy().delete("c69933c1-b472-44f9-8226-30dc4ffd454c");
+		ActionResponse result = osv3().networking().firewalls().firewallpolicy().delete("c69933c1-b472-44f9-8226-30dc4ffd454c");
 		assertTrue(result.isSuccess());
 	}
 

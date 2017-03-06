@@ -1,0 +1,124 @@
+{
+   "l2_policies":[
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"f9c1f545-6ea6-4b05-99d5-50f02ed3c640",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "1fb00129-06cf-48e5-8282-d15dbf4be60b"
+         ],
+         "shared":false,
+         "id":"08c1c093-6337-4383-938e-2d9c6cac531a",
+         "name":"test-policy-target-group"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"43f98ed6-3e4a-4dfe-a1d4-3b7692641811",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "62acdf14-184d-4565-9660-e5f0ec454e79"
+         ],
+         "shared":false,
+         "id":"138305c9-2749-4291-b9ff-adb901a660f1",
+         "name":"test-policy-target-group"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"58a69068-075b-44a4-8829-52b233cafd70",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "d3f59dc9-f7c4-4183-8315-4fa3f5ca3202"
+         ],
+         "shared":false,
+         "id":"36af9906-300e-465a-85fc-716694de38c7",
+         "name":"test-policy-target-group"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"20e0314c-3d75-496a-ab7f-14fac20d6efd",
+         "tenant_id":"abc0b828ace347049b0835f4a4d10040",
+         "l3_policy_id":"8a45f76f-888b-4f3b-ad00-88c3b0ba9e6d",
+         "policy_target_groups":[
+            "2b2a44de-0992-4cf8-bbd6-b2e4c565e16d"
+         ],
+         "shared":false,
+         "id":"65fc10d2-f173-48db-ad50-72f29790c4d1",
+         "name":"test"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"852eb20e-edf2-48c4-a498-a776fe93bb4d",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "ab19a691-24e1-44e8-bc74-38b233305f52"
+         ],
+         "shared":false,
+         "id":"7dc44fbd-bc2b-4aa3-808c-0498183f5e21",
+         "name":"test-policy-target-group"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"e05accfc-c550-4528-bfe3-5a52382482fd",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "aab0872f-890f-46b1-b461-86877039c23e"
+         ],
+         "shared":false,
+         "id":"7eea106a-714d-41aa-ac69-de4c3f2e4b44",
+         "name":"test-policy-target-group"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"6f9a05c9-b162-4e75-8ae3-9fea2c5eee31",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "3ecf2178-25bb-4611-8a10-0dc074e90295"
+         ],
+         "shared":false,
+         "id":"9fe34254-28fd-4db2-bba6-f8c35c51617e",
+         "name":"test-policy-target-group"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"c0631952-3247-40ad-bb0e-8e7dc7c9feff",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "61073812-3994-40c2-96f0-6bff03804e47"
+         ],
+         "shared":false,
+         "id":"a8aea144-92d8-4830-ae9f-41af291adb42",
+         "name":"test-policy-target-group"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"e16c1817-463b-42ab-afbf-801434e845be",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "a72f99fa-68d1-494a-bc63-8b9e9b526f76"
+         ],
+         "shared":false,
+         "id":"c1cc9bd8-49a5-4699-aa26-b276ced4cc67",
+         "name":"sha1-test"
+      },
+      {
+         "description":"Implicitly created L2 policy",
+         "network_id":"1f3d040d-0cd4-4ae2-839d-bccbd718a58f",
+         "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+         "l3_policy_id":"da7083c6-3d5b-450c-8163-0b156d55eba6",
+         "policy_target_groups":[
+            "793c0497-39e8-4c76-a751-1d115d7a3b21"
+         ],
+         "shared":false,
+         "id":"d02b17ad-ef26-4a04-9071-82a5cfa100a6",
+         "name":"test-policy-target-group"
+      }
+   ]
+}

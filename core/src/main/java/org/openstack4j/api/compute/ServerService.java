@@ -4,18 +4,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openstack4j.api.compute.ext.InstanceActionsService;
 import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.model.compute.Action;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.RebootType;
 import org.openstack4j.model.compute.Server;
 import org.openstack4j.model.compute.Server.Status;
 import org.openstack4j.model.compute.ServerCreate;
+import org.openstack4j.model.compute.ServerPassword;
 import org.openstack4j.model.compute.ServerUpdateOptions;
 import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.actions.BackupOptions;
+import org.openstack4j.model.compute.actions.EvacuateOptions;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
@@ -191,7 +194,8 @@ public interface ServerService {
     /**
      * Will attempt to tail and return the last {@code numLines} from the given servers console.
      * @param serverId the server identifier
-     * @param numLines the number of console lines to return
+     * @param numLines the number of console lines to return.
+     * 				   If lower or equal than zero, the whole console content will be returned.
      * @return console output as string or null
      */
     String getConsoleOutput(String serverId, int numLines);
@@ -323,4 +327,28 @@ public interface ServerService {
      * @return the interface service
      */
     InterfaceService interfaces();
+    
+    /**
+     * The instance actions service extension (os-instance-actions)
+     * @return the instance actions service
+     */
+    InstanceActionsService instanceActions();
+
+    /**
+     * Returns the encrypted password for the specified server which can be decrypted with
+     * the private key
+     * 
+     * @param serverId the server identifier
+     * @return the encrypted server password
+     */
+    ServerPassword getPassword(String serverId);
+
+    /**
+     * Evacuates a server identified with {@code serverId} from a failed host to a new host
+     * 
+     * @param serverId the server identifier
+     * @param options evaucate options
+     * @return ActionResponse
+     */
+    ServerPassword evacuate(String serverId, EvacuateOptions options);
 }

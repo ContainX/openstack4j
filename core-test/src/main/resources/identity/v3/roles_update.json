@@ -1,0 +1,10 @@
+{
+    "role": {
+        "domain_id" : "default",
+        "id": "aae88952465d4c32b0a1140a76601b68",
+        "links": {
+            "self": "http://127.0.0.1:5000/v3/roles/aae88952465d4c32b0a1140a76601b68"
+        },
+        "name": "cloudAdmin"
+    }
+}

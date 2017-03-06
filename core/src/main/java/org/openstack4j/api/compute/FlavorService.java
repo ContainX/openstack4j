@@ -4,19 +4,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.FlavorAccess;
 
 /**
  * Flavor service provides CRUD capabilities for Flavor(s).  A flavor is an available hardware configuration/template for a server
  * 
- * @author Jeremy Unruh
+ * @author Jeremy Unruh, whaon
  */
 public interface FlavorService extends RestService {
 	
 	/**
-	 * List all Flavors
+	 * List all Flavors with details
 	 * 
 	 * @return List of Flavor
 	 */
@@ -56,7 +56,6 @@ public interface FlavorService extends RestService {
 	 * @param  the space in GB that will disappear when the VM is terminated (default is 0) [OPTIONAL]
 	 * @param swap the Swap space in MB
 	 * @param rxtxFactor the RX/TX factor (default is 1) [OPTIONAL]
-	 * @param isPublic makes the flavor accessible to the public (the default is true).
 	 * @return the created flavor
 	 */
 	Flavor create(String name, int ram, int vcpus, int disk, int ephemeral, int swap, float rxtxFactor, boolean isPublic);
@@ -122,5 +121,27 @@ public interface FlavorService extends RestService {
 	 * @return List tenants with access to private flavor
 	 */
 	List<? extends FlavorAccess> removeTenantAccess(String flavorId, String tenantId);
+
+	/**
+	 * list flavors
+	 * @param detail is detailed
+	 * @param filteringParams parameters affect the response data,availbed are:sort_key,sort_dir,limit,marker,minDisk,minRam,is_public
+	 * @return
+	 */
+	List<? extends Flavor> list(boolean detail, Map<String, String> filteringParams);
+
+	/**
+	 * list flavors with detailed
+	 * @param filteringParams
+	 * @return
+	 */
+	List<? extends Flavor> list(Map<String, String> filteringParams);
+
+	/**
+	 * list flavors with non filtering parameters
+	 * @param detail
+	 * @return
+	 */
+	List<? extends Flavor> list(boolean detail);
 	
 }

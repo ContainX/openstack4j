@@ -33,6 +33,8 @@ public class SwiftObjectImpl implements SwiftObject {
     private long sizeBytes;
     @JsonProperty
     private String name;
+    @JsonProperty("subdir")
+    private String directoryName;
     @JsonProperty("content_type")
     private String mimeType;
     
@@ -67,13 +69,21 @@ public class SwiftObjectImpl implements SwiftObject {
     }
 
     @Override
+    public String getDirectoryName() {
+        return directoryName;
+    }
+
+    @Override
     public String getMimeType() {
         return mimeType;
     }
     
     @Override
     public boolean isDirectory() {
-        return CONTENT_TYPE_DIRECTORY.equals(mimeType);
+        if(directoryName != null && mimeType == null)
+            return true;
+        else
+            return CONTENT_TYPE_DIRECTORY.equals(mimeType);
     }
     
     @Override
@@ -121,6 +131,11 @@ public static class Builder {
         
         public Builder name(String name) {
             obj.name = name;
+            return this;
+        }
+
+        public Builder directoryName(String directoryName) {
+            obj.directoryName = directoryName;
             return this;
         }
         

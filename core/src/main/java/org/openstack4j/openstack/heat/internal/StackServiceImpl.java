@@ -1,19 +1,19 @@
 package org.openstack4j.openstack.heat.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.heat.StackService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.heat.domain.HeatStack;
 import org.openstack4j.openstack.heat.domain.HeatStack.Stacks;
+
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * This class implements all methods for manipulation of {@link HeatStack} objects. The
@@ -47,6 +47,17 @@ public class StackServiceImpl extends BaseHeatServices implements StackService {
     @Override
     public List<? extends Stack> list() {
         return get(Stacks.class, uri("/stacks")).execute().getList();
+    }
+
+    @Override
+    public List<? extends Stack> list(Map<String, String> filteringParams) {
+        Invocation<Stacks> req = get(Stacks.class, uri("/stacks"));
+        if (filteringParams != null) {
+            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+                req = req.param(entry.getKey(), entry.getValue());
+            }
+        }
+        return req.execute().getList();
     }
 
     @Override

@@ -1,10 +1,11 @@
 package org.openstack4j.api.networking;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.NetworkUpdate;
 
@@ -14,6 +15,16 @@ import org.openstack4j.model.network.NetworkUpdate;
  * @author Jeremy Unruh
  */
 public interface NetworkService extends RestService {
+	
+	/**
+	 * @author HY(huangyi813 @ qq.com)
+	 * Lists the networks to which the current authorized tenant has access
+	 * @param filteringParams map (name, value) of filtering parameters
+	 * 
+	 * @return List of Network
+	 */
+	List<? extends Network> list(Map<String, String> filteringParams);
+	
 
 	/**
 	 * Lists the networks to which the current authorized tenant has access

@@ -1,0 +1,25 @@
+{
+   "external_segment":{
+      "description":"extSeg01-desc",
+      "external_policies":[
+
+      ],
+      "port_address_translation":false,
+      "shared":false,
+      "cidr":"172.16.0.0/12",
+      "id":"df9e5238-084e-4053-8871-81b63167e2f4",
+      "name":"extSeg01",
+      "l3_policies":[
+
+      ],
+      "subnet_id":null,
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "nat_pools":[
+
+      ],
+      "ip_version":4,
+      "external_routes":[
+
+      ]
+   }
+}

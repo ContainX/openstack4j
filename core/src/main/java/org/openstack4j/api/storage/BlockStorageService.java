@@ -20,6 +20,8 @@ public interface BlockStorageService extends RestService {
 	 */
 	BlockVolumeSnapshotService snapshots();
 	
+	CinderZoneService zones();
+	
 	/**
 	 * Gets the Absolute limits used by this tenant
 	 * 
@@ -33,4 +35,16 @@ public interface BlockStorageService extends RestService {
 	 * @return the quota-set service
 	 */
 	BlockQuotaSetService quotaSets();
+
+	/**
+	 * The block storage get_pools service.
+	 *
+	 * @return the scheduler stats service
+	 */
+	SchedulerStatsGetPoolService schedulerStatsPools();
+	
+	/**
+	 * @return the Volume Service API
+	 */
+	BlockVolumeBackupService backups();
 }

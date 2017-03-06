@@ -3,9 +3,10 @@ package org.openstack4j.openstack.networking.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.networking.NetworkService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.NetworkUpdate;
 import org.openstack4j.openstack.networking.domain.NeutronNetwork;
@@ -17,6 +18,29 @@ import org.openstack4j.openstack.networking.domain.NeutronNetwork.Networks;
  * @author Jeremy Unruh
  */
 public class NetworkServiceImpl extends BaseNetworkingServices implements NetworkService {
+	
+	 private Invocation<Networks> buildInvocation(Map<String, String> filteringParams) {
+	        Invocation<Networks> invocation = get(Networks.class, "/networks");
+	        if (filteringParams == null) {
+	            return invocation;
+	        } else {
+	            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+	            	invocation = invocation.param(entry.getKey(), entry.getValue());
+	            }
+	        }
+	        return invocation;
+	    }
+	
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Network> list(Map<String, String> filteringParams){
+		  Invocation<Networks> invocation = buildInvocation(filteringParams);
+	        return invocation.execute().getList();
+		
+	}
 
 	/**
 	 * {@inheritDoc}

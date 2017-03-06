@@ -6,11 +6,12 @@ import java.util.Map;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.DLPayload;
 import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.options.DownloadOptions;
 import org.openstack4j.model.storage.object.SwiftObject;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
 import org.openstack4j.model.storage.object.options.ObjectLocation;
+import org.openstack4j.model.storage.object.options.ObjectDeleteOptions;
 import org.openstack4j.model.storage.object.options.ObjectPutOptions;
 
 /**
@@ -120,6 +121,15 @@ public interface ObjectStorageObjectService extends RestService {
      * @return the action response
      */
     ActionResponse delete(ObjectLocation location);
+    
+    /**
+     * Deletes an Object from the specified container
+     * 
+     * @param location location containing container name and object name
+     * @param options the deleting options
+     * @return the action response
+     */
+    ActionResponse delete(ObjectLocation location, ObjectDeleteOptions options);
     
     /**
      * Copies an object to another object in the object store

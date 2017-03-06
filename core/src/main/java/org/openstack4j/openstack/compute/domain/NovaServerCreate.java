@@ -1,7 +1,6 @@
 package org.openstack4j.openstack.compute.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.openstack4j.model.compute.Flavor;
 import org.openstack4j.model.compute.Image;
 import org.openstack4j.model.compute.NetworkCreate;
 import org.openstack4j.model.compute.Personality;
+import org.openstack4j.model.compute.SecurityGroup;
 import org.openstack4j.model.compute.Server.DiskConfig;
 import org.openstack4j.model.compute.ServerCreate;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
@@ -34,9 +34,9 @@ public class NovaServerCreate implements ServerCreate {
     private String accessIPv6;
     private Integer min;
     private Integer max;
-    private DiskConfig diskConfig = DiskConfig.MANUAL;
+    private DiskConfig diskConfig;
     @JsonProperty("metadata")
-    private Map<String, String> metadata = new HashMap<String, String>();
+    private Map<String, String> metadata;
     @JsonProperty("user_data")
     private String userData;
     @JsonProperty("key_name")
@@ -58,7 +58,7 @@ public class NovaServerCreate implements ServerCreate {
     private List<Personality> personality;
 
     @JsonProperty("block_device_mapping_v2")
-    private List<BlockDeviceMappingCreate> blockDeviceMapping = Lists.newArrayList();
+    private List<BlockDeviceMappingCreate> blockDeviceMapping;
 
     public static ServerCreateBuilder builder() {
         return new ServerCreateConcreteBuilder();
@@ -69,15 +69,19 @@ public class NovaServerCreate implements ServerCreate {
         return new ServerCreateConcreteBuilder(this);
     }
 
+    @Override
     public String getName() {
         return name;
     }
+    @Override
     public String getAdminPass() {
         return adminPass;
     }
+    @Override
     public String getImageRef() {
         return imageRef;
     }
+    @Override
     public String getFlavorRef() {
         return flavorRef;
     }
@@ -136,6 +140,7 @@ public class NovaServerCreate implements ServerCreate {
         return schedulerHints;
     }
 
+    @Override
     @JsonIgnore
     public boolean isConfigDrive() {
         return configDrive != null && configDrive;
@@ -148,6 +153,7 @@ public class NovaServerCreate implements ServerCreate {
         return (List<? extends NetworkCreate>) (networks != null ? networks : Collections.emptyList());
     }
 
+    @Override
     public List<Personality> getPersonality() {
         return personality;
     }
@@ -209,26 +215,31 @@ public class NovaServerCreate implements ServerCreate {
             this.m = m;
         }
 
+        @Override
         public ServerCreateConcreteBuilder name(String name) {
             m.name = name;
             return this;
         }
 
+        @Override
         public ServerCreateConcreteBuilder flavor(String flavorId) {
             m.flavorRef = flavorId;
             return this;
         }
 
+        @Override
         public ServerCreateConcreteBuilder flavor(Flavor flavor) {
             m.flavorRef = flavor.getId();
             return this;
         }
 
+        @Override
         public ServerCreateConcreteBuilder image(String imageId) {
             m.imageRef = imageId;
             return this;
         }
 
+        @Override
         public ServerCreateConcreteBuilder image(Image image) {
             m.imageRef = image.getId();
             return this;
@@ -299,6 +310,9 @@ public class NovaServerCreate implements ServerCreate {
 
         @Override
         public ServerCreateBuilder blockDevice(BlockDeviceMappingCreate blockDevice) {
+            if (blockDevice != null && m.blockDeviceMapping == null) {
+                m.blockDeviceMapping = Lists.newArrayList();
+            }
             m.blockDeviceMapping.add(blockDevice);
             return this;
         }
@@ -353,6 +367,12 @@ public class NovaServerCreate implements ServerCreate {
         	m.adminPass = adminPass;
         	return this;
         }
+		
+	@Override
+	public ServerCreateBuilder configDrive(boolean configDrive){
+		m.configDrive=configDrive;
+		return this;
+	}
         
     }
 }

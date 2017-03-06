@@ -9,16 +9,19 @@ import org.openstack4j.api.compute.ComputeSecurityGroupService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.compute.FlavorService;
 import org.openstack4j.api.compute.HostAggregateService;
+import org.openstack4j.api.compute.HostService;
 import org.openstack4j.api.compute.KeypairService;
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.api.compute.ServerGroupService;
 import org.openstack4j.api.compute.ServerService;
+import org.openstack4j.api.compute.ServerTagService;
 import org.openstack4j.api.compute.ext.FloatingIPDNSService;
 import org.openstack4j.api.compute.ext.HypervisorService;
 import org.openstack4j.api.compute.ext.MigrationService;
+import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.model.common.Extension;
-import org.openstack4j.openstack.common.ExtensionValue.NovaExtensions;
+import org.openstack4j.openstack.common.ExtensionValue.Extensions;
 
 /**
  * Compute (Nova) Operations API implementation
@@ -63,8 +66,16 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 	 * {@inheritDoc}
 	 */
 	@Override
+	public HostService host() {
+		return Apis.get(HostService.class);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public List<? extends Extension> listExtensions() {
-		return get(NovaExtensions.class, uri("/extensions")).execute().getList();
+		return get(Extensions.class, uri("/extensions")).execute().getList();
 	}
 
 	/**
@@ -130,5 +141,15 @@ public class ComputeServiceImpl extends BaseComputeServices implements ComputeSe
 		
 		return Apis.get(HostAggregateService.class);
 	}
+
+	@Override
+	public ServerTagService serverTags() {
+		return Apis.get(ServerTagService.class);
+	}
+	
+    @Override
+    public ServicesService services() {
+        return Apis.get(ServicesService.class);
+    }
     
 }

@@ -2,12 +2,12 @@
 	<parent>
 		<groupId>org.pacesys.openstack4j.connectors</groupId>
 		<artifactId>openstack4j-connectors</artifactId>
-		<version>2.0.5-SNAPSHOT</version>
+		<version>3.0.4-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-httpclient</artifactId>
 	<name>OpenStack4j HttpComponents-HttpClient Connector</name>
-	<url>http://github.com/gondor/openstack4j/</url>
+	<url>http://github.com/ContainX/openstack4j/</url>
 	<packaging>jar</packaging>
 
 	<properties>

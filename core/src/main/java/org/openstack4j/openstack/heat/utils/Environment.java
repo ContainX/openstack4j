@@ -1,5 +1,10 @@
 package org.openstack4j.openstack.heat.utils;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -8,30 +13,25 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-
 public class Environment {
-        
+
     private String envContent;
     private Map<String, String> files = new HashMap<String, String>();
     private URL baseUrl;
-    
+
     public Environment(URL environmentRes) throws JsonParseException, IOException, URISyntaxException{
         setEnvContent(Resources.toString(environmentRes, Charsets.UTF_8));
         setBaseUrl(TemplateUtils.baseUrl(environmentRes.toString()));
         getFileContent();
     }
-    
-    public Environment(String environmentLoc) 
-            throws JsonParseException, MalformedURLException, 
+
+    public Environment(String environmentLoc)
+            throws JsonParseException, MalformedURLException,
                    UnsupportedEncodingException, IOException, URISyntaxException {
         this(TemplateUtils.normaliseFilePathToUrl(environmentLoc));
     }
-    
-    
+
+
     @SuppressWarnings("unchecked")
     private Map<String, String> getResourceRegistry(){
         // FIXME find alternative implementation not importing com.fasterxml.jackson.dataformat.yaml.snakeyaml package
@@ -44,16 +44,20 @@ public class Environment {
     /*
      * Processing the template files located in the resource_registry part in the environment file
      */
-    private void getFileContent() 
+    private void getFileContent()
             throws JsonParseException, MalformedURLException, UnsupportedEncodingException, IOException, URISyntaxException {
         Map<String, String> rr = getResourceRegistry();
         if (rr == null ) return;
         if(rr.get("base_url") != null ) setBaseUrl(new URL(rr.get("base_url")));
         for(String resourceType: rr.keySet()) {
-            if(resourceType == "base_url") continue;
+        	if(resourceType.equals("base_url"))
+                continue;
+            
+            if("OS::Heat::None".equals(rr.get(resourceType)))
+            		continue;
             
             URL tplUrl = new URL(baseUrl, rr.get(resourceType));
-            
+
             Template tpl = new Template(tplUrl);
             files.put(rr.get(resourceType), tpl.getTplContent());
             Map<String, String> fileFromTemplate = tpl.getFiles();
@@ -62,7 +66,7 @@ public class Environment {
                     files.put(file, fileFromTemplate.get(file));
                 }
             }
-            
+
         }
     }
 

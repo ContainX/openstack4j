@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.networking.ext.LbPoolService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.HealthMonitor;
 import org.openstack4j.model.network.ext.HealthMonitorAssociate;
 import org.openstack4j.model.network.ext.LbPool;

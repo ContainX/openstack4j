@@ -7,7 +7,6 @@ import static org.openstack4j.core.transport.HttpEntityHandler.closeQuietly;
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_METADATA_PREFIX;
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_REMOVE_METADATA_PREFIX;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +14,7 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.common.Payloads;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.object.SwiftContainer;
 import org.openstack4j.model.storage.object.options.ContainerListOptions;
 import org.openstack4j.model.storage.object.options.CreateUpdateContainerOptions;
@@ -77,8 +74,7 @@ public class ObjectStorageContainerServiceImpl extends BaseObjectStorageService 
     public String createPath(String containerName, String path) {
         checkNotNull(containerName);
         checkNotNull(path);
-        Payload<?> pl = Payloads.create(new ByteArrayInputStream(new byte[]{}));
-        return Apis.get(ObjectStorageObjectService.class).put(containerName, path, pl, 
+        return Apis.get(ObjectStorageObjectService.class).put(containerName, path, null, 
                         ObjectPutOptions.create().contentType(CONTENT_TYPE_DIRECTORY));
     }
 

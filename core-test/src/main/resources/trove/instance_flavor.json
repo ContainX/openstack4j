@@ -1,0 +1,20 @@
+{
+  "flavor":{
+    "name":"m1.tiny",
+    "links":[
+      {
+        "href":"https://172.20.75.130:8779/v1.0/d6ac65efd0e14ef3b9c9bc33f8f809fa/flavors/1",
+        "rel":"self"
+      },
+      {
+        "href":"https://172.20.75.130:8779/flavors/1",
+        "rel":"bookmark"
+      }
+    ],
+    "ram":512,
+    "str_id":"1",
+    "id":1,
+    "disk":50,
+    "vcpus": 10
+  }
+}

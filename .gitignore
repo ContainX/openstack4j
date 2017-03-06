@@ -15,3 +15,5 @@ test-output
 pom-shade.xml
 *.releaseBackup
 *.versionsBackup
+*/bin/*
+*.iml

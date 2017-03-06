@@ -9,7 +9,7 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeTransferService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
 import org.openstack4j.model.storage.block.VolumeUploadImage;
@@ -18,9 +18,13 @@ import org.openstack4j.openstack.storage.block.domain.CinderUploadImageData;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume.Volumes;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeMigration;
+import org.openstack4j.openstack.storage.block.domain.CinderVolumeType;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeType.VolumeTypes;
-import org.openstack4j.openstack.storage.block.domain.ForceDeleteAction;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeUploadImage;
+import org.openstack4j.openstack.storage.block.domain.ExtendAction;
+import org.openstack4j.openstack.storage.block.domain.ForceDeleteAction;
+import org.openstack4j.openstack.storage.block.domain.ResetStatusAction;
+import org.openstack4j.openstack.storage.block.domain.UpdateReadOnlyFlagAction;
 
 /**
  * Manages Volumes and Volume Type based operations against Block Storage (Cinder)
@@ -72,25 +76,49 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
         return deleteWithResponse(uri("/volumes/%s", volumeId)).execute();
     }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ActionResponse forceDelete(String volumeId) {
-		checkNotNull(volumeId);
-		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
-    		    .entity(new ForceDeleteAction())
-    		    .execute();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse forceDelete(String volumeId) {
+        checkNotNull(volumeId);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new ForceDeleteAction())
+                .execute();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Volume create(Volume volume) {
-		checkNotNull(volume);
-		return post(CinderVolume.class, uri("/volumes")).entity(volume).execute();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse resetState(String volumeId, Volume.Status status) {
+        checkNotNull(volumeId);
+        checkNotNull(status);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new ResetStatusAction(status))
+                .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse extend(String volumeId, Integer newSize) {
+        checkNotNull(volumeId);
+        checkNotNull(newSize);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new ExtendAction(newSize))
+                .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Volume create(Volume volume) {
+        checkNotNull(volume);
+        return post(CinderVolume.class, uri("/volumes")).entity(volume).execute();
+    }
 
     /**
      * {@inheritDoc}
@@ -104,6 +132,25 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
         return put(ActionResponse.class, uri("/volumes/%s", volumeId))
                 .entity(Builders.volume().name(name).description(description).build())
                 .execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteVolumeType(String volumeTypeId) {
+        checkNotNull(volumeTypeId);
+        delete(Void.class, uri("/types/%s", volumeTypeId)).execute();
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public VolumeType createVolumeType(VolumeType volumeType) {
+        checkNotNull(volumeType);
+        return post(CinderVolumeType.class, uri("/types")).entity(volumeType).execute();
     }
 
     @Override
@@ -139,6 +186,17 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
             }
         }
         return volumeInvocation;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse readOnlyModeUpdate(String volumeId, boolean readonly) {
+        checkNotNull(volumeId);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new UpdateReadOnlyFlagAction(readonly))
+                .execute();
     }
 
 }

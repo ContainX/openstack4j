@@ -21,7 +21,7 @@ public class MigrationTests extends AbstractTest {
 
     public void listMigrations() throws Exception {
         respondWith(JSON_MIGRATIONS);
-        List<? extends Migration> migrations = os().compute().migrations().list();
+        List<? extends Migration> migrations = osv3().compute().migrations().list();
         
         assertEquals(2, migrations.size());
         assertEquals(Status.DONE, migrations.get(0).getStatus());

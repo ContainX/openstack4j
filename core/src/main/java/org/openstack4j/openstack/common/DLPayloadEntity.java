@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.DLPayload;
 
 import com.google.common.io.ByteStreams;
@@ -18,26 +19,33 @@ import com.google.common.io.ByteStreams;
  */
 public class DLPayloadEntity implements DLPayload {
 
-    private final InputStream stream;
+    private final HttpResponse response;
 
-    private DLPayloadEntity(InputStream stream) {
-        this.stream = stream;
+    private DLPayloadEntity(HttpResponse response) {
+        this.response = response;
     }
 
-    public static DLPayloadEntity create(InputStream stream) {
-        return new DLPayloadEntity(stream);
+    public static DLPayloadEntity create(HttpResponse response) {
+        return new DLPayloadEntity(response);
     }
 
+	@Override
+	public HttpResponse getHttpResponse() {
+		return response;
+	}
+	
     @Override
     public InputStream getInputStream() {
-        return stream;
+        return response.getInputStream();
     }
 
     @Override
     public void writeToFile(File file) throws IOException {
         checkNotNull(file);
-
-        ByteStreams.copy(stream, new FileOutputStream(file));
+        try(InputStream inputStream = response.getInputStream();
+                FileOutputStream fileOutputStream = new FileOutputStream(file) ){
+            ByteStreams.copy(inputStream, fileOutputStream);
+        }
     }
 
 }

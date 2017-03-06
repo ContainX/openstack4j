@@ -1,11 +1,13 @@
 package org.openstack4j.model.compute;
 
+import java.util.Date;
+
 import org.openstack4j.model.ModelEntity;
 
 /**
  * An OpenStack Keypair is an SSH Key
  * 
- * @author Jeremy Unruh
+ * @author Jeremy Unruh,whaon
  */
 public interface Keypair extends ModelEntity {
 	
@@ -35,5 +37,41 @@ public interface Keypair extends ModelEntity {
 	 * @return the server fingerprint
 	 */
 	String getFingerprint();
+	
+	/**
+	 * 
+	 * @return the user_id for a keypair.
+	 */
+	String getUserId();
+	
+	/**
+	 * 
+	 * @return is deleted
+	 */
+	Boolean getDeleted();
+	
+	/**
+	 * time created
+	 * @return
+	 */
+	Date getCreatedAt();
+	
+	/**
+	 * time updated
+	 * @return
+	 */
+	Date getUpdatedAt();
+	
+	/**
+	 * time deleted
+	 * @return
+	 */
+	Date getDeletedAt();
+	
+	/**
+	 * 
+	 * @return id of the keypair
+	 */
+	Integer getId();
 
 }

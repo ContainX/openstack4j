@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.List;
 
 import org.openstack4j.api.compute.ext.FloatingIPDNSDomainService;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.ext.DomainEntry;
 import org.openstack4j.model.compute.ext.DomainEntry.Scope;
 import org.openstack4j.openstack.compute.domain.ext.ExtDomainEntry;

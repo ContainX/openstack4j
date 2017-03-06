@@ -1,0 +1,199 @@
+{
+	"access": {
+		"token": {
+			"issued_at": "2014-04-04T18:09:56.670624",
+			"expires": "2014-04-05T18:09:56Z",
+			"id": "MIILdQYJKoZIhvcNAQcCoIILZjCCC2ICAQExCTAHBgUrDgMCGjCCCcsGCSqGSIb3DQEHAaCCCbwEggm4eyJhY2Nlc3MiOiB7InRva2VuIjogeyJpc3N1ZWRfYXQiOiAiMjAxNC0wNC0wNFQxODowOTo1Ni42NzA2MjQiLCAiZXhwaXJlcyI6ICIyMDE0LTA0LTA1VDE4OjA5OjU2WiIsICJpZCI6ICJwbGFjZWhvbGRlciIsICJ0ZW5hbnQiOiB7ImRlc2NyaXB0aW9uIjogbnVsbCwgImVuYWJsZWQiOiB0cnVlLCAiaWQiOiAiYjgwZjhkNGUyOGI3NDE4ODg1OGI2NTRjYjFmY2NmN2QiLCAibmFtZSI6ICJhZG1pbiJ9fSwgInNlcnZpY2VDYXRhbG9nIjogW3siZW5kcG9pbnRzIjogW3siYWRtaW5VUkwiOiAiaHR0cDovLzEwLjEwLjEwLjUxOjg3NzQvdjIvYjgwZjhkNGUyOGI3NDE4ODg1OGI2NTRjYjFmY2NmN2QiLCAicmVnaW9uIjogIlJlZ2lvbk9uZSIsICJpbnRlcm5hbFVSTCI6ICJodHRwOi8vMTAuMTAuMTAuNTE6ODc3NC92Mi9iODBmOGQ0ZTI4Yjc0MTg4ODU4YjY1NGNiMWZjY2Y3ZCIsICJpZCI6ICIzZDQ0MDU0ZmUwZWM0NDBlOWQ0NjQxYTcyMTkwMDJkZCIsICJwdWJsaWNVUkwiOiAiaHR0cDovLzE5Mi4xNjguNTYuMjUxOjg3NzQvdjIvYjgwZjhkNGUyOGI3NDE4ODg1OGI2NTRjYjFmY2NmN2QifV0sICJlbmRwb2ludHNfbGlua3MiOiBbXSwgInR5cGUiOiAiY29tcHV0ZSIsICJuYW1lIjogIm5vdmEifSwgeyJlbmRwb2ludHMiOiBbeyJhZG1pblVSTCI6ICJodHRwOi8vMTAuMTAuMTAuNTE6OTY5Ni8iLCAicmVnaW9uIjogIlJlZ2lvbk9uZSIsICJpbnRlcm5hbFVSTCI6ICJodHRwOi8vMTAuMTAuMTAuNTE6OTY5Ni8iLCAiaWQiOiAiNTRjOTE3NTU1MjZlNDRiOTgwODM4NWEyNjNkYjRhYTYiLCAicHVibGljVVJMIjogImh0dHA6Ly8xOTIuMTY4LjU2LjI1MTo5Njk2LyJ9XSwgImVuZHBvaW50c19saW5rcyI6IFtdLCAidHlwZSI6ICJuZXR3b3JrIiwgIm5hbWUiOiAibmV1dHJvbiJ9LCB7ImVuZHBvaW50cyI6IFt7ImFkbWluVVJMIjogImh0dHA6Ly8xMC4xMC4xMC41MTo5MjkyL3YyIiwgInJlZ2lvbiI6ICJSZWdpb25PbmUiLCAiaW50ZXJuYWxVUkwiOiAiaHR0cDovLzEwLjEwLjEwLjUxOjkyOTIvdjIiLCAiaWQiOiAiNDMyOWI3NzYwZDMyNGVmZThlNjQzMGJmMDQwZTViODgiLCAicHVibGljVVJMIjogImh0dHA6Ly8xOTIuMTY4LjU2LjI1MTo5MjkyL3YyIn1dLCAiZW5kcG9pbnRzX2xpbmtzIjogW10sICJ0eXBlIjogImltYWdlIiwgIm5hbWUiOiAiZ2xhbmNlIn0sIHsiZW5kcG9pbnRzIjogW3siYWRtaW5VUkwiOiAiaHR0cDovLzEwLjEwLjEwLjUxOjg3NzYvdjEvYjgwZjhkNGUyOGI3NDE4ODg1OGI2NTRjYjFmY2NmN2QiLCAicmVnaW9uIjogIlJlZ2lvbk9uZSIsICJpbnRlcm5hbFVSTCI6ICJodHRwOi8vMTAuMTAuMTAuNTE6ODc3Ni92MS9iODBmOGQ0ZTI4Yjc0MTg4ODU4YjY1NGNiMWZjY2Y3ZCIsICJpZCI6ICI4MDliYzNiZjE4NzQ0MDk5OTBmMzg5MTFlM2IxYWE3YSIsICJwdWJsaWNVUkwiOiAiaHR0cDovLzE5Mi4xNjguNTYuMjUxOjg3NzYvdjEvYjgwZjhkNGUyOGI3NDE4ODg1OGI2NTRjYjFmY2NmN2QifV0sICJlbmRwb2ludHNfbGlua3MiOiBbXSwgInR5cGUiOiAidm9sdW1lIiwgIm5hbWUiOiAiY2luZGVyIn0sIHsiZW5kcG9pbnRzIjogW3siYWRtaW5VUkwiOiAiaHR0cDovLzEwLjEwLjEwLjUxOjg3NzMvc2VydmljZXMvQWRtaW4iLCAicmVnaW9uIjogIlJlZ2lvbk9uZSIsICJpbnRlcm5hbFVSTCI6ICJodHRwOi8vMTAuMTAuMTAuNTE6ODc3My9zZXJ2aWNlcy9DbG91ZCIsICJpZCI6ICI4MTIyNTk0YzNkYWI0ODI5OGI4OTBhMzY3Y2M3NTdmYiIsICJwdWJsaWNVUkwiOiAiaHR0cDovLzE5Mi4xNjguNTYuMjUxOjg3NzMvc2VydmljZXMvQ2xvdWQifV0sICJlbmRwb2ludHNfbGlua3MiOiBbXSwgInR5cGUiOiAiZWMyIiwgIm5hbWUiOiAiZWMyIn0sIHsiZW5kcG9pbnRzIjogW3siYWRtaW5VUkwiOiAiaHR0cDovLzEwLjEwLjEwLjUxOjM1MzU3L3YyLjAiLCAicmVnaW9uIjogIlJlZ2lvbk9uZSIsICJpbnRlcm5hbFVSTCI6ICJodHRwOi8vMTAuMTAuMTAuNTE6NTAwMC92Mi4wIiwgImlkIjogIjM1ZDIyMDRiZmUxNDRjMzVhNWIzZWI5NmU3ODY3NmU4IiwgInB1YmxpY1VSTCI6ICJodHRwOi8vMTkyLjE2OC41Ni4yNTE6NTAwMC92Mi4wIn1dLCAiZW5kcG9pbnRzX2xpbmtzIjogW10sICJ0eXBlIjogImlkZW50aXR5IiwgIm5hbWUiOiAia2V5c3RvbmUifV0sICJ1c2VyIjogeyJ1c2VybmFtZSI6ICJhZG1pbiIsICJyb2xlc19saW5rcyI6IFtdLCAiaWQiOiAiZjkzMTIwODM4MjgxNGU1YWIzNDEyZjdlMDJjNWUzYWUiLCAicm9sZXMiOiBbeyJuYW1lIjogImFkbWluIn0sIHsibmFtZSI6ICJLZXlzdG9uZVNlcnZpY2VBZG1pbiJ9LCB7Im5hbWUiOiAiS2V5c3RvbmVBZG1pbiJ9XSwgIm5hbWUiOiAiYWRtaW4ifSwgIm1ldGFkYXRhIjogeyJpc19hZG1pbiI6IDAsICJyb2xlcyI6IFsiM2U5MjQ1ZTU2NjAzNDRlMzkzMjhhYTY4ZmM5ZWI2ZTAiLCAiMmNjZTI0Njc1MGNmNGUwZGEwOWFkYTkxOTcwMmUzMGMiLCAiNzE3MTNiODMwNmFkNDU2Njk5NjI4NmVkOGFmZGE4OWUiXX19fTGCAYEwggF9AgEBMFwwVzELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVuc2V0MQ4wDAYDVQQHDAVVbnNldDEOMAwGA1UECgwFVW5zZXQxGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbQIBATAHBgUrDgMCGjANBgkqhkiG9w0BAQEFAASCAQAvA++EdcPjlpDnUlubOe4W3O3A0pbgyiehgES6qeIQt2wdODbR-SkUXW+H+199Gn4qbKsHLcbx82gMnXTWR-qXlDrpzApoZ0Om3wmnOKk7Z-nEX9cVweocBGKX0LUpU3j5tiJ4a+Ijn4UYbSypkao2Wl1Ky0NHE4vx7ns0G1bo4ErKrZZY3JPoPtPqc-wJ4JvTgRceVDR-Tv-VLjROSZ4SHHC7eeHaeva4FrGDSjqhBmhSkvuxH1xQ+7+GbtY2WJuN0nu6SrFVdLROWqFqd222zaF+gKNG8df6oFMUdevTs9pDaW+XWm39DARCMmUWehs1DUw65OfZmTsAgS28f8Rt",
+			"tenant": {
+				"description": null,
+				"enabled": true,
+				"id": "b80f8d4e28b74188858b654cb1fccf7d",
+				"name": "admin"
+			}
+		},
+		"serviceCatalog": [
+			{
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8774\/v2\/b80f8d4e28b74188858b654cb1fccf7d",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8774\/v2\/b80f8d4e28b74188858b654cb1fccf7d",
+						"id": "3d44054fe0ec440e9d4641a7219002dd",
+						"publicURL": "http:\/\/127.0.0.1:8774\/v2\/b80f8d4e28b74188858b654cb1fccf7d"
+					}
+				],
+				"endpoints_links": [],
+				"type": "compute",
+				"name": "nova"
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8774\/v2.1\/b80f8d4e28b74188858b654cb1fccf7d",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8774\/v2.1\/b80f8d4e28b74188858b654cb1fccf7d",
+						"id": "3d44054fe0ec440e9d4641a7219002dd",
+						"publicURL": "http:\/\/127.0.0.1:8774\/v2.1\/b80f8d4e28b74188858b654cb1fccf7d"
+					}
+				],
+				"endpoints_links": [],
+				"type": "computev21",
+				"name": "novav21"
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:9696\/",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:9696\/",
+						"id": "54c91755526e44b9808385a263db4aa6",
+						"publicURL": "http:\/\/127.0.0.1:9696\/"
+					}, {
+						"adminURL": "http:\/\/127.0.0.1:9696\/",
+						"region": "RegionTwo",
+						"internalURL": "http:\/\/127.0.0.1:9696\/",
+						"id": "54c91755526e44b9808385a263db4aa6",
+						"publicURL": "http:\/\/127.0.0.1:9696\/"
+					}
+				],
+				"endpoints_links": [],
+				"type": "network",
+				"name": "neutron"
+			}, {
+				"name": "Object Storage",
+				"type": "object-store",
+				"endpoints": [
+					{
+						"tenantId": "10108557731121",
+						"publicURL": "http:\/\/127.0.0.1:8800\/v1\/10108557731121",
+						"publicURL2": "",
+						"region": "RegionOne",
+						"versionId": "1",
+						"versionInfo": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com\/v1\/",
+						"versionList": "https:\/\/region-b.geo-1.objects.hpcloudsvc.com"
+					}
+				]
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:9292\/v2",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:9292\/v2",
+						"id": "4329b7760d324efe8e6430bf040e5b88",
+						"publicURL": "http:\/\/127.0.0.1:9292\/v2"
+					}
+				],
+				"endpoints_links": [],
+				"type": "image",
+				"name": "glance"
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8786\/v1\/b80f8d4e28b74188858b654cb1fccf7d",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8786\/v1\/b80f8d4e28b74188858b654cb1fccf7d",
+						"id": "240163b88bcb4222ba96c2483f2b83f9",
+						"publicURL": "http:\/\/127.0.0.1:8786\/v1\/b80f8d4e28b74188858b654cb1fccf7d"
+					}
+				],
+				"endpoints_links": [],
+				"type": "share",
+				"name": "manila"
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8776\/v1\/b80f8d4e28b74188858b654cb1fccf7d",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8776\/v1\/b80f8d4e28b74188858b654cb1fccf7d",
+						"id": "809bc3bf1874409990f38911e3b1aa7a",
+						"publicURL": "http:\/\/127.0.0.1:8776\/v1\/b80f8d4e28b74188858b654cb1fccf7d"
+					}
+				],
+				"endpoints_links": [],
+				"type": "volume",
+				"name": "cinder"
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8773\/services\/Admin",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8773\/services\/Cloud",
+						"id": "8122594c3dab48298b890a367cc757fb",
+						"publicURL": "http:\/\/127.0.0.1:8773\/services\/Cloud"
+					}
+				],
+				"endpoints_links": [],
+				"type": "ec2",
+				"name": "ec2"
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:5000\/v2.0",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:5000\/v2.0",
+						"id": "35d2204bfe144c35a5b3eb96e78676e8",
+						"publicURL": "http:\/\/127.0.0.1:5000\/v2.0"
+					}, {
+						"adminURL": "http:\/\/127.0.0.1:5000\/v2.0",
+						"region": "RegionTwo",
+						"internalURL": "http:\/\/127.0.0.1:5000\/v2.0",
+						"id": "35d2204bfe144c35a5b3eb96e78676e8",
+						"publicURL": "http:\/\/127.0.0.1:5000\/v2.0"
+					}
+				],
+				"endpoints_links": [],
+				"type": "identity",
+				"name": "keystone"
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8087\/v2.0",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8087\/v2.0",
+						"id": "9c66xrg3rruv2a3hj8tatd7smmas23fy",
+						"publicURL": "http:\/\/127.0.0.1:8087\/v2.0"
+					}, {
+						"adminURL": "http:\/\/127.0.0.1:8087\/v2.0",
+						"region": "RegionTwo",
+						"internalURL": "http:\/\/127.0.0.1:8087\/v2.0",
+						"id": "9c66xrg3rruv2a3hj8tatd7smmas23fy",
+						"publicURL": "http:\/\/127.0.0.1:8087\/v2.0"
+					}
+				],
+				"endpoints_links": [],
+				"type": "telemetry",
+				"name": "ceilometer"
+			}, {
+				"endpoints": [
+			  		{
+						"adminURL": "http:\/\/127.0.0.1:8779\/v1.0\/26decac97b67478f9f64ff2c2c1b778e",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8779\/v1.0\/26decac97b67478f9f64ff2c2c1b778e",
+				  		"id": "19e954d8-6a91-11e6-8b77-86f30ca893d3",
+						"publicURL": "http:\/\/127.0.0.1:8779\/v1.0\/26decac97b67478f9f64ff2c2c1b778e"
+			  		}
+				],
+				"endpoints_links": [],
+				"type": "database",
+				"name": "trove"
+		  	}
+		],
+		"user": {
+			"username": "admin",
+			"roles_links": [],
+			"id": "f931208382814e5ab3412f7e02c5e3ae",
+			"roles": [
+				{
+					"name": "admin"
+				}, {
+					"name": "KeystoneServiceAdmin"
+				}, {
+					"name": "KeystoneAdmin"
+				}
+			],
+			"name": "admin"
+		},
+		"metadata": {
+			"is_admin": 0,
+			"roles": ["3e9245e5660344e39328aa68fc9eb6e0", "2cce246750cf4e0da09ada919702e30c", "71713b8306ad4566996286ed8afda89e"]
+		}
+	}
+}

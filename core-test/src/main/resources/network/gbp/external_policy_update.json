@@ -1,0 +1,22 @@
+{
+   "external_policy":{
+      "consumed_policy_rule_sets":[
+         "1bbc10a8-aeb2-4e53-ab31-a1fed18763f4",
+         "ec0b5a7d-f963-45de-b4e4-864d59dc8c0b",
+         "de829eb3-4867-442f-bac7-c59906c610b0"
+      ],
+      "description":"test-ext-policy-desc-update",
+      "tenant_id":"8be60cc30edc44978d24d51ce5f8d9da",
+      "provided_policy_rule_sets":[
+         "1bbc10a8-aeb2-4e53-ab31-a1fed18763f4",
+         "ec0b5a7d-f963-45de-b4e4-864d59dc8c0b",
+         "de829eb3-4867-442f-bac7-c59906c610b0"
+      ],
+      "shared":false,
+      "external_segments":[
+         "f062e3b9-a668-4265-95d0-239c2061ca12"
+      ],
+      "id":"8d14b663-c67d-4fa7-b23f-0732cb9aa292",
+      "name":"test-ext-policy-update"
+   }
+}

@@ -1,8 +1,11 @@
 package org.openstack4j.api.heat;
 
-import java.util.List;
-
+import org.openstack4j.model.common.*;
 import org.openstack4j.model.heat.Resource;
+import org.openstack4j.model.heat.ResourceHealth;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -30,6 +33,15 @@ public interface ResourcesService {
 	 * @return the list of {@link Resource}s
 	 */
 	List<? extends Resource> list(String stackNameOrId);
+
+	/**
+	 * Gets a list of currently existing {@link Resource}s for a specified stack with filtern parameters.
+	 *
+	 * @param stackNameOrId  	Stack name or stack id
+	 * @param depth   			The recursion level for which resources will be listed.
+	 * @return the list of {@link Resource}s
+	 */
+	List<? extends Resource> list(String stackNameOrId, int depth);
 	
 	/**
 	 * Gets the detail of the specified resource
@@ -40,4 +52,32 @@ public interface ResourcesService {
 	 * @return the detail of the specified resource
 	 */
 	Resource show(String stackName, String stackId, String resourceName);
+
+	/**
+	 * Gets the stack resource metadata
+	 *
+	 * @param stackName     The name of a stack
+	 * @param stackId       The unique identifier for a stack
+	 * @param resourceName  The name of a resource
+	 * @return the metadata of the specified resource
+	 */
+	Map<String, Object> getMetadata(String stackName, String stackId, String resourceName);
+
+	/**
+	 * Signals a resource
+	 * @param stackName
+	 * @param stackId
+	 * @param resourceName
+	 */
+	ActionResponse signal(String stackName, String stackId, String resourceName);
+
+	/**
+	 * Marks a resource unhealthy
+	 * @param stackName
+	 * @param stackId
+	 * @param resourceName
+	 * @param resourceHealth
+	 */
+	ActionResponse markUnhealthy(String stackName, String stackId, String resourceName, ResourceHealth resourceHealth);
+
 }

@@ -49,5 +49,21 @@ public interface NetQuotaBuilder extends Builder<NetQuotaBuilder, NetQuota>{
      * @return NetQuotaBuilder
      */
     NetQuotaBuilder floatingIP(int floatingIP);
-    
+
+    /**
+     * See {@link NetQuota#getSecurityGroup()} for details
+     *
+     * @param securityGroup the max security group allowed
+     * @return NetQuotaBuilder
+     */
+    NetQuotaBuilder securityGroup(int securityGroup);
+
+    /**
+     * See {@link NetQuota#getSecurityGroupRule()} for details
+     *
+     * @param securityGroupRule the max security group rules allowed
+     * @return NetQuotaBuilder
+     */
+    NetQuotaBuilder securityGroupRule(int securityGroupRule);
+
 }

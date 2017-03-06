@@ -1,0 +1,13 @@
+{
+  "members": [
+    {
+      "status": "accepted",
+      "created_at": "2016-08-30T21:37:04Z",
+      "updated_at": "2016-08-31T21:22:38Z",
+      "image_id": "4b434528-032b-4467-946c-b5880ce15c06",
+      "member_id": "66cabdfb14bd48d48402f7464bda7733",
+      "schema": "/v2/schemas/member"
+    }
+  ],
+  "schema": "/v2/schemas/members"
+}

@@ -16,11 +16,12 @@ import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.DLPayload;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.payloads.FilePayload;
-import org.openstack4j.model.compute.ActionResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.options.DownloadOptions;
 import org.openstack4j.model.storage.object.SwiftObject;
 import org.openstack4j.model.storage.object.options.ObjectListOptions;
 import org.openstack4j.model.storage.object.options.ObjectLocation;
+import org.openstack4j.model.storage.object.options.ObjectDeleteOptions;
 import org.openstack4j.model.storage.object.options.ObjectPutOptions;
 import org.openstack4j.openstack.common.DLPayloadEntity;
 import org.openstack4j.openstack.common.functions.HeaderNameValuesToHeaderMap;
@@ -110,10 +111,9 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
     @Override
     public String put(String containerName, String name, Payload<?> payload, ObjectPutOptions options) {
         checkNotNull(containerName);
-        checkNotNull(payload);
         checkNotNull(options);
 
-        if (FilePayload.class.isAssignableFrom(payload.getClass()) && name == null)
+        if (payload != null && FilePayload.class.isAssignableFrom(payload.getClass()) && name == null)
             name = FilePayload.class.cast(payload).getRaw().getName();
         else
             checkNotNull(name);
@@ -126,6 +126,7 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
                               .entity(payload)
                               .headers(options.getOptions())
                               .contentType(options.getContentType())
+                              .paramLists(options.getQueryParams())
                               .executeWithResponse();
         try
         {
@@ -146,8 +147,16 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
 
     @Override
     public ActionResponse delete(ObjectLocation location) {
+        return delete(location, ObjectDeleteOptions.NONE);
+    }
+
+    @Override
+    public ActionResponse delete(ObjectLocation location, ObjectDeleteOptions options) {
         checkNotNull(location);
-        return deleteWithResponse(location.getURI()).execute();
+        checkNotNull(options);
+        return delete(ActionResponse.class, location.getURI())
+            .paramLists(options.getQueryParams())
+            .execute();
     }
     
     /**
@@ -197,9 +206,11 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(location);
         checkNotNull(metadata);
 
+        //the successfull response state of updateMetadata is 202 instead of 204
+        //I test it by curl and this api
         return isResponseSuccess(post(Void.class, location.getURI())
                   .headers(MetadataToHeadersFunction.create(OBJECT_METADATA_PREFIX).apply(metadata))
-                  .executeWithResponse(), 204);
+                  .executeWithResponse(), 202);
     }
 
     @Override
@@ -225,7 +236,6 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
                   get(Void.class, location.getURI())
                     .headers(HeaderNameValuesToHeaderMap.INSTANCE.apply(options.getHeaders()))
                     .executeWithResponse()
-                    .getInputStream()
                );
     }
 }

@@ -59,6 +59,12 @@ public class CinderVolume implements Volume {
 	private Map<String, Object> imageMetadata;
 	@JsonProperty("os-vol-mig-status-attr:migstat")
 	private MigrationStatus migrateStatus;
+	@JsonProperty("os-vol-tenant-attr:tenant_id")
+	private String tenantId;	
+	@JsonProperty("encrypted")
+	private Boolean encrypted;
+	@JsonProperty("os-vol-host-attr:host")
+	private String host;
 	/**
 	 * {@inheritDoc}
 	 */
@@ -193,6 +199,30 @@ public class CinderVolume implements Volume {
 	@Override
 	public List<? extends VolumeAttachment> getAttachments() {
 		return attachments;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean bootable(){
+		return bootable;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean encrypted(){
+		return encrypted;
 	}
 	
 	/**

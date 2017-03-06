@@ -67,6 +67,9 @@ public class NeutronPort implements Port {
 	
 	@JsonProperty("extra_dhcp_opts")
 	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates;
+	
+	@JsonProperty("port_security_enabled")
+	private Boolean portSecurityEnabled; 
         
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
@@ -197,6 +200,15 @@ public class NeutronPort implements Port {
 		this.tenantId = tenantId;
 	}
 	
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Boolean isPortSecurityEnabled() {
+        return portSecurityEnabled;
+    }
+
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -206,7 +218,7 @@ public class NeutronPort implements Port {
 				    .add("id", id).add("name", name).add("adminStateUp", adminStateUp).add("deviceId", deviceId)
 				    .add("deviceOwner", deviceOwner).add("fixedIps", fixedIps).add("macAddress", macAddress)
 				    .add("networkId", networkId).add("tenantId", tenantId).add("securityGroups", securityGroups)
-				    .add("allowed_address_pairs", allowedAddressPairs)
+				    .add("allowed_address_pairs", allowedAddressPairs).add("port_security_enabled ", portSecurityEnabled)
 				    .toString();
 	}
 	
@@ -268,7 +280,7 @@ public class NeutronPort implements Port {
 		}
 		
     @Override
-    public PortBuilder removeFixedIp(String address, String subnetId) {
+        public PortBuilder removeFixedIp(String address, String subnetId) {
       if (m.fixedIps == null)
         m.fixedIps = Sets.newHashSet();
       
@@ -284,32 +296,33 @@ public class NeutronPort implements Port {
       
       return this;
     }
-    
-    @Override
-    public PortBuilder allowedAddressPair(String address) {
-      if (m.allowedAddressPairs == null)
-        m.allowedAddressPairs = Sets.newHashSet();
-      
-      m.allowedAddressPairs.add(new NeutronAllowedAddressPair(address));
-      return this;
-    }
-    
-    @Override
-    public PortBuilder removeAddressPair(String address) {
-      if (m.allowedAddressPairs == null)
-        m.allowedAddressPairs = Sets.newHashSet();
-      
-      Iterator<NeutronAllowedAddressPair> iter = m.allowedAddressPairs.iterator();
-      
-      while (iter.hasNext()) {
-        NeutronAllowedAddressPair allowedAddress = iter.next();
-        if (allowedAddress.getIpAddress() != null && allowedAddress.getIpAddress().equals(address)) {
-          iter.remove();
-        }
-      }
-      
-      return this;
-    }
+
+		@Override
+		public PortBuilder allowedAddressPair(String ipAddress, String macAddress) {
+			if (m.allowedAddressPairs == null)
+				m.allowedAddressPairs = Sets.newHashSet();
+
+			m.allowedAddressPairs.add(new NeutronAllowedAddressPair(ipAddress, macAddress));
+			return this;
+		}
+
+		@Override
+		public PortBuilder removeAddressPair(String ipAddress, String macAddress) {
+			if (m.allowedAddressPairs == null)
+				m.allowedAddressPairs = Sets.newHashSet();
+
+			Iterator<NeutronAllowedAddressPair> iter = m.allowedAddressPairs.iterator();
+
+			while (iter.hasNext()) {
+				NeutronAllowedAddressPair allowedAddress = iter.next();
+				if (allowedAddress.getIpAddress() != null && allowedAddress.getIpAddress().equals(ipAddress) &&
+						allowedAddress.getMacAddress() != null && allowedAddress.getMacAddress().equals(macAddress)) {
+					iter.remove();
+				}
+			}
+
+			return this;
+		}
     
 
 		@Override
@@ -341,7 +354,7 @@ public class NeutronPort implements Port {
 		}
 
     @Override
-    public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
+        public PortBuilder extraDhcpOpt(ExtraDhcpOptCreate extraDhcpOptCreate) {
             if (m.extraDhcpOptCreates == null)
                 m.extraDhcpOptCreates = Lists.newArrayList();
             m.extraDhcpOptCreates.add((NeutronExtraDhcpOptCreate)extraDhcpOptCreate);
@@ -351,10 +364,17 @@ public class NeutronPort implements Port {
 		@Override
 		public PortBuilder securityGroup(String groupName) {
 			if(m.securityGroups==null){
-				m.securityGroups = new ArrayList<String>();
+				m.securityGroups = new ArrayList<>();
 			}
 			m.securityGroups.add(groupName);
 			return this;
 		}
+
+        @Override
+        public PortBuilder portSecurityEnabled(Boolean portSecurityEnabled) {
+            m.portSecurityEnabled=portSecurityEnabled;
+            return this;
+        }
 	}
+
 }

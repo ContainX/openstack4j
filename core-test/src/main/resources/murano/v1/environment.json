@@ -1,0 +1,100 @@
+{
+  "name" : "test",
+  "tenant_id" : "e62d6f1538074da1a56c5e393398c999",
+  "updated" : "2016-09-18T15:30:34",
+  "id" : "721f76f9a9d64ebcacc76189cb8978a9",
+  "version" : 1,
+  "created" : "2016-09-18T14:16:34",
+  "status" : "ready",
+  "services" : [
+      {
+      "instance" : {
+        "availabilityZone" : "nova",
+        "openstackId" : "8204d92c-9a79-4474-9f65-2f54f092948e",
+        "name" : "Docker",
+        "securityGroupName" : null,
+        "image" : "500375f8-e64b-453e-8b46-5d5d0d1d926a",
+        "ipAddresses" : [ "10.0.115.3", "172.16.167.175" ],
+        "networks" : {
+          "useFlatNetwork" : false,
+          "primaryNetwork" : null,
+          "useEnvironmentNetwork" : true,
+          "customNetworks" : [ ]
+        },
+        "keyname" : "nmakhotkin",
+        "sharedIps" : [ ],
+        "floatingIpAddress" : "172.16.167.175",
+        "flavor" : "m1.medium",
+        "assignFloatingIp" : true,
+        "?" : {
+          "classVersion" : "0.0.0",
+          "name" : null,
+          "package" : "io.murano",
+          "type" : "io.murano.resources.LinuxMuranoInstance",
+          "_actions" : { },
+          "id" : "c350d3f6-5d58-44e8-97ce-930f112c7f9e"
+        }
+      },
+      "name" : "DockerVM",
+      "dockerRegistry" : null,
+      "containers" : [ "DockerHTTPdSite" ],
+      "applicationEndpoints" : [{
+        "applicationName" : "DockerHTTPdSite",
+        "portScope" : "public",
+        "protocol" : "TCP",
+        "containerPort" : 80,
+        "address" : "172.16.167.175",
+        "scope" : "public",
+        "port" : 80
+      }],
+      "?" : {
+        "classVersion" : "0.0.0",
+        "_26411a1861294160833743e45d0eaad9" : {
+          "name" : "Docker VM Service"
+        },
+        "name" : null,
+        "package" : "com.mirantis.docker.DockerStandaloneHost",
+        "_actions" : { },
+        "status" : "pending",
+        "type" : "com.mirantis.docker.DockerStandaloneHost",
+        "id" : "2614f193-f13e-42b1-af7e-01729bb5af75"
+      }
+    }, {
+      "siteRepo" : "https://github.com/nmakhotkin/example-web.git",
+      "publish" : true,
+      "name" : "DockerHTTPdSite",
+      "host" : "2614f193-f13e-42b1-af7e-01729bb5af75",
+      "applicationEndpoints" : [{
+        "portScope" : "public",
+        "protocol" : "TCP",
+        "port" : 80,
+        "address" : "172.16.167.175",
+        "scope" : "public",
+        "containerPort" : 80
+      }],
+      "?" : {
+        "classVersion" : "0.0.0",
+        "_26411a1861294160833743e45d0eaad9" : {
+          "name" : "Docker HTTPd Site"
+        },
+        "name" : null,
+        "package" : "com.example.docker.DockerHTTPdSite",
+        "_actions" : {
+          "e8d61b75-df6a-42c6-be2c-5b6aeaa60f5c_getTest": {
+            "name": "getTest",
+            "title": "getTest",
+            "enabled": true
+          },
+          "e8d61b75-df6a-42c6-be2c-5b6aeaa60f5c_getCredentials": {
+            "name": "getCredentials",
+            "title": "getCredentials",
+            "enabled": true
+          }
+        },
+        "status" : "pending",
+        "type" : "com.example.docker.DockerHTTPdSite",
+        "id" : "e8d61b75-df6a-42c6-be2c-5b6aeaa60f5c"
+      }
+    }
+  ]
+}
