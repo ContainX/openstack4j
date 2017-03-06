@@ -161,4 +161,10 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return whether this volume is encrypted.
 	 */
 	boolean encrypted();
+
+	/**
+	 *
+	 * @return current back-end of the volume.
+     */
+	String host();
 }

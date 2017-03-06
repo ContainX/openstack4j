@@ -224,7 +224,13 @@ public class CinderVolume implements Volume {
 	public boolean encrypted(){
 		return encrypted;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String host() { return host; }
+
 	/**
 	 * {@inheritDoc}
 	 */
