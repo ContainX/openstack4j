@@ -67,7 +67,7 @@ public class PortListOptions {
      * @return options
      */
     public PortListOptions displayName(String displayName) {
-        return add("display_name", displayName);
+        return add("name", displayName);
     }
     
     /**
