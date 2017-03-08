@@ -70,7 +70,7 @@ public class PortListOptions {
      */
     @Deprecated
     public PortListOptions displayName(String displayName) {
-        return add("display_name", displayName);
+        return add("name", displayName);
     }
     
     /**
