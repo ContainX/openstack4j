@@ -5,6 +5,8 @@ import static org.testng.Assert.assertEquals;
 import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
+import org.openstack4j.model.storage.block.ext.Service.State;
+import org.openstack4j.model.storage.block.ext.Service.Status;
 import org.testng.annotations.Test;
 
 /**
@@ -25,8 +27,8 @@ public class ServiceTests extends AbstractTest {
         org.openstack4j.model.storage.block.ext.Service s = services.get(0);
         assertEquals("cinder-scheduler", s.getBinary());
         assertEquals("host1", s.getHost());
-        assertEquals("ENABLED", s.getStatus());
-        assertEquals("UP", s.getState());        
+        assertEquals(Status.ENABLED, s.getStatus());
+        assertEquals(State.UP, s.getState());        
     }
 
     @Override
