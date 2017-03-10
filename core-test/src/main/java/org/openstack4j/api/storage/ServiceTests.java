@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  * 
  * @author Taemin
  */
-@Test(suiteName = "Services")
+@Test(suiteName = "BlockStroageServices")
 public class ServiceTests extends AbstractTest {
 
     private static final String JSON_SERVICES = "/storage/ext/services.json";
@@ -21,8 +21,7 @@ public class ServiceTests extends AbstractTest {
         respondWith(JSON_SERVICES);
 
         List<? extends org.openstack4j.model.storage.block.ext.Service> services = osv3().blockStorage().services().list();
-        assertEquals(4, services.size());
-
+        assertEquals(2, services.size());
         org.openstack4j.model.storage.block.ext.Service s = services.get(0);
         assertEquals("cinder-scheduler", s.getBinary());
         assertEquals("host1", s.getHost());
