@@ -1,5 +1,7 @@
 package org.openstack4j.model.network.builder;
 
+import java.util.Map;
+
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.identity.v3.Tenant;
 import org.openstack4j.model.network.ExtraDhcpOptCreate;
@@ -104,5 +106,15 @@ public interface PortBuilder extends Builder<PortBuilder, Port> {
 	
 	PortBuilder portSecurityEnabled(Boolean portSecurityEnabled); 
 	
+    PortBuilder hostId(String hostId);
+
+	PortBuilder vifType(String vifType);
+
+	PortBuilder vifDetails(Map<String, Object> vifDetails);
+
+	PortBuilder vNicType(String vNicType);
+
+	PortBuilder profile(Map<String, Object> profile);
+
 	
 }

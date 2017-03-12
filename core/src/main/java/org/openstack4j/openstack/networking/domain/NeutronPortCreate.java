@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.networking.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.openstack4j.model.ModelEntity;
@@ -45,6 +46,22 @@ public class NeutronPortCreate implements ModelEntity {
 	
     @JsonProperty("port_security_enabled")
     private Boolean portSecurityEnabled; 
+    
+	@JsonProperty("binding:host_id")
+	private String hostId;
+	
+	@JsonProperty("binding:vif_type")
+	private String vifType;
+	
+	@JsonProperty("binding:vif_details")
+	private Map<String, Object> vifDetails;
+
+	@JsonProperty("binding:vnic_type")
+	private String vNicType;
+	
+	@JsonProperty("binding:profile")
+	private Map<String, Object> profile;
+
 	
 	public NeutronPortCreate() {
 	}
@@ -66,6 +83,12 @@ public class NeutronPortCreate implements ModelEntity {
 		c.securityGroups = port.getSecurityGroups();
 		c.fixedIps = (Set<NeutronIP>) port.getFixedIps();
 		c.portSecurityEnabled=port.isPortSecurityEnabled();
+		c.hostId = port.getHostId();
+		c.vifType = port.getVifType();
+		c.vifDetails = port.getVifDetails();
+		c.vNicType = port.getvNicType();
+		c.profile = port.getProfile();
+
 		
 		return c;
 	}
