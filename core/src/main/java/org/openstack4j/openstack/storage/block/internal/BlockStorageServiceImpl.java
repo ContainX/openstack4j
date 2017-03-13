@@ -10,6 +10,7 @@ import org.openstack4j.api.storage.CinderZoneService;
 import org.openstack4j.model.storage.block.BlockLimits;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockLimits;
 import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
+import org.openstack4j.api.storage.ext.BlockStroageServicesService;
 
 /**
  * Block Storage (Cinder) Service Operation implementation
@@ -68,6 +69,15 @@ public class BlockStorageServiceImpl extends BaseBlockStorageServices implements
 	@Override
 	public BlockVolumeBackupService backups() { 
 		return Apis.get(BlockVolumeBackupService.class); 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BlockStroageServicesService services() {
+		return Apis.get(BlockStroageServicesService.class);
+
 	}
 
 }
