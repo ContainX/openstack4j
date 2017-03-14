@@ -6,6 +6,7 @@ import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
@@ -168,6 +169,15 @@ public class Apis {
 	public static SenlinService getSenlinServices() {
 		return get(SenlinService.class);
 	}
+
+	/**
+     * Gets the Magnum services API
+     *
+     * @return the Magnum Service
+     */
+    public static MagnumService getMagnumService() {
+        return get(MagnumService.class);
+    }
 
 
     /**
