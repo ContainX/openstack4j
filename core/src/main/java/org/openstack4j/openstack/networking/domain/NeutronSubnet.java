@@ -10,8 +10,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.HostRoute;
 import org.openstack4j.model.network.IPVersionType;
-import org.openstack4j.model.network.Ipv6AddressMode;
-import org.openstack4j.model.network.Ipv6RaMode;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.Pool;
 import org.openstack4j.model.network.Subnet;
@@ -53,17 +51,13 @@ public class NeutronSubnet implements Subnet {
 	@JsonProperty("gateway_ip")
 	private String gateway;
 	private String cidr;
-	@JsonProperty("ipv6_address_mode")
-	private Ipv6AddressMode ipv6AddressMode;
-	@JsonProperty("ipv6_ra_mode")
-	private Ipv6RaMode ipv6RaMode;
 
     public NeutronSubnet() {
     }
 
     public NeutronSubnet(String id, String name, boolean enableDHCP, String networkId, String tenantId, List<String> dnsNames,
                          List<NeutronPool> pools, List<NeutronHostRoute> hostRoutes, IPVersionType ipVersion,
-                         String gateway, String cidr, Ipv6AddressMode ipv6AddressMode, Ipv6RaMode ipv6RaMode) {
+                         String gateway, String cidr) {
         this.id = id;
         this.name = name;
         this.enableDHCP = enableDHCP;
@@ -75,8 +69,6 @@ public class NeutronSubnet implements Subnet {
         this.ipVersion = ipVersion;
         this.gateway = gateway;
         this.cidr = cidr;
-        this.ipv6AddressMode = ipv6AddressMode;
-        this.ipv6RaMode = ipv6RaMode;
     }
 
     public static SubnetBuilder builder() {
@@ -201,22 +193,6 @@ public class NeutronSubnet implements Subnet {
 	public String getCidr() {
 		return cidr;
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Ipv6AddressMode getIpv6AddressMode() {
-		return ipv6AddressMode;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Ipv6RaMode getIpv6RaMode() {
-		return ipv6RaMode;
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -227,7 +203,6 @@ public class NeutronSubnet implements Subnet {
 				.add("id", id).add("name", name).add("enableDHCP", enableDHCP).add("network-id", networkId)
 				.add("tenant_id", tenantId).add("dns_nameservers", dnsNames).add("allocation_pools", pools)
 				.add("host_routes", hostRoutes).add("ip_version", ipVersion).add("gateway_ip", gateway).add("cidr", cidr)
-				.add("ipv6AddressMode", ipv6AddressMode).add("ipv6RaMode", ipv6RaMode)
 				.toString();
 	}
 
@@ -241,8 +216,8 @@ public class NeutronSubnet implements Subnet {
 
         public NeutronSubnetNoGateway(String id, String name, boolean enableDHCP, String networkId, String tenantId,
                                       List<String> dnsNames, List<NeutronPool> pools, List<NeutronHostRoute> hostRoutes,
-                                      IPVersionType ipVersion, String cidr, Ipv6AddressMode ipv6AddressMode, Ipv6RaMode ipv6RaMode) {
-            super(id, name, enableDHCP, networkId, tenantId, dnsNames, pools, hostRoutes, ipVersion, null, cidr, ipv6AddressMode, ipv6RaMode);
+                                      IPVersionType ipVersion, String cidr) {
+            super(id, name, enableDHCP, networkId, tenantId, dnsNames, pools, hostRoutes, ipVersion, null, cidr);
             this.gateway = null;
         }
     }
@@ -322,24 +297,12 @@ public class NeutronSubnet implements Subnet {
 		  isNoGateway = true;
 		  return this;
 		}
-	
-		@Override
-		public SubnetBuilder ipv6AddressMode(Ipv6AddressMode ipv6AddressMode) {
-			m.ipv6AddressMode = ipv6AddressMode;
-			return this;
-		}
-		
-		@Override
-		public SubnetBuilder ipv6RaMode(Ipv6RaMode ipv6RaMode) {
-			m.ipv6RaMode = ipv6RaMode;
-			return this;
-		}
 
 		@Override
 		public Subnet build() {
             if(isNoGateway) {
                 return new NeutronSubnetNoGateway(m.id, m.name, m.enableDHCP, m.networkId,
-                m.tenantId, m.dnsNames, m.pools, m.hostRoutes, m.ipVersion, m.cidr, m.ipv6AddressMode, m.ipv6RaMode);
+                m.tenantId, m.dnsNames, m.pools, m.hostRoutes, m.ipVersion, m.cidr);
             }
             return m;
 		}
@@ -375,11 +338,7 @@ public class NeutronSubnet implements Subnet {
             m.hostRoutes.add(new NeutronHostRoute(destination, nexthop));
             return this;
         }
-        
-       
 
 	}
-
-	
 	
 }
