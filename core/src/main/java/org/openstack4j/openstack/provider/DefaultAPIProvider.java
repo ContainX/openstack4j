@@ -140,6 +140,7 @@ import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
+import org.openstack4j.api.storage.ext.BlockStroageServicesService;
 import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.tacker.TackerServiceImpl;
 import org.openstack4j.api.tacker.VimService;
@@ -277,6 +278,7 @@ import org.openstack4j.openstack.senlin.internal.SenlinVersionServiceImpl;
 import org.openstack4j.openstack.senlin.internal.SenlinWebHookServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockQuotaSetServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockStorageServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.BlockStorageServicesServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeBackupServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
@@ -479,6 +481,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(AlarmAodhService.class, AlarmAodhServiceImpl.class);
         bind(ServicesService.class, ServicesServiceImpl.class);
         bind(MagnumService.class, MagnumServiceImpl.class);
+        bind(BlockStroageServicesService.class, BlockStorageServicesServiceImpl.class);
     }
 
     /**
