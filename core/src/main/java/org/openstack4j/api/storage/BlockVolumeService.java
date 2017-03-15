@@ -149,5 +149,29 @@ public interface BlockVolumeService extends RestService {
 	 * @return the action response
 	 */
 	ActionResponse readOnlyModeUpdate(String volumeId, boolean readonly);
+	
+	/**
+	 * 
+	 * <br/>Description:Attaches a volume to a server.
+	 * You should set instance_uuid or host_name.
+	 * Volume status must be available.
+	 * <p>Author:Wang Ting/王婷</p>
+	 * @param volumeId
+	 * @param instanceId
+	 * @param mountpoint
+	 * @param hostName
+	 * @return
+	 */
+	ActionResponse attach(String volumeId, String instanceId,String mountpoint,String hostName );
 
+	/**
+	 * 
+	 * <br/>Description:Forces a volume to detach.
+	 * <p>Author:Wang Ting/王婷</p>
+	 * @param volumeId
+	 * @param initiator
+	 * @param attachmentId
+	 * @return
+	 */
+	ActionResponse forceDetach(String volumeId, String initiator,String attachmentId  );
 }

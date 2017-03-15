@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.model.network.SecurityGroupRule;
@@ -49,5 +50,17 @@ public class SecurityGroupRuleServiceImpl extends BaseNetworkingServices impleme
 	@Override
 	public List<? extends SecurityGroupRule> list() {
 		return get(SecurityGroupRules.class, uri("/security-group-rules")).execute().getList();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends SecurityGroupRule> list(Map<String,Object> param){
+		Invocation<SecurityGroupRules> invocation = get(SecurityGroupRules.class, uri("/security-group-rules"));
+		for(Map.Entry<String, Object> entry : param.entrySet()){
+			invocation.param(entry.getKey(), entry.getValue());
+		}
+		return invocation.execute().getList();
 	}
 }
