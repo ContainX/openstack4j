@@ -19,5 +19,4 @@ public interface BlockStroageServicesService {
 	 * @return a list of block storage services
 	 */
 	List<? extends Service> list();
-
 }

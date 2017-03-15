@@ -61,13 +61,26 @@ public class PortListOptions {
     }
     
     /**
-     * The port name
-     * 
-     * @param displayName the port name
+     * DEPRECATED: This option is not valid anymore since
+     * neutron port does not have attribute named "display_name".
+     * Use {@link #name(String)} to filter ports by name
+     *
+     * @param displayName the port display name
      * @return options
      */
+    @Deprecated
     public PortListOptions displayName(String displayName) {
         return add("display_name", displayName);
+    }
+    
+    /**
+     * The port name
+     *
+     * @param name the port name
+     * @return options
+     */
+    public PortListOptions name(String name) {
+        return add("name", name);
     }
     
     /**

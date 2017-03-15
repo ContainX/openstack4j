@@ -5,7 +5,7 @@
 
 GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD 2>/dev/null)
 IMAGE_NAME := openstack4j-dev$(if $(GIT_BRANCH),:$(GIT_BRANCH))
-DOCKER_RUN := docker run --rm -it --privileged $(IMAGE_NAME)
+DOCKER_RUN := docker run --rm -it --privileged -e MAVEN_CONFIG=/home/builder/.m2 $(IMAGE_NAME)
 
 default: build
 

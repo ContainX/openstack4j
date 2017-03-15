@@ -63,6 +63,8 @@ public class CinderVolume implements Volume {
 	private String tenantId;	
 	@JsonProperty("encrypted")
 	private Boolean encrypted;
+	@JsonProperty("os-vol-host-attr:host")
+	private String host;
 	/**
 	 * {@inheritDoc}
 	 */
@@ -222,7 +224,13 @@ public class CinderVolume implements Volume {
 	public boolean encrypted(){
 		return encrypted;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String host() { return host; }
+
 	/**
 	 * {@inheritDoc}
 	 */

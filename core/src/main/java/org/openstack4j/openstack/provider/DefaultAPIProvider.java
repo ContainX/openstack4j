@@ -3,6 +3,8 @@ package org.openstack4j.openstack.provider;
 import java.util.Map;
 
 import org.openstack4j.api.APIProvider;
+import org.openstack4j.api.artifact.ArtifactService;
+import org.openstack4j.api.artifact.ToscaTemplatesArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.barbican.ContainerService;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
@@ -149,6 +151,8 @@ import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
+import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
+import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
 import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
@@ -335,6 +339,8 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(HostService.class, HostServiceImpl.class);
         bind(NetworkingService.class, NetworkingServiceImpl.class);
         bind(NetworkService.class, NetworkServiceImpl.class);
+        bind(ArtifactService.class, ArtifactServiceImpl.class);
+        bind(ToscaTemplatesArtifactService.class, ToscaTemplatesArtifactServiceImpl.class);
         bind(SubnetService.class, SubnetServiceImpl.class);
         bind(PortService.class, PortServiceImpl.class);
         bind(RouterService.class, RouterServiceImpl.class);

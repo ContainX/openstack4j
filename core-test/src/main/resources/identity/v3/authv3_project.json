@@ -46,6 +46,33 @@
 				"endpoints": [
 					{
 						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:9494",
+						"region": "RegionOne",
+						"interface": "admin",
+						"id": "ab129c85b6bc4d229a5dc21de7400ede"
+					},
+					{
+						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:9494",
+						"region": "RegionOne",
+						"interface": "internal",
+						"id": "c2361ae4f9eb47a9a98928cc9db49ec1"
+					},
+					{
+						"region_id": "RegionOne",
+						"url": "http://127.0.0.1:9494",
+						"region": "RegionOne",
+						"interface": "public",
+						"id": "f3e9c7f6d3914eedb5fe0f4dc8e53438"
+					}
+				],
+				"type": "artifact",
+				"id": "3a6ea5b1d31943cdb751c4484fa6ee24",
+				"name": "glare"
+			}, {
+				"endpoints": [
+					{
+						"region_id": "RegionOne",
 						"url": "http://127.0.0.1:8776/v2/123ac695d4db400a9001b91bb3b8aa46",
 						"region": "RegionOne",
 						"interface": "internal",

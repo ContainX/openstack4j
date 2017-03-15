@@ -77,7 +77,6 @@ public class BlockStorageServiceImpl extends BaseBlockStorageServices implements
 	@Override
 	public BlockStroageServicesService services() {
 		return Apis.get(BlockStroageServicesService.class);
-
 	}
 
 }

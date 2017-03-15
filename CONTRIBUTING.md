@@ -22,8 +22,9 @@ Pull requests should be made against the master (development)
 branch and include relevant tests, if applicable. 
 
 Code should compile and tests should pass under all Java versions 
-which the OpenStack4j currently supports.  Currently we support
-a minimum version of Java 6.
+which the OpenStack4j currently supports.
+Refer to [unit tests README](./core-test/README.md) or [integration tests README](./core-integration-test/README.md) for more details on how to write tests.
+Currently we support a minimum version of Java 7.
 
 Please insure all code is formatted like the rest of the API, well documented and same patterns applied. When configuring your IDE workspace make sure tabs are represented as spaces.
 
