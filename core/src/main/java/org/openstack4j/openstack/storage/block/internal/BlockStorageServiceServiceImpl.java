@@ -2,7 +2,7 @@ package org.openstack4j.openstack.storage.block.internal;
 
 import java.util.List;
 
-import org.openstack4j.api.storage.ext.BlockStroageServicesService;
+import org.openstack4j.api.storage.ext.BlockStroageServiceService;
 import org.openstack4j.model.storage.block.ext.Service;
 import org.openstack4j.openstack.storage.block.domain.ext.ExtService.Services;
 
@@ -11,7 +11,7 @@ import org.openstack4j.openstack.storage.block.domain.ext.ExtService.Services;
  *
  * @author Taemin
  */
-public class BlockStorageServicesServiceImpl extends BaseBlockStorageServices implements BlockStroageServicesService {
+public class BlockStorageServiceServiceImpl extends BaseBlockStorageServices implements BlockStroageServiceService {
 
 	/**
 	 * {@inheritDoc}
