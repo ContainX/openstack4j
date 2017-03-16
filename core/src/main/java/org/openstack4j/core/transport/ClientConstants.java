@@ -49,5 +49,18 @@ public final class ClientConstants {
     public static final String PATH_SERVICE_CATALOGS = "auth/catalog";
     public static final String PATH_TENANTS = "/tenants";
     public static final String PATH_ARTIFACTS = "/artifacts";
+	
+	//Magnum APIs
+    // list all Magnum Services
+    public static final String MAGNUM_MSERVICES = "/mservices";
+    // list baymodels
+    public static final String MAGNUM_BAYMODELS = "/baymodels";
+    // bays
+    public static final String MAGNUM_BAYS = "/bays";
+    public static final String MAGNUM_CONTAINERS = "/containers";
+    public static final String MAGNUM_CERTIFICATES = "/certificates";
+    public static final String MAGNUM_CLUSTERS = "/clusters";
+    public static final String MAGNUM_CLUSTERTEMPLATES = "/clustertemplates";
+    public static final String MAGNUM_PODS = "/pods";
 
 }

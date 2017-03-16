@@ -21,6 +21,7 @@ import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+import org.openstack4j.api.magnum.MagnumService;
 
 import java.util.Set;
 
@@ -235,6 +236,13 @@ public interface OSClient< T extends OSClient<T>> {
      */
     SaharaService sahara();
     
+    /**
+     * Returns the Magnum Service API
+     * 
+     * @return the Magnum Service
+     */
+    MagnumService magnum();
+
     /**
      * OpenStack4j Client which authenticates against version V2
      */
