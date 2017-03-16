@@ -35,6 +35,7 @@ public abstract class AbstractTest {
         SHARE(8786), 
         OBJECT_STORAGE(8800),
         BARBICAN(9311),
+        MAGNUM(9511),
         ORCHESTRATION(8004),
         DATABASE(8779),
     	TACKER(9890),

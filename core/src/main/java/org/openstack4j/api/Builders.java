@@ -28,6 +28,7 @@ import org.openstack4j.model.identity.v3.builder.*;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.image.v2.builder.ImageUpdateBuilder;
 import org.openstack4j.model.image.v2.builder.TaskBuilder;
+import org.openstack4j.model.magnum.BaymodelBuilder;
 import org.openstack4j.model.manila.builder.*;
 import org.openstack4j.model.murano.v1.builder.EnvironmentBuilder;
 import org.openstack4j.model.murano.v1.builder.AppCatalogBuilders;
@@ -76,6 +77,7 @@ import org.openstack4j.openstack.identity.v3.domain.*;
 import org.openstack4j.openstack.image.domain.GlanceImage;
 import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
 import org.openstack4j.openstack.image.v2.domain.GlanceTask;
+import org.openstack4j.openstack.magnum.MagnumBaymodel;
 import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.*;
 import org.openstack4j.openstack.murano.v1.builder.MuranoBuilders;
@@ -1073,6 +1075,15 @@ public class Builders {
      */
     public static LoadBalancerV2UpdateBuilder loadBalancerV2Update() {
         return NeutronLoadBalancerV2Update.builder();
+    }
+
+    /**
+     * Magnum builder
+     * @return the magnum builder
+     */
+    
+    public static BaymodelBuilder baymodel() {
+        return MagnumBaymodel.builder();
     }
 
     /**

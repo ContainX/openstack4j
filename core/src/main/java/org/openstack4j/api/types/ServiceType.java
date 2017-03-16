@@ -20,6 +20,7 @@ public enum ServiceType {
 	BARBICAN("barbican", "key-manager"),
 	TACKER("tacker", "nfv-orchestration"),
 	ARTIFACT("glare", "artifact"),
+    MAGNUM("magnum", "container"),
 	UNKNOWN("NA", "NA")
 	;
 
