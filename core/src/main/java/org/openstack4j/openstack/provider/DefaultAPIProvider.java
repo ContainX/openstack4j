@@ -140,7 +140,7 @@ import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.storage.SchedulerStatsGetPoolService;
-import org.openstack4j.api.storage.ext.BlockStroageServiceService;
+import org.openstack4j.api.storage.ext.BlockStorageServiceService;
 import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.tacker.TackerServiceImpl;
 import org.openstack4j.api.tacker.VimService;
@@ -496,7 +496,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(TelemetryAodhService.class,TelemetryAodhServiceImpl.class);
         bind(AlarmAodhService.class, AlarmAodhServiceImpl.class);
         bind(ServicesService.class, ServicesServiceImpl.class);
-        bind(BlockStroageServiceService.class, BlockStorageServiceServiceImpl.class);
+        bind(BlockStorageServiceService.class, BlockStorageServiceServiceImpl.class);
         bind(MagnumService.class, MagnumServiceImpl.class);
     }
 

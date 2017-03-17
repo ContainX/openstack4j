@@ -9,7 +9,7 @@ import org.openstack4j.model.storage.block.ext.Service;
  *
  * @author Taemin
  */
-public interface BlockStroageServiceService {
+public interface BlockStorageServiceService {
 
 	/**
 	 * List services info
