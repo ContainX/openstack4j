@@ -13,6 +13,7 @@ import static org.openstack4j.openstack.image.domain.ImageHeader.PROPERTY;
 import static org.openstack4j.openstack.image.domain.ImageHeader.PROTECTED;
 import static org.openstack4j.openstack.image.domain.ImageHeader.SIZE;
 import static org.openstack4j.openstack.image.domain.ImageHeader.STORE;
+import static org.openstack4j.openstack.image.domain.ImageHeader.ID;
 
 import java.util.Map;
 
@@ -49,6 +50,7 @@ public class ImageForUpdateToHeaders implements Function<Image, Map<String, Obje
 
         Map<String, Object> headers = Maps.newHashMap();
 
+        addIfNotNull(headers, ID, from.getId());
         addIfNotNull(headers, NAME, from.getName());
         addIfNotNull(headers, MIN_DISK, from.getMinDisk());
         addIfNotNull(headers, MIN_RAM, from.getMinRam());
