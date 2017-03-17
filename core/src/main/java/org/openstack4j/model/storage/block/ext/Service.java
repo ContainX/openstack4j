@@ -7,13 +7,13 @@ import org.openstack4j.model.ModelEntity;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
- * A Service represents a Nova compute service
+ * A Service represents a Block storage service
  *
  * @author Stephan Latour
  */
 public interface Service extends ModelEntity {
     /**
-     * The status of a Nova service entity
+     * The status of a Block storage service entity
      */
     public enum Status {
         DISABLED, ENABLED, UNRECOGNIZED;
@@ -32,7 +32,7 @@ public interface Service extends ModelEntity {
     }
 
     /**
-     * The state of a Nova service entity
+     * The state of a Block storage service entity
      */
     public enum State {
         DOWN, UNRECOGNIZED, UP;

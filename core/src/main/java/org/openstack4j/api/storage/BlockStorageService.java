@@ -1,6 +1,6 @@
 package org.openstack4j.api.storage;
 
-import org.openstack4j.api.storage.ext.BlockStroageServicesService;
+import org.openstack4j.api.storage.ext.BlockStorageServiceService;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.storage.block.BlockLimits;
 
@@ -50,9 +50,9 @@ public interface BlockStorageService extends RestService {
 	BlockVolumeBackupService backups();
 	
 	/**
-     *  The block storage services service
-     *  
-     * @return ServicesService
-     */
-	BlockStroageServicesService services();
+	 * The block storage service service
+	 * 
+	 * @return ServiceService
+	 */
+	 BlockStorageServiceService services();
 }
