@@ -50,9 +50,9 @@ public interface BlockStorageService extends RestService {
 	BlockVolumeBackupService backups();
 	
 	/**
-	 * The block storage services service
+	 * The block storage service service
 	 * 
-	 * @return ServicesService
+	 * @return ServiceService
 	 */
 	 BlockStroageServiceService services();
 }
