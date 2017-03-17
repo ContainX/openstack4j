@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
  * @author Taemin
  */
 
-@Test(suiteName = "BlockStroageService")
+@Test(suiteName = "BlockStorageService")
 public class ServiceTests extends AbstractTest {
 
 	private static final String JSON_SERVICES = "/storage/ext/services.json";
