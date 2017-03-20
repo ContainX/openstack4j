@@ -2,9 +2,11 @@ package org.openstack4j.api.networking;
 
 import java.util.List;
 
+import org.openstack4j.api.Builders;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.SecurityGroup;
+import org.openstack4j.model.network.SecurityGroupUpdate;
 
 
 /**
@@ -14,34 +16,42 @@ import org.openstack4j.model.network.SecurityGroup;
  */
 public interface SecurityGroupService extends RestService {
 
-  /**
-   * Get list of security groups accessible by the current tenant
-   *
-   * @return the list<? extends security group>
-   */
-  List<? extends SecurityGroup> list();
-  
-  /**
-   * Gets the Security Group by id.
-   *
-   * @param id the id
-   * @return the security group
-   */
-  SecurityGroup get(String id);
-  
-  /**
-   * Deletes SecurityGroup by id.
-   *
-   * @param id SecurityGroup id
-   */
-  ActionResponse delete(String id);
-  
-  /**
-   * Creates a SecurityGroup.
-   *
-   * @param securityGroup the security group
-   * @return the security group
-   */
-  SecurityGroup create(SecurityGroup securityGroup);
-  
+    /**
+     * Get list of security groups accessible by the current tenant
+     *
+     * @return the list<? extends security group>
+     */
+    List<? extends SecurityGroup> list();
+
+    /**
+     * Gets the Security Group by id.
+     *
+     * @param id the id
+     * @return the security group
+     */
+    SecurityGroup get(String id);
+
+    /**
+     * Deletes SecurityGroup by id.
+     *
+     * @param id SecurityGroup id
+     */
+    ActionResponse delete(String id);
+
+    /**
+     * Creates a SecurityGroup.
+     *
+     * @param securityGroup the security group
+     * @return the security group
+     */
+    SecurityGroup create(SecurityGroup securityGroup);
+
+    /**
+     * Updates a SecurityGroup associated by the specified {@code securityGroupId}
+     *
+     * @param securityGroupId     the security group identifier
+     * @param securityGroupUpdate the security group options to update (see {@link Builders#securityGroupUpdate()}
+     * @return the updated security group
+     */
+    SecurityGroup update(String securityGroupId, SecurityGroupUpdate securityGroupUpdate);
 }
