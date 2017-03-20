@@ -266,6 +266,15 @@ public class Builders {
     }
 
     /**
+     * The builder to update a security group
+     *
+     * @return the security group update builder
+     */
+    public static NetSecurityGroupUpdateBuilder securityGroupUpdate() {
+        return NeutronSecurityGroupUpdate.builder();
+    }
+
+    /**
      * The builder to create a Neutron Security Group Rule
      *
      * @return the security group builder

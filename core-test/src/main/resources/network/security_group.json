@@ -1,0 +1,36 @@
+{
+  "security_group": {
+    "tenant_id": "29602e4c3cc1455ea828a00263e282db",
+    "description": "updated_description",
+    "id": "448675b7-a412-4030-9c05-4bb723f58387",
+    "security_group_rules": [
+      {
+        "direction": "egress",
+        "protocol": null,
+        "description": "",
+        "port_range_max": null,
+        "id": "6173049a-282f-4505-adbb-503a8e8b00df",
+        "remote_group_id": null,
+        "remote_ip_prefix": null,
+        "security_group_id": "448675b7-a412-4030-9c05-4bb723f58387",
+        "tenant_id": "29602e4c3cc1455ea828a00263e282db",
+        "port_range_min": null,
+        "ethertype": "IPv6"
+      },
+      {
+        "direction": "egress",
+        "protocol": null,
+        "description": "",
+        "port_range_max": null,
+        "id": "877b2c2c-73f7-4e18-9301-71ad1cae95b0",
+        "remote_group_id": null,
+        "remote_ip_prefix": null,
+        "security_group_id": "448675b7-a412-4030-9c05-4bb723f58387",
+        "tenant_id": "29602e4c3cc1455ea828a00263e282db",
+        "port_range_min": null,
+        "ethertype": "IPv4"
+      }
+    ],
+    "name": "updated_name"
+  }
+}
