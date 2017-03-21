@@ -1,6 +1,7 @@
 package org.openstack4j.api.networking;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.common.RestService;
@@ -54,4 +55,12 @@ public interface SecurityGroupService extends RestService {
      * @return the updated security group
      */
     SecurityGroup update(String securityGroupId, SecurityGroupUpdate securityGroupUpdate);
+
+    /**
+     * Get list of security groups accessible by the current tenant
+     * @param filteringParams map (name, value) of filtering parameters
+     *
+     * @return the list<? extends security group>
+     */
+    List<? extends SecurityGroup> list(Map<String, String> filteringParams);
 }
