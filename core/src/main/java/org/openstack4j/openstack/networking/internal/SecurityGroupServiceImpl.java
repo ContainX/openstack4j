@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.internal;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.model.common.ActionResponse;
@@ -61,5 +62,20 @@ public class SecurityGroupServiceImpl extends BaseNetworkingServices implements 
     @Override
     public List<? extends SecurityGroup> list() {
         return get(SecurityGroups.class, uri("/security-groups")).execute().getList();
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends SecurityGroup> list(Map<String, String> filteringParams) {
+        Invocation<SecurityGroups> securityGroupInvocation = get(SecurityGroups.class, "/security-groups");
+        if (filteringParams != null) {
+            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+                securityGroupInvocation = securityGroupInvocation.param(entry.getKey(), entry.getValue());
+            }
+        }
+        return securityGroupInvocation.execute().getList();
     }
 }

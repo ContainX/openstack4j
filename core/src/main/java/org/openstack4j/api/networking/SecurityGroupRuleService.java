@@ -1,6 +1,7 @@
 package org.openstack4j.api.networking;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.network.SecurityGroupRule;
@@ -42,5 +43,13 @@ public interface SecurityGroupRuleService extends RestService {
    * @return the security group rule
    */
   SecurityGroupRule create(SecurityGroupRule rule);
+
+  /**
+   * List security group rules accessible by current Tenant.
+   * @param filteringParams map (name, value) of filtering parameters
+   *
+   * @return the list<? extends security group rules>
+   */
+  List<? extends SecurityGroupRule> list(Map<String, String> filteringParams);
   
 }
