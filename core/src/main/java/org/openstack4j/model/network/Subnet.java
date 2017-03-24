@@ -54,4 +54,14 @@ public interface Subnet extends Resource, Buildable<SubnetBuilder> {
 	 * @return the cidr representing the IP range for this subnet, based on IP version
 	 */
 	String getCidr();
+	
+	/**
+	 * @return The IPv6 address modes specifies mechanisms for assigning IP addresses
+	 */
+	Ipv6AddressMode getIpv6AddressMode();
+	
+	/**
+	 * @return the IPv6 router advertisement specifies whether the networking service should transmit ICMPv6 packets, for a subnet
+	 */
+	Ipv6RaMode getIpv6RaMode();		
 }

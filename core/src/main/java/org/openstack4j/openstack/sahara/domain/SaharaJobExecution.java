@@ -47,10 +47,10 @@ public class SaharaJobExecution implements JobExecution {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date endTime;
     @JsonProperty("created_at")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date createdAt;
     @JsonProperty("updated_at")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date updatedAt;
     @JsonProperty("oozie_job_id")
     private String oozieJobId;

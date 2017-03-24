@@ -43,14 +43,14 @@ public class SaharaCluster implements Cluster {
         @JsonProperty("cluster_configs")
         private Map<String, SaharaServiceConfig> clusterConfigs;
 	@JsonProperty("created_at")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date createdAt;
 	@JsonProperty("default_image_id")
 	private String defaultImageId;
 	@JsonProperty("user_keypair_id")
 	private String userKeypairId;
 	@JsonProperty("updated_at")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date updatedAt;
 	@JsonProperty("plugin_name")
         private String pluginName;
