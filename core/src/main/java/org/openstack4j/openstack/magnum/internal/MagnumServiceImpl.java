@@ -27,11 +27,14 @@ import org.openstack4j.openstack.magnum.MagnumBay.BayConcreteBuilder.Bays;
 import org.openstack4j.openstack.magnum.MagnumBaymodel;
 import org.openstack4j.openstack.magnum.MagnumBaymodel.Baymodels;
 import org.openstack4j.openstack.magnum.MagnumCertificate;
+import org.openstack4j.openstack.magnum.MagnumCluster;
 import org.openstack4j.openstack.magnum.MagnumCluster.Clusters;
+import org.openstack4j.openstack.magnum.MagnumClustertemplate;
 import org.openstack4j.openstack.magnum.MagnumClustertemplate.Clustertemplates;
 import org.openstack4j.openstack.magnum.MagnumContainer;
 import org.openstack4j.openstack.magnum.MagnumContainer.Containers;
 import org.openstack4j.openstack.magnum.MagnumMservice.Mservices;
+import org.openstack4j.openstack.magnum.MagnumPod;
 import org.openstack4j.openstack.magnum.MagnumPod.Pods;
 
 
@@ -147,37 +150,45 @@ public class MagnumServiceImpl extends BaseOpenStackService implements MagnumSer
     @Override
     public Container pauseContainer(String id) {
         checkNotNull(id);
-        return put(Container.class, uri("%s/%s/pause", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();
+        return put(MagnumContainer.class, uri("%s/%s/pause", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();
     }
     
     @Override
     public Container unpauseContainer(String id) {
         checkNotNull(id);
-        return put(Container.class, uri("%s/%s/unpause", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();
+        return put(MagnumContainer.class, uri("%s/%s/unpause", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();
     }
     
     @Override
     public Container rebootContainer(String id) {
         checkNotNull(id);
-        return put(Container.class, uri("%s/%s/reboot", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();  
+        return put(MagnumContainer.class, uri("%s/%s/reboot", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();  
     }
     
     @Override
     public Container startContainer(String id) {
         checkNotNull(id);
-        return put(Container.class, uri("%s/%s/start", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();  
+        return put(MagnumContainer.class, uri("%s/%s/start", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();  
     }
     
     @Override
     public Container stopContainer(String id) {
         checkNotNull(id);
-        return put(Container.class, uri("%s/%s/stop", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();  
+        return put(MagnumContainer.class, uri("%s/%s/stop", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();  
     }
     
     @Override
     public Container showContainer(String id) {
         checkNotNull(id);
-        return get(Container.class, uri("%s/%s", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();
+        return get(MagnumContainer.class, uri("%s/%s", MAGNUM_CONTAINERS, id)).serviceType(ServiceType.MAGNUM).execute();
+    }
+    
+    @Override
+    public Container updateContainer(String id, String operations) {
+        checkNotNull(id);       
+        checkNotNull(operations);
+        return patch(MagnumContainer.class, MAGNUM_CONTAINERS, "/", id).serviceType(ServiceType.MAGNUM).json(operations).execute();       
+    
     }
 
     @Override
@@ -203,7 +214,7 @@ public class MagnumServiceImpl extends BaseOpenStackService implements MagnumSer
     @Override
     public Cluster createCluster(Cluster cluster) {
         checkNotNull(cluster);
-        return post(Cluster.class, MAGNUM_CLUSTERS).serviceType(ServiceType.MAGNUM).entity(cluster).execute();        
+        return post(MagnumCluster.class, MAGNUM_CLUSTERS).serviceType(ServiceType.MAGNUM).entity(cluster).execute();        
     }
 
     @Override
@@ -227,7 +238,7 @@ public class MagnumServiceImpl extends BaseOpenStackService implements MagnumSer
     public Cluster updateCluster(String id, String operations) {
         checkNotNull(id);       
         checkNotNull(operations);
-        return patch(Cluster.class, MAGNUM_CLUSTERS, "/", id).serviceType(ServiceType.MAGNUM).json(operations).execute();        
+        return patch(MagnumCluster.class, MAGNUM_CLUSTERS, "/", id).serviceType(ServiceType.MAGNUM).json(operations).execute();        
     }
     
     //Cluster template APIs
@@ -235,7 +246,7 @@ public class MagnumServiceImpl extends BaseOpenStackService implements MagnumSer
     @Override
     public Clustertemplate createClustertemplate(Clustertemplate template) {
         checkNotNull(template);
-        return post(Clustertemplate.class, MAGNUM_CLUSTERTEMPLATES).serviceType(ServiceType.MAGNUM).entity(template).execute();  
+        return post(MagnumClustertemplate.class, MAGNUM_CLUSTERTEMPLATES).serviceType(ServiceType.MAGNUM).entity(template).execute();  
     }
 
     @Override
@@ -253,7 +264,7 @@ public class MagnumServiceImpl extends BaseOpenStackService implements MagnumSer
     public Clustertemplate updateClustertemplate(String id, String operations) {
         checkNotNull(id);       
         checkNotNull(operations);
-        return patch(Clustertemplate.class, MAGNUM_CLUSTERTEMPLATES, "/", id).serviceType(ServiceType.MAGNUM).json(operations).execute();        
+        return patch(MagnumClustertemplate.class, MAGNUM_CLUSTERTEMPLATES, "/", id).serviceType(ServiceType.MAGNUM).json(operations).execute();        
     }
 
     @Override
@@ -266,7 +277,7 @@ public class MagnumServiceImpl extends BaseOpenStackService implements MagnumSer
     @Override
     public Pod createPod(Pod pod) {
         checkNotNull(pod);
-        return post(Pod.class, MAGNUM_PODS).serviceType(ServiceType.MAGNUM).entity(pod).execute();  
+        return post(MagnumPod.class, MAGNUM_PODS).serviceType(ServiceType.MAGNUM).entity(pod).execute();  
     }
 
     @Override
@@ -284,14 +295,14 @@ public class MagnumServiceImpl extends BaseOpenStackService implements MagnumSer
         checkNotNull(id);
         
         // Url: '/v1/pods/%s/?bay_ident=%s'
-        return get(Pod.class, uri("%s/?bay_ident=%s", MAGNUM_PODS, bayUuid)).serviceType(ServiceType.MAGNUM).execute();        
+        return get(MagnumPod.class, uri("%s/?bay_ident=%s", MAGNUM_PODS, bayUuid)).serviceType(ServiceType.MAGNUM).execute();        
     }
 
     @Override
     public Pod updatePod(String bayUuid, String id, String operations) {
         checkNotNull(id);       
         checkNotNull(operations);
-        return patch(Pod.class, MAGNUM_PODS, "/", id).serviceType(ServiceType.MAGNUM).json(operations).execute();        
+        return patch(MagnumPod.class, MAGNUM_PODS, "/", id).serviceType(ServiceType.MAGNUM).json(operations).execute();        
     }
 
 

@@ -202,6 +202,15 @@ public interface MagnumService extends RestService {
     Container showContainer(String id);
     
     /**
+     * Update a container
+     * 
+     * @param id
+     * @param operations
+     * @return
+     */
+    Container updateContainer(String id, String operations);
+    
+    /**
      * Gets certificate
      * 
      * @param uuid of a bay or cluster
