@@ -51,6 +51,13 @@ public interface PortService extends RestService {
 	 * @return the newly create Port
 	 */
 	Port create(Port port);
+
+	/**
+	 * Creates new Ports
+	 * @param ports the ports to create
+	 * @return the newly created Ports
+	 */
+	List<? extends Port> create(List<? extends Port> ports);
 	
 	/**
 	 * Updates an existing Port.  The Port identifier must be set on the port object to be successful
