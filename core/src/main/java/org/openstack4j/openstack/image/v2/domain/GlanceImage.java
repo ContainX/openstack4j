@@ -1,7 +1,10 @@
 package org.openstack4j.openstack.image.v2.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.openstack4j.model.common.builder.BasicResourceBuilder;
 import org.openstack4j.model.image.v2.ContainerFormat;
@@ -10,9 +13,13 @@ import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.builder.ImageBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 /**
  * A glance v2.0-2.3 image model implementation
@@ -21,6 +28,35 @@ import com.google.common.base.Objects;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GlanceImage implements Image {
+
+    private static final Set<String> RESERVED_KEYS = Sets.newHashSet(Arrays.asList(new String[] { 
+            "id",
+            "name",
+            "tags",
+            "status",
+            "container_format",
+            "disk_format",
+            "created_at",
+            "updated_at",
+            "min_disk",
+            "min_ram",
+            "protected",
+            "checksum",
+            "owner",
+            "visibility",
+            "size",
+            "locations",
+            "direct_url",
+            "self",
+            "file",
+            "schema",
+            "architecture",
+            "instance_uuid",
+            "kernel_id",
+            "os_version",
+            "os_distro",
+            "ramdisk_id",
+            "virtual_size" }));
 
     private static final long serialVersionUID = 1L;
 
@@ -92,6 +128,7 @@ public class GlanceImage implements Image {
     @JsonProperty("virtual_size")
     private Long virtualSize;
 
+    private Map<String, String> additionalProperties = Maps.newHashMap();
 
     /**
      * {@inheritDoc}
@@ -326,6 +363,26 @@ public class GlanceImage implements Image {
      * {@inheritDoc}
      */
     @Override
+    public String getAdditionalPropertyValue(String key) {
+        return additionalProperties.get(key);
+    }
+
+    @JsonAnyGetter
+    public Map<String, String> getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String key, String value) {
+        if (key != null && !RESERVED_KEYS.contains(key)) {
+            additionalProperties.put(key, value);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public ImageBuilder toBuilder() {
         return new ImageConcreteBuilder(this);
     }
@@ -508,6 +565,17 @@ public class GlanceImage implements Image {
         @Override
         public ImageBuilder ramdiskId(String ramdiskId) {
             m.ramdiskId = ramdiskId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public ImageBuilder additionalProperty(String key, String value) {
+            if (key != null && !RESERVED_KEYS.contains(key)) {
+                m.additionalProperties.put(key, value);
+            }
             return this;
         }
 
