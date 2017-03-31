@@ -1,10 +1,10 @@
 package org.openstack4j.openstack.common;
 
 
+import org.openstack4j.model.ModelEntity;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openstack4j.model.ModelEntity;
 
 /**
  * Simple name value pair based Entity
@@ -20,7 +20,11 @@ public class ListEntity<T> extends ArrayList<T> implements ModelEntity {
         return new ListEntity().add(key, value);
     }
     */
-    
+
+    public ListEntity(){
+        super();
+    }
+
     public ListEntity(List<T> list){
     	super(list);
     }
