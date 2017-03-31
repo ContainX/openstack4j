@@ -250,4 +250,10 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
      * @return Virtual size of image in bytes (READ-ONLY)
      */
     Long getVirtualSize();
+
+    /**
+     * @return Additional property's value from key
+     * https://developer.openstack.org/api-ref/image/v2/index.html#create-an-image
+     */
+    String getAdditionalPropertyValue(String key);
 }

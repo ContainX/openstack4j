@@ -87,4 +87,9 @@ public interface ImageBuilder extends Buildable.Builder<ImageBuilder, Image> {
      * @see Image#getRamdiskId()
      */
     ImageBuilder ramdiskId(String ramdiskId);
+
+    /**
+     * @see Image#getAdditionalPropertyValue()
+     */
+    ImageBuilder additionalProperty(String key, String value);
 }
