@@ -1,15 +1,15 @@
 package org.openstack4j.openstack.networking.domain;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.network.Port;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.network.Port;
+import org.openstack4j.openstack.common.ListEntity;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents a Port that is used during a create operation which only encapsulates the allowed properties
@@ -92,5 +92,32 @@ public class NeutronPortCreate implements ModelEntity {
 		
 		return c;
 	}
-	
+
+	public static class NeutronPortsCreate implements ModelEntity {
+
+		private static final long serialVersionUID = 1L;
+
+		@JsonProperty("ports")
+		private ListEntity<NeutronPortCreate> ports;
+
+		public NeutronPortsCreate() {
+			ports = new ListEntity<>();
+		}
+
+		/**
+		 * Creates a List of Port Create objects which only encapsulates allowable fields from a port
+		 *
+		 * @param ports the ports (source)
+		 * @return the port create objects
+		 */
+		@SuppressWarnings("unchecked")
+		public static NeutronPortsCreate fromPorts(List<? extends Port> ports) {
+			NeutronPortsCreate c = new NeutronPortsCreate();
+			for (Port port : ports) {
+				c.ports.add(NeutronPortCreate.fromPort(port));
+			}
+			return c;
+		}
+
+	}
 }
