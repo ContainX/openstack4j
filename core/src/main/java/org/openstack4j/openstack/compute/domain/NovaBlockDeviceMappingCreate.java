@@ -5,6 +5,8 @@ import org.openstack4j.model.compute.BDMSourceType;
 import org.openstack4j.model.compute.BlockDeviceMappingCreate;
 import org.openstack4j.model.compute.builder.BlockDeviceMappingBuilder;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -26,6 +28,14 @@ public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 
 	@JsonProperty("volume_id")
 	public String volumeId;
+
+    @JsonInclude(Include.NON_NULL)
+    @JsonProperty("disk_bus")
+    public String diskBus;
+
+    @JsonInclude(Include.NON_NULL)
+    @JsonProperty("device_type")
+    public String deviceType;
 
 	public static NovaBlockDeviceMappingBuilder builder() {
 		return new NovaBlockDeviceMappingBuilder(new NovaBlockDeviceMappingCreate());
@@ -96,6 +106,18 @@ public class NovaBlockDeviceMappingCreate implements BlockDeviceMappingCreate {
 		@Override
         public BlockDeviceMappingBuilder volumeSize(Integer volumeSize) {
             create.volume_size = volumeSize;
+            return this;
+        }
+
+        @Override
+        public BlockDeviceMappingBuilder diskBus(String diskBus) {
+            create.diskBus = diskBus;
+            return this;
+        }
+
+        @Override
+        public BlockDeviceMappingBuilder deviceType(String deviceType) {
+            create.deviceType = deviceType;
             return this;
         }
 
