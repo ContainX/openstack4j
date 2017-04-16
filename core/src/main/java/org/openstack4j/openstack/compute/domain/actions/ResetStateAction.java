@@ -16,17 +16,27 @@ public class ResetStateAction implements ServerAction {
     private static final long serialVersionUID = 1L;
     
     @JsonProperty("state")
-    private final Status state;
+    private final String state;
     
     public ResetStateAction(Status state) {
-        this.state = state;
+		switch (state) {
+		case ACTIVE:
+			this.state = "active";
+			break;
+		case ERROR:
+			this.state = "error";
+			break;
+		default:
+			this.state = "active";
+			break;
+		}
     }
     
     public static ResetStateAction create(Status state) {
         return new ResetStateAction(state);
     }
 
-    public Status getState() {
+    public String getState() {
         return state;
     }
 }
