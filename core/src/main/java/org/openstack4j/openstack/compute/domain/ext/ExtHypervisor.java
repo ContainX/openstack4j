@@ -48,6 +48,10 @@ public class ExtHypervisor implements Hypervisor {
     private int localMemoryUsed;
     @JsonProperty("service")
     private HypervisorService service;
+    @JsonProperty("status")
+    private String status;
+    @JsonProperty("state")
+    private String state;
 
     @JsonProperty("cpu_info")
     private HypervisorCPUInfo cpuInfo;
@@ -142,6 +146,15 @@ public class ExtHypervisor implements Hypervisor {
     public CPUInfo getCPUInfo() {
         return cpuInfo;
     }
+    @Override
+    public String getState() {
+         return state;
+    }
+   
+    @Override
+    public String getStatus() {
+         return status;
+    }
 
     @Override
     public String toString() {
@@ -151,7 +164,7 @@ public class ExtHypervisor implements Hypervisor {
                 .add("vcpus", virtualCPU).add("usedVcpu", virtualUsedCPU).add("localDisk", localDisk).add("localDiskUsed", localDiskUsed)
                 .add("localMemory", localMemory).add("localMemoryUsed", localMemoryUsed).add("currentWorkload",currentWorkload)
                 .add("leastDiskAvail", leastDiskAvailable).add("running_vms", runningVM).add("service", service)
-                .add("cpuInfo", cpuInfo)
+                .add("cpuInfo", cpuInfo).add("state", state).add("status", status)
                 .toString();
     }
 
