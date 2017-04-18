@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
  * 
  * @author Jeremy Unruh
  */
-@JsonRootName("quota")
+@JsonRootName("quotas")
 public class NeutronNetQuota implements NetQuota {
 
     private static final long serialVersionUID = 1L;
