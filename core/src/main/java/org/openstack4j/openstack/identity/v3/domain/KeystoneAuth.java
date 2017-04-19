@@ -54,6 +54,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
         this.type = Type.CREDENTIALS;
     }
 
+    public KeystoneAuth(AuthScope scope, Type type){
+        this.scope = scope;
+        this.type = type;
+    }
+
     protected KeystoneAuth(Type type) {
         this.type = type;
     }
