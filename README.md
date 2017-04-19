@@ -177,6 +177,38 @@ OSClientV3 os = OSFactory.builderV3()
                 .scopeToProject(Identifier.byId("project id"))
                 .authenticate());
 ```
+(5) authenticate using client certificate
+```bash
+openssl pkcs12 -export -out client-certificate-keystore.p12  -inkey key.pem -in cert.pem -certfile ca.pem
+Enter Export Password:encrypt
+Verifying - Enter Export Password:encrypt
+```
+```java
+String encrypt =  "encrypt";
+KeyStore keyStore = KeyStore.getInstance("PKCS12");
+keyStore.load(new FileInputStream(new File("client-certificate-keystore.p12")), encrypt.toCharArray());
+SSLContext sslContext = SSLContexts.custom()
+        //ignore server verify
+        .loadTrustMaterial(new TrustStrategy() {
+            @Override
+            public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                return true;
+            }
+        })
+        .loadKeyMaterial(keyStore,encrypt.toCharArray())
+        .build();
+Config config = Config.newConfig();
+config.withSSLContext(sslContext);
+Map headersMap = new HashMap();
+//project scope
+headersMap.put("X-Project-Name","project name");
+headersMap.put("X-Project-Domain-Id","domain id");
+//domain scope
+//headersMap.put("X-Domain-Id","domain id");
+KeystoneToken token = new KeystoneToken();
+token.setEndpoint("https://<fqdn>:5000/v3");
+OSClient.OSClientV3 osClient = OSFactory.clientFromToken(token, config).headers(headersMap);
+```
 
 #### Identity Operations (Keystone) V3
 

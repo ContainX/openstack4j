@@ -4,15 +4,21 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.mockwebserver.RecordedRequest;
 import org.openstack4j.api.AbstractTest;
+import org.openstack4j.api.OSClient;
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
+import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.v3.User;
 import org.openstack4j.openstack.OSFactory;
+import org.openstack4j.openstack.identity.v3.domain.KeystoneToken;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.ImmutableMap;
@@ -349,6 +355,26 @@ public class KeystoneAuthenticationTests extends AbstractTest {
 
     }
 
+    /**
+     * check headers whether right from request
+     *
+     * @throws Exception
+     */
+    public void pass_headers_Test() throws Exception {
 
+        respondWith(JSON_USERS);
+
+        Map header = new HashMap();
+        String key = "X-Domain-Id";
+        String value = "default";
+        header.put(key, value);
+        KeystoneToken token = new KeystoneToken();
+        token.setEndpoint(authURL("/v3"));
+        OSClient.OSClientV3 osClient = OSFactory.clientFromToken(token).headers(header);
+        osClient.identity().users().list();
+
+        RecordedRequest request = server.takeRequest();
+        assertEquals(request.getHeader(key), value);
+    }
 
 }
