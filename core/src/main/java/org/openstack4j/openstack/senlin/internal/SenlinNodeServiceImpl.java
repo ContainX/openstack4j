@@ -33,8 +33,14 @@ public class SenlinNodeServiceImpl extends BaseSenlinServices implements SenlinN
 
 	@Override
 	public Node get(String nodeID) {
+		return get(nodeID, false);	//false for backward compatibility
+	}
+
+	@Override
+	public Node get(final String nodeID, final boolean showDetails) {
 		checkNotNull(nodeID);
-		return get(SenlinNode.class, uri("/nodes/%s", nodeID)).execute();
+		//see at https://developer.openstack.org/api-ref/clustering/?expanded=show-node-details-detail
+		return get(SenlinNode.class, uri("/nodes/%s", nodeID)).param("show_details", showDetails).execute();
 	}
 
 	@Override
