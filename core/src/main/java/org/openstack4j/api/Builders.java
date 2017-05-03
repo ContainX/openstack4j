@@ -47,6 +47,7 @@ import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
 import org.openstack4j.model.trove.builder.DBServiceBuilders;
 import org.openstack4j.openstack.artifact.domain.ArtifactUpdateModel;
 import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
+import org.openstack4j.model.workflow.builder.WorkflowBuilders;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
 import org.openstack4j.openstack.common.GenericLink;
@@ -97,6 +98,7 @@ import org.openstack4j.openstack.tacker.builders.TackerBuilders;
 import org.openstack4j.openstack.telemetry.builder.CeilometerBuilders;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
 import org.openstack4j.openstack.trove.builder.TroveBuilders;
+import org.openstack4j.openstack.workflow.builder.MistralBuilders;
 
 /**
  * A utility class to quickly access available Builders within the OpenStack API
@@ -1159,5 +1161,9 @@ public class Builders {
      */
     public static EnvironmentBuilder environment() {
         return MuranoEnvironment.builder();
+    }
+
+    public static WorkflowBuilders workflow() {
+        return new MistralBuilders();
     }
 }
