@@ -174,7 +174,20 @@
 				"endpoints_links": [],
 				"type": "database",
 				"name": "trove"
-		  	}
+		  	}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8989\/v2",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8989\/v2",
+						"id": "98d22770096a11e793ae92361f002671",
+						"publicURL": "http:\/\/127.0.0.1:8989\/v2"
+					}
+				],
+				"endpoints_links": [],
+				"type": "workflow",
+				"name": "mistral"
+			}
 		],
 		"user": {
 			"username": "admin",

@@ -22,6 +22,7 @@ public enum ServiceType {
 	ARTIFACT("glare", "artifact"),
     MAGNUM("magnum", "container"),
 	DNS("designate", "dns"),
+	WORKFLOW("mistral", "workflow"),
 	UNKNOWN("NA", "NA")
 	;
 

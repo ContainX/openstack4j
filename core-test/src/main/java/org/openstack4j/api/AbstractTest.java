@@ -53,7 +53,8 @@ public abstract class AbstractTest {
         ARTIFACT(9494),
         CLUSTERING(8778),
         APP_CATALOG(8082),
-        DNS(9001);
+        DNS(9001),
+        WORKFLOW(8989);
 
         private final int port;
 
