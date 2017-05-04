@@ -14,6 +14,7 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.workflow.WorkflowService;
 
 import java.util.ServiceLoader;
 
@@ -135,6 +136,15 @@ public class Apis {
      */
     public static SaharaService getSaharaServices() {
         return get(SaharaService.class);
+    }
+
+    /**
+     * Gets the (Mistral) Workflow services API
+     *
+     * @return the workflow services
+     */
+    public static WorkflowService getWorkflowServices() {
+        return get(WorkflowService.class);
     }
 
     /**

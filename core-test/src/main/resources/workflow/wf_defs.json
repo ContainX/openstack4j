@@ -1,0 +1,26 @@
+{
+  "workflows": [
+    {
+      "id": "0169affc-e6a1-4013-a59e-c89dfd5523f2",
+      "name": "parallel_join_2",
+      "tags": ["test", "private"],
+      "project_id": "<default-project>",
+      "scope": "private",
+      "created_at": "2016-08-17 10:33:24",
+      "updated_at": null,
+      "definition": "---\nversion: '2.0'\n\nparallel_join_2:\n  tasks:\n    join_task:\n      join: all\n    task_1:\n      on-success: join_task\n    task_2:\n      on-success: join_task\n",
+      "input": ""
+    },
+    {
+      "id": "108e5a8e-9af9-4d07-a454-3a856c3b4026",
+      "name": "with_items_50",
+      "tags": [],
+      "project_id": "<default-project>",
+      "scope": "private",
+      "created_at": null,
+      "updated_at": "2016-12-20 07:02:17",
+      "definition": "---\nversion: '2.0'\n\nwith_items_50:\n  tasks:\n    task1:\n      with-items: i in <% range(0, 50) %>\n      action: std.echo output=<% $.i %>\n",
+      "input": ""
+    }
+  ]
+}
