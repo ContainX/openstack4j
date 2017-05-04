@@ -42,7 +42,8 @@ public abstract class AbstractTest {
         IMAGE(9292),
         ARTIFACT(9494),
         CLUSTERING(8778),
-        APP_CATALOG(8082);
+        APP_CATALOG(8082),
+        DNS(9001);
 
         private final int port;
 
@@ -120,7 +121,7 @@ public abstract class AbstractTest {
      * Responds with specified status code and json body
      * 
      * @param statusCode the status code to respond with
-     * @param body the json body
+     * @param jsonBody the json body
      */
     protected void respondWith(int statusCode, String jsonBody) {
         Map<String, String> headers = new HashMap<String, String>();
