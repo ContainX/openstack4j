@@ -42,7 +42,8 @@ public abstract class AbstractTest {
         IMAGE(9292),
         ARTIFACT(9494),
         CLUSTERING(8778),
-        APP_CATALOG(8082);
+        APP_CATALOG(8082),
+        WORKFLOW(8989);
 
         private final int port;
 
