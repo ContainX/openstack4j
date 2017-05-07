@@ -28,6 +28,8 @@ import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.api.compute.ext.ZoneService;
+import org.openstack4j.api.dns.v2.DNSService;
+import org.openstack4j.api.dns.v2.RecordsetService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.gbp.ExternalPolicyService;
 import org.openstack4j.api.gbp.ExternalSegmentService;
@@ -185,6 +187,8 @@ import org.openstack4j.openstack.compute.internal.ext.InstanceActionsServiceImpl
 import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
+import org.openstack4j.openstack.dns.v2.internal.DNSServiceImpl;
+import org.openstack4j.openstack.dns.v2.internal.RecordsetServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalPolicyServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalSegmentServiceImpl;
 import org.openstack4j.openstack.gbp.internal.GbpServiceImpl;
@@ -498,6 +502,9 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ServicesService.class, ServicesServiceImpl.class);
         bind(BlockStorageServiceService.class, BlockStorageServiceServiceImpl.class);
         bind(MagnumService.class, MagnumServiceImpl.class);
+        bind(DNSService.class, DNSServiceImpl.class);
+        bind(org.openstack4j.api.dns.v2.ZoneService.class, org.openstack4j.openstack.dns.v2.internal.ZoneServiceImpl.class);
+        bind(RecordsetService.class, RecordsetServiceImpl.class);
     }
 
     /**

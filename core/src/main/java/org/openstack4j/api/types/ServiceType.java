@@ -21,6 +21,7 @@ public enum ServiceType {
 	TACKER("tacker", "nfv-orchestration"),
 	ARTIFACT("glare", "artifact"),
     MAGNUM("magnum", "container"),
+	DNS("designate", "dns"),
 	UNKNOWN("NA", "NA")
 	;
 

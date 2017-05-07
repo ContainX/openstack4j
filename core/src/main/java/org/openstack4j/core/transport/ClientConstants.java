@@ -27,7 +27,7 @@ public final class ClientConstants {
     public static final String CONTENT_TYPE_ARTIFACT_PATCH = "application/json-patch+json";
     
     public static final String X_OPENSTACK_REQUEST_ID = "x-openstack-request-id";
-	public static final String X_COMPUTE_REQUEST_ID = "X-Compute-Request-Id";
+    public static final String X_COMPUTE_REQUEST_ID = "X-Compute-Request-Id";
 
 
     // Paths
@@ -49,8 +49,13 @@ public final class ClientConstants {
     public static final String PATH_SERVICE_CATALOGS = "auth/catalog";
     public static final String PATH_TENANTS = "/tenants";
     public static final String PATH_ARTIFACTS = "/artifacts";
-	
-	//Magnum APIs
+
+    // DNS/Designate
+    public static final String PATH_ZONES = "/zones";
+    public static final String PATH_RECORDSETS = "/recordsets";
+    public static final String PATH_NAMESERVERS = "/nameservers";
+
+    //Magnum APIs
     // list all Magnum Services
     public static final String MAGNUM_MSERVICES = "/mservices";
     // list baymodels
