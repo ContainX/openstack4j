@@ -51,7 +51,7 @@ public class NovaHostAggregate implements HostAggregate {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getAvaiablityZone() {
+	public String getAvailabilityZone() {
 		return availabilityZone;
 	}
 	/**

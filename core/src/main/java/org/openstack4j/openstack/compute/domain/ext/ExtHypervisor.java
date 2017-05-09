@@ -51,6 +51,17 @@ public class ExtHypervisor implements Hypervisor {
 
     @JsonProperty("cpu_info")
     private HypervisorCPUInfo cpuInfo;
+    /**
+     * The status of the hypervisor. One of enabled or disabled.
+     * Author:Wang Ting/王婷
+     */
+    private String status;
+
+    /**
+     * The state of the hypervisor. One of up or down
+     * Author:Wang Ting/王婷
+     */
+    private String state;
 
     @Override
     public String getId() {
@@ -144,14 +155,26 @@ public class ExtHypervisor implements Hypervisor {
     }
 
     @Override
+    public String getStatus() {
+        return status;
+    }
+
+    @Override
+    public String getState() {
+        return state;
+    }
+
+    @Override
     public String toString() {
         return Objects.toStringHelper(this).omitNullValues()
                 .add("id", id).add("hypervisor_hostname", hypervisorHostname).add("version", version).add("type", type)
                 .add("host_ip", hostIP).add("running", runningVM).add("freeDisk", freeDisk).add("freeRam", freeRam)
                 .add("vcpus", virtualCPU).add("usedVcpu", virtualUsedCPU).add("localDisk", localDisk).add("localDiskUsed", localDiskUsed)
-                .add("localMemory", localMemory).add("localMemoryUsed", localMemoryUsed).add("currentWorkload",currentWorkload)
+                .add("localMemory", localMemory).add("localMemoryUsed", localMemoryUsed).add("currentWorkload", currentWorkload)
                 .add("leastDiskAvail", leastDiskAvailable).add("running_vms", runningVM).add("service", service)
                 .add("cpuInfo", cpuInfo)
+                .add("status", status)
+                .add("state", state)
                 .toString();
     }
 
@@ -204,11 +227,10 @@ public class ExtHypervisor implements Hypervisor {
 
         @JsonCreator
         public static HypervisorCPUInfo value(String json) {
-            if (json != null && json.length() > 0)
-            {
+            if (json != null && json.length() > 0) {
                 try {
                     return ObjectMapperSingleton.getContext(HypervisorCPUInfo.class)
-                              .reader(HypervisorCPUInfo.class).readValue(json);
+                            .reader(HypervisorCPUInfo.class).readValue(json);
                 } catch (Exception e) {
                     LoggerFactory.getLogger(HypervisorCPUInfo.class).error(e.getMessage(), e);
                 }
@@ -245,7 +267,7 @@ public class ExtHypervisor implements Hypervisor {
         public String toString() {
             return Objects.toStringHelper(this).omitNullValues().add("vendor", vendor)
                     .add("model", model)
-                    .add("arch",  arch)
+                    .add("arch", arch)
                     .add("features", features)
                     .add("topology", topology)
                     .toString();
@@ -279,7 +301,7 @@ public class ExtHypervisor implements Hypervisor {
         @Override
         public String toString() {
             return Objects.toStringHelper(this).omitNullValues().add("cores", cores)
-                    .add("threads",  threads)
+                    .add("threads", threads)
                     .add("sockets", sockets)
                     .toString();
         }
