@@ -143,12 +143,39 @@ public class NeutronRouter implements Router {
 	@Override
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues()
-				    .add("id", id).add("name", name).add("tenantId", tenantId).add("admin_state_up", adminStateUp)
-				    .add("external_gateway_info", externalGatewayInfo).add("routes", routes)
-				    .addValue("\n")
-				    .toString();
+                .add("id", id).add("name", name).add("status", status).add("tenantId", tenantId)
+                .add("admin_state_up", adminStateUp).add("external_gateway_info", externalGatewayInfo)
+                .add("routes", routes).addValue("\n")
+                .toString();
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(id, name, status, tenantId, adminStateUp,
+				externalGatewayInfo, routes);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj instanceof NeutronRouter) {
+			NeutronRouter that = (NeutronRouter) obj;
+			if (java.util.Objects.equals(id, that.id) &&
+					java.util.Objects.equals(name, that.name) &&
+					java.util.Objects.equals(status, that.status) &&
+					java.util.Objects.equals(tenantId, that.tenantId) &&
+					java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
+					java.util.Objects.equals(externalGatewayInfo, that.externalGatewayInfo) &&
+					java.util.Objects.equals(routes, that.routes)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static class Routers extends ListResult<NeutronRouter> {
 
 		private static final long serialVersionUID = 1L;

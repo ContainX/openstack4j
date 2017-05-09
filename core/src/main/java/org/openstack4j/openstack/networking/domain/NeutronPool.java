@@ -46,6 +46,28 @@ public class NeutronPool implements Pool {
 	public String toString() {
 		return Objects.toStringHelper(this).omitNullValues().add("start", start).add("end", end).toString();
 	}
+
+
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(start, end);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj instanceof NeutronPool) {
+			NeutronPool that = (NeutronPool) obj;
+			if (java.util.Objects.equals(start, that.start) &&
+					java.util.Objects.equals(end, that.end)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 
