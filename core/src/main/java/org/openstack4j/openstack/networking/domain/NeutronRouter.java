@@ -189,6 +189,7 @@ public class NeutronRouter implements Router {
         }
         return false;
     }
+
     public static class Routers extends ListResult<NeutronRouter> {
 
         private static final long serialVersionUID = 1L;

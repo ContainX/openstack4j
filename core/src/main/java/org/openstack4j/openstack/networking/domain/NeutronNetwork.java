@@ -45,6 +45,11 @@ public class NeutronNetwork implements Network {
     private Boolean shared;
     @JsonProperty("provider:segmentation_id")
     private String providerSegID;
+    /**
+     * The maximum transmission unit (MTU) value to address fragmentation. Minimum value is 68 for IPv4, and 1280 for IPv6.
+     */
+    @JsonProperty("mtu")
+	private Integer mtu;
 
     public static NetworkBuilder builder() {
         return new NetworkConcreteBuilder();
@@ -186,6 +191,14 @@ public class NeutronNetwork implements Network {
     public String getProviderSegID() {
         return providerSegID;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+	public Integer getMTU() {
+		return mtu;
+	}
 
     /**
      * {@inheritDoc}
@@ -196,6 +209,7 @@ public class NeutronNetwork implements Network {
                 .add("name", name).add("status", status).add("subnets", subnets).add("provider:physical_network", providerPhyNet)
                 .add("adminStateUp", adminStateUp).add("tenantId", tenantId).add("provider:network_type", networkType).add("router:external", routerExternal)
                 .add("id", id).add("shared", shared).add("provider:segmentation_id", providerSegID)
+                .add("mtu", mtu)
                 .toString();
     }
 
