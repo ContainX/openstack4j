@@ -213,6 +213,9 @@ public class NeutronNetwork implements Network {
                 .toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return java.util.Objects.hash(name, status, subnets,
@@ -220,6 +223,9 @@ public class NeutronNetwork implements Network {
                 routerExternal, id, shared, providerSegID);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

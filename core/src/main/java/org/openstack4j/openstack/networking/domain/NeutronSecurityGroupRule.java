@@ -161,12 +161,18 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
                 .toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return java.util.Objects.hash(id, tenantId, securityGroupId, direction, etherType,
                 portRangeMin, portRangeMax, protocol, remoteGroupId, remoteIpPrefix);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

@@ -192,13 +192,18 @@ public class NeutronFloatingIP implements NetFloatingIP {
             .toString();
   }
 
-
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public int hashCode() {
     return java.util.Objects.hash(id, routerId, tenantId, floatingNetworkId,
             floatingIpAddress, fixedIpAddress, portId, status);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {

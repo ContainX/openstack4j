@@ -300,7 +300,9 @@ public class NeutronPort implements Port {
 				    .toString();
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		return java.util.Objects.hash(id, name, adminStateUp, deviceId,
@@ -309,6 +311,9 @@ public class NeutronPort implements Port {
 				vifType, vifDetails, vNicType, profile);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
