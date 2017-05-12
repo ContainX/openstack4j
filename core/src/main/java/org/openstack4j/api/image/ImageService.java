@@ -1,16 +1,16 @@
 package org.openstack4j.api.image;
 
+import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.image.CachedImage;
+import org.openstack4j.model.image.Image;
+import org.openstack4j.model.image.ImageMember;
+
+import javax.annotation.Nullable;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Nullable;
-
-import org.openstack4j.common.RestService;
-import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.image.Image;
-import org.openstack4j.model.image.ImageMember;
 
 /**
  * OpenStack (Glance) Image based Operations
@@ -18,6 +18,13 @@ import org.openstack4j.model.image.ImageMember;
  * @author Jeremy Unruh
  */
 public interface ImageService extends RestService {
+
+    /**
+     * List images currently in the glance image cache.
+     *
+     * @return list of cached images or empty list if the cache is empty or null if the cache is not enabled.
+     */
+    List<? extends CachedImage> listChachedImages();
 
     /**
      * Lists public VM images by the default page size defined by openstack 
