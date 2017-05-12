@@ -3,7 +3,7 @@ package org.openstack4j.openstack.networking.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import org.openstack4j.model.common.builder.ResourceBuilder;
 import org.openstack4j.model.network.ExternalGateway;
@@ -149,7 +149,7 @@ public class NeutronRouter implements Router {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", id).add("name", name).add("tenantId", tenantId).add("admin_state_up", adminStateUp)
                 .add("external_gateway_info", externalGatewayInfo).add("routes", routes)
                 .add("distributed", distributed)

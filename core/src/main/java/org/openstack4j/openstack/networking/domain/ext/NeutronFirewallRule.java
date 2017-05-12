@@ -12,33 +12,33 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Neutron Firewall (FwaaS) : Firewall Rule Entity.
- * 
+ *
  * @author Vishvesh Deshmukh
  */
 @JsonRootName("firewall_rule")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronFirewallRule implements FirewallRule {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * <p>Action of a Neutron (Firewall Rule - FwaaS) entity.</p>
-	 * 
+	 *
 	 * <p>Indicates whether firewall rule resource has action ALLOW/DENY.</p>
-	 * 
+	 *
 	 * @author Vishvesh Deshmukh
 	 */
 	public enum FirewallRuleAction {
-		ALLOW, 
-		DENY, 
+		ALLOW,
+		DENY,
 		UNRECOGNIZED;
-		
+
 		@JsonCreator
-		public static FirewallRuleAction value(String v) 
+		public static FirewallRuleAction value(String v)
 		{
 			if (v == null) return UNRECOGNIZED;
 			try {
@@ -47,26 +47,26 @@ public class NeutronFirewallRule implements FirewallRule {
 				return UNRECOGNIZED;
 			}
 		}
-		
+
 		@JsonValue
 		public String value() {
 			return name().toLowerCase();
 		}
 	}
-	
+
 	/**
 	 * <p>IPProtocolType of a Neutron (Firewall Rule - FwaaS) entity.</p>
-	 * 
+	 *
 	 * <p>Represents an IPProtocolType of a Neutron (Firewall Rule - FwaaS) entity.</p>
-	 * 
+	 *
 	 * @author Vishvesh Deshmukh
 	 */
 	public enum IPProtocol {
-		TCP, 
-		UDP, 
-		ICMP, 
+		TCP,
+		UDP,
+		ICMP,
 		UNRECOGNIZED;
-		
+
 		@JsonCreator
 		public static IPProtocol value(String v) {
 			if (v == null) return UNRECOGNIZED;
@@ -76,50 +76,50 @@ public class NeutronFirewallRule implements FirewallRule {
 				return UNRECOGNIZED;
 			}
 		}
-		
+
 		@JsonValue
 		public String value() {
 			return name().toLowerCase();
 		}
 	}
-	
+
 	private String id;
-	
+
 	private String name;
-	
+
 	@JsonProperty("tenant_id")
 	private String tenantId;
-	
+
 	private String description;
-	
+
 	private Boolean enabled;
-	
+
 	private Boolean shared;
-	
+
 	@JsonProperty("firewall_policy_id")
 	private String policyId;
-	
+
 	private FirewallRuleAction action;
-	
+
 	@JsonProperty("source_ip_address")
 	private String sourceIpAddress;
-	
+
 	@JsonProperty("destination_ip_address")
 	private String destinationIpAddress;
-	
+
 	private Integer position;
-	
+
 	private IPProtocol protocol;
-	
+
 	@JsonProperty("ip_version")
 	private IPVersionType ipVersion;
-	
+
 	@JsonProperty("source_port")
 	private String sourcePort;
-	
+
 	@JsonProperty("destination_port")
 	private String destinationPort;
-	
+
 	/**
 	 * Wrap this FirewallRule to a builder
 	 * @return FirewallRuleBuilder
@@ -128,7 +128,7 @@ public class NeutronFirewallRule implements FirewallRule {
 	public FirewallRuleBuilder toBuilder() {
 		return new FirewallRuleConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return FirewallRuleBuilder
 	 */
@@ -140,7 +140,7 @@ public class NeutronFirewallRule implements FirewallRule {
 	public String getId() {
 		return id;
 	}
-	
+
 	@Override
 	public String getName() {
 		return name;
@@ -165,7 +165,7 @@ public class NeutronFirewallRule implements FirewallRule {
 	public String getPolicy() {
 		return policyId;
 	}
-	
+
 	@Override
 	public IPProtocol getProtocol() {
 		return protocol;
@@ -210,10 +210,10 @@ public class NeutronFirewallRule implements FirewallRule {
 	public Boolean isEnabled() {
 		return enabled != null && enabled;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("id", id).add("name", name).add("position", position)
 				.add("action", action).add("ipVersion", ipVersion)
 				.add("policyId", policyId).add("enabled", enabled)
@@ -224,42 +224,42 @@ public class NeutronFirewallRule implements FirewallRule {
 				.add("description", description).add("protocol", protocol)
 				.toString();
 	}
-	
+
 	public static class FirewallRules extends ListResult<NeutronFirewallRule> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("firewall_rules")
 		List<NeutronFirewallRule> firewallRules;
-		
+
 		@Override
 		public List<NeutronFirewallRule> value() {
 			return firewallRules;
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					.add("firewall_rules", firewallRules).toString();
 		}
 	}
-	
+
 	public static class FirewallRuleConcreteBuilder implements FirewallRuleBuilder {
 		NeutronFirewallRule f;
-		
+
 		@Override
 		public FirewallRule build() {
 			return f;
 		}
-		
+
 		public FirewallRuleConcreteBuilder() {
 			this(new NeutronFirewallRule());
 		}
-		
+
 		public FirewallRuleConcreteBuilder(NeutronFirewallRule f){
 			this.f = f;
 		}
-		
+
 		@Override
 		public FirewallRuleBuilder from(FirewallRule in) {
 			this.f = (NeutronFirewallRule) in;

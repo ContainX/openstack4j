@@ -9,11 +9,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
- * A Sahara image 
- *  
+ * A Sahara image
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  */
 @JsonRootName("image")
@@ -146,24 +146,24 @@ public class SaharaImage implements Image {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 						.add("id", id).add("name", name).add("status", status).add("description", description).add("username", username)
 						.add("progress", progress).add("size", size).add("minRam", minRam)
 						.add("minDisk", minDisk).add("created", created).add("updated", updated)
 						.add("metadata", metadata).add("tags", tags).addValue("\n")
 						.toString();
 	}
-	
+
 	public static class SaharaImages extends ListResult<SaharaImage> {
 
 		private static final long serialVersionUID = 1L;
 
 		@JsonProperty("images")
 		private List<SaharaImage> images;
-		
+
 		public List<SaharaImage> value() {
 			return images;
 		}
-		
+
 	}
 }

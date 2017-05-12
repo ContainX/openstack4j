@@ -11,45 +11,45 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Neutron Firewall (FwaaS) : Firewall Policy Entity.
- * 
+ *
  * <p>This is the Parent class which is extended by {@link NeutronFirewallPolicy} & {@link NeutronFirewalPolicyRule} classes.
-	* Prior has `@JsonRootName("firewall_policy")` attribute whereas the later doesn't have 
-	* (which is used by `rule_insert/rule_remove` calls - which doesn't require JsonRootName).</p> 
- * 
+	* Prior has `@JsonRootName("firewall_policy")` attribute whereas the later doesn't have
+	* (which is used by `rule_insert/rule_remove` calls - which doesn't require JsonRootName).</p>
+ *
  * @see NeutronFirewallPolicy
  * @see NeutronFirewallPolicyRule
- * 
+ *
  * @author Vishvesh Deshmukh
  */
 public class AbstractNeutronFirewallPolicy implements FirewallPolicy {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	protected String id;
-	
+
 	protected String name;
-	
+
 	@JsonProperty("tenant_id")
 	protected String tenantId;
-	
+
 	protected String description;
-	
+
 	protected Boolean shared;
-	
+
 	protected Boolean audited;
-	
+
 	@JsonProperty("firewall_rules")
 	protected List<String> firewallRules;
-	
+
 	protected List<NeutronFirewallRule> neutronFirewallRules;
-	
+
 	@JsonProperty("firewall_list")
 	private List<String> firewallList;
-		
+
 	/**
 	 * Wrap this FirewallPolicy to a builder
 	 * @return FirewallPolicyBuilder
@@ -58,7 +58,7 @@ public class AbstractNeutronFirewallPolicy implements FirewallPolicy {
 	public FirewallPolicyBuilder toBuilder() {
 		return new FirewallPolicyConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return FirewallPolicyBuilder
 	 */
@@ -70,7 +70,7 @@ public class AbstractNeutronFirewallPolicy implements FirewallPolicy {
 	public String getId() {
 		return id;
 	}
-	
+
 	@Override
 	public String getName() {
 		return name;
@@ -90,7 +90,7 @@ public class AbstractNeutronFirewallPolicy implements FirewallPolicy {
 	public Boolean isShared() {
 		return shared != null && shared;
 	}
-	
+
 	@Override
 	public Boolean isAudited() {
 		return audited != null && audited;
@@ -121,52 +121,52 @@ public class AbstractNeutronFirewallPolicy implements FirewallPolicy {
 	public List<String> getFirewallList() {
 		return firewallList;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("id", id).add("name", name).add("shared", shared).add("audited", audited)
 				.add("tenantId", tenantId).add("description", description)
 				.add("firewallRuleIds", firewallRules).add("neutronFirewallRules", neutronFirewallRules)
 				.add("firewallList", firewallList)
 				.toString();
 	}
-	
+
 	public static class FirewallPolicies extends ListResult<NeutronFirewallPolicy> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("firewall_policies")
 		List<NeutronFirewallPolicy> firewallPolicies;
-		
+
 		@Override
 		public List<NeutronFirewallPolicy> value() {
 			return firewallPolicies;
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					.add("firewallPolicies", firewallPolicies).toString();
 		}
 	}
-	
+
 	public static class FirewallPolicyConcreteBuilder implements FirewallPolicyBuilder {
 		NeutronFirewallPolicy f;
-		
+
 		@Override
 		public FirewallPolicy build() {
 			return f;
 		}
-		
+
 		public FirewallPolicyConcreteBuilder() {
 			this(new NeutronFirewallPolicy());
 		}
-		
+
 		public FirewallPolicyConcreteBuilder(FirewallPolicy f) {
 			this.f = (NeutronFirewallPolicy) f;
 		}
-		
+
 		@Override
 		public FirewallPolicyBuilder from(FirewallPolicy in) {
 			this.f = (NeutronFirewallPolicy) in;

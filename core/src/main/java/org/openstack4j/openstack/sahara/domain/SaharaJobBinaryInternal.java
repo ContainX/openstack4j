@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * For mapping JSON response to/from java objects
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */
@@ -90,7 +90,7 @@ public class SaharaJobBinaryInternal implements JobBinaryInternal {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                    .add("name", name)
                    .add("tenant_id", tenantId)
                    .add("created_at", createdAt)
@@ -106,11 +106,11 @@ public class SaharaJobBinaryInternal implements JobBinaryInternal {
 
         @JsonProperty("binaries")
         private List<SaharaJobBinaryInternal> jobBinaryInternal;
-        
+
         public List<SaharaJobBinaryInternal> value() {
             return jobBinaryInternal;
         }
-        
+
     }
-    
+
 }

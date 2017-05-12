@@ -3,7 +3,7 @@ package org.openstack4j.openstack.common;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.common.Link;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Represents an Extension which adds additional functionality to the OpenStack API
- * 
+ *
  * @author Jeremy Unruh
  */
 public class ExtensionValue implements Extension {
@@ -25,28 +25,28 @@ public class ExtensionValue implements Extension {
 	Date updated;
 	String description;
 	List<GenericLink> links;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	public URI getNamespace() {
 		return namespace;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	public String getAlias() {
 		return alias;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -54,24 +54,24 @@ public class ExtensionValue implements Extension {
 	public Date getUpdated() {
 		return updated;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	public List<? extends Link> getLinks() {
 		return links;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(Extension.class).omitNullValues()
+		return MoreObjects.toStringHelper(Extension.class).omitNullValues()
 						.add("name", name)
 						.add("namespace", namespace)
 						.add("description", description)

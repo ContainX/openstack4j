@@ -3,7 +3,7 @@ package org.openstack4j.openstack.tacker.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  *
@@ -15,42 +15,42 @@ import com.google.common.base.Objects;
 public class AuthCredentials {
 
 	private String username;
-	
+
 	@JsonProperty("project_name")
 	private String projectName;
-	
+
 	@JsonProperty("user_id")
 	private String userId;
 
 	@JsonProperty("user_domain_name")
 	private String userDomainName;
-	
+
 	@JsonProperty("project_id")
 	private String projectId;
-	
+
 	@JsonProperty("auth_url")
 	private String authUrl;
-	
+
 	private String password;
-	
+
 	@JsonProperty("project_domain_name")
 	private String projectDomainName;
-	
+
 	public static AuthCredentials create() {
 		return new AuthCredentials();
 	}
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("username", username).add("projectName", projectName)
+		return MoreObjects.toStringHelper(this).add("username", username).add("projectName", projectName)
 				.add("userId", userId).add("userDomainName", userDomainName).add("projectId", projectId)
 				.add("authUrl", authUrl).add("password", password).add("projectDomainName", projectDomainName)
 				.toString();
 	}
-	
+
 	/**
 	 * Username to Set
-	 * 
+	 *
 	 * @param username the username to set
 	 * @return AuthCredentials
 	 */
@@ -58,10 +58,10 @@ public class AuthCredentials {
 		this.username = username;
 		return this;
 	}
-	
+
 	/**
 	 * password to Set
-	 * 
+	 *
 	 * @param password the password to set
 	 * @return AuthCredentials
 	 */
@@ -69,10 +69,10 @@ public class AuthCredentials {
 		this.password = password;
 		return this;
 	}
-	
+
 	/**
 	 * projectName to Set
-	 * 
+	 *
 	 * @param projectName the projectName to set
 	 * @return AuthCredentials
 	 */
@@ -80,10 +80,10 @@ public class AuthCredentials {
 		this.projectName = projectName;
 		return this;
 	}
-	
+
 	/**
 	 * userId to Set
-	 * 
+	 *
 	 * @param userId the userId to set
 	 * @return AuthCredentials
 	 */
@@ -91,10 +91,10 @@ public class AuthCredentials {
 		this.userId = userId;
 		return this;
 	}
-	
+
 	/**
 	 * authUrl to Set
-	 * 
+	 *
 	 * @param authUrl the authUrl to set
 	 * @return AuthCredentials
 	 */
@@ -102,10 +102,10 @@ public class AuthCredentials {
 		this.authUrl = authUrl;
 		return this;
 	}
-	
+
 	/**
 	 * projectId to Set
-	 * 
+	 *
 	 * @param projectId the projectId to set
 	 * @return AuthCredentials
 	 */
@@ -113,10 +113,10 @@ public class AuthCredentials {
 		this.projectId = projectId;
 		return this;
 	}
-	
+
 	/**
 	 * projectDomainName to Set
-	 * 
+	 *
 	 * @param projectDomainName the projectDomainName to set
 	 * @return AuthCredentials
 	 */
@@ -124,10 +124,10 @@ public class AuthCredentials {
 		this.projectDomainName = projectDomainName;
 		return this;
 	}
-	
+
 	/**
 	 * userDomainName to Set
-	 * 
+	 *
 	 * @param userDomainName the userDomainName to set
 	 * @return AuthCredentials
 	 */

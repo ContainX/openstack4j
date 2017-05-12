@@ -3,7 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.network.ext.LbMethod;
 import org.openstack4j.model.network.ext.LbPoolV2;
 import org.openstack4j.model.network.ext.Protocol;
@@ -150,7 +150,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
 
     @Override
     public String toString(){
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("tenantId", tenantId)
                 .add("name", name)
@@ -275,7 +275,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
 
         @Override
         public String toString(){
-            return Objects.toStringHelper(this)
+            return MoreObjects.toStringHelper(this)
                     .add("lbPools", lbPools)
                     .toString();
         }

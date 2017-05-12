@@ -7,11 +7,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Nova Host Resource describes the capacity and capability of a compute host that provides compute service
- * 
+ *
  * @author Qin An
  * @author Elina Meier
  */
@@ -19,7 +19,7 @@ import com.google.common.base.Objects;
 public class NovaHostResource implements HostResource {
 
     public static final long serialVersionUID = 1L;
-	
+
     private int cpu;
 	@JsonProperty("disk_gb")
     private int diskGb;
@@ -71,7 +71,7 @@ public class NovaHostResource implements HostResource {
     public String getProject() {
         return project;
     }
-	
+
 	/**
 	 * <p>Author:Wang Ting/王婷</p>
 	 * @Title: getService
@@ -104,10 +104,10 @@ public class NovaHostResource implements HostResource {
 	public String getHostName() {
 		return hostName;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("cpu", cpu)
 				.add("diskGb", diskGb)
 				.add("host", host)
@@ -140,7 +140,7 @@ public class NovaHostResource implements HostResource {
 		public String toString() {
 			return "NovaHostResources [hosts=" + hosts + "]";
 		}
-		
+
 	}
 
 }

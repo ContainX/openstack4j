@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class ExtAvailabilityZone implements AvailabilityZone {
 
     private static final long serialVersionUID = 1L;
-    
+
     ExtZoneState zoneState;
     String zoneName;
-        
+
     /**
      * {@inheritDoc}
      */
@@ -36,7 +36,7 @@ public class ExtAvailabilityZone implements AvailabilityZone {
     @JsonRootName("zoneState")
     static class ExtZoneState implements ZoneState {
         private static final long serialVersionUID = 1L;
-        
+
         boolean available;
 
         /**
@@ -46,7 +46,7 @@ public class ExtAvailabilityZone implements AvailabilityZone {
         public boolean getAvailable() {
             return available;
         }
-        
+
         @Override
         public String toString() {
             return toStringHelper(this).omitNullValues()
@@ -54,12 +54,12 @@ public class ExtAvailabilityZone implements AvailabilityZone {
                      .toString();
         }
     }
-    
-    
+
+
     public static class AvailabilityZones extends ListResult<ExtAvailabilityZone> {
 
         private static final long serialVersionUID = 1L;
-        
+
         @JsonProperty("availabilityZoneInfo")
         private List<ExtAvailabilityZone> result;
 
@@ -68,6 +68,6 @@ public class ExtAvailabilityZone implements AvailabilityZone {
             return result;
         }
 
-        
+
     }
 }

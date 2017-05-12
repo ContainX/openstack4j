@@ -10,6 +10,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 @JsonRootName("policy")
@@ -91,7 +92,7 @@ public class KeystonePolicy implements Policy {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", id)
                 .add("projectId", projectId)
                 .add("userId", userId)

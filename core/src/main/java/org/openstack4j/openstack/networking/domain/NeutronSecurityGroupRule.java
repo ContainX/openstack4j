@@ -8,7 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack Neutron Security Group Rule model.
@@ -147,7 +147,7 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", id).add("tenantId", tenantId)
                 .add("securityGroupId", securityGroupId)
                 .add("direction", direction)
@@ -199,7 +199,7 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
 
     /**
      * The Class SecurityGroupRules.
-     * 
+     *
      *
      * @author Nathan Anderson
      */
@@ -221,7 +221,7 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
 
     /**
      * The Class SecurityGroupRuleConcreteBuilder.
-     * 
+     *
      *
      * @author Nathan Anderson
      */

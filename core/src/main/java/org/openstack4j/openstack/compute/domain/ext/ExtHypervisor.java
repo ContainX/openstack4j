@@ -3,7 +3,7 @@ package org.openstack4j.openstack.compute.domain.ext;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.model.compute.ext.Hypervisor;
 import org.openstack4j.openstack.common.ListResult;
@@ -166,7 +166,7 @@ public class ExtHypervisor implements Hypervisor {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", id).add("hypervisor_hostname", hypervisorHostname).add("version", version).add("type", type)
                 .add("host_ip", hostIP).add("running", runningVM).add("freeDisk", freeDisk).add("freeRam", freeRam)
                 .add("vcpus", virtualCPU).add("usedVcpu", virtualUsedCPU).add("localDisk", localDisk).add("localDiskUsed", localDiskUsed)
@@ -197,7 +197,7 @@ public class ExtHypervisor implements Hypervisor {
 
         @Override
         public String toString() {
-            return Objects.toStringHelper(this).omitNullValues().add("id", id).add("host", host).toString();
+            return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("host", host).toString();
         }
     }
 
@@ -265,7 +265,7 @@ public class ExtHypervisor implements Hypervisor {
 
         @Override
         public String toString() {
-            return Objects.toStringHelper(this).omitNullValues().add("vendor", vendor)
+            return MoreObjects.toStringHelper(this).omitNullValues().add("vendor", vendor)
                     .add("model", model)
                     .add("arch", arch)
                     .add("features", features)
@@ -300,7 +300,7 @@ public class ExtHypervisor implements Hypervisor {
 
         @Override
         public String toString() {
-            return Objects.toStringHelper(this).omitNullValues().add("cores", cores)
+            return MoreObjects.toStringHelper(this).omitNullValues().add("cores", cores)
                     .add("threads", threads)
                     .add("sockets", sockets)
                     .toString();

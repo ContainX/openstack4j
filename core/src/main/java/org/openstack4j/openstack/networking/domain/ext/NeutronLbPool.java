@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.openstack4j.openstack.networking.domain.ext;
 
@@ -14,11 +14,11 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A pool of a load balancer
- * 
+ *
  * @author liujunpeng
  *
  */
@@ -28,7 +28,7 @@ public class NeutronLbPool implements LbPool {
 
 	private static final long serialVersionUID = 1L;
 
-	
+
 	@JsonProperty("health_monitors")
 	private List<String> healthMonitors;
 	private String id;
@@ -40,13 +40,13 @@ public class NeutronLbPool implements LbPool {
 	private String description;
 	@JsonProperty("subnet_id")
 	private String subnetId;
-	
+
 	private Protocol protocol;
-	
+
 	private String provider;
 	@JsonProperty("lb_method")
 	private LbMethod lbMethod;
-	
+
 	private List<String> members;
 	@JsonProperty("admin_state_up")
 	private boolean adminStateUp;
@@ -96,7 +96,7 @@ public class NeutronLbPool implements LbPool {
 	 */
 	@Override
 	public String getDescription() {
-		
+
 		return description;
 	}
 
@@ -163,10 +163,10 @@ public class NeutronLbPool implements LbPool {
 	public String getStatus() {
 		return status;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("id", id)
 				.add("adminStateUp", adminStateUp)
 				.add("description", description)
@@ -182,7 +182,7 @@ public class NeutronLbPool implements LbPool {
 				.add("vipId", vipId)
 				.toString();
 	}
-	
+
 	public static class LbPoolContreteBuilder implements LbPoolBuilder{
 
 		private NeutronLbPool m;
@@ -204,7 +204,7 @@ public class NeutronLbPool implements LbPool {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -214,7 +214,7 @@ public class NeutronLbPool implements LbPool {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -224,7 +224,7 @@ public class NeutronLbPool implements LbPool {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -234,7 +234,7 @@ public class NeutronLbPool implements LbPool {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -244,7 +244,7 @@ public class NeutronLbPool implements LbPool {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -254,7 +254,7 @@ public class NeutronLbPool implements LbPool {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -264,7 +264,7 @@ public class NeutronLbPool implements LbPool {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -273,7 +273,7 @@ public class NeutronLbPool implements LbPool {
 			return this;
 		}
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -281,9 +281,9 @@ public class NeutronLbPool implements LbPool {
 			m.protocol = protocol;
 			return this;
 		}
-		
+
 	}
-	
+
 	public static class LbPools extends ListResult<NeutronLbPool> {
 
 		private static final long serialVersionUID = 1L;
@@ -298,14 +298,14 @@ public class NeutronLbPool implements LbPool {
 		}
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this)
+			return MoreObjects.toStringHelper(this)
 					.add("lbPools", lbPools)
 					.toString();
 		}
-		
+
 	}
 
-	
+
 	public static LbPoolBuilder builder(){
 		return new LbPoolContreteBuilder();
 	}

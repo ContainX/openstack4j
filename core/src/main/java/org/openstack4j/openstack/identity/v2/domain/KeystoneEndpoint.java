@@ -9,14 +9,15 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
  * Endpoint Model is used to describe a network address which is described by URL's and other service
  * information depending on the context it was retrieved in.
- * 
+ *
  * @author Jeremy Unruh
- * 
+ *
  * @see <a href="http://docs.openstack.org/api/openstack-identity-service/2.0/content/GET_listEndpointsForToken_v2.0_tokens__tokenId__endpoints_Token_Operations.html#GET_listEndpointsForToken_v2.0_tokens__tokenId__endpoints_Token_Operations-Response"
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -35,16 +36,16 @@ public class KeystoneEndpoint implements Endpoint {
 	private String versionId;
 	private URI versionInfo;
 	private URI versionList;
-	
+
 	public static EndpointBuilder builder() {
 		return new EndPointConcreteBuilder();
 	}
-	
+
 	@Override
 	public EndpointBuilder toBuilder() {
 		return new EndPointConcreteBuilder(this);
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -76,55 +77,55 @@ public class KeystoneEndpoint implements Endpoint {
 	public URI getPublicURL() {
 		return publicURL;
 	}
-	
+
 	/**
 	 * @return the internal URL for this endpoint
 	 */
 	public URI getInternalURL() {
 		return internalURL;
 	}
-	
+
 	/**
    * @return the region of the endpoint or null
    */
 	public String getRegion() {
 		return region;
 	}
-	
+
 	/**
 	 * @return the tenant identifier for this endpoint or null
 	 */
 	public String getTenantId() {
 		return tenantId;
 	}
-	
+
 	/**
 	 * @return the version id or null
 	 */
 	public String getVersionId() {
 		return versionId;
 	}
-	
+
 	/**
 	 * @return the version information when endpoint is listed as part of Access Service Catalog, otherwise null
 	 */
 	public URI getVersionInfo() {
 		return versionInfo;
 	}
-	
+
 	/**
 	 * @return the version list when endpoint is listed as part of Access Service Catalog, otherwise null
 	 */
 	public URI getVersionList() {
 		return versionList;
 	}
-	
+
 	 @Override
    public int hashCode() {
       return Objects.hashCode(id, versionId, region, publicURL, internalURL, adminURL, versionInfo, versionList,
             tenantId, type);
    }
-	 
+
    @Override
    public boolean equals(Object obj) {
       if (this == obj)
@@ -138,40 +139,40 @@ public class KeystoneEndpoint implements Endpoint {
             && Objects.equal(this.versionInfo, that.versionInfo) && Objects.equal(this.versionList, that.versionList)
             && Objects.equal(this.tenantId, that.tenantId) && Objects.equal(this.type, that.type);
    }
-	
+
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				   .add("id", id).add("name", name).add("type", type)
 				   .add("region", region).add("publicURL", publicURL)
 				   .add("internalURL", internalURL).add("adminURL", adminURL)
 				   .add("versionId", versionId).add("versionInfo", versionInfo).add("versionList", versionList)
 				   .toString();
 	}
-	
+
 	@JsonIgnoreProperties(ignoreUnknown=true)
 	public static class Endpoints extends ListResult<KeystoneEndpoint> {
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("endpoints")
 		private List<KeystoneEndpoint> endpoints;
-		
+
 		public List<KeystoneEndpoint> value() {
 			return endpoints;
 		}
 	}
-	
+
 	public static class EndPointConcreteBuilder implements EndpointBuilder {
-		
+
 		protected KeystoneEndpoint model;
-		
+
 		protected EndPointConcreteBuilder() {
 			this(new KeystoneEndpoint());
 		}
-		
+
 		EndPointConcreteBuilder(KeystoneEndpoint model) {
 			this.model = model;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getRegion()
 		 */
@@ -179,7 +180,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.region = region;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getPublicURL()
 		 */
@@ -187,7 +188,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.publicURL = publicURL;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getInternalURL()
 		 */
@@ -195,7 +196,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.internalURL = internalURL;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getTenantId()
 		 */
@@ -203,7 +204,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.tenantId = tenantId;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getType()
 		 */
@@ -211,7 +212,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.type = type;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getId()
 		 */
@@ -219,7 +220,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.id = id;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getName()
 		 */
@@ -227,7 +228,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.name = name;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getAdminURL()
 		 */
@@ -235,7 +236,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.adminURL = adminURL;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getVersionInfo()
 		 */
@@ -243,7 +244,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.versionInfo = versionInfo;
 			return this;
 		}
-		
+
 		/**
 		 * @see KeystoneEndpoint#getVersionList()
 		 */
@@ -251,7 +252,7 @@ public class KeystoneEndpoint implements Endpoint {
 			model.versionList = versionList;
 			return this;
 		}
-		
+
 		@Override
 		public KeystoneEndpoint build() {
 			return model;

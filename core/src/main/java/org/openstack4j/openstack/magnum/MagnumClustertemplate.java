@@ -12,7 +12,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumClustertemplate implements Clustertemplate {
@@ -85,11 +85,11 @@ public class MagnumClustertemplate implements Clustertemplate {
     @JsonProperty("dns_nameserver")
     private String dnsNameserver;
 
-    
+
     public static ClustertemplateBuilder builder() {
         return new ClustertemplateConcreteBuilder();
     }
-    
+
     @Override
     public ClustertemplateBuilder toBuilder() {
         return new ClustertemplateConcreteBuilder(this);
@@ -221,7 +221,7 @@ public class MagnumClustertemplate implements Clustertemplate {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("insecureRegistry", insecureRegistry)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("insecureRegistry", insecureRegistry)
                 .add("links", links).add("httpProxy", httpProxy).add("updatedAt", updatedAt)
                 .add("floatingIpEnabled", floatingIpEnabled).add("fixedSubnet", fixedSubnet)
                 .add("masterFlavorId", masterFlavorId).add("uuid", uuid).add("noProxy", noProxy)

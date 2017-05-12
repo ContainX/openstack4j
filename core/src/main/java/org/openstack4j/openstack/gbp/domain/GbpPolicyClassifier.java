@@ -10,17 +10,17 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Model implementation for Policy Classifier
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_classifier")
 public class GbpPolicyClassifier implements PolicyClassifier {
     private static final long serialVersionUID = 1L;
-    private String name; 
+    private String name;
     @JsonProperty("tenant_id")
     private String tenantId;
     private String id;
@@ -30,9 +30,9 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     private String portRange;
     private String protocol;
     private Boolean shared;
-    
 
-     
+
+
     @Override
     public PolicyClassifierBuilder toBuilder() {
         return new PolicyClassifierConcreteBuilder(this);
@@ -93,7 +93,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     }
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("portRange", portRange).add("protocol", protocol).add("shared", shared).toString();
     }
     public static class PolicyClassifiers extends ListResult<GbpPolicyClassifier>{
@@ -106,8 +106,8 @@ public class GbpPolicyClassifier implements PolicyClassifier {
             return policyClassfiers;
         }
     }
-    
-    
+
+
     public static class PolicyClassifierConcreteBuilder implements PolicyClassifierBuilder{
 
         private GbpPolicyClassifier policyClassfier;
@@ -149,7 +149,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
                 range=min+":"+this.policyClassfier.portRange;
             else
                 range=""+min;
-            
+
             this.policyClassfier.portRange=range;
             return this;
         }
@@ -161,7 +161,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
                 range=this.policyClassfier.portRange+":"+max;
             else
                 range=""+max;
-            
+
             this.policyClassfier.portRange=range;
             return this;
         }
@@ -183,7 +183,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
             this.policyClassfier.shared=shared;
             return this;
         }
-        
+
     }
 
 

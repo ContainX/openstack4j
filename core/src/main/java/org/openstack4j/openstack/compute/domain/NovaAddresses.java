@@ -8,7 +8,7 @@ import org.openstack4j.model.compute.Addresses;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -18,15 +18,15 @@ public class NovaAddresses implements Addresses {
 
 	@JsonProperty("addresses")
 	private Map<String, List<NovaAddress>> addresses = Maps.newHashMap();
-	
+
 	@Override
 	public void add(String key, Address value) {
 		if (!addresses.containsKey(key))
 			addresses.put(key, Lists.<NovaAddress>newArrayList());
-		
+
 		addresses.get(key).add((NovaAddress) value);
 	}
-	
+
 	@JsonAnySetter
 	public void add(String key, List<NovaAddress> value) {
 		addresses.put(key, value);
@@ -47,16 +47,16 @@ public class NovaAddresses implements Addresses {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 						.add("addresses", addresses).addValue("\n")
 						.toString();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private <T> T encapsulate() {
 		return (T) addresses;
 	}
-	
+
 	public static class NovaAddress implements Address {
 
 		private static final long serialVersionUID = 1L;
@@ -66,7 +66,7 @@ public class NovaAddresses implements Addresses {
 		private String addr;
 		@JsonProperty("OS-EXT-IPS:type")
 		private String type;
-		
+
 		@Override
 		public String getMacAddr() {
 			return macAddr;
@@ -86,18 +86,18 @@ public class NovaAddresses implements Addresses {
 		public String getType() {
 			return type;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 							.add("address", addr).add("type", type).add("version", version)
 							.add("macaddr", macAddr).addValue("\n")
 							.toString();
 		}
-		
+
 	}
-	
+
 }

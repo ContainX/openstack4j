@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.SortedSetMultimap;
 import com.google.common.collect.TreeMultimap;
 
@@ -37,8 +37,8 @@ public class KeystoneAccess implements Access {
 	private AuthStore credentials;
 	private TokenAuth tokenAuth;
 	@JsonIgnore
-	private volatile SortedSetMultimap<String, AccessService> aggregatedCatalog; 
-	
+	private volatile SortedSetMultimap<String, AccessService> aggregatedCatalog;
+
 	/**
 	 * @return the token
 	 */
@@ -52,11 +52,11 @@ public class KeystoneAccess implements Access {
 	public List<? extends Service> getServiceCatalog() {
 		return serviceCatalog;
 	}
-	
+
 	/**
 	 * A Lazy loading Aggregated Service Catalog Mapping.  The key is a stripped version service type or name with a collection
 	 * of Services sorted by version
-	 * 
+	 *
 	 * @return sorted aggregate service catalog
 	 */
 	@Override
@@ -100,11 +100,11 @@ public class KeystoneAccess implements Access {
 	public AuthStore getCredentials() {
 		return credentials;
 	}
-	
+
 	public TokenAuth getTokenAuth() {
 	    return tokenAuth;
 	}
-	
+
 	public boolean isCredentialType() {
 	    return credentials != null;
 	}
@@ -114,7 +114,7 @@ public class KeystoneAccess implements Access {
 		this.endpoint = endpoint;
 		return this;
 	}
-	
+
 	public KeystoneAccess applyContext(String endpoint, TokenAuth token) {
         this.endpoint = endpoint;
         return this;
@@ -124,7 +124,7 @@ public class KeystoneAccess implements Access {
 	 * {@inheritDoc}
 	 */
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("token", token).add("serviceCatalog", serviceCatalog).add("user", user)
 				.toString();
 	}
@@ -133,7 +133,7 @@ public class KeystoneAccess implements Access {
 	public static final class AccessUser implements UserDetails, Serializable {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		private String id;
 		private String name;
 		private String username;
@@ -171,7 +171,7 @@ public class KeystoneAccess implements Access {
 		 * {@inheritDoc}
 		 */
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					.add("id", id).add("name", name).add("username", username).add("enabled", enabled)
 					.add("roles", roles).add("rolesLinks", rolesLinks)
 					.toString();
@@ -186,7 +186,7 @@ public class KeystoneAccess implements Access {
 			 * {@inheritDoc}
 			 */
 			public String toString() {
-				return Objects.toStringHelper(this).omitNullValues()
+				return MoreObjects.toStringHelper(this).omitNullValues()
 						.add("id", getId()).add("name", getName()).add("tenantId", getTenantId())
 						.toString();
 			}
@@ -208,7 +208,7 @@ public class KeystoneAccess implements Access {
 	public static final class AccessService implements Service, Comparable<AccessService>, Serializable
 	{
 		private static final long serialVersionUID = 1L;
-		
+
 		private String type;
 		private String name;
 		private List<KeystoneEndpoint> endpoints;
@@ -255,7 +255,7 @@ public class KeystoneAccess implements Access {
 		public List<? extends Link> getEndpointsLinks() {
 			return endpointsLinks;
 		}
-		
+
 		@JsonIgnore
 		public Integer getVersion() {
 		    if (version == null) {
@@ -268,7 +268,7 @@ public class KeystoneAccess implements Access {
 		 * {@inheritDoc}
 		 */
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					.add("name", name).add("type", type).add("version", getVersion()).add("endpoints", endpoints).addValue("\n")
 					.toString();
 		}
@@ -303,7 +303,7 @@ public class KeystoneAccess implements Access {
 	    else
 	        uniq = "";
 	    return String.format(CACHE_FMT, endpoint, uniq);
-	    
+
     }
 
 }

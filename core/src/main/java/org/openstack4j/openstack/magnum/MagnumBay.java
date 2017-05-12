@@ -8,7 +8,7 @@ import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 public class MagnumBay implements Bay {
     private static final long serialVersionUID = 1L;
@@ -34,7 +34,7 @@ public class MagnumBay implements Bay {
     public static BayBuilder builder() {
         return new BayConcreteBuilder();
     }
-    
+
     @Override
     public BayBuilder toBuilder() {
         return new BayConcreteBuilder(this);
@@ -78,7 +78,7 @@ public class MagnumBay implements Bay {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("status", status).add("uuid", uuid).add("links", links)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("status", status).add("uuid", uuid).add("links", links)
                 .add("stackId", stackId).add("masterCount", masterCount).add("baymodelId", baymodelId)
                 .add("nodeCount", nodeCount).add("bayCreateTimeout", bayCreateTimeout).add("name", name).toString();
     }

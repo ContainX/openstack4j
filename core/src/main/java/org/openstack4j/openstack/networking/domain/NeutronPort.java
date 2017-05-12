@@ -18,13 +18,13 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
  * A Neutron Port
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("port")
@@ -47,7 +47,7 @@ public class NeutronPort implements Port {
 
 	@JsonProperty("fixed_ips")
 	private Set<NeutronIP> fixedIps;
-	
+
 	@JsonProperty("allowed_address_pairs")
 	private Set<NeutronAllowedAddressPair> allowedAddressPairs;
 
@@ -65,37 +65,37 @@ public class NeutronPort implements Port {
 
 	@JsonProperty("security_groups")
 	private List<String> securityGroups;
-	
+
 	@JsonProperty("extra_dhcp_opts")
 	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates;
-	
+
 	@JsonProperty("port_security_enabled")
-	private Boolean portSecurityEnabled; 
-	
+	private Boolean portSecurityEnabled;
+
 	@JsonProperty("binding:host_id")
 	private String hostId;
-	
+
 	@JsonProperty("binding:vif_type")
 	private String vifType;
-	
+
 	@JsonProperty("binding:vif_details")
 	private Map<String, Object> vifDetails;
 
 	@JsonProperty("binding:vnic_type")
 	private String vNicType;
-	
+
 	@JsonProperty("binding:profile")
 	private Map<String, Object> profile;
-       
+
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
 	}
-	
+
 	@Override
 	public PortBuilder toBuilder() {
 		return new PortConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -167,7 +167,7 @@ public class NeutronPort implements Port {
 	public Set<? extends IP> getFixedIps() {
 		return fixedIps;
 	}
-	
+
 	/**
 	* {@inheritDoc}
 	*/
@@ -255,7 +255,7 @@ public class NeutronPort implements Port {
 	public void setTenantId(String tenantId) {
 		this.tenantId = tenantId;
 	}
-	
+
 	public void setHostId(String hostId) {
 		this.hostId = hostId;
 	}
@@ -284,13 +284,13 @@ public class NeutronPort implements Port {
         return portSecurityEnabled;
     }
 
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("id", id).add("name", name).add("adminStateUp", adminStateUp).add("deviceId", deviceId)
 				    .add("deviceOwner", deviceOwner).add("fixedIps", fixedIps).add("macAddress", macAddress)
 				    .add("networkId", networkId).add("tenantId", tenantId).add("securityGroups", securityGroups)
@@ -348,24 +348,24 @@ public class NeutronPort implements Port {
 	public static class Ports extends ListResult<NeutronPort> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("ports")
 		private List<NeutronPort> ports;
-		
+
 		@Override
 		protected List<NeutronPort> value() {
 			return ports;
 		}
 	}
-	
+
 	public static class PortConcreteBuilder extends ResourceBuilder<Port, PortConcreteBuilder> implements PortBuilder {
 
 		private NeutronPort m;
-		
-		PortConcreteBuilder() { 
+
+		PortConcreteBuilder() {
 			this(new NeutronPort());
 		}
-		
+
 		PortConcreteBuilder(NeutronPort port) {
 			this.m = port;
 		}
@@ -397,26 +397,26 @@ public class NeutronPort implements Port {
 		public PortBuilder fixedIp(String address, String subnetId) {
 			if (m.fixedIps == null)
 				m.fixedIps = Sets.newHashSet();
-			
+
 			m.fixedIps.add(new NeutronIP(address, subnetId));
 			return this;
 		}
-		
+
 		@Override
         public PortBuilder removeFixedIp(String address, String subnetId) {
 			if (m.fixedIps == null)
 			  m.fixedIps = Sets.newHashSet();
-			  
+
 			Iterator<NeutronIP> iter = m.fixedIps.iterator();
-			  
+
 			while (iter.hasNext()) {
 			  NeutronIP fixedIP = iter.next();
-			  if (fixedIP.getSubnetId() != null && fixedIP.getSubnetId().equals(subnetId) && 
+			  if (fixedIP.getSubnetId() != null && fixedIP.getSubnetId().equals(subnetId) &&
 			      fixedIP.getIpAddress() != null && fixedIP.getIpAddress().equals(address)) {
 			    iter.remove();
 			  }
 			}
-		  
+
 			return this;
 		}
 
@@ -446,7 +446,7 @@ public class NeutronPort implements Port {
 
 			return this;
 		}
-    
+
 
 		@Override
 		public PortBuilder adminState(boolean adminStateUp) {
@@ -459,7 +459,7 @@ public class NeutronPort implements Port {
 			m.state = state;
 			return this;
 		}
-		
+
 		@Override
 		public Port build() {
 			return m;
@@ -498,7 +498,7 @@ public class NeutronPort implements Port {
             m.portSecurityEnabled=portSecurityEnabled;
             return this;
         }
-        
+
         @Override
         public PortBuilder hostId(String hostId) {
 			m.hostId = hostId;

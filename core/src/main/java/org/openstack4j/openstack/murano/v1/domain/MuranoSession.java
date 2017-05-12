@@ -1,7 +1,7 @@
 package org.openstack4j.openstack.murano.v1.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.murano.v1.domain.AppCatalogSession;
 
 /**
@@ -91,7 +91,7 @@ public class MuranoSession implements AppCatalogSession {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", this.id)
                 .add("state", this.state)
                 .add("created", this.created)

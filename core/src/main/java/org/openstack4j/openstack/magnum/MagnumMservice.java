@@ -10,13 +10,13 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonRootName("mservice")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumMservice implements Mservice {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	@JsonProperty
@@ -33,21 +33,21 @@ public class MagnumMservice implements Mservice {
 	@JsonProperty("disabled_reason")
 	private String disabledReason;
 
-	
+
 	/**
 	 * Magnum service builder
-	 * 
+	 *
 	 * @return the Magnum Service builder
 	 */
 	public static MserviceBuilder builder() {
 		return new MserviceConcreteBuilder();
 	}
-	
+
 	@Override
 	public MserviceBuilder toBuilder() {
 		return new MserviceConcreteBuilder(this);
 	}
-	
+
 	 /**
      * {@inheritDoc}
      */
@@ -56,15 +56,15 @@ public class MagnumMservice implements Mservice {
 		return id;
 	}
 
-	/** 
+	/**
 	 * Set the id
-	 * 
+	 *
 	 * @param id
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	 /**
      * {@inheritDoc}
      */
@@ -73,9 +73,9 @@ public class MagnumMservice implements Mservice {
 		return binary;
 	}
 
-	/** 
+	/**
 	 * Set the binary
-	 * 
+	 *
 	 * @param binary
 	 */
 	public void setBinary(String binary) {
@@ -92,7 +92,7 @@ public class MagnumMservice implements Mservice {
 
 	/**
 	 * Set the creation date
-	 * 
+	 *
 	 * @param createdAt
 	 */
 	public void setCreatedAt(String createdAt) {
@@ -109,7 +109,7 @@ public class MagnumMservice implements Mservice {
 
 	/**
 	 * Set the state
-	 * 
+	 *
 	 * @param state
 	 */
 	public void setState(String state) {
@@ -126,7 +126,7 @@ public class MagnumMservice implements Mservice {
 
 	/**
 	 * Set the report count
-	 * 
+	 *
 	 * @param reportCount
 	 */
 	public void setReportCount(int reportCount) {
@@ -143,7 +143,7 @@ public class MagnumMservice implements Mservice {
 
 	/**
 	 * Set the updated time
-	 * 
+	 *
 	 * @param updatedAt
 	 */
 	public void setUpdatedAt(String updatedAt) {
@@ -160,7 +160,7 @@ public class MagnumMservice implements Mservice {
 
 	/**
 	 * Set the hostname
-	 * 
+	 *
 	 * @param host
 	 */
 	public void setHost(String host) {
@@ -174,11 +174,11 @@ public class MagnumMservice implements Mservice {
 	public String getDisabledReason() {
 		return disabledReason;
 	}
-	
+
 
 	/**
 	 * Set the disabled reason
-	 * 
+	 *
 	 * @param disabledReason
 	 */
 	public void setDisabledReason(String disabledReason) {
@@ -187,7 +187,7 @@ public class MagnumMservice implements Mservice {
 
 	@Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", id)
                 .add("binary", binary)
                 .add("createdAt", createdAt)
@@ -200,7 +200,7 @@ public class MagnumMservice implements Mservice {
     }
 
 	/**
-	 * Concrete builder	containing MagnumMservice as model 
+	 * Concrete builder	containing MagnumMservice as model
 	 *
 	 */
 	public static class MserviceConcreteBuilder implements MserviceBuilder {
@@ -277,7 +277,7 @@ public class MagnumMservice implements Mservice {
 	}
 
 	/**
-	 * List of Magnum Services 
+	 * List of Magnum Services
 	 *
 	 */
 	public static class Mservices extends ListResult<MagnumMservice> {
