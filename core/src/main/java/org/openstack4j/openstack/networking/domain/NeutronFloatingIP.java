@@ -180,7 +180,7 @@ public class NeutronFloatingIP implements NetFloatingIP {
 	this.status = status;
   }
 
-/**
+  /**
    * {@inheritDoc}
    */
   @Override
@@ -191,7 +191,41 @@ public class NeutronFloatingIP implements NetFloatingIP {
             .addValue("\n")
             .toString();
   }
-  
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+    return java.util.Objects.hash(id, routerId, tenantId, floatingNetworkId,
+            floatingIpAddress, fixedIpAddress, portId, status);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (obj instanceof NeutronFloatingIP) {
+      NeutronFloatingIP that = (NeutronFloatingIP) obj;
+      if (java.util.Objects.equals(id, that.id) &&
+              java.util.Objects.equals(routerId, that.routerId) &&
+              java.util.Objects.equals(tenantId, that.tenantId) &&
+              java.util.Objects.equals(floatingNetworkId, that.floatingNetworkId) &&
+              java.util.Objects.equals(floatingIpAddress, that.floatingIpAddress) &&
+              java.util.Objects.equals(fixedIpAddress, that.fixedIpAddress) &&
+              java.util.Objects.equals(portId, that.portId) &&
+              java.util.Objects.equals(status, that.status)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * The Class FloatingIPs.
    * 

@@ -128,7 +128,37 @@ public class NeutronSecurityGroup implements SecurityGroup {
             .addValue("\n")
             .toString();
   }
-  
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+    return java.util.Objects.hash(id, tenantId, name, description, rules);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (obj instanceof NeutronSecurityGroup) {
+      NeutronSecurityGroup that = (NeutronSecurityGroup) obj;
+      if (java.util.Objects.equals(id, that.id) &&
+              java.util.Objects.equals(tenantId, that.tenantId) &&
+              java.util.Objects.equals(name, that.name) &&
+              java.util.Objects.equals(description, that.description) &&
+              java.util.Objects.equals(rules, that.rules)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * The Class SecurityGroups.
    *
@@ -170,7 +200,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
     /**
      * Instantiates a new security group rule concrete builder.
      *
-     * @param rule the rule
+     * @param in the rule
      */
     public SecurityGroupConcreteBuilder(SecurityGroup in) {
       g = (NeutronSecurityGroup) in;

@@ -231,6 +231,46 @@ public class NeutronSubnet implements Subnet {
 				.toString();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+			return java.util.Objects.hash(id, name, enableDHCP, networkId,
+							tenantId, dnsNames, pools, hostRoutes, ipVersion, gateway,
+							cidr, ipv6AddressMode, ipv6RaMode);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+			if (this == obj) {
+					return true;
+			}
+
+			if (obj instanceof NeutronSubnet) {
+					NeutronSubnet that = (NeutronSubnet) obj;
+					if (java.util.Objects.equals(id, that.id) &&
+									java.util.Objects.equals(name, that.name) &&
+									java.util.Objects.equals(enableDHCP, that.enableDHCP) &&
+									java.util.Objects.equals(networkId, that.networkId) &&
+									java.util.Objects.equals(tenantId, that.tenantId) &&
+									java.util.Objects.equals(dnsNames, that.dnsNames) &&
+									java.util.Objects.equals(pools, that.pools) &&
+									java.util.Objects.equals(hostRoutes, that.hostRoutes) &&
+									java.util.Objects.equals(ipVersion, that.ipVersion) &&
+									java.util.Objects.equals(gateway, that.gateway) &&
+									java.util.Objects.equals(cidr, that.cidr) &&
+									java.util.Objects.equals(ipv6AddressMode, that.ipv6AddressMode) &&
+									java.util.Objects.equals(ipv6RaMode, that.ipv6RaMode)) {
+							return true;
+					}
+			}
+			return false;
+	}
+
     @JsonRootName("subnet")
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class NeutronSubnetNoGateway extends NeutronSubnet {

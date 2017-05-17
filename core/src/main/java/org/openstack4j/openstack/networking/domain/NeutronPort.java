@@ -299,7 +299,52 @@ public class NeutronPort implements Port {
 				    .add("binding:vnic_type", vNicType).add("binding:profile", profile)
 				    .toString();
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(id, name, adminStateUp, deviceId,
+				deviceOwner, fixedIps, macAddress, networkId, tenantId,
+				securityGroups, allowedAddressPairs, portSecurityEnabled, hostId,
+				vifType, vifDetails, vNicType, profile);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj instanceof NeutronPort) {
+			NeutronPort that = (NeutronPort) obj;
+			if (java.util.Objects.equals(id, that.id) &&
+					java.util.Objects.equals(name, that.name) &&
+					java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
+					java.util.Objects.equals(deviceId, that.deviceId) &&
+					java.util.Objects.equals(deviceOwner, that.deviceOwner) &&
+					java.util.Objects.equals(fixedIps, that.fixedIps) &&
+					java.util.Objects.equals(macAddress, that.macAddress) &&
+					java.util.Objects.equals(networkId, that.networkId) &&
+					java.util.Objects.equals(tenantId, that.tenantId) &&
+					java.util.Objects.equals(securityGroups, that.securityGroups) &&
+					java.util.Objects.equals(allowedAddressPairs, that.allowedAddressPairs) &&
+					java.util.Objects.equals(portSecurityEnabled, that.portSecurityEnabled) &&
+					java.util.Objects.equals(hostId, that.hostId) &&
+					java.util.Objects.equals(vifType, that.vifType) &&
+					java.util.Objects.equals(vifDetails, that.vifDetails) &&
+					java.util.Objects.equals(vNicType, that.vNicType) &&
+					java.util.Objects.equals(profile, that.profile)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static class Ports extends ListResult<NeutronPort> {
 
 		private static final long serialVersionUID = 1L;

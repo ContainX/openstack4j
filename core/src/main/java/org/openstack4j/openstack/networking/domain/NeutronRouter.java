@@ -157,6 +157,39 @@ public class NeutronRouter implements Router {
                 .toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+		@Override
+		public int hashCode() {
+			return java.util.Objects.hash(id, name, status, tenantId, adminStateUp,
+							externalGatewayInfo, routes);
+		}
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+          return true;
+        }
+
+        if (obj instanceof NeutronRouter) {
+            NeutronRouter that = (NeutronRouter) obj;
+            if (java.util.Objects.equals(id, that.id) &&
+                    java.util.Objects.equals(name, that.name) &&
+                    java.util.Objects.equals(status, that.status) &&
+                    java.util.Objects.equals(tenantId, that.tenantId) &&
+                    java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
+                    java.util.Objects.equals(externalGatewayInfo, that.externalGatewayInfo) &&
+                    java.util.Objects.equals(routes, that.routes)) {
+              return true;
+            }
+        }
+        return false;
+    }
+
     public static class Routers extends ListResult<NeutronRouter> {
 
         private static final long serialVersionUID = 1L;

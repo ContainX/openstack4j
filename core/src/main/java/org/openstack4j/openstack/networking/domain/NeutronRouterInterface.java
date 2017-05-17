@@ -73,5 +73,34 @@ public class NeutronRouterInterface implements RouterInterface {
 		return Objects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("subnetId", subnetId).add("portId", portId).add("tenantId", tenantId).toString();
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(id, subnetId, portId, tenantId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj instanceof NeutronRouterInterface) {
+            NeutronRouterInterface that = (NeutronRouterInterface) obj;
+			if (java.util.Objects.equals(id, that.id) &&
+					java.util.Objects.equals(subnetId, that.subnetId) &&
+					java.util.Objects.equals(portId, that.portId) &&
+					java.util.Objects.equals(tenantId, that.tenantId)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

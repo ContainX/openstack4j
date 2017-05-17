@@ -18,7 +18,7 @@ import com.google.common.base.Objects;
 
 /**
  * An OpenStack (Neutron) network
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("network")
@@ -108,7 +108,7 @@ public class NeutronNetwork implements Network {
      */
     @Override
     public List<? extends Subnet> getNeutronSubnets() {
-        if ( neutronSubnets == null && (subnets != null && subnets.size() > 0)) 
+        if ( neutronSubnets == null && (subnets != null && subnets.size() > 0))
         {
             neutronSubnets = new ArrayList<NeutronSubnet>();
             for ( String subnetId : subnets) {
@@ -211,6 +211,44 @@ public class NeutronNetwork implements Network {
                 .add("id", id).add("shared", shared).add("provider:segmentation_id", providerSegID)
                 .add("mtu", mtu)
                 .toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(name, status, subnets,
+                providerPhyNet, adminStateUp, tenantId, networkType,
+                routerExternal, id, shared, providerSegID);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj instanceof NeutronNetwork) {
+            NeutronNetwork that = (NeutronNetwork) obj;
+            if (java.util.Objects.equals(name, that.name) &&
+                    java.util.Objects.equals(status, that.status) &&
+                    java.util.Objects.equals(subnets, that.subnets) &&
+                    java.util.Objects.equals(providerPhyNet, that.providerPhyNet) &&
+                    java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
+                    java.util.Objects.equals(tenantId, that.tenantId) &&
+                    java.util.Objects.equals(networkType, that.networkType) &&
+                    java.util.Objects.equals(routerExternal, that.routerExternal) &&
+                    java.util.Objects.equals(id, that.id) &&
+                    java.util.Objects.equals(shared, that.shared) &&
+                    java.util.Objects.equals(providerSegID, that.providerSegID)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static class Networks extends ListResult<NeutronNetwork> {
