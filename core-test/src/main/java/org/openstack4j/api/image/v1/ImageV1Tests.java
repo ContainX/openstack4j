@@ -6,7 +6,9 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
@@ -53,7 +55,9 @@ public class ImageV1Tests extends AbstractTest {
     }
 
     public void testCacheNotEnabled() {
-        respondWith(404);
+        Map<String, String> headers = new HashMap<String,String>();
+        headers.put("Content-Type","text/html");
+        respondWith(headers, 404, "");
         List<? extends CachedImage> list = osv3().images().listChachedImages();
         assertNull(list);
     }

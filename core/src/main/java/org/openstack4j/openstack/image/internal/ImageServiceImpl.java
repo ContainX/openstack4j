@@ -1,7 +1,7 @@
 package org.openstack4j.openstack.image.internal;
 
 import org.openstack4j.api.client.CloudProvider;
-import org.openstack4j.api.exceptions.ClientResponseException;
+import org.openstack4j.api.exceptions.ResponseException;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
@@ -48,7 +48,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
             return get(CachedImages.class, uri("/cached_images"))
                     .execute(ExecutionOptions.<CachedImages>create(PropagateOnStatus.on(404))).getList();
         }
-        catch (ClientResponseException e) {
+        catch (ResponseException e) {
             return null;
         }
     }
