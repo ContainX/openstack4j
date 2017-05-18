@@ -20,7 +20,7 @@ public class CachedGlanceImage implements CachedImage {
     @JsonProperty("image_id")
     private String imageId;
 
-    private int hits;
+    private Integer hits;
 
     @JsonProperty("last_accessed")
     @JsonDeserialize(using = CustomEpochToDateDeserializer.class)
@@ -48,7 +48,7 @@ public class CachedGlanceImage implements CachedImage {
     }
 
     @Override
-    public int getHits() {
+    public Integer getHits() {
         return hits;
     }
 

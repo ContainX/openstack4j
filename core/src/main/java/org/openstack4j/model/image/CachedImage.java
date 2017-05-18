@@ -32,7 +32,7 @@ public interface CachedImage extends ModelEntity {
      *
      * @return nr of cache hits
      */
-    int getHits();
+    Integer getHits();
 
     /**
      *

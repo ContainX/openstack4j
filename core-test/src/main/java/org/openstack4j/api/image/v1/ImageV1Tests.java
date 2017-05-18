@@ -35,8 +35,8 @@ public class ImageV1Tests extends AbstractTest {
         assertEquals(first.getSize().longValue(), 50901);
         assertEquals(second.getSize().longValue(), 70109);
 
-        assertEquals(first.getHits(), 0);
-        assertEquals(second.getHits(), 23);
+        assertEquals(first.getHits().intValue(), 0);
+        assertEquals(second.getHits().intValue(), 23);
 
         Date firstDate = new Date((long)Double.parseDouble("1492607597169.914"));
         Date secondDate = new Date((long)Double.parseDouble("1494248723169"));
