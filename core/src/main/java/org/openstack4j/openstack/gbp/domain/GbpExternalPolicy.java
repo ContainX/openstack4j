@@ -7,10 +7,10 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 /**
  * Model implementation for External Policy
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("external_policy")
@@ -28,11 +28,11 @@ public class GbpExternalPolicy implements ExternalPolicy{
     @JsonProperty("external_segments")
     private List<String> externalSegments;
     private Boolean shared;
-    
+
     /**
      * {@inheritDoc}
      */
-    @Override 
+    @Override
     public String getTenantId() {
         return tenantId;
     }
@@ -76,7 +76,7 @@ public class GbpExternalPolicy implements ExternalPolicy{
     public void setId(String id) {
         this.id=id;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -125,9 +125,9 @@ public class GbpExternalPolicy implements ExternalPolicy{
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).add("externalSegments", externalSegments).add("id", id).add("description", description).add("shared", shared).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets).toString();
+        return MoreObjects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).add("externalSegments", externalSegments).add("id", id).add("description", description).add("shared", shared).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets).toString();
     }
-    
+
     public static class ExternalPolicies extends ListResult<GbpExternalPolicy> {
 
         private static final long serialVersionUID = 1L;

@@ -8,7 +8,7 @@ import org.openstack4j.model.sahara.JobConfig;
 import org.openstack4j.model.sahara.builder.JobConfigBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 /**
@@ -28,7 +28,7 @@ public class SaharaJobConfig implements JobConfig {
     private List<Object> args;
     @JsonProperty("params")
     private Map<String, Object> params;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -55,7 +55,7 @@ public class SaharaJobConfig implements JobConfig {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                    .add("configs", configs)
                    .add("args", args)
                    .add("params", params)
@@ -110,7 +110,7 @@ public class SaharaJobConfig implements JobConfig {
 
         @Override
         public JobConfigBuilder addArg(Object arg) {
-            if (m.args == null) 
+            if (m.args == null)
                 m.args = Lists.newArrayList();
             m.args.add(arg);
             return this;
@@ -123,6 +123,6 @@ public class SaharaJobConfig implements JobConfig {
             m.params.put(param, value);
             return this;
         }
-        
+
     }
 }

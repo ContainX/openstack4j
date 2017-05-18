@@ -11,7 +11,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName("user")
@@ -29,40 +29,40 @@ public class KeystoneUser implements User
 	private Boolean enabled;
 	@JsonProperty("OS-ROLE:roles")
 	private List<KeystoneRole> roles;
-	
+
 	public static UserBuilder builder() {
 		return new UserConcreteBuilder();
 	}
-	
+
 	@Override
 	public UserBuilder toBuilder() {
 		return new UserConcreteBuilder(this);
 	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public String getTenantId() {
 		return tenantId;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public Boolean isEnabled() {
 		return enabled;
 	}
@@ -72,7 +72,7 @@ public class KeystoneUser implements User
 	}
 
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("name", name)
 					.add("id", id)
 					.add("username", username)
@@ -83,35 +83,35 @@ public class KeystoneUser implements User
 				    .add("roles", roles)
 				    .toString();
 	}
-	
+
 	public static class Users extends ListResult<KeystoneUser> {
 
 		private static final long serialVersionUID = 1L;
 		@JsonProperty("users")
 		private List<KeystoneUser> list;
-		
+
 		public List<KeystoneUser> value() {
 			return list;
 		}
 	}
-	
+
 	public static class UserConcreteBuilder implements UserBuilder {
 
 		private KeystoneUser model;
-		
+
 		UserConcreteBuilder() {
 			this(new KeystoneUser());
 		}
-		
+
 		UserConcreteBuilder(KeystoneUser model) {
 			this.model = model;
 		}
-		
+
 		public UserBuilder name(String name) {
 			model.name = name;
 			return this;
 		}
-		
+
 		/**
 		 * ID should only ever be set if the user already exists and this is used for update based actions
 		 * @param id the user id
@@ -121,33 +121,33 @@ public class KeystoneUser implements User
 			model.id = id;
 			return this;
 		}
-		
+
 		public UserBuilder password(String password) {
 			model.password = password;
 			return this;
 		}
-		
+
 		public UserBuilder email(String email) {
 			model.email = email;
 			return this;
 		}
-		
+
 		public UserBuilder enabled(boolean enabled) {
 			model.enabled = enabled;
 			return this;
 		}
-		
+
 		public UserBuilder tenantId(String tenantId) {
 			model.tenantId = tenantId;
 			return this;
 		}
-		
+
 		public UserBuilder tenant(Tenant tenant) {
 			if (tenant != null && tenant.getId() != null)
 				model.tenantId = tenant.getId();
 			return this;
 		}
-		
+
 		@Override
 		public User build() {
 			return model;
@@ -158,6 +158,6 @@ public class KeystoneUser implements User
 			model = (KeystoneUser) in;
 			return this;
 		}
-		
+
 	}
 }

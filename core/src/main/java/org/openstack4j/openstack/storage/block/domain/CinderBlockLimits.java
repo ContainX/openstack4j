@@ -5,11 +5,11 @@ import org.openstack4j.model.storage.block.BlockLimits;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Show absolute limits for a tenant
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("limits")
@@ -18,15 +18,15 @@ public class CinderBlockLimits implements BlockLimits {
 
     @JsonProperty
     private CinderAbsoluteLimit absolute;
-    
+
     @Override
     public Absolute getAbsolute() {
         return absolute;
     }
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("absolute", absolute).toString();
+        return MoreObjects.toStringHelper(this).omitNullValues().add("absolute", absolute).toString();
     }
 
     public static class CinderAbsoluteLimit implements Absolute {
@@ -41,7 +41,7 @@ public class CinderBlockLimits implements BlockLimits {
         private int totalVolumesUsed;
         private int totalBackupsUsed;
         private int totalGigabytesUsed;
-        
+
         @Override
         public int getTotalSnapshotsUsed() {
             return totalSnapshotsUsed;
@@ -91,10 +91,10 @@ public class CinderBlockLimits implements BlockLimits {
         public int getTotalGigabytesUsed() {
             return totalGigabytesUsed;
         }
-        
+
         @Override
         public String toString() {
-            return Objects.toStringHelper(this)
+            return MoreObjects.toStringHelper(this)
                      .add("totalSnapshotsUsed", totalSnapshotsUsed).add("maxTotalBackups", maxTotalBackups)
                      .add("maxTotalVolumeGigabytes", maxTotalVolumeGigabytes).add("maxTotalSnapshots", maxTotalSnapshots)
                      .add("maxTotalBackupGigabytes", maxTotalBackupGigabytes).add("totalBackupGigabytesUsed", totalBackupGigabytesUsed)

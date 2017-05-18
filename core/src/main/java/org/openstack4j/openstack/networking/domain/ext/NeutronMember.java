@@ -9,7 +9,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A member of a Lbaas pool
@@ -99,10 +99,10 @@ public class NeutronMember implements Member {
 	public String getPoolId(){
 		return poolId;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 			    .add("id", id)
 			    .add("address", address)
 			    .add("adminStateUp", adminStateUp)
@@ -113,7 +113,7 @@ public class NeutronMember implements Member {
 			    .add("weight",weight)
 			    .toString();
 	}
-	
+
 	/**
 	 * Lbaas members
 	 * @author liujunpeng
@@ -130,7 +130,7 @@ public class NeutronMember implements Member {
 		}
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("members", members).toString();
 		}
 	}
@@ -163,7 +163,7 @@ public class NeutronMember implements Member {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -173,7 +173,7 @@ public class NeutronMember implements Member {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -183,7 +183,7 @@ public class NeutronMember implements Member {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -193,7 +193,7 @@ public class NeutronMember implements Member {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -204,7 +204,7 @@ public class NeutronMember implements Member {
 
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -214,7 +214,7 @@ public class NeutronMember implements Member {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -223,7 +223,7 @@ public class NeutronMember implements Member {
 			return this;
 		}
 	}
-	
+
 	/**
 	 * Wraps this Member into a Builder
 	 * @return the network builder
@@ -231,9 +231,9 @@ public class NeutronMember implements Member {
 	public MemberBuilder toBuilder() {
 		return new MemberConcreteBuilder(this);
 	}
-	
+
 	public static MemberBuilder builder(){
 		return new MemberConcreteBuilder();
 	}
-	
+
 }

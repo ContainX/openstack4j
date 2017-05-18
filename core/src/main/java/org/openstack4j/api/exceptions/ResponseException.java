@@ -1,10 +1,10 @@
 package org.openstack4j.api.exceptions;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Base Exception for HTTP Errors during Rest Operations
- * 
+ *
  * @author Jeremy Unruh
  */
 public class ResponseException extends OS4JException {
@@ -17,7 +17,7 @@ public class ResponseException extends OS4JException {
 		super(message);
 		this.status = status;
 	}
-	
+
 	public ResponseException(String message, int status, Throwable cause) {
 		super(message, cause);
 		this.status = status;
@@ -35,11 +35,11 @@ public class ResponseException extends OS4JException {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("message", getMessage()).add("status", getStatus())
 				     .toString();
 	}
-	
+
 	/**
      * Maps an Exception based on the underlying status code
      *
@@ -50,7 +50,7 @@ public class ResponseException extends OS4JException {
     public static ResponseException mapException(String message, int status) {
         return mapException(message, status, null);
     }
-    
+
     /**
      * Maps an Exception based on the underlying status code
      *
@@ -66,8 +66,8 @@ public class ResponseException extends OS4JException {
             return new ClientResponseException(message, status, cause);
         if (status >= 500 && status < 600)
             return new ServerResponseException(message, status, cause);
-        
+
         return new ResponseException(message, status, cause);
     }
-	
+
 }

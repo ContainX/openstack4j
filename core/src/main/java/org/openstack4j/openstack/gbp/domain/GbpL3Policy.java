@@ -10,11 +10,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
 /**
  * Model implementation for L3 Policy
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("l3_policy")
@@ -37,8 +37,8 @@ public class GbpL3Policy implements L3Policy {
     private Boolean shared;
     @JsonProperty("subnet_prefix_length")
     private String subnetPrefixLength;
-    
-    
+
+
 
     @Override
     public String getTenantId() {
@@ -116,7 +116,7 @@ public class GbpL3Policy implements L3Policy {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("externalSegments", externalSegments).add("ipPool", ipPool).add("ipVersion", ipVersion)
                 .add("l2Policies", l2Policies).add("routers", routers).add("shared", shared).add("subnetPrefixLength", subnetPrefixLength).toString();
     }
@@ -126,18 +126,18 @@ public class GbpL3Policy implements L3Policy {
         private static final long serialVersionUID = 1L;
         @JsonProperty("l3_policies")
         private List<GbpL3Policy> l3Policies;
-        
+
         @Override
         protected List<GbpL3Policy> value() {
             return l3Policies;
         }
-        
+
     }
-    
+
     public static class L3PolicyConcreteBuilder implements L3PolicyBuilder{
 
         private GbpL3Policy l3Policy;
-        
+
         public L3PolicyConcreteBuilder(GbpL3Policy gbpL3Policy) {
             this.l3Policy=gbpL3Policy;
         }
@@ -147,7 +147,7 @@ public class GbpL3Policy implements L3Policy {
         }
 
         @Override
-        public L3Policy build() { 
+        public L3Policy build() {
             return l3Policy;
         }
 
@@ -201,7 +201,7 @@ public class GbpL3Policy implements L3Policy {
             }
             return this;
         }
-        
+
     }
 
     public static L3PolicyBuilder builder() {

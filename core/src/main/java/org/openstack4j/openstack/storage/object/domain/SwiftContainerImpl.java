@@ -7,11 +7,11 @@ import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.model.storage.object.SwiftContainer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Represents an OpenStack Swift Container which holds Objects
- * 
+ *
  * @author Jeremy Unruh
  */
 public class SwiftContainerImpl implements SwiftContainer {
@@ -20,13 +20,13 @@ public class SwiftContainerImpl implements SwiftContainer {
 
     @JsonProperty
     private String name;
-    
+
     @JsonProperty("count")
     private int objectCount;
-    
+
     @JsonProperty("bytes")
     private long totalSize;
-    
+
     @Override
     public String getName() {
         return name;
@@ -41,7 +41,7 @@ public class SwiftContainerImpl implements SwiftContainer {
     public long getTotalSize() {
         return totalSize;
     }
-    
+
     @Override
     public Map<String, String> getMetadata() {
         return Apis.get(ObjectStorageContainerService.class).getMetadata(name);
@@ -52,7 +52,7 @@ public class SwiftContainerImpl implements SwiftContainer {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                    .add("name", name).add("count", objectCount).add("total size", totalSize)
                    .toString();
     }

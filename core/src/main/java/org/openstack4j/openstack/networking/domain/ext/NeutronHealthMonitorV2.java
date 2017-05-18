@@ -3,7 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.network.ext.HealthMonitorType;
 import org.openstack4j.model.network.ext.HealthMonitorV2;
 import org.openstack4j.model.network.ext.builder.HealthMonitorV2Builder;
@@ -135,7 +135,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
 
     @Override
     public String toString(){
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("tenantId", tenantId)
                 .add("type", type)
@@ -161,7 +161,7 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
         @Override
         public String toString() {
-            return Objects.toStringHelper(this).omitNullValues()
+            return MoreObjects.toStringHelper(this).omitNullValues()
                     .add("healthMonitors", healthMonitors).toString();
         }
     }

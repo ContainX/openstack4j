@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -29,7 +29,7 @@ import com.google.common.collect.Sets;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GlanceImage implements Image {
 
-    private static final Set<String> RESERVED_KEYS = Sets.newHashSet(Arrays.asList(new String[] { 
+    private static final Set<String> RESERVED_KEYS = Sets.newHashSet(Arrays.asList(new String[] {
             "id",
             "name",
             "tags",
@@ -396,7 +396,7 @@ public class GlanceImage implements Image {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("name", name)
                 .add("tags", tags)

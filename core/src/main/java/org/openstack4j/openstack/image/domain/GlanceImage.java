@@ -17,12 +17,12 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
 
 /**
  * A Glance v1.1 Image model implementation
- * 
+ *
  * @author Jeremy Unruh
  * @see http://docs.openstack.org/api/openstack-image-service/1.1/content/index.html
  */
@@ -30,14 +30,14 @@ import com.google.common.collect.Maps;
 public class GlanceImage implements Image {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
 	private String name;
 	private String location;
-	
+
 	@JsonProperty("disk_format")
 	private DiskFormat diskFormat;
-	
+
 	@JsonProperty("container_format")
 	private ContainerFormat containerFormat;
 	private Long size;
@@ -46,46 +46,46 @@ public class GlanceImage implements Image {
 
 	@JsonProperty("created_at")
 	private Date createdAt;
-	
+
 	@JsonProperty("updated_at")
 	private Date updatedAt;
-	
+
 	@JsonProperty("deleted_at")
 	private Date deletedAt;
-	
+
 	private Status status;
-	
+
 	@JsonProperty("is_public")
 	private boolean isPublic;
-	
+
 	@JsonProperty("min_ram")
 	private Long minRam;
-	
+
 	@JsonProperty("min_disk")
 	private Long minDisk;
-	
+
 	@JsonProperty("deleted")
 	private boolean isDeleted;
-	
+
 	@JsonProperty("protected")
 	private boolean isProtected;
 
     @JsonProperty("copy_from")
     private String copyFrom;
-	
+
 	private Map<String, String> properties;
-	
+
 	private transient StoreType storeType;
-	
+
 	public static ImageBuilder builder() {
 		return new ImageConcreteBuilder();
 	}
-	
+
 	@Override
 	public ImageBuilder toBuilder() {
 		return new ImageConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -239,7 +239,7 @@ public class GlanceImage implements Image {
 	public boolean isProtected() {
 		return isProtected;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -262,7 +262,7 @@ public class GlanceImage implements Image {
     }
 
     /* Business Domain Method Chains for Conversion */
-	
+
 	public GlanceImage isProtected(Boolean isProtected) {
 		if (isProtected != null)
 			this.isProtected = isProtected;
@@ -274,42 +274,42 @@ public class GlanceImage implements Image {
 			this.isDeleted = isDeleted;
 		return this;
 	}
-	
+
 	public GlanceImage status(Status status) {
 		this.status = status;
 		return this;
 	}
-	
+
 	public GlanceImage createdAt(Date createdAt) {
 		this.createdAt = createdAt;
 		return this;
 	}
-	
+
 	public GlanceImage updatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 		return this;
 	}
-	
+
 	public GlanceImage deletedAt(Date deletedAt) {
 		this.deletedAt = deletedAt;
 		return this;
 	}
-	
+
 	public GlanceImage size(Long size) {
 		this.size = size;
 		return this;
 	}
-	
+
 	public GlanceImage location(String location) {
 		this.location = location;
 		return this;
 	}
-	
+
 	public GlanceImage properties(Map<String, String> properties) {
 		this.properties = properties;
 		return this;
 	}
-	
+
 	/**
      * {@inheritDoc}
      */
@@ -318,45 +318,45 @@ public class GlanceImage implements Image {
     public boolean isSnapshot() {
         return properties != null && properties.containsKey("image_location") && "snapshot".equals(properties.get("image_location"));
     }
-    
-	
+
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("name", name).add("status", status).add("location", location).add("diskFormat", diskFormat)
 				     .add("containerFormat", containerFormat).add("size", size).add("owner", owner).add("minRam", minRam).add("minDisk", minDisk)
 				     .add("created", createdAt).add("updated", updatedAt).add("deleted", deletedAt).add("isPublic", isPublic)
 				     .add("isProtected", isProtected).add("isDeleted", isDeleted).add("propterties", properties).addValue("\n")
 				     .toString();
 	}
-	
+
 	public static class Images extends ListResult<GlanceImage> {
 
 		private static final long serialVersionUID = 1L;
 		@JsonProperty("images")
 		private List<GlanceImage> images;
-		
+
 		@Override
 		protected List<GlanceImage> value() {
 			return images;
 		}
 	}
-	
+
 	public static class ImageConcreteBuilder extends BasicResourceBuilder<Image, ImageConcreteBuilder> implements ImageBuilder {
 
 		private GlanceImage m;
-		
+
 		ImageConcreteBuilder() {
 		 	this(new GlanceImage());
 		}
-		
+
 		ImageConcreteBuilder(GlanceImage m) {
 			this.m = m;
 		}
-		
+
 		@Override
 		public ImageBuilder diskFormat(DiskFormat diskFormat) {
 			m.diskFormat = diskFormat;
@@ -416,7 +416,7 @@ public class GlanceImage implements Image {
 		protected Image reference() {
 			return m;
 		}
-		
+
 		@Override
 		public Image build() {
 			return m;

@@ -6,7 +6,7 @@ import org.openstack4j.model.magnum.EnvironmentBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumEnvironment implements Environment {
@@ -19,7 +19,7 @@ public class MagnumEnvironment implements Environment {
     public static EnvironmentBuilder builder() {
         return new EnvironmentConcreteBuilder();
     }
-    
+
     @Override
     public EnvironmentBuilder toBuilder() {
         return new EnvironmentConcreteBuilder(this);
@@ -35,7 +35,7 @@ public class MagnumEnvironment implements Environment {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("path", path).add("ldLibraryPath", ldLibraryPath)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("path", path).add("ldLibraryPath", ldLibraryPath)
                 .toString();
     }
 

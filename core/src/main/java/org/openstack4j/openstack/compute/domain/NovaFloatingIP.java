@@ -8,48 +8,48 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * The Class NovaFloatingIP.
- * 
+ *
  *
  * @author Nathan Anderson
  */
 @JsonRootName("floating_ip")
 public class NovaFloatingIP implements FloatingIP {
-  
+
   private static final long serialVersionUID = -4441740897994315920L;
 
   @JsonProperty("id")
   private String id;
-  
+
   @JsonProperty("instance_id")
   private String instanceId;
-  
+
   @JsonProperty("ip")
   private String floatingIpAddress;
-  
+
   @JsonProperty("fixed_ip")
   private String fixedIpAddress;
-  
+
   @JsonProperty("pool")
   private String pool;
-  
+
   /**
    * {@inheritDoc}
    */
   public FloatingIPBuilder toBuilder() {
     return new FloatingIPConcreteBuilder(this);
   }
-  
+
   /**
    * @return the Floating IP Builder
    */
   public static FloatingIPBuilder builder() {
   	return new FloatingIPConcreteBuilder();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -81,7 +81,7 @@ public class NovaFloatingIP implements FloatingIP {
   public String getFixedIpAddress() {
     return this.fixedIpAddress;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -95,7 +95,7 @@ public class NovaFloatingIP implements FloatingIP {
    */
   @Override
   public String toString() {
-    return Objects.toStringHelper(this).omitNullValues()
+    return MoreObjects.toStringHelper(this).omitNullValues()
             .add("id", id).add("instanceId", instanceId)
             .add("floatingIpAddress", floatingIpAddress)
             .add("fixedIpAddress", fixedIpAddress)
@@ -103,19 +103,19 @@ public class NovaFloatingIP implements FloatingIP {
             .addValue("\n")
             .toString();
   }
-  
+
   /**
    * The Class NovaFloatingIPs.
    *
    * @author Nathan Anderson
    */
   public static class NovaFloatingIPs extends ListResult<NovaFloatingIP> {
-    
+
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("floating_ips")
     private List<NovaFloatingIP> floatingIps;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -124,24 +124,24 @@ public class NovaFloatingIP implements FloatingIP {
       return floatingIps;
     }
   }
-  
+
   /**
    * The Class FloatingIPConcreteBuilder.
-   * 
+   *
    *
    * @author Nathan Anderson
    */
   public static class FloatingIPConcreteBuilder implements FloatingIPBuilder {
-    
+
     NovaFloatingIP m = null;
-    
+
     /**
      * Instantiates a new floating ip concrete builder.
      */
     public FloatingIPConcreteBuilder() {
       this.m = new NovaFloatingIP();
     }
-    
+
     /**
      * Instantiates a new floating ip concrete builder.
      *
@@ -150,7 +150,7 @@ public class NovaFloatingIP implements FloatingIP {
     public FloatingIPConcreteBuilder(FloatingIP floatingIp) {
       this.m = (NovaFloatingIP) floatingIp;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -213,5 +213,5 @@ public class NovaFloatingIP implements FloatingIP {
       return this;
     }
   }
-  
+
 }

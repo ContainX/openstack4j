@@ -14,7 +14,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack (Neutron) network
@@ -191,7 +191,7 @@ public class NeutronNetwork implements Network {
     public String getProviderSegID() {
         return providerSegID;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -205,7 +205,7 @@ public class NeutronNetwork implements Network {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("name", name).add("status", status).add("subnets", subnets).add("provider:physical_network", providerPhyNet)
                 .add("adminStateUp", adminStateUp).add("tenantId", tenantId).add("provider:network_type", networkType).add("router:external", routerExternal)
                 .add("id", id).add("shared", shared).add("provider:segmentation_id", providerSegID)

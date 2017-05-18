@@ -8,11 +8,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Model implementation for Policy rule
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_rule")
@@ -30,10 +30,10 @@ public class GbpPolicyRule implements PolicyRule {
     private List<String> policyActions;
     private Boolean shared;
     private Boolean enabled;
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("policyClassifierId", policyClassifierId).add("policyActions", policyActions).add("shared", shared).add("enabled", enabled).toString();
     }
     @Override
@@ -92,7 +92,7 @@ public class GbpPolicyRule implements PolicyRule {
     public PolicyRuleBuilder toBuilder() {
         return new PolicyRuleConcreteBuilder(this);
     }
-    
+
     public static class PolicyRules extends ListResult<GbpPolicyRule>{
 
         private static final long serialVersionUID = 1L;
@@ -102,13 +102,13 @@ public class GbpPolicyRule implements PolicyRule {
         protected List<GbpPolicyRule> value() {
             return policyRules;
         }
-        
+
     }
-    
+
     public static class PolicyRuleConcreteBuilder implements PolicyRuleBuilder{
 
         private GbpPolicyRule policyRule;
-        
+
         public PolicyRuleConcreteBuilder(GbpPolicyRule gbpPolicyRule) {
             this.policyRule=gbpPolicyRule;
         }
@@ -157,8 +157,8 @@ public class GbpPolicyRule implements PolicyRule {
             this.policyRule.policyActions=actionIds;
             return this;
         }
-        
-        
+
+
     }
 
     public static PolicyRuleBuilder builder() {

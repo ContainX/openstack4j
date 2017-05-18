@@ -3,11 +3,11 @@ package org.openstack4j.openstack.networking.domain;
 import org.openstack4j.model.network.RouterInterface;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An interface data model which is returned during interface association with a router
- * 
+ *
  * @author Jeremy Unruh
  */
 public class NeutronRouterInterface implements RouterInterface {
@@ -16,23 +16,23 @@ public class NeutronRouterInterface implements RouterInterface {
 
 	@JsonProperty("id")
 	private String id;
-	
+
 	@JsonProperty("tenant_id")
 	private String tenantId;
-	
+
 	@JsonProperty("subnet_id")
 	private String subnetId;
-	
+
 	@JsonProperty("port_id")
 	private String portId;
-	
+
 	public NeutronRouterInterface() { }
-	
+
 	public NeutronRouterInterface(String subnetId, String portId) {
 		this.subnetId = subnetId;
 		this.portId = portId;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -70,7 +70,7 @@ public class NeutronRouterInterface implements RouterInterface {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("subnetId", subnetId).add("portId", portId).add("tenantId", tenantId).toString();
 	}
 

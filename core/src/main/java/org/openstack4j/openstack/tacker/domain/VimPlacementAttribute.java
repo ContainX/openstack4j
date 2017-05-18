@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  *
@@ -14,12 +14,12 @@ import com.google.common.base.Objects;
 @JsonRootName("placement_attr")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VimPlacementAttribute {
-	
+
 	private List<String> regions;
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("regions", regions)
 				.toString();
 	}

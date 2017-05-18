@@ -3,84 +3,84 @@ package org.openstack4j.openstack.common;
 import org.openstack4j.model.common.Link;
 import org.openstack4j.model.common.builder.LinkBuilder;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Link holds information about a URL, Relative URL and the type of the link
- * 
+ *
  * @author Jeremy Unruh
  */
 public class GenericLink implements Link {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String rel;
 	private String href;
 	private String type;
-	
+
 	public GenericLink() { }
-	
+
 	public GenericLink(String rel, String href, String type) {
 		this.rel = rel;
 		this.type = type;
 		this.href = href;
 	}
-	
+
 	/**
 	 * @return the link builder
 	 */
 	public static LinkBuilder builder() {
 		return new LinkConcreteBuilder();
 	}
-	
+
 	@Override
 	public LinkBuilder toBuilder() {
 		return new LinkConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return the relative URL or null
 	 */
 	public String getRel() {
 		return rel;
 	}
-	
+
 	/**
 	 * @return the href URL
 	 */
 	public String getHref() {
 		return href;
 	}
-	
+
 	/**
 	 * @return the type of link or null
 	 */
 	public String getType() {
 		return type;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 						.add("href", href).add("rel", rel).add("type", type)
 						.toString();
 	}
-	
+
 	public static class LinkConcreteBuilder implements LinkBuilder {
 
 		GenericLink model;
-		
+
 		LinkConcreteBuilder() {
 			this(new GenericLink());
 		}
-		
+
 		LinkConcreteBuilder(GenericLink link) {
 			this.model = link;
 		}
-		
+
 		/**
 		 * @see GenericLink#getRel()
 		 */
@@ -88,7 +88,7 @@ public class GenericLink implements Link {
 			model.rel = rel;
 			return this;
 		}
-		
+
 		/**
 		 * @see GenericLink#getHref()
 		 */
@@ -96,7 +96,7 @@ public class GenericLink implements Link {
 			model.href = href;
 			return this;
 		}
-		
+
 		/**
 		 * @see GenericLink#getType()
 		 */
@@ -104,7 +104,7 @@ public class GenericLink implements Link {
 			model.type = type;
 			return this;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -122,5 +122,5 @@ public class GenericLink implements Link {
 			return this;
 		}
 	}
-	
+
 }

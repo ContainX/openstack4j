@@ -10,7 +10,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumCertificate implements Certificate {
@@ -25,7 +25,7 @@ public class MagnumCertificate implements Certificate {
     public static CertificateBuilder builder() {
         return new CertificateConcreteBuilder();
     }
-    
+
     @Override
     public CertificateBuilder toBuilder() {
         return new CertificateConcreteBuilder(this);
@@ -45,7 +45,7 @@ public class MagnumCertificate implements Certificate {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("pem", pem).add("bayUuid", bayUuid).add("links", links)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("pem", pem).add("bayUuid", bayUuid).add("links", links)
                 .toString();
     }
 
