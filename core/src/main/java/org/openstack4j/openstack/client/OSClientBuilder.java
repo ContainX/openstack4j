@@ -10,6 +10,7 @@ import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
+import org.openstack4j.openstack.common.Auth;
 import org.openstack4j.openstack.identity.v2.domain.Credentials;
 import org.openstack4j.openstack.identity.v2.domain.RaxApiKeyCredentials;
 import org.openstack4j.openstack.identity.v2.domain.TokenAuth;
@@ -162,7 +163,11 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             if (tokenId != null && tokenId.length() > 0)
                 return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(tokenId, scope), endpoint, perspective, config,
                         provider);
-            return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective,
+            if (user != null && user.length() > 0)
+                return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective,
+                        config, provider);
+            // Use tokenless auth finally
+            return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(scope, Auth.Type.TOKENLESS), endpoint, perspective,
                     config, provider);
         }
 

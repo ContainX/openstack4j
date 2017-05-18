@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -62,6 +63,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     String region;
     Set<ServiceType> supports;
     CloudProvider provider;
+    Map<String, ? extends Object> headers;
     EndpointURLResolver fallbackEndpointUrlResolver = new DefaultEndpointURLResolver();
 
     @SuppressWarnings("rawtypes")
@@ -231,6 +233,18 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
     public CloudProvider getProvider() {
         return (provider == null) ? CloudProvider.UNKNOWN : provider;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public T headers(Map<String, ? extends Object> headers) {
+        this.headers = headers;
+        return (T) this;
+    }
+
+    public Map<String, ? extends Object> getHeaders(){
+        return this.headers;
     }
 
     /**
