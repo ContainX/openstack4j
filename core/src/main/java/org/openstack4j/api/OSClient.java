@@ -24,6 +24,7 @@ import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.api.magnum.MagnumService;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -61,6 +62,14 @@ public interface OSClient< T extends OSClient<T>> {
      * @return OSClient for method chaining
      */
     T perspective(Facing perspective);
+
+    /**
+     * Passes the Headers for the current Session(Client)
+     *
+     * @param headers the headers to use for keystone tokenless
+     * @return OSClient for method chaining
+     */
+    T headers(Map<String, ? extends Object> headers);
 
     /**
      * Gets the supported services. A set of ServiceTypes will be returned
