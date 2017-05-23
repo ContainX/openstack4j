@@ -9,12 +9,12 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
 
 /**
  * Model implementation for Policy target group create
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_target_group")
@@ -42,8 +42,8 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
     @JsonProperty("subnets")
     private List<String> subnets;
     @Override
-    public PolicyTargetGroupBuilder toBuilder() { 
-        return new PolicyTargetConcreteGroupBuilder(this); 
+    public PolicyTargetGroupBuilder toBuilder() {
+        return new PolicyTargetConcreteGroupBuilder(this);
     }
 
     @Override
@@ -121,17 +121,17 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets)
                 .add("l2PolicyId", l2PolicyId).add("networkServicePolicyId", networkServicePolicyId)
                 .add("policyTargets", policyTargets).add("serviceManagement", serviceManagement).add("shared", shared).add("subnets", subnets).toString();
     }
-    
-    
-    
+
+
+
     public static class PolicyTargetGroups extends ListResult<GbpPolicyTargetGroupCreate>{
         private static final long serialVersionUID = 1L;
-        
+
         @JsonProperty("policy_target_groups")
         private List<GbpPolicyTargetGroupCreate> policyTargetGroups;
 
@@ -140,10 +140,10 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
             return policyTargetGroups;
         }
     }
-    
+
     public static class PolicyTargetConcreteGroupBuilder implements PolicyTargetGroupBuilder{
         private GbpPolicyTargetGroupCreate policyTargetGroup;
-        
+
         public PolicyTargetConcreteGroupBuilder(GbpPolicyTargetGroupCreate gbpPolicyTargetGroup) {
             this.policyTargetGroup=gbpPolicyTargetGroup;
         }
@@ -222,11 +222,11 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
             this.policyTargetGroup.serviceManagement=serviceManagement;
             return this;
         }
-        
+
     }
 
     public static PolicyTargetGroupBuilder builder() {
         return new PolicyTargetConcreteGroupBuilder();
     }
-    
+
 }

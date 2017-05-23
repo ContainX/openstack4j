@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 @JsonRootName("server")
@@ -105,10 +105,15 @@ public class NovaServer implements Server {
 	@JsonIgnore
 	@Override
 	public String getImageId() {
-		Image image = getImage();
-		return (image != null) ? image.getId() : null;
+		/*Image image = getImage();
+		return (image != null) ? image.getId() : null;*/
+		if(image instanceof Map) {
+			Map<String, String> map = (Map<String, String>) image;
+			return map.get("id");
+		}
+		return null;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Image getImage() {
@@ -123,7 +128,7 @@ public class NovaServer implements Server {
 		}
 		return null;
 	}
-	
+
 	@JsonIgnore
 	@Override
 	public String getFlavorId() {
@@ -206,7 +211,7 @@ public class NovaServer implements Server {
     public List<? extends NovaSecurityGroup> getSecurityGroups() {
         return securityGroups;
     }
-     
+
 	@Override
 	public String getTaskState() {
 		return taskState;
@@ -261,8 +266,8 @@ public class NovaServer implements Server {
     @JsonIgnore
 	@Override
 	public List<String> getOsExtendedVolumesAttached() {
-		return (List<String>) ((osExtendedVolumesAttached == null) 
-		                      ? Collections.emptyList() 
+		return (List<String>) ((osExtendedVolumesAttached == null)
+		                      ? Collections.emptyList()
 		                      : Lists.transform(osExtendedVolumesAttached, IdEntityToString.INSTANCE));
 	}
 
@@ -275,10 +280,10 @@ public class NovaServer implements Server {
 	public String getAdminPass() {
 		return adminPass;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				   .add("id",id).add("name", name).add("image", image).add("flavor", flavor)
 				   .add("status", status).add("diskconfig", diskConfig).add("userId", userId)
 				   .add("admin-pass", adminPass).add("created", created).add("updated", updated)
@@ -288,14 +293,14 @@ public class NovaServer implements Server {
 				   .add("vmState", vmState).add("metadata", metadata)
 				   .toString();
 	}
-	
+
 	public static class Servers extends ListResult<NovaServer> {
 
 		private static final long serialVersionUID = 1L;
 
 		@JsonProperty("servers")
 		private List<NovaServer> servers;
-		
+
 		@Override
         public List<NovaServer> value() {
 			return servers;

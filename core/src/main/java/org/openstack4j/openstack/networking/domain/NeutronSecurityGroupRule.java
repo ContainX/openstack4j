@@ -8,7 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack Neutron Security Group Rule model.
@@ -147,7 +147,7 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", id).add("tenantId", tenantId)
                 .add("securityGroupId", securityGroupId)
                 .add("direction", direction)
@@ -162,8 +162,44 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, tenantId, securityGroupId, direction, etherType,
+                portRangeMin, portRangeMax, protocol, remoteGroupId, remoteIpPrefix);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj instanceof NeutronSecurityGroupRule) {
+            NeutronSecurityGroupRule that = (NeutronSecurityGroupRule) obj;
+            if (java.util.Objects.equals(id, that.id) &&
+                    java.util.Objects.equals(tenantId, that.tenantId) &&
+                    java.util.Objects.equals(securityGroupId, that.securityGroupId) &&
+                    java.util.Objects.equals(direction, that.direction) &&
+                    java.util.Objects.equals(etherType, that.etherType) &&
+                    java.util.Objects.equals(portRangeMin, that.portRangeMin) &&
+                    java.util.Objects.equals(portRangeMax, that.portRangeMax) &&
+                    java.util.Objects.equals(protocol, that.protocol) &&
+                    java.util.Objects.equals(remoteGroupId, that.remoteGroupId) &&
+                    java.util.Objects.equals(remoteIpPrefix, that.remoteIpPrefix)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * The Class SecurityGroupRules.
-     * 
+     *
      *
      * @author Nathan Anderson
      */
@@ -185,7 +221,7 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
 
     /**
      * The Class SecurityGroupRuleConcreteBuilder.
-     * 
+     *
      *
      * @author Nathan Anderson
      */

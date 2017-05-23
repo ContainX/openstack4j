@@ -11,6 +11,7 @@ public enum ServiceType {
 	NETWORK("neutron", "network"),
 	EC2("ec2", "ec2"),
 	TELEMETRY("ceilometer", "metering"),
+	TELEMETRY_AODH("aodh", "alarming"),
 	ORCHESTRATION("heat", "orchestration"),
 	CLUSTERING("senlin", "clustering"),
 	SAHARA("sahara", "data_processing"),
@@ -18,6 +19,9 @@ public enum ServiceType {
 	DATABASE("trove","database"),
 	BARBICAN("barbican", "key-manager"),
 	TACKER("tacker", "nfv-orchestration"),
+	ARTIFACT("glare", "artifact"),
+    MAGNUM("magnum", "container"),
+	DNS("designate", "dns"),
 	UNKNOWN("NA", "NA")
 	;
 

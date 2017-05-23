@@ -11,11 +11,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Security Group which is defined the the (os-security-groups) extension
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("security_group")
@@ -34,7 +34,7 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 	/**
 	 * Security Groups only need two fields populated when Created so instead of a builder the API can
 	 * leverage this call to create a new Security Group
-	 * 
+	 *
 	 * @param name name of the security group
 	 * @param description description of the security group
 	 * @return
@@ -45,7 +45,7 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 		sg.description = description;
 		return sg;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -99,26 +99,26 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("id", id).add("name", name).add("description", description)
 				.add("tenantId", tenantId).add("rules", rules).add("links", links)
 				.toString();
 	}
 
-	
+
 	public static class SecurityGroups extends ListResult<NovaSecGroupExtension> {
 
 		private static final long serialVersionUID = 1L;
 
 		@JsonProperty("security_groups")
 		private List<NovaSecGroupExtension> groups;
-		
+
 		@Override
 		protected List<NovaSecGroupExtension> value() {
 			return groups;
 		}
 	}
-	
+
 	/**
 	 * Security Group Rule
 	 */
@@ -146,14 +146,14 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 		@JsonProperty("ip_range")
 		private RuleIpRange ipRange;
 		private RuleGroup group;
-		
+
 		// Used for Create Only
 		@JsonProperty("cidr")
 		String cidr;
-		
+
 		@JsonProperty("group_id")
 		String groupId;
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -161,7 +161,7 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 		public IPProtocol getIPProtocol() {
 			return (ipProtocol != null) ? ipProtocol : IPProtocol.UNRECOGNIZED;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -219,13 +219,13 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 		}
 
 		public String toString() {
-			return Objects.toStringHelper("Rule").omitNullValues()
+			return MoreObjects.toStringHelper("Rule").omitNullValues()
 					    .add("id", id).add("name", name).add("parentGroupId", parentGroupId)
 					    .add("fromPort", fromPort).add("toPort", toPort).add("ipProtocol", ipProtocol)
 					    .add("range", ipRange).add("group", group)
 					    .toString();
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -233,20 +233,20 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 		public SecurityGroupRuleBuilder toBuilder() {
 			return new RuleConcreteBuilder(this);
 		}
-		
+
 		public static SecurityGroupRuleBuilder builder() {
 			return new RuleConcreteBuilder();
 		}
-		
-		public static class RuleConcreteBuilder implements SecurityGroupRuleBuilder 
+
+		public static class RuleConcreteBuilder implements SecurityGroupRuleBuilder
 		{
 
 			private SecurityGroupRule m;
-			
+
 			RuleConcreteBuilder() {
 				this(new SecurityGroupRule());
 			}
-			
+
 			RuleConcreteBuilder(SecurityGroupRule m) {
 				this.m = m;
 			}
@@ -281,7 +281,7 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 				m.parentGroupId = parentGroupId;
 				return this;
 			}
-			
+
 			@Override
 			public Rule build() {
 				return m;
@@ -294,7 +294,7 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 			}
 
 		}
-		
+
 		/**
 		 * Security Group Rule -> Group
 		 */
@@ -326,7 +326,7 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 			 */
 			@Override
 			public String toString() {
-				return Objects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).toString();
+				return MoreObjects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).toString();
 			}
 
 		}
@@ -351,7 +351,7 @@ public class NovaSecGroupExtension implements SecGroupExtension {
 			 */
 			@Override
 			public String toString() {
-				return Objects.toStringHelper(this).add("cidr", cidr).toString();
+				return MoreObjects.toStringHelper(this).add("cidr", cidr).toString();
 			}
 
 		}

@@ -1,9 +1,14 @@
 package org.openstack4j.api;
 
+import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
+import org.openstack4j.model.artifact.builder.ToscaTemplatesArtifactBuilder;
 import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
 import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.*;
+import org.openstack4j.model.dns.v2.builder.DNSV2Builders;
+import org.openstack4j.model.dns.v2.builder.RecordsetBuilder;
+import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
 import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
@@ -26,6 +31,7 @@ import org.openstack4j.model.identity.v3.builder.*;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.image.v2.builder.ImageUpdateBuilder;
 import org.openstack4j.model.image.v2.builder.TaskBuilder;
+import org.openstack4j.model.magnum.BaymodelBuilder;
 import org.openstack4j.model.manila.builder.*;
 import org.openstack4j.model.murano.v1.builder.EnvironmentBuilder;
 import org.openstack4j.model.murano.v1.builder.AppCatalogBuilders;
@@ -42,6 +48,8 @@ import org.openstack4j.model.tacker.builder.NfvBuilders;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
 import org.openstack4j.model.trove.builder.DBServiceBuilders;
+import org.openstack4j.openstack.artifact.domain.ArtifactUpdateModel;
+import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
 import org.openstack4j.openstack.common.GenericLink;
@@ -49,6 +57,9 @@ import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.*;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.dns.v2.builder.DesignateV2Builders;
+import org.openstack4j.openstack.dns.v2.domain.DesignateRecordset;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
 import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
@@ -72,6 +83,7 @@ import org.openstack4j.openstack.identity.v3.domain.*;
 import org.openstack4j.openstack.image.domain.GlanceImage;
 import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
 import org.openstack4j.openstack.image.v2.domain.GlanceTask;
+import org.openstack4j.openstack.magnum.MagnumBaymodel;
 import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.*;
 import org.openstack4j.openstack.murano.v1.builder.MuranoBuilders;
@@ -132,6 +144,24 @@ public class Builders {
      */
     public static FlavorBuilder flavor() {
         return NovaFlavor.builder();
+    }
+
+    /**
+     * The builder to create a ToscaTemplatesArtifact
+     *
+     * @return the ToscaTemplatesArtifactBuilder
+     */
+    public static ToscaTemplatesArtifactBuilder toscaTemplatesArtifact() {
+        return ToscaTemplates.builder();
+    }
+
+    /**
+     * The builder to update an Artifact
+     *
+     * @return the ArtifactUpdateBuilder
+     */
+    public static ArtifactUpdateBuilder artifactUpdate() {
+        return ArtifactUpdateModel.builder();
     }
 
     /**
@@ -239,6 +269,15 @@ public class Builders {
      */
     public static NetSecurityGroupBuilder securityGroup() {
         return NeutronSecurityGroup.builder();
+    }
+
+    /**
+     * The builder to update a security group
+     *
+     * @return the security group update builder
+     */
+    public static NetSecurityGroupUpdateBuilder securityGroupUpdate() {
+        return NeutronSecurityGroupUpdate.builder();
     }
 
     /**
@@ -1054,6 +1093,15 @@ public class Builders {
     }
 
     /**
+     * Magnum builder
+     * @return the magnum builder
+     */
+    
+    public static BaymodelBuilder baymodel() {
+        return MagnumBaymodel.builder();
+    }
+
+    /**
      * Barbican container builder
      * @return the container builder
      */
@@ -1118,4 +1166,27 @@ public class Builders {
     public static EnvironmentBuilder environment() {
         return MuranoEnvironment.builder();
     }
+
+    /**
+     * The DNS/Designate V2 builders
+     *
+     * @return the dns/designate v2 builders
+     */
+    public static DNSV2Builders dnsV2() {
+        return new DesignateV2Builders();
+    }
+
+    /**
+     * The builder to create a Zone.
+     *
+     * @return the zone builder
+     */
+    public static ZoneBuilder zone() { return DesignateZone.builder(); }
+
+    /**
+     * The builder to create a Recordset.
+     *
+     * @return the recordset builder
+     */
+    public static RecordsetBuilder recordset() { return DesignateRecordset.builder(); }
 }

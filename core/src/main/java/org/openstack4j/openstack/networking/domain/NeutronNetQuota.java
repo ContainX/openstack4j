@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.networking.domain;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 import java.util.List;
 
@@ -14,14 +14,14 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * Network quotas that are bound to a Tenant
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("quota")
 public class NeutronNetQuota implements NetQuota {
 
     private static final long serialVersionUID = 1L;
-    
+
     @JsonProperty
     private int subnet;
     @JsonProperty
@@ -40,12 +40,12 @@ public class NeutronNetQuota implements NetQuota {
     public static NetQuotaBuilder builder() {
         return new NetQuotaConcreteBuilder();
     }
-    
+
     @Override
     public NetQuotaBuilder toBuilder() {
         return new NetQuotaConcreteBuilder(this);
     }
-    
+
     @Override
     public int getSubnet() {
         return subnet;
@@ -93,15 +93,15 @@ public class NeutronNetQuota implements NetQuota {
     public static class NetQuotaConcreteBuilder implements NetQuotaBuilder {
 
         private NeutronNetQuota model;
-        
+
         public NetQuotaConcreteBuilder() {
             model = new NeutronNetQuota();
         }
-        
+
         public NetQuotaConcreteBuilder(NeutronNetQuota model) {
             this.model = model;
         }
-        
+
         @Override
         public NetQuota build() {
             return model;
@@ -153,20 +153,20 @@ public class NeutronNetQuota implements NetQuota {
         public NetQuotaBuilder securityGroupRule(int securityGroupRule) {
             model.securityGroupRule = securityGroupRule;
             return this;
-        }   
+        }
     }
-    
+
     public static class NeutronNetQuotas extends ListResult<NeutronNetQuota> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("quotas")
     	private List<NeutronNetQuota> quotas;
-    	
+
 		@Override
 		protected List<NeutronNetQuota> value() {
 			return quotas;
 		}
     }
-    
+
 }

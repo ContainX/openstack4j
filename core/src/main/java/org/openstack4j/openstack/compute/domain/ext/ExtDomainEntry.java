@@ -7,11 +7,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Floating IP DNS Extension - Domain Entry
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("domain_entry")
@@ -27,16 +27,16 @@ public class ExtDomainEntry implements DomainEntry {
     private String project;
     @JsonProperty
     private Scope scope;
-    
+
     public ExtDomainEntry() {
     }
-    
+
     public ExtDomainEntry(Scope scope, String availabilityZone, String project) {
         this.scope = scope;
         this.availabilityZone = availabilityZone;
         this.project = project;
     }
-    
+
     @Override
     public String getAvailabilityZone() {
         return availabilityZone;
@@ -56,19 +56,19 @@ public class ExtDomainEntry implements DomainEntry {
     public Scope getScope() {
         return scope;
     }
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                   .add("availabilityZone", availabilityZone).add("domain", domain)
                   .add("project", project).add("scope", scope)
                   .toString();
     }
-    
+
     public static class DomainEntries extends ListResult<ExtDomainEntry> {
 
         private static final long serialVersionUID = 1L;
-        
+
         @JsonProperty("domain_entries")
         private List<ExtDomainEntry> results;
 
@@ -76,7 +76,7 @@ public class ExtDomainEntry implements DomainEntry {
         protected List<ExtDomainEntry> value() {
             return results;
         }
-        
+
     }
 
 }

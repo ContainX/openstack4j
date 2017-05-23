@@ -9,7 +9,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack Neutron Security Group Rule model.
@@ -18,24 +18,24 @@ import com.google.common.base.Objects;
  */
 @JsonRootName("security_group")
 public class NeutronSecurityGroup implements SecurityGroup {
-  
+
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("id")
   private String id;
-  
+
   @JsonProperty("tenant_id")
   private String tenantId;
-  
+
   @JsonProperty("description")
   private String description;
-  
+
   @JsonProperty("name")
   private String name;
-  
+
   @JsonProperty("security_group_rules")
   private List<NeutronSecurityGroupRule> rules;
-  
+
   /**
    * {@inheritDoc}
    */
@@ -44,7 +44,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
     return this.description;
   }
 
-  
+
   /**
    * {@inheritDoc}
    */
@@ -52,7 +52,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
   public String getId() {
     return this.id;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -85,7 +85,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
   public void setName(String name) {
     this.name = name;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -94,7 +94,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
     this.tenantId = tenantId;
   }
 
-  
+
   /**
    * {@inheritDoc}
    */
@@ -102,7 +102,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
   public List<? extends SecurityGroupRule> getRules() {
     return rules;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -110,7 +110,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
   public NetSecurityGroupBuilder toBuilder() {
     return new SecurityGroupConcreteBuilder(this);
   }
-  
+
   public static NetSecurityGroupBuilder builder() {
     return new SecurityGroupConcreteBuilder();
   }
@@ -120,7 +120,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
    */
   @Override
   public String toString() {
-    return Objects.toStringHelper(this).omitNullValues()
+    return MoreObjects.toStringHelper(this).omitNullValues()
             .add("id", id).add("tenantId", tenantId)
             .add("name", name)
             .add("description", description)
@@ -128,19 +128,49 @@ public class NeutronSecurityGroup implements SecurityGroup {
             .addValue("\n")
             .toString();
   }
-  
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+    return java.util.Objects.hash(id, tenantId, name, description, rules);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+
+    if (obj instanceof NeutronSecurityGroup) {
+      NeutronSecurityGroup that = (NeutronSecurityGroup) obj;
+      if (java.util.Objects.equals(id, that.id) &&
+              java.util.Objects.equals(tenantId, that.tenantId) &&
+              java.util.Objects.equals(name, that.name) &&
+              java.util.Objects.equals(description, that.description) &&
+              java.util.Objects.equals(rules, that.rules)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * The Class SecurityGroups.
    *
    * @author Nathan Anderson
    */
   public static class SecurityGroups extends ListResult<NeutronSecurityGroup> {
-    
+
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("security_groups")
     private List<NeutronSecurityGroup> rules;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -149,24 +179,24 @@ public class NeutronSecurityGroup implements SecurityGroup {
       return rules;
     }
   }
-  
+
   /**
    * The Class SecurityGroupConcreteBuilder.
-   * 
+   *
    *
    * @author Nathan Anderson
    */
   public static class SecurityGroupConcreteBuilder implements NetSecurityGroupBuilder {
-    
+
     NeutronSecurityGroup g;
-    
+
     /**
      * Instantiates a new security group rule concrete builder.
      */
     public SecurityGroupConcreteBuilder() {
       g = new NeutronSecurityGroup();
     }
-    
+
     /**
      * Instantiates a new security group rule concrete builder.
      *
@@ -175,7 +205,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
     public SecurityGroupConcreteBuilder(SecurityGroup in) {
       g = (NeutronSecurityGroup) in;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -192,7 +222,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
       g = (NeutronSecurityGroup) in;
       return this;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -201,7 +231,7 @@ public class NeutronSecurityGroup implements SecurityGroup {
       g.name = name;
       return this;
     }
-    
+
     /**
      * {@inheritDoc}
      */

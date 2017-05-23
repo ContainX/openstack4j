@@ -105,4 +105,9 @@ public interface VolumeBackup   extends ModelEntity {
 	 */
 	Boolean hasDependent();
 
+	/**
+	 * @return If the backup was created from snapshot, the snapshot id. Otherwise, null.
+	 */
+	String getSnapshotId();
+
 }

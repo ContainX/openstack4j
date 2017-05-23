@@ -8,7 +8,7 @@ import org.openstack4j.model.network.ext.builder.LbPoolUpdateBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A entity used to update a lb pool
@@ -34,29 +34,29 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 		return new LbPoolUpdateContreteBuilder(this);
 	}
 
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 				.add("adminStateUp", adminStateUp)
 				.add("description", description)
 				.add("lbMethod", lbMethod)
 				.add("name", name)
 				.toString();
 	}
-	
+
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isAdminStateUp() {
-		
+
 		return adminStateUp;
 	}
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -64,7 +64,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 		return name;
 	}
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -72,7 +72,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 		return lbMethod;
 	}
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -92,7 +92,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 		}
 		@Override
 		public LbPoolUpdate build() {
-			
+
 			return m;
 		}
 
@@ -103,7 +103,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -113,7 +113,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -122,7 +122,7 @@ public class NeutronLbPoolUpdate implements LbPoolUpdate {
 			return this;
 		}
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override

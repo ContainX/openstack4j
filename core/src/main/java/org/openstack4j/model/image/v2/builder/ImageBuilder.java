@@ -1,11 +1,11 @@
 package org.openstack4j.model.image.v2.builder;
 
+import java.util.List;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.image.v2.ContainerFormat;
 import org.openstack4j.model.image.v2.DiskFormat;
 import org.openstack4j.model.image.v2.Image;
-
-import java.util.List;
 
 /**
  * Builder which creates a v2 Image
@@ -46,12 +46,12 @@ public interface ImageBuilder extends Buildable.Builder<ImageBuilder, Image> {
     /**
      * @see Image#getMinDisk()
      */
-    ImageBuilder minDisk(Integer minDisk);
+    ImageBuilder minDisk(Long minDisk);
 
     /**
      * @see Image#getMinRam()
      */
-    ImageBuilder minRam(Integer minRam);
+    ImageBuilder minRam(Long minRam);
 
     /**
      * @see Image#getIsProtected()
@@ -87,4 +87,9 @@ public interface ImageBuilder extends Buildable.Builder<ImageBuilder, Image> {
      * @see Image#getRamdiskId()
      */
     ImageBuilder ramdiskId(String ramdiskId);
+
+    /**
+     * @see Image#getAdditionalPropertyValue()
+     */
+    ImageBuilder additionalProperty(String key, String value);
 }

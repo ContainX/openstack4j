@@ -8,13 +8,16 @@ import org.openstack4j.api.EndpointTokenProvider;
 import org.openstack4j.api.OSClient;
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
+import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
@@ -23,6 +26,7 @@ import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.telemetry.TelemetryAodhService;
 import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
@@ -38,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -53,12 +58,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     @SuppressWarnings("rawtypes")
     private static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
 
-    EndpointURLResolver epr = new DefaultEndpointURLResolver();
     Config config;
     Facing perspective;
     String region;
     Set<ServiceType> supports;
     CloudProvider provider;
+    Map<String, ? extends Object> headers;
+    EndpointURLResolver fallbackEndpointUrlResolver = new DefaultEndpointURLResolver();
 
     @SuppressWarnings("rawtypes")
     public static OSClientSession getCurrent() {
@@ -114,6 +120,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public NetworkingService networking() {
         return Apis.getNetworkingServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ArtifactService artifact() {
+        return Apis.getArtifactServices();
     }
     
     /**
@@ -172,6 +185,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public MagnumService magnum() {
+    	return Apis.getMagnumService();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public SenlinService senlin() {
         return Apis.getSenlinServices();
     }
@@ -200,6 +220,11 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public DNSService dns() {return Apis.getDNSService(); }
+
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     public T perspective(Facing perspective) {
         this.perspective = perspective;
@@ -208,6 +233,18 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
     public CloudProvider getProvider() {
         return (provider == null) ? CloudProvider.UNKNOWN : provider;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public T headers(Map<String, ? extends Object> headers) {
+        this.headers = headers;
+        return (T) this;
+    }
+
+    public Map<String, ? extends Object> getHeaders(){
+        return this.headers;
     }
 
     /**
@@ -276,15 +313,26 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public boolean supportsTelemetry_aodh() {
+        return getSupportedServices().contains(ServiceType.TELEMETRY_AODH);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public boolean supportsShare() {
         return getSupportedServices().contains(ServiceType.SHARE);
     }
 
     /**
-     *
-     * @return
+     * {@inheritDoc}
      */
     public boolean supportsTrove() { return getSupportedServices().contains(ServiceType.DATABASE); }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean supportsDNS() { return getSupportedServices().contains(ServiceType.DNS); }
 
     public Set<ServiceType> getSupportedServices() {
         return null;
@@ -367,7 +415,10 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
          */
         @Override
         public String getEndpoint(ServiceType service) {
-            return addNATIfApplicable(epr.findURLV2(URLResolverParams
+        	
+        	final EndpointURLResolver eUrlResolver = (config != null && config.getEndpointURLResolver() != null) ? config.getEndpointURLResolver() : fallbackEndpointUrlResolver;
+        	
+            return addNATIfApplicable(eUrlResolver.findURLV2(URLResolverParams
                     .create(access, service)
                     .resolver(config != null ? config.getV2Resolver() : null)
                     .perspective(perspective)
@@ -464,7 +515,10 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
          */
         @Override
         public String getEndpoint(ServiceType service) {
-            return addNATIfApplicable(epr.findURLV3(URLResolverParams
+        	
+        	final EndpointURLResolver eUrlResolver = (config != null && config.getEndpointURLResolver() != null) ? config.getEndpointURLResolver() : fallbackEndpointUrlResolver;
+        	
+            return addNATIfApplicable(eUrlResolver.findURLV3(URLResolverParams
                     .create(token, service)
                     .resolver(config != null ? config.getResolver() : null)
                     .perspective(perspective)
@@ -496,6 +550,11 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
                 supports = Sets.immutableEnumSet(Iterables.transform(token.getCatalog(),
                         new org.openstack4j.openstack.identity.v3.functions.ServiceToServiceType()));
             return supports;
+        }
+
+        @Override
+        public TelemetryService telemetry() {
+            return Apis.get(TelemetryAodhService.class);
         }
 
     }

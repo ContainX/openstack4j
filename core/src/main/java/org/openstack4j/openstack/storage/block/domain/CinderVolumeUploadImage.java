@@ -9,18 +9,18 @@ import org.openstack4j.model.storage.block.VolumeUploadImage;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Represents an action state when uploading a volume to the image service
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("os-volume_upload_image")
 public class CinderVolumeUploadImage implements VolumeUploadImage {
 
     private static final long serialVersionUID = 1L;
-    
+
     private String id;
     @JsonProperty("status")
     private Status status;
@@ -81,10 +81,10 @@ public class CinderVolumeUploadImage implements VolumeUploadImage {
     public DiskFormat getDiskFormat() {
         return diskFormat;
     }
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                  .add("id", id).add("status", status).add("display_description", displayDescription)
                  .add("updatedAt", updatedAt).add("image_id", imageId).add("image_name", imageName)
                  .add("container_format", containerFormat).add("disk_format", diskFormat)

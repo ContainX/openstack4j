@@ -17,5 +17,7 @@
   "owner": "48e3c436235547a68324c2891bea41ac",
   "virtual_size": null,
   "min_ram": 0,
-  "schema": "/v2/schemas/image"
+  "schema": "/v2/schemas/image",
+  "test-key1": "test-value1",
+  "test-key2": "test-value2"
 }

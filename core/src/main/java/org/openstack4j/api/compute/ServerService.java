@@ -18,6 +18,7 @@ import org.openstack4j.model.compute.VNCConsole;
 import org.openstack4j.model.compute.VNCConsole.Type;
 import org.openstack4j.model.compute.VolumeAttachment;
 import org.openstack4j.model.compute.actions.BackupOptions;
+import org.openstack4j.model.compute.actions.EvacuateOptions;
 import org.openstack4j.model.compute.actions.LiveMigrateOptions;
 import org.openstack4j.model.compute.actions.RebuildOptions;
 import org.openstack4j.model.compute.builder.ServerCreateBuilder;
@@ -193,7 +194,8 @@ public interface ServerService {
     /**
      * Will attempt to tail and return the last {@code numLines} from the given servers console.
      * @param serverId the server identifier
-     * @param numLines the number of console lines to return
+     * @param numLines the number of console lines to return.
+     * 				   If lower or equal than zero, the whole console content will be returned.
      * @return console output as string or null
      */
     String getConsoleOutput(String serverId, int numLines);
@@ -340,4 +342,13 @@ public interface ServerService {
      * @return the encrypted server password
      */
     ServerPassword getPassword(String serverId);
+
+    /**
+     * Evacuates a server identified with {@code serverId} from a failed host to a new host
+     * 
+     * @param serverId the server identifier
+     * @param options evaucate options
+     * @return an administrative password to access the evacuated or rebuilt instance.
+     */
+    ServerPassword evacuate(String serverId, EvacuateOptions options);
 }

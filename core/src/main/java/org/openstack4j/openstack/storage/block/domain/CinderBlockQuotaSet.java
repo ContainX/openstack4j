@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 import org.openstack4j.model.storage.block.BlockQuotaSet;
 import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class CinderBlockQuotaSet implements BlockQuotaSet {
 
     private static final long serialVersionUID = 1L;
-    
+
     @JsonProperty
     private String id;
     @JsonProperty
@@ -28,11 +28,11 @@ public class CinderBlockQuotaSet implements BlockQuotaSet {
     private int volumes;
     @JsonProperty
     private int gigabytes;
-    
+
     public static BlockQuotaSetBuilder builder() {
         return new BlockQuotaSetConcreteBuilder();
     }
-    
+
     @Override
     public BlockQuotaSetBuilder toBuilder() {
         return new BlockQuotaSetConcreteBuilder(this);
@@ -57,25 +57,25 @@ public class CinderBlockQuotaSet implements BlockQuotaSet {
     public int getGigabytes() {
         return gigabytes;
     }
-    
+
     @Override
     public String toString() {
         return toStringHelper(this).add("snapshots", snapshots).add("volumes", volumes).add("gigabytes", gigabytes).toString();
     }
-    
+
     public static class BlockQuotaSetConcreteBuilder implements BlockQuotaSetBuilder {
 
         private CinderBlockQuotaSet model;
-        
+
         BlockQuotaSetConcreteBuilder() {
             this.model = new CinderBlockQuotaSet();
         }
-        
+
         BlockQuotaSetConcreteBuilder(CinderBlockQuotaSet model) {
             this.model = model;
             this.model.id = null;
         }
-        
+
         @Override
         public BlockQuotaSet build() {
             return model;
@@ -103,7 +103,7 @@ public class CinderBlockQuotaSet implements BlockQuotaSet {
             model.gigabytes = gigabytes;
             return this;
         }
-        
+
     }
 
 }

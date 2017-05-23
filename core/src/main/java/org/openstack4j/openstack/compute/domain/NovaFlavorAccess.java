@@ -8,12 +8,12 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
- * 
+ *
  * An OpenStack Flavor Access for tenants implement
- * 
+ *
  * @author Moodpo
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -48,7 +48,7 @@ public class NovaFlavorAccess implements FlavorAccess {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("flavorId", flavorId).add("tenantId", tenantId)
 				.addValue("\n").toString();
 	}
@@ -64,7 +64,7 @@ public class NovaFlavorAccess implements FlavorAccess {
 		public void setTenantId(String tenantId) {
 			this.tenantId = tenantId;
 		}
-		
+
 		public String getTenantId() {
 			return tenantId;
 		}
@@ -82,7 +82,7 @@ public class NovaFlavorAccess implements FlavorAccess {
 		public void setTenantId(String tenantId) {
 			this.tenantId = tenantId;
 		}
-		
+
 		public String getTenantId() {
 			return tenantId;
 		}

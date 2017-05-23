@@ -10,7 +10,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 /**
  * Nova HostAggregate
  * @author liujunpeng
@@ -45,13 +45,13 @@ public class NovaHostAggregate implements HostAggregate {
 		hostAggregate.name = name;
 		hostAggregate.availabilityZone=availabilityZone;
 		return hostAggregate;
-		
+
 	}
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getAvaiablityZone() {
+	public String getAvailabilityZone() {
 		return availabilityZone;
 	}
 	/**
@@ -110,11 +110,11 @@ public class NovaHostAggregate implements HostAggregate {
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-	
+
 	@Override
 	public String toString() {
-		
-		return Objects.toStringHelper(this).omitNullValues()
+
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("availabilityZone", availabilityZone)
 				.add("createdAt", createdAt)
 				.add("deleted", deleted)
@@ -148,7 +148,7 @@ public class NovaHostAggregate implements HostAggregate {
 		public String toString() {
 			return "HostAggregates [aggregates=" + aggregates + "]";
 		}
-		
+
 	}
-	
+
 }

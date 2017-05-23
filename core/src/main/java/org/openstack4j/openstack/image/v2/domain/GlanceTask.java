@@ -1,14 +1,15 @@
 package org.openstack4j.openstack.image.v2.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
 import org.openstack4j.model.image.v2.Task;
 import org.openstack4j.model.image.v2.builder.TaskBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Glance v2 task model implementation
@@ -32,7 +33,7 @@ public class GlanceTask implements Task {
 
     String owner;
 
-    String result;
+    Map<String, String> result;
 
     String schema;
 
@@ -78,7 +79,7 @@ public class GlanceTask implements Task {
     }
 
     @Override
-    public String getResult() {
+    public Map<String, String> getResult() {
         return result;
     }
 
@@ -113,7 +114,7 @@ public class GlanceTask implements Task {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("createdAt", createdAt)
                 .add("expiresAt", expiresAt)
                 .add("updatedAt", updatedAt)

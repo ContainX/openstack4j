@@ -7,11 +7,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Model implementation for Policy target group
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_target_group")
@@ -38,7 +38,7 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
     private Boolean shared;
     @JsonProperty("subnets")
     private List<String> subnets;
-   
+
 
     @Override
     public String getTenantId() {
@@ -115,17 +115,17 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets)
                 .add("l2PolicyId", l2PolicyId).add("networkServicePolicyId", networkServicePolicyId)
                 .add("policyTargets", policyTargets).add("serviceManagement", serviceManagement).add("shared", shared).add("subnets", subnets).toString();
     }
-    
-    
-    
+
+
+
     public static class PolicyTargetGroups extends ListResult<GbpPolicyTargetGroup>{
         private static final long serialVersionUID = 1L;
-        
+
         @JsonProperty("policy_target_groups")
         private List<GbpPolicyTargetGroup> policyTargetGroups;
 
@@ -134,7 +134,7 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
             return policyTargetGroups;
         }
     }
-    
-  
-    
+
+
+
 }

@@ -14,18 +14,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack Volume
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("volume")
 public class CinderVolume implements Volume {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
 	@JsonProperty("display_name")
 	private String name;
@@ -60,9 +60,11 @@ public class CinderVolume implements Volume {
 	@JsonProperty("os-vol-mig-status-attr:migstat")
 	private MigrationStatus migrateStatus;
 	@JsonProperty("os-vol-tenant-attr:tenant_id")
-	private String tenantId;	
+	private String tenantId;
 	@JsonProperty("encrypted")
 	private Boolean encrypted;
+	@JsonProperty("os-vol-host-attr:host")
+	private String host;
 	/**
 	 * {@inheritDoc}
 	 */
@@ -77,7 +79,7 @@ public class CinderVolume implements Volume {
 	public static VolumeBuilder builder() {
 		return new ConcreteVolumeBuilder();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -166,11 +168,11 @@ public class CinderVolume implements Volume {
 	    if (imageRef != null)
 	        return imageRef;
 
-	    // Depending on whether this is a Listing or a direct Get the information is different so we are smart 
+	    // Depending on whether this is a Listing or a direct Get the information is different so we are smart
 	    // about returning the proper imageId if applicable
 	    if (imageId == null && imageMetadata != null && imageMetadata.containsKey("image_id"))
 	        imageId = String.valueOf(imageMetadata.get("image_id"));
-	    
+
 	    return imageId;
 	}
 
@@ -190,7 +192,7 @@ public class CinderVolume implements Volume {
 	public Map<String, String> getMetaData() {
 		return metadata;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -214,7 +216,7 @@ public class CinderVolume implements Volume {
 	public boolean bootable(){
 		return bootable;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -222,13 +224,19 @@ public class CinderVolume implements Volume {
 	public boolean encrypted(){
 		return encrypted;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String host() { return host; }
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("name", name).add("description", description)
 				     .add("status", status).add("size", size).add("zone", zone).add("created", created)
 				     .add("volumeType", volumeType).add("imageRef", getImageRef())
@@ -236,32 +244,32 @@ public class CinderVolume implements Volume {
 				     .add("bootable", bootable)
 				     .toString();
 	}
-	
+
 	public static class Volumes extends ListResult<CinderVolume> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("volumes")
 		private List<CinderVolume> volumes;
-		
+
 		@Override
 		protected List<CinderVolume> value() {
 			return volumes;
 		}
 	}
-	
+
 	public static class ConcreteVolumeBuilder implements VolumeBuilder {
 
 		private CinderVolume m;
-		
+
 		ConcreteVolumeBuilder() {
 			this(new CinderVolume());
 		}
-		
+
 		ConcreteVolumeBuilder(CinderVolume m) {
 			this.m = m;
 		}
-		
+
 		@Override
 		public VolumeBuilder name(String name) {
 			m.name = name;
@@ -315,7 +323,7 @@ public class CinderVolume implements Volume {
 			m.metadata = metadata;
 			return this;
 		}
-		
+
 		@Override
 		public Volume build() {
 			return m;

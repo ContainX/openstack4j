@@ -3,7 +3,7 @@ package org.openstack4j.openstack.identity.v3.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.identity.v3.RoleAssignment;
 import org.openstack4j.model.identity.v3.builder.RoleBuilder;
@@ -109,7 +109,7 @@ public class KeystoneRoleAssignment implements RoleAssignment {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("roleId", roleId)
                 .add("groupId", groupId)
                 .add("userId", userId)

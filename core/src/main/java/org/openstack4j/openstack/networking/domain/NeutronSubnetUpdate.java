@@ -30,6 +30,8 @@ public class NeutronSubnetUpdate implements ModelEntity {
     private List<NeutronHostRoute> hostRoutes;
     @JsonProperty("gateway_ip")
     private String gateway;
+    @JsonProperty("enable_dhcp")
+    private boolean enabledhcp;
     
     @SuppressWarnings("unchecked")
     public static NeutronSubnetUpdate createFromSubnet(Subnet in) {
@@ -39,6 +41,7 @@ public class NeutronSubnetUpdate implements ModelEntity {
         ns.pools = (List<NeutronPool>) in.getAllocationPools();
         ns.hostRoutes = (List<NeutronHostRoute>) in.getHostRoutes();
         ns.gateway = in.getGateway();
+        ns.enabledhcp = in.isDHCPEnabled();
         return ns;
     }
 

@@ -13,19 +13,19 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 /**
  * An OpenStack Sahara
- * 
+ *
  * @author Ekasit Kijsipongse
  */
 @JsonRootName("node_group_template")
 public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
 	private String name;
 	private String description;
@@ -34,10 +34,10 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 	@JsonProperty("tenant_id")
 	private String tenantId;
 	@JsonProperty("created_at")
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private Date createdAt;
 	@JsonProperty("updated_at")
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private Date updatedAt;
 	@JsonProperty("plugin_name")
 	private String pluginName;
@@ -79,7 +79,7 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 	public static NodeGroupTemplateBuilder builder() {
 		return new ConcreteNodeGroupTemplateBuilder();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -223,13 +223,13 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 	public Map<String, ? extends ServiceConfig> getServiceConfigs() {
 		return serviceConfigs;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 	             .add("id", id)
                      .add("name", name)
                      .add("description", description)
@@ -250,28 +250,28 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
                      .add("node_configs",serviceConfigs)
                      .toString();
 	}
-	
+
 	public static class NodeGroupTemplates extends ListResult<SaharaNodeGroupTemplate> {
 
 		private static final long serialVersionUID = 1L;
-		
+
                 @JsonProperty("node_group_templates")
 		private List<SaharaNodeGroupTemplate> nodeGroupTemplates;
-		
+
 		@Override
 		protected List<SaharaNodeGroupTemplate> value() {
 			return nodeGroupTemplates;
 		}
 	}
-	
+
 	public static class ConcreteNodeGroupTemplateBuilder implements NodeGroupTemplateBuilder {
 
 		private SaharaNodeGroupTemplate m;
-		
+
 		ConcreteNodeGroupTemplateBuilder() {
 			this(new SaharaNodeGroupTemplate());
 		}
-		
+
 		ConcreteNodeGroupTemplateBuilder(SaharaNodeGroupTemplate m) {
 			this.m = m;
 		}
@@ -286,7 +286,7 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 			m = (SaharaNodeGroupTemplate) in;
 			return this;
                 }
-		
+
 		@Override
 		public NodeGroupTemplateBuilder name(String name) {
 			m.name = name;
@@ -332,9 +332,9 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 		@Override
 		public NodeGroupTemplateBuilder addSecurityGroup(String id) {
                         if (id != null && !id.isEmpty()) {
-                           if (m.securityGroups == null) 
+                           if (m.securityGroups == null)
                               m.securityGroups = Lists.newArrayList();
-                           m.securityGroups.add(id); 
+                           m.securityGroups.add(id);
                         }
 			return this;
 		}
@@ -352,7 +352,7 @@ public class SaharaNodeGroupTemplate implements NodeGroupTemplate {
 		@Override
                 public NodeGroupTemplateBuilder addServiceConfig(String name, ServiceConfig config) {
                         if (name != null && !name.isEmpty()) {
-                           if (m.serviceConfigs == null) 
+                           if (m.serviceConfigs == null)
                               m.serviceConfigs = new HashMap<String,SaharaServiceConfig>();
                            m.serviceConfigs.put(name,(SaharaServiceConfig) config);
                         }

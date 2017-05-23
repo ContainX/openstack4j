@@ -8,11 +8,11 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Model implementation for Policy Action
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_action")
@@ -28,8 +28,8 @@ public class GbpPolicyAction implements PolicyAction {
     private PolicyActionProtocol actionType;
     @JsonProperty("action_value")
     private String actionValue;
-    
-    
+
+
     @Override
     public PolicyActionCreateBuilder toBuilder() {
         return new PolicyActionConcreteBuilder(this);
@@ -65,7 +65,7 @@ public class GbpPolicyAction implements PolicyAction {
         this.id=id;
     }
     @Override
-    public String getDescription() { 
+    public String getDescription() {
         return description;
     }
     @Override
@@ -85,25 +85,25 @@ public class GbpPolicyAction implements PolicyAction {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("actionType", actionType).add("actionValue", actionValue).add("shared", shared).toString();
     }
     public static class PolicyActions extends ListResult<GbpPolicyAction>{
         private static final long serialVersionUID = 1L;
         @JsonProperty("policy_actions")
         private List<GbpPolicyAction> policyActions;
-        
+
         @Override
         protected List<GbpPolicyAction> value() {
             return policyActions;
         }
-        
+
     }
-    
+
     public static class PolicyActionConcreteBuilder implements PolicyActionCreateBuilder{
 
         private GbpPolicyAction policyAction;
-        
+
         public PolicyActionConcreteBuilder(GbpPolicyAction gbpPolicyAction) {
             this.policyAction=gbpPolicyAction;
         }
@@ -111,7 +111,7 @@ public class GbpPolicyAction implements PolicyAction {
         public PolicyActionConcreteBuilder() {
             this(new GbpPolicyAction());
         }
- 
+
         @Override
         public PolicyAction build() {
             return policyAction;
@@ -146,12 +146,12 @@ public class GbpPolicyAction implements PolicyAction {
             this.policyAction.shared=shared;
             return this;
         }
-        
+
     }
 
     public static PolicyActionCreateBuilder builder() {
         return new PolicyActionConcreteBuilder();
     }
-    
+
 
 }

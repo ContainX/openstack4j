@@ -1,16 +1,9 @@
 package org.openstack4j.api.image.v2;
 
-import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders;
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.common.Payloads;
-import org.openstack4j.model.image.v2.ContainerFormat;
-import org.openstack4j.model.image.v2.DiskFormat;
-import org.openstack4j.model.image.v2.Image;
-import org.openstack4j.model.image.v2.Member;
-import org.openstack4j.model.image.v2.Task;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -23,9 +16,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import org.openstack4j.api.AbstractTest;
+import org.openstack4j.api.Builders;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.common.Payloads;
+import org.openstack4j.model.image.v2.ContainerFormat;
+import org.openstack4j.model.image.v2.DiskFormat;
+import org.openstack4j.model.image.v2.Image;
+import org.openstack4j.model.image.v2.Member;
+import org.openstack4j.model.image.v2.Task;
+import org.testng.annotations.Test;
 
 /**
  * @author emjburns
@@ -77,9 +78,15 @@ public class ImageV2Tests extends AbstractTest {
         String name = "amphora-x64-haproxy";
         ContainerFormat cf = ContainerFormat.BARE;
         DiskFormat df = DiskFormat.QCOW2;
-        Integer mindisk = 0;
-        Integer minram = 0;
+        Long mindisk = 0L;
+        Long minram = 0L;
         Image.ImageVisibility vis = Image.ImageVisibility.PUBLIC;
+        String key1 = "test-key1";
+        String key2 = "test-key2";
+        String key3 = "id";
+        String value1 = "test-value1";
+        String value2 = "test-value2";
+        String value3 = "test-value3";
         Image im = Builders.imageV2()
                 .id(id)
                 .name(name)
@@ -88,6 +95,9 @@ public class ImageV2Tests extends AbstractTest {
                 .minDisk(mindisk)
                 .minRam(minram)
                 .visibility(vis)
+                .additionalProperty(key1, value1)
+                .additionalProperty(key2, value2)
+                .additionalProperty(key3, value3)
                 .build();
         Image image = osv3().imagesV2().create(im);
         assertNotNull(image);
@@ -98,6 +108,9 @@ public class ImageV2Tests extends AbstractTest {
         assertEquals(image.getVisibility(), vis);
         assertEquals(image.getMinDisk(), mindisk);
         assertEquals(image.getMinRam(), minram);
+        assertEquals(image.getAdditionalPropertyValue(key1), value1);
+        assertEquals(image.getAdditionalPropertyValue(key2), value2);
+        assertNull(image.getAdditionalPropertyValue(key3));
     }
 
     public void testDeleteImage() throws IOException {

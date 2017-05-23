@@ -1,7 +1,7 @@
 package org.openstack4j.openstack.barbican.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.barbican.ContainerConsumer;
 import org.openstack4j.model.barbican.Container;
 import org.openstack4j.model.barbican.ContainerSecret;
@@ -105,7 +105,7 @@ public class BarbicanContainer implements Container {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("status", status).add("name", name).add("updated", updatedTime)
                 .add("created", createdTime).add("consumers", consumers).add("reference", containerReference)
                 .add("creatorId", creatorId).add("secrets", secretReferences).add("type", type)

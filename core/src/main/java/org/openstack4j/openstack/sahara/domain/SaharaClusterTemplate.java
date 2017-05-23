@@ -14,26 +14,26 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 /**
  * An OpenStack Sahara
- * 
+ *
  * @author Ekasit Kijsipongse
  */
 @JsonRootName("cluster_template")
 public class SaharaClusterTemplate implements ClusterTemplate {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonProperty("hadoop_version")
 	private String hadoopVersion;
 	@JsonProperty("default_image_id")
 	private String defaultImageId;
 	private String name;
 	@JsonProperty("updated_at")
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private Date updatedAt;
 	@JsonProperty("tenant_id")
 	private String tenantId;
@@ -48,7 +48,7 @@ public class SaharaClusterTemplate implements ClusterTemplate {
         @JsonProperty("neutron_management_network")
 	private String managementNetworkId;
 	@JsonProperty("created_at")
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private Date createdAt;
 	@JsonProperty("cluster_configs")
 	private Map<String, SaharaServiceConfig> clusterConfigs;
@@ -67,7 +67,7 @@ public class SaharaClusterTemplate implements ClusterTemplate {
 	public static ClusterTemplateBuilder builder() {
 		return new ConcreteClusterTemplateBuilder();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -171,13 +171,13 @@ public class SaharaClusterTemplate implements ClusterTemplate {
 	public Map<String, ? extends ServiceConfig> getClusterConfigs() {
 		return clusterConfigs;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 	             .add("id", id)
                      .add("name", name)
                      .add("description", description)
@@ -193,28 +193,28 @@ public class SaharaClusterTemplate implements ClusterTemplate {
                      .add("cluster_configs",clusterConfigs)
                      .toString();
 	}
-	
+
 	public static class ClusterTemplates extends ListResult<SaharaClusterTemplate> {
 
 		private static final long serialVersionUID = 1L;
-		
+
                 @JsonProperty("cluster_templates")
 		private List<SaharaClusterTemplate> nodeGroupTemplates;
-		
+
 		@Override
 		protected List<SaharaClusterTemplate> value() {
 			return nodeGroupTemplates;
 		}
 	}
-	
+
 	public static class ConcreteClusterTemplateBuilder implements ClusterTemplateBuilder {
 
 		private SaharaClusterTemplate m;
-		
+
 		ConcreteClusterTemplateBuilder() {
 			this(new SaharaClusterTemplate());
 		}
-		
+
 		ConcreteClusterTemplateBuilder(SaharaClusterTemplate m) {
 			this.m = m;
 		}
@@ -229,7 +229,7 @@ public class SaharaClusterTemplate implements ClusterTemplate {
 			m = (SaharaClusterTemplate) in;
 			return this;
                 }
-		
+
 		@Override
 		public ClusterTemplateBuilder pluginName(String pluginName) {
 			m.pluginName = pluginName;
@@ -245,7 +245,7 @@ public class SaharaClusterTemplate implements ClusterTemplate {
 
 		@Override
 		public ClusterTemplateBuilder addNodeGroup(NodeGroup nodeGroup) {
-                        if (m.nodeGroups == null) 
+                        if (m.nodeGroups == null)
                            m.nodeGroups = Lists.newArrayList();
                         m.nodeGroups.add((SaharaNodeGroup) nodeGroup);
                         return this;
@@ -272,7 +272,7 @@ public class SaharaClusterTemplate implements ClusterTemplate {
 		@Override
                 public ClusterTemplateBuilder addServiceConfig(String name, ServiceConfig config) {
                         if (name != null && !name.isEmpty()) {
-                           if (m.clusterConfigs == null) 
+                           if (m.clusterConfigs == null)
                               m.clusterConfigs = new HashMap<String,SaharaServiceConfig>();
                            m.clusterConfigs.put(name,(SaharaServiceConfig) config);
                         }

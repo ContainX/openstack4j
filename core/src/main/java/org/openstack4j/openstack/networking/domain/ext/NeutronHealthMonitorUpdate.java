@@ -6,11 +6,11 @@ import org.openstack4j.model.network.ext.builder.HealthMonitorUpdateBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An entity used to update a healthmonitor
- * 
+ *
  * @author liujunpeng
  *
  */
@@ -85,7 +85,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("delay", delay)
 				.add("urlPath", urlPath)
 				.add("adminStateUp", adminStateUp)
@@ -125,7 +125,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -135,7 +135,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -145,7 +145,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -155,7 +155,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -165,7 +165,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -175,7 +175,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -185,7 +185,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -197,7 +197,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -206,7 +206,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -215,7 +215,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -224,7 +224,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -233,7 +233,7 @@ public class NeutronHealthMonitorUpdate implements HealthMonitorUpdate {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override

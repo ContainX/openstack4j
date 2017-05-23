@@ -56,8 +56,21 @@ public interface RouterBuilder extends Builder<RouterBuilder, Router> {
 	 * Removes the external gateway from the router during an update operation
 	 */
 	RouterBuilder clearExternalGateway();
+
 	/**
 	 * @see Router#getRoutes()
 	 */
 	RouterBuilder route(String destination, String nexthop);
+
+	/**
+	 * Removes the static routes from the router during an update operation
+	 */
+	RouterBuilder noRoutes();
+	
+	/**
+	 * 
+	 * @param distributed:true indicates a distributed router. It is available when dvr extension is enabled.
+	 * @return
+	 */
+	RouterBuilder distributed(Boolean distributed);
 }

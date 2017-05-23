@@ -83,6 +83,30 @@ public interface BlockDeviceMappingBuilder extends Buildable.Builder<BlockDevice
 	 */
 	BlockDeviceMappingBuilder volumeSize(Integer size);
 	
-	
+    /**
+     * Used to set the disk_bus, low level detail that some hypervisors
+     * (currently only libvirt) may support.
+     * 
+     * @see <a href=
+     *      "https://docs.openstack.org/developer/nova/block_device_mapping.html#block-device-mapping-v2">https://docs.openstack.org/developer/nova/block_device_mapping.html#block-device-mapping-v2</a>
+     * 
+     * @param disk_bus
+     *            type, e.g ide, usb, virtio, scsi
+     * @return BlockDeviceMappingBuilder
+     */
+    BlockDeviceMappingBuilder diskBus(String diskBus);
+
+    /**
+     * Used to set the device_type, low level detail that some hypervisors
+     * (currently only libvirt) may support.
+     * 
+     * @see <a href=
+     *      "https://docs.openstack.org/developer/nova/block_device_mapping.html#block-device-mapping-v2">https://docs.openstack.org/developer/nova/block_device_mapping.html#block-device-mapping-v2</a>
+     * 
+     * @param device_type,
+     *            disk, cdrom, floppy, lun
+     * @return BlockDeviceMappingBuilder
+     */
+    BlockDeviceMappingBuilder deviceType(String deviceType);
 
 }

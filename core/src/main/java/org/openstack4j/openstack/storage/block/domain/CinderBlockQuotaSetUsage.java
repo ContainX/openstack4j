@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 import org.openstack4j.model.common.QuotaDetails;
 import org.openstack4j.model.storage.block.BlockQuotaSetUsage;
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * Block Quota-Set Usage Details
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("quota_set")
@@ -20,15 +20,15 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class CinderBlockQuotaSetUsage implements BlockQuotaSetUsage {
 
     private static final long serialVersionUID = 1L;
-    
+
     @JsonProperty
     private QuotaDetailsEntity snapshots;
     @JsonProperty
     private QuotaDetailsEntity volumes;
     @JsonProperty
     private QuotaDetailsEntity gigabytes;
-    
-    
+
+
     @Override
     public QuotaDetails getSnapshots() {
         return snapshots;
@@ -43,7 +43,7 @@ public class CinderBlockQuotaSetUsage implements BlockQuotaSetUsage {
     public QuotaDetails getGigabytes() {
         return gigabytes;
     }
-    
+
     @Override
     public String toString() {
         return toStringHelper(this).add("snapshots", snapshots).add("volumes", volumes).add("gigabytes", gigabytes).toString();
