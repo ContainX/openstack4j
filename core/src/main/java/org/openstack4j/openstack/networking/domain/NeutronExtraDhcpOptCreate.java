@@ -11,7 +11,9 @@ public class NeutronExtraDhcpOptCreate implements ExtraDhcpOptCreate {
 
     // {"opt_value": "testfile.1", "opt_name": "bootfile-name"}
     
+    @JsonProperty("opt_value")
     public String opt_value;
+    @JsonProperty("opt_name")
     public String opt_name;
     
     @Override
