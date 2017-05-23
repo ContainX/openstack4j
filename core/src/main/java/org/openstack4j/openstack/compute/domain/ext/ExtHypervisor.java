@@ -219,8 +219,8 @@ public class ExtHypervisor implements Hypervisor {
 
         private static final long serialVersionUID = 1L;
 
-        private String vendor;
-        private String model;
+        private List<Object> vendor;
+        private List<Object> model;
         private String arch;
         private List<String> features;
         private HypervisorCPUTopology topology;
@@ -239,12 +239,12 @@ public class ExtHypervisor implements Hypervisor {
         }
 
         @Override
-        public String getVendor() {
+        public List<Object> getVendor() {
             return vendor;
         }
 
         @Override
-        public String getModel() {
+        public List<Object> getModel() {
             return model;
         }
 

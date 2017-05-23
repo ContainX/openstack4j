@@ -178,12 +178,12 @@ public interface Hypervisor extends ModelEntity {
         /**
          * @return cpu vendor
          */
-        String getVendor();
+        List<Object> getVendor();
 
         /**
          * @return cpu model
          */
-        String getModel();
+        List<Object> getModel();
 
         /**
          * @return chipset architecture
