@@ -9,12 +9,14 @@ import org.openstack4j.model.network.NetworkType;
 import org.openstack4j.model.network.State;
 import org.openstack4j.model.network.Subnet;
 import org.openstack4j.model.network.builder.NetworkBuilder;
+import org.openstack4j.model.network.builder.PortBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import com.google.common.collect.Sets;
 
 /**
  * An OpenStack (Neutron) network
@@ -45,6 +47,12 @@ public class NeutronNetwork implements Network {
     private Boolean shared;
     @JsonProperty("provider:segmentation_id")
     private String providerSegID;
+    @JsonProperty("availability_zone_hints")
+    private List<String> availabilityZoneHints;
+    @JsonProperty("availability_zones")
+    private List<String> availabilityZones;    
+    
+    
     /**
      * The maximum transmission unit (MTU) value to address fragmentation. Minimum value is 68 for IPv4, and 1280 for IPv6.
      */
@@ -199,6 +207,23 @@ public class NeutronNetwork implements Network {
 	public Integer getMTU() {
 		return mtu;
 	}
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getAvailabilityZoneHints() {
+        return availabilityZoneHints;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> getAvailabilityZones() {
+        return availabilityZones;
+    }
+    
 
     /**
      * {@inheritDoc}
@@ -209,7 +234,7 @@ public class NeutronNetwork implements Network {
                 .add("name", name).add("status", status).add("subnets", subnets).add("provider:physical_network", providerPhyNet)
                 .add("adminStateUp", adminStateUp).add("tenantId", tenantId).add("provider:network_type", networkType).add("router:external", routerExternal)
                 .add("id", id).add("shared", shared).add("provider:segmentation_id", providerSegID)
-                .add("mtu", mtu)
+                .add("mtu", mtu).add("availabilityZoneHints", availabilityZoneHints).add("availabilityZones", availabilityZones)
                 .toString();
     }
 
@@ -220,7 +245,7 @@ public class NeutronNetwork implements Network {
     public int hashCode() {
         return java.util.Objects.hash(name, status, subnets,
                 providerPhyNet, adminStateUp, tenantId, networkType,
-                routerExternal, id, shared, providerSegID);
+                routerExternal, id, shared, providerSegID, availabilityZoneHints, availabilityZones);
     }
 
     /**
@@ -244,7 +269,9 @@ public class NeutronNetwork implements Network {
                     java.util.Objects.equals(routerExternal, that.routerExternal) &&
                     java.util.Objects.equals(id, that.id) &&
                     java.util.Objects.equals(shared, that.shared) &&
-                    java.util.Objects.equals(providerSegID, that.providerSegID)) {
+                    java.util.Objects.equals(providerSegID, that.providerSegID) &&
+                    java.util.Objects.equals(availabilityZoneHints, that.availabilityZoneHints) &&
+                    java.util.Objects.equals(availabilityZones, that.availabilityZones)) {
                 return true;
             }
         }
@@ -333,5 +360,14 @@ public class NeutronNetwork implements Network {
             m = (NeutronNetwork) in;
             return this;
         }
+        
+        @Override
+		public NetworkBuilder addAvailabilityZoneHints(String availabilityZone) {
+        	if(m.availabilityZoneHints==null){
+				m.availabilityZoneHints = new ArrayList<>();
+			}
+			m.availabilityZoneHints.add(availabilityZone);
+			return this;			        	
+		}
     }
 }

@@ -63,4 +63,15 @@ public interface Network extends Resource, Buildable<NetworkBuilder> {
 	 */
 	Integer getMTU();
 	
+	/**
+	 * @return the list of the availability zone candidate for the network.
+	 */
+	List<String> getAvailabilityZoneHints();
+	
+	/**
+	 * @return the list of the availability zone for the network.
+	 */
+	List<String> getAvailabilityZones();
+	
+	
 }
