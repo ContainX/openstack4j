@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.compute.domain.ext;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -17,11 +17,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class ExtAvailabilityZone implements AvailabilityZone {
 
     private static final long serialVersionUID = 1L;
-    
+
     ExtZoneState zoneState;
     String zoneName;
     Map<String, Map<String, ExtNovaService>> hosts;
-        
+
     /**
      * {@inheritDoc}
      */
@@ -52,18 +52,18 @@ public class ExtAvailabilityZone implements AvailabilityZone {
         }
         return map;
     }
-    
+
     @Override
     public String toString() {
         return toStringHelper(this).omitNullValues()
                  .add("zoneState", zoneState).add("zoneName", zoneName).add("hosts", hosts)
                  .toString();
     }
-    
+
     @JsonRootName("zoneState")
     static class ExtZoneState implements ZoneState {
         private static final long serialVersionUID = 1L;
-        
+
         boolean available;
 
         /**
@@ -73,7 +73,7 @@ public class ExtAvailabilityZone implements AvailabilityZone {
         public boolean getAvailable() {
             return available;
         }
-        
+
         @Override
         public String toString() {
             return toStringHelper(this).omitNullValues()
@@ -81,16 +81,16 @@ public class ExtAvailabilityZone implements AvailabilityZone {
                      .toString();
         }
     }
-    
+
     static class ExtNovaService implements NovaService {
         private static final long serialVersionUID = 1L;
-        
+
         boolean available;
         @JsonProperty("active")
         String statusActive;
         @JsonProperty("updated_at")
         Date updateTime;
-        
+
         /**
          * {@inheritDoc}
          */
@@ -114,7 +114,7 @@ public class ExtAvailabilityZone implements AvailabilityZone {
         public Date getUpdateTime() {
             return updateTime;
         }
-        
+
         @Override
         public String toString() {
             return toStringHelper(this).omitNullValues()
@@ -122,11 +122,11 @@ public class ExtAvailabilityZone implements AvailabilityZone {
                      .toString();
         }
     }
-    
+
     public static class AvailabilityZones extends ListResult<ExtAvailabilityZone> {
 
         private static final long serialVersionUID = 1L;
-        
+
         @JsonProperty("availabilityZoneInfo")
         private List<ExtAvailabilityZone> result;
 
@@ -135,6 +135,6 @@ public class ExtAvailabilityZone implements AvailabilityZone {
             return result;
         }
 
-        
+
     }
 }

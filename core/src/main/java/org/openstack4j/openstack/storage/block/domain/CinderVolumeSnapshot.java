@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -127,7 +127,7 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("name", name).add("description", description).add("volumeId", volumeId)
 				     .add("status", status).add("created", created).add("force", force).add("size", size).add("metadata", metadata)
 				     .toString();

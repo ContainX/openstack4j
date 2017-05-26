@@ -11,15 +11,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumBaymodel implements Baymodel{
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
-    
+
     @JsonProperty("insecure_registry")
     private String insecureRegistry;
     @JsonProperty("links")
@@ -86,16 +86,16 @@ public class MagnumBaymodel implements Baymodel{
     private Boolean masterLbEnabled;
     @JsonProperty("dns_nameserver")
     private String dnsNameserver;
-    
+
     public static BaymodelBuilder builder() {
         return new BaymodelConcreteBuilder();
     }
     @Override
     public BaymodelBuilder toBuilder() {
-        
+
         return new BaymodelConcreteBuilder(this);
     }
-    
+
     public String getInsecureRegistry() {
         return insecureRegistry;
     }
@@ -185,11 +185,11 @@ public class MagnumBaymodel implements Baymodel{
     }
     public String getDnsNameserver() {
         return dnsNameserver;
-    } 
-    
+    }
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("insecureRegistry", insecureRegistry)
                 .add("links", links)
                 .add("httpProxy", httpProxy)
@@ -222,23 +222,23 @@ public class MagnumBaymodel implements Baymodel{
                 .add("dnsNameserver", dnsNameserver)
                 .toString();
     }
-    
+
     /**
-     * Concrete builder containing MagnumBaymodel as model 
+     * Concrete builder containing MagnumBaymodel as model
      *
      */
     public static class BaymodelConcreteBuilder implements BaymodelBuilder{
 
         MagnumBaymodel model;
-        
+
         public BaymodelConcreteBuilder() {
             this(new MagnumBaymodel());
         }
-        
+
         public BaymodelConcreteBuilder(MagnumBaymodel model) {
             this.model = model;
         }
-        
+
         @Override
         public Baymodel build() {
             return model;
@@ -430,28 +430,28 @@ public class MagnumBaymodel implements Baymodel{
             model.dnsNameserver = dnsNameserver;
             return this;
         }
-        
+
     }
-    
+
     /**
      * list of baymodels
      *
      *
      */
     public static class Baymodels extends ListResult<MagnumBaymodel> {
-        
+
         /**
-         * 
+         *
          */
         private static final long serialVersionUID = 1L;
         @JsonProperty("baymodels")
         private List<MagnumBaymodel> list;
-        
+
         @Override
         public List<MagnumBaymodel> value() {
             return list;
-        }        
-        
+        }
+
     }
- 
+
 }

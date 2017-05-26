@@ -3,11 +3,11 @@ package org.openstack4j.openstack.networking.domain;
 import org.openstack4j.model.network.IP;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Fixed IP Address
- * 
+ *
  * @author Jeremy Unruh
  */
 public class NeutronIP implements IP {
@@ -19,14 +19,14 @@ public class NeutronIP implements IP {
 
   @JsonProperty("subnet_id")
   private String subnetId;
-	
+
   public NeutronIP() { }
-  
+
   public NeutronIP(String address, String subnetId) {
   	this.ipAddress = address;
   	this.subnetId = subnetId;
   }
-  
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -42,13 +42,13 @@ public class NeutronIP implements IP {
 	public String getSubnetId() {
 		return subnetId;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues().add("ipAddress", ipAddress).add("subnetId", subnetId).toString();
+		return MoreObjects.toStringHelper(this).omitNullValues().add("ipAddress", ipAddress).add("subnetId", subnetId).toString();
 	}
 
 }

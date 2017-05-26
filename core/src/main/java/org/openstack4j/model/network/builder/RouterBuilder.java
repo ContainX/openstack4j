@@ -66,4 +66,11 @@ public interface RouterBuilder extends Builder<RouterBuilder, Router> {
 	 * Removes the static routes from the router during an update operation
 	 */
 	RouterBuilder noRoutes();
+	
+	/**
+	 * 
+	 * @param distributed:true indicates a distributed router. It is available when dvr extension is enabled.
+	 * @return
+	 */
+	RouterBuilder distributed(Boolean distributed);
 }

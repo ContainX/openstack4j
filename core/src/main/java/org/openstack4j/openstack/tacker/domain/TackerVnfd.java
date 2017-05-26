@@ -9,7 +9,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  *
@@ -21,24 +21,24 @@ import com.google.common.base.Objects;
 public class TackerVnfd implements Vnfd {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
-	
+
 	private String name;
-	
+
 	@JsonProperty("tenant_id")
 	private String tenantId;
-	
+
 	private String description;
-	
+
 	@JsonProperty("mgmt_driver")
     private String managementDriver;
-	
+
 	@JsonProperty("infra_driver")
     private String infrastructureDriver;
-	
+
 	private VnfdAttributes attributes;
-	
+
 	@JsonProperty("service_types")
 	private List<VnfdServiceTypes> serviceTypes;
 
@@ -50,7 +50,7 @@ public class TackerVnfd implements Vnfd {
 	public VnfdBuilder toBuilder() {
 		return new VnfdConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return VnfdBuilder
 	 */
@@ -113,49 +113,49 @@ public class TackerVnfd implements Vnfd {
 	public List<VnfdServiceTypes> getServiceTypes() {
 		return serviceTypes;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("id", id).add("name", name)
 				.add("tenantId", tenantId).add("description", description)
 				.add("serviceTypes", serviceTypes).add("attributes", attributes)
 				.add("managementDriver", managementDriver).add("infrastructureDriver", infrastructureDriver)
 				.toString();
 	}
-	
+
 	public static class TackerVnfds extends ListResult<TackerVnfd> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("vnfds")
 		List<TackerVnfd> vnfds;
-		
+
 		@Override
 		public List<TackerVnfd> value() {
 			return vnfds;
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					.add("vnfds", vnfds).toString();
 		}
 	}
-	
+
 	public static class VnfdConcreteBuilder implements VnfdBuilder {
-		
+
 		TackerVnfd vnfd;
 
 		@Override
 		public Vnfd build() {
 			return vnfd;
 		}
-		
+
 		public VnfdConcreteBuilder() {
 			this(new TackerVnfd());
 		}
-		
+
 		public VnfdConcreteBuilder(TackerVnfd f) {
 			this.vnfd = f;
 		}
@@ -207,7 +207,7 @@ public class TackerVnfd implements Vnfd {
 			vnfd.serviceTypes = serviceTypes;
 			return this;
 		}
-		
+
 	}
-	
+
 }

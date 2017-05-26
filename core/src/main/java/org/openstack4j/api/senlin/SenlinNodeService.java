@@ -44,6 +44,14 @@ public interface SenlinNodeService {
 	Node get(String nodeID);
 
 	/**
+	 * returns details of a {@link Node}
+	 * @param nodeID Id of {@link Node}
+	 * @param showDetails {@literal true} to retrieve the properties about the physical object that backs the node
+	 * @return Node
+	 */
+	Node get(String nodeID, boolean showDetails);
+
+	/**
 	 * Deletes the specified {@link Node} from the server.
 	 *
 	 * @param nodeID

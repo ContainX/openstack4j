@@ -6,6 +6,9 @@ import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
 import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.*;
+import org.openstack4j.model.dns.v2.builder.DNSV2Builders;
+import org.openstack4j.model.dns.v2.builder.RecordsetBuilder;
+import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
 import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
@@ -55,6 +58,9 @@ import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.*;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.dns.v2.builder.DesignateV2Builders;
+import org.openstack4j.openstack.dns.v2.domain.DesignateRecordset;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
 import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
@@ -1166,4 +1172,26 @@ public class Builders {
     public static WorkflowBuilders workflow() {
         return new MistralBuilders();
     }
+    /**
+     * The DNS/Designate V2 builders
+     *
+     * @return the dns/designate v2 builders
+     */
+    public static DNSV2Builders dnsV2() {
+        return new DesignateV2Builders();
+    }
+
+    /**
+     * The builder to create a Zone.
+     *
+     * @return the zone builder
+     */
+    public static ZoneBuilder zone() { return DesignateZone.builder(); }
+
+    /**
+     * The builder to create a Recordset.
+     *
+     * @return the recordset builder
+     */
+    public static RecordsetBuilder recordset() { return DesignateRecordset.builder(); }
 }

@@ -8,7 +8,7 @@ import org.openstack4j.model.identity.v2.TokenV2;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 public final class KeystoneToken implements TokenV2 {
 
@@ -37,7 +37,7 @@ public final class KeystoneToken implements TokenV2 {
 	 * {@inheritDoc}
 	 */
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("id", id).add("created", created).add("expires", expires).add("tenant", tenant)
 				.toString();
 	}

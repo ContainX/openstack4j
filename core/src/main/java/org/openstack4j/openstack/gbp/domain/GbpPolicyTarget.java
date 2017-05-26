@@ -8,10 +8,10 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 /**
  * Model implementation for Policy Target
- *  
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_target")
@@ -30,7 +30,7 @@ public class GbpPolicyTarget implements PolicyTarget {
     @JsonProperty("port_id")
     private String portId;
 
-    
+
     @Override
     public String getTenantId() {
         return tenantId;
@@ -86,7 +86,7 @@ public class GbpPolicyTarget implements PolicyTarget {
     }
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("clusterId", clusterId).add("policyTargetGroupId", policyTargetGroupId).add("portId", portId).toString();
     }
 
@@ -99,9 +99,9 @@ public class GbpPolicyTarget implements PolicyTarget {
         protected List<GbpPolicyTarget> value() {
             return policyTargets;
         }
-        
+
     }
-    
+
     public static class PolicyTargetConcreteBuilder implements PolicyTargetBuilder{
 
         private GbpPolicyTarget policyTarget;
@@ -153,7 +153,7 @@ public class GbpPolicyTarget implements PolicyTarget {
             policyTarget.name=name;
             return this;
         }
-        
+
     }
 
     public static PolicyTargetBuilder builder() {

@@ -12,6 +12,7 @@ import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
@@ -42,6 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -62,6 +64,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     String region;
     Set<ServiceType> supports;
     CloudProvider provider;
+    Map<String, ? extends Object> headers;
     EndpointURLResolver fallbackEndpointUrlResolver = new DefaultEndpointURLResolver();
 
     @SuppressWarnings("rawtypes")
@@ -225,6 +228,11 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public DNSService dns() {return Apis.getDNSService(); }
+
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     public T perspective(Facing perspective) {
         this.perspective = perspective;
@@ -233,6 +241,18 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
     public CloudProvider getProvider() {
         return (provider == null) ? CloudProvider.UNKNOWN : provider;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public T headers(Map<String, ? extends Object> headers) {
+        this.headers = headers;
+        return (T) this;
+    }
+
+    public Map<String, ? extends Object> getHeaders(){
+        return this.headers;
     }
 
     /**
@@ -298,6 +318,9 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return getSupportedServices().contains(ServiceType.TELEMETRY);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean supportsTelemetry_aodh() {
         return getSupportedServices().contains(ServiceType.TELEMETRY_AODH);
     }
@@ -310,10 +333,14 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     }
 
     /**
-     *
-     * @return
+     * {@inheritDoc}
      */
     public boolean supportsTrove() { return getSupportedServices().contains(ServiceType.DATABASE); }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean supportsDNS() { return getSupportedServices().contains(ServiceType.DNS); }
 
     public Set<ServiceType> getSupportedServices() {
         return null;

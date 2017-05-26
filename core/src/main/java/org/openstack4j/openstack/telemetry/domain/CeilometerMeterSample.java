@@ -6,52 +6,52 @@ import org.openstack4j.model.telemetry.Meter.Type;
 import org.openstack4j.model.telemetry.MeterSample;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A single measurement for a given meter and resource.
- * 
+ *
  * @author Jeremy Unruh
  */
 public class CeilometerMeterSample implements MeterSample {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonProperty("counter_name")
 	private String counterName;
-	
+
 	@JsonProperty("counter_type")
 	private Type counterType;
-	
+
 	@JsonProperty("counter_unit")
 	private String counterUnit;
-	
+
 	@JsonProperty("counter_volume")
 	private Float counterVolume;
-	
+
 	private String source;
-	
+
 	@JsonProperty("project_id")
 	private String projectId;
-	
+
 	@JsonProperty("user_id")
 	private String userId;
-	
+
 	@JsonProperty("resource_id")
 	private String resourceId;
-	
+
 	private String timestamp;
-	
+
 	@JsonProperty("message_id")
 	private String messageId;
-	
+
 	@JsonProperty("resource_metadata")
 	private Map<String, Object> metadata;
-	
+
 	@JsonProperty("recorded_at")
 	private String recordedAt;
-	
-	
+
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -107,7 +107,7 @@ public class CeilometerMeterSample implements MeterSample {
 	public String getUserId() {
 		return userId;
 	}
-	
+
   /**
    * {@inheritDoc}
    */
@@ -147,13 +147,13 @@ public class CeilometerMeterSample implements MeterSample {
 	public Map<String, Object> getMetadata() {
 		return metadata;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("name", counterName).add("type", counterType).add("unit", counterUnit)
 				    .add("volume", counterVolume).add("timestamp", timestamp).add("source", source)
 				    .add("project", projectId).add("user", userId).add("resource", resourceId)
@@ -165,7 +165,7 @@ public class CeilometerMeterSample implements MeterSample {
 	@Override
 	public void setCounterName(String counterName) {
 		this.counterName = counterName;
-		
+
 	}
 
 	@Override
@@ -216,7 +216,7 @@ public class CeilometerMeterSample implements MeterSample {
 	@Override
 	public void setMessageId(String messageId) {
 		this.messageId = messageId;
-		
+
 	}
 
 	@Override

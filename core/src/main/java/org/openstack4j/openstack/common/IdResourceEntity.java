@@ -3,17 +3,17 @@ package org.openstack4j.openstack.common;
 import org.openstack4j.model.common.IdEntity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Basic Id based Entity Model implementation
- * 
+ *
  * @author Jeremy Unruh
  */
 public class IdResourceEntity implements IdEntity {
 
     private static final long serialVersionUID = 1L;
-    
+
     @JsonProperty
     private String id;
 
@@ -24,7 +24,7 @@ public class IdResourceEntity implements IdEntity {
     public String getId() {
         return id;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -32,10 +32,10 @@ public class IdResourceEntity implements IdEntity {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(getClass()).omitNullValues()
+        return MoreObjects.toStringHelper(getClass()).omitNullValues()
                      .add("id", id)
                      .toString();
     }

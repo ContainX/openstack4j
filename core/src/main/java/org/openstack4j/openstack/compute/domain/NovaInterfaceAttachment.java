@@ -8,13 +8,13 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonRootName("interfaceAttachment")
 public class NovaInterfaceAttachment implements InterfaceAttachment {
 
     private static final long serialVersionUID = 1L;
-    
+
     @JsonProperty("fixed_ips")
     private List<NovaFixedIp> fixedIps;
     @JsonProperty("mac_addr")
@@ -28,11 +28,11 @@ public class NovaInterfaceAttachment implements InterfaceAttachment {
 
     public NovaInterfaceAttachment() {
     }
-    
+
     public NovaInterfaceAttachment(String portId) {
         this.portId = portId;
     }
-    
+
     @Override
     public List<? extends FixedIp> getFixedIps() {
         return fixedIps;
@@ -57,15 +57,15 @@ public class NovaInterfaceAttachment implements InterfaceAttachment {
     public PortState getPortState() {
         return portState;
     }
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                   .add("mac_addr", macAddr).add("net_id", netId).add("port_id", portId)
                   .add("port_state", portState).add("fixed_ips", fixedIps)
                   .toString();
     }
-    
+
     public static class NovaInterfaceAttachments extends ListResult<NovaInterfaceAttachment> {
 
         private static final long serialVersionUID = 1L;
@@ -76,9 +76,9 @@ public class NovaInterfaceAttachment implements InterfaceAttachment {
         protected List<NovaInterfaceAttachment> value() {
             return attachments;
         }
-        
+
     }
-    
+
     public static class NovaFixedIp implements FixedIp {
 
         private static final long serialVersionUID = 1L;
@@ -87,8 +87,8 @@ public class NovaInterfaceAttachment implements InterfaceAttachment {
         private String ipAddress;
         @JsonProperty("subnet_id")
         private String subnetId;
-        
-        
+
+
         @Override
         public String getIpAddress() {
             return ipAddress;
@@ -98,10 +98,10 @@ public class NovaInterfaceAttachment implements InterfaceAttachment {
         public String getSubnetId() {
             return subnetId;
         }
-        
+
         @Override
         public String toString() {
-            return Objects.toStringHelper(this).omitNullValues()
+            return MoreObjects.toStringHelper(this).omitNullValues()
                       .add("ip_address", ipAddress).add("subnet_id", subnetId).toString();
         }
     }

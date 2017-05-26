@@ -9,49 +9,49 @@ import org.openstack4j.openstack.networking.domain.ext.NeutronFirewallRule.IPPro
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An entity used to update Neutron Firewall Rule (FwaaS).
- * 
+ *
  * @author Vishvesh Deshmukh
  */
 @JsonRootName("firewall_rule")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronFirewallRuleUpdate implements FirewallRuleUpdate {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	
+
 	@JsonProperty("tenant_id")
 	private String tenantId;
-	
+
 	private String description;
-	
+
 	private Boolean enabled;
-	
+
 	private Boolean shared;
-	
+
 	private FirewallRuleAction action;
-	
+
 	@JsonProperty("source_ip_address")
 	private String sourceIpAddress;
-	
+
 	@JsonProperty("destination_ip_address")
 	private String destinationIpAddress;
-	
+
 	private IPProtocol protocol;
-	
+
 	@JsonProperty("ip_version")
 	private IPVersionType ipVersion;
-	
+
 	@JsonProperty("source_port")
 	private String sourcePort;
-	
+
 	@JsonProperty("destination_port")
 	private String destinationPort;
-	
+
 	/**
 	 * Wrap this FirewallRuleUpdate to a builder
 	 * @return FirewallRuleUpdateBuilder
@@ -60,7 +60,7 @@ public class NeutronFirewallRuleUpdate implements FirewallRuleUpdate {
 	public FirewallRuleUpdateBuilder toBuilder() {
 		return new FirewallRuleUpdateConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return FirewallRuleUpdateBuilder
 	 */
@@ -127,10 +127,10 @@ public class NeutronFirewallRuleUpdate implements FirewallRuleUpdate {
 	public Boolean isEnabled() {
 		return enabled != null && enabled;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("name", name).add("action", action).add("ipVersion", ipVersion)
 				.add("enabled", enabled).add("shared", shared).add("tenantId", tenantId)
 				.add("sourceIpAddress", sourceIpAddress)
@@ -139,23 +139,23 @@ public class NeutronFirewallRuleUpdate implements FirewallRuleUpdate {
 				.add("description", description).add("protocol", protocol)
 				.toString();
 	}
-	
+
 	public static class FirewallRuleUpdateConcreteBuilder implements FirewallRuleUpdateBuilder {
 		NeutronFirewallRuleUpdate f;
-		
+
 		@Override
 		public FirewallRuleUpdate build() {
 			return f;
 		}
-		
+
 		public FirewallRuleUpdateConcreteBuilder() {
 			this(new NeutronFirewallRuleUpdate());
 		}
-		
+
 		public FirewallRuleUpdateConcreteBuilder(NeutronFirewallRuleUpdate f){
 			this.f = f;
 		}
-		
+
 		@Override
 		public FirewallRuleUpdateBuilder from(FirewallRuleUpdate in) {
 			this.f = (NeutronFirewallRuleUpdate) in;

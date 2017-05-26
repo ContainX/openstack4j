@@ -14,11 +14,11 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack (Neutron) network
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("network")
@@ -45,6 +45,11 @@ public class NeutronNetwork implements Network {
     private Boolean shared;
     @JsonProperty("provider:segmentation_id")
     private String providerSegID;
+    /**
+     * The maximum transmission unit (MTU) value to address fragmentation. Minimum value is 68 for IPv4, and 1280 for IPv6.
+     */
+    @JsonProperty("mtu")
+	private Integer mtu;
 
     public static NetworkBuilder builder() {
         return new NetworkConcreteBuilder();
@@ -103,7 +108,7 @@ public class NeutronNetwork implements Network {
      */
     @Override
     public List<? extends Subnet> getNeutronSubnets() {
-        if ( neutronSubnets == null && (subnets != null && subnets.size() > 0)) 
+        if ( neutronSubnets == null && (subnets != null && subnets.size() > 0))
         {
             neutronSubnets = new ArrayList<NeutronSubnet>();
             for ( String subnetId : subnets) {
@@ -191,12 +196,59 @@ public class NeutronNetwork implements Network {
      * {@inheritDoc}
      */
     @Override
+	public Integer getMTU() {
+		return mtu;
+	}
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("name", name).add("status", status).add("subnets", subnets).add("provider:physical_network", providerPhyNet)
                 .add("adminStateUp", adminStateUp).add("tenantId", tenantId).add("provider:network_type", networkType).add("router:external", routerExternal)
                 .add("id", id).add("shared", shared).add("provider:segmentation_id", providerSegID)
+                .add("mtu", mtu)
                 .toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(name, status, subnets,
+                providerPhyNet, adminStateUp, tenantId, networkType,
+                routerExternal, id, shared, providerSegID);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj instanceof NeutronNetwork) {
+            NeutronNetwork that = (NeutronNetwork) obj;
+            if (java.util.Objects.equals(name, that.name) &&
+                    java.util.Objects.equals(status, that.status) &&
+                    java.util.Objects.equals(subnets, that.subnets) &&
+                    java.util.Objects.equals(providerPhyNet, that.providerPhyNet) &&
+                    java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
+                    java.util.Objects.equals(tenantId, that.tenantId) &&
+                    java.util.Objects.equals(networkType, that.networkType) &&
+                    java.util.Objects.equals(routerExternal, that.routerExternal) &&
+                    java.util.Objects.equals(id, that.id) &&
+                    java.util.Objects.equals(shared, that.shared) &&
+                    java.util.Objects.equals(providerSegID, that.providerSegID)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static class Networks extends ListResult<NeutronNetwork> {

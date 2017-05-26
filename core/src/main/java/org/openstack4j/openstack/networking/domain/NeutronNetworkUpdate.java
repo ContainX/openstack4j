@@ -6,29 +6,29 @@ import org.openstack4j.model.network.builder.NetworkUpdateBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An entity used to update a network
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("network")
 public class NeutronNetworkUpdate implements NetworkUpdate {
 
     private static final long serialVersionUID = 1L;
- 
+
     @JsonProperty
     private String name;
     @JsonProperty("shared")
     private Boolean shared;
     @JsonProperty("admin_state_up")
     private Boolean adminStateUp;
-    
+
     public static NetworkUpdateBuilder builder() {
         return new NetworkUpdateConcreteBuilder();
     }
-    
+
     @Override
     public NetworkUpdateBuilder toBuilder() {
         return new NetworkUpdateConcreteBuilder(this);
@@ -50,10 +50,10 @@ public class NeutronNetworkUpdate implements NetworkUpdate {
     public boolean isShared() {
         return shared == null ? false : shared;
     }
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                   .add("name", name).add("adminStateUp", adminStateUp).add("shared", shared)
                   .toString();
     }
@@ -61,15 +61,15 @@ public class NeutronNetworkUpdate implements NetworkUpdate {
     public static class NetworkUpdateConcreteBuilder implements NetworkUpdateBuilder {
 
         private NeutronNetworkUpdate model;
-        
+
         public NetworkUpdateConcreteBuilder() {
             this.model = new NeutronNetworkUpdate();
         }
-        
+
         public NetworkUpdateConcreteBuilder(NeutronNetworkUpdate model) {
             this.model = model;
         }
-        
+
         @Override
         public NetworkUpdate build() {
             return model;
@@ -98,6 +98,6 @@ public class NeutronNetworkUpdate implements NetworkUpdate {
             model.shared = shared;
             return this;
         }
-        
+
     }
 }

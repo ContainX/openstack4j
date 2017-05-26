@@ -5,11 +5,11 @@ import java.util.Date;
 import org.openstack4j.model.telemetry.Statistics;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Computed Statistics for a Query against a Meter
- * 
+ *
  * @author Jeremy Unruh
  */
 public class CeilometerStatistics implements Statistics {
@@ -41,11 +41,11 @@ public class CeilometerStatistics implements Statistics {
 	private Date periodEnd;
 
 	private Double sum;
-	
+
 	private String unit;
-	
+
 	private String groupby;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -141,7 +141,7 @@ public class CeilometerStatistics implements Statistics {
 	public String getUnit() {
 		return unit;
 	}
-	
+
   /**
    * {@inheritDoc}
    */
@@ -149,13 +149,13 @@ public class CeilometerStatistics implements Statistics {
   public String getGroupBy() {
     return groupby;
   }
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("avg", avg).add("count", count).add("duration", duration)
 				    .add("durationStart", durationStart).add("durationEnd", durationEnd)
 				    .add("min", min).add("max", max).add("sum", sum).add("period", period)

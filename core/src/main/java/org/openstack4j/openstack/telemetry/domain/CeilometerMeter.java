@@ -3,11 +3,11 @@ package org.openstack4j.openstack.telemetry.domain;
 import org.openstack4j.model.telemetry.Meter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Meter is a category of Measurement
- * 
+ *
  * @author Jeremy Unruh
  */
 public class CeilometerMeter implements Meter {
@@ -23,12 +23,12 @@ public class CeilometerMeter implements Meter {
 	private String projectId;
 	private Type type;
 	private String unit;
-	
+
 	private String source;
-	
+
 	@JsonProperty("user_id")
   private String userId;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -76,7 +76,7 @@ public class CeilometerMeter implements Meter {
 	public String getUnit() {
 		return unit;
 	}
-	
+
   /**
    * {@inheritDoc}
    */
@@ -84,13 +84,13 @@ public class CeilometerMeter implements Meter {
   public String getUserId() {
     return userId;
   }
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("id", id).add("name", name).add("resource_id", resourceId)
 				    .add("project_id", projectId).add("type", type).add("unit", unit)
 				    .add("user_id",  userId)

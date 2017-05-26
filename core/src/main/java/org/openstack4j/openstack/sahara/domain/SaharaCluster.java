@@ -17,12 +17,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 /**
  * For mapping JSON response to/from java objects
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  */
 
@@ -242,7 +242,7 @@ public class SaharaCluster implements Cluster {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				   .add("id",id)
                                    .add("name", name)
                                    .add("description", description)
@@ -262,18 +262,18 @@ public class SaharaCluster implements Cluster {
                                    .add("management_public_key",managementPublicKey)
                                    .add("status_description",statusDescription)
                                    .add("hadoop_version",hadoopVersion)
-                                   .add("trust_id",trustId)  
+                                   .add("trust_id",trustId)
                                    .add("info",infos)
 				   .toString();
 	}
-	
+
 	public static class Clusters extends ListResult<SaharaCluster> {
 
 		private static final long serialVersionUID = 1L;
 
 		@JsonProperty("clusters")
 		private List<SaharaCluster> clusters;
-		
+
 		public List<SaharaCluster> value() {
 			return clusters;
 		}

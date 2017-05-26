@@ -4,11 +4,11 @@ import org.openstack4j.model.compute.QuotaSet;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack Quota-Set
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("quota_set")
@@ -50,7 +50,7 @@ public class NovaQuotaSet implements QuotaSet {
 
 	@JsonProperty("key_pairs")
 	private int keyPairs;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -162,10 +162,10 @@ public class NovaQuotaSet implements QuotaSet {
 	public int getKeyPairs() {
 		return keyPairs;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("metadataItems", metadataItems).add("injectedFileContentBytes", injectedFileContentBytes)
 				     .add("injectedFileContentBytes", injectedFileContentBytes).add("injectedFiles", injectedFiles).add("gigabytes", gigabytes)
 				     .add("ram", "ram").add("securityGroups", securityGroups).add("securityGroupRules", securityGroupRules)

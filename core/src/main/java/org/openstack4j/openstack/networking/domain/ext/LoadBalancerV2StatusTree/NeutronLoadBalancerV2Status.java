@@ -3,7 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext.LoadBalancerV2StatusTree
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.network.ext.status.ListenerV2Status;
 import org.openstack4j.model.network.ext.status.LoadBalancerV2Status;
 
@@ -33,7 +33,7 @@ public class NeutronLoadBalancerV2Status extends Status implements LoadBalancerV
 
     @Override
     public String toString(){
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("name", name)
                 .add("listenerStatuses", listenerStatuses)

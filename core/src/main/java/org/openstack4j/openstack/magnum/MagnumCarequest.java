@@ -8,7 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumCarequest implements Carequest {
@@ -17,7 +17,7 @@ public class MagnumCarequest implements Carequest {
     private String bayUuid;
     @JsonProperty("csr")
     private String csr;
-    
+
     public static CarequestBuilder builder() {
         return new CarequestConcreteBuilder();
     }
@@ -37,7 +37,7 @@ public class MagnumCarequest implements Carequest {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("bayUuid", bayUuid).add("csr", csr).toString();
+        return MoreObjects.toStringHelper(this).omitNullValues().add("bayUuid", bayUuid).add("csr", csr).toString();
     }
 
     /**
