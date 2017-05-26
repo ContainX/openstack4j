@@ -1169,6 +1169,9 @@ public class Builders {
         return MuranoEnvironment.builder();
     }
 
+    public static WorkflowBuilders workflow() {
+        return new MistralBuilders();
+    }
     /**
      * The DNS/Designate V2 builders
      *
