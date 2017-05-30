@@ -1,7 +1,7 @@
 package org.openstack4j.openstack.workflow.internal;
 
 import org.openstack4j.api.workflow.WorkflowDefinitionService;
-import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.payloads.InputStreamPayload;
 import org.openstack4j.model.workflow.Scope;
 import org.openstack4j.model.workflow.WorkflowDefinition;
@@ -44,8 +44,8 @@ public class WorkflowDefinitionServiceImpl extends BaseMistralService implements
     }
 
     @Override
-    public HttpResponse delete(String identifier) {
-        return deleteWithResponse(uri("/workflows/%s", identifier)).executeWithResponse();
+    public ActionResponse delete(String identifier) {
+        return deleteWithResponse(uri("/workflows/%s", identifier)).execute();
     }
 
 }

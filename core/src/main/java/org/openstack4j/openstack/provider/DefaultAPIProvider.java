@@ -162,6 +162,7 @@ import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
+import org.openstack4j.api.workflow.WorkbookDefinitionService;
 import org.openstack4j.api.workflow.WorkflowDefinitionService;
 import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
@@ -323,6 +324,7 @@ import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
 
 import com.google.common.collect.Maps;
+import org.openstack4j.openstack.workflow.internal.WorkbookDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkflowDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkflowServiceImpl;
 
@@ -513,6 +515,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(RecordsetService.class, RecordsetServiceImpl.class);
         bind(WorkflowService.class, WorkflowServiceImpl.class);
         bind(WorkflowDefinitionService.class, WorkflowDefinitionServiceImpl.class);
+        bind(WorkbookDefinitionService.class, WorkbookDefinitionServiceImpl.class);
     }
 
     /**

@@ -1,7 +1,7 @@
 package org.openstack4j.api.workflow;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.workflow.Scope;
 import org.openstack4j.model.workflow.WorkflowDefinition;
 
@@ -43,7 +43,7 @@ public interface WorkflowDefinitionService extends RestService {
      * Delete workflow definition by its identifier.
      *
      * @param identifier Workflow definition identifier (either ID or name).
-     * @return HTTP response from the server.
+     * @return Action response from the server.
      */
-    HttpResponse delete(String identifier);
+    ActionResponse delete(String identifier);
 }
