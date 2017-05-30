@@ -1,6 +1,5 @@
 package org.openstack4j.model.workflow.builder;
 
-import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.workflow.WorkbookDefinition;
 
 /**
@@ -8,12 +7,7 @@ import org.openstack4j.model.workflow.WorkbookDefinition;
  * 
  * @author Renat Akhmerov
  */
-public interface WorkbookDefinitionBuilder extends Builder<WorkbookDefinitionBuilder, WorkbookDefinition> {
-
-	/**
-	 * @see WorkbookDefinition#getName()
-	 */
-	WorkbookDefinitionBuilder name(String name);
-
-	// TODO(rakhmerov): add all methods
+public interface WorkbookDefinitionBuilder <T extends WorkbookDefinitionBuilder<T, M>, M extends WorkbookDefinition>
+		extends DefinitionBuilder<T, M> {
+	// No-op.
 }

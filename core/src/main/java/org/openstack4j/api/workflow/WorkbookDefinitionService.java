@@ -2,8 +2,10 @@ package org.openstack4j.api.workflow;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.workflow.Scope;
 import org.openstack4j.model.workflow.WorkbookDefinition;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -22,10 +24,11 @@ public interface WorkbookDefinitionService extends RestService {
     /**
      * Create a new workbook definition.
      *
-     * @param workbookDefinition Workbook definition to create.
+     * @param wbText Text in YAML format (Mistral language) with a workbook definition.
+     * @param scope Scope of newly created workbook.
      * @return Created workbook definition.
      */
-    WorkbookDefinition create(WorkbookDefinition workbookDefinition);
+    WorkbookDefinition create(InputStream wbText, Scope scope);
 
     /**
      * Get workbook definition by its identifier.

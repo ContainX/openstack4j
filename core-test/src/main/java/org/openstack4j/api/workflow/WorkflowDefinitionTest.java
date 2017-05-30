@@ -55,7 +55,7 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
         assertNotNull(wfDef.getInput());
         assertEquals(wfDef.getInput().length(), 0);
 
-        // Check first workflow definition.
+        // Check second workflow definition.
         wfDef = wfDefs.get(1);
 
         assertNotNull(wfDef);
