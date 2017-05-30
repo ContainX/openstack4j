@@ -1,9 +1,11 @@
 package org.openstack4j.api.workflow;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.workflow.ActionDefinition;
+import org.openstack4j.model.workflow.Scope;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -23,10 +25,11 @@ public interface ActionDefinitionService extends RestService {
     /**
      * Create a new action definition.
      *
-     * @param actionDefinition Action definition to create.
+     * @param actionText Text in YAML format (Mistral language) with one or more action definitions.
+     * @param scope Scope of newly created workflows.
      * @return Created action definition.
      */
-    ActionDefinition create(ActionDefinition actionDefinition);
+    List<? extends ActionDefinition> create(InputStream actionText, Scope scope);
 
     /**
      * Get action definition by its identifier.
@@ -40,9 +43,9 @@ public interface ActionDefinitionService extends RestService {
      * Delete action definition by its identifier.
      *
      * @param identifier Action definition identifier (either ID or name).
-     * @return HTTP response from the server.
+     * @return Action response from the server.
      */
-    HttpResponse delete(String identifier);
+    ActionResponse delete(String identifier);
 }
 
 
