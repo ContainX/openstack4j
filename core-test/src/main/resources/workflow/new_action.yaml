@@ -1,0 +1,10 @@
+---
+version: '2.0'
+
+concat:
+  base: std.echo
+  base-input:
+    output: "<% $.s1 %>+<% $.s2 %>"
+  input:
+    - s1
+    - s2
