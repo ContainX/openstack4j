@@ -9,7 +9,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumBay implements Bay {
@@ -128,7 +128,7 @@ public class MagnumBay implements Bay {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues().add("status", status).add("uuid", uuid).add("links", links)
+		return MoreObjects.toStringHelper(this).omitNullValues().add("status", status).add("uuid", uuid).add("links", links)
 				.add("stackId", stackId).add("createdAt", createdAt).add("apiAddress", apiAddress)
 				.add("discoveryUrl", discoveryUrl).add("updatedAt", updatedAt).add("masterCount", masterCount)
 				.add("coeVersion", coeVersion).add("baymodelId", baymodelId).add("masterAddresses", masterAddresses)
