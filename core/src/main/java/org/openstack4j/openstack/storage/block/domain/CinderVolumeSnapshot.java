@@ -25,9 +25,9 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	@JsonProperty("display_name")
+	@JsonProperty("name")
 	private String name;
-	@JsonProperty("display_description")
+	@JsonProperty("description")
 	private String description;
 	@JsonProperty("volume_id")
 	private String volumeId;
