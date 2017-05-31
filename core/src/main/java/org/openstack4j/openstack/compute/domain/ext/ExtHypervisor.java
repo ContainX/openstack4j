@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.model.compute.ext.Hypervisor;
 import org.openstack4j.openstack.common.ListResult;
@@ -219,8 +220,8 @@ public class ExtHypervisor implements Hypervisor {
 
         private static final long serialVersionUID = 1L;
 
-        private String vendor;
-        private String model;
+        private List<Object> vendor;
+        private List<Object> model;
         private String arch;
         private List<String> features;
         private HypervisorCPUTopology topology;
@@ -239,12 +240,12 @@ public class ExtHypervisor implements Hypervisor {
         }
 
         @Override
-        public String getVendor() {
+        public List<Object> getVendor() {
             return vendor;
         }
 
         @Override
-        public String getModel() {
+        public List<Object> getModel() {
             return model;
         }
 
