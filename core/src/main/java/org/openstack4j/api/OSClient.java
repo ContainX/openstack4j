@@ -20,6 +20,7 @@ import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.api.magnum.MagnumService;
@@ -245,7 +246,15 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the Sahara service
      */
     SaharaService sahara();
-    
+
+    /**
+     * Returns the Workflow Service API
+     *
+     * @return the Workflow service
+     */
+    WorkflowService workflow();
+
+
     /**
      * Returns the Magnum Service API
      * 

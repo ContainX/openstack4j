@@ -162,6 +162,8 @@ import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
+import org.openstack4j.api.workflow.WorkflowDefinitionService;
+import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
@@ -321,6 +323,8 @@ import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
 
 import com.google.common.collect.Maps;
+import org.openstack4j.openstack.workflow.internal.WorkflowDefinitionServiceImpl;
+import org.openstack4j.openstack.workflow.internal.WorkflowServiceImpl;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons
@@ -502,9 +506,13 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ServicesService.class, ServicesServiceImpl.class);
         bind(BlockStorageServiceService.class, BlockStorageServiceServiceImpl.class);
         bind(MagnumService.class, MagnumServiceImpl.class);
+        bind(WorkflowService.class, WorkflowServiceImpl.class);
+        bind(WorkflowDefinitionService.class, WorkflowDefinitionServiceImpl.class);
         bind(DNSService.class, DNSServiceImpl.class);
         bind(org.openstack4j.api.dns.v2.ZoneService.class, org.openstack4j.openstack.dns.v2.internal.ZoneServiceImpl.class);
         bind(RecordsetService.class, RecordsetServiceImpl.class);
+        bind(WorkflowService.class, WorkflowServiceImpl.class);
+        bind(WorkflowDefinitionService.class, WorkflowDefinitionServiceImpl.class);
     }
 
     /**

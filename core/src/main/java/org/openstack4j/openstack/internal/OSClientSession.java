@@ -31,6 +31,7 @@ import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.URLResolverParams;
@@ -208,6 +209,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public SaharaService sahara() {
         return Apis.getSaharaServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public WorkflowService workflow() {
+        return Apis.getWorkflowServices();
     }
 
     /**
