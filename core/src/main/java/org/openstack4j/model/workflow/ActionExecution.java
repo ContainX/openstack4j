@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @author Renat Akhmerov
  */
-public interface ActionExecution extends Execution, Buildable<ActionExecutionBuilder> {
+public interface ActionExecution extends Execution {
     /**
      * @return The name of the corresponding task.
      */

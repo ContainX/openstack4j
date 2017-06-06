@@ -15,13 +15,13 @@ import java.util.Map;
  *
  * @author Renat Akhmerov
  */
-public interface WorkflowExecution extends Execution, Buildable<WorkflowExecutionBuilder> {
+public interface WorkflowExecution extends Execution {
     /**
      * @return The meta parameters of workflow execution specific to workflow type.
      *      Example: a reverse workflow requires the parameter 'task_name' which
      *      specifies the target task in the workflow graph.
      */
-    Map<String, ?> getParameters();
+    Map<String, Object> getParameters();
 
     /**
      * @return The id of the parent task execution.
@@ -32,10 +32,10 @@ public interface WorkflowExecution extends Execution, Buildable<WorkflowExecutio
     /**
      * @return The input parameters of this workflow execution.
      */
-    Map<String, ?> getInput();
+    Map<String, Object> getInput();
 
     /**
      * @return The output of this workflow execution.
      */
-    Map<String, ?> getOutput();
+    Map<String, Object> getOutput();
 }

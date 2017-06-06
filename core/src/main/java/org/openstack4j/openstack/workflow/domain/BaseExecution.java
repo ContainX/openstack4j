@@ -2,21 +2,23 @@ package org.openstack4j.openstack.workflow.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.openstack4j.model.workflow.Definition;
-import org.openstack4j.model.workflow.Scope;
-import org.openstack4j.model.workflow.builder.DefinitionBuilder;
+import org.openstack4j.model.workflow.Execution;
+import org.openstack4j.model.workflow.State;
+import org.openstack4j.model.workflow.builder.ExecutionBuilder;
 
 import java.util.Date;
 import java.util.List;
 
 
 /**
- * Base class for all definition models.
+ * Base class for all execution models.
  *
  * @author Renat Akhmerov
  */
-public abstract class BaseDefinition implements Definition {
+public abstract class BaseExecution implements Execution {
     String id;
+
+    String description;
 
     @JsonProperty("created_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -28,16 +30,13 @@ public abstract class BaseDefinition implements Definition {
 
     List<String> tags;
 
-    String name;
+    @JsonProperty("workflow_name")
+    String wfName;
 
-    String definition;
+    State state;
 
-    @JsonProperty("project_id")
-    String projectId;
-
-    Scope scope;
-
-    Boolean system;
+    @JsonProperty("state_info")
+    String stateInfo;
 
     @Override
     public String getId() {
@@ -45,13 +44,13 @@ public abstract class BaseDefinition implements Definition {
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
     @Override
-    public String getDefinition() {
-        return definition;
+    public String getWorkflowName() {
+        return wfName;
     }
 
     public Date getCreatedAt() {
@@ -63,37 +62,32 @@ public abstract class BaseDefinition implements Definition {
     }
 
     @Override
-    public Boolean isSystem() {
-        return system;
-    }
-
-    @Override
     public List<String> getTags() {
         return tags;
     }
 
     @Override
-    public Scope getScope() {
-        return scope;
+    public State getState() {
+        return state;
     }
 
     @Override
-    public String getProjectId() {
-        return projectId;
+    public String getStateInfo() {
+        return stateInfo;
     }
 
     /**
-     * Base definition builder.
+     * Base execution builder.
      *
      * @author Renat Akhmerov
      */
     @SuppressWarnings("unchecked")
-    public static abstract class BaseDefinitionBuilder<T extends DefinitionBuilder<T, M>, M extends BaseDefinition>
-            implements DefinitionBuilder<T, M> {
+    public static abstract class BaseExecutionBuilder<T extends ExecutionBuilder<T, M>, M extends BaseExecution>
+            implements ExecutionBuilder<T, M> {
 
         protected M model;
 
-        BaseDefinitionBuilder(M model) {
+        BaseExecutionBuilder(M model) {
             this.model = model;
         }
 
@@ -101,7 +95,7 @@ public abstract class BaseDefinition implements Definition {
             return model;
         }
 
-        public T from(Definition in) {
+        public T from(Execution in) {
             return null;
         }
 
@@ -111,32 +105,26 @@ public abstract class BaseDefinition implements Definition {
             return (T) this;
         }
 
-        public T name(String name) {
-            model.name = name;
+        public T description(String description) {
+            model.description = description;
 
             return (T) this;
         }
 
-        public T definition(String definition) {
-            model.definition = definition;
+        public T workflowName(String wfName) {
+            model.wfName = wfName;
 
             return (T) this;
         }
 
-        public T created(Date create) {
-            model.createdAt = create;
+        public T createdAt(Date createdAt) {
+            model.createdAt = createdAt;
 
             return (T) this;
         }
 
-        public T updated(Date updated) {
-            model.updatedAt = updated;
-
-            return (T) this;
-        }
-
-        public T system(Boolean system) {
-            model.system = system;
+        public T updatedAt(Date updatedAt) {
+            model.updatedAt = updatedAt;
 
             return (T) this;
         }
@@ -147,17 +135,16 @@ public abstract class BaseDefinition implements Definition {
             return (T) this;
         }
 
-        public T scope(Scope scope) {
-            model.scope = scope;
+        public T state(State state) {
+            model.state = state;
 
             return (T) this;
         }
 
-        public T projectId(String projectId) {
-            model.projectId = projectId;
+        public T stateInfo(String stateInfo) {
+            model.stateInfo = stateInfo;
 
             return (T) this;
         }
     }
-
 }

@@ -1,0 +1,31 @@
+{
+  "executions": [
+    {
+      "id": "79d187f4-b8e5-4288-b2cd-ed27ee31e4b0",
+      "description": "",
+      "created_at": "2016-08-17 10:34:00",
+      "updated_at": "2016-08-17 10:34:02",
+      "workflow_id": "0169affc-e6a1-4013-a59e-c89dfd5523f2",
+      "workflow_name": "parallel_join_2",
+      "params": {},
+      "input": {},
+      "state": "SUCCESS",
+      "state_info": null,
+      "task_execution_id": null
+    },
+    {
+      "id": "7af6a8e3-96f1-4928-8363-e244032b5419",
+      "description": "",
+      "created_at": "2016-08-17 10:35:05",
+      "updated_at": "2016-08-17 10:35:05",
+      "tags": ["test", "private"],
+      "workflow_id": "0169affc-e6a1-4013-a59e-c89dfd5523f2",
+      "workflow_name": "parallel_join_2",
+      "params": {},
+      "input": {},
+      "state": "ERROR",
+      "state_info": "Failed for reason X",
+      "task_execution_id": null
+    }
+  ]
+}

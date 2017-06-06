@@ -3,7 +3,9 @@
  */
 package org.openstack4j.model.workflow;
 
+import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.workflow.builder.ExecutionBuilder;
 
 import java.util.Date;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
  * 
  * @author Renat Akhmerov
  */
-public interface Execution extends ModelEntity {
+public interface Execution extends ModelEntity, Buildable<ExecutionBuilder> {
 	/**
 	 * @return The id of this execution.
 	 */
@@ -46,12 +48,12 @@ public interface Execution extends ModelEntity {
     List<String> getTags();
 
     /**
-	 * @return The time that this entity was createdAt at.
+	 * @return The time that this entity was created at.
 	 */
-	Date getCreated();
+	Date getCreatedAt();
 
 	/**
-	 * @return The time that this entity was last updatedAt at.
+	 * @return The time that this entity was last updated at.
 	 */
-	Date getUpdated();
+	Date getUpdatedAt();
 }

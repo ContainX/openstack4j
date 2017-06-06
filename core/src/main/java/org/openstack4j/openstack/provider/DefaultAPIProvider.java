@@ -162,10 +162,7 @@ import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
-import org.openstack4j.api.workflow.ActionDefinitionService;
-import org.openstack4j.api.workflow.WorkbookDefinitionService;
-import org.openstack4j.api.workflow.WorkflowDefinitionService;
-import org.openstack4j.api.workflow.WorkflowService;
+import org.openstack4j.api.workflow.*;
 import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
@@ -325,10 +322,7 @@ import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
 
 import com.google.common.collect.Maps;
-import org.openstack4j.openstack.workflow.internal.ActionDefinitionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.WorkbookDefinitionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.WorkflowDefinitionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.WorkflowServiceImpl;
+import org.openstack4j.openstack.workflow.internal.*;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons
@@ -519,6 +513,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(WorkflowDefinitionService.class, WorkflowDefinitionServiceImpl.class);
         bind(WorkbookDefinitionService.class, WorkbookDefinitionServiceImpl.class);
         bind(ActionDefinitionService.class, ActionDefinitionServiceImpl.class);
+        bind(WorkflowExecutionService.class, WorkflowExecutionServiceImpl.class);
     }
 
     /**

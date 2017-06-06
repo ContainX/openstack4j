@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * @author Renat Akhmerov
  */
-public interface TaskExecution extends Execution, Buildable<TaskExecutionBuilder> {
+public interface TaskExecution extends Execution {
     /**
      * @return The task name.
      */

@@ -1,19 +1,34 @@
 package org.openstack4j.model.workflow.builder;
 
-import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.workflow.WorkflowExecution;
+
+import java.util.Map;
 
 /**
  * Builder for a {@link WorkflowExecution} model class
  * 
  * @author Renat Akhmerov
  */
-public interface WorkflowExecutionBuilder extends Builder<WorkflowExecutionBuilder, WorkflowExecution> {
+public interface WorkflowExecutionBuilder<T extends WorkflowExecutionBuilder<T, M>, M extends WorkflowExecution>
+		extends ExecutionBuilder<T, M> {
 
-	/**
-	 * @see WorkflowExecution#getId()
+    /**
+     * @see WorkflowExecution#getParameters()
+     */
+    T parameters(Map<String, Object> params);
+
+    /**
+	 * @see WorkflowExecution#getInput()
 	 */
-	WorkflowExecutionBuilder id(String id);
+	T input(Map<String, Object> input);
 
-	// TODO(rakhmerov): add all methods
+    /**
+     * @see WorkflowExecution#getOutput()
+     */
+    T output(Map<String, Object> output);
+
+    /**
+     * @see WorkflowExecution#getTaskExecutionId()
+     */
+    T taskExecutionId(String taskExecutionId);
 }
