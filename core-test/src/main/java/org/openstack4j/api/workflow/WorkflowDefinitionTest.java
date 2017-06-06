@@ -1,6 +1,5 @@
 package org.openstack4j.api.workflow;
 
-import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.workflow.Scope;
 import org.openstack4j.model.workflow.WorkflowDefinition;
