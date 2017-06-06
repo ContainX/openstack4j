@@ -127,7 +127,6 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
 
         ActionResponse resp = service.delete("with_items_40");
 
-        // TODO(rakhmerov): Change to 204 once ActionResponse can return other 2xx codes.
-        assertEquals(resp.getCode(), 200);
+        assertEquals(resp.getCode(), 204);
     }
 }
