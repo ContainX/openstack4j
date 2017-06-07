@@ -1,6 +1,6 @@
 package org.openstack4j.api.workflow;
 
-import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.workflow.Scope;
 import org.openstack4j.model.workflow.WorkflowDefinition;
 import org.testng.annotations.BeforeTest;
@@ -55,7 +55,7 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
         assertNotNull(wfDef.getInput());
         assertEquals(wfDef.getInput().length(), 0);
 
-        // Check first workflow definition.
+        // Check second workflow definition.
         wfDef = wfDefs.get(1);
 
         assertNotNull(wfDef);
@@ -125,8 +125,9 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
     public void deleteWorkflowDefinition() throws Exception {
         respondWith(204); // No content.
 
-        HttpResponse resp = service.delete("with_items_40");
+        ActionResponse resp = service.delete("with_items_40");
 
-        assertEquals(resp.getStatus(), 204);
+        // TODO(rakhmerov): Change to 204 once ActionResponse can return other 2xx codes.
+        assertEquals(resp.getCode(), 200);
     }
 }

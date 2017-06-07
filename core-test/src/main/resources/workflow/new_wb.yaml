@@ -1,0 +1,11 @@
+---
+version: '2.0'
+
+name: my_wb
+
+workflows:
+  with_items_40:
+    tasks:
+      task1:
+        with-items: i in <% range(0, 40) %>
+        action: std.echo output=<% $.i %>

@@ -254,7 +254,6 @@ public interface OSClient< T extends OSClient<T>> {
      */
     WorkflowService workflow();
 
-
     /**
      * Returns the Magnum Service API
      * 
