@@ -1,8 +1,10 @@
+<!--
+ -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>org.pacesys</groupId>
 		<artifactId>openstack4j-parent</artifactId>
-		<version>3.0.5-SNAPSHOT</version>
+		<version>huawei-3.0.5-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-core-test</artifactId>
@@ -19,6 +21,17 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.pacesys.openstack4j.connectors</groupId>
+			<artifactId>openstack4j-httpclient</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+			<version>1.5.2.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>mockwebserver</artifactId>
 			<version>3.2.0</version>
@@ -33,7 +46,6 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.8</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>

@@ -1,8 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>org.pacesys</groupId>
 		<artifactId>openstack4j-parent</artifactId>
-		<version>3.0.5-SNAPSHOT</version>
+		<version>huawei-3.0.5-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-core</artifactId>
@@ -42,16 +45,16 @@
 						<Bundle-Name>${project.name}</Bundle-Name>
 						<Export-Package>
 							<!-- core.transport.internal is imported by jersey2 connector! -->
-							<!-- !org.openstack4j.core.transport.internal,  -->
+							<!-- !org.openstack4j.core.transport.internal, -->
 							!org.openstack4j.openstack.compute.internal,
 							!org.openstack4j.openstack.compute.internal.ext,
 							!org.openstack4j.openstack.heat.internal,
 							!org.openstack4j.openstack.identity.internal,
 							!org.openstack4j.openstack.image.internal,
-							<!--  openstack.internal is imported by connectors! -->
-							<!--  !org.openstack4j.openstack.internal, -->
+							<!-- openstack.internal is imported by connectors! -->
+							<!-- !org.openstack4j.openstack.internal, -->
 							<!-- logging.internal is imported by logging plugins! -->
-							<!-- !org.openstack4j.openstack.logging.internal,  -->
+							<!-- !org.openstack4j.openstack.logging.internal, -->
 							!org.openstack4j.openstack.networking.internal,
 							!org.openstack4j.openstack.networking.internal.ext,
 							!org.openstack4j.openstack.storage.block.internal,
@@ -77,23 +80,19 @@
 							!com.fasterxml.jackson.dataformat.yaml.snakeyaml,
 							*
 						</Import-Package>
-						<!--
-							Required for SPI in OSGi:
-							http://aries.apache.org/modules/spi-fly.html#specconf
-
-							This bundles uses SPI to locate implementations for:
-							org.openstack4j.api.APIProvider
-							org.openstack4j.core.transport.HttpExecutorService
-							org.openstack4j.openstack.logging.LoggerFactorySupplier
-							This bundle defines an implementation for following services in META-INF-services:
-							org.openstack4j.api.APIProvider
-						-->
+						<!-- Required for SPI in OSGi: http://aries.apache.org/modules/spi-fly.html#specconf This bundles uses SPI to locate 
+							implementations for: org.openstack4j.api.APIProvider org.openstack4j.core.transport.HttpExecutorService org.openstack4j.openstack.logging.LoggerFactorySupplier 
+							This bundle defines an implementation for following services in META-INF-services: org.openstack4j.api.APIProvider -->
 						<Require-Capability>
-							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.api.APIProvider)";cardinality:=multiple,
-							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService)";cardinality:=multiple,
-							osgi.serviceloader; filter:="(osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple;resolution:=optional,
+							osgi.serviceloader;
+							filter:="(osgi.serviceloader=org.openstack4j.api.APIProvider)";cardinality:=multiple,
+							osgi.serviceloader;
+							filter:="(osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService)";cardinality:=multiple,
+							osgi.serviceloader;
+							filter:="(osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple;resolution:=optional,
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)",
-							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
+							osgi.extender;
+							filter:="(osgi.extender=osgi.serviceloader.registrar)"
 						</Require-Capability>
 						<Provide-Capability>
 							osgi.serviceloader; osgi.serviceloader=org.openstack4j.api.APIProvider
@@ -142,7 +141,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -178,6 +177,34 @@
 	</build>
 	<dependencies>
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.fge</groupId>
+			<artifactId>json-patch</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
@@ -195,7 +222,7 @@
 					<excludePackageNames>*.internal</excludePackageNames>
 					<reportOutputDirectory>docs</reportOutputDirectory>
 					<destDir>javadoc</destDir>
-                                        <additionalparam>-Xdoclint:none</additionalparam>
+					<additionalparam>-Xdoclint:none</additionalparam>
 				</configuration>
 			</plugin>
 		</plugins>

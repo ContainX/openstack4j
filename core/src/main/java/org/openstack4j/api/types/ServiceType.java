@@ -2,6 +2,7 @@ package org.openstack4j.api.types;
 
 public enum ServiceType {
 
+	//@off
 	IDENTITY("keystone", "identity"),
 	APP_CATALOG("murano", "application-catalog"),
 	COMPUTE("nova", "compute"),
@@ -23,8 +24,12 @@ public enum ServiceType {
   	MAGNUM("magnum", "container"),
 	DNS("designate", "dns"),
 	WORKFLOW("mistral", "workflow"),
+	
+	// qianbiao.ng - new add services
+	CLOUD_VOLUME_BACKUP("vbs", "volume-backup"),
 	UNKNOWN("NA", "NA")
 	;
+	//@on
 
 	private final String serviceName;
 	private final String type;
