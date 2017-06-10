@@ -1,5 +1,3 @@
-/*******************************************************************************
- *******************************************************************************/
 package org.openstack4j.openstack.storage.block.internal;
 
 import static com.google.common.base.Preconditions.*;
