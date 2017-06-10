@@ -1,4 +1,5 @@
 /*******************************************************************************
+ *  Copyright 2017 Huawei TLD
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -338,12 +339,12 @@ import org.openstack4j.openstack.trove.internal.DBFlavorServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
-
-import com.google.common.collect.Maps;
 import org.openstack4j.openstack.workflow.internal.ActionDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkbookDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkflowDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkflowServiceImpl;
+
+import com.google.common.collect.Maps;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons

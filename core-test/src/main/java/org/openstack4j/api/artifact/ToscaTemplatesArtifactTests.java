@@ -15,6 +15,11 @@
  *******************************************************************************/
 package org.openstack4j.api.artifact;
 
+import static org.testng.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.artifact.ArtifactUpdate;
@@ -22,15 +27,7 @@ import org.openstack4j.model.artifact.ToscaTemplatesArtifact;
 import org.openstack4j.model.artifact.ToscaTemplatesArtifacts;
 import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
 import org.openstack4j.model.artifact.builder.ToscaTemplatesArtifactBuilder;
-import org.openstack4j.model.common.ActionResponse;
 import org.testng.annotations.Test;
-
-import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.testng.Assert.assertEquals;
 
 /**
  * Tests the Artifact -> Tosca Template Artifact API against the mock webserver and spec based

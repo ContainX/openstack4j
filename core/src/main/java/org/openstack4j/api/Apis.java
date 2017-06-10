@@ -1,4 +1,5 @@
 /*******************************************************************************
+ *  Copyright 2017 Huawei TLD
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -15,6 +16,8 @@
  *******************************************************************************/
 package org.openstack4j.api;
 
+import java.util.ServiceLoader;
+
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
@@ -28,11 +31,9 @@ import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
-import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.workflow.WorkflowService;
-
-import java.util.ServiceLoader;
 
 /**
  * Provides access to the Major APIs and Buildables

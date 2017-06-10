@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ *  Copyright 2017 Huawei TLD
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -19,7 +19,6 @@ package org.openstack4j.sample;
 
 import org.openstack4j.model.storage.block.CloudVolumeBackupJob;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupCreate;
-import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupJob;
 import org.testng.annotations.Test;
 
 /**
@@ -34,8 +33,6 @@ public class VolumeBackupSample extends AbstractSample {
 		VBSVolumeBackupCreate vbc = VBSVolumeBackupCreate.builder().name("qianbiao-ng-os4j-1")
 				.volumeId("0a3218ef-7841-45c5-b9a1-5da6e0b70b85").build();
 
-		VBSVolumeBackupCreate.builder().build();
-		VBSVolumeBackupJob.builder();
 		CloudVolumeBackupJob create = osc.cloudVolumeBackup().create(vbc);
 		System.out.println(create);
 	}

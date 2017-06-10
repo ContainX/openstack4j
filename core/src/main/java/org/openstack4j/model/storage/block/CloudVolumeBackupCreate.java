@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ *  Copyright 2017 Huawei TLD                                        
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -12,8 +12,6 @@
  * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
- *******************************************************************************/
-/*******************************************************************************
  *******************************************************************************/
 package org.openstack4j.model.storage.block;
 
