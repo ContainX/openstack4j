@@ -153,6 +153,7 @@ import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
 import org.openstack4j.api.storage.BlockVolumeTransferService;
 import org.openstack4j.api.storage.CinderZoneService;
+import org.openstack4j.api.storage.CloudVolumeBackupService;
 import org.openstack4j.api.storage.ObjectStorageAccountService;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.api.storage.ObjectStorageObjectService;
@@ -316,6 +317,7 @@ import org.openstack4j.openstack.storage.block.internal.BlockVolumeServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeSnapshotServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.BlockVolumeTransferServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.CinderZoneServiceImpl;
+import org.openstack4j.openstack.storage.block.internal.CloudVolumeBackupServiceImpl;
 import org.openstack4j.openstack.storage.block.internal.SchedulerStatsGetPoolServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageAccountServiceImpl;
 import org.openstack4j.openstack.storage.object.internal.ObjectStorageContainerServiceImpl;
@@ -538,6 +540,9 @@ public class DefaultAPIProvider implements APIProvider {
         bind(WorkflowDefinitionService.class, WorkflowDefinitionServiceImpl.class);
         bind(WorkbookDefinitionService.class, WorkbookDefinitionServiceImpl.class);
         bind(ActionDefinitionService.class, ActionDefinitionServiceImpl.class);
+
+		// huawei openstack services binding
+		bind(CloudVolumeBackupService.class, CloudVolumeBackupServiceImpl.class);
     }
 
     /**

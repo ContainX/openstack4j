@@ -15,13 +15,6 @@
  *******************************************************************************/
 package org.openstack4j.openstack.heat.utils;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -30,6 +23,14 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.yaml.snakeyaml.Yaml;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 
 public class Template {
 
@@ -60,8 +61,6 @@ public class Template {
      * Save the file name(absolute path) with file content in the files map
      */
     private void getFileContents() {
-        // FIXME find alternative implementation not importing com.fasterxml.jackson.dataformat.yaml.snakeyaml package
-        // this package is not visible in OSGi
         Yaml yaml = new Yaml();
         @SuppressWarnings("unchecked")
         Map<String, Object> content = (Map<String, Object>) yaml.load(getTplContent());

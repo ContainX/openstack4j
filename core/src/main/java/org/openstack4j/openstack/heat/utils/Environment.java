@@ -15,11 +15,6 @@
  *******************************************************************************/
 package org.openstack4j.openstack.heat.utils;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -27,6 +22,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.yaml.snakeyaml.Yaml;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 
 public class Environment {
 
