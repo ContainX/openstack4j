@@ -1,6 +1,8 @@
 # HuaWei SDK Client Initial
 
-First, ask your OpenStack environment administrator to get credentials, a credentials should contains infomation below:
+## 1. credentials
+
+Ask OpenStack environment administrator to get credentials, a credentials should contains infomation below:
 
 - user
 - secret
@@ -8,8 +10,9 @@ First, ask your OpenStack environment administrator to get credentials, a creden
 - user domain id
 - project id 
 
-To fixed the some service endpoint is not provide through `/v3/auth/token` API, 
-we could use the override endpoint resolver to register service endpoint:
+## 2. build V3 Client
+
+To fixed the service endpoint is not provide through `/v3/auth/token` API issue, use the override endpoint resolver to register service endpoint:
 
 ```
 // add endpoint for the service
@@ -30,3 +33,14 @@ OSClientV3 osclient = OSFactory.builderV3()
 		                .authenticate());
 ```
 
+
+## 3. Endpoint mapping
+
+| ServiceName |  ServiceType  |                              URL example                             |
+|:-----------:|:-------------:|:--------------------------------------------------------------------:|
+|     VBS     | volume-backup |         https://vbs.eu-de.otc.t-systems.com/v2/%(project_id)s        |
+|     CES     |   cloud-eye   |        https://ces.eu-de.otc.t-systems.com/v1.0/%(project_id)s       |
+|      AS     |  auto-scaling | https://as.eu-de.otc.t-systems.com/autoscaling-api/v1/%(project_id)s |
+|     ELB     |  load-balance |    https://elb.eu-de.otc.t-systems.com/v1.0/elbaas/%(project_id)s    |
+|     DNS     |      dns      |                 https://dns.eu-de.otc.t-systems.com/v2               |
+|     MRS     |   map-reduce  |        https://mrs.eu-de.otc.t-systems.com/v1.1/%(project_id)s       |

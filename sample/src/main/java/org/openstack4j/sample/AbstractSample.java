@@ -30,16 +30,18 @@ import org.testng.annotations.BeforeClass;
  */
 public class AbstractSample {
 
-	OSClientV3 osc;
+	OSClientV3 osclient;
 
 	@BeforeClass
 	public void initialV3Client() {
 		// add override endpoint
 		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
-		endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_VOLUME_BACKUP,
-				"https://vbs.eu-de.otc.t-systems.com/v2/%(project_id)s");
+		endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
+				"https://evs.eu-de.otc.t-systems.com/v2/%(project_id)s");
+		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
+		// "https://dns.eu-de.otc.t-systems.com/v2/elbaas/%(project_id)s");
 
-		osc = OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
+		osclient = OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
 				.endpoint("https://iam.eu-de.otc.t-systems.com/v3")
 				.credentials("14783667 OTC00000000001000000680", "eSpace7850",
 						Identifier.byId("bb42e2cd2b784ac4bdc350fb660a2bdb"))

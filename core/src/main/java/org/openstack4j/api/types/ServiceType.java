@@ -41,7 +41,7 @@ public enum ServiceType {
 	WORKFLOW("mistral", "workflow"),
 	
 	// qianbiao.ng - new add services
-	CLOUD_VOLUME_BACKUP("vbs", "volume-backup"),
+	VOLUME_BACKUP("vbs", "volume-backup"),
 	UNKNOWN("NA", "NA")
 	;
 	//@on

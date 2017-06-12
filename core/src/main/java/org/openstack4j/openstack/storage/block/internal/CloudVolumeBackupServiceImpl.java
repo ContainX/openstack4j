@@ -32,7 +32,7 @@ import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupJob;
 public class CloudVolumeBackupServiceImpl extends BaseOpenStackService implements CloudVolumeBackupService {
 
 	public CloudVolumeBackupServiceImpl() {
-		super(ServiceType.CLOUD_VOLUME_BACKUP);
+		super(ServiceType.VOLUME_BACKUP);
 	}
 
 	/*

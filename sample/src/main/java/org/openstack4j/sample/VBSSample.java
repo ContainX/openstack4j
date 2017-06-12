@@ -17,8 +17,16 @@
  *******************************************************************************/
 package org.openstack4j.sample;
 
+import java.util.List;
+
+import org.openstack4j.api.Builders;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.CloudVolumeBackupJob;
+import org.openstack4j.model.storage.block.VolumeBackup;
+import org.openstack4j.model.storage.block.VolumeBackupCreate;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupCreate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -27,14 +35,31 @@ import org.testng.annotations.Test;
  * @author Woo Cubic
  * @date   2017-06-06 20:40:10
  */
-public class VolumeBackupSample extends AbstractSample {
+public class VBSSample extends AbstractSample {
+
+	private static final Logger logger = LoggerFactory.getLogger(VBSSample.class);
 
 	@Test
 	public void testVolumeBackupCreate() {
 		VBSVolumeBackupCreate vbc = VBSVolumeBackupCreate.builder().name("qianbiao-ng-os4j-1")
 				.volumeId("0a3218ef-7841-45c5-b9a1-5da6e0b70b85").build();
-		CloudVolumeBackupJob job = osc.cloudVolumeBackup().create(vbc);
+		CloudVolumeBackupJob job = osclient.cloudVolumeBackup().create(vbc);
 		Assert.assertNotNull(job.getJobId());
+	}
+
+	@Test
+	public void testVolumeBackupList() {
+		VolumeBackupCreate vbc = Builders.volumeBackupCreate().volumeId("0a3218ef-7841-45c5-b9a1-5da6e0b70b85")
+				.name("qianbiao-ng-original-1").build();
+		osclient.blockStorage().backups().create(vbc);
+		List<? extends VolumeBackup> list = osclient.blockStorage().backups().list();
+		logger.info("{}", list);
+	}
+
+	@Test
+	public void testVolumeBackupDelete() {
+		ActionResponse delete = osclient.blockStorage().backups().delete("fc335f70-4880-4f03-a408-3d2bc691df8d");
+		logger.info("{}", delete);
 	}
 
 }
