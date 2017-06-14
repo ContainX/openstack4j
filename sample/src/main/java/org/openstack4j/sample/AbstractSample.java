@@ -37,10 +37,12 @@ public class AbstractSample {
 		// add override endpoint
 		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
 		endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
-				"https://evs.eu-de.otc.t-systems.com/v2/%(project_id)s");
-		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
-		// "https://dns.eu-de.otc.t-systems.com/v2/elbaas/%(project_id)s");
+				"https://vbs.eu-de.otc.t-systems.com/v2/%(project_id)s");
+		endpointResolver.addOverrideEndpoint(ServiceType.AUTO_SCALING,
+				"https://as.eu-de.otc.t-systems.com/autoscaling-api/v1/%(project_id)s");
+		endpointResolver.addOverrideEndpoint(ServiceType.DNS, "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
+		// TODO remove authentication before push to github
 		osclient = OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
 				.endpoint("https://iam.eu-de.otc.t-systems.com/v3")
 				.credentials("14783667 OTC00000000001000000680", "eSpace7850",

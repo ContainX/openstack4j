@@ -40,6 +40,7 @@ import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.scaling.AutoScalingService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.CloudVolumeBackupService;
@@ -589,6 +590,14 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 		@Override
 		public CloudVolumeBackupService cloudVolumeBackup() {
 			return Apis.get(CloudVolumeBackupService.class);
+		}
+
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public AutoScalingService autoScaling() {
+			return Apis.get(AutoScalingService.class);
 		}
 
     }

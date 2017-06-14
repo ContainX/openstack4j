@@ -676,6 +676,34 @@
         "type": "workflow",
         "id": "2241f6c6096a11e793ae92361f002671",
         "name": "mistral"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10000",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "2241f1ee096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10000",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "2241f446096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10000",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "2241f55e096a11e793ae92361f002671"
+          }
+        ],
+        "type": "auto-scaling",
+        "id": "2241f6c6096a11e793ae92361f002671",
+        "name": "as"
       }
     ],
     "extras": {},

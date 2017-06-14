@@ -1,9 +1,16 @@
 # Quick start
 
-This project is based on [openstack4j v3.0.4](https://github.com/ContainX/openstack4j/tree/3.0.4) 
-and add several SDK implement for HuaWei.TLD OpenStack services like CES, ELB, VBS, AS, DNS, MRS.
-All new added service SDK is the same as exists SDK of openstack4j, you can get more document 
-from the [openstack4j](https://github.com/ContainX/openstack4j) project.
+Base on [python-openstacksdk v0.9.16](https://github.com/openstack/python-openstacksdk/tree/0.9.16), 
+we add six more libraries for HuaWei.Tld OpenStack Services:
+
+- CES
+- ELB
+- VBS
+- AS
+- DNS
+- MRS
+
+All new libraries are simulating the implementation of existing components/architecture/design. Please refer to the official libraries design documentation when you have any questions.
 
 
 ## Prepare
@@ -39,7 +46,7 @@ mvn clean package install
 
 To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/ContainX/openstack4j/tree/master/connectors)
 
-## SDK usage
+## Usage
 
 > Visit [www.OpenStack4j.com](http://www.openstack4j.com) for the full manual and getting started guides.
 
@@ -75,18 +82,17 @@ OSClientV3 osclient = OSFactory.builderV3()
 		                .authenticate());
 ```
 
-**2. use SDK**
+**2. Use libraries**
 
-Base on openstack4j, we add six more HuaWei OpenStack service SDK(VBS, CES, AS, ELB, DNS, MRS). Use huawei create volume backup as example, the code may like :
-
-```java
-// build VBS volume backup create model
-VBSVolumeBackupCreate vbc = VBSVolumeBackupCreate.builder().name("qianbiao-ng-os4j-1")
-				.volumeId("0a3218ef-7841-45c5-b9a1-5da6e0b70b85").build();
-				
-// use cloud-volume-backup SDK to create a volume backup
-CloudVolumeBackupJob job = osclient.cloudVolumeBackup().create(vbc);
-```
+- For libraries provided by official, please refer to the official documentation.
+- For new added libraries::
+	- [VBS](vbs-sdk)
+	- [CES](ces-sdk)
+	- [AS](as-sdk)
+	- [DNS](dns-sdk)
+	- [ELB](elb-sdk)
+	- [MRS](mrs-sdk)
+	
 
 ## Showcase
 

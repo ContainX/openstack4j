@@ -42,6 +42,9 @@ public enum ServiceType {
 	
 	// qianbiao.ng - new add services
 	VOLUME_BACKUP("vbs", "volume-backup"),
+	AUTO_SCALING("as", "auto-scaling"),
+	
+	
 	UNKNOWN("NA", "NA")
 	;
 	//@on

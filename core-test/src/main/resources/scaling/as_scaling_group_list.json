@@ -1,0 +1,81 @@
+{
+  "limit": 20,
+  "scaling_groups": [
+    {
+      "networks": [
+        {
+          "id": "d2c9712f-84a8-4511-bebf-ec6eac62daf8"
+        }
+      ],
+      "detail": null,
+      "notifications": [],
+      "scaling_group_name": "as-group-349s",
+      "scaling_group_id": "9d841f24-755a-4706-ba1a-11fcd27d5891",
+      "scaling_group_status": "PAUSED",
+      "scaling_configuration_id": null,
+      "scaling_configuration_name": null,
+      "current_instance_number": 0,
+      "desire_instance_number": 0,
+      "min_instance_number": 0,
+      "max_instance_number": 1,
+      "cool_down_time": 900,
+      "lb_listener_id": null,
+      "lbaas_listeners": [],
+      "cloud_location_id": null,
+      "available_zones": [
+        "eu-de-02"
+      ],
+      "security_groups": [
+        {
+          "id": "0005ba27-b937-4a7c-a280-c7b65cea2e47"
+        }
+      ],
+      "create_time": "2017-04-10T14:57:39Z",
+      "vpc_id": "31d158b8-e7d7-4b4a-b2a7-a5240296b267",
+      "health_periodic_audit_method": "NOVA_AUDIT",
+      "health_periodic_audit_time": 5,
+      "instance_terminate_policy": "OLD_CONFIG_OLD_INSTANCE",
+      "is_scaling": false,
+      "delete_publicip": false
+    },
+    {
+      "networks": [
+        {
+          "id": "668ad9b0-6f3f-46ee-8972-0b2a42909bcc"
+        }
+      ],
+      "detail": null,
+      "notifications": [],
+      "scaling_group_name": "as-group-lorc-Romania1",
+      "scaling_group_id": "56e25174-c317-4be1-9fbd-17d5aff10ad5",
+      "scaling_group_status": "PAUSED",
+      "scaling_configuration_id": null,
+      "scaling_configuration_name": null,
+      "current_instance_number": 0,
+      "desire_instance_number": 2,
+      "min_instance_number": 1,
+      "max_instance_number": 4,
+      "cool_down_time": 900,
+      "lb_listener_id": null,
+      "lbaas_listeners": [],
+      "cloud_location_id": null,
+      "available_zones": [
+        "eu-de-02"
+      ],
+      "security_groups": [
+        {
+          "id": "1e225447-928a-431f-855a-0857385788c5"
+        }
+      ],
+      "create_time": "2016-11-15T13:44:00Z",
+      "vpc_id": "facf3196-1862-4b3f-b802-9f46ad8908a3",
+      "health_periodic_audit_method": "NOVA_AUDIT",
+      "health_periodic_audit_time": 5,
+      "instance_terminate_policy": "OLD_CONFIG_OLD_INSTANCE",
+      "is_scaling": false,
+      "delete_publicip": false
+    }
+  ],
+  "total_number": 2,
+  "start_number": 0
+}

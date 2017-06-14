@@ -1,4 +1,5 @@
 /*******************************************************************************
+ *  Copyright 2017 Huawei TLD
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -15,14 +16,13 @@
  *******************************************************************************/
 package org.openstack4j.api;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.common.io.ByteStreams;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bouncycastle.util.io.Streams;
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
@@ -35,12 +35,15 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.common.io.ByteStreams;
+
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
 
 /**
  * Base Test class which handles Mocking a Webserver to fullfill and test
@@ -51,6 +54,7 @@ import java.util.Map;
 public abstract class AbstractTest {
 
     protected enum Service {
+    	//@off
         IDENTITY(5000),
         NETWORK(9696),
         COMPUTE(8774),
@@ -69,7 +73,11 @@ public abstract class AbstractTest {
         CLUSTERING(8778),
         APP_CATALOG(8082),
         DNS(9001),
-        WORKFLOW(8989);
+        WORKFLOW(8989),
+        // huawei
+        AUTO_SCALING(10000),
+        ;
+    	//@on
 
         private final int port;
 

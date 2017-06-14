@@ -32,6 +32,7 @@ import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.scaling.AutoScalingService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.CloudVolumeBackupService;
@@ -323,6 +324,13 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the Huawei Cloud Volume Backup service
 		 */
 		CloudVolumeBackupService cloudVolumeBackup();
+		
+		
+		/**
+		 * Returns the Huawei Cloud Volume Backup service
+		 * @return the Huawei Cloud Volume Backup service
+		 */
+		AutoScalingService autoScaling();
 
 	}
 

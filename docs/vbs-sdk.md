@@ -10,7 +10,7 @@ Visit official [document](http://support.hwclouds.com/api-vbs/zh-cn_topic_002023
 
 ### initial SDK client
 
-You can find how to initial SDK client in the [quickstart](huawei-sdk) page .
+You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
 
 
 ### create volume backup

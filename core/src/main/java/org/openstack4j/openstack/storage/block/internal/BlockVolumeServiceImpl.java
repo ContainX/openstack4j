@@ -15,6 +15,11 @@
  *******************************************************************************/
 package org.openstack4j.openstack.storage.block.internal;
 
+import static com.google.common.base.Preconditions.*;
+
+import java.util.List;
+import java.util.Map;
+
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.storage.BlockVolumeService;
@@ -24,14 +29,20 @@ import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeType;
 import org.openstack4j.model.storage.block.VolumeUploadImage;
 import org.openstack4j.model.storage.block.options.UploadImageData;
-import org.openstack4j.openstack.storage.block.domain.*;
+import org.openstack4j.openstack.storage.block.domain.AttachAction;
+import org.openstack4j.openstack.storage.block.domain.CinderUploadImageData;
+import org.openstack4j.openstack.storage.block.domain.CinderVolume;
 import org.openstack4j.openstack.storage.block.domain.CinderVolume.Volumes;
+import org.openstack4j.openstack.storage.block.domain.CinderVolumeMigration;
+import org.openstack4j.openstack.storage.block.domain.CinderVolumeType;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeType.VolumeTypes;
-
-import java.util.List;
-import java.util.Map;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.openstack4j.openstack.storage.block.domain.CinderVolumeUploadImage;
+import org.openstack4j.openstack.storage.block.domain.ExtendAction;
+import org.openstack4j.openstack.storage.block.domain.ForceDeleteAction;
+import org.openstack4j.openstack.storage.block.domain.ForceDetachAction;
+import org.openstack4j.openstack.storage.block.domain.ForceDetachConnector;
+import org.openstack4j.openstack.storage.block.domain.ResetStatusAction;
+import org.openstack4j.openstack.storage.block.domain.UpdateReadOnlyFlagAction;
 
 /**
  * Manages Volumes and Volume Type based operations against Block Storage (Cinder)

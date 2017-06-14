@@ -8,7 +8,7 @@ Not provided for now.
 ## SDK document
 
 ### initial SDK client
-You can find how to initial SDK client in the [quickstart](huawei-sdk) page .
+You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
 
 ### List Zones
 ```java
