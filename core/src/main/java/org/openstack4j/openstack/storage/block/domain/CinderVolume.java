@@ -27,9 +27,9 @@ public class CinderVolume implements Volume {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	@JsonProperty("display_name")
+	@JsonProperty("name")
 	private String name;
-	@JsonProperty("display_description")
+	@JsonProperty("description")
 	private String description;
 	private Status status;
 	@JsonInclude(Include.NON_DEFAULT)
