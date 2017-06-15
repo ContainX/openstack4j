@@ -18,10 +18,26 @@ package org.openstack4j.api.scaling;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroup;
+import org.openstack4j.model.scaling.ScalingGroupCreate;
+import org.openstack4j.model.scaling.ScalingGroupUpdate;
+import org.openstack4j.openstack.scaling.domain.action.ScalingGroupAction;
+import org.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 
 public interface AutoScalingGroupService extends RestService {
+	
+	public ScalingGroupCreate create(ScalingGroupCreate group); 
 
+	public List<? extends ScalingGroup> list(ScalingGroupListOptions options);
+	
 	public List<? extends ScalingGroup> list();
-
+	
+	public ScalingGroup get(String groupId);
+	
+	public ScalingGroupUpdate update(String groupId, ScalingGroupUpdate group);
+	
+	public ActionResponse delete(String groupId);
+	
+	public ActionResponse operate(String groupId, ScalingGroupAction action);
 }

@@ -9,6 +9,154 @@
       ],
       "detail": null,
       "notifications": [],
+      "scaling_group_name": "test-4-bill",
+      "scaling_group_id": "99beebd6-3357-4a56-a74a-045c6eae5580",
+      "scaling_group_status": "PAUSED",
+      "scaling_configuration_id": null,
+      "scaling_configuration_name": null,
+      "current_instance_number": 0,
+      "desire_instance_number": 0,
+      "min_instance_number": 0,
+      "max_instance_number": 0,
+      "cool_down_time": 900,
+      "lb_listener_id": null,
+      "lbaas_listeners": [],
+      "cloud_location_id": null,
+      "available_zones": [
+        "eu-de-02"
+      ],
+      "security_groups": [
+        {
+          "id": "0005ba27-b937-4a7c-a280-c7b65cea2e47"
+        }
+      ],
+      "create_time": "2017-06-14T11:49:33Z",
+      "vpc_id": "31d158b8-e7d7-4b4a-b2a7-a5240296b267",
+      "health_periodic_audit_method": "NOVA_AUDIT",
+      "health_periodic_audit_time": 5,
+      "instance_terminate_policy": "OLD_CONFIG_OLD_INSTANCE",
+      "is_scaling": false,
+      "delete_publicip": false
+    },
+    {
+      "networks": [
+        {
+          "id": "d2c9712f-84a8-4511-bebf-ec6eac62daf8"
+        }
+      ],
+      "detail": null,
+      "notifications": [],
+      "scaling_group_name": "test-4-bill",
+      "scaling_group_id": "40bbe899-b27a-43fb-8bab-5cb85554cb49",
+      "scaling_group_status": "PAUSED",
+      "scaling_configuration_id": null,
+      "scaling_configuration_name": null,
+      "current_instance_number": 0,
+      "desire_instance_number": 0,
+      "min_instance_number": 0,
+      "max_instance_number": 0,
+      "cool_down_time": 900,
+      "lb_listener_id": null,
+      "lbaas_listeners": [],
+      "cloud_location_id": null,
+      "available_zones": [
+        "eu-de-02"
+      ],
+      "security_groups": [
+        {
+          "id": "0005ba27-b937-4a7c-a280-c7b65cea2e47"
+        }
+      ],
+      "create_time": "2017-06-14T11:30:17Z",
+      "vpc_id": "31d158b8-e7d7-4b4a-b2a7-a5240296b267",
+      "health_periodic_audit_method": "NOVA_AUDIT",
+      "health_periodic_audit_time": 5,
+      "instance_terminate_policy": "OLD_CONFIG_OLD_INSTANCE",
+      "is_scaling": false,
+      "delete_publicip": false
+    },
+    {
+      "networks": [
+        {
+          "id": "d2c9712f-84a8-4511-bebf-ec6eac62daf8"
+        }
+      ],
+      "detail": null,
+      "notifications": [],
+      "scaling_group_name": "test-4-bill",
+      "scaling_group_id": "9bfaa7bc-f154-4158-80f7-185236f0ddce",
+      "scaling_group_status": "PAUSED",
+      "scaling_configuration_id": null,
+      "scaling_configuration_name": null,
+      "current_instance_number": 0,
+      "desire_instance_number": 0,
+      "min_instance_number": 0,
+      "max_instance_number": 0,
+      "cool_down_time": 900,
+      "lb_listener_id": null,
+      "lbaas_listeners": [],
+      "cloud_location_id": null,
+      "available_zones": [
+        "eu-de-02"
+      ],
+      "security_groups": [
+        {
+          "id": "0005ba27-b937-4a7c-a280-c7b65cea2e47"
+        }
+      ],
+      "create_time": "2017-06-14T11:28:36Z",
+      "vpc_id": "31d158b8-e7d7-4b4a-b2a7-a5240296b267",
+      "health_periodic_audit_method": "NOVA_AUDIT",
+      "health_periodic_audit_time": 5,
+      "instance_terminate_policy": "OLD_CONFIG_OLD_INSTANCE",
+      "is_scaling": false,
+      "delete_publicip": false
+    },
+    {
+      "networks": [
+        {
+          "id": "d2c9712f-84a8-4511-bebf-ec6eac62daf8"
+        }
+      ],
+      "detail": null,
+      "notifications": [],
+      "scaling_group_name": "test-4-bill",
+      "scaling_group_id": "0a0fc4f8-bba0-4eec-a77e-4fc6e3281cfd",
+      "scaling_group_status": "PAUSED",
+      "scaling_configuration_id": null,
+      "scaling_configuration_name": null,
+      "current_instance_number": 0,
+      "desire_instance_number": 0,
+      "min_instance_number": 0,
+      "max_instance_number": 0,
+      "cool_down_time": 900,
+      "lb_listener_id": null,
+      "lbaas_listeners": [],
+      "cloud_location_id": null,
+      "available_zones": [
+        "eu-de-02"
+      ],
+      "security_groups": [
+        {
+          "id": "0005ba27-b937-4a7c-a280-c7b65cea2e47"
+        }
+      ],
+      "create_time": "2017-06-14T11:19:50Z",
+      "vpc_id": "31d158b8-e7d7-4b4a-b2a7-a5240296b267",
+      "health_periodic_audit_method": "NOVA_AUDIT",
+      "health_periodic_audit_time": 5,
+      "instance_terminate_policy": "OLD_CONFIG_OLD_INSTANCE",
+      "is_scaling": false,
+      "delete_publicip": false
+    },
+    {
+      "networks": [
+        {
+          "id": "d2c9712f-84a8-4511-bebf-ec6eac62daf8"
+        }
+      ],
+      "detail": null,
+      "notifications": [],
       "scaling_group_name": "as-group-349s",
       "scaling_group_id": "9d841f24-755a-4706-ba1a-11fcd27d5891",
       "scaling_group_status": "PAUSED",
@@ -76,6 +224,6 @@
       "delete_publicip": false
     }
   ],
-  "total_number": 2,
+  "total_number": 6,
   "start_number": 0
 }
