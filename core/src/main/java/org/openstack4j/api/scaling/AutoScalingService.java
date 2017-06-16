@@ -21,4 +21,5 @@ public interface AutoScalingService extends RestService {
 
 	AutoScalingGroupService groups();
 
+	AutoScalingConfigService configs();
 }

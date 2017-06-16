@@ -62,3 +62,49 @@ ActionResponse resp = osclient.autoScaling().groups().delete("groupId");
 ```java
 ActionResponse resp = osclient.autoScaling().groups().operate("groupId", new Resume());
 ```
+
+### Create AutoScaling Configuration
+```java
+Map<String, String> metaData = Maps.newHashMap();
+metaData.put("key1", "val1");
+metaData.put("key2", "val2");
+
+Disk disk = Disk.builder()
+	.size(40)
+	.volumeType("SATA")
+	.diskType("SYS")
+	.build();
+InstanceConfig instanceConfig = InstanceConfig.builder()
+	.flavorRef("flavorId")
+	.imageRef("imageId")
+	.disks(Lists.newArrayList(disk))
+	.keyName("keyname")
+	.metadata(metaData)
+	.build();
+ScalingConfigCreate config = ASAutoScalingConfigCreate.builder()
+	.configName("configName")
+	.instanceConfig(instanceConfig)
+	.build();
+
+ScalingConfigCreate result = osv3().autoScaling().configs().create(config);
+```
+
+### List AutoScaling Configuration
+```java
+List<? extends ScalingConfig> all = osv3().autoScaling().configs().list();
+
+ScalingConfigListOptions options = ScalingConfigListOptions.create().configName("configName");
+List<? extends ScalingConfig> list = osv3().autoScaling().configs().list(options);
+```
+
+### Get AutoScaling Configuration
+```java
+ScalingConfigCreate config = osv3().autoScaling().configs().get("configId");
+```
+
+### Delete AutoScaling Configuration
+```java
+ActionResponse resp = osv3().autoScaling().configs().delete("configId");
+
+ActionResponse resp2 = osv3().autoScaling().configs().delete(Lists.newArrayList("configId"));
+```
