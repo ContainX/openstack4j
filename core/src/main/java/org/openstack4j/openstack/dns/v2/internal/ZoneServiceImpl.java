@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.*;
 import static org.openstack4j.core.transport.ClientConstants.*;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.dns.v2.ZoneService;
 import org.openstack4j.model.common.ActionResponse;
@@ -69,6 +70,13 @@ public class ZoneServiceImpl extends BaseDNSServices implements ZoneService {
     @Override
     public List<? extends Zone> list() {
         return get(DesignateZone.Zones.class, uri(PATH_ZONES)).execute().getList();
+    }
+
+    @Override
+    public List<? extends Zone> list(Map<String, Object> filters) {
+        Invocation<DesignateZone.Zones> invocation = get(DesignateZone.Zones.class, uri(PATH_ZONES));
+        invocation.params(filters);
+        return invocation.execute().getList();
     }
 
 }

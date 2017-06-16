@@ -16,6 +16,7 @@
 package org.openstack4j.api.dns.v2;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
@@ -27,8 +28,9 @@ import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
  *
  */
 public interface PTRService extends RestService {
-	public DesignatePTR setup(DesignatePTR record);
-	public DesignatePTR get(String region, String floatingIpId);
-	public List<? extends PTR> list();
-	public ActionResponse restore(DesignatePTR record);
+	DesignatePTR setup(DesignatePTR record);
+	DesignatePTR get(String region, String floatingIpId);
+	List<? extends PTR> list();
+	ActionResponse restore(DesignatePTR record);
+	List<? extends PTR> list(Map<String, Object> filters);
 }

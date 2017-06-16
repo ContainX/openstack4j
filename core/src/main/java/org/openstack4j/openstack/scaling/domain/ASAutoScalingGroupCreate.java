@@ -77,7 +77,7 @@ public class ASAutoScalingGroupCreate implements ScalingGroupCreate {
 	public String groupId() {
 		return groupId;
 	}
-	
+
 	@Override
 	public String groupName() {
 		return groupName;

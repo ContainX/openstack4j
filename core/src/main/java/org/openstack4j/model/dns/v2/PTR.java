@@ -44,7 +44,7 @@ public interface PTR extends ModelEntity {
 	String getId();
 	String getPtrdname();
 	String getDescription();
-	String getTtl();
+	int getTtl();
 	String getAddress();
 	Status getStatus();
 	String getAction();

@@ -17,10 +17,15 @@ package org.openstack4j.api.dns.v2;
 
 import static org.testng.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.AbstractTest;
+import org.openstack4j.api.Builders;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.dns.v2.PTR;
+import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
 import org.testng.annotations.Test;
 
 /**
@@ -30,18 +35,63 @@ import org.testng.annotations.Test;
 public class DesignatePtrServiceTest extends AbstractTest {
 
 	private static final String JSON_PTR_LIST = "/dns/v2/list_ptrs.json";
+	private static final String JSON_PTR_SETUP = "/dns/v2/setup_ptr.json";
+	private static final String PTRDNAME = "www.example.com";
+	private static final String DESCRIPTION = "Description for this PTR record";
+	private static final String REGION = "eu-de";
+	private static final String FLOATING_IP_ID = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+	private static final int TTL = 300;
+	public static final String ADDRESS = "160.44.201.194";
 
 	@Override
 	protected Service service() {
 		return Service.DNS;
 	}
 
-	public void zoneCreateTest() throws Exception {
+	public void ptrCreateTest() throws Exception {
 		respondWith(JSON_PTR_LIST);
 		List<? extends PTR> list = osv3().dns().ptrs().list();
 		assertNotNull(list);
 		assertEquals(list.size(), 1);
-		assertEquals(list.get(0).getAddress(), "160.44.201.194");
+		assertEquals(list.get(0).getAddress(), ADDRESS);
+	}
+
+	public void ptrListWithFilterTest() throws Exception {
+		respondWith(JSON_PTR_LIST);
+		Map<String, Object> filters = new HashMap<>();
+		filters.put("limit", "2");
+		List<? extends PTR> list = osv3().dns().ptrs().list(filters);
+		assertNotNull(list);
+		assertEquals(list.size(), 1);
+		assertEquals(list.get(0).getAddress(), ADDRESS);
+	}
+
+	public void setupPTRTest() throws Exception {
+		respondWith(JSON_PTR_SETUP);
+
+		DesignatePTR.DesignatePTRBuilder builder = Builders.ptr().ptrdname(PTRDNAME).description(DESCRIPTION).region(REGION).floatingIpId(FLOATING_IP_ID).ttl(TTL);
+		DesignatePTR ptrRecord = builder.build();
+		PTR ptr = osv3().dns().ptrs().setup(ptrRecord);
+		assertNotNull(ptr);
+		assertEquals(ptr.getAddress(), ADDRESS);
+	}
+
+	public void getPTRTest() throws Exception {
+		respondWith(JSON_PTR_SETUP);
+
+		PTR ptr = osv3().dns().ptrs().get(REGION, FLOATING_IP_ID);
+		assertNotNull(ptr);
+		assertEquals(ptr.getAddress(), ADDRESS);
+	}
+
+	public void restorePTRTest() throws Exception {
+		respondWith(202);
+
+		DesignatePTR.DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(null).region(REGION).floatingIpId(FLOATING_IP_ID);
+		DesignatePTR ptrRecord = builder.build();
+		ActionResponse ptrRestoreActionResponse = osv3().dns().ptrs().restore(ptrRecord);
+
+		assertTrue(ptrRestoreActionResponse.isSuccess());
 	}
 
 }

@@ -75,8 +75,44 @@ if (response.isSuccess()) {
 ```java
 String region = "eu-de";
 String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
-DesignateReverseRecord ptr = osclient.dns().reverseRecords().get(region, floatingIpId);
+DesignatePTR ptr = osclient.dns().reverseRecords().get(region, floatingIpId);
 ```
 
+### Setup PTR
+```java
+String ptrDname = "www.example.com";
+String description = "Description for this PTR record";
+Stirng region = "eu-de";
+String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+int ttl = 300;
+DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(ptrDname).description(description).region(region).floatingIpId(floatingIpId).ttl(ttl);
+DesignatePTR ptrRecord = builder.build();
+DesignatePTR ptr = osclient.dns().ptrs().setup(ptrRecord);
+```
+
+### Restore PTR
+```java
+String region = "eu-de";
+String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(null).region(REGION).floatingIpId(FLOATING_IP_ID);
+DesignatePTR ptrRecord = builder.build();
+ActionResponse actionResponse = osclient.dns().ptrs().restore(ptrRecord);
+```
+
+### List PTR without filters
+```java
+List<? extends PTR> list = osclient.dns().ptrs().list();
+```
+
+### List PTR with filters
+```java
+String limit = "limit"; 
+String marker = "marker";
+String source_id = "eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+Map<String, Object> filters = new HashMap<>();
+filters.put(limit, "2");
+filters.put(marker, source_id); 
+List<? extends PTR> list = osclient.dns().ptrs().list(filters);
+```
 
 
