@@ -1,0 +1,22 @@
+{
+  "links": {
+    "self": "https://dns.eu-de.otc.t-systems.com/v2/reverse/floatingips"
+  },
+  "metadata": {
+    "total_count": 1
+  },
+  "floatingips": [
+    {
+      "id": "eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c",
+      "ptrdname": "www.turnbig.net.",
+      "description": "HaveFun.lee - For Test",
+      "address": "160.44.201.194",
+      "action": "NONE",
+      "ttl": 300,
+      "status": "ACTIVE",
+      "links": {
+        "self": "https://dns.eu-de.otc.t-systems.com/v2/reverse/floatingips/eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c"
+      }
+    }
+  ]
+}

@@ -13,36 +13,35 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.dns.v2.internal;
+package org.openstack4j.api.dns.v2;
 
-import org.openstack4j.api.Apis;
-import org.openstack4j.api.dns.v2.DNSService;
-import org.openstack4j.api.dns.v2.RecordsetService;
-import org.openstack4j.api.dns.v2.PTRService;
-import org.openstack4j.api.dns.v2.ZoneService;
+import static org.testng.Assert.*;
 
+import java.util.List;
+
+import org.openstack4j.api.AbstractTest;
+import org.openstack4j.model.dns.v2.PTR;
+import org.testng.annotations.Test;
 
 /**
- * DNS/Designate V2 service implementation
- *
+ * Tests the DNS/Designate API version 2 ZoneService
  */
-public class DNSServiceImpl extends BaseDNSServices implements DNSService {
+@Test(groups = "dnsV2", suiteName = "DNS/Designate_V2")
+public class DesignatePtrServiceTest extends AbstractTest {
 
-    @Override
-    public ZoneService zones() {
-        return Apis.get(ZoneService.class);
-    }
+	private static final String JSON_PTR_LIST = "/dns/v2/list_ptrs.json";
 
-    @Override
-    public RecordsetService recordsets() {
-        return Apis.get(RecordsetService.class);
-    }
-
-	/*
-	 * {@inheritDoc}
-	 */
 	@Override
-	public PTRService ptrs() {
-		return Apis.get(PTRService.class);
+	protected Service service() {
+		return Service.DNS;
 	}
+
+	public void zoneCreateTest() throws Exception {
+		respondWith(JSON_PTR_LIST);
+		List<? extends PTR> list = osv3().dns().ptrs().list();
+		assertNotNull(list);
+		assertEquals(list.size(), 1);
+		assertEquals(list.get(0).getAddress(), "160.44.201.194");
+	}
+
 }

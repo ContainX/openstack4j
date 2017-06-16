@@ -5,10 +5,11 @@ HuaWei OpenStack4j DNS SDK, entry point is: `osclient.dns()`
 ## API document
 Not provided for now.
 
-## SDK document
-
-### initial SDK client
+## initial SDK client
 You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
+
+
+## Zone
 
 ### List Zones
 ```java
@@ -32,6 +33,7 @@ if (response.isSuccess()) {
 }
 ```
 
+## Recordset
 ### List Recordsets
 ```java
 List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list("zone-id");
@@ -66,6 +68,14 @@ ActionResponse response = osclient.dns().recordsets().delete("zone-id", "records
 if (response.isSuccess()) {
 	// 
 }
+```
+
+## PTR
+### Get PTR
+```java
+String region = "eu-de";
+String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+DesignateReverseRecord ptr = osclient.dns().reverseRecords().get(region, floatingIpId);
 ```
 
 

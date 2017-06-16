@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei Tld                       
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,36 +13,43 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.dns.v2.internal;
+package org.openstack4j.model.dns.v2;
 
-import org.openstack4j.api.Apis;
-import org.openstack4j.api.dns.v2.DNSService;
-import org.openstack4j.api.dns.v2.RecordsetService;
-import org.openstack4j.api.dns.v2.PTRService;
-import org.openstack4j.api.dns.v2.ZoneService;
+import java.util.Map;
 
+import org.openstack4j.model.ModelEntity;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
- * DNS/Designate V2 service implementation
- *
+ * ReverseRecord(PTR) model
  */
-public class DNSServiceImpl extends BaseDNSServices implements DNSService {
-
-    @Override
-    public ZoneService zones() {
-        return Apis.get(ZoneService.class);
-    }
-
-    @Override
-    public RecordsetService recordsets() {
-        return Apis.get(RecordsetService.class);
-    }
-
-	/*
-	 * {@inheritDoc}
-	 */
-	@Override
-	public PTRService ptrs() {
-		return Apis.get(PTRService.class);
+public interface PTR extends ModelEntity {
+	enum Status {
+		ACTIVE, UNKNOWN;
+		
+		@JsonCreator
+		public static Status forValue(String value) {
+			if (value != null)
+			{
+				for (Status s : Status.values()) {
+					if (s.name().equalsIgnoreCase(value))
+						return s;
+				}
+			}
+			return Status.UNKNOWN;
+		}
 	}
+
+	String getId();
+	String getPtrdname();
+	String getDescription();
+	String getTtl();
+	String getAddress();
+	Status getStatus();
+	String getAction();
+	Map<String, String> getLinks();
+	String getRegion();
+	String getFloatingIpId();
+
 }

@@ -1,4 +1,5 @@
 /*******************************************************************************
+ *  Copyright 2017 HuaWei Tld
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -15,17 +16,15 @@
  *******************************************************************************/
 package org.openstack4j.api.dns.v2;
 
-import com.google.common.collect.ImmutableList;
+import static org.testng.Assert.*;
+
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.dns.v2.Action;
 import org.openstack4j.model.dns.v2.Recordset;
 import org.openstack4j.model.dns.v2.Status;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Tests the DNS/Designate API version 2 ZoneService
@@ -50,30 +49,14 @@ public class DesignateRecordsetServiceTest extends AbstractTest {
     }
 
     public void recordsetCreateTest() throws Exception {
-
         respondWith(JSON_RECORDSET);
-
         Recordset recordset = osv3().dns().recordsets().create(ZONE_ID, RECORDSET_NAME, RECORDSET_TYPE, RECORDSET_RECORDS);
-
         assertEquals(recordset.getZoneId(), ZONE_ID);
         assertEquals(recordset.getName(), RECORDSET_NAME);
         assertEquals(recordset.getType(), RECORDSET_TYPE);
         assertEquals(recordset.getRecords(), RECORDSET_RECORDS);
         assertEquals(recordset.getStatus(), RECORDSET_STATUS);
         assertEquals(recordset.getAction(), RECORDSET_ACTION);
-
-    }
-
-    public void recordsetListTest() throws Exception {
-
-        respondWith(JSON_RECORDSETLIST);
-
-        List<? extends Recordset> recordsetList = osv3().dns().recordsets().list(ZONE_ID);
-
-        assertFalse(recordsetList.isEmpty());
-        assertEquals(recordsetList.get(0).getZoneId(), ZONE_ID);
-        assertEquals(recordsetList.get(0).getVersion(), RECORDSET_VERSION);
-
     }
 
 }

@@ -37,4 +37,11 @@ public interface DNSService extends RestService {
 	 */
 	RecordsetService recordsets();
 
+	/**
+	 *  ReverseRecord Service API
+	 *
+	 * @return the ReverseRecord service
+	 */
+	PTRService ptrs();
+
 }
