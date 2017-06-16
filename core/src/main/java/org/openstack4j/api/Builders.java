@@ -154,6 +154,8 @@ import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
 import org.openstack4j.openstack.dns.v2.builder.DesignateV2Builders;
+import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
+import org.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
 import org.openstack4j.openstack.dns.v2.domain.DesignateRecordset;
 import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
@@ -1351,6 +1353,14 @@ public class Builders {
 
     public static WorkflowBuilders workflow() {
         return new MistralBuilders();
+    }
+
+    /**
+     * The builder to create a PTR build
+     * @return
+     */
+    public static DesignatePTRBuilder ptr() {
+        return DesignatePTR.builder();
     }
 
 }

@@ -40,7 +40,8 @@ public class AbstractSample {
 				"https://vbs.eu-de.otc.t-systems.com/v2/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.AUTO_SCALING,
 				"https://as.eu-de.otc.t-systems.com/autoscaling-api/v1/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.DNS, "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
+		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
+		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
 		// TODO remove authentication before push to github
 		osclient = OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))

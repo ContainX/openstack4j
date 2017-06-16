@@ -21,7 +21,7 @@ import lombok.ToString;
 public class ASAutoScalingGroupCreate implements ScalingGroupCreate {
 
 	private static final long serialVersionUID = -8059070824334840043L;
-	
+
 	@JsonProperty("scaling_group_id")
 	String groupId;
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei Tld                       
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -15,33 +15,54 @@
  *******************************************************************************/
 package org.openstack4j.api.dns.v2;
 
+import java.util.List;
+import java.util.Map;
+
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.dns.v2.PTR;
+import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
 
 /**
- * DNS/Designate Service Operations API
+ * Designate V2 ReverseRecord Service
  *
  */
-public interface DNSService extends RestService {
+public interface PTRService extends RestService {
+    /**
+     * Set the PTR record for floating IP
+     * @param record
+     * @return
+     */
+	DesignatePTR setup(DesignatePTR record);
 
-	/**
-	 * Zone Service API
-	 *
-	 * @return the zone service
-	 */
-	ZoneService zones();
+    /**
+     * Query the PTR record for a single floating IP.
+     * @param region
+     * @param floatingIpId
+     * @return
+     */
+	DesignatePTR get(String region, String floatingIpId);
 
-	/**
-	 * Recordset Service API
-	 *
-	 * @return the recordsets service
-	 */
-	RecordsetService recordsets();
+    /**
+     * Query the PTR records for all floating IP without filters.
+     * @return
+     */
+	List<? extends PTR> list();
 
-	/**
-	 *  ReverseRecord Service API
-	 *
-	 * @return the ReverseRecord service
-	 */
-	PTRService ptrs();
+    /**
+     * Query the PTR records for all floating IP with filters
+     * @param filters
+     * @return
+     */
+    List<? extends PTR> list(Map<String, Object> filters);
+
+    /**
+     * Restore the PTR record of floating IP to the default value.
+     * @param region
+     * @param floatingIpId
+     * @return
+     */
+	ActionResponse restore(String region, String floatingIpId);
+
 
 }

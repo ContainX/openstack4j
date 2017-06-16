@@ -13,36 +13,56 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.dns.v2.internal;
+package org.openstack4j.openstack.dns.v2.domain;
 
-import org.openstack4j.api.Apis;
-import org.openstack4j.api.dns.v2.DNSService;
-import org.openstack4j.api.dns.v2.RecordsetService;
-import org.openstack4j.api.dns.v2.PTRService;
-import org.openstack4j.api.dns.v2.ZoneService;
+import java.util.List;
+import java.util.Map;
 
+import org.openstack4j.model.dns.v2.PTR;
+import org.openstack4j.openstack.common.ListResult;
 
-/**
- * DNS/Designate V2 service implementation
- *
- */
-public class DNSServiceImpl extends BaseDNSServices implements DNSService {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    @Override
-    public ZoneService zones() {
-        return Apis.get(ZoneService.class);
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class DesignatePTR implements PTR {
+	
+	private static final long serialVersionUID = 1649349482218584398L;
+	
+	String id;
+	String ptrdname;
+	String description;
+	Integer ttl;
+	String address;
+	Status status;
+	String action;
+	Map<String, String> links;
+	String region;
+	
+	@JsonProperty("floatingip_id")
+	String floatingIpId;
+	
+    public static class PTRList extends ListResult<DesignatePTR> {
+        private static final long serialVersionUID = 1L;
+        
+        @JsonProperty("floatingips")
+        protected List<DesignatePTR> list;
+
+        @Override
+        public List<DesignatePTR> value() {
+            return list;
+        }
     }
 
-    @Override
-    public RecordsetService recordsets() {
-        return Apis.get(RecordsetService.class);
-    }
-
-	/*
-	 * {@inheritDoc}
-	 */
-	@Override
-	public PTRService ptrs() {
-		return Apis.get(PTRService.class);
-	}
 }

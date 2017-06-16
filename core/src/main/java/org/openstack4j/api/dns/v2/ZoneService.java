@@ -21,6 +21,7 @@ import org.openstack4j.model.dns.v2.Nameserver;
 import org.openstack4j.model.dns.v2.Zone;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Designate V2 Zone Service
@@ -84,5 +85,12 @@ public interface ZoneService extends RestService {
      * @return list of zones
      */
     List<? extends Zone> list();
+
+    /**
+     * lists zones.
+     * @param filters
+     * @return
+     */
+    List<? extends Zone> list(Map<String, Object> filters);
 
 }

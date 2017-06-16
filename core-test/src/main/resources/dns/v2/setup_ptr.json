@@ -1,0 +1,12 @@
+{
+  "id": "eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c",
+  "ptrdname": "www.example.com.",
+  "description": "Description for this PTR record",
+  "address": "160.44.201.194",
+  "action": "CREATE",
+  "ttl": 300,
+  "status": "PENDING_CREATE",
+  "links": {
+    "self": "https://dns.eu-de.otc.t-systems.com/v2/reverse/floatingips/eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c"
+  }
+}

@@ -5,10 +5,11 @@ HuaWei OpenStack4j DNS SDK, entry point is: `osclient.dns()`
 ## API document
 Not provided for now.
 
-## SDK document
-
-### initial SDK client
+## initial SDK client
 You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
+
+
+## Zone
 
 ### List Zones
 ```java
@@ -32,6 +33,7 @@ if (response.isSuccess()) {
 }
 ```
 
+## Recordset
 ### List Recordsets
 ```java
 List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list("zone-id");
@@ -68,5 +70,47 @@ if (response.isSuccess()) {
 }
 ```
 
+## PTR
+### Get PTR
+```java
+String region = "eu-de";
+String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+DesignatePTR ptr = osclient.dns().reverseRecords().get(region, floatingIpId);
+```
+
+### Setup PTR
+```java
+String ptrDname = "www.example.com";
+String description = "Description for this PTR record";
+Stirng region = "eu-de";
+String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+int ttl = 300;
+DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(ptrDname).description(description).region(region).floatingIpId(floatingIpId).ttl(ttl);
+DesignatePTR ptrRecord = builder.build();
+DesignatePTR ptr = osclient.dns().ptrs().setup(ptrRecord);
+```
+
+### Restore PTR
+```java
+String region = "eu-de";
+String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+ActionResponse actionResponse = osclient.dns().ptrs().restore(region, floatingIpId);
+```
+
+### List PTR without filters
+```java
+List<? extends PTR> list = osclient.dns().ptrs().list();
+```
+
+### List PTR with filters
+```java
+String limit = "limit"; 
+String marker = "marker";
+String source_id = "eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+Map<String, Object> filters = new HashMap<>();
+filters.put(limit, "2");
+filters.put(marker, source_id); 
+List<? extends PTR> list = osclient.dns().ptrs().list(filters);
+```
 
 

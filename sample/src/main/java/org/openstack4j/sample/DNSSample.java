@@ -17,13 +17,18 @@
  *******************************************************************************/
 package org.openstack4j.sample;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.dns.v2.PTR;
 import org.openstack4j.model.dns.v2.Recordset;
 import org.openstack4j.model.dns.v2.Zone;
 import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
+import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
+import org.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -38,9 +43,12 @@ import com.google.common.collect.Lists;
 public class DNSSample extends AbstractSample {
 
 	private static final Logger logger = LoggerFactory.getLogger(DNSSample.class);
+	private static final String FLOATING_IP_ID = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+	private static final String REGION = "eu-de";
+	public static final String PTRDNAME = "www.example.com";
 
 	@Test
-	public void testGetZones() {
+	public void testListZones() {
 		List<? extends Zone> list = osclient.dns().zones().list();
 		logger.info("{}", list);
 	}
@@ -54,8 +62,8 @@ public class DNSSample extends AbstractSample {
 	}
 
 	@Test
-	public void testShowZones() {
-		Zone zone = osclient.dns().zones().get("");
+	public void testGetZone() {
+		Zone zone = osclient.dns().zones().get("123445");
 		logger.info("{}", zone);
 	}
 
@@ -102,6 +110,46 @@ public class DNSSample extends AbstractSample {
 			//
 		}
 	}
+	
+	@Test
+	public void setupPTR() {
+		DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(PTRDNAME + "1").description("Description for this PTR record").region(REGION).floatingIpId(FLOATING_IP_ID).ttl(300);
+		DesignatePTR ptrRecord = builder.build();
+		DesignatePTR ptr = osclient.dns().ptrs().setup(ptrRecord);
+		logger.info("SetupPTR: {}", ptr);
+	}
 
+	@Test
+	public void getPTR() {
+		DesignatePTR ptr = osclient.dns().ptrs().get(REGION,
+				FLOATING_IP_ID);
+		logger.info("PTR: {}", ptr);
+	}
+	@Test
+	public void listPTR() {
+		List<? extends PTR> list = osclient.dns().ptrs().list();
+		logger.info("PTR list: {}", list);
+	}
+
+	@Test
+	public void listWithFilterPTR() {
+		Map<String, Object> filters = new HashMap<>();
+		filters.put("limit", "2");
+		List<? extends PTR> list = osclient.dns().ptrs().list(filters);
+		logger.info("PTR list: {}", list);
+	}
+
+	@Test
+	public void restorePTR() {
+		ActionResponse actionResponse = osclient.dns().ptrs().restore(REGION, FLOATING_IP_ID);
+		logger.info("PTR restore: {}", actionResponse);
+	}
+
+
+	public static void main(String[] args) {
+		DesignatePTRBuilder builder = DesignatePTR.builder().id("1").ptrdname("example.com");
+		DesignatePTR reverseRecord = builder.build();
+		System.out.println(reverseRecord);
+	}
 
 }
