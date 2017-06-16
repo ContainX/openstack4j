@@ -20,41 +20,23 @@ import java.util.List;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.IdResourceEntity;
 
-public interface ScalingGroup extends ModelEntity {
+public interface ScalingGroupCreate extends ModelEntity {
 
 	/**
-	 * @return the id for the scaling group
+	 * @return scaling group id
 	 */
 	String groupId();
-
+	
 	/**
 	 * @return the name for the scaling group
 	 */
 	String groupName();
-
-	/**
-	 * 
-	 * @return scaling group status
-	 */
-	String groupStatus();
 	
 	/**
 	 * 
 	 * @return scaling configuration id
 	 */
 	String configId();
-	
-	/**
-	 * 
-	 * @return scaling configuration name
-	 */
-	String configName();
-	
-	/**
-	 * 
-	 * @return current instance number
-	 */
-	Integer currentInstanceNumber();
 	
 	/**
 	 * 
@@ -108,27 +90,9 @@ public interface ScalingGroup extends ModelEntity {
 	
 	/**
 	 * 
-	 * @return scaling group creation time
-	 */
-	String createTime();
-	
-	/**
-	 * 
 	 * @return vpc id
 	 */
 	String vpcId();
-	
-	/**
-	 * 
-	 * @return scaling group detail
-	 */
-	String detail();
-	
-	/**
-	 * 
-	 * @return Is group scale
-	 */
-	Boolean isScaling();
 	
 	/**
 	 * 
