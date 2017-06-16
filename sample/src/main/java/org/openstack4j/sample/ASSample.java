@@ -71,7 +71,7 @@ public class ASSample extends AbstractSample {
 				.list(ScalingGroupListOptions.create().groupName("test-4-bill").limit(5).startNumber(1));
 		logger.info("{}", list);
 		Assert.assertTrue(!list.isEmpty());
-		Assert.assertEquals(list.get(0).groupName(), "test-4-bill");
+		Assert.assertEquals(list.get(0).getGroupName(), "test-4-bill");
 		list = osclient.autoScaling().groups().list(ScalingGroupListOptions.create().groupName("$&"));
 		logger.info("{}", list);
 		Assert.assertTrue(list.isEmpty());
@@ -85,7 +85,7 @@ public class ASSample extends AbstractSample {
 		ScalingGroup group = osclient.autoScaling().groups().get("9d841f24-755a-4706-ba1a-11fcd27d5891");
 		logger.info("{}", group);
 		Assert.assertNotNull(group);
-		Assert.assertEquals(group.groupName(), "as-group-349s");
+		Assert.assertEquals(group.getGroupName(), "as-group-349s");
 	}
 
 	@Test
@@ -94,14 +94,14 @@ public class ASSample extends AbstractSample {
 		ScalingGroup group = osclient.autoScaling().groups().get(groupId);
 		Assert.assertNotNull(group);
 
-		String before = group.groupName();
+		String before = group.getGroupName();
 		String after = new StringBuilder(before).reverse().toString();
-		ScalingGroupUpdate result = osclient.autoScaling().groups().update(group.groupId(),
+		ScalingGroupUpdate result = osclient.autoScaling().groups().update(group.getGroupId(),
 				ASAutoScalingGroupUpdate.fromScalingGroup(group).toBuilder().groupName(after).build());
-		Assert.assertNotNull(result.groupId());
+		Assert.assertNotNull(result.getGroupId());
 
 		ScalingGroup afterUpdate = osclient.autoScaling().groups().get(groupId);
-		Assert.assertEquals(afterUpdate.groupName(), after);
+		Assert.assertEquals(afterUpdate.getGroupName(), after);
 	}
 
 	@Test
@@ -125,13 +125,13 @@ public class ASSample extends AbstractSample {
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
 
 		ScalingGroup group = osclient.autoScaling().groups().get(groupId);
-		Assert.assertEquals(group.groupStatus(), resumeGroupStatus);
+		Assert.assertEquals(group.getGroupStatus(), resumeGroupStatus);
 
 		resp = osclient.autoScaling().groups().operate(groupId, new Pause());
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
 
 		group = osclient.autoScaling().groups().get(groupId);
-		Assert.assertEquals(group.groupStatus(), pauseGroupStatus);
+		Assert.assertEquals(group.getGroupStatus(), pauseGroupStatus);
 	}
 
 	@Test
@@ -201,8 +201,8 @@ public class ASSample extends AbstractSample {
 				.build();
 
 		ScalingGroupCreate result = osclient.autoScaling().groups().create(group);
-		Assert.assertNotNull(result.groupId());
-		return result.groupId();
+		Assert.assertNotNull(result.getGroupId());
+		return result.getGroupId();
 	}
 
 	/**
