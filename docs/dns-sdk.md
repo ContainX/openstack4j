@@ -94,9 +94,7 @@ DesignatePTR ptr = osclient.dns().ptrs().setup(ptrRecord);
 ```java
 String region = "eu-de";
 String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
-DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(null).region(REGION).floatingIpId(FLOATING_IP_ID);
-DesignatePTR ptrRecord = builder.build();
-ActionResponse actionResponse = osclient.dns().ptrs().restore(ptrRecord);
+ActionResponse actionResponse = osclient.dns().ptrs().restore(region, floatingIpId);
 ```
 
 ### List PTR without filters

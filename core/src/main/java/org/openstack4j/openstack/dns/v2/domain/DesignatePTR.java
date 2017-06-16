@@ -43,7 +43,7 @@ public class DesignatePTR implements PTR {
 	String id;
 	String ptrdname;
 	String description;
-	int ttl;
+	Integer ttl;
 	String address;
 	Status status;
 	String action;

@@ -66,14 +66,22 @@ public class DesignatePtrServiceTest extends AbstractTest {
 		assertEquals(list.get(0).getAddress(), ADDRESS);
 	}
 
-	public void setupPTRTest() throws Exception {
-		respondWith(JSON_PTR_SETUP);
+	public void setupPTRSuccessTest() throws Exception {
+        respondWith(JSON_PTR_SETUP);
 
-		DesignatePTR.DesignatePTRBuilder builder = Builders.ptr().ptrdname(PTRDNAME).description(DESCRIPTION).region(REGION).floatingIpId(FLOATING_IP_ID).ttl(TTL);
-		DesignatePTR ptrRecord = builder.build();
-		PTR ptr = osv3().dns().ptrs().setup(ptrRecord);
-		assertNotNull(ptr);
-		assertEquals(ptr.getAddress(), ADDRESS);
+        DesignatePTR.DesignatePTRBuilder builder = Builders.ptr().ptrdname(PTRDNAME).description(DESCRIPTION).region(REGION).floatingIpId(FLOATING_IP_ID).ttl(TTL);
+        DesignatePTR ptrRecord = builder.build();
+        PTR ptr = osv3().dns().ptrs().setup(ptrRecord);
+        assertNotNull(ptr);
+        assertEquals(ptr.getAddress(), ADDRESS);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void setupPTRFailedTest() throws Exception {
+		int ttl = 299;
+        DesignatePTR.DesignatePTRBuilder builder = Builders.ptr().ptrdname(PTRDNAME).description(DESCRIPTION).region(REGION).floatingIpId(FLOATING_IP_ID).ttl(ttl);
+        DesignatePTR ptrRecord = builder.build();
+        osv3().dns().ptrs().setup(ptrRecord);
 	}
 
 	public void getPTRTest() throws Exception {
@@ -84,13 +92,10 @@ public class DesignatePtrServiceTest extends AbstractTest {
 		assertEquals(ptr.getAddress(), ADDRESS);
 	}
 
-	public void restorePTRTest() throws Exception {
+	public void restoreSuccessPTRTest() throws Exception {
 		respondWith(202);
 
-		DesignatePTR.DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(null).region(REGION).floatingIpId(FLOATING_IP_ID);
-		DesignatePTR ptrRecord = builder.build();
-		ActionResponse ptrRestoreActionResponse = osv3().dns().ptrs().restore(ptrRecord);
-
+		ActionResponse ptrRestoreActionResponse = osv3().dns().ptrs().restore(REGION, FLOATING_IP_ID);
 		assertTrue(ptrRestoreActionResponse.isSuccess());
 	}
 

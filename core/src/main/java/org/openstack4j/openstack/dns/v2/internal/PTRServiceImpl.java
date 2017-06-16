@@ -23,8 +23,8 @@ public class PTRServiceImpl extends BaseDNSServices implements PTRService {
 	 */
 	@Override
 	public DesignatePTR setup(DesignatePTR record) {
-		checkNotNull(record);
-		checkArgument(record.getTtl() >= 300 && record.getTtl() <= 2147483647);
+		checkNotNull(record, "The PTR record is Null.");
+		checkArgument(record.getTtl() >= 300 && record.getTtl() <= 2147483647, "TTL value shold equal or bigger than 300, and equal or less than 2147483647");
 		return patch(DesignatePTR.class, PATH_PTR, "/", record.getRegion(), ":", record.getFloatingIpId()).entity(record).execute();
 	}
 
@@ -33,8 +33,8 @@ public class PTRServiceImpl extends BaseDNSServices implements PTRService {
 	 */
 	@Override
 	public DesignatePTR get(String region, String floatingIpId) {
-		checkNotNull(region);
-		checkNotNull(floatingIpId);
+		checkNotNull(region, "The region info is Null.");
+		checkNotNull(floatingIpId, "The floating Ip ID is Null.");
 		return get(DesignatePTR.class, PATH_PTR, "/", region, ":", floatingIpId).execute();
 	}
 
@@ -60,9 +60,12 @@ public class PTRServiceImpl extends BaseDNSServices implements PTRService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ActionResponse restore(DesignatePTR record) {
-		checkNotNull(record);
-		return patchWithResponse(PATH_PTR, "/", record.getRegion(), ":", record.getFloatingIpId()).entity(record).execute();
+	public ActionResponse restore(String region, String floatingIpId) {
+		checkNotNull(region, "The region is Null.");
+		checkNotNull(floatingIpId, "The floating Ip Id is Null.");
+		DesignatePTR.DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(null);
+		DesignatePTR ptrRecord = builder.build();
+		return patchWithResponse(PATH_PTR, "/", region, ":", floatingIpId).entity(ptrRecord).execute();
 	}
 
 }

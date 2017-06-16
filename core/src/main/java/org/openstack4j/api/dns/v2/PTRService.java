@@ -28,9 +28,41 @@ import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
  *
  */
 public interface PTRService extends RestService {
+    /**
+     * Set the PTR record for floating IP
+     * @param record
+     * @return
+     */
 	DesignatePTR setup(DesignatePTR record);
+
+    /**
+     * Query the PTR record for a single floating IP.
+     * @param region
+     * @param floatingIpId
+     * @return
+     */
 	DesignatePTR get(String region, String floatingIpId);
+
+    /**
+     * Query the PTR records for all floating IP without filters.
+     * @return
+     */
 	List<? extends PTR> list();
-	ActionResponse restore(DesignatePTR record);
-	List<? extends PTR> list(Map<String, Object> filters);
+
+    /**
+     * Query the PTR records for all floating IP with filters
+     * @param filters
+     * @return
+     */
+    List<? extends PTR> list(Map<String, Object> filters);
+
+    /**
+     * Restore the PTR record of floating IP to the default value.
+     * @param region
+     * @param floatingIpId
+     * @return
+     */
+	ActionResponse restore(String region, String floatingIpId);
+
+
 }
