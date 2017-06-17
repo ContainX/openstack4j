@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.scaling.internal;
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.api.scaling.AutoScalingActivityLogService;
 import org.openstack4j.api.scaling.AutoScalingConfigService;
 import org.openstack4j.api.scaling.AutoScalingGroupInstanceService;
 import org.openstack4j.api.scaling.AutoScalingGroupService;
@@ -35,6 +36,11 @@ public class AutoScalingServiceImpl extends BaseAutoScalingServices implements A
 	@Override
 	public AutoScalingPolicyService policys() {
 		return Apis.get(AutoScalingPolicyService.class);
+	}
+
+	@Override
+	public AutoScalingActivityLogService activityLogs() {
+		return Apis.get(AutoScalingActivityLogService.class);
 	}
 	
 }

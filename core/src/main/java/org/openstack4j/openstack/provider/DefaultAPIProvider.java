@@ -133,6 +133,7 @@ import org.openstack4j.api.sahara.NodeGroupTemplateService;
 import org.openstack4j.api.sahara.SaharaImageService;
 import org.openstack4j.api.sahara.SaharaPluginService;
 import org.openstack4j.api.sahara.SaharaService;
+import org.openstack4j.api.scaling.AutoScalingActivityLogService;
 import org.openstack4j.api.scaling.AutoScalingConfigService;
 import org.openstack4j.api.scaling.AutoScalingGroupInstanceService;
 import org.openstack4j.api.scaling.AutoScalingGroupService;
@@ -302,6 +303,7 @@ import org.openstack4j.openstack.sahara.internal.NodeGroupTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaImageServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaPluginServiceImpl;
 import org.openstack4j.openstack.sahara.internal.SaharaServiceImpl;
+import org.openstack4j.openstack.scaling.internal.AutoScalingActivityLogServiceImpl;
 import org.openstack4j.openstack.scaling.internal.AutoScalingConfigServiceImpl;
 import org.openstack4j.openstack.scaling.internal.AutoScalingGroupInstanceServiceImpl;
 import org.openstack4j.openstack.scaling.internal.AutoScalingGroupServiceImpl;
@@ -565,6 +567,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(AutoScalingConfigService.class, AutoScalingConfigServiceImpl.class);
 		bind(AutoScalingGroupInstanceService.class, AutoScalingGroupInstanceServiceImpl.class);
 		bind(AutoScalingPolicyService.class, AutoScalingPolicyServiceImpl.class);
+		bind(AutoScalingActivityLogService.class, AutoScalingActivityLogServiceImpl.class);
     }
 
     /**
