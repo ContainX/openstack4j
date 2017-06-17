@@ -1,5 +1,6 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 TLD
+ * 	Copyright 2016 ContainX and OpenStack4j
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -23,22 +24,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum ZoneType {
 
-	PRIMARY, SECONDARY;
+	PRIVATE, PUBLIC;
 
 	@JsonValue
 	public String value() {
 		return name().toUpperCase();
 	}
 
-	//default to PRIMARY
+	//default to PUBLIC
 	@JsonCreator
 	public static ZoneType value(String v)
 	{
-		if (v == null) return PRIMARY;
+		if (v == null) return PUBLIC;
 		try {
 			return valueOf(v.toUpperCase());
 		} catch (IllegalArgumentException e) {
-			return PRIMARY;
+			return PUBLIC;
 		}
 	}
 

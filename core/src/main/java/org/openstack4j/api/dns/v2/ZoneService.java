@@ -1,4 +1,5 @@
 /*******************************************************************************
+ *  Copyright 2017 HuaWei TLD
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -19,6 +20,8 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.dns.v2.Nameserver;
 import org.openstack4j.model.dns.v2.Zone;
+import org.openstack4j.model.dns.v2.ZoneType;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 
 import java.util.List;
 import java.util.Map;
@@ -56,20 +59,12 @@ public interface ZoneService extends RestService {
     Zone get(String zoneId);
 
     /**
-     * updates an existing zone
-     *
-     * @param zone the zone set to update
-     * @return the updated zone
-     */
-    Zone update(Zone zone);
-
-    /**
      * delete a zone by id
      *
      * @param zoneId the zone id
      * @return the action response
      */
-    ActionResponse delete(String zoneId);
+    Zone delete(String zoneId);
 
     /**
      * list nameservers for a zone
@@ -87,10 +82,29 @@ public interface ZoneService extends RestService {
     List<? extends Zone> list();
 
     /**
-     * lists zones.
-     * @param filters
+     * lists zones
+     * @param type the zone type, null -> query all zones, public -> query all public zones, private -> query all private zones
+     * @param marker the initial ID of a paging query, if null, query the first page
+     * @param limit per page's item quantity. Value can be 0~500
      * @return
      */
-    List<? extends Zone> list(Map<String, Object> filters);
+    List<? extends Zone> list(String type, String marker, String limit);
+
+    /**
+     * Associate a router to the zone
+     * @param zoneId the zone id
+     * @param router the router info
+     * @return
+     */
+    DesignateZone.Router associateRouter(String zoneId, DesignateZone.Router router);
+
+    /**
+     * Disassociate the router from the zone
+     * @param zoneId the zone id
+     * @param router the router info
+     * @return
+     */
+    DesignateZone.Router disassociateRouter(String zoneId, DesignateZone.Router router);
+
 
 }

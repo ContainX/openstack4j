@@ -4,13 +4,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 
+import com.google.common.base.Strings;
 import org.openstack4j.api.scaling.AutoScalingGroupInstanceService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroupInstance;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstance.ASAutoScalingGroupInstances;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
-import org.testng.util.Strings;
 
 public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 		implements AutoScalingGroupInstanceService {

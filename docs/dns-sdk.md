@@ -11,13 +11,38 @@ You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-buil
 
 ## Zone
 
-### List Zones
+### List All Zones
 ```java
 List<? extends Zone> list = osclient.dns().zones().list();
 ```
 
+### List Specific Zones 
+```java
+String type = "public"; //null -> query all zones, public -> query all public zones, private -> query all private zones
+String marker = null; //the initial ID of a paging query, if null, query the first page
+String limit = "2"; //per page's item quantity. Value can be 0~500
+List<? extends Zone> list = osclient.dns().zones().list(type, marker, limit);
+```
+
 ### Create Zone
 ```java
+String name = "example.com.";
+String description = "This is an example zone.";
+ZoneBuilder builder = Builders.zone();
+Zone zone = builder.name(name).description(description).build();
+Zone zoneResult = osclient.dns().zones().create(zone);
+```
+
+### Create Private Zone
+```java
+String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
+String region = "eu-de";
+String name = "example.com.";
+String description = "This is an example zone.";
+DesignateZone.Router router = new DesignateZone.Router(router_id, region, null);
+ZoneBuilder builder = Builders.zone();
+Zone sourceZone = builder.name(name).description(description).type(ZoneType.PRIVATE).router(router).build();
+Zone zoneResult = osclient.dns().zones().create(sourceZone);
 ```
 
 ### Get Zone
@@ -27,12 +52,36 @@ Zone zone = osclient.dns().zones().get("zone-id");
 
 ### Delete Zone
 ```java
-ActionResponse response = osclient.dns().zones().delete("zone-id");
-if (response.isSuccess()) {
-	//
-}
+String zone_id = "2c9eb155587194ec01587224c9f90149";
+Zone deletedZone = osclient.dns().zones().delete(zone_id);
 ```
 
+### Get Namesevers
+```java
+String zone_id = "2c9eb155587194ec01587224c9f90149";
+List<? extends Nameserver> nameserversList = osclient.dns().zones().listNameservers(zone_id);
+```
+
+### Associate Router
+```java
+String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
+String region = "eu-de";
+String zone_id = "2c9eb155587194ec01587224c9f90149";
+DesignateZone.Router router = new DesignateZone.Router(router_id, region, null);
+DesignateZone.Router routerResult = osclient.dns().zones().associateRouter(zone_id, router);
+```
+
+### Disassociate Router
+```java
+String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
+String region = "eu-de";
+String zone_id = "2c9eb155587194ec01587224c9f90149";
+DesignateZone.Router router = new DesignateZone.Router(router_id, region, null);
+DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter(zone_id, router);
+```
+
+
+### 
 ## Recordset
 ### List Recordsets
 ```java

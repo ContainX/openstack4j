@@ -23,12 +23,11 @@ import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.dns.v2.PTR;
-import org.openstack4j.model.dns.v2.Recordset;
-import org.openstack4j.model.dns.v2.Zone;
+import org.openstack4j.model.dns.v2.*;
 import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
 import org.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -46,33 +45,71 @@ public class DNSSample extends AbstractSample {
 	private static final String FLOATING_IP_ID = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
 	private static final String REGION = "eu-de";
 	public static final String PTRDNAME = "www.example.com";
+	public static final String ZONE_ID = "2c9eb155587194ec01587224c9f90149";
+	private static final String ROUTER_ID = "19664294-0bf6-4271-ad3a-94b8c79c6558";
 
 	@Test
 	public void testListZones() {
 		List<? extends Zone> list = osclient.dns().zones().list();
-		logger.info("{}", list);
+		logger.info("All zones: {}", list);
+	}
+
+	@Test
+	public void testListZonesWithParams() {
+		List<? extends Zone> list = osclient.dns().zones().list("public", null, "2");
+		logger.info("Public zones: {}", list);
+
+		list = osclient.dns().zones().list("private", null, "1");
+		logger.info("Private zones: {}", list);
 	}
 
 	@Test
 	public void testCreateZones() {
 		ZoneBuilder builder = Builders.zone();
-		Zone zone = builder.name("").build();
-		osclient.dns().zones().create(zone);
-		logger.info("{}");
+		Zone zone = builder.name("example.com.").description("This is an example zone.").build();
+		Zone zoneResult = osclient.dns().zones().create(zone);
+		logger.info("Create zone: {}", zoneResult);
+	}
+
+	@Test
+	public void testCreatePrivateZones() {
+		DesignateZone.Router router = new DesignateZone.Router("19664294-0bf6-4271-ad3a-94b8c79c6558", REGION, null);
+		ZoneBuilder builder = Builders.zone();
+		Zone sourceZone = builder.name("example.com.").description("This is an example zone.").type(ZoneType.PRIVATE).router(router).build();
+		Zone zoneResult = osclient.dns().zones().create(sourceZone);
+		logger.info("Create zone: {}", zoneResult);
 	}
 
 	@Test
 	public void testGetZone() {
-		Zone zone = osclient.dns().zones().get("123445");
-		logger.info("{}", zone);
+		Zone zone = osclient.dns().zones().get(ZONE_ID);
+		logger.info("Get zone: {}", zone);
 	}
 
 	@Test
 	public void testDeleteZones() {
-		ActionResponse response = osclient.dns().zones().delete("zone-id");
-		if (response.isSuccess()) {
-			//
-		}
+		Zone deletedZone = osclient.dns().zones().delete(ZONE_ID);
+		logger.info("Delete zone: {}", deletedZone);
+	}
+
+	@Test
+	public void testGetNameServers() {
+		List<? extends Nameserver> nameserversList = osclient.dns().zones().listNameservers(ZONE_ID);
+		logger.info("Get name servers: {}", nameserversList);
+	}
+
+	@Test
+	public void testAssociateRouter() {
+		DesignateZone.Router router = new DesignateZone.Router(ROUTER_ID, REGION, null);
+		DesignateZone.Router routerResult = osclient.dns().zones().associateRouter(ZONE_ID, router);
+		logger.info("Associate router: {}", routerResult);
+	}
+
+	@Test
+	public void testDisassociateRouter() {
+		DesignateZone.Router router = new DesignateZone.Router(ROUTER_ID, REGION, null);
+		DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter(ZONE_ID, router);
+		logger.info("Associate router: {}", routerResult);
 	}
 
 	@Test

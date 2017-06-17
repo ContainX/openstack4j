@@ -35,6 +35,7 @@ public class DesignateNameserver implements Nameserver {
 	private static final long serialVersionUID = 1L;
 	private String hostname;
 	private Integer priority;
+	private String address;
 
 	/**
 	 * @return the nameserver builder
@@ -56,6 +57,11 @@ public class DesignateNameserver implements Nameserver {
 	@Override
 	public Integer getPriority() {
 		return priority;
+	}
+
+	@Override
+	public String getAddress() {
+		return address;
 	}
 
 	/**

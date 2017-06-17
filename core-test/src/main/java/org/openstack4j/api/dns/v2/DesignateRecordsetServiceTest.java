@@ -39,9 +39,8 @@ public class DesignateRecordsetServiceTest extends AbstractTest {
     private static final String RECORDSET_NAME = "example.org.";
     private static final String RECORDSET_TYPE = "A";
     private static final ImmutableList<String> RECORDSET_RECORDS = ImmutableList.of("10.1.0.2");
-    private static final Status RECORDSET_STATUS = Status.PENDING;
+    private static final Status RECORDSET_STATUS = Status.PENDING_CREATE;
     private static final Action RECORDSET_ACTION = Action.CREATE;
-    private static final Integer RECORDSET_VERSION = 1;
 
     @Override
     protected Service service() {

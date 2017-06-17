@@ -6,15 +6,13 @@
   "email": "joe@example.org",
   "ttl": 7200,
   "serial": 1404757531,
-  "status": "ACTIVE",
-  "action": "CREATE",
+  "status": "PENDING_CREATE",
   "description": "This is an example zone.",
   "masters": [],
-  "type": "PRIMARY",
-  "transferred_at": null,
-  "version": 1,
+  "zone_type": "public",
   "created_at": "2014-07-07T18:25:31.275934",
-  "updated_at": null,
+  "update_at": null,
+  "record_num": 0,
   "links": {
     "self": "https://127.0.0.1:9001/v2/zones/a86dba58-0043-4cc6-a1bb-69d5e86f3ca3"
   }

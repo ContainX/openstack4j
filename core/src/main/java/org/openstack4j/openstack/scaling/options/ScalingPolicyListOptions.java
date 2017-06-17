@@ -1,11 +1,11 @@
 package org.openstack4j.openstack.scaling.options;
 
+import com.google.common.collect.Maps;
+
 import java.util.Map;
 
-import com.beust.jcommander.internal.Maps;
-
 public class ScalingPolicyListOptions {
-	private Map<String, Object> queryParam = Maps.newHashMap();	
+	private Map<String, Object> queryParam = Maps.newHashMap();
 	
 	private ScalingPolicyListOptions() { }
 	

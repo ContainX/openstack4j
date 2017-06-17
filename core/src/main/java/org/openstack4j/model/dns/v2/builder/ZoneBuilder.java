@@ -1,4 +1,5 @@
 /*******************************************************************************
+ *  Copyright 2017 HuaWei TLD
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -19,10 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.common.Buildable.Builder;
-import org.openstack4j.model.dns.v2.Action;
-import org.openstack4j.model.dns.v2.Status;
-import org.openstack4j.model.dns.v2.Zone;
-import org.openstack4j.model.dns.v2.ZoneType;
+import org.openstack4j.model.dns.v2.*;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 
 /**
  * A Builder which creates a designate v2 Zone
@@ -71,10 +70,6 @@ public interface ZoneBuilder extends Builder<ZoneBuilder, Zone> {
 	 */
 	ZoneBuilder status(Status status);
 
-	/**
-	 * @see Zone#getAction()
-	 */
-	ZoneBuilder action(Action action);
 
 	/**
 	 * @see Zone#getDescription() ()
@@ -92,22 +87,12 @@ public interface ZoneBuilder extends Builder<ZoneBuilder, Zone> {
 	ZoneBuilder type(ZoneType type);
 
 	/**
-	 * @see Zone#getTransferedAt()
-	 */
-	ZoneBuilder transferredAt(String transferredAt);
-
-	/**
-	 * @see Zone#getVersion()
-	 */
-	ZoneBuilder version(Integer version);
-
-	/**
 	 * @see Zone#getCreatedAt()
 	 */
 	ZoneBuilder createdAt(String createdAt);
 
 	/**
-	 * @see Zone#getUpdatedAt()
+	 * @see Zone#getUpdateAt()
 	 */
 	ZoneBuilder updatedAt(String updatedAt);
 
@@ -115,5 +100,10 @@ public interface ZoneBuilder extends Builder<ZoneBuilder, Zone> {
 	 * @see Zone#getLinks()
 	 */
 	ZoneBuilder links(Map<String, String> links);
+
+	/**
+	 * @see DesignateZone#getRouter()
+	 */
+	ZoneBuilder router(DesignateZone.Router router);
 
 }

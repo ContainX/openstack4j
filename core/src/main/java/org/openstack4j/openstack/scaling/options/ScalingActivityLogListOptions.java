@@ -1,8 +1,8 @@
 package org.openstack4j.openstack.scaling.options;
 
-import java.util.Map;
+import com.google.common.collect.Maps;
 
-import com.beust.jcommander.internal.Maps;
+import java.util.Map;
 
 public class ScalingActivityLogListOptions {
 	private Map<String, Object> queryParam = Maps.newHashMap();

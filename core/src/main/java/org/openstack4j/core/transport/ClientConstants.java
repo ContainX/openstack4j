@@ -76,6 +76,8 @@ public final class ClientConstants {
     public static final String PATH_RECORDSETS = "/recordsets";
     public static final String PATH_NAMESERVERS = "/nameservers";
     public static final String PATH_PTR = "/reverse/floatingips";
+    public static final String PATH_ASSOCIATE = "/associaterouter";
+    public static final String PATH_DISASSOCIATE = "/disassociaterouter";
 
     //Magnum APIs
     // list all Magnum Services
