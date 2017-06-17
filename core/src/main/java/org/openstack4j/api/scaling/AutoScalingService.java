@@ -28,4 +28,6 @@ public interface AutoScalingService extends RestService {
 	AutoScalingPolicyService policys();
 	
 	AutoScalingActivityLogService activityLogs();
+	
+	AutoScalingQuotaService quotas();
 }
