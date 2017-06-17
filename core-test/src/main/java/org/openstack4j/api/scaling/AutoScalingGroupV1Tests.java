@@ -58,30 +58,30 @@ public class AutoScalingGroupV1Tests extends AbstractTest {
 				.build();
 
 		ScalingGroupCreate result = osv3().autoScaling().groups().create(group);
-		assertEquals(result.groupId(), "613baa6b-32c5-4052-9cb1-45f9a22b2579");
+		assertEquals(result.getGroupId(), "613baa6b-32c5-4052-9cb1-45f9a22b2579");
 	}
 	
     public void testsListAutoScalingGroups() throws IOException {
 		respondWith(JSON_SCALING_GROUP_LIST);
         List<? extends ScalingGroup> list = osv3().autoScaling().groups().list();
         assertEquals(list.size(), 6);
-        assertEquals(list.get(0).groupName(), "test-4-bill");
+        assertEquals(list.get(0).getGroupName(), "test-4-bill");
     }
     
     public void testGetAutoScalingGroup() throws IOException {
 		respondWith(JSON_SCALING_GROUP);
     	ScalingGroup group = osv3().autoScaling().groups().get("9d841f24-755a-4706-ba1a-11fcd27d5891");
-    	assertEquals(group.groupName(), "as-group-349s");
+    	assertEquals(group.getGroupName(), "as-group-349s");
     }
     
     public void testUpdateAutoScalingGroup() throws IOException {
     	respondWith(JSON_SCALING_GROUP);
     	ScalingGroup group = osv3().autoScaling().groups().get("9d841f24-755a-4706-ba1a-11fcd27d5891");
-    	assertEquals(group.groupName(), "as-group-349s");
+    	assertEquals(group.getGroupName(), "as-group-349s");
     	
     	respondWith(JSON_SCALING_GROUP_UPDATE);
-    	ScalingGroupUpdate result = osv3().autoScaling().groups().update(group.groupId(), ASAutoScalingGroupUpdate.fromScalingGroup(group).toBuilder().groupName("groupNameUpdate").build());
-    	assertEquals(result.groupId(), group.groupId());
+    	ScalingGroupUpdate result = osv3().autoScaling().groups().update(group.getGroupId(), ASAutoScalingGroupUpdate.fromScalingGroup(group).toBuilder().groupName("groupNameUpdate").build());
+    	assertEquals(result.getGroupId(), group.getGroupId());
     }
     
     public void testDeleteAutoScalingGroup() {

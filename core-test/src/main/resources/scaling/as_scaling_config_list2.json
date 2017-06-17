@@ -1,0 +1,211 @@
+{
+    "limit": 20,
+    "total_number": 8,
+    "start_number": 0,
+    "scaling_configurations": [{
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "ad3c541b-d92f-42f2-88a4-368c89e592de",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {
+                "key1": "val1",
+                "key2": "val2"
+            }
+        },
+        "create_time": "2017-06-16T08:21:18Z"
+    }, {
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "a9800cc4-3f59-43b1-8a95-090f967a55c3",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {
+                "key1": "val1",
+                "key2": "val2"
+            }
+        },
+        "create_time": "2017-06-16T08:13:59Z"
+    }, {
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "ef86358b-b501-4efa-899b-1163196d2f1a",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {
+                "key1": "val1",
+                "key2": "val2"
+            }
+        },
+        "create_time": "2017-06-16T08:12:15Z"
+    }, {
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "21114dcf-7d42-4c7b-84b8-35983da4fccb",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {
+                "key1": "val1",
+                "key2": "val2"
+            }
+        },
+        "create_time": "2017-06-16T08:08:40Z"
+    }, {
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "86f4d707-5b6e-49df-8de1-47bb4a4b823c",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {
+                "key1": "val1",
+                "key2": "val2"
+            }
+        },
+        "create_time": "2017-06-16T08:03:57Z"
+    }, {
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "1606fc9e-1d23-46f0-aa3a-640ea14c1dd8",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {
+                "key1": "val1",
+                "key2": "val2"
+            }
+        },
+        "create_time": "2017-06-16T08:01:03Z"
+    }, {
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "b04cefb1-b115-46b7-920a-14d569a87c30",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {
+                "key1": "val1",
+                "key2": "val2"
+            }
+        },
+        "create_time": "2017-06-16T07:50:08Z"
+    }, {
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "9c920f92-6c0c-4c45-9d93-1d61a45e3cee",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {}
+        },
+        "create_time": "2017-06-16T07:44:48Z"
+    }]
+}

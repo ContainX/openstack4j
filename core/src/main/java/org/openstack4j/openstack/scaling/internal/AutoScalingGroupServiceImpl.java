@@ -27,13 +27,13 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 	@Override
 	public ScalingGroupCreate create(ScalingGroupCreate group) {
 		checkNotNull(group, "scaling group");
-		checkNotNull(group.networks(), "networks");
-		checkNotNull(group.securityGroups(), "securityGroups");
-		checkNotNull(group.vpcId(), "vpcId");
-		for (IdResourceEntity network : group.networks()) {
+		checkNotNull(group.getNetworks(), "networks");
+		checkNotNull(group.getSecurityGroups(), "securityGroups");
+		checkNotNull(group.getVpcId(), "vpcId");
+		for (IdResourceEntity network : group.getNetworks()) {
 			checkNotNull(network.getId(), "network id");
 		}
-		for (IdResourceEntity securityGroup : group.securityGroups()) {
+		for (IdResourceEntity securityGroup : group.getSecurityGroups()) {
 			checkNotNull(securityGroup.getId(), "security group id");
 		}
 		return post(ASAutoScalingGroupCreate.class, uri("/scaling_group")).entity(group).execute();
@@ -62,13 +62,13 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 	public ScalingGroupUpdate update(String groupId, ScalingGroupUpdate group) {
 		checkNotNull(group, "scaling group");
 		checkNotNull(groupId, "groupId");
-		if (group.networks() != null) {
-			for (IdResourceEntity network : group.networks()) {
+		if (group.getNetworks() != null) {
+			for (IdResourceEntity network : group.getNetworks()) {
 				checkNotNull(network.getId(), "network id");
 			}
 		}
-		if (group.securityGroups() != null) {
-			for (IdResourceEntity securityGroup : group.securityGroups()) {
+		if (group.getSecurityGroups() != null) {
+			for (IdResourceEntity securityGroup : group.getSecurityGroups()) {
 				checkNotNull(securityGroup.getId(), "security group id");
 			}
 		}

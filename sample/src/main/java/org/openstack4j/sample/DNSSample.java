@@ -141,9 +141,7 @@ public class DNSSample extends AbstractSample {
 
 	@Test
 	public void restorePTR() {
-		DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(null).region(REGION).floatingIpId(FLOATING_IP_ID);
-		DesignatePTR ptrRecord = builder.build();
-		ActionResponse actionResponse = osclient.dns().ptrs().restore(ptrRecord);
+		ActionResponse actionResponse = osclient.dns().ptrs().restore(REGION, FLOATING_IP_ID);
 		logger.info("PTR restore: {}", actionResponse);
 	}
 

@@ -21,7 +21,7 @@ import lombok.ToString;
 public class ASAutoScalingGroupCreate implements ScalingGroupCreate {
 
 	private static final long serialVersionUID = -8059070824334840043L;
-	
+
 	@JsonProperty("scaling_group_id")
 	String groupId;
 
@@ -72,89 +72,4 @@ public class ASAutoScalingGroupCreate implements ScalingGroupCreate {
 
 	@JsonProperty("delete_publicip")
 	Boolean deletePublicip;
-
-	@Override
-	public String groupId() {
-		return groupId;
-	}
-
-	@Override
-	public String groupName() {
-		return groupName;
-	}
-
-	@Override
-	public String configId() {
-		return configId;
-	}
-
-	@Override
-	public Integer desireInstanceNumber() {
-		return desireInstanceNumber;
-	}
-
-	@Override
-	public Integer minInstanceNumber() {
-		return minInstanceNumber;
-	}
-
-	@Override
-	public Integer maxInstanceNumber() {
-		return maxInstanceNumber;
-	}
-
-	@Override
-	public Integer coolDownTime() {
-		return coolDownTime;
-	}
-
-	@Override
-	public String lbListenerId() {
-		return lbListenerId;
-	}
-
-	@Override
-	public List<String> availabilityZones() {
-		return availabilityZones;
-	}
-
-	@Override
-	public List<IdResourceEntity> networks() {
-		return networks;
-	}
-
-	@Override
-	public List<IdResourceEntity> securityGroups() {
-		return securityGroups;
-	}
-
-	@Override
-	public String vpcId() {
-		return vpcId;
-	}
-
-	@Override
-	public String healthPeriodicAuditMethod() {
-		return healthPeriodicAuditMethod;
-	}
-
-	@Override
-	public Integer healthPeriodicAuditTime() {
-		return healthPeriodicAuditTime;
-	}
-
-	@Override
-	public String instanceTerminatePolicy() {
-		return instanceTerminatePolicy;
-	}
-
-	@Override
-	public List<String> notifications() {
-		return notifications;
-	}
-
-	@Override
-	public Boolean deletePublicip() {
-		return deletePublicip;
-	}
 }

@@ -1,0 +1,29 @@
+{
+    "scaling_configuration": {
+        "tenant": "d4f2557d248e4860829f5fef030b209c",
+        "scaling_configuration_id": "a9800cc4-3f59-43b1-8a95-090f967a55c3",
+        "scaling_configuration_name": "test-config-name",
+        "instance_config": {
+            "disk": [{
+                "size": 40,
+                "volume_type": "SATA",
+                "disk_type": "SYS",
+                "metadata": null
+            }],
+            "adminPass": "***",
+            "personality": null,
+            "instance_name": null,
+            "instance_id": null,
+            "flavorRef": "computev1-1",
+            "imageRef": "cb6ad86a-f69e-4a36-b65b-1038b19e15d3",
+            "key_name": "KeyPair-28ice",
+            "public_ip": null,
+            "user_data": null,
+            "metadata": {
+                "key1": "val1",
+                "key2": "val2"
+            }
+        },
+        "create_time": "2017-06-16T08:13:59Z"
+    }
+}

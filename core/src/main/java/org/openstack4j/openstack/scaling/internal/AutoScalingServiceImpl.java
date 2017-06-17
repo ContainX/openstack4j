@@ -1,7 +1,12 @@
 package org.openstack4j.openstack.scaling.internal;
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.api.scaling.AutoScalingActivityLogService;
+import org.openstack4j.api.scaling.AutoScalingConfigService;
+import org.openstack4j.api.scaling.AutoScalingGroupInstanceService;
 import org.openstack4j.api.scaling.AutoScalingGroupService;
+import org.openstack4j.api.scaling.AutoScalingPolicyService;
+import org.openstack4j.api.scaling.AutoScalingQuotaService;
 import org.openstack4j.api.scaling.AutoScalingService;
 
 /**
@@ -19,4 +24,29 @@ public class AutoScalingServiceImpl extends BaseAutoScalingServices implements A
 		return Apis.get(AutoScalingGroupService.class);
 	}
 
+	@Override
+	public AutoScalingConfigService configs() {
+		return Apis.get(AutoScalingConfigService.class);
+	}
+
+	@Override
+	public AutoScalingGroupInstanceService groupInstances() {
+		return Apis.get(AutoScalingGroupInstanceService.class);
+	}
+
+	@Override
+	public AutoScalingPolicyService policys() {
+		return Apis.get(AutoScalingPolicyService.class);
+	}
+
+	@Override
+	public AutoScalingActivityLogService activityLogs() {
+		return Apis.get(AutoScalingActivityLogService.class);
+	}
+
+	@Override
+	public AutoScalingQuotaService quotas() {
+		return Apis.get(AutoScalingQuotaService.class);
+	}
+	
 }

@@ -70,102 +70,22 @@ public class ASAutoScalingGroupUpdate implements ScalingGroupUpdate {
 	@JsonProperty("delete_publicip")
 	Boolean deletePublicip;
 
-	@Override
-	public String groupId() {
-		return groupId;
-	}
-	
-	@Override
-	public String groupName() {
-		return groupName;
-	}
-
-	@Override
-	public String configId() {
-		return configId;
-	}
-
-	@Override
-	public Integer desireInstanceNumber() {
-		return desireInstanceNumber;
-	}
-
-	@Override
-	public Integer minInstanceNumber() {
-		return minInstanceNumber;
-	}
-
-	@Override
-	public Integer maxInstanceNumber() {
-		return maxInstanceNumber;
-	}
-
-	@Override
-	public Integer coolDownTime() {
-		return coolDownTime;
-	}
-
-	@Override
-	public String lbListenerId() {
-		return lbListenerId;
-	}
-
-	@Override
-	public List<String> availabilityZones() {
-		return availabilityZones;
-	}
-
-	@Override
-	public List<IdResourceEntity> networks() {
-		return networks;
-	}
-
-	@Override
-	public List<IdResourceEntity> securityGroups() {
-		return securityGroups;
-	}
-
-	@Override
-	public String healthPeriodicAuditMethod() {
-		return healthPeriodicAuditMethod;
-	}
-
-	@Override
-	public Integer healthPeriodicAuditTime() {
-		return healthPeriodicAuditTime;
-	}
-
-	@Override
-	public String instanceTerminatePolicy() {
-		return instanceTerminatePolicy;
-	}
-
-	@Override
-	public List<String> notifications() {
-		return notifications;
-	}
-
-	@Override
-	public Boolean deletePublicip() {
-		return deletePublicip;
-	}
-	
 	public static ASAutoScalingGroupUpdate fromScalingGroup(ScalingGroup group) {
 		return ASAutoScalingGroupUpdate.builder()
-			.groupName(group.groupName())
-			.desireInstanceNumber(group.desireInstanceNumber())
-			.minInstanceNumber(group.minInstanceNumber())
-			.maxInstanceNumber(group.maxInstanceNumber())
-			.coolDownTime(group.coolDownTime())
-			.availabilityZones(group.availabilityZones())
-			.networks(group.networks())
-			.securityGroups(group.securityGroups())
-			.lbListenerId(group.lbListenerId())
-			.healthPeriodicAuditMethod(group.healthPeriodicAuditMethod())
-			.healthPeriodicAuditTime(group.healthPeriodicAuditTime())
-			.instanceTerminatePolicy(group.instanceTerminatePolicy())
-			.configId(group.configId())
-			.notifications(group.notifications())
-			.deletePublicip(group.deletePublicip()).build();
+			.groupName(group.getGroupName())
+			.desireInstanceNumber(group.getDesireInstanceNumber())
+			.minInstanceNumber(group.getMinInstanceNumber())
+			.maxInstanceNumber(group.getMaxInstanceNumber())
+			.coolDownTime(group.getCoolDownTime())
+			.availabilityZones(group.getAvailabilityZones())
+			.networks(group.getNetworks())
+			.securityGroups(group.getSecurityGroups())
+			.lbListenerId(group.getLbListenerId())
+			.healthPeriodicAuditMethod(group.getHealthPeriodicAuditMethod())
+			.healthPeriodicAuditTime(group.getHealthPeriodicAuditTime())
+			.instanceTerminatePolicy(group.getInstanceTerminatePolicy())
+			.configId(group.getConfigId())
+			.notifications(group.getNotifications())
+			.deletePublicip(group.getDeletePublicip()).build();
 	}
 }

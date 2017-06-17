@@ -25,102 +25,102 @@ public interface ScalingGroupCreate extends ModelEntity {
 	/**
 	 * @return scaling group id
 	 */
-	String groupId();
+	String getGroupId();
 	
 	/**
 	 * @return the name for the scaling group
 	 */
-	String groupName();
+	String getGroupName();
 	
 	/**
 	 * 
 	 * @return scaling configuration id
 	 */
-	String configId();
+	String getConfigId();
 	
 	/**
 	 * 
 	 * @return desire instance number
 	 */
-	Integer desireInstanceNumber();
+	Integer getDesireInstanceNumber();
 	
 	/**
 	 * 
 	 * @return minimal instance number
 	 */
-	Integer minInstanceNumber();
+	Integer getMinInstanceNumber();
 	
 	/**
 	 * 
 	 * @return maximal instance number
 	 */
-	Integer maxInstanceNumber();
+	Integer getMaxInstanceNumber();
 	
 	/**
 	 * 
 	 * @return cool down time
 	 */
-	Integer coolDownTime();
+	Integer getCoolDownTime();
 	
 	/**
 	 * 
 	 * @return load balance listener id
 	 */
-	String lbListenerId();
+	String getLbListenerId();
 	
 	/**
 	 * 
 	 * @return availability zones
 	 */
-	List<String> availabilityZones();
+	List<String> getAvailabilityZones();
 	
 	/**
 	 * 
 	 * @return networks information
 	 */
 	//TODO check
-	List<IdResourceEntity> networks();
+	List<IdResourceEntity> getNetworks();
 	
 	/**
 	 * 
 	 * @return security groups information
 	 */
 	//TODO check
-	List<IdResourceEntity> securityGroups();
+	List<IdResourceEntity> getSecurityGroups();
 	
 	/**
 	 * 
 	 * @return vpc id
 	 */
-	String vpcId();
+	String getVpcId();
 	
 	/**
 	 * 
 	 * @return health periodic audit method
 	 */
-	String healthPeriodicAuditMethod();
+	String getHealthPeriodicAuditMethod();
 	
 	/**
 	 * 
 	 * @return health periodic audit time
 	 */
-	Integer healthPeriodicAuditTime();
+	Integer getHealthPeriodicAuditTime();
 	
 	/**
 	 * 
 	 * @return instance terminate policy
 	 */
-	String instanceTerminatePolicy();
+	String getInstanceTerminatePolicy();
 	
 	/**
 	 * 
 	 * @return notification method
 	 */
-	List<String> notifications();
+	List<String> getNotifications();
 	
 	/**
 	 * 
 	 * @return whether delete server's ip
 	 */
-	Boolean deletePublicip();
+	Boolean getDeletePublicip();
 }
