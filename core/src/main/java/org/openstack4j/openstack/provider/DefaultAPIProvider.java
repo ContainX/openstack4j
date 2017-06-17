@@ -136,6 +136,7 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.scaling.AutoScalingConfigService;
 import org.openstack4j.api.scaling.AutoScalingGroupInstanceService;
 import org.openstack4j.api.scaling.AutoScalingGroupService;
+import org.openstack4j.api.scaling.AutoScalingPolicyService;
 import org.openstack4j.api.scaling.AutoScalingService;
 import org.openstack4j.api.senlin.SenlinActionService;
 import org.openstack4j.api.senlin.SenlinBuildInfoService;
@@ -304,6 +305,7 @@ import org.openstack4j.openstack.sahara.internal.SaharaServiceImpl;
 import org.openstack4j.openstack.scaling.internal.AutoScalingConfigServiceImpl;
 import org.openstack4j.openstack.scaling.internal.AutoScalingGroupInstanceServiceImpl;
 import org.openstack4j.openstack.scaling.internal.AutoScalingGroupServiceImpl;
+import org.openstack4j.openstack.scaling.internal.AutoScalingPolicyServiceImpl;
 import org.openstack4j.openstack.scaling.internal.AutoScalingServiceImpl;
 import org.openstack4j.openstack.senlin.internal.SenlinActionServiceImpl;
 import org.openstack4j.openstack.senlin.internal.SenlinBuildInfoServiceImpl;
@@ -562,6 +564,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(AutoScalingGroupService.class, AutoScalingGroupServiceImpl.class);
 		bind(AutoScalingConfigService.class, AutoScalingConfigServiceImpl.class);
 		bind(AutoScalingGroupInstanceService.class, AutoScalingGroupInstanceServiceImpl.class);
+		bind(AutoScalingPolicyService.class, AutoScalingPolicyServiceImpl.class);
     }
 
     /**
