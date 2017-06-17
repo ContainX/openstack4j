@@ -15,8 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.internal;
 
-import static org.openstack4j.core.transport.ClientConstants.HEADER_USER_AGENT;
-import static org.openstack4j.core.transport.ClientConstants.USER_AGENT;
+import static org.openstack4j.core.transport.ClientConstants.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,7 +33,6 @@ import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpRequest.RequestBuilder;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.internal.HttpExecutor;
-import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.identity.AuthVersion;
@@ -186,7 +184,7 @@ public class BaseOpenStackService {
             return this;
         }
 
-        public Invocation<R> entity(ModelEntity entity) {
+        public Invocation<R> entity(Object entity) {
             req.entity(entity);
             return this;
         }
