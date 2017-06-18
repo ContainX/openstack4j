@@ -13,7 +13,7 @@ public interface AutoScalingGroupInstanceService extends RestService {
 	
 	public List<? extends ScalingGroupInstance> list(String groupId, ScalingGroupInstanceListOptions options);
 	
-	public ActionResponse delete(String instanceId, String delete);
+	public ActionResponse delete(String instanceId, boolean deleteInstance);
 	
-	public ActionResponse batchOperate(String groupId, List<String> instanceIds, String delete, String action);
+	public ActionResponse batchOperate(String groupId, List<String> instanceIds, boolean deleteInstance, String action);
 }

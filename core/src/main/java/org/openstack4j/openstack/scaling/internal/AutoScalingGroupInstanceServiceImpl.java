@@ -10,7 +10,6 @@ import org.openstack4j.model.scaling.ScalingGroupInstance;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstance.ASAutoScalingGroupInstances;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
-import org.testng.util.Strings;
 
 public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 		implements AutoScalingGroupInstanceService {
@@ -18,32 +17,31 @@ public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 	@Override
 	public List<? extends ScalingGroupInstance> list(String groupId) {
 		checkNotNull(groupId, "groupId");
-		return get(ASAutoScalingGroupInstances.class, uri("/scaling_group_instance/%s/list")).execute().getList();
+		return get(ASAutoScalingGroupInstances.class, uri("/scaling_group_instance/%s/list", groupId)).execute()
+				.getList();
 	}
 
 	@Override
 	public List<? extends ScalingGroupInstance> list(String groupId, ScalingGroupInstanceListOptions options) {
 		checkNotNull(groupId, "groupId");
-		return get(ASAutoScalingGroupInstances.class, uri("/scaling_group_instance/%s/list"))
+		return get(ASAutoScalingGroupInstances.class, uri("/scaling_group_instance/%s/list", groupId))
 				.params(options.getOptions()).execute().getList();
 	}
 
 	@Override
-	public ActionResponse delete(String instanceId, String delete) {
+	public ActionResponse delete(String instanceId, boolean deleteInstance) {
 		checkNotNull(instanceId, "instanceId");
-		delete = Strings.isNullOrEmpty(delete) ? "no" : delete;
-		return deleteWithResponse(uri("/scaling_group_instance/%s?instance_delete=%s", instanceId, delete)).execute();
+		String yesOrNo = deleteInstance ? "yes" : "no";
+		return deleteWithResponse(uri("/scaling_group_instance/%s?instance_delete=%s", instanceId, yesOrNo)).execute();
 	}
 
 	@Override
-	public ActionResponse batchOperate(String groupId, List<String> instanceIds, String delete, String action) {
+	public ActionResponse batchOperate(String groupId, List<String> instanceIds, boolean deleteInstance,
+			String action) {
 		checkNotNull(groupId, "groupId");
-		delete = Strings.isNullOrEmpty(delete) ? "no" : delete;
-		ASAutoScalingGroupInstanceBatch entity = ASAutoScalingGroupInstanceBatch.builder()
-			.instanceIds(instanceIds)
-			.delete(delete)
-			.action(action)
-			.build();
+		String yesOrNo = deleteInstance ? "yes" : "no";
+		ASAutoScalingGroupInstanceBatch entity = ASAutoScalingGroupInstanceBatch.builder().instanceIds(instanceIds)
+				.delete(yesOrNo).action(action).build();
 		return post(ActionResponse.class, uri("/scaling_group_instance/%s/action", groupId)).entity(entity).execute();
 	}
 }
