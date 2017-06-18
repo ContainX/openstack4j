@@ -1,5 +1,6 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei TLD
+ * 	Copyright 2016 ContainX and OpenStack4j
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -20,9 +21,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
-import org.openstack4j.model.dns.v2.Recordset;
-import org.openstack4j.model.dns.v2.Action;
-import org.openstack4j.model.dns.v2.Status;
+import lombok.ToString;
+import org.openstack4j.model.dns.v2.*;
 import org.openstack4j.model.dns.v2.builder.RecordsetBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -32,30 +32,33 @@ import java.util.Map;
 /**
  * zone model class for designate/v2 zone
  */
+@ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DesignateRecordset implements Recordset {
 
     private static final long serialVersionUID = 1L;
     private String id;
-    @JsonProperty("project_id")
-    private String projectId;
     private String name;
-    private String ttl;
-    private Status status;
-    private Action action;
+    private String description;
     @JsonProperty("zone_id")
     private String zoneId;
     @JsonProperty("zone_name")
     private String zoneName;
-    private String description;
-    private String type;
-    private Integer version;
+    private RecordSetType type;
+    private Integer ttl;
+    private List<String> records;
     @JsonProperty("created_at")
     private String createdAt;
-    @JsonProperty("updated_at")
-    private String updatedAt;
+    @JsonProperty("update_at")
+    private String updateAt;
+    private Status status;
+    @JsonProperty("health_check_id")
+    private String healthCheckId;
+    @JsonProperty("default")
+    private String defaultValue;
+    @JsonProperty("project_id")
+    private String projectId;
     private Map<String,String> links;
-    private List<String> records;
 
     /**
      * @return the zone builder
@@ -85,18 +88,8 @@ public class DesignateRecordset implements Recordset {
     }
 
     @Override
-    public String getTTL() {
-        return ttl;
-    }
-
-    @Override
     public Status getStatus() {
         return status;
-    }
-
-    @Override
-    public Action getAction() {
-        return action;
     }
 
     @Override
@@ -115,23 +108,13 @@ public class DesignateRecordset implements Recordset {
     }
 
     @Override
-    public String getType() {
+    public RecordSetType getType() {
         return type;
-    }
-
-    @Override
-    public Integer getVersion() {
-        return version;
     }
 
     @Override
     public String getCreatedAt() {
         return createdAt;
-    }
-
-    @Override
-    public String getUpdatedAt() {
-        return updatedAt;
     }
 
     @Override
@@ -144,27 +127,23 @@ public class DesignateRecordset implements Recordset {
         return records;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    public Integer getTtl() {
+        return ttl;
+    }
+
     @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this).omitNullValues()
-                .add("id", id)
-                .add("projectId", projectId)
-                .add("name", name)
-                .add("ttl", ttl)
-                .add("status", status)
-                .add("action", action)
-                .add("zoneId", zoneId)
-                .add("zoneName", zoneName)
-                .add("description",description)
-                .add("type", type)
-                .add("version", version)
-                .add("createdAt", createdAt)
-                .add("updatedAt", updatedAt)
-                .add("links", links)
-                .toString();
+    public String getUpdateAt() {
+        return updateAt;
+    }
+
+    @Override
+    public String getHealthCheckId() {
+        return healthCheckId;
+    }
+
+    @Override
+    public String getDefaultValue() {
+        return defaultValue;
     }
 
     /**
@@ -172,7 +151,7 @@ public class DesignateRecordset implements Recordset {
      */
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, projectId, name, ttl, status, action, zoneId, zoneName, description, type, version, createdAt, updatedAt, links);
+        return Objects.hashCode(id, projectId, name, ttl, status, zoneId, zoneName, description, type, createdAt, updateAt, links, healthCheckId, defaultValue);
     }
 
     /**
@@ -190,15 +169,14 @@ public class DesignateRecordset implements Recordset {
                 && Objects.equal(this.name, that.name)
                 && Objects.equal(this.ttl, that.ttl)
                 && Objects.equal(this.status, that.status)
-                && Objects.equal(this.action, that.action)
                 && Objects.equal(this.zoneId, that.zoneId)
                 && Objects.equal(this.zoneName, that.zoneName)
                 && Objects.equal(this.description, that.description)
                 && Objects.equal(this.type, that.type)
-                && Objects.equal(this.version, that.version)
                 && Objects.equal(this.createdAt, that.createdAt)
-                && Objects.equal(this.updatedAt, that.updatedAt)
-                && Objects.equal(this.links, that.links);
+                && Objects.equal(this.links, that.links)
+                && Objects.equal(this.healthCheckId, that.healthCheckId)
+                && Objects.equal(this.defaultValue, that.defaultValue);
     }
 
     public static class RecordsetConcreteBuilder implements RecordsetBuilder {
@@ -247,7 +225,7 @@ public class DesignateRecordset implements Recordset {
         }
 
         @Override
-        public RecordsetBuilder ttl(String ttl) {
+        public RecordsetBuilder ttl(int ttl) {
             model.ttl = ttl;
             return this;
         }
@@ -255,12 +233,6 @@ public class DesignateRecordset implements Recordset {
         @Override
         public RecordsetBuilder status(Status status) {
             model.status = status;
-            return this;
-        }
-
-        @Override
-        public RecordsetBuilder action(Action action) {
-            model.action = action;
             return this;
         }
 
@@ -283,14 +255,8 @@ public class DesignateRecordset implements Recordset {
         }
 
         @Override
-        public RecordsetBuilder type(String type) {
+        public RecordsetBuilder type(RecordSetType type) {
             model.type = type;
-            return this;
-        }
-
-        @Override
-        public RecordsetBuilder version(Integer version) {
-            model.version = version;
             return this;
         }
 
@@ -301,8 +267,8 @@ public class DesignateRecordset implements Recordset {
         }
 
         @Override
-        public RecordsetBuilder updatedAt(String updatedAt) {
-            model.updatedAt = updatedAt;
+        public RecordsetBuilder updateAt(String updatedAt) {
+            model.updateAt = updatedAt;
             return this;
         }
 
@@ -321,6 +287,18 @@ public class DesignateRecordset implements Recordset {
         @Override
         public RecordsetBuilder records(List<String> records) {
             model.records = records;
+            return this;
+        }
+
+        @Override
+        public RecordsetBuilder defaultValue(String defaultValue) {
+            model.defaultValue = defaultValue;
+            return this;
+        }
+
+        @Override
+        public RecordsetBuilder healthCheckId(String healthCheckId) {
+            model.healthCheckId = healthCheckId;
             return this;
         }
 

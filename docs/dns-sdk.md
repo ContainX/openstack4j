@@ -81,42 +81,80 @@ DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter(zo
 ```
 
 
-### 
 ## Recordset
 ### List Recordsets
 ```java
-List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list("zone-id");
+String zone_id = "2c9eb155587194ec01587224c9f90149";
+String limit = "2";
+String marker = null;
+
+List<? extends Recordset> allRecordsetsOfZone = osclient.dns().recordsets().list(zone_id);
+logger.info("all recordsets of zone: {}", allRecordsetsOfZone);
+
+List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list(zone_id, limit, marker);
 logger.info("recordsets of zone: {}", recordsetsOfZone);
 
 List<? extends Recordset> allRecordsets = osclient.dns().recordsets().list();
-logger.info("all recordsets", allRecordsets);
+logger.info("all recordsets for project: {}", allRecordsets);
+
+List<? extends Recordset> recordsetsOfProject = osclient.dns().recordsets().list(limit, marker);
+logger.info("recordsets for project: {}", recordsetsOfProject);
 ```
 
 ### Create Recordset
 ```java
 // create with recordset model
-Recordset recordset = Builders.recordset().name("").type("A").build();
-Recordset created = osclient.dns().recordsets().create("zone-id", recordset);
-logger.info("{}", created);
+Recordset recordset = Builders.recordset().name("name").type(RecordSetType.A).ttl(300).records(Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3")).build();
+Recordset created = osclient.dns().recordsets().create(ZONE_ID, recordset);
+logger.info("Create record set with recordset model: {}", created);
 
-// create directly
-Recordset created2 = osclient.dns().recordsets().create("zone-id", "name", "dns-type",
-		Lists.newArrayList("record1", "records2", "..."));
-logger.info("{}", created2);
+// create Type A directly
+Recordset created2 = osclient.dns().recordsets().create(ZONE_ID, "name", "description", "A", ttl,
+    Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3"));
+logger.info("Create type A record set directly: {}", created2);
+
+// create Type AAAA directly
+Recordset created3 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type AAAA example record set.", "AAAA", 7200,
+    Lists.newArrayList("fe80:0:0:0:202:b3ff:fe1e:8329", "ff03:0db8:85a3:0:0:8a2e:0370:7334"));
+logger.info("Create type AAAA record set directly: {}", created3);
+
+// create Type MX directly
+Recordset created4 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type MX example record set.", "MX", 7200,
+    Lists.newArrayList("1 mail.example.com"));
+logger.info("Create type MX record set directly: {}", created4);
+
+// create Type CNAME directly
+Recordset created5 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type CNAME example record set.", "CNAME", 7200,
+    Lists.newArrayList("server1.example.com"));
+logger.info("Create type CNAME record set directly: {}", created5);
+
+// create Type TXT directly
+Recordset created6 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type TXT record set.", "TXT", 7200,
+    Lists.newArrayList("This host is used for sale."));
+logger.info("Create type TXT record set directly: {}", created6);
+
+// create Type NS directly
+Recordset created7 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type NS record set.", "NS", 7200,
+    Lists.newArrayList("node1.example.com.", "node2.example.com."));
+logger.info("Create type NS record set directly: {}", created7);
 ```
 
 ### Get Recordset
 ```java
-Recordset recordset = osclient.dns().recordsets().get("zone-id", "recordset-id");
-logger.info("recordset", recordset);
+String zone_id = "2c9eb155587194ec01587224c9f90149";
+String recordset_id = "2c9eb155587228570158722b6ac30007";
+
+Recordset recordset = osclient.dns().recordsets().get(zone_id, recordset_id);
+logger.info("Get recordset: {}", recordset);
 ```
 
 ### Delete Recordset
 ```java
-ActionResponse response = osclient.dns().recordsets().delete("zone-id", "recordset-id");
-if (response.isSuccess()) {
-	// 
-}
+String zone_id = "2c9eb155587194ec01587224c9f90149";
+String recordset_id = "2c9eb155587228570158722b6ac30007";
+
+Recordset recordset = osclient.dns().recordsets().delete(zone_id, recordset_id);
+logger.info("Delete recordset: {}", recordset);
 ```
 
 ## PTR
