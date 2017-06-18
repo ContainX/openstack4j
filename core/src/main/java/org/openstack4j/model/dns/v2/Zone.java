@@ -70,11 +70,6 @@ public interface Zone extends ModelEntity, Buildable<ZoneBuilder> {
     Status getStatus();
 
     /**
-     * @return current action in progress on the resource
-     */
-    Action getAction();
-
-    /**
      * @return description for this zone
      */
     String getDescription();
@@ -90,16 +85,6 @@ public interface Zone extends ModelEntity, Buildable<ZoneBuilder> {
     ZoneType getType();
 
     /**
-     * @return for secondary zones. The last time an update was retrieved from the master servers.
-     */
-    String getTransferedAt();
-
-    /**
-     * @return version of the resource
-     */
-    Integer getVersion();
-
-    /**
      * @return date / time when resource was created
      */
     String getCreatedAt();
@@ -107,11 +92,16 @@ public interface Zone extends ModelEntity, Buildable<ZoneBuilder> {
     /**
      * @return date / time when resource last updated
      */
-    String getUpdatedAt();
+    String getUpdateAt();
 
     /**
      * @return links to the resource, and other related resources
      */
     Map<String, String> getLinks();
+
+    /**
+     * @return the recordset amount belongs to the zone
+     */
+    Integer getRecordsAmount();
 
 }

@@ -1,0 +1,30 @@
+{
+  "id": "ff8080825b8fc86c015b94bc6f8712c3",
+  "name": "example.com.",
+  "description": "This is an example zone.",
+  "email": "xx@example.com",
+  "ttl": 300,
+  "serial": 0,
+  "masters": [],
+  "status": "ACTIVE",
+  "links": {
+    "self": "https://Endpoint/v2/zones/ff8080825b8fc86c015b94bc6f8712c3"
+  },
+  "pool_id": "ff8080825ab738f4015ab7513298010e",
+  "project_id": "e55c6f3dc4e34c9f86353b664ae0e70c",
+  "zone_type": "private",
+  "created_at": "2017-04-22T08:17:08.997",
+  "record_num": 2,
+  "routers": [
+    {
+      "status": "ACTIVE",
+      "router_id": "19664294-0bf6-4271-ad3a-94b8c79c6558",
+      "router_region": "eu-de"
+    },
+    {
+      "status": "ACTIVE",
+      "router_id": "f0791650-db8c-4a20-8a44-a06c6e24b15b",
+      "router_region": "eu-de"
+    }
+  ]
+}

@@ -48,7 +48,7 @@ public class DesignatePtrServiceTest extends AbstractTest {
 		return Service.DNS;
 	}
 
-	public void ptrCreateTest() throws Exception {
+	public void ptrListWithoutFilterTest() throws Exception {
 		respondWith(JSON_PTR_LIST);
 		List<? extends PTR> list = osv3().dns().ptrs().list();
 		assertNotNull(list);

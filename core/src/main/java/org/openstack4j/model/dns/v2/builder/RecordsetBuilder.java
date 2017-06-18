@@ -1,6 +1,7 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
+ * 	Copyright 2017 HuaWei TLD
+ * 	Copyright 2016 ContainX and OpenStack4j
+ *
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -16,9 +17,7 @@
 package org.openstack4j.model.dns.v2.builder;
 
 import org.openstack4j.common.Buildable.Builder;
-import org.openstack4j.model.dns.v2.Recordset;
-import org.openstack4j.model.dns.v2.Action;
-import org.openstack4j.model.dns.v2.Status;
+import org.openstack4j.model.dns.v2.*;
 
 import java.util.List;
 import java.util.Map;
@@ -46,19 +45,14 @@ public interface RecordsetBuilder extends Builder<RecordsetBuilder, Recordset> {
 	RecordsetBuilder name(String name);
 
 	/**
-	 * @see Recordset#getTTL() ()
+	 * @see Recordset#getTtl() ()
 	 */
-	RecordsetBuilder ttl(String ttl);
+	RecordsetBuilder ttl(int ttl);
 
 	/**
 	 * @see Recordset#getStatus()
 	 */
 	RecordsetBuilder status(Status status);
-
-	/**
-	 * @see Recordset#getAction()
-	 */
-	RecordsetBuilder action(Action action);
 
 	/**
 	 * @see Recordset#getZoneId()
@@ -78,12 +72,7 @@ public interface RecordsetBuilder extends Builder<RecordsetBuilder, Recordset> {
 	/**
 	 * @see Recordset#getType()
 	 */
-	RecordsetBuilder type(String type);
-
-	/**
-	 * @see Recordset#getVersion()
-	 */
-	RecordsetBuilder version(Integer version);
+	RecordsetBuilder type(RecordSetType type);
 
 	/**
 	 * @see Recordset#getCreatedAt()
@@ -91,9 +80,9 @@ public interface RecordsetBuilder extends Builder<RecordsetBuilder, Recordset> {
 	RecordsetBuilder createdAt(String createdAt);
 
 	/**
-	 * @see Recordset#getUpdatedAt()
+	 * @see Recordset#getUpdateAt()
 	 */
-	RecordsetBuilder updatedAt(String updatedAt);
+	RecordsetBuilder updateAt(String updateAt);
 
 	/**
 	 * @see Recordset#getLinks()
@@ -104,5 +93,15 @@ public interface RecordsetBuilder extends Builder<RecordsetBuilder, Recordset> {
 	 * @see Recordset#getRecords()
 	 */
 	RecordsetBuilder records(List<String> records);
+
+	/**
+	 * @see Recordset#getDefaultValue()
+	 */
+	RecordsetBuilder defaultValue(String defaultValue);
+
+	/**
+	 * @see Recordset#getHealthCheckId() ()
+	 */
+	RecordsetBuilder healthCheckId(String healthCheckId);
 
 }

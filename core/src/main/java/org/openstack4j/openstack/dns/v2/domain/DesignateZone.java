@@ -1,4 +1,5 @@
 /*******************************************************************************
+ *  Copyright 2017 HuaWei TLD
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -17,10 +18,11 @@ package org.openstack4j.openstack.dns.v2.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.Objects;
 
-import org.openstack4j.model.dns.v2.Action;
+import lombok.*;
+import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.dns.v2.Status;
 import org.openstack4j.model.dns.v2.Zone;
 import org.openstack4j.model.dns.v2.ZoneType;
@@ -33,32 +35,34 @@ import java.util.Map;
 /**
  * zone model class for designate/v2 zone
  */
+@ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DesignateZone implements Zone {
 
     private static final long serialVersionUID = 1L;
     private String id;
+    private String name;
+    private String description;
+    private String email;
+    @JsonProperty("zone_type")
+    private ZoneType type;
+    private Integer ttl;
+    private String serial;
+    private Status status;
+    @JsonProperty("record_num")
+    private Integer recordsAmount;
     @JsonProperty("pool_id")
     private String poolId;
     @JsonProperty("project_id")
     private String projectId;
-    private String name;
-    private String email;
-    private Integer ttl;
-    private String serial;
-    private Status status;
-    private Action action;
-    private String description;
-    private List<String> masters;
-    private ZoneType type;
-    @JsonProperty("tranferred_at")
-    private String transferredAt;
-    private Integer version;
     @JsonProperty("created_at")
     private String createdAt;
-    @JsonProperty("updated_at")
-    private String updatedAt;
+    @JsonProperty("update_at")
+    private String updateAt;
     private Map<String, String> links;
+    private List<String> masters;
+    private Router router;
+    private List<Router> routers;
 
     /**
      * @return the zone builder
@@ -113,11 +117,6 @@ public class DesignateZone implements Zone {
     }
 
     @Override
-    public Action getAction() {
-        return action;
-    }
-
-    @Override
     public String getDescription() {
         return description;
     }
@@ -133,23 +132,13 @@ public class DesignateZone implements Zone {
     }
 
     @Override
-    public String getTransferedAt() {
-        return transferredAt;
-    }
-
-    @Override
-    public Integer getVersion() {
-        return version;
-    }
-
-    @Override
     public String getCreatedAt() {
         return createdAt;
     }
 
     @Override
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getUpdateAt() {
+        return updateAt;
     }
 
     @Override
@@ -157,30 +146,17 @@ public class DesignateZone implements Zone {
         return links;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this).omitNullValues()
-                .add("id", id)
-                .add("poolId", poolId)
-                .add("projectId", projectId)
-                .add("name", name)
-                .add("email", email)
-                .add("ttl", ttl)
-                .add("serial", serial)
-                .add("status", status)
-                .add("action", action)
-                .add("description",description)
-                .add("masters", masters)
-                .add("type", type)
-                .add("transferredAt", transferredAt)
-                .add("version", version)
-                .add("createdAt", createdAt)
-                .add("updatedAt", updatedAt)
-                .add("links", links)
-                .toString();
+    public Integer getRecordsAmount() {
+        return recordsAmount;
+    }
+
+    public Router getRouter() {
+        return router;
+    }
+
+    public List<Router> getRouters() {
+        return routers;
     }
 
     /**
@@ -188,7 +164,7 @@ public class DesignateZone implements Zone {
      */
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, poolId, projectId, name, email, ttl, serial, status, action, description, masters, type, transferredAt, version, createdAt, updatedAt);
+        return Objects.hashCode(id, poolId, projectId, name, email, ttl, serial, status, description, masters, type, createdAt, updateAt);
     }
 
     /**
@@ -209,14 +185,12 @@ public class DesignateZone implements Zone {
                 && Objects.equal(this.ttl, that.ttl)
                 && Objects.equal(this.serial, that.serial)
                 && Objects.equal(this.status, that.status)
-                && Objects.equal(this.action, that.action)
                 && Objects.equal(this.description, that.description)
                 && Objects.equal(this.masters, that.masters)
                 && Objects.equal(this.type, that.type)
-                && Objects.equal(this.transferredAt, that.transferredAt)
-                && Objects.equal(this.version, that.version)
                 && Objects.equal(this.createdAt, that.createdAt)
-                && Objects.equal(this.updatedAt, that.updatedAt)
+                && Objects.equal(this.updateAt, that.updateAt)
+                && Objects.equal(this.recordsAmount, that.recordsAmount)
                 && Objects.equal(this.links, that.links);
     }
 
@@ -320,15 +294,6 @@ public class DesignateZone implements Zone {
         }
 
         /**
-         * @see DesignateZone#getAction()
-         */
-        @Override
-        public ZoneBuilder action(Action action) {
-            model.action = action;
-            return this;
-        }
-
-        /**
          * @see DesignateZone#getDescription()()
          */
         @Override
@@ -356,24 +321,6 @@ public class DesignateZone implements Zone {
         }
 
         /**
-         * @see DesignateZone#getTransferedAt()
-         */
-        @Override
-        public ZoneBuilder transferredAt(String transferredAt) {
-            model.transferredAt = transferredAt;
-            return this;
-        }
-
-        /**
-         * @see DesignateZone#getVersion()
-         */
-        @Override
-        public ZoneBuilder version(Integer version) {
-            model.version = version;
-            return this;
-        }
-
-        /**
          * @see DesignateZone#getCreatedAt()
          */
         @Override
@@ -383,11 +330,11 @@ public class DesignateZone implements Zone {
         }
 
         /**
-         * @see DesignateZone#getUpdatedAt()
+         * @see DesignateZone#getUpdateAt()
          */
         @Override
         public ZoneBuilder updatedAt(String updatedAt) {
-            model.updatedAt = updatedAt;
+            model.updateAt = updatedAt;
             return this;
         }
 
@@ -397,6 +344,11 @@ public class DesignateZone implements Zone {
         @Override
         public ZoneBuilder links(Map<String, String> links) {
             model.links = links;
+            return this;
+        }
+
+        public ZoneBuilder router(Router router) {
+            model.router = router;
             return this;
         }
     }
@@ -410,6 +362,36 @@ public class DesignateZone implements Zone {
         @Override
         public List<DesignateZone> value() {
             return list;
+        }
+    }
+
+
+    public static class Router implements ModelEntity {
+        @JsonProperty("router_id")
+        protected String id;
+        @JsonProperty("router_region")
+        protected String region;
+        protected Status status;
+
+        public Router(String id, String region, Status status) {
+            this.id = id;
+            this.region = region;
+            this.status = status;
+        }
+
+        public Router() {
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public Status getStatus() {
+            return status;
         }
     }
 

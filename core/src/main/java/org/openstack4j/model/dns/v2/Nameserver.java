@@ -36,4 +36,9 @@ public interface Nameserver extends ModelEntity, Buildable<NameserverBuilder> {
      */
     Integer getPriority();
 
+    /**
+     * @return the ip address of the nameserver that the zone should be delegated to
+     */
+    String getAddress();
+
 }

@@ -24,6 +24,7 @@ public class PTRServiceImpl extends BaseDNSServices implements PTRService {
 	@Override
 	public DesignatePTR setup(DesignatePTR record) {
 		checkNotNull(record, "The PTR record is Null.");
+		checkNotNull(record.getPtrdname());
 		checkArgument(record.getTtl() >= 300 && record.getTtl() <= 2147483647, "TTL value shold equal or bigger than 300, and equal or less than 2147483647");
 		return patch(DesignatePTR.class, PATH_PTR, "/", record.getRegion(), ":", record.getFloatingIpId()).entity(record).execute();
 	}
@@ -69,3 +70,4 @@ public class PTRServiceImpl extends BaseDNSServices implements PTRService {
 	}
 
 }
+

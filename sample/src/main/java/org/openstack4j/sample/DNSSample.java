@@ -23,12 +23,11 @@ import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.dns.v2.PTR;
-import org.openstack4j.model.dns.v2.Recordset;
-import org.openstack4j.model.dns.v2.Zone;
+import org.openstack4j.model.dns.v2.*;
 import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
 import org.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -45,70 +44,138 @@ public class DNSSample extends AbstractSample {
 	private static final Logger logger = LoggerFactory.getLogger(DNSSample.class);
 	private static final String FLOATING_IP_ID = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
 	private static final String REGION = "eu-de";
-	public static final String PTRDNAME = "www.example.com";
+	private static final String PTRDNAME = "www.example.com";
+	private static final String ZONE_ID = "2c9eb155587194ec01587224c9f90149";
+	private static final String ROUTER_ID = "19664294-0bf6-4271-ad3a-94b8c79c6558";
+	private static final String RECORDSET_ID = "2c9eb155587228570158722b6ac30007";
 
 	@Test
 	public void testListZones() {
 		List<? extends Zone> list = osclient.dns().zones().list();
-		logger.info("{}", list);
+		logger.info("All zones: {}", list);
+	}
+
+	@Test
+	public void testListZonesWithParams() {
+		List<? extends Zone> list = osclient.dns().zones().list("public", null, "2");
+		logger.info("Public zones: {}", list);
+
+		list = osclient.dns().zones().list("private", null, "1");
+		logger.info("Private zones: {}", list);
 	}
 
 	@Test
 	public void testCreateZones() {
 		ZoneBuilder builder = Builders.zone();
-		Zone zone = builder.name("").build();
-		osclient.dns().zones().create(zone);
-		logger.info("{}");
+		Zone zone = builder.name("example.com.").description("This is an example zone.").build();
+		Zone zoneResult = osclient.dns().zones().create(zone);
+		logger.info("Create zone: {}", zoneResult);
+	}
+
+	@Test
+	public void testCreatePrivateZones() {
+		DesignateZone.Router router = new DesignateZone.Router("19664294-0bf6-4271-ad3a-94b8c79c6558", REGION, null);
+		ZoneBuilder builder = Builders.zone();
+		Zone sourceZone = builder.name("example.com.").description("This is an example zone.").type(ZoneType.PRIVATE).router(router).build();
+		Zone zoneResult = osclient.dns().zones().create(sourceZone);
+		logger.info("Create zone: {}", zoneResult);
 	}
 
 	@Test
 	public void testGetZone() {
-		Zone zone = osclient.dns().zones().get("123445");
-		logger.info("{}", zone);
+		Zone zone = osclient.dns().zones().get(ZONE_ID);
+		logger.info("Get zone: {}", zone);
 	}
 
 	@Test
 	public void testDeleteZones() {
-		ActionResponse response = osclient.dns().zones().delete("zone-id");
-		if (response.isSuccess()) {
-			//
-		}
+		Zone deletedZone = osclient.dns().zones().delete(ZONE_ID);
+		logger.info("Delete zone: {}", deletedZone);
+	}
+
+	@Test
+	public void testGetNameServers() {
+		List<? extends Nameserver> nameserversList = osclient.dns().zones().listNameservers(ZONE_ID);
+		logger.info("Get name servers: {}", nameserversList);
+	}
+
+	@Test
+	public void testAssociateRouter() {
+		DesignateZone.Router router = new DesignateZone.Router(ROUTER_ID, REGION, null);
+		DesignateZone.Router routerResult = osclient.dns().zones().associateRouter(ZONE_ID, router);
+		logger.info("Associate router: {}", routerResult);
+	}
+
+	@Test
+	public void testDisassociateRouter() {
+		DesignateZone.Router router = new DesignateZone.Router(ROUTER_ID, REGION, null);
+		DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter(ZONE_ID, router);
+		logger.info("Associate router: {}", routerResult);
 	}
 
 	@Test
 	public void testCreateRecordset() {
 		// create with recordset model
-		Recordset recordset = Builders.recordset().name("").type("A").build();
-		Recordset created = osclient.dns().recordsets().create("zone-id", recordset);
-		logger.info("{}", created);
+		Recordset recordset = Builders.recordset().name("").type(RecordSetType.A).ttl(300).records(Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3")).build();
+		Recordset created = osclient.dns().recordsets().create(ZONE_ID, recordset);
+		logger.info("Create record set with recordset model: {}", created);
 
-		// create directly
-		Recordset created2 = osclient.dns().recordsets().create("zone-id", "name", "dns-type",
-				Lists.newArrayList("record1", "records2", "..."));
-		logger.info("{}", created2);
+		// create Type A directly
+		Recordset created2 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type A example record set.", "A", 7200,
+				Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3"));
+		logger.info("Create type A record set directly: {}", created2);
+
+		// create Type AAAA directly
+		Recordset created3 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type AAAA example record set.", "AAAA", 7200,
+				Lists.newArrayList("fe80:0:0:0:202:b3ff:fe1e:8329", "ff03:0db8:85a3:0:0:8a2e:0370:7334"));
+		logger.info("Create type AAAA record set directly: {}", created3);
+
+		// create Type MX directly
+		Recordset created4 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type MX example record set.", "MX", 7200,
+				Lists.newArrayList("1 mail.example.com"));
+		logger.info("Create type MX record set directly: {}", created4);
+
+		// create Type CNAME directly
+		Recordset created5 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type CNAME example record set.", "CNAME", 7200,
+				Lists.newArrayList("server1.example.com"));
+		logger.info("Create type CNAME record set directly: {}", created5);
+
+		// create Type TXT directly
+		Recordset created6 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type TXT record set.", "TXT", 7200,
+				Lists.newArrayList("This host is used for sale."));
+		logger.info("Create type TXT record set directly: {}", created6);
+
+		// create Type NS directly
+		Recordset created7 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type NS record set.", "NS", 7200,
+				Lists.newArrayList("node1.example.com.", "node2.example.com."));
+		logger.info("Create type NS record set directly: {}", created7);
 	}
 
 	@Test
 	public void listRecordsets() {
-		List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list("zone-id");
+		List<? extends Recordset> allRecordsetsOfZone = osclient.dns().recordsets().list(ZONE_ID);
+		logger.info("all recordsets of zone: {}", allRecordsetsOfZone);
+
+		List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list(ZONE_ID, "2", null);
 		logger.info("recordsets of zone: {}", recordsetsOfZone);
 
 		List<? extends Recordset> allRecordsets = osclient.dns().recordsets().list();
-		logger.info("all recordsets", allRecordsets);
+		logger.info("all recordsets for project: {}", allRecordsets);
+
+		List<? extends Recordset> recordsetsOfProject = osclient.dns().recordsets().list("2", null);
+		logger.info("recordsets for project: {}", recordsetsOfProject);
 	}
 
 	@Test
 	public void getRecordset() {
-		Recordset recordset = osclient.dns().recordsets().get("zone-id", "recordset-id");
-		logger.info("recordset", recordset);
+		Recordset recordset = osclient.dns().recordsets().get(ZONE_ID, RECORDSET_ID);
+		logger.info("Get recordset: {}", recordset);
 	}
 
 	@Test
 	public void delRecordset() {
-		ActionResponse response = osclient.dns().recordsets().delete("zone-id", "recordset-id");
-		if (response.isSuccess()) {
-			//
-		}
+		Recordset recordset = osclient.dns().recordsets().delete(ZONE_ID, RECORDSET_ID);
+		logger.info("Delete recordset: {}", recordset);
 	}
 	
 	@Test

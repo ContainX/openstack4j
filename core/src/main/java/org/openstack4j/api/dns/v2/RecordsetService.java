@@ -1,6 +1,7 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
+ * 	Copyright 2017 HuaWei TLD
+ * 	Copyright 2016 ContainX and OpenStack4j
+ *
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -47,7 +48,7 @@ public interface RecordsetService extends RestService {
 	 *
 	 * @return the newly created Recordset
 	 */
-	Recordset create(String zoneId, String name, String type, List<String> records);
+	Recordset create(String zoneId, String name, String description, String type, Integer ttl, List<String> records);
 
 	/**
 	 * gets detailed information about a specified recordset in a zone by id
@@ -58,23 +59,15 @@ public interface RecordsetService extends RestService {
 	 */
 	Recordset get(String zoneId, String recordsetId);
 
-	/**
-	 * updates an existing recordset
-	 *
-	 * @param zoneId the identifier of the zone
-	 * @param recordset the recordset set to update
-	 * @return the updated recordset
-	 */
-	Recordset update(String zoneId, Recordset recordset);
 
 	/**
 	 * delete a recordset within a zone
 	 *
 	 * @param zoneId the uuid of the zone
 	 * @param recordsetId the uuid of the recordset
-	 * @return the action response
+	 * @return the recordset
 	 */
-	ActionResponse delete(String zoneId, String recordsetId);
+	Recordset delete(String zoneId, String recordsetId);
 
 	/**
 	 * list all recordsets owned by project
@@ -84,11 +77,29 @@ public interface RecordsetService extends RestService {
 	List<? extends Recordset> list();
 
 	/**
+	 * list recordsets owned by project
+	 *
+	 * @param limit per page's item amount, the value is 0~500
+	 * @param marker the initial ID of a paging query, if null, query the first page
+	 * @return list of recordsets in a zone
+	 */
+	List<? extends Recordset> list(String limit, String marker);
+
+	/**
 	 * list recordsets in a zone
 	 *
 	 * @param zoneId the identifier of the zone
 	 * @return list of recordsets in a zone
 	 */
 	List<? extends Recordset> list(String zoneId);
+
+	/**
+	 * list recordsets in a zone
+	 * @param zoneId zoneId the identifier of the zone
+	 * @param limit per page's item amount, the value is 0~500
+	 * @param marker the initial ID of a paging query, if null, query the first page
+	 * @return list of recordsets in a zone
+	 */
+	List<? extends Recordset> list(String zoneId, String limit, String marker);
 
 }

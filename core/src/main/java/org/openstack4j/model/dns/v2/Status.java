@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum Status {
 
-	ERROR, PENDING, ACTIVE;
+	PENDING_CREATE, ACTIVE, PENDING_DELETE, ERROR;
 
 	@JsonValue
 	public String value() {

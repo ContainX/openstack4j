@@ -4,10 +4,10 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
 
+import com.google.common.base.Strings;
 import org.openstack4j.api.scaling.AutoScalingQuotaService;
 import org.openstack4j.model.scaling.ScalingQuota;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingQuota.ASAutoScalingQuotas;
-import org.testng.util.Strings;
 
 public class AutoScalingQuotaServiceImpl extends BaseAutoScalingServices implements AutoScalingQuotaService {
 
