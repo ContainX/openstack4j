@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.scaling.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
 
@@ -11,26 +11,28 @@ import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstance.ASAut
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
 
+import com.google.common.base.Strings;
+
 public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 		implements AutoScalingGroupInstanceService {
 
 	@Override
 	public List<? extends ScalingGroupInstance> list(String groupId) {
-		checkNotNull(groupId, "groupId");
+		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");
 		return get(ASAutoScalingGroupInstances.class, uri("/scaling_group_instance/%s/list", groupId)).execute()
 				.getList();
 	}
 
 	@Override
 	public List<? extends ScalingGroupInstance> list(String groupId, ScalingGroupInstanceListOptions options) {
-		checkNotNull(groupId, "groupId");
+		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");
 		return get(ASAutoScalingGroupInstances.class, uri("/scaling_group_instance/%s/list", groupId))
 				.params(options.getOptions()).execute().getList();
 	}
 
 	@Override
 	public ActionResponse delete(String instanceId, boolean deleteInstance) {
-		checkNotNull(instanceId, "instanceId");
+		checkArgument(!Strings.isNullOrEmpty(instanceId), "instanceId is required");
 		String yesOrNo = deleteInstance ? "yes" : "no";
 		return deleteWithResponse(uri("/scaling_group_instance/%s?instance_delete=%s", instanceId, yesOrNo)).execute();
 	}
@@ -38,7 +40,7 @@ public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 	@Override
 	public ActionResponse batchOperate(String groupId, List<String> instanceIds, boolean deleteInstance,
 			String action) {
-		checkNotNull(groupId, "groupId");
+		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");
 		String yesOrNo = deleteInstance ? "yes" : "no";
 		ASAutoScalingGroupInstanceBatch entity = ASAutoScalingGroupInstanceBatch.builder().instanceIds(instanceIds)
 				.delete(yesOrNo).action(action).build();

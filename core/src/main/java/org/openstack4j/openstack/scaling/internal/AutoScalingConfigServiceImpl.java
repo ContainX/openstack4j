@@ -11,6 +11,7 @@ import org.openstack4j.model.scaling.Disk;
 import org.openstack4j.model.scaling.Eip;
 import org.openstack4j.model.scaling.InstanceConfig;
 import org.openstack4j.model.scaling.Personality;
+import org.openstack4j.model.scaling.PublicIp;
 import org.openstack4j.model.scaling.ScalingConfig;
 import org.openstack4j.model.scaling.ScalingConfigCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingConfig;
@@ -25,44 +26,41 @@ public class AutoScalingConfigServiceImpl extends BaseAutoScalingServices implem
 
 	@Override
 	public ScalingConfigCreate create(ScalingConfigCreate config) {
-		checkNotNull(config, "scaling config");
-		checkNotNull(config.getConfigName(), "scaling config name");
-		checkNotNull(config.getInstanceConfig(), "instance config");
-		if (config.getInstanceConfig().getDisks() != null) {
-			for (Disk disk : config.getInstanceConfig().getDisks()) {
-				checkNotNull(disk.getSize(), "disk size");
-				checkNotNull(disk.getVolumeType(), "disk volume type");
-				checkNotNull(disk.getDiskType(), "disk type");
-			}
-		}
-		if (config.getInstanceConfig().getPersonality() != null) {
-			for (Personality p : config.getInstanceConfig().getPersonality()) {
-				checkNotNull(p.getPath(), "personality path");
-				checkNotNull(p.getContent(), "personality content");
-			}
-		}
-		if (config.getInstanceConfig().getPublicIp() != null) {
-			Eip eip = config.getInstanceConfig().getPublicIp().getEip();
-			checkNotNull(eip, "eip");
-			checkNotNull(eip.getIpType(), "ip type");
-			checkNotNull(eip.getBandwidth(), "bandwidth");
-			checkNotNull(eip.getBandwidth().getSize(), "bandwidth size");
-			checkNotNull(eip.getBandwidth().getShareType(), "bandwidth share type");
-			checkNotNull(eip.getBandwidth().getChargingMode(), "bandwidth charging mode");
-		}
-		
+		checkArgument(config != null, "config is required");
+		checkArgument(!Strings.isNullOrEmpty(config.getConfigName()), "configName is required");
+		checkArgument(config.getInstanceConfig() != null, "instanceConfig is required");
+
+		checkDiskWhenPresent(config.getInstanceConfig().getDisks());
+		checkPersonalityWhenPresent(config.getInstanceConfig().getPersonality());
+		checkPublicIpWhenPresent(config.getInstanceConfig().getPublicIp());
+
 		InstanceConfig instanceConfig = config.getInstanceConfig();
-		if(Strings.isNullOrEmpty(instanceConfig.getInstanceId())) {
-			checkArgument(!Strings.isNullOrEmpty(instanceConfig.getFlavorRef()), "flavorRef is required when instanceId not present");
-			checkArgument(!Strings.isNullOrEmpty(instanceConfig.getImageRef()), "imageRef is required when instanceId not present");
+		if (Strings.isNullOrEmpty(instanceConfig.getInstanceId())) {
+			checkArgument(!Strings.isNullOrEmpty(instanceConfig.getFlavorRef()),
+					"flavorRef is required when instanceId not present");
+			checkArgument(!Strings.isNullOrEmpty(instanceConfig.getImageRef()),
+					"imageRef is required when instanceId not present");
 			checkDiskWhenInstanceIdNotPresent(instanceConfig.getDisks());
 		} else {
 			instanceConfig.setFlavorRef(null);
 			instanceConfig.setImageRef(null);
 			instanceConfig.setDisks(null);
 		}
-		
+
 		return post(ASAutoScalingConfigCreate.class, uri("/scaling_configuration")).entity(config).execute();
+	}
+
+	private void checkPublicIpWhenPresent(PublicIp publicIp) {
+		if (publicIp != null) {
+			Eip eip = publicIp.getEip();
+			checkArgument(eip != null, "eip is required");
+			checkArgument(!Strings.isNullOrEmpty(eip.getIpType()), "ipType is required");
+			checkArgument(eip.getBandwidth() != null, "bandwidth is required");
+			checkArgument(!Strings.isNullOrEmpty(eip.getBandwidth().getSize()), "bandwidth size is required");
+			checkArgument(!Strings.isNullOrEmpty(eip.getBandwidth().getShareType()), "bandwidth shareType is required");
+			checkArgument(!Strings.isNullOrEmpty(eip.getBandwidth().getChargingMode()),
+					"bandwidth chargingMode is required");
+		}
 	}
 
 	@Override
@@ -97,11 +95,29 @@ public class AutoScalingConfigServiceImpl extends BaseAutoScalingServices implem
 
 	private void checkDiskWhenInstanceIdNotPresent(List<Disk> disks) {
 		checkArgument(disks != null && !disks.isEmpty(), "disk is required when instanceId not present");
-		for(Disk disk : disks) {
+		for (Disk disk : disks) {
 			checkNotNull(disk.getSize(), "disk size");
 			checkNotNull(disk.getVolumeType(), "disk volume type");
 			checkNotNull(disk.getDiskType(), "disk type");
 		}
 	}
 
+	private void checkPersonalityWhenPresent(List<Personality> personality) {
+		if (personality != null) {
+			for (Personality p : personality) {
+				checkArgument(!Strings.isNullOrEmpty(p.getPath()), "personality path is required");
+				checkArgument(!Strings.isNullOrEmpty(p.getContent()), "personality content is required");
+			}
+		}
+	}
+
+	private void checkDiskWhenPresent(List<Disk> disks) {
+		if (disks != null) {
+			for (Disk disk : disks) {
+				checkArgument(disk.getSize() != null, "diskSize is required");
+				checkArgument(!Strings.isNullOrEmpty(disk.getVolumeType()), "diskVolumeType is required");
+				checkArgument(!Strings.isNullOrEmpty(disk.getDiskType()), "diskType is required");
+			}
+		}
+	}
 }
