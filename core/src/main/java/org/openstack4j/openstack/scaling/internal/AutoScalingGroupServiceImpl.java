@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.scaling.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
 import org.openstack4j.openstack.scaling.domain.action.ScalingGroupAction;
 import org.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
+import org.testng.util.Strings;
 
 /**
  *
@@ -26,15 +27,16 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 
 	@Override
 	public ScalingGroupCreate create(ScalingGroupCreate group) {
-		checkNotNull(group, "scaling group");
-		checkNotNull(group.getNetworks(), "networks");
-		checkNotNull(group.getSecurityGroups(), "securityGroups");
-		checkNotNull(group.getVpcId(), "vpcId");
+		checkArgument(group != null, "group is required");
+		checkArgument(group.getNetworks() != null && !group.getNetworks().isEmpty(), "networks is required");
+		checkArgument(group.getSecurityGroups() != null && !group.getSecurityGroups().isEmpty(),
+				"securityGroups is required");
+		checkArgument(!Strings.isNullOrEmpty(group.getVpcId()), "vpcId is required");
 		for (IdResourceEntity network : group.getNetworks()) {
-			checkNotNull(network.getId(), "network id");
+			checkArgument(!Strings.isNullOrEmpty(network.getId()), "network id is required");
 		}
 		for (IdResourceEntity securityGroup : group.getSecurityGroups()) {
-			checkNotNull(securityGroup.getId(), "security group id");
+			checkArgument(!Strings.isNullOrEmpty(securityGroup.getId()), "security group id is required");
 		}
 		return post(ASAutoScalingGroupCreate.class, uri("/scaling_group")).entity(group).execute();
 	}
@@ -54,22 +56,22 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 
 	@Override
 	public ScalingGroup get(String groupId) {
-		checkNotNull(groupId, "scaling group id");
+		checkArgument(!Strings.isNullOrEmpty(groupId), "group id is required");
 		return get(ASAutoScalingGroup.class, uri("/scaling_group/%s", groupId)).execute();
 	}
 
 	@Override
 	public ScalingGroupUpdate update(String groupId, ScalingGroupUpdate group) {
-		checkNotNull(group, "scaling group");
-		checkNotNull(groupId, "groupId");
+		checkArgument(group != null, "group is required");
+		checkArgument(!Strings.isNullOrEmpty(groupId), "group id is required");
 		if (group.getNetworks() != null) {
 			for (IdResourceEntity network : group.getNetworks()) {
-				checkNotNull(network.getId(), "network id");
+				checkArgument(!Strings.isNullOrEmpty(network.getId()), "network id is required");
 			}
 		}
 		if (group.getSecurityGroups() != null) {
 			for (IdResourceEntity securityGroup : group.getSecurityGroups()) {
-				checkNotNull(securityGroup.getId(), "security group id");
+				checkArgument(!Strings.isNullOrEmpty(securityGroup.getId()), "security group id is required");
 			}
 		}
 		return put(ASAutoScalingGroupUpdate.class, uri("/scaling_group/%s", groupId)).entity(group).execute();
@@ -77,14 +79,14 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 
 	@Override
 	public ActionResponse delete(String groupId) {
-		checkNotNull(groupId, "groupId");
+		checkArgument(!Strings.isNullOrEmpty(groupId), "group id is required");
 		return deleteWithResponse(uri("/scaling_group/%s", groupId)).execute();
 	}
 
 	@Override
 	public ActionResponse operate(String groupId, ScalingGroupAction action) {
-		checkNotNull(groupId, "groupId");
-		checkNotNull(action, "action");
+		checkArgument(!Strings.isNullOrEmpty(groupId), "group id is required");
+		checkArgument(action != null, "action is required");
 		return postWithResponse(uri("/scaling_group/%s/action", groupId)).entity(action).execute();
 	}
 
