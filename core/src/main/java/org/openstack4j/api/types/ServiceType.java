@@ -43,7 +43,9 @@ public enum ServiceType {
 	// qianbiao.ng - new add services
 	VOLUME_BACKUP("vbs", "volume-backup"),
 	AUTO_SCALING("as", "auto-scaling"),
-	
+	LOAD_BALANCER("elb", "load-balancer"),
+	CLOUD_EYE("ces", "cloud-eye"),
+	MAP_REDUCE("mrs", "map-reduce"),
 	
 	UNKNOWN("NA", "NA")
 	;
