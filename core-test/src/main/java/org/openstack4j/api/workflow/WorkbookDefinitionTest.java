@@ -112,7 +112,6 @@ public class WorkbookDefinitionTest extends WorkflowBaseTest {
 
         ActionResponse resp = service.delete("my_wb");
 
-        // TODO(rakhmerov): Change to 204 once ActionResponse can return other 2xx codes.
-        assertEquals(resp.getCode(), 200);
+        assertEquals(resp.getCode(), 204);
     }
 }

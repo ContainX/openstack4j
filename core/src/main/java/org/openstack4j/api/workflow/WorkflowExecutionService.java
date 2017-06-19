@@ -1,7 +1,6 @@
 package org.openstack4j.api.workflow;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.workflow.WorkflowExecution;
 
@@ -23,10 +22,10 @@ public interface WorkflowExecutionService extends RestService {
     /**
      * Create a new workflow execution.
      *
-     * @param workflowExecution Workflow execution to create.
+     * @param wfExec Workflow execution to create.
      * @return Created workflow execution.
      */
-    WorkflowExecution create(WorkflowExecution workflowExecution);
+    WorkflowExecution create(WorkflowExecution wfExec);
 
     /**
      * Get workflow execution by its ID.
@@ -40,7 +39,7 @@ public interface WorkflowExecutionService extends RestService {
      * Delete workflow execution by its ID.
      *
      * @param id Workflow execution ID.
-     * @return HTTP response from the server.
+     * @return Action response from the server.
      */
-    HttpResponse delete(String id);
+    ActionResponse delete(String id);
 }

@@ -123,7 +123,6 @@ public class ActionDefinitionTest extends WorkflowBaseTest {
 
         ActionResponse resp = service.delete("concat");
 
-        // TODO(rakhmerov): Change to 204 once ActionResponse can return other 2xx codes.
-        assertEquals(resp.getCode(), 200);
+        assertEquals(resp.getCode(), 204);
     }
 }
