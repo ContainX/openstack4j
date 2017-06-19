@@ -9,6 +9,7 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroupInstance;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstance.ASAutoScalingGroupInstances;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch;
+import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch.Action;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
 
 import com.google.common.base.Strings;
@@ -39,7 +40,7 @@ public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 
 	@Override
 	public ActionResponse batchOperate(String groupId, List<String> instanceIds, boolean deleteInstance,
-			String action) {
+			Action action) {
 		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");
 		String yesOrNo = deleteInstance ? "yes" : "no";
 		ASAutoScalingGroupInstanceBatch entity = ASAutoScalingGroupInstanceBatch.builder().instanceIds(instanceIds)
