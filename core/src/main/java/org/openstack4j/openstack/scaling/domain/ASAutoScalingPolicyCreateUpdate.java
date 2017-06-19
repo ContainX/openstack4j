@@ -14,7 +14,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class ASAutoScalingPolicyCreateUpdate implements ScalingPolicyCreateUpdate {
@@ -43,4 +43,11 @@ public class ASAutoScalingPolicyCreateUpdate implements ScalingPolicyCreateUpdat
 	
 	@JsonProperty("cool_down_time")
 	private Integer coolDownTime;
+	
+	public enum PolicyType {
+		ALARM,
+		SCHEDULED,
+		RECURRENCE,
+		;
+	}
 }

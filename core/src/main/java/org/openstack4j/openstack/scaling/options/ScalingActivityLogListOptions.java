@@ -30,7 +30,7 @@ public class ScalingActivityLogListOptions {
 		return add("limit", limit);
 	}
 
-	public ScalingActivityLogListOptions add(String key, Object value) {
+	private ScalingActivityLogListOptions add(String key, Object value) {
 		if (value != null)
 			this.queryParam.put(key, value);
 

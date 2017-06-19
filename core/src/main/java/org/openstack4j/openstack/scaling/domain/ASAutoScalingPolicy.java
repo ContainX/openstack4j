@@ -18,7 +18,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonRootName("scaling_policy")

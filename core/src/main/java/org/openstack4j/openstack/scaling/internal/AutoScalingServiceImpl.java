@@ -35,7 +35,7 @@ public class AutoScalingServiceImpl extends BaseAutoScalingServices implements A
 	}
 
 	@Override
-	public AutoScalingPolicyService policys() {
+	public AutoScalingPolicyService policies() {
 		return Apis.get(AutoScalingPolicyService.class);
 	}
 

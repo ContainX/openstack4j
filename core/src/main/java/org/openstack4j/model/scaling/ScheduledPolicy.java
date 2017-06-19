@@ -33,4 +33,11 @@ public class ScheduledPolicy implements ModelEntity {
 
 	@JsonProperty("end_time")
 	private String endTime;
+	
+	public enum RecurrenceType {
+		Daily,
+		Weekly,
+		Monthly,
+		;
+	}
 }

@@ -29,7 +29,7 @@ public class ScalingPolicyListOptions {
 		return add("limit", limit);
 	}
 	
-	public ScalingPolicyListOptions add(String key, Object value) {
+	private ScalingPolicyListOptions add(String key, Object value) {
 		if(value != null)
 			this.queryParam.put(key, value);
 		return this;
