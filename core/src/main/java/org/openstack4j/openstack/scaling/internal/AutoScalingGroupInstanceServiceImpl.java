@@ -44,7 +44,7 @@ public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");
 		String yesOrNo = deleteInstance ? "yes" : "no";
 		ASAutoScalingGroupInstanceBatch entity = ASAutoScalingGroupInstanceBatch.builder().instanceIds(instanceIds)
-				.delete(yesOrNo).action(action).build();
+				.delete(yesOrNo).action(action.name()).build();
 		return post(ActionResponse.class, uri("/scaling_group_instance/%s/action", groupId)).entity(entity).execute();
 	}
 }

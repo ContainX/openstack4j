@@ -28,7 +28,7 @@ public class ASAutoScalingGroupInstanceBatch implements ModelEntity {
 	private String delete;
 
 	@JsonProperty
-	private Action action;
+	private String action;
 	
 	public enum Action {
 		ADD,
