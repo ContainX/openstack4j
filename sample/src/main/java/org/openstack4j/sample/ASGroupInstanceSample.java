@@ -18,6 +18,7 @@ package org.openstack4j.sample;
 import static org.testng.Assert.assertTrue;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroupInstance;
@@ -29,14 +30,13 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
 
-//TODO need test
 public class ASGroupInstanceSample extends AbstractSample {
 
 	private static final Logger logger = LoggerFactory.getLogger(ASGroupInstanceSample.class);
 
-	@Test
+	@Test(priority = 2)
 	public void testListAutoScalingGroupInstance() {
-		String groupId = "";
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
 		List<? extends ScalingGroupInstance> list = osclient.autoScaling().groupInstances().list(groupId);
 		logger.info("{}", list);
 		if (list != null && !list.isEmpty()) {
@@ -58,22 +58,23 @@ public class ASGroupInstanceSample extends AbstractSample {
 		}
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void testDeleteAutoScalingGroupInstance() {
-		String instanceId = "";
+		String instanceId = "475db405-11b4-47f6-bb9d-f3bcbc7ac27f";
 		ActionResponse resp = osclient.autoScaling().groupInstances().delete(instanceId, false);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
-	@Test
-	public void testBatchOperateAutoScalingGroupInstance() {
-		String groupId = "";
-		List<String> instanceIds =  Lists.newArrayList();
-		ActionResponse resp = osclient.autoScaling().groupInstances().batchOperate(groupId, instanceIds , false, Action.ADD);
-		assertTrue(resp.isSuccess(), resp.getFault());
-		
-		resp = osclient.autoScaling().groupInstances().batchOperate(groupId, instanceIds, false, Action.REMOVE);
+	@Test(priority = 0)
+	public void testBatchOperateAutoScalingGroupInstance() throws InterruptedException {
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
+		List<String> instanceIds = Lists.newArrayList("475db405-11b4-47f6-bb9d-f3bcbc7ac27f");
+
+		ActionResponse resp = osclient.autoScaling().groupInstances().batchOperate(groupId, instanceIds, false,
+				Action.ADD);
+		//wait server to initial new group instance life cycle status, 
+		//other wise the delete test case will fail for group instance not found
+		TimeUnit.MINUTES.sleep(1);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
-
 }

@@ -1,0 +1,20 @@
+{
+    "scaling_policy": {
+        "scaling_policy_id": "50bbaf82-f4c1-4870-a55c-61a52cdcfa27",
+        "scaling_group_id": "6e42cf82-8157-41eb-a2bc-784f18fa9c2a",
+        "scaling_policy_name": "policyName",
+        "scaling_policy_type": "RECURRENCE",
+        "scheduled_policy": {
+            "launch_time": "01:00",
+            "recurrence_type": "Daily",
+            "end_time": "2017-06-20T21:38Z"
+        },
+        "cool_down_time": 900,
+        "scaling_policy_action": {
+            "operation": "ADD",
+            "instance_number": 1
+        },
+        "policy_status": "INSERVICE",
+        "create_time": "2017-06-20T12:38:28Z"
+    }
+}

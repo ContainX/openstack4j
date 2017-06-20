@@ -22,14 +22,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-//TODO need test
 public class ASQuotasSample extends AbstractSample {
 
 	private static final Logger logger = LoggerFactory.getLogger(ASQuotasSample.class);
 
 	@Test
 	public void testListAutoScalingQuotas() {
-		String groupId = "";
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
 		List<? extends ScalingQuota> all = osclient.autoScaling().quotas().list();
 		logger.info("{}", all);
 

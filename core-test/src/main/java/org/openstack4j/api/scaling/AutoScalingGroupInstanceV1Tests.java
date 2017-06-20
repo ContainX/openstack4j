@@ -29,19 +29,18 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
 
-//TODO need test
 @Test(suiteName = "AutoScaling/AutoScalingGroupInstanceV1", enabled = true)
 public class AutoScalingGroupInstanceV1Tests extends AbstractTest {
 
-	private static final String JSON_SCALING_GROUP_INSTANCE_LIST = null;
-	private static final String JSON_SCALING_GROUP_INSTANCE_LIST2 = null;
+	private static final String JSON_SCALING_GROUP_INSTANCE_LIST = "/scaling/as_scaling_group_instance_list.json";
+	private static final String JSON_SCALING_GROUP_INSTANCE_LIST2 = "/scaling/as_scaling_group_instance_list2.json";
 
 	public void testListAutoScalingGroupInstance() throws IOException {
 		respondWith(JSON_SCALING_GROUP_INSTANCE_LIST);
 
-		String groupId = "";
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
 		List<? extends ScalingGroupInstance> all = osv3().autoScaling().groupInstances().list(groupId);
-		assertTrue(all != null && all.size() == 10);
+		assertTrue(all != null && all.size() == 2);
 
 		respondWith(JSON_SCALING_GROUP_INSTANCE_LIST2);
 		ScalingGroupInstanceListOptions options = ScalingGroupInstanceListOptions.create().heathStatus("NORMAL")
@@ -54,23 +53,21 @@ public class AutoScalingGroupInstanceV1Tests extends AbstractTest {
 		}
 	}
 
+	//TODO bill: need check, actual response code(200) difference with doc(204)
 	public void testDeleteAutoScalingGroupInstance() {
 		respondWith(204);
-		String instanceId = "";
+		String instanceId = "475db405-11b4-47f6-bb9d-f3bcbc7ac27f";
 		ActionResponse resp = osv3().autoScaling().groupInstances().delete(instanceId, false);
-		assertTrue(resp.isSuccess() && resp.getCode() == 204, resp.getFault());
+		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
 	public void testBatchOperateAutoScalingGroupInstance() {
-		String groupId = "";
-		List<String> instanceIds = Lists.newArrayList();
+		respondWith(204);
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
+		List<String> instanceIds = Lists.newArrayList("475db405-11b4-47f6-bb9d-f3bcbc7ac27f");
 		ActionResponse resp = osv3().autoScaling().groupInstances().batchOperate(groupId, instanceIds, false,
 				Action.ADD);
-		assertTrue(resp.isSuccess() && resp.getCode() == 204, resp.getFault());
-
-		respondWith(204);
-		resp = osv3().autoScaling().groupInstances().batchOperate(groupId, instanceIds, false, Action.REMOVE);
-		assertTrue(resp.isSuccess() && resp.getCode() == 204, resp.getFault());
+		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
 	@Override

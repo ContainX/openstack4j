@@ -25,23 +25,22 @@ import org.openstack4j.model.scaling.ScalingActivityLog;
 import org.openstack4j.openstack.scaling.options.ScalingActivityLogListOptions;
 import org.testng.annotations.Test;
 
-//TODO need test
 @Test(suiteName = "AutoScaling/AutoScalingActivityLogV1", enabled = true)
 public class AutoScalingActivityLogV1Tests3 extends AbstractTest {
 
-	private static final String JSON_SCALING_ACTIVITY_LOG_LIST = "";
-	private static final String JSON_SCALING_ACTIVITY_LOG_LIST2 = "";
+	private static final String JSON_SCALING_ACTIVITY_LOG_LIST = "/scaling/as_scaling_activity_log_list.json";
+	private static final String JSON_SCALING_ACTIVITY_LOG_LIST2 = "/scaling/as_scaling_activity_log_list2.json";
 
 	public void testListAutoScalingActivityLog() throws IOException {
 		respondWith(JSON_SCALING_ACTIVITY_LOG_LIST);
-		String groupId = "";
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
 		List<? extends ScalingActivityLog> all = osv3().autoScaling().activityLogs().list(groupId);
-		assertTrue(all != null && all.size() == 5);
+		assertTrue(all != null && all.size() == 11);
 
 		respondWith(JSON_SCALING_ACTIVITY_LOG_LIST2);
 		ScalingActivityLogListOptions options = ScalingActivityLogListOptions.create().startNumber(5).limit(5);
 		List<? extends ScalingActivityLog> list = osv3().autoScaling().activityLogs().list(groupId, options);
-		assertTrue(list != null && list.size() == 2);
+		assertTrue(list != null && list.size() == 5);
 	}
 
 	@Override

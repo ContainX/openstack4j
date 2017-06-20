@@ -36,49 +36,49 @@ import org.testng.annotations.Test;
 
 import com.google.common.base.Strings;
 
-//TODO need test
 @Test(suiteName = "AutoScaling/AutoScalingPolicyV1", enabled = true)
 public class AutoScalingPolicyV1Tests2 extends AbstractTest {
 
-	private static final String JSON_SCALING_POLICY_CREATE = "";
-	private static final String JSON_SCALING_POLICY_UPDATE = "";
-	private static final String JSON_SCALING_POLICY_LIST = "";
-	private static final String JSON_SCALING_POLICY_LIST2 = "";
-	private static final String JSON_SCALING_POLICY_GET = "";
+	private static final String JSON_SCALING_POLICY_CREATE = "/scaling/as_scaling_group_policy_create.json";
+	private static final String JSON_SCALING_POLICY_LIST = "/scaling/as_scaling_group_policy_list.json";
+	private static final String JSON_SCALING_POLICY_LIST2 = "/scaling/as_scaling_group_policy_list2.json";
+	private static final String JSON_SCALING_POLICY_GET = "/scaling/as_scaling_group_policy.json";
 
 	public void testCreateAutoScalingPolicy() throws IOException {
 		respondWith(JSON_SCALING_POLICY_CREATE);
-		String groupId = "";
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
 		ScheduledPolicy scheduledPolicy = ScheduledPolicy.builder().launchTime("01:00")
 				.recurrenceType(RecurrenceType.Daily.name()).recurrenceValue(null).build();
-		ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder().policyName("policyName")
-				.groupId(groupId).policyType(PolicyType.SCHEDULED.name()).scheduledPolicy(scheduledPolicy).build();
+		ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder().policyName("policyTestName")
+				.groupId(groupId).policyType(PolicyType.RECURRENCE.name()).scheduledPolicy(scheduledPolicy).build();
 		ScalingPolicyCreateUpdate create = osv3().autoScaling().policies().create(policy);
 		assertTrue(create != null && !Strings.isNullOrEmpty(create.getPolicyId()));
 	}
 
 	public void testUpdateAutoScalingPolicy() throws IOException {
-		respondWith(JSON_SCALING_POLICY_UPDATE);
-		String policyId = "";
+		respondWith(JSON_SCALING_POLICY_GET);
+		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
 		ASAutoScalingPolicy policy = (ASAutoScalingPolicy) osv3().autoScaling().policies().get(policyId);
+
+		respondWith(JSON_SCALING_POLICY_CREATE);
 		String after = new StringBuilder(policy.getPolicyName()).reverse().toString();
-		ScalingPolicyCreateUpdate update = osv3().autoScaling().policies()
-				.update(policy.toBuilder().policyName(after).build());
-		assertTrue(after.equals(update.getPolicyName()));
+		ScalingPolicyCreateUpdate update = osv3().autoScaling().policies().update(
+				ASAutoScalingPolicyCreateUpdate.fromScalingPolicy(policy).toBuilder().policyName(after).build());
+		assertTrue(policyId.equals(update.getPolicyId()));
 	}
 
 	public void testListAutoScalingPolicy() throws IOException {
 		respondWith(JSON_SCALING_POLICY_LIST);
-		String groupId = "";
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
 		List<? extends ScalingPolicy> all = osv3().autoScaling().policies().list(groupId);
-		assertTrue(all != null && all.size() == 5);
+		assertTrue(all != null && all.size() == 2);
 
 		
 		respondWith(JSON_SCALING_POLICY_LIST2);
-		String policyName = "";
+		String policyName = "policyName";
 		ScalingPolicyListOptions options = ScalingPolicyListOptions.create().policyName(policyName);
 		List<? extends ScalingPolicy> list = osv3().autoScaling().policies().list(groupId, options);
-		assertTrue(list != null && list.size() == 2);
+		assertTrue(list != null && list.size() == 1);
 		if (list != null && !list.isEmpty()) {
 			for (ScalingPolicy policy : list) {
 				assertTrue(policyName.equals(policy.getPolicyName()));
@@ -88,14 +88,14 @@ public class AutoScalingPolicyV1Tests2 extends AbstractTest {
 
 	public void testGetAutoScalingPolicy() throws IOException {
 		respondWith(JSON_SCALING_POLICY_GET);
-		String policyId = "";
+		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
 		ScalingPolicy policy = osv3().autoScaling().policies().get(policyId);
 		assertTrue(policyId.equals(policy.getPolicyId()));
 	}
 
 	public void testOperateAutoScalingPolicy() {
 		respondWith(204);
-		String policyId = "";
+		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
 		ActionResponse resp = osv3().autoScaling().policies().operate(policyId, new Resume());
 		assertTrue(resp.isSuccess(), resp.getFault());
 
@@ -106,7 +106,7 @@ public class AutoScalingPolicyV1Tests2 extends AbstractTest {
 
 	public void testDeleteAutoScalingPolicy() {
 		respondWith(204);
-		String policyId = "";
+		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
 		ActionResponse resp = osv3().autoScaling().policies().delete(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}

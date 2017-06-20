@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.scaling.domain;
 
+import org.openstack4j.model.scaling.ScalingPolicy;
 import org.openstack4j.model.scaling.ScalingPolicyAction;
 import org.openstack4j.model.scaling.ScalingPolicyCreateUpdate;
 import org.openstack4j.model.scaling.ScheduledPolicy;
@@ -64,5 +65,17 @@ public class ASAutoScalingPolicyCreateUpdate implements ScalingPolicyCreateUpdat
 		SCHEDULED,
 		RECURRENCE,
 		;
+	}
+	
+	public static ASAutoScalingPolicyCreateUpdate fromScalingPolicy(ScalingPolicy policy) {
+		return ASAutoScalingPolicyCreateUpdate.builder()
+				.policyId(policy.getPolicyId())
+				.policyName(policy.getPolicyName())
+				.policyType(policy.getPolicyType())
+				.alarmId(policy.getAlarmId())
+				.scheduledPolicy(policy.getScheduledPolicy())
+				.scalingPolicyAction(policy.getScalingPolicyAction())
+				.coolDownTime(policy.getCoolDownTime())
+				.build();
 	}
 }

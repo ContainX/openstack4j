@@ -31,7 +31,8 @@ import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
 import org.openstack4j.openstack.scaling.domain.action.ScalingGroupAction;
 import org.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
-import org.testng.util.Strings;
+
+import com.google.common.base.Strings;
 
 /**
  *

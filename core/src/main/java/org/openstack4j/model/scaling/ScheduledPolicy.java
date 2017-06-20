@@ -27,7 +27,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScheduledPolicy implements ModelEntity {

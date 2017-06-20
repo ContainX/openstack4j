@@ -96,14 +96,12 @@ public interface ScalingGroup extends ModelEntity {
 	 * 
 	 * @return networks information
 	 */
-	//TODO check
 	List<IdResourceEntity> getNetworks();
 	
 	/**
 	 * 
 	 * @return security groups information
 	 */
-	//TODO check
 	List<IdResourceEntity> getSecurityGroups();
 	
 	/**

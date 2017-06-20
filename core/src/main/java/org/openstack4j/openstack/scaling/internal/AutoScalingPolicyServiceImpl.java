@@ -48,10 +48,15 @@ public class AutoScalingPolicyServiceImpl extends BaseAutoScalingServices implem
 	@Override
 	public ScalingPolicyCreateUpdate update(ScalingPolicyCreateUpdate policy) {
 		checkArgument(policy != null, "policy required");
-		checkArgument(!Strings.isNullOrEmpty(policy.getPolicyId()), "policyId required");
+		String policyId = policy.getPolicyId();
+		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
+		
+		
+		return put(ASAutoScalingPolicyCreateUpdate.class, uri("/scaling_policy/%s", policyId)).entity(resetPolicyId((ASAutoScalingPolicyCreateUpdate) policy)).execute();
+	}
 
-		checkScheduledPolicyWhenPresent(policy.getScheduledPolicy());
-		return put(ASAutoScalingPolicyCreateUpdate.class, uri("/scaling_policy/%s", policy.getPolicyId())).execute();
+	private ScalingPolicyCreateUpdate resetPolicyId(ASAutoScalingPolicyCreateUpdate policy) {
+		return policy.toBuilder().policyId(null).build();
 	}
 
 	@Override

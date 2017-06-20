@@ -1,0 +1,26 @@
+{
+    "limit": 20,
+    "total_number": 2,
+    "start_number": 0,
+    "scaling_group_instances": [{
+        "instance_id": "475db405-11b4-47f6-bb9d-f3bcbc7ac27f",
+        "scaling_group_id": "6e42cf82-8157-41eb-a2bc-784f18fa9c2a",
+        "scaling_group_name": "test-4-bill",
+        "life_cycle_state": "INSERVICE",
+        "health_status": "NORMAL",
+        "scaling_configuration_name": null,
+        "scaling_configuration_id": null,
+        "create_time": "2017-06-20T11:25:13Z",
+        "instance_name": "DoNotDel00174715SGtest1"
+    }, {
+        "instance_id": "a70d3507-6048-4b48-8ae2-f8a59a7b5f68",
+        "scaling_group_id": "6e42cf82-8157-41eb-a2bc-784f18fa9c2a",
+        "scaling_group_name": "test-4-bill",
+        "life_cycle_state": "INSERVICE",
+        "health_status": "NORMAL",
+        "scaling_configuration_name": null,
+        "scaling_configuration_id": null,
+        "create_time": "2017-06-20T10:54:38Z",
+        "instance_name": "DonetDel174715SGtest2"
+    }]
+}
