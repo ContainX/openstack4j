@@ -46,7 +46,7 @@ public class AbstractSample {
 		// TODO remove authentication before push to github
 		osclient = OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
 				.endpoint("https://iam.eu-de.otc.t-systems.com/v3")
-				.credentials("14783667 OTC00000000001000000680", "eSpace7850",
+				.credentials("14783667 OTC00000000001000000680", "******",
 						Identifier.byId("bb42e2cd2b784ac4bdc350fb660a2bdb"))
 				.scopeToProject(Identifier.byId("d4f2557d248e4860829f5fef030b209c")).authenticate();
 	}
