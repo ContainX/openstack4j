@@ -1,12 +1,12 @@
 package org.openstack4j.model.telemetry;
 
-import com.google.common.collect.Lists;
-import org.openstack4j.openstack.internal.Parser;
+import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.openstack4j.openstack.internal.Parser;
 
 /**
  * Query options used in retreiving Samples
@@ -37,7 +37,8 @@ public class SampleCriteria {
         }
     }
     
-    private List<NameOpValue> params = Lists.newArrayList();
+   private String groupBy;
+    private List<NameOpValue> params = new ArrayList<>();
     
     public static SampleCriteria create() {
         return new SampleCriteria();
@@ -106,6 +107,12 @@ public class SampleCriteria {
         return this;
     }
     
+    public SampleCriteria groupBy(String field) {
+        checkNotNull(field, "Field must not be null");
+      groupBy = field;
+        return this;
+    }
+
     /**
      * @return the criteria parameters for this query
      */
@@ -113,6 +120,10 @@ public class SampleCriteria {
         return params;
     }
     
+   public String getGroupBy() {
+        return groupBy;
+    }
+
     public static class NameOpValue {
         private final String field;
         private final Oper operator;
@@ -121,10 +132,11 @@ public class SampleCriteria {
         NameOpValue(String field, Oper operator, Comparable<?> value) {
             this.field = field;
             this.operator = operator;
-            if (value instanceof Date) 
-                this.value = Parser.toISO8601DateFormat(Date.class.cast(value));
-            else
-                this.value = String.valueOf(value);
+            if (value instanceof Date) {
+               this.value = Parser.toISO8601DateFormat(Date.class.cast(value));
+            } else {
+               this.value = String.valueOf(value);
+            }
         }
         
         public String getField() {

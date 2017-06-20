@@ -1,8 +1,12 @@
 package org.openstack4j.openstack.telemetry.domain;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.openstack4j.model.telemetry.Statistics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -13,8 +17,11 @@ import com.google.common.base.MoreObjects;
  * @author Jeremy Unruh
  */
 public class CeilometerStatistics implements Statistics {
-
+   private static final Logger LOG = LoggerFactory.getLogger(CeilometerStatistics.class);
 	private static final long serialVersionUID = 1L;
+
+   private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+   private static final int DATE_FORMAT_LENGTH = 23;
 
 	private Double avg;
 
@@ -23,9 +30,12 @@ public class CeilometerStatistics implements Statistics {
 	private Double duration;
 
 	@JsonProperty("duration_start")
-	private Date durationStart;
+   private String durationStartStr;
 
-	@JsonProperty("duration_end")
+   @JsonProperty("duration_end")
+   private String durationEndStr;
+
+	private Date durationStart;
 	private Date durationEnd;
 
 	private Double max;
@@ -34,17 +44,20 @@ public class CeilometerStatistics implements Statistics {
 
 	private Integer period;
 
-	@JsonProperty("period_start")
-	private Date periodStart;
+   @JsonProperty("period_start")
+   private String periodStartStr;
 
-	@JsonProperty("period_end")
+   @JsonProperty("period_end")
+   private String periodEndStr;
+
+	private Date periodStart;
 	private Date periodEnd;
 
 	private Double sum;
 
 	private String unit;
 
-	private String groupby;
+   private String groupby;
 
 	/**
 	 * {@inheritDoc}
@@ -75,6 +88,9 @@ public class CeilometerStatistics implements Statistics {
 	 */
 	@Override
 	public Date getDurationStart() {
+	   if(durationStart == null){
+         durationStart = parseDate(durationStartStr);
+	   }
 		return durationStart;
 	}
 
@@ -83,12 +99,15 @@ public class CeilometerStatistics implements Statistics {
 	 */
 	@Override
 	public Date getDurationEnd() {
-		return durationEnd;
+      if (durationEnd == null) {
+         durationEnd = parseDate(durationEndStr);
+      }
+      return durationEnd;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+   /**
+    * {@inheritDoc}
+    */
 	@Override
 	public Double getMax() {
 		return max;
@@ -123,7 +142,10 @@ public class CeilometerStatistics implements Statistics {
 	 */
 	@Override
 	public Date getPeriodStart() {
-		return periodStart;
+      if (periodStart == null) {
+         periodStart = parseDate(periodStartStr);
+      }
+      return periodStart;
 	}
 
 	/**
@@ -131,6 +153,9 @@ public class CeilometerStatistics implements Statistics {
 	 */
 	@Override
 	public Date getPeriodEnd() {
+      if (periodEnd == null) {
+         periodEnd = parseDate(periodEndStr);
+      }
 		return periodEnd;
 	}
 
@@ -146,9 +171,28 @@ public class CeilometerStatistics implements Statistics {
    * {@inheritDoc}
    */
   @Override
-  public String getGroupBy() {
+   public String getGroupBy() {
     return groupby;
   }
+  
+  private Date parseDate(String date) {
+    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+    try {
+      return sdf.parse(getTrimmedDate(date));
+    } catch (ParseException e) {
+      LOG.warn("Error while parsing date", e);
+    }
+    return null;
+  }
+
+   private String getTrimmedDate(String date) {
+      // convert "2017-06-19T10:00:00.395000"
+      if (date.length() > DATE_FORMAT_LENGTH) {
+         // to "2017-06-19T10:00:00.395"
+         return date.substring(0, DATE_FORMAT_LENGTH - 1);
+      }
+      return date;
+   }
 
 	/**
 	 * {@inheritDoc}
@@ -157,9 +201,9 @@ public class CeilometerStatistics implements Statistics {
 	public String toString() {
 		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("avg", avg).add("count", count).add("duration", duration)
-				    .add("durationStart", durationStart).add("durationEnd", durationEnd)
+				    .add("durationStart", getDurationStart()).add("durationEnd", getDurationEnd())
 				    .add("min", min).add("max", max).add("sum", sum).add("period", period)
-				    .add("periodStart", periodStart).add("periodEnd", periodEnd).add("unit", unit)
+				    .add("periodStart", getPeriodStart()).add("periodEnd", getPeriodEnd()).add("unit", unit)
 				    .add("groupBy", groupby)
 				    .toString();
 	}
