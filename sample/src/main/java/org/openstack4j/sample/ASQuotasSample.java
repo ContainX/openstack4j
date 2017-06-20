@@ -13,53 +13,27 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.model.scaling;
+package org.openstack4j.sample;
 
-import org.openstack4j.model.ModelEntity;
+import java.util.List;
 
-public interface ScalingGroupInstance extends ModelEntity {
-	/**
-	 * @return instance id
-	 */
-	String getInstanceId();
-	
-	/**
-	 * @return instance name
-	 */
-	String getInstanceName();
-	
-	/**
-	 * @return scaling group id
-	 */
-	String getGroupId();
-	
-	/**
-	 * @return scaling group name
-	 */
-	String getGroupName();
-	
-	/**
-	 * @return life cycle state
-	 */
-	String getLifeCycleState();
-	
-	/**
-	 * @return health status
-	 */
-	String getHealthStatus();
-	
-	/**
-	 * @return configuration name
-	 */
-	String getConfigName();
-	
-	/**
-	 * @return configuration id
-	 */
-	String getConfigId();
-	
-	/**
-	 * @return create time of instance
-	 */
-	String getCreateTime();
+import org.openstack4j.model.scaling.ScalingQuota;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
+
+//TODO need test
+public class ASQuotasSample extends AbstractSample {
+
+	private static final Logger logger = LoggerFactory.getLogger(ASQuotasSample.class);
+
+	@Test
+	public void testListAutoScalingQuotas() {
+		String groupId = "";
+		List<? extends ScalingQuota> all = osclient.autoScaling().quotas().list();
+		logger.info("{}", all);
+
+		List<? extends ScalingQuota> list = osclient.autoScaling().quotas().list(groupId);
+		logger.info("{}", list);
+	}
 }
