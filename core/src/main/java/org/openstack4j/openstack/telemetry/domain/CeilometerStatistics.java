@@ -3,6 +3,7 @@ package org.openstack4j.openstack.telemetry.domain;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import org.openstack4j.model.telemetry.Statistics;
 import org.slf4j.Logger;
@@ -52,7 +53,8 @@ public class CeilometerStatistics implements Statistics {
 
 	private String unit;
 
-   private String groupby;
+   @JsonProperty("groupby")
+   private Map<String, Object> groupBy;
 
 	/**
 	 * {@inheritDoc}
@@ -160,8 +162,8 @@ public class CeilometerStatistics implements Statistics {
    * {@inheritDoc}
    */
   @Override
-   public String getGroupBy() {
-    return groupby;
+   public Map<String, Object> getGroupBy() {
+      return groupBy;
   }
   
   private Date parseDate(String date) {
@@ -193,7 +195,7 @@ public class CeilometerStatistics implements Statistics {
 				    .add("durationStart", getDurationStart()).add("durationEnd", getDurationEnd())
 				    .add("min", min).add("max", max).add("sum", sum).add("period", period)
 				    .add("periodStart", getPeriodStart()).add("periodEnd", getPeriodEnd()).add("unit", unit)
-				    .add("groupBy", groupby)
+            .add("groupBy", getGroupBy())
 				    .toString();
 	}
 
