@@ -15,8 +15,12 @@
  *******************************************************************************/
 package org.openstack4j.model.scaling;
 
-import org.openstack4j.model.ModelEntity;
+import java.util.Date;
 
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.DateTimeUtils;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -44,10 +48,12 @@ public class ScheduledPolicy implements ModelEntity {
 	private String recurrenceValue;
 
 	@JsonProperty("start_time")
-	private String startTime;
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHM)
+	private Date startTime;
 
 	@JsonProperty("end_time")
-	private String endTime;
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHM)
+	private Date endTime;
 	
 	public enum RecurrenceType {
 		Daily,

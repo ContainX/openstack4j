@@ -15,6 +15,8 @@
  *******************************************************************************/
 package org.openstack4j.model.scaling;
 
+import java.util.Date;
+
 public interface ScalingConfig extends ScalingConfigCreate {
 	/**
 	 * @return tenant id
@@ -24,5 +26,5 @@ public interface ScalingConfig extends ScalingConfigCreate {
 	/**
 	 * @return create time of scaling configuration
 	 */
-	String getCreateTime();
+	Date getCreateTime();
 }
