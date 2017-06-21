@@ -8,7 +8,7 @@ import org.openstack4j.openstack.workflow.domain.MistralTaskExecution.MistralTas
 import java.util.List;
 
 /**
- * Workflow execution service implementation.
+ * Task execution service implementation.
  *
  * @author Renat Akhmerov
  */

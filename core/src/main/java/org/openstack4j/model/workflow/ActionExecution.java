@@ -39,10 +39,10 @@ public interface ActionExecution extends Execution {
     /**
      * @return The input parameters of this action execution.
      */
-    Map<String, ?> getInput();
+    Map<String, Object> getInput();
 
     /**
      * @return The output of this action execution.
      */
-    Map<String, ?> getOutput();
+    Map<String, Object> getOutput();
 }
