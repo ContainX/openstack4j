@@ -15,6 +15,8 @@
  *******************************************************************************/
 package org.openstack4j.model.scaling;
 
+import java.util.Date;
+
 public interface ScalingPolicy extends ScalingPolicyCreateUpdate {
 	/**
 	 * @return policy status
@@ -25,5 +27,5 @@ public interface ScalingPolicy extends ScalingPolicyCreateUpdate {
 	 * create time of policy
 	 * @return
 	 */
-	String getCreateTime();
+	Date getCreateTime();
 }

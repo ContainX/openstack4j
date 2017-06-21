@@ -15,9 +15,12 @@
  *******************************************************************************/
 package org.openstack4j.openstack.scaling.options;
 
-import com.google.common.collect.Maps;
-
+import java.util.Date;
 import java.util.Map;
+
+import org.openstack4j.openstack.common.DateTimeUtils;
+
+import com.google.common.collect.Maps;
 
 public class ScalingActivityLogListOptions {
 	private Map<String, Object> queryParam = Maps.newHashMap();
@@ -29,12 +32,12 @@ public class ScalingActivityLogListOptions {
 		return new ScalingActivityLogListOptions();
 	}
 
-	public ScalingActivityLogListOptions startTime(String startTime) {
-		return add("start_time", startTime);
+	public ScalingActivityLogListOptions startTime(Date startTime) {
+		return add("start_time", DateTimeUtils.format(startTime, DateTimeUtils.FORMAT_YMDTHMSZ));
 	}
 
-	public ScalingActivityLogListOptions endTime(String endTime) {
-		return add("end_time", endTime);
+	public ScalingActivityLogListOptions endTime(Date endTime) {
+		return add("end_time", DateTimeUtils.format(endTime, DateTimeUtils.FORMAT_YMDTHMSZ));
 	}
 
 	public ScalingActivityLogListOptions startNumber(Integer startNumber) {

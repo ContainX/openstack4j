@@ -15,11 +15,14 @@
  *******************************************************************************/
 package org.openstack4j.openstack.scaling.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.scaling.ScalingActivityLog;
+import org.openstack4j.openstack.common.DateTimeUtils;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -40,10 +43,12 @@ public class ASAutoScalingActivityLog implements ScalingActivityLog {
 	private String status;
 
 	@JsonProperty("start_time")
-	private String startTime;
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	private Date startTime;
 
 	@JsonProperty("end_time")
-	private String endTime;
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	private Date endTime;
 
 	@JsonProperty
 	private String id;
@@ -80,5 +85,4 @@ public class ASAutoScalingActivityLog implements ScalingActivityLog {
 			return logs;
 		}
 	}
-
 }
