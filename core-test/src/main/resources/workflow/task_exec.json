@@ -1,0 +1,16 @@
+{
+  "id": "6e7cce36-1ab2-45c8-baf5-88d5d726ea1d",
+  "name": "join_task",
+  "type": "ACTION",
+  "created_at": "2016-08-17 10:34:02",
+  "updated_at": "2016-08-17 10:34:04",
+  "workflow_name": "parallel_join_2",
+  "workflow_id": "0169affc-e6a1-4013-a59e-c89dfd5523f2",
+  "workflow_execution_id": "79d187f4-b8e5-4288-b2cd-ed27ee31e4b0",
+  "state": "SUCCESS",
+  "state_info": null,
+  "runtime_context": {"retry_cnt": 1},
+  "published": {"my_var": "my_val"},
+  "result": "my task result",
+  "processed": true
+}

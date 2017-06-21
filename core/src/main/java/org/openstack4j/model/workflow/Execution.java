@@ -28,11 +28,11 @@ public interface Execution extends ModelEntity, Buildable<ExecutionBuilder> {
     String getDescription();
 
     /**
-     * @return The name of the workflow that this task belongs to.
+     * @return The name of the workflow that this execution belongs to.
      */
     String getWorkflowName();
 
-    /**
+	/**
 	 * @return Execution state.
 	 */
 	State getState();
