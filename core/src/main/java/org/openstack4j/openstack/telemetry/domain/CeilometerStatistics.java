@@ -37,6 +37,7 @@ public class CeilometerStatistics implements Statistics {
    private String durationEndStr;
 
 	private Date durationStart;
+	
 	private Date durationEnd;
 
 	private Double max;
@@ -44,8 +45,10 @@ public class CeilometerStatistics implements Statistics {
 	private Double min;
 
 	private Integer period;
+
    @JsonProperty("period_start")
 	private Date periodStart;
+
    @JsonProperty("period_end")
 	private Date periodEnd;
 
@@ -194,8 +197,8 @@ public class CeilometerStatistics implements Statistics {
 				    .add("avg", avg).add("count", count).add("duration", duration)
 				    .add("durationStart", getDurationStart()).add("durationEnd", getDurationEnd())
 				    .add("min", min).add("max", max).add("sum", sum).add("period", period)
-				    .add("periodStart", getPeriodStart()).add("periodEnd", getPeriodEnd()).add("unit", unit)
-            .add("groupBy", getGroupBy())
+				    .add("periodStart", periodStart).add("periodEnd", periodEnd).add("unit", unit)
+				    .add("groupBy", groupBy)
 				    .toString();
 	}
 
