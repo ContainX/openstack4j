@@ -48,11 +48,11 @@ public class ScheduledPolicy implements ModelEntity {
 	private String recurrenceValue;
 
 	@JsonProperty("start_time")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHM)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMZ)
 	private Date startTime;
 
 	@JsonProperty("end_time")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHM)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMZ)
 	private Date endTime;
 	
 	public enum RecurrenceType {

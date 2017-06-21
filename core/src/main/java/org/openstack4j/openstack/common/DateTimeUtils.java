@@ -7,12 +7,12 @@ public class DateTimeUtils {
 	/**
 	 * DateTime format YYYY-MM-dd'T'HH:mm'Z'
 	 */
-	public static final String FORMAT_YMDHM = "YYYY-MM-dd'T'HH:mm'Z'";
+	public static final String FORMAT_YMDTHMZ = "YYYY-MM-dd'T'HH:mm'Z'";
 	
 	/**
 	 * DateTime format YYYY-MM-dd'T'HH:mm:ss'Z'
 	 */
-	public static final String FORMAT_YMDHMS = "YYYY-MM-dd'T'HH:mm:ss'Z'";
+	public static final String FORMAT_YMDTHMSZ = "YYYY-MM-dd'T'HH:mm:ss'Z'";
 	
 	/**
 	 * format date

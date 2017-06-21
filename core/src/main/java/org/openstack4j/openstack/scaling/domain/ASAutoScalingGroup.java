@@ -91,7 +91,7 @@ public class ASAutoScalingGroup implements ScalingGroup {
 	List<IdResourceEntity> securityGroups;
 
 	@JsonProperty("create_time")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
 	Date createTime;
 	
 	@JsonProperty("vpc_id")

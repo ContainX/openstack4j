@@ -33,11 +33,11 @@ public class ScalingActivityLogListOptions {
 	}
 
 	public ScalingActivityLogListOptions startTime(Date startTime) {
-		return add("start_time", DateTimeUtils.format(startTime, DateTimeUtils.FORMAT_YMDHMS));
+		return add("start_time", DateTimeUtils.format(startTime, DateTimeUtils.FORMAT_YMDTHMSZ));
 	}
 
 	public ScalingActivityLogListOptions endTime(Date endTime) {
-		return add("end_time", DateTimeUtils.format(endTime, DateTimeUtils.FORMAT_YMDHMS));
+		return add("end_time", DateTimeUtils.format(endTime, DateTimeUtils.FORMAT_YMDTHMSZ));
 	}
 
 	public ScalingActivityLogListOptions startNumber(Integer startNumber) {

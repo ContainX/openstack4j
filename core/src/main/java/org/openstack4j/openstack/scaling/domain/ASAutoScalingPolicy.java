@@ -71,7 +71,7 @@ public class ASAutoScalingPolicy implements ScalingPolicy {
 	private String policyStatus;
 
 	@JsonProperty("create_time")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
 	private Date createTime;
 	
 	public static class ASAutoScalingPolicys extends ListResult<ASAutoScalingPolicy> {

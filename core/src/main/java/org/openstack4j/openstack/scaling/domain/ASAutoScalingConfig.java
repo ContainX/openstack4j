@@ -56,7 +56,7 @@ public class ASAutoScalingConfig implements ScalingConfig {
 	private String tenant;
 	
 	@JsonProperty("create_time")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
 	private Date createTime;
 
 	public static class ASAutoScalingConfigs extends ListResult<ASAutoScalingConfig> {

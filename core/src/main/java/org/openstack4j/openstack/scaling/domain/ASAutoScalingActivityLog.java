@@ -43,11 +43,11 @@ public class ASAutoScalingActivityLog implements ScalingActivityLog {
 	private String status;
 
 	@JsonProperty("start_time")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
 	private Date startTime;
 
 	@JsonProperty("end_time")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
 	private Date endTime;
 
 	@JsonProperty
