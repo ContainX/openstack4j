@@ -43,14 +43,9 @@ public class CeilometerStatistics implements Statistics {
 	private Double min;
 
 	private Integer period;
-
    @JsonProperty("period_start")
-   private String periodStartStr;
-
-   @JsonProperty("period_end")
-   private String periodEndStr;
-
 	private Date periodStart;
+   @JsonProperty("period_end")
 	private Date periodEnd;
 
 	private Double sum;
@@ -142,9 +137,6 @@ public class CeilometerStatistics implements Statistics {
 	 */
 	@Override
 	public Date getPeriodStart() {
-      if (periodStart == null) {
-         periodStart = parseDate(periodStartStr);
-      }
       return periodStart;
 	}
 
@@ -153,9 +145,6 @@ public class CeilometerStatistics implements Statistics {
 	 */
 	@Override
 	public Date getPeriodEnd() {
-      if (periodEnd == null) {
-         periodEnd = parseDate(periodEndStr);
-      }
 		return periodEnd;
 	}
 
