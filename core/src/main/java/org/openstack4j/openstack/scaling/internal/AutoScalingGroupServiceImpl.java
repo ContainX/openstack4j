@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
 
+import com.google.common.base.Strings;
 import org.openstack4j.api.scaling.AutoScalingGroupService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroup;
@@ -31,7 +32,6 @@ import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
 import org.openstack4j.openstack.scaling.domain.action.ScalingGroupAction;
 import org.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
-import org.testng.util.Strings;
 
 /**
  *

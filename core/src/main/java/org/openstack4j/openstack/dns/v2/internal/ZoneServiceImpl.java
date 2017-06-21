@@ -93,7 +93,7 @@ public class ZoneServiceImpl extends BaseDNSServices implements ZoneService {
     @Override
     public List<? extends Zone> list(String type, String marker, String limit) {
         Invocation<DesignateZone.Zones> invocation = get(DesignateZone.Zones.class, uri(PATH_ZONES));
-        invocation.param("type", ZoneType.value(type));
+        invocation.param("type", type);
         invocation.param("marker", marker);
         invocation.param("limit", limit);
         return invocation.execute().getList();
@@ -112,7 +112,7 @@ public class ZoneServiceImpl extends BaseDNSServices implements ZoneService {
         verifyParameters(zoneId, router);
         HashMap<Object, Object> entity = Maps.newHashMap();
         entity.put("router", router);
-        return post(DesignateZone.Router.class, uri(PATH_ZONES), "/", zoneId, PATH_DISASSOCIATE).entity(router).execute();
+        return post(DesignateZone.Router.class, uri(PATH_ZONES), "/", zoneId, PATH_DISASSOCIATE).entity(entity).execute();
     }
 
     private void verifyParameters(String zoneId, DesignateZone.Router router) {

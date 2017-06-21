@@ -28,7 +28,7 @@ public enum ZoneType {
 
 	@JsonValue
 	public String value() {
-		return name().toUpperCase();
+		return name().toLowerCase();
 	}
 
 	//default to PUBLIC
