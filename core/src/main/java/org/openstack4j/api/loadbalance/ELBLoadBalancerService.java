@@ -13,54 +13,27 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.loadbalance.domain;
+package org.openstack4j.api.loadbalance;
 
-import java.util.Map;
+import java.util.List;
 
-import org.openstack4j.model.ModelEntity;
+import org.openstack4j.common.RestService;
+import org.openstack4j.model.loadbalance.LoadBalancer;
+import org.openstack4j.model.loadbalance.LoadBalancerCreate;
+import org.openstack4j.model.loadbalance.LoadBalancerUpdate;
+import org.openstack4j.openstack.loadbalance.domain.ELBJob;
+import org.openstack4j.openstack.loadbalance.options.ELBLoadBalancerListOptions;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@Getter
-@ToString
-@Builder(toBuilder = true)
-@NoArgsConstructor
-@AllArgsConstructor
-public class ELBAsyncJob implements ModelEntity {
-	private static final long serialVersionUID = -4122799701625680047L;
+public interface ELBLoadBalancerService extends RestService {
+	ELBJob create(LoadBalancerCreate loadBalancer);
 	
-	@JsonProperty
-	private String status;
+	ELBJob delete(String loadBalancerId);
 	
-	@JsonProperty
-	private Map<String, Object> entities;
+	ELBJob update(String loadBalancerId, LoadBalancerUpdate loadBalancer);
 	
-	@JsonProperty("job_id")
-	private String jobId;
+	LoadBalancer get(String loadBalancerId);
 	
-	@JsonProperty("job_type")
-	private String jobType;
+	List<? extends LoadBalancer> list();
 	
-	@JsonProperty("error_code")
-	private String errorCode;
-	
-	@JsonProperty("fail_reason")
-	private String failReason;
-	
-	public enum Status {
-		SUCCESS,
-		FAIL,
-		RUNNING,
-		INIT,
-		;
-	}
-	
-	
-
+	List<? extends LoadBalancer> list(ELBLoadBalancerListOptions options);
 }

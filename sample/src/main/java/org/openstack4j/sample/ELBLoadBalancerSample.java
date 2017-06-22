@@ -19,8 +19,8 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
-import org.openstack4j.model.loadbalance.ElasticLoadBalancer;
-import org.openstack4j.openstack.loadbalance.domain.ELBAsyncJob;
+import org.openstack4j.model.loadbalance.LoadBalancer;
+import org.openstack4j.openstack.loadbalance.domain.AsyncJob;
 import org.openstack4j.openstack.loadbalance.domain.ELBJob;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancerCreate;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancerCreate.Type;
@@ -59,7 +59,7 @@ public class ELBLoadBalancerSample extends AbstractSample {
 	@Test
 	public void testUpdateLoadBalancer() {
 		String loadBalancerId = "";
-		ElasticLoadBalancer loadBalancer = osclient.elasticLoadBalance().loadBalancers().get(loadBalancerId);
+		LoadBalancer loadBalancer = osclient.elasticLoadBalance().loadBalancers().get(loadBalancerId);
 		String after = new StringBuilder(loadBalancer.getName()).reverse().toString();
 		ELBLoadBalancerUpdate update = ELBLoadBalancerUpdate.fromLoadBalancer(loadBalancer).toBuilder().name(after)
 				.build();
@@ -71,22 +71,22 @@ public class ELBLoadBalancerSample extends AbstractSample {
 	@Test
 	public void testGetLoadBalancer() {
 		String loadBalancerId = "";
-		ElasticLoadBalancer loadBalancer = osclient.elasticLoadBalance().loadBalancers().get(loadBalancerId);
+		LoadBalancer loadBalancer = osclient.elasticLoadBalance().loadBalancers().get(loadBalancerId);
 		logger.info("get load balancer: {}", loadBalancer);
 		assertTrue(loadBalancer.getId().equals(loadBalancerId));
 	}
 
 	@Test
 	public void testListLoadBalancer() {
-		List<? extends ElasticLoadBalancer> all = osclient.elasticLoadBalance().loadBalancers().list();
+		List<? extends LoadBalancer> all = osclient.elasticLoadBalance().loadBalancers().list();
 		logger.info("list load balancer all: {}", all);
 
 		String name = "elb-4-test";
 		ELBLoadBalancerListOptions options = ELBLoadBalancerListOptions.create().name(name);
-		List<? extends ElasticLoadBalancer> list = osclient.elasticLoadBalance().loadBalancers().list(options);
+		List<? extends LoadBalancer> list = osclient.elasticLoadBalance().loadBalancers().list(options);
 		logger.info("list load balancer with options: {}", list);
 		if (list != null) {
-			for (ElasticLoadBalancer loadBalancer : list) {
+			for (LoadBalancer loadBalancer : list) {
 				assertTrue(name.equals(loadBalancer.getName()));
 			}
 		}
@@ -95,7 +95,7 @@ public class ELBLoadBalancerSample extends AbstractSample {
 	@Test
 	public void testGetJob() {
 		String jobId = "2c9eb2c05cbc6a07015cc9b371ee3be3";
-		ELBAsyncJob job = osclient.elasticLoadBalance().jobs().get(jobId);
+		AsyncJob job = osclient.elasticLoadBalance().jobs().get(jobId);
 	}
 
 }

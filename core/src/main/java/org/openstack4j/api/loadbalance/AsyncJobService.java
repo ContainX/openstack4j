@@ -13,14 +13,11 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.loadbalance.internal;
+package org.openstack4j.api.loadbalance;
 
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
+import org.openstack4j.common.RestService;
+import org.openstack4j.openstack.loadbalance.domain.AsyncJob;
 
-public class BaseElasticLoadBalanceServices extends BaseOpenStackService {
-
-	public BaseElasticLoadBalanceServices() {
-		super(ServiceType.LOAD_BALANCER);
-	}
+public interface AsyncJobService extends RestService {
+	AsyncJob get(String jobId);
 }

@@ -18,7 +18,7 @@ package org.openstack4j.openstack.loadbalance.domain;
 import java.util.Date;
 import java.util.List;
 
-import org.openstack4j.model.loadbalance.ElasticLoadBalancer;
+import org.openstack4j.model.loadbalance.LoadBalancer;
 import org.openstack4j.openstack.common.DateTimeUtils;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -36,7 +36,7 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ELBLoadBalancer implements ElasticLoadBalancer {
+public class ELBLoadBalancer implements LoadBalancer {
 
 	private static final long serialVersionUID = 742286551840027186L;
 

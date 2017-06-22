@@ -15,9 +15,17 @@
  *******************************************************************************/
 package org.openstack4j.model.loadbalance;
 
+import java.util.Date;
+
 import org.openstack4j.model.ModelEntity;
 
-public interface ElasticLoadBalancerUpdate extends ModelEntity {
+public interface LoadBalancer extends ModelEntity {
+
+	/**
+	 * @return load balancer id
+	 */
+	String getId();
+
 	/**
 	 * @return name of load balancer
 	 */
@@ -29,12 +37,52 @@ public interface ElasticLoadBalancerUpdate extends ModelEntity {
 	String getDescription();
 
 	/**
+	 * @return vpc id of load balancer
+	 */
+	String getVpcId();
+
+	/**
 	 * @return bandwidth of load balancer
 	 */
 	Integer getBandwidth();
 
 	/**
+	 * @return load balancer type
+	 */
+	String getType();
+	
+	/**
 	 * @return administration state of load balancer
 	 */
 	Integer getAdminStateUp();
+	
+	/**
+	 * @return vip subnet id of load balancer
+	 */
+	String getVipSubnetId();
+	
+	/**
+	 * @return security group id
+	 */
+	String getSecurityGroupId();
+	
+	/**
+	 * @return vip address
+	 */
+	String getVipAddress();
+	
+	/**
+	 * @return load balancer status
+	 */
+	String getStatus();
+	
+	/**
+	 * @return creation time of load balancer
+	 */
+	Date getCreateTime();
+	
+	/**
+	 * @return update time of load balancer
+	 */
+	Date getUpdateTime();
 }

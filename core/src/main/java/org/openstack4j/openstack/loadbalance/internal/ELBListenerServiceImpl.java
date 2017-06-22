@@ -33,7 +33,7 @@ import org.openstack4j.openstack.loadbalance.options.ELBListenerListOptions;
 
 import com.google.common.base.Strings;
 
-public class ELBListenerServiceImpl extends BaseElasticLoadBalanceServices implements ELBListenerService {
+public class ELBListenerServiceImpl extends BaseELBServices implements ELBListenerService {
 	private static final String API_PATH = "/elbaas/listeners";
 
 	@Override

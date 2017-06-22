@@ -83,9 +83,9 @@ import org.openstack4j.api.identity.v3.UserService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.image.v2.TaskService;
 import org.openstack4j.api.loadbalance.ELBListenerService;
-import org.openstack4j.api.loadbalance.ElasticAsyncJobService;
-import org.openstack4j.api.loadbalance.ElasticLoadBalanceService;
-import org.openstack4j.api.loadbalance.ElasticLoadBalancerService;
+import org.openstack4j.api.loadbalance.AsyncJobService;
+import org.openstack4j.api.loadbalance.ELBService;
+import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
 import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.SchedulerStatsService;
 import org.openstack4j.api.manila.SecurityServiceService;
@@ -258,9 +258,9 @@ import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBListenerServiceImpl;
-import org.openstack4j.openstack.loadbalance.internal.ElasticAsyncJobServiceImpl;
-import org.openstack4j.openstack.loadbalance.internal.ElasticLoadBalanceServiceImpl;
-import org.openstack4j.openstack.loadbalance.internal.ElasticLoadBalancerServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.AsyncJobServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBLoadBalancerServiceImpl;
 import org.openstack4j.openstack.magnum.internal.MagnumServiceImpl;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;
@@ -581,11 +581,11 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(AutoScalingQuotaService.class, AutoScalingQuotaServiceImpl.class);
 		
 		//load balance
-		bind(ElasticLoadBalanceService.class, ElasticLoadBalanceServiceImpl.class);
-		bind(ElasticLoadBalancerService.class, ElasticLoadBalancerServiceImpl.class);
+		bind(ELBService.class, ELBServiceImpl.class);
+		bind(ELBLoadBalancerService.class, ELBLoadBalancerServiceImpl.class);
 		bind(ELBListenerService.class, ELBListenerServiceImpl.class);
 		
-		bind(ElasticAsyncJobService.class, ElasticAsyncJobServiceImpl.class);
+		bind(AsyncJobService.class, AsyncJobServiceImpl.class);
     }
 
     /**

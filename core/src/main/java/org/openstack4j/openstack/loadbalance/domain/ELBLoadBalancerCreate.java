@@ -15,7 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.loadbalance.domain;
 
-import org.openstack4j.model.loadbalance.ElasticLoadBalancerCreate;
+import org.openstack4j.model.loadbalance.LoadBalancerCreate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,7 +30,7 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ELBLoadBalancerCreate implements ElasticLoadBalancerCreate {
+public class ELBLoadBalancerCreate implements LoadBalancerCreate {
 
 	private static final long serialVersionUID = 742286551840027186L;
 

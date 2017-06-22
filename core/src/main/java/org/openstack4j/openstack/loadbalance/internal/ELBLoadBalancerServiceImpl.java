@@ -19,10 +19,10 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
 
-import org.openstack4j.api.loadbalance.ElasticLoadBalancerService;
-import org.openstack4j.model.loadbalance.ElasticLoadBalancer;
-import org.openstack4j.model.loadbalance.ElasticLoadBalancerCreate;
-import org.openstack4j.model.loadbalance.ElasticLoadBalancerUpdate;
+import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
+import org.openstack4j.model.loadbalance.LoadBalancer;
+import org.openstack4j.model.loadbalance.LoadBalancerCreate;
+import org.openstack4j.model.loadbalance.LoadBalancerUpdate;
 import org.openstack4j.openstack.loadbalance.domain.ELBJob;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancer;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancer.ELBLoadBalancers;
@@ -30,12 +30,12 @@ import org.openstack4j.openstack.loadbalance.options.ELBLoadBalancerListOptions;
 
 import com.google.common.base.Strings;
 
-public class ElasticLoadBalancerServiceImpl extends BaseElasticLoadBalanceServices
-		implements ElasticLoadBalancerService {
+public class ELBLoadBalancerServiceImpl extends BaseELBServices
+		implements ELBLoadBalancerService {
 	private static final String API_PATH = "/elbaas/loadbalancers";
 
 	@Override
-	public ELBJob create(ElasticLoadBalancerCreate loadBalancer) {
+	public ELBJob create(LoadBalancerCreate loadBalancer) {
 //		checkArgument(loadBalancer != null, "loadBalancer is required");
 //		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getName()), "name is required");
 //		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getVpcId()), "vpcId is required");
@@ -52,7 +52,7 @@ public class ElasticLoadBalancerServiceImpl extends BaseElasticLoadBalanceServic
 	}
 
 	@Override
-	public ELBJob update(String loadBalancerId, ElasticLoadBalancerUpdate loadBalancer) {
+	public ELBJob update(String loadBalancerId, LoadBalancerUpdate loadBalancer) {
 		checkArgument(!Strings.isNullOrEmpty(loadBalancerId), "loadBalancerId is required");
 		checkArgument(loadBalancer != null, "loadBalancer is required");
 
@@ -60,18 +60,18 @@ public class ElasticLoadBalancerServiceImpl extends BaseElasticLoadBalanceServic
 	}
 
 	@Override
-	public ElasticLoadBalancer get(String loadBalancerId) {
+	public LoadBalancer get(String loadBalancerId) {
 		checkArgument(!Strings.isNullOrEmpty(loadBalancerId), "loadBalancerId is required");
 		return get(ELBLoadBalancer.class, uri("%s/%s", API_PATH, loadBalancerId)).execute();
 	}
 
 	@Override
-	public List<? extends ElasticLoadBalancer> list() {
+	public List<? extends LoadBalancer> list() {
 		return get(ELBLoadBalancers.class, uri(API_PATH)).execute().getList();
 	}
 
 	@Override
-	public List<? extends ElasticLoadBalancer> list(ELBLoadBalancerListOptions options) {
+	public List<? extends LoadBalancer> list(ELBLoadBalancerListOptions options) {
 		checkArgument(options != null, "options is required");
 		return get(ELBLoadBalancers.class, uri(API_PATH)).params(options.getOptions()).execute().getList();
 	}

@@ -13,74 +13,22 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.model.loadbalance;
+package org.openstack4j.openstack.loadbalance.internal;
 
-import org.openstack4j.model.ModelEntity;
+import org.openstack4j.api.Apis;
+import org.openstack4j.api.loadbalance.AsyncJobService;
+import org.openstack4j.api.loadbalance.ELBService;
+import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
 
-public interface ElasticLoadBalancerCreate extends ModelEntity {
+public class ELBServiceImpl extends BaseELBServices implements ELBService {
+	
+	@Override
+	public ELBLoadBalancerService loadBalancers() {
+		return Apis.get(ELBLoadBalancerService.class);
+	}
 
-	/**
-	 * @return name of load balancer
-	 */
-	String getName();
-
-	/**
-	 * @return description of load balancer
-	 */
-	String getDescription();
-
-	/**
-	 * @return vpc id of load balancer
-	 */
-	String getVpcId();
-
-	/**
-	 * @return bandwidth of load balancer
-	 */
-	Integer getBandwidth();
-
-	/**
-	 * @return load balancer type
-	 */
-	String getType();
-	
-	/**
-	 * @return administration state of load balancer
-	 */
-	Integer getAdminStateUp();
-	
-	/**
-	 * @return vip subnet id of load balancer
-	 */
-	String getVipSubnetId();
-	
-	/**
-	 * @return available zone id
-	 */
-	String getAzId();
-	
-	/**
-	 * @return charge mode
-	 */
-	String getChargeMode();
-	
-	/**
-	 * @return eip type
-	 */
-	String getEipType();
-	
-	/**
-	 * @return security group id
-	 */
-	String getSecurityGroupId();
-	
-	/**
-	 * @return vip address
-	 */
-	String getVipAddress();
-	
-	/**
-	 * @return tenant id
-	 */
-	String getTenantId();
+	@Override
+	public AsyncJobService jobs() {
+		return Apis.get(AsyncJobService.class);
+	}
 }

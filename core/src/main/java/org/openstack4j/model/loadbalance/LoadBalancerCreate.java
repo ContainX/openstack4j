@@ -13,23 +13,74 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.loadbalance.internal;
+package org.openstack4j.model.loadbalance;
 
-import org.openstack4j.api.Apis;
-import org.openstack4j.api.loadbalance.ElasticAsyncJobService;
-import org.openstack4j.api.loadbalance.ElasticLoadBalanceService;
-import org.openstack4j.api.loadbalance.ElasticLoadBalancerService;
-import org.openstack4j.openstack.scaling.internal.BaseAutoScalingServices;
+import org.openstack4j.model.ModelEntity;
 
-public class ElasticLoadBalanceServiceImpl extends BaseAutoScalingServices implements ElasticLoadBalanceService {
+public interface LoadBalancerCreate extends ModelEntity {
+
+	/**
+	 * @return name of load balancer
+	 */
+	String getName();
+
+	/**
+	 * @return description of load balancer
+	 */
+	String getDescription();
+
+	/**
+	 * @return vpc id of load balancer
+	 */
+	String getVpcId();
+
+	/**
+	 * @return bandwidth of load balancer
+	 */
+	Integer getBandwidth();
+
+	/**
+	 * @return load balancer type
+	 */
+	String getType();
 	
-	@Override
-	public ElasticLoadBalancerService loadBalancers() {
-		return Apis.get(ElasticLoadBalancerService.class);
-	}
-
-	@Override
-	public ElasticAsyncJobService jobs() {
-		return Apis.get(ElasticAsyncJobService.class);
-	}
+	/**
+	 * @return administration state of load balancer
+	 */
+	Integer getAdminStateUp();
+	
+	/**
+	 * @return vip subnet id of load balancer
+	 */
+	String getVipSubnetId();
+	
+	/**
+	 * @return available zone id
+	 */
+	String getAzId();
+	
+	/**
+	 * @return charge mode
+	 */
+	String getChargeMode();
+	
+	/**
+	 * @return eip type
+	 */
+	String getEipType();
+	
+	/**
+	 * @return security group id
+	 */
+	String getSecurityGroupId();
+	
+	/**
+	 * @return vip address
+	 */
+	String getVipAddress();
+	
+	/**
+	 * @return tenant id
+	 */
+	String getTenantId();
 }

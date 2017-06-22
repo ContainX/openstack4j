@@ -27,7 +27,7 @@ import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
-import org.openstack4j.api.loadbalance.ElasticLoadBalanceService;
+import org.openstack4j.api.loadbalance.ELBService;
 import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
@@ -336,7 +336,7 @@ public interface OSClient<T extends OSClient<T>> {
 		/**
 		 * @return the Huawei Elastic Load Balance service
 		 */
-		ElasticLoadBalanceService elasticLoadBalance();
+		ELBService elasticLoadBalance();
 	}
 
 	/**

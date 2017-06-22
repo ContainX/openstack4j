@@ -13,20 +13,54 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.loadbalance.internal;
+package org.openstack4j.openstack.loadbalance.domain;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import java.util.Map;
 
-import org.openstack4j.api.loadbalance.ElasticAsyncJobService;
-import org.openstack4j.openstack.loadbalance.domain.ELBAsyncJob;
+import org.openstack4j.model.ModelEntity;
 
-import com.google.common.base.Strings;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ElasticAsyncJobServiceImpl extends BaseElasticLoadBalanceServices implements ElasticAsyncJobService {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-	@Override
-	public ELBAsyncJob get(String jobId) {
-		checkArgument(!Strings.isNullOrEmpty(jobId), "jobId is required");
-		return get(ELBAsyncJob.class, uri("/jobs/%s", jobId)).execute();
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class AsyncJob implements ModelEntity {
+	private static final long serialVersionUID = -4122799701625680047L;
+	
+	@JsonProperty
+	private String status;
+	
+	@JsonProperty
+	private Map<String, Object> entities;
+	
+	@JsonProperty("job_id")
+	private String jobId;
+	
+	@JsonProperty("job_type")
+	private String jobType;
+	
+	@JsonProperty("error_code")
+	private String errorCode;
+	
+	@JsonProperty("fail_reason")
+	private String failReason;
+	
+	public enum Status {
+		SUCCESS,
+		FAIL,
+		RUNNING,
+		INIT,
+		;
 	}
+	
+	
+
 }

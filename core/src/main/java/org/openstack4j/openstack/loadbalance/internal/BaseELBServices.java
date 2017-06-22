@@ -13,27 +13,14 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.openstack.loadbalance.internal;
 
-import java.util.List;
+import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-import org.openstack4j.common.RestService;
-import org.openstack4j.model.loadbalance.ElasticLoadBalancer;
-import org.openstack4j.model.loadbalance.ElasticLoadBalancerCreate;
-import org.openstack4j.model.loadbalance.ElasticLoadBalancerUpdate;
-import org.openstack4j.openstack.loadbalance.domain.ELBJob;
-import org.openstack4j.openstack.loadbalance.options.ELBLoadBalancerListOptions;
+public class BaseELBServices extends BaseOpenStackService {
 
-public interface ElasticLoadBalancerService extends RestService {
-	ELBJob create(ElasticLoadBalancerCreate loadBalancer);
-	
-	ELBJob delete(String loadBalancerId);
-	
-	ELBJob update(String loadBalancerId, ElasticLoadBalancerUpdate loadBalancer);
-	
-	ElasticLoadBalancer get(String loadBalancerId);
-	
-	List<? extends ElasticLoadBalancer> list();
-	
-	List<? extends ElasticLoadBalancer> list(ELBLoadBalancerListOptions options);
+	public BaseELBServices() {
+		super(ServiceType.LOAD_BALANCER);
+	}
 }
