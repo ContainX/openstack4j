@@ -82,6 +82,7 @@ import org.openstack4j.api.identity.v3.TokenService;
 import org.openstack4j.api.identity.v3.UserService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.image.v2.TaskService;
+import org.openstack4j.api.loadbalance.ELBListenerService;
 import org.openstack4j.api.loadbalance.ElasticAsyncJobService;
 import org.openstack4j.api.loadbalance.ElasticLoadBalanceService;
 import org.openstack4j.api.loadbalance.ElasticLoadBalancerService;
@@ -256,6 +257,7 @@ import org.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBListenerServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ElasticAsyncJobServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ElasticLoadBalanceServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ElasticLoadBalancerServiceImpl;
@@ -581,6 +583,8 @@ public class DefaultAPIProvider implements APIProvider {
 		//load balance
 		bind(ElasticLoadBalanceService.class, ElasticLoadBalanceServiceImpl.class);
 		bind(ElasticLoadBalancerService.class, ElasticLoadBalancerServiceImpl.class);
+		bind(ELBListenerService.class, ELBListenerServiceImpl.class);
+		
 		bind(ElasticAsyncJobService.class, ElasticAsyncJobServiceImpl.class);
     }
 
