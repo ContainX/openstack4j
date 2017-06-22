@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.openstack4j.model.telemetry.Statistics;
 import org.slf4j.Logger;
@@ -21,8 +22,7 @@ public class CeilometerStatistics implements Statistics {
    private static final Logger LOG = LoggerFactory.getLogger(CeilometerStatistics.class);
 	private static final long serialVersionUID = 1L;
 
-   private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS";
-   private static final int DATE_FORMAT_LENGTH = 23;
+   private static final String MILLIS_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 
 	private Double avg;
 
@@ -47,9 +47,13 @@ public class CeilometerStatistics implements Statistics {
 	private Integer period;
 
    @JsonProperty("period_start")
-	private Date periodStart;
+   private String periodStartStr;
 
    @JsonProperty("period_end")
+   private String periodEndStr;
+
+	private Date periodStart;
+
 	private Date periodEnd;
 
 	private Double sum;
@@ -142,6 +146,9 @@ public class CeilometerStatistics implements Statistics {
 	 */
 	@Override
 	public Date getPeriodStart() {
+      if (periodStart == null) {
+         periodStart = parseDate(periodStartStr);
+      }
       return periodStart;
 	}
 
@@ -150,6 +157,9 @@ public class CeilometerStatistics implements Statistics {
 	 */
 	@Override
 	public Date getPeriodEnd() {
+      if (periodEnd == null) {
+         periodEnd = parseDate(periodEndStr);
+      }
 		return periodEnd;
 	}
 
@@ -170,34 +180,45 @@ public class CeilometerStatistics implements Statistics {
   }
   
   private Date parseDate(String date) {
-    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+      SimpleDateFormat sdf = new SimpleDateFormat(MILLIS_DATE_FORMAT);
+      sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
     try {
-      return sdf.parse(getTrimmedDate(date));
+         return sdf.parse(getParseableDate(date));
     } catch (ParseException e) {
       LOG.warn("Error while parsing date", e);
     }
     return null;
   }
 
-   private String getTrimmedDate(String date) {
-      // convert "2017-06-19T10:00:00.395000"
-      if (date.length() > DATE_FORMAT_LENGTH) {
-         // to "2017-06-19T10:00:00.395"
-         return date.substring(0, DATE_FORMAT_LENGTH - 1);
+   /**
+    * Modifies the date string to have the expected date format ("yyyy-MM-dd'T'HH:mm:ss.SSS")
+    * 
+    * @param date
+    * @return the date with the correct format
+    */
+   private String getParseableDate(String date) {
+      // e.g. [ "2017-06-20 13:00:00" , "395000" ] or [] if no decimal
+      String[] sdate = date.split("\\.");
+      if (sdate.length > 1) {
+         return sdate[0] + "." + getExpectedDecimals(sdate[1]);
       }
-      return date;
+      return date + ".000";
    }
 
-	/**
-	 * {@inheritDoc}
-	 */
+   private String getExpectedDecimals(String decimals) {
+      return (decimals + "000").substring(0, 3);
+   }
+
+   /**
+    * {@inheritDoc}
+    */
 	@Override
 	public String toString() {
 		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("avg", avg).add("count", count).add("duration", duration)
 				    .add("durationStart", getDurationStart()).add("durationEnd", getDurationEnd())
 				    .add("min", min).add("max", max).add("sum", sum).add("period", period)
-				    .add("periodStart", periodStart).add("periodEnd", periodEnd).add("unit", unit)
+				    .add("periodStart", getPeriodStart()).add("periodEnd", getPeriodEnd()).add("unit", unit)
 				    .add("groupBy", groupBy)
 				    .toString();
 	}
