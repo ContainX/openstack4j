@@ -35,6 +35,7 @@ import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.loadbalance.ElasticLoadBalanceService;
 import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
@@ -600,6 +601,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 			return Apis.get(AutoScalingService.class);
 		}
 
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public ElasticLoadBalanceService elasticLoadBalance() {
+			return Apis.get(ElasticLoadBalanceService.class);
+		}
     }
 
 

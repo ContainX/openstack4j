@@ -45,8 +45,8 @@ import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.api.dns.v2.DNSService;
-import org.openstack4j.api.dns.v2.RecordsetService;
 import org.openstack4j.api.dns.v2.PTRService;
+import org.openstack4j.api.dns.v2.RecordsetService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.gbp.ExternalPolicyService;
 import org.openstack4j.api.gbp.ExternalSegmentService;
@@ -82,6 +82,9 @@ import org.openstack4j.api.identity.v3.TokenService;
 import org.openstack4j.api.identity.v3.UserService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.image.v2.TaskService;
+import org.openstack4j.api.loadbalance.ElasticAsyncJobService;
+import org.openstack4j.api.loadbalance.ElasticLoadBalanceService;
+import org.openstack4j.api.loadbalance.ElasticLoadBalancerService;
 import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.SchedulerStatsService;
 import org.openstack4j.api.manila.SecurityServiceService;
@@ -217,8 +220,8 @@ import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
 import org.openstack4j.openstack.dns.v2.internal.DNSServiceImpl;
-import org.openstack4j.openstack.dns.v2.internal.RecordsetServiceImpl;
 import org.openstack4j.openstack.dns.v2.internal.PTRServiceImpl;
+import org.openstack4j.openstack.dns.v2.internal.RecordsetServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalPolicyServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalSegmentServiceImpl;
 import org.openstack4j.openstack.gbp.internal.GbpServiceImpl;
@@ -253,6 +256,9 @@ import org.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ElasticAsyncJobServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ElasticLoadBalanceServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ElasticLoadBalancerServiceImpl;
 import org.openstack4j.openstack.magnum.internal.MagnumServiceImpl;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;
@@ -571,6 +577,11 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(AutoScalingPolicyService.class, AutoScalingPolicyServiceImpl.class);
 		bind(AutoScalingActivityLogService.class, AutoScalingActivityLogServiceImpl.class);
 		bind(AutoScalingQuotaService.class, AutoScalingQuotaServiceImpl.class);
+		
+		//load balance
+		bind(ElasticLoadBalanceService.class, ElasticLoadBalanceServiceImpl.class);
+		bind(ElasticLoadBalancerService.class, ElasticLoadBalancerServiceImpl.class);
+		bind(ElasticAsyncJobService.class, ElasticAsyncJobServiceImpl.class);
     }
 
     /**

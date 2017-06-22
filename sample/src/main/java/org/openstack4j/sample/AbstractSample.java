@@ -43,7 +43,7 @@ public class AbstractSample {
 		endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_EYE,
 				"https://ces.eu-de.otc.t-systems.com/autoscaling-api/v1/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.LOAD_BALANCER,
-				"https://elb.eu-de.otc.t-systems.com/autoscaling-api/v1/%(project_id)s");
+				"https://elb.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
