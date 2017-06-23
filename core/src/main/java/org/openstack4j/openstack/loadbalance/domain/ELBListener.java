@@ -101,6 +101,12 @@ public class ELBListener implements Listener {
 	@JsonProperty("healthcheck_id")
 	private String healthCheckId;
 
+	@JsonProperty("tcp_draining")
+	private Boolean tcpDraining;
+
+	@JsonProperty("tcp_draining_timeout")
+	private Integer tcpDrainingTimeout;
+
 	@JsonProperty("create_time")
 	private Date createTime;
 

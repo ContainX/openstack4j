@@ -22,7 +22,6 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.loadbalance.Listener;
 import org.openstack4j.model.loadbalance.ListenerCreate;
 import org.openstack4j.model.loadbalance.ListenerUpdate;
-import org.openstack4j.model.loadbalance.ListenerUpdateResp;
 import org.openstack4j.openstack.loadbalance.options.ELBListenerListOptions;
 
 public interface ELBListenerService extends RestService {
@@ -30,7 +29,7 @@ public interface ELBListenerService extends RestService {
 	
 	ActionResponse delete(String listenerId);
 	
-	ListenerUpdateResp update(String listenerId, ListenerUpdate listener);
+	Listener update(String listenerId, ListenerUpdate listener);
 	
 	Listener get(String listenerId);
 	

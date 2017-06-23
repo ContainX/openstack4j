@@ -24,11 +24,9 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.loadbalance.Listener;
 import org.openstack4j.model.loadbalance.ListenerCreate;
 import org.openstack4j.model.loadbalance.ListenerUpdate;
-import org.openstack4j.model.loadbalance.ListenerUpdateResp;
 import org.openstack4j.openstack.loadbalance.domain.ELBListener;
-import org.openstack4j.openstack.loadbalance.domain.ELBListenerCreate;
-import org.openstack4j.openstack.loadbalance.domain.ELBListenerUpdateResp;
 import org.openstack4j.openstack.loadbalance.domain.ELBListener.ELBListeners;
+import org.openstack4j.openstack.loadbalance.domain.ELBListenerCreate;
 import org.openstack4j.openstack.loadbalance.options.ELBListenerListOptions;
 
 import com.google.common.base.Strings;
@@ -57,11 +55,11 @@ public class ELBListenerServiceImpl extends BaseELBServices implements ELBListen
 	}
 
 	@Override
-	public ListenerUpdateResp update(String listenerId, ListenerUpdate listener) {
+	public Listener update(String listenerId, ListenerUpdate listener) {
 		checkArgument(!Strings.isNullOrEmpty(listenerId), "listenerId is required");
 		checkArgument(listener != null, "listener is required");
 
-		return put(ELBListenerUpdateResp.class, uri("%s/%s", API_PATH, listenerId)).entity(listener).execute();
+		return put(ELBListener.class, uri("%s/%s", API_PATH, listenerId)).entity(listener).execute();
 	}
 
 	@Override

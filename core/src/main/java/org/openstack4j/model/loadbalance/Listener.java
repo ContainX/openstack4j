@@ -102,6 +102,16 @@ public interface Listener extends ModelEntity {
 	String getHealthCheckId();
 	
 	/**
+	 * @return whether tcp draining
+	 */
+	Boolean getTcpDraining();
+	
+	/**
+	 * @return tcp draining timeout
+	 */
+	Integer getTcpDrainingTimeout();
+	
+	/**
 	 * @return create time
 	 */
 	Date getCreateTime();
