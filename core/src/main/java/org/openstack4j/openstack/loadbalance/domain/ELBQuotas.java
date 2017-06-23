@@ -13,20 +13,29 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.openstack.loadbalance.domain;
 
-import org.openstack4j.common.RestService;
+import java.util.List;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
-	
-	ELBListenerService listeners();
-	
-	ELBHealthCheckService healthchecks();
-	
-	ELBServerService servers();
-	
-	ELBQuotaService quotas();
-	
-	AsyncJobService jobs();
+import org.openstack4j.model.loadbalance.Quotas;
+
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonRootName("quotas")
+public class ELBQuotas implements Quotas {
+
+	private static final long serialVersionUID = -5590384808188502565L;
+
+	private List<Resource> resources;
 }

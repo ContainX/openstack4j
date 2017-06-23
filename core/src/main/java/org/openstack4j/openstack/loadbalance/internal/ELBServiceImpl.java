@@ -21,6 +21,7 @@ import org.openstack4j.api.loadbalance.ELBHealthCheckService;
 import org.openstack4j.api.loadbalance.ELBListenerService;
 import org.openstack4j.api.loadbalance.ELBService;
 import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
+import org.openstack4j.api.loadbalance.ELBQuotaService;
 import org.openstack4j.api.loadbalance.ELBServerService;
 
 public class ELBServiceImpl extends BaseELBServices implements ELBService {
@@ -43,6 +44,11 @@ public class ELBServiceImpl extends BaseELBServices implements ELBService {
 	@Override
 	public ELBServerService servers() {
 		return Apis.get(ELBServerService.class);
+	}
+	
+	@Override
+	public ELBQuotaService quotas() {
+		return Apis.get(ELBQuotaService.class);
 	}
 
 	@Override

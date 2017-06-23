@@ -16,17 +16,8 @@
 package org.openstack4j.api.loadbalance;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.loadbalance.Quotas;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
-	
-	ELBListenerService listeners();
-	
-	ELBHealthCheckService healthchecks();
-	
-	ELBServerService servers();
-	
-	ELBQuotaService quotas();
-	
-	AsyncJobService jobs();
+public interface ELBQuotaService extends RestService {
+	Quotas list();
 }

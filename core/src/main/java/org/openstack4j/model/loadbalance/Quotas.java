@@ -13,20 +13,14 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.model.loadbalance;
 
-import org.openstack4j.common.RestService;
+import java.util.List;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.loadbalance.domain.Resource;
+
+public interface Quotas extends ModelEntity {
 	
-	ELBListenerService listeners();
-	
-	ELBHealthCheckService healthchecks();
-	
-	ELBServerService servers();
-	
-	ELBQuotaService quotas();
-	
-	AsyncJobService jobs();
+	List<Resource> getResources();
 }

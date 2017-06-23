@@ -87,6 +87,7 @@ import org.openstack4j.api.loadbalance.AsyncJobService;
 import org.openstack4j.api.loadbalance.ELBHealthCheckService;
 import org.openstack4j.api.loadbalance.ELBService;
 import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
+import org.openstack4j.api.loadbalance.ELBQuotaService;
 import org.openstack4j.api.loadbalance.ELBServerService;
 import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.SchedulerStatsService;
@@ -264,6 +265,7 @@ import org.openstack4j.openstack.loadbalance.internal.AsyncJobServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBHealthCheckServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBLoadBalancerServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBQuotaServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBServerServiceImpl;
 import org.openstack4j.openstack.magnum.internal.MagnumServiceImpl;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
@@ -590,6 +592,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ELBListenerService.class, ELBListenerServiceImpl.class);
 		bind(ELBHealthCheckService.class, ELBHealthCheckServiceImpl.class);
 		bind(ELBServerService.class, ELBServerServiceImpl.class);
+		bind(ELBQuotaService.class, ELBQuotaServiceImpl.class);
 		
 		bind(AsyncJobService.class, AsyncJobServiceImpl.class);
     }

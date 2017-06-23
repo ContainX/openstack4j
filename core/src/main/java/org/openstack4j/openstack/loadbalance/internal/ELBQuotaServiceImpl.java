@@ -13,20 +13,16 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.openstack.loadbalance.internal;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.api.loadbalance.ELBQuotaService;
+import org.openstack4j.model.loadbalance.Quotas;
+import org.openstack4j.openstack.loadbalance.domain.ELBQuotas;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
-	
-	ELBListenerService listeners();
-	
-	ELBHealthCheckService healthchecks();
-	
-	ELBServerService servers();
-	
-	ELBQuotaService quotas();
-	
-	AsyncJobService jobs();
+public class ELBQuotaServiceImpl extends BaseELBServices implements ELBQuotaService {
+
+	@Override
+	public Quotas list() {
+		return get(ELBQuotas.class, uri("/elbaas/quotas")).execute();
+	}
 }
