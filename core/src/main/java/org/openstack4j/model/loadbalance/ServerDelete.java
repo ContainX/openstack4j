@@ -13,18 +13,17 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.model.loadbalance;
 
-import org.openstack4j.common.RestService;
+import java.util.List;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.IdResourceEntity;
+
+public interface ServerDelete extends ModelEntity {
 	
-	ELBListenerService listeners();
-	
-	ELBHealthCheckService healthchecks();
-	
-	ELBServerService servers();
-	
-	AsyncJobService jobs();
+	/**
+	 * @return remove member list
+	 */
+	List<IdResourceEntity> getRemoveMember();
 }

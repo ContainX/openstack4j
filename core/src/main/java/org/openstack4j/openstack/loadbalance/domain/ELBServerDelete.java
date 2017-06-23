@@ -13,18 +13,27 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.openstack.loadbalance.domain;
 
-import org.openstack4j.common.RestService;
+import java.util.List;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+import org.openstack4j.model.loadbalance.ServerDelete;
+import org.openstack4j.openstack.common.IdResourceEntity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class ELBServerDelete implements ServerDelete {
+
+	private static final long serialVersionUID = -8665580397908023570L;
 	
-	ELBListenerService listeners();
-	
-	ELBHealthCheckService healthchecks();
-	
-	ELBServerService servers();
-	
-	AsyncJobService jobs();
+	private List<IdResourceEntity> removeMember;
 }

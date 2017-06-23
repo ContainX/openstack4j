@@ -13,18 +13,19 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.model.loadbalance;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.model.ModelEntity;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+public interface ServerCreate extends ModelEntity {
 	
-	ELBListenerService listeners();
+	/**
+	 * @return server id
+	 */
+	String getServerId();
 	
-	ELBHealthCheckService healthchecks();
-	
-	ELBServerService servers();
-	
-	AsyncJobService jobs();
+	/**
+	 * @return server address
+	 */
+	String getAddress();
 }

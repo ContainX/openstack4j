@@ -15,16 +15,21 @@
  *******************************************************************************/
 package org.openstack4j.api.loadbalance;
 
-import org.openstack4j.common.RestService;
+import java.util.List;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+import org.openstack4j.common.RestService;
+import org.openstack4j.model.loadbalance.Server;
+import org.openstack4j.model.loadbalance.ServerCreate;
+import org.openstack4j.model.loadbalance.ServerDelete;
+import org.openstack4j.openstack.loadbalance.domain.ELBJob;
+import org.openstack4j.openstack.loadbalance.options.ELBServerListOptions;
+
+public interface ELBServerService extends RestService {
+	ELBJob create(String listenerId, List<ServerCreate> servers);
 	
-	ELBListenerService listeners();
+	ELBJob delete(String listenerId, ServerDelete servers);
 	
-	ELBHealthCheckService healthchecks();
+	List<? extends Server> list(String listenerId);
 	
-	ELBServerService servers();
-	
-	AsyncJobService jobs();
+	List<? extends Server> list(String listenerId, ELBServerListOptions options);
 }
