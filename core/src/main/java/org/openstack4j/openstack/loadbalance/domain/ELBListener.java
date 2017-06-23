@@ -16,11 +16,9 @@
 package org.openstack4j.openstack.loadbalance.domain;
 
 import java.util.Date;
-import java.util.List;
 
 import org.openstack4j.model.loadbalance.Listener;
 import org.openstack4j.openstack.common.DateTimeUtils;
-import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -116,15 +114,4 @@ public class ELBListener implements Listener {
 	@JsonProperty("update_time")
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
-
-	public static class ELBListeners extends ListResult<ELBListener> {
-		private static final long serialVersionUID = -1719754719461310540L;
-		
-		private List<ELBListener> listeners;
-
-		@Override
-		protected List<ELBListener> value() {
-			return listeners;
-		}
-	}
 }

@@ -15,8 +15,6 @@
  *******************************************************************************/
 package org.openstack4j.api.loadbalance;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.loadbalance.Listener;
@@ -33,7 +31,7 @@ public interface ELBListenerService extends RestService {
 	
 	Listener get(String listenerId);
 	
-	List<? extends Listener> list();
+	Listener[] list();
 	
-	List<? extends Listener> list(ELBListenerListOptions options);
+	Listener[] list(ELBListenerListOptions options);
 }

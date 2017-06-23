@@ -17,15 +17,12 @@ package org.openstack4j.openstack.loadbalance.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import java.util.List;
-
 import org.openstack4j.api.loadbalance.ELBListenerService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.loadbalance.Listener;
 import org.openstack4j.model.loadbalance.ListenerCreate;
 import org.openstack4j.model.loadbalance.ListenerUpdate;
 import org.openstack4j.openstack.loadbalance.domain.ELBListener;
-import org.openstack4j.openstack.loadbalance.domain.ELBListener.ELBListeners;
 import org.openstack4j.openstack.loadbalance.domain.ELBListenerCreate;
 import org.openstack4j.openstack.loadbalance.options.ELBListenerListOptions;
 
@@ -69,13 +66,13 @@ public class ELBListenerServiceImpl extends BaseELBServices implements ELBListen
 	}
 
 	@Override
-	public List<? extends Listener> list() {
-		return get(ELBListeners.class, uri(API_PATH)).execute().getList();
+	public Listener[] list() {
+		return get(ELBListener[].class, uri(API_PATH)).execute();
 	}
 
 	@Override
-	public List<? extends Listener> list(ELBListenerListOptions options) {
+	public Listener[] list(ELBListenerListOptions options) {
 		checkArgument(options != null, "options is required");
-		return get(ELBListeners.class, uri(API_PATH)).params(options.getOptions()).execute().getList();
+		return get(ELBListener[].class, uri(API_PATH)).params(options.getOptions()).execute();
 	}
 }

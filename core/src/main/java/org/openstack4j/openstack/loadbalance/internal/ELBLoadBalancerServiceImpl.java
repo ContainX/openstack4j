@@ -36,11 +36,11 @@ public class ELBLoadBalancerServiceImpl extends BaseELBServices
 
 	@Override
 	public ELBJob create(LoadBalancerCreate loadBalancer) {
-//		checkArgument(loadBalancer != null, "loadBalancer is required");
-//		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getName()), "name is required");
-//		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getVpcId()), "vpcId is required");
-//		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getType()), "type is required");
-//		checkArgument(loadBalancer.getAdminStateUp() != null, "adminStateUp is required");
+		checkArgument(loadBalancer != null, "loadBalancer is required");
+		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getName()), "name is required");
+		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getVpcId()), "vpcId is required");
+		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getType()), "type is required");
+		checkArgument(loadBalancer.getAdminStateUp() != null, "adminStateUp is required");
 
 		return post(ELBJob.class, uri(API_PATH)).entity(loadBalancer).execute();
 	}
@@ -56,7 +56,7 @@ public class ELBLoadBalancerServiceImpl extends BaseELBServices
 		checkArgument(!Strings.isNullOrEmpty(loadBalancerId), "loadBalancerId is required");
 		checkArgument(loadBalancer != null, "loadBalancer is required");
 
-		return put(ELBJob.class, uri("%s/%s", API_PATH, loadBalancerId)).execute();
+		return put(ELBJob.class, uri("%s/%s", API_PATH, loadBalancerId)).entity(loadBalancer).execute();
 	}
 
 	@Override

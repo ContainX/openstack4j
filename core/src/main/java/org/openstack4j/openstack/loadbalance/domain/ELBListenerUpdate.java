@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.loadbalance.domain;
 
+import org.openstack4j.model.loadbalance.Listener;
 import org.openstack4j.model.loadbalance.ListenerUpdate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -66,4 +67,16 @@ public class ELBListenerUpdate implements ListenerUpdate {
 
 	@JsonProperty("ssl_ciphers")
 	private String sslCiphers;
+	
+	public static ELBListenerUpdate fromListener(Listener listener) {
+		return ELBListenerUpdate.builder()
+					.name(listener.getName())
+					.description(listener.getDescription())
+					.port(listener.getPort())
+					.backendPort(listener.getBackendPort())
+					.lbAlgorithm(listener.getLbAlgorithm())
+					.tcpDraining(listener.getTcpDraining())
+					.tcpDrainingTimeout(listener.getTcpDrainingTimeout())
+					.build();
+	}
 }

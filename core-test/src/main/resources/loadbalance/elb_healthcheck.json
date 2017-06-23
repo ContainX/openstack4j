@@ -1,0 +1,12 @@
+{
+    "healthcheck_interval": 5,
+    "listener_id": "cd9dc55344fd41b8b1aad5190d2b8dba",
+    "id": "dbaad61e9d5341d7924ceac6bd2d4a77",
+    "healthcheck_protocol": "TCP",
+    "unhealthy_threshold": 3,
+    "update_time": "2017-06-23 09:23:41",
+    "create_time": "2017-06-23 09:23:41",
+    "healthy_threshold": 3,
+    "healthcheck_timeout": 10,
+    "healthcheck_uri": ""
+}

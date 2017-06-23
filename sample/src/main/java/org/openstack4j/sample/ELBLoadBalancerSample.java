@@ -32,7 +32,6 @@ import org.testng.annotations.Test;
 
 import com.google.common.base.Strings;
 
-//TODO bill: test
 public class ELBLoadBalancerSample extends AbstractSample {
 	private static final Logger logger = LoggerFactory.getLogger(ELBLoadBalancerSample.class);
 
@@ -40,7 +39,7 @@ public class ELBLoadBalancerSample extends AbstractSample {
 	public void testCreateLoadBalancer() {
 		String vpcId = "31d158b8-e7d7-4b4a-b2a7-a5240296b267";
 		ELBLoadBalancerCreate loadBalancer = ELBLoadBalancerCreate.builder()
-				.name("elb-4-test")
+				.name("SDK-elb-4-test")
 				.vpcId(vpcId)
 				.type(Type.External.name()).adminStateUp(1).build();
 		ELBJob job = osclient.elasticLoadBalance().loadBalancers().create(loadBalancer);
@@ -50,7 +49,7 @@ public class ELBLoadBalancerSample extends AbstractSample {
 
 	@Test
 	public void testDeleteLoadBalancer() {
-		String loadBalancerId = "";
+		String loadBalancerId = "loadBalancerId";
 		ELBJob job = osclient.elasticLoadBalance().loadBalancers().delete(loadBalancerId);
 		logger.info("delete load balancer: {}", job);
 		assertTrue(!Strings.isNullOrEmpty(job.getJobId()));
@@ -58,10 +57,10 @@ public class ELBLoadBalancerSample extends AbstractSample {
 
 	@Test
 	public void testUpdateLoadBalancer() {
-		String loadBalancerId = "";
+		String loadBalancerId = "a650695bb9344a3fa24dec344116d261";
 		LoadBalancer loadBalancer = osclient.elasticLoadBalance().loadBalancers().get(loadBalancerId);
-		String after = new StringBuilder(loadBalancer.getName()).reverse().toString();
-		ELBLoadBalancerUpdate update = ELBLoadBalancerUpdate.fromLoadBalancer(loadBalancer).toBuilder().name(after)
+		String after = new StringBuilder(loadBalancer.getDescription()).reverse().toString();
+		ELBLoadBalancerUpdate update = ELBLoadBalancerUpdate.fromLoadBalancer(loadBalancer).toBuilder().description(after)
 				.build();
 		ELBJob updateJob = osclient.elasticLoadBalance().loadBalancers().update(loadBalancerId, update);
 		logger.info("update load balancer{}", updateJob);
@@ -70,7 +69,7 @@ public class ELBLoadBalancerSample extends AbstractSample {
 
 	@Test
 	public void testGetLoadBalancer() {
-		String loadBalancerId = "";
+		String loadBalancerId = "a650695bb9344a3fa24dec344116d261";
 		LoadBalancer loadBalancer = osclient.elasticLoadBalance().loadBalancers().get(loadBalancerId);
 		logger.info("get load balancer: {}", loadBalancer);
 		assertTrue(loadBalancer.getId().equals(loadBalancerId));
@@ -94,7 +93,7 @@ public class ELBLoadBalancerSample extends AbstractSample {
 	
 	@Test
 	public void testGetJob() {
-		String jobId = "2c9eb2c05cbc6a07015cc9b371ee3be3";
+		String jobId = "2c9eb2c15cbc6bfd015cd3e250af1bde";
 		AsyncJob job = osclient.elasticLoadBalance().jobs().get(jobId);
 	}
 

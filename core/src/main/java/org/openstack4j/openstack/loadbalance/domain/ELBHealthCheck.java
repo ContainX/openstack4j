@@ -71,4 +71,10 @@ public class ELBHealthCheck implements HealthCheck {
 	@JsonProperty("update_time")
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
+	
+	public enum HealthCheckProtocol {
+		HTTP,
+		TCP,
+		;
+	}
 }

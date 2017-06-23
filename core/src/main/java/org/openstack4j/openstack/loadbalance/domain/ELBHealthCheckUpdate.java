@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.loadbalance.domain;
 
+import org.openstack4j.model.loadbalance.HealthCheck;
 import org.openstack4j.model.loadbalance.HealthCheckUpdate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,9 +34,6 @@ import lombok.ToString;
 public class ELBHealthCheckUpdate implements HealthCheckUpdate {
 
 	private static final long serialVersionUID = 3164457385221233948L;
-
-	@JsonProperty("healthcheck_id")
-	private String healthCheckId;
 
 	@JsonProperty("healthcheck_protocol")
 	private String healthCheckProtocol;
@@ -57,4 +55,16 @@ public class ELBHealthCheckUpdate implements HealthCheckUpdate {
 	
 	@JsonProperty("healthcheck_interval")
 	private Integer healthCheckInterval;
+	
+	public static ELBHealthCheckUpdate fromHealthCheck(HealthCheck healthCheck) {
+		return ELBHealthCheckUpdate.builder()
+					.healthCheckProtocol(healthCheck.getHealthCheckProtocol())
+					.healthCheckUri(healthCheck.getHealthCheckUri())
+					.healthCheckConnectPort(healthCheck.getHealthCheckConnectPort())
+					.healthyThreshold(healthCheck.getHealthyThreshold())
+					.unhealthyThreshold(healthCheck.getUnhealthyThreshold())
+					.healthCheckTimeout(healthCheck.getHealthCheckTimeout())
+					.healthCheckInterval(healthCheck.getHealthCheckInterval())
+					.build();
+	}
 }

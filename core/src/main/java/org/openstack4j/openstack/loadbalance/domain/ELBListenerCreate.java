@@ -18,7 +18,9 @@ package org.openstack4j.openstack.loadbalance.domain;
 import java.util.Date;
 
 import org.openstack4j.model.loadbalance.ListenerCreate;
+import org.openstack4j.openstack.common.DateTimeUtils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -40,7 +42,7 @@ public class ELBListenerCreate implements ListenerCreate {
 
 	@JsonProperty
 	private String name;
-	
+
 	@JsonProperty
 	private String description;
 
@@ -92,21 +94,35 @@ public class ELBListenerCreate implements ListenerCreate {
 	@JsonProperty("ssl_ciphers")
 	private String sslCiphers;
 
-	@JsonInclude(value=Include.NON_NULL)
+	@JsonInclude(value = Include.NON_NULL)
 	private String id;
 
-	@JsonInclude(value=Include.NON_NULL)
+	@JsonInclude(value = Include.NON_NULL)
 	private String status;
 
 	@JsonProperty("admin_state_up")
-	@JsonInclude(value=Include.NON_NULL)
+	@JsonInclude(value = Include.NON_NULL)
 	private Boolean adminStateUp;
 
 	@JsonProperty("create_time")
-	@JsonInclude(value=Include.NON_NULL)
+	@JsonInclude(value = Include.NON_NULL)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date createTime;
 
 	@JsonProperty("update_time")
-	@JsonInclude(value=Include.NON_NULL)
+	@JsonInclude(value = Include.NON_NULL)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
+
+	public enum Protocol {
+		HTTP, TCP, HTTPS, UDP,;
+	}
+
+	public enum BackendProtocol {
+		HTTP, TCP, UDP,;
+	}
+
+	public enum LbAlgorithm {
+		roundrobin, leastconn, source,;
+	}
 }

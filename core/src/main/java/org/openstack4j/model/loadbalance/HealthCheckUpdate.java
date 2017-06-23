@@ -20,11 +20,6 @@ import org.openstack4j.model.ModelEntity;
 public interface HealthCheckUpdate extends ModelEntity {
 	
 	/**
-	 * @return health check id
-	 */
-	String getHealthCheckId();
-
-	/**
 	 * @return health check protocol
 	 */
 	String getHealthCheckProtocol();

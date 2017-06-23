@@ -48,7 +48,7 @@ public class ELBHealthCheckServiceImpl extends BaseELBServices implements ELBHea
 		checkArgument(!Strings.isNullOrEmpty(healthCheckId), "healthCheckId is required");
 		checkArgument(healthCheck != null, "healthCheck is reuquired");
 
-		return put(ELBHealthCheck.class, uri("%s/%s", API_PATH, healthCheck)).entity(healthCheck).execute();
+		return put(ELBHealthCheck.class, uri("%s/%s", API_PATH, healthCheckId)).entity(healthCheck).execute();
 	}
 
 	@Override
