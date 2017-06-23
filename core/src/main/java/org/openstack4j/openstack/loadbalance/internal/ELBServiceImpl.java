@@ -17,6 +17,7 @@ package org.openstack4j.openstack.loadbalance.internal;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.loadbalance.AsyncJobService;
+import org.openstack4j.api.loadbalance.ELBListenerService;
 import org.openstack4j.api.loadbalance.ELBService;
 import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
 
@@ -25,6 +26,11 @@ public class ELBServiceImpl extends BaseELBServices implements ELBService {
 	@Override
 	public ELBLoadBalancerService loadBalancers() {
 		return Apis.get(ELBLoadBalancerService.class);
+	}
+	
+	@Override
+	public ELBListenerService listeners() {
+		return Apis.get(ELBListenerService.class);
 	}
 
 	@Override

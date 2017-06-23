@@ -5,5 +5,7 @@ import org.openstack4j.common.RestService;
 public interface ELBService extends RestService {
 	ELBLoadBalancerService loadBalancers();
 	
+	ELBListenerService listeners();
+	
 	AsyncJobService jobs();
 }
