@@ -19,9 +19,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.loadbalance.Server;
+import org.openstack4j.openstack.common.DateTimeUtils;
 import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -59,21 +61,23 @@ public class ELBServer implements Server {
 
 	private List<IdResourceEntity> listeners;
 
+	@JsonProperty("create_time")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date createTime;
 
+	@JsonProperty("update_time")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
-	
+
 	public static class ELBServers extends ListResult<ELBServer> {
-		
+
 		private static final long serialVersionUID = -2100665693687367863L;
-		
+
 		private List<ELBServer> servers;
 
 		@Override
 		protected List<ELBServer> value() {
 			return servers;
 		}
-		
-		
 	}
 }

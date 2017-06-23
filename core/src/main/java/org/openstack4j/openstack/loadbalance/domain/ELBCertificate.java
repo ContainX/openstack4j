@@ -19,7 +19,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.loadbalance.Certificate;
+import org.openstack4j.openstack.common.DateTimeUtils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -49,9 +51,11 @@ public class ELBCertificate implements Certificate {
 	private String privateKey;
 
 	@JsonProperty("create_time")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date createTime;
 
 	@JsonProperty("update_time")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
 
 	@Getter

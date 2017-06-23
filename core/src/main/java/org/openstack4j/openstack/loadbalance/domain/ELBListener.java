@@ -19,8 +19,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.loadbalance.Listener;
+import org.openstack4j.openstack.common.DateTimeUtils;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -108,9 +110,11 @@ public class ELBListener implements Listener {
 	private Integer tcpDrainingTimeout;
 
 	@JsonProperty("create_time")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date createTime;
 
 	@JsonProperty("update_time")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
 
 	public static class ELBListeners extends ListResult<ELBListener> {

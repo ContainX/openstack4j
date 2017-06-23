@@ -18,7 +18,9 @@ package org.openstack4j.openstack.loadbalance.domain;
 import java.util.Date;
 
 import org.openstack4j.model.loadbalance.HealthCheck;
+import org.openstack4j.openstack.common.DateTimeUtils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -63,8 +65,10 @@ public class ELBHealthCheck implements HealthCheck {
 	private Integer healthCheckInterval;
 	
 	@JsonProperty("create_time")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date createTime;
 	
 	@JsonProperty("update_time")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
 }
