@@ -13,16 +13,49 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.model.loadbalance;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.model.ModelEntity;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+public interface HealthCheckUpdate extends ModelEntity {
 	
-	ELBListenerService listeners();
-	
-	ELBHealthCheckService healthchecks();
-	
-	AsyncJobService jobs();
+	/**
+	 * @return health check id
+	 */
+	String getHealthCheckId();
+
+	/**
+	 * @return health check protocol
+	 */
+	String getHealthCheckProtocol();
+
+	/**
+	 * @return health check uri
+	 */
+	String getHealthCheckUri();
+
+	/**
+	 * @return health check connect port
+	 */
+	Integer getHealthCheckConnectPort();
+
+	/**
+	 * @return healthy threshold
+	 */
+	Integer getHealthyThreshold();
+
+	/**
+	 * @return unhealthy threshold
+	 */
+	Integer getUnhealthyThreshold();
+
+	/**
+	 * @return health check timeout
+	 */
+	Integer getHealthCheckTimeout();
+
+	/**
+	 * @return health check interval
+	 */
+	Integer getHealthCheckInterval();
 }

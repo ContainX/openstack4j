@@ -13,16 +13,48 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.openstack.loadbalance.domain;
 
-import org.openstack4j.common.RestService;
+import org.openstack4j.model.loadbalance.HealthCheckCreate;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class ELBHealthCheckCreate implements HealthCheckCreate {
+
+	private static final long serialVersionUID = 3164457385221233948L;
+
+	@JsonProperty("listener_id")
+	private String listenerId;
 	
-	ELBListenerService listeners();
+	@JsonProperty("healthcheck_protocol")
+	private String healthCheckProtocol;
 	
-	ELBHealthCheckService healthchecks();
+	@JsonProperty("healthcheck_uri")
+	private String healthCheckUri;
 	
-	AsyncJobService jobs();
+	@JsonProperty("healthcheck_connect_port")
+	private Integer healthCheckConnectPort;
+	
+	@JsonProperty("healthy_threshold")
+	private Integer healthyThreshold;
+	
+	@JsonProperty("unhealthy_threshold")
+	private Integer unhealthyThreshold;
+	
+	@JsonProperty("healthcheck_timeout")
+	private Integer healthCheckTimeout;
+	
+	@JsonProperty("healthcheck_interval")
+	private Integer healthCheckInterval;
 }

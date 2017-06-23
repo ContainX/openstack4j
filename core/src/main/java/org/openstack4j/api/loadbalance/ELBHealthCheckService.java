@@ -16,13 +16,17 @@
 package org.openstack4j.api.loadbalance;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.loadbalance.HealthCheck;
+import org.openstack4j.model.loadbalance.HealthCheckCreate;
+import org.openstack4j.model.loadbalance.HealthCheckUpdate;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+public interface ELBHealthCheckService extends RestService {
+	HealthCheck create(HealthCheckCreate healthCheck);
 	
-	ELBListenerService listeners();
+	ActionResponse delete(String healthCheckId);
 	
-	ELBHealthCheckService healthchecks();
+	HealthCheck update(String healthCheckId, HealthCheckUpdate healthCheck);
 	
-	AsyncJobService jobs();
+	HealthCheck get(String healthCheckId);
 }
