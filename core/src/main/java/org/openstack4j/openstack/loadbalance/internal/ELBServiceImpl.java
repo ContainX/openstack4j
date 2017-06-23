@@ -17,38 +17,44 @@ package org.openstack4j.openstack.loadbalance.internal;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.loadbalance.AsyncJobService;
+import org.openstack4j.api.loadbalance.ELBCertificateService;
 import org.openstack4j.api.loadbalance.ELBHealthCheckService;
 import org.openstack4j.api.loadbalance.ELBListenerService;
-import org.openstack4j.api.loadbalance.ELBService;
 import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
 import org.openstack4j.api.loadbalance.ELBQuotaService;
 import org.openstack4j.api.loadbalance.ELBServerService;
+import org.openstack4j.api.loadbalance.ELBService;
 
 public class ELBServiceImpl extends BaseELBServices implements ELBService {
-	
+
 	@Override
 	public ELBLoadBalancerService loadBalancers() {
 		return Apis.get(ELBLoadBalancerService.class);
 	}
-	
+
 	@Override
 	public ELBListenerService listeners() {
 		return Apis.get(ELBListenerService.class);
 	}
-	
+
 	@Override
 	public ELBHealthCheckService healthchecks() {
 		return Apis.get(ELBHealthCheckService.class);
 	}
-	
+
 	@Override
 	public ELBServerService servers() {
 		return Apis.get(ELBServerService.class);
 	}
-	
+
 	@Override
 	public ELBQuotaService quotas() {
 		return Apis.get(ELBQuotaService.class);
+	}
+
+	@Override
+	public ELBCertificateService certs() {
+		return Apis.get(ELBCertificateService.class);
 	}
 
 	@Override

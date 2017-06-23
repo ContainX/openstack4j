@@ -16,19 +16,18 @@
 package org.openstack4j.api.loadbalance;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.loadbalance.Certificate;
+import org.openstack4j.model.loadbalance.CertificateUpdate;
+import org.openstack4j.openstack.loadbalance.domain.ELBCertificate.Certificates;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+public interface ELBCertificateService extends RestService {
 	
-	ELBListenerService listeners();
+	Certificate create(Certificate cert);
 	
-	ELBHealthCheckService healthchecks();
+	ActionResponse delete(String certificateId);
 	
-	ELBServerService servers();
+	Certificate update(String certificateId, CertificateUpdate cert);
 	
-	ELBQuotaService quotas();
-	
-	ELBCertificateService certs();
-	
-	AsyncJobService jobs();
+	Certificates list();
 }

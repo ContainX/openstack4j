@@ -13,22 +13,46 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.model.loadbalance;
 
-import org.openstack4j.common.RestService;
+import java.util.Date;
 
-public interface ELBService extends RestService {
-	ELBLoadBalancerService loadBalancers();
+import org.openstack4j.model.ModelEntity;
+
+public interface Certificate extends ModelEntity {
 	
-	ELBListenerService listeners();
+	/**
+	 * @return certificate id
+	 */
+	String getId();
+
+	/**
+	 * @return certificate name
+	 */
+	String getName();
+
+	/**
+	 * @return description
+	 */
+	String getDescription();
+
+	/**
+	 * @return certificate
+	 */
+	String getCertificate();
+
+	/**
+	 * @return private key
+	 */
+	String getPrivateKey();
+
+	/**
+	 * @return create time
+	 */
+	Date getCreateTime();
 	
-	ELBHealthCheckService healthchecks();
-	
-	ELBServerService servers();
-	
-	ELBQuotaService quotas();
-	
-	ELBCertificateService certs();
-	
-	AsyncJobService jobs();
+	/**
+	 * @return update time
+	 */
+	Date getUpdateTime();
 }

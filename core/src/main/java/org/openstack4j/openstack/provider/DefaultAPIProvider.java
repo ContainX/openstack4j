@@ -84,6 +84,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.image.v2.TaskService;
 import org.openstack4j.api.loadbalance.ELBListenerService;
 import org.openstack4j.api.loadbalance.AsyncJobService;
+import org.openstack4j.api.loadbalance.ELBCertificateService;
 import org.openstack4j.api.loadbalance.ELBHealthCheckService;
 import org.openstack4j.api.loadbalance.ELBService;
 import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
@@ -262,6 +263,7 @@ import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBListenerServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.AsyncJobServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBCertificateSeviceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBHealthCheckServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBLoadBalancerServiceImpl;
@@ -593,6 +595,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ELBHealthCheckService.class, ELBHealthCheckServiceImpl.class);
 		bind(ELBServerService.class, ELBServerServiceImpl.class);
 		bind(ELBQuotaService.class, ELBQuotaServiceImpl.class);
+		bind(ELBCertificateService.class, ELBCertificateSeviceImpl.class);
 		
 		bind(AsyncJobService.class, AsyncJobServiceImpl.class);
     }
