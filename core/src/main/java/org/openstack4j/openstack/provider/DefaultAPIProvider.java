@@ -197,6 +197,7 @@ import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
 import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
+import org.openstack4j.openstack.cloudeye.internal.CloudEyeAlarmServiceImpl;
 import org.openstack4j.openstack.cloudeye.internal.CloudEyeMetricServiceImpl;
 import org.openstack4j.openstack.cloudeye.internal.CloudEyeServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
@@ -570,7 +571,7 @@ public class DefaultAPIProvider implements APIProvider {
 		// Cloud Eye
         bind(CloudEyeService.class, CloudEyeServiceImpl.class);
         bind(MetricService.class, CloudEyeMetricServiceImpl.class);
-        bind(AlarmService.class, AlarmServiceImpl.class);
+        bind(org.openstack4j.api.cloudeye.AlarmService.class, CloudEyeAlarmServiceImpl.class);
 
 		// auto-scaling
 		bind(AutoScalingService.class, AutoScalingServiceImpl.class);

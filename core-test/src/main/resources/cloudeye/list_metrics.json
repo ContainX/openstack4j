@@ -1,0 +1,42 @@
+{
+  "metrics": [
+    {
+      "namespace": "SYS.Workspace",
+      "dimensions": [
+        {
+          "name": "instance_id",
+          "value": "a25ab1d8-7570-4de2-a782-f67d36be6c24"
+        }
+      ],
+      "metric_name": "mem_util",
+      "unit": "%"
+    },
+    {
+      "namespace": "SYS.Workspace",
+      "dimensions": [
+        {
+          "name": "instance_id",
+          "value": "585c679c-d9af-4166-966c-bd2a04959745"
+        }
+      ],
+      "metric_name": "mem_util",
+      "unit": "%"
+    },
+    {
+      "namespace": "SYS.Workspace",
+      "dimensions": [
+        {
+          "name": "instance_id",
+          "value": "a25ab1d8-7570-4de2-a782-f67d36be6c24"
+        }
+      ],
+      "metric_name": "iops",
+      "unit": "Counts"
+    }
+  ],
+  "meta_data": {
+    "count": 3,
+    "marker": "SYS.Workspace.iops.instance_id:a25ab1d8-7570-4de2-a782-f67d36be6c24",
+    "total": 3
+  }
+}
