@@ -22,7 +22,7 @@ public interface CloudEyeService extends RestService {
 
 	MetricService metrics();
 
-	MetricDataService alarms();
+	AlarmService alarms();
 	
 	AutoScalingGroupInstanceService datas();
 	

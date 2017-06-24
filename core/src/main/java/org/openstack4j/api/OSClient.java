@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
+import org.openstack4j.api.cloudeye.CloudEyeService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
@@ -368,5 +369,11 @@ public interface OSClient<T extends OSClient<T>> {
 	 * @return the DNS service
 	 */
 	DNSService dns();
+
+	/**
+	 * Returns the CloudEye Service API
+	 * @return the CloudEye service
+	 */
+	CloudEyeService cloudEye();
 
 }

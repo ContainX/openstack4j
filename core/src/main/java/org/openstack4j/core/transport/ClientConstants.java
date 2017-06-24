@@ -79,6 +79,13 @@ public final class ClientConstants {
     public static final String PATH_ASSOCIATE = "/associaterouter";
     public static final String PATH_DISASSOCIATE = "/disassociaterouter";
 
+    //CloudEye/Metrics
+    public static final String PATH_METRICS = "/metrics";
+    public static final String PATH_FAVORITE_METRICS = "/favorite-metrics";
+
+            //CloudEye/Alarm
+    public static final String PATH_ALARMS = "/alarms";
+
     //Magnum APIs
     // list all Magnum Services
     public static final String MAGNUM_MSERVICES = "/mservices";
