@@ -1,0 +1,15 @@
+{
+    "vip_address": "192.168.2.36",
+    "update_time": "2017-06-23 07:54:18",
+    "create_time": "2017-05-02 07:54:33",
+    "id": "a650695bb9344a3fa24dec344116d261",
+    "status": "ACTIVE",
+    "bandwidth": null,
+    "security_group_id": "0005ba27-b937-4a7c-a280-c7b65cea2e47",
+    "vpc_id": "31d158b8-e7d7-4b4a-b2a7-a5240296b267",
+    "admin_state_up": 1,
+    "vip_subnet_id": "cb9a6ede-39c6-498f-ad85-c554ef7220fc",
+    "type": "Internal",
+    "name": "elb-yc5f",
+    "description": "desc"
+}

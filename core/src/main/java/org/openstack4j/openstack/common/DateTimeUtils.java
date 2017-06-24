@@ -15,6 +15,11 @@ public class DateTimeUtils {
 	public static final String FORMAT_YMDTHMSZ = "YYYY-MM-dd'T'HH:mm:ss'Z'";
 	
 	/**
+	 * DateTime format YYYY-MM-dd HH:mm:ss
+	 */
+	public static final String FORMAT_YMDHMS = "YYYY-MM-dd HH:mm:ss";
+	
+	/**
 	 * format date
 	 * @param date
 	 * @param format

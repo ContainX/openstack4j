@@ -1,0 +1,17 @@
+{
+    "quotas": {
+        "resources": [{
+            "max": 255,
+            "type": "elb",
+            "used": 5,
+            "min": 1,
+            "quota": 5
+        }, {
+            "max": 255,
+            "type": "listener",
+            "used": 1,
+            "min": 1,
+            "quota": 5
+        }]
+    }
+}
