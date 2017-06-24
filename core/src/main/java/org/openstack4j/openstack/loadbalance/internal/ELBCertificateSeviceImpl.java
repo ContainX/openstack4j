@@ -21,6 +21,7 @@ import org.openstack4j.api.loadbalance.ELBCertificateService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.loadbalance.Certificate;
 import org.openstack4j.model.loadbalance.CertificateUpdate;
+import org.openstack4j.openstack.loadbalance.domain.ELBCertificate;
 import org.openstack4j.openstack.loadbalance.domain.ELBCertificate.Certificates;
 
 import com.google.common.base.Strings;
@@ -35,7 +36,7 @@ public class ELBCertificateSeviceImpl extends BaseELBServices implements ELBCert
 		checkArgument(!Strings.isNullOrEmpty(cert.getCertificate()), "certificate is required");
 		checkArgument(!Strings.isNullOrEmpty(cert.getPrivateKey()), "privateKey is required");
 
-		return post(Certificate.class, uri(API_PATH)).entity(cert).execute();
+		return post(ELBCertificate.class, uri(API_PATH)).entity(cert).execute();
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class ELBCertificateSeviceImpl extends BaseELBServices implements ELBCert
 		checkArgument(!Strings.isNullOrEmpty(certificateId), "certificateId is required");
 		checkArgument(cert != null, "cert is required");
 
-		return put(Certificate.class, uri("%s/%s", API_PATH, certificateId)).entity(cert).execute();
+		return put(ELBCertificate.class, uri("%s/%s", API_PATH, certificateId)).entity(cert).execute();
 	}
 
 	@Override

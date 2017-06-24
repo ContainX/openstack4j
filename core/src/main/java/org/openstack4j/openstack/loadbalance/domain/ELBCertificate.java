@@ -65,7 +65,7 @@ public class ELBCertificate implements Certificate {
 	@AllArgsConstructor
 	public static class Certificates {
 
-		private List<Certificate> certificates;
+		private List<ELBCertificate> certificates;
 
 		@JsonProperty("instance_num")
 		private String instanceNum;

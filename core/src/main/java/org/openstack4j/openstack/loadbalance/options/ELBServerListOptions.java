@@ -58,7 +58,7 @@ public class ELBServerListOptions {
 	
 	public ELBServerListOptions healthStatus(HealthStatus healthStatus) {
 		checkArgument(healthStatus !=null, "healthStatus is required");
-		return add("health_status", healthStatus);
+		return add("health_status", healthStatus.name());
 	}
 	
 	public ELBServerListOptions serverId(String serverId) {

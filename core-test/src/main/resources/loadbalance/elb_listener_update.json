@@ -22,5 +22,5 @@
     "healthcheck_id": null,
     "session_sticky": false,
     "tcp_draining_timeout": null,
-    "name": "SDK-test-listener"
+    "name": "renetsil-tset-KDS"
 }

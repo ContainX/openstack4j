@@ -25,7 +25,7 @@ import org.openstack4j.model.loadbalance.ServerCreate;
 import org.openstack4j.model.loadbalance.ServerDelete;
 import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.loadbalance.domain.ELBJob;
-import org.openstack4j.openstack.loadbalance.domain.ELBServer.ELBServers;
+import org.openstack4j.openstack.loadbalance.domain.ELBServer;
 import org.openstack4j.openstack.loadbalance.options.ELBServerListOptions;
 
 import com.google.common.base.Strings;
@@ -63,18 +63,17 @@ public class ELBServerServiceImpl extends BaseELBServices implements ELBServerSe
 	}
 
 	@Override
-	public List<? extends Server> list(String listenerId) {
+	public Server[] list(String listenerId) {
 		checkArgument(!Strings.isNullOrEmpty(listenerId), "listenerId is required");
-		return get(ELBServers.class, uri("%s/%s/members", API_PATH, listenerId)).execute().getList();
+		return get(ELBServer[].class, uri("%s/%s/members", API_PATH, listenerId)).execute();
 	}
 
 	@Override
-	public List<? extends Server> list(String listenerId, ELBServerListOptions options) {
+	public Server[] list(String listenerId, ELBServerListOptions options) {
 		checkArgument(!Strings.isNullOrEmpty(listenerId), "listenerId is required");
 		checkArgument(options != null, "options is required");
 
-		return get(ELBServers.class, uri("%s/%s/members", API_PATH, listenerId)).params(options.getOptions()).execute()
-				.getList();
+		return get(ELBServer[].class, uri("%s/%s/members", API_PATH, listenerId)).params(options.getOptions()).execute();
 	}
 
 }

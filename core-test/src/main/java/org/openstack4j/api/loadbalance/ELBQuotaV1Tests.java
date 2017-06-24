@@ -15,21 +15,27 @@
  *******************************************************************************/
 package org.openstack4j.api.loadbalance;
 
-import java.util.List;
+import static org.testng.Assert.assertTrue;
 
-import org.openstack4j.common.RestService;
-import org.openstack4j.model.loadbalance.Server;
-import org.openstack4j.model.loadbalance.ServerCreate;
-import org.openstack4j.model.loadbalance.ServerDelete;
-import org.openstack4j.openstack.loadbalance.domain.ELBJob;
-import org.openstack4j.openstack.loadbalance.options.ELBServerListOptions;
+import java.io.IOException;
 
-public interface ELBServerService extends RestService {
-	ELBJob create(String listenerId, List<ServerCreate> servers);
+import org.openstack4j.api.AbstractTest;
+import org.openstack4j.model.loadbalance.Quotas;
+import org.testng.annotations.Test;
+
+@Test(suiteName = "ELBLoadBalancer/QuotaV1")
+public class ELBQuotaV1Tests extends AbstractTest {
+
+	private static final String JSON_QUOTAS = "/loadbalance/elb_quotas.json";
+
+	public void testListQuotas() throws IOException {
+		respondWith(JSON_QUOTAS);
+		Quotas quotas = osv3().elasticLoadBalance().quotas().list();
+		assertTrue(quotas.getResources().size() == 2);
+	}
 	
-	ELBJob delete(String listenerId, ServerDelete servers);
-	
-	Server[] list(String listenerId);
-	
-	Server[] list(String listenerId, ELBServerListOptions options);
+	@Override
+	protected Service service() {
+		return Service.LOAD_BALANCER;
+	}
 }

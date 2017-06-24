@@ -13,23 +13,19 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.api.loadbalance;
+package org.openstack4j.sample;
 
-import java.util.List;
+import org.openstack4j.model.loadbalance.Quotas;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
 
-import org.openstack4j.common.RestService;
-import org.openstack4j.model.loadbalance.Server;
-import org.openstack4j.model.loadbalance.ServerCreate;
-import org.openstack4j.model.loadbalance.ServerDelete;
-import org.openstack4j.openstack.loadbalance.domain.ELBJob;
-import org.openstack4j.openstack.loadbalance.options.ELBServerListOptions;
+public class ELBQuotaSample extends AbstractSample {
+	private static final Logger logger = LoggerFactory.getLogger(ELBQuotaSample.class);
 
-public interface ELBServerService extends RestService {
-	ELBJob create(String listenerId, List<ServerCreate> servers);
-	
-	ELBJob delete(String listenerId, ServerDelete servers);
-	
-	Server[] list(String listenerId);
-	
-	Server[] list(String listenerId, ELBServerListOptions options);
+	@Test
+	public void testListQuotas() {
+		Quotas quotas = osclient.elasticLoadBalance().quotas().list();
+		logger.info("{}", quotas);
+	}
 }

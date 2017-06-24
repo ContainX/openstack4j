@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.loadbalance.domain;
 
+import org.openstack4j.model.loadbalance.Certificate;
 import org.openstack4j.model.loadbalance.CertificateUpdate;
 
 import lombok.AllArgsConstructor;
@@ -35,4 +36,11 @@ public class ELBCertificateUpdate implements CertificateUpdate {
 	private String name;
 
 	private String description;
+	
+	public static ELBCertificateUpdate fromCertificate(Certificate cert) {
+		return ELBCertificateUpdate.builder()
+					.name(cert.getName())
+					.description(cert.getDescription())
+					.build();
+	}
 }
