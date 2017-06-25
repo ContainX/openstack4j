@@ -1,17 +1,17 @@
-# DNS SDk
+# AS SDK
 
-HuaWei OpenStack4j DNS SDK, entry point is: `osclient.as()`
+HuaWei OpenStack4j AS SDK, entry point is: `osclient.autoScaling()`
 
-## API document
+## API 文档
 Not provided for now.
 
-## SDK document
+## SDK 文档
 
-### initial SDK client
+### 初始化 SDK 客户端
 You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
 
-## AutoScaling Group
-### Create AutoScaling Group
+## 弹性伸缩组
+### 创建弹性伸缩组
 ```java
 IdResourceEntity network = new IdResourceEntity();
 network.setId("network id");
@@ -29,7 +29,7 @@ ASAutoScalingGroupCreate group = ASAutoScalingGroupCreate.builder()
 ScalingGroupCreate result = osclient.autoScaling().groups().create(group);
 ```
 
-### List AutoScaling Groups
+### 查询弹性伸缩组列表
 ```java
 List<? extends ScalingGroup> list = osclient.autoScaling().groups().list();
 List<? extends ScalingGroup> list = osclient.autoScaling().groups().list(
@@ -40,12 +40,12 @@ List<? extends ScalingGroup> list = osclient.autoScaling().groups().list(
 
 ```
 
-### Get AutoScaling Group
+### 查询弹性伸缩组详情
 ```java
 ScalingGroup group = osclient.autoScaling().groups().get("groupId");
 ```
 
-### Update AutoScaling Group
+### 修改弹性伸缩组
 ```java
 ScalingGroup group = osclient.autoScaling().groups().get("groupId");
 
@@ -54,18 +54,18 @@ ScalingGroupUpdate result = osclient.autoScaling().groups().update(group.groupId
 		.groupName("updateGroupName").build());
 ```
 
-### Delete AutoScaling Group
+### 删除弹性伸缩组
 ```java
 ActionResponse resp = osclient.autoScaling().groups().delete("groupId");
 ```
 
-### Operate AutoScaling Group
+### 启用/停止弹性伸缩组
 ```java
 ActionResponse resp = osclient.autoScaling().groups().operate("groupId", new Resume());
 ```
 
-## AutoScaling Configuration
-### Create AutoScaling Configuration
+## 弹性伸缩配置
+### 创建弹性伸缩配置
 ```java
 Map<String, String> metaData = Maps.newHashMap();
 metaData.put("key1", "val1");
@@ -91,7 +91,7 @@ ScalingConfigCreate config = ASAutoScalingConfigCreate.builder()
 ScalingConfigCreate result = osv3().autoScaling().configs().create(config);
 ```
 
-### List AutoScaling Configuration
+### 查询弹性伸缩配置列表
 ```java
 List<? extends ScalingConfig> all = osv3().autoScaling().configs().list();
 
@@ -99,20 +99,20 @@ ScalingConfigListOptions options = ScalingConfigListOptions.create().configName(
 List<? extends ScalingConfig> list = osv3().autoScaling().configs().list(options);
 ```
 
-### Get AutoScaling Configuration
+### 查询弹性伸缩配置详情
 ```java
 ScalingConfigCreate config = osv3().autoScaling().configs().get("configId");
 ```
 
-### Delete AutoScaling Configuration
+### 删除弹性伸缩配置
 ```java
 ActionResponse resp = osv3().autoScaling().configs().delete("configId");
 
 ActionResponse resp2 = osv3().autoScaling().configs().delete(Lists.newArrayList("configId"));
 ```
 
-## AutoScaling Group Instance
-### List AutoScaling Group Instance
+## 弹性伸缩实例
+### 查询弹性伸缩组中的实例列表
 ```java
 List<? extends ScalingGroupInstance> list = osclient.autoScaling().groupInstances().list("groupId");
 
@@ -124,20 +124,20 @@ List<? extends ScalingGroupInstance> filterList = osclient.autoScaling()
 		.groupInstances().list("groupId", options);
 ```
 
-### Delete AutoScaling Group Instance
+### 移出弹性伸缩组实例
 ```java
 ActionResponse resp = osclient.autoScaling().groupInstances().delete("instanceId", false);
 ```
 
-### Batch Operate AutoScaling Group Instance
+### 批量移出/添加实例
 ```java
 List<String> instanceIds =  Lists.newArrayList("id1", "id2");
 ActionResponse resp = osclient.autoScaling().groupInstances()
 		.batchOperate("groupId", instanceIds , false, Action.ADD);
 ```
 
-## AutoScaling Policy
-### Create AutoScaling Policy
+## 弹性伸缩策略
+### 创建弹性伸缩策略
 ```java
 ScheduledPolicy scheduledPolicy = ScheduledPolicy.builder()
 		.launchTime("launchTime")
@@ -152,14 +152,14 @@ ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder()
 ScalingPolicyCreateUpdate create = osclient.autoScaling().policies().create(policy);
 ```
 
-### Update AutoScaling Policy
+### 修改弹性伸缩策略
 ```java
 ASAutoScalingPolicy policy = ...; //get policy
 ScalingPolicyCreateUpdate update = osclient.autoScaling().policies()
 		.update(policy.toBuilder().policyName("newPolicyName").build());
 ```
 
-### List AutoScaling Policy
+### 查询弹性伸缩策略列表
 ```java
 List<? extends ScalingPolicy> all = osclient.autoScaling().policies().list("groupId");
 
@@ -167,23 +167,23 @@ ScalingPolicyListOptions options = ScalingPolicyListOptions.create().policyName(
 List<? extends ScalingPolicy> list = osclient.autoScaling().policies().list("groupId", options);
 ```
 
-### Get AutoScaling Policy
+### 查询弹性伸缩策略详情
 ```java
 ScalingPolicy policy = osclient.autoScaling().policies().get("policyId");
 ```
 
-### Operate AutoScaling Policy
+### 执行/启用/停止弹性伸缩策略
 ```java
 ActionResponse resp = osclient.autoScaling().policies().operate("policyId", new Resume());
 ```
 
-### Delete AutoScaling Policy
+### 删除弹性伸缩策略
 ```java
 ActionResponse resp = osclient.autoScaling().policies().delete("policyId");
 ```
 
-## AutoScaling Activity Log
-### List AutoScaling Activity Log
+## 伸缩活动日志
+### 查询伸缩活动日志
 ```java
 List<? extends ScalingActivityLog> all = osclient.autoScaling().activityLogs().list("groupId");
 
@@ -193,8 +193,8 @@ ScalingActivityLogListOptions options = ScalingActivityLogListOptions.create()
 List<? extends ScalingActivityLog> list = osclient.autoScaling().activityLogs().list("groupId", options);
 ```
 
-## AutoScaling Quotas
-### List AutoScaling Quotas
+## 配额
+### 查询配额
 ```java
 List<? extends ScalingQuota> all = osclient.autoScaling().quotas().list();
 

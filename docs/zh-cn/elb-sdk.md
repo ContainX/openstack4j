@@ -1,17 +1,17 @@
-# DNS SDk
+# ELB SDk
 
 HuaWei OpenStack4j ELB SDK, entry point is: `osclient.elasticLoadBalance()`
 
-## API document
+## API 文档
 Not provided for now.
 
-## SDK document
+## SDK 文档
 
-### initial SDK client
+### 初始化 SDK 客户端
 You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
 
-## Elastic Load Balancer
-### Create Elastic Load Balancer
+## 弹性负载均衡
+### 创建负载均衡器
 ```java
 ELBLoadBalancerCreate loadBalancer = ELBLoadBalancerCreate.builder()
 		.name("name")
@@ -22,12 +22,12 @@ ELBLoadBalancerCreate loadBalancer = ELBLoadBalancerCreate.builder()
 ELBJob job = osclient.elasticLoadBalance().loadBalancers().create(loadBalancer);
 ```
 
-### Delete Load Balancer
+### 删除负载均衡器
 ```java
 ELBJob job = osclient.elasticLoadBalance().loadBalancers().delete("loadBalancerId");
 ```
 
-### Update Load Balancer
+### 修改负载均衡器
 ```java
 LoadBalancer loadBalancer = osclient.elasticLoadBalance().loadBalancers()
 		.get("loadBalancerId");
@@ -40,12 +40,12 @@ ELBJob updateJob = osclient.elasticLoadBalance().loadBalancers()
 		.update("loadBalancerId", update);
 ```
 
-### Get Load Balancer
+### 查询负载均衡器详情
 ```java
 LoadBalancer loadBalancer = osclient.elasticLoadBalance().loadBalancers().get("loadBalancerId");
 ```
 
-### List Load Balancer
+### 查询负载均衡器列表
 ```java
 List<? extends LoadBalancer> all = osclient.elasticLoadBalance().loadBalancers().list();
 
@@ -53,8 +53,8 @@ ELBLoadBalancerListOptions options = ELBLoadBalancerListOptions.create().name("n
 List<? extends LoadBalancer> list = osclient.elasticLoadBalance().loadBalancers().list(options);
 ```
 
-## Listener
-### Create Listener
+## 监听器
+### 创建监听器
 ```java
 ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener")
 		.loadBalancerId("loadBalancerId")
@@ -67,12 +67,12 @@ ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener")
 ListenerCreate create = osclient.elasticLoadBalance().listeners().create(listener);
 ```
 
-### Delete Listener
+### 删除监听器
 ```java
 ActionResponse resp = osclient.elasticLoadBalance().listeners().delete("listenerId");
 ```
 
-### Update Listener
+### 修改监听器
 ```java
 Listener listener = osclient.elasticLoadBalance().listeners().get("listenerId");
 
@@ -81,12 +81,12 @@ ELBListenerUpdate update = ELBListenerUpdate.fromListener(listener).toBuilder().
 Listener afterUpdate = osclient.elasticLoadBalance().listeners().update("listenerId", update);
 ```
 
-### Get Listener
+### 查询监听器详情
 ```java
 Listener listener = osclient.elasticLoadBalance().listeners().get("listenerId");
 ```
 
-### List Listener
+### 查询监听器列表
 ```java
 Listener[] all = osclient.elasticLoadBalance().listeners().list();
 
@@ -94,19 +94,19 @@ ELBListenerListOptions options = ELBListenerListOptions.create().name("name");
 Listener[] list = osclient.elasticLoadBalance().listeners().list(options);
 ```
 
-## Health-Check
-### Create Health-Check
+## 健康检查
+### 创建健康检查
 ```java
 HealthCheckCreate healthCheck = ELBHealthCheckCreate.builder().listenerId("listenerId").build();
 HealthCheck create = osclient.elasticLoadBalance().healthchecks().create(healthCheck);
 ```
 
-### Delete Health-Check
+### 删除健康检查
 ```java
 ActionResponse resp = osclient.elasticLoadBalance().healthchecks().delete("healthCheckId");
 ```
 
-### Update Health-Check
+### 修改健康检查
 ```java
 HealthCheck healthCheck = osclient.elasticLoadBalance().healthchecks().get("healthCheckId");
 
@@ -116,20 +116,20 @@ ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).
 HealthCheck afterUpdate = osclient.elasticLoadBalance().healthchecks().update("healthCheckId", update);
 ```
 
-### Get Health-Check
+### 查询健康检查详情
 ```java
 HealthCheck healthCheck = osclient.elasticLoadBalance().healthchecks().get("healthCheckId");
 ```
 
-## Server
-### Create Server
+## 后端云服务器
+### 创建后端云服务器
 ```java
 ServerCreate server = ELBServerCreate.builder().serverId("serverId").address("address").build();
 List<ServerCreate> servers = Lists.newArrayList(server);
 ELBJob job = osclient.elasticLoadBalance().servers().create("listenerId", servers);
 ```
 
-### Delete Server
+### 移除后端云服务器
 ```java
 IdResourceEntity server = new IdResourceEntity();
 server.setId("memberId");
@@ -138,7 +138,7 @@ ServerDelete servers = ELBServerDelete.builder().removeMember(removeMember).buil
 ELBJob job = osclient.elasticLoadBalance().servers().delete("listenerId", servers);
 ```
 
-### List Server
+### 查询后端云服务器列表
 ```java
 Server[] all = osclient.elasticLoadBalance().servers().list("listenerId");
 
@@ -146,14 +146,14 @@ ELBServerListOptions options = ELBServerListOptions.create().address("address");
 Server[] list = osclient.elasticLoadBalance().servers().list(listenerId, options);
 ```
 
-## Quotas
-### List Quotas
+## 配额
+### 查询配额
 ```java
 Quotas quotas = osclient.elasticLoadBalance().quotas().list();
 ```
 
-## Certificate
-### Create Certificate
+## 证书管理
+### 创建证书
 ```java
 Certificate cert = ELBCertificate.builder().name("name").description("desc")
 		.certificate("certificate")
@@ -163,12 +163,12 @@ Certificate create = osclient.elasticLoadBalance().certs().create(cert);
 
 ```
 
-### Delete Certificate
+### 删除证书
 ```java
 ActionResponse resp = osclient.elasticLoadBalance().certs().delete("certificateId");
 ```
 
-### Update Certificate
+### 修改证书
 ```java
 Certificate cert = ...;//get cert
 ELBCertificateUpdate update = ELBCertificateUpdate.fromCertificate(cert).toBuilder()
@@ -177,7 +177,7 @@ ELBCertificateUpdate update = ELBCertificateUpdate.fromCertificate(cert).toBuild
 Certificate afterUpdate = osclient.elasticLoadBalance().certs().update(cert.getId(), update);
 ```
 
-### List Certificate
+### 查询证书列表
 ```java
 Certificates certs = osclient.elasticLoadBalance().certs().list();
 ```
