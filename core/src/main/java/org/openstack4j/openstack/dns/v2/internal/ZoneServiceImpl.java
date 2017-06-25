@@ -17,19 +17,19 @@
 package org.openstack4j.openstack.dns.v2.internal;
 
 import static com.google.common.base.Preconditions.*;
-import static com.google.common.collect.Maps.*;
 import static org.openstack4j.core.transport.ClientConstants.*;
 
 import java.util.HashMap;
 import java.util.List;
 
-import com.google.common.collect.Maps;
 import org.openstack4j.api.dns.v2.ZoneService;
 import org.openstack4j.model.dns.v2.Nameserver;
 import org.openstack4j.model.dns.v2.Zone;
 import org.openstack4j.model.dns.v2.ZoneType;
 import org.openstack4j.openstack.dns.v2.domain.DesignateNameserver;
 import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
+
+import com.google.common.collect.Maps;
 
 public class ZoneServiceImpl extends BaseDNSServices implements ZoneService {
 
@@ -91,7 +91,7 @@ public class ZoneServiceImpl extends BaseDNSServices implements ZoneService {
     }
 
     @Override
-    public List<? extends Zone> list(String type, String marker, String limit) {
+    public List<? extends Zone> list(ZoneType type, String marker, String limit) {
         Invocation<DesignateZone.Zones> invocation = get(DesignateZone.Zones.class, uri(PATH_ZONES));
         invocation.param("type", type);
         invocation.param("marker", marker);

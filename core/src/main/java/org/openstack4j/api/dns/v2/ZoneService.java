@@ -16,15 +16,13 @@
  *******************************************************************************/
 package org.openstack4j.api.dns.v2;
 
+import java.util.List;
+
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.dns.v2.Nameserver;
 import org.openstack4j.model.dns.v2.Zone;
 import org.openstack4j.model.dns.v2.ZoneType;
 import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Designate V2 Zone Service
@@ -88,7 +86,7 @@ public interface ZoneService extends RestService {
      * @param limit per page's item quantity. Value can be 0~500
      * @return
      */
-    List<? extends Zone> list(String type, String marker, String limit);
+    List<? extends Zone> list(ZoneType type, String marker, String limit);
 
     /**
      * Associate a router to the zone

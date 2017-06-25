@@ -38,89 +38,140 @@ $ mvn -version
 
 
 
-we use maven as build tool
+## SDK获取和安装
 
-> For now, you need to build the SDK and install to your maven repository by hand
+我们使用Maven来管理 OpenStack4j，由于该项目并未发布到maven官方仓库中，所以需要你自行下载源码并使用 `mvn` 来安装到本地maven仓库。
 
 ```bash
 cd your-workspace-folder
-git clone https://github.com/huawei/openstack4j huawei-openstack4j
-cd huawei-openstack4j
-mvn clean package install
+git clone https://github.com/huawei/openstack4j otc-openstack4j
+cd otc-openstack4j
+mvn clean package install -DskipTests
 ```
 
-## Maven integration
+通过以上命令，可以将 openstack4j安装到本地的Maven仓库中
 
-> OpenStack4j is modular. One of the benefits to this is the ability to choose the connector that you would like to use in your environment.  
+!> 目前master分支上的版本号是 `OTC-3.0.5-SNAPSHOT`, 在SDK全部完成后，会修改成 `OTC-3.0.5`
 
 
-**1. Using OpenStack4j with the default resteasy Connector**
+## 开始使用
 
-```
+?> 在项目源码中，新增了一个 `sample` 的示例项目，里面包含了本次新增的所有SDK的示例。
+
+**1. 配置maven依赖**
+
+你可以简单的将如下依赖加入你的pom.xml中，这个依赖会自动使用默认的 `resteasy`作为Connector
+```xml
 <dependency>
-    <groupId>org.pacesys</groupId>
-    <artifactId>openstack4j</artifactId>
-    <version>huawei-3.0.5</version>
+	<groupId>org.pacesys</groupId>
+	<artifactId>openstack4j</artifactId>
+	<version>OTC-3.0.5-SNAPSHOT</version>
 </dependency>
 ```
 
+或者，你也可以引入 all-in-one jar
+```xml
+<dependency>
+  <groupId>org.pacesys</groupId>
+  <artifactId>openstack4j</artifactId>
+  <version>OTC-3.0.5-SNAPSHOT</version>
+  <classifier>withdeps</classifier>
+</dependency>
+```
 
-**2. Using OpenStack4j with other connector modules**
+OpenStack4j 被设计成一个模块化的系统，模块化其中的一个好处是，你可以自由的选择你喜欢的`Connector`，所以如果你不喜欢默认的 resteasy connector 的话，那么你可以这样引入依赖：
 
-To configure OpenStack4j to use one of our supported connectors (Jersey 2, Resteasy, Apache HttpClient, OKHttp) [see the usage guide](https://github.com/ContainX/openstack4j/tree/master/connectors)
+```xml
+<!-- 引入 核心包 -->
+<dependency>
+  <groupId>org.pacesys</groupId>
+  <artifactId>openstack4j-core</artifactId>
+  <version>OTC-3.0.5-SNAPSHOT</version>
+</dependency>
 
-## Usage
+<!-- 引入 你想要的connector -->
+<dependency>
+  <groupId>org.pacesys.openstack4j.connectors</groupId>
+  <artifactId>[connector-artifactId]</artifactId>
+  <version>OTC-3.0.5-SNAPSHOT</version>
+</dependency>
+```
 
-> Visit [www.OpenStack4j.com](http://www.openstack4j.com) for the full manual and getting started guides.
+目前，我们提供了以下的connector方案供选择：
+- `openstack4j-jersey2`
+- `openstack4j-resteasy`
+- `openstack4j-okhttp`
+- `openstack4j-httpclient`
+- `openstack4j-http-connector`
 
-**1. Initialize OpenStack V3 Client**
+你可以在[connector说明](https://github.com/huawei/openstack4j/tree/master/connectors)页面找到更多的资料
 
-Initialize client and authenticate within project-scope
+
+**2. 初始化SDK客户端并使用v3认证**
+
+以德电环境为例，以下代码节选自 Sample项目的 [AbstractSample.class](https://github.com/Huawei/openstack4j/blob/master/sample/src/main/java/org/openstack4j/sample/AbstractSample.java)
+```java
+// 添加各个服务的Endpoint绑定
+OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
+		endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
+				"https://vbs.eu-de.otc.t-systems.com/v2/%(project_id)s");
+		endpointResolver.addOverrideEndpoint(ServiceType.AUTO_SCALING,
+				"https://as.eu-de.otc.t-systems.com/autoscaling-api/v1/%(project_id)s");
+		endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_EYE,
+				"https://ces.eu-de.otc.t-systems.com/V1.0/%(project_id)s");
+		endpointResolver.addOverrideEndpoint(ServiceType.LOAD_BALANCER,
+				"https://elb.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
+		
+// 使用 credentials 进行认证
+String user = "replace-with-your-username";
+String password = "replace-with-your-password";
+String projectId = "d4f2557d248e4860829f5fef030b209c";
+String userDomainId = "bb42e2cd2b784ac4bdc350fb660a2bdb";
+osclient = OSFactory.builderV3()
+		.withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
+		.endpoint("https://iam.eu-de.otc.t-systems.com/v3")
+		.credentials(user, password, Identifier.byId(userDomainId))
+		.scopeToProject(Identifier.byId(projectId)).authenticate();
+```
+
+!> 以上代码示例中的 `OverridableEndpointURLResolver` 的设置在正常情况下是多余的，因为OpenStack的`v3`认证会自动返回所有 Service的 Endpoint信息，但是，德电环境有问题，实际上并没有返回，所以需要我们手动设置缺失的endpoint信息。
+
+**3. 使用SDK**
+
+在osclient初始化完成后，osclient下会绑定所有的可用服务。比如 `osclient.compute()`, `osclient.dns()`, `osclient.autoScaling()` 等。下面以DNS服务的查询Zone列表为例：
 
 ```java
-OSClientV3 osclient = OSFactory.builderV3()
-		                .endpoint("http://<fqdn>:5000/v3")
-		                .credentials("user", "secret", Identifier.byId("user domain id"))
-		                .scopeToProject(Identifier.byId("project id"))
-		                .authenticate());
+// 查询 DNS zone 列表
+List<? extends Zone> list = osclient.dns().zones().list();
 ```
 
+**4. SDK使用详情**
 
-In case of service endpoint is not registered or override service endpoint, 
-OverridableEndpointURLResolver is provided to register endpoint for services.
-
-```
-// add endpoint for the service
-OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
-endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_VOLUME_BACKUP,
-		"https://vbs.eu-de.otc.t-systems.com/v2/%(project_id)s");
-endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_EYE,
-		"https://ecs.eu-de.otc.t-systems.com/v2/%(project_id)s");
-		
-OSClientV3 osclient = OSFactory.builderV3()
-						.withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
-		                .endpoint("http://<fqdn>:5000/v3")
-		                .credentials("user", "secret", Identifier.byId("user domain id"))
-		                .scopeToProject(Identifier.byId("project id"))
-		                .authenticate());
-```
-
-**2. Use libraries**
-
-- For libraries provided by official, please refer to the official documentation.
-- For new added libraries::
-	- [VBS](vbs-sdk)
-	- [CES](ces-sdk)
-	- [AS](as-sdk)
-	- [DNS](dns-sdk)
-	- [ELB](elb-sdk)
-	- [MRS](mrs-sdk)
+- 官方已经提供部分OpenStack基础服务的SDK，具体的用法请查阅 [官方文档](http://www.openstack4j.com/learn/getting-started)
+	- Identity (Keystone) V2
+	- Identity (Keystone) V3
+	- Compute (Nova)
+	- Network (Neutron)
+	- Images (Glance)
+	- Images (Glance) V2
+	- Block Storage (Cinder)
+	- Object Storage (Swift)
+	- Telemetry (Ceilometer)
+	- Orchestration (Heat)
+	- Data Processing (Sahara)
+	- Database as a Service (Trove)
+	
+- 我们在官方的基础上新增了6个华为云服务的SDK，具体的用法请查阅对应的使用手册
+	- [VBS](zh-cn/vbs-sdk)
+	- [CES](zh-cn/ces-sdk)
+	- [AS](zh-cn/as-sdk)
+	- [DNS](zh-cn/dns-sdk)
+	- [ELB](zh-cn/elb-sdk)
+	- [MRS](zh-cn/mrs-sdk)
 	
 
-## Showcase
+## 使用例子项目
 
-We have a showcase project [openstack4j-sample](https://github.com/huawei/openstack4j/openstack-sample), 
-it may enlighten u about how to use the SDK.
-
-note:: The showcase project use `Apache HttpClient` as connector but not default `Resteasy`
-
+我们提供了一个[Sample](https://github.com/Huawei/openstack4j/blob/master/sample) 项目，里面包含了这次开发的所有服务的每一个API的使用例子。如果你想运行那些例子，
+- 修改 AbstractSample 里的认证所需的 auth-url，user，password，user-domain-id, project-id
+- 修改各个TestNG测试用例中的部分参数（因为环境不同，部分API需要关联的资源ID不一样）

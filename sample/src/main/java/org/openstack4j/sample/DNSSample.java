@@ -23,7 +23,11 @@ import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.dns.v2.*;
+import org.openstack4j.model.dns.v2.Nameserver;
+import org.openstack4j.model.dns.v2.PTR;
+import org.openstack4j.model.dns.v2.Recordset;
+import org.openstack4j.model.dns.v2.Zone;
+import org.openstack4j.model.dns.v2.ZoneType;
 import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
 import org.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
@@ -57,10 +61,10 @@ public class DNSSample extends AbstractSample {
 
 	@Test
 	public void testListZonesWithParams() {
-		List<? extends Zone> list = osclient.dns().zones().list("public", null, "2");
+		List<? extends Zone> list = osclient.dns().zones().list(ZoneType.PUBLIC, null, "2");
 		logger.info("Public zones: {}", list);
 
-		list = osclient.dns().zones().list("private", null, "1");
+		list = osclient.dns().zones().list(ZoneType.PRIVATE, null, "1");
 		logger.info("Private zones: {}", list);
 	}
 
