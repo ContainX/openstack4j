@@ -29,12 +29,14 @@ import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.client.CloudProvider;
+import org.openstack4j.api.cloudeye.CloudEyeService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.loadbalance.ELBService;
 import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
@@ -252,6 +254,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public CloudEyeService cloudEye() {
+        return Apis.getCloudEyeService();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     public T perspective(Facing perspective) {
         this.perspective = perspective;
@@ -419,7 +428,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         public String getEndpoint() {
             return access.getEndpoint();
         }
-        
+
         @Override
         public AuthVersion getAuthVersion() {
             return AuthVersion.V2;
@@ -600,6 +609,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 			return Apis.get(AutoScalingService.class);
 		}
 
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public ELBService elasticLoadBalance() {
+			return Apis.get(ELBService.class);
+		}
     }
 
 

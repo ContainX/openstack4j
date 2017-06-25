@@ -82,6 +82,10 @@ public class BaseOpenStackService {
         return builder(returnType, path, HttpMethod.PUT);
     }
 
+    protected <R> Invocation<ActionResponse> putWithResponse(String... path) {
+        return builder(ActionResponse.class, path, HttpMethod.PUT);
+    }
+
     protected <R> Invocation<R> patch(Class<R> returnType, String... path) {
         return builder(returnType, path, HttpMethod.PATCH);
     }

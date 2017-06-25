@@ -21,12 +21,14 @@ import java.util.Set;
 
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
+import org.openstack4j.api.cloudeye.CloudEyeService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.loadbalance.ELBService;
 import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
@@ -331,7 +333,11 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the Huawei Cloud Volume Backup service
 		 */
 		AutoScalingService autoScaling();
-
+		
+		/**
+		 * @return the Huawei Elastic Load Balance service
+		 */
+		ELBService elasticLoadBalance();
 	}
 
 	/**
@@ -368,5 +374,11 @@ public interface OSClient<T extends OSClient<T>> {
 	 * @return the DNS service
 	 */
 	DNSService dns();
+
+	/**
+	 * Returns the CloudEye Service API
+	 * @return the CloudEye service
+	 */
+	CloudEyeService cloudEye();
 
 }

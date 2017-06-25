@@ -1,0 +1,20 @@
+{
+  "metrics": [
+    {
+      "namespace": "SYS.ECS",
+      "dimensions": [
+        {
+          "name": "instance_id",
+          "value": "5b4c1602-fb6d-4f1e-87a8-dcf21d9654ba"
+        }
+      ],
+      "metric_name": "network_outgoing_bytes_aggregate_rate",
+      "unit": "B/s"
+    }
+  ],
+  "meta_data": {
+    "count": 1,
+    "marker": "SYS.ECS.network_outgoing_bytes_aggregate_rate.instance_id:5b4c1602-fb6d-4f1e-87a8-dcf21d9654ba",
+    "total": 1
+  }
+}

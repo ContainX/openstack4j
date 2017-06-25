@@ -20,6 +20,7 @@ import java.util.ServiceLoader;
 
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
+import org.openstack4j.api.cloudeye.CloudEyeService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
@@ -219,6 +220,12 @@ public class Apis {
      * @return the dns services
      */
     public static DNSService getDNSService() { return get(DNSService.class); }
+
+    /**
+     * Gets the Cloud Eye services API
+     * @return the Cloud Eye services
+     */
+    public static CloudEyeService getCloudEyeService() { return get(CloudEyeService.class); }
 
 
     private static APIProvider initializeProvider() {

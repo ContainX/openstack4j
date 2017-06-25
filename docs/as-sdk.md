@@ -1,6 +1,6 @@
 # DNS SDk
 
-HuaWei OpenStack4j DNS SDK, entry point is: `osclient.as()`
+HuaWei OpenStack4j AS SDK, entry point is: `osclient.autoScaling()`
 
 ## API document
 Not provided for now.

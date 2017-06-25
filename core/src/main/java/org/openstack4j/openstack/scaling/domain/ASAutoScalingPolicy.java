@@ -15,13 +15,16 @@
  *******************************************************************************/
 package org.openstack4j.openstack.scaling.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.scaling.ScalingPolicy;
 import org.openstack4j.model.scaling.ScalingPolicyAction;
 import org.openstack4j.model.scaling.ScheduledPolicy;
+import org.openstack4j.openstack.common.DateTimeUtils;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -68,7 +71,8 @@ public class ASAutoScalingPolicy implements ScalingPolicy {
 	private String policyStatus;
 
 	@JsonProperty("create_time")
-	private String createTime;
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	private Date createTime;
 	
 	public static class ASAutoScalingPolicys extends ListResult<ASAutoScalingPolicy> {
 		private static final long serialVersionUID = -1002284271614932588L;

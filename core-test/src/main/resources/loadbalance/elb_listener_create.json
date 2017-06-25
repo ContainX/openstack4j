@@ -1,0 +1,15 @@
+{
+    "loadbalancer_id": "a650695bb9344a3fa24dec344116d261",
+    "update_time": "2017-06-23 08:29:28",
+    "backend_port": 54321,
+    "id": "f5c566e27ebb4d5d8708fca77915a04b",
+    "status": "ACTIVE",
+    "protocol": "TCP",
+    "tcp_draining": false,
+    "tcp_timeout": 1,
+    "create_time": "2017-06-23 08:29:28",
+    "lb_algorithm": "roundrobin",
+    "backend_protocol": "TCP",
+    "name": "SDK-test-listener",
+    "port": 12345
+}

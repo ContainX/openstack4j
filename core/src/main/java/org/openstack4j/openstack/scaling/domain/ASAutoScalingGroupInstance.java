@@ -15,11 +15,14 @@
  *******************************************************************************/
 package org.openstack4j.openstack.scaling.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.scaling.ScalingGroupInstance;
+import org.openstack4j.openstack.common.DateTimeUtils;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -63,7 +66,8 @@ public class ASAutoScalingGroupInstance implements ScalingGroupInstance {
 	private String configId;
 
 	@JsonProperty("create_time")
-	private String createTime;
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	private Date createTime;
 
 	public static class ASAutoScalingGroupInstances extends ListResult<ASAutoScalingGroupInstance> {
 		private static final long serialVersionUID = -2720812005861616356L;

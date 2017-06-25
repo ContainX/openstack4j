@@ -366,6 +366,7 @@ public class DesignateZone implements Zone {
     }
 
 
+    @ToString
     public static class Router implements ModelEntity {
         @JsonProperty("router_id")
         protected String id;

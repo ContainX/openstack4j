@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.compute.Keypair;
 import org.openstack4j.model.scaling.Disk;
 import org.openstack4j.model.scaling.InstanceConfig;
 import org.openstack4j.model.scaling.ScalingConfig;
@@ -211,13 +212,19 @@ public class ASSample extends AbstractSample {
 	 * @return configuration id
 	 */
 	private String createScalingConfig() {
+		String keyname = "KeyPair-28ice";
+		Keypair keypair = osclient.compute().keypairs().get(keyname);
+		if (keypair == null) {
+			osclient.compute().keypairs().create(keyname, null);
+		}
+
 		Map<String, String> metaData = Maps.newHashMap();
 		metaData.put("key1", "val1");
 		metaData.put("key2", "val2");
 		Disk disk = Disk.builder().size(40).volumeType("SATA").diskType("SYS").build();
 		InstanceConfig instanceConfig = InstanceConfig.builder().flavorRef("computev1-1")
-				.imageRef("cb6ad86a-f69e-4a36-b65b-1038b19e15d3").disks(Lists.newArrayList(disk))
-				.keyName("KeyPair-28ice").metadata(metaData).build();
+				.imageRef("cb6ad86a-f69e-4a36-b65b-1038b19e15d3").disks(Lists.newArrayList(disk)).keyName(keyname)
+				.metadata(metaData).build();
 		ScalingConfigCreate config = ASAutoScalingConfigCreate.builder().configName("test-config-name")
 				.instanceConfig(instanceConfig).build();
 
@@ -225,5 +232,4 @@ public class ASSample extends AbstractSample {
 		assertNotNull(result.getConfigId());
 		return result.getConfigId();
 	}
-
 }

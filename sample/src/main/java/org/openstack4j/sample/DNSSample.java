@@ -45,9 +45,9 @@ public class DNSSample extends AbstractSample {
 	private static final String FLOATING_IP_ID = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
 	private static final String REGION = "eu-de";
 	private static final String PTRDNAME = "www.example.com";
-	private static final String ZONE_ID = "2c9eb155587194ec01587224c9f90149";
+	private static final String ZONE_ID = "ff8080825ca865e8015caa9f452700a8";
 	private static final String ROUTER_ID = "19664294-0bf6-4271-ad3a-94b8c79c6558";
-	private static final String RECORDSET_ID = "2c9eb155587228570158722b6ac30007";
+	private static final String RECORDSET_ID = "d4f2557d248e4860829f5fef030b209c";
 
 	@Test
 	public void testListZones() {
@@ -67,14 +67,14 @@ public class DNSSample extends AbstractSample {
 	@Test
 	public void testCreateZones() {
 		ZoneBuilder builder = Builders.zone();
-		Zone zone = builder.name("example.com.").description("This is an example zone.").build();
+		Zone zone = builder.name("a.example1.com.").description("This is an example zone.").build();
 		Zone zoneResult = osclient.dns().zones().create(zone);
 		logger.info("Create zone: {}", zoneResult);
 	}
 
 	@Test
 	public void testCreatePrivateZones() {
-		DesignateZone.Router router = new DesignateZone.Router("19664294-0bf6-4271-ad3a-94b8c79c6558", REGION, null);
+		DesignateZone.Router router = new DesignateZone.Router("5fbf2de5-c7e5-4ec5-92ef-1e0b128f729f", REGION, null);
 		ZoneBuilder builder = Builders.zone();
 		Zone sourceZone = builder.name("example.com.").description("This is an example zone.").type(ZoneType.PRIVATE).router(router).build();
 		Zone zoneResult = osclient.dns().zones().create(sourceZone);
@@ -83,13 +83,13 @@ public class DNSSample extends AbstractSample {
 
 	@Test
 	public void testGetZone() {
-		Zone zone = osclient.dns().zones().get(ZONE_ID);
+		Zone zone = osclient.dns().zones().get("ff8080825ca86646015cc5d399c505c2");
 		logger.info("Get zone: {}", zone);
 	}
 
 	@Test
 	public void testDeleteZones() {
-		Zone deletedZone = osclient.dns().zones().delete(ZONE_ID);
+		Zone deletedZone = osclient.dns().zones().delete("ff8080825ca865e8015ca99563af004a");
 		logger.info("Delete zone: {}", deletedZone);
 	}
 
@@ -101,54 +101,54 @@ public class DNSSample extends AbstractSample {
 
 	@Test
 	public void testAssociateRouter() {
-		DesignateZone.Router router = new DesignateZone.Router(ROUTER_ID, REGION, null);
-		DesignateZone.Router routerResult = osclient.dns().zones().associateRouter(ZONE_ID, router);
+		DesignateZone.Router router = new DesignateZone.Router("62615060-5a38-42d4-a391-9b8a109da548", REGION, null);
+		DesignateZone.Router routerResult = osclient.dns().zones().associateRouter("ff8080825ca86646015cc5d399c505c2", router);
 		logger.info("Associate router: {}", routerResult);
 	}
 
 	@Test
 	public void testDisassociateRouter() {
-		DesignateZone.Router router = new DesignateZone.Router(ROUTER_ID, REGION, null);
-		DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter(ZONE_ID, router);
+		DesignateZone.Router router = new DesignateZone.Router("5fbf2de5-c7e5-4ec5-92ef-1e0b128f729f", REGION, null);
+		DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter("ff8080825ca86646015cc5d399c505c2", router);
 		logger.info("Associate router: {}", routerResult);
 	}
 
 	@Test
 	public void testCreateRecordset() {
 		// create with recordset model
-		Recordset recordset = Builders.recordset().name("").type(RecordSetType.A).ttl(300).records(Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3")).build();
-		Recordset created = osclient.dns().recordsets().create(ZONE_ID, recordset);
-		logger.info("Create record set with recordset model: {}", created);
+//		Recordset recordset = Builders.recordset().name("api.turnbig.net").type(RecordSetType.A).ttl(300).records(Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3")).build();
+//		Recordset created = osclient.dns().recordsets().create("ff8080825ca865e8015caa9f452700a8", recordset);
+//		logger.info("Create record set with recordset model: {}", created);
 
-		// create Type A directly
-		Recordset created2 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type A example record set.", "A", 7200,
-				Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3"));
-		logger.info("Create type A record set directly: {}", created2);
-
+//		// create Type A directly
+//		Recordset created2 = osclient.dns().recordsets().create(ZONE_ID, "example.com.", "This is a type A example record set.", "A", 7200,
+//				Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3"));
+//		logger.info("Create type A record set directly: {}", created2);
+//
 		// create Type AAAA directly
-		Recordset created3 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type AAAA example record set.", "AAAA", 7200,
+		Recordset created3 = osclient.dns().recordsets().create("ff8080825ca865e8015caa9f452700a8", "api.turnbig.net", "This is a type AAAA example record set.", "AAAA", 7200,
 				Lists.newArrayList("fe80:0:0:0:202:b3ff:fe1e:8329", "ff03:0db8:85a3:0:0:8a2e:0370:7334"));
 		logger.info("Create type AAAA record set directly: {}", created3);
-
-		// create Type MX directly
-		Recordset created4 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type MX example record set.", "MX", 7200,
-				Lists.newArrayList("1 mail.example.com"));
-		logger.info("Create type MX record set directly: {}", created4);
-
-		// create Type CNAME directly
-		Recordset created5 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type CNAME example record set.", "CNAME", 7200,
-				Lists.newArrayList("server1.example.com"));
-		logger.info("Create type CNAME record set directly: {}", created5);
-
-		// create Type TXT directly
-		Recordset created6 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type TXT record set.", "TXT", 7200,
-				Lists.newArrayList("This host is used for sale."));
-		logger.info("Create type TXT record set directly: {}", created6);
-
-		// create Type NS directly
-		Recordset created7 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type NS record set.", "NS", 7200,
-				Lists.newArrayList("node1.example.com.", "node2.example.com."));
-		logger.info("Create type NS record set directly: {}", created7);
+//
+//		// create Type MX directly
+//		Recordset created4 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type MX example record set.", "MX", 7200,
+//				Lists.newArrayList("1 mail.example.com"));
+//		logger.info("Create type MX record set directly: {}", created4);
+//
+//		// create Type CNAME directly
+//		Recordset created5 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type CNAME example record set.", "CNAME", 7200,
+//				Lists.newArrayList("server1.example.com"));
+//		logger.info("Create type CNAME record set directly: {}", created5);
+//
+//		// create Type TXT directly
+//		Recordset created6 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type TXT record set.", "TXT", 7200,
+//				Lists.newArrayList("This host is used for sale."));
+//		logger.info("Create type TXT record set directly: {}", created6);
+//
+//		// create Type NS directly
+//		Recordset created7 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type NS record set.", "NS", 7200,
+//				Lists.newArrayList("node1.example.com.", "node2.example.com."));
+//		logger.info("Create type NS record set directly: {}", created7);
 	}
 
 	@Test
@@ -168,13 +168,13 @@ public class DNSSample extends AbstractSample {
 
 	@Test
 	public void getRecordset() {
-		Recordset recordset = osclient.dns().recordsets().get(ZONE_ID, RECORDSET_ID);
+		Recordset recordset = osclient.dns().recordsets().get("ff80808259367d380159687a3b0e07b7", "ff80808259367d380159687a3b0e07b8");
 		logger.info("Get recordset: {}", recordset);
 	}
 
 	@Test
 	public void delRecordset() {
-		Recordset recordset = osclient.dns().recordsets().delete(ZONE_ID, RECORDSET_ID);
+		Recordset recordset = osclient.dns().recordsets().delete("ff80808259367d380159687a3b0e07b7", "ff80808259367d380159687a3b0e07b8");
 		logger.info("Delete recordset: {}", recordset);
 	}
 	

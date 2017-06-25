@@ -15,6 +15,8 @@
  *******************************************************************************/
 package org.openstack4j.model.scaling;
 
+import java.util.Date;
+
 import org.openstack4j.model.ModelEntity;
 
 public interface ScalingGroupInstance extends ModelEntity {
@@ -61,5 +63,5 @@ public interface ScalingGroupInstance extends ModelEntity {
 	/**
 	 * @return create time of instance
 	 */
-	String getCreateTime();
+	Date getCreateTime();
 }

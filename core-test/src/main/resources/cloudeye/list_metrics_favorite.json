@@ -1,0 +1,24 @@
+{
+  "metrics": [
+    {
+      "namespace": "SYS.AS",
+      "metric_name": "instance_num",
+      "dimensions": [
+        {
+          "name": "AutoScalingGroup",
+          "value": "56e25174-c317-4be1-9fbd-17d5aff10ad5"
+        }
+      ]
+    },
+    {
+      "namespace": "SYS.ECS",
+      "metric_name": "network_outgoing_bytes_aggregate_rate",
+      "dimensions": [
+        {
+          "name": "instance_id",
+          "value": "5b4c1602-fb6d-4f1e-87a8-dcf21d9654ba"
+        }
+      ]
+    }
+  ]
+}

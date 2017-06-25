@@ -15,6 +15,8 @@
  *******************************************************************************/
 package org.openstack4j.model.scaling;
 
+import java.util.Date;
+
 import org.openstack4j.model.ModelEntity;
 
 public interface ScalingActivityLog extends ModelEntity {
@@ -26,12 +28,12 @@ public interface ScalingActivityLog extends ModelEntity {
 	/**
 	 * @return start time of activity log
 	 */
-	String getStartTime();
+	Date getStartTime();
 	
 	/**
 	 * @return end time of activity log
 	 */
-	String getEndTime();
+	Date getEndTime();
 	
 	/**
 	 * @return activity log id

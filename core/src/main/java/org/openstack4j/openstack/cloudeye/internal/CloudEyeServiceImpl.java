@@ -1,9 +1,7 @@
 package org.openstack4j.openstack.cloudeye.internal;
 
-import org.openstack4j.api.cloudeye.CloudEyeService;
-import org.openstack4j.api.cloudeye.MetricDataService;
-import org.openstack4j.api.cloudeye.MetricService;
-import org.openstack4j.api.cloudeye.QuotaService;
+import org.openstack4j.api.Apis;
+import org.openstack4j.api.cloudeye.*;
 import org.openstack4j.api.scaling.AutoScalingGroupInstanceService;
 
 /**
@@ -18,15 +16,20 @@ public class CloudEyeServiceImpl extends BaseCloudEyeServices implements CloudEy
 	 */
 	@Override
 	public MetricService metrics() {
-		return null;
+		return Apis.get(MetricService.class);
 	}
 
 	/* 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MetricDataService alarms() {
-		return null;
+	public AlarmService alarms() {
+		return Apis.get(AlarmService.class);
+	}
+
+	@Override
+	public MetricDataService metricsDatas() {
+		return Apis.get(MetricDataService.class);
 	}
 
 	/* 
@@ -42,7 +45,7 @@ public class CloudEyeServiceImpl extends BaseCloudEyeServices implements CloudEy
 	 */
 	@Override
 	public QuotaService quotas() {
-		return null;
+		return Apis.get(QuotaService.class);
 	}
 
 	

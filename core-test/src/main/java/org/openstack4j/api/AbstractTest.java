@@ -76,6 +76,8 @@ public abstract class AbstractTest {
         WORKFLOW(8989),
         // huawei
         AUTO_SCALING(10000),
+        CLOUD_EYE(10001),
+        LOAD_BALANCER(10002),
         ;
     	//@on
 

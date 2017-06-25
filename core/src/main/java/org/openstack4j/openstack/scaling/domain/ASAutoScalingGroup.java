@@ -15,12 +15,15 @@
  *******************************************************************************/
 package org.openstack4j.openstack.scaling.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.scaling.ScalingGroup;
+import org.openstack4j.openstack.common.DateTimeUtils;
 import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -88,7 +91,8 @@ public class ASAutoScalingGroup implements ScalingGroup {
 	List<IdResourceEntity> securityGroups;
 
 	@JsonProperty("create_time")
-	String createTime;
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	Date createTime;
 	
 	@JsonProperty("vpc_id")
 	String vpcId;

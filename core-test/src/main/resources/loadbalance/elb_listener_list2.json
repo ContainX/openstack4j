@@ -1,0 +1,29 @@
+[
+	{
+		"update_time": "2017-06-23 08:41:39",
+		"backend_port": 54321,
+		"id": "f5c566e27ebb4d5d8708fca77915a04b",
+		"ssl_ciphers": null,
+		"backend_protocol": "TCP",
+		"sticky_session_type": null,
+		"certificate_id": null,
+		"lb_algorithm": "roundrobin",
+		"admin_state_up": false,
+		"description": null,
+		"loadbalancer_id": "a650695bb9344a3fa24dec344116d261",
+		"status": "ACTIVE",
+		"create_time": "2017-06-23 08:29:28",
+		"cookie_timeout": null,
+		"ssl_protocols": null,
+		"protocol": "TCP",
+		"port": 12345,
+		"udp_timeout": null,
+		"tcp_draining": false,
+		"tcp_timeout": 1,
+		"member_number": 0,
+		"healthcheck_id": null,
+		"session_sticky": false,
+		"tcp_draining_timeout": null,
+		"name": "SDK-test-listener"
+	}
+]

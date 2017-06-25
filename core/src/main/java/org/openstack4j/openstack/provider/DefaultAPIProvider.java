@@ -23,6 +23,10 @@ import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.artifact.ToscaTemplatesArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.barbican.ContainerService;
+import org.openstack4j.api.cloudeye.CloudEyeService;
+import org.openstack4j.api.cloudeye.MetricDataService;
+import org.openstack4j.api.cloudeye.MetricService;
+import org.openstack4j.api.cloudeye.QuotaService;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
@@ -45,8 +49,8 @@ import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.api.dns.v2.DNSService;
-import org.openstack4j.api.dns.v2.RecordsetService;
 import org.openstack4j.api.dns.v2.PTRService;
+import org.openstack4j.api.dns.v2.RecordsetService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.gbp.ExternalPolicyService;
 import org.openstack4j.api.gbp.ExternalSegmentService;
@@ -82,6 +86,14 @@ import org.openstack4j.api.identity.v3.TokenService;
 import org.openstack4j.api.identity.v3.UserService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.image.v2.TaskService;
+import org.openstack4j.api.loadbalance.ELBListenerService;
+import org.openstack4j.api.loadbalance.AsyncJobService;
+import org.openstack4j.api.loadbalance.ELBCertificateService;
+import org.openstack4j.api.loadbalance.ELBHealthCheckService;
+import org.openstack4j.api.loadbalance.ELBService;
+import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
+import org.openstack4j.api.loadbalance.ELBQuotaService;
+import org.openstack4j.api.loadbalance.ELBServerService;
 import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.SchedulerStatsService;
 import org.openstack4j.api.manila.SecurityServiceService;
@@ -195,6 +207,7 @@ import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
 import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
+import org.openstack4j.openstack.cloudeye.internal.*;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
@@ -217,8 +230,8 @@ import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
 import org.openstack4j.openstack.dns.v2.internal.DNSServiceImpl;
-import org.openstack4j.openstack.dns.v2.internal.RecordsetServiceImpl;
 import org.openstack4j.openstack.dns.v2.internal.PTRServiceImpl;
+import org.openstack4j.openstack.dns.v2.internal.RecordsetServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalPolicyServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalSegmentServiceImpl;
 import org.openstack4j.openstack.gbp.internal.GbpServiceImpl;
@@ -253,6 +266,14 @@ import org.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBListenerServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.AsyncJobServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBCertificateSeviceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBHealthCheckServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBLoadBalancerServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBQuotaServiceImpl;
+import org.openstack4j.openstack.loadbalance.internal.ELBServerServiceImpl;
 import org.openstack4j.openstack.magnum.internal.MagnumServiceImpl;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;
@@ -563,6 +584,13 @@ public class DefaultAPIProvider implements APIProvider {
 		// DNS
 		bind(PTRService.class, PTRServiceImpl.class);
 
+		// Cloud Eye
+        bind(CloudEyeService.class, CloudEyeServiceImpl.class);
+        bind(MetricService.class, CloudEyeMetricServiceImpl.class);
+        bind(org.openstack4j.api.cloudeye.AlarmService.class, CloudEyeAlarmServiceImpl.class);
+        bind(MetricDataService.class, CloudEyeMetricDataServiceImpl.class);
+        bind(QuotaService.class, CloudEyeQuotaServiceImpl.class);
+
 		// auto-scaling
 		bind(AutoScalingService.class, AutoScalingServiceImpl.class);
 		bind(AutoScalingGroupService.class, AutoScalingGroupServiceImpl.class);
@@ -571,6 +599,17 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(AutoScalingPolicyService.class, AutoScalingPolicyServiceImpl.class);
 		bind(AutoScalingActivityLogService.class, AutoScalingActivityLogServiceImpl.class);
 		bind(AutoScalingQuotaService.class, AutoScalingQuotaServiceImpl.class);
+		
+		//load balance
+		bind(ELBService.class, ELBServiceImpl.class);
+		bind(ELBLoadBalancerService.class, ELBLoadBalancerServiceImpl.class);
+		bind(ELBListenerService.class, ELBListenerServiceImpl.class);
+		bind(ELBHealthCheckService.class, ELBHealthCheckServiceImpl.class);
+		bind(ELBServerService.class, ELBServerServiceImpl.class);
+		bind(ELBQuotaService.class, ELBQuotaServiceImpl.class);
+		bind(ELBCertificateService.class, ELBCertificateSeviceImpl.class);
+		
+		bind(AsyncJobService.class, AsyncJobServiceImpl.class);
     }
 
     /**

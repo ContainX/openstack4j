@@ -1,0 +1,36 @@
+{
+  "metric_alarms": [
+    {
+      "alarm_name": "ECS-Alarm-maas-filp",
+      "alarm_description": "",
+      "metric": {
+        "namespace": "SYS.ECS",
+        "dimensions": [
+          {
+            "name": "instance_id",
+            "value": "5b4c1602-fb6d-4f1e-87a8-dcf21d9654ba"
+          }
+        ],
+        "metric_name": "network_incoming_bytes_aggregate_rate"
+      },
+      "condition": {
+        "period": 300,
+        "filter": "average",
+        "comparison_operator": ">=",
+        "value": 100,
+        "unit": "B/s",
+        "count": 3
+      },
+      "alarm_enabled": true,
+      "alarm_action_enabled": false,
+      "alarm_id": "al1483387711418ZNpR8DX3g",
+      "update_time": 1495572900000,
+      "alarm_state": "ok"
+    }
+  ],
+  "meta_data": {
+    "count": 1,
+    "marker": "al1483387711418ZNpR8DX3g",
+    "total": 1
+  }
+}

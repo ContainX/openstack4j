@@ -17,8 +17,8 @@ package org.openstack4j.sample;
 
 import static org.testng.Assert.assertTrue;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.common.ActionResponse;
@@ -44,22 +44,22 @@ public class ASPolicySample extends AbstractSample {
 	@Test
 	public void testCreateAutoScalingPolicy() {
 		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
-		String endTime = getEndTime();
 		ScheduledPolicy scheduledPolicy = ScheduledPolicy.builder().launchTime("01:00")
-				.recurrenceType(RecurrenceType.Daily.name()).endTime(endTime).recurrenceValue(null).build();
+				.recurrenceType(RecurrenceType.Daily.name()).endTime(getEndTime()).recurrenceValue(null).build();
 		ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder().policyName("policyTestName")
 				.groupId(groupId).policyType(PolicyType.RECURRENCE.name()).scheduledPolicy(scheduledPolicy).build();
 		ScalingPolicyCreateUpdate create = osclient.autoScaling().policies().create(policy);
 		assertTrue(create != null && !Strings.isNullOrEmpty(create.getPolicyId()));
 	}
-	
+
 	@Test
 	public void testUpdateAutoScalingPolicy() {
 		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
 		ASAutoScalingPolicy policy = (ASAutoScalingPolicy) osclient.autoScaling().policies().get(policyId);
 		String after = new StringBuilder(policy.getPolicyName()).reverse().toString();
-		osclient.autoScaling().policies().update(
-				ASAutoScalingPolicyCreateUpdate.fromScalingPolicy(policy).toBuilder().policyName(after).build());
+		ScheduledPolicy scheduledPolicy = policy.getScheduledPolicy().toBuilder().endTime(getEndTime()).build();
+		osclient.autoScaling().policies().update(ASAutoScalingPolicyCreateUpdate.fromScalingPolicy(policy).toBuilder()
+				.scheduledPolicy(scheduledPolicy).policyName(after).build());
 
 		policy = (ASAutoScalingPolicy) osclient.autoScaling().policies().get(policyId);
 		assertTrue(after.equals(policy.getPolicyName()));
@@ -70,7 +70,7 @@ public class ASPolicySample extends AbstractSample {
 		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
 		List<? extends ScalingPolicy> all = osclient.autoScaling().policies().list(groupId);
 		logger.info("{}", all);
-		
+
 		String policyName = "policyName";
 		ScalingPolicyListOptions options = ScalingPolicyListOptions.create().policyName(policyName);
 		List<? extends ScalingPolicy> list = osclient.autoScaling().policies().list(groupId, options);
@@ -81,45 +81,43 @@ public class ASPolicySample extends AbstractSample {
 			}
 		}
 	}
-	
+
 	@Test
 	public void testGetAutoScalingPolicy() {
 		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
 		ScalingPolicy policy = osclient.autoScaling().policies().get(policyId);
 		assertTrue(policyId.equals(policy.getPolicyId()));
 	}
-	
+
 	@Test
 	public void testOperateAutoScalingPolicy() {
 		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
 		ActionResponse resp = osclient.autoScaling().policies().operate(policyId, new Pause());
 		assertTrue(resp.isSuccess(), resp.getFault());
-		
+
 		ScalingPolicy policy = osclient.autoScaling().policies().get(policyId);
 		assertTrue("PAUSED".equals(policy.getPolicyStatus()));
 	}
-	
+
 	@Test
 	public void testDeleteAutoScalingPolicy() {
 		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
-		String endTime = getEndTime();
 		ScheduledPolicy scheduledPolicy = ScheduledPolicy.builder().launchTime("01:00")
-				.recurrenceType(RecurrenceType.Daily.name()).endTime(endTime).recurrenceValue(null).build();
+				.recurrenceType(RecurrenceType.Daily.name()).endTime(getEndTime()).recurrenceValue(null).build();
 		ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder().policyName("policyTestName")
 				.groupId(groupId).policyType(PolicyType.RECURRENCE.name()).scheduledPolicy(scheduledPolicy).build();
 		ScalingPolicyCreateUpdate create = osclient.autoScaling().policies().create(policy);
 		assertTrue(create != null && !Strings.isNullOrEmpty(create.getPolicyId()));
-		
+
 		String policyId = create.getPolicyId();
 		ActionResponse resp = osclient.autoScaling().policies().delete(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
-	private String getEndTime() {
+	private Date getEndTime() {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.HOUR, 1);
-		String endTime = new SimpleDateFormat("YYYY-MM-dd'T'HH:mm'Z'").format(cal.getTime());
-		return endTime;
+		return cal.getTime();
 	}
 
 }

@@ -1,0 +1,9 @@
+{
+  "code": 400,
+  "element": "Bad Request",
+  "message": "The system received a request which cannot be recognized",
+  "details": {
+    "details": "The URL parameter is invalid or does not exist.",
+    "code": "ces.0013"
+  }
+}
