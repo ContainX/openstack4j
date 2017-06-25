@@ -39,7 +39,7 @@ public class ELBLoadBalancerV1Tests extends AbstractTest {
 		respondWith(JSON_LOAD_BLANACER_JOB);
 		String vpcId = "31d158b8-e7d7-4b4a-b2a7-a5240296b267";
 		ELBLoadBalancerCreate loadBalancer = ELBLoadBalancerCreate.builder().name("SDK-elb-4-test").vpcId(vpcId)
-				.type(Type.External.name()).adminStateUp(1).build();
+				.type(Type.External.name()).bandwidth(1).adminStateUp(1).build();
 		ELBJob job = osv3().elasticLoadBalance().loadBalancers().create(loadBalancer);
 		assertTrue("2c9eb2c15cbc6bfd015cd3e250af1bde".equals(job.getJobId()));
 	}

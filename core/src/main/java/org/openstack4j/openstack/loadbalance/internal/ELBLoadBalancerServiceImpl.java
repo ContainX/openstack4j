@@ -26,6 +26,7 @@ import org.openstack4j.model.loadbalance.LoadBalancerUpdate;
 import org.openstack4j.openstack.loadbalance.domain.ELBJob;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancer;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancer.ELBLoadBalancers;
+import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancerCreate.Type;
 import org.openstack4j.openstack.loadbalance.options.ELBLoadBalancerListOptions;
 
 import com.google.common.base.Strings;
@@ -41,6 +42,14 @@ public class ELBLoadBalancerServiceImpl extends BaseELBServices
 		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getVpcId()), "vpcId is required");
 		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getType()), "type is required");
 		checkArgument(loadBalancer.getAdminStateUp() != null, "adminStateUp is required");
+		if(Type.Internal.name().equals(loadBalancer.getType())) {
+			checkArgument(!Strings.isNullOrEmpty(loadBalancer.getVipSubnetId()), "vipSubnetId is required when type is Internal");
+			checkArgument(!Strings.isNullOrEmpty(loadBalancer.getAzId()), "azId is required when type is Internal");
+			checkArgument(!Strings.isNullOrEmpty(loadBalancer.getTenantId()), "tenantId is required when type is Internal");
+		} 
+		if(Type.External.name().equals(loadBalancer.getType())) {
+			checkArgument(loadBalancer.getBandwidth() != null, "bandwidth is required when type is External");
+		}
 
 		return post(ELBJob.class, uri(API_PATH)).entity(loadBalancer).execute();
 	}

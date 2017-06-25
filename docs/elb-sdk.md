@@ -16,7 +16,9 @@ You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-buil
 ELBLoadBalancerCreate loadBalancer = ELBLoadBalancerCreate.builder()
 		.name("name")
 		.vpcId("vpcId")
-		.type(Type.External.name()).adminStateUp(1).build();
+		.type(Type.External.name())
+		.bandwidth(1)
+		.adminStateUp(1).build();
 ELBJob job = osclient.elasticLoadBalance().loadBalancers().create(loadBalancer);
 ```
 
@@ -130,7 +132,7 @@ ELBJob job = osclient.elasticLoadBalance().servers().create("listenerId", server
 ### Delete Server
 ```java
 IdResourceEntity server = new IdResourceEntity();
-server.setId("serverId");
+server.setId("memberId");
 List<IdResourceEntity> removeMember = Lists.newArrayList(server);
 ServerDelete servers = ELBServerDelete.builder().removeMember(removeMember).build();
 ELBJob job = osclient.elasticLoadBalance().servers().delete("listenerId", servers);
