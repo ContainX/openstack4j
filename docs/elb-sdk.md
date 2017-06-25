@@ -130,7 +130,7 @@ ELBJob job = osclient.elasticLoadBalance().servers().create("listenerId", server
 ### Delete Server
 ```java
 IdResourceEntity server = new IdResourceEntity();
-server.setId("serverId");
+server.setId("memberId");
 List<IdResourceEntity> removeMember = Lists.newArrayList(server);
 ServerDelete servers = ELBServerDelete.builder().removeMember(removeMember).build();
 ELBJob job = osclient.elasticLoadBalance().servers().delete("listenerId", servers);
