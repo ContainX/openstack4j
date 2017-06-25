@@ -15,16 +15,19 @@
  *******************************************************************************/
 package org.openstack4j.api.dns.v2;
 
-import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders;
-import org.openstack4j.model.dns.v2.*;
-import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
-import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
-import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 
 import java.util.List;
 
-import static org.testng.Assert.*;
+import org.openstack4j.api.AbstractTest;
+import org.openstack4j.api.Builders;
+import org.openstack4j.model.dns.v2.Nameserver;
+import org.openstack4j.model.dns.v2.Status;
+import org.openstack4j.model.dns.v2.Zone;
+import org.openstack4j.model.dns.v2.ZoneType;
+import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
+import org.testng.annotations.Test;
 
 /**
  * Tests the DNS/Designate API version 2 ZoneService
@@ -151,7 +154,7 @@ public class DesignateZoneServiceTest extends AbstractTest {
     public void zonePublicListWithParamsTest() throws Exception {
         respondWith(JSON_ZONELIST_PUBLIC);
 
-        List<? extends Zone> zoneList = osv3().dns().zones().list("public", null, "1");
+        List<? extends Zone> zoneList = osv3().dns().zones().list(ZoneType.PUBLIC, null, "1");
         assertFalse(zoneList.isEmpty());
         assertTrue(zoneList.size() == 1);
         assertEquals(zoneList.get(0).getType(), ZoneType.PUBLIC);
@@ -161,7 +164,7 @@ public class DesignateZoneServiceTest extends AbstractTest {
     public void zonePrivateListWithParamsTest() throws Exception {
         respondWith(JSON_ZONELIST_PRIVATE);
 
-        List<? extends Zone> zoneList = osv3().dns().zones().list("private", null, "2");
+        List<? extends Zone> zoneList = osv3().dns().zones().list(ZoneType.PRIVATE, null, "2");
         assertFalse(zoneList.isEmpty());
         assertTrue(zoneList.size() == 2);
         assertEquals(zoneList.get(0).getType(), ZoneType.PRIVATE);
