@@ -1,6 +1,5 @@
 - [Quick start](quickstart.md)
 - HuaWei SDK
-  - [initial](huawei-sdk.md)
   - [VBS](vbs-sdk.md)
   - [DNS](dns-sdk.md)
   - [AS](as-sdk.md)
