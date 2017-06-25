@@ -123,6 +123,12 @@ public class CloudEyeSample extends AbstractSample {
         logger.info("Add metric datas: {}", actionResponse);
     }
 
+    @Test
+    public void testGetQuotas() {
+        Quota quotas = osclient.cloudEye().quotas().get();
+        logger.info("Alarm: {}", quotas);
+    }
+
 }
 
 

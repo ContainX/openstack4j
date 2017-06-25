@@ -45,7 +45,7 @@ public class CloudEyeServiceImpl extends BaseCloudEyeServices implements CloudEy
 	 */
 	@Override
 	public QuotaService quotas() {
-		return null;
+		return Apis.get(QuotaService.class);
 	}
 
 	

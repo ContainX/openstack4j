@@ -20,7 +20,7 @@ import static org.testng.Assert.*;
 /**
  * Tests the CloudEye API version Metric Service
  */
-@Test(groups = "Cloudeye", suiteName = "Cloudeye/Metrics")
+@Test(groups = "Cloudeye", suiteName = "Cloudeye/MetricDatas")
 public class CloudEyeMetricDataServiceTest extends AbstractTest {
     private static final String JSON_METRIC_AGGREGATION = "/cloudeye/get_metric_aggregation.json";
     private static final String JSON_METRIC_AGGREGATION_ERROR = "/cloudeye/get_metric_aggregation_error.json";

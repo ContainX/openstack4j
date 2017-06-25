@@ -26,6 +26,7 @@ import org.openstack4j.api.barbican.ContainerService;
 import org.openstack4j.api.cloudeye.CloudEyeService;
 import org.openstack4j.api.cloudeye.MetricDataService;
 import org.openstack4j.api.cloudeye.MetricService;
+import org.openstack4j.api.cloudeye.QuotaService;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
@@ -206,10 +207,7 @@ import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
 import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
-import org.openstack4j.openstack.cloudeye.internal.CloudEyeAlarmServiceImpl;
-import org.openstack4j.openstack.cloudeye.internal.CloudEyeMetricDataServiceImpl;
-import org.openstack4j.openstack.cloudeye.internal.CloudEyeMetricServiceImpl;
-import org.openstack4j.openstack.cloudeye.internal.CloudEyeServiceImpl;
+import org.openstack4j.openstack.cloudeye.internal.*;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
@@ -591,6 +589,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(MetricService.class, CloudEyeMetricServiceImpl.class);
         bind(org.openstack4j.api.cloudeye.AlarmService.class, CloudEyeAlarmServiceImpl.class);
         bind(MetricDataService.class, CloudEyeMetricDataServiceImpl.class);
+        bind(QuotaService.class, CloudEyeQuotaServiceImpl.class);
 
 		// auto-scaling
 		bind(AutoScalingService.class, AutoScalingServiceImpl.class);

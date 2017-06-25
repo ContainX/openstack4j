@@ -1,0 +1,12 @@
+{
+  "quotas": {
+    "resources": [
+      {
+        "type": "alarm",
+        "used": 1,
+        "unit": "",
+        "quota": 100
+      }
+    ]
+  }
+}

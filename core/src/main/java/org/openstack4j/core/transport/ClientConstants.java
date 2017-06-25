@@ -90,6 +90,9 @@ public final class ClientConstants {
     //CloudEye/Metric Datas
     public static final String PATH_METRIC_DATAS = "/metric-data";
 
+    //CloudEye/Quota
+    public static final String PATH_QUOTA = "/quotas";
+
     //Magnum APIs
     // list all Magnum Services
     public static final String MAGNUM_MSERVICES = "/mservices";
