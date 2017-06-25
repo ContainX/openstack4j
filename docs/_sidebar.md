@@ -1,6 +1,7 @@
 - [Quick start](quickstart.md)
 - HuaWei SDK
-  - [VBS](vbs-sdk.md)
   - [DNS](dns-sdk.md)
+  - [CES](ces-sdk.md)
   - [AS](as-sdk.md)
   - [ELB](elb-sdk.md)
+  - [VBS](vbs-sdk.md)
