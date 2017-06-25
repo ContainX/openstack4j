@@ -82,3 +82,58 @@ ActionResponse actionResponse = osclient.cloudEye().alarms().stopAlarm(ALARM_ID)
 String ALARM_ID = "al1483387711418ZNpR8DX3g";
 ActionResponse actionResponse = osclient.cloudEye().alarms().deleteAlarm(ALARM_ID);
 ```
+
+## Metric Data
+### Get Metric Aggregation Data
+```java
+String namespace = "SYS.ECS";
+String metric_name = "network_incoming_bytes_aggregate_rate";
+Date from = new Date(1498321875058l);
+Date to = new Date(); 
+Period period = Period.FIVE_MINS;
+Filter filter = Filter.AVERAGE;
+String[] dimValues = new String[]{"instance_id,33328f02-3814-422e-b688-bfdba93d4050"};
+MetricAggregation metricAggregation = osv3().cloudEye().metricsDatas().get(namespace, metric_name, from, to, period, filter, dimValues);
+```
+
+### Add Metric Data
+```java
+List<CloudEyeMetricData> metrics = new ArrayList<>();
+//Must begin with the letter, can only contain 0-9 / a-z / A-Z / _ / -, the length of the shortest 1, the maximum 32.
+String demensionName = "instance_id"; 
+//Must start with a letter or number, only 0-9 / a-z / A-Z / _ / -, with a minimum length of 1 and a maximum of 64.
+String demensionValue = "33328f02-3814-422e-b688-bfdba93d4050";
+CloudEyeMetricDemension.CloudEyeMetricDemensionBuilder dimBuilder = CloudEyeMetricDemension.builder().name(demensionName).value(demensionValue);
+CloudEyeMetricDemension dim1 = dimBuilder.build();
+List<CloudEyeMetricDemension> dimList = new ArrayList<>();
+dimList.add(dim1);
+
+//Must begin with a letter and can only contain 0-9 / a-z / A-Z / _, with a minimum length of 1 and a maximum of 64.
+String metricName = "cpu_util";
+//Must start with the letter, can only contain 0-9 / az / AZ / _, the total length of the shortest 3, the maximum is 32, service can not be " SYS ".
+String metricNamespace = "MINE.APP";
+
+CloudEyeMetric.CloudEyeMetricBuilder metricBuilder = CloudEyeMetric.builder().namespace(metricNamespace)
+        .metricName(metricName)
+        .dimensions(dimList);
+CloudEyeMetricData.CloudEyeMetricDataBuilder builder1 = CloudEyeMetricData.builder()
+        .metric(metricBuilder.build())
+        .ttl(172800) //the maximun is 604800
+        .collectTime(new Date())
+        .value(60)
+        .unit("%");
+
+CloudEyeMetric.CloudEyeMetricBuilder metricBuilder2 = CloudEyeMetric.builder().namespace("MINE.APP")
+        .metricName(metricName)
+        .dimensions(dimList);
+CloudEyeMetricData.CloudEyeMetricDataBuilder builder2 = CloudEyeMetricData.builder()
+        .metric(metricBuilder2.build())
+        .ttl(172800)
+        .collectTime(new Date())
+        .value(70)
+        .unit("%");
+metrics.add(builder1.build());
+metrics.add(builder2.build());
+
+ActionResponse actionResponse = osclient.cloudEye().metricsDatas().add(metrics);
+```

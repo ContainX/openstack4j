@@ -27,6 +27,11 @@ public class CloudEyeServiceImpl extends BaseCloudEyeServices implements CloudEy
 		return Apis.get(AlarmService.class);
 	}
 
+	@Override
+	public MetricDataService metricsDatas() {
+		return Apis.get(MetricDataService.class);
+	}
+
 	/* 
 	 * {@inheritDoc}
 	 */

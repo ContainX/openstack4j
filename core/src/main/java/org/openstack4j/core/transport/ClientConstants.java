@@ -87,6 +87,9 @@ public final class ClientConstants {
     public static final String PATH_ALARMS = "/alarms";
     public static final String PATH_ALARMS_ACTION = "/action";
 
+    //CloudEye/Metric Datas
+    public static final String PATH_METRIC_DATAS = "/metric-data";
+
     //Magnum APIs
     // list all Magnum Services
     public static final String MAGNUM_MSERVICES = "/mservices";
