@@ -40,8 +40,8 @@ public class ELBServerSample extends AbstractSample {
 	@Test
 	public void testCreateServer() {
 		String listenerId = "3a9fe2c9703c43e1ab761552a022c11e";
-		String serverId = "a43d86c8-c2af-4c50-9b14-d32f99874885";
-		ServerCreate server = ELBServerCreate.builder().serverId(serverId).address("127.0.0.1").build();
+		String serverId = "a4d346cd-eead-47b2-a26a-35fa05eaebbf";
+		ServerCreate server = ELBServerCreate.builder().serverId(serverId).address("192.168.1.6").build();
 		List<ServerCreate> servers = Lists.newArrayList(server);
 		ELBJob job = osclient.elasticLoadBalance().servers().create(listenerId, servers);
 		logger.info("create job{}", job);
@@ -51,9 +51,9 @@ public class ELBServerSample extends AbstractSample {
 	@Test
 	public void testDeleteServer() {
 		String listenerId = "3a9fe2c9703c43e1ab761552a022c11e";
-		String serverId = "b235e7d0-8f6d-4777-b9ea-1b1596241996";
+		String memberId = "6f829313333240aa9cbbaf241673dbe7";
 		IdResourceEntity server = new IdResourceEntity();
-		server.setId(serverId);
+		server.setId(memberId);
 		List<IdResourceEntity> removeMember = Lists.newArrayList(server);
 		ServerDelete servers = ELBServerDelete.builder().removeMember(removeMember).build();
 		ELBJob job = osclient.elasticLoadBalance().servers().delete(listenerId, servers);
@@ -67,7 +67,7 @@ public class ELBServerSample extends AbstractSample {
 		Server[] all = osclient.elasticLoadBalance().servers().list(listenerId);
 		logger.info("all:{}", all);
 
-		String address = "127.0.0.1";
+		String address = "192.168.1.6";
 		ELBServerListOptions options = ELBServerListOptions.create().address(address);
 		Server[] list = osclient.elasticLoadBalance().servers().list(listenerId, options);
 		logger.info("list:{}", list);
