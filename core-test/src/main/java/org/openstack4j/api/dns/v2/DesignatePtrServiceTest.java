@@ -67,21 +67,23 @@ public class DesignatePtrServiceTest extends AbstractTest {
 	}
 
 	public void setupPTRSuccessTest() throws Exception {
-        respondWith(JSON_PTR_SETUP);
+		respondWith(JSON_PTR_SETUP);
 
-        DesignatePTR.DesignatePTRBuilder builder = Builders.ptr().ptrdname(PTRDNAME).description(DESCRIPTION).region(REGION).floatingIpId(FLOATING_IP_ID).ttl(TTL);
-        DesignatePTR ptrRecord = builder.build();
-        PTR ptr = osv3().dns().ptrs().setup(ptrRecord);
-        assertNotNull(ptr);
-        assertEquals(ptr.getAddress(), ADDRESS);
-    }
+		DesignatePTR.DesignatePTRBuilder builder = Builders.ptr().ptrdname(PTRDNAME).description(DESCRIPTION)
+				.region(REGION).floatingIpId(FLOATING_IP_ID).ttl(TTL);
+		DesignatePTR ptrRecord = builder.build();
+		PTR ptr = osv3().dns().ptrs().setup(ptrRecord);
+		assertNotNull(ptr);
+		assertEquals(ptr.getAddress(), ADDRESS);
+	}
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void setupPTRFailedTest() throws Exception {
+	@Test(expectedExceptions = IllegalArgumentException.class)
+	public void setupPTRFailedTest() throws Exception {
 		int ttl = 299;
-        DesignatePTR.DesignatePTRBuilder builder = Builders.ptr().ptrdname(PTRDNAME).description(DESCRIPTION).region(REGION).floatingIpId(FLOATING_IP_ID).ttl(ttl);
-        DesignatePTR ptrRecord = builder.build();
-        osv3().dns().ptrs().setup(ptrRecord);
+		DesignatePTR.DesignatePTRBuilder builder = Builders.ptr().ptrdname(PTRDNAME).description(DESCRIPTION)
+				.region(REGION).floatingIpId(FLOATING_IP_ID).ttl(ttl);
+		DesignatePTR ptrRecord = builder.build();
+		osv3().dns().ptrs().setup(ptrRecord);
 	}
 
 	public void getPTRTest() throws Exception {
