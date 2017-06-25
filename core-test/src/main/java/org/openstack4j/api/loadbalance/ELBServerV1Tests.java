@@ -47,7 +47,7 @@ public class ELBServerV1Tests extends AbstractTest {
 		String serverId = "a43d86c8-c2af-4c50-9b14-d32f99874885";
 		ServerCreate server = ELBServerCreate.builder().serverId(serverId).address("127.0.0.1").build();
 		List<ServerCreate> servers = Lists.newArrayList(server);
-		ELBJob job = osv3().elasticLoadBalance().servers().create(listenerId, servers);
+		ELBJob job = osv3().loadBalancer().servers().create(listenerId, servers);
 		assertTrue("2c9eb2c05cbc6a07015cd8c817925b98".equals(job.getJobId()));
 	}
 
@@ -59,7 +59,7 @@ public class ELBServerV1Tests extends AbstractTest {
 		server.setId(serverId);
 		List<IdResourceEntity> removeMember = Lists.newArrayList(server);
 		ServerDelete servers = ELBServerDelete.builder().removeMember(removeMember).build();
-		ELBJob job = osv3().elasticLoadBalance().servers().delete(listenerId, servers);
+		ELBJob job = osv3().loadBalancer().servers().delete(listenerId, servers);
 		assertTrue("2c9eb2c05cbc6a07015cd8c817925b98".equals(job.getJobId()));
 	}
 
@@ -67,11 +67,11 @@ public class ELBServerV1Tests extends AbstractTest {
 		respondWith(JSON_SERVER_LIST);
 		respondWith(JSON_SERVER_LIST2);
 		String listenerId = "3a9fe2c9703c43e1ab761552a022c11e";
-		Server[] all = osv3().elasticLoadBalance().servers().list(listenerId);
+		Server[] all = osv3().loadBalancer().servers().list(listenerId);
 		assertTrue(all.length == 2);
 
 		ELBServerListOptions options = ELBServerListOptions.create().healthStatus(HealthStatus.NORMAL);
-		Server[] list = osv3().elasticLoadBalance().servers().list(listenerId, options);
+		Server[] list = osv3().loadBalancer().servers().list(listenerId, options);
 		if (list != null) {
 			for (Server server : list) {
 				assertTrue(HealthStatus.NORMAL.name().equalsIgnoreCase(server.getHealthStatus()));

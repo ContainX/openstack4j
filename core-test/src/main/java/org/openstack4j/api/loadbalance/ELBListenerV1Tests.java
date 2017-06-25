@@ -46,14 +46,14 @@ public class ELBListenerV1Tests extends AbstractTest {
 		ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener").loadBalancerId(loadBalancerId)
 				.protocol(Protocol.TCP.name()).port(12345).backendProtocol(BackendProtocol.TCP.name())
 				.backendPort(54321).lbAlgorithm(LbAlgorithm.roundrobin.name()).build();
-		ListenerCreate create = osv3().elasticLoadBalance().listeners().create(listener);
+		ListenerCreate create = osv3().loadBalancer().listeners().create(listener);
 		assertTrue("f5c566e27ebb4d5d8708fca77915a04b".equals(create.getId()));
 	}
 
 	public void testDeleteListener() {
 		respondWith(204);
 		String listenerId = "f5c566e27ebb4d5d8708fca77915a04b";
-		ActionResponse resp = osv3().elasticLoadBalance().listeners().delete(listenerId);
+		ActionResponse resp = osv3().loadBalancer().listeners().delete(listenerId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
@@ -61,32 +61,32 @@ public class ELBListenerV1Tests extends AbstractTest {
 		respondWith(JSON_LISTENER);
 		respondWith(JSON_LISTENER_UPDATE);
 		String listenerId = "f5c566e27ebb4d5d8708fca77915a04b";
-		Listener listener = osv3().elasticLoadBalance().listeners().get(listenerId);
+		Listener listener = osv3().loadBalancer().listeners().get(listenerId);
 		assertTrue("f5c566e27ebb4d5d8708fca77915a04b".equals(listener.getId()));
 
 		String after = new StringBuilder(listener.getName()).reverse().toString();
 		ELBListenerUpdate update = ELBListenerUpdate.fromListener(listener).toBuilder().name(after).build();
 
-		Listener afterUpdate = osv3().elasticLoadBalance().listeners().update(listenerId, update);
+		Listener afterUpdate = osv3().loadBalancer().listeners().update(listenerId, update);
 		assertTrue(after.equals(afterUpdate.getName()));
 	}
 
 	public void testGetListener() throws IOException {
 		respondWith(JSON_LISTENER);
 		String listenerId = "f5c566e27ebb4d5d8708fca77915a04b";
-		Listener listener = osv3().elasticLoadBalance().listeners().get(listenerId);
+		Listener listener = osv3().loadBalancer().listeners().get(listenerId);
 		assertTrue(listener.getId().equals(listenerId));
 	}
 
 	public void testListListener() throws IOException {
 		respondWith(JSON_LISTENER_LIST);
 		respondWith(JSON_LISTENER_LIST2);
-		Listener[] all = osv3().elasticLoadBalance().listeners().list();
+		Listener[] all = osv3().loadBalancer().listeners().list();
 		assertTrue(all.length == 5);
 
 		String name = "SDK-test-listener";
 		ELBListenerListOptions options = ELBListenerListOptions.create().name(name);
-		Listener[] list = osv3().elasticLoadBalance().listeners().list(options);
+		Listener[] list = osv3().loadBalancer().listeners().list(options);
 		assertTrue(list.length == 1);
 		if (list != null) {
 			for (Listener listener : list) {

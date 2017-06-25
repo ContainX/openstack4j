@@ -39,7 +39,7 @@ public class ELBCertSample extends AbstractSample {
 				.privateKey(
 						"-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEArmUUhzm5sxxVr/ku4+6cKqnKgZvDl+e/6CNCAq8YMZXTpJP6\n4DjDPny9+8s9MbFabEG3HqjHSKh3b/Ew3FXr8LFa9YuWuAi3W9ii29sZsOwmzIfQ\nhIOIaP1YNR50DDjbAGTaxzRhV40ZKSOCkaUTvl3do5d8ttD1VlF2r0w0DfclrVcs\nS5v3kw889gJ3s3hNkatfQiSt4qLNMehZ8Xofx58DIAOk/f3Vusj3372PsJwKX39c\nHX/NpIHCHKE8qaGCpDqv0daH766eJ065dqO9DuorXPaPT/nxw4PAccb9fByLrTam\ns0ThvSlZo6V3yvHR4KN7mmvbViEmWRy+9oiJEwIDAQABAoIBACV47rpHuxEza24O\nevbbFI9OQIcs8xA26dN1j/+HpAkzinB4o5V+XOWWZDQwbYu58hYE4NYjqf6AxHk3\nOCqAA9yKH2NXhSEyLkP7/rKDF7geZg/YtwNiR/NXTJbNXl4p8VTaVvAq3yey188x\nJCMrd1yWSsOWD2Qw7iaIBpqQIzdEovPE4CG6GmaIRSuqYuoCfbVTFa6YST7jmOTv\nEpG+x6yJZzJ4o0vvfKbKfvPmQizjL+3nAW9g+kgXJmA1xTujiky7bzm2sLK2Slrx\n5rY73mXMElseSlhkYzWwyRmC6M+rWALXqOhVDgIGbaBV4IOzuyH/CUt0wy3ZMIpv\nMOWMNoECgYEA1LHsepCmwjlDF3yf/OztCr/DYqM4HjAY6FTmH+xz1Zjd5R1XOq60\nYFRkhs/e2D6M/gSX6hMqS9sCkg25yRJk3CsPeoS9v5MoiZQA8XlQNovcpWUI2DCm\naZRIsdovFgIqMHYh/Y4CYouee7Nz7foICzO9svrYrbOIVmMwDVJ8vzMCgYEA0ebg\nm0lCuOunyxaSBqOv4Q4sk7Ix0702dIrW0tsUJyU+xuXYH1P/0m+t4/KUU2cNwsg3\njiNzQR9QKvF8yTB5TB4Ye/9dKlu+BEOskvCpuErxc6iVJ+TZOrQDDPNcq56qez5b\nvv9EDdgzpjkjO+hS1j3kYOuG11hrP4Pox4PijqECgYEAz6RTZORKqFoWsZss5VK3\np0LGkEkfw/jYmBgqAQhpnSD7n20hd1yPI2vAKAxPVXTbWDFLzWygYiWRQNy9fxrB\n9F7lYYqtY5VagdVHhnYUZOvtoFoeZFA6ZeAph9elGCtM3Lq3PD2i/mmncsQibTUn\nHSiKDWzuk8UtWIjEpHze5BkCgYEAifD9eG+bzqTnn1qU2pIl2nQTLXj0r97v84Tu\niqF4zAT5DYMtFeGBBI1qLJxVh7342CH2CI4ZhxmJ+L68sAcQH8rDcnGui1DBPlIv\nDl3kW3280bJfW1lUvPRh8NfZ9dsO1HF1n75nveVwg/OWyR7zmWIRPPRrqAeua45H\nox5z/CECgYBqwlEBjue8oOkVVu/lKi6fo6jr+0u25K9dp9azHYwE0KNHX0MwRALw\nWbPgcjge23sfhbeqVvHo0JYBdRsk/OBuW73/9Sb5E+6auDoubCjC0cAIvs23MPju\nsMvKak4mQkI19foRXBydB/DDkK26iei/l0xoygrw50v2HErsQ7JcHw==\n-----END RSA PRIVATE KEY-----")
 				.build();
-		Certificate create = osclient.elasticLoadBalance().certs().create(cert);
+		Certificate create = osclient.loadBalancer().certs().create(cert);
 		logger.info("create:{}", create);
 		assertTrue(!Strings.isNullOrEmpty(create.getId()));
 	}
@@ -47,20 +47,20 @@ public class ELBCertSample extends AbstractSample {
 	@Test
 	public void testDeleteCert() {
 		String certificateId = "60884e005ce546b1b580bf259cd37016";
-		ActionResponse resp = osclient.elasticLoadBalance().certs().delete(certificateId);
+		ActionResponse resp = osclient.loadBalancer().certs().delete(certificateId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
 	@Test
 	public void testUpdateCert() {
-		Certificates certs = osclient.elasticLoadBalance().certs().list();
+		Certificates certs = osclient.loadBalancer().certs().list();
 		logger.info("list:{}", certs);
 		assertTrue(certs != null && Integer.valueOf(certs.getInstanceNum()) > 0, "No cert for update");
 
 		Certificate cert = certs.getCertificates().get(0);
 		String after = new StringBuilder(cert.getDescription()).reverse().toString();
 		ELBCertificateUpdate update = ELBCertificateUpdate.fromCertificate(cert).toBuilder().description(after).build();
-		Certificate afterUpdate = osclient.elasticLoadBalance().certs().update(cert.getId(), update);
+		Certificate afterUpdate = osclient.loadBalancer().certs().update(cert.getId(), update);
 		logger.info("update:{}", afterUpdate);
 		assertTrue(after.equals(afterUpdate.getDescription()));
 	}

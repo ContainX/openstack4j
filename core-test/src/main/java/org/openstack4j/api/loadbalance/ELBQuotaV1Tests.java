@@ -30,7 +30,7 @@ public class ELBQuotaV1Tests extends AbstractTest {
 
 	public void testListQuotas() throws IOException {
 		respondWith(JSON_QUOTAS);
-		Quotas quotas = osv3().elasticLoadBalance().quotas().list();
+		Quotas quotas = osv3().loadBalancer().quotas().list();
 		assertTrue(quotas.getResources().size() == 2);
 	}
 	

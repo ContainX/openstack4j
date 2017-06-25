@@ -337,7 +337,7 @@ public interface OSClient<T extends OSClient<T>> {
 		/**
 		 * @return the Huawei Elastic Load Balance service
 		 */
-		ELBService elasticLoadBalance();
+		ELBService loadBalancer();
 	}
 
 	/**

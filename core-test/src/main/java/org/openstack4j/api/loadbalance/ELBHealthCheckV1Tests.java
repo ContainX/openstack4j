@@ -39,7 +39,7 @@ public class ELBHealthCheckV1Tests extends AbstractTest {
 		respondWith(JSON_HEALTH_CHECK_CREATE);
 		String listenerId = "cd9dc55344fd41b8b1aad5190d2b8dba";
 		HealthCheckCreate healthCheck = ELBHealthCheckCreate.builder().listenerId(listenerId).build();
-		HealthCheck create = osv3().elasticLoadBalance().healthchecks().create(healthCheck);
+		HealthCheck create = osv3().loadBalancer().healthchecks().create(healthCheck);
 
 		assertTrue("dbaad61e9d5341d7924ceac6bd2d4a77".equals(create.getId()));
 	}
@@ -47,7 +47,7 @@ public class ELBHealthCheckV1Tests extends AbstractTest {
 	public void testDeleteHealthCheck() {
 		respondWith(204);
 		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		ActionResponse resp = osv3().elasticLoadBalance().healthchecks().delete(healthCheckId);
+		ActionResponse resp = osv3().loadBalancer().healthchecks().delete(healthCheckId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
@@ -55,7 +55,7 @@ public class ELBHealthCheckV1Tests extends AbstractTest {
 		respondWith(JSON_HEALTH_CHECK);
 		respondWith(JSON_HEALTH_CHECK_UPDATE);
 		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		HealthCheck healthCheck = osv3().elasticLoadBalance().healthchecks().get(healthCheckId);
+		HealthCheck healthCheck = osv3().loadBalancer().healthchecks().get(healthCheckId);
 
 		String before = healthCheck.getHealthCheckProtocol();
 		String after = HealthCheckProtocol.HTTP.name().equalsIgnoreCase(before) ? HealthCheckProtocol.TCP.name()
@@ -63,14 +63,14 @@ public class ELBHealthCheckV1Tests extends AbstractTest {
 		ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).toBuilder()
 				.healthCheckProtocol(after).healthCheckUri("/test").build();
 
-		HealthCheck afterUpdate = osv3().elasticLoadBalance().healthchecks().update(healthCheckId, update);
+		HealthCheck afterUpdate = osv3().loadBalancer().healthchecks().update(healthCheckId, update);
 		assertTrue(afterUpdate.getHealthCheckProtocol().equalsIgnoreCase(after));
 	}
 
 	public void testGetHealthCheck() throws IOException {
 		respondWith(JSON_HEALTH_CHECK);
 		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		HealthCheck healthCheck = osv3().elasticLoadBalance().healthchecks().get(healthCheckId);
+		HealthCheck healthCheck = osv3().loadBalancer().healthchecks().get(healthCheckId);
 		assertTrue(healthCheck.getId().equals(healthCheckId));
 	}
 	@Override

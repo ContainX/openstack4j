@@ -41,7 +41,7 @@ public class ELBListenerSample extends AbstractSample {
 		ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener").loadBalancerId(loadBalancerId)
 				.protocol(Protocol.TCP.name()).port(12345).backendProtocol(BackendProtocol.TCP.name())
 				.backendPort(54321).lbAlgorithm(LbAlgorithm.roundrobin.name()).build();
-		ListenerCreate create = osclient.elasticLoadBalance().listeners().create(listener);
+		ListenerCreate create = osclient.loadBalancer().listeners().create(listener);
 		logger.info("create: {}", create);
 		assertTrue(!Strings.isNullOrEmpty(create.getId()));
 	}
@@ -49,19 +49,19 @@ public class ELBListenerSample extends AbstractSample {
 	@Test
 	public void testDeleteListener() {
 		String listenerId = "f5c566e27ebb4d5d8708fca77915a04b";
-		ActionResponse resp = osclient.elasticLoadBalance().listeners().delete(listenerId);
+		ActionResponse resp = osclient.loadBalancer().listeners().delete(listenerId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
 	@Test
 	public void testUpdateListener() {
 		String listenerId = "f5c566e27ebb4d5d8708fca77915a04b";
-		Listener listener = osclient.elasticLoadBalance().listeners().get(listenerId);
+		Listener listener = osclient.loadBalancer().listeners().get(listenerId);
 
 		String after = new StringBuilder(listener.getName()).reverse().toString();
 		ELBListenerUpdate update = ELBListenerUpdate.fromListener(listener).toBuilder().name(after).build();
 
-		Listener afterUpdate = osclient.elasticLoadBalance().listeners().update(listenerId, update);
+		Listener afterUpdate = osclient.loadBalancer().listeners().update(listenerId, update);
 		logger.info("update:{}", afterUpdate);
 		assertTrue(after.equals(afterUpdate.getName()));
 	}
@@ -69,19 +69,19 @@ public class ELBListenerSample extends AbstractSample {
 	@Test
 	public void testGetListener() {
 		String listenerId = "f5c566e27ebb4d5d8708fca77915a04b";
-		Listener listener = osclient.elasticLoadBalance().listeners().get(listenerId);
+		Listener listener = osclient.loadBalancer().listeners().get(listenerId);
 		logger.info("get:{}", listener);
 		assertTrue(listener.getId().equals(listenerId));
 	}
 
 	@Test
 	public void testListListener() {
-		Listener[] all = osclient.elasticLoadBalance().listeners().list();
+		Listener[] all = osclient.loadBalancer().listeners().list();
 		logger.info("all:{}", all);
 
 		String name = "SDK";
 		ELBListenerListOptions options = ELBListenerListOptions.create().name(name);
-		Listener[] list = osclient.elasticLoadBalance().listeners().list(options);
+		Listener[] list = osclient.loadBalancer().listeners().list(options);
 		logger.info("list:{}", list);
 		if (list != null) {
 			for (Listener listener : list) {

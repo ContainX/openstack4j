@@ -40,14 +40,14 @@ public class ELBLoadBalancerV1Tests extends AbstractTest {
 		String vpcId = "31d158b8-e7d7-4b4a-b2a7-a5240296b267";
 		ELBLoadBalancerCreate loadBalancer = ELBLoadBalancerCreate.builder().name("SDK-elb-4-test").vpcId(vpcId)
 				.type(Type.External.name()).bandwidth(1).adminStateUp(1).build();
-		ELBJob job = osv3().elasticLoadBalance().loadBalancers().create(loadBalancer);
+		ELBJob job = osv3().loadBalancer().loadBalancers().create(loadBalancer);
 		assertTrue("2c9eb2c15cbc6bfd015cd3e250af1bde".equals(job.getJobId()));
 	}
 
 	public void testDeleteLoadBalancer() throws IOException {
 		respondWith(JSON_LOAD_BLANACER_JOB);
 		String loadBalancerId = "loadBalancerId";
-		ELBJob job = osv3().elasticLoadBalance().loadBalancers().delete(loadBalancerId);
+		ELBJob job = osv3().loadBalancer().loadBalancers().delete(loadBalancerId);
 		assertTrue("2c9eb2c15cbc6bfd015cd3e250af1bde".equals(job.getJobId()));
 	}
 
@@ -55,24 +55,24 @@ public class ELBLoadBalancerV1Tests extends AbstractTest {
 		respondWith(JSON_LOAD_BALANCER);
 		respondWith(JSON_LOAD_BLANACER_JOB);
 		String loadBalancerId = "a650695bb9344a3fa24dec344116d261";
-		LoadBalancer loadBalancer = osv3().elasticLoadBalance().loadBalancers().get(loadBalancerId);
+		LoadBalancer loadBalancer = osv3().loadBalancer().loadBalancers().get(loadBalancerId);
 		String after = new StringBuilder(loadBalancer.getDescription()).reverse().toString();
 		ELBLoadBalancerUpdate update = ELBLoadBalancerUpdate.fromLoadBalancer(loadBalancer).toBuilder()
 				.description(after).build();
-		ELBJob job = osv3().elasticLoadBalance().loadBalancers().update(loadBalancerId, update);
+		ELBJob job = osv3().loadBalancer().loadBalancers().update(loadBalancerId, update);
 		assertTrue("2c9eb2c15cbc6bfd015cd3e250af1bde".equals(job.getJobId()));
 	}
 
 	public void testGetLoadBalancer() throws IOException {
 		respondWith(JSON_LOAD_BALANCER);
 		String loadBalancerId = "a650695bb9344a3fa24dec344116d261";
-		LoadBalancer loadBalancer = osv3().elasticLoadBalance().loadBalancers().get(loadBalancerId);
+		LoadBalancer loadBalancer = osv3().loadBalancer().loadBalancers().get(loadBalancerId);
 		assertTrue(loadBalancer.getId().equals(loadBalancerId));
 	}
 
 	public void testListLoadBalancer() throws IOException {
 		respondWith(JSON_LOAD_BALANCER_LIST);
-		List<? extends LoadBalancer> all = osv3().elasticLoadBalance().loadBalancers().list();
+		List<? extends LoadBalancer> all = osv3().loadBalancer().loadBalancers().list();
 		assertTrue(all.size() == 5);
 	}
 

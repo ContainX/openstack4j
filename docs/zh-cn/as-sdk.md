@@ -1,14 +1,9 @@
 # AS SDK
 
-HuaWei OpenStack4j AS SDK, entry point is: `osclient.autoScaling()`
+OTC OpenStack4j AutoScaling SDK
+- 服务入口: `osclient.autoScaling()`
+- 服务类型: `auto-scaling`
 
-## API 文档
-Not provided for now.
-
-## SDK 文档
-
-### 初始化 SDK 客户端
-You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
 
 ## 弹性伸缩组
 ### 创建弹性伸缩组

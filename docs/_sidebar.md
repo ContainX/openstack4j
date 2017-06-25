@@ -1,5 +1,5 @@
 - [Quick start](quickstart.md)
-- HuaWei SDK
+- OTC SDK
   - [DNS](dns-sdk.md)
   - [CES](ces-sdk.md)
   - [AS](as-sdk.md)

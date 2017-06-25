@@ -613,7 +613,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 		 * {@inheritDoc}
 		 */
 		@Override
-		public ELBService elasticLoadBalance() {
+		public ELBService loadBalancer() {
 			return Apis.get(ELBService.class);
 		}
     }

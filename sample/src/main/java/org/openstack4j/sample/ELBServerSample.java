@@ -43,7 +43,7 @@ public class ELBServerSample extends AbstractSample {
 		String serverId = "a4d346cd-eead-47b2-a26a-35fa05eaebbf";
 		ServerCreate server = ELBServerCreate.builder().serverId(serverId).address("192.168.1.6").build();
 		List<ServerCreate> servers = Lists.newArrayList(server);
-		ELBJob job = osclient.elasticLoadBalance().servers().create(listenerId, servers);
+		ELBJob job = osclient.loadBalancer().servers().create(listenerId, servers);
 		logger.info("create job{}", job);
 		assertTrue(!Strings.isNullOrEmpty(job.getJobId()));
 	}
@@ -56,7 +56,7 @@ public class ELBServerSample extends AbstractSample {
 		server.setId(memberId);
 		List<IdResourceEntity> removeMember = Lists.newArrayList(server);
 		ServerDelete servers = ELBServerDelete.builder().removeMember(removeMember).build();
-		ELBJob job = osclient.elasticLoadBalance().servers().delete(listenerId, servers);
+		ELBJob job = osclient.loadBalancer().servers().delete(listenerId, servers);
 		logger.info("delete job:{}", job);
 		assertTrue(!Strings.isNullOrEmpty(job.getJobId()));
 	}
@@ -64,12 +64,12 @@ public class ELBServerSample extends AbstractSample {
 	@Test
 	public void testListServer() {
 		String listenerId = "3a9fe2c9703c43e1ab761552a022c11e";
-		Server[] all = osclient.elasticLoadBalance().servers().list(listenerId);
+		Server[] all = osclient.loadBalancer().servers().list(listenerId);
 		logger.info("all:{}", all);
 
 		String address = "192.168.1.6";
 		ELBServerListOptions options = ELBServerListOptions.create().address(address);
-		Server[] list = osclient.elasticLoadBalance().servers().list(listenerId, options);
+		Server[] list = osclient.loadBalancer().servers().list(listenerId, options);
 		logger.info("list:{}", list);
 		if (list != null) {
 			for (Server server : list) {

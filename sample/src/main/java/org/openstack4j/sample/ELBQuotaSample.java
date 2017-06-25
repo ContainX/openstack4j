@@ -25,7 +25,7 @@ public class ELBQuotaSample extends AbstractSample {
 
 	@Test
 	public void testListQuotas() {
-		Quotas quotas = osclient.elasticLoadBalance().quotas().list();
+		Quotas quotas = osclient.loadBalancer().quotas().list();
 		logger.info("{}", quotas);
 	}
 }

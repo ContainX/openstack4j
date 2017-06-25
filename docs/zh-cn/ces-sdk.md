@@ -1,22 +1,20 @@
 # Cloud Eye SDk
 
-HuaWei OpenStack4j Cloud Eye SDK, entry point is: `osclient.cloudeye()`
+OTC OpenStack4j CloudEye SDK
+- 服务入口: `osclient.cloudEye()`
+- 服务类型: `cloud-eye`
 
-## API document
-Not provided for now.
+## 指标管理
 
-## initial SDK client
-You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
+### 查询指标列表
 
-
-## Metrics
-
-### List All Metrics
+- 无查询条件
 ```java
 List<? extends Metric> list1 = osclient.cloudEye().metrics().getList();
 ```
 
-### Filter Metrics
+- 带查询条件
+
 ```java
 //The index of dimension, supports up to three dimensions at most, the string format = key, value. For example: instance_id, 6f3c6f91-4b24-4e1b-b7d1-a94ac1cb011d
 String[] dims = new String[]{"instance_id,5b4c1602-fb6d-4f1e-87a8-dcf21d9654ba"}; 
@@ -35,19 +33,22 @@ options.start("SYS.ECS.network_outgoing_bytes_aggregate_rate.instance_id:5b4c160
 List<? extends Metric> list2 = osclient.cloudEye().metrics().getList(options);
 ```
 
-### List Favorite Metrics
+### 查询已关注指标
 ```java
 List<? extends Metric> list = osclient.cloudEye().metrics().getFavoriteList();
 ```
 
 
-## Alarms
-### List Alarms
+## 告警规则管理
+### 查询告警规则列表
+
+- 查询所有
 ```java
   List<? extends Alarm> list1 = osclient.cloudEye().alarms().getList();
 ```
 
-### Filter Alarms
+- 按查询条件过滤
+
 ```java
 AlarmFilterOptions config = AlarmFilterOptions.create();
 AlarmFilterOptions options = config.limit(5); //Optional
@@ -59,32 +60,37 @@ options.start("al1483387711418ZNpR8DX3g");
 List<? extends Alarm> list2 = osclient.cloudEye().alarms().getList(options);
 ```
 
-### Get Specific Alarm by ID
+### 查询告警规则详情
 ```java
 String ALARM_ID = "al1483387711418ZNpR8DX3g";
 List<? extends Alarm> alarm = osclient.cloudEye().alarms().get(ALARM_ID);
 ```
 
-### Start Specific Alarm
+### 启用告警规则
+
 ```java
 String ALARM_ID = "al1483387711418ZNpR8DX3g";
 ActionResponse actionResponse = osclient.cloudEye().alarms().startAlarm(ALARM_ID);
 ```
 
-### Stop Specific Alarm
+### 暂停告警规则
+
 ```java
 String ALARM_ID = "al1483387711418ZNpR8DX3g";
 ActionResponse actionResponse = osclient.cloudEye().alarms().stopAlarm(ALARM_ID);
 ```
 
-### Delete Specific Alarm
+### 删除告警规则
+
 ```java
 String ALARM_ID = "al1483387711418ZNpR8DX3g";
 ActionResponse actionResponse = osclient.cloudEye().alarms().deleteAlarm(ALARM_ID);
 ```
 
-## Metric Data
-### Get Metric Aggregation Data
+## 监控数据管理
+
+### 获取监控数据聚合统计
+
 ```java
 String namespace = "SYS.ECS";
 String metric_name = "network_incoming_bytes_aggregate_rate";
@@ -96,21 +102,25 @@ String[] dimValues = new String[]{"instance_id,33328f02-3814-422e-b688-bfdba93d4
 MetricAggregation metricAggregation = osv3().cloudEye().metricsDatas().get(namespace, metric_name, from, to, period, filter, dimValues);
 ```
 
-### Add Metric Data
+### 添加监控数据
 ```java
 List<CloudEyeMetricData> metrics = new ArrayList<>();
-//Must begin with the letter, can only contain 0-9 / a-z / A-Z / _ / -, the length of the shortest 1, the maximum 32.
+// Must begin with the letter, can only contain 0-9 / a-z / A-Z / _ / -, 
+// the length of the shortest 1, the maximum 32.
 String demensionName = "instance_id"; 
-//Must start with a letter or number, only 0-9 / a-z / A-Z / _ / -, with a minimum length of 1 and a maximum of 64.
+// Must start with a letter or number, only 0-9 / a-z / A-Z / _ / -, 
+// with a minimum length of 1 and a maximum of 64.
 String demensionValue = "33328f02-3814-422e-b688-bfdba93d4050";
 CloudEyeMetricDemension.CloudEyeMetricDemensionBuilder dimBuilder = CloudEyeMetricDemension.builder().name(demensionName).value(demensionValue);
 CloudEyeMetricDemension dim1 = dimBuilder.build();
 List<CloudEyeMetricDemension> dimList = new ArrayList<>();
 dimList.add(dim1);
 
-//Must begin with a letter and can only contain 0-9 / a-z / A-Z / _, with a minimum length of 1 and a maximum of 64.
+// Must begin with a letter and can only contain 0-9 / a-z / A-Z / _, 
+// with a minimum length of 1 and a maximum of 64.
 String metricName = "cpu_util";
-//Must start with the letter, can only contain 0-9 / az / AZ / _, the total length of the shortest 3, the maximum is 32, service can not be " SYS ".
+// Must start with the letter, can only contain 0-9 / az / AZ / _, 
+// the total length of the shortest 3, the maximum is 32, service can not be " SYS ".
 String metricNamespace = "MINE.APP";
 
 CloudEyeMetric.CloudEyeMetricBuilder metricBuilder = CloudEyeMetric.builder().namespace(metricNamespace)
@@ -138,8 +148,9 @@ metrics.add(builder2.build());
 ActionResponse actionResponse = osclient.cloudEye().metricsDatas().add(metrics);
 ```
 
-## Quota Data
-### Get QuotaData
+## 配额管理
+### 获取配额
+
 ```java
 Quota quotas = osclient.cloudEye().quotas().get();
 ```

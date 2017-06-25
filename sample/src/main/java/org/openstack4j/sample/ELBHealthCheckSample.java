@@ -36,7 +36,7 @@ public class ELBHealthCheckSample extends AbstractSample {
 	public void testCreateHealthCheck() {
 		String listenerId = "cd9dc55344fd41b8b1aad5190d2b8dba";
 		HealthCheckCreate healthCheck = ELBHealthCheckCreate.builder().listenerId(listenerId).build();
-		HealthCheck create = osclient.elasticLoadBalance().healthchecks().create(healthCheck);
+		HealthCheck create = osclient.loadBalancer().healthchecks().create(healthCheck);
 
 		logger.info("create: {}", create);
 		assertTrue(!Strings.isNullOrEmpty(create.getId()));
@@ -45,14 +45,14 @@ public class ELBHealthCheckSample extends AbstractSample {
 	@Test
 	public void testDeleteHealthCheck() {
 		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		ActionResponse resp = osclient.elasticLoadBalance().healthchecks().delete(healthCheckId);
+		ActionResponse resp = osclient.loadBalancer().healthchecks().delete(healthCheckId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
 	@Test
 	public void testUpdateHealthCheck() {
 		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		HealthCheck healthCheck = osclient.elasticLoadBalance().healthchecks().get(healthCheckId);
+		HealthCheck healthCheck = osclient.loadBalancer().healthchecks().get(healthCheckId);
 
 		String before = healthCheck.getHealthCheckProtocol();
 		String after = HealthCheckProtocol.HTTP.name().equalsIgnoreCase(before) ? HealthCheckProtocol.TCP.name()
@@ -60,7 +60,7 @@ public class ELBHealthCheckSample extends AbstractSample {
 		ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).toBuilder()
 				.healthCheckProtocol(after).healthCheckUri("/test").build();
 
-		HealthCheck afterUpdate = osclient.elasticLoadBalance().healthchecks().update(healthCheckId, update);
+		HealthCheck afterUpdate = osclient.loadBalancer().healthchecks().update(healthCheckId, update);
 		logger.info("update, before:{}, after:{}, {}", before, after, afterUpdate);
 		assertTrue(afterUpdate.getHealthCheckProtocol().equalsIgnoreCase(after));
 	}
@@ -68,7 +68,7 @@ public class ELBHealthCheckSample extends AbstractSample {
 	@Test
 	public void testGetHealthCheck() {
 		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		HealthCheck healthCheck = osclient.elasticLoadBalance().healthchecks().get(healthCheckId);
+		HealthCheck healthCheck = osclient.loadBalancer().healthchecks().get(healthCheckId);
 		logger.info("get:{}", healthCheck);
 		assertTrue(healthCheck.getId().equals(healthCheckId));
 	}
