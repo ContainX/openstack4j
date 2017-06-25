@@ -16,7 +16,9 @@ You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-buil
 ELBLoadBalancerCreate loadBalancer = ELBLoadBalancerCreate.builder()
 		.name("name")
 		.vpcId("vpcId")
-		.type(Type.External.name()).adminStateUp(1).build();
+		.type(Type.External.name())
+		.bandwidth(1)
+		.adminStateUp(1).build();
 ELBJob job = osclient.elasticLoadBalance().loadBalancers().create(loadBalancer);
 ```
 
