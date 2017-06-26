@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.sample;
+package org.openstack4j.sample.loadbalancer;
 
 import static org.testng.Assert.assertTrue;
 
@@ -27,6 +27,7 @@ import org.openstack4j.openstack.loadbalance.domain.ELBJob;
 import org.openstack4j.openstack.loadbalance.domain.ELBServerCreate;
 import org.openstack4j.openstack.loadbalance.domain.ELBServerDelete;
 import org.openstack4j.openstack.loadbalance.options.ELBServerListOptions;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;

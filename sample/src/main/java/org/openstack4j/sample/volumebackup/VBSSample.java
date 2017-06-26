@@ -15,7 +15,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package org.openstack4j.sample;
+package org.openstack4j.sample.volumebackup;
 
 import java.util.List;
 
@@ -25,6 +25,7 @@ import org.openstack4j.model.storage.block.CloudVolumeBackupJob;
 import org.openstack4j.model.storage.block.VolumeBackup;
 import org.openstack4j.model.storage.block.VolumeBackupCreate;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupCreate;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;

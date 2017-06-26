@@ -15,7 +15,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package org.openstack4j.sample;
+package org.openstack4j.sample.scaling;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -43,6 +43,7 @@ import org.openstack4j.openstack.scaling.domain.action.ASScalingGroupAction.Paus
 import org.openstack4j.openstack.scaling.domain.action.ASScalingGroupAction.Resume;
 import org.openstack4j.openstack.scaling.options.ScalingConfigListOptions;
 import org.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;

@@ -15,7 +15,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package org.openstack4j.sample;
+package org.openstack4j.sample.dns.v2;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +32,7 @@ import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import org.openstack4j.openstack.dns.v2.domain.DesignatePTR;
 import org.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
 import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;

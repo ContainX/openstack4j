@@ -1,4 +1,4 @@
-package org.openstack4j.sample;
+package org.openstack4j.sample.cloudeye;
 
 import org.openstack4j.model.cloudeye.*;
 import org.openstack4j.model.common.ActionResponse;
@@ -7,6 +7,7 @@ import org.openstack4j.openstack.cloudeye.domain.CloudEyeMetricData;
 import org.openstack4j.openstack.cloudeye.domain.CloudEyeMetricDemension;
 import org.openstack4j.openstack.cloudeye.internal.AlarmFilterOptions;
 import org.openstack4j.openstack.cloudeye.internal.MetricFilterOptions;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;

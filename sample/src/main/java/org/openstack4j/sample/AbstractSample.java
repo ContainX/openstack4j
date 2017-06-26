@@ -30,7 +30,7 @@ import org.testng.annotations.BeforeClass;
  */
 public class AbstractSample {
 
-	OSClientV3 osclient;
+	protected OSClientV3 osclient;
 
 	@BeforeClass
 	public void initialV3Client() {

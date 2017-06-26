@@ -13,19 +13,27 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.sample;
+package org.openstack4j.sample.scaling;
 
-import org.openstack4j.model.loadbalance.Quotas;
+import java.util.List;
+
+import org.openstack4j.model.scaling.ScalingQuota;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-public class ELBQuotaSample extends AbstractSample {
-	private static final Logger logger = LoggerFactory.getLogger(ELBQuotaSample.class);
+public class ASQuotasSample extends AbstractSample {
+
+	private static final Logger logger = LoggerFactory.getLogger(ASQuotasSample.class);
 
 	@Test
-	public void testListQuotas() {
-		Quotas quotas = osclient.loadBalancer().quotas().list();
-		logger.info("{}", quotas);
+	public void testListAutoScalingQuotas() {
+		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
+		List<? extends ScalingQuota> all = osclient.autoScaling().quotas().list();
+		logger.info("{}", all);
+
+		List<? extends ScalingQuota> list = osclient.autoScaling().quotas().list(groupId);
+		logger.info("{}", list);
 	}
 }

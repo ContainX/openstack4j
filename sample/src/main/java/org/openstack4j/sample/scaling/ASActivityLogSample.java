@@ -13,26 +13,29 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.sample;
+package org.openstack4j.sample.scaling;
 
 import java.util.List;
 
-import org.openstack4j.model.scaling.ScalingQuota;
+import org.openstack4j.model.scaling.ScalingActivityLog;
+import org.openstack4j.openstack.scaling.options.ScalingActivityLogListOptions;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-public class ASQuotasSample extends AbstractSample {
+public class ASActivityLogSample extends AbstractSample {
 
-	private static final Logger logger = LoggerFactory.getLogger(ASQuotasSample.class);
+	private static final Logger logger = LoggerFactory.getLogger(ASActivityLogSample.class);
 
 	@Test
-	public void testListAutoScalingQuotas() {
+	public void testListAutoScalingActivityLog() {
 		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
-		List<? extends ScalingQuota> all = osclient.autoScaling().quotas().list();
+		List<? extends ScalingActivityLog> all = osclient.autoScaling().activityLogs().list(groupId);
 		logger.info("{}", all);
 
-		List<? extends ScalingQuota> list = osclient.autoScaling().quotas().list(groupId);
+		ScalingActivityLogListOptions options = ScalingActivityLogListOptions.create().startNumber(5).limit(5);
+		List<? extends ScalingActivityLog> list = osclient.autoScaling().activityLogs().list(groupId, options);
 		logger.info("{}", list);
 	}
 }

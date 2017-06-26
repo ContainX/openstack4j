@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.sample;
+package org.openstack4j.sample.scaling;
 
 import static org.testng.Assert.assertTrue;
 
@@ -24,6 +24,7 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroupInstance;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch.Action;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
