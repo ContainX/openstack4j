@@ -196,7 +196,8 @@ public class CeiloMeterSample implements Sample {
      */
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this).omitNullValues().add("type", type).add("unit", unit).add("volume", volume).add("timestamp", timestamp).add("source", source).add("project", projectId)
-                .add("user", userId).add("resource", resourceId).addValue("\n").add("metadata", metadata).add("recorded_at", recordedAt).toString();
+        return MoreObjects.toStringHelper(this).omitNullValues().add("meter", meter).add("type", type).add("unit", unit).add("volume", volume).add("timestamp", timestamp)
+              .add("source", source).add("project", projectId).add("user", userId).add("resource", resourceId).addValue("\n").add("metadata", metadata)
+              .add("recorded_at", recordedAt).toString();
     }
 }

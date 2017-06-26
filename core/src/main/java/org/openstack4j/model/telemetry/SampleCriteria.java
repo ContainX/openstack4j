@@ -1,12 +1,14 @@
 package org.openstack4j.model.telemetry;
 
-import com.google.common.collect.Lists;
-import org.openstack4j.openstack.internal.Parser;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Date;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.openstack4j.openstack.internal.Parser;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 /**
  * Query options used in retreiving Samples
@@ -39,6 +41,8 @@ public class SampleCriteria {
     
     private List<NameOpValue> params = Lists.newArrayList();
     
+    private int limit;
+
     public static SampleCriteria create() {
         return new SampleCriteria();
     }
@@ -106,6 +110,12 @@ public class SampleCriteria {
         return this;
     }
     
+    public SampleCriteria limit(int limit) {
+        Preconditions.checkArgument(limit > 0, "Limit must be greater than zero");
+        this.limit = limit;
+        return this;
+    }
+
     /**
      * @return the criteria parameters for this query
      */
@@ -113,6 +123,10 @@ public class SampleCriteria {
         return params;
     }
     
+    public int getLimit() {
+        return limit;
+    }
+
     public static class NameOpValue {
         private final String field;
         private final Oper operator;
