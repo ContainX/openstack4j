@@ -81,7 +81,7 @@
 		<bundle dependency="true">mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/2.4.1</bundle>
 		<bundle dependency="true">mvn:org.yaml/snakeyaml/1.14</bundle>
 		
-		<bundle dependency="true">wrap:mvn:com.google.code.findbugs/jsr305/2.0.0</bundle>
+		<bundle dependency="true">wrap:mvn:com.google.code.findbugs/jsr305/2.0.1</bundle>
 		
 		<bundle start-level="80" >mvn:org.pacesys/openstack4j-core/${project.version}</bundle>
 	</feature>

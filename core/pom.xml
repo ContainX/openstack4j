@@ -45,7 +45,9 @@
 						<configuration>
 							<minimizeJar>true</minimizeJar>
 							<shadedArtifactAttached>true</shadedArtifactAttached>
+							<!-- 
 							<createSourcesJar>true</createSourcesJar>
+							 -->
 							<shadedClassifierName>withdeps</shadedClassifierName>
 						</configuration>
 					</execution>
