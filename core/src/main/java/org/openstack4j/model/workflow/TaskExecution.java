@@ -38,17 +38,34 @@ public interface TaskExecution extends Execution {
     String getWorkflowExecutionId();
 
     /**
+     * @return The runtime context of the task.
+     */
+    Map<String, Object> getRuntimeContext();
+
+    /**
      * @return The result of this task.
      */
-    Map<?, ?> getResult();
+    Object getResult();
 
     /**
      * @return The variables published into workflow context by this task.
      */
-    Map<?, ?> getPublished();
+    Map<String, Object> getPublished();
 
     /**
      * @return {@code True} if this task is fully processed (all decisions made based on its result).
      */
     Boolean isProcessed();
+
+    /**
+     * @return {@code True} if "reset" flag of the task execution is set and its action
+     * executions should be dropped when rerunning the task.
+     */
+    Boolean isReset();
+
+    /**
+     * @return The environment of the task execution.
+     */
+    Map<String, Object> getEnvironment();
+
 }

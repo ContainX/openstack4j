@@ -1,7 +1,6 @@
 package org.openstack4j.api.workflow;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.workflow.TaskExecution;
 
 import java.util.List;
@@ -20,26 +19,10 @@ public interface TaskExecutionService extends RestService {
     List<? extends TaskExecution> list();
 
     /**
-     * Create a new task execution.
-     *
-     * @param taskExecution Task execution to create.
-     * @return Created task execution.
-     */
-    TaskExecution create(TaskExecution taskExecution);
-
-    /**
      * Get task execution by its ID.
      *
      * @param id Task execution ID.
      * @return Task execution.
      */
     TaskExecution get(String id);
-
-    /**
-     * Delete task execution by its ID.
-     *
-     * @param id Task execution ID.
-     * @return HTTP response from the server.
-     */
-    HttpResponse delete(String id);
 }

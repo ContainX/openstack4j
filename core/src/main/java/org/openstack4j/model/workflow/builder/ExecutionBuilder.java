@@ -27,7 +27,7 @@ public interface ExecutionBuilder<T extends ExecutionBuilder<T, M>, M extends Ex
 	/**
 	 * @see Execution#getWorkflowName()
 	 */
-	T workflowName(String name);
+	T workflowName(String wfName);
 
 	/**
 	 * @see Execution#getCreatedAt()
