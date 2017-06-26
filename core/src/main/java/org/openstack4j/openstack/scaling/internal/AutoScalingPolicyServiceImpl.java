@@ -17,6 +17,7 @@ package org.openstack4j.openstack.scaling.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.openstack4j.api.scaling.AutoScalingPolicyService;
@@ -27,10 +28,10 @@ import org.openstack4j.model.scaling.ScheduledPolicy;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicy;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicy.ASAutoScalingPolicys;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicyCreateUpdate;
-import org.openstack4j.openstack.scaling.domain.action.ScalingPolicyAction;
 import org.openstack4j.openstack.scaling.options.ScalingPolicyListOptions;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 public class AutoScalingPolicyServiceImpl extends BaseAutoScalingServices implements AutoScalingPolicyService {
 
@@ -77,12 +78,29 @@ public class AutoScalingPolicyServiceImpl extends BaseAutoScalingServices implem
 		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
 		return get(ASAutoScalingPolicy.class, uri("/scaling_policy/%s", policyId)).execute();
 	}
-
+	
 	@Override
-	public ActionResponse operate(String policyId, ScalingPolicyAction action) {
+	public ActionResponse execute(String policyId) {
 		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
-		checkArgument(action != null, "action required");
-		return post(ActionResponse.class, uri("/scaling_policy/%s/action", policyId)).entity(action).execute();
+		HashMap<Object, Object> entity = Maps.newHashMap();
+		entity.put("action", "execute");
+		return post(ActionResponse.class, uri("/scaling_policy/%s/action", policyId)).entity(entity).execute();
+	}
+	
+	@Override
+	public ActionResponse resume(String policyId) {
+		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
+		HashMap<Object, Object> entity = Maps.newHashMap();
+		entity.put("action", "resume");
+		return post(ActionResponse.class, uri("/scaling_policy/%s/action", policyId)).entity(entity).execute();
+	}
+	
+	@Override
+	public ActionResponse pause(String policyId) {
+		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
+		HashMap<Object, Object> entity = Maps.newHashMap();
+		entity.put("action", "pause");
+		return post(ActionResponse.class, uri("/scaling_policy/%s/action", policyId)).entity(entity).execute();
 	}
 
 	@Override

@@ -54,9 +54,14 @@ ScalingGroupUpdate result = osclient.autoScaling().groups().update(group.groupId
 ActionResponse resp = osclient.autoScaling().groups().delete("groupId");
 ```
 
-### 启用/停止弹性伸缩组
+### 启用弹性伸缩组
 ```java
-ActionResponse resp = osclient.autoScaling().groups().operate("groupId", new Resume());
+ActionResponse resp = osclient.autoScaling().groups().resume(groupId);
+```
+
+### 停止弹性伸缩组
+```java
+ActionResponse resp = osclient.autoScaling().groups().pause(groupId);
 ```
 
 ## 弹性伸缩配置
@@ -119,16 +124,21 @@ List<? extends ScalingGroupInstance> filterList = osclient.autoScaling()
 		.groupInstances().list("groupId", options);
 ```
 
-### 移出弹性伸缩组实例
+### 移除弹性伸缩组实例
 ```java
 ActionResponse resp = osclient.autoScaling().groupInstances().delete("instanceId", false);
 ```
 
-### 批量移出/添加实例
+### 批量添加弹性伸缩组实例
 ```java
 List<String> instanceIds =  Lists.newArrayList("id1", "id2");
-ActionResponse resp = osclient.autoScaling().groupInstances()
-		.batchOperate("groupId", instanceIds , false, Action.ADD);
+ActionResponse resp = osclient.autoScaling().groupInstances().batchAdd("groupId", instanceIds, false);
+```
+
+### 批量移除弹性伸缩组实例
+```java
+List<String> instanceIds =  Lists.newArrayList("id1", "id2");
+ActionResponse resp = osclient.autoScaling().groupInstances().batchRemove("groupId", instanceIds, false);
 ```
 
 ## 弹性伸缩策略
@@ -167,9 +177,19 @@ List<? extends ScalingPolicy> list = osclient.autoScaling().policies().list("gro
 ScalingPolicy policy = osclient.autoScaling().policies().get("policyId");
 ```
 
-### 执行/启用/停止弹性伸缩策略
+### 执行弹性伸缩策略
 ```java
-ActionResponse resp = osclient.autoScaling().policies().operate("policyId", new Resume());
+ActionResponse resp = osclient.autoScaling().policies().execute("policyId");
+```
+
+### 启用弹性伸缩策略
+```java
+ActionResponse resp = osclient.autoScaling().policies().resume("policyId");
+```
+
+### 停止弹性伸缩策略
+```java
+ActionResponse resp = osclient.autoScaling().policies().pause("policyId");
 ```
 
 ### 删除弹性伸缩策略

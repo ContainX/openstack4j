@@ -39,8 +39,6 @@ import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingConfigCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
-import org.openstack4j.openstack.scaling.domain.action.ASScalingGroupAction.Pause;
-import org.openstack4j.openstack.scaling.domain.action.ASScalingGroupAction.Resume;
 import org.openstack4j.openstack.scaling.options.ScalingConfigListOptions;
 import org.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 import org.openstack4j.sample.AbstractSample;
@@ -92,14 +90,15 @@ public class ASSample extends AbstractSample {
 
 	@Test
 	public void testUpdateAutoScalingGroup() {
-		String groupId = "99beebd6-3357-4a56-a74a-045c6eae5580";
+		String groupId = "8f633489-ec05-4a22-b8b5-2fa1006f6b60";
 		ScalingGroup group = osclient.autoScaling().groups().get(groupId);
 		Assert.assertNotNull(group);
 
 		String before = group.getGroupName();
 		String after = new StringBuilder(before).reverse().toString();
 		ScalingGroupUpdate result = osclient.autoScaling().groups().update(group.getGroupId(),
-				ASAutoScalingGroupUpdate.fromScalingGroup(group).toBuilder().groupName(after).build());
+				ASAutoScalingGroupUpdate.fromScalingGroup(group).toBuilder().groupName(after).maxInstanceNumber(2)
+						.minInstanceNumber(0).desireInstanceNumber(1).build());
 		Assert.assertNotNull(result.getGroupId());
 
 		ScalingGroup afterUpdate = osclient.autoScaling().groups().get(groupId);
@@ -123,17 +122,20 @@ public class ASSample extends AbstractSample {
 		String pauseGroupStatus = "PAUSED";
 
 		String groupId = createScalingGroup();
-		ActionResponse resp = osclient.autoScaling().groups().operate(groupId, new Resume());
+		ActionResponse resp = osclient.autoScaling().groups().resume(groupId);
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
 
 		ScalingGroup group = osclient.autoScaling().groups().get(groupId);
 		Assert.assertEquals(group.getGroupStatus(), resumeGroupStatus);
 
-		resp = osclient.autoScaling().groups().operate(groupId, new Pause());
+		resp = osclient.autoScaling().groups().pause(groupId);
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
 
 		group = osclient.autoScaling().groups().get(groupId);
 		Assert.assertEquals(group.getGroupStatus(), pauseGroupStatus);
+
+		resp = osclient.autoScaling().groups().delete(groupId);
+		Assert.assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
 	@Test
@@ -200,7 +202,7 @@ public class ASSample extends AbstractSample {
 		ASAutoScalingGroupCreate group = ASAutoScalingGroupCreate.builder().groupName("test-4-bill")
 				.vpcId("31d158b8-e7d7-4b4a-b2a7-a5240296b267").networks(Lists.newArrayList(network))
 				.configId("21114dcf-7d42-4c7b-84b8-35983da4fccb").securityGroups(Lists.newArrayList(securityGroup))
-				.build();
+				.maxInstanceNumber(2).minInstanceNumber(1).desireInstanceNumber(1).build();
 
 		ScalingGroupCreate result = osclient.autoScaling().groups().create(group);
 		Assert.assertNotNull(result.getGroupId());

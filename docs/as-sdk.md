@@ -59,9 +59,14 @@ ScalingGroupUpdate result = osclient.autoScaling().groups().update(group.groupId
 ActionResponse resp = osclient.autoScaling().groups().delete("groupId");
 ```
 
-### Operate AutoScaling Group
+### Resume AutoScaling Group
 ```java
-ActionResponse resp = osclient.autoScaling().groups().operate("groupId", new Resume());
+ActionResponse resp = osclient.autoScaling().groups().resume(groupId);
+```
+
+### Pause AutoScaling Group
+```java
+ActionResponse resp = osclient.autoScaling().groups().pause(groupId);
 ```
 
 ## AutoScaling Configuration
@@ -129,11 +134,16 @@ List<? extends ScalingGroupInstance> filterList = osclient.autoScaling()
 ActionResponse resp = osclient.autoScaling().groupInstances().delete("instanceId", false);
 ```
 
-### Batch Operate AutoScaling Group Instance
+### Batch Add AutoScaling Group Instance
 ```java
 List<String> instanceIds =  Lists.newArrayList("id1", "id2");
-ActionResponse resp = osclient.autoScaling().groupInstances()
-		.batchOperate("groupId", instanceIds , false, Action.ADD);
+ActionResponse resp = osclient.autoScaling().groupInstances().batchAdd("groupId", instanceIds, false);
+```
+
+### Batch Remove AutoScaling Group Instance
+```java
+List<String> instanceIds =  Lists.newArrayList("id1", "id2");
+ActionResponse resp = osclient.autoScaling().groupInstances().batchRemove("groupId", instanceIds, false);
 ```
 
 ## AutoScaling Policy
@@ -172,9 +182,19 @@ List<? extends ScalingPolicy> list = osclient.autoScaling().policies().list("gro
 ScalingPolicy policy = osclient.autoScaling().policies().get("policyId");
 ```
 
-### Operate AutoScaling Policy
+### Execute AutoScaling Policy
 ```java
-ActionResponse resp = osclient.autoScaling().policies().operate("policyId", new Resume());
+ActionResponse resp = osclient.autoScaling().policies().execute("policyId");
+```
+
+### Resume AutoScaling Policy
+```java
+ActionResponse resp = osclient.autoScaling().policies().resume("policyId");
+```
+
+### Pause AutoScaling Policy
+```java
+ActionResponse resp = osclient.autoScaling().policies().pause("policyId");
 ```
 
 ### Delete AutoScaling Policy

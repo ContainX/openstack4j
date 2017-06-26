@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroupInstance;
-import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch.Action;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
 import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
@@ -68,14 +67,17 @@ public class ASGroupInstanceSample extends AbstractSample {
 
 	@Test(priority = 0)
 	public void testBatchOperateAutoScalingGroupInstance() throws InterruptedException {
-		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
-		List<String> instanceIds = Lists.newArrayList("475db405-11b4-47f6-bb9d-f3bcbc7ac27f");
+		String groupId = "8a2462e3-6ae8-4d86-bd89-4497836fe022";
+		List<String> instanceIds = Lists.newArrayList("ebcc24c9-64b6-4f61-ab30-46e496ef31c5");
 
-		ActionResponse resp = osclient.autoScaling().groupInstances().batchOperate(groupId, instanceIds, false,
-				Action.ADD);
+		ActionResponse resp = osclient.autoScaling().groupInstances().batchAdd(groupId, instanceIds, false);
+		assertTrue(resp.isSuccess(), resp.getFault());
 		//wait server to initial new group instance life cycle status, 
-		//other wise the delete test case will fail for group instance not found
+		//otherwise the delete test case will fail for group instance not found
 		TimeUnit.MINUTES.sleep(1);
+		
+		resp = osclient.autoScaling().groupInstances().batchRemove(groupId, instanceIds, false);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
+	
 }

@@ -22,7 +22,6 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroup;
 import org.openstack4j.model.scaling.ScalingGroupCreate;
 import org.openstack4j.model.scaling.ScalingGroupUpdate;
-import org.openstack4j.openstack.scaling.domain.action.ScalingGroupAction;
 import org.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 
 public interface AutoScalingGroupService extends RestService {
@@ -39,5 +38,7 @@ public interface AutoScalingGroupService extends RestService {
 	
 	public ActionResponse delete(String groupId);
 	
-	public ActionResponse operate(String groupId, ScalingGroupAction action);
+	public ActionResponse resume(String groupId);
+	
+	public ActionResponse pause(String groupId);
 }

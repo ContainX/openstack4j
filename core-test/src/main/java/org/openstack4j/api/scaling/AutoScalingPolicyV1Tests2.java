@@ -29,8 +29,6 @@ import org.openstack4j.model.scaling.ScheduledPolicy.RecurrenceType;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicy;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicyCreateUpdate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicyCreateUpdate.PolicyType;
-import org.openstack4j.openstack.scaling.domain.action.ASScalingPolicyAction.Pause;
-import org.openstack4j.openstack.scaling.domain.action.ASScalingPolicyAction.Resume;
 import org.openstack4j.openstack.scaling.options.ScalingPolicyListOptions;
 import org.testng.annotations.Test;
 
@@ -95,12 +93,12 @@ public class AutoScalingPolicyV1Tests2 extends AbstractTest {
 
 	public void testOperateAutoScalingPolicy() {
 		respondWith(204);
-		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
-		ActionResponse resp = osv3().autoScaling().policies().operate(policyId, new Resume());
-		assertTrue(resp.isSuccess(), resp.getFault());
-
 		respondWith(204);
-		resp = osv3().autoScaling().policies().operate(policyId, new Pause());
+		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
+		ActionResponse resp = osv3().autoScaling().policies().resume(policyId);
+		assertTrue(resp.isSuccess(), resp.getFault());
+		
+		resp = osv3().autoScaling().policies().pause(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 

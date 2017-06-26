@@ -17,6 +17,7 @@ package org.openstack4j.openstack.scaling.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.openstack4j.api.scaling.AutoScalingGroupService;
@@ -29,10 +30,10 @@ import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroup;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroup.ASAutoScalingGroups;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
-import org.openstack4j.openstack.scaling.domain.action.ScalingGroupAction;
 import org.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 /**
  *
@@ -100,10 +101,19 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 	}
 
 	@Override
-	public ActionResponse operate(String groupId, ScalingGroupAction action) {
+	public ActionResponse resume(String groupId) {
 		checkArgument(!Strings.isNullOrEmpty(groupId), "group id is required");
-		checkArgument(action != null, "action is required");
-		return postWithResponse(uri("/scaling_group/%s/action", groupId)).entity(action).execute();
+		HashMap<Object, Object> entity = Maps.newHashMap();
+		entity.put("action", "resume");
+		return postWithResponse(uri("/scaling_group/%s/action", groupId)).entity(entity).execute();
+	}
+
+	@Override
+	public ActionResponse pause(String groupId) {
+		checkArgument(!Strings.isNullOrEmpty(groupId), "group id is required");
+		HashMap<Object, Object> entity = Maps.newHashMap();
+		entity.put("action", "pause");
+		return postWithResponse(uri("/scaling_group/%s/action", groupId)).entity(entity).execute();
 	}
 
 }

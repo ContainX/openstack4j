@@ -23,7 +23,6 @@ import java.util.List;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroupInstance;
-import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch.Action;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
 import org.testng.annotations.Test;
 
@@ -53,7 +52,6 @@ public class AutoScalingGroupInstanceV1Tests extends AbstractTest {
 		}
 	}
 
-	//TODO bill: need check, actual response code(200) difference with doc(204)
 	public void testDeleteAutoScalingGroupInstance() {
 		respondWith(204);
 		String instanceId = "475db405-11b4-47f6-bb9d-f3bcbc7ac27f";
@@ -63,10 +61,13 @@ public class AutoScalingGroupInstanceV1Tests extends AbstractTest {
 
 	public void testBatchOperateAutoScalingGroupInstance() {
 		respondWith(204);
+		respondWith(204);
 		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
 		List<String> instanceIds = Lists.newArrayList("475db405-11b4-47f6-bb9d-f3bcbc7ac27f");
-		ActionResponse resp = osv3().autoScaling().groupInstances().batchOperate(groupId, instanceIds, false,
-				Action.ADD);
+		ActionResponse resp = osv3().autoScaling().groupInstances().batchAdd(groupId, instanceIds, false);
+		assertTrue(resp.isSuccess(), resp.getFault());
+		
+		resp = osv3().autoScaling().groupInstances().batchRemove(groupId, instanceIds, false);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 

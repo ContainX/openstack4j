@@ -54,12 +54,20 @@ public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 	}
 
 	@Override
-	public ActionResponse batchOperate(String groupId, List<String> instanceIds, boolean deleteInstance,
-			Action action) {
+	public ActionResponse batchAdd(String groupId, List<String> instanceIds, boolean deleteInstance) {
 		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");
 		String yesOrNo = deleteInstance ? "yes" : "no";
 		ASAutoScalingGroupInstanceBatch entity = ASAutoScalingGroupInstanceBatch.builder().instanceIds(instanceIds)
-				.delete(yesOrNo).action(action.name()).build();
+				.delete(yesOrNo).action(Action.ADD.name()).build();
+		return post(ActionResponse.class, uri("/scaling_group_instance/%s/action", groupId)).entity(entity).execute();
+	}
+	
+	@Override
+	public ActionResponse batchRemove(String groupId, List<String> instanceIds, boolean deleteInstance) {
+		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");
+		String yesOrNo = deleteInstance ? "yes" : "no";
+		ASAutoScalingGroupInstanceBatch entity = ASAutoScalingGroupInstanceBatch.builder().instanceIds(instanceIds)
+				.delete(yesOrNo).action(Action.REMOVE.name()).build();
 		return post(ActionResponse.class, uri("/scaling_group_instance/%s/action", groupId)).entity(entity).execute();
 	}
 }

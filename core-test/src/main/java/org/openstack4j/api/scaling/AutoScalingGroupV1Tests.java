@@ -30,7 +30,6 @@ import org.openstack4j.model.scaling.ScalingGroupUpdate;
 import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
-import org.openstack4j.openstack.scaling.domain.action.ASScalingGroupAction.Resume;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
@@ -92,7 +91,12 @@ public class AutoScalingGroupV1Tests extends AbstractTest {
     
     public void testActionAutoScalingGroup() {
     	respondWith(204);
-    	ActionResponse resp = osv3().autoScaling().groups().operate("9d841f24-755a-4706-ba1a-11fcd27d5891", new Resume());
+    	respondWith(204);
+    	String groupId = "9d841f24-755a-4706-ba1a-11fcd27d5891";
+		ActionResponse resp = osv3().autoScaling().groups().resume(groupId);
+    	assertTrue(resp.isSuccess());
+    	
+    	resp = osv3().autoScaling().groups().pause(groupId);
     	assertTrue(resp.isSuccess());
     }
     
