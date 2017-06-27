@@ -17,3 +17,5 @@ pom-shade.xml
 *.versionsBackup
 */bin/*
 *.iml
+*.ipr
+*.iws

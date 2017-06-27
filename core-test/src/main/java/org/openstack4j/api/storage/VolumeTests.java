@@ -63,8 +63,8 @@ public class VolumeTests extends AbstractTest {
         assertTrue(getRequest.getPath().matches("/v[12]/\\p{XDigit}*/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
         
         assertEquals(volume.getId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
-        assertEquals(volume.getName(), "vol-test");
-        assertEquals(volume.getDescription(), "a description");
+        assertEquals(volume.getDisplayName(), "vol-test");
+        assertEquals(volume.getDisplayDescription(), "a description");
         assertNotNull(volume.getCreated());
         assertEquals(volume.getZone(), "nova");
         assertEquals(volume.getSize(), 100);
@@ -91,7 +91,6 @@ public class VolumeTests extends AbstractTest {
     
     @SuppressWarnings("unchecked")
     @Test
-    @SkipTest(connector = ".*", issue = 395, description = "Volume attribute not recognized when using cinder v2 api")
     public void getVolumeV2() throws Exception {
         // Check get volume
         respondWith("/storage/v2/volume.json");
@@ -101,7 +100,7 @@ public class VolumeTests extends AbstractTest {
         assertTrue(getRequest.getPath().matches("/v[12]/\\p{XDigit}*/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
         
         assertEquals(volume.getId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
-        assertEquals(volume.getName(), "vol-test");
+        assertEquals(volume.getName(), "test-volume");
         assertEquals(volume.getDescription(), "a description");
         assertNotNull(volume.getCreated());
         assertEquals(volume.getZone(), "nova");

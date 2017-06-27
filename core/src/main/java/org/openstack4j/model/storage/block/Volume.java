@@ -87,9 +87,21 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	String getName();
 
 	/**
+	 * @return the display name of the volume
+	 */
+	@Deprecated
+	String getDisplayName();
+
+	/**
 	 * @return the description of the volume
 	 */
 	String getDescription();
+
+	/**
+	 * @return the display description of the volume
+	 */
+	@Deprecated
+	String getDisplayDescription();
 
 	/**
 	 * @return the status of the volume
