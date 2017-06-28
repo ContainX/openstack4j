@@ -37,7 +37,6 @@ public class SampleCriteria {
         }
     }
     
-   private String groupBy;
     private List<NameOpValue> params = new ArrayList<>();
     
     public static SampleCriteria create() {
@@ -107,12 +106,6 @@ public class SampleCriteria {
         return this;
     }
     
-    public SampleCriteria groupBy(String field) {
-        checkNotNull(field, "Field must not be null");
-      groupBy = field;
-        return this;
-    }
-
     /**
      * @return the criteria parameters for this query
      */
@@ -120,10 +113,6 @@ public class SampleCriteria {
         return params;
     }
     
-   public String getGroupBy() {
-        return groupBy;
-    }
-
     public static class NameOpValue {
         private final String field;
         private final Oper operator;

@@ -90,9 +90,6 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
         Invocation<CeilometerStatistics[]> invocation = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName))
                                                            .param(period > 0, "period", period);
         if (criteria != null) {
-            if (!criteria.getGroupBy().isEmpty()) {
-                invocation.param("groupby", criteria.getGroupBy());
-            }
             if (!criteria.getCriteriaParams().isEmpty()) {
                 for (NameOpValue c : criteria.getCriteriaParams()) {
                     invocation.param(FIELD, c.getField());
