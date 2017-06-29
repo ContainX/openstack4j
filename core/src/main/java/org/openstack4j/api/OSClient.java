@@ -37,7 +37,6 @@ import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.scaling.AutoScalingService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
-import org.openstack4j.api.storage.CloudVolumeBackupService;
 import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.telemetry.TelemetryService;
@@ -321,21 +320,14 @@ public interface OSClient<T extends OSClient<T>> {
 		 */
 		org.openstack4j.api.identity.v3.IdentityService identity();
 
-		/**
-		 * Returns the Huawei Cloud Volume Backup service
-		 * @return the Huawei Cloud Volume Backup service
-		 */
-		CloudVolumeBackupService cloudVolumeBackup();
-		
 		
 		/**
-		 * Returns the Huawei Cloud Volume Backup service
-		 * @return the Huawei Cloud Volume Backup service
+		 * @return the OTC AutoScaling Service
 		 */
 		AutoScalingService autoScaling();
 		
 		/**
-		 * @return the Huawei Elastic Load Balance service
+		 * @return the OTC Elastic Load Balance service
 		 */
 		ELBService loadBalancer();
 	}

@@ -15,12 +15,13 @@
  *******************************************************************************/
 package org.openstack4j.openstack.storage.block.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.api.storage.BlockVolumeBackupService;
+import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.VolumeBackup;
 import org.openstack4j.model.storage.block.VolumeBackupCreate;
@@ -28,7 +29,6 @@ import org.openstack4j.model.storage.block.VolumeBackupRestore;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeBackup;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeBackup.VolumeBackups;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeBackupRestore;
-import org.openstack4j.model.ModelEntity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -44,21 +44,23 @@ public class BlockVolumeBackupServiceImpl extends BaseBlockStorageServices imple
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<? extends VolumeBackup> list() {
-		return get(VolumeBackups.class, uri("/backups/detail")).execute().getList();
+	public List<? extends VolumeBackup> list(boolean detail) {
+		String uri = detail? "/backups/detail": "/backups";
+		return get(VolumeBackups.class, uri).execute().getList();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<? extends VolumeBackup> list(Map<String, String> filteringParams) {
-		Invocation<VolumeBackups> invocation = buildInvocation(filteringParams);
+	public List<? extends VolumeBackup> list(boolean detail, Map<String, String> filteringParams) {
+		Invocation<VolumeBackups> invocation = buildInvocation(detail, filteringParams);
 		return invocation.execute().getList();
 	}
 
-	private Invocation<VolumeBackups> buildInvocation(Map<String, String> filteringParams) {
-		Invocation<VolumeBackups> invocation = get(VolumeBackups.class, "/backups/detail");
+	private Invocation<VolumeBackups> buildInvocation(boolean detail, Map<String, String> filteringParams) {
+		String uri = detail? "/backups/detail": "/backups";
+		Invocation<VolumeBackups> invocation = get(VolumeBackups.class, uri);
 		if (filteringParams == null) {
 			return invocation;
 		} else {

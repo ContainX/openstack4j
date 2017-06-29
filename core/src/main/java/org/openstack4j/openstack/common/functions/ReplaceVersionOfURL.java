@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ *  Copyright 2017 HuaWei and OTC tld
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,18 +13,30 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.model.workflow.builder;
+package org.openstack4j.openstack.common.functions;
+
+import com.google.common.base.Function;
 
 /**
- * The Workflow service builders.
  */
-public interface WorkflowBuilders {
-
-    /**
-     * The builder to create a workflow definition.
-     *
-     * @return the workflow definition builder.
-     */
-    public WorkflowDefinitionBuilder workflowDefinition();
-
+public class ReplaceVersionOfURL implements Function<String, String> {
+	
+	public static final String VERSION_REGEX = "/[v|V][0-9]+(\\.[0-9])*";
+    
+    private final String version;
+    
+    private ReplaceVersionOfURL(String version) {
+    	this.version = version;
+    }
+    
+    public static ReplaceVersionOfURL instance(String version) {
+        return new ReplaceVersionOfURL(version);
+    }
+    
+    
+    @Override
+    public String apply(String input) {
+    	return input.replaceFirst(VERSION_REGEX, version);
+    }
+    
 }

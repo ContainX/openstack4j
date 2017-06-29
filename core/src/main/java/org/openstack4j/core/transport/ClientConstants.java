@@ -92,6 +92,11 @@ public final class ClientConstants {
 
     //CloudEye/Quota
     public static final String PATH_QUOTA = "/quotas";
+    
+    //VolumeBackup
+    public static final String PATH_ASYNC_VOLUME_BACKUP = "/cloudbackups";
+    public static final String PATH_VOLUME_BACKUP_POLICY = "/backuppolicy";
+    
 
     //Magnum APIs
     // list all Magnum Services
@@ -105,5 +110,6 @@ public final class ClientConstants {
     public static final String MAGNUM_CLUSTERS = "/clusters";
     public static final String MAGNUM_CLUSTERTEMPLATES = "/clustertemplates";
     public static final String MAGNUM_PODS = "/pods";
+	
 
 }

@@ -17,7 +17,10 @@
  *******************************************************************************/
 package org.openstack4j.openstack.storage.block.domain;
 
-import org.openstack4j.model.storage.block.CloudVolumeBackupJob;
+import java.util.HashMap;
+import java.util.List;
+
+import org.openstack4j.model.storage.block.AsyncVolumeBackupJob;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -37,14 +40,34 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class VBSVolumeBackupJob implements CloudVolumeBackupJob {
+public class VBSVolumeBackupJob implements AsyncVolumeBackupJob {
 
 	private static final long serialVersionUID = -9174668588171960734L;
 
 	@JsonProperty("job_id")
-	String jobId;
+	String id;
+	
+	@JsonProperty("job_type")
+	String type;
 
-	@JsonProperty("message")
-	String message;
-
+	@JsonProperty("entities")
+	HashMap<String, Object> entities;
+	
+	@JsonProperty("sub_jobs")
+	List<AsyncVolumeBackupJob> subJobs;
+	
+	Status status;
+	
+	@JsonProperty("begin_time")
+	String beginTime;
+	
+	@JsonProperty("end_time")
+	String endTime;
+	
+	@JsonProperty("error_code")
+	String errorCode;
+	
+	@JsonProperty("fail_reason")
+	String failReason;
+	
 }

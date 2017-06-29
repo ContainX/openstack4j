@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ *  Copyright 2017 Huawei TLD                                   
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,18 +13,28 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.model.workflow.builder;
+package org.openstack4j.api.storage;
+
+import org.openstack4j.common.RestService;
+import org.openstack4j.model.storage.block.AsyncVolumeBackupJob;
 
 /**
- * The Workflow service builders.
+ * 
+ * Works with {@link AsyncVolumeBackupService}, 
+ * to provide a feature to get job detail for asynchronous volume backup jobs
+ * 
+ * @author QianBiao.NG
+ * @date   2017-06-07 10:36:10
  */
-public interface WorkflowBuilders {
+public interface AsyncVolumeBackupJobService extends RestService {
 
-    /**
-     * The builder to create a workflow definition.
-     *
-     * @return the workflow definition builder.
-     */
-    public WorkflowDefinitionBuilder workflowDefinition();
+	
+	/**
+	 * get asynchronous job details
+	 * 
+	 * @param jobId id of the job to fetch
+	 * @return Asynchronous Volume Backup Job detail
+	 */
+	public AsyncVolumeBackupJob get(String jobId);
 
 }

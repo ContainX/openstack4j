@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright 2017 Huawei TLD                                        
+ *  Copyright 2017 Huawei TLD                                   
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -15,28 +15,85 @@
  *******************************************************************************/
 package org.openstack4j.model.storage.block;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.openstack4j.model.ModelEntity;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
  *
- * @author Woo Cubic
- * @date   2017-06-07 08:37:14
+ * @author QianBiao.NG
+ * @date   2017-06-07 10:42:15
  */
-public interface CloudVolumeBackupCreate extends ModelEntity {
+public interface AsyncVolumeBackupJob extends ModelEntity {
+
+	enum Status {
+
+		SUCCESS, RUNNING, FAIL, INIT;
+
+		@JsonCreator
+		public static Status forValue(String value) {
+			if (value != null) {
+				for (Status s : Status.values()) {
+					if (s.name().equalsIgnoreCase(value))
+						return s;
+				}
+			}
+			return null;
+		}
+	}
 
 	/**
-	 * @return the name of the Volume Transfer.
+	 * @return job id
 	 */
-	String getName();
+	public String getId();
 
 	/**
-	 * @return the description of the volume backup
+	 * @return job type
 	 */
-	String getDescription();
+	public String getType();
 
 	/**
-	 * @return The UUID of the volume.
+	 * 
+	 * @return job entities
 	 */
-	String getVolumeId();
+	public HashMap<String, Object> getEntities();
 
+	/**
+	 * 
+	 * @return sub jobs of this job
+	 */
+	public List<AsyncVolumeBackupJob> getSubJobs();
+
+	/**
+	 * 
+	 * @return job status
+	 */
+	public Status getStatus();
+
+	/**
+	 * 
+	 * @return UTC date and time of the job start time
+	 */
+	public String getBeginTime();
+
+	/**
+	 * 
+	 * @return UTC date and time of the job end time
+	 */
+	public String getEndTime();
+
+	/**
+	 * 
+	 * @return Error Code if job fails
+	 */
+	public String getErrorCode();
+
+	/**
+	 * 
+	 * @return Text fail reason if job fails
+	 */
+	public String getFailReason();
 }

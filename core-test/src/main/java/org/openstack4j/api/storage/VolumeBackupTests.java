@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okio.Buffer;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
@@ -110,7 +109,7 @@ public class VolumeBackupTests extends AbstractTest {
 	public void listVolumeBackupsV1() throws Exception {
 		// Check list volumes
 		respondWith("/storage/v1/volumebackups.json");
-		List<? extends VolumeBackup> backups = osv3().blockStorage().backups().list();
+		List<? extends VolumeBackup> backups = osv3().blockStorage().backups().list(true);
 		assertEquals(backups.size(), 3);
 
 		// Check that the list request is the one we expect
@@ -142,7 +141,7 @@ public class VolumeBackupTests extends AbstractTest {
         Map<String, String> filters = new HashMap<String, String>();
         filters.put("name", backupName);
 		
-		List<? extends VolumeBackup> backups = osv3().blockStorage().backups().list(filters);
+		List<? extends VolumeBackup> backups = osv3().blockStorage().backups().list(true, filters);
 		assertEquals(backups.size(), 1);
 
 		// Check that the list request is the one we expect

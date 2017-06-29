@@ -15,13 +15,15 @@
  *******************************************************************************/
 package org.openstack4j.sample;
 
+import java.util.UUID;
+
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.identity.internal.OverridableEndpointURLResolver;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 
 /**
  *
@@ -32,7 +34,7 @@ public class AbstractSample {
 
 	protected OSClientV3 osclient;
 
-	@BeforeClass
+	@BeforeTest
 	public void initialV3Client() {
 		// add override endpoint
 		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
@@ -47,16 +49,40 @@ public class AbstractSample {
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
-		String user = "replace-with-your-username";
-		String password = "replace-with-your-password";
+		// String user = "replace-with-your-username";
+		// String password = "replace-with-your-password";
+		String user = "zhangdong";
+		String password = "hw@otc2017";
 		String projectId = "d4f2557d248e4860829f5fef030b209c";
 		String userDomainId = "bb42e2cd2b784ac4bdc350fb660a2bdb";
 		String authUrl = "https://iam.eu-de.otc.t-systems.com/v3";
+		
+		OSFactory.enableHttpLoggingFilter(true);
 		// TODO remove authentication before push to github
-		osclient = OSFactory.builderV3()
-				.withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
-				.endpoint(authUrl)
-				.credentials(user, password, Identifier.byId(userDomainId))
+		osclient = OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
+				.endpoint(authUrl).credentials(user, password, Identifier.byId(userDomainId))
 				.scopeToProject(Identifier.byId(projectId)).authenticate();
+	}
+
+	protected Object retry(Retry retry) {
+		Integer retryTimes = 0;
+		Integer maxRetryTimes = retry.maxRetryTimes();
+		while (retryTimes++ < maxRetryTimes) {
+			Object result = retry.run();
+			if (result != null) {
+				return result;
+			}
+
+			try {
+				Thread.sleep(retry.delay() * 1000);
+			} catch (InterruptedException e) {
+			}
+		}
+
+		throw new RuntimeException("Retried max times, but no expected result returned");
+	}
+
+	protected static String randomName() {
+		return "SDK-" + UUID.randomUUID().toString();
 	}
 }

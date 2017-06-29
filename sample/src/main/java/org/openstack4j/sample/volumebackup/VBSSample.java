@@ -17,50 +17,189 @@
  *******************************************************************************/
 package org.openstack4j.sample.volumebackup;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.storage.block.CloudVolumeBackupJob;
+import org.openstack4j.model.storage.block.AsyncVolumeBackupCreate;
+import org.openstack4j.model.storage.block.AsyncVolumeBackupJob;
+import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeBackup;
-import org.openstack4j.model.storage.block.VolumeBackupCreate;
-import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupCreate;
 import org.openstack4j.sample.AbstractSample;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.openstack4j.sample.Retry;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import com.google.common.collect.Maps;
 
 /**
  *
  * @author Woo Cubic
  * @date   2017-06-06 20:40:10
  */
+@Test(suiteName = "VolumeBackup/volumebackup")
 public class VBSSample extends AbstractSample {
 
-	private static final Logger logger = LoggerFactory.getLogger(VBSSample.class);
+	static String backupName = randomName();
+	Volume volume;
+	VolumeBackup volumeBackup;
+	AsyncVolumeBackupJob createJobDetail;
+
+	@BeforeClass
+	public void prepare() {
+		// 取的avaiable状态的硬盘用于测试
+		Map<String, String> filter = Maps.newHashMap();
+		filter.put("limit", "1");
+		filter.put("status", Volume.Status.AVAILABLE.toString());
+		List<? extends Volume> list = osclient.blockStorage().volumes().list(filter);
+		if (list != null && list.size() > 0) {
+			volume = list.get(0);
+		} else {
+			throw new RuntimeException("No volume availble for test");
+		}
+	}
+
+	@AfterClass
+	public void cleanup() {
+
+	}
 
 	@Test
 	public void testVolumeBackupCreate() {
-		VBSVolumeBackupCreate vbc = VBSVolumeBackupCreate.builder().name("qianbiao-ng-os4j-1")
-				.volumeId("0a3218ef-7841-45c5-b9a1-5da6e0b70b85").build();
-		CloudVolumeBackupJob job = osclient.cloudVolumeBackup().create(vbc);
-		Assert.assertNotNull(job.getJobId());
+		AsyncVolumeBackupCreate vbc = Builders.asyncVolumeBackupCreate().name(backupName).volumeId(volume.getId())
+				.build();
+		final AsyncVolumeBackupJob job = osclient.blockStorage().asyncBackups().create(vbc);
+		Assert.assertNotNull(job.getId());
+
+		Retry retry = new Retry() {
+			@Override
+			public Integer maxRetryTimes() {
+				return 10;
+			}
+
+			@Override
+			public Integer delay() {
+				return 120;
+			}
+
+			@Override
+			public Object run() {
+				AsyncVolumeBackupJob detail = osclient.blockStorage().jobs().get(job.getId());
+				if (AsyncVolumeBackupJob.Status.SUCCESS.equals(detail.getStatus())) {
+					return detail;
+				}
+
+				if (AsyncVolumeBackupJob.Status.FAIL.equals(detail.getStatus())) {
+					throw new RuntimeException("Interval task failed");
+				}
+
+				return null;
+			}
+		};
+
+		createJobDetail = (AsyncVolumeBackupJob) this.retry(retry);
 	}
 
-	@Test
+	@Test(priority = 1, dependsOnMethods = { "testVolumeBackupCreate" })
+	public void testVolumeBackupGet() {
+		Object backupId = createJobDetail.getEntities().get("backup_id");
+		volumeBackup = osclient.blockStorage().backups().get(backupId.toString());
+		Assert.assertEquals(backupName, volumeBackup.getName());
+		Assert.assertEquals(volume.getId(), volumeBackup.getVolumeId());
+	}
+
+	@Test(priority = 2, dependsOnMethods = { "testVolumeBackupGet" })
+	public void testVolumeBackupListFilter() {
+		HashMap<String, String> filter = Maps.newHashMap();
+		filter.put("name", backupName);
+
+		// list backups with detail
+		List<? extends VolumeBackup> list = osclient.blockStorage().backups().list(true, filter);
+		Assert.assertEquals(1, list.size());
+		VolumeBackup volumeBackup = list.get(0);
+		Assert.assertEquals(volumeBackup.getId(), volumeBackup.getId());
+		Assert.assertEquals(volumeBackup.getVolumeId(), volumeBackup.getVolumeId());
+
+		// list backups with brief attributes
+		list = osclient.blockStorage().backups().list(false, filter);
+		Assert.assertEquals(1, list.size());
+		volumeBackup = list.get(0);
+		Assert.assertEquals(volumeBackup.getId(), volumeBackup.getId());
+		Assert.assertNull(volumeBackup.getVolumeId());
+	}
+
+	@Test(priority = 2, dependsOnMethods = { "testVolumeBackupGet" })
 	public void testVolumeBackupList() {
-		VolumeBackupCreate vbc = Builders.volumeBackupCreate().volumeId("0a3218ef-7841-45c5-b9a1-5da6e0b70b85")
-				.name("qianbiao-ng-original-1").build();
-		osclient.blockStorage().backups().create(vbc);
-		List<? extends VolumeBackup> list = osclient.blockStorage().backups().list();
-		logger.info("{}", list);
+
+		// list backups with detail
+		List<? extends VolumeBackup> list = osclient.blockStorage().backups().list(true);
+		Assert.assertTrue(list.size() >= 1);
+		VolumeBackup volumeBackup = list.get(0);
+		Assert.assertNotNull(volumeBackup.getId());
+		Assert.assertNotNull(volumeBackup.getVolumeId());
+		Assert.assertNotNull(volumeBackup.getName());
+
+		// list backups with brief attributes
+		list = osclient.blockStorage().backups().list(false);
+		Assert.assertTrue(list.size() >= 1);
+		volumeBackup = list.get(0);
+		Assert.assertNotNull(volumeBackup.getId());
+		Assert.assertNotNull(volumeBackup.getName());
+		Assert.assertNull(volumeBackup.getVolumeId());
 	}
 
-	@Test
+	@Test(priority = 2, dependsOnMethods = { "testVolumeBackupGet" })
+	public void testVolumeBackupRestore() {
+
+		// list backups with detail
+		AsyncVolumeBackupJob job = osclient.blockStorage().asyncBackups().restore(volumeBackup.getId(), volume.getId());
+		Retry retry = new Retry() {
+			@Override
+			public Integer maxRetryTimes() {
+				return 10;
+			}
+
+			@Override
+			public Integer delay() {
+				return 120;
+			}
+
+			@Override
+			public Object run() {
+				AsyncVolumeBackupJob detail = osclient.blockStorage().jobs().get(job.getId());
+				if (AsyncVolumeBackupJob.Status.SUCCESS.equals(detail.getStatus())) {
+					return detail;
+				}
+
+				if (AsyncVolumeBackupJob.Status.FAIL.equals(detail.getStatus())) {
+					throw new RuntimeException("Inteval task failed");
+				}
+
+				return null;
+			}
+		};
+
+		AsyncVolumeBackupJob restoreJob = (AsyncVolumeBackupJob) this.retry(retry);
+		Assert.assertEquals("bksRestoreBackup", restoreJob.getType());
+	}
+
+	@Test(priority = 100, dependsOnMethods = { "testVolumeBackupGet" })
 	public void testVolumeBackupDelete() {
-		ActionResponse delete = osclient.blockStorage().backups().delete("fc335f70-4880-4f03-a408-3d2bc691df8d");
-		logger.info("{}", delete);
+		ActionResponse delete = osclient.blockStorage().backups().delete(volumeBackup.getId());
+		Assert.assertTrue(delete.isSuccess());
+
+		HashMap<String, String> filter = Maps.newHashMap();
+		filter.put("name", backupName);
+
+		// list backups with detail
+		List<? extends VolumeBackup> list = osclient.blockStorage().backups().list(true, filter);
+		if (list.size() == 1) {
+			Assert.assertEquals(list.get(0).getStatus(), VolumeBackup.Status.DELETING);
+		}
 	}
 
 }

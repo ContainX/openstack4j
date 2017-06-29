@@ -15,13 +15,9 @@
  *******************************************************************************/
 package org.openstack4j.openstack.storage.block.internal;
 
-import static com.google.common.base.Preconditions.*;
-
-import org.openstack4j.api.storage.CloudVolumeBackupService;
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.model.storage.block.CloudVolumeBackupCreate;
-import org.openstack4j.model.storage.block.CloudVolumeBackupJob;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
+import org.openstack4j.api.storage.AsyncVolumeBackupJobService;
+import org.openstack4j.model.storage.block.AsyncVolumeBackupJob;
+import org.openstack4j.openstack.common.functions.ReplaceVersionOfURL;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupJob;
 
 /**
@@ -29,20 +25,18 @@ import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupJob;
  * @author QianBiao.NG
  * @date   2017-06-07 10:47:47
  */
-public class CloudVolumeBackupServiceImpl extends BaseOpenStackService implements CloudVolumeBackupService {
+public class VBSVolumeBackupJobServiceImpl extends BaseVolumeBackupServices implements AsyncVolumeBackupJobService {
 
-	public CloudVolumeBackupServiceImpl() {
-		super(ServiceType.VOLUME_BACKUP);
+	public VBSVolumeBackupJobServiceImpl() {
+		super(ReplaceVersionOfURL.instance("/v1"));
 	}
 
-	/*
+	/* 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CloudVolumeBackupJob create(CloudVolumeBackupCreate cvbc) {
-		checkNotNull(cvbc);
-		checkNotNull(cvbc.getVolumeId());
-		return post(VBSVolumeBackupJob.class, uri("/cloudbackups")).entity(cvbc).execute();
+	public AsyncVolumeBackupJob get(String jobId) {
+		return get(VBSVolumeBackupJob.class, uri("/jobs/%s", jobId)).execute();
 	}
 
 }

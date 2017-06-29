@@ -17,7 +17,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.storage.block.domain;
 
-import org.openstack4j.model.storage.block.CloudVolumeBackupCreate;
+import org.openstack4j.model.storage.block.AsyncVolumeBackupCreate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -35,7 +35,7 @@ import lombok.ToString;
 @ToString
 @Builder(toBuilder = true)
 @JsonRootName("backup")
-public class VBSVolumeBackupCreate implements CloudVolumeBackupCreate {
+public class VBSVolumeBackupCreate implements AsyncVolumeBackupCreate {
 
 	private static final long serialVersionUID = 5031528431685550961L;
 
@@ -47,5 +47,8 @@ public class VBSVolumeBackupCreate implements CloudVolumeBackupCreate {
 
 	@JsonProperty("volume_id")
 	String volumeId;
+	
+	@JsonProperty("snapshot_id")
+	String snapshotId;
 
 }

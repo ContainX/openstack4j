@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright 2017 Huawei TLD                                   
+ *  Copyright 2017 Huawei TLD                                        
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -19,13 +19,29 @@ import org.openstack4j.model.ModelEntity;
 
 /**
  *
- * @author QianBiao.NG
- * @date   2017-06-07 10:42:15
+ * @author Woo Cubic
+ * @date   2017-06-07 08:37:14
  */
-public interface CloudVolumeBackupJob extends ModelEntity {
+public interface AsyncVolumeBackupCreate extends ModelEntity {
 
-	String getJobId();
+	/**
+	 * @return the name of the Volume Transfer.
+	 */
+	String getName();
 
-	String getMessage();
+	/**
+	 * @return the description of the volume backup
+	 */
+	String getDescription();
+
+	/**
+	 * @return The UUID of the volume.
+	 */
+	String getVolumeId();
+	
+	/**
+	 * @return The UUID of the volume snapshot.
+	 */
+	String getSnapshotId();
 
 }

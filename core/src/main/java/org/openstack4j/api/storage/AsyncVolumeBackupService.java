@@ -16,16 +16,40 @@
 package org.openstack4j.api.storage;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.storage.block.CloudVolumeBackupCreate;
-import org.openstack4j.model.storage.block.CloudVolumeBackupJob;
+import org.openstack4j.model.storage.block.AsyncVolumeBackupCreate;
+import org.openstack4j.model.storage.block.AsyncVolumeBackupJob;
 
 /**
- *
+ * <h3>New Volume Backup provided by OTC. </h3>
+ * 
+ * <p>Volume backup job is executed asynchronous in this server</p>
+ * 
  * @author QianBiao.NG
  * @date   2017-06-07 10:36:10
  */
-public interface CloudVolumeBackupService extends RestService {
+public interface AsyncVolumeBackupService extends RestService {
 
-	public CloudVolumeBackupJob create(CloudVolumeBackupCreate cvbc);
+	/**
+	 * create a new volume backup asynchronously
+	 * 
+	 * @param cvbc volume backup create meta
+	 * @return Asynchronous Volume Backup Job 
+	 */
+	public AsyncVolumeBackupJob create(AsyncVolumeBackupCreate cvbc);
+	
+	/**
+	 * restore a volume backup to a volume asynchronously
+	 * 
+	 * @param volumeBackupId  the volume backup to be used
+	 * @param volumeId		  the volume to be restored
+	 * @return Asynchronous Volume Backup Job 
+	 */
+	public AsyncVolumeBackupJob restore(String volumeBackupId, String volumeId);
+	
 
+	/**
+	 * 
+	 * @return asynchronous volume backup jobs service 
+	 */
+	public AsyncVolumeBackupJobService jobs();
 }

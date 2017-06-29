@@ -16,6 +16,8 @@
 package org.openstack4j.openstack.storage.block.internal;
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.api.storage.AsyncVolumeBackupJobService;
+import org.openstack4j.api.storage.AsyncVolumeBackupService;
 import org.openstack4j.api.storage.BlockQuotaSetService;
 import org.openstack4j.api.storage.BlockStorageService;
 import org.openstack4j.api.storage.BlockVolumeBackupService;
@@ -92,6 +94,22 @@ public class BlockStorageServiceImpl extends BaseBlockStorageServices implements
 	@Override
 	public BlockStorageServiceService services() {
 		return Apis.get(BlockStorageServiceService.class);
+	}
+
+	/* 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AsyncVolumeBackupService asyncBackups() {
+		return Apis.get(AsyncVolumeBackupService.class);
+	}
+
+	/* 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public AsyncVolumeBackupJobService jobs() {
+		return Apis.get(AsyncVolumeBackupJobService.class);
 	}
 
 }
