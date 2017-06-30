@@ -2,7 +2,9 @@ package org.openstack4j.openstack.storage.block.internal;
 
 import static com.google.common.base.Preconditions.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.storage.BlockVolumeBackupPolicyService;
 import org.openstack4j.core.transport.ClientConstants;
@@ -10,9 +12,12 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.VolumeBackupPolicy;
 import org.openstack4j.model.storage.block.VolumeBackupPolicy.VolumeBackupPolicyStatus;
 import org.openstack4j.model.storage.block.VolumeBackupPolicy.VolumeBackupScheduledPolicy;
+import org.openstack4j.model.storage.block.VolumeBackupPolicyBackupTask;
 import org.openstack4j.model.storage.block.VolumeBackupPolicyResource.VolumeBackupPolicyResourceActionResult;
+import org.openstack4j.model.storage.block.options.BakcupTaskListOptions;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicy;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicy.VolumeBackupPolicies;
+import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicyBackupTask.VolumeBackupPolicyBackupTasks;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicyResource;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicyResourceActionResult;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupScheduledPolicy;
@@ -21,7 +26,6 @@ import org.testng.collections.Lists;
 import org.testng.util.Strings;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  *
@@ -69,7 +73,7 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	public VolumeBackupPolicy update(VolumeBackupPolicy updated) {
 		Assert.assertFalse(Strings.isNullOrEmpty(updated.getId()));
 		return put(VBSVolumeBackupPolicy.class, ClientConstants.PATH_VOLUME_BACKUP_POLICY, "/", updated.getId())
-				.execute();
+				.entity(updated).execute();
 	}
 
 	/*
@@ -155,7 +159,16 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 				"/deleted_resources").entity(resources).execute();
 	}
 
-	@JsonRootName("resources")
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends VolumeBackupPolicyBackupTask> tasks(String policyId, BakcupTaskListOptions options) {
+		Map<String, Object> params = options != null? options.getOptions() : new HashMap<String, Object>();
+		return get(VolumeBackupPolicyBackupTasks.class, ClientConstants.PATH_VOLUME_BACKUP_POLICY, "/", policyId,
+				"/backuptasks").params(params).execute().getList();
+	}
+
 	@SuppressWarnings("unused")
 	private static class _VBSVolumeBackupPolicyResources {
 

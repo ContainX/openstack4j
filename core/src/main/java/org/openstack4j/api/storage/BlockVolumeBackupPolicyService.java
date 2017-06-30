@@ -20,7 +20,9 @@ import java.util.List;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.VolumeBackupPolicy;
+import org.openstack4j.model.storage.block.VolumeBackupPolicyBackupTask;
 import org.openstack4j.model.storage.block.VolumeBackupPolicyResource.VolumeBackupPolicyResourceActionResult;
+import org.openstack4j.model.storage.block.options.BakcupTaskListOptions;
 
 /**
  * 
@@ -108,6 +110,17 @@ public interface BlockVolumeBackupPolicyService extends RestService {
 	 * @return
 	 */
 	VolumeBackupPolicyResourceActionResult unlinkResources(String backupPolicyId, List<String> resourceIds);
+	
+	
+	/**
+	 * 
+	 * list backup tasks belongs to the policy
+	 * 
+	 * @param policyId tasks of the policy
+	 * @param options list filter option
+	 * @return
+	 */
+	List<? extends VolumeBackupPolicyBackupTask> tasks(String policyId, BakcupTaskListOptions options);
 	
 
 }

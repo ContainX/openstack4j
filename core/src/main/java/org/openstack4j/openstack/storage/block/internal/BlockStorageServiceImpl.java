@@ -20,6 +20,7 @@ import org.openstack4j.api.storage.AsyncVolumeBackupJobService;
 import org.openstack4j.api.storage.AsyncVolumeBackupService;
 import org.openstack4j.api.storage.BlockQuotaSetService;
 import org.openstack4j.api.storage.BlockStorageService;
+import org.openstack4j.api.storage.BlockVolumeBackupPolicyService;
 import org.openstack4j.api.storage.BlockVolumeBackupService;
 import org.openstack4j.api.storage.BlockVolumeService;
 import org.openstack4j.api.storage.BlockVolumeSnapshotService;
@@ -110,6 +111,14 @@ public class BlockStorageServiceImpl extends BaseBlockStorageServices implements
 	@Override
 	public AsyncVolumeBackupJobService jobs() {
 		return Apis.get(AsyncVolumeBackupJobService.class);
+	}
+
+	/* 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BlockVolumeBackupPolicyService policies() {
+		return Apis.get(BlockVolumeBackupPolicyService.class);
 	}
 
 }

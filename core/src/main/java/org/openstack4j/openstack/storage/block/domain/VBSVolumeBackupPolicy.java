@@ -7,8 +7,10 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -19,6 +21,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class VBSVolumeBackupPolicy implements VolumeBackupPolicy {
 
 	private static final long serialVersionUID = -1027176809768928487L;
@@ -36,7 +40,7 @@ public class VBSVolumeBackupPolicy implements VolumeBackupPolicy {
 
 		private static final long serialVersionUID = 1L;
 
-		@JsonProperty("backups")
+		@JsonProperty("backup_policies")
 		private List<VBSVolumeBackupPolicy> policies;
 
 		@Override

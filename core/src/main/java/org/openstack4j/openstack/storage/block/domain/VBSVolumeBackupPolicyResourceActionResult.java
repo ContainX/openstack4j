@@ -6,8 +6,10 @@ import org.openstack4j.model.storage.block.VolumeBackupPolicyResource.VolumeBack
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -18,6 +20,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class VBSVolumeBackupPolicyResourceActionResult implements VolumeBackupPolicyResourceActionResult {
 	
 	private static final long serialVersionUID = 3622412528513440384L;
@@ -27,6 +31,5 @@ public class VBSVolumeBackupPolicyResourceActionResult implements VolumeBackupPo
 	
 	@JsonProperty("fail_resources")
 	List<VBSVolumeBackupPolicyResource> failResources;
-
 
 }

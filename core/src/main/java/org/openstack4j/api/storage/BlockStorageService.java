@@ -77,6 +77,13 @@ public interface BlockStorageService extends RestService {
 	AsyncVolumeBackupJobService jobs();
 	
 	/**
+	 * OTC new volume backup policy
+	 * 
+	 * @return the volume backup policy API
+	 */
+	BlockVolumeBackupPolicyService policies();
+	
+	/**
 	 * The block storage service service
 	 * 
 	 * @return ServiceService

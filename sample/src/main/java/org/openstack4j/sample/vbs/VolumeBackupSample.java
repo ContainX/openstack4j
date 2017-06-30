@@ -15,7 +15,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package org.openstack4j.sample.volumebackup;
+package org.openstack4j.sample.vbs;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +41,8 @@ import com.google.common.collect.Maps;
  * @author Woo Cubic
  * @date   2017-06-06 20:40:10
  */
-@Test(suiteName = "VolumeBackup/volumebackup")
-public class VBSSample extends AbstractSample {
+@Test(suiteName = "VolumeBackup/volume-backup")
+public class VolumeBackupSample extends AbstractSample {
 
 	static String backupName = randomName();
 	Volume volume;
@@ -70,11 +70,13 @@ public class VBSSample extends AbstractSample {
 
 	@Test
 	public void testVolumeBackupCreate() {
+		// 新的创建备份接口 创建一个备份
 		AsyncVolumeBackupCreate vbc = Builders.asyncVolumeBackupCreate().name(backupName).volumeId(volume.getId())
 				.build();
 		final AsyncVolumeBackupJob job = osclient.blockStorage().asyncBackups().create(vbc);
 		Assert.assertNotNull(job.getId());
 
+		// 每两分钟查询一次备份Job的状态，假如状态为 Success，则表示成功
 		Retry retry = new Retry() {
 			@Override
 			public Integer maxRetryTimes() {
@@ -101,6 +103,7 @@ public class VBSSample extends AbstractSample {
 			}
 		};
 
+		// 
 		createJobDetail = (AsyncVolumeBackupJob) this.retry(retry);
 	}
 
