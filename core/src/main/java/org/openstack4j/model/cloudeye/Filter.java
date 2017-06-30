@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Created by coa.ke on 6/24/17.
  */
 public enum  Filter {
-    AVERAGE, VARIANCE, MIN, MAX;
+    AVERAGE, VARIANCE, MIN, MAX, SUM;
 
     @JsonValue
     public String value() {
