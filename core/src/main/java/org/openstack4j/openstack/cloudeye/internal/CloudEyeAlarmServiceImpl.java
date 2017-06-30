@@ -1,30 +1,28 @@
 package org.openstack4j.openstack.cloudeye.internal;
 
-import org.openstack4j.api.cloudeye.AlarmService;
-import org.openstack4j.model.cloudeye.Alarm;
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.openstack.cloudeye.domain.CloudEyeAlarm;
+import static com.google.common.base.Preconditions.*;
+import static org.openstack4j.core.transport.ClientConstants.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.core.transport.ClientConstants.PATH_ALARMS;
-import static org.openstack4j.core.transport.ClientConstants.PATH_ALARMS_ACTION;
+import org.openstack4j.api.cloudeye.AlarmService;
+import org.openstack4j.model.cloudeye.Alarm;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.cloudeye.domain.CloudEyeAlarm;
 
-public class CloudEyeAlarmServiceImpl extends BaseCloudEyeServices
-		implements AlarmService {
-
+public class CloudEyeAlarmServiceImpl extends BaseCloudEyeServices implements AlarmService {
 
 	@Override
-	public List<? extends Alarm> getList() {
+	public List<? extends Alarm> list() {
 		return get(CloudEyeAlarm.CloudEyeAlarms.class, uri(PATH_ALARMS)).execute().getList();
 	}
 
 	@Override
-	public List<? extends Alarm> getList(AlarmFilterOptions options) {
-		return get(CloudEyeAlarm.CloudEyeAlarms.class, uri(PATH_ALARMS)).params(options.getOptions()).execute().getList();
+	public List<? extends Alarm> list(AlarmFilterOptions options) {
+		return get(CloudEyeAlarm.CloudEyeAlarms.class, uri(PATH_ALARMS)).params(options.getOptions()).execute()
+				.getList();
 	}
 
 	@Override

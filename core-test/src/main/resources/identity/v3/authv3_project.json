@@ -15,7 +15,7 @@
         "id": "default",
         "name": "Default"
       },
-      "id": "123ac695d4db400a9001b91bb3b8aa46",
+      "id": "project-id",
       "name": "admin"
     },
     "catalog": [
@@ -107,21 +107,21 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8776/v2/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8776/v2/project-id",
             "region": "RegionOne",
             "interface": "internal",
             "id": "261aaf6239bb49a4a1cfa87c19859138"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8776/v2/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8776/v2/project-id",
             "region": "RegionOne",
             "interface": "admin",
             "id": "437d282e0bb94622aaacc4d194c069a9"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8776/v2/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8776/v2/project-id",
             "region": "RegionOne",
             "interface": "public",
             "id": "5e78bf7bae7c4ff5b9720b2c2e4da743"
@@ -191,21 +191,21 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8776/v1/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8776/v1/project-id",
             "region": "RegionOne",
             "interface": "admin",
             "id": "4442fbd064844a7bbe6a792507d4b8e3"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8776/v1/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8776/v1/project-id",
             "region": "RegionOne",
             "interface": "internal",
             "id": "4b4178fd2e3d4f329600cc4ceaaa7e3a"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8776/v1/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8776/v1/project-id",
             "region": "RegionOne",
             "interface": "public",
             "id": "90977723dba04ea9a2a184c99565ccff"
@@ -219,21 +219,21 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8774/v2/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8774/v2/project-id",
             "region": "RegionOne",
             "interface": "internal",
             "id": "81c51855280345e9a6c322ca986d4e4b"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8774/v2/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8774/v2/project-id",
             "region": "RegionOne",
             "interface": "admin",
             "id": "a0310a37cf6144a6a967cbae9a7959ba"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8774/v2/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8774/v2/project-id",
             "region": "RegionOne",
             "interface": "public",
             "id": "f6d38c03b9c04a9e924aaa288ce014b8"
@@ -247,21 +247,21 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8774/v2.1/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8774/v2.1/project-id",
             "region": "RegionOne",
             "interface": "internal",
             "id": "2f17e155b0aa47838394e6c4f6fe30e0"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8774/v2.1/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8774/v2.1/project-id",
             "region": "RegionOne",
             "interface": "public",
             "id": "9d2555fd27dd44e5acfb5e56127d974b"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:8774/v2.1/123ac695d4db400a9001b91bb3b8aa46",
+            "url": "http://127.0.0.1:8774/v2.1/project-id",
             "region": "RegionOne",
             "interface": "admin",
             "id": "e8bdd9403fbb4efa8d77bfd4f6a5e34a"
@@ -737,21 +737,21 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10002",
+            "url": "http://127.0.0.1:10002/v1.0/project-id",
             "region": "RegionOne",
             "interface": "public",
             "id": "2241f1ee096a11e793ae92361f002671"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10002",
+            "url": "http://127.0.0.1:10002/v1.0/project-id",
             "region": "RegionOne",
             "interface": "admin",
             "id": "2241f446096a11e793ae92361f002671"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10002",
+            "url": "http://127.0.0.1:10002/v1.0/project-id",
             "region": "RegionOne",
             "interface": "internal",
             "id": "2241f55e096a11e793ae92361f002671"
@@ -760,6 +760,62 @@
         "type": "load-balancer",
         "id": "2241f6c6096a11e793ae92361f002671",
         "name": "elb"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10003/v2/project-id",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "2241f1ee096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10003/v2/project-id",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "2241f446096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10003/v2/project-id",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "2241f55e096a11e793ae92361f002671"
+          }
+        ],
+        "type": "volume-backup",
+        "id": "2241f6c6096a11e793ae92361f002671",
+        "name": "vbs"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10004",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "2241f1ee096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10004",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "2241f446096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10004",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "2241f55e096a11e793ae92361f002671"
+          }
+        ],
+        "type": "map-reduce",
+        "id": "2241f6c6096a11e793ae92361f002671",
+        "name": "mrs"
       }
     ],
     "extras": {},

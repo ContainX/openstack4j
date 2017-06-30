@@ -47,7 +47,7 @@ public class CloudEyeSample extends AbstractSample {
     @Test
     public void testListAlarms() {
 
-        List<? extends Alarm> list1 = osclient.cloudEye().alarms().getList();
+        List<? extends Alarm> list1 = osclient.cloudEye().alarms().list();
         logger.info("All alarms: {}", list1);
 
         AlarmFilterOptions config = AlarmFilterOptions.create();
@@ -55,7 +55,7 @@ public class CloudEyeSample extends AbstractSample {
         options.order(OrderType.ASC);
 //        options.start("al1483387711418ZNpR8DX3g");
 
-        List<? extends Alarm> list2 = osclient.cloudEye().alarms().getList(options);
+        List<? extends Alarm> list2 = osclient.cloudEye().alarms().list(options);
         logger.info("All alarms with filter: {}", list2);
     }
 

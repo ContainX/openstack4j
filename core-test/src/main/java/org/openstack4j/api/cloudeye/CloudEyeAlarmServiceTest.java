@@ -28,7 +28,7 @@ public class CloudEyeAlarmServiceTest extends AbstractTest {
 
     public void getAlarmListTest() throws Exception {
         respondWith(JSON_ALARMS);
-        List<? extends Alarm> alarms = osv3().cloudEye().alarms().getList();
+        List<? extends Alarm> alarms = osv3().cloudEye().alarms().list();
         assertNotNull(alarms);
         assertEquals(alarms.size(), 1);
         assertEquals(alarms.get(0).getAlarmState(), AlarmState.OK);
@@ -40,7 +40,7 @@ public class CloudEyeAlarmServiceTest extends AbstractTest {
         AlarmFilterOptions options = config.limit(5);
         options.order(OrderType.ASC);
 
-        List<? extends Alarm> alarms = osv3().cloudEye().alarms().getList(options);
+        List<? extends Alarm> alarms = osv3().cloudEye().alarms().list(options);
         assertNotNull(alarms);
         assertEquals(alarms.size(), 1);
         assertEquals(alarms.get(0).getAlarmState(), AlarmState.OK);

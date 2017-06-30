@@ -26,6 +26,7 @@ import java.util.Map;
 import org.bouncycastle.util.io.Streams;
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
+import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.identity.v2.domain.KeystoneAccess;
@@ -53,8 +54,8 @@ import okhttp3.mockwebserver.RecordedRequest;
  */
 public abstract class AbstractTest {
 
-    protected enum Service {
-    	//@off
+	protected enum Service {
+		//@off
         IDENTITY(5000),
         NETWORK(9696),
         COMPUTE(8774),
@@ -78,239 +79,251 @@ public abstract class AbstractTest {
         AUTO_SCALING(10000),
         CLOUD_EYE(10001),
         LOAD_BALANCER(10002),
+        VOLUME_BACKUP(10003),
+        MAP_REDUCE(10004),
         ;
     	//@on
 
-        private final int port;
+		private final int port;
 
-        private Service(int port) {
-            this.port = port;
-        }
+		private Service(int port) {
+			this.port = port;
+		}
 
-    }
+	}
 
-    private final Logger LOG = LoggerFactory.getLogger(getClass().getName());
+	private final Logger LOG = LoggerFactory.getLogger(getClass().getName());
 
-    protected static final String JSON_ACCESS = "/identity/v2/access.json";
-    protected static final String JSON_TOKEN = "/identity/v3/authv3_project.json";
-    protected static final String TOKEN_ID = "123456789";
+	protected static final String JSON_ACCESS = "/identity/v2/access.json";
+	protected static final String JSON_TOKEN = "/identity/v3/authv3_project.json";
+	protected static final String TOKEN_ID = "123456789";
 
-    protected OSClientV2 osv2;
-    protected OSClientV3 osv3;
-    private String host;
-    protected MockWebServer server = new MockWebServer();
+	protected OSClientV2 osv2;
+	protected OSClientV3 osv3;
+	private String host;
+	protected MockWebServer server = new MockWebServer();
 
-    /**
-     * @return the service the API is using
-     */
-    protected abstract Service service();
+	/**
+	 * @return the service the API is using
+	 */
+	protected abstract Service service();
 
-    @BeforeClass
-    protected void startServer() throws UnknownHostException {
+	@BeforeClass
+	protected void startServer() throws UnknownHostException {
 
-        InetAddress inetAddress = InetAddress.getByName("localhost");
-        LOG.info("localhost inet address: " + inetAddress.toString());
-        LOG.info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
+		InetAddress inetAddress = InetAddress.getByName("localhost");
+		LOG.info("localhost inet address: " + inetAddress.toString());
+		LOG.info("Tests using connector: " + HttpExecutor.create().getExecutorName() + " on " + getHost());
 
-        try {
-            LOG.info("Starting server on port " + service().port);
-            server.start(service().port);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
-    }
+		try {
+			LOG.info("Starting server on port " + service().port);
+			server.start(service().port);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+	}
 
-    /**
-     * Responds with success status code and body from json resource file
-     *
-     * @param resource the json resource file
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
-    protected void respondWith(String resource) throws IOException {
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        respondWith(headers, 200, getResource(resource));
-    }
+	/**
+	 * responds with success status code and body from an Object
+	 */
+	protected void respondWith(Object body) throws IOException {
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Content-Type", "application/json");
+		String bodyAsString = ObjectMapperSingleton.getContext(body.getClass()).writeValueAsString(body);
+		respondWith(headers, 200, bodyAsString);
+	}
 
-    /**
-     * Responds with specified status code and no body
-     *
-     * @param statusCode the status code to respond with
-     */
-    protected void respondWith(int statusCode) {
-        respondWith(null, statusCode, "");
-    }
+	/**
+	 * Responds with success status code and body from json resource file
+	 *
+	 * @param resource the json resource file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	protected void respondWith(String resource) throws IOException {
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Content-Type", "application/json");
+		respondWith(headers, 200, getResource(resource));
+	}
 
-    /**
-     * Responds with specified status code, no body and optional headers
-     *
-     * @param headers    optional headers
-     * @param statusCode the status code to respond with
-     */
-    protected void respondWith(Map<String, String> headers, int statusCode) {
-        respondWith(headers, statusCode, "");
-    }
+	/**
+	 * Responds with specified status code and no body
+	 *
+	 * @param statusCode the status code to respond with
+	 */
+	protected void respondWith(int statusCode) {
+		respondWith(null, statusCode, "");
+	}
 
-    /**
-     * Responds with specified status code and json body
-     *
-     * @param statusCode the status code to respond with
-     * @param jsonBody   the json body
-     */
-    protected void respondWith(int statusCode, String jsonBody) {
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        respondWith(headers, statusCode, jsonBody);
-    }
+	/**
+	 * Responds with specified status code, no body and optional headers
+	 *
+	 * @param headers    optional headers
+	 * @param statusCode the status code to respond with
+	 */
+	protected void respondWith(Map<String, String> headers, int statusCode) {
+		respondWith(headers, statusCode, "");
+	}
 
-    /**
-     * Responds with specified status code, body and optional headers
-     *
-     * @param headers    optional headers
-     * @param statusCode the status code to respond with
-     * @param body       the response body
-     */
-    protected void respondWith(Map<String, String> headers, int statusCode, String body) {
-        MockResponse r = new MockResponse();
-        if (headers != null) {
-            for (String name : headers.keySet()) {
-                r.addHeader(name, headers.get(name));
-            }
-        }
-        r.setBody(body);
-        r.setResponseCode(statusCode);
-        server.enqueue(r);
-    }
+	/**
+	 * Responds with specified status code and json body
+	 *
+	 * @param statusCode the status code to respond with
+	 * @param jsonBody   the json body
+	 */
+	protected void respondWith(int statusCode, String jsonBody) {
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Content-Type", "application/json");
+		respondWith(headers, statusCode, jsonBody);
+	}
 
-    /**
-     * Responds with given header, status code, body from json resource file.
-     *
-     * @param headers    the specified header
-     * @param statusCode the status code to respond with
-     * @param resource   the json resource file
-     * @throws IOException Signals that an I/O exception has occurred
-     */
-    protected void respondWithHeaderAndResource(Map<String, String> headers, int statusCode, String resource)
-            throws IOException {
-        InputStream is = getClass().getResourceAsStream(resource);
-        respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
-    }
+	/**
+	 * Responds with specified status code, body and optional headers
+	 *
+	 * @param headers    optional headers
+	 * @param statusCode the status code to respond with
+	 * @param body       the response body
+	 */
+	protected void respondWith(Map<String, String> headers, int statusCode, String body) {
+		MockResponse r = new MockResponse();
+		if (headers != null) {
+			for (String name : headers.keySet()) {
+				r.addHeader(name, headers.get(name));
+			}
+		}
+		r.setBody(body);
+		r.setResponseCode(statusCode);
+		server.enqueue(r);
+	}
 
-    protected void respondWithCodeAndResource(int statusCode, String resource) throws IOException {
-        InputStream is = getClass().getResourceAsStream(resource);
-        Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json");
-        respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
-    }
+	/**
+	 * Responds with given header, status code, body from json resource file.
+	 *
+	 * @param headers    the specified header
+	 * @param statusCode the status code to respond with
+	 * @param resource   the json resource file
+	 * @throws IOException Signals that an I/O exception has occurred
+	 */
+	protected void respondWithHeaderAndResource(Map<String, String> headers, int statusCode, String resource)
+			throws IOException {
+		InputStream is = getClass().getResourceAsStream(resource);
+		respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
+	}
 
-    /**
-     * Awaits, removes and returns the next request made to the mock server.
-     * Callers should use this to verify the request was sent as intended.
-     * This method will block until the request is available, possibly forever.
-     * <br/>
-     * <b>Be aware that this method will catch all the previous requests made
-     * to the mock server, also from other previous tests!
-     * Make sure to take all the requests made by methods in the same test class.</b>
-     *
-     * @return the head of the request queue
-     */
-    protected RecordedRequest takeRequest() throws InterruptedException {
-        return server.takeRequest();
-    }
+	protected void respondWithCodeAndResource(int statusCode, String resource) throws IOException {
+		InputStream is = getClass().getResourceAsStream(resource);
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Content-Type", "application/json");
+		respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
+	}
 
-    protected String authURL(String path) {
-        return String.format("http://%s:5000%s", getHost(), path);
-    }
+	/**
+	 * Awaits, removes and returns the next request made to the mock server.
+	 * Callers should use this to verify the request was sent as intended.
+	 * This method will block until the request is available, possibly forever.
+	 * <br/>
+	 * <b>Be aware that this method will catch all the previous requests made
+	 * to the mock server, also from other previous tests!
+	 * Make sure to take all the requests made by methods in the same test class.</b>
+	 *
+	 * @return the head of the request queue
+	 */
+	protected RecordedRequest takeRequest() throws InterruptedException {
+		return server.takeRequest();
+	}
 
-    @AfterClass(alwaysRun = true)
-    protected void afterTest() {
-        try {
-            server.shutdown();
-            LOG.info("Stopped server on port " + service().port);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+	protected String authURL(String path) {
+		return String.format("http://%s:5000%s", getHost(), path);
+	}
 
-    protected void associateClientV2(OSClientV2 osv2) {
-        this.osv2 = osv2;
-    }
+	@AfterClass(alwaysRun = true)
+	protected void afterTest() {
+		try {
+			server.shutdown();
+			LOG.info("Stopped server on port " + service().port);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    protected void associateClientV3(OSClientV3 osv3) {
-        this.osv3 = osv3;
-    }
+	protected void associateClientV2(OSClientV2 osv2) {
+		this.osv2 = osv2;
+	}
 
-    protected OSClientV2 osv2() {
-        if (osv2 == null) {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.setSerializationInclusion(Include.NON_NULL);
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
-            mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
-            mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+	protected void associateClientV3(OSClientV3 osv3) {
+		this.osv3 = osv3;
+	}
 
-            try {
-                String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
-                LOG.info(getClass().getName());
-                //LOG.info(getClass().getName() + ", JSON Access = " + json);
-                json = json.replaceAll("127.0.0.1", getHost());
-                //LOG.info("JSON Access = " + json);
-                KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
-                a.applyContext(authURL("/v2.0"),
-                        new org.openstack4j.openstack.identity.v2.domain.Credentials("test", "test"));
-                osv2 = OSFactory.clientFromAccess(a);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return osv2;
-    }
+	protected OSClientV2 osv2() {
+		if (osv2 == null) {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.setSerializationInclusion(Include.NON_NULL);
+			mapper.enable(SerializationFeature.INDENT_OUTPUT);
+			mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+			mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+			mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+			mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-    protected OSClientV3 osv3() {
-        if (osv3 == null) {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.setSerializationInclusion(Include.NON_NULL);
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
-            mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
-            mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+			try {
+				String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_ACCESS)));
+				LOG.info(getClass().getName());
+				// LOG.info(getClass().getName() + ", JSON Access = " + json);
+				json = json.replaceAll("127.0.0.1", getHost());
+				// LOG.info("JSON Access = " + json);
+				KeystoneAccess a = mapper.readValue(json, KeystoneAccess.class);
+				a.applyContext(authURL("/v2.0"),
+						new org.openstack4j.openstack.identity.v2.domain.Credentials("test", "test"));
+				osv2 = OSFactory.clientFromAccess(a);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return osv2;
+	}
 
-            try {
-                String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_TOKEN)));
-                LOG.info(getClass().getName());
-                json = json.replaceAll("devstack.openstack.stack", getHost());
-                KeystoneToken token = mapper.readValue(json, KeystoneToken.class);
-                token.setId(TOKEN_ID);
-                token.applyContext(authURL("/v3"),
-                        new org.openstack4j.openstack.identity.v3.domain.Credentials("admin", "test"));
+	protected OSClientV3 osv3() {
+		if (osv3 == null) {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.setSerializationInclusion(Include.NON_NULL);
+			mapper.enable(SerializationFeature.INDENT_OUTPUT);
+			mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+			mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+			mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+			mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-                osv3 = OSFactory.clientFromToken(token);
+			try {
+				String json = new String(Streams.readAll(getClass().getResourceAsStream(JSON_TOKEN)));
+				LOG.info(getClass().getName());
+				json = json.replaceAll("devstack.openstack.stack", getHost());
+				KeystoneToken token = mapper.readValue(json, KeystoneToken.class);
+				token.setId(TOKEN_ID);
+				token.applyContext(authURL("/v3"),
+						new org.openstack4j.openstack.identity.v3.domain.Credentials("admin", "test"));
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return osv3;
-    }
+				osv3 = OSFactory.clientFromToken(token);
 
-    protected String getResource(String resource) throws IOException {
-        InputStream is = getClass().getResourceAsStream(resource);
-        return new String(ByteStreams.toByteArray(is));
-    }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return osv3;
+	}
 
-    private String getHost() {
-        /*
-         * try { if (host == null) host =
-         * InetAddress.getLocalHost().getHostAddress(); } catch (Exception e) {
-         * e.printStackTrace(); }
-         */
-        if (host == null)
-            return "127.0.0.1";
+	protected String getResource(String resource) throws IOException {
+		InputStream is = getClass().getResourceAsStream(resource);
+		return new String(ByteStreams.toByteArray(is));
+	}
 
-        return host;
-    }
+	private String getHost() {
+		/*
+		 * try { if (host == null) host =
+		 * InetAddress.getLocalHost().getHostAddress(); } catch (Exception e) {
+		 * e.printStackTrace(); }
+		 */
+		if (host == null)
+			return "127.0.0.1";
+
+		return host;
+	}
 }

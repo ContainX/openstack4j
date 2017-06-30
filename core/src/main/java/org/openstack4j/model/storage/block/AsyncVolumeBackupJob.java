@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.model.storage.block;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -77,13 +78,13 @@ public interface AsyncVolumeBackupJob extends ModelEntity {
 	 * 
 	 * @return UTC date and time of the job start time
 	 */
-	public String getBeginTime();
+	public Date getBeginTime();
 
 	/**
 	 * 
 	 * @return UTC date and time of the job end time
 	 */
-	public String getEndTime();
+	public Date getEndTime();
 
 	/**
 	 * 

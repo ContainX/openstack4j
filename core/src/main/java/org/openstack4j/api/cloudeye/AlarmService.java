@@ -1,15 +1,27 @@
 package org.openstack4j.api.cloudeye;
 
+import java.util.List;
+
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.cloudeye.Alarm;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.cloudeye.internal.AlarmFilterOptions;
 
-import java.util.List;
-
 public interface AlarmService extends RestService {
-    List<? extends Alarm> getList();
-    List<? extends Alarm> getList(AlarmFilterOptions options);
+	
+	/**
+	 * list alarm
+	 * @return
+	 */
+    List<? extends Alarm> list();
+    
+    /**
+     * list alarm with filter options
+     * 
+     * @param options filter options
+     * @return
+     */
+    List<? extends Alarm> list(AlarmFilterOptions options);
 
     /**
      * @param alarmId The id for the alarm

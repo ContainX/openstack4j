@@ -5,26 +5,28 @@ import java.util.Date;
 
 public class DateTimeUtils {
 	/**
-	 * DateTime format YYYY-MM-dd'T'HH:mm'Z'
+	 * DateTime format yyyy-MM-dd'T'HH:mm'Z'
 	 */
-	public static final String FORMAT_YMDTHMZ = "YYYY-MM-dd'T'HH:mm'Z'";
+	public static final String FORMAT_YMDTHMZ = "yyyy-MM-dd'T'HH:mm'Z'";
 	
 	/**
-	 * DateTime format YYYY-MM-dd'T'HH:mm:ss'Z'
+	 * DateTime format yyyy-MM-dd'T'HH:mm:ss'Z'
 	 */
-	public static final String FORMAT_YMDTHMSZ = "YYYY-MM-dd'T'HH:mm:ss'Z'";
+	public static final String FORMAT_YMDTHMSZ = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 	
 	/**
-	 * DateTime format YYYY-MM-dd'T'HH:mm:ss'Z'
+	 * DateTime format yyyy-MM-dd'T'HH:mm:ss'Z'
 	 * 
 	 * example: 2016-12-02T13:00:00.121
 	 */
-	public static final String FORMAT_YMDTHMS_SSS = "YYYY-MM-dd'T'HH:mm:ss.SSS";
+	public static final String FORMAT_YMDTHMS_SSS = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+	
+	public static final String FORMAT_YMDTHMS_SSSZ = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 	
 	/**
-	 * DateTime format YYYY-MM-dd HH:mm:ss
+	 * DateTime format yyyy-MM-dd HH:mm:ss
 	 */
-	public static final String FORMAT_YMDHMS = "YYYY-MM-dd HH:mm:ss";
+	public static final String FORMAT_YMDHMS = "yyyy-MM-dd HH:mm:ss";
 	
 	/**
 	 * format date
@@ -34,5 +36,9 @@ public class DateTimeUtils {
 	 */
 	public static String format(Date date, String format) {
 		return new SimpleDateFormat(format).format(date);
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(format(new Date(), FORMAT_YMDTHMS_SSSZ));
 	}
 }

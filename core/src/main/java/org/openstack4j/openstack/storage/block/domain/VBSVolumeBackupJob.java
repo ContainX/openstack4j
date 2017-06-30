@@ -17,11 +17,14 @@
  *******************************************************************************/
 package org.openstack4j.openstack.storage.block.domain;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.openstack4j.model.storage.block.AsyncVolumeBackupJob;
+import org.openstack4j.openstack.common.DateTimeUtils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -46,28 +49,30 @@ public class VBSVolumeBackupJob implements AsyncVolumeBackupJob {
 
 	@JsonProperty("job_id")
 	String id;
-	
+
 	@JsonProperty("job_type")
 	String type;
 
 	@JsonProperty("entities")
 	HashMap<String, Object> entities;
-	
+
 	@JsonProperty("sub_jobs")
 	List<AsyncVolumeBackupJob> subJobs;
-	
+
 	Status status;
-	
+
 	@JsonProperty("begin_time")
-	String beginTime;
-	
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMS_SSSZ)
+	Date beginTime;
+
 	@JsonProperty("end_time")
-	String endTime;
-	
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMS_SSSZ)
+	Date endTime;
+
 	@JsonProperty("error_code")
 	String errorCode;
-	
+
 	@JsonProperty("fail_reason")
 	String failReason;
-	
+
 }
