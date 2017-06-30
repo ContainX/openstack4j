@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Created by coa.ke on 6/24/17.
  */
 public enum AlarmType {
-    NOTIFICATION, AUTOSCALING;
+    NOTIFICATION, AUTOSCALING, ECSRECOVERY;
 
     @JsonValue
     public String value() {
