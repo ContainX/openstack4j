@@ -28,6 +28,7 @@ import org.openstack4j.model.storage.block.VolumeBackupPolicy;
 import org.openstack4j.model.storage.block.VolumeBackupPolicy.VolumeBackupPolicyStatus;
 import org.openstack4j.model.storage.block.VolumeBackupPolicyBackupTask;
 import org.openstack4j.model.storage.block.VolumeBackupPolicyResource.VolumeBackupPolicyResourceActionResult;
+import org.openstack4j.model.storage.block.options.BakcupTaskListOptions;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicy;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupScheduledPolicy;
 import org.openstack4j.sample.AbstractSample;
@@ -79,7 +80,7 @@ public class VolumeBackupPolicySample extends AbstractSample {
 				.maxBackupAmount(10).retainFirstBackupOfCurrentMonth(true).startTime("01:00")
 				.status(VolumeBackupPolicyStatus.ON).build();
 
-		VBSVolumeBackupPolicy create = VBSVolumeBackupPolicy.builder().name(policyName).scheduledPolicy(scheduledPolicy)
+		VolumeBackupPolicy create = VBSVolumeBackupPolicy.builder().name(policyName).scheduledPolicy(scheduledPolicy)
 				.build();
 		this.policy = osclient.blockStorage().policies().create(create);
 	}
@@ -148,6 +149,7 @@ public class VolumeBackupPolicySample extends AbstractSample {
 	
 	@Test(dependsOnMethods = { "testExecute" })
 	public void testListBackupTasks() {
+		BakcupTaskListOptions limit = BakcupTaskListOptions.create().asc().limit(10);
 		List<? extends VolumeBackupPolicyBackupTask> tasks = osclient.blockStorage().policies().tasks(this.policy.getId(), null);
 		tasks.size();
 	}
