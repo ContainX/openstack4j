@@ -1,6 +1,16 @@
 package org.openstack4j.sample.cloudeye;
 
-import org.openstack4j.model.cloudeye.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.openstack4j.model.cloudeye.Alarm;
+import org.openstack4j.model.cloudeye.Filter;
+import org.openstack4j.model.cloudeye.Metric;
+import org.openstack4j.model.cloudeye.MetricAggregation;
+import org.openstack4j.model.cloudeye.OrderType;
+import org.openstack4j.model.cloudeye.Period;
+import org.openstack4j.model.cloudeye.Quota;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.cloudeye.domain.CloudEyeMetric;
 import org.openstack4j.openstack.cloudeye.domain.CloudEyeMetricData;
@@ -12,10 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class CloudEyeSample extends AbstractSample {
     private static final Logger logger = LoggerFactory.getLogger(CloudEyeSample.class);
     public static final String ALARM_ID = "al1483387711418ZNpR8DX3g";
@@ -25,6 +31,8 @@ public class CloudEyeSample extends AbstractSample {
 
         List<? extends Metric> list1 = osclient.cloudEye().metrics().getList();
         logger.info("All metrics: {}", list1);
+        
+        list1.get(0).getId();
 
         MetricFilterOptions config = MetricFilterOptions.create();
         MetricFilterOptions options = config.dim(new String[]{"instance_id,5b4c1602-fb6d-4f1e-87a8-dcf21d9654ba"});

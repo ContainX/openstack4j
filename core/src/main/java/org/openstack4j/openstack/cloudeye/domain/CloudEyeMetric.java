@@ -1,12 +1,18 @@
 package org.openstack4j.openstack.cloudeye.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import java.util.List;
+
 import org.openstack4j.model.cloudeye.Metric;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @ToString
@@ -16,24 +22,35 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CloudEyeMetric implements Metric {
 
-    private static final long serialVersionUID = -4166055531397254389L;
+	private static final long serialVersionUID = -4166055531397254389L;
 
-    String namespace;
-    List<CloudEyeMetricDemension> dimensions;
-    @JsonProperty("metric_name")
-    String metricName;
-    String unit;
+	String id;
+	String namespace;
+	List<CloudEyeMetricDemension> dimensions;
+	@JsonProperty("metric_name")
+	String metricName;
+	String unit;
 
-    public static class CloudEyeMetrics extends ListResult<CloudEyeMetric> {
+	public String getId() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(namespace).append(".").append(metricName);
+		for (CloudEyeMetricDemension dimension : dimensions) {
+			sb.append(".").append(dimension.getName()).append(":").append(dimension.getValue());
+		}
+		return sb.toString();
+	}
 
-        private static final long serialVersionUID = 2211086062776417518L;
+	public static class CloudEyeMetrics extends ListResult<CloudEyeMetric> {
 
-        @JsonProperty("metrics")
-        protected List<CloudEyeMetric> list;
+		private static final long serialVersionUID = 2211086062776417518L;
 
-        @Override
-        public List<CloudEyeMetric> value() {
-            return list;
-        }
-    }
+		@JsonProperty("metrics")
+		protected List<CloudEyeMetric> list;
+		
+
+		@Override
+		public List<CloudEyeMetric> value() {
+			return list;
+		}
+	}
 }

@@ -15,14 +15,18 @@
  *******************************************************************************/
 package org.openstack4j.model.cloudeye;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.openstack4j.model.ModelEntity;
-
 import java.util.List;
 
+import org.openstack4j.model.ModelEntity;
+
 public interface Metric extends ModelEntity {
-    String getNamespace();
-    String getMetricName();
-    String getUnit();
-    List<? extends MetricDimensions> getDimensions();
+	public String getId();
+
+	String getNamespace();
+
+	String getMetricName();
+
+	String getUnit();
+
+	List<? extends MetricDimensions> getDimensions();
 }
