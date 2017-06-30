@@ -516,6 +516,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(WorkflowExecutionService.class, WorkflowExecutionServiceImpl.class);
         bind(TaskExecutionService.class, TaskExecutionServiceImpl.class);
         bind(ActionExecutionService.class, ActionExecutionServiceImpl.class);
+        bind(WorkflowEnvironmentService.class, WorkflowEnvironmentServiceImpl.class);
     }
 
     /**

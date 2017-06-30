@@ -1,0 +1,13 @@
+{
+  "id": "91fdedd9-43cd-4820-b017-a2b2fe600ef3",
+  "name": "my_env",
+  "description": "This is my test environment",
+  "project_id": "<default-project>",
+  "scope": "private",
+  "created_at": "2017-05-30 10:35:16",
+  "updated_at": "2017-05-30 10:35:16",
+  "variables": {
+    "var1": "val1",
+    "var2": "val2"
+  }
+}

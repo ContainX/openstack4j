@@ -31,7 +31,8 @@ public class ActionExecutionServiceImpl extends BaseMistralService implements Ac
                 uri("/executions")
         );
 
-        return invocation.entity(actionExec).execute();    }
+        return invocation.entity(actionExec).execute();
+    }
 
     @Override
     public ActionExecution get(String id) {
