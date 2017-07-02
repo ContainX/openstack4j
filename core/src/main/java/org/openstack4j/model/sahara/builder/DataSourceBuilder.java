@@ -17,6 +17,7 @@ package org.openstack4j.model.sahara.builder;
 
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.sahara.DataSource;
+import org.openstack4j.model.sahara.DataSource.DataSourceType;
 
 /**
  * Builder interface used for {@link DataSource} object.
@@ -48,7 +49,7 @@ public interface DataSourceBuilder extends Builder<DataSourceBuilder, DataSource
      * @param type the type of the data source
      * @return DataSourceBuilder
      */
-    DataSourceBuilder type(String type);
+    DataSourceBuilder type(DataSourceType type);
 
     /**
      * See {@link DataSource#getName()}
@@ -57,6 +58,22 @@ public interface DataSourceBuilder extends Builder<DataSourceBuilder, DataSource
      * @return DataSourceBuilder
      */
     DataSourceBuilder name(String name);
+    
+    /**
+     * See {@link DataSource#isPublic()}
+     * 
+     * @param isPublic is data source public
+     * @return DataSourceBuilder
+     */
+    DataSourceBuilder isPublic(boolean isPublic);
+    
+    /**
+     * See {@link DataSource#isProtected()}
+     * 
+     * @param isProtected is data source protected
+     * @return DataSourceBuilder
+     */
+    DataSourceBuilder isProtect(boolean isProtected);
 
     /**
      * See {@link DataSource#getCredentials()}
@@ -66,5 +83,6 @@ public interface DataSourceBuilder extends Builder<DataSourceBuilder, DataSource
      * @return DataSourceBuilder
      */
     DataSourceBuilder credentials(String user, String password);
+    
 
 }

@@ -63,9 +63,24 @@ public interface JobBinary extends ModelEntity, Buildable<JobBinaryBuilder>  {
      * @return the name of the job binary
      */
     String getName();
+    
 
     /**
      * @return the credentials of the job binary
      */
     JobBinaryCredentials getCredentials();
+    
+    /**
+     * reserved attribute, not support for now
+     * 
+     * @return is data source protected
+     */
+    Boolean isProtected();
+    
+    /**
+     * reserved attribute, not support for now
+     * 
+     * @return is data source public
+     */
+    Boolean isPublic();
 }

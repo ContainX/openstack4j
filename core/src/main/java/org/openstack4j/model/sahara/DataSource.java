@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * 	Copyright 2017 HuaWei and OTC                                       
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -20,6 +21,10 @@ import java.util.Date;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.DataSourceBuilder;
+import org.openstack4j.model.storage.block.AsyncVolumeBackupJob.Status;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * An OpenStack Data Source
@@ -28,6 +33,29 @@ import org.openstack4j.model.sahara.builder.DataSourceBuilder;
  * @author siwat.pru@outlook.com
  */
 public interface DataSource extends ModelEntity, Buildable<DataSourceBuilder> {
+	
+	public enum DataSourceType {
+
+		HDFS, OBS, SWIFT;
+		
+	    @JsonValue
+	    public String value() {
+	        return name().toLowerCase();
+	    }
+
+		@JsonCreator
+		public static Status forValue(String value) {
+			if (value != null) {
+				for (Status s : Status.values()) {
+					if (s.name().equalsIgnoreCase(value))
+						return s;
+				}
+			}
+			return null;
+		}
+	}
+
+
 
     /**
      * @return the description of the data source
@@ -57,7 +85,7 @@ public interface DataSource extends ModelEntity, Buildable<DataSourceBuilder> {
     /**
      * @return the type of the data source
      */
-    String getType();
+    DataSourceType getType();
 
     /**
      * @return the identifier of the data source
@@ -73,4 +101,18 @@ public interface DataSource extends ModelEntity, Buildable<DataSourceBuilder> {
      * @return the credentials of the data source
      */
     DataSourceCredentials getCredentials();
+    
+    /**
+     * reserved attribute, not support for now
+     * 
+     * @return is data source protected
+     */
+    Boolean isProtected();
+    
+    /**
+     * reserved attribute, not support for now
+     * 
+     * @return is data source public
+     */
+    Boolean isPublic();
 }

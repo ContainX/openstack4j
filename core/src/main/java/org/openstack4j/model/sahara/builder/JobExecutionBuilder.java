@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * 	Copyright 2017 HuaWei and OTC                                          
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -66,4 +67,30 @@ public interface JobExecutionBuilder extends Builder<JobExecutionBuilder, JobExe
      * @return JobExecutionBuilder
      */
     JobExecutionBuilder jobId(String jobId);
+    
+    /**
+     * See {@link JobExecution#isPublic()}
+     * 
+     * @param isPublic is job execution public
+     * @return JobExecutionBuilder
+     */
+    JobExecutionBuilder isPublic(boolean isPublic);
+    
+    /**
+     * See {@link JobExecution#isProtected()}
+     * 
+     * @param isProtected is job execution protected
+     * @return JobExecutionBuilder
+     */
+    JobExecutionBuilder isProtect(boolean isProtected);
+    
+    
+    /**
+     * See {@link JobExecution#getEngineJobId()}
+     * 
+     * @param engineJobId oozie workflow id
+     * @return JobExecutionBuilder
+     */
+    JobExecutionBuilder engineJobId(String engineJobId);
+
 }

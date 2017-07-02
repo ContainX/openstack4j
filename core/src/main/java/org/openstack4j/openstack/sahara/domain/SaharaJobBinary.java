@@ -27,7 +27,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+
+import lombok.ToString;
 
 /**
  * For mapping JSON response to/from java objects
@@ -35,7 +36,7 @@ import com.google.common.base.MoreObjects;
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */
-
+@ToString
 @JsonRootName("job_binary")
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class SaharaJobBinary implements JobBinary {
@@ -60,6 +61,10 @@ public class SaharaJobBinary implements JobBinary {
     private String name;
     @JsonProperty("extra")
     private SaharaJobBinaryCredentials credentials;
+	@JsonProperty("is_protected")
+	Boolean isProtected;
+	@JsonProperty("is_public")
+	Boolean isPublic;
 
     /**
      * {@inheritDoc}
@@ -124,19 +129,22 @@ public class SaharaJobBinary implements JobBinary {
     public JobBinaryCredentials getCredentials() {
         return credentials;
     }
+    
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean isProtected() {
+		return isProtected;
+	}
 
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("description", description)
-                   .add("url", url)
-                   .add("tenant_id", tenantId)
-                   .add("created_at", createdAt)
-                   .add("updated_at", updatedAt)
-                   .add("id",id)
-                   .add("name", name)
-                   .toString();
-    }
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean isPublic() {
+		return isPublic;
+	}
 
     public static class JobBinaries extends ListResult<SaharaJobBinary> {
 
@@ -211,6 +219,24 @@ public class SaharaJobBinary implements JobBinary {
             m.credentials = new SaharaJobBinaryCredentials(user, password);
             return this;
         }
+        
+        /* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public JobBinaryBuilder isPublic(boolean isPublic) {
+			m.isPublic = isPublic;
+			return this;
+		}
+
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public JobBinaryBuilder isProtect(boolean isProtected) {
+			m.isProtected = isProtected;
+			return this;
+		}
 
     }
 }

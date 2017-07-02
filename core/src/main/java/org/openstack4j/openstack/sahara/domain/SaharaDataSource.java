@@ -27,7 +27,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+
+import lombok.ToString;
 
 /**
  * For mapping JSON response to/from java objects
@@ -35,198 +36,226 @@ import com.google.common.base.MoreObjects;
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */
+@ToString
 @JsonRootName("data_source")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaDataSource implements DataSource {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @JsonProperty("description")
-    private String description;
-    @JsonProperty("url")
-    private String url;
-    @JsonProperty("tenant_id")
-    private String tenantId;
-    @JsonProperty("created_at")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date createdAt;
-    @JsonProperty("updated_at")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date updatedAt;
-    @JsonProperty("type")
-    private String type;
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("name")
-    private String name;
-    private SaharaDataSourceCredentials credentials;
+	@JsonProperty("description")
+	private String description;
+	@JsonProperty("url")
+	private String url;
+	@JsonProperty("tenant_id")
+	private String tenantId;
+	@JsonProperty("created_at")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	private Date createdAt;
+	@JsonProperty("updated_at")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	private Date updatedAt;
+	@JsonProperty("type")
+	private DataSourceType type;
+	@JsonProperty("id")
+	private String id;
+	@JsonProperty("name")
+	private String name;
+	private SaharaDataSourceCredentials credentials;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getDescription() {
-        return description;
-    }
+	@JsonProperty("is_protected")
+	Boolean isProtected;
+	@JsonProperty("is_public")
+	Boolean isPublic;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getURL() {
-        return url;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDescription() {
+		return description;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTenantId() {
-        return tenantId;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getURL() {
+		return url;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getTenantId() {
+		return tenantId;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getType() {
-        return type;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getId() {
-        return id;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public DataSourceType getType() {
+		return type;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
 
-    /**
-    * {@inheritDoc}
-    */
-    @Override
-    public DataSourceCredentials getCredentials() {
-        return credentials;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
 
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("description", description)
-                   .add("url", url)
-                   .add("tenant_id", tenantId)
-                   .add("created_at", createdAt)
-                   .add("updated_at", updatedAt)
-                   .add("type", type)
-                   .add("id",id)
-                   .add("name", name)
-                   .toString();
-    }
+	/**
+	* {@inheritDoc}
+	*/
+	@Override
+	public DataSourceCredentials getCredentials() {
+		return credentials;
+	}
 
-    public static class DataSources extends ListResult<SaharaDataSource> {
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean isProtected() {
+		return isProtected;
+	}
 
-        private static final long serialVersionUID = 1L;
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean isPublic() {
+		return isPublic;
+	}
 
-        @JsonProperty("data_sources")
-        private List<SaharaDataSource> datasources;
 
-        public List<SaharaDataSource> value() {
-            return datasources;
-        }
-    }
+	public static class DataSources extends ListResult<SaharaDataSource> {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DataSourceBuilder toBuilder() {
-            return new ConcreteDataSourceBuilder(this);
-    }
+		private static final long serialVersionUID = 1L;
 
-    /**
-     * @return the data source Builder
-     */
-    public static DataSourceBuilder builder() {
-            return new ConcreteDataSourceBuilder();
-    }
+		@JsonProperty("data_sources")
+		private List<SaharaDataSource> datasources;
 
-    public static class ConcreteDataSourceBuilder implements DataSourceBuilder {
+		public List<SaharaDataSource> value() {
+			return datasources;
+		}
+	}
 
-        SaharaDataSource m;
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public DataSourceBuilder toBuilder() {
+		return new ConcreteDataSourceBuilder(this);
+	}
 
-        ConcreteDataSourceBuilder() {
-            this(new SaharaDataSource());
-        }
+	/**
+	 * @return the data source Builder
+	 */
+	public static DataSourceBuilder builder() {
+		return new ConcreteDataSourceBuilder();
+	}
 
-        ConcreteDataSourceBuilder(SaharaDataSource m) {
-            this.m = m;
-        }
+	public static class ConcreteDataSourceBuilder implements DataSourceBuilder {
 
-        @Override
-        public DataSourceBuilder description(String description) {
-            m.description = description;
-            return this;
-        }
+		SaharaDataSource m;
 
-        @Override
-        public DataSourceBuilder url(String url) {
-            m.url = url;
-            return this;
-        }
+		ConcreteDataSourceBuilder() {
+			this(new SaharaDataSource());
+		}
 
-        @Override
-        public DataSourceBuilder type(String type) {
-            m.type = type;
-            return this;
-        }
+		ConcreteDataSourceBuilder(SaharaDataSource m) {
+			this.m = m;
+		}
 
-        @Override
-        public DataSourceBuilder name(String name) {
-            m.name = name;
-            return this;
-        }
+		@Override
+		public DataSourceBuilder description(String description) {
+			m.description = description;
+			return this;
+		}
 
-        @Override
-        public DataSourceBuilder credentials(String user, String password) {
-            m.credentials = new SaharaDataSourceCredentials(user, password);
-            return this;
-        }
+		@Override
+		public DataSourceBuilder url(String url) {
+			m.url = url;
+			return this;
+		}
 
-        @Override
-        public DataSource build() {
-            return m;
-        }
+		@Override
+		public DataSourceBuilder type(DataSourceType type) {
+			m.type = type;
+			return this;
+		}
 
-        @Override
-        public DataSourceBuilder from(DataSource in) {
-            m = (SaharaDataSource) in;
-            return this;
-        }
+		@Override
+		public DataSourceBuilder name(String name) {
+			m.name = name;
+			return this;
+		}
+		
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public DataSourceBuilder isPublic(boolean isPublic) {
+			m.isPublic = isPublic;
+			return this;
+		}
 
-    }
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public DataSourceBuilder isProtect(boolean isProtected) {
+			m.isProtected = isProtected;
+			return this;
+		}
+
+		@Override
+		public DataSourceBuilder credentials(String user, String password) {
+			m.credentials = new SaharaDataSourceCredentials(user, password);
+			return this;
+		}
+
+		@Override
+		public DataSource build() {
+			return m;
+		}
+
+		@Override
+		public DataSourceBuilder from(DataSource in) {
+			m = (SaharaDataSource) in;
+			return this;
+		}
+
+
+	}
 
 }

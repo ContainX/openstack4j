@@ -84,4 +84,19 @@ public interface Job extends ModelEntity, Buildable<JobBuilder>   {
      * @return lib ids
      */
     List<String> getLibs();
+    
+    
+    /**
+     * reserved attribute, not support for now
+     * 
+     * @return is job protected
+     */
+    Boolean isProtected();
+    
+    /**
+     * reserved attribute, not support for now
+     * 
+     * @return is job public
+     */
+    Boolean isPublic();
 }

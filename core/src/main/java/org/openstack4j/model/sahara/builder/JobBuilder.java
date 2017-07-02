@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * 	Copyright 2017 HuaWei and OTC      
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -65,4 +66,20 @@ public interface JobBuilder extends Builder<JobBuilder, Job> {
      * @return JobBuilder
      */
     JobBuilder addLibs(String jobBinaryId);
+    
+    /**
+     * See {@link Job#isPublic()}
+     * 
+     * @param isPublic is job public
+     * @return JobBuilder
+     */
+    JobBuilder isPublic(boolean isPublic);
+    
+    /**
+     * See {@link Job#isProtected()}
+     * 
+     * @param isProtected is job protected
+     * @return JobBuilder
+     */
+    JobBuilder isProtect(boolean isProtected);
 }

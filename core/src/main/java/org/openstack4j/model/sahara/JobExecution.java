@@ -108,4 +108,27 @@ public interface JobExecution extends ModelEntity, Buildable<JobExecutionBuilder
      * @return the job identifier
      */
     String getJobIdForExecution();
+    
+    /**
+     * reserved attribute, not support for now
+     * 
+     * @return is job execution protected
+     */
+    Boolean isProtected();
+    
+    /**
+     * reserved attribute, not support for now
+     * 
+     * @return is job execution public
+     */
+    Boolean isPublic();
+    
+    /**
+     * OTC new property: oozie workflow id
+     * 
+     * @return the oozie workflow id
+     */
+    String getEngineJobId();
+    
+    
 }

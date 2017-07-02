@@ -58,4 +58,20 @@ public interface JobBinaryBuilder extends Builder<JobBinaryBuilder, JobBinary> {
      * @return JobBinaryBuilder
      */
     JobBinaryBuilder credentials(String user, String password);
+    
+    /**
+     * See {@link JobBinary#isPublic()}
+     * 
+     * @param isPublic is job binary public
+     * @return JobBinaryBuilder
+     */
+    JobBinaryBuilder isPublic(boolean isPublic);
+    
+    /**
+     * See {@link JobBinary#isProtected()}
+     * 
+     * @param isProtected is job binary protected
+     * @return JobBinaryBuilder
+     */
+    JobBinaryBuilder isProtect(boolean isProtected);
 }

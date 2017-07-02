@@ -27,8 +27,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
+
+import lombok.ToString;
 
 /**
  * For mapping JSON response to/from java objects
@@ -36,7 +37,7 @@ import com.google.common.collect.Lists;
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */
-
+@ToString
 @JsonRootName("job")
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class SaharaJob implements Job {
@@ -68,6 +69,11 @@ public class SaharaJob implements Job {
 
     private List<String> mainBinaryIds;
     private List<String> libBinaryIds;
+    
+	@JsonProperty("is_protected")
+	Boolean isProtected;
+	@JsonProperty("is_public")
+	Boolean isPublic;
 
     /**
      * {@inheritDoc}
@@ -156,22 +162,23 @@ public class SaharaJob implements Job {
     public List<String> getLibs() {
         return libBinaryIds;
     }
+    
+    /*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean isProtected() {
+		return isProtected;
+	}
 
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("description", description)
-                   .add("url", url)
-                   .add("tenant_id", tenantId)
-                   .add("created_at", createdAt)
-                   .add("updated_at", updatedAt)
-                   .add("id",id)
-                   .add("name", name)
-                   .add("mains", mains)
-                   .add("libs", libs)
-                   .add("type", type)
-                   .toString();
-    }
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean isPublic() {
+		return isPublic;
+	}
+
 
     public static class Jobs extends ListResult<SaharaJob> {
 
@@ -241,6 +248,7 @@ public class SaharaJob implements Job {
             m.name = name;
             return this;
         }
+        
 
         @Override
         @JsonProperty("mains")
@@ -259,6 +267,24 @@ public class SaharaJob implements Job {
             m.libBinaryIds.add(jobBinaryId);
             return this;
         }
+        
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public JobBuilder isPublic(boolean isPublic) {
+			m.isPublic = isPublic;
+			return this;
+		}
+
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public JobBuilder isProtect(boolean isProtected) {
+			m.isProtected = isProtected;
+			return this;
+		}
 
     }
 
