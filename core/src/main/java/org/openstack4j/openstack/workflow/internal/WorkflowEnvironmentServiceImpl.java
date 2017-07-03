@@ -19,7 +19,7 @@ public class WorkflowEnvironmentServiceImpl extends BaseMistralService implement
 
     @Override
     public List<? extends WorkflowEnvironment> list() {
-        return get(MistralWorkflowEnvironments.class, uri("/actions")).execute().getList();
+        return get(MistralWorkflowEnvironments.class, uri("/environments")).execute().getList();
     }
 
     @Override

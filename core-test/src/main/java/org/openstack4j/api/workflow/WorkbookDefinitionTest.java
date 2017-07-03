@@ -12,10 +12,10 @@ import static org.testng.Assert.*;
 
 /**
  * Test cases for {@link WorkbookDefinitionService}.
- * 
+ *
  * @author Renat Akhmerov
  */
-@Test(suiteName="WorkbookDefinitions")
+@Test(suiteName = "WorkbookDefinitions")
 public class WorkbookDefinitionTest extends WorkflowBaseTest {
 
     private static final String JSON_WB_DEF = "/workflow/wb_def.json";
@@ -31,9 +31,9 @@ public class WorkbookDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void listWorkbookDefinitions() throws Exception {
+    public void list() throws Exception {
         respondWith(JSON_WB_DEFS);
-        
+
         List<? extends WorkbookDefinition> wbDefs = service.list();
 
         assertEquals(wbDefs.size(), 2);
@@ -46,7 +46,7 @@ public class WorkbookDefinitionTest extends WorkflowBaseTest {
         assertNotEmptyString(wbDef.getProjectId());
         assertEquals(wbDef.getName(), "my_wb0");
         assertNotNull(wbDef.getTags());
-        assertEquals(wbDef.getTags().get(0),"test");
+        assertEquals(wbDef.getTags().get(0), "test");
         assertEquals(wbDef.getTags().get(1), "private");
         assertNotNull(wbDef.getCreatedAt());
         assertNull(wbDef.getUpdatedAt());
@@ -69,7 +69,7 @@ public class WorkbookDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void getWorkbookDefinition() throws Exception {
+    public void get() throws Exception {
         respondWith(JSON_WB_DEF);
 
         WorkbookDefinition wbDef = service.get("eecf6cad-65af-4a11-9e6f-692b23ffac08");
@@ -88,7 +88,7 @@ public class WorkbookDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void createWorkbookDefinition() throws Exception {
+    public void create() throws Exception {
         respondWith(JSON_WB_DEF_CREATE);
 
         WorkbookDefinition wbDef = service.create(getClass().getResourceAsStream(NEW_WB), Scope.PRIVATE);
@@ -107,7 +107,7 @@ public class WorkbookDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void deleteWorkbookDefinition() throws Exception {
+    public void delete() throws Exception {
         respondWith(204); // No content.
 
         ActionResponse resp = service.delete("my_wb");

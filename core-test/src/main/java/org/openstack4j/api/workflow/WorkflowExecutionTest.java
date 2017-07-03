@@ -14,10 +14,10 @@ import static org.testng.Assert.*;
 
 /**
  * Test cases for {@link WorkflowExecutionService}.
- * 
+ *
  * @author Renat Akhmerov
  */
-@Test(suiteName="WorkflowExecutions")
+@Test(suiteName = "WorkflowExecutions")
 public class WorkflowExecutionTest extends WorkflowBaseTest {
 
     private static final String JSON_WF_EXEC = "/workflow/wf_exec.json";
@@ -32,9 +32,9 @@ public class WorkflowExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void listWorkflowExecutions() throws Exception {
+    public void list() throws Exception {
         respondWith(JSON_WF_EXECS);
-        
+
         List<? extends WorkflowExecution> wfExecs = service.list();
 
         assertEquals(wfExecs.size(), 2);
@@ -74,7 +74,7 @@ public class WorkflowExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void getWorkflowExecution() throws Exception {
+    public void get() throws Exception {
         respondWith(JSON_WF_EXEC);
 
         WorkflowExecution wfExec = service.get("79d187f4-b8e5-4288-b2cd-ed27ee31e4b0");
@@ -94,7 +94,7 @@ public class WorkflowExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void createWorkflowExecution() throws Exception {
+    public void create() throws Exception {
         respondWith(JSON_WF_EXEC_CREATE);
 
         WorkflowExecution wfExec = new MistralWorkflowExecutionBuilder().
@@ -120,7 +120,7 @@ public class WorkflowExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void deleteWorkflowExecution() throws Exception {
+    public void delete() throws Exception {
         respondWith(204); // No content.
 
         ActionResponse resp = service.delete("parallel_join_2");

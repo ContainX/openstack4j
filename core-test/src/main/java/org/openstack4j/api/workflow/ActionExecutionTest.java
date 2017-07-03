@@ -14,10 +14,10 @@ import static org.testng.Assert.*;
 
 /**
  * Test cases for {@link ActionExecutionService}.
- * 
+ *
  * @author Renat Akhmerov
  */
-@Test(suiteName="ActionExecutions")
+@Test(suiteName = "ActionExecutions")
 public class ActionExecutionTest extends WorkflowBaseTest {
 
     private static final String JSON_ACTION_EXEC = "/workflow/action_exec.json";
@@ -32,9 +32,9 @@ public class ActionExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void listActionExecutions() throws Exception {
+    public void list() throws Exception {
         respondWith(JSON_ACTION_EXECS);
-        
+
         List<? extends ActionExecution> actionExecs = service.list();
 
         assertEquals(actionExecs.size(), 2);
@@ -81,7 +81,7 @@ public class ActionExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void getActionExecution() throws Exception {
+    public void get() throws Exception {
         respondWith(JSON_ACTION_EXEC);
 
         ActionExecution actionExec = service.get("294725fa-980d-436f-b882-a75cfeffa8c0");
@@ -105,7 +105,7 @@ public class ActionExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void createActionExecution() throws Exception {
+    public void create() throws Exception {
         respondWith(JSON_ACTION_EXEC_CREATE);
 
         ActionExecution actionExec = new MistralActionExecution.MistralActionExecutionBuilder().
@@ -134,10 +134,11 @@ public class ActionExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void deleteActionExecution() throws Exception {
+    public void delete() throws Exception {
         respondWith(204); // No content.
 
         ActionResponse resp = service.delete("294725fa-980d-436f-b882-a75cfeffa8c0");
 
         assertEquals(resp.getCode(), 204);
-    }}
+    }
+}

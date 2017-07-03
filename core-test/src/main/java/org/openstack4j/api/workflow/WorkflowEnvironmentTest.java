@@ -33,7 +33,7 @@ public class WorkflowEnvironmentTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void listWorkflowEnvironments() throws Exception {
+    public void list() throws Exception {
         respondWith(JSON_WF_ENVS);
 
         List<? extends WorkflowEnvironment> envs = service.list();
@@ -70,7 +70,7 @@ public class WorkflowEnvironmentTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void getWorkflowEnvironment() throws Exception {
+    public void get() throws Exception {
         respondWith(JSON_WF_ENV);
 
         WorkflowEnvironment env = service.get("eecf6cad-65af-4a11-9e6f-692b23ffac08");
@@ -88,7 +88,7 @@ public class WorkflowEnvironmentTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void createWorkflowEnvironment() throws Exception {
+    public void create() throws Exception {
         respondWith(JSON_WF_ENV_CREATE);
 
         WorkflowEnvironment env = MistralWorkflowEnvironment.builder().
@@ -112,7 +112,7 @@ public class WorkflowEnvironmentTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void deleteWorkflowEnvironment() throws Exception {
+    public void delete() throws Exception {
         respondWith(204); // No content.
 
         ActionResponse resp = service.delete("concat");

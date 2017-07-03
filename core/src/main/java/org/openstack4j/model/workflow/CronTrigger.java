@@ -1,6 +1,3 @@
-/*
- * 
- */
 package org.openstack4j.model.workflow;
 
 import org.openstack4j.common.Buildable;
@@ -22,6 +19,21 @@ public interface CronTrigger extends ModelEntity, Buildable<CronTriggerBuilder> 
      * @return The id of this definition.
      */
     String getId();
+
+    /**
+     * @return The time that this trigger was createdAt at.
+     */
+    Date getCreatedAt();
+
+    /**
+     * @return The time that this trigger was last updatedAt at.
+     */
+    Date getUpdatedAt();
+
+    /**
+     * @return The scope of this trigger.
+     */
+    Scope getScope();
 
     /**
      * @return The name of this definition.
@@ -49,11 +61,6 @@ public interface CronTrigger extends ModelEntity, Buildable<CronTriggerBuilder> 
     Map<String, ?> getWorkflowParameters();
 
     /**
-     * @return The scope of this trigger.
-     */
-    Scope getScope();
-
-    /**
      * @return The cron pattern of this trigger.
      */
     String getPattern();
@@ -66,20 +73,10 @@ public interface CronTrigger extends ModelEntity, Buildable<CronTriggerBuilder> 
     /**
      * @return The first execution time of this trigger.
      */
-    Date getFistExecutionTime();
+    Date getFirstExecutionTime();
 
     /**
      * @return The next execution time of this trigger according the cron pattern.
      */
     Date getNextExecutionTime();
-
-    /**
-     * @return The time that this trigger was createdAt at.
-     */
-    Date getCreated();
-
-    /**
-     * @return The time that this trigger was last updatedAt at.
-     */
-    Date getUpdated();
 }
