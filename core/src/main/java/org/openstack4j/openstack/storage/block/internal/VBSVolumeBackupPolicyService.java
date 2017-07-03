@@ -21,11 +21,10 @@ import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicyBacku
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicyResource;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicyResourceActionResult;
 import org.openstack4j.openstack.storage.block.domain.VBSVolumeBackupScheduledPolicy;
-import org.testng.Assert;
-import org.testng.collections.Lists;
-import org.testng.util.Strings;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -39,8 +38,8 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	 */
 	@Override
 	public VolumeBackupPolicy create(VolumeBackupPolicy policy) {
-		checkNotNull(policy);
-		Assert.assertFalse(Strings.isNullOrEmpty(policy.getName()));
+		checkNotNull(policy, "parameter `policy` should not be null");
+		checkState(!Strings.isNullOrEmpty(policy.getName()), "parameter `policy.name` should not be null");
 		VolumeBackupScheduledPolicy scheduledPolicy = policy.getScheduledPolicy();
 		checkScheduledPolicy(scheduledPolicy);
 		return post(VBSVolumeBackupPolicy.class, ClientConstants.PATH_VOLUME_BACKUP_POLICY).entity(policy).execute();
@@ -54,7 +53,7 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 		checkNotNull(scheduledPolicy.getFrequency());
 		checkNotNull(scheduledPolicy.getMaxBackupAmount());
 		checkNotNull(scheduledPolicy.getRetainFirstBackupOfCurrentMonth());
-		Assert.assertFalse(Strings.isNullOrEmpty(scheduledPolicy.getStartTime()));
+		checkState(!Strings.isNullOrEmpty(scheduledPolicy.getStartTime()));
 		checkNotNull(scheduledPolicy.getStatus());
 	}
 
@@ -71,7 +70,7 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	 */
 	@Override
 	public VolumeBackupPolicy update(VolumeBackupPolicy updated) {
-		Assert.assertFalse(Strings.isNullOrEmpty(updated.getId()));
+		checkState(!Strings.isNullOrEmpty(updated.getId()), "parameter `policy.id` should not be null");
 		return put(VBSVolumeBackupPolicy.class, ClientConstants.PATH_VOLUME_BACKUP_POLICY, "/", updated.getId())
 				.entity(updated).execute();
 	}
@@ -81,7 +80,7 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	 */
 	@Override
 	public ActionResponse delete(String backupPolicyId) {
-		Assert.assertFalse(Strings.isNullOrEmpty(backupPolicyId));
+		checkState(!Strings.isNullOrEmpty(backupPolicyId), "parameter `backupPolicyId` should not be null");
 		return deleteWithResponse(ClientConstants.PATH_VOLUME_BACKUP_POLICY, "/", backupPolicyId).execute();
 	}
 
@@ -90,7 +89,7 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	 */
 	@Override
 	public ActionResponse execute(String backupPolicyId) {
-		Assert.assertFalse(Strings.isNullOrEmpty(backupPolicyId));
+		checkState(!Strings.isNullOrEmpty(backupPolicyId), "parameter `backupPolicyId` should not be null");
 		return postWithResponse(ClientConstants.PATH_VOLUME_BACKUP_POLICY, "/", backupPolicyId, "/action").execute();
 	}
 
@@ -99,7 +98,7 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	 */
 	@Override
 	public VolumeBackupPolicy enable(String backupPolicyId) {
-		Assert.assertFalse(Strings.isNullOrEmpty(backupPolicyId));
+		checkState(!Strings.isNullOrEmpty(backupPolicyId), "parameter `backupPolicyId` should not be null");
 		VBSVolumeBackupScheduledPolicy scheduledPolicy = VBSVolumeBackupScheduledPolicy.builder()
 				.status(VolumeBackupPolicyStatus.ON).build();
 		VBSVolumeBackupPolicy policy = VBSVolumeBackupPolicy.builder().id(backupPolicyId)
@@ -112,7 +111,7 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	 */
 	@Override
 	public VolumeBackupPolicy disable(String backupPolicyId) {
-		Assert.assertFalse(Strings.isNullOrEmpty(backupPolicyId));
+		checkState(!Strings.isNullOrEmpty(backupPolicyId));
 		VBSVolumeBackupScheduledPolicy scheduledPolicy = VBSVolumeBackupScheduledPolicy.builder()
 				.status(VolumeBackupPolicyStatus.OFF).build();
 		VBSVolumeBackupPolicy policy = VBSVolumeBackupPolicy.builder().id(backupPolicyId)
@@ -125,9 +124,9 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	 */
 	@Override
 	public VolumeBackupPolicyResourceActionResult linkResources(String backupPolicyId, List<String> resourceIds) {
-		Assert.assertFalse(Strings.isNullOrEmpty(backupPolicyId), "Parameter `backupPolicyId` should not be empty");
-		Assert.assertNotNull(resourceIds, "Parameter `resourceIds` should not be null");
-		Assert.assertTrue(resourceIds.size() > 0, "Parameter `resourceIds` should not be empty");
+		checkState(!Strings.isNullOrEmpty(backupPolicyId), "parameter `backupPolicyId` should not be null");
+		checkNotNull(resourceIds, "Parameter `resourceIds` should not be null");
+		checkState(resourceIds.size() > 0, "Parameter `resourceIds` should not be empty");
 
 		_VBSVolumeBackupPolicyResources resources = new _VBSVolumeBackupPolicyResources();
 		resources.setBackupPolicyId(backupPolicyId);
@@ -146,9 +145,9 @@ public class VBSVolumeBackupPolicyService extends BaseVolumeBackupServices imple
 	 */
 	@Override
 	public VolumeBackupPolicyResourceActionResult unlinkResources(String backupPolicyId, List<String> resourceIds) {
-		Assert.assertFalse(Strings.isNullOrEmpty(backupPolicyId), "Parameter `backupPolicyId` should not be empty");
-		Assert.assertNotNull(resourceIds, "Parameter `resourceIds` should not be null");
-		Assert.assertTrue(resourceIds.size() > 0, "Parameter `resourceIds` should not be empty");
+		checkState(!Strings.isNullOrEmpty(backupPolicyId), "Parameter `backupPolicyId` should not be empty");
+		checkNotNull(resourceIds, "Parameter `resourceIds` should not be null");
+		checkState(resourceIds.size() > 0, "Parameter `resourceIds` should not be empty");
 
 		_VBSVolumeBackupPolicyResources resources = new _VBSVolumeBackupPolicyResources();
 		for (String resourceId : resourceIds) {
