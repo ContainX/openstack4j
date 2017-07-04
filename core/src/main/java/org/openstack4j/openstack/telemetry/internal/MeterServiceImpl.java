@@ -89,16 +89,13 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
         checkNotNull(meterName);
         Invocation<CeilometerStatistics[]> invocation = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName))
                                                            .param(period > 0, "period", period);
-
-
-        if (criteria != null && !criteria.getCriteriaParams().isEmpty()) {
-            for (NameOpValue c : criteria.getCriteriaParams()) {
-                invocation.param(FIELD, c.getField());
-                invocation.param(OPER, c.getOperator().getQueryValue());
-                invocation.param(VALUE, c.getValue());
-            }
-        }
-
+         if (criteria != null && !criteria.getCriteriaParams().isEmpty()) {
+             for (NameOpValue c : criteria.getCriteriaParams()) {
+                 invocation.param(FIELD, c.getField());
+                 invocation.param(OPER, c.getOperator().getQueryValue());
+                 invocation.param(VALUE, c.getValue());
+             }
+         }
         CeilometerStatistics[] stats = invocation.execute();
         return wrapList(stats);
     }
