@@ -46,7 +46,7 @@ public class ASAutoScalingPolicyCreateUpdate implements ScalingPolicyCreateUpdat
 	private String groupId;
 	
 	@JsonProperty("scaling_policy_type")
-	private String policyType;
+	private ScalingPolicyType policyType;
 	
 	@JsonProperty("alarm_id")
 	private String alarmId;
@@ -59,13 +59,6 @@ public class ASAutoScalingPolicyCreateUpdate implements ScalingPolicyCreateUpdat
 	
 	@JsonProperty("cool_down_time")
 	private Integer coolDownTime;
-	
-	public enum PolicyType {
-		ALARM,
-		SCHEDULED,
-		RECURRENCE,
-		;
-	}
 	
 	public static ASAutoScalingPolicyCreateUpdate fromScalingPolicy(ScalingPolicy policy) {
 		return ASAutoScalingPolicyCreateUpdate.builder()

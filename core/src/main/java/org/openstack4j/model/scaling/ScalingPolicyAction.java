@@ -17,7 +17,9 @@ package org.openstack4j.model.scaling;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,9 +35,25 @@ import lombok.ToString;
 public class ScalingPolicyAction implements ModelEntity {
 	private static final long serialVersionUID = -5715857665624203418L;
 
+	public enum Operation {
+		ADD, REMOVE, SET;
+
+		@JsonCreator
+		public Operation forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (Operation op : Operation.values()) {
+					if (op.name().equalsIgnoreCase(value)) {
+						return op;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	@JsonProperty
-	private String operation;
-	
+	private Operation operation;
+
 	@JsonProperty("instance_number")
 	private Integer instanceNumber;
 }

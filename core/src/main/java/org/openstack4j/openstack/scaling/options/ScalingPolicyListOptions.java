@@ -19,6 +19,8 @@ import com.google.common.collect.Maps;
 
 import java.util.Map;
 
+import org.openstack4j.model.scaling.ScalingPolicyCreateUpdate.ScalingPolicyType;
+
 public class ScalingPolicyListOptions {
 	private Map<String, Object> queryParam = Maps.newHashMap();
 	
@@ -32,8 +34,8 @@ public class ScalingPolicyListOptions {
 		return add("scaling_policy_name", policyName);
 	}
 	
-	public ScalingPolicyListOptions policyType(String policyType) {
-		return add("scaling_policy_type", policyType);
+	public ScalingPolicyListOptions policyType(ScalingPolicyType policyType) {
+		return add("scaling_policy_type", policyType.name());
 	}
 	
 	public ScalingPolicyListOptions startNumber(Integer startNumber) {

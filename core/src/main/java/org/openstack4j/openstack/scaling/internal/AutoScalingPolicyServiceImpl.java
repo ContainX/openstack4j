@@ -40,7 +40,7 @@ public class AutoScalingPolicyServiceImpl extends BaseAutoScalingServices implem
 		checkArgument(policy != null, "policy required");
 		checkArgument(!Strings.isNullOrEmpty(policy.getPolicyName()), "policyName required");
 		checkArgument(!Strings.isNullOrEmpty(policy.getGroupId()), "groupId required");
-		checkArgument(!Strings.isNullOrEmpty(policy.getPolicyType()), "policyType required");
+		checkArgument(policy.getPolicyType() != null, "policyType required");
 
 		checkScheduledPolicyWhenPresent(policy.getScheduledPolicy());
 		return post(ASAutoScalingPolicyCreateUpdate.class, uri("/scaling_policy")).entity(policy).execute();

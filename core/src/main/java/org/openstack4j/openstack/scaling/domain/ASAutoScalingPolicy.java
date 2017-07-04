@@ -53,7 +53,7 @@ public class ASAutoScalingPolicy implements ScalingPolicy {
 	private String groupId;
 
 	@JsonProperty("scaling_policy_type")
-	private String policyType;
+	private ScalingPolicyType policyType;
 
 	@JsonProperty("alarm_id")
 	private String alarmId;
@@ -68,7 +68,7 @@ public class ASAutoScalingPolicy implements ScalingPolicy {
 	private Integer coolDownTime;
 
 	@JsonProperty("policy_status")
-	private String policyStatus;
+	private PolicyStatus policyStatus;
 
 	@JsonProperty("create_time")
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)

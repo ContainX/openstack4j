@@ -17,7 +17,27 @@ package org.openstack4j.model.scaling;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.common.base.Strings;
+
 public interface ScalingPolicyCreateUpdate extends ModelEntity {
+	
+	public enum ScalingPolicyType {
+		ALARM, SCHEDULED, RECURRENCE;
+		
+		@JsonCreator
+		public ScalingPolicyType forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (ScalingPolicyType status : ScalingPolicyType.values()) {
+					if (status.name().equalsIgnoreCase(value)) {
+						return status;
+					}
+				}
+			}
+			return null;
+		}
+	}
+	
 	/**
 	 * @return policy id
 	 */
@@ -36,7 +56,7 @@ public interface ScalingPolicyCreateUpdate extends ModelEntity {
 	/**
 	 * @return policy type
 	 */
-	String getPolicyType();
+	ScalingPolicyType getPolicyType();
 	
 	/**
 	 * @return alarm id

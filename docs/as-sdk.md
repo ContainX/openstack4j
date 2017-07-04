@@ -151,12 +151,12 @@ ActionResponse resp = osclient.autoScaling().groupInstances().batchRemove("group
 ```java
 ScheduledPolicy scheduledPolicy = ScheduledPolicy.builder()
 		.launchTime("launchTime")
-		.recurrenceType(RecurrenceType.Daily.name())
+		.recurrenceType(RecurrenceType.DAILY)
 		.build();
 ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder()
 		.policyName("policyName")
 		.groupId("groupId")
-		.policyType(PolicyType.SCHEDULED.name())
+		.policyType(ScalingPolicyType.SCHEDULED)
 		.scheduledPolicy(scheduledPolicy)
 		.build();
 ScalingPolicyCreateUpdate create = osclient.autoScaling().policies().create(policy);

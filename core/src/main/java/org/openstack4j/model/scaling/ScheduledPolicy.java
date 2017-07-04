@@ -20,8 +20,11 @@ import java.util.Date;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.DateTimeUtils;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,11 +41,38 @@ public class ScheduledPolicy implements ModelEntity {
 
 	private static final long serialVersionUID = -6411187348817338454L;
 
+	public enum RecurrenceType {
+		DAILY("Daily"), WEEKLY("WeekLy"), MONTHLY("Monthly");
+
+		private String val;
+
+		private RecurrenceType(String val) {
+			this.val = val;
+		}
+
+		@JsonValue
+		public String getVal() {
+			return this.val;
+		}
+
+		@JsonCreator
+		public RecurrenceType forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (RecurrenceType type : RecurrenceType.values()) {
+					if (type.name().equalsIgnoreCase(value)) {
+						return type;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	@JsonProperty("launch_time")
 	private String launchTime;
 
 	@JsonProperty("recurrence_type")
-	private String recurrenceType;
+	private RecurrenceType recurrenceType;
 
 	@JsonProperty("recurrence_value")
 	private String recurrenceValue;
@@ -54,11 +84,4 @@ public class ScheduledPolicy implements ModelEntity {
 	@JsonProperty("end_time")
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMZ)
 	private Date endTime;
-	
-	public enum RecurrenceType {
-		Daily,
-		Weekly,
-		Monthly,
-		;
-	}
 }

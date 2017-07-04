@@ -17,14 +17,34 @@ package org.openstack4j.model.scaling;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.common.base.Strings;
+
 public interface ScalingPolicy extends ScalingPolicyCreateUpdate {
+	public enum PolicyStatus {
+		INSERVICE, PAUSED;
+
+		@JsonCreator
+		public PolicyStatus forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (PolicyStatus status : PolicyStatus.values()) {
+					if (status.name().equalsIgnoreCase(value)) {
+						return status;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	/**
 	 * @return policy status
 	 */
-	String getPolicyStatus();
-	
+	PolicyStatus getPolicyStatus();
+
 	/**
 	 * create time of policy
+	 * 
 	 * @return
 	 */
 	Date getCreateTime();

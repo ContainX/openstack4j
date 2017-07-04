@@ -24,11 +24,11 @@ import java.util.List;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingPolicy;
 import org.openstack4j.model.scaling.ScalingPolicyCreateUpdate;
+import org.openstack4j.model.scaling.ScalingPolicyCreateUpdate.ScalingPolicyType;
 import org.openstack4j.model.scaling.ScheduledPolicy;
 import org.openstack4j.model.scaling.ScheduledPolicy.RecurrenceType;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicy;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicyCreateUpdate;
-import org.openstack4j.openstack.scaling.domain.ASAutoScalingPolicyCreateUpdate.PolicyType;
 import org.openstack4j.openstack.scaling.options.ScalingPolicyListOptions;
 import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
@@ -45,9 +45,9 @@ public class ASPolicySample extends AbstractSample {
 	public void testCreateAutoScalingPolicy() {
 		String groupId = "8a2462e3-6ae8-4d86-bd89-4497836fe022";
 		ScheduledPolicy scheduledPolicy = ScheduledPolicy.builder().launchTime("2017-07-24T01:21Z")
-				.recurrenceType(RecurrenceType.Daily.name()).endTime(getEndTime()).recurrenceValue(null).build();
+				.recurrenceType(RecurrenceType.DAILY).endTime(getEndTime()).recurrenceValue(null).build();
 		ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder().policyName("SDK-policyName")
-				.groupId(groupId).policyType(PolicyType.SCHEDULED.name()).scheduledPolicy(scheduledPolicy).build();
+				.groupId(groupId).policyType(ScalingPolicyType.RECURRENCE).scheduledPolicy(scheduledPolicy).build();
 		ScalingPolicyCreateUpdate create = osclient.autoScaling().policies().create(policy);
 		assertTrue(create != null && !Strings.isNullOrEmpty(create.getPolicyId()));
 	}
