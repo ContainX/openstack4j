@@ -18,6 +18,13 @@ package org.openstack4j.model.loadbalance;
 import java.util.Date;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.loadbalance.Listener.BackendProtocol;
+import org.openstack4j.model.loadbalance.Listener.LbAlgorithm;
+import org.openstack4j.model.loadbalance.Listener.Protocol;
+import org.openstack4j.model.loadbalance.Listener.SSLCiphers;
+import org.openstack4j.model.loadbalance.Listener.SSLProtocols;
+import org.openstack4j.model.loadbalance.Listener.StickySessionType;
+import org.openstack4j.model.loadbalance.LoadBalancer.Status;
 
 public interface ListenerCreate extends ModelEntity {
 	
@@ -39,7 +46,7 @@ public interface ListenerCreate extends ModelEntity {
 	/**
 	 * @return listener protocol
 	 */
-	String getProtocol();
+	Protocol getProtocol();
 	
 	/**
 	 * @return listen port
@@ -49,7 +56,7 @@ public interface ListenerCreate extends ModelEntity {
 	/**
 	 * @return backend protocol of listener
 	 */
-	String getBackendProtocol();
+	BackendProtocol getBackendProtocol();
 	
 	/**
 	 * @return backend listen port
@@ -59,7 +66,7 @@ public interface ListenerCreate extends ModelEntity {
 	/**
 	 * @return algorithm of load balancer
 	 */
-	String getLbAlgorithm();
+	LbAlgorithm getLbAlgorithm();
 
 	/**
 	 * @return whether session sticky
@@ -69,7 +76,7 @@ public interface ListenerCreate extends ModelEntity {
 	/**
 	 * @return session sticky type
 	 */
-	String getStickySessionType();
+	StickySessionType getStickySessionType();
 	
 	/**
 	 * @return cookie timeout
@@ -104,12 +111,12 @@ public interface ListenerCreate extends ModelEntity {
 	/**
 	 * @return ssl protocols of listener
 	 */
-	String getSslProtocols();
+	SSLProtocols getSslProtocols();
 	
 	/**
 	 * @return ssl ciphers
 	 */
-	String getSslCiphers();
+	SSLCiphers getSslCiphers();
 	
 	/**
 	 * @return listener id
@@ -119,7 +126,7 @@ public interface ListenerCreate extends ModelEntity {
 	/**
 	 * @return listener status
 	 */
-	String getStatus();
+	Status getStatus();
 	
 	/**
 	 * @return whether administration state up

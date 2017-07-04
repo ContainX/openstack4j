@@ -16,6 +16,9 @@
 package org.openstack4j.model.loadbalance;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.loadbalance.Listener.LbAlgorithm;
+import org.openstack4j.model.loadbalance.Listener.SSLCiphers;
+import org.openstack4j.model.loadbalance.Listener.SSLProtocols;
 
 public interface ListenerUpdate extends ModelEntity {
 	
@@ -42,7 +45,7 @@ public interface ListenerUpdate extends ModelEntity {
 	/**
 	 * @return algorithm of load balancer
 	 */
-	String getLbAlgorithm();
+	LbAlgorithm getLbAlgorithm();
 
 	/**
 	 * @return tcp connection timeout
@@ -67,10 +70,10 @@ public interface ListenerUpdate extends ModelEntity {
 	/**
 	 * @return ssl protocols of listener
 	 */
-	String getSslProtocols();
+	SSLProtocols getSslProtocols();
 	
 	/**
 	 * @return ssl ciphers
 	 */
-	String getSslCiphers();
+	SSLCiphers getSslCiphers();
 }

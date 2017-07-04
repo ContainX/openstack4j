@@ -17,7 +17,14 @@ package org.openstack4j.openstack.loadbalance.domain;
 
 import java.util.Date;
 
+import org.openstack4j.model.loadbalance.Listener.BackendProtocol;
+import org.openstack4j.model.loadbalance.Listener.LbAlgorithm;
+import org.openstack4j.model.loadbalance.Listener.Protocol;
+import org.openstack4j.model.loadbalance.Listener.SSLCiphers;
+import org.openstack4j.model.loadbalance.Listener.SSLProtocols;
+import org.openstack4j.model.loadbalance.Listener.StickySessionType;
 import org.openstack4j.model.loadbalance.ListenerCreate;
+import org.openstack4j.model.loadbalance.LoadBalancer.Status;
 import org.openstack4j.openstack.common.DateTimeUtils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -50,25 +57,25 @@ public class ELBListenerCreate implements ListenerCreate {
 	private String loadBalancerId;
 
 	@JsonProperty
-	private String protocol;
+	private Protocol protocol;
 
 	@JsonProperty
 	private Integer port;
 
 	@JsonProperty("backend_protocol")
-	private String backendProtocol;
+	private BackendProtocol backendProtocol;
 
 	@JsonProperty("backend_port")
 	private Integer backendPort;
 
 	@JsonProperty("lb_algorithm")
-	private String lbAlgorithm;
+	private LbAlgorithm lbAlgorithm;
 
 	@JsonProperty("session_sticky")
 	private Boolean sessionSticky;
 
 	@JsonProperty("sticky_session_type")
-	private String stickySessionType;
+	private StickySessionType stickySessionType;
 
 	@JsonProperty("cookie_timeout")
 	private Integer cookieTimeout;
@@ -89,16 +96,16 @@ public class ELBListenerCreate implements ListenerCreate {
 	private Integer udpTimeout;
 
 	@JsonProperty("ssl_protocols")
-	private String sslProtocols;
+	private SSLProtocols sslProtocols;
 
 	@JsonProperty("ssl_ciphers")
-	private String sslCiphers;
+	private SSLCiphers sslCiphers;
 
 	@JsonInclude(value = Include.NON_NULL)
 	private String id;
 
 	@JsonInclude(value = Include.NON_NULL)
-	private String status;
+	private Status status;
 
 	@JsonProperty("admin_state_up")
 	@JsonInclude(value = Include.NON_NULL)
@@ -113,16 +120,4 @@ public class ELBListenerCreate implements ListenerCreate {
 	@JsonInclude(value = Include.NON_NULL)
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
-
-	public enum Protocol {
-		HTTP, TCP, HTTPS, UDP,;
-	}
-
-	public enum BackendProtocol {
-		HTTP, TCP, UDP,;
-	}
-
-	public enum LbAlgorithm {
-		roundrobin, leastconn, source,;
-	}
 }

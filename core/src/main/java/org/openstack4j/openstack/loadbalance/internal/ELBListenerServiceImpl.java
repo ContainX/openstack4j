@@ -36,11 +36,11 @@ public class ELBListenerServiceImpl extends BaseELBServices implements ELBListen
 		checkArgument(listener != null, "listener is required");
 		checkArgument(!Strings.isNullOrEmpty(listener.getName()), "name is required");
 		checkArgument(!Strings.isNullOrEmpty(listener.getLoadBalancerId()), "loadBalancerId is required");
-		checkArgument(!Strings.isNullOrEmpty(listener.getProtocol()), "protocol is required");
+		checkArgument(listener.getProtocol() != null, "protocol is required");
 		checkArgument(listener.getPort() != null, "port is required");
-		checkArgument(!Strings.isNullOrEmpty(listener.getBackendProtocol()), "backendProtocol is required");
+		checkArgument(listener.getBackendProtocol() != null, "backendProtocol is required");
 		checkArgument(listener.getBackendPort() != null, "backendPort is required");
-		checkArgument(!Strings.isNullOrEmpty(listener.getLbAlgorithm()), "lbAlgorithm is required");
+		checkArgument(listener.getLbAlgorithm() != null, "lbAlgorithm is required");
 
 		return post(ELBListenerCreate.class, uri(API_PATH)).entity(listener).execute();
 	}

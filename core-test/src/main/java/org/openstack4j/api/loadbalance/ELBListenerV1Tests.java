@@ -22,11 +22,11 @@ import java.io.IOException;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.loadbalance.Listener;
+import org.openstack4j.model.loadbalance.Listener.BackendProtocol;
+import org.openstack4j.model.loadbalance.Listener.LbAlgorithm;
+import org.openstack4j.model.loadbalance.Listener.Protocol;
 import org.openstack4j.model.loadbalance.ListenerCreate;
 import org.openstack4j.openstack.loadbalance.domain.ELBListenerCreate;
-import org.openstack4j.openstack.loadbalance.domain.ELBListenerCreate.BackendProtocol;
-import org.openstack4j.openstack.loadbalance.domain.ELBListenerCreate.LbAlgorithm;
-import org.openstack4j.openstack.loadbalance.domain.ELBListenerCreate.Protocol;
 import org.openstack4j.openstack.loadbalance.domain.ELBListenerUpdate;
 import org.openstack4j.openstack.loadbalance.options.ELBListenerListOptions;
 import org.testng.annotations.Test;
@@ -44,8 +44,8 @@ public class ELBListenerV1Tests extends AbstractTest {
 		respondWith(JSON_LISTENER_CREATE);
 		String loadBalancerId = "a650695bb9344a3fa24dec344116d261";
 		ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener").loadBalancerId(loadBalancerId)
-				.protocol(Protocol.TCP.name()).port(12345).backendProtocol(BackendProtocol.TCP.name())
-				.backendPort(54321).lbAlgorithm(LbAlgorithm.roundrobin.name()).build();
+				.protocol(Protocol.TCP).port(12345).backendProtocol(BackendProtocol.TCP)
+				.backendPort(54321).lbAlgorithm(LbAlgorithm.ROUND_ROBIN).build();
 		ListenerCreate create = osv3().loadBalancer().listeners().create(listener);
 		assertTrue("f5c566e27ebb4d5d8708fca77915a04b".equals(create.getId()));
 	}

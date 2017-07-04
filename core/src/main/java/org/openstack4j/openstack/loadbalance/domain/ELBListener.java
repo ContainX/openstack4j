@@ -51,25 +51,25 @@ public class ELBListener implements Listener {
 	private String loadBalancerId;
 
 	@JsonProperty
-	private String protocol;
+	private Protocol protocol;
 
 	@JsonProperty
 	private Integer port;
 
 	@JsonProperty("backend_protocol")
-	private String backendProtocol;
+	private BackendProtocol backendProtocol;
 
 	@JsonProperty("backend_port")
 	private Integer backendPort;
 
 	@JsonProperty("lb_algorithm")
-	private String lbAlgorithm;
+	private LbAlgorithm lbAlgorithm;
 
 	@JsonProperty("session_sticky")
 	private Boolean sessionSticky;
 
 	@JsonProperty("sticky_session_type")
-	private String stickySessionType;
+	private StickySessionType stickySessionType;
 
 	@JsonProperty("cookie_timeout")
 	private Integer cookieTimeout;
@@ -84,13 +84,13 @@ public class ELBListener implements Listener {
 	private Integer udpTimeout;
 
 	@JsonProperty("ssl_protocols")
-	private String sslProtocols;
+	private SSLProtocols sslProtocols;
 
 	@JsonProperty("ssl_ciphers")
-	private String sslCiphers;
+	private SSLCiphers sslCiphers;
 
 	@JsonProperty
-	private String status;
+	private Status status;
 
 	@JsonProperty("admin_state_up")
 	private Boolean adminStateUp;

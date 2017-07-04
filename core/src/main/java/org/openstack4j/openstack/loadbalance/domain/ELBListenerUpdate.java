@@ -17,6 +17,9 @@ package org.openstack4j.openstack.loadbalance.domain;
 
 import org.openstack4j.model.loadbalance.Listener;
 import org.openstack4j.model.loadbalance.ListenerUpdate;
+import org.openstack4j.model.loadbalance.Listener.LbAlgorithm;
+import org.openstack4j.model.loadbalance.Listener.SSLCiphers;
+import org.openstack4j.model.loadbalance.Listener.SSLProtocols;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -48,7 +51,7 @@ public class ELBListenerUpdate implements ListenerUpdate {
 	private Integer backendPort;
 
 	@JsonProperty("lb_algorithm")
-	private String lbAlgorithm;
+	private LbAlgorithm lbAlgorithm;
 
 	@JsonProperty("tcp_timeout")
 	private Integer tcpTimeout;
@@ -63,10 +66,10 @@ public class ELBListenerUpdate implements ListenerUpdate {
 	private Integer udpTimeout;
 
 	@JsonProperty("ssl_protocols")
-	private String sslProtocols;
+	private SSLProtocols sslProtocols;
 
 	@JsonProperty("ssl_ciphers")
-	private String sslCiphers;
+	private SSLCiphers sslCiphers;
 	
 	public static ELBListenerUpdate fromListener(Listener listener) {
 		return ELBListenerUpdate.builder()

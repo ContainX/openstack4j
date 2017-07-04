@@ -58,11 +58,11 @@ List<? extends LoadBalancer> list = osclient.elasticLoadBalance().loadBalancers(
 ```java
 ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener")
 		.loadBalancerId("loadBalancerId")
-		.protocol(Protocol.TCP.name())
+		.protocol(Protocol.TCP)
 		.port(12345)
-		.backendProtocol(BackendProtocol.TCP.name())
+		.backendProtocol(BackendProtocol.TCP)
 		.backendPort(54321)
-		.lbAlgorithm(LbAlgorithm.roundrobin.name())
+		.lbAlgorithm(LbAlgorithm.ROUND_ROBIN)
 		.build();
 ListenerCreate create = osclient.elasticLoadBalance().listeners().create(listener);
 ```
