@@ -46,7 +46,7 @@ public class ASPolicySample extends AbstractSample {
 		String groupId = "8a2462e3-6ae8-4d86-bd89-4497836fe022";
 		ScheduledPolicy scheduledPolicy = ScheduledPolicy.builder().launchTime("2017-07-24T01:21Z")
 				.recurrenceType(RecurrenceType.Daily.name()).endTime(getEndTime()).recurrenceValue(null).build();
-		ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder().policyName("policyTestName")
+		ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder().policyName("SDK-policyName")
 				.groupId(groupId).policyType(PolicyType.SCHEDULED.name()).scheduledPolicy(scheduledPolicy).build();
 		ScalingPolicyCreateUpdate create = osclient.autoScaling().policies().create(policy);
 		assertTrue(create != null && !Strings.isNullOrEmpty(create.getPolicyId()));
@@ -71,7 +71,7 @@ public class ASPolicySample extends AbstractSample {
 		List<? extends ScalingPolicy> all = osclient.autoScaling().policies().list(groupId);
 		logger.info("{}", all);
 
-		String policyName = "policyName";
+		String policyName = "SDK-policyName";
 		ScalingPolicyListOptions options = ScalingPolicyListOptions.create().policyName(policyName);
 		List<? extends ScalingPolicy> list = osclient.autoScaling().policies().list(groupId, options);
 		logger.info("{}", list);
@@ -91,11 +91,17 @@ public class ASPolicySample extends AbstractSample {
 
 	@Test
 	public void testOperateAutoScalingPolicy() {
-		String policyId = "451cc329-6def-4bfb-ae97-4eabbfa9391b";
+		String policyId = "73a0d241-ba0a-4273-a471-d80ed55db184";
 		ActionResponse resp = osclient.autoScaling().policies().resume(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 
 		ScalingPolicy policy = osclient.autoScaling().policies().get(policyId);
+		assertTrue("INSERVICE".equals(policy.getPolicyStatus()));
+		
+		resp = osclient.autoScaling().policies().execute(policyId);
+		assertTrue(resp.isSuccess(), resp.getFault());
+
+		policy = osclient.autoScaling().policies().get(policyId);
 		assertTrue("INSERVICE".equals(policy.getPolicyStatus()));
 		
 		resp = osclient.autoScaling().policies().pause(policyId);
@@ -107,7 +113,7 @@ public class ASPolicySample extends AbstractSample {
 
 	@Test
 	public void testDeleteAutoScalingPolicy() {
-		String policyId = "451cc329-6def-4bfb-ae97-4eabbfa9391b";
+		String policyId = "73a0d241-ba0a-4273-a471-d80ed55db184";
 		ActionResponse resp = osclient.autoScaling().policies().delete(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
