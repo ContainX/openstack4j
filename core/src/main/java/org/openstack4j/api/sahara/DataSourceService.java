@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * 	Copyright 2017 HuaWei and OTC                                 
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -20,6 +21,7 @@ import java.util.List;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.DataSource;
+import org.openstack4j.model.sahara.options.DataSourceListOptions;
 
 /**
  * Sahara Data Processing Operations
@@ -30,10 +32,10 @@ public interface DataSourceService extends RestService {
 
     /**
      * List all data sources
-     * 
+     * @param options filter options
      * @return list of data sources or empty
      */
-     List<? extends DataSource> list();
+     List<? extends DataSource> list(DataSourceListOptions options);
 
     /**
      * Get a data source by ID
@@ -49,6 +51,14 @@ public interface DataSourceService extends RestService {
      * @return the created data source
      */
      DataSource create(DataSource datasource);
+     
+     /**
+      * Update an exists data source
+      *
+      * @param datasource the data source to update
+      * @return the updated data source
+      */
+      DataSource update(DataSource datasource);
 
     /**
      * Delete the specified data source 

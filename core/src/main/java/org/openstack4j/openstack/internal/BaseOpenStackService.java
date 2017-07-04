@@ -116,12 +116,12 @@ public class BaseOpenStackService {
         return String.format(path, params);
     }
 
-    private <R> Invocation<R> builder(Class<R> returnType, String[] path, HttpMethod method) {
+    protected <R> Invocation<R> builder(Class<R> returnType, String[] path, HttpMethod method) {
         return builder(returnType, Joiner.on("").join(path), method);
     }
 
     @SuppressWarnings("rawtypes")
-    private <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+    protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
         OSClientSession ses = OSClientSession.getCurrent();
         if (ses == null) {
             throw new OS4JException(

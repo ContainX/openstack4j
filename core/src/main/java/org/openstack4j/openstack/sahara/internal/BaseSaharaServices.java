@@ -16,6 +16,7 @@
 package org.openstack4j.openstack.sahara.internal;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
@@ -26,9 +27,19 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
  * 
  */
 public class BaseSaharaServices extends BaseOpenStackService {
+	
+	public static String CONTENT_JSON = "application/json;charset=utf-8";
 
 	protected BaseSaharaServices() {
 		super(ServiceType.SAHARA);
+	}
+	
+	
+	/**
+	 * HuaWei MapReduceService(known as sahara) validate the content-type in every request
+	 */
+	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON);
 	}
 
 }

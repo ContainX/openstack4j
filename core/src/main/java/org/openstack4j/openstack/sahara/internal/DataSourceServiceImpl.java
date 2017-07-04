@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * 	Copyright 2016 HuaWei and OTC                                 
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -15,13 +16,14 @@
  *******************************************************************************/
 package org.openstack4j.openstack.sahara.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
 
 import org.openstack4j.api.sahara.DataSourceService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.DataSource;
+import org.openstack4j.model.sahara.options.DataSourceListOptions;
 import org.openstack4j.openstack.sahara.domain.SaharaDataSource;
 import org.openstack4j.openstack.sahara.domain.SaharaDataSource.DataSources;
 import org.openstack4j.openstack.sahara.domain.SaharaDataSourceUnwrapped;
@@ -38,8 +40,8 @@ public class DataSourceServiceImpl extends BaseSaharaServices implements DataSou
      * {@inheritDoc}
      */
     @Override
-    public List<? extends DataSource> list() {
-        return get(DataSources.class, uri("/data-sources")).execute().getList();
+    public List<? extends DataSource> list(DataSourceListOptions options) {
+        return get(DataSources.class, uri("/data-sources")).params(options.getOptions()).execute().getList();
     }
 
     /**
@@ -71,5 +73,18 @@ public class DataSourceServiceImpl extends BaseSaharaServices implements DataSou
         checkNotNull(datasourceId);
         return deleteWithResponse(uri("/data-sources/%s", datasourceId)).execute();
     }
+
+	/* 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public DataSource update(DataSource datasource) {
+        checkNotNull(datasource);
+        checkNotNull(datasource.getId(), "data-source `id` attribute is required");
+//        checkNotNull(datasource.getType(), "data-source `type` attribute is required");
+        checkNotNull(datasource.getURL(), "data-source `URL` attribute is required");
+        SaharaDataSourceUnwrapped unwrapped = new SaharaDataSourceUnwrapped(datasource);
+        return put(SaharaDataSource.class, uri("/data-sources/%s", datasource.getId())).entity(unwrapped).execute();
+	}
 
 }

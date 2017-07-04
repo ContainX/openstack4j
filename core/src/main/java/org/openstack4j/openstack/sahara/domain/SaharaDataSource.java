@@ -195,6 +195,16 @@ public class SaharaDataSource implements DataSource {
 		ConcreteDataSourceBuilder(SaharaDataSource m) {
 			this.m = m;
 		}
+		
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public DataSourceBuilder id(String dataSourceId) {
+			m.id = dataSourceId;
+			return this;
+		}
+
 
 		@Override
 		public DataSourceBuilder description(String description) {

@@ -26,6 +26,8 @@ import org.openstack4j.model.sahara.DataSource.DataSourceType;
  * @author siwat.pru@outlook.com
  */
 public interface DataSourceBuilder extends Builder<DataSourceBuilder, DataSource> {
+	
+    DataSourceBuilder id(String dataSourceId);
 
     /**
      * See {@link DataSource#getDescription()}
