@@ -19,57 +19,76 @@ import java.util.Date;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.common.base.Strings;
+
 public interface ScalingActivityLog extends ModelEntity {
+	public enum Status {
+		SUCCESS, FAIL, DOING;
+
+		@JsonCreator
+		public Status forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (Status status : Status.values()) {
+					if (status.name().equalsIgnoreCase(value)) {
+						return status;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	/**
 	 * @return status of activity log
 	 */
-	String getStatus();
-	
+	Status getStatus();
+
 	/**
 	 * @return start time of activity log
 	 */
 	Date getStartTime();
-	
+
 	/**
 	 * @return end time of activity log
 	 */
 	Date getEndTime();
-	
+
 	/**
 	 * @return activity log id
 	 */
 	String getId();
-	
+
 	/**
 	 * @return removed instance list
 	 */
 	String getInstanceRemovedList();
-	
+
 	/**
-	 * @return deleted instance list 
+	 * @return deleted instance list
 	 */
 	String getInstanceDeletedList();
-	
+
 	/**
 	 * @return added instance list
 	 */
 	String getInstanceAddedList();
-	
+
 	/**
 	 * @return scaling value
 	 */
 	String getScalingValue();
-	
+
 	/**
 	 * @return description of activity log
 	 */
 	String getDescription();
-	
+
 	/**
 	 * @return instance value
 	 */
 	Integer getInstanceValue();
-	
+
 	/**
 	 * @return desire value
 	 */

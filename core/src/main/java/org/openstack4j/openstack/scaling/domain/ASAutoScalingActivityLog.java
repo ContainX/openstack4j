@@ -40,7 +40,7 @@ public class ASAutoScalingActivityLog implements ScalingActivityLog {
 	private static final long serialVersionUID = 7380843131412884092L;
 
 	@JsonProperty
-	private String status;
+	private Status status;
 
 	@JsonProperty("start_time")
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
