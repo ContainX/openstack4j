@@ -17,22 +17,55 @@ package org.openstack4j.model.scaling;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.base.Strings;
+
 public interface ScalingQuota extends ModelEntity {
+
+	public enum Type {
+		SCALING_GROUP("scaling_Group"), SCALING_CONFIG("scaling_Config"), SCALING_POLICY(
+				"scaling_Policy"), SCALING_INSTANCE("scaling_Instance");
+
+		private String val;
+
+		private Type(String val) {
+			this.val = val;
+		}
+
+		@JsonValue
+		public String getVal() {
+			return this.val;
+		}
+
+		@JsonCreator
+		public Type forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (Type type : Type.values()) {
+					if (type.getVal().equalsIgnoreCase(value)) {
+						return type;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	/**
 	 * @return quota type
 	 */
-	String getType();
-	
+	Type getType();
+
 	/**
 	 * @return used number
 	 */
 	Integer getUsed();
-	
+
 	/**
 	 * @return sum of quota
 	 */
 	Integer getQuota();
-	
+
 	/**
 	 * @return max quota
 	 */

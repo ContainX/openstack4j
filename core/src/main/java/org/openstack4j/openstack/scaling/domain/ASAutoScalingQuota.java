@@ -39,7 +39,7 @@ public class ASAutoScalingQuota implements ScalingQuota {
 	private static final long serialVersionUID = -9212794561246868065L;
 
 	@JsonProperty
-	private String type;
+	private Type type;
 	
 	@JsonProperty
 	private Integer used;
