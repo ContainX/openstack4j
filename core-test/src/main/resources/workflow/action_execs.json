@@ -1,0 +1,44 @@
+{
+  "action_executions": [
+    {
+      "id": "294725fa-980d-436f-b882-a75cfeffa8c0",
+      "name": "std.noop",
+      "task_name": "task_1",
+      "description": "",
+      "created_at": "2016-08-17 10:34:00",
+      "updated_at": "2016-08-17 10:34:01",
+      "workflow_name": "parallel_join_2",
+      "task_execution_id": "c40c26cb-f695-4f20-8455-c57ca5c0770a",
+      "tags": null,
+      "input": {
+        "param1": "val1"
+      },
+      "output": {
+        "result": null
+      },
+      "state": "SUCCESS",
+      "state_info": null,
+      "accepted": true
+    },
+    {
+      "id": "294725fa-980d-436f-b882-a75cfeffa8c0",
+      "name": "std.noop",
+      "task_name": "task_2",
+      "description": "",
+      "created_at": "2016-08-17 10:34:00",
+      "updated_at": "2016-08-17 10:34:01",
+      "workflow_name": "parallel_join_2",
+      "task_execution_id": "c40c26cb-f695-4f20-8455-c57ca5c0770a",
+      "tags": null,
+      "input": {
+        "param1": "val1"
+      },
+      "output": {
+        "result": null
+      },
+      "state": "ERROR",
+      "state_info": "Some error info",
+      "accepted": true
+    }
+  ]
+}

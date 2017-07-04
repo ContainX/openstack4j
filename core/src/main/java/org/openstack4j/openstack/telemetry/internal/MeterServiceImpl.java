@@ -94,7 +94,6 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
         checkNotNull(criteria);
         Invocation<CeilometerStatistics[]> invocation = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName))
                                                            .param(period > 0, "period", period);
-
         if(criteria.getLimit() > 0){
            invocation.param(LIMIT, criteria.getLimit());
         }
@@ -105,7 +104,6 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
                 invocation.param(VALUE, c.getValue());
             }
         }
-
         CeilometerStatistics[] stats = invocation.execute();
         return wrapList(stats);
     }

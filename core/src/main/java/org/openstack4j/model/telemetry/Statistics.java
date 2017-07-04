@@ -74,5 +74,5 @@ public interface Statistics extends ModelEntity {
 	/**
    * @return The group-by of the data set
    */
-	String getGroupBy();
+   String getGroupBy();
 }

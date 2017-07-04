@@ -2,13 +2,13 @@ package org.openstack4j.model.telemetry;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.openstack.internal.Parser;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 
 /**
  * Query options used in retreiving Samples
@@ -39,7 +39,7 @@ public class SampleCriteria {
         }
     }
     
-    private List<NameOpValue> params = Lists.newArrayList();
+    private List<NameOpValue> params = new ArrayList<>();
     
     private int limit;
 
@@ -135,10 +135,11 @@ public class SampleCriteria {
         NameOpValue(String field, Oper operator, Comparable<?> value) {
             this.field = field;
             this.operator = operator;
-            if (value instanceof Date) 
-                this.value = Parser.toISO8601DateFormat(Date.class.cast(value));
-            else
-                this.value = String.valueOf(value);
+            if (value instanceof Date) {
+               this.value = Parser.toISO8601DateFormat(Date.class.cast(value));
+            } else {
+               this.value = String.valueOf(value);
+            }
         }
         
         public String getField() {

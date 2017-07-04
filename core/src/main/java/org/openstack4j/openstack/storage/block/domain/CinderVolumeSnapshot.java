@@ -27,8 +27,12 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 	private String id;
 	@JsonProperty("name")
 	private String name;
+	@JsonProperty("display_name")
+	private String displayName;
 	@JsonProperty("description")
 	private String description;
+	@JsonProperty("display_description")
+	private String displayDescription;
 	@JsonProperty("volume_id")
 	private String volumeId;
 	private Status status;
@@ -77,8 +81,24 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getDescription() {
 		return description;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDisplayDescription() {
+		return displayDescription;
 	}
 
 	/**

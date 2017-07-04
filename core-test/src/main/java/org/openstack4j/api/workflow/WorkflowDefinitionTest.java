@@ -12,10 +12,10 @@ import static org.testng.Assert.*;
 
 /**
  * Test cases for {@link WorkflowDefinitionService}.
- * 
+ *
  * @author Renat Akhmerov
  */
-@Test(suiteName="WorkflowDefinitions")
+@Test(suiteName = "WorkflowDefinitions")
 public class WorkflowDefinitionTest extends WorkflowBaseTest {
 
     private static final String JSON_WF_DEF = "/workflow/wf_def.json";
@@ -31,9 +31,9 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void listWorkflowDefinitions() throws Exception {
+    public void list() throws Exception {
         respondWith(JSON_WF_DEFS);
-        
+
         List<? extends WorkflowDefinition> wfDefs = service.list();
 
         assertEquals(wfDefs.size(), 2);
@@ -46,7 +46,7 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
         assertNotEmptyString(wfDef.getProjectId());
         assertEquals(wfDef.getName(), "parallel_join_2");
         assertNotNull(wfDef.getTags());
-        assertEquals(wfDef.getTags().get(0),"test");
+        assertEquals(wfDef.getTags().get(0), "test");
         assertEquals(wfDef.getTags().get(1), "private");
         assertNotNull(wfDef.getCreatedAt());
         assertNull(wfDef.getUpdatedAt());
@@ -73,7 +73,7 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void getWorkflowDefinition() throws Exception {
+    public void get() throws Exception {
         respondWith(JSON_WF_DEF);
 
         WorkflowDefinition wfDef = service.get("eecf6cad-65af-4a11-9e6f-692b23ffac08");
@@ -94,7 +94,7 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void createWorkflowDefinition() throws Exception {
+    public void create() throws Exception {
         respondWith(JSON_WF_DEF_CREATE);
 
         List<? extends WorkflowDefinition> wfDefs = service.create(
@@ -122,7 +122,7 @@ public class WorkflowDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void deleteWorkflowDefinition() throws Exception {
+    public void delete() throws Exception {
         respondWith(204); // No content.
 
         ActionResponse resp = service.delete("with_items_40");

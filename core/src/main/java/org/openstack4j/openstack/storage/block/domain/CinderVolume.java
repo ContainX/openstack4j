@@ -27,10 +27,14 @@ public class CinderVolume implements Volume {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	@JsonProperty("display_name")
+	@JsonProperty("name")
 	private String name;
-	@JsonProperty("display_description")
+	@JsonProperty("display_name")
+	private String displayName;
+	@JsonProperty("description")
 	private String description;
+	@JsonProperty("display_description")
+	private String displayDescription;
 	private Status status;
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonProperty("size")
@@ -100,8 +104,24 @@ public class CinderVolume implements Volume {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getDescription() {
 		return description;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDisplayDescription() {
+		return displayDescription;
 	}
 
 	/**
