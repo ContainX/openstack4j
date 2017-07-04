@@ -1,7 +1,7 @@
 package org.openstack4j.api.workflow;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.workflow.WorkflowEnvironment;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public interface WorkflowEnvironmentService extends RestService {
      * Delete workflow environment by its ID.
      *
      * @param id Workflow environment ID.
-     * @return HTTP response from the server.
+     * @return Action response from the server.
      */
-    HttpResponse delete(String id);
+    ActionResponse delete(String id);
 }

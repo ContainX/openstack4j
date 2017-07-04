@@ -12,10 +12,10 @@ import static org.testng.Assert.*;
 
 /**
  * Test cases for {@link ActionDefinitionService}.
- * 
+ *
  * @author Renat Akhmerov
  */
-@Test(suiteName="ActionDefinitions")
+@Test(suiteName = "ActionDefinitions")
 public class ActionDefinitionTest extends WorkflowBaseTest {
 
     private static final String JSON_ACTION_DEF = "/workflow/action_def.json";
@@ -31,9 +31,9 @@ public class ActionDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void listActionDefinitions() throws Exception {
+    public void list() throws Exception {
         respondWith(JSON_ACTION_DEFS);
-        
+
         List<? extends ActionDefinition> actionDefs = service.list();
 
         assertEquals(actionDefs.size(), 2);
@@ -71,7 +71,7 @@ public class ActionDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void getActionDefinition() throws Exception {
+    public void get() throws Exception {
         respondWith(JSON_ACTION_DEF);
 
         ActionDefinition actionDef = service.get("eecf6cad-65af-4a11-9e6f-692b23ffac08");
@@ -91,7 +91,7 @@ public class ActionDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void createActionDefinition() throws Exception {
+    public void create() throws Exception {
         respondWith(JSON_ACTION_DEF_CREATE);
 
         List<? extends ActionDefinition> actionDefs = service.create(
@@ -118,7 +118,7 @@ public class ActionDefinitionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void deleteActionDefinition() throws Exception {
+    public void delete() throws Exception {
         respondWith(204); // No content.
 
         ActionResponse resp = service.delete("concat");

@@ -11,10 +11,10 @@ import static org.testng.Assert.*;
 
 /**
  * Test cases for {@link TaskExecutionService}.
- * 
+ *
  * @author Renat Akhmerov
  */
-@Test(suiteName="TaskExecutions")
+@Test(suiteName = "TaskExecutions")
 public class TaskExecutionTest extends WorkflowBaseTest {
 
     private static final String JSON_TASK_EXEC = "/workflow/task_exec.json";
@@ -28,9 +28,9 @@ public class TaskExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void listTaskExecutions() throws Exception {
+    public void list() throws Exception {
         respondWith(JSON_TASK_EXECS);
-        
+
         List<? extends TaskExecution> taskExecs = service.list();
 
         assertEquals(taskExecs.size(), 2);
@@ -80,7 +80,7 @@ public class TaskExecutionTest extends WorkflowBaseTest {
     }
 
     @Test
-    public void getTaskExecution() throws Exception {
+    public void get() throws Exception {
         respondWith(JSON_TASK_EXEC);
 
         TaskExecution taskExec = service.get("6e7cce36-1ab2-45c8-baf5-88d5d726ea1d");
