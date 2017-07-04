@@ -17,6 +17,9 @@ package org.openstack4j.openstack.scaling.options;
 
 import java.util.Map;
 
+import org.openstack4j.model.scaling.ScalingGroupInstance.HealthStatus;
+import org.openstack4j.model.scaling.ScalingGroupInstance.LifeCycleState;
+
 import com.google.common.collect.Maps;
 
 public class ScalingGroupInstanceListOptions {
@@ -29,12 +32,12 @@ public class ScalingGroupInstanceListOptions {
 		return new ScalingGroupInstanceListOptions();
 	}
 
-	public ScalingGroupInstanceListOptions lifeCycleState(String state) {
-		return add("life_cycle_state", state);
+	public ScalingGroupInstanceListOptions lifeCycleState(LifeCycleState state) {
+		return add("life_cycle_state", state.name());
 	}
 
-	public ScalingGroupInstanceListOptions heathStatus(String status) {
-		return add("health_status", status);
+	public ScalingGroupInstanceListOptions heathStatus(HealthStatus status) {
+		return add("health_status", status.name());
 	}
 
 	public ScalingGroupInstanceListOptions startNumber(Integer number) {

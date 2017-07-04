@@ -22,6 +22,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroupInstance;
+import org.openstack4j.model.scaling.ScalingGroupInstance.HealthStatus;
+import org.openstack4j.model.scaling.ScalingGroupInstance.LifeCycleState;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
 import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
@@ -45,15 +47,16 @@ public class ASGroupInstanceSample extends AbstractSample {
 			}
 		}
 
-		ScalingGroupInstanceListOptions options = ScalingGroupInstanceListOptions.create().lifeCycleState("INSERVICE")
-				.heathStatus("NORMAL").limit(2);
+		ScalingGroupInstanceListOptions options = ScalingGroupInstanceListOptions.create()
+				.lifeCycleState(LifeCycleState.INSERVICE)
+				.heathStatus(HealthStatus.NORMAL).limit(2);
 		List<? extends ScalingGroupInstance> filterList = osclient.autoScaling().groupInstances().list(groupId,
 				options);
 		logger.info("{}", filterList);
 		if (filterList != null && !filterList.isEmpty()) {
 			for (ScalingGroupInstance instance : filterList) {
-				assertTrue("INSERVICE".equalsIgnoreCase(instance.getLifeCycleState()));
-				assertTrue("NORMAL".equalsIgnoreCase(instance.getHealthStatus()));
+				assertTrue(LifeCycleState.INSERVICE.equals(instance.getLifeCycleState()));
+				assertTrue(HealthStatus.NORMAL.equals(instance.getHealthStatus()));
 			}
 		}
 	}

@@ -54,10 +54,10 @@ public class ASAutoScalingGroupInstance implements ScalingGroupInstance {
 	private String groupName;
 
 	@JsonProperty("life_cycle_state")
-	private String lifeCycleState;
+	private LifeCycleState lifeCycleState;
 
 	@JsonProperty("health_status")
-	private String healthStatus;
+	private HealthStatus healthStatus;
 
 	@JsonProperty("scaling_configuration_name")
 	private String configName;

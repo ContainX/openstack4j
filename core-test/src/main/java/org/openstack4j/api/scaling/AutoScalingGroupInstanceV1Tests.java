@@ -23,6 +23,8 @@ import java.util.List;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroupInstance;
+import org.openstack4j.model.scaling.ScalingGroupInstance.HealthStatus;
+import org.openstack4j.model.scaling.ScalingGroupInstance.LifeCycleState;
 import org.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
 import org.testng.annotations.Test;
 
@@ -42,13 +44,13 @@ public class AutoScalingGroupInstanceV1Tests extends AbstractTest {
 		assertTrue(all != null && all.size() == 2);
 
 		respondWith(JSON_SCALING_GROUP_INSTANCE_LIST2);
-		ScalingGroupInstanceListOptions options = ScalingGroupInstanceListOptions.create().heathStatus("NORMAL")
-				.lifeCycleState("INSERVICE");
+		ScalingGroupInstanceListOptions options = ScalingGroupInstanceListOptions.create().heathStatus(HealthStatus.NORMAL)
+				.lifeCycleState(LifeCycleState.INSERVICE);
 		List<? extends ScalingGroupInstance> list = osv3().autoScaling().groupInstances().list(groupId, options);
 		assertTrue(list != null && list.size() == 2);
 		for (ScalingGroupInstance instance : list) {
-			assertTrue("INSERVICE".equalsIgnoreCase(instance.getLifeCycleState()));
-			assertTrue("NORMAL".equalsIgnoreCase(instance.getHealthStatus()));
+			assertTrue(LifeCycleState.INSERVICE.equals(instance.getLifeCycleState()));
+			assertTrue(HealthStatus.NORMAL.equals(instance.getHealthStatus()));
 		}
 	}
 

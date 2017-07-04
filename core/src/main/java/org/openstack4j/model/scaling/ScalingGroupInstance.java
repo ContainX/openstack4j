@@ -19,47 +19,82 @@ import java.util.Date;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.common.base.Strings;
+
 public interface ScalingGroupInstance extends ModelEntity {
+	public enum LifeCycleState {
+		INSERVICE, PENDING, REMOVING;
+
+		@JsonCreator
+		public LifeCycleState forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (LifeCycleState state : LifeCycleState.values()) {
+					if (state.name().equalsIgnoreCase(value)) {
+						return state;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
+	public enum HealthStatus {
+		INITIALIZING, NORMAL, ERROR;
+
+		@JsonCreator
+		public HealthStatus forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (HealthStatus status : HealthStatus.values()) {
+					if (status.name().equalsIgnoreCase(value)) {
+						return status;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	/**
 	 * @return instance id
 	 */
 	String getInstanceId();
-	
+
 	/**
 	 * @return instance name
 	 */
 	String getInstanceName();
-	
+
 	/**
 	 * @return scaling group id
 	 */
 	String getGroupId();
-	
+
 	/**
 	 * @return scaling group name
 	 */
 	String getGroupName();
-	
+
 	/**
 	 * @return life cycle state
 	 */
-	String getLifeCycleState();
-	
+	LifeCycleState getLifeCycleState();
+
 	/**
 	 * @return health status
 	 */
-	String getHealthStatus();
-	
+	HealthStatus getHealthStatus();
+
 	/**
 	 * @return configuration name
 	 */
 	String getConfigName();
-	
+
 	/**
 	 * @return configuration id
 	 */
 	String getConfigId();
-	
+
 	/**
 	 * @return create time of instance
 	 */
