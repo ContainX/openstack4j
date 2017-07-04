@@ -39,11 +39,13 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
 	private static final String TACKER_ERROR = "TackerError";
 	/** For HuaWei CloudEye Error Message Propagation.. */
 	private static final String CLOUDEYE_ERROR = "details";
+	/** For HuaWei SAHARA Error Message Propagation.. */
+	private static final String SAHARA_ERROR = "error_message";
 
-	private static final String[] KEY_CODE_LIST = { "code", };
+	private static final String[] KEY_CODE_LIST = { "code", "errorCode"};
 	private static final String[] KEY_MESSAGE_LIST = { 
 		KEY_MESSAGE, NEUTRON_ERROR, COMPUTE_FAULT, TACKER_ERROR,
-		CLOUDEYE_ERROR 
+		CLOUDEYE_ERROR, SAHARA_ERROR 
 	};
 	private HttpResponse response;
 
@@ -63,19 +65,6 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
 	public ActionResponse apply(Map<String, Object> map) {
 		if (map == null || map.isEmpty())
 			return null;
-
-		/***
-		 * 
-		   VolumeBackup: { 
-			    "error": { 
-			        "message": "XXXX", 
-			        "code": "XXX" 
-			    } 
-			}
-			
-			CloudEye: {
-			}
-		 */
 
 		for (String key : map.keySet()) {
 			if (Map.class.isAssignableFrom(map.get(key).getClass())) {
@@ -104,32 +93,22 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
 			}
 		}
 
-		// Try with Sahara fault response which is just a plain Map
-		// { "error_name": "error name",
-		// "error_message": "error message",
-		// "error_code": XXX }
-		if (map.containsKey("error_message")) {
-			String msg = String.valueOf(map.get("error_message"));
-			return ActionResponse.actionFailed(msg, response.getStatus());
+
+		// detect HuaWei OTC error code
+		String errorCode = "";
+		for (String codeKey : KEY_CODE_LIST) {
+			if (map.containsKey(codeKey)) {
+				errorCode = "[" + String.valueOf(map.get(codeKey)) + "] ";
+				break;
+			}
 		}
 
-		// Neutron error handling when just a message is present
-		if (map.containsKey(NEUTRON_ERROR)) {
-			String msg = String.valueOf(map.get(NEUTRON_ERROR));
-			return ActionResponse.actionFailed(msg, response.getStatus());
-		}
-
-		// Sahara :: {"errorCode":"12000002","message":"type only support hdfs or obs"}
-		// huawei OTC non-standard error response handle
-		StringBuffer message = new StringBuffer();
-		if (map.containsKey("errorCode")) {
-			String errorCode = String.valueOf(map.get("errorCode"));
-			message.append("[").append(errorCode).append("] ");
-		}
-
-		if (map.containsKey("message")) {
-			String msg = String.valueOf(map.get("message"));
-			message.append(msg);
+		String message = "";
+		for (String messageKey : KEY_MESSAGE_LIST) {
+			if (map.containsKey(messageKey)) {
+				message = errorCode + String.valueOf(map.get(messageKey));
+				break;
+			}
 		}
 
 		if (!Strings.isNullOrEmpty(message.toString())) {

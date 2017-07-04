@@ -15,7 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.loadbalance.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import org.openstack4j.api.loadbalance.ELBCertificateService;
 import org.openstack4j.model.common.ActionResponse;
