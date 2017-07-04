@@ -18,6 +18,8 @@ package org.openstack4j.model.scaling;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.scaling.ScalingGroup.HealthPeriodicAuditMethod;
+import org.openstack4j.model.scaling.ScalingGroup.InstanceTerminatePolicy;
 import org.openstack4j.openstack.common.IdResourceEntity;
 
 public interface ScalingGroupUpdate extends ModelEntity {
@@ -83,7 +85,7 @@ public interface ScalingGroupUpdate extends ModelEntity {
 	 * 
 	 * @return health periodic audit method
 	 */
-	String getHealthPeriodicAuditMethod();
+	HealthPeriodicAuditMethod getHealthPeriodicAuditMethod();
 	
 	/**
 	 * 
@@ -95,7 +97,7 @@ public interface ScalingGroupUpdate extends ModelEntity {
 	 * 
 	 * @return instance terminate policy
 	 */
-	String getInstanceTerminatePolicy();
+	InstanceTerminatePolicy getInstanceTerminatePolicy();
 	
 	/**
 	 * 

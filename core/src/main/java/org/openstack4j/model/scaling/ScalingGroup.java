@@ -21,7 +21,42 @@ import java.util.List;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.IdResourceEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.common.base.Strings;
+
 public interface ScalingGroup extends ModelEntity {
+
+	public enum HealthPeriodicAuditMethod {
+		ELB_AUDIT, NOVA_AUDIT;
+
+		@JsonCreator
+		public HealthPeriodicAuditMethod forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (HealthPeriodicAuditMethod method : HealthPeriodicAuditMethod.values()) {
+					if (method.name().equalsIgnoreCase(value)) {
+						return method;
+					}
+				}
+			}
+			return null;
+		}
+	}
+	
+	public enum InstanceTerminatePolicy {
+		OLD_CONFIG_OLD_INSTANCE, OLD_CONFIG_NEW_INSTANCE, OLD_INSTANCE, NEW_INSTANCE;
+
+		@JsonCreator
+		public InstanceTerminatePolicy forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (InstanceTerminatePolicy policy : InstanceTerminatePolicy.values()) {
+					if (policy.name().equalsIgnoreCase(value)) {
+						return policy;
+					}
+				}
+			}
+			return null;
+		}
+	}
 
 	/**
 	 * @return the id for the scaling group
@@ -133,7 +168,7 @@ public interface ScalingGroup extends ModelEntity {
 	 * 
 	 * @return health periodic audit method
 	 */
-	String getHealthPeriodicAuditMethod();
+	HealthPeriodicAuditMethod getHealthPeriodicAuditMethod();
 	
 	/**
 	 * 
@@ -145,7 +180,7 @@ public interface ScalingGroup extends ModelEntity {
 	 * 
 	 * @return instance terminate policy
 	 */
-	String getInstanceTerminatePolicy();
+	InstanceTerminatePolicy getInstanceTerminatePolicy();
 	
 	/**
 	 * 

@@ -17,6 +17,8 @@ package org.openstack4j.openstack.scaling.domain;
 
 import java.util.List;
 
+import org.openstack4j.model.scaling.ScalingGroup.HealthPeriodicAuditMethod;
+import org.openstack4j.model.scaling.ScalingGroup.InstanceTerminatePolicy;
 import org.openstack4j.model.scaling.ScalingGroupCreate;
 import org.openstack4j.openstack.common.IdResourceEntity;
 
@@ -74,13 +76,13 @@ public class ASAutoScalingGroupCreate implements ScalingGroupCreate {
 	String vpcId;
 
 	@JsonProperty("health_periodic_audit_method")
-	String healthPeriodicAuditMethod;
+	HealthPeriodicAuditMethod healthPeriodicAuditMethod;
 
 	@JsonProperty("health_periodic_audit_time")
 	Integer healthPeriodicAuditTime;
 
 	@JsonProperty("instance_terminate_policy")
-	String instanceTerminatePolicy;
+	InstanceTerminatePolicy instanceTerminatePolicy;
 
 	@JsonProperty("notifications")
 	List<String> notifications;

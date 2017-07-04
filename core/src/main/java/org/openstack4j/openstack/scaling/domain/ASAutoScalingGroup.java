@@ -104,13 +104,13 @@ public class ASAutoScalingGroup implements ScalingGroup {
 	Boolean isScaling;
 
 	@JsonProperty("health_periodic_audit_method")
-	String healthPeriodicAuditMethod;
+	HealthPeriodicAuditMethod healthPeriodicAuditMethod;
 
 	@JsonProperty("health_periodic_audit_time")
 	Integer healthPeriodicAuditTime;
 
 	@JsonProperty("instance_terminate_policy")
-	String instanceTerminatePolicy;
+	InstanceTerminatePolicy instanceTerminatePolicy;
 
 	@JsonProperty("notifications")
 	List<String> notifications;

@@ -25,6 +25,8 @@ import java.util.List;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingGroup;
+import org.openstack4j.model.scaling.ScalingGroup.HealthPeriodicAuditMethod;
+import org.openstack4j.model.scaling.ScalingGroup.InstanceTerminatePolicy;
 import org.openstack4j.model.scaling.ScalingGroupCreate;
 import org.openstack4j.model.scaling.ScalingGroupUpdate;
 import org.openstack4j.openstack.common.IdResourceEntity;
@@ -54,6 +56,8 @@ public class AutoScalingGroupV1Tests extends AbstractTest {
 				.vpcId("31d158b8-e7d7-4b4a-b2a7-a5240296b267")
 				.networks(Lists.newArrayList(network))
 				.securityGroups(Lists.newArrayList(securityGroup))
+				.healthPeriodicAuditMethod(HealthPeriodicAuditMethod.ELB_AUDIT)
+				.instanceTerminatePolicy(InstanceTerminatePolicy.NEW_INSTANCE)
 				.build();
 
 		ScalingGroupCreate result = osv3().autoScaling().groups().create(group);
