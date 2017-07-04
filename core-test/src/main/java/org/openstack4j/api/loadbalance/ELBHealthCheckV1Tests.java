@@ -22,8 +22,8 @@ import java.io.IOException;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.loadbalance.HealthCheck;
+import org.openstack4j.model.loadbalance.HealthCheck.HealthCheckProtocol;
 import org.openstack4j.model.loadbalance.HealthCheckCreate;
-import org.openstack4j.openstack.loadbalance.domain.ELBHealthCheck.HealthCheckProtocol;
 import org.openstack4j.openstack.loadbalance.domain.ELBHealthCheckCreate;
 import org.openstack4j.openstack.loadbalance.domain.ELBHealthCheckUpdate;
 import org.testng.annotations.Test;
@@ -57,14 +57,14 @@ public class ELBHealthCheckV1Tests extends AbstractTest {
 		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
 		HealthCheck healthCheck = osv3().loadBalancer().healthchecks().get(healthCheckId);
 
-		String before = healthCheck.getHealthCheckProtocol();
-		String after = HealthCheckProtocol.HTTP.name().equalsIgnoreCase(before) ? HealthCheckProtocol.TCP.name()
-				: HealthCheckProtocol.HTTP.name();
+		HealthCheckProtocol before = healthCheck.getHealthCheckProtocol();
+		HealthCheckProtocol after = HealthCheckProtocol.HTTP.equals(before) ? HealthCheckProtocol.TCP
+				: HealthCheckProtocol.HTTP;
 		ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).toBuilder()
 				.healthCheckProtocol(after).healthCheckUri("/test").build();
 
 		HealthCheck afterUpdate = osv3().loadBalancer().healthchecks().update(healthCheckId, update);
-		assertTrue(afterUpdate.getHealthCheckProtocol().equalsIgnoreCase(after));
+		assertTrue(afterUpdate.getHealthCheckProtocol().equals(after));
 	}
 
 	public void testGetHealthCheck() throws IOException {

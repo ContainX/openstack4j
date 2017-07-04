@@ -19,11 +19,11 @@ import static org.testng.Assert.assertTrue;
 
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.loadbalance.HealthCheck;
+import org.openstack4j.model.loadbalance.HealthCheck.HealthCheckProtocol;
 import org.openstack4j.model.loadbalance.HealthCheckCreate;
-import org.openstack4j.openstack.loadbalance.domain.ELBHealthCheck.HealthCheckProtocol;
-import org.openstack4j.sample.AbstractSample;
 import org.openstack4j.openstack.loadbalance.domain.ELBHealthCheckCreate;
 import org.openstack4j.openstack.loadbalance.domain.ELBHealthCheckUpdate;
+import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
@@ -55,15 +55,15 @@ public class ELBHealthCheckSample extends AbstractSample {
 		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
 		HealthCheck healthCheck = osclient.loadBalancer().healthchecks().get(healthCheckId);
 
-		String before = healthCheck.getHealthCheckProtocol();
-		String after = HealthCheckProtocol.HTTP.name().equalsIgnoreCase(before) ? HealthCheckProtocol.TCP.name()
-				: HealthCheckProtocol.HTTP.name();
+		HealthCheckProtocol before = healthCheck.getHealthCheckProtocol();
+		HealthCheckProtocol after = HealthCheckProtocol.HTTP.equals(before) ? HealthCheckProtocol.TCP
+				: HealthCheckProtocol.HTTP;
 		ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).toBuilder()
 				.healthCheckProtocol(after).healthCheckUri("/test").build();
 
 		HealthCheck afterUpdate = osclient.loadBalancer().healthchecks().update(healthCheckId, update);
 		logger.info("update, before:{}, after:{}, {}", before, after, afterUpdate);
-		assertTrue(afterUpdate.getHealthCheckProtocol().equalsIgnoreCase(after));
+		assertTrue(afterUpdate.getHealthCheckProtocol().equals(after));
 	}
 
 	@Test

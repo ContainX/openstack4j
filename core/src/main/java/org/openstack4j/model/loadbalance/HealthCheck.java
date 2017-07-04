@@ -19,7 +19,26 @@ import java.util.Date;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.common.base.Strings;
+
 public interface HealthCheck extends ModelEntity {
+
+	public enum HealthCheckProtocol {
+		HTTP, TCP;
+
+		@JsonCreator
+		public HealthCheckProtocol forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (HealthCheckProtocol protocol : HealthCheckProtocol.values()) {
+					if (protocol.name().equalsIgnoreCase(value)) {
+						return protocol;
+					}
+				}
+			}
+			return null;
+		}
+	}
 
 	/**
 	 * @return health check id
@@ -34,7 +53,7 @@ public interface HealthCheck extends ModelEntity {
 	/**
 	 * @return health check protocol
 	 */
-	String getHealthCheckProtocol();
+	HealthCheckProtocol getHealthCheckProtocol();
 
 	/**
 	 * @return health check uri

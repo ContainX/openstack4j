@@ -16,13 +16,14 @@
 package org.openstack4j.model.loadbalance;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.loadbalance.HealthCheck.HealthCheckProtocol;
 
 public interface HealthCheckUpdate extends ModelEntity {
 	
 	/**
 	 * @return health check protocol
 	 */
-	String getHealthCheckProtocol();
+	HealthCheckProtocol getHealthCheckProtocol();
 
 	/**
 	 * @return health check uri

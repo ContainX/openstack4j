@@ -44,7 +44,7 @@ public class ELBHealthCheck implements HealthCheck {
 	private String listenerId;
 	
 	@JsonProperty("healthcheck_protocol")
-	private String healthCheckProtocol;
+	private HealthCheckProtocol healthCheckProtocol;
 	
 	@JsonProperty("healthcheck_uri")
 	private String healthCheckUri;
@@ -71,10 +71,4 @@ public class ELBHealthCheck implements HealthCheck {
 	@JsonProperty("update_time")
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
 	private Date updateTime;
-	
-	public enum HealthCheckProtocol {
-		HTTP,
-		TCP,
-		;
-	}
 }

@@ -16,6 +16,7 @@
 package org.openstack4j.openstack.loadbalance.domain;
 
 import org.openstack4j.model.loadbalance.HealthCheck;
+import org.openstack4j.model.loadbalance.HealthCheck.HealthCheckProtocol;
 import org.openstack4j.model.loadbalance.HealthCheckUpdate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,7 +37,7 @@ public class ELBHealthCheckUpdate implements HealthCheckUpdate {
 	private static final long serialVersionUID = 3164457385221233948L;
 
 	@JsonProperty("healthcheck_protocol")
-	private String healthCheckProtocol;
+	private HealthCheckProtocol healthCheckProtocol;
 	
 	@JsonProperty("healthcheck_uri")
 	private String healthCheckUri;

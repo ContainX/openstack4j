@@ -111,7 +111,7 @@ ActionResponse resp = osclient.elasticLoadBalance().healthchecks().delete("healt
 HealthCheck healthCheck = osclient.elasticLoadBalance().healthchecks().get("healthCheckId");
 
 ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).toBuilder()
-		.healthCheckProtocol(HealthCheckProtocol.HTTP.name()).build();
+		.healthCheckProtocol(HealthCheckProtocol.HTTP).build();
 
 HealthCheck afterUpdate = osclient.elasticLoadBalance().healthchecks().update("healthCheckId", update);
 ```
