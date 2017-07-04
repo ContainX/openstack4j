@@ -20,10 +20,10 @@ import static org.testng.Assert.assertTrue;
 import java.util.List;
 
 import org.openstack4j.model.loadbalance.LoadBalancer;
+import org.openstack4j.model.loadbalance.LoadBalancer.Type;
 import org.openstack4j.openstack.loadbalance.domain.AsyncJob;
 import org.openstack4j.openstack.loadbalance.domain.ELBJob;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancerCreate;
-import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancerCreate.Type;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancerUpdate;
 import org.openstack4j.openstack.loadbalance.options.ELBLoadBalancerListOptions;
 import org.openstack4j.sample.AbstractSample;
@@ -43,7 +43,7 @@ public class ELBLoadBalancerSample extends AbstractSample {
 				.name("SDK-elb-4-test")
 				.vpcId(vpcId)
 				.bandwidth(1)
-				.type(Type.External.name()).adminStateUp(1).build();
+				.type(Type.EXTERNAL).adminStateUp(1).build();
 		ELBJob job = osclient.loadBalancer().loadBalancers().create(loadBalancer);
 		logger.info("create load balancer: {}", job);
 		assertTrue(!Strings.isNullOrEmpty(job.getJobId()));

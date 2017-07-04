@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.loadbalance.domain;
 
+import org.openstack4j.model.loadbalance.LoadBalancer.Type;
 import org.openstack4j.model.loadbalance.LoadBalancerCreate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,7 +48,7 @@ public class ELBLoadBalancerCreate implements LoadBalancerCreate {
 	private Integer bandwidth;
 
 	@JsonProperty
-	private String type;
+	private Type type;
 
 	@JsonProperty("admin_state_up")
 	private Integer adminStateUp;
@@ -59,10 +60,10 @@ public class ELBLoadBalancerCreate implements LoadBalancerCreate {
 	private String azId;
 
 	@JsonProperty("charge_mode")
-	private String chargeMode;
+	private ChargeMode chargeMode;
 
 	@JsonProperty("eip_type")
-	private String eipType;
+	private EipType eipType;
 
 	@JsonProperty("security_group_id")
 	private String securityGroupId;
@@ -72,10 +73,4 @@ public class ELBLoadBalancerCreate implements LoadBalancerCreate {
 
 	@JsonProperty
 	private String tenantId;
-	
-	public enum Type {
-		Internal,
-		External,
-		;
-	}
 }

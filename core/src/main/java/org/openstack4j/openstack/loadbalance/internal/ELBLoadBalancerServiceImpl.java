@@ -21,12 +21,12 @@ import java.util.List;
 
 import org.openstack4j.api.loadbalance.ELBLoadBalancerService;
 import org.openstack4j.model.loadbalance.LoadBalancer;
+import org.openstack4j.model.loadbalance.LoadBalancer.Type;
 import org.openstack4j.model.loadbalance.LoadBalancerCreate;
 import org.openstack4j.model.loadbalance.LoadBalancerUpdate;
 import org.openstack4j.openstack.loadbalance.domain.ELBJob;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancer;
 import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancer.ELBLoadBalancers;
-import org.openstack4j.openstack.loadbalance.domain.ELBLoadBalancerCreate.Type;
 import org.openstack4j.openstack.loadbalance.options.ELBLoadBalancerListOptions;
 
 import com.google.common.base.Strings;
@@ -40,14 +40,14 @@ public class ELBLoadBalancerServiceImpl extends BaseELBServices
 		checkArgument(loadBalancer != null, "loadBalancer is required");
 		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getName()), "name is required");
 		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getVpcId()), "vpcId is required");
-		checkArgument(!Strings.isNullOrEmpty(loadBalancer.getType()), "type is required");
+		checkArgument(loadBalancer.getType() != null, "type is required");
 		checkArgument(loadBalancer.getAdminStateUp() != null, "adminStateUp is required");
-		if(Type.Internal.name().equals(loadBalancer.getType())) {
+		if(Type.INTERNAL.name().equals(loadBalancer.getType())) {
 			checkArgument(!Strings.isNullOrEmpty(loadBalancer.getVipSubnetId()), "vipSubnetId is required when type is Internal");
 			checkArgument(!Strings.isNullOrEmpty(loadBalancer.getAzId()), "azId is required when type is Internal");
 			checkArgument(!Strings.isNullOrEmpty(loadBalancer.getTenantId()), "tenantId is required when type is Internal");
 		} 
-		if(Type.External.name().equals(loadBalancer.getType())) {
+		if(Type.EXTERNAL.name().equals(loadBalancer.getType())) {
 			checkArgument(loadBalancer.getBandwidth() != null, "bandwidth is required when type is External");
 		}
 

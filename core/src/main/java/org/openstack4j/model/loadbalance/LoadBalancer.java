@@ -19,7 +19,54 @@ import java.util.Date;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.base.Strings;
+
 public interface LoadBalancer extends ModelEntity {
+
+	public enum Status {
+		ACTIVE, PENDING_CREATE, ERROR;
+
+		@JsonCreator
+		public Status forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (Status status : Status.values()) {
+					if (status.name().equalsIgnoreCase(value)) {
+						return status;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
+	public enum Type {
+		INTERNAL("Internal"), EXTERNAL("External");
+
+		private String val;
+
+		private Type(String val) {
+			this.val = val;
+		}
+
+		@JsonValue
+		public String getVal() {
+			return this.val;
+		}
+
+		@JsonCreator
+		public Type forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (Type type : Type.values()) {
+					if (type.getVal().equalsIgnoreCase(value)) {
+						return type;
+					}
+				}
+			}
+			return null;
+		}
+	}
 
 	/**
 	 * @return load balancer id
@@ -49,38 +96,38 @@ public interface LoadBalancer extends ModelEntity {
 	/**
 	 * @return load balancer type
 	 */
-	String getType();
-	
+	Type getType();
+
 	/**
 	 * @return administration state of load balancer
 	 */
 	Integer getAdminStateUp();
-	
+
 	/**
 	 * @return vip subnet id of load balancer
 	 */
 	String getVipSubnetId();
-	
+
 	/**
 	 * @return security group id
 	 */
 	String getSecurityGroupId();
-	
+
 	/**
 	 * @return vip address
 	 */
 	String getVipAddress();
-	
+
 	/**
 	 * @return load balancer status
 	 */
-	String getStatus();
-	
+	Status getStatus();
+
 	/**
 	 * @return creation time of load balancer
 	 */
 	Date getCreateTime();
-	
+
 	/**
 	 * @return update time of load balancer
 	 */

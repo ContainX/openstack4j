@@ -16,8 +16,67 @@
 package org.openstack4j.model.loadbalance;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.loadbalance.LoadBalancer.Type;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.base.Strings;
 
 public interface LoadBalancerCreate extends ModelEntity {
+
+	public enum ChargeMode {
+		BANDWIDTH("bandwidth"), TRAFFIC("traffic");
+
+		private String val;
+
+		private ChargeMode(String val) {
+			this.val = val;
+		}
+
+		@JsonValue
+		public String getVal() {
+			return this.val;
+		}
+
+		@JsonCreator
+		public ChargeMode forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (ChargeMode mode : ChargeMode.values()) {
+					if (mode.getVal().equalsIgnoreCase(value)) {
+						return mode;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
+	public enum EipType {
+		TELCOM_5("5_telcom"), UNION_5("5_union"), BGP_5("5_bgp");
+
+		private String val;
+
+		private EipType(String val) {
+			this.val = val;
+		}
+
+		@JsonValue
+		public String getVal() {
+			return this.val;
+		}
+
+		@JsonCreator
+		public EipType forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (EipType type : EipType.values()) {
+					if (type.getVal().equalsIgnoreCase(value)) {
+						return type;
+					}
+				}
+			}
+			return null;
+		}
+	}
 
 	/**
 	 * @return name of load balancer
@@ -42,43 +101,43 @@ public interface LoadBalancerCreate extends ModelEntity {
 	/**
 	 * @return load balancer type
 	 */
-	String getType();
-	
+	Type getType();
+
 	/**
 	 * @return administration state of load balancer
 	 */
 	Integer getAdminStateUp();
-	
+
 	/**
 	 * @return vip subnet id of load balancer
 	 */
 	String getVipSubnetId();
-	
+
 	/**
 	 * @return available zone id
 	 */
 	String getAzId();
-	
+
 	/**
 	 * @return charge mode
 	 */
-	String getChargeMode();
-	
+	ChargeMode getChargeMode();
+
 	/**
 	 * @return eip type
 	 */
-	String getEipType();
-	
+	EipType getEipType();
+
 	/**
 	 * @return security group id
 	 */
 	String getSecurityGroupId();
-	
+
 	/**
 	 * @return vip address
 	 */
 	String getVipAddress();
-	
+
 	/**
 	 * @return tenant id
 	 */

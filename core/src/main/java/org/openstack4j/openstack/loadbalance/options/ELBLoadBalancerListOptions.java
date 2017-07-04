@@ -17,6 +17,9 @@ package org.openstack4j.openstack.loadbalance.options;
 
 import java.util.Map;
 
+import org.openstack4j.model.loadbalance.LoadBalancer.Status;
+import org.openstack4j.model.loadbalance.LoadBalancer.Type;
+
 import com.google.common.collect.Maps;
 
 public class ELBLoadBalancerListOptions {
@@ -36,8 +39,8 @@ public class ELBLoadBalancerListOptions {
 		return add("id", id);
 	}
 	
-	public ELBLoadBalancerListOptions status(String status) {
-		return add("status", status);
+	public ELBLoadBalancerListOptions status(Status status) {
+		return add("status", status.name());
 	}
 	
 	public ELBLoadBalancerListOptions bandwidth(Integer bandwidth) {
@@ -56,8 +59,8 @@ public class ELBLoadBalancerListOptions {
 		return add("vip_subnet_id", vipSubnetId);
 	}
 	
-	public ELBLoadBalancerListOptions type(String type) {
-		return add("type", type);
+	public ELBLoadBalancerListOptions type(Type type) {
+		return add("type", type.getVal());
 	}
 
 	public ELBLoadBalancerListOptions name(String name) {

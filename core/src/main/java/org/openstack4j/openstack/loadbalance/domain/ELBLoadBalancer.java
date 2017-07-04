@@ -56,7 +56,7 @@ public class ELBLoadBalancer implements LoadBalancer {
 	private Integer bandwidth;
 
 	@JsonProperty
-	private String type;
+	private Type type;
 
 	@JsonProperty("admin_state_up")
 	private Integer adminStateUp;
@@ -71,7 +71,7 @@ public class ELBLoadBalancer implements LoadBalancer {
 	private String vipAddress;
 	
 	@JsonProperty
-	private String status;
+	private Status status;
 	
 	@JsonProperty("create_time")
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDHMS)
