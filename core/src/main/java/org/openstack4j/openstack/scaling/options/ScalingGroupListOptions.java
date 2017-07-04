@@ -17,6 +17,8 @@ package org.openstack4j.openstack.scaling.options;
 
 import java.util.Map;
 
+import org.openstack4j.model.scaling.ScalingGroup.ScalingGroupStatus;
+
 import com.google.common.collect.Maps;
 
 public class ScalingGroupListOptions {
@@ -38,8 +40,8 @@ public class ScalingGroupListOptions {
 		return add("scaling_configuration_id", configId);
 	}
 
-	public ScalingGroupListOptions groupStatus(String groupStatus) {
-		return add("scaling_group_status", groupStatus);
+	public ScalingGroupListOptions groupStatus(ScalingGroupStatus groupStatus) {
+		return add("scaling_group_status", groupStatus.name());
 	}
 
 	public ScalingGroupListOptions startNumber(Integer startNumber) {

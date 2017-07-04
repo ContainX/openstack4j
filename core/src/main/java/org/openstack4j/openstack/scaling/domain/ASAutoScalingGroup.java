@@ -55,7 +55,7 @@ public class ASAutoScalingGroup implements ScalingGroup {
 	String groupName;
 	
 	@JsonProperty("scaling_group_status")
-	String groupStatus;
+	ScalingGroupStatus groupStatus;
 
 	@JsonProperty("scaling_configuration_id")
 	String configId;
