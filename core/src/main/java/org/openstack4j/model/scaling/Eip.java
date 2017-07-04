@@ -17,7 +17,10 @@ package org.openstack4j.model.scaling;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,9 +37,36 @@ public class Eip implements ModelEntity {
 
 	private static final long serialVersionUID = -1069053200085079737L;
 
+	public enum IpType {
+		TELCOM5("5_telcom");
+
+		private String val;
+
+		private IpType(String val) {
+			this.val = val;
+		}
+
+		@JsonValue
+		public String getVal() {
+			return this.val;
+		}
+
+		@JsonCreator
+		public IpType forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (IpType type : IpType.values()) {
+					if (type.getVal().equalsIgnoreCase(value)) {
+						return type;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	@JsonProperty("ip_type")
-	private String ipType;
-	
+	private IpType ipType;
+
 	@JsonProperty
 	private Bandwidth bandwidth;
 }

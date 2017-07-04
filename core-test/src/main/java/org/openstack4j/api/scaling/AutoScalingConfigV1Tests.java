@@ -28,6 +28,8 @@ import org.openstack4j.model.scaling.Disk;
 import org.openstack4j.model.scaling.InstanceConfig;
 import org.openstack4j.model.scaling.ScalingConfig;
 import org.openstack4j.model.scaling.ScalingConfigCreate;
+import org.openstack4j.model.scaling.Disk.DiskType;
+import org.openstack4j.model.scaling.Disk.VolumeType;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingConfigCreate;
 import org.openstack4j.openstack.scaling.options.ScalingConfigListOptions;
 import org.testng.annotations.Test;
@@ -47,7 +49,7 @@ public class AutoScalingConfigV1Tests extends AbstractTest {
 		Map<String, String> metaData = Maps.newHashMap();
 		metaData.put("key1", "val1");
 		metaData.put("key2", "val2");
-		Disk disk = Disk.builder().size(40).volumeType("SATA").diskType("SYS").build();
+		Disk disk = Disk.builder().size(40).volumeType(VolumeType.SATA).diskType(DiskType.SYS).build();
 		InstanceConfig instanceConfig = InstanceConfig.builder().flavorRef("computev1-1")
 				.imageRef("cb6ad86a-f69e-4a36-b65b-1038b19e15d3").disks(Lists.newArrayList(disk))
 				.keyName("KeyPair-28ice").metadata(metaData).build();

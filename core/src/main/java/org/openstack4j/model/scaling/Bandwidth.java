@@ -17,7 +17,10 @@ package org.openstack4j.model.scaling;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,13 +36,56 @@ import lombok.ToString;
 public class Bandwidth implements ModelEntity {
 
 	private static final long serialVersionUID = -1154665269978660693L;
-	
+
+	public enum ShareType {
+		PER;
+
+		@JsonCreator
+		public ShareType forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (ShareType type : ShareType.values()) {
+					if (type.name().equalsIgnoreCase(value)) {
+						return type;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
+	public enum ChargingMode {
+		TRAFFIC("traffic");
+
+		private String val;
+
+		private ChargingMode(String val) {
+			this.val = val;
+		}
+
+		@JsonValue
+		public String getVal() {
+			return this.val;
+		}
+
+		@JsonCreator
+		public ChargingMode forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (ChargingMode mode : ChargingMode.values()) {
+					if (mode.getVal().equalsIgnoreCase(value)) {
+						return mode;
+					}
+				}
+			}
+			return null;
+		}
+	}
+
 	@JsonProperty
 	private String size;
-	
+
 	@JsonProperty("share_type")
-	private String shareType;
-	
+	private ShareType shareType;
+
 	@JsonProperty("charging_mode")
-	private String chargingMode;
+	private ChargingMode chargingMode;
 }

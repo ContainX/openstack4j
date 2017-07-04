@@ -69,12 +69,11 @@ public class AutoScalingConfigServiceImpl extends BaseAutoScalingServices implem
 		if (publicIp != null) {
 			Eip eip = publicIp.getEip();
 			checkArgument(eip != null, "eip is required");
-			checkArgument(!Strings.isNullOrEmpty(eip.getIpType()), "ipType is required");
+			checkArgument(eip.getIpType() != null, "ipType is required");
 			checkArgument(eip.getBandwidth() != null, "bandwidth is required");
 			checkArgument(!Strings.isNullOrEmpty(eip.getBandwidth().getSize()), "bandwidth size is required");
-			checkArgument(!Strings.isNullOrEmpty(eip.getBandwidth().getShareType()), "bandwidth shareType is required");
-			checkArgument(!Strings.isNullOrEmpty(eip.getBandwidth().getChargingMode()),
-					"bandwidth chargingMode is required");
+			checkArgument(eip.getBandwidth().getShareType() != null, "bandwidth shareType is required");
+			checkArgument(eip.getBandwidth().getChargingMode() != null, "bandwidth chargingMode is required");
 		}
 	}
 
@@ -130,8 +129,8 @@ public class AutoScalingConfigServiceImpl extends BaseAutoScalingServices implem
 		if (disks != null) {
 			for (Disk disk : disks) {
 				checkArgument(disk.getSize() != null, "diskSize is required");
-				checkArgument(!Strings.isNullOrEmpty(disk.getVolumeType()), "diskVolumeType is required");
-				checkArgument(!Strings.isNullOrEmpty(disk.getDiskType()), "diskType is required");
+				checkArgument(disk.getVolumeType() != null, "diskVolumeType is required");
+				checkArgument(disk.getDiskType() != null, "diskType is required");
 			}
 		}
 	}
