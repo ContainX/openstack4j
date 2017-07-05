@@ -17,10 +17,7 @@
  *******************************************************************************/
 package org.openstack4j.sample.scaling;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +26,15 @@ import java.util.Map;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.Keypair;
 import org.openstack4j.model.scaling.Disk;
+import org.openstack4j.model.scaling.Disk.DiskType;
+import org.openstack4j.model.scaling.Disk.VolumeType;
 import org.openstack4j.model.scaling.InstanceConfig;
 import org.openstack4j.model.scaling.ScalingConfig;
 import org.openstack4j.model.scaling.ScalingConfigCreate;
 import org.openstack4j.model.scaling.ScalingGroup;
+import org.openstack4j.model.scaling.ScalingGroup.ScalingGroupStatus;
 import org.openstack4j.model.scaling.ScalingGroupCreate;
 import org.openstack4j.model.scaling.ScalingGroupUpdate;
-import org.openstack4j.model.scaling.Disk.DiskType;
-import org.openstack4j.model.scaling.Disk.VolumeType;
 import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingConfigCreate;
 import org.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
@@ -120,21 +118,19 @@ public class ASGroupSample extends AbstractSample {
 
 	@Test
 	public void testOperateAutoScalingGroup() {
-		String resumeGroupStatus = "INSERVICE";
-		String pauseGroupStatus = "PAUSED";
 
 		String groupId = createScalingGroup();
 		ActionResponse resp = osclient.autoScaling().groups().resume(groupId);
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
 
 		ScalingGroup group = osclient.autoScaling().groups().get(groupId);
-		Assert.assertEquals(group.getGroupStatus(), resumeGroupStatus);
+		Assert.assertEquals(group.getGroupStatus(), ScalingGroupStatus.INSERVICE);
 
 		resp = osclient.autoScaling().groups().pause(groupId);
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
 
 		group = osclient.autoScaling().groups().get(groupId);
-		Assert.assertEquals(group.getGroupStatus(), pauseGroupStatus);
+		Assert.assertEquals(group.getGroupStatus(), ScalingGroupStatus.PAUSED);
 
 		resp = osclient.autoScaling().groups().delete(groupId);
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
