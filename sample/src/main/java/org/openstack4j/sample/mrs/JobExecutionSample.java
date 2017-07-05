@@ -61,7 +61,7 @@ public class JobExecutionSample extends AbstractSample {
 		Assert.assertTrue(execution.isPublic());
 	}
 
-	@Test(dependsOnMethods = { "testUpdateJobExecution" })
+	@Test(dependsOnMethods = { "testGetJobExecution" })
 	public void testListJobExecution() {
 		JobExecutionListOptions options = JobExecutionListOptions.create().asc("created_at").limit(10);
 		List<? extends JobExecution> list = osclient.sahara().jobExecutions().list(options);
