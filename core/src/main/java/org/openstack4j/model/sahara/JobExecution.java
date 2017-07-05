@@ -16,13 +16,14 @@
 package org.openstack4j.model.sahara;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.JobExecutionBuilder;
 
 /**
- * An Openstack Sahara Job Execution
+ * An Openstack Sahara Job Execution (X)
  * 
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
@@ -129,6 +130,13 @@ public interface JobExecution extends ModelEntity, Buildable<JobExecutionBuilder
      * @return the oozie workflow id
      */
     String getEngineJobId();
+    
+    /**
+     * OTC new property: Data source URL list of a job
+     * 
+     * @return A HashMap which key is data-source id value is data source url
+     */
+    HashMap<String, String> getDataSourceUrls();
     
     
 }

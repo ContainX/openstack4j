@@ -25,6 +25,14 @@ import org.openstack4j.model.sahara.JobBinary;
  * @author siwat.pru@outlook.com
  */
 public interface JobBinaryBuilder extends Builder<JobBinaryBuilder, JobBinary> {
+	
+    /**
+     * See {@link JobBinary#getId()}
+     * 
+     * @param id the id of the job binary
+     * @return JobBinaryBuilder
+     */
+    JobBinaryBuilder id(String id);
 
     /**
      * See {@link JobBinary#getDescription()}

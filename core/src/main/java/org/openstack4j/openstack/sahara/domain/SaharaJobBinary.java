@@ -65,6 +65,7 @@ public class SaharaJobBinary implements JobBinary {
 	Boolean isProtected;
 	@JsonProperty("is_public")
 	Boolean isPublic;
+	
 
     /**
      * {@inheritDoc}
@@ -193,6 +194,12 @@ public class SaharaJobBinary implements JobBinary {
         @Override
         public JobBinaryBuilder from(JobBinary in) {
             m = (SaharaJobBinary) in;
+            return this;
+        }
+        
+        @Override
+        public JobBinaryBuilder id(String id) {
+            m.id = id;
             return this;
         }
 

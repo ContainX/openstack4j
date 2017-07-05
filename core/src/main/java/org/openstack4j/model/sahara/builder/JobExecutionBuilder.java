@@ -16,6 +16,8 @@
  *******************************************************************************/
 package org.openstack4j.model.sahara.builder;
 
+import java.util.HashMap;
+
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.sahara.JobConfig;
 import org.openstack4j.model.sahara.JobExecution;
@@ -92,5 +94,14 @@ public interface JobExecutionBuilder extends Builder<JobExecutionBuilder, JobExe
      * @return JobExecutionBuilder
      */
     JobExecutionBuilder engineJobId(String engineJobId);
+    
+    
+    /**
+     * See {@link JobExecution#getDataSourceUrls()}
+     * 
+     * @param dataSourceUrls data source URL mapping
+     * @return JobExecutionBuilder
+     */
+    JobExecutionBuilder dataSourceUrls(HashMap<String, String> dataSourceUrls);
 
 }

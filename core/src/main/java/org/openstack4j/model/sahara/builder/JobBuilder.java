@@ -18,6 +18,7 @@ package org.openstack4j.model.sahara.builder;
 
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.sahara.Job;
+import org.openstack4j.model.sahara.Job.JobType;
 
 /**
  * Builder interface used for {@link Job} object.
@@ -26,6 +27,14 @@ import org.openstack4j.model.sahara.Job;
  * @author siwat.pru@outlook.com
  */
 public interface JobBuilder extends Builder<JobBuilder, Job> {
+	
+    /**
+     * See {@link Job#getId()}
+     * 
+     * @param id the id of the job
+     * @return JobBuilder
+     */
+    JobBuilder id(String id);
 
     /**
      * See {@link Job#getDescription()}
@@ -41,7 +50,7 @@ public interface JobBuilder extends Builder<JobBuilder, Job> {
      * @param type the type of the job
      * @return JobBuilder
      */
-    JobBuilder type(String type);
+    JobBuilder type(JobType type);
 
     /**
      * See {@link Job#getName()}

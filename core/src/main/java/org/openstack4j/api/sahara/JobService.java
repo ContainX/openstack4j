@@ -21,6 +21,7 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.Job;
 import org.openstack4j.model.sahara.JobConfigHint;
+import org.openstack4j.model.sahara.options.JobListOptions;
 
 /**
  * Sahara Data Processing Operations
@@ -30,11 +31,11 @@ import org.openstack4j.model.sahara.JobConfigHint;
 public interface JobService extends RestService {
 
     /**
-     * List all jobs
+     * List jobs with filter options
      * 
      * @return list of jobs or empty
      */
-     List<? extends Job> list();
+     List<? extends Job> list(JobListOptions options);
 
     /**
      * Get a job by ID
@@ -46,10 +47,19 @@ public interface JobService extends RestService {
     /**
      * Create a new job
      *
-     * @param jobBinary the job to create
+     * @param job the job to create
      * @return the created job
      */
-     Job create(Job jobBinary);
+     Job create(Job job);
+     
+     
+     /**
+      * Update an exists job
+      *
+      * @param job the job to update
+      * @return the updated job
+      */
+      Job update(Job job);
 
     /**
      * Delete the specified job

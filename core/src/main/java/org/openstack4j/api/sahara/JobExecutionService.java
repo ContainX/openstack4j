@@ -20,6 +20,7 @@ import java.util.List;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.JobExecution;
+import org.openstack4j.model.sahara.options.JobExecutionListOptions;
 
 /**
  * Sahara Data Processing Operations
@@ -37,11 +38,11 @@ public interface JobExecutionService extends RestService {
     JobExecution create(JobExecution jobExecution);
 
     /**
-     * List all job executions
+     * List job executions with filter options
      * 
      * @return list of job executions or empty
      */
-    List<? extends JobExecution> list();
+    List<? extends JobExecution> list(JobExecutionListOptions options);
 
     /**
      * Get a job execution by ID

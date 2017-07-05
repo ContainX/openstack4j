@@ -39,131 +39,131 @@ import lombok.ToString;
  */
 @ToString
 @JsonRootName("job")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaJob implements Job {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @JsonProperty("description")
-    private String description;
-    @JsonProperty("url")
-    private String url;
-    @JsonProperty("tenant_id")
-    private String tenantId;
-    @JsonProperty("created_at")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date createdAt;
-    @JsonProperty("updated_at")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date updatedAt;
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("type")
-    private String type;
-    @JsonProperty("mains")
-    private List<SaharaJobBinary> mains;
-    @JsonProperty("libs")
-    private List<SaharaJobBinary> libs;
+	@JsonProperty("description")
+	private String description;
+	@JsonProperty("url")
+	private String url;
+	@JsonProperty("tenant_id")
+	private String tenantId;
+	@JsonProperty("created_at")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	private Date createdAt;
+	@JsonProperty("updated_at")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+	private Date updatedAt;
+	@JsonProperty("id")
+	private String id;
+	@JsonProperty("name")
+	private String name;
+	@JsonProperty("type")
+	private JobType type;
+	@JsonProperty("mains")
+	private List<SaharaJobBinary> mains;
+	@JsonProperty("libs")
+	private List<SaharaJobBinary> libs;
 
-    private List<String> mainBinaryIds;
-    private List<String> libBinaryIds;
-    
+	private List<String> mainBinaryIds;
+	private List<String> libBinaryIds;
+
 	@JsonProperty("is_protected")
 	Boolean isProtected;
 	@JsonProperty("is_public")
 	Boolean isPublic;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDescription() {
+		return description;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTenantId() {
-        return tenantId;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getTenantId() {
+		return tenantId;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getId() {
-        return id;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getType() {
-        return type;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JobType getType() {
+		return type;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends JobBinary> getFullMains() {
-        return mains;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends JobBinary> getFullMains() {
+		return mains;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends JobBinary> getFullLibs() {
-        return libs;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends JobBinary> getFullLibs() {
+		return libs;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<String> getMains() {
-        return mainBinaryIds;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<String> getMains() {
+		return mainBinaryIds;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<String> getLibs() {
-        return libBinaryIds;
-    }
-    
-    /*
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<String> getLibs() {
+		return libBinaryIds;
+	}
+
+	/*
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -179,96 +179,100 @@ public class SaharaJob implements Job {
 		return isPublic;
 	}
 
+	public static class Jobs extends ListResult<SaharaJob> {
 
-    public static class Jobs extends ListResult<SaharaJob> {
+		private static final long serialVersionUID = 1L;
 
-        private static final long serialVersionUID = 1L;
+		@JsonProperty("jobs")
+		private List<SaharaJob> jobs;
 
-        @JsonProperty("jobs")
-        private List<SaharaJob> jobs;
+		@Override
+		protected List<SaharaJob> value() {
+			return jobs;
+		}
+	}
 
-        @Override
-        protected List<SaharaJob> value() {
-            return jobs;
-        }
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JobBuilder toBuilder() {
+		return new ConcreteJobBuilder(this);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JobBuilder toBuilder() {
-        return new ConcreteJobBuilder(this);
-    }
+	/**
+	 * @return the job Builder
+	 */
+	public static JobBuilder builder() {
+		return new ConcreteJobBuilder();
+	}
 
-    /**
-     * @return the job Builder
-     */
-    public static JobBuilder builder() {
-        return new ConcreteJobBuilder();
-    }
+	public static class ConcreteJobBuilder implements JobBuilder {
 
-    public static class ConcreteJobBuilder implements JobBuilder {
+		SaharaJob m;
 
-        SaharaJob m;
+		ConcreteJobBuilder() {
+			this(new SaharaJob());
+		}
 
-        ConcreteJobBuilder() {
-            this(new SaharaJob());
-        }
+		ConcreteJobBuilder(SaharaJob m) {
+			this.m = m;
+		}
 
-        ConcreteJobBuilder(SaharaJob m) {
-            this.m = m;
-        }
+		@Override
+		public Job build() {
+			return m;
+		}
 
-        @Override
-        public Job build() {
-            return m;
-        }
+		@Override
+		public JobBuilder from(Job in) {
+			m = (SaharaJob) in;
+			return this;
+		}
 
-        @Override
-        public JobBuilder from(Job in) {
-            m = (SaharaJob) in;
-            return this;
-        }
+		@Override
+		public JobBuilder id(String id) {
+			m.id = id;
+			return this;
+		}
 
-        @Override
-        public JobBuilder description(String description) {
-            m.description = description;
-            return this;
-        }
+		@Override
+		public JobBuilder description(String description) {
+			m.description = description;
+			return this;
+		}
 
-        @Override
-        public JobBuilder type(String type) {
-            m.type = type;
-            return this;
-        }
+		@Override
+		public JobBuilder type(JobType type) {
+			m.type = type;
+			return this;
+		}
 
-        @Override
-        public JobBuilder name(String name) {
-            m.name = name;
-            return this;
-        }
-        
+		@Override
+		public JobBuilder name(String name) {
+			m.name = name;
+			return this;
+		}
 
-        @Override
-        @JsonProperty("mains")
-        public JobBuilder setMain(String jobBinaryId) {
-            if (m.mainBinaryIds == null)
-                m.mainBinaryIds = Lists.newArrayList();
-            m.mainBinaryIds.add(jobBinaryId);
-            return this;
-        }
+		@Override
+		@JsonProperty("mains")
+		public JobBuilder setMain(String jobBinaryId) {
+			if (m.mainBinaryIds == null)
+				m.mainBinaryIds = Lists.newArrayList();
+			m.mainBinaryIds.add(jobBinaryId);
+			return this;
+		}
 
-        @Override
-        @JsonProperty("libs")
-        public JobBuilder addLibs(String jobBinaryId) {
-            if (m.libBinaryIds == null)
-                m.libBinaryIds = Lists.newArrayList();
-            m.libBinaryIds.add(jobBinaryId);
-            return this;
-        }
-        
-		/* 
+		@Override
+		@JsonProperty("libs")
+		public JobBuilder addLibs(String jobBinaryId) {
+			if (m.libBinaryIds == null)
+				m.libBinaryIds = Lists.newArrayList();
+			m.libBinaryIds.add(jobBinaryId);
+			return this;
+		}
+
+		/*
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -277,7 +281,7 @@ public class SaharaJob implements Job {
 			return this;
 		}
 
-		/* 
+		/*
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -286,6 +290,6 @@ public class SaharaJob implements Job {
 			return this;
 		}
 
-    }
+	}
 
 }

@@ -22,81 +22,100 @@ import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.JobBuilder;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.common.base.Strings;
+
 /**
  * An Openstack Sahara Job
  * 
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */
-public interface Job extends ModelEntity, Buildable<JobBuilder>   {
+public interface Job extends ModelEntity, Buildable<JobBuilder> {
 
-    /**
-     * @return the description of the job
-     */
-    String getDescription();
+	public enum JobType {
+		
+		MapReduce, Spark, Hive, Hql, DistCp, SparkScript, SparkSql,;
 
-    /**
-     * @return the tenant id of the job
-     */
-    String getTenantId();
+		@JsonCreator
+		public JobType forValue(String value) {
+			if (!Strings.isNullOrEmpty(value)) {
+				for (JobType type : JobType.values()) {
+					if (type.name().equalsIgnoreCase(value)) {
+						return type;
+					}
+				}
+			}
+			return null;
+		}
+	}
 
-    /**
-     * @return the created date of the job
-     */
-    Date getCreatedAt();
+	/**
+	 * @return the description of the job
+	 */
+	String getDescription();
 
-    /**
-     * @return the updated date of the job
-     */
-    Date getUpdatedAt();
+	/**
+	 * @return the tenant id of the job
+	 */
+	String getTenantId();
 
-    /**
-     * @return the identifier of the job
-     */
-    String getId();
+	/**
+	 * @return the created date of the job
+	 */
+	Date getCreatedAt();
 
-    /**
-     * @return the name of the job
-     */
-    String getName();
+	/**
+	 * @return the updated date of the job
+	 */
+	Date getUpdatedAt();
 
-    /**
-     * @return the type of the job
-     */
-    String getType();
-    
-    /**
-     * @return mains
-     */
-    List<? extends JobBinary> getFullMains();
+	/**
+	 * @return the identifier of the job
+	 */
+	String getId();
 
-    /**
-     * @return libs
-     */
-    List<? extends JobBinary> getFullLibs();
+	/**
+	 * @return the name of the job
+	 */
+	String getName();
 
-    /**
-     * @return main ids
-     */
-    List<String> getMains();
+	/**
+	 * @return the type of the job
+	 */
+	JobType getType();
 
-    /**
-     * @return lib ids
-     */
-    List<String> getLibs();
-    
-    
-    /**
-     * reserved attribute, not support for now
-     * 
-     * @return is job protected
-     */
-    Boolean isProtected();
-    
-    /**
-     * reserved attribute, not support for now
-     * 
-     * @return is job public
-     */
-    Boolean isPublic();
+	/**
+	 * @return mains
+	 */
+	List<? extends JobBinary> getFullMains();
+
+	/**
+	 * @return libs
+	 */
+	List<? extends JobBinary> getFullLibs();
+
+	/**
+	 * @return main ids
+	 */
+	List<String> getMains();
+
+	/**
+	 * @return lib ids
+	 */
+	List<String> getLibs();
+
+	/**
+	 * reserved attribute, not support for now
+	 * 
+	 * @return is job protected
+	 */
+	Boolean isProtected();
+
+	/**
+	 * reserved attribute, not support for now
+	 * 
+	 * @return is job public
+	 */
+	Boolean isPublic();
 }

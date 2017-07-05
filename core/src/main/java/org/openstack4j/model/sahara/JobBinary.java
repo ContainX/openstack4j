@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * 	Copyright 2017 HuaWei and OTC tld                        
  * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
@@ -22,7 +23,7 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.JobBinaryBuilder;
 
 /**
- * An Openstack Sahara Job Binary
+ * An Openstack Sahara Job Binary (X)
  * 
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com

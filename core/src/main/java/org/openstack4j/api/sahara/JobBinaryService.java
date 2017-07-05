@@ -19,9 +19,10 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.sahara.JobBinary;
+import org.openstack4j.model.sahara.options.JobBinaryListOptions;
 
 /**
  * Sahara Data Processing Operations
@@ -30,42 +31,50 @@ import org.openstack4j.model.sahara.JobBinary;
  */
 public interface JobBinaryService extends RestService {
 
-    /**
-     * List all job binaries
-     * 
-     * @return list of job binaries or empty
-     */
-     List<? extends JobBinary> list();
+	/**
+	 * List job binaries by filter options
+	 * 
+	 * @return list of job binaries or empty
+	 */
+	List<? extends JobBinary> list(JobBinaryListOptions options);
 
-    /**
-     * Get a job binary by ID
-     * 
-     * @param JobBinaryId the job binary identifier
-     * @return the job binary or null if not found
-     */
-     JobBinary get(String JobBinaryId);
+	/**
+	 * Get a job binary by ID
+	 * 
+	 * @param JobBinaryId the job binary identifier
+	 * @return the job binary or null if not found
+	 */
+	JobBinary get(String JobBinaryId);
 
-    /**
-     * Create a new job binary
-     *
-     * @param jobBinary the job binary to create
-     * @return the created job binary
-     */
-     JobBinary create(JobBinary jobBinary);
+	/**
+	 * Create a new job binary
+	 *
+	 * @param jobBinary the job binary to create
+	 * @return the created job binary
+	 */
+	JobBinary create(JobBinary jobBinary);
 
-    /**
-     * Delete the specified job binary
-     * 
-     * @param JobBinaryId the job binary identifier
-     * @return the action response
-     */
-     ActionResponse delete(String JobBinaryId);
+	/**
+	 * Update an exists job binary
+	 *
+	 * @param jobBinary the job binary to update
+	 * @return the updated job binary
+	 */
+	JobBinary update(JobBinary jobBinary);
 
-     /**
-      * Retrieves data of specified job binary object
-      * 
-      * @param JobBinaryId the job binary identifier
-      * @return Job Binary data
-      */
-     Payload<InputStream> getData(String JobBinaryId);
+	/**
+	 * Delete the specified job binary
+	 * 
+	 * @param JobBinaryId the job binary identifier
+	 * @return the action response
+	 */
+	ActionResponse delete(String JobBinaryId);
+
+	/**
+	 * Retrieves data of specified job binary object
+	 * 
+	 * @param JobBinaryId the job binary identifier
+	 * @return Job Binary data
+	 */
+	Payload<InputStream> getData(String JobBinaryId);
 }

@@ -16,6 +16,7 @@
 package org.openstack4j.openstack.sahara.domain;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.openstack4j.model.sahara.JobConfig;
@@ -80,6 +81,9 @@ public class SaharaJobExecution implements JobExecution {
 	private SaharaJobExecutionInfo info;
 
 	private String jobIdForExecute;
+	
+	@JsonProperty("data_source_urls")
+	HashMap<String, String> dataSourceUrls;
 
 	@JsonProperty("engine_job_id")
 	String engineJobId;
@@ -88,8 +92,6 @@ public class SaharaJobExecution implements JobExecution {
 	@JsonProperty("is_public")
 	Boolean isPublic;
 
-	// engine_job_id
-	// data_source_urls
 
 	/**
 	 * {@inheritDoc}
@@ -219,6 +221,14 @@ public class SaharaJobExecution implements JobExecution {
 		return info;
 	}
 	
+	/* 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HashMap<String, String> getDataSourceUrls() {
+		return dataSourceUrls;
+	}
+	
 	public String getEngineJobId() {
 		return engineJobId;
 	}
@@ -346,5 +356,15 @@ public class SaharaJobExecution implements JobExecution {
 			m.engineJobId = engineJobId;
 			return this;
 		}
+
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public JobExecutionBuilder dataSourceUrls(HashMap<String, String> dataSourceUrls) {
+			m.dataSourceUrls = dataSourceUrls;
+			return this;
+		}
 	}
+
 }

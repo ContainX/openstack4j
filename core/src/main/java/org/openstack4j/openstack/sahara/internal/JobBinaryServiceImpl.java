@@ -15,18 +15,20 @@
  *******************************************************************************/
 package org.openstack4j.openstack.sahara.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.sahara.JobBinaryService;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.Payloads;
-import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.JobBinary;
+import org.openstack4j.model.sahara.options.JobBinaryListOptions;
 import org.openstack4j.openstack.sahara.domain.SaharaJobBinary;
 import org.openstack4j.openstack.sahara.domain.SaharaJobBinary.JobBinaries;
 import org.openstack4j.openstack.sahara.domain.SaharaJobBinaryUnwrapped;
@@ -40,59 +42,70 @@ import org.openstack4j.openstack.sahara.domain.SaharaJobBinaryUnwrapped;
 
 public class JobBinaryServiceImpl extends BaseSaharaServices implements JobBinaryService {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends JobBinary> list() {
-        return get(JobBinaries.class, uri("/job-binaries")).execute().getList();
-    }
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends JobBinary> list(JobBinaryListOptions options) {
+		Map<String, Object> params = (options == null) ? null : options.getOptions();
+		return get(JobBinaries.class, uri("/job-binaries")).params(params).execute().getList();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JobBinary get(String JobBinaryId) {
-        checkNotNull(JobBinaryId);
-        return get(SaharaJobBinary.class, uri("/job-binaries/%s", JobBinaryId)).execute();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JobBinary get(String JobBinaryId) {
+		checkNotNull(JobBinaryId);
+		return get(SaharaJobBinary.class, uri("/job-binaries/%s", JobBinaryId)).execute();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JobBinary create(JobBinary jobBinary) {
-        checkNotNull(jobBinary);
-        SaharaJobBinaryUnwrapped unwrapped = new SaharaJobBinaryUnwrapped(jobBinary);
-        return post(SaharaJobBinary.class, uri("/job-binaries"))
-                     .entity(unwrapped)  // setup request
-                     .execute();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JobBinary create(JobBinary jobBinary) {
+		checkNotNull(jobBinary);
+		SaharaJobBinaryUnwrapped unwrapped = new SaharaJobBinaryUnwrapped(jobBinary);
+		return post(SaharaJobBinary.class, uri("/job-binaries")).entity(unwrapped) // setup request
+				.execute();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse delete(String JobBinaryId) {
-        checkNotNull(JobBinaryId);
-        return deleteWithResponse(uri("/job-binaries/%s", JobBinaryId)).execute();
-    }
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JobBinary update(JobBinary jobBinary) {
+		checkNotNull(jobBinary);
+		checkNotNull(jobBinary.getId(), "job-binary `id` attribute is required");
+		checkNotNull(jobBinary.getURL(), "job-binary `URL` attribute is required");
+		checkNotNull(jobBinary.getName(), "job-binary `name` attribute is required");
+		SaharaJobBinaryUnwrapped unwrapped = new SaharaJobBinaryUnwrapped(jobBinary);
+		return put(SaharaJobBinary.class, uri("/job-binaries/%s", jobBinary.getId())).entity(unwrapped).execute();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Payload<InputStream> getData(String JobBinaryId) {
-        HttpResponse response = get(Void.class, uri("/job-binaries/%s/data", JobBinaryId)).executeWithResponse();
-        try
-        {
-            if (response.getStatus() < 400)
-                return Payloads.create(response.getInputStream());
-            return null;
-        }
-        finally {
-            HttpEntityHandler.closeQuietly(response);
-        }
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse delete(String JobBinaryId) {
+		checkNotNull(JobBinaryId);
+		return deleteWithResponse(uri("/job-binaries/%s", JobBinaryId)).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Payload<InputStream> getData(String JobBinaryId) {
+		HttpResponse response = get(Void.class, uri("/job-binaries/%s/data", JobBinaryId)).executeWithResponse();
+		try {
+			if (response.getStatus() < 400)
+				return Payloads.create(response.getInputStream());
+			return null;
+		} finally {
+			HttpEntityHandler.closeQuietly(response);
+		}
+	}
 
 }
