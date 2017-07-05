@@ -15,7 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.sample.scaling;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.scaling.ScalingPolicy;
+import org.openstack4j.model.scaling.ScalingPolicy.PolicyStatus;
 import org.openstack4j.model.scaling.ScalingPolicyCreateUpdate;
 import org.openstack4j.model.scaling.ScalingPolicyCreateUpdate.ScalingPolicyType;
 import org.openstack4j.model.scaling.ScheduledPolicy;
@@ -51,7 +52,7 @@ public class ASPolicySample extends AbstractSample {
 		ScalingPolicyCreateUpdate create = osclient.autoScaling().policies().create(policy);
 		assertTrue(create != null && !Strings.isNullOrEmpty(create.getPolicyId()));
 	}
-
+	
 	@Test
 	public void testUpdateAutoScalingPolicy() {
 		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
@@ -96,19 +97,19 @@ public class ASPolicySample extends AbstractSample {
 		assertTrue(resp.isSuccess(), resp.getFault());
 
 		ScalingPolicy policy = osclient.autoScaling().policies().get(policyId);
-		assertTrue("INSERVICE".equals(policy.getPolicyStatus()));
+		assertTrue(PolicyStatus.INSERVICE.equals(policy.getPolicyStatus()));
 		
 		resp = osclient.autoScaling().policies().execute(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 
 		policy = osclient.autoScaling().policies().get(policyId);
-		assertTrue("INSERVICE".equals(policy.getPolicyStatus()));
+		assertTrue(PolicyStatus.INSERVICE.equals(policy.getPolicyStatus()));
 		
 		resp = osclient.autoScaling().policies().pause(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 
 		policy = osclient.autoScaling().policies().get(policyId);
-		assertTrue("PAUSED".equals(policy.getPolicyStatus()));
+		assertTrue(PolicyStatus.PAUSED.equals(policy.getPolicyStatus()));
 	}
 
 	@Test
