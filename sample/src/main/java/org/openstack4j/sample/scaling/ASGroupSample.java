@@ -233,4 +233,31 @@ public class ASGroupSample extends AbstractSample {
 		assertNotNull(result.getConfigId());
 		return result.getConfigId();
 	}
+	
+	@Test
+	public void create() {
+		//add by cym
+		IdResourceEntity network = new IdResourceEntity();
+		network.setId("814fcf7b-2a78-4a6f-b68e-0646a6384bf1");
+
+		IdResourceEntity securityGroup = new IdResourceEntity();
+		securityGroup.setId("6c22a6c0-b5d2-4a84-ac56-51090dcc33be");
+
+		String availabilityZone = "az1.dc1";
+
+		ASAutoScalingGroupCreate group = ASAutoScalingGroupCreate.builder().groupName("test-4-bill")
+				.vpcId("eb83b023-3ffe-4ec7-b868-f2818fdc401f").networks(Lists.newArrayList(network))
+				.securityGroups(Lists.newArrayList(securityGroup))
+				.maxInstanceNumber(2).minInstanceNumber(1).desireInstanceNumber(1).coolDownTime(800)
+				.lbListenerId("47c134f775834f9991fbe5e8c41b296b")
+				.lbListenerId("e68450203ddf49be96232e9ec8951049")
+				.availabilityZones(Lists.newArrayList(availabilityZone))
+		//		.healthPeriodicAuditMethod("NOVA_AUDIT")
+				.healthPeriodicAuditTime(15)
+		//		.instanceTerminatePolicy("OLD_INSTANCE")
+				.deletePublicip(true)
+				.build();
+		ScalingGroupCreate result = osclient.autoScaling().groups().create(group);
+		Assert.assertNotNull(result.getGroupId());
+	}
 }
