@@ -63,7 +63,7 @@ public class ASAutoScalingGroupCreate implements ScalingGroupCreate {
 	@JsonProperty("lb_listener_id")
 	String lbListenerId;
 
-	@JsonProperty("availability_zones")
+	@JsonProperty("available_zones")
 	List<String> availabilityZones;
 
 	@JsonProperty("networks")
