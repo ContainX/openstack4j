@@ -60,10 +60,18 @@ public class JobExecutionSample extends AbstractSample {
 		Assert.assertTrue(execution.isProtected());
 		Assert.assertTrue(execution.isPublic());
 	}
+	
+	@Test
+	public void testCancelJobExecution() {
+		JobExecution execution = osclient.sahara().jobExecutions().cancel(createdJobExecution.getId());
+		Assert.assertEquals(execution.getId(), createdJobExecution.getId());
+		Assert.assertTrue(execution.isProtected());
+		Assert.assertTrue(execution.isPublic());
+	}
 
 	@Test(dependsOnMethods = { "testGetJobExecution" })
 	public void testListJobExecution() {
-		JobExecutionListOptions options = JobExecutionListOptions.create().asc("created_at").limit(10);
+		JobExecutionListOptions options = JobExecutionListOptions.create().desc("created_at").limit(10);
 		List<? extends JobExecution> list = osclient.sahara().jobExecutions().list(options);
 		boolean found = false;
 		for (JobExecution jobBinary : list) {

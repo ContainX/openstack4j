@@ -1,4 +1,4 @@
-# Cloud Eye SDk
+# Cloud Eye SDK
 
 OTC OpenStack4j DNS SDK
 - 服务入口: `osclient.dns()`

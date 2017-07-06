@@ -20,8 +20,12 @@ import java.util.List;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.Job;
 import org.openstack4j.model.sahara.Job.JobType;
+import org.openstack4j.model.sahara.JobConfig;
+import org.openstack4j.model.sahara.JobExecution;
 import org.openstack4j.model.sahara.options.JobListOptions;
 import org.openstack4j.openstack.sahara.domain.SaharaJob;
+import org.openstack4j.openstack.sahara.domain.SaharaJobConfig;
+import org.openstack4j.openstack.sahara.domain.SaharaJobExecution;
 import org.openstack4j.sample.AbstractSample;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -58,13 +62,13 @@ public class JobSample extends AbstractSample {
 
 	@Test
 	public void testGetJob() {
-		Job execution = osclient.sahara().jobs().get(createdJob.getId());
-		Assert.assertEquals(execution.getId(), createdJob.getId());
+		Job job = osclient.sahara().jobs().get(createdJob.getId());
+		Assert.assertEquals(job.getId(), createdJob.getId());
 		Assert.assertEquals(name, createdJob.getName());
 		Assert.assertEquals(JobType.MapReduce, createdJob.getType());
 		Assert.assertEquals("sdk unittest", createdJob.getDescription());
-		Assert.assertTrue(execution.isProtected());
-		Assert.assertTrue(execution.isPublic());
+		Assert.assertTrue(job.isProtected());
+		Assert.assertTrue(job.isPublic());
 	}
 
 	@Test(dependsOnMethods = { "testGetJob" })
@@ -81,7 +85,7 @@ public class JobSample extends AbstractSample {
 
 	@Test(dependsOnMethods = { "testUpdateJob" })
 	public void testListJob() {
-		JobListOptions options = JobListOptions.create().asc("created_at").limit(10);
+		JobListOptions options = JobListOptions.create().desc("created_at").limit(10);
 		List<? extends Job> list = osclient.sahara().jobs().list(options);
 		boolean found = false;
 		for (Job jobBinary : list) {
@@ -91,6 +95,20 @@ public class JobSample extends AbstractSample {
 			}
 		}
 		Assert.assertTrue(found);
+	}
+	
+	
+	/**
+	 * TODO
+	 */
+	public void testExecuteJob() {
+		JobConfig jobConfig = SaharaJobConfig.builder().addConfig("mapred.map.tasks", 1)
+				.addConfig("mapred.reduce.tasks", 1).addArg("wordcount").addParam("param1", "value1")
+				.addParam("param2", "value2").build();
+		JobExecution jobExecution = SaharaJobExecution.builder().jobId("to-execute-job-id").clusterId("cluster-id")
+				.inputId("input-id").outputId("output-id").isProtect(true).isPublic(true).setJobConfig(jobConfig)
+				.build();
+		JobExecution execution = osclient.sahara().jobExecutions().create(jobExecution);
 	}
 
 }

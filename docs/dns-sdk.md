@@ -1,4 +1,4 @@
-# DNS SDk
+# DNS SDK
 
 HuaWei OpenStack4j DNS SDK, entry point is: `osclient.dns()`
 

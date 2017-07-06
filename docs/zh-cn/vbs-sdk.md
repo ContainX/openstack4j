@@ -1,4 +1,4 @@
-# Volume Backup SDk
+# Volume Backup SDK
 
 OTC OpenStack4j Volume Backup SDK
 - 服务入口: `osclient.storage()`

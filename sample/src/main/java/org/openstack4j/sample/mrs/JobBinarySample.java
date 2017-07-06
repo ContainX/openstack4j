@@ -52,12 +52,12 @@ public class JobBinarySample extends AbstractSample {
 
 	@Test
 	public void testGetJobBinary() {
-		JobBinary dataSource = osclient.sahara().jobBinaries().get(createdJobBinary.getId());
-		Assert.assertEquals(dataSource.getId(), createdJobBinary.getId());
-		Assert.assertEquals(dataSource.getName(), name);
-		Assert.assertEquals(dataSource.getURL(), "/sdk/unittest/input");
-		Assert.assertTrue(dataSource.isProtected());
-		Assert.assertTrue(dataSource.isPublic());
+		JobBinary jobBinary = osclient.sahara().jobBinaries().get(createdJobBinary.getId());
+		Assert.assertEquals(jobBinary.getId(), createdJobBinary.getId());
+		Assert.assertEquals(jobBinary.getName(), name);
+		Assert.assertEquals(jobBinary.getURL(), "/sdk/unittest/input");
+		Assert.assertTrue(jobBinary.isProtected());
+		Assert.assertTrue(jobBinary.isPublic());
 	}
 
 	@Test(dependsOnMethods = { "testGetJobBinary" })
@@ -71,7 +71,7 @@ public class JobBinarySample extends AbstractSample {
 
 	@Test(dependsOnMethods = { "testUpdateJobBinary" })
 	public void testListJobBinary() {
-		JobBinaryListOptions options = JobBinaryListOptions.create().asc("created_at").limit(10);
+		JobBinaryListOptions options = JobBinaryListOptions.create().desc("created_at").limit(10);
 		List<? extends JobBinary> list = osclient.sahara().jobBinaries().list(options);
 		boolean found = false;
 		for (JobBinary jobBinary : list) {

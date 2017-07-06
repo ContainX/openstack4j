@@ -78,7 +78,7 @@ public class DataSourceSample extends AbstractSample {
 
 	@Test(dependsOnMethods = { "testUpdateDataSource" })
 	public void testListDataSource() {
-		DataSourceListOptions options = DataSourceListOptions.create().asc("created_at").limit(10);
+		DataSourceListOptions options = DataSourceListOptions.create().desc("created_at").limit(10);
 		List<? extends DataSource> list = osclient.sahara().dataSources().list(options);
 		boolean found = false;
 		for (DataSource dataSource : list) {

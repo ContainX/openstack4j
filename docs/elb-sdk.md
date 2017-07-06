@@ -1,4 +1,4 @@
-# DNS SDk
+# DNS SDK
 
 HuaWei OpenStack4j ELB SDK, entry point is: `osclient.elasticLoadBalance()`
 

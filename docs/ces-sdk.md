@@ -1,4 +1,4 @@
-# Cloud Eye SDk
+# Cloud Eye SDK
 
 HuaWei OpenStack4j Cloud Eye SDK, entry point is: `osclient.cloudeye()`
 

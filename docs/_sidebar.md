@@ -5,3 +5,4 @@
   - [AS](as-sdk.md)
   - [ELB](elb-sdk.md)
   - [VBS](vbs-sdk.md)
+  - [MRS](mrs-sdk.md)
