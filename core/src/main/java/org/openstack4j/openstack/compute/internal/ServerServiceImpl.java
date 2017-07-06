@@ -188,7 +188,7 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     private String invokeCreateSnapshotAction(String serverId, String snapshotName, Map<String, String> metadata) {
         checkNotNull(serverId);
         checkNotNull(snapshotName);
-        CreateSnapshotAction createSnapshotAction = metadata != null ? create(snapshotName, metadata) : create(snapshotName);
+        CreateSnapshotAction createSnapshotAction = metadata != null && !metadata.isEmpty() ? create(snapshotName, metadata) : create(snapshotName);
         HttpResponse response = invokeActionWithResponse(serverId, createSnapshotAction);
         String id = null;
         if (response.getStatus() == 202) {
