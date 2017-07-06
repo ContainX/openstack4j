@@ -681,21 +681,21 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10000",
+            "url": "http://127.0.0.1:10000/v1/project-id",
             "region": "RegionOne",
             "interface": "public",
             "id": "2241f1ee096a11e793ae92361f002671"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10000",
+            "url": "http://127.0.0.1:10000/v1/project-id",
             "region": "RegionOne",
             "interface": "admin",
             "id": "2241f446096a11e793ae92361f002671"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10000",
+            "url": "http://127.0.0.1:10000/v1/project-id",
             "region": "RegionOne",
             "interface": "internal",
             "id": "2241f55e096a11e793ae92361f002671"
