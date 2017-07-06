@@ -25,12 +25,13 @@ public class MeterSampleTests extends AbstractTest {
     }
 
     @Test
-    public void listMeterSampleTest() throws IOException {
+    public void listMeterSampleTest() throws IOException, InterruptedException {
         respondWith(JSON_METER_SAMPLES);
 
         List<? extends MeterSample> samples = osv3().telemetry().meters().samples("cpu");
         assertEquals(samples.size(), 3);
 
+        RecordedRequest listRequest = server.takeRequest();
         MeterSample sample = samples.get(0);
         assertEquals(sample.getCounterName(), "cpu");
         assertNotNull(sample.getMetadata());
@@ -48,21 +49,21 @@ public class MeterSampleTests extends AbstractTest {
         // Check that the list request is the one we expect
         RecordedRequest listRequest = server.takeRequest();
         assertNotNull(listRequest.getHeader("X-Auth-Token"));
-        assertTrue(listRequest.getPath().contains("limit=3"));
+        assertTrue(listRequest.getRequestLine().contains("limit=3"));
     }
     
-   @Test
-   public void listMeterSampleWithLargerLimitTest() throws IOException, InterruptedException {
-      respondWith(JSON_METER_SAMPLES);
+    @Test
+    public void listMeterSampleWithLargerLimitTest() throws IOException, InterruptedException {
+        respondWith(JSON_METER_SAMPLES);
 
-      SampleCriteria sampleCriteria = SampleCriteria.create().limit(100);
+        SampleCriteria sampleCriteria = SampleCriteria.create().limit(100);
 
-      osv3().telemetry().meters().samples("cpu", sampleCriteria);
+        osv3().telemetry().meters().samples("cpu", sampleCriteria);
 
-      // Check that the list request is the one we expect
-      RecordedRequest listRequest = server.takeRequest();
-      assertNotNull(listRequest.getHeader("X-Auth-Token"));
-      assertTrue(listRequest.getPath().contains("limit=100"));
-   }
+        // Check that the list request is the one we expect
+        RecordedRequest listRequest = server.takeRequest();
+        assertNotNull(listRequest.getHeader("X-Auth-Token"));
+        assertTrue(listRequest.getRequestLine().contains("limit=100"));
+    }
 
 }
