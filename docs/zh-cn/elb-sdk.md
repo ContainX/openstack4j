@@ -12,7 +12,7 @@ OTC OpenStack4j Load Balancer SDK
 ELBLoadBalancerCreate loadBalancer = ELBLoadBalancerCreate.builder()
 		.name("name")
 		.vpcId("vpcId")
-		.type(Type.External.name())
+		.type(Type.EXTERNAL)
 		.bandwidth(1)
 		.adminStateUp(1).build();
 ELBJob job = osclient.loadBalancer().loadBalancers().create(loadBalancer);
@@ -54,11 +54,11 @@ List<? extends LoadBalancer> list = osclient.loadBalancer().loadBalancers().list
 ```java
 ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener")
 		.loadBalancerId("loadBalancerId")
-		.protocol(Protocol.TCP.name())
+		.protocol(Protocol.TCP)
 		.port(12345)
-		.backendProtocol(BackendProtocol.TCP.name())
+		.backendProtocol(BackendProtocol.TCP)
 		.backendPort(54321)
-		.lbAlgorithm(LbAlgorithm.roundrobin.name())
+		.lbAlgorithm(LbAlgorithm.ROUND_ROBIN)
 		.build();
 ListenerCreate create = osclient.loadBalancer().listeners().create(listener);
 ```
@@ -107,7 +107,7 @@ ActionResponse resp = osclient.loadBalancer().healthchecks().delete("healthCheck
 HealthCheck healthCheck = osclient.loadBalancer().healthchecks().get("healthCheckId");
 
 ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).toBuilder()
-		.healthCheckProtocol(HealthCheckProtocol.HTTP.name()).build();
+		.healthCheckProtocol(HealthCheckProtocol.HTTP).build();
 
 HealthCheck afterUpdate = osclient.loadBalancer().healthchecks().update("healthCheckId", update);
 ```

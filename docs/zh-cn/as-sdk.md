@@ -73,8 +73,8 @@ metaData.put("key2", "val2");
 
 Disk disk = Disk.builder()
 	.size(40)
-	.volumeType("SATA")
-	.diskType("SYS")
+	.volumeType(DiskType.SATA)
+	.diskType(DiskType.SYS)
 	.build();
 InstanceConfig instanceConfig = InstanceConfig.builder()
 	.flavorRef("flavorId")
@@ -117,8 +117,8 @@ ActionResponse resp2 = osv3().autoScaling().configs().delete(Lists.newArrayList(
 List<? extends ScalingGroupInstance> list = osclient.autoScaling().groupInstances().list("groupId");
 
 ScalingGroupInstanceListOptions options = ScalingGroupInstanceListOptions.create()
-		.lifeCycleState("INSERVICE")
-		.heathStatus("NORMAL")
+		.lifeCycleState(LifeCycleState.INSERVICE)
+		.heathStatus(HealthStatus.NORMAL)
 		.limit(2);
 List<? extends ScalingGroupInstance> filterList = osclient.autoScaling()
 		.groupInstances().list("groupId", options);
