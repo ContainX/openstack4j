@@ -63,7 +63,7 @@ public class ASAutoScalingGroupUpdate implements ScalingGroupUpdate {
 	@JsonProperty("lb_listener_id")
 	String lbListenerId;
 
-	@JsonProperty("available_zones")
+	@JsonProperty("availability_zones")
 	List<String> availabilityZones;
 
 	@JsonProperty("networks")

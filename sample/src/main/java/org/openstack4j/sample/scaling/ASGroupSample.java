@@ -96,10 +96,10 @@ public class ASGroupSample extends AbstractSample {
 
 		String before = group.getGroupName();
 		String after = new StringBuilder(before).reverse().toString();
-		ScalingGroupUpdate result = osclient.autoScaling().groups().update(group.getGroupId(),
-				ASAutoScalingGroupUpdate.fromScalingGroup(group).toBuilder().groupName(after).maxInstanceNumber(2)
-						.minInstanceNumber(0).desireInstanceNumber(1).build());
-		Assert.assertNotNull(result.getGroupId());
+		
+		ASAutoScalingGroupUpdate updated = ASAutoScalingGroupUpdate.builder().groupName(after).build();
+		ScalingGroupUpdate update = osclient.autoScaling().groups().update(group.getGroupId(), updated);
+		Assert.assertNotNull(update.getGroupId());
 
 		ScalingGroup afterUpdate = osclient.autoScaling().groups().get(groupId);
 		Assert.assertEquals(afterUpdate.getGroupName(), after);
