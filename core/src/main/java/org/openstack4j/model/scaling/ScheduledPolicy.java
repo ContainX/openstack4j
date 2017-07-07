@@ -42,7 +42,7 @@ public class ScheduledPolicy implements ModelEntity {
 	private static final long serialVersionUID = -6411187348817338454L;
 
 	public enum RecurrenceType {
-		DAILY("Daily"), WEEKLY("WeekLy"), MONTHLY("Monthly");
+		DAILY("Daily"), WEEKLY("Weekly"), MONTHLY("Monthly");
 
 		private String val;
 
