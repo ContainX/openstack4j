@@ -293,12 +293,14 @@ public class CinderVolume implements Volume {
 		@Override
 		public VolumeBuilder name(String name) {
 			m.name = name;
+			m.displayName = name;
 			return this;
 		}
 
 		@Override
 		public VolumeBuilder description(String description) {
 			m.description = description;
+			m.displayDescription = description;
 			return this;
 		}
 
