@@ -45,7 +45,6 @@ public enum ServiceType {
 	AUTO_SCALING("as", "auto-scaling"),
 	LOAD_BALANCER("elb", "load-balancer"),
 	CLOUD_EYE("ces", "cloud-eye"),
-	MAP_REDUCE("mrs", "map-reduce"),
 	
 	UNKNOWN("NA", "NA")
 	;

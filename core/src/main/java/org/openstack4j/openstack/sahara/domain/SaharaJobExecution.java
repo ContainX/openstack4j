@@ -153,7 +153,7 @@ public class SaharaJobExecution implements JobExecution {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Date getEndtime() {
+	public Date getEndTime() {
 		return endTime;
 	}
 

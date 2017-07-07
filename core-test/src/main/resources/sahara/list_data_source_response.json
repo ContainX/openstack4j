@@ -1,0 +1,32 @@
+{ 
+    "markers": { 
+        "prev": null,  
+        "next": "e0b16cb7-9e6f-4175-a208-b0c7d075451f" 
+    },  
+    "data_sources": [ 
+        { 
+	        "description": "",  
+	        "url": "/simple/mapreduce/input",  
+	        "tenant_id": "46abc9f8044f40428f83a06cba0d5ddb",  
+	        "created_at": "2016-12-09T19:12:14",  
+	        "updated_at": "2016-12-14T09:05:44",  
+	        "is_protected": false,  
+	        "is_public": false,  
+	        "type": "hdfs",  
+	        "id": "9bcd0e98-d927-4cae-a111-c30ebc2454ed",  
+	        "name": "my-input" 
+        },  
+        { 
+            "name": "hdfs_input8",  
+            "type": "hdfs",  
+            "url": "/test-master-node:8020/user/hadoop/input",  
+            "description": "This is hdfs input13_update",  
+            "created_at": "2016-12-09T19:12:14",  
+            "updated_at": "2016-12-09T23:12:14",  
+            "id": "e0b16cb7-9e6f-4175-a208-b0c7d075451f",  
+            "tenant_id": "3f99e3319a8943ceb15c584f3325d064",  
+            "is_public": null,  
+            "is_protected": null 
+        } 
+    ] 
+}

@@ -61,20 +61,29 @@ public interface JobBuilder extends Builder<JobBuilder, Job> {
     JobBuilder name(String name);
 
     /**
-     * See {@link Job#getMainIds()}
+     * See {@link Job#getMains()}
      * 
-     * @param id the id of the job binary
+     * @param jobBinaryId the id of the job binary
      * @return JobBuilder
      */
-    JobBuilder setMain(String jobBinaryId);
+    JobBuilder addMain(String jobBinaryId);
 
     /**
-     * See {@link Job#getLibId()}
+     * See {@link Job#getLibs()}
      * 
-     * @param name the name of the job
+     * @param jobBinaryId the id of the job binary
      * @return JobBuilder
      */
-    JobBuilder addLibs(String jobBinaryId);
+    JobBuilder addLib(String jobBinaryId);
+    
+    
+    /**
+     * See {@link Job#getInterfaces()}
+     * 
+     * @param interface interface to add
+     * @return JobBuilder
+     */
+	JobBuilder addInterface(String interface_);
     
     /**
      * See {@link Job#isPublic()}

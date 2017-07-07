@@ -45,7 +45,7 @@ public class SaharaJobExecutionAction implements JobExecutionAction {
     @JsonProperty("stats")
     private String stats;
     @JsonProperty("startTime")
-    @JsonFormat(pattern = "EEE, d MMM yyyy HH:mm:ss")
+    @JsonFormat(pattern = "EEE, dd MMM yyyy HH:mm:ss 'GMT'", locale = "en")
     private Date startTime;
     @JsonProperty("cred")
     private String cred;
@@ -70,7 +70,7 @@ public class SaharaJobExecutionAction implements JobExecutionAction {
     @JsonProperty("externalChildIDs")
     private String externalChildIds;
     @JsonProperty("endTime")
-    @JsonFormat(pattern = "EEE, d MMM yyyy HH:mm:ss")
+    @JsonFormat(pattern = "EEE, dd MMM yyyy HH:mm:ss 'GMT'", locale = "en")
     private Date endTime;
     @JsonProperty("data")
     private String data;

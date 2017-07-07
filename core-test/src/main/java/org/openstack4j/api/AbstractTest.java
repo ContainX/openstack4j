@@ -80,7 +80,7 @@ public abstract class AbstractTest {
         CLOUD_EYE(10001),
         LOAD_BALANCER(10002),
         VOLUME_BACKUP(10003),
-        MAP_REDUCE(10004),
+        SAHARA(10004),
         ;
     	//@on
 

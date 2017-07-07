@@ -22,9 +22,6 @@ import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.JobBuilder;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.google.common.base.Strings;
-
 /**
  * An Openstack Sahara Job
  * 
@@ -34,20 +31,7 @@ import com.google.common.base.Strings;
 public interface Job extends ModelEntity, Buildable<JobBuilder> {
 
 	public enum JobType {
-		
 		MapReduce, Spark, Hive, Hql, DistCp, SparkScript, SparkSql,;
-
-		@JsonCreator
-		public JobType forValue(String value) {
-			if (!Strings.isNullOrEmpty(value)) {
-				for (JobType type : JobType.values()) {
-					if (type.name().equalsIgnoreCase(value)) {
-						return type;
-					}
-				}
-			}
-			return null;
-		}
 	}
 
 	/**
@@ -104,6 +88,11 @@ public interface Job extends ModelEntity, Buildable<JobBuilder> {
 	 * @return lib ids
 	 */
 	List<String> getLibs();
+	
+	/**
+	 * @return lib ids
+	 */
+	List<String> getInterfaces();
 
 	/**
 	 * reserved attribute, not support for now

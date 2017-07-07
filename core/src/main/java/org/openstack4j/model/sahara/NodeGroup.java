@@ -35,31 +35,31 @@ public interface NodeGroup extends ModelEntity, Buildable<NodeGroupBuilder> {
 	 */
 	String getName();
 
-        /**
-         * @return the number of instances in node groups
-         */
-        Integer getCount();
+	/**
+	 * @return the number of instances in node groups
+	 */
+	Integer getCount();
 
-        /**
-         * @return the id of node group template
-         */
-        String getNodeGroupTemplateId();
+	/**
+	 * @return the id of node group template
+	 */
+	String getNodeGroupTemplateId();
 
 	/**
 	 * @return the created date 
 	 */
 	Date getCreatedAt();
-	
+
 	/**
 	 * @return the updated date 
 	 */
 	Date getUpdatedAt();
-	
+
 	/**
 	 * @return the id of floating IP Pool
 	 */
 	String getFloatingNetworkId();
-	
+
 	/**
 	 * @return the number of volumes per node
 	 */
@@ -69,37 +69,37 @@ public interface NodeGroup extends ModelEntity, Buildable<NodeGroupBuilder> {
 	 * @return the volumes size
 	 */
 	Integer getVolumesSize();
-	
+
 	/**
 	 * @return the volume mount prefix
 	 */
 	String getVolumeMountPrefix();
-	
+
 	/**
 	 * @return the image identifier 
 	 */
 	String getImageId();
-	
+
 	/**
 	 * @return the flavor identifier
 	 */
 	String getFlavorId();
-	
-        /**
-         * @return the security groups
-         */
-        List<String> getSecurityGroups();
+
+	/**
+	 * @return the security groups
+	 */
+	List<String> getSecurityGroups();
 
 	/**
 	 * @return the auto security group
 	 */
 	Boolean isAutoSecurityGroup();
-	
+
 	/**
 	 * @return node processes
 	 */
 	List<String> getNodeProcesses();
-	
+
 	/**
 	 * @return map of service configurations or null
 	 */
@@ -108,5 +108,5 @@ public interface NodeGroup extends ModelEntity, Buildable<NodeGroupBuilder> {
 	/**
 	 * @return instances in the node group
 	 */
-	List< ? extends Instance> getInstances();
+	List<? extends Instance> getInstances();
 }

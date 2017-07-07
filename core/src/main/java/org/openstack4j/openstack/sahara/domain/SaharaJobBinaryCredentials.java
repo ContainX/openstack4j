@@ -36,6 +36,10 @@ public class SaharaJobBinaryCredentials implements JobBinaryCredentials {
 
     private String password;
     private String user;
+    
+    SaharaJobBinaryCredentials() {
+    	
+    }
 
     SaharaJobBinaryCredentials(String user, String password) {
         this.user = user;

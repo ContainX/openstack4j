@@ -63,7 +63,7 @@ public interface JobExecution extends ModelEntity, Buildable<JobExecutionBuilder
     /**
      * @return end time of the job execution
      */
-    Date getEndtime();
+    Date getEndTime();
 
     /**
      * @return create time of the job execution

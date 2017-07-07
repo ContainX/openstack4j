@@ -69,6 +69,7 @@ public class SaharaJob implements Job {
 
 	private List<String> mainBinaryIds;
 	private List<String> libBinaryIds;
+	private List<String> interfaces;
 
 	@JsonProperty("is_protected")
 	Boolean isProtected;
@@ -146,6 +147,8 @@ public class SaharaJob implements Job {
 	public List<? extends JobBinary> getFullLibs() {
 		return libs;
 	}
+	
+	
 
 	/**
 	 * {@inheritDoc}
@@ -161,6 +164,13 @@ public class SaharaJob implements Job {
 	@Override
 	public List<String> getLibs() {
 		return libBinaryIds;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<String> getInterfaces() {
+		return interfaces;
 	}
 
 	/*
@@ -206,6 +216,7 @@ public class SaharaJob implements Job {
 	public static JobBuilder builder() {
 		return new ConcreteJobBuilder();
 	}
+
 
 	public static class ConcreteJobBuilder implements JobBuilder {
 
@@ -256,7 +267,7 @@ public class SaharaJob implements Job {
 
 		@Override
 		@JsonProperty("mains")
-		public JobBuilder setMain(String jobBinaryId) {
+		public JobBuilder addMain(String jobBinaryId) {
 			if (m.mainBinaryIds == null)
 				m.mainBinaryIds = Lists.newArrayList();
 			m.mainBinaryIds.add(jobBinaryId);
@@ -265,10 +276,18 @@ public class SaharaJob implements Job {
 
 		@Override
 		@JsonProperty("libs")
-		public JobBuilder addLibs(String jobBinaryId) {
+		public JobBuilder addLib(String jobBinaryId) {
 			if (m.libBinaryIds == null)
 				m.libBinaryIds = Lists.newArrayList();
 			m.libBinaryIds.add(jobBinaryId);
+			return this;
+		}
+		
+		@JsonProperty("interfaces")
+		public JobBuilder addInterface(String interface_) {
+			if (m.interfaces == null)
+				m.interfaces = Lists.newArrayList();
+			m.interfaces.add(interface_);
 			return this;
 		}
 
