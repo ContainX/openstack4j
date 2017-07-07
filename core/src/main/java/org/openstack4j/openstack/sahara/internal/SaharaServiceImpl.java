@@ -18,6 +18,7 @@ package org.openstack4j.openstack.sahara.internal;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.sahara.ClusterService;
 import org.openstack4j.api.sahara.ClusterTemplateService;
+import org.openstack4j.api.sahara.DataSourceService;
 import org.openstack4j.api.sahara.JobBinaryInternalService;
 import org.openstack4j.api.sahara.JobBinaryService;
 import org.openstack4j.api.sahara.JobExecutionService;
@@ -26,7 +27,6 @@ import org.openstack4j.api.sahara.NodeGroupTemplateService;
 import org.openstack4j.api.sahara.SaharaImageService;
 import org.openstack4j.api.sahara.SaharaPluginService;
 import org.openstack4j.api.sahara.SaharaService;
-import org.openstack4j.api.sahara.DataSourceService;
 
 /**
  * Sahara (Data Processing) Operations API implementation
@@ -114,4 +114,12 @@ public class SaharaServiceImpl extends BaseSaharaServices implements SaharaServi
     public JobExecutionService jobExecutions() {
         return Apis.get(JobExecutionService.class);
     }
+
+	/* 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public JobExeServiceImpl jobExes() {
+		return Apis.get(JobExeServiceImpl.class);
+	}
 }

@@ -16,14 +16,20 @@
 package org.openstack4j.openstack.sahara.domain;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonValue;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -33,105 +39,216 @@ import lombok.ToString;
  * @author QianBiao.NG
  * @date   2017-07-05 16:07:41
  */
+@Getter
 @ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonRootName("job_execution")
-@JsonIgnoreProperties(value = { "jobIdForExecution" }, ignoreUnknown = true)
 public class SaharaJobExe implements ModelEntity {
 
-	private static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 1L;
 
-	
+	public enum JobType {
+
+		MapReduce(1), Spark(2), Hive(3), Hql(4), DistCp(5), SparkScript(6), SparkSql(7),;
+
+		Integer value;
+
+		JobType(Integer value) {
+			this.value = value;
+		}
+
+		@JsonValue
+		public Integer value() {
+			return value;
+		}
+
+		@JsonCreator
+		public static JobType value(Integer v) {
+			JobType[] values = JobType.values();
+			for (JobType jobType : values) {
+				if(jobType.value.equals(v)) {
+					return jobType;
+				}
+			}
+			return null;
+		}
+	}
+
+	public enum JobState {
+
+		Terminated(-1), Starting(1), Running(2), Completed(3), Abnormal(4),;
+
+		Integer value;
+
+		JobState(Integer value) {
+			this.value = value;
+		}
+
+		@JsonValue
+		public Integer value() {
+			return value;
+		}
+
+		@JsonCreator
+		public static JobState value(Integer v) {
+			JobState[] values = JobState.values();
+			for (JobState state : values) {
+				if(state.value.equals(v)) {
+					return state;
+				}
+			}
+			return null;
+		}
+	}
+
+	public enum JobFinalStatus {
+
+		Running(0), Terminated(1), Completed(2), Canceled(4),;
+
+		Integer value;
+
+		JobFinalStatus(Integer value) {
+			this.value = value;
+		}
+
+		@JsonValue
+		public Integer value() {
+			return value;
+		}
+
+		@JsonCreator
+		public static JobFinalStatus value(Integer v) {
+			JobFinalStatus[] values = JobFinalStatus.values();
+			for (JobFinalStatus state : values) {
+				if(state.value.equals(v)) {
+					return state;
+				}
+			}
+			return null;
+		}
+
+	}
+
 	@JsonProperty("id")
-	private String id;
-	
+	String id;
+
 	@JsonProperty("cluster_id")
-	private String clusterId;
-	
-	@JsonProperty("input")
-	private String input;
-	
-	@JsonProperty("output")
-	private String output;
-	
-	@JsonProperty("job_configs")
-	private SaharaJobConfig jobConfigs;
-	
-	@JsonProperty("job_id")
-	private String jobId;
-	
-	@JsonProperty("job_name")
-	private String jobName;
-	
-	@JsonProperty("job_type")
-	private String jobType;
-	
+	String clusterId;
+
 	@JsonProperty("group_id")
-	private String groupId;
-	
-	@JsonProperty("jar_path")
-	private String jarPath;
-	
+	String groupId;
+
+	@JsonProperty("input")
+	String input;
+
+	@JsonProperty("output")
+	String output;
+
+	@JsonProperty("job_configs")
+	SaharaJobConfig jobConfigs;
+
+	@JsonProperty("job_id")
+	String jobId;
+
+	@JsonProperty("job_name")
+	String jobName;
+
+	@JsonProperty("job_type")
+	JobType jobType;
+
 	@JsonProperty("job_log")
-	private String jobLog;
-	
-	
-	@JsonProperty("tenant_id")
-	private String tenantId;
-	
-	@JsonProperty("start_time")
-	private Date startTime;
-	
-	@JsonProperty("end_time")
-	private Date endTime;
-	
-	@JsonProperty("created_at")
-	private Date createdAt;
-	
-	@JsonProperty("updated_at")
-	private Date updatedAt;
-	
-	@JsonProperty("oozie_job_id")
-	private String oozieJobId;
-	
-	@JsonProperty("return_code")
-	private String returnCode;
-	
+	String jobLog;
+
+	@JsonProperty("job_state")
+	JobState jobState;
+
+	@JsonProperty("job_final_status")
+	JobFinalStatus jobFinalStatus;
+
+	@JsonProperty("job_main_id")
+	String jobMainId;
+
+	@JsonProperty("job_step_id")
+	String jobStepId;
+
+	@JsonProperty("jar_path")
+	String jarPath;
+
 	@JsonProperty("progress")
-	private String progress;
-	
-	@JsonProperty("info")
-	private SaharaJobExecutionInfo info;
+	String progress;
 
-	private String jobIdForExecute;
+	@JsonProperty("file_action")
+	String fileAction;
 
-	@JsonProperty("data_source_urls")
-	HashMap<String, String> dataSourceUrls;
+	@JsonProperty("arguments")
+	String arguments;
 
-	@JsonProperty("engine_job_id")
-	String engineJobId;
+	@JsonProperty("hql")
+	String hql;
+
+	@JsonProperty("hive_script_path")
+	String hiveScriptPath;
+
+	@JsonProperty("finished_step")
+	Integer finishedStep;
+
+	@JsonProperty("postpone_at")
+	Date postponeAt;
+
+	@JsonProperty("step_name")
+	String stepName;
+
+	@JsonProperty("step_num")
+	Integer stepNum;
+
+	@JsonProperty("step_seq")
+	Integer stepSeq;
+
+	@JsonProperty("task_num")
+	Integer taskNum;
+
+	@JsonProperty("spend_time")
+	Integer spendTime;
+
+	@JsonProperty("create_by")
+	String createBy;
+
+	@JsonProperty("update_by")
+	String updateBy;
+
+	@JsonProperty("tenant_id")
+	String tenantId;
+
+	@JsonProperty("start_time")
+	Date startTime;
+
+	@JsonProperty("end_time")
+	Date endTime;
+
+	@JsonProperty("create_at")
+	Date createAt;
+
+	@JsonProperty("update_at")
+	Date updateAt;
+
 	@JsonProperty("is_protected")
 	Boolean isProtected;
+
 	@JsonProperty("is_public")
 	Boolean isPublic;
-	
-//	file_action
-//	arguments
-//	hql
-//	job_state
-//	job_final_status
-//	hive_script_path
-//	create_by
-//	finished_step
-//	job_main_id
-//	job_step_id
-//	postpone_at
-//	step_name
-//	step_num
-//	task_num
-//	update_by
-//	spend_time
-//	step_seq
-//	progress
 
+	public static class JobExes extends ListResult<SaharaJobExe> {
+
+		private static final long serialVersionUID = 1L;
+
+		@JsonProperty("job_executions")
+		private List<SaharaJobExe> jobExe;
+
+		public List<SaharaJobExe> value() {
+			return jobExe;
+		}
+	}
 
 }

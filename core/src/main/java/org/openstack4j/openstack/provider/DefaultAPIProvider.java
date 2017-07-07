@@ -325,6 +325,7 @@ import org.openstack4j.openstack.sahara.internal.ClusterTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.DataSourceServiceImpl;
 import org.openstack4j.openstack.sahara.internal.JobBinaryInternalServiceImpl;
 import org.openstack4j.openstack.sahara.internal.JobBinaryServiceImpl;
+import org.openstack4j.openstack.sahara.internal.JobExeServiceImpl;
 import org.openstack4j.openstack.sahara.internal.JobExecutionServiceImpl;
 import org.openstack4j.openstack.sahara.internal.JobServiceImpl;
 import org.openstack4j.openstack.sahara.internal.NodeGroupTemplateServiceImpl;
@@ -517,6 +518,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(JobBinaryService.class, JobBinaryServiceImpl.class);
         bind(JobService.class, JobServiceImpl.class);
         bind(JobExecutionService.class, JobExecutionServiceImpl.class);
+        bind(JobExeServiceImpl.class, JobExeServiceImpl.class);
         bind(ShareService.class, ShareServiceImpl.class);
         bind(SecurityServiceService.class, SecurityServiceServiceImpl.class);
         bind(ShareSnapshotService.class, ShareSnapshotServiceImpl.class);

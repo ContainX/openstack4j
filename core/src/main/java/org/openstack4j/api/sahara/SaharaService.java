@@ -16,6 +16,7 @@
 package org.openstack4j.api.sahara;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.openstack.sahara.internal.JobExeServiceImpl;
 
 /**
  * (Sahara) Data Processing Operations API
@@ -94,4 +95,11 @@ public interface SaharaService extends RestService {
      * @return the job execution service
      */
     JobExecutionService jobExecutions();
+    
+    /**
+     * Job Exe Service API
+     *
+     * @return the job exe service
+     */
+    JobExeServiceImpl jobExes();
 }
