@@ -23,7 +23,6 @@ import org.openstack4j.openstack.sahara.domain.SaharaJobExe.JobState;
 import org.openstack4j.sample.AbstractSample;
 import org.testng.annotations.Test;
 
-
 /**
  *
  * @author QianBiao.NG
@@ -31,15 +30,14 @@ import org.testng.annotations.Test;
  */
 public class JobExeSample extends AbstractSample {
 
-
 	@Test
 	public void testGetJobExe() {
 		SaharaJobExe execution = osclient.sahara().jobExes().get("job-exe-id");
 	}
-	
 
 	public void testListJobExe() {
-		JobExeListOptions options = JobExeListOptions.create().page(1).pageSize(20).clusterId("cluster-id").state(JobState.Completed);
+		JobExeListOptions options = JobExeListOptions.create().page(1).pageSize(20).clusterId("cluster-id")
+				.state(JobState.Completed);
 		List<? extends SaharaJobExe> list = osclient.sahara().jobExes().list(options);
 	}
 

@@ -37,11 +37,36 @@ DataSource dataSource = osclient.sahara().dataSources().get("data-source-id");
 ActionResponse delete = osclient.sahara().dataSources().delete("to-delete-data-source-id");
 ```
 
-### 集群管理接口
+## 集群管理接口
 ### 创建集群并执行作业
+```java
+TODO
+```
+
 ### 扩容集群节点
+
+```java
+ActionResponse expand = osclient.sahara().clusters().expand("cluster-id", 3);
+```
+
+### 缩减集群节点
+```java
+// 暂不支持
+List<String> includes = Lists.newArrayList("instance-id-1");
+List<String> excludes = Lists.newArrayList("instance-id-3");
+ActionResponse reduce = osclient.sahara().clusters().reduce("cluster-id", 3, includes, excludes);
+```
+
 ### 查询集群详情
+```java
+TODO
+```
+
 ### 终止集群
+```java
+ActionResponse delete = osclient.sahara().clusters().delete("cluster-id");
+```
+
 
 ## 作业二进制对象
 ### 创建作业二进制对象
@@ -119,12 +144,14 @@ Job job = osclient.sahara().jobs().get("job-id");
 
 ### 查询作业exe对象列表
 ```java
-# TODO
+JobExeListOptions options = JobExeListOptions.create().page(1).pageSize(20).clusterId("cluster-id")
+		.state(JobState.Completed);
+List<? extends SaharaJobExe> list = osclient.sahara().jobExes().list(options);
 ```
 
 ### 查询作业exe对象详情
 ```java
-# TODO
+osclient.sahara().jobExes().get("job-exe-id")
 ```
 
 ### 删除作业对象
