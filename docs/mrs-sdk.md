@@ -159,7 +159,7 @@ ActionResponse delete = osclient.sahara().jobs().delete("to-delete-job-id");
 ```
 
 
-### Job Execution
+## Job Execution
 ### List Job Execution
 ```java
 JobExecutionListOptions options = JobExecutionListOptions.create().desc("created_at").limit(10);
