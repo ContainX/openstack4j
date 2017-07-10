@@ -181,12 +181,14 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 		@Override
 		public VolumeSnapshotBuilder name(String name) {
 			m.name = name;
+			m.displayName = name;
 			return this;
 		}
 
 		@Override
 		public VolumeSnapshotBuilder description(String description) {
 			m.description = description;
+			m.displayDescription = description;
 			return this;
 		}
 
