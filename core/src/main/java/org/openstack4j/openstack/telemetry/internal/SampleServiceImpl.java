@@ -35,13 +35,16 @@ public class SampleServiceImpl extends BaseTelemetryServices implements SampleSe
      */
     @Override
     public List<? extends Sample> list(SampleCriteria criteria) {
+        checkNotNull(criteria);
         Invocation<CeiloMeterSample[]> invocation = get(CeiloMeterSample[].class, uri("/samples"));
-        if (criteria != null && !criteria.getCriteriaParams().isEmpty()) {
-            for (SampleCriteria.NameOpValue c : criteria.getCriteriaParams()) {
-                invocation.param(FIELD, c.getField());
-                invocation.param(OPER, c.getOperator().getQueryValue());
-                invocation.param(VALUE, c.getValue());
-            }
+        if(criteria.getLimit() > 0){
+            invocation.param("limit", criteria.getLimit());
+        }
+        
+        for (SampleCriteria.NameOpValue c : criteria.getCriteriaParams()) {
+            invocation.param(FIELD, c.getField());
+            invocation.param(OPER, c.getOperator().getQueryValue());
+            invocation.param(VALUE, c.getValue());
         }
         CeiloMeterSample[] samples = invocation.execute();
         return wrapList(samples);
