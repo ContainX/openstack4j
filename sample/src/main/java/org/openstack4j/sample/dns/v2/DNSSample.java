@@ -173,7 +173,7 @@ public class DNSSample extends AbstractSample {
 
 	@Test
 	public void getRecordset() {
-		Recordset recordset = osclient.dns().recordsets().get("ff80808259367d380159687a3b0e07b7", "ff80808259367d380159687a3b0e07b8");
+		Recordset recordset = osclient.dns().recordsets().get("ff80808259367d380159687a3b0e07b7", "1");
 		logger.info("Get recordset: {}", recordset);
 	}
 
@@ -217,11 +217,5 @@ public class DNSSample extends AbstractSample {
 		logger.info("PTR restore: {}", actionResponse);
 	}
 
-
-	public static void main(String[] args) {
-		DesignatePTRBuilder builder = DesignatePTR.builder().id("1").ptrdname("example.com");
-		DesignatePTR reverseRecord = builder.build();
-		System.out.println(reverseRecord);
-	}
 
 }

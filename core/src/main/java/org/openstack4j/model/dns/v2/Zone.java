@@ -15,12 +15,13 @@
  *******************************************************************************/
 package org.openstack4j.model.dns.v2;
 
+import java.util.List;
+import java.util.Map;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
-
-import java.util.List;
-import java.util.Map;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone.Router;
 
 /**
  * Zone model
@@ -103,5 +104,12 @@ public interface Zone extends ModelEntity, Buildable<ZoneBuilder> {
      * @return the recordset amount belongs to the zone
      */
     Integer getRecordsAmount();
+    
+    
+    /**
+     * 
+     * @return the routers bound to the zone
+     */
+    List<Router> getRouters();
 
 }
