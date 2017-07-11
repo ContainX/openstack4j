@@ -38,7 +38,7 @@ public class Eip implements ModelEntity {
 	private static final long serialVersionUID = -1069053200085079737L;
 
 	public enum IpType {
-		TELCOM5("5_telcom");
+		TELCOM5("5_telcom"), BGP5("5_bgp"), LXBGP5("5_lxbgp"), UNION5("5_union");
 
 		private String val;
 
