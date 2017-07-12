@@ -1,0 +1,15 @@
+{
+  "cluster_id" : "cluster-id",
+  "input" : "s3a://sdk/input",
+  "output" : "s3a://sdk/output",
+  "job_name" : "sdk-unittests",
+  "job_type" : 2,
+  "job_log" : "s3a://sdk/log",
+  "jar_path" : "s3a://sdk/jar.jar",
+  "file_action" : "export",
+  "arguments" : "wordcount",
+  "hql" : "hql",
+  "hive_script_path" : "s3a://sdk/script.hql",
+  "is_protected" : true,
+  "is_public" : false
+}

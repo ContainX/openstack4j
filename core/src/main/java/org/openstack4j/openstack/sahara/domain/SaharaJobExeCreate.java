@@ -19,7 +19,6 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.sahara.constants.JobType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,7 +38,6 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("job_execution")
 public class SaharaJobExeCreate implements ModelEntity {
 
 	static final long serialVersionUID = 1L;

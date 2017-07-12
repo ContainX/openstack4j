@@ -40,7 +40,22 @@ ActionResponse delete = osclient.sahara().dataSources().delete("to-delete-data-s
 ## 集群管理接口
 ### 创建集群并执行作业
 ```java
-TODO
+SaharaComponent component = SaharaComponent.builder().id("MRS 1.3.0_001").name("Hadoop").version("").desc("")
+		.build();
+SaharaClusterCreate cluster = SaharaClusterCreate.builder().dataCenter("eu-de").masterNodeNum(2)
+		.masterNodeSize("c2.2xlarge.linux.mrs").coreNodeNum(3).coreNodeSize("c2.2xlarge.linux.mrs")
+		.name("newcluster").availablilityZoneId("eu-de-01").vpcName("vpc1").vpcId("vpc-id").subnetName("subnet")
+		.subnetId("subnet-id").version(ClusterVersion.MRS12).type(ClusterType.Stream).volumeSize(100)
+		.volumeType(VolumeType.SSD).keypair("keypair").safeMode(0).components(Lists.newArrayList(component))
+		.build();
+
+// initial job exe create model
+SaharaJobExeCreate jobExe = SaharaJobExeCreate.builder().jobType(JobType.MapReduce).jobName("sdk")
+		.jarPath("s3a://sdk/sdk.jar").arguments("wordcount").input("s3a://input/").output("s3a://output/")
+		.jobLog("s3a://log/").fileAction("").hql("").hiveScriptPath("").shutdownCluster(false)
+		.submitJobOnceClusterRun(true).build();
+
+SaharaClusterCreateResult result = osclient.sahara().clusters2().createAndRunJob(cluster, jobExe);
 ```
 
 ### 扩容集群节点
@@ -59,7 +74,7 @@ ActionResponse reduce = osclient.sahara().clusters().reduce("cluster-id", 3, inc
 
 ### 查询集群详情
 ```java
-TODO
+SaharaCluster2 cluster = osclient.sahara().clusters2().get("0f4ab6b7-a723-4b6c-b326-f8a5711d365a");
 ```
 
 ### 终止集群
@@ -103,7 +118,11 @@ ActionResponse delete = osclient.sahara().jobBinaries().delete("to-delete-job-bi
 ## 作业对象接口
 ### 新增作业并执行
 ```java
-# TODO
+SaharaJobExeCreate jobExeCreate = SaharaJobExeCreate.builder().jobType(JobType.Spark).jobName("sdk-unittests")
+				.clusterId("cluster-id").jarPath("s3a://sdk/jar.jar").arguments("wordcount").input("s3a://sdk/input")
+				.output("s3a://sdk/output").jobLog("s3a://sdk/log").fileAction("export").hql("hql")
+				.hiveScriptPath("s3a://sdk/script.hql").isProtected(true).isPublic(false).build();
+SaharaJobExe exe = osclient.sahara().jobExes().create(jobExeCreate);
 ```
 
 ### 创建作业对象

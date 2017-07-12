@@ -24,6 +24,7 @@ import org.openstack4j.openstack.sahara.constants.JobFinalStatus;
 import org.openstack4j.openstack.sahara.constants.JobState;
 import org.openstack4j.openstack.sahara.constants.JobType;
 import org.openstack4j.openstack.sahara.domain.SaharaJobExe;
+import org.openstack4j.openstack.sahara.domain.SaharaJobExeCreate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -31,6 +32,72 @@ import okhttp3.mockwebserver.RecordedRequest;
 
 @Test(suiteName = "Sahara/JobExe", enabled = true)
 public class SaharaJobExeTest extends AbstractTest {
+
+	@Test
+	public void testCreateSaharaJobExe() throws IOException, InterruptedException {
+		respondWith("/sahara/create_job_and_execute_response.json");
+
+		SaharaJobExeCreate jobExeCreate = SaharaJobExeCreate.builder().jobType(JobType.Spark).jobName("sdk-unittests")
+				.clusterId("cluster-id").jarPath("s3a://sdk/jar.jar").arguments("wordcount").input("s3a://sdk/input")
+				.output("s3a://sdk/output").jobLog("s3a://sdk/log").fileAction("export").hql("hql")
+				.hiveScriptPath("s3a://sdk/script.hql").isProtected(true).isPublic(false).build();
+		SaharaJobExe exe = osv3().sahara().jobExes().create(jobExeCreate);
+
+		RecordedRequest request = server.takeRequest();
+		Assert.assertEquals(request.getPath(), "/v1.1/project-id/jobs/submit-job");
+		Assert.assertEquals(request.getMethod(), "POST");
+		
+		// assert post body
+		String requestBody = request.getBody().readUtf8();
+		String expectBody = getResource("/sahara/create_job_and_execute_request.json");
+		Assert.assertEquals(expectBody, requestBody);
+		
+		// assert response mapping
+		Assert.assertEquals(exe.getId(), "12ee9ae4-6ee1-48c6-bb84-fb0b4f76cf03");
+		Assert.assertEquals(exe.getTemplated().booleanValue(), false);
+		Assert.assertEquals(exe.getCreatedAt().getTime(), 1496387588913L);
+		Assert.assertEquals(exe.getUpdatedAt().getTime(), 1496387588913L);
+		Assert.assertEquals(exe.getTenantId(), "c71ad83a66c5470496c2ed6e982621cc");
+		Assert.assertEquals(exe.getJobId(), "");
+		Assert.assertEquals(exe.getJobName(), "mrs_test_jobone_20170602_141106");
+		Assert.assertEquals(exe.getInputId(), null);
+		Assert.assertEquals(exe.getOutputId(), null);
+		Assert.assertEquals(exe.getStartTime().getTime(), 1496387588913L);
+		Assert.assertEquals(exe.getEndTime(), null);
+		Assert.assertEquals(exe.getClusterId(), "e955a7a3-d334-4943-a39a-994976900d56");
+		Assert.assertEquals(exe.getEnineJobId(), null);
+		Assert.assertEquals(exe.getReturnCode(), null);
+		Assert.assertEquals(exe.getIsPublic(), null);
+		Assert.assertEquals(exe.getIsProtected(), null);
+		Assert.assertEquals(exe.getGroupId(), "12ee9ae4-6ee1-48c6-bb84-fb0b4f76cf03");
+		Assert.assertEquals(exe.getJarPath(), "s3a://mrs-opsadm/jarpath/hadoop-mapreduce-examples-2.7.2.jar");
+		Assert.assertEquals(exe.getInput(), "s3a://mrs-opsadm/input/");
+		Assert.assertEquals(exe.getOutput(), "s3a://mrs-opsadm/output/");
+		Assert.assertEquals(exe.getJobLog(), "s3a://mrs-opsadm/log/");
+		Assert.assertEquals(exe.getJobType(), JobType.MapReduce);
+		Assert.assertEquals(exe.getFileAction(), "");
+		Assert.assertEquals(exe.getArguments(), "wordcount");
+		Assert.assertEquals(exe.getHql(), "");
+		Assert.assertEquals(exe.getHiveScriptPath(), "");
+		Assert.assertEquals(exe.getJobState(), JobState.Running);
+		Assert.assertEquals(exe.getJobFinalStatus(), JobFinalStatus.Running);
+		Assert.assertEquals(exe.getCreateBy(), "b67132be2f054a45b247365647e05af0");
+		Assert.assertEquals(exe.getFinishedStep().intValue(), 0);
+		Assert.assertEquals(exe.getJobMainId(), "");
+		Assert.assertEquals(exe.getJobStepId(), "");
+		Assert.assertEquals(exe.getPostponeAt().getTime(), 1496387588911L);
+		Assert.assertEquals(exe.getStepName(), "");
+		Assert.assertEquals(exe.getStepNum().intValue(), 0);
+		Assert.assertEquals(exe.getTaskNum().intValue(), 0);
+		Assert.assertEquals(exe.getUpdateBy(), "b67132be2f054a45b247365647e05af0");
+		Assert.assertEquals(exe.getCredentials(), "");
+		Assert.assertEquals(exe.getUserId(), "b67132be2f054a45b247365647e05af0");
+		Assert.assertEquals(exe.getJobConfigs(), null);
+		Assert.assertEquals(exe.getExtra(), null);
+		Assert.assertEquals(exe.getDataSourceUrls(), null);
+		Assert.assertEquals(exe.getInfo(), null);
+
+	}
 
 	@Test
 	public void testGetSaharaJobExe() throws IOException, InterruptedException {
@@ -101,8 +168,7 @@ public class SaharaJobExeTest extends AbstractTest {
 		Assert.assertEquals(exe.getFileAction(), "");
 		Assert.assertEquals(exe.getArguments(), "wordcount");
 		Assert.assertEquals(exe.getHql(), "");
-		
-        
+
 		Assert.assertEquals(exe.getJobState(), JobState.Running);
 		Assert.assertEquals(exe.getJobFinalStatus(), JobFinalStatus.Terminated);
 		Assert.assertEquals(exe.getClusterId(), "2b460e01-3351-4170-b0a7-57b9dd5ffef3");
@@ -116,7 +182,7 @@ public class SaharaJobExeTest extends AbstractTest {
 		Assert.assertEquals(exe.getJobStepId(), "");
 		Assert.assertEquals(exe.getJobType(), JobType.MapReduce);
 		Assert.assertEquals(exe.getStepName(), "");
-		
+
 		Assert.assertEquals(exe.getStepNum().intValue(), 0);
 		Assert.assertEquals(exe.getTaskNum().intValue(), 0);
 		Assert.assertEquals(exe.getSpendTime(), null);
@@ -127,7 +193,6 @@ public class SaharaJobExeTest extends AbstractTest {
 		Assert.assertEquals(exe.getUpdateAt().getTime(), 1484641003707L);
 		Assert.assertEquals(exe.getStartTime().getTime(), 1484641003707L);
 		Assert.assertEquals(exe.getEndTime(), null);
-
 
 	}
 

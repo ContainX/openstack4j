@@ -15,10 +15,20 @@
  *******************************************************************************/
 package org.openstack4j.sample.mrs;
 
+import org.openstack4j.openstack.sahara.constants.ClusterType;
+import org.openstack4j.openstack.sahara.constants.ClusterVersion;
+import org.openstack4j.openstack.sahara.constants.JobType;
+import org.openstack4j.openstack.sahara.constants.VolumeType;
 import org.openstack4j.openstack.sahara.domain.SaharaCluster2;
+import org.openstack4j.openstack.sahara.domain.SaharaClusterCreate;
+import org.openstack4j.openstack.sahara.domain.SaharaClusterCreateResult;
+import org.openstack4j.openstack.sahara.domain.SaharaComponent;
+import org.openstack4j.openstack.sahara.domain.SaharaJobExeCreate;
 import org.openstack4j.sample.AbstractSample;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.google.common.collect.Lists;
 
 /**
  *
@@ -34,7 +44,24 @@ public class Cluster2Sample extends AbstractSample {
 	}
 
 	public void testCreateClusterAndRunJob() {
-//		osclient.sahara().clusters2().createAndRunJob("");
+		// initial cluster create model
+		SaharaComponent component = SaharaComponent.builder().id("MRS 1.3.0_001").name("Hadoop").version("").desc("")
+				.build();
+		SaharaClusterCreate cluster = SaharaClusterCreate.builder().dataCenter("eu-de").masterNodeNum(2)
+				.masterNodeSize("c2.2xlarge.linux.mrs").coreNodeNum(3).coreNodeSize("c2.2xlarge.linux.mrs")
+				.name("newcluster").availablilityZoneId("eu-de-01").vpcName("vpc1").vpcId("vpc-id").subnetName("subnet")
+				.subnetId("subnet-id").version(ClusterVersion.MRS12).type(ClusterType.Stream).volumeSize(100)
+				.volumeType(VolumeType.SSD).keypair("keypair").safeMode(0).components(Lists.newArrayList(component))
+				.build();
+
+		// initial job exe create model
+		SaharaJobExeCreate jobExe = SaharaJobExeCreate.builder().jobType(JobType.MapReduce).jobName("sdk")
+				.jarPath("s3a://sdk/sdk.jar").arguments("wordcount").input("s3a://input/").output("s3a://output/")
+				.jobLog("s3a://log/").fileAction("").hql("").hiveScriptPath("").shutdownCluster(false)
+				.submitJobOnceClusterRun(true).build();
+
+		SaharaClusterCreateResult result = osclient.sahara().clusters2().createAndRunJob(cluster, jobExe);
+		Assert.assertTrue(result.getResult());
 	}
 
 }

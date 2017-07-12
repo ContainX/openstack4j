@@ -64,6 +64,15 @@ public class SaharaJobExe implements ModelEntity {
 
 	@JsonProperty("output")
 	String output;
+	
+	@JsonProperty("input_id")
+	String inputId;
+
+	@JsonProperty("output_id")
+	String outputId;
+	
+	@JsonProperty("templated")
+	Boolean templated;
 
 	@JsonProperty("job_configs")
 	SaharaJobConfig jobConfigs;
@@ -85,6 +94,12 @@ public class SaharaJobExe implements ModelEntity {
 
 	@JsonProperty("job_final_status")
 	JobFinalStatus jobFinalStatus;
+	
+	@JsonProperty("engine_job_id")
+	String enineJobId;
+	
+	@JsonProperty("return_code")
+	Integer returnCode;
 
 	@JsonProperty("job_main_id")
 	String jobMainId;
@@ -127,6 +142,21 @@ public class SaharaJobExe implements ModelEntity {
 
 	@JsonProperty("task_num")
 	Integer taskNum;
+	
+	@JsonProperty("credentials")
+	String credentials;
+	
+	@JsonProperty("user_id")
+	String userId;
+	
+	@JsonProperty("extra")
+	String extra;
+	
+	@JsonProperty("data_source_urls")
+	String dataSourceUrls;
+	
+	@JsonProperty("info")
+	String info;
 
 	@JsonProperty("spend_time")
 	Integer spendTime;
@@ -151,6 +181,13 @@ public class SaharaJobExe implements ModelEntity {
 
 	@JsonProperty("update_at")
 	Date updateAt;
+	
+	// create and get return different field...
+	@JsonProperty("created_at")
+	Date createdAt;
+
+	@JsonProperty("updated_at")
+	Date updatedAt;
 
 	@JsonProperty("is_protected")
 	Boolean isProtected;

@@ -19,8 +19,11 @@ import java.util.List;
 
 import org.openstack4j.model.sahara.options.JobExeListOptions;
 import org.openstack4j.openstack.sahara.constants.JobState;
+import org.openstack4j.openstack.sahara.constants.JobType;
 import org.openstack4j.openstack.sahara.domain.SaharaJobExe;
+import org.openstack4j.openstack.sahara.domain.SaharaJobExeCreate;
 import org.openstack4j.sample.AbstractSample;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -29,6 +32,16 @@ import org.testng.annotations.Test;
  * @date   2017-07-05 15:36:39
  */
 public class JobExeSample extends AbstractSample {
+	
+	@Test
+	public void testCreateJobExe() {
+		SaharaJobExeCreate jobExeCreate = SaharaJobExeCreate.builder().jobType(JobType.Spark).jobName("sdk-unittests")
+				.clusterId("cluster-id").jarPath("s3a://sdk/jar.jar").arguments("wordcount").input("s3a://sdk/input")
+				.output("s3a://sdk/output").jobLog("s3a://sdk/log").fileAction("export").hql("hql")
+				.hiveScriptPath("s3a://sdk/script.hql").isProtected(true).isPublic(false).build();
+		SaharaJobExe exe = osclient.sahara().jobExes().create(jobExeCreate);
+		Assert.assertEquals(exe.getJobName(), "sdk-unittests");
+	}
 
 	@Test
 	public void testGetJobExe() {

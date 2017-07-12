@@ -24,6 +24,7 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.sahara.options.JobExeListOptions;
 import org.openstack4j.openstack.sahara.domain.SaharaJobExe;
 import org.openstack4j.openstack.sahara.domain.SaharaJobExe.JobExes;
+import org.openstack4j.openstack.sahara.domain.SaharaJobExeCreate;
 
 /**
  * Sahara Data Processing Operations
@@ -32,6 +33,16 @@ import org.openstack4j.openstack.sahara.domain.SaharaJobExe.JobExes;
  * @author siwat.pru@outlook.com
  */
 public class JobExeServiceImpl extends BaseSaharaServices implements RestService {
+
+	/**
+	 * Backward compatibility, create a job and execute it
+	 * @param jobExecution
+	 * @return
+	 */
+	public SaharaJobExe create(SaharaJobExeCreate jobExeCreate) {
+		checkNotNull(jobExeCreate);
+		return post(SaharaJobExe.class, uri("/jobs/submit-job")).entity(jobExeCreate).execute();
+	}
 
 	/**
 	 * 
