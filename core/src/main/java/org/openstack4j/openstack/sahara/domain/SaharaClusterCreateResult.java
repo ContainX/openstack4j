@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei Tld                                     
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,33 +13,28 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.sample.mrs;
+package org.openstack4j.openstack.sahara.domain;
 
-import java.util.List;
+import org.openstack4j.model.ModelEntity;
 
-import org.openstack4j.model.sahara.options.JobExeListOptions;
-import org.openstack4j.openstack.sahara.constants.JobState;
-import org.openstack4j.openstack.sahara.domain.SaharaJobExe;
-import org.openstack4j.sample.AbstractSample;
-import org.testng.annotations.Test;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- *
- * @author QianBiao.NG
- * @date   2017-07-05 15:36:39
- */
-public class JobExeSample extends AbstractSample {
+import lombok.Getter;
+import lombok.ToString;
 
-	@Test
-	public void testGetJobExe() {
-		SaharaJobExe execution = osclient.sahara().jobExes().get("job-exe-id");
-	}
+@Getter
+@ToString
+public class SaharaClusterCreateResult implements ModelEntity {
 
-	@Test
-	public void testListJobExe() {
-		JobExeListOptions options = JobExeListOptions.create().page(1).pageSize(20)
-				.clusterId("0f4ab6b7-a723-4b6c-b326-f8a5711d365a").state(JobState.Completed);
-		List<? extends SaharaJobExe> list = osclient.sahara().jobExes().list(options);
-	}
+	private static final long serialVersionUID = -4868885128978653274L;
+
+	@JsonProperty("cluster_id")
+	String clusterId;
+
+	@JsonProperty("msg")
+	String msg;
+
+	@JsonProperty("result")
+	Boolean result;
 
 }

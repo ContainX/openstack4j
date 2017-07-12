@@ -15,13 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.sahara.domain;
 
-import java.util.Date;
-import java.util.List;
-
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.common.ListResult;
-import org.openstack4j.openstack.sahara.constants.JobFinalStatus;
-import org.openstack4j.openstack.sahara.constants.JobState;
 import org.openstack4j.openstack.sahara.constants.JobType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,30 +40,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonRootName("job_execution")
-public class SaharaJobExe implements ModelEntity {
+public class SaharaJobExeCreate implements ModelEntity {
 
 	static final long serialVersionUID = 1L;
 
-	@JsonProperty("id")
-	String id;
-
 	@JsonProperty("cluster_id")
 	String clusterId;
-
-	@JsonProperty("group_id")
-	String groupId;
 
 	@JsonProperty("input")
 	String input;
 
 	@JsonProperty("output")
 	String output;
-
-	@JsonProperty("job_configs")
-	SaharaJobConfig jobConfigs;
-
-	@JsonProperty("job_id")
-	String jobId;
 
 	@JsonProperty("job_name")
 	String jobName;
@@ -80,23 +62,8 @@ public class SaharaJobExe implements ModelEntity {
 	@JsonProperty("job_log")
 	String jobLog;
 
-	@JsonProperty("job_state")
-	JobState jobState;
-
-	@JsonProperty("job_final_status")
-	JobFinalStatus jobFinalStatus;
-
-	@JsonProperty("job_main_id")
-	String jobMainId;
-
-	@JsonProperty("job_step_id")
-	String jobStepId;
-
 	@JsonProperty("jar_path")
 	String jarPath;
-
-	@JsonProperty("progress")
-	String progress;
 
 	@JsonProperty("file_action")
 	String fileAction;
@@ -109,65 +76,17 @@ public class SaharaJobExe implements ModelEntity {
 
 	@JsonProperty("hive_script_path")
 	String hiveScriptPath;
-
-	@JsonProperty("finished_step")
-	Integer finishedStep;
-
-	@JsonProperty("postpone_at")
-	Date postponeAt;
-
-	@JsonProperty("step_name")
-	String stepName;
-
-	@JsonProperty("step_num")
-	Integer stepNum;
-
-	@JsonProperty("step_seq")
-	Integer stepSeq;
-
-	@JsonProperty("task_num")
-	Integer taskNum;
-
-	@JsonProperty("spend_time")
-	Integer spendTime;
-
-	@JsonProperty("create_by")
-	String createBy;
-
-	@JsonProperty("update_by")
-	String updateBy;
-
-	@JsonProperty("tenant_id")
-	String tenantId;
-
-	@JsonProperty("start_time")
-	Date startTime;
-
-	@JsonProperty("end_time")
-	Date endTime;
-
-	@JsonProperty("create_at")
-	Date createAt;
-
-	@JsonProperty("update_at")
-	Date updateAt;
+	
+	@JsonProperty("shutdown_cluster")
+	Boolean shutdownCluster;
+	
+	@JsonProperty("submit_job_once_cluster_run")
+	Boolean submitJobOnceClusterRun;
 
 	@JsonProperty("is_protected")
 	Boolean isProtected;
 
 	@JsonProperty("is_public")
 	Boolean isPublic;
-
-	public static class JobExes extends ListResult<SaharaJobExe> {
-
-		private static final long serialVersionUID = 1L;
-
-		@JsonProperty("job_executions")
-		private List<SaharaJobExe> jobExe;
-
-		public List<SaharaJobExe> value() {
-			return jobExe;
-		}
-	}
-
+	
 }

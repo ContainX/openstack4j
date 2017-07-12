@@ -29,7 +29,6 @@ import org.testng.collections.Lists;
 @Test
 public class ClusterSample extends AbstractSample {
 
-
 	public void testDeleteCluster() {
 		ActionResponse delete = osclient.sahara().clusters().delete("cluster-id");
 		Assert.assertTrue(delete.isSuccess());
@@ -40,7 +39,6 @@ public class ClusterSample extends AbstractSample {
 		Assert.assertTrue(expand.isSuccess());
 	}
 
-	
 	/**
 	 * 这个操作系统暂不支持
 	 */

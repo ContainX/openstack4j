@@ -2,7 +2,7 @@ package org.openstack4j.model.sahara.options;
 
 import java.util.Map;
 
-import org.openstack4j.openstack.sahara.domain.SaharaJobExe.JobState;
+import org.openstack4j.openstack.sahara.constants.JobState;
 
 import com.google.common.collect.Maps;
 
@@ -29,7 +29,7 @@ public class JobExeListOptions {
 	}
 	
 	public JobExeListOptions state(JobState state) {
-		return add("state", state);
+		return add("state", state.value());
 	}
 
 	

@@ -321,6 +321,7 @@ import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.VipServiceImpl;
 import org.openstack4j.openstack.sahara.internal.ClusterServiceImpl;
+import org.openstack4j.openstack.sahara.internal.ClusterServiceImpl2;
 import org.openstack4j.openstack.sahara.internal.ClusterTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.DataSourceServiceImpl;
 import org.openstack4j.openstack.sahara.internal.JobBinaryInternalServiceImpl;
@@ -501,10 +502,12 @@ public class DefaultAPIProvider implements APIProvider {
         bind(LbPoolService.class, LbPoolServiceImpl.class);
         bind(LoadBalancerService.class, LoadBalancerServiceImpl.class);
         bind(BlockVolumeTransferService.class, BlockVolumeTransferServiceImpl.class);
+        
         bind(SaharaPluginService.class, SaharaPluginServiceImpl.class);
         bind(SaharaImageService.class, SaharaImageServiceImpl.class);
         bind(SaharaService.class, SaharaServiceImpl.class);
         bind(ClusterService.class, ClusterServiceImpl.class);
+        bind(ClusterServiceImpl2.class, ClusterServiceImpl2.class);
         bind(AppCatalogService.class, MuranoService.class);
         bind(MuranoEnvironmentService.class, MuranoEnvironmentServiceImpl.class);
         bind(MuranoSessionService.class, MuranoSessionServiceImpl.class);

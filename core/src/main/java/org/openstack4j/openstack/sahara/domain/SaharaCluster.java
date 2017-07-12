@@ -42,21 +42,21 @@ import com.google.common.collect.Lists;
  */
 
 @JsonRootName("cluster")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaCluster implements Cluster {
 
 	private static final long serialVersionUID = 1L;
 
 	private Status status;
 	@JsonProperty("info")
-        private Map<String,SaharaServiceInfo> infos;
+	private Map<String, SaharaServiceInfo> infos;
 	@JsonProperty("cluster_template_id")
-        private String clusterTemplateId;
+	private String clusterTemplateId;
 	@JsonProperty("is_transient")
-        private Boolean isTransient;
-        private String description;
-        @JsonProperty("cluster_configs")
-        private Map<String, SaharaServiceConfig> clusterConfigs;
+	private Boolean isTransient;
+	private String description;
+	@JsonProperty("cluster_configs")
+	private Map<String, SaharaServiceConfig> clusterConfigs;
 	@JsonProperty("created_at")
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date createdAt;
@@ -68,188 +68,188 @@ public class SaharaCluster implements Cluster {
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Date updatedAt;
 	@JsonProperty("plugin_name")
-        private String pluginName;
+	private String pluginName;
 	@JsonProperty("neutron_management_network")
-        private String managementNetworkId;
-        @JsonProperty("anti_affinity")
-        private List<String> antiAffinity;
+	private String managementNetworkId;
+	@JsonProperty("anti_affinity")
+	private List<String> antiAffinity;
 	@JsonProperty("tenant_id")
 	private String tenantId;
-        @JsonProperty("node_groups")
-        private List<SaharaNodeGroup> nodeGroups;
+	@JsonProperty("node_groups")
+	private List<SaharaNodeGroup> nodeGroups;
 	@JsonProperty("management_public_key")
 	private String managementPublicKey;
 	@JsonProperty("status_description")
 	private String statusDescription;
 	@JsonProperty("hadoop_version")
-        private String hadoopVersion;
+	private String hadoopVersion;
 	private String id;
 	@JsonProperty("trust_id")
-        private String trustId;    // TODO: What is trust_id?
+	private String trustId; // TODO: What is trust_id?
 	private String name;
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Status getStatus() {
 		return status;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Map<String,? extends ServiceInfo> getInfos() {
+	public Map<String, ? extends ServiceInfo> getInfos() {
 		return infos;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getClusterTemplateId() {
 		return clusterTemplateId;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Boolean isTransient() {
 		return isTransient;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getDescription() {
 		return description;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
-        public Map<String, ? extends ServiceConfig> getClusterConfigs() {
-                return clusterConfigs;
-        }
+	/**
+	 * {@inheritDoc}
+	 */
+	public Map<String, ? extends ServiceConfig> getClusterConfigs() {
+		return clusterConfigs;
+	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getDefaultImageId() {
-                return defaultImageId;
+		return defaultImageId;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getUserKeypairId() {
-                return userKeypairId;
+		return userKeypairId;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getPluginName() {
 		return pluginName;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getManagementNetworkId() {
 		return managementNetworkId;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public List<String> getAntiAffinity() {
-                return antiAffinity;
-        }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<String> getAntiAffinity() {
+		return antiAffinity;
+	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getTenantId() {
 		return tenantId;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public List<? extends NodeGroup> getNodeGroups() {
-                return nodeGroups;
-        }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends NodeGroup> getNodeGroups() {
+		return nodeGroups;
+	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getManagementPublicKey() {
 		return managementPublicKey;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getStatusDescription() {
 		return statusDescription;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getHadoopVersion() {
 		return hadoopVersion;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getId() {
 		return id;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getTrustId() {
 		return trustId;
 	}
 
-        /**
-         * {@inheritDoc}
-         */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getName() {
 		return name;
@@ -257,29 +257,15 @@ public class SaharaCluster implements Cluster {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this).omitNullValues()
-				   .add("id",id)
-                                   .add("name", name)
-                                   .add("description", description)
-				   .add("status", status)
-                                   .add("created_at", createdAt)
-                                   .add("updated_at", updatedAt)
-                                   .add("tenant_id", tenantId)
-                                   .add("cluster_template_id",clusterTemplateId)
-                                   .add("is_transient",isTransient)
-                                   .add("default_image_id",defaultImageId)
-                                   .add("user_keypair_id",userKeypairId)
-                                   .add("plugin_name",pluginName)
-                                   .add("neutron_management_network",managementNetworkId)
-                                   .add("cluster_configs",clusterConfigs)
-                                   .add("anti_affinity",antiAffinity)
-                                   .add("node_groups",nodeGroups)
-                                   .add("management_public_key",managementPublicKey)
-                                   .add("status_description",statusDescription)
-                                   .add("hadoop_version",hadoopVersion)
-                                   .add("trust_id",trustId)
-                                   .add("info",infos)
-				   .toString();
+		return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name)
+				.add("description", description).add("status", status).add("created_at", createdAt)
+				.add("updated_at", updatedAt).add("tenant_id", tenantId).add("cluster_template_id", clusterTemplateId)
+				.add("is_transient", isTransient).add("default_image_id", defaultImageId)
+				.add("user_keypair_id", userKeypairId).add("plugin_name", pluginName)
+				.add("neutron_management_network", managementNetworkId).add("cluster_configs", clusterConfigs)
+				.add("anti_affinity", antiAffinity).add("node_groups", nodeGroups)
+				.add("management_public_key", managementPublicKey).add("status_description", statusDescription)
+				.add("hadoop_version", hadoopVersion).add("trust_id", trustId).add("info", infos).toString();
 	}
 
 	public static class Clusters extends ListResult<SaharaCluster> {
@@ -294,110 +280,109 @@ public class SaharaCluster implements Cluster {
 		}
 	}
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public ClusterBuilder toBuilder() {
-                return new ConcreteClusterBuilder(this);
-        }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ClusterBuilder toBuilder() {
+		return new ConcreteClusterBuilder(this);
+	}
 
-        /**
-         * @return the cluster Builder
-         */
-        public static ClusterBuilder builder() {
-                return new ConcreteClusterBuilder();
-        }
+	/**
+	 * @return the cluster Builder
+	 */
+	public static ClusterBuilder builder() {
+		return new ConcreteClusterBuilder();
+	}
 
-        public static class ConcreteClusterBuilder implements ClusterBuilder {
+	public static class ConcreteClusterBuilder implements ClusterBuilder {
 
-            SaharaCluster m;
+		SaharaCluster m;
 
-            ConcreteClusterBuilder() {
-                this(new SaharaCluster());
-            }
+		ConcreteClusterBuilder() {
+			this(new SaharaCluster());
+		}
 
-            ConcreteClusterBuilder(SaharaCluster m) {
-                this.m = m;
-            }
+		ConcreteClusterBuilder(SaharaCluster m) {
+			this.m = m;
+		}
 
-            @Override
-            public ClusterBuilder name(String name) {
-                m.name = name;
-                return this;
-            }
+		@Override
+		public ClusterBuilder name(String name) {
+			m.name = name;
+			return this;
+		}
 
-            @Override
-            public ClusterBuilder hadoopVersion(String hadoopVersion) {
-                m.hadoopVersion = hadoopVersion;
-                return this;
-            }
+		@Override
+		public ClusterBuilder hadoopVersion(String hadoopVersion) {
+			m.hadoopVersion = hadoopVersion;
+			return this;
+		}
 
-            @Override
-            public ClusterBuilder pluginName(String pluginName) {
-                m.pluginName = pluginName;
-                return this;
-            }
+		@Override
+		public ClusterBuilder pluginName(String pluginName) {
+			m.pluginName = pluginName;
+			return this;
+		}
 
-            @Override
-            public ClusterBuilder template(String clusterTemplateId) {
-                m.clusterTemplateId = clusterTemplateId;
-                return this;
-            }
+		@Override
+		public ClusterBuilder template(String clusterTemplateId) {
+			m.clusterTemplateId = clusterTemplateId;
+			return this;
+		}
 
-            @Override
-            public ClusterBuilder image(String imageId) {
-                m.defaultImageId = imageId;
-                return this;
-            }
+		@Override
+		public ClusterBuilder image(String imageId) {
+			m.defaultImageId = imageId;
+			return this;
+		}
 
-            public ClusterBuilder image(Image image) {
-                m.defaultImageId = image.getId();
-                return this;
-            }
+		public ClusterBuilder image(Image image) {
+			m.defaultImageId = image.getId();
+			return this;
+		}
 
-            @Override
-            public ClusterBuilder keypairName(String keypairName) {
-                m.userKeypairId = keypairName;
-                return this;
-            }
+		@Override
+		public ClusterBuilder keypairName(String keypairName) {
+			m.userKeypairId = keypairName;
+			return this;
+		}
 
-            @Override
-            public ClusterBuilder managementNetworkId(String networkId) {
-                m.managementNetworkId = networkId;
-                return this;
-            }
+		@Override
+		public ClusterBuilder managementNetworkId(String networkId) {
+			m.managementNetworkId = networkId;
+			return this;
+		}
 
-            @Override
-            public ClusterBuilder addNodeGroup(NodeGroup nodeGroup) {
-                    if (m.nodeGroups == null)
-                       m.nodeGroups = Lists.newArrayList();
-                    m.nodeGroups.add((SaharaNodeGroup) nodeGroup);
-                    return this;
-            }
+		@Override
+		public ClusterBuilder addNodeGroup(NodeGroup nodeGroup) {
+			if (m.nodeGroups == null)
+				m.nodeGroups = Lists.newArrayList();
+			m.nodeGroups.add((SaharaNodeGroup) nodeGroup);
+			return this;
+		}
 
-            @Override
-            public ClusterBuilder addServiceConfig(String name, ServiceConfig config) {
-                    if (name != null && !name.isEmpty()) {
-                       if (m.clusterConfigs == null)
-                          m.clusterConfigs = new HashMap<String,SaharaServiceConfig>();
-                       m.clusterConfigs.put(name,(SaharaServiceConfig) config);
-                    }
-                    return this;
-            }
+		@Override
+		public ClusterBuilder addServiceConfig(String name, ServiceConfig config) {
+			if (name != null && !name.isEmpty()) {
+				if (m.clusterConfigs == null)
+					m.clusterConfigs = new HashMap<String, SaharaServiceConfig>();
+				m.clusterConfigs.put(name, (SaharaServiceConfig) config);
+			}
+			return this;
+		}
 
-            @Override
-            public Cluster build() {
-                return m;
-            }
+		@Override
+		public Cluster build() {
+			return m;
+		}
 
-            @Override
-            public ClusterBuilder from(Cluster in) {
-                m = (SaharaCluster) in;
-                return this;
-            }
+		@Override
+		public ClusterBuilder from(Cluster in) {
+			m = (SaharaCluster) in;
+			return this;
+		}
 
-        }
-
+	}
 
 }

@@ -16,6 +16,7 @@
 package org.openstack4j.api.sahara;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.openstack.sahara.internal.ClusterServiceImpl2;
 import org.openstack4j.openstack.sahara.internal.JobExeServiceImpl;
 
 /**
@@ -31,6 +32,13 @@ public interface SaharaService extends RestService {
      * @return the cluster service
      */
     ClusterService clusters();
+    
+    /**
+     * Old Cluster Service API (backward compatibilty)
+     *
+     * @return the cluster service
+     */
+    ClusterServiceImpl2 clusters2();
     
     /**
      * Node Group Template Service API

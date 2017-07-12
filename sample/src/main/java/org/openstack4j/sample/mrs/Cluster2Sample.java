@@ -15,12 +15,9 @@
  *******************************************************************************/
 package org.openstack4j.sample.mrs;
 
-import java.util.List;
-
-import org.openstack4j.model.sahara.options.JobExeListOptions;
-import org.openstack4j.openstack.sahara.constants.JobState;
-import org.openstack4j.openstack.sahara.domain.SaharaJobExe;
+import org.openstack4j.openstack.sahara.domain.SaharaCluster2;
 import org.openstack4j.sample.AbstractSample;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -28,18 +25,16 @@ import org.testng.annotations.Test;
  * @author QianBiao.NG
  * @date   2017-07-05 15:36:39
  */
-public class JobExeSample extends AbstractSample {
+@Test
+public class Cluster2Sample extends AbstractSample {
 
-	@Test
-	public void testGetJobExe() {
-		SaharaJobExe execution = osclient.sahara().jobExes().get("job-exe-id");
+	public void testGetCluster() {
+		SaharaCluster2 cluster = osclient.sahara().clusters2().get("0f4ab6b7-a723-4b6c-b326-f8a5711d365a");
+		Assert.assertEquals(cluster.getId(), "0f4ab6b7-a723-4b6c-b326-f8a5711d365a");
 	}
 
-	@Test
-	public void testListJobExe() {
-		JobExeListOptions options = JobExeListOptions.create().page(1).pageSize(20)
-				.clusterId("0f4ab6b7-a723-4b6c-b326-f8a5711d365a").state(JobState.Completed);
-		List<? extends SaharaJobExe> list = osclient.sahara().jobExes().list(options);
+	public void testCreateClusterAndRunJob() {
+//		osclient.sahara().clusters2().createAndRunJob("");
 	}
 
 }

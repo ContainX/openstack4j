@@ -20,10 +20,10 @@ import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.sahara.options.JobExeListOptions;
+import org.openstack4j.openstack.sahara.constants.JobFinalStatus;
+import org.openstack4j.openstack.sahara.constants.JobState;
+import org.openstack4j.openstack.sahara.constants.JobType;
 import org.openstack4j.openstack.sahara.domain.SaharaJobExe;
-import org.openstack4j.openstack.sahara.domain.SaharaJobExe.JobFinalStatus;
-import org.openstack4j.openstack.sahara.domain.SaharaJobExe.JobState;
-import org.openstack4j.openstack.sahara.domain.SaharaJobExe.JobType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

@@ -122,4 +122,12 @@ public class SaharaServiceImpl extends BaseSaharaServices implements SaharaServi
 	public JobExeServiceImpl jobExes() {
 		return Apis.get(JobExeServiceImpl.class);
 	}
+
+	/* 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ClusterServiceImpl2 clusters2() {
+		return Apis.get(ClusterServiceImpl2.class);
+	}
 }
