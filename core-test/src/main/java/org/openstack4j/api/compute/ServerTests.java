@@ -6,7 +6,9 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
@@ -86,7 +88,33 @@ public class ServerTests extends AbstractTest {
         
         takeRequest();
     }
-    
+
+    @Test
+    public void createServerSnapshotWithNoMetadata() throws Exception {
+        createServerSnapshot(null);
+    }
+
+    @Test
+    public void createServerSnapshotWithMetadata() throws Exception {
+        Map<String, String> metadata = new HashMap<String, String>() {{ put("image_type", "image"); }};
+        createServerSnapshot(metadata);
+    }
+
+    private void createServerSnapshot(Map<String, String> metadata) throws Exception {
+        final String serverSnapshotId = "72f759b3-2576-4bf0-9ac9-7cb4a5b9d541";
+        String serverId = "e565cbdb-8e74-4044-ba6e-0155500b2c46";
+        Map<String, String> headers = new HashMap<String, String>() {{
+            put("location", "http://127.0.0.1:9292/images/" + serverSnapshotId);
+        }};
+
+        respondWith(headers, 202);
+
+        String imageId = osv3().compute().servers().createSnapshot(serverId, "server-snapshot", metadata);
+        assertEquals(imageId, serverSnapshotId);
+
+        takeRequest();
+    }
+
     @Test
     public void getServerConsoleOutput() throws Exception {                
         // Get console output with explicit length
