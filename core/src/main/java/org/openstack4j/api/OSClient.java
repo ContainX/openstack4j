@@ -46,6 +46,7 @@ import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+import org.openstack4j.openstack.key.management.internal.KeyManagementService;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -330,6 +331,13 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the OTC Elastic Load Balance service
 		 */
 		ELBService loadBalancer();
+		
+		
+		/**
+		 * 
+		 * @return the OTC Key Management service instance
+ 		 */
+		KeyManagementService keyManagement();
 	}
 
 	/**

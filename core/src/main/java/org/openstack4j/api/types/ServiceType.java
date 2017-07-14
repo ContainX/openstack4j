@@ -46,6 +46,8 @@ public enum ServiceType {
 	LOAD_BALANCER("elb", "load-balancer"),
 	CLOUD_EYE("ces", "cloud-eye"),
 	
+	KEY_MANAGEMENT("kms", "key-management"),
+	
 	UNKNOWN("NA", "NA")
 	;
 	//@on

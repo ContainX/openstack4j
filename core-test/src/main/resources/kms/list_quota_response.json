@@ -1,0 +1,11 @@
+{ 
+    "quotas": { 
+        "resources": [ 
+            { 
+                "type": "CMK", 
+                "used": 15, 
+                "quota": 20 
+            } 
+        ] 
+    } 
+}

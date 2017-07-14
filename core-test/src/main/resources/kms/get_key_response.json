@@ -1,0 +1,14 @@
+{ 
+    "key_info": { 
+        "key_id": "0d0466b0-e727-4d9c-b35d-f84bb474a37f", 
+        "domain_id": "b168fe00ff56492495a7d22974df2d0b", 
+        "key_alias": "kms_test", 
+        "realm": "cn-north-1eu-deaaa", 
+        "key_description": "", 
+        "creation_date": "1472442386000", 
+        "scheduled_deletion_date": "", 
+        "key_state": "2", 
+        "default_key_flag": "0", 
+        "key_type": "1" 
+    } 
+}

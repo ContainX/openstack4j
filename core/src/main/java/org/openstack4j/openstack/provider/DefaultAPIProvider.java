@@ -272,6 +272,9 @@ import org.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import org.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import org.openstack4j.openstack.image.internal.ImageServiceImpl;
 import org.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
+import org.openstack4j.openstack.key.management.internal.CryptoService;
+import org.openstack4j.openstack.key.management.internal.KeyManagementService;
+import org.openstack4j.openstack.key.management.internal.KeyService;
 import org.openstack4j.openstack.loadbalance.internal.AsyncJobServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBCertificateSeviceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBHealthCheckServiceImpl;
@@ -624,8 +627,12 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ELBServerService.class, ELBServerServiceImpl.class);
 		bind(ELBQuotaService.class, ELBQuotaServiceImpl.class);
 		bind(ELBCertificateService.class, ELBCertificateSeviceImpl.class);
-		
 		bind(AsyncJobService.class, AsyncJobServiceImpl.class);
+		
+		// key management
+		bind(KeyService.class, KeyService.class);
+		bind(CryptoService.class, CryptoService.class);
+		bind(KeyManagementService.class, KeyManagementService.class);
     }
 
     /**

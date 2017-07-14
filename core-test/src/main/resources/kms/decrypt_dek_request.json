@@ -1,0 +1,10 @@
+{
+  "key_id" : "key-id",
+  "cipher_text" : "cipher-text",
+  "datakey_cipher_length" : 64,
+  "encryption_context" : {
+    "Key2" : "value2",
+    "Key1" : "value1"
+  },
+  "sequence" : "919c82d4-8046-4722-9094-35c3c6524cff"
+}

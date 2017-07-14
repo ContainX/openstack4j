@@ -81,6 +81,7 @@ public abstract class AbstractTest {
         LOAD_BALANCER(10002),
         VOLUME_BACKUP(10003),
         SAHARA(10004),
+        KEY_MANAGEMENT(10005),
         ;
     	//@on
 

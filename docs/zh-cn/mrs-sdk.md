@@ -4,6 +4,10 @@ OTC OpenStack4j Map Reduce SDK
 - 服务入口: `osclient.sahara()`
 - 服务类型: `sahara`
 
+## API接口文档
+
+请查阅 [官方接口文档](https://docs.otc.t-systems.com/en-us/api/mrs/en-us_topic_0037324628.html)
+
 
 ## 数据源接口
 ### 创建数据源

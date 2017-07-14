@@ -1,27 +1,30 @@
 # DNS SDK
 
-OTC OpenStack4j DNS SDK
-- 服务入口: `osclient.dns()`
-- 服务类型: `dns`
+HuaWei OpenStack4j DNS SDK, entry point is: `osclient.dns()`
+
+## API document
+Not provided for now.
+
+## initial SDK client
+You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
+
 
 ## Zone
 
-### 查询Zone列表
-
+### List All Zones
 ```java
 List<? extends Zone> list = osclient.dns().zones().list();
 ```
 
-> 或者
-
+### List Specific Zones 
 ```java
-ZoneType type = ZoneType.public; //null -> query all zones, public -> query all public zones, private -> query all private zones
+String type = "public"; //null -> query all zones, public -> query all public zones, private -> query all private zones
 String marker = null; //the initial ID of a paging query, if null, query the first page
 String limit = "2"; //per page's item quantity. Value can be 0~500
 List<? extends Zone> list = osclient.dns().zones().list(type, marker, limit);
 ```
 
-### 创建公网Zone
+### Create Zone
 ```java
 String name = "example.com.";
 String description = "This is an example zone.";
@@ -30,7 +33,7 @@ Zone zone = builder.name(name).description(description).build();
 Zone zoneResult = osclient.dns().zones().create(zone);
 ```
 
-### 创建内网Zone
+### Create Private Zone
 ```java
 String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
 String region = "eu-de";
@@ -42,28 +45,24 @@ Zone sourceZone = builder.name(name).description(description).type(ZoneType.PRIV
 Zone zoneResult = osclient.dns().zones().create(sourceZone);
 ```
 
-### 查询Zone详情
-
+### Get Zone
 ```java
 Zone zone = osclient.dns().zones().get("zone-id");
 ```
 
-### 删除Zone
-
+### Delete Zone
 ```java
 String zone_id = "2c9eb155587194ec01587224c9f90149";
 Zone deletedZone = osclient.dns().zones().delete(zone_id);
 ```
 
-### 查询内网Zone的名称服务器
-
+### Get Namesevers
 ```java
 String zone_id = "2c9eb155587194ec01587224c9f90149";
 List<? extends Nameserver> nameserversList = osclient.dns().zones().listNameservers(zone_id);
 ```
 
-### 内网Zone关联VPC
-
+### Associate Router
 ```java
 String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
 String region = "eu-de";
@@ -72,8 +71,7 @@ DesignateZone.Router router = new DesignateZone.Router(router_id, region, null);
 DesignateZone.Router routerResult = osclient.dns().zones().associateRouter(zone_id, router);
 ```
 
-### 内网Zone解关联VPC
-
+### Disassociate Router
 ```java
 String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
 String region = "eu-de";
@@ -84,9 +82,7 @@ DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter(zo
 
 
 ## Recordset
-
-### 查询 Recordset 列表
-
+### List Recordsets
 ```java
 String zone_id = "2c9eb155587194ec01587224c9f90149";
 String limit = "2";
@@ -105,8 +101,7 @@ List<? extends Recordset> recordsetsOfProject = osclient.dns().recordsets().list
 logger.info("recordsets for project: {}", recordsetsOfProject);
 ```
 
-### 创建Recordset
-
+### Create Recordset
 ```java
 // create with recordset model
 Recordset recordset = Builders.recordset().name("name").type(RecordSetType.A).ttl(300).records(Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3")).build();
@@ -144,7 +139,7 @@ Recordset created7 = osclient.dns().recordsets().create(ZONE_ID, "name", "This i
 logger.info("Create type NS record set directly: {}", created7);
 ```
 
-### 查询Recordset详情
+### Get Recordset
 ```java
 String zone_id = "2c9eb155587194ec01587224c9f90149";
 String recordset_id = "2c9eb155587228570158722b6ac30007";
@@ -153,7 +148,7 @@ Recordset recordset = osclient.dns().recordsets().get(zone_id, recordset_id);
 logger.info("Get recordset: {}", recordset);
 ```
 
-### 删除Recordset
+### Delete Recordset
 ```java
 String zone_id = "2c9eb155587194ec01587224c9f90149";
 String recordset_id = "2c9eb155587228570158722b6ac30007";
@@ -162,16 +157,15 @@ Recordset recordset = osclient.dns().recordsets().delete(zone_id, recordset_id);
 logger.info("Delete recordset: {}", recordset);
 ```
 
-## PTR Record
-
-### 查询 PTR Record详情
+## PTR
+### Get PTR
 ```java
 String region = "eu-de";
 String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
 DesignatePTR ptr = osclient.dns().reverseRecords().get(region, floatingIpId);
 ```
 
-### 设置 PTR Record
+### Setup PTR
 ```java
 String ptrDname = "www.example.com";
 String description = "Description for this PTR record";
@@ -183,21 +177,19 @@ DesignatePTR ptrRecord = builder.build();
 DesignatePTR ptr = osclient.dns().ptrs().setup(ptrRecord);
 ```
 
-### 恢复 PTR Record 默认值
+### Restore PTR
 ```java
 String region = "eu-de";
 String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
 ActionResponse actionResponse = osclient.dns().ptrs().restore(region, floatingIpId);
 ```
 
-### 查询 PTR Record 列表
-
+### List PTR without filters
 ```java
 List<? extends PTR> list = osclient.dns().ptrs().list();
 ```
 
-> 或者
-
+### List PTR with filters
 ```java
 String limit = "limit"; 
 String marker = "marker";
@@ -207,4 +199,5 @@ filters.put(limit, "2");
 filters.put(marker, source_id); 
 List<? extends PTR> list = osclient.dns().ptrs().list(filters);
 ```
+
 
