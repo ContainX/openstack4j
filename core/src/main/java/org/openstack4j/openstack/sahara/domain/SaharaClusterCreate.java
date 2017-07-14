@@ -23,10 +23,10 @@ import org.openstack4j.openstack.sahara.constants.ClusterType;
 import org.openstack4j.openstack.sahara.constants.ClusterVersion;
 import org.openstack4j.openstack.sahara.constants.VolumeType;
 
-import com.beust.jcommander.internal.Lists;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.collect.Lists;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
