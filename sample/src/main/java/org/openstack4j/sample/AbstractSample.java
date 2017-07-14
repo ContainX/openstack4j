@@ -48,8 +48,8 @@ public class AbstractSample {
 				"https://elb.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.SAHARA,
 				"https://mrs.eu-de.otc.t-systems.com/v1.1/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
-				"https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
+//		endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
+//				"https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
