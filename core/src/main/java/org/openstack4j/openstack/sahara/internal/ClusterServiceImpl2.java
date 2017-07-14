@@ -23,9 +23,9 @@ import org.openstack4j.openstack.sahara.domain.SaharaCluster2;
 import org.openstack4j.openstack.sahara.domain.SaharaClusterCreate;
 import org.openstack4j.openstack.sahara.domain.SaharaClusterCreateResult;
 import org.openstack4j.openstack.sahara.domain.SaharaJobExeCreate;
-import org.testng.collections.Lists;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 /**
  * Sahara Data Processing Operations
