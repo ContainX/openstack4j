@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.cloud.trace.internal;
+package org.openstack4j.openstack.cloud.trace.v1.internal;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -22,9 +22,9 @@ import java.util.List;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.openstack.cloud.trace.domain.Tracker;
-import org.openstack4j.openstack.cloud.trace.domain.Tracker.Trackers;
-import org.openstack4j.openstack.cloud.trace.domain.TrackerUpdate;
+import org.openstack4j.openstack.cloud.trace.v1.domain.Tracker;
+import org.openstack4j.openstack.cloud.trace.v1.domain.Tracker.Trackers;
+import org.openstack4j.openstack.cloud.trace.v1.domain.TrackerUpdate;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;

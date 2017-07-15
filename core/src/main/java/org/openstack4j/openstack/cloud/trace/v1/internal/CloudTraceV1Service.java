@@ -1,4 +1,6 @@
 /*******************************************************************************
+ * 	Copyright 2017 HuaWei TLD and OTC                                          
+ * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -11,51 +13,35 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.cloud.trace.domain;
+package org.openstack4j.openstack.cloud.trace.v1.internal;
 
-import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.cloud.trace.constants.TrackerStatus;
+import org.openstack4j.api.Apis;
+import org.openstack4j.common.RestService;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@Getter
-@ToString
-@Builder(toBuilder = true)
-@NoArgsConstructor
-@AllArgsConstructor
-public class TrackerUpdate implements ModelEntity {
-
-	private static final long serialVersionUID = -6764087311133427927L;
+/**
+ * 
+ *
+ * @author QianBiao.NG
+ * @date   2017-07-13 09:31:29
+ */
+public class CloudTraceV1Service extends BaseCloudTraceServices implements RestService {
 
 	/**
-	 * the name of the tracker to be updated
+	 * get tracker operation service instance
+	 * 
+	 * @return
 	 */
-	@JsonIgnore
-	String trackerName;
+	public TrackerService trakers() {
+		return Apis.get(TrackerService.class);
+	}
 
 	/**
-	 * bucket (name) used to persist the trace log
+	 * get V1 trace operation service instance
+	 * 
+	 * @return
 	 */
-	@JsonProperty("bucket_name")
-	String bucketName;
-
-	/**
-	 * if set, only log files whose name start with `file_prefix_name` will be persisted
-	 */
-	@JsonProperty("file_prefix_name")
-	String filePrefixName;
-
-	/**
-	 * tracer status
-	 */
-	@JsonProperty("status")
-	TrackerStatus status;
+	public TraceService traces() {
+		return Apis.get(TraceService.class);
+	}
 
 }

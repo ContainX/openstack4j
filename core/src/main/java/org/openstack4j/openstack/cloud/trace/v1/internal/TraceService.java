@@ -13,24 +13,36 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.cloud.trace.internal;
+package org.openstack4j.openstack.cloud.trace.v1.internal;
 
-import org.openstack4j.api.Apis;
+import java.util.List;
+import java.util.Map;
+
 import org.openstack4j.common.RestService;
+import org.openstack4j.openstack.cloud.trace.v1.domain.Trace;
+import org.openstack4j.openstack.cloud.trace.v1.domain.Trace.Traces;
+import org.openstack4j.openstack.cloud.trace.v1.options.TraceListOptions;
+import org.testng.util.Strings;
+
+import com.google.common.base.Preconditions;
 
 /**
  * 
  *
  * @author QianBiao.NG
- * @date   2017-07-13 09:31:29
+ * @date   2017-07-13 09:31:10
  */
-public class CloudTraceService extends BaseCloudTraceServices implements RestService {
+public class TraceService extends BaseCloudTraceServices implements RestService {
 
-	public TrackerService trakers() {
-		return Apis.get(TrackerService.class);
+	/**
+	 * List traces
+	 * 
+	 * @return
+	 */
+	public List<Trace> list(String trackerName, TraceListOptions options) {
+		Preconditions.checkNotNull(!Strings.isNullOrEmpty(trackerName), "parameter `trackerName` should not be empty");
+		Map<String, Object> params = (options == null) ? null : options.getOptions();
+		return get(Traces.class, uri("/%s/trace", trackerName)).params(params).execute().getList();
 	}
-	
-	public TraceService traces() {
-		return Apis.get(TraceService.class);
-	}
+
 }

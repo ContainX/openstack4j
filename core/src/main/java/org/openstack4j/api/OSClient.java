@@ -46,7 +46,8 @@ import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
-import org.openstack4j.openstack.cloud.trace.internal.CloudTraceService;
+import org.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
+import org.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
 
 /**
@@ -342,9 +343,15 @@ public interface OSClient<T extends OSClient<T>> {
 		
 		/**
 		 * 
-		 * @return the OTC Cloud Trace service instance
+		 * @return the OTC Cloud Trace V1 service instance
 		 */
-		CloudTraceService cloudTrace();
+		CloudTraceV1Service cloudTraceV1();
+		
+		/**
+		 * 
+		 * @return the OTC Cloud Trace V2 service instance
+		 */
+		CloudTraceV2Service cloudTraceV2();
 	}
 
 	/**

@@ -21,8 +21,8 @@ import java.util.List;
 
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.cloud.trace.constants.TrackerStatus;
-import org.openstack4j.openstack.cloud.trace.domain.Tracker;
-import org.openstack4j.openstack.cloud.trace.domain.TrackerUpdate;
+import org.openstack4j.openstack.cloud.trace.v1.domain.Tracker;
+import org.openstack4j.openstack.cloud.trace.v1.domain.TrackerUpdate;
 import org.openstack4j.sample.AbstractSample;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -39,11 +39,11 @@ public class TrackerSample extends AbstractSample {
 	@BeforeClass
 	public void prepare() {
 		// due to only one tracker is support for now, we try list first
-		List<Tracker> trackers = osclient.cloudTrace().trakers().list();
+		List<Tracker> trackers = osclient.cloudTraceV1().trakers().list();
 		if (trackers.size() == 0) {
 			// if no tracker has been created, try create one
 			osclient.objectStorage().containers().create(bucketName);
-			tracker = osclient.cloudTrace().trakers().create(bucketName);
+			tracker = osclient.cloudTraceV1().trakers().create(bucketName);
 			newCreated = true;
 		} else {
 			tracker = trackers.get(0);
@@ -53,14 +53,14 @@ public class TrackerSample extends AbstractSample {
 	@AfterClass
 	public void cleanup() {
 		if (newCreated) {
-			ActionResponse delete = osclient.cloudTrace().trakers().delete(tracker.getName());
+			ActionResponse delete = osclient.cloudTraceV1().trakers().delete(tracker.getName());
 			Assert.assertTrue(delete.isSuccess());
 		}
 	}
 
 	@Test(priority = 1)
 	public void testGetTraker() {
-		Tracker get = osclient.cloudTrace().trakers().get(tracker.getName());
+		Tracker get = osclient.cloudTraceV1().trakers().get(tracker.getName());
 		Assert.assertEquals(get.getName(), tracker.getName());
 		Assert.assertEquals(get.getBucketName(), tracker.getBucketName());
 		Assert.assertEquals(get.getFilePrefixName(), tracker.getFilePrefixName());
@@ -74,11 +74,11 @@ public class TrackerSample extends AbstractSample {
 				: TrackerStatus.Enabled;
 		TrackerUpdate update = TrackerUpdate.builder().trackerName(tracker.getName())
 				.bucketName(tracker.getBucketName()).filePrefixName("SDK-unittest").status(newStatus).build();
-		ActionResponse response = osclient.cloudTrace().trakers().update(update);
+		ActionResponse response = osclient.cloudTraceV1().trakers().update(update);
 		Assert.assertTrue(response.isSuccess());
 
 		// assert
-		Tracker get = osclient.cloudTrace().trakers().get(tracker.getName());
+		Tracker get = osclient.cloudTraceV1().trakers().get(tracker.getName());
 		Assert.assertEquals(get.getName(), tracker.getName());
 		Assert.assertEquals(get.getBucketName(), tracker.getBucketName());
 		Assert.assertEquals(get.getFilePrefixName(), "SDK-unittest");
@@ -88,11 +88,11 @@ public class TrackerSample extends AbstractSample {
 		TrackerUpdate update2 = TrackerUpdate.builder().trackerName(tracker.getName())
 				.bucketName(tracker.getBucketName()).filePrefixName(tracker.getFilePrefixName())
 				.status(tracker.getStatus()).build();
-		ActionResponse response2 = osclient.cloudTrace().trakers().update(update2);
+		ActionResponse response2 = osclient.cloudTraceV1().trakers().update(update2);
 		Assert.assertTrue(response2.isSuccess());
 
 		// assert restored tracker
-		Tracker get2 = osclient.cloudTrace().trakers().get(tracker.getName());
+		Tracker get2 = osclient.cloudTraceV1().trakers().get(tracker.getName());
 		Assert.assertEquals(get2.getName(), tracker.getName());
 		Assert.assertEquals(get2.getBucketName(), tracker.getBucketName());
 		Assert.assertEquals(get2.getFilePrefixName(), tracker.getFilePrefixName());
@@ -101,24 +101,24 @@ public class TrackerSample extends AbstractSample {
 
 	@Test(priority = 3)
 	public void testDeleteTraker() {
-		ActionResponse delete = osclient.cloudTrace().trakers().delete(tracker.getName());
+		ActionResponse delete = osclient.cloudTraceV1().trakers().delete(tracker.getName());
 		Assert.assertTrue(delete.isSuccess());
 
 		// assert delete success
-		List<Tracker> trackers = osclient.cloudTrace().trakers().list();
+		List<Tracker> trackers = osclient.cloudTraceV1().trakers().list();
 		Assert.assertTrue(trackers.size() == 0);
 	}
 
 	@Test(priority = 4)
 	public void testCreateTraker() {
 		// create it again
-		Tracker create = osclient.cloudTrace().trakers().create(tracker.getBucketName(), tracker.getFilePrefixName());
+		Tracker create = osclient.cloudTraceV1().trakers().create(tracker.getBucketName(), tracker.getFilePrefixName());
 
 		// restore status
 		if (!create.getStatus().equals(tracker.getStatus())) {
 			TrackerUpdate update = TrackerUpdate.builder().trackerName(tracker.getName())
 					.bucketName(tracker.getBucketName()).status(tracker.getStatus()).build();
-			ActionResponse response = osclient.cloudTrace().trakers().update(update);
+			ActionResponse response = osclient.cloudTraceV1().trakers().update(update);
 			Assert.assertTrue(response.isSuccess());
 		}
 	}

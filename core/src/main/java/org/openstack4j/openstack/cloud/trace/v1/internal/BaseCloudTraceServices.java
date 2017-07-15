@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.cloud.trace.internal;
+package org.openstack4j.openstack.cloud.trace.v1.internal;
 
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
