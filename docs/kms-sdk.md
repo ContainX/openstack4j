@@ -1,203 +1,117 @@
-# DNS SDK
+# KMS SDK
 
-HuaWei OpenStack4j DNS SDK, entry point is: `osclient.dns()`
-
-## API document
-Not provided for now.
-
-## initial SDK client
-You can find how to initial SDK client in the [quickstart](huawei-sdk?id=_2-build-v3-client) page .
+OTC OpenStack4j KMS SDK
+- 服务入口: `osclient.keyManagement()`
+- 服务类型: `key-management`
 
 
-## Zone
+## API接口文档
 
-### List All Zones
+Refer: [Official API documentation](https://docs.otc.t-systems.com/en-us/api/kms/en-us_topic_0038437596.html)
+
+    
+## 密钥管理服务
+### 创建密钥
+
 ```java
-List<? extends Zone> list = osclient.dns().zones().list();
+KeyCreate create = KeyCreate.builder().alias("alias").description("desc")
+					.realm("eu-de").sequence("sequence_xxxxxxxxxx").build();
+Key key = osclient.keyManagement().keys().create(create);
 ```
 
-### List Specific Zones 
+### 启用密钥
 ```java
-String type = "public"; //null -> query all zones, public -> query all public zones, private -> query all private zones
-String marker = null; //the initial ID of a paging query, if null, query the first page
-String limit = "2"; //per page's item quantity. Value can be 0~500
-List<? extends Zone> list = osclient.dns().zones().list(type, marker, limit);
+Key enabled = osclient.keyManagement().keys().enable("key-id", "sequence");
 ```
 
-### Create Zone
+### 禁用密钥
 ```java
-String name = "example.com.";
-String description = "This is an example zone.";
-ZoneBuilder builder = Builders.zone();
-Zone zone = builder.name(name).description(description).build();
-Zone zoneResult = osclient.dns().zones().create(zone);
+Key disabled = osclient.keyManagement().keys().disable("key-id", "sequence");
 ```
 
-### Create Private Zone
+### 计划删除密钥
 ```java
-String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
-String region = "eu-de";
-String name = "example.com.";
-String description = "This is an example zone.";
-DesignateZone.Router router = new DesignateZone.Router(router_id, region, null);
-ZoneBuilder builder = Builders.zone();
-Zone sourceZone = builder.name(name).description(description).type(ZoneType.PRIVATE).router(router).build();
-Zone zoneResult = osclient.dns().zones().create(sourceZone);
+Key delete = osclient.keyManagement().keys().scheduleDeletion("key-id", 10, "sequence");
 ```
 
-### Get Zone
+### 取消计划删除密钥
 ```java
-Zone zone = osclient.dns().zones().get("zone-id");
+Key cancel = osclient.keyManagement().keys().cancelDeletion("key-id", "sequence");
 ```
 
-### Delete Zone
+### 查询密钥列表
 ```java
-String zone_id = "2c9eb155587194ec01587224c9f90149";
-Zone deletedZone = osclient.dns().zones().delete(zone_id);
+KeyListOptions options = KeyListOptions.create().limit(10).marker("last-key-id").sequence("sequence");
+Keys keys = osclient.keyManagement().keys().list(options);
+List<String> keyIdList = keys.get();
 ```
 
-### Get Namesevers
+### 查询密钥信息
 ```java
-String zone_id = "2c9eb155587194ec01587224c9f90149";
-List<? extends Nameserver> nameserversList = osclient.dns().zones().listNameservers(zone_id);
+Key key = osclient.keyManagement().keys().get("key-id", "sequence");
 ```
 
-### Associate Router
+### 查询实例数
 ```java
-String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
-String region = "eu-de";
-String zone_id = "2c9eb155587194ec01587224c9f90149";
-DesignateZone.Router router = new DesignateZone.Router(router_id, region, null);
-DesignateZone.Router routerResult = osclient.dns().zones().associateRouter(zone_id, router);
+Integer keyCreatedAmount = osclient.keyManagement().keys().getKeyCreatedAmount();
 ```
 
-### Disassociate Router
+### 查询配额
 ```java
-String router_id = "19664294-0bf6-4271-ad3a-94b8c79c6558";
-String region = "eu-de";
-String zone_id = "2c9eb155587194ec01587224c9f90149";
-DesignateZone.Router router = new DesignateZone.Router(router_id, region, null);
-DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter(zone_id, router);
+List<Quota> quotas = osclient.keyManagement().keys().quotas();
+for (Quota quota : quotas) {
+	if (quota.getType().equals(ResourceType.CMK)) {
+		// do what u want to
+	}
+}
 ```
 
 
-## Recordset
-### List Recordsets
+## 数据加解密
+### 创建随机数
 ```java
-String zone_id = "2c9eb155587194ec01587224c9f90149";
-String limit = "2";
-String marker = null;
-
-List<? extends Recordset> allRecordsetsOfZone = osclient.dns().recordsets().list(zone_id);
-logger.info("all recordsets of zone: {}", allRecordsetsOfZone);
-
-List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list(zone_id, limit, marker);
-logger.info("recordsets of zone: {}", recordsetsOfZone);
-
-List<? extends Recordset> allRecordsets = osclient.dns().recordsets().list();
-logger.info("all recordsets for project: {}", allRecordsets);
-
-List<? extends Recordset> recordsetsOfProject = osclient.dns().recordsets().list(limit, marker);
-logger.info("recordsets for project: {}", recordsetsOfProject);
+String randomString = osclient.keyManagement().crypto().generateRandomString("sequence");
 ```
 
-### Create Recordset
+### 创建数据密钥
 ```java
-// create with recordset model
-Recordset recordset = Builders.recordset().name("name").type(RecordSetType.A).ttl(300).records(Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3")).build();
-Recordset created = osclient.dns().recordsets().create(ZONE_ID, recordset);
-logger.info("Create record set with recordset model: {}", created);
-
-// create Type A directly
-Recordset created2 = osclient.dns().recordsets().create(ZONE_ID, "name", "description", "A", ttl,
-    Lists.newArrayList("192.168.10.1", "192.168.10.2", "192.168.10.3"));
-logger.info("Create type A record set directly: {}", created2);
-
-// create Type AAAA directly
-Recordset created3 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type AAAA example record set.", "AAAA", 7200,
-    Lists.newArrayList("fe80:0:0:0:202:b3ff:fe1e:8329", "ff03:0db8:85a3:0:0:8a2e:0370:7334"));
-logger.info("Create type AAAA record set directly: {}", created3);
-
-// create Type MX directly
-Recordset created4 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type MX example record set.", "MX", 7200,
-    Lists.newArrayList("1 mail.example.com"));
-logger.info("Create type MX record set directly: {}", created4);
-
-// create Type CNAME directly
-Recordset created5 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type CNAME example record set.", "CNAME", 7200,
-    Lists.newArrayList("server1.example.com"));
-logger.info("Create type CNAME record set directly: {}", created5);
-
-// create Type TXT directly
-Recordset created6 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type TXT record set.", "TXT", 7200,
-    Lists.newArrayList("This host is used for sale."));
-logger.info("Create type TXT record set directly: {}", created6);
-
-// create Type NS directly
-Recordset created7 = osclient.dns().recordsets().create(ZONE_ID, "name", "This is a type NS record set.", "NS", 7200,
-    Lists.newArrayList("node1.example.com.", "node2.example.com."));
-logger.info("Create type NS record set directly: {}", created7);
+HashMap<String, Object> encryptionContext = Maps.newHashMap();
+encryptionContext.put("Key1", "value1");
+encryptionContext.put("Key2", "value2");
+DEK dek = osclient.keyManagement().crypto().createDEK("key-id", encryptionContext, "sequence");
 ```
 
-### Get Recordset
+### 创建不含明文数据密钥
 ```java
-String zone_id = "2c9eb155587194ec01587224c9f90149";
-String recordset_id = "2c9eb155587228570158722b6ac30007";
-
-Recordset recordset = osclient.dns().recordsets().get(zone_id, recordset_id);
-logger.info("Get recordset: {}", recordset);
+HashMap<String, Object> encryptionContext = Maps.newHashMap();
+encryptionContext.put("Key1", "value1");
+encryptionContext.put("Key2", "value2");
+DEK dek = osclient.keyManagement().crypto().createDEKWithoutPlaintext("key-id", encryptionContext, "sequence");
 ```
 
-### Delete Recordset
+### 加密数据密钥
 ```java
-String zone_id = "2c9eb155587194ec01587224c9f90149";
-String recordset_id = "2c9eb155587228570158722b6ac30007";
+HashMap<String, Object> context = Maps.newHashMap();
+context.put("Key1", "value1");
+context.put("Key2", "value2");
 
-Recordset recordset = osclient.dns().recordsets().delete(zone_id, recordset_id);
-logger.info("Delete recordset: {}", recordset);
+// 这边的plain-text不需要自行添加 sha-256 hash值，SDK会自动帮你生成hash
+String plainText = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+EncryptDEK encrypt = EncryptDEK.builder().keyId("key-id").plainText(plainText).encryptionContext(context)
+		.build();
+EncryptedDEK encryptedDEK = osclient.keyManagement().crypto().encryptDEK(encrypt);
 ```
 
-## PTR
-### Get PTR
+### 解密数据密钥
+
 ```java
-String region = "eu-de";
-String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
-DesignatePTR ptr = osclient.dns().reverseRecords().get(region, floatingIpId);
+HashMap<String, Object> context = Maps.newHashMap();
+context.put("Key1", "value1");
+context.put("Key2", "value2");
+
+// some-cipher-text 来自上一节中的 加密数据密钥
+DecryptDEK decrypt = DecryptDEK.builder().keyId(keyId).cipherText("some-cipher-text")
+		.encryptionContext(context).build();
+
+DecryptedDEK decryptDEK = osclient.keyManagement().crypto().decryptDEK(decrypt);
 ```
-
-### Setup PTR
-```java
-String ptrDname = "www.example.com";
-String description = "Description for this PTR record";
-Stirng region = "eu-de";
-String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
-int ttl = 300;
-DesignatePTRBuilder builder = DesignatePTR.builder().ptrdname(ptrDname).description(description).region(region).floatingIpId(floatingIpId).ttl(ttl);
-DesignatePTR ptrRecord = builder.build();
-DesignatePTR ptr = osclient.dns().ptrs().setup(ptrRecord);
-```
-
-### Restore PTR
-```java
-String region = "eu-de";
-String floatingIpId = "9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
-ActionResponse actionResponse = osclient.dns().ptrs().restore(region, floatingIpId);
-```
-
-### List PTR without filters
-```java
-List<? extends PTR> list = osclient.dns().ptrs().list();
-```
-
-### List PTR with filters
-```java
-String limit = "limit"; 
-String marker = "marker";
-String source_id = "eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
-Map<String, Object> filters = new HashMap<>();
-filters.put(limit, "2");
-filters.put(marker, source_id); 
-List<? extends PTR> list = osclient.dns().ptrs().list(filters);
-```
-
-

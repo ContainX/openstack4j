@@ -6,4 +6,5 @@
   - [ELB](zh-cn/elb-sdk.md)
   - [VBS](zh-cn/vbs-sdk.md)
   - [MRS](zh-cn/mrs-sdk.md)
+  - [KMS](zh-cn/kms-sdk.md)
 - [贡献代码](zh-cn/contributing.md)

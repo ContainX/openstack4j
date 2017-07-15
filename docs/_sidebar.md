@@ -6,3 +6,4 @@
   - [ELB](elb-sdk.md)
   - [VBS](vbs-sdk.md)
   - [MRS](mrs-sdk.md)
+  - [KMS](zh-cn/kms-sdk.md)
