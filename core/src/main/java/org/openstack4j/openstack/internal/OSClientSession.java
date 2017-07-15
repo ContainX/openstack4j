@@ -58,6 +58,7 @@ import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+import org.openstack4j.openstack.cloud.trace.internal.CloudTraceService;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
 import org.slf4j.Logger;
@@ -616,6 +617,14 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 		@Override
 		public KeyManagementService keyManagement() {
 			return Apis.get(KeyManagementService.class);
+		}
+
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public CloudTraceService cloudTrace() {
+			return Apis.get(CloudTraceService.class);
 		}
     }
 

@@ -209,6 +209,9 @@ import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
 import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
+import org.openstack4j.openstack.cloud.trace.internal.CloudTraceService;
+import org.openstack4j.openstack.cloud.trace.internal.TraceService;
+import org.openstack4j.openstack.cloud.trace.internal.TrackerService;
 import org.openstack4j.openstack.cloudeye.internal.CloudEyeAlarmServiceImpl;
 import org.openstack4j.openstack.cloudeye.internal.CloudEyeMetricDataServiceImpl;
 import org.openstack4j.openstack.cloudeye.internal.CloudEyeMetricServiceImpl;
@@ -633,6 +636,11 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(KeyService.class, KeyService.class);
 		bind(CryptoService.class, CryptoService.class);
 		bind(KeyManagementService.class, KeyManagementService.class);
+		
+		// cloud trace
+		bind(TraceService.class, TraceService.class);
+		bind(TrackerService.class, TrackerService.class);
+		bind(CloudTraceService.class, CloudTraceService.class);
     }
 
     /**

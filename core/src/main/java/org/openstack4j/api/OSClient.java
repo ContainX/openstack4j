@@ -46,6 +46,7 @@ import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+import org.openstack4j.openstack.cloud.trace.internal.CloudTraceService;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
 
 /**
@@ -338,6 +339,12 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the OTC Key Management service instance
  		 */
 		KeyManagementService keyManagement();
+		
+		/**
+		 * 
+		 * @return the OTC Cloud Trace service instance
+		 */
+		CloudTraceService cloudTrace();
 	}
 
 	/**
