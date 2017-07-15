@@ -76,10 +76,6 @@ public class TraceListOptions {
 	public TraceListOptions next(String next) {
 		return add("next", next);
 	}
-	
-	public TraceListOptions sequence(String sequence) {
-		return add("sequence", sequence);
-	}
 
 	private TraceListOptions add(String param, Object value) {
 		if (value != null)

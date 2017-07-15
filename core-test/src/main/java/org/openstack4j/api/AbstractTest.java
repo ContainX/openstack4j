@@ -82,6 +82,7 @@ public abstract class AbstractTest {
         VOLUME_BACKUP(10003),
         SAHARA(10004),
         KEY_MANAGEMENT(10005),
+        CLOUD_TRACKER(10006),
         ;
     	//@on
 

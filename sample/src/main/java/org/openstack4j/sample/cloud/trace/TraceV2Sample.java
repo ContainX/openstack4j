@@ -34,10 +34,11 @@ public class TraceV2Sample extends AbstractSample {
 		TraceListOptions options = TraceListOptions.create().limit(5).user("zhangdong").serviceType("CTS");
 		List<Trace> list = osclient.cloudTraceV2().traces().list("system", options);
 		
-		Trace trace = list.get(list.size() -1);
-		options.marker(trace.getId());
-		List<Trace> list2 = osclient.cloudTraceV2().traces().list("system", options);
-		
+		if (list.size() > 0) {
+			Trace trace = list.get(list.size() -1);
+			options.marker(trace.getId());
+			List<Trace> list2 = osclient.cloudTraceV2().traces().list("system", options);
+		}
 	}
 
 

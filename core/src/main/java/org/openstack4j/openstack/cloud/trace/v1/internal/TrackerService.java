@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.core.transport.ExecutionOptions;
+import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.cloud.trace.v1.domain.Tracker;
 import org.openstack4j.openstack.cloud.trace.v1.domain.Tracker.Trackers;
@@ -57,7 +59,7 @@ public class TrackerService extends BaseCloudTraceServices implements RestServic
 		checkNotNull(trackerName, "parameter `trackerName` should not be empty");
 		return get(Tracker.class, "/tracker").param("tracker_name", trackerName).execute();
 	}
-	
+
 	/**
 	 * Create a new Tracer which trace all operations
 	 * 
@@ -79,26 +81,28 @@ public class TrackerService extends BaseCloudTraceServices implements RestServic
 	 */
 	public Tracker create(String bucketName, String filePrefixName) {
 		checkNotNull(bucketName, "parameter `bucketName` should not be empty");
-		
+
 		HashMap<Object, Object> entity = Maps.newHashMap();
 		entity.put("bucket_name", bucketName);
 		if (!Strings.isNullOrEmpty(filePrefixName)) {
-			entity.put("file_prefix_name", bucketName);
+			entity.put("file_prefix_name", filePrefixName);
 		}
-		return post(Tracker.class, "/tracker").entity(entity).execute();
+		return post(Tracker.class, "/tracker").entity(entity)
+				.execute(ExecutionOptions.<Tracker> create(PropagateOnStatus.on(404)));
 	}
-	
+
 	/**
 	 * update a tracker
 	 * 
 	 * @param update a model represent to be updated attributes of the tracker
 	 * @return
 	 */
-	public ActionResponse update(TrackerUpdate update) {
+	public Tracker update(TrackerUpdate update) {
 		checkNotNull(update, "parameter `update` should not be empty");
 		checkNotNull(update.getTrackerName(), "parameter `update.tracerName` should not be empty");
 		checkNotNull(update.getBucketName(), "parameter `update.bucketName` should not be empty");
-		return putWithResponse("/tracker/", update.getTrackerName()).entity(update).execute();
+		return put(Tracker.class, "/tracker/", update.getTrackerName()).entity(update)
+				.execute(ExecutionOptions.<Tracker> create(PropagateOnStatus.on(404)));
 	}
 
 	/**
@@ -111,7 +115,7 @@ public class TrackerService extends BaseCloudTraceServices implements RestServic
 		checkNotNull(trackerName, "parameter `trackerName` should not be empty");
 		return deleteWithResponse("/tracker").param("tracker_name", trackerName).execute();
 	}
-	
+
 	/**
 	 * 
 	 * delete all tracker

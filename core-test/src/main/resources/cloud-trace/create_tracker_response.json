@@ -1,0 +1,6 @@
+{ 
+  "bucket_name" : "defaultbucket", 
+  "tracker_name" : "system", 
+  "file_prefix_name" : "mytracker1", 
+  "status" : "enabled" 
+}

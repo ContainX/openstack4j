@@ -31,7 +31,7 @@ public class CloudTraceV1Service extends BaseCloudTraceServices implements RestS
 	 * 
 	 * @return
 	 */
-	public TrackerService trakers() {
+	public TrackerService trackers() {
 		return Apis.get(TrackerService.class);
 	}
 
