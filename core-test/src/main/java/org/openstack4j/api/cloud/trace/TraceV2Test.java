@@ -56,10 +56,6 @@ public class TraceV2Test extends AbstractTest {
 
 		Trace trace = list.get(0);
 		
-//	    "user" : {"name":"xxx","id":"a2e899190fcd444084a68fc0ac2sc1e9","domain":{"name":"xxx","id":"05b2598d69bc4a209f9ac5eeeb1f91ad"}},  
-//	    "response" : {"code":"VPC.0514","message":"Update port fail."},  
-
-
 		Assert.assertEquals(trace.getTime().getTime(), 1472148708232L);
 		Assert.assertEquals(trace.getCode().intValue(), 200);
 		Assert.assertEquals(trace.getServiceType(), "VPC");
