@@ -43,152 +43,152 @@ import org.openstack4j.api.workflow.WorkflowService;
  */
 public class Apis {
 
-    private static final APIProvider provider = initializeProvider();
-
-    /**
-     * Gets the API implementation based on Type
-     *
-     * @param <T>
-     *            the API type
-     * @param api
-     *            the API implementation
-     * @return the API implementation
-     */
-    public static <T> T get(Class<T> api) {
-        return provider.get(api);
-    }
-
-    /**
-     * Gets the identity v3 services API
-     *
-     * @return the identity v3 services
-     */
-    public static org.openstack4j.api.identity.v3.IdentityService getIdentityV3Services() {
-        return get(org.openstack4j.api.identity.v3.IdentityService.class);
-    }
-    
-    /**
-     * Gets the identity v2 services API
-     *
-     * @return the identity v2 services
-     */
-    public static org.openstack4j.api.identity.v2.IdentityService getIdentityV2Services() {
-        return get(org.openstack4j.api.identity.v2.IdentityService.class);
-    }
-
-    /**
-     * Gets the compute services API
-     *
-     * @return the compute services
-     */
-    public static ComputeService getComputeServices() {
-        return get(ComputeService.class);
-    }
-
-    /**
-     * Gets the Network services API
-     *
-     * @return the network services
-     */
-    public static NetworkingService getNetworkingServices() {
-        return get(NetworkingService.class);
-    }
-    
-    /**
-     * Gets the Artifact services API
-     *
-     * @return the artifact services
-     */
-    public static ArtifactService getArtifactServices() {
-        return get(ArtifactService.class);
-    }
-
-    /**
-     * Gets the Tacker services API
-     *
-     * @return the tacker services
-     */
-    public static TackerService getTackerServices() {
-        return get(TackerService.class);
-    }
-
-    /**
-     * Gets the (Glance) Image services API
-     *
-     * @return the image services
-     */
-    public static ImageService getImageService() {
-        return get(ImageService.class);
-    }
-
-    /**
-     * Gets the (Glance) Image v2 services API
-     * @return the image v2 services
-     */
-    public static org.openstack4j.api.image.v2.ImageService getImageV2Service() {
-        return get(org.openstack4j.api.image.v2.ImageService.class);
-    }
-
-    /**
-     * Gets the (Heat) Orchestration services API
-     * 
-     * @return the heat services
-     */
-    public static HeatService getHeatServices() {
-        return get(HeatService.class);
-    }
-
-    /**
-     * Gets the (Murano) App Catalog services API
-     *
-     * @return the murano services
-     */
-    public static AppCatalogService getMuranoServices() {
-        return get(AppCatalogService.class);
-    }
-
-    /**
-     * Gets the (Sahara) Data Processing services API
-     * 
-     * @return the sahara services
-     */
-    public static SaharaService getSaharaServices() {
-        return get(SaharaService.class);
-    }
-
-    /**
-     * Gets the (Mistral) Workflow services API
-     *
-     * @return the workflow services
-     */
-    public static WorkflowService getWorkflowServices() {
-        return get(WorkflowService.class);
-    }
-
-    /**
-     * Gets the (Manila) Shared File Systems services API
-     * 
-     * @return the share services
-     */
-    public static ShareService getShareServices() {
-        return get(ShareService.class);
-    }
+	private static final APIProvider provider = initializeProvider();
 
 	/**
-     * Gets the group based policy services API
-     * @return the gbp services 
-     */
-    public static GbpService getGbpServices() {
-        return get(GbpService.class);
-    }
+	 * Gets the API implementation based on Type
+	 *
+	 * @param <T>
+	 *            the API type
+	 * @param api
+	 *            the API implementation
+	 * @return the API implementation
+	 */
+	public static <T> T get(Class<T> api) {
+		return provider.get(api);
+	}
 
-    /**
-     * Gets the trove services API
-     * @return the trove services
-     */
-    public static TroveService getTroveServices(){
-        return get(TroveService.class);
-    }
+	/**
+	 * Gets the identity v3 services API
+	 *
+	 * @return the identity v3 services
+	 */
+	public static org.openstack4j.api.identity.v3.IdentityService getIdentityV3Services() {
+		return get(org.openstack4j.api.identity.v3.IdentityService.class);
+	}
+
+	/**
+	 * Gets the identity v2 services API
+	 *
+	 * @return the identity v2 services
+	 */
+	public static org.openstack4j.api.identity.v2.IdentityService getIdentityV2Services() {
+		return get(org.openstack4j.api.identity.v2.IdentityService.class);
+	}
+
+	/**
+	 * Gets the compute services API
+	 *
+	 * @return the compute services
+	 */
+	public static ComputeService getComputeServices() {
+		return get(ComputeService.class);
+	}
+
+	/**
+	 * Gets the Network services API
+	 *
+	 * @return the network services
+	 */
+	public static NetworkingService getNetworkingServices() {
+		return get(NetworkingService.class);
+	}
+
+	/**
+	 * Gets the Artifact services API
+	 *
+	 * @return the artifact services
+	 */
+	public static ArtifactService getArtifactServices() {
+		return get(ArtifactService.class);
+	}
+
+	/**
+	 * Gets the Tacker services API
+	 *
+	 * @return the tacker services
+	 */
+	public static TackerService getTackerServices() {
+		return get(TackerService.class);
+	}
+
+	/**
+	 * Gets the (Glance) Image services API
+	 *
+	 * @return the image services
+	 */
+	public static ImageService getImageService() {
+		return get(ImageService.class);
+	}
+
+	/**
+	 * Gets the (Glance) Image v2 services API
+	 * @return the image v2 services
+	 */
+	public static org.openstack4j.api.image.v2.ImageService getImageV2Service() {
+		return get(org.openstack4j.api.image.v2.ImageService.class);
+	}
+
+	/**
+	 * Gets the (Heat) Orchestration services API
+	 * 
+	 * @return the heat services
+	 */
+	public static HeatService getHeatServices() {
+		return get(HeatService.class);
+	}
+
+	/**
+	 * Gets the (Murano) App Catalog services API
+	 *
+	 * @return the murano services
+	 */
+	public static AppCatalogService getMuranoServices() {
+		return get(AppCatalogService.class);
+	}
+
+	/**
+	 * Gets the (Sahara) Data Processing services API
+	 * 
+	 * @return the sahara services
+	 */
+	public static SaharaService getSaharaServices() {
+		return get(SaharaService.class);
+	}
+
+	/**
+	 * Gets the (Mistral) Workflow services API
+	 *
+	 * @return the workflow services
+	 */
+	public static WorkflowService getWorkflowServices() {
+		return get(WorkflowService.class);
+	}
+
+	/**
+	 * Gets the (Manila) Shared File Systems services API
+	 * 
+	 * @return the share services
+	 */
+	public static ShareService getShareServices() {
+		return get(ShareService.class);
+	}
+
+	/**
+	 * Gets the group based policy services API
+	 * @return the gbp services 
+	 */
+	public static GbpService getGbpServices() {
+		return get(GbpService.class);
+	}
+
+	/**
+	 * Gets the trove services API
+	 * @return the trove services
+	 */
+	public static TroveService getTroveServices() {
+		return get(TroveService.class);
+	}
 
 	/**
 	 * Gets the (Senlin) Orchestration services API
@@ -199,39 +199,42 @@ public class Apis {
 	}
 
 	/**
-     * Gets the Magnum services API
-     *
-     * @return the Magnum Service
-     */
-    public static MagnumService getMagnumService() {
-        return get(MagnumService.class);
-    }
+	 * Gets the Magnum services API
+	 *
+	 * @return the Magnum Service
+	 */
+	public static MagnumService getMagnumService() {
+		return get(MagnumService.class);
+	}
 
-    /**
-     * Gets the (BarbicanService) Orchestration services API
-     * @return the BarbicanService services
-     */
-    public static BarbicanService getBarbicanServices() {
-        return get(BarbicanService.class);
-    }
+	/**
+	 * Gets the (BarbicanService) Orchestration services API
+	 * @return the BarbicanService services
+	 */
+	public static BarbicanService getBarbicanServices() {
+		return get(BarbicanService.class);
+	}
 
-    /**
-     * Gets the dns services API
-     * @return the dns services
-     */
-    public static DNSService getDNSService() { return get(DNSService.class); }
+	/**
+	 * Gets the dns services API
+	 * @return the dns services
+	 */
+	public static DNSService getDNSService() {
+		return get(DNSService.class);
+	}
 
-    /**
-     * Gets the Cloud Eye services API
-     * @return the Cloud Eye services
-     */
-    public static CloudEyeService getCloudEyeService() { return get(CloudEyeService.class); }
+	/**
+	 * Gets the Cloud Eye services API
+	 * @return the Cloud Eye services
+	 */
+	public static CloudEyeService getCloudEyeService() {
+		return get(CloudEyeService.class);
+	}
 
-
-    private static APIProvider initializeProvider() {
-        // No need to check for emptiness as there is default implementation registered
-        APIProvider p = ServiceLoader.load(APIProvider.class, Apis.class.getClassLoader()).iterator().next();
-        p.initialize();
-        return p;
-    }
+	private static APIProvider initializeProvider() {
+		// No need to check for emptiness as there is default implementation registered
+		APIProvider p = ServiceLoader.load(APIProvider.class, Apis.class.getClassLoader()).iterator().next();
+		p.initialize();
+		return p;
+	}
 }

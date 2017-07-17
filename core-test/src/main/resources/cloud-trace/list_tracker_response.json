@@ -1,0 +1,7 @@
+[{ 
+  "bucket_name" : "my_created_bucket", 
+  "tracker_name" : "system", 
+  "detail" : "noBucket", 
+  "file_prefix_name" : "some_folder", 
+  "status" : "disabled" 
+}]

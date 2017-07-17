@@ -1,0 +1,37 @@
+{ 
+  "traces" : [ { 
+    "time" : 1472148708232, 
+    "user" : "{\"name\":\"xxx\",\"domain\":{\"name\":\"xxx\",\"id\":\"ded649d814464428ba89d04d7955c93e\"},\"assumedBy\":{\"user\":{\"name\":\"bss_bm_admin\",\"id\":\"c5140af45b5d4b399dea8f900f1dcf1b\",\"domain\":{\"name\":\"op_service\",\"id\":\"71ce673175024d0495664e525e52bac0\"}}}}", 
+    "response" : "{\"code\":\"VPC.0514\",\"message\":\"Update port fail.\"}", 
+    "code" : 200, 
+    "service_type" : "VPC", 
+    "resource_type" : "eip", 
+    "resource_name" : "192.144.163.1", 
+    "resource_id" : "d502809d-0d1d-41ce-9690-784282142ccc", 
+    "trace_name" : "deleteEip", 
+    "trace_rating" : "warning", 
+    "trace_type" : "ConsoleAction", 
+    "api_version" : "2.0", 
+    "record_time" : 1481066128032, 
+    "trace_id" : "e001ccb9-bc09-11e6-b00b-4b2a61338db6" 
+  }, { 
+    "time" : 1472148708232, 
+    "user" : "{\"name\":\"xxx\",\"domain\":{\"name\":\"xxx\",\"id\":\"ded649d814464428ba89d04d7955c93e\"},\"assumedBy\":{\"user\":{\"name\":\"bss_bm_admin\",\"id\":\"c5140af45b5d4b399dea8f900f1dcf1b\",\"domain\":{\"name\":\"op_service\",\"id\":\"71ce673175024d0495664e525e52bac0\"}}}}", 
+    "response" : "{\"code\":\"VPC.0514\",\"message\":\"Update port fail.\"}", 
+    "code" : 200, 
+    "service_type" : "VPC", 
+    "resource_type" : "eip", 
+    "resource_name" : "192.144.163.1", 
+    "resource_id" : "d502809d-0d1d-41ce-9690-784282142ccc", 
+    "trace_name" : "deleteEip", 
+    "trace_rating" : "warning", 
+    "trace_type" : "ConsoleAction", 
+    "api_version" : "2.0", 
+    "record_time" : 1481066128032, 
+    "trace_id" : "e001ccb8-bc09-11e6-b2cc-2640a43cc6e8" 
+  } ], 
+  "meta_data" : { 
+    "count" : 2, 
+    "marker" : "e001ccb8-bc09-11e6-b2cc-2640a43cc6e8" 
+  } 
+}

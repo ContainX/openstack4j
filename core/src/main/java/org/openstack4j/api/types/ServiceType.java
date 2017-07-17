@@ -47,6 +47,7 @@ public enum ServiceType {
 	CLOUD_EYE("ces", "cloud-eye"),
 	
 	KEY_MANAGEMENT("kms", "key-management"),
+	CLOUD_TRACE("CTS", "cloud-trace"),
 	
 	UNKNOWN("NA", "NA")
 	;
