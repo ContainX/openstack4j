@@ -41,13 +41,14 @@ public enum ServiceType {
 	WORKFLOW("mistral", "workflow"),
 	
 	// qianbiao.ng - new add services
-	VOLUME_BACKUP("vbs", "volume-backup"),
-	AUTO_SCALING("as", "auto-scaling"),
-	LOAD_BALANCER("elb", "load-balancer"),
-	CLOUD_EYE("ces", "cloud-eye"),
+	VOLUME_BACKUP("VBS", "volume-backup"),
+	AUTO_SCALING("AS", "auto-scaling"),
+	LOAD_BALANCER("ELB", "load-balancer"),
+	CLOUD_EYE("CES", "cloud-eye"),
 	
-	KEY_MANAGEMENT("kms", "key-management"),
+	KEY_MANAGEMENT("KMS", "key-management"),
 	CLOUD_TRACE("CTS", "cloud-trace"),
+	Notification("SMN", "notification-message"),
 	
 	UNKNOWN("NA", "NA")
 	;

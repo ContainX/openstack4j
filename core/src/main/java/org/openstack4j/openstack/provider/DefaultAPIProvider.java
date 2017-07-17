@@ -297,6 +297,11 @@ import org.openstack4j.openstack.manila.internal.ShareServiceImpl;
 import org.openstack4j.openstack.manila.internal.ShareSnapshotServiceImpl;
 import org.openstack4j.openstack.manila.internal.ShareTypeServiceImpl;
 import org.openstack4j.openstack.manila.internal.SharesServiceImpl;
+import org.openstack4j.openstack.message.notification.internal.MessageTemplateService;
+import org.openstack4j.openstack.message.notification.internal.NotificationService;
+import org.openstack4j.openstack.message.notification.internal.SmsService;
+import org.openstack4j.openstack.message.notification.internal.SubscriptionService;
+import org.openstack4j.openstack.message.notification.internal.TopicService;
 import org.openstack4j.openstack.murano.v1.internal.MuranoActionServiceImpl;
 import org.openstack4j.openstack.murano.v1.internal.MuranoApplicationServiceImpl;
 import org.openstack4j.openstack.murano.v1.internal.MuranoDeploymentServiceImpl;
@@ -650,6 +655,13 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(org.openstack4j.openstack.cloud.trace.v2.internal.TraceService.class,
 				org.openstack4j.openstack.cloud.trace.v2.internal.TraceService.class);
 		bind(CloudTraceV2Service.class, CloudTraceV2Service.class);
+		
+		// simple message notification
+		bind(NotificationService.class, NotificationService.class);
+		bind(TopicService.class, TopicService.class);
+		bind(SubscriptionService.class, SubscriptionService.class);
+		bind(MessageTemplateService.class, MessageTemplateService.class);
+		bind(SmsService.class, SmsService.class);
 	}
 
 	/**

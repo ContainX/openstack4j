@@ -26,6 +26,10 @@ import org.openstack4j.common.RestService;
  */
 public class KeyManagementService extends BaseKeyManagementServices implements RestService {
 
+	/**
+	 * 
+	 * @return
+	 */
 	public KeyService keys() {
 		return Apis.get(KeyService.class);
 	}
