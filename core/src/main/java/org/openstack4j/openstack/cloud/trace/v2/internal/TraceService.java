@@ -25,9 +25,9 @@ import org.openstack4j.openstack.cloud.trace.v2.domain.Trace.Traces;
 import org.openstack4j.openstack.cloud.trace.v2.options.TraceListOptions;
 import org.openstack4j.openstack.common.functions.ReplaceVersionOfURL;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
-import org.testng.util.Strings;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 /**
  * 

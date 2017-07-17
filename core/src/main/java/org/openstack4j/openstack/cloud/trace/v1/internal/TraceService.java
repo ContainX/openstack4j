@@ -22,9 +22,9 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.openstack.cloud.trace.v1.domain.Trace;
 import org.openstack4j.openstack.cloud.trace.v1.domain.Trace.Traces;
 import org.openstack4j.openstack.cloud.trace.v1.options.TraceListOptions;
-import org.testng.util.Strings;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 /**
  * 
