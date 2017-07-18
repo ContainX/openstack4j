@@ -58,6 +58,7 @@ import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.URLResolverParams;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+import org.openstack4j.openstack.antiddos.internal.AntiDDoSServices;
 import org.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
 import org.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
@@ -634,6 +635,11 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 		@Override
 		public CloudTraceV2Service cloudTraceV2() {
 			return Apis.get(CloudTraceV2Service.class);
+		}
+
+		@Override
+		public AntiDDoSServices antiDDoS() {
+			return Apis.get(AntiDDoSServices.class);
 		}
     }
 

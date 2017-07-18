@@ -83,6 +83,7 @@ public abstract class AbstractTest {
         SAHARA(10004),
         KEY_MANAGEMENT(10005),
         CLOUD_TRACKER(10006),
+        ANTI_DDOS(10007),
         ;
     	//@on
 

@@ -205,6 +205,8 @@ import org.openstack4j.api.workflow.ActionDefinitionService;
 import org.openstack4j.api.workflow.WorkbookDefinitionService;
 import org.openstack4j.api.workflow.WorkflowDefinitionService;
 import org.openstack4j.api.workflow.WorkflowService;
+import org.openstack4j.openstack.antiddos.internal.AntiDDoSService;
+import org.openstack4j.openstack.antiddos.internal.AntiDDoSServices;
 import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
@@ -650,6 +652,10 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(org.openstack4j.openstack.cloud.trace.v2.internal.TraceService.class,
 				org.openstack4j.openstack.cloud.trace.v2.internal.TraceService.class);
 		bind(CloudTraceV2Service.class, CloudTraceV2Service.class);
+		
+		//anti-ddos
+		bind(AntiDDoSServices.class, AntiDDoSServices.class);
+		bind(AntiDDoSService.class, AntiDDoSService.class);
 	}
 
 	/**

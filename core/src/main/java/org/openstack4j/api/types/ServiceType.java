@@ -48,6 +48,7 @@ public enum ServiceType {
 	
 	KEY_MANAGEMENT("kms", "key-management"),
 	CLOUD_TRACE("CTS", "cloud-trace"),
+	ANTI_DDOS("antiddos", "anti-ddos"),
 	
 	UNKNOWN("NA", "NA")
 	;

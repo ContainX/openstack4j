@@ -52,6 +52,8 @@ public class AbstractSample {
 				"https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_TRACE,
 				"https://cts.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
+		endpointResolver.addOverrideEndpoint(ServiceType.ANTI_DDOS,
+				"https://antiddos.eu-de.otc.t-systems.com/v1/%(project_id)s");
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
