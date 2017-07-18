@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 
- * A model contains represent request ID which could be used to trace a API request
+ * A model used to trace a API request by request-id which is assign to every API request
  *
  * @author QianBiao.NG
  * @date   2017-07-17 10:42:14

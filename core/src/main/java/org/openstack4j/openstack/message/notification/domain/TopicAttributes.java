@@ -17,6 +17,7 @@ package org.openstack4j.openstack.message.notification.domain;
 
 import org.openstack4j.model.ModelEntity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -30,30 +31,46 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class TopicAttributes extends TracableRequest implements ModelEntity {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class TopicAttributes implements ModelEntity {
 
 	private static final long serialVersionUID = -6764087311133427927L;
-	
-	
-	
 
 	/**
 	 * access policy of the topic
 	 */
 	@JsonProperty("access_policy")
 	String accessPolicy;
-	
+
 	/**
 	 * the introduction of the topic
 	 */
 	@JsonProperty("introduction")
 	String introduction;
-	
+
 	/**
 	 * SMS sign identifier, only provided for enterprise user
 	 */
 	@JsonProperty("sms_sign_id")
 	String smsSignId;
 
+	public static class TopicAttributesUnwapper implements ModelEntity {
+
+		private static final long serialVersionUID = 1L;
+
+		@JsonProperty("attributes")
+		private TopicAttributes attributes;
+		
+		public TopicAttributesUnwapper() {
+		}
+
+		public TopicAttributesUnwapper(TopicAttributes attributes) {
+			this.attributes = attributes;
+		}
+
+		public TopicAttributes getTopicAttributes() {
+			return attributes;
+		}
+	}
 
 }

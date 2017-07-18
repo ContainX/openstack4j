@@ -25,6 +25,7 @@ import org.openstack4j.openstack.message.notification.constant.TopicAttributeNam
 import org.openstack4j.openstack.message.notification.domain.Topic;
 import org.openstack4j.openstack.message.notification.domain.Topic.Topics;
 import org.openstack4j.openstack.message.notification.domain.TopicAttributes;
+import org.openstack4j.openstack.message.notification.domain.TopicAttributes.TopicAttributesUnwapper;
 import org.openstack4j.openstack.message.notification.domain.TracableRequest;
 
 import com.google.common.collect.Maps;
@@ -76,9 +77,9 @@ public class TopicService extends BaseNotificationServices implements RestServic
 	/**
 	 * update topic's display name
 	 * 
-	 * @param topicUrn			
-	 * @param displayName
-	 * @return
+	 * @param topicUrn		the URN of the topic		
+	 * @param displayName	display-name to be updated
+	 * @return {@link TracableRequest} instance
 	 */
 	public TracableRequest updateDisplayName(String topicUrn, String displayName) {
 		checkNotNull(topicUrn, "parameter `topicUrn` should not be empty");
@@ -88,7 +89,10 @@ public class TopicService extends BaseNotificationServices implements RestServic
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * delete a topic
+	 * 
+	 * @param topicUrn the URN of the topic to be deleted
+	 * @return {@link TracableRequest} instance
 	 */
 	public TracableRequest delete(String topicUrn) {
 		checkNotNull(topicUrn, "parameter `topicUrn` should not be empty");
@@ -103,7 +107,8 @@ public class TopicService extends BaseNotificationServices implements RestServic
 	 */
 	public TopicAttributes getTopicAttributes(String topicUrn) {
 		checkNotNull(topicUrn, "parameter `topicUrn` should not be empty");
-		return get(TopicAttributes.class, "/notifications/topics/", topicUrn, "/attributes").execute();
+		return get(TopicAttributesUnwapper.class, "/notifications/topics/", topicUrn, "/attributes").execute()
+				.getTopicAttributes();
 	}
 
 	/**
@@ -113,11 +118,22 @@ public class TopicService extends BaseNotificationServices implements RestServic
 	 * @param attributeName the attribute-name of the topic attributes 
 	 * @return TopicAttributes instance
 	 */
-	public TopicAttributes getTopicAttribute(String topicUrn, TopicAttributeName attributeName) {
+	public String getTopicAttribute(String topicUrn, TopicAttributeName attributeName) {
 		checkNotNull(topicUrn, "parameter `topicUrn` should not be empty");
 		checkNotNull(attributeName, "parameter `attributeName` should not be empty");
-		return get(TopicAttributes.class, "/notifications/topics/", topicUrn, "/attributes")
-				.param("attributes_name", attributeName.value()).execute();
+		TopicAttributesUnwapper unwrapper = get(TopicAttributesUnwapper.class, "/notifications/topics/", topicUrn,
+				"/attributes").param("attributes_name", attributeName.value()).execute();
+		TopicAttributes attributes = unwrapper.getTopicAttributes();
+		switch (attributeName) {
+		case AccessPolicy:
+			return attributes.getAccessPolicy();
+		case Introduction:
+			return attributes.getIntroduction();
+		case SMSSignId:
+			return attributes.getSmsSignId();
+		default:
+			return null;
+		}
 	}
 
 	/**
@@ -126,17 +142,18 @@ public class TopicService extends BaseNotificationServices implements RestServic
 	 * @param topicUrn the topic (URN) attribute to update 
 	 * @param attributeName the attribute name of the topic attributes 
 	 * @param attributeValue the attribute value to update
-	 * @return TracableRequest instance
+	 * @return {@link TracableRequest} instance
 	 */
-	public TracableRequest updateTopicAttribute(String topicUrn, TopicAttributeName attributeName, String attributeValue) {
+	public TracableRequest updateTopicAttribute(String topicUrn, TopicAttributeName attributeName,
+			String attributeValue) {
 		checkNotNull(topicUrn, "parameter `topicUrn` should not be empty");
 		checkNotNull(attributeName, "parameter `attributeName` should not be empty");
 		checkNotNull(attributeValue, "parameter `attributeValue` should not be empty");
 
 		HashMap<Object, Object> body = Maps.newHashMap();
 		body.put("value", attributeValue);
-		return put(TracableRequest.class, uri("/notifications/topics/%s/attributes/%s", topicUrn, attributeName.value()))
-				.entity(body).execute();
+		return put(TracableRequest.class,
+				uri("/notifications/topics/%s/attributes/%s", topicUrn, attributeName.value())).entity(body).execute();
 	}
 
 	/**
@@ -145,14 +162,14 @@ public class TopicService extends BaseNotificationServices implements RestServic
 	 * 
 	 * @param topicUrn the topic (URN) attribute to delete 
 	 * @param attributeName the attribute name of the topic attributes 
-	 * @return TracableRequest instance
+	 * @return {@link TracableRequest} instance
 	 */
 	public TracableRequest deleteTopicAttribute(String topicUrn, TopicAttributeName attributeName) {
 		checkNotNull(topicUrn, "parameter `topicUrn` should not be empty");
 		checkNotNull(attributeName, "parameter `attributeName` should not be empty");
 
-		return delete(TracableRequest.class, uri("/notifications/topics/%s/attributes/%s", topicUrn, attributeName.value()))
-				.execute();
+		return delete(TracableRequest.class,
+				uri("/notifications/topics/%s/attributes/%s", topicUrn, attributeName.value())).execute();
 	}
 
 	/**
@@ -160,10 +177,11 @@ public class TopicService extends BaseNotificationServices implements RestServic
 	 * delete all topic attributes
 	 * 
 	 * @param topicUrn the topic (URN) attribute to delete 
-	 * @return TracableRequest instance
+	 * @return {@link TracableRequest} instance
 	 */
 	public TracableRequest deleteTopicAttributes(String topicUrn) {
 		checkNotNull(topicUrn, "parameter `topicUrn` should not be empty");
 		return delete(TracableRequest.class, uri("/notifications/topics/%s/attributes", topicUrn)).execute();
 	}
+
 }
