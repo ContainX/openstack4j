@@ -15,12 +15,12 @@
  *******************************************************************************/
 package org.openstack4j.openstack.message.notification.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
 import org.openstack4j.openstack.message.notification.constant.Protocol;
-import org.openstack4j.openstack.message.notification.constant.SubscriptionStatus;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,78 +30,91 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 /**
- * A model represent SMN topic subscriber
+ * A model represent SMN message template which used for 
+ * quickly message sending to reduce the request data volume.
  *
  * @author QianBiao.NG
- * @date   2017-07-18 10:41:59
+ * @date   2017-07-18 10:41:47
  */
 @Getter
 @ToString
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Subscription extends TracableRequest implements ModelEntity {
+public class MessageTemplate extends TracableRequest implements ModelEntity {
 
 	private static final long serialVersionUID = -6764087311133427927L;
 	
 	/**
-	 * identifier of this subscription
+	 * identifier of this message template
 	 */
-	@JsonProperty("subscription_urn")
-	String urn;
-
-	/**
-	 * Topic(urn) of this subscription
-	 */
-	@JsonProperty("topic_urn")
-	String topicUrn;
-
+	@JsonProperty("message_template_id")
+	String id;
+	
 	/**
 	 * the protocol used for message pushing
 	 */
 	@JsonProperty("protocol")
 	Protocol protocol;
 
-
-	/**
-	 * Project ID of the topic creator
-	 */
-	@JsonProperty("owner")
-	String owner;
-
-	/**
-	 * Message receiving endpoint
-	 */
-	@JsonProperty("endpoint")
-	String endpoint;
-
-	/**
-	 * Remark of this subscription
-	 */
-	@JsonProperty("remark")
-	String remark;
 	
 	/**
-	 * status of this subscription
+	 * the name of this message template
 	 */
-	@JsonProperty("status")
-	SubscriptionStatus status;
+	@JsonProperty("message_template_name")
+	String name;
+	
+	/**
+	 * the language of this message template
+	 */
+	@JsonProperty("locale")
+	String locale;
+	
+	/**
+	 * the content of this message template
+	 */
+	@JsonProperty("content")
+	String content;
+	
+	/**
+	 * tags of this message template
+	 */
+	@JsonProperty("tag_names")
+	List<String> tags;
+
+	
+	/**
+	 * Creation time (timestamp) of this message template
+	 */
+	@JsonProperty("create_time")
+	Date createTime;
+
+	/**
+	 * Latest update time (timestamp) of this message template
+	 */
+	@JsonProperty("update_time")
+	Date updateTime;
 
 
-	public static class Subscriptions extends ListResult<Subscription> {
+	/**
+	 * A modal used to mapping message template list API
+	 *
+	 * @author QianBiao.NG
+	 * @date   2017-07-18 11:08:44
+	 */
+	public static class MessageTemplates extends ListResult<MessageTemplate> {
 
 		private static final long serialVersionUID = 1L;
 
-		@JsonProperty("subscriptions")
-		private List<Subscription> subscriptions;
+		@JsonProperty("message_templates")
+		private List<MessageTemplate> templates;
 
 		@JsonProperty("request_id")
 		String requestId;
 
-		public List<Subscription> value() {
-			return subscriptions;
+		public List<MessageTemplate> value() {
+			return templates;
 		}
 
 		public String getRequestId() {

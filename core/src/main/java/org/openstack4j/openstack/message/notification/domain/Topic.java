@@ -73,7 +73,7 @@ public class Topic extends TracableRequest implements ModelEntity {
 	 * Latest update time (timestamp) of the topic
 	 */
 	@JsonProperty("update_time")
-	Date update_time;
+	Date updateTime;
 
 	public static class Topics extends ListResult<Topic> {
 
