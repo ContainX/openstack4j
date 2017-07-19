@@ -13,20 +13,42 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.antiddos.internal;
+package org.openstack4j.openstack.antiddos.constants;
 
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-import com.google.common.base.Function;
-
-public class BaseAntiDDoSService extends BaseOpenStackService {
+public enum LogStatus {
+	/**
+	 * Packet cleaning
+	 */
+	Status_1(1),
+	/**
+	 * Packet dropping
+	 */
+	Status_2(2),
+	;
 	
-	protected BaseAntiDDoSService() {
-		super(ServiceType.ANTI_DDOS);
+	private Integer val;
+	
+	@JsonValue
+	public Integer getVal() {
+		return val;
 	}
 
-	protected BaseAntiDDoSService(Function<String, String> func) {
-		super(ServiceType.ANTI_DDOS, func);
+	private LogStatus(Integer val) {
+		this.val = val;
+	}
+	
+	@JsonCreator
+	public LogStatus forValue(Integer val) {
+		if(val != null) {
+			for (LogStatus status : LogStatus.values()) {
+				if(val.equals(status.getVal())) {
+					return status;
+				}
+			}
+		}
+		return null;
 	}
 }

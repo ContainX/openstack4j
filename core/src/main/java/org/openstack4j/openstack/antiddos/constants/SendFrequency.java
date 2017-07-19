@@ -13,20 +13,37 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.antiddos.internal;
+package org.openstack4j.openstack.antiddos.constants;
 
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-import com.google.common.base.Function;
-
-public class BaseAntiDDoSService extends BaseOpenStackService {
+public enum SendFrequency {
+	FREQUENCY_0(0),
+	FREQUENCY_1(1),
+	;
 	
-	protected BaseAntiDDoSService() {
-		super(ServiceType.ANTI_DDOS);
+	private Integer val;
+	
+	private SendFrequency(Integer val) {
+		this.val = val;
 	}
 
-	protected BaseAntiDDoSService(Function<String, String> func) {
-		super(ServiceType.ANTI_DDOS, func);
+	@JsonValue
+	public Integer getVal() {
+		return val;
 	}
+	
+	@JsonCreator
+	public SendFrequency forValue(Integer val) {
+		if(val != null) {
+			for (SendFrequency freq : SendFrequency.values()) {
+				if(val.equals(freq.getVal())) {
+					return freq;
+				}
+			}
+		}
+		return null;
+	}
+	
 }

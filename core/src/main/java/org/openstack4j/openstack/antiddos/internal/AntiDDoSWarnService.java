@@ -15,18 +15,17 @@
  *******************************************************************************/
 package org.openstack4j.openstack.antiddos.internal;
 
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
+import org.openstack4j.common.RestService;
+import org.openstack4j.openstack.antiddos.domain.AntiDDoSWarn;
+import org.openstack4j.openstack.common.functions.ReplaceVersionOfURL;
 
-import com.google.common.base.Function;
-
-public class BaseAntiDDoSService extends BaseOpenStackService {
-	
-	protected BaseAntiDDoSService() {
-		super(ServiceType.ANTI_DDOS);
+public class AntiDDoSWarnService extends BaseAntiDDoSService implements RestService {
+	 
+	public AntiDDoSWarnService() {
+		super(ReplaceVersionOfURL.instance("/v2"));
 	}
-
-	protected BaseAntiDDoSService(Function<String, String> func) {
-		super(ServiceType.ANTI_DDOS, func);
+	
+	public AntiDDoSWarn query() {
+		return get(AntiDDoSWarn.class, uri("/warnalert/alertconfig/query")).execute();
 	}
 }

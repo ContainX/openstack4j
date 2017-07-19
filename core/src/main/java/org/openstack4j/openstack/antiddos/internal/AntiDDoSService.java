@@ -17,15 +17,21 @@ package org.openstack4j.openstack.antiddos.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.openstack.antiddos.domain.AntiDDoS;
 import org.openstack4j.openstack.antiddos.domain.AntiDDoSConfig;
+import org.openstack4j.openstack.antiddos.domain.AntiDDoSDailyData;
+import org.openstack4j.openstack.antiddos.domain.AntiDDoSDailyData.AntiDDoSDailyDatas;
+import org.openstack4j.openstack.antiddos.domain.AntiDDoSLog;
+import org.openstack4j.openstack.antiddos.domain.AntiDDoSLog.AntiDDoSLogs;
 import org.openstack4j.openstack.antiddos.domain.AntiDDoSStatus;
 import org.openstack4j.openstack.antiddos.domain.AntiDDoSStatus.AntiDDoSStatuses;
 import org.openstack4j.openstack.antiddos.domain.AntiDDoSStatusDetail;
 import org.openstack4j.openstack.antiddos.domain.Task;
+import org.openstack4j.openstack.antiddos.options.AntiDDoSLogListOptions;
 import org.openstack4j.openstack.antiddos.options.AntiDDoSStatusListOptions;
 
 import com.google.common.base.Strings;
@@ -70,23 +76,47 @@ public class AntiDDoSService extends BaseAntiDDoSService implements RestService 
 		return post(Task.class, uri("/antiddos/%s", floatingIpId)).entity(entity).execute();
 	}
 	
-	public Task getTask(String taskId) {
+	public Task task(String taskId) {
 		checkArgument(!Strings.isNullOrEmpty(taskId), "taskId is required");
 		return get(Task.class, uri("/query_task_status")).param("task_id", taskId).execute();
 	}
 	
-	public List<? extends AntiDDoSStatus> listAntiDDoSStatus() {
+	public List<? extends AntiDDoSStatus> statuses() {
 		return get(AntiDDoSStatuses.class, uri("/antiddos")).execute().getList();
 	}
 
-	public List<? extends AntiDDoSStatus> listAntiDDoSStatus(AntiDDoSStatusListOptions options) {
+	public List<? extends AntiDDoSStatus> statuses(AntiDDoSStatusListOptions options) {
 		checkArgument(options != null, "options is required");
 		return get(AntiDDoSStatuses.class, uri("/antiddos")).params(options.getOptions()).execute().getList();
 	}
 	
-	public AntiDDoSStatusDetail getStatus(String floatingIpId) {
+	public AntiDDoSStatusDetail status(String floatingIpId) {
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		return get(AntiDDoSStatusDetail.class, uri("/antiddos/%s/status", floatingIpId)).execute();
 	}
 	
+	public List<? extends AntiDDoSDailyData> daily(String floatingIpId) {
+		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
+		return get(AntiDDoSDailyDatas.class, uri("/antiddos/%s/daily", floatingIpId)).execute().getList();
+	}
+	
+	public List<? extends AntiDDoSLog> logs(String floatingIpId) {
+		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
+		return get(AntiDDoSLogs.class, uri("/antiddos/%s/logs", floatingIpId)).execute().getList();
+	}
+	
+	public List<? extends AntiDDoSLog> logs(String floatingIpId, AntiDDoSLogListOptions options) {
+		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
+		checkArgument(options != null, "options is required");
+		return get(AntiDDoSLogs.class, uri("/antiddos/%s/logs", floatingIpId)).params(options.getOptions()).execute().getList();
+	}
+	
+	public AntiDDoSWeeklyData weekly() {
+		return get(AntiDDoSWeeklyData.class, uri("/antiddos/weekly")).execute();
+	}
+	
+	public AntiDDoSWeeklyData weekly(Date periodStartDate) {
+		checkArgument(periodStartDate != null, "periodStartDate is required");
+		return get(AntiDDoSWeeklyData.class, uri("/antiddos/weekly")).param("period_start_date", periodStartDate.getTime()).execute();
+	}
 }

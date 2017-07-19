@@ -13,20 +13,9 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.antiddos.internal;
+package org.openstack4j.openstack.antiddos.constants;
 
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
-
-import com.google.common.base.Function;
-
-public class BaseAntiDDoSService extends BaseOpenStackService {
-	
-	protected BaseAntiDDoSService() {
-		super(ServiceType.ANTI_DDOS);
-	}
-
-	protected BaseAntiDDoSService(Function<String, String> func) {
-		super(ServiceType.ANTI_DDOS, func);
-	}
+public enum Sort {
+	DESC,
+	ASC;
 }
