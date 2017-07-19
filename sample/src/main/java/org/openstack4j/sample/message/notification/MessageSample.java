@@ -20,7 +20,7 @@ package org.openstack4j.sample.message.notification;
 import java.util.Map;
 
 import org.openstack4j.openstack.message.notification.constant.Protocol;
-import org.openstack4j.openstack.message.notification.domain.Message;
+import org.openstack4j.openstack.message.notification.domain.MessageIdResponse;
 import org.openstack4j.openstack.message.notification.domain.MessageTemplate;
 import org.openstack4j.openstack.message.notification.domain.MessageTemplateCreate;
 import org.openstack4j.openstack.message.notification.domain.StructuredMessage;
@@ -83,7 +83,7 @@ public class MessageSample extends AbstractSample {
 
 	@Test
 	public void testPublishMessage() {
-		Message message = osclient.notification().messages().publish(topic.getUrn(), "Hello", "Hello, there");
+		MessageIdResponse message = osclient.notification().messages().publish(topic.getUrn(), "Hello", "Hello, there");
 		Assert.assertNotNull(message.getId());
 		Assert.assertNotNull(message.getRequestId());
 	}
@@ -95,7 +95,7 @@ public class MessageSample extends AbstractSample {
 		TemplatedMessage templatedMessage = TemplatedMessage.builder().messageTemplateName(name).subject("hello")
 				.tags(tagReplacer).build();
 		// dont know why not success
-		Message message = osclient.notification().messages().publish(topic.getUrn(), templatedMessage);
+		MessageIdResponse message = osclient.notification().messages().publish(topic.getUrn(), templatedMessage);
 		Assert.assertNotNull(message.getId());
 		Assert.assertNotNull(message.getRequestId());
 	}
@@ -104,7 +104,7 @@ public class MessageSample extends AbstractSample {
 	public void testPublishStructuredMessage() {
 		StructuredMessage structuredMessage = StructuredMessage.builder().subject("hello")
 				.defaultMessage("hello, there").emailMessage("hello, email").build();
-		Message message = osclient.notification().messages().publish(topic.getUrn(), structuredMessage);
+		MessageIdResponse message = osclient.notification().messages().publish(topic.getUrn(), structuredMessage);
 		Assert.assertNotNull(message.getId());
 		Assert.assertNotNull(message.getRequestId());
 	}

@@ -15,7 +15,16 @@
  *******************************************************************************/
 package org.openstack4j.openstack.message.notification.internal;
 
+import static com.google.common.base.Preconditions.*;
+
+import java.util.Map;
+
 import org.openstack4j.common.RestService;
+import org.openstack4j.openstack.message.notification.domain.MessageIdResponse;
+
+import com.google.common.base.Strings;
+
+import com.beust.jcommander.internal.Maps;
 
 /**
  * Notification SMS Service 
@@ -24,5 +33,29 @@ import org.openstack4j.common.RestService;
  * @date   2017-07-17 09:35:34
  */
 public class SmsService extends BaseNotificationServices implements RestService {
+
+	/**
+	 * send a SMS
+	 * 
+	 * @param receiver			phone number	(required)
+	 * @param message			message content (required)
+	 * @param smsSignId			SMS sign ID 	(optional)
+	 * @return	{@link MessageIdResponse} instance
+ 	 */
+	public MessageIdResponse send(String receiver, String message, String smsSignId) {
+		checkNotNull(!Strings.isNullOrEmpty(receiver), "parameter `receiver` should not be null");
+		checkNotNull(!Strings.isNullOrEmpty(message), "parameter `message` should not be null");
+		if (!receiver.startsWith("+")) {
+			receiver = "+" + receiver;
+		}
+
+		Map<String, Object> body = Maps.newHashMap();
+		body.put("endpoint", receiver);
+		body.put("message", message);
+		if (!Strings.isNullOrEmpty(smsSignId)) {
+			body.put("sign_id", smsSignId);
+		}
+		return post(MessageIdResponse.class, uri("/notifications/sms")).entity(body).execute();
+	}
 
 }

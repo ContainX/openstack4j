@@ -22,6 +22,7 @@ import java.util.HashMap;
 import org.openstack4j.common.RestService;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.openstack.message.notification.domain.Message;
+import org.openstack4j.openstack.message.notification.domain.MessageIdResponse;
 import org.openstack4j.openstack.message.notification.domain.StructuredMessage;
 import org.openstack4j.openstack.message.notification.domain.TemplatedMessage;
 
@@ -44,14 +45,14 @@ public class MessageService extends BaseNotificationServices implements RestServ
 	 * @param topicUrn 		the topic URN (id)
 	 * @param subject		the message subject (EMAIL subject)
 	 * @param message		the message content
-	 * @return	{@linkplain Message} instance
+	 * @return	{@linkplain MessageIdResponse} instance
 	 */
-	public Message publish(String topicUrn, String subject, String message) {
+	public MessageIdResponse publish(String topicUrn, String subject, String message) {
 		checkNotNull(!Strings.isNullOrEmpty(topicUrn), "parameter `topicUrn` should not be empty");
 		checkNotNull(!Strings.isNullOrEmpty(message), "parameter `message` should not be empty");
 
 		Message msg = Message.builder().subject(subject).message(message).build();
-		return post(Message.class, uri("/notifications/topics/%s/publish", topicUrn)).entity(msg).execute();
+		return post(MessageIdResponse.class, uri("/notifications/topics/%s/publish", topicUrn)).entity(msg).execute();
 	}
 
 	/**
@@ -59,23 +60,23 @@ public class MessageService extends BaseNotificationServices implements RestServ
 	 * 
 	 * @param topicUrn		the topic URN (id)
 	 * @param message		the templated message modal
-	 * @return	{@linkplain Message} instance
+	 * @return	{@linkplain MessageIdResponse} instance
 	 */
-	public Message publish(String topicUrn, TemplatedMessage message) {
+	public MessageIdResponse publish(String topicUrn, TemplatedMessage message) {
 		checkNotNull(!Strings.isNullOrEmpty(topicUrn), "parameter `topicUrn` should not be null");
 		checkNotNull(message, "parameter `message` should not be null");
 		checkNotNull(!Strings.isNullOrEmpty(message.getMessageTemplateName()),
 				"parameter `message.messageTemplateName` should not be empty");
-		return post(Message.class, uri("/notifications/topics/%s/publish", topicUrn)).entity(message).execute();
+		return post(MessageIdResponse.class, uri("/notifications/topics/%s/publish", topicUrn)).entity(message).execute();
 	}
 
 	/**
 	 * publish a structured message to a topic
 	 * @param topicUrn		the topic URN (id)
 	 * @param message		the structured message modal
-	 * @return	{@linkplain Message} instance
+	 * @return	{@linkplain MessageIdResponse} instance
 	 */
-	public Message publish(String topicUrn, StructuredMessage message) {
+	public MessageIdResponse publish(String topicUrn, StructuredMessage message) {
 		checkNotNull(!Strings.isNullOrEmpty(topicUrn), "parameter `topicUrn` should not be null");
 		checkNotNull(message, "parameter `message` should not be null");
 		checkNotNull(!Strings.isNullOrEmpty(message.getDefaultMessage()),
@@ -89,7 +90,7 @@ public class MessageService extends BaseNotificationServices implements RestServ
 			if(!Strings.isNullOrEmpty(subject)) {
 				body.put("subject", subject);
 			}
-			return post(Message.class, uri("/notifications/topics/%s/publish", topicUrn)).entity(body).execute();
+			return post(MessageIdResponse.class, uri("/notifications/topics/%s/publish", topicUrn)).entity(body).execute();
 		} catch (JsonProcessingException e) {
 			// should not happen
 			throw new RuntimeException(e);

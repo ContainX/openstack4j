@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * @date   2017-07-18 09:07:40
  */
 public enum Protocol {
-
+	
 	EMAIL("email"),
 	SMS("sms"),
 	HTTP("http"),

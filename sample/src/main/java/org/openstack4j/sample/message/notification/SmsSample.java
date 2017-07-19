@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei tld and OTC                                
+ *  Copyright 2017 Huawei TLD
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,43 +13,23 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.message.notification.domain;
+/*******************************************************************************
+ *******************************************************************************/
+package org.openstack4j.sample.message.notification;
 
-import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.message.notification.domain.MessageIdResponse;
+import org.openstack4j.sample.AbstractSample;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+@Test(suiteName = "SimpleMessageNotificatoin/SMS/Sample")
+public class SmsSample extends AbstractSample {
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+	@Test
+	public void testPublishMessage() {
+		MessageIdResponse message = osclient.notification().sms().send("15659767757", "Hello, sms", null);
+		Assert.assertNotNull(message.getId());
+		Assert.assertNotNull(message.getRequestId());
+	}
 
-/**
- * A model represent a notification message 
- *
- * @author QianBiao.NG
- * @date   2017-07-18 10:41:47
- */
-@Getter
-@ToString
-@Builder(toBuilder = true)
-@NoArgsConstructor
-@AllArgsConstructor
-public class Message extends TracableRequest implements ModelEntity {
-
-	private static final long serialVersionUID = -6764087311133427927L;
-	
-	/**
-	 * subject of the message
-	 */
-	@JsonProperty("subject")
-	String subject;
-	
-	/**
-	 * content of the message
-	 */
-	@JsonProperty("message")
-	String message;
-	
 }

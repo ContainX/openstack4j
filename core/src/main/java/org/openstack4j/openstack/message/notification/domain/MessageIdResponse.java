@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * A model represent a notification message 
+ * A model represent a publish message action response
  *
  * @author QianBiao.NG
  * @date   2017-07-18 10:41:47
@@ -36,20 +36,14 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message extends TracableRequest implements ModelEntity {
+public class MessageIdResponse extends TracableRequest implements ModelEntity {
 
 	private static final long serialVersionUID = -6764087311133427927L;
 	
 	/**
-	 * subject of the message
+	 * identifier of this message
 	 */
-	@JsonProperty("subject")
-	String subject;
-	
-	/**
-	 * content of the message
-	 */
-	@JsonProperty("message")
-	String message;
+	@JsonProperty("message_id")
+	String id;
 	
 }
