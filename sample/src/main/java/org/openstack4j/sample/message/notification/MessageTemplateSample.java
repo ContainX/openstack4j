@@ -31,6 +31,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.util.Strings;
 
+import com.google.common.collect.Lists;
+
 @Test(suiteName = "SimpleMessageNotificatoin/MessageTemplate/Sample")
 public class MessageTemplateSample extends AbstractSample {
 
@@ -44,7 +46,7 @@ public class MessageTemplateSample extends AbstractSample {
 	public void prepare() {
 		MessageTemplateCreate create = MessageTemplateCreate.builder().name(name).protocol(Protocol.EMAIL)
 				.locale("zh-cn").content(name).build();
-		template = osclient.notification().templates().create(create);
+		template = osclient.notification().messageTemplates().create(create);
 	}
 
 	/**
@@ -52,13 +54,14 @@ public class MessageTemplateSample extends AbstractSample {
 	 */
 	@AfterClass
 	public void cleanup() {
-		TracableRequest delete = osclient.notification().templates().delete(template.getId());
+		TracableRequest delete = osclient.notification().messageTemplates().delete(template.getId());
 		Assert.assertTrue(!Strings.isNullOrEmpty(delete.getRequestId()));
 	}
-	
+
 	@Test(priority = 0)
 	public void testUpdateTemplate() {
-		TracableRequest update = osclient.notification().templates().updateContent(template.getId(), name + "-updated");
+		TracableRequest update = osclient.notification().messageTemplates().updateContent(template.getId(),
+				"sdk-unittest, {tag1}");
 		Assert.assertTrue(!Strings.isNullOrEmpty(update.getRequestId()));
 	}
 
@@ -66,7 +69,7 @@ public class MessageTemplateSample extends AbstractSample {
 	public void testListTemplates() {
 		MessageTemplateListOptions options = MessageTemplateListOptions.create().limit(1).offset(0).name(name)
 				.protocol(Protocol.EMAIL);
-		List<? extends MessageTemplate> templates = osclient.notification().templates().list(options);
+		List<? extends MessageTemplate> templates = osclient.notification().messageTemplates().list(options);
 
 		MessageTemplate messageTemplate = templates.get(0);
 		Assert.assertNotNull(messageTemplate);
@@ -77,16 +80,16 @@ public class MessageTemplateSample extends AbstractSample {
 
 	@Test(priority = 1)
 	public void testGetTemplate() {
-		MessageTemplate get = osclient.notification().templates().get(template.getId());
+		MessageTemplate get = osclient.notification().messageTemplates().get(template.getId());
 		Assert.assertNotNull(get);
 		Assert.assertEquals(get.getId(), get.getId());
 		Assert.assertEquals(get.getName(), name);
 		// Assert.assertEquals(get.getLocale(), "zh-cn");
 		Assert.assertEquals(get.getProtocol(), Protocol.EMAIL);
-		Assert.assertEquals(get.getContent(), name + "-updated");
+		Assert.assertEquals(get.getContent(), "sdk-unittest, {tag1}");
+		Assert.assertEquals(get.getTags(), Lists.newArrayList("tag1"));
 		Assert.assertNotNull(get.getCreateTime());
 		Assert.assertNotNull(get.getUpdateTime());
 	}
-
 
 }

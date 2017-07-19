@@ -27,7 +27,7 @@ import org.openstack4j.openstack.message.notification.domain.TracableRequest;
 import org.testng.util.Strings;
 
 /**
- * Notification Service Entry Point
+ * Notification Subscription Service
  *
  * @author QianBiao.NG
  * @date   2017-07-17 09:35:34

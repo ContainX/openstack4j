@@ -30,7 +30,7 @@ import org.openstack4j.openstack.message.notification.options.MessageTemplateLis
 import com.google.common.base.Strings;
 
 /**
- * Notification Service Entry Point
+ * Notification MessageTemplate Service
  *
  * @author QianBiao.NG
  * @date   2017-07-17 09:35:34

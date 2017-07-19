@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei TLD and OTC                                          
+ * 	Copyright 2017 HuaWei tld and OTC                                
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,62 +13,65 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.message.notification.internal;
+package org.openstack4j.openstack.message.notification.domain;
 
-import org.openstack4j.api.Apis;
-import org.openstack4j.common.RestService;
+import org.openstack4j.model.ModelEntity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
- * Notification Service Entry Point
+ * A model represent SMN message 
  *
  * @author QianBiao.NG
- * @date   2017-07-17 09:35:34
+ * @date   2017-07-18 10:41:47
  */
-public class NotificationService extends BaseNotificationServices implements RestService {
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class StructuredMessage extends TracableRequest implements ModelEntity {
 
-	/**
-	 * SMN Topic Service 
-	 * 
-	 * @return SMN Topic Service instance
-	 */
-	public TopicService topics() {
-		return Apis.get(TopicService.class);
-	}
-
-	/**
-	 * SMN Subscription Service 
-	 * 
-	 * @return SMN Subscription Service instance
-	 */
-	public SubscriptionService subscriptions() {
-		return Apis.get(SubscriptionService.class);
-	}
-
-	/**
-	 * SMN Message Template Service 
-	 * 
-	 * @return SMN Message Template Service instance
-	 */
-	public MessageTemplateService messageTemplates() {
-		return Apis.get(MessageTemplateService.class);
-	}
+	private static final long serialVersionUID = -6764087311133427927L;
+	
+	@JsonIgnore
+	String subject;
 	
 	/**
-	 * SMN Message Service 
-	 * 
-	 * @return SMN Message Service instance
+	 * default message
 	 */
-	public MessageService messages() {
-		return Apis.get(MessageService.class);
-	}
+	@JsonProperty("default")
+	String defaultMessage;
+	
+	/**
+	 * message for EMAIL protocol subscriber
+	 */
+	@JsonProperty("email")
+	String emailMessage;
+	
+	/**
+	 * message for SMS protocol subscriber
+	 */
+	@JsonProperty("sms")
+	String smsMessage;
 
 	/**
-	 * SMN SMS Service 
-	 * 
-	 * @return SMN SMS Service instance
+	 * message for HTTP protocol subscriber
 	 */
-	public SmsService sms() {
-		return Apis.get(SmsService.class);
-	}
-
+	@JsonProperty("http")
+	String httpMessage;
+	
+	/**
+	 * message for HTTPS protocol subscriber
+	 */
+	@JsonProperty("https")
+	String httpsMessage;
+	
 }

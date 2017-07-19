@@ -31,7 +31,7 @@ import org.openstack4j.openstack.message.notification.domain.TracableRequest;
 import com.google.common.collect.Maps;
 
 /**
- * Notification Service Entry Point
+ * Notification Topic Service
  *
  * @author QianBiao.NG
  * @date   2017-07-17 09:35:34
