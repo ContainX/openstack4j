@@ -36,11 +36,12 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import com.google.common.io.ByteStreams;
+
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.google.common.io.ByteStreams;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -82,7 +83,8 @@ public abstract class AbstractTest {
         VOLUME_BACKUP(10003),
         SAHARA(10004),
         KEY_MANAGEMENT(10005),
-        CLOUD_TRACKER(10006),
+        CLOUD_TRACE(10006),
+        NOTIFICATION(10007),
         ;
     	//@on
 

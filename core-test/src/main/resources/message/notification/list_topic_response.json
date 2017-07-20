@@ -1,0 +1,12 @@
+{ 
+    "request_id": "70bb40bef50e4a14b116a5a527fd7432",  
+    "topic_count": 1,  
+    "topics": [ 
+        { 
+            "topic_urn": "urn:smn:regionId:8bad8a40e0f7462f8c1676e3f93a8183:test_topic_v2",  
+            "display_name": "testtest",  
+            "name": "test_topic_v1",  
+            "push_policy": 0             
+        } 
+    ] 
+}
