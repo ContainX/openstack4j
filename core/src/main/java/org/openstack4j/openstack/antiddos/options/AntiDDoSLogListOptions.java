@@ -13,20 +13,41 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.antiddos.internal;
+package org.openstack4j.openstack.antiddos.options;
 
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
+import java.util.Map;
 
-import com.google.common.base.Function;
+import org.openstack4j.openstack.antiddos.constants.Sort;
 
-public class BaseAntiDDoSService extends BaseOpenStackService {
-	
-	protected BaseAntiDDoSService() {
-		super(ServiceType.ANTI_DDOS);
+import com.google.common.collect.Maps;
+
+public class AntiDDoSLogListOptions {
+
+	private Map<String, Object> queryParams = Maps.newHashMap();
+
+	private AntiDDoSLogListOptions add(String param, Object value) {
+		if (value != null)
+			this.queryParams.put(param, value);
+		return this;
 	}
 
-	protected BaseAntiDDoSService(Function<String, String> func) {
-		super(ServiceType.ANTI_DDOS, func);
+	public Map<String, Object> getOptions() {
+		return queryParams;
+	}
+
+	public static AntiDDoSLogListOptions create() {
+		return new AntiDDoSLogListOptions();
+	}
+	
+	public AntiDDoSLogListOptions limit(Integer limit) {
+		return add("limit", limit);
+	}
+	
+	public AntiDDoSLogListOptions offset(Integer offset) {
+		return add("offset", offset);
+	}
+	
+	public AntiDDoSLogListOptions sort(Sort sort) {
+		return add("sort_dir", sort.name().toLowerCase());
 	}
 }
