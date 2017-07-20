@@ -62,9 +62,10 @@ public class AntiDDoSConfig implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public class TrafficLimited {
+	public static class TrafficLimited {
 
 		/**
 		 * traffic position id
@@ -87,9 +88,10 @@ public class AntiDDoSConfig implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	private class HttpLimited {
+	public static class HttpLimited {
 
 		/**
 		 * http request position id
@@ -106,9 +108,10 @@ public class AntiDDoSConfig implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	private class ConnectionLimited {
+	public static class ConnectionLimited {
 		/**
 		 * access position id when cleaning
 		 */
@@ -130,9 +133,10 @@ public class AntiDDoSConfig implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	private class ExtendDDoSConfig {
+	public static class ExtendDDoSConfig {
 
 		/**
 		 * new connection limited
