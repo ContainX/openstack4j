@@ -38,7 +38,7 @@ import com.google.common.base.Strings;
 
 public class AntiDDoSService extends BaseAntiDDoSService implements RestService {
 
-	public AntiDDoSConfig listConfig() {
+	public AntiDDoSConfig configs() {
 		return get(AntiDDoSConfig.class, uri("/antiddos/query_config_list")).execute();
 	}
 
