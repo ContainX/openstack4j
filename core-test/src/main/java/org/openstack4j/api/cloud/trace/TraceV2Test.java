@@ -79,7 +79,7 @@ public class TraceV2Test extends AbstractTest {
 
 	@Override
 	protected Service service() {
-		return Service.CLOUD_TRACKER;
+		return Service.CLOUD_TRACE;
 	}
 
 }

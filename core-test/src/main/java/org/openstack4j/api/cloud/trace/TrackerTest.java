@@ -146,7 +146,7 @@ public class TrackerTest extends AbstractTest {
 
 	@Override
 	protected Service service() {
-		return Service.CLOUD_TRACKER;
+		return Service.CLOUD_TRACE;
 	}
 
 }
