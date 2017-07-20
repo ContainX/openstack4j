@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei TLD and OTC                                          
+ * 	Copyright 2017 HuaWei tld and OTC                                
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,28 +13,51 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.key.management.internal;
+package org.openstack4j.openstack.message.notification.domain;
 
-import org.openstack4j.api.Apis;
-import org.openstack4j.common.RestService;
+import java.util.Map;
+
+import org.openstack4j.model.ModelEntity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
- * 
+ * A model represent SMN message 
  *
  * @author QianBiao.NG
- * @date   2017-07-13 09:31:29
+ * @date   2017-07-18 10:41:47
  */
-public class KeyManagementService extends BaseKeyManagementServices implements RestService {
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class TemplatedMessage extends TracableRequest implements ModelEntity {
+
+	private static final long serialVersionUID = -6764087311133427927L;
+	
+	/**
+	 * message template(name) to be used
+	 */
+	@JsonProperty("message_template_name")
+	String messageTemplateName;
+	
+	/**
+	 * subject of the message
+	 */
+	@JsonProperty("subject")
+	String subject;
 
 	/**
-	 * 
-	 * @return
+	 * message template tags to be replaced
 	 */
-	public KeyService keys() {
-		return Apis.get(KeyService.class);
-	}
+	@JsonProperty("tags")
+	Map<String, Object> tags;
 	
-	public CryptoService crypto() {
-		return Apis.get(CryptoService.class);
-	}
 }

@@ -1,0 +1,12 @@
+{ 
+    "message_template_name": "confirm_message", 
+    "protocol": "https", 
+    "update_time": "2016-08-02T08:22:25Z", 
+    "create_time": "2016-08-02T08:22:20Z", 
+    "locale": "en-us", 
+    "tag_names": [ 
+        "topic_id_id4" 
+    ], 
+    "content": "(1/24)You are invited to subscribe to topic({topic_id_id4}). Click the following URL to confirm subscription:(If you do not want to subscribe to this topic, ignore this message.)", 
+    "message_template_id": "57ba8dcecda844878c5dd5815b65d10f" 
+}

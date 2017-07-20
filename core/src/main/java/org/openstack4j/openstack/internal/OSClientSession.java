@@ -63,6 +63,7 @@ import org.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
 import org.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
+import org.openstack4j.openstack.message.notification.internal.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -637,9 +638,20 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 			return Apis.get(CloudTraceV2Service.class);
 		}
 
+		/* 
+		 * {@inheritDoc}
+		 */
 		@Override
 		public AntiDDoSServices antiDDoS() {
 			return Apis.get(AntiDDoSServices.class);
+		}
+		
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public NotificationService notification() {
+			return Apis.get(NotificationService.class);
 		}
     }
 

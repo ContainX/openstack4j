@@ -1,0 +1,13 @@
+{
+	"request_id": "4650b14bf221492fb819c231d167e6fe",
+	"subscription_count": 1,
+	"subscriptions": [{
+		"topic_urn": "urn:smn:regionId:762bdb3251034f268af0e395c53ea09b:test_topic_v1",
+		"protocol": "email",
+		"subscription_urn": "urn:smn:regionId:762bdb3251034f268af0e395c53ea09b:test_topic_v1:a2d52a9f5c3b47f48c3fafb177a58796",
+		"owner": "762bdb3251034f268af0e395c53ea09b",
+		"endpoint": "xx@xx.com",
+		"remark": "",
+		"status": 0
+	}]
+}

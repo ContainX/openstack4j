@@ -1,0 +1,9 @@
+{ 
+    "update_time":"2016-08-01T02:16:38Z", 
+    "push_policy":0, 
+    "create_time":"2016-08-01T02:16:38Z", 
+    "name":"test_create_topic_v2", 
+    "topic_urn":"urn:smn:regionId:8bad8a40e0f7462f8c1676e3f93a8183:test_create_topic_v2", 
+    "display_name":"test create topic v2", 
+    "request_id":"6837531fd3f54550927b930180a706bf" 
+}

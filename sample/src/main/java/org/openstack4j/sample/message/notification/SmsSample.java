@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei TLD and OTC                                          
+ *  Copyright 2017 Huawei TLD
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,28 +13,23 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.key.management.internal;
+/*******************************************************************************
+ *******************************************************************************/
+package org.openstack4j.sample.message.notification;
 
-import org.openstack4j.api.Apis;
-import org.openstack4j.common.RestService;
+import org.openstack4j.openstack.message.notification.domain.MessageIdResponse;
+import org.openstack4j.sample.AbstractSample;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-/**
- * 
- *
- * @author QianBiao.NG
- * @date   2017-07-13 09:31:29
- */
-public class KeyManagementService extends BaseKeyManagementServices implements RestService {
+@Test(suiteName = "SimpleMessageNotificatoin/SMS/Sample")
+public class SmsSample extends AbstractSample {
 
-	/**
-	 * 
-	 * @return
-	 */
-	public KeyService keys() {
-		return Apis.get(KeyService.class);
+	@Test
+	public void testPublishMessage() {
+		MessageIdResponse message = osclient.notification().sms().send("15659767757", "Hello, sms", null);
+		Assert.assertNotNull(message.getId());
+		Assert.assertNotNull(message.getRequestId());
 	}
-	
-	public CryptoService crypto() {
-		return Apis.get(CryptoService.class);
-	}
+
 }

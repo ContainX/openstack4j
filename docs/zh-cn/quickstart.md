@@ -123,13 +123,14 @@ OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLReso
 				"https://elb.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		
 // 使用 credentials 进行认证
+String authUrl = "https://iam.eu-de.otc.t-systems.com/v3"; // identity(IAM) 服务的地址  + '/v3'
 String user = "replace-with-your-username";
 String password = "replace-with-your-password";
 String projectId = "d4f2557d248e4860829f5fef030b209c";
 String userDomainId = "bb42e2cd2b784ac4bdc350fb660a2bdb";
 osclient = OSFactory.builderV3()
 		.withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
-		.endpoint("https://iam.eu-de.otc.t-systems.com/v3")
+		.endpoint(authUrl)
 		.credentials(user, password, Identifier.byId(userDomainId))
 		.scopeToProject(Identifier.byId(projectId)).authenticate();
 ```

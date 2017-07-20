@@ -50,6 +50,7 @@ import org.openstack4j.openstack.antiddos.internal.AntiDDoSServices;
 import org.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
 import org.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
+import org.openstack4j.openstack.message.notification.internal.NotificationService;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -331,30 +332,42 @@ public interface OSClient<T extends OSClient<T>> {
 		AutoScalingService autoScaling();
 		
 		/**
+		 * get the Elastic Load Balance service 
 		 * @return the OTC Elastic Load Balance service
 		 */
 		ELBService loadBalancer();
 		
 		
 		/**
-		 * 
+		 * get the Key Management service 
 		 * @return the OTC Key Management service instance
  		 */
 		KeyManagementService keyManagement();
 		
 		/**
-		 * 
+		 * get the Cloud Trace V1 service 
 		 * @return the OTC Cloud Trace V1 service instance
 		 */
 		CloudTraceV1Service cloudTraceV1();
 		
 		/**
-		 * 
+		 * get the Cloud Trace V2 service 
 		 * @return the OTC Cloud Trace V2 service instance
 		 */
 		CloudTraceV2Service cloudTraceV2();
 		
+		
+		/**
+		 * get the AntiDDos service 
+		 * @return the OTC AntiDDos service instance
+		 */
 		AntiDDoSServices antiDDoS();
+		
+		/**
+		 * get the Simple Message Notification service 
+		 * @return the OTC Simple Message Notification service instance
+		 */
+		NotificationService notification();
 	}
 
 	/**

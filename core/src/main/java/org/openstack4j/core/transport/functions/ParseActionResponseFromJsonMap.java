@@ -43,10 +43,10 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
 	private static final String SAHARA_ERROR = "error_message";
 	private static final String KEY_MANAGEMENT_ERROR_MSG = "error_msg";
 
-	private static final String[] KEY_CODE_LIST = { "code", "errorCode", "error_code"};
+	private static final String[] KEY_CODE_LIST = { "code", "errorCode", "error_code", "Code"};
 	private static final String[] KEY_MESSAGE_LIST = { 
 		KEY_MESSAGE, NEUTRON_ERROR, COMPUTE_FAULT, TACKER_ERROR,
-		CLOUDEYE_ERROR, SAHARA_ERROR, KEY_MANAGEMENT_ERROR_MSG
+		CLOUDEYE_ERROR, SAHARA_ERROR, KEY_MANAGEMENT_ERROR_MSG, "Message"
 	};
 	private HttpResponse response;
 

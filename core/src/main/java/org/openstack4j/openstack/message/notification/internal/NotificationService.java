@@ -13,28 +13,62 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.key.management.internal;
+package org.openstack4j.openstack.message.notification.internal;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.common.RestService;
 
 /**
- * 
+ * Notification Service Entry Point
  *
  * @author QianBiao.NG
- * @date   2017-07-13 09:31:29
+ * @date   2017-07-17 09:35:34
  */
-public class KeyManagementService extends BaseKeyManagementServices implements RestService {
+public class NotificationService extends BaseNotificationServices implements RestService {
 
 	/**
+	 * SMN Topic Service 
 	 * 
-	 * @return
+	 * @return SMN Topic Service instance
 	 */
-	public KeyService keys() {
-		return Apis.get(KeyService.class);
+	public TopicService topics() {
+		return Apis.get(TopicService.class);
+	}
+
+	/**
+	 * SMN Subscription Service 
+	 * 
+	 * @return SMN Subscription Service instance
+	 */
+	public SubscriptionService subscriptions() {
+		return Apis.get(SubscriptionService.class);
+	}
+
+	/**
+	 * SMN Message Template Service 
+	 * 
+	 * @return SMN Message Template Service instance
+	 */
+	public MessageTemplateService messageTemplates() {
+		return Apis.get(MessageTemplateService.class);
 	}
 	
-	public CryptoService crypto() {
-		return Apis.get(CryptoService.class);
+	/**
+	 * SMN Message Service 
+	 * 
+	 * @return SMN Message Service instance
+	 */
+	public MessageService messages() {
+		return Apis.get(MessageService.class);
 	}
+
+	/**
+	 * SMN SMS Service 
+	 * 
+	 * @return SMN SMS Service instance
+	 */
+	public SmsService sms() {
+		return Apis.get(SmsService.class);
+	}
+
 }
