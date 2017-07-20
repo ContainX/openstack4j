@@ -24,7 +24,8 @@ import org.openstack4j.openstack.message.notification.domain.Subscription;
 import org.openstack4j.openstack.message.notification.domain.Subscription.Subscriptions;
 import org.openstack4j.openstack.message.notification.domain.SubscriptionCreate;
 import org.openstack4j.openstack.message.notification.domain.TracableRequest;
-import org.testng.util.Strings;
+
+import com.google.common.base.Strings;
 
 /**
  * Notification Subscription Service

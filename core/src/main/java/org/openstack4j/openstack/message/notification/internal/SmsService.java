@@ -23,8 +23,8 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.openstack.message.notification.domain.MessageIdResponse;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
-import com.beust.jcommander.internal.Maps;
 
 /**
  * Notification SMS Service 
