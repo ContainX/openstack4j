@@ -94,7 +94,6 @@ public class MessageSample extends AbstractSample {
 		tagReplacer.put("user", "tag-user");
 		TemplatedMessage templatedMessage = TemplatedMessage.builder().messageTemplateName(name).subject("hello")
 				.tags(tagReplacer).build();
-		// dont know why not success
 		MessageIdResponse message = osclient.notification().messages().publish(topic.getUrn(), templatedMessage);
 		Assert.assertNotNull(message.getId());
 		Assert.assertNotNull(message.getRequestId());

@@ -53,7 +53,8 @@ public class TopicSample extends AbstractSample {
 	 */
 	@AfterClass
 	public void cleanup() {
-		osclient.notification().topics().delete(topic.getUrn());
+		TracableRequest delete = osclient.notification().topics().delete(topic.getUrn());
+		Assert.assertFalse(Strings.isNullOrEmpty(delete.getRequestId()));
 	}
 
 	@Test(priority = 1)

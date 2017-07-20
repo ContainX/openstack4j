@@ -67,7 +67,24 @@ public class SubscriptionSample extends AbstractSample {
 	public void testListSubscriptions() {
 		List<? extends Subscription> subscriptions = osclient.notification().subscriptions().listByTopic(topic.getUrn(),
 				100, 0);
-		
+
+		Subscription found = null;
+		for (Subscription subscription : subscriptions) {
+			if (subscription.getUrn().equals(subscription.getUrn())) {
+				found = subscription;
+				break;
+			}
+		}
+		Assert.assertNotNull(found);
+		Assert.assertEquals(found.getEndpoint(), "xmufive@qq.com");
+		Assert.assertEquals(found.getProtocol(), Protocol.EMAIL);
+		Assert.assertEquals(found.getRemark(), "sdk-unittest");
+	}
+
+	@Test(priority = 1)
+	public void testListSubscriptions2() {
+		List<? extends Subscription> subscriptions = osclient.notification().subscriptions().list(100, 0);
+
 		Subscription found = null;
 		for (Subscription subscription : subscriptions) {
 			if (subscription.getUrn().equals(subscription.getUrn())) {

@@ -31,7 +31,38 @@
 
 	<build>
 		<finalName>openstack4j-core</finalName>
+		<sourceDirectory>target/generated-sources/delombok</sourceDirectory>
+		<testSourceDirectory>target/generated-test-sources/delombok</testSourceDirectory>
 		<plugins>
+			<plugin>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok-maven-plugin</artifactId>
+				<version>1.16.18.0</version>
+				<executions>
+					<execution>
+						<id>delombok</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>delombok</goal>
+						</goals>
+						<configuration>
+							<addOutputDirectory>false</addOutputDirectory>
+							<sourceDirectory>src/main/java</sourceDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>test-delombok</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>testDelombok</goal>
+						</goals>
+						<configuration>
+							<addOutputDirectory>false</addOutputDirectory>
+							<sourceDirectory>src/test/java</sourceDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -47,7 +78,7 @@
 							<shadedArtifactAttached>true</shadedArtifactAttached>
 							<!-- 
 							<createSourcesJar>true</createSourcesJar>
-							 -->
+							-->
 							<shadedClassifierName>withdeps</shadedClassifierName>
 						</configuration>
 					</execution>
@@ -123,6 +154,19 @@
 					</instructions>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -196,6 +240,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -236,7 +281,6 @@
 				<configuration>
 					<author>true</author>
 					<protected>true</protected>
-					<excludePackageNames>*.internal</excludePackageNames>
 					<reportOutputDirectory>docs</reportOutputDirectory>
 					<destDir>javadoc</destDir>
 					<additionalparam>-Xdoclint:none</additionalparam>

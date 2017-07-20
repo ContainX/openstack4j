@@ -31,6 +31,7 @@
 	<url>http://github.com/ContainX/openstack4j/</url>
 	<packaging>pom</packaging>
 	<properties>
+		<lombok.version>1.16.18</lombok.version>
 		<release.version>2.0.0</release.version>
 		<aries.spifly.version>1.0.0</aries.spifly.version>
 		<slf4j.version>1.7.21</slf4j.version>
@@ -259,7 +260,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.16.18</version>
+				<version>${lombok.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>

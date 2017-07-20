@@ -26,7 +26,6 @@ import org.openstack4j.openstack.sahara.constants.VolumeType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.collect.Lists;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -98,6 +97,6 @@ public class SaharaClusterCreate implements ModelEntity {
 	List<SaharaComponent> components;
 	
 	@JsonProperty("add_jobs")
-	List<SaharaJobExeCreate> jobs = Lists.newArrayList();
+	List<SaharaJobExeCreate> jobs;
 	
 }
