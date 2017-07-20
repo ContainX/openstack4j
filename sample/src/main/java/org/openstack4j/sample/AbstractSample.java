@@ -59,10 +59,8 @@ public class AbstractSample {
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
-//		String user = "replace-with-your-username";
-//		String password = "replace-with-your-password";
-		String user = "zhangdong";
-		String password = "hw@otc2017";
+		String user = "replace-with-your-username";
+		String password = "replace-with-your-password";
 		String projectId = "d4f2557d248e4860829f5fef030b209c";
 		String userDomainId = "bb42e2cd2b784ac4bdc350fb660a2bdb";
 		String authUrl = "https://iam.eu-de.otc.t-systems.com/v3";
