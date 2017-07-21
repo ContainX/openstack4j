@@ -83,7 +83,7 @@ public class AntiDDoSDailyData implements ModelEntity {
 	@JsonProperty("total_pps")
 	private Integer totalPps;
 	
-	public class AntiDDoSDailyDatas extends ListResult<AntiDDoSDailyData> {
+	public static class AntiDDoSDailyDatas extends ListResult<AntiDDoSDailyData> {
 
 		private static final long serialVersionUID = 3674265240585920922L;
 

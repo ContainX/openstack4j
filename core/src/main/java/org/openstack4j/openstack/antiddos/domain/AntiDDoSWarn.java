@@ -57,9 +57,10 @@ public class AntiDDoSWarn implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	private class Config {
+	public static class Config {
 		/**
 		 * Whether DDoS attack
 		 */

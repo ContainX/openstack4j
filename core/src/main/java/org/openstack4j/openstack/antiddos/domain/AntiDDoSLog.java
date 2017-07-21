@@ -78,7 +78,7 @@ public class AntiDDoSLog implements ModelEntity {
 	@JsonProperty("trigger_http_pps")
 	private Integer triggerHttpPps;
 	
-	public class AntiDDoSLogs extends ListResult<AntiDDoSLog> {
+	public static class AntiDDoSLogs extends ListResult<AntiDDoSLog> {
 
 		private static final long serialVersionUID = 8436517976118230703L;
 

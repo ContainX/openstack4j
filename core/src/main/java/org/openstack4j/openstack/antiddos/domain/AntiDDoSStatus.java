@@ -51,9 +51,10 @@ public class AntiDDoSStatus implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	private class DDoSStatus {
+	public static class DDoSStatus {
 
 		/**
 		 * floating ip address
@@ -79,7 +80,7 @@ public class AntiDDoSStatus implements ModelEntity {
 		private Status status;
 	}
 	
-	public class AntiDDoSStatuses extends ListResult<AntiDDoSStatus> {
+	public static class AntiDDoSStatuses extends ListResult<AntiDDoSStatus> {
 
 		private static final long serialVersionUID = 6346118253981717289L;
 
