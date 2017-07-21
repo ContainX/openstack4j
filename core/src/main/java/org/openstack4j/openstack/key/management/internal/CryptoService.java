@@ -33,7 +33,7 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
 
 /**
- * 
+ * Crypto Service
  *
  * @author QianBiao.NG
  * @date   2017-07-13 09:31:10

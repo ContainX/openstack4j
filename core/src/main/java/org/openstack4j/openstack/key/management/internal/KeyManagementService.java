@@ -27,13 +27,17 @@ import org.openstack4j.common.RestService;
 public class KeyManagementService extends BaseKeyManagementServices implements RestService {
 
 	/**
-	 * 
-	 * @return
+	 * Master Key Service API
+	 * @return the {@link KeyService} instance
 	 */
 	public KeyService keys() {
 		return Apis.get(KeyService.class);
 	}
 	
+	/**
+	 * Crypto Service API
+	 * @return the {@link CryptoService} instance
+	 */
 	public CryptoService crypto() {
 		return Apis.get(CryptoService.class);
 	}

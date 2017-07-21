@@ -20,7 +20,6 @@ import java.util.HashMap;
 import org.openstack4j.model.ModelEntity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.Maps;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,13 +55,10 @@ public class DecryptDEK implements ModelEntity {
 
 
 	@JsonProperty("encryption_context")
-	HashMap<String, Object> encryptionContext = Maps.newHashMap();
+	HashMap<String, Object> encryptionContext;
 
 	@JsonProperty("sequence")
 	String sequence;
 
-	public void addContext(String key, Object value) {
-		encryptionContext.put(key, value);
-	}
 
 }
