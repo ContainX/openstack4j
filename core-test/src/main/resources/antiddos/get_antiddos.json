@@ -1,0 +1,7 @@
+{
+    "enable_L7": true,
+    "traffic_pos_id": 1,
+    "http_request_pos_id": 1,
+    "cleaning_access_pos_id": 1,
+    "app_type_id": 0
+}

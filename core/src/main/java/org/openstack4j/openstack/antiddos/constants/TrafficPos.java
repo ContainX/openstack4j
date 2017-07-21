@@ -68,7 +68,7 @@ public enum TrafficPos {
 	}
 	
 	@JsonCreator
-	public TrafficPos forValue(Integer id) {
+	public static TrafficPos forValue(Integer id) {
 		if(id != null) {
 			for (TrafficPos pos : TrafficPos.values()) {
 				if(id.equals(pos.getId())) {

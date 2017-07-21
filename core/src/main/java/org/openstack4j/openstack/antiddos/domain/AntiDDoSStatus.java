@@ -20,7 +20,6 @@ import java.util.List;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.antiddos.constants.NetworkType;
 import org.openstack4j.openstack.antiddos.constants.Status;
-import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -78,18 +77,5 @@ public class AntiDDoSStatus implements ModelEntity {
 		 * status
 		 */
 		private Status status;
-	}
-	
-	public static class AntiDDoSStatuses extends ListResult<AntiDDoSStatus> {
-
-		private static final long serialVersionUID = 6346118253981717289L;
-
-		@JsonProperty("ddosStatus")
-		private List<AntiDDoSStatus> statuses;
-		
-		@Override
-		protected List<AntiDDoSStatus> value() {
-			return statuses;
-		}
 	}
 }

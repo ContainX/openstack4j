@@ -207,6 +207,7 @@ import org.openstack4j.api.workflow.WorkflowDefinitionService;
 import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.openstack.antiddos.internal.AntiDDoSService;
 import org.openstack4j.openstack.antiddos.internal.AntiDDoSServices;
+import org.openstack4j.openstack.antiddos.internal.AntiDDoSWarnService;
 import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
@@ -662,6 +663,7 @@ public class DefaultAPIProvider implements APIProvider {
 		//anti-ddos
 		bind(AntiDDoSServices.class, AntiDDoSServices.class);
 		bind(AntiDDoSService.class, AntiDDoSService.class);
+		bind(AntiDDoSWarnService.class, AntiDDoSWarnService.class);
 		
 		// simple message notification
 		bind(NotificationService.class, NotificationService.class);

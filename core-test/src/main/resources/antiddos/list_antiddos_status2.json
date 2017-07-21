@@ -1,0 +1,9 @@
+{
+    "total": 1,
+    "ddosStatus": [{
+        "floating_ip_id": "11ee0ec8-2b4f-438d-8235-dd22a3effa46",
+        "floating_ip_address": "160.44.196.90",
+        "network_type": "EIP",
+        "status": "normal"
+    }]
+}

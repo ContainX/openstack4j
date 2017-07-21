@@ -19,7 +19,6 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.antiddos.constants.SendFrequency;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +31,6 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("warn_config")
 public class AntiDDoSWarn implements ModelEntity {
 
 	private static final long serialVersionUID = 5554288057606873003L;

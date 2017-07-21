@@ -40,7 +40,7 @@ public enum Status {
 	}
 	
 	@JsonCreator
-	public Status forValue(String val) {
+	public static Status forValue(String val) {
 		if(!Strings.isNullOrEmpty(val)) {
 			for (Status status : Status.values()) {
 				if(val.equalsIgnoreCase(status.getVal())) {

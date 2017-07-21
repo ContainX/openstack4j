@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.antiddos.internal;
+package org.openstack4j.openstack.antiddos.domain;
 
 import java.util.Date;
 import java.util.List;
@@ -59,9 +59,10 @@ public class AntiDDoSWeeklyData implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	private class WeekData {
+	public static class WeekData {
 		/**
 		 * DDoS intercept times
 		 */
@@ -96,9 +97,10 @@ public class AntiDDoSWeeklyData implements ModelEntity {
 
 	@Getter
 	@ToString
+	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	private class IpData {
+	public static class IpData {
 
 		/**
 		 * floating ip address

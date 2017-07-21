@@ -1,0 +1,14 @@
+{
+    "warn_config": {
+        "antiDDoS": false,
+        "bruce_force": false,
+        "remote_login": false,
+        "weak_password": false,
+        "high_privilege": false,
+        "back_doors": false,
+        "waf": false,
+        "send_frequency": 0
+    },
+    "topic_urn": null,
+    "display_name": null
+}

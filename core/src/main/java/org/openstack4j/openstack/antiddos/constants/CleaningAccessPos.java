@@ -15,35 +15,32 @@
  *******************************************************************************/
 package org.openstack4j.openstack.antiddos.constants;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Access position
  */
 public enum CleaningAccessPos {
-	POS_1(1, 10, 30),
-	POS_2(2, 20, 100),
-	POS_3(3, 30, 200),
-	POS_4(4, 40, 250),
-	POS_5(5, 50, 300),
-	POS_6(6, 60, 500),
-	POS_7(7, 70, 600),
-	POS_8(8, 70, 700),
-	;
-	
+	POS_1(1, 10, 30), POS_2(2, 20, 100), POS_3(3, 30, 200), POS_4(4, 40, 250), POS_5(5, 50, 300), POS_6(6, 60,
+			500), POS_7(7, 70, 600), POS_8(8, 80, 700),;
+
 	/**
 	 * Access position id when cleaning
 	 */
 	private Integer id;
-	
+
 	/**
 	 * new connection limited
 	 */
 	private Integer newConnectionLimited;
-	
+
 	/**
 	 * total connection limited
 	 */
 	private Integer totalConnectionLimited;
 
+	@JsonValue
 	public Integer getId() {
 		return id;
 	}
@@ -55,10 +52,22 @@ public enum CleaningAccessPos {
 	public Integer getTotalConnectionLimited() {
 		return totalConnectionLimited;
 	}
-	
+
 	private CleaningAccessPos(Integer id, Integer newConnectionLimited, Integer totalConnectionLimited) {
 		this.id = id;
 		this.newConnectionLimited = newConnectionLimited;
 		this.totalConnectionLimited = totalConnectionLimited;
+	}
+
+	@JsonCreator
+	public static CleaningAccessPos forValue(Integer id) {
+		if (id != null) {
+			for (CleaningAccessPos pos : CleaningAccessPos.values()) {
+				if (id.equals(pos.getId())) {
+					return pos;
+				}
+			}
+		}
+		return null;
 	}
 }

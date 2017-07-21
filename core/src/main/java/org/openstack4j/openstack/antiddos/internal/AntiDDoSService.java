@@ -28,8 +28,8 @@ import org.openstack4j.openstack.antiddos.domain.AntiDDoSDailyData.AntiDDoSDaily
 import org.openstack4j.openstack.antiddos.domain.AntiDDoSLog;
 import org.openstack4j.openstack.antiddos.domain.AntiDDoSLog.AntiDDoSLogs;
 import org.openstack4j.openstack.antiddos.domain.AntiDDoSStatus;
-import org.openstack4j.openstack.antiddos.domain.AntiDDoSStatus.AntiDDoSStatuses;
 import org.openstack4j.openstack.antiddos.domain.AntiDDoSStatusDetail;
+import org.openstack4j.openstack.antiddos.domain.AntiDDoSWeeklyData;
 import org.openstack4j.openstack.antiddos.domain.Task;
 import org.openstack4j.openstack.antiddos.options.AntiDDoSLogListOptions;
 import org.openstack4j.openstack.antiddos.options.AntiDDoSStatusListOptions;
@@ -38,85 +38,87 @@ import com.google.common.base.Strings;
 
 public class AntiDDoSService extends BaseAntiDDoSService implements RestService {
 
-	public AntiDDoSConfig configs() {
+	public AntiDDoSConfig listConfigs() {
 		return get(AntiDDoSConfig.class, uri("/antiddos/query_config_list")).execute();
 	}
 
 	public Task create(AntiDDoS entity, String floatingIpId) {
-		checkArgument(entity !=null, "entity is required");
+		checkArgument(entity != null, "entity is required");
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		checkArgument(entity.getEnableL7() != null, "enableL7 is required");
 		checkArgument(entity.getTrafficPos() != null, "trafficPos is required");
 		checkArgument(entity.getHttpRequestPos() != null, "httpRequestPos is required");
 		checkArgument(entity.getCleaningAccessPos() != null, "cleaningAccessPos is required");
 		checkArgument(entity.getAppType() != null, "appType is required");
-		
+
 		return post(Task.class, uri("/antiddos/%s", floatingIpId)).entity(entity).execute();
 	}
-	
+
 	public Task delete(String floatingIpId) {
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		return delete(Task.class, uri("/antiddos/%s", floatingIpId)).execute();
 	}
-	
+
 	public AntiDDoS get(String floatingIpId) {
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		return get(AntiDDoS.class, uri("/antiddos/%s", floatingIpId)).execute();
 	}
-	
+
 	public Task update(AntiDDoS entity, String floatingIpId) {
-		checkArgument(entity !=null, "entity is required");
+		checkArgument(entity != null, "entity is required");
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		checkArgument(entity.getEnableL7() != null, "enableL7 is required");
 		checkArgument(entity.getTrafficPos() != null, "trafficPos is required");
 		checkArgument(entity.getHttpRequestPos() != null, "httpRequestPos is required");
 		checkArgument(entity.getCleaningAccessPos() != null, "cleaningAccessPos is required");
 		checkArgument(entity.getAppType() != null, "appType is required");
-		
-		return post(Task.class, uri("/antiddos/%s", floatingIpId)).entity(entity).execute();
+
+		return put(Task.class, uri("/antiddos/%s", floatingIpId)).entity(entity).execute();
 	}
-	
-	public Task task(String taskId) {
+
+	public Task getTask(String taskId) {
 		checkArgument(!Strings.isNullOrEmpty(taskId), "taskId is required");
 		return get(Task.class, uri("/query_task_status")).param("task_id", taskId).execute();
 	}
-	
-	public List<? extends AntiDDoSStatus> statuses() {
-		return get(AntiDDoSStatuses.class, uri("/antiddos")).execute().getList();
+
+	public AntiDDoSStatus listStatus() {
+		return get(AntiDDoSStatus.class, uri("/antiddos")).execute();
 	}
 
-	public List<? extends AntiDDoSStatus> statuses(AntiDDoSStatusListOptions options) {
+	public AntiDDoSStatus listStatus(AntiDDoSStatusListOptions options) {
 		checkArgument(options != null, "options is required");
-		return get(AntiDDoSStatuses.class, uri("/antiddos")).params(options.getOptions()).execute().getList();
+		return get(AntiDDoSStatus.class, uri("/antiddos")).params(options.getOptions()).execute();
 	}
-	
-	public AntiDDoSStatusDetail status(String floatingIpId) {
+
+	public AntiDDoSStatusDetail getStatus(String floatingIpId) {
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		return get(AntiDDoSStatusDetail.class, uri("/antiddos/%s/status", floatingIpId)).execute();
 	}
-	
-	public List<? extends AntiDDoSDailyData> daily(String floatingIpId) {
+
+	public List<? extends AntiDDoSDailyData> dailyReport(String floatingIpId) {
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		return get(AntiDDoSDailyDatas.class, uri("/antiddos/%s/daily", floatingIpId)).execute().getList();
 	}
-	
-	public List<? extends AntiDDoSLog> logs(String floatingIpId) {
+
+	public List<? extends AntiDDoSLog> listLogs(String floatingIpId) {
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		return get(AntiDDoSLogs.class, uri("/antiddos/%s/logs", floatingIpId)).execute().getList();
 	}
-	
-	public List<? extends AntiDDoSLog> logs(String floatingIpId, AntiDDoSLogListOptions options) {
+
+	public List<? extends AntiDDoSLog> listLogs(String floatingIpId, AntiDDoSLogListOptions options) {
 		checkArgument(!Strings.isNullOrEmpty(floatingIpId), "floatingIpId is required");
 		checkArgument(options != null, "options is required");
-		return get(AntiDDoSLogs.class, uri("/antiddos/%s/logs", floatingIpId)).params(options.getOptions()).execute().getList();
+		return get(AntiDDoSLogs.class, uri("/antiddos/%s/logs", floatingIpId)).params(options.getOptions()).execute()
+				.getList();
 	}
-	
-	public AntiDDoSWeeklyData weekly() {
+
+	public AntiDDoSWeeklyData weeklyReport() {
 		return get(AntiDDoSWeeklyData.class, uri("/antiddos/weekly")).execute();
 	}
-	
-	public AntiDDoSWeeklyData weekly(Date periodStartDate) {
+
+	public AntiDDoSWeeklyData weeklyReport(Date periodStartDate) {
 		checkArgument(periodStartDate != null, "periodStartDate is required");
-		return get(AntiDDoSWeeklyData.class, uri("/antiddos/weekly")).param("period_start_date", periodStartDate.getTime()).execute();
+		return get(AntiDDoSWeeklyData.class, uri("/antiddos/weekly"))
+				.param("period_start_date", periodStartDate.getTime()).execute();
 	}
 }

@@ -21,6 +21,8 @@ import org.openstack4j.openstack.antiddos.constants.CleaningAccessPos;
 import org.openstack4j.openstack.antiddos.constants.HttpRequestPos;
 import org.openstack4j.openstack.antiddos.constants.TrafficPos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,13 +38,18 @@ public class AntiDDoS implements ModelEntity {
 
 	private static final long serialVersionUID = -1475286444132857293L;
 	
+	@JsonProperty("enable_L7")
 	private Boolean enableL7;
 	
+	@JsonProperty("traffic_pos_id")
 	private TrafficPos trafficPos;
 	
+	@JsonProperty("http_request_pos_id")
 	private HttpRequestPos httpRequestPos;
 	
+	@JsonProperty("cleaning_access_pos_id")
 	private CleaningAccessPos cleaningAccessPos;
 	
+	@JsonProperty("app_type_id")
 	private AppType appType;
 }

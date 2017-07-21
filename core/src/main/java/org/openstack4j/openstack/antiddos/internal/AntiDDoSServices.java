@@ -24,4 +24,8 @@ public class AntiDDoSServices extends BaseAntiDDoSService implements RestService
 		return Apis.get(AntiDDoSService.class);
 	}
 	
+	public AntiDDoSWarnService warnalert() {
+		return Apis.get(AntiDDoSWarnService.class);
+	}
+	
 }

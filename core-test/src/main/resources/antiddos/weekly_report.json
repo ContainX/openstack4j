@@ -1,0 +1,59 @@
+{
+    "ddos_intercept_times": 0,
+    "weekdata": [{
+        "ddos_intercept_times": 0,
+        "ddos_blackhole_times": 0,
+        "max_attack_bps": 0,
+        "max_attack_conns": 0,
+        "period_start_date": 1499677503437
+    }, {
+        "ddos_intercept_times": 0,
+        "ddos_blackhole_times": 0,
+        "max_attack_bps": 0,
+        "max_attack_conns": 0,
+        "period_start_date": 1499763903437
+    }, {
+        "ddos_intercept_times": 0,
+        "ddos_blackhole_times": 0,
+        "max_attack_bps": 0,
+        "max_attack_conns": 0,
+        "period_start_date": 1499850303437
+    }, {
+        "ddos_intercept_times": 0,
+        "ddos_blackhole_times": 0,
+        "max_attack_bps": 0,
+        "max_attack_conns": 0,
+        "period_start_date": 1499936703437
+    }, {
+        "ddos_intercept_times": 0,
+        "ddos_blackhole_times": 0,
+        "max_attack_bps": 0,
+        "max_attack_conns": 0,
+        "period_start_date": 1500023103437
+    }, {
+        "ddos_intercept_times": 0,
+        "ddos_blackhole_times": 0,
+        "max_attack_bps": 0,
+        "max_attack_conns": 0,
+        "period_start_date": 1500109503437
+    }, {
+        "ddos_intercept_times": 0,
+        "ddos_blackhole_times": 0,
+        "max_attack_bps": 0,
+        "max_attack_conns": 0,
+        "period_start_date": 1500195903437
+    }],
+    "top10": [],
+    "weeklyCountTableHeader": ["ddos_intercept_times", "max_attack_bps", "max_attack_conns", "period_start_date"],
+    "weeklyCountTableBody": [
+        ["0", "0", "0", "2017-07-10 11:05:03"],
+        ["0", "0", "0", "2017-07-11 11:05:03"],
+        ["0", "0", "0", "2017-07-12 11:05:03"],
+        ["0", "0", "0", "2017-07-13 11:05:03"],
+        ["0", "0", "0", "2017-07-14 11:05:03"],
+        ["0", "0", "0", "2017-07-15 11:05:03"],
+        ["0", "0", "0", "2017-07-16 11:05:03"]
+    ],
+    "weeklyTop10TableHeader": ["floating_ip_address", "times"],
+    "weeklyTop10TableBody": []
+}

@@ -26,10 +26,11 @@ public enum TaskStatus {
 	FAILED,
 	WAITING,
 	RUNNING,
+	READY
 	;
 	
 	@JsonCreator
-	public TaskStatus forValue(String val) {
+	public static TaskStatus forValue(String val) {
 		if(!Strings.isNullOrEmpty(val)) {
 			for (TaskStatus status : TaskStatus.values()) {
 				if(val.equalsIgnoreCase(status.name())) {

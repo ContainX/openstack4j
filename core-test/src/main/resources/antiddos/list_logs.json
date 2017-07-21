@@ -1,0 +1,6 @@
+{
+    "total": 0,
+    "logs": [],
+    "tableHeader": ["start_time", "end_time", "status", "trigger_bps", "trigger_pps", "trigger_http_pps"],
+    "tableBody": []
+}

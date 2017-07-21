@@ -64,7 +64,7 @@ public enum HttpRequestPos {
 	}
 	
 	@JsonCreator
-	public HttpRequestPos forValue(Integer id) {
+	public static HttpRequestPos forValue(Integer id) {
 		if(id != null) {
 			for (HttpRequestPos pos : HttpRequestPos.values()) {
 				if(id.equals(pos.getId())) {
