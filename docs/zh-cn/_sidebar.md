@@ -8,4 +8,5 @@
   - [MRS](zh-cn/mrs-sdk.md)
   - [KMS](zh-cn/kms-sdk.md)
   - [CTS](zh-cn/cts-sdk.md)
+  - [SMN](zh-cn/smn-sdk.md)
 - [贡献代码](zh-cn/contributing.md)

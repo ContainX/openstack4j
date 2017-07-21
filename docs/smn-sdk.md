@@ -1,146 +1,146 @@
 # SMN SDK
 
 OTC OpenStack4j Simple Message Notification SDK
-- 服务入口: `osclient.notification()`
-- 服务类型: `notification`
+- Service Entry: `osclient.notification()`
+- Service Type: `notification`
 
 
-## API接口文档
+## API Documentation
 
-请查阅 [官方接口文档](https://docs.otc.t-systems.com/en-us/api/smn/en-us_topic_0036017316.html)
+Refer: [Official API documentation](https://docs.otc.t-systems.com/en-us/api/smn/en-us_topic_0036017316.html)
   
 ##  Topic
-### 创建Topic
+### Create Topic
 ```java
 Topic topic = osclient.notification().topics().create("topic-name", "display-name");
 ```
 
-### 更新Topic
+### Update Topic
 ```java
 String topicUrn = "topic-urn";
 String displayName = "new-display-name";
 TracableRequest updated = osclient.notification().topics().updateDisplayName(topicUrn, displayName);
 ```
 
-### 删除Topic
+### Delete Topic
 ```java
 String topicUrn = "topic-urn";
 TracableRequest request = osclient.notification().topics().delete(topicUrn);
 ```
 
-### 查询Topic列表
+### List Topic
 ```java
 List<? extends Topic> topics = osclient.notification().topics().list(100, 0);
 ```
 
-### 查询Topic详情
+### Get Topic
 ```java
 String topicUrn = "topic-urn";
 Topic get = osclient.notification().topics().get(topicUrn);
 ```
 
-### 查询Topic属性
+### List Topic Attribute
 ```java
 String topicUrn = "topic-urn";
 TopicAttributes attrs = osclient.notification().topics().getTopicAttributes(topicUrn);
 System.out.println(attrs.getIntroduction());
 ```
 
-### 查询Topic单个属性
+### Get Topic Attribute
 ```java
 String topicUrn = "topic-urn";
 String attr = osclient.notification().topics().getTopicAttribute(topicUrn, TopicAttributeName.Introduction);
 ```
 
-### 更新Topic属性
+### Update Topic Attribute
 ```java
 String topicUrn = "topic-urn";
 TracableRequest request = osclient.notification().topics()
 							.updateTopicAttribute(topicUrn, TopicAttributeName.Introduction, "sdk-unittest");
 ```
 
-### 删除指定名称的Topic属性
+### Delete Topic Attribute
 ```java
 String topicUrn = "topic-urn";
 TracableRequest request = osclient.notification().topics()
 							.deleteTopicAttribute(topicUrn, TopicAttributeName.Introduction);
 ```
 
-### 删除所有Topic属性
+### Delete Topic Attributes
 ```java
 String topicUrn = "topic-urn";
 TracableRequest request = osclient.notification().topics().deleteTopicAttributes(topicUrn);
 ```
 
 
-## 订阅
-### 查询订阅者列表
+## Subscription
+### List Subscription
 ```java
 List<? extends Subscription> subscriptions = osclient.notification().subscriptions().list(100, 0);
 ```
 
-### 查询指定主题的订阅者列表
+### List Subscription of topic
 ```java
 List<? extends Subscription> subscriptions = osclient.notification().subscriptions().listByTopic("topic-urn", 100, 0);
 ```
 
-### 订阅
+### Subscribe
 ```java
 SubscriptionCreate subscribe = SubscriptionCreate.builder().topicUrn("topic-urn").endpoint("xx@xx.com")
 				.protocol(Protocol.EMAIL).remark("sdk-unittest").build();
 Subscription subscription = osclient.notification().subscriptions().subscribe(subscribe);
 ```
 
-### 取消订阅
+### Unsubscribe
 ```java
 TracableRequest unsubscribe = osclient.notification().subscriptions().unsubscribe("subscription-urn");
 ```
 
-## 消息模板
-### 创建消息模板
+## Message Template
+### Create Message Template
 ```java
 MessageTemplateCreate create = MessageTemplateCreate.builder().name("template-name").protocol(Protocol.EMAIL)
 				.locale("zh-cn").content("content").build();
 MessageTemplate	template = osclient.notification().messageTemplates().create(create);
 ```
 
-### 更新消息模板
+### Update Message Template
 ```java
 TracableRequest update = osclient.notification().messageTemplates().updateContent("message-template-id",
 				"Hello, {user}");
 ```
 
-### 删除消息模板
+### Delete Message Template
 ```java
 TracableRequest delete = osclient.notification().messageTemplates().delete("message-template-id");
 ```
 
-### 查询消息模板列表
+### List Message Template
 ```java
 MessageTemplateListOptions options = MessageTemplateListOptions.create().limit(1).offset(0).name("template-name")
 				.protocol(Protocol.EMAIL);
 List<? extends MessageTemplate> templates = osclient.notification().messageTemplates().list(options);
 ```
 
-### 查询消息模板详情
+### Get Message Template
 ```java
 MessageTemplate get = osclient.notification().messageTemplates().get("message-template-id");
 ```
 
-## 消息发布
-### 消息发布
+## Message
+### Publish Message
 ```java
 MessageIdResponse message = osclient.notification().messages().publish("topic-urn", "subject", "message-content");
 ```
 
-### 使用消息结构体方式的消息发布
+### Publish Structured Message
 ```java
 StructuredMessage structuredMessage = StructuredMessage.builder().subject("hello")
 				.defaultMessage("hello, there").emailMessage("hello, email").build();
 MessageIdResponse message = osclient.notification().messages().publish("topic-urn", structuredMessage);
 ```
 
-### 使用消息模板方式的消息发布
+### Publish Templated Message
 ```java
 Map<String, Object> tagReplacer = Maps.newHashMap();
 tagReplacer.put("user", "tag-user");
@@ -149,9 +149,8 @@ TemplatedMessage templatedMessage = TemplatedMessage.builder().messageTemplateNa
 MessageIdResponse message = osclient.notification().messages().publish("topic-urn", templatedMessage);
 ```
 
-## 短信直发
-
-### 发送短信
+##  SMS
+### Send SMS
 ```java
 MessageIdResponse message = osclient.notification().sms().send("15659767757", "Hello, sms", null);
 ```
