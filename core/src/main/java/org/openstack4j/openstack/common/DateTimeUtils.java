@@ -29,6 +29,11 @@ public class DateTimeUtils {
 	public static final String FORMAT_YMDHMS = "yyyy-MM-dd HH:mm:ss";
 	
 	/**
+	 * DateTime format yyyy-MM-d
+	 */
+	public static final String FORMAT_YMD = "yyyy-MM-d";
+	
+	/**
 	 * format date
 	 * @param date
 	 * @param format

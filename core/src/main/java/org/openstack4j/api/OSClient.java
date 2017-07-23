@@ -50,6 +50,7 @@ import org.openstack4j.openstack.antiddos.internal.AntiDDoSServices;
 import org.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
 import org.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
+import org.openstack4j.openstack.maas.internal.MaaSService;
 import org.openstack4j.openstack.message.notification.internal.NotificationService;
 
 /**
@@ -368,6 +369,12 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the OTC Simple Message Notification service instance
 		 */
 		NotificationService notification();
+		
+		/**
+		 * MaaS service
+		 * @return the OTC MaaS service instance
+		 */
+		MaaSService maas();
 	}
 
 	/**

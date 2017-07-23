@@ -290,6 +290,8 @@ import org.openstack4j.openstack.loadbalance.internal.ELBLoadBalancerServiceImpl
 import org.openstack4j.openstack.loadbalance.internal.ELBQuotaServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBServerServiceImpl;
 import org.openstack4j.openstack.loadbalance.internal.ELBServiceImpl;
+import org.openstack4j.openstack.maas.internal.MaaSService;
+import org.openstack4j.openstack.maas.internal.VersionService;
 import org.openstack4j.openstack.magnum.internal.MagnumServiceImpl;
 import org.openstack4j.openstack.manila.internal.SchedulerStatsServiceImpl;
 import org.openstack4j.openstack.manila.internal.SecurityServiceServiceImpl;
@@ -672,6 +674,11 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(MessageTemplateService.class, MessageTemplateService.class);
 		bind(MessageService.class, MessageService.class);
 		bind(SmsService.class, SmsService.class);
+		
+		//maas
+		bind(MaaSService.class, MaaSService.class);
+		bind(VersionService.class, VersionService.class);
+		bind(org.openstack4j.openstack.maas.internal.TaskService.class, org.openstack4j.openstack.maas.internal.TaskService.class);
 	}
 
 	/**
