@@ -38,6 +38,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
     	super();
     }
 
+    public KeystoneAuth(String tokenId) {
+        this.identity = AuthIdentity.createTokenType(tokenId);
+        this.type = Type.TOKEN;
+    }
+
     public KeystoneAuth(String tokenId, AuthScope scope) {
         this.identity = AuthIdentity.createTokenType(tokenId);
         this.scope = scope;
