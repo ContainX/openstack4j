@@ -1,17 +1,17 @@
 package org.openstack4j.connectors.resteasy.executors;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
-import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.openstack4j.core.transport.Config;
+import org.openstack4j.core.transport.UntrustedSSL;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Default Apache HttpClient based Executor
@@ -25,26 +25,42 @@ public class ApacheHttpClientExecutor extends ApacheHttpClient4Executor {
     }
     
     public static ApacheHttpClientExecutor create(Config config) {
-        
-        HttpParams params = new BasicHttpParams();
-        if (config.getReadTimeout() > 0)
-            HttpConnectionParams.setSoTimeout(params, config.getReadTimeout());
-        
-        if (config.getConnectTimeout() > 0)
-            HttpConnectionParams.setConnectionTimeout(params, config.getConnectTimeout());
-        
-        HttpClient client = new DefaultHttpClient(params);
-        
+
+        RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+
+        if (config.getReadTimeout() > 0) {
+            requestConfigBuilder.setConnectionRequestTimeout(config.getReadTimeout());
+        }
+
+        if (config.getConnectTimeout() > 0) {
+            requestConfigBuilder.setConnectTimeout(config.getConnectTimeout());
+        }
+
+        /*HttpClient client*/
+
+        HttpClientBuilder httpClientBuilder = HttpClients.custom();
+
+        if (config.isIgnoreSSLVerification()) {
+            httpClientBuilder.setSSLContext(UntrustedSSL.getSSLContext());
+            httpClientBuilder.setSSLHostnameVerifier(new NoopHostnameVerifier());
+        }
+
+        if (config.getHostNameVerifier() != null) {
+            httpClientBuilder.setSSLHostnameVerifier(config.getHostNameVerifier());
+        }
+
         if (config.getProxy() != null) {
             try {
                 URL url = new URL(config.getProxy().getHost());
                 HttpHost proxy = new HttpHost(url.getHost(), config.getProxy().getPort(), url.getProtocol());
-                client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
+                requestConfigBuilder.setProxy(proxy);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
-        
+
+        httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
+        HttpClient client = httpClientBuilder.build();
         return new ApacheHttpClientExecutor(client);
     }
     
