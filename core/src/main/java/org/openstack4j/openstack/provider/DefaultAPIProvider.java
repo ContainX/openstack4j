@@ -305,6 +305,11 @@ import org.openstack4j.openstack.message.notification.internal.NotificationServi
 import org.openstack4j.openstack.message.notification.internal.SmsService;
 import org.openstack4j.openstack.message.notification.internal.SubscriptionService;
 import org.openstack4j.openstack.message.notification.internal.TopicService;
+import org.openstack4j.openstack.message.queue.internal.ConsumerGroupService;
+import org.openstack4j.openstack.message.queue.internal.MessageQueueQuotaService;
+import org.openstack4j.openstack.message.queue.internal.MessageQueueService;
+import org.openstack4j.openstack.message.queue.internal.QueueMessageService;
+import org.openstack4j.openstack.message.queue.internal.QueueService;
 import org.openstack4j.openstack.murano.v1.internal.MuranoActionServiceImpl;
 import org.openstack4j.openstack.murano.v1.internal.MuranoApplicationServiceImpl;
 import org.openstack4j.openstack.murano.v1.internal.MuranoDeploymentServiceImpl;
@@ -670,6 +675,14 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(MessageTemplateService.class, MessageTemplateService.class);
 		bind(MessageService.class, MessageService.class);
 		bind(SmsService.class, SmsService.class);
+		
+		
+		// distributed message
+		bind(MessageQueueService.class, MessageQueueService.class);
+		bind(QueueMessageService.class, QueueMessageService.class);
+		bind(QueueService.class, QueueService.class);
+		bind(ConsumerGroupService.class, ConsumerGroupService.class);
+		bind(MessageQueueQuotaService.class, MessageQueueQuotaService.class);
 	}
 
 	/**
