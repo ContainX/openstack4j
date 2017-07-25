@@ -56,13 +56,15 @@ public class AbstractSample {
 				"https://antiddos.eu-de.otc.t-systems.com/v1/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.Notification,
 				"https://smn.eu-de.otc.t-systems.com/v2/%(project_id)s");
+		endpointResolver.addOverrideEndpoint(ServiceType.MessageQueue,
+				"https://dms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.MAAS,
 				"https://maas.eu-de.otc.t-systems.com/v1/%(project_id)s/objectstorage");
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
-		String user = "replace-with-your-username";
-		String password = "replace-with-your-password";
+		String user = "zhangdong";
+		String password = "hw@otc2017";
 		String projectId = "d4f2557d248e4860829f5fef030b209c";
 		String userDomainId = "bb42e2cd2b784ac4bdc350fb660a2bdb";
 		String authUrl = "https://iam.eu-de.otc.t-systems.com/v3";

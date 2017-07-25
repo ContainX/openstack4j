@@ -1,0 +1,20 @@
+{ 
+  "queue_name": "queue_003",  
+  "queue_id": "075ae7da-6ce5-4966-940c-17c19fb5175e",  
+  "groups": [ 
+    { 
+      "id": "g-5ec247fd-d4a2-4d4f-9876-e4ff3280c461",  
+      "name": "abcDffD",  
+      "produced_messages": "0",  
+      "consumed_messages": "0",  
+      "available_messages": "0" 
+    },  
+    { 
+      "id": "g-96e79286-5cb8-47f0-9fe0-0769f6de2e4d",  
+      "name": "abcDffsss",  
+      "produced_messages": "0",  
+      "consumed_messages": "0",  
+      "available_messages": "0" 
+    } 
+  ] 
+}

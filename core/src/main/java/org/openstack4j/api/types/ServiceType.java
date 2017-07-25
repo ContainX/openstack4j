@@ -50,6 +50,7 @@ public enum ServiceType {
 	CLOUD_TRACE("CTS", "cloud-trace"),
 	ANTI_DDOS("antiddos", "anti-ddos"),
 	Notification("SMN", "notification-message"),
+	MessageQueue("DMS", "distributed-message"),
 	MAAS("MaaS", "MaaS"),
 	
 	UNKNOWN("NA", "NA")

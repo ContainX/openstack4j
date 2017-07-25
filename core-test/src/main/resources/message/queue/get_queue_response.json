@@ -1,0 +1,9 @@
+{ 
+   "id": "9bf46390-38a2-462d-b392-4d5b2d519c55",  
+   "name": "queue_001",  
+   "description": "test1",  
+   "created": 1470063965218,  
+   "reservation": 4320,  
+   "max_msg_size_byte": 524288, 
+   "produced_messages": 5 
+}

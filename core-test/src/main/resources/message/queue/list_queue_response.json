@@ -1,0 +1,41 @@
+{  
+  "queues": [  
+    {  
+      "id": "277b772e-05d2-4da4-8539-fe4c06de53b6",   
+      "name": "queue_002",   
+      "description": "Used for testing",   
+      "created": 1470063863257,   
+      "reservation": 4320,   
+      "max_msg_size_byte": 524288, 
+      "produced_messages": 5 
+    },   
+    {  
+      "id": "36b4ee23-63cf-448f-8325-7afc786dc8ff",   
+      "name": "aa_fvb",   
+      "description": "aa",   
+      "created": 1469549603578,   
+      "reservation": 4320,   
+      "max_msg_size_byte": 524288, 
+      "produced_messages": 5 
+  },   
+    {  
+      "id": "9bf46390-38a2-462d-b392-4d5b2d519c55",   
+      "name": "queue_001",   
+      "description": "test1",   
+      "created": 1470063965218,   
+      "reservation": 4320,   
+      "max_msg_size_byte": 524288, 
+      "produced_messages": 5 
+    },   
+    {  
+      "id": "b231413a-528b-4a00-aa60-53075194d0d7",   
+      "name": "queue_yjl_002",   
+      "description": "Used for testing",   
+      "created": 1470063779087,   
+      "reservation": 4320,   
+      "max_msg_size_byte": 524288, 
+      "produced_messages": 5 
+    }  
+  ],   
+  "total": 4  
+}

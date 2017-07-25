@@ -904,6 +904,33 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10008/v2/project-id",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "2241f1ee096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10008/v2/project-id",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "2241f446096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:10008/v2/project-id",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "2241f55e096a11e793ae92361f002671"
+          }
+        ],
+        "type": "MaaS",
+        "id": "2241f6c6096a11e793ae92361f002671",
+        "name": "MaaS"
+      }, {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
             "url": "http://127.0.0.1:10010/v2/project-id",
             "region": "RegionOne",
             "interface": "public",
@@ -931,29 +958,29 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10011/v2/project-id",
+            "url": "http://127.0.0.1:10011/v1.0/project-id",
             "region": "RegionOne",
             "interface": "public",
             "id": "2241f1ee096a11e793ae92361f002671"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10011/v2/project-id",
+            "url": "http://127.0.0.1:10011/v1.0/project-id",
             "region": "RegionOne",
             "interface": "admin",
             "id": "2241f446096a11e793ae92361f002671"
           },
           {
             "region_id": "RegionOne",
-            "url": "http://127.0.0.1:10011/v2/project-id",
+            "url": "http://127.0.0.1:10011/v1.0/project-id",
             "region": "RegionOne",
             "interface": "internal",
             "id": "2241f55e096a11e793ae92361f002671"
           }
         ],
-        "type": "MaaS",
+        "type": "notification-message",
         "id": "2241f6c6096a11e793ae92361f002671",
-        "name": "MaaS"
+        "name": "DMS"
       }
     ],
     "extras": {},

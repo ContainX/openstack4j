@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei TLD and OTC                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,36 +13,54 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common;
+package org.openstack4j.openstack.message.queue.internal;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.openstack4j.core.transport.ListType;
-import org.openstack4j.model.ModelEntity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openstack4j.api.Apis;
+import org.openstack4j.common.RestService;
 
 /**
- * A List result which wrappers a JSON Array
+ * MessageQueue Service Entry Point
  *
- * @param <T> the generic type
+ * @author QianBiao.NG
+ * @date   2017-07-17 09:35:34
  */
-public abstract class ListResult<T> implements ModelEntity, ListType {
+public class MessageQueueService extends BaseMessageQueueServices implements RestService {
 
-	private static final long serialVersionUID = 1L;
-
-	protected abstract List<T> value();
+	/**
+	 * DMS Queue Service 
+	 * 
+	 * @return {@link QueueService} instance
+	 */
+	public QueueService queue() {
+		return Apis.get(QueueService.class);
+	}
 	
-	@JsonIgnore
-	public List<T> getList() {
-		if (value() == null)
-			return Collections.emptyList();
-		return value();
+	/**
+	 * DMS Consumer Group Service 
+	 * 
+	 * @return {@link ConsumerGroupService} instance
+	 */
+	public ConsumerGroupService consumerGroups() {
+		return Apis.get(ConsumerGroupService.class);
+	}
+	
+	/**
+	 * DMS Message Service 
+	 * 
+	 * @return {@link QueueMessageService} instance
+	 */
+	public QueueMessageService messages() {
+		return Apis.get(QueueMessageService.class);
+	}
+	
+	/**
+	 * DMS Quota Service 
+	 * 
+	 * @return {@link MessageQueueQuotaService} instance
+	 */
+	public MessageQueueQuotaService quotas() {
+		return Apis.get(MessageQueueQuotaService.class);
 	}
 
-	
-    public T first() {
-    	return value().isEmpty() ? null : value().get(0);   	
-    }
+
 }

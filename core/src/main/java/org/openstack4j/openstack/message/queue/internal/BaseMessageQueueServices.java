@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei and OTC                              
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,36 +13,22 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common;
+package org.openstack4j.openstack.message.queue.internal;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.openstack4j.core.transport.ListType;
-import org.openstack4j.model.ModelEntity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
- * A List result which wrappers a JSON Array
+ * 
+ * Base Notification Service for all notification service
  *
- * @param <T> the generic type
+ * @author QianBiao.NG
+ * @date   2017-07-17 09:28:43
  */
-public abstract class ListResult<T> implements ModelEntity, ListType {
+public class BaseMessageQueueServices extends BaseOpenStackService {
 
-	private static final long serialVersionUID = 1L;
-
-	protected abstract List<T> value();
-	
-	@JsonIgnore
-	public List<T> getList() {
-		if (value() == null)
-			return Collections.emptyList();
-		return value();
+	protected BaseMessageQueueServices() {
+		super(ServiceType.MessageQueue);
 	}
 
-	
-    public T first() {
-    	return value().isEmpty() ? null : value().get(0);   	
-    }
 }

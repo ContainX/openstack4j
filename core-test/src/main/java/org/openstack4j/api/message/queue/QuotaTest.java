@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei Tld                                     
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,36 +13,42 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common;
+package org.openstack4j.api.message.queue;
 
-import java.util.Collections;
+import java.io.IOException;
 import java.util.List;
 
-import org.openstack4j.core.transport.ListType;
-import org.openstack4j.model.ModelEntity;
+import org.openstack4j.api.AbstractTest;
+import org.openstack4j.openstack.common.Quota;
+import org.openstack4j.openstack.common.Quota.ResourceType;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import okhttp3.mockwebserver.RecordedRequest;
 
-/**
- * A List result which wrappers a JSON Array
- *
- * @param <T> the generic type
- */
-public abstract class ListResult<T> implements ModelEntity, ListType {
+@Test(suiteName = "MessageQueue/Quota", enabled = true)
+public class QuotaTest extends AbstractTest {
 
-	private static final long serialVersionUID = 1L;
+	@Test
+	public void testListQuota() throws IOException, InterruptedException {
+		respondWith("/message/queue/list_quota_response.json");
+		List<Quota> quotas = osv3().messageQueue().quotas().get();
 
-	protected abstract List<T> value();
+		RecordedRequest request = server.takeRequest();
+		Assert.assertEquals(request.getPath(), "/v1.0/project-id/quotas/dms");
+		Assert.assertEquals(request.getMethod(), "GET");
+		
+		Assert.assertEquals(quotas.size(), 1);
+		Quota quota = quotas.get(0);
+
+		Assert.assertEquals(quota.getType(), ResourceType.QUEUE);
+		Assert.assertEquals(quota.getQuota().intValue(), 5);
+		Assert.assertEquals(quota.getUsed().intValue(), 3);
+	}
 	
-	@JsonIgnore
-	public List<T> getList() {
-		if (value() == null)
-			return Collections.emptyList();
-		return value();
+	@Override
+	protected Service service() {
+		return Service.MESSAGE_QUEUE;
 	}
 
-	
-    public T first() {
-    	return value().isEmpty() ? null : value().get(0);   	
-    }
 }

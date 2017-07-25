@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei tld and OTC                                
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,36 +13,43 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common;
+package org.openstack4j.openstack.message.queue.domain;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.openstack4j.core.transport.ListType;
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.message.queue.constant.ConsumeStatus;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
- * A List result which wrappers a JSON Array
+ * A model represent a Queue Message Consume Confirm 
  *
- * @param <T> the generic type
+ * @author QianBiao.NG
+ * @date   2017-07-21 16:37:17
  */
-public abstract class ListResult<T> implements ModelEntity, ListType {
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class ConsumeConfirm implements ModelEntity {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6764087311133427927L;
 
-	protected abstract List<T> value();
+
+	/**
+	 * Indicates the message handler
+	 */
+	String handler;
 	
-	@JsonIgnore
-	public List<T> getList() {
-		if (value() == null)
-			return Collections.emptyList();
-		return value();
-	}
-
 	
-    public T first() {
-    	return value().isEmpty() ? null : value().get(0);   	
-    }
+	/**
+	 * Message consumption status
+	 */
+	ConsumeStatus status;
+
+
 }

@@ -1,0 +1,24 @@
+[{ 
+  "message" : { 
+   "body" : { 
+    "foo" : "123=" 
+   }, 
+   "attributes": { 
+       "attribute1": "value1", 
+       "attribute2": "value2" 
+        } 
+  }, 
+  "handler" : "eyJjZyI6Im15X2pzb25fZ3JvdXAiLCJjaSI6InJlc3QtY29uc3VtZXItYzNlNThiNjEtYzA0NC00NGJkLTkxM2ItZDgzNjljNmJhYTQxIiwiY291bnQiOjAsIm9mZnNldCI6MCwicCI6MCwidCI6InRlc3QyIn0=" 
+ }, { 
+  "message" : { 
+   "body" : { 
+    "foo" : "123=" 
+   }, 
+   "attributes": { 
+       "attribute1": "value1", 
+       "attribute2": "value2" 
+        } 
+  }, 
+  "handler" : "eyJjZyI6Im15X2pzb25fZ3JvdXAiLCJjaSI6InJlc3QtY29uc3VtZXItYzNlNThiNjEtYzA0NC00NGJkLTkxM2ItZDgzNjljNmJhYTQxIiwiY291bnQiOjAsIm9mZnNldCI6MSwicCI6MCwidCI6InRlc3QyIn0=" 
+ } 
+]
