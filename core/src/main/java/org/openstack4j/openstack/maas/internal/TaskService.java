@@ -15,7 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.maas.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.Map;
 
@@ -30,9 +30,9 @@ import org.openstack4j.openstack.maas.domain.TaskCreate.SmnInfo;
 import org.openstack4j.openstack.maas.domain.TaskCreateResp;
 import org.openstack4j.openstack.maas.domain.TaskStart;
 import org.openstack4j.openstack.maas.options.TaskListOptions;
-import org.testng.collections.Maps;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 public class TaskService extends BaseMaaSService implements RestService {
 
