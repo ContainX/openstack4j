@@ -54,7 +54,7 @@ public class VolumeBackupTests extends AbstractTest {
 		
 		RecordedRequest request = server.takeRequest();
 		assertNotNull(request.getHeader("X-Auth-Token"));	
-		assertTrue(request.getPath().matches("/v[123]/\\p{XDigit}*/backups" ));
+		assertTrue(request.getPath().matches("/v[123]/project-id/backups" ));
 		assertEquals( request.getMethod(), "POST");
 
 		String requestBody = request.getBody().readUtf8();
@@ -76,7 +76,7 @@ public class VolumeBackupTests extends AbstractTest {
 
 		RecordedRequest request = server.takeRequest();
 		assertNotNull(request.getHeader("X-Auth-Token"));
-		assertTrue(request.getPath().matches("/v[123]/\\p{XDigit}*/backups" ));
+		assertTrue(request.getPath().matches("/v[123]/project-id/backups" ));
 		assertEquals( request.getMethod(), "POST");
 
 		String requestBody = request.getBody().readUtf8();
@@ -97,7 +97,7 @@ public class VolumeBackupTests extends AbstractTest {
 		
 		RecordedRequest request = server.takeRequest();
 		assertNotNull(request.getHeader("X-Auth-Token"));
-		assertTrue(request.getPath().matches("/v[123]/\\p{XDigit}*/backups/" + backupId ));
+		assertTrue(request.getPath().matches("/v[123]/project-id/backups/" + backupId ));
 		assertEquals( request.getMethod(), "DELETE");
 		//Reporter.log( request.getPath() , true );
 		
@@ -117,7 +117,7 @@ public class VolumeBackupTests extends AbstractTest {
 		assertNotNull(listRequest.getHeader("X-Auth-Token"));
 		
 		Reporter.log( listRequest.getPath() , true );
-		assertTrue(listRequest.getPath().matches("/v[123]/\\p{XDigit}*/backups/detail"));
+		assertTrue(listRequest.getPath().matches("/v[123]/project-id/backups/detail"));
 
 		assertEquals(backups.get(0).getContainer(), "container1122");
 		assertEquals(backups.get(0).getVolumeId(), "999b49ff-a813-45cc-aef3-3ec82f089490");
@@ -147,7 +147,7 @@ public class VolumeBackupTests extends AbstractTest {
 		// Check that the list request is the one we expect
 		RecordedRequest listRequest = server.takeRequest();	 
 		assertNotNull(listRequest.getHeader("X-Auth-Token")); 
-		assertTrue(listRequest.getPath().matches("/v[123]/\\p{XDigit}*/backups/detail\\?name=" + backupName));
+		assertTrue(listRequest.getPath().matches("/v[123]/project-id/backups/detail\\?name=" + backupName));
 		
 		assertEquals(backups.get(0).getContainer(), "container1122");
 		assertEquals(backups.get(0).getVolumeId(), "999b49ff-a813-45cc-aef3-3ec82f089490");
@@ -171,7 +171,7 @@ public class VolumeBackupTests extends AbstractTest {
 
 		RecordedRequest getRequest = server.takeRequest();
 		assertNotNull(getRequest.getHeader("X-Auth-Token"));
-		assertTrue(getRequest.getPath().matches("/v[123]/\\p{XDigit}*/backups/"+id));
+		assertTrue(getRequest.getPath().matches("/v[123]/project-id/backups/"+id));
 
 		assertEquals(backup.getId(), "735359d5-9584-4046-94d3-5ffc47be84f5");
 		assertEquals(backup.getContainer(), "test999b49ff-a813-45cc-aef3-3ec82f089490");
@@ -198,7 +198,7 @@ public class VolumeBackupTests extends AbstractTest {
 
 		RecordedRequest getRequest = server.takeRequest();
 		assertNotNull(getRequest.getHeader("X-Auth-Token"));
-		assertTrue(getRequest.getPath().matches("/v[123]/\\p{XDigit}*/backups/"+id));
+		assertTrue(getRequest.getPath().matches("/v[123]/project-id/backups/"+id));
 
 		assertEquals(backup.getId(), "735359d5-9584-4046-94d3-5ffc47be84f5");
 		assertEquals(backup.getContainer(), "test999b49ff-a813-45cc-aef3-3ec82f089490");

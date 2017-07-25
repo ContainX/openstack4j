@@ -15,18 +15,17 @@
  *******************************************************************************/
 package org.openstack4j.api.storage;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.mockwebserver.RecordedRequest;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.storage.block.VolumeSnapshot;
 import org.testng.annotations.Test;
+
+import okhttp3.mockwebserver.RecordedRequest;
 
 
 
@@ -47,7 +46,7 @@ public class VolumeSnapshotTests extends AbstractTest {
         // Check that the list request is the one we expect
         RecordedRequest listRequest = server.takeRequest();
         assertNotNull(listRequest.getHeader("X-Auth-Token"));
-        assertTrue(listRequest.getPath().matches("/v[12]/\\p{XDigit}*/snapshots"));
+        assertTrue(listRequest.getPath().matches("/v[12]/project-id/snapshots"));
         
         // Check list volumes with filters
         respondWith("/storage/v1/volumesnapshots_filtered.json");
@@ -60,7 +59,7 @@ public class VolumeSnapshotTests extends AbstractTest {
         // Check that the list request is the one we expect
         RecordedRequest filteredListRequest = server.takeRequest();
         assertNotNull(filteredListRequest.getHeader("X-Auth-Token"));
-        assertTrue(filteredListRequest.getPath().matches("/v[12]/\\p{XDigit}*/snapshots\\?display_name=" + volName));
+        assertTrue(filteredListRequest.getPath().matches("/v[12]/project-id/snapshots\\?display_name=" + volName));
     }
     
 }

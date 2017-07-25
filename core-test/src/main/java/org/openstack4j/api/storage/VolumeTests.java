@@ -15,20 +15,19 @@
  *******************************************************************************/
 package org.openstack4j.api.storage;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.mockwebserver.RecordedRequest;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.SkipTest;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeAttachment;
 import org.testng.annotations.Test;
+
+import okhttp3.mockwebserver.RecordedRequest;
 
 
 
@@ -51,7 +50,7 @@ public class VolumeTests extends AbstractTest {
         // Check that the list request is the one we expect
         RecordedRequest listRequest = server.takeRequest();
         assertNotNull(listRequest.getHeader("X-Auth-Token"));
-        assertTrue(listRequest.getPath().matches("/v[12]/\\p{XDigit}*/volumes/detail"));
+        assertTrue(listRequest.getPath().matches("/v[12]/project-id/volumes/detail"));
         
         // Check list volumes with filters
         respondWith("/storage/v1/volumes_filtered.json");
@@ -64,7 +63,7 @@ public class VolumeTests extends AbstractTest {
         // Check that the list request is the one we expect
         RecordedRequest filteredListRequest = server.takeRequest();
         assertNotNull(filteredListRequest.getHeader("X-Auth-Token"));
-        assertTrue(filteredListRequest.getPath().matches("/v[12]/\\p{XDigit}*/volumes/detail\\?display_name=" + volName));
+        assertTrue(filteredListRequest.getPath().matches("/v[12]/project-id/volumes/detail\\?display_name=" + volName));
     }
     
     @SuppressWarnings("unchecked")
@@ -75,7 +74,7 @@ public class VolumeTests extends AbstractTest {
         Volume volume = osv3().blockStorage().volumes().get("8a9287b7-4f4d-4213-8d75-63470f19f27c");
         
         RecordedRequest getRequest = server.takeRequest();
-        assertTrue(getRequest.getPath().matches("/v[12]/\\p{XDigit}*/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
+        assertTrue(getRequest.getPath().matches("/v[12]/project-id/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
         
         assertEquals(volume.getId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
         assertEquals(volume.getName(), "vol-test");
@@ -113,7 +112,7 @@ public class VolumeTests extends AbstractTest {
         Volume volume = osv3().blockStorage().volumes().get("8a9287b7-4f4d-4213-8d75-63470f19f27c");
         
         RecordedRequest getRequest = server.takeRequest();
-        assertTrue(getRequest.getPath().matches("/v[12]/\\p{XDigit}*/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
+        assertTrue(getRequest.getPath().matches("/v[12]/project-id/volumes/8a9287b7-4f4d-4213-8d75-63470f19f27c"));
         
         assertEquals(volume.getId(), "8a9287b7-4f4d-4213-8d75-63470f19f27c");
         assertEquals(volume.getName(), "vol-test");
