@@ -86,6 +86,7 @@ public abstract class AbstractTest {
         CLOUD_TRACE(10006),
         ANTI_DDOS(10007),
         NOTIFICATION(10010),
+        MESSAGE_QUEUE(10011),
         ;
     	//@on
 

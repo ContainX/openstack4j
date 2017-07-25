@@ -1,0 +1,10 @@
+{ 
+    "quotas" : { 
+        "resources" : [{ 
+                "type" : "queue", 
+                "quota" : 5, 
+                "used" : 3 
+            } 
+        ] 
+    } 
+}

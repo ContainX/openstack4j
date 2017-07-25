@@ -94,17 +94,17 @@ public class QueueMessageService extends BaseMessageQueueServices implements Res
 	 * 
 	 * @param queueId				the ID of the Queue
 	 * @param consumerGroupId		the consumer group ID which is consuming the message
-	 * @param maxMessages 		Indicates the number of consumable messages that can be obtained per time. (Value range: 1-10)
-	 * @param timeAwait				Indicates the amount of time that the API call can wait for a message to arrive 
+	 * @param maxMessages 			Indicates the number of consumable messages that can be obtained per time. (Value range: 1-10)
+	 * @param timeWait				Indicates the amount of time that the API call can wait for a message to arrive 
 	 * 								in the empty queue before returning an empty response. (Value range: 1–60s Default value: 3s)
 	 * @return  a list of {@link QueueMessage}
 	 */
 	public List<QueueMessageWithHandler> consume(String queueId, String consumerGroupId, Integer maxMessages,
-			Integer timeAwait) {
+			Integer timeWait) {
 		checkNotNull(!Strings.isNullOrEmpty(queueId), "parameter `queueId` should not be empty");
 		checkNotNull(!Strings.isNullOrEmpty(consumerGroupId), "parameter `consumerGroupId` should not be empty");
 		return get(QueueMessageWithHandlers.class, uri("/queues/%s/groups/%s/messages", queueId, consumerGroupId))
-				.param("max_msgs", maxMessages).param("time_wait", timeAwait).execute().getList();
+				.param("max_msgs", maxMessages).param("time_wait", timeWait).execute().getList();
 	}
 
 	/**
