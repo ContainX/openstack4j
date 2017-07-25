@@ -51,6 +51,7 @@ import org.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
 import org.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
 import org.openstack4j.openstack.message.notification.internal.NotificationService;
+import org.openstack4j.openstack.message.queue.internal.MessageQueueService;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -368,6 +369,13 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the OTC Simple Message Notification service instance
 		 */
 		NotificationService notification();
+		
+		
+		/**
+		 * get the Distributed Message service 
+		 * @return the OTC Distributed Message service instance
+		 */
+		MessageQueueService messageQueue();
 	}
 
 	/**

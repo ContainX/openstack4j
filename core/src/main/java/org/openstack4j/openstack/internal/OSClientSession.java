@@ -64,6 +64,7 @@ import org.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import org.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
 import org.openstack4j.openstack.message.notification.internal.NotificationService;
+import org.openstack4j.openstack.message.queue.internal.MessageQueueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -652,6 +653,14 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 		@Override
 		public NotificationService notification() {
 			return Apis.get(NotificationService.class);
+		}
+
+		/* 
+		 * {@inheritDoc}
+		 */
+		@Override
+		public MessageQueueService messageQueue() {
+			return Apis.get(MessageQueueService.class);
 		}
     }
 
