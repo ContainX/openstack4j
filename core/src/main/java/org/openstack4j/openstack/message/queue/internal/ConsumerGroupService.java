@@ -17,6 +17,8 @@ package org.openstack4j.openstack.message.queue.internal;
 
 import static com.google.common.base.Preconditions.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.openstack4j.common.RestService;
@@ -26,6 +28,7 @@ import org.openstack4j.openstack.message.queue.domain.ConsumerGroup.ConsumerGrou
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * <h3>[DMS] Consumer Group Service </h3>
@@ -67,7 +70,16 @@ public class ConsumerGroupService extends BaseMessageQueueServices implements Re
 		boolean isGroupNamesValid = consumerGroupNames != null && consumerGroupNames.size() > 0
 				&& consumerGroupNames.size() <= 3;
 		checkState(isGroupNamesValid, "parameter `consumerGroupNames` should be a list with 1-3 items");
-		return post(ConsumerGroups.class, uri("/queues/%s/groups", queueId)).execute().getList();
+		
+		ArrayList<ConsumerGroup> groups = Lists.newArrayList();
+		for (String name : consumerGroupNames) {
+			groups.add(ConsumerGroup.builder().name(name).build());
+		}
+		
+		HashMap<String, Object> entity = Maps.newHashMap();
+		entity.put("groups", groups);
+		
+		return post(ConsumerGroups.class, uri("/queues/%s/groups", queueId)).entity(entity).execute().getList();
 	}
 
 	/**

@@ -20,6 +20,8 @@ import java.util.List;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.google.common.collect.Lists;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -80,12 +82,12 @@ public class ConsumerGroup implements ModelEntity {
 		private static final long serialVersionUID = 1L;
 
 		@JsonProperty("groups")
-		private List<ConsumerGroup> groups;
+		private List<ConsumerGroup> groups = Lists.newArrayList();
 
 		public List<ConsumerGroup> value() {
 			return groups;
 		}
-
+		
 	}
 
 }

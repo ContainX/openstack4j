@@ -15,7 +15,6 @@
  *******************************************************************************/
 package org.openstack4j.openstack.message.queue.domain;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
@@ -42,45 +41,39 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class QueueMessage implements ModelEntity {
+public class QueueMessageWithHandler implements ModelEntity {
 
 	private static final long serialVersionUID = -6764087311133427927L;
 
 	/**
-	 * Indicates the message body. (could be any java object that can be serialize as JSON)
-	 * 
-	   NOTE::
-	   
-		`\` and `"` is defined as an escape character in a message
-		body. If you need to enter a backward slash (\) or a
-		double quotation mark (") in a message body, enter
-		\\ or \".
-		
+	 * Indicates the queue message
 	 */
-	@JsonProperty("body")
-	Object body;
-
+	@JsonProperty("message")
+	QueueMessage message;
+	
 	/**
-	 * Indicates the list of attributes, including attribute names and values.
+	 * Indicates the queue message handler
 	 */
-	HashMap<String, Object> attributes;
+	@JsonProperty("handler")
+	String handler;
 
-	public static class QueueMessages extends ListResult<QueueMessage> {
+	
+
+	public static class QueueMessageWithHandlers extends ListResult<QueueMessageWithHandler> {
 
 		private static final long serialVersionUID = 1L;
 
 		@JsonProperty("messages")
-		private List<QueueMessage> messages = Lists.newArrayList();
+		private List<QueueMessageWithHandler> messages = Lists.newArrayList();
 
-		public List<QueueMessage> value() {
+		public List<QueueMessageWithHandler> value() {
 			return messages;
 		}
 
 		@JsonCreator
-		public QueueMessages(List<QueueMessage> messages) {
+		public QueueMessageWithHandlers(List<QueueMessageWithHandler> messages) {
 			this.messages = messages;
 		}
-
 	}
 
 }

@@ -27,9 +27,12 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.message.queue.constant.ConsumeStatus;
 import org.openstack4j.openstack.message.queue.domain.ConsumeConfirm;
+import org.openstack4j.openstack.message.queue.domain.ConsumeConfirmResponse;
 import org.openstack4j.openstack.message.queue.domain.Queue;
 import org.openstack4j.openstack.message.queue.domain.QueueMessage;
 import org.openstack4j.openstack.message.queue.domain.QueueMessage.QueueMessages;
+import org.openstack4j.openstack.message.queue.domain.QueueMessageWithHandler;
+import org.openstack4j.openstack.message.queue.domain.QueueMessageWithHandler.QueueMessageWithHandlers;
 import org.testng.collections.Lists;
 
 import com.google.common.base.Strings;
@@ -96,10 +99,11 @@ public class QueueMessageService extends BaseMessageQueueServices implements Res
 	 * 								in the empty queue before returning an empty response. (Value range: 1–60s Default value: 3s)
 	 * @return  a list of {@link QueueMessage}
 	 */
-	public List<QueueMessage> consume(String queueId, String consumerGroupId, Integer maxMessages, Integer timeAwait) {
+	public List<QueueMessageWithHandler> consume(String queueId, String consumerGroupId, Integer maxMessages,
+			Integer timeAwait) {
 		checkNotNull(!Strings.isNullOrEmpty(queueId), "parameter `queueId` should not be empty");
 		checkNotNull(!Strings.isNullOrEmpty(consumerGroupId), "parameter `consumerGroupId` should not be empty");
-		return get(QueueMessages.class, uri("/queues/%s/groups/%s/messages", queueId, consumerGroupId))
+		return get(QueueMessageWithHandlers.class, uri("/queues/%s/groups/%s/messages", queueId, consumerGroupId))
 				.param("max_msgs", maxMessages).param("time_wait", timeAwait).execute().getList();
 	}
 
@@ -135,7 +139,7 @@ public class QueueMessageService extends BaseMessageQueueServices implements Res
 	 * @param consumeResult				A Map indicates the result of consuming. Key is message handler and value is consume status
 	 * @return
 	 */
-	public List<QueueMessage> confirmConsuming(String queueId, String consumerGroupId,
+	public ConsumeConfirmResponse confirmConsuming(String queueId, String consumerGroupId,
 			Map<String, ConsumeStatus> consumeResult) {
 		checkNotNull(!Strings.isNullOrEmpty(queueId), "parameter `queueId` should not be empty");
 		checkNotNull(!Strings.isNullOrEmpty(consumerGroupId), "parameter `consumerGroupId` should not be empty");
@@ -155,8 +159,8 @@ public class QueueMessageService extends BaseMessageQueueServices implements Res
 		// build body
 		HashMap<String, Object> body = Maps.newHashMap();
 		body.put("message", confirms);
-		return get(QueueMessages.class, uri("/queues/%s/groups/%s/ack", queueId, consumerGroupId)).entity(body)
-				.execute().getList();
+		return post(ConsumeConfirmResponse.class, uri("/queues/%s/groups/%s/ack", queueId, consumerGroupId)).entity(body)
+				.execute();
 	}
 
 }

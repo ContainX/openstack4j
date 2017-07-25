@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ *  Copyright 2017 Huawei TLD
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,36 +13,28 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common;
+/*******************************************************************************
+ *******************************************************************************/
+package org.openstack4j.sample.message.queue;
 
-import java.util.Collections;
 import java.util.List;
 
-import org.openstack4j.core.transport.ListType;
-import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.Quota;
+import org.openstack4j.openstack.common.Quota.ResourceType;
+import org.openstack4j.sample.AbstractSample;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+@Test(suiteName = "MessageQueue/Quota/Sample")
+public class QuotaSample extends AbstractSample {
 
-/**
- * A List result which wrappers a JSON Array
- *
- * @param <T> the generic type
- */
-public abstract class ListResult<T> implements ModelEntity, ListType {
+	@Test
+	public void testGetTopic() {
+		List<Quota> qutoas = osclient.messageQueue().quotas().get();
+		Assert.assertEquals(qutoas.size(), 1);
 
-	private static final long serialVersionUID = 1L;
-
-	protected abstract List<T> value();
-	
-	@JsonIgnore
-	public List<T> getList() {
-		if (value() == null)
-			return Collections.emptyList();
-		return value();
+		Quota quota = qutoas.get(0);
+		Assert.assertEquals(quota.getType(), ResourceType.QUEUE);
 	}
 
-	
-    public T first() {
-    	return value().isEmpty() ? null : value().get(0);   	
-    }
 }
