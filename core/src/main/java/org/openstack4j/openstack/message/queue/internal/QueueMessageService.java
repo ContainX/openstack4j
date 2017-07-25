@@ -33,9 +33,9 @@ import org.openstack4j.openstack.message.queue.domain.QueueMessage;
 import org.openstack4j.openstack.message.queue.domain.QueueMessage.QueueMessages;
 import org.openstack4j.openstack.message.queue.domain.QueueMessageWithHandler;
 import org.openstack4j.openstack.message.queue.domain.QueueMessageWithHandler.QueueMessageWithHandlers;
-import org.testng.collections.Lists;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**

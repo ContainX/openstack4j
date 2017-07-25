@@ -20,7 +20,8 @@ import java.util.List;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
