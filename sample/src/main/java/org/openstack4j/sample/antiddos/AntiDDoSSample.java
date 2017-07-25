@@ -19,7 +19,6 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openstack4j.openstack.antiddos.constants.AppType;
 import org.openstack4j.openstack.antiddos.constants.CleaningAccessPos;
@@ -39,11 +38,14 @@ import org.openstack4j.openstack.antiddos.domain.Task;
 import org.openstack4j.openstack.antiddos.options.AntiDDoSLogListOptions;
 import org.openstack4j.openstack.antiddos.options.AntiDDoSStatusListOptions;
 import org.openstack4j.sample.AbstractSample;
+import org.openstack4j.sample.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import com.google.common.collect.Lists;
 
 public class AntiDDoSSample extends AbstractSample {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AntiDDoSSample.class);
@@ -162,14 +164,33 @@ public class AntiDDoSSample extends AbstractSample {
 	 * @throws InterruptedException
 	 */
 	private void waitTaskFinish(String taskId) throws InterruptedException {
-		while (true) {
-			LOGGER.info("--------- PENDING TASK [{}]------------", taskId);
-			TimeUnit.SECONDS.sleep(30);
-			Task task2 = osclient.antiDDoS().antiddos().getTask(taskId);
-			if (TaskStatus.SUCCESS.equals(task2.getStatus()))
-				break;
-			else if (TaskStatus.FAILED.equals(task2.getStatus()))
-				throw new RuntimeException(String.format("[%s]Task failed", taskId));
+		Retry retry = new Retry() {
+
+			@Override
+			public Object run() {
+				LOGGER.info("--------- PENDING TASK [{}]------------", taskId);
+				Task task2 = osclient.antiDDoS().antiddos().getTask(taskId);
+				List<TaskStatus> expected = Lists.newArrayList(TaskStatus.SUCCESS, TaskStatus.FAILED);
+				if (expected.contains(task2.getStatus())) {
+					return task2.getStatus();
+				} else
+					return null;
+			}
+
+			@Override
+			public Integer maxRetryTimes() {
+				return 5;
+			}
+
+			@Override
+			public Integer delay() {
+				return 60;
+			}
+		};
+		
+		TaskStatus status = (TaskStatus) this.retry(retry);
+		if (status != null && TaskStatus.FAILED.equals(status)) {
+			throw new RuntimeException(String.format("[%s]Task failed", taskId));
 		}
 	}
 }
