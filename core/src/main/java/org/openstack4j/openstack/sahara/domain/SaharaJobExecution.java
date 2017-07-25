@@ -81,7 +81,7 @@ public class SaharaJobExecution implements JobExecution {
 	private SaharaJobExecutionInfo info;
 
 	private String jobIdForExecute;
-	
+
 	@JsonProperty("data_source_urls")
 	HashMap<String, String> dataSourceUrls;
 
@@ -91,7 +91,6 @@ public class SaharaJobExecution implements JobExecution {
 	Boolean isProtected;
 	@JsonProperty("is_public")
 	Boolean isPublic;
-
 
 	/**
 	 * {@inheritDoc}
@@ -220,15 +219,15 @@ public class SaharaJobExecution implements JobExecution {
 	public JobExecutionInfo getInfo() {
 		return info;
 	}
-	
-	/* 
+
+	/*
 	 * {@inheritDoc}
 	 */
 	@Override
 	public HashMap<String, String> getDataSourceUrls() {
 		return dataSourceUrls;
 	}
-	
+
 	public String getEngineJobId() {
 		return engineJobId;
 	}
@@ -237,6 +236,7 @@ public class SaharaJobExecution implements JobExecution {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@JsonProperty(value="is_protected")   
 	public Boolean isProtected() {
 		return isProtected;
 	}
@@ -245,6 +245,7 @@ public class SaharaJobExecution implements JobExecution {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@JsonProperty(value="is_public")   
 	public Boolean isPublic() {
 		return isPublic;
 	}
@@ -275,7 +276,6 @@ public class SaharaJobExecution implements JobExecution {
 	public static JobExecutionBuilder builder() {
 		return new ConcreteJobExecutionBuilder();
 	}
-
 
 	public static class ConcreteJobExecutionBuilder implements JobExecutionBuilder {
 
@@ -348,7 +348,7 @@ public class SaharaJobExecution implements JobExecution {
 			return this;
 		}
 
-		/* 
+		/*
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -357,7 +357,7 @@ public class SaharaJobExecution implements JobExecution {
 			return this;
 		}
 
-		/* 
+		/*
 		 * {@inheritDoc}
 		 */
 		@Override

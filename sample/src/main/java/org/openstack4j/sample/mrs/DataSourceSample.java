@@ -69,7 +69,7 @@ public class DataSourceSample extends AbstractSample {
 
 	@Test(dependsOnMethods = { "testGetDataSource" })
 	public void testUpdateDataSource() {
-		DataSource build = SaharaDataSource.builder().id(createdDataSource.getId()).name("sdk-new-name")
+		DataSource build = SaharaDataSource.builder().id(createdDataSource.getId()).name("sdk-new-name").type(DataSourceType.HDFS)
 				.url("/sdk/unittest/input2").build();
 		createdDataSource = osclient.sahara().dataSources().update(build);
 		Assert.assertEquals(createdDataSource.getURL(), "/sdk/unittest/input2");

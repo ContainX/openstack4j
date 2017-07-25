@@ -144,6 +144,7 @@ public class SaharaDataSource implements DataSource {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@JsonProperty(value="is_protected") 
 	public Boolean isProtected() {
 		return isProtected;
 	}
@@ -152,6 +153,7 @@ public class SaharaDataSource implements DataSource {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@JsonProperty(value="is_public") 
 	public Boolean isPublic() {
 		return isPublic;
 	}

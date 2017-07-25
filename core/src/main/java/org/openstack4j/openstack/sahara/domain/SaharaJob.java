@@ -23,11 +23,13 @@ import org.openstack4j.model.sahara.JobBinary;
 import org.openstack4j.model.sahara.builder.JobBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.google.common.collect.Lists;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.collect.Lists;
 
 import lombok.ToString;
 
@@ -177,6 +179,7 @@ public class SaharaJob implements Job {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@JsonIgnore
 	public Boolean isProtected() {
 		return isProtected;
 	}
@@ -185,6 +188,7 @@ public class SaharaJob implements Job {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@JsonIgnore
 	public Boolean isPublic() {
 		return isPublic;
 	}
