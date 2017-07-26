@@ -9,4 +9,5 @@
   - [KMS](zh-cn/kms-sdk.md)
   - [CTS](zh-cn/cts-sdk.md)
   - [SMN](zh-cn/smn-sdk.md)
+  - [DMS](zh-cn/dms-sdk.md)
 - [贡献代码](zh-cn/contributing.md)
