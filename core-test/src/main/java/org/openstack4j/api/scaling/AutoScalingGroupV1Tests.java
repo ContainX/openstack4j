@@ -20,7 +20,6 @@ import static org.testng.Assert.*;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Assert;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.model.common.ActionResponse;
@@ -71,10 +70,10 @@ public class AutoScalingGroupV1Tests extends AbstractTest {
 
 		String requestBody = request.getBody().readUtf8();
 		JsonNode response = ObjectMapperSingleton.getContext(Object.class).readTree(requestBody);
-		Assert.assertEquals("test-4-bill", response.get("scaling_group_name").asText());
-		Assert.assertEquals("31d158b8-e7d7-4b4a-b2a7-a5240296b267", response.get("vpc_id").asText());
-		Assert.assertTrue(response.get("available_zones").isArray());
-		Assert.assertEquals("eu-de", response.get("available_zones").get(0).asText());
+		assertEquals("test-4-bill", response.get("scaling_group_name").asText());
+		assertEquals("31d158b8-e7d7-4b4a-b2a7-a5240296b267", response.get("vpc_id").asText());
+		assertTrue(response.get("available_zones").isArray());
+		assertEquals("eu-de", response.get("available_zones").get(0).asText());
 
 		
 		assertEquals(result.getGroupId(), "613baa6b-32c5-4052-9cb1-45f9a22b2579");

@@ -15,9 +15,9 @@
  *******************************************************************************/
 package org.openstack4j.api.storage;
 
+
 import static org.testng.Assert.*;
 
-import org.junit.Assert;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
@@ -46,7 +46,7 @@ public class AsyncVolumeBackupTests extends AbstractTest {
 		AsyncVolumeBackupCreate vbc = Builders.asyncVolumeBackupCreate().name("new-backup").volumeId("volume-id")
 				.build();
 		final AsyncVolumeBackupJob job = osv3().blockStorage().asyncBackups().create(vbc);
-		Assert.assertEquals("job-id", job.getId());
+		assertEquals("job-id", job.getId());
 
 		RecordedRequest request = server.takeRequest();
 		assertTrue(request.getPath().equals("/v2/project-id/cloudbackups"));
@@ -54,10 +54,10 @@ public class AsyncVolumeBackupTests extends AbstractTest {
 
 		String requestBody = request.getBody().readUtf8();
 		JsonNode response = ObjectMapperSingleton.getContext(Object.class).readTree(requestBody);
-		Assert.assertTrue(response.has("backup"));
+		assertTrue(response.has("backup"));
 		JsonNode backup = response.get("backup");
-		Assert.assertEquals("volume-id", backup.get("volume_id").asText());
-		Assert.assertEquals("new-backup", backup.get("name").asText());
+		assertEquals("volume-id", backup.get("volume_id").asText());
+		assertEquals("new-backup", backup.get("name").asText());
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class AsyncVolumeBackupTests extends AbstractTest {
 		respondWith(200, "{\"job_id\": \"job-id\"}");
 
 		AsyncVolumeBackupJob job = osv3().blockStorage().asyncBackups().restore("volume-backup-id", "volume-id");
-		Assert.assertEquals("job-id", job.getId());
+		assertEquals("job-id", job.getId());
 
 		RecordedRequest request = server.takeRequest();
 		assertTrue(request.getPath().equals("/v2/project-id/cloudbackups/volume-backup-id/restore"));
@@ -74,9 +74,9 @@ public class AsyncVolumeBackupTests extends AbstractTest {
 
 		String requestBody = request.getBody().readUtf8();
 		JsonNode response = ObjectMapperSingleton.getContext(Object.class).readTree(requestBody);
-		Assert.assertTrue(response.has("restore"));
+		assertTrue(response.has("restore"));
 		JsonNode backup = response.get("restore");
-		Assert.assertEquals("volume-id", backup.get("volume_id").asText());
+		assertEquals("volume-id", backup.get("volume_id").asText());
 	}
 	
 	@Test
@@ -90,10 +90,10 @@ public class AsyncVolumeBackupTests extends AbstractTest {
 		assertEquals(request.getMethod(), "GET");
 		
 		
-		Assert.assertEquals("4010b39b5281d3590152874bfa3b1604", job.getId());
-		Assert.assertEquals("bksCreateBackup", job.getType());
-		Assert.assertEquals(AsyncVolumeBackupJob.Status.SUCCESS, job.getStatus());
-		Assert.assertEquals(1453997649466L, job.getBeginTime().getTime());
+		assertEquals("4010b39b5281d3590152874bfa3b1604", job.getId());
+		assertEquals("bksCreateBackup", job.getType());
+		assertEquals(AsyncVolumeBackupJob.Status.SUCCESS, job.getStatus());
+		assertEquals(1453997649466L, job.getBeginTime().getTime());
 	}
 
 }
