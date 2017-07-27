@@ -33,7 +33,7 @@ public class TaskSample extends AbstractSample {
 	
 	@Test
 	public void testVersionGet() {
-		Version version = osclient.maas().version().get();
+		Version[] version = osclient.maas().version().get();
 		LOGGER.info("{}", version);
 		assertTrue(version != null);
 	}
