@@ -16,11 +16,21 @@
 package org.openstack4j.openstack.maas.internal;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 public class BaseMaaSService extends BaseOpenStackService {
+	
+	public static String CONTENT_JSON = "application/json;charset=utf-8";
 
 	protected BaseMaaSService() {
 		super(ServiceType.MAAS);
+	}
+	
+	/**
+	 * HuaWei MaaS Service validate the content-type in every request (even get)
+	 */
+	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON);
 	}
 }

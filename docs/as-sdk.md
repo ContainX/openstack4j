@@ -1,4 +1,4 @@
-# DNS SDK
+# AS SDK
 
 HuaWei OpenStack4j AS SDK, entry point is: `osclient.autoScaling()`
 

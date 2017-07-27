@@ -15,10 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.api.network;
 
-import static org.junit.Assert.assertFalse;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -29,11 +26,9 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.network.Agent;
 import org.openstack4j.model.network.Agent.Type;
-import org.openstack4j.model.storage.block.VolumeBackup;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.NetworkType;
 import org.openstack4j.model.network.State;
-import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import okhttp3.mockwebserver.RecordedRequest;

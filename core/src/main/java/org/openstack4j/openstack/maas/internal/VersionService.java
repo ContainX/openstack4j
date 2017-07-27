@@ -20,7 +20,7 @@ import org.openstack4j.openstack.maas.domain.Version;
 
 public class VersionService extends BaseMaaSService implements RestService {
 
-	public Version get() {
-		return get(Version.class, uri("/version")).execute();
+	public Version[] get() {
+		return get(Version[].class, uri("/version")).execute();
 	}
 }

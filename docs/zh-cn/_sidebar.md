@@ -10,4 +10,5 @@
   - [CTS](zh-cn/cts-sdk.md)
   - [SMN](zh-cn/smn-sdk.md)
   - [DMS](zh-cn/dms-sdk.md)
+  - [Anti-DDoS](zh-cn/antiddos-sdk.md)
 - [贡献代码](zh-cn/contributing.md)
