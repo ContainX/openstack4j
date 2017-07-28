@@ -30,6 +30,8 @@ import org.openstack4j.openstack.storage.block.domain.CinderVolumeBackup;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeBackup.VolumeBackups;
 import org.openstack4j.openstack.storage.block.domain.CinderVolumeBackupRestore;
 
+import com.google.common.base.Strings;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -96,7 +98,8 @@ public class BlockVolumeBackupServiceImpl extends BaseBlockStorageServices imple
 	@Override
 	public VolumeBackup create(VolumeBackupCreate vbc) {
 		checkNotNull(vbc);
-		checkNotNull(vbc.getVolumeId());
+		checkNotNull(!Strings.isNullOrEmpty(vbc.getVolumeId()), "parameter `vbc.volumeId` should not be empty");
+		checkNotNull(!Strings.isNullOrEmpty(vbc.getSnapshotId()), "parameter `vbc.snapshotId` should not be empty");
 		return post(CinderVolumeBackup.class, uri("/backups")).entity(vbc).execute();
 	}
 
