@@ -1,0 +1,29 @@
+{
+    "id": 170734736722221,
+    "name": "test-4-bill-2-sdk-test-20170728-20170728105721639_406",
+    "src_node": {
+        "region": "ap-southeast-1",
+        "bucket": "test-4-bill-2",
+        "object_key": ["abc/"]
+    },
+    "dst_node": {
+        "region": "eu-de",
+        "bucket": "sdk-test-20170728",
+        "object_key": "sdk-folder-20170728/"
+    },
+    "thread_num": 5,
+    "status": 2,
+    "progress": 0,
+    "total_num": 0,
+    "success_num": 0,
+    "fail_num": 0,
+    "description": "description",
+    "enableKMS": false,
+    "error_reason": "",
+    "total_size": -1,
+    "complete_size": 0,
+    "migrate_speed": 0,
+    "start_time": 1501232253109,
+    "left_time": 999999999,
+    "total_time": 4145
+}
