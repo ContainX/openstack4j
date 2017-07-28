@@ -37,7 +37,7 @@ public class TaskStart implements ModelEntity {
 	/**
 	 * operation: start
 	 */
-	private Operation operaion = Operation.START;
+	private Operation operation = Operation.START;
 	
 	/**
 	 * source node access key
