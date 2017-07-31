@@ -61,21 +61,9 @@ public class TaskCreate implements ModelEntity {
 	private Integer threadNum;
 
 	/**
-	 * whether enable acceleration
-	 */
-	@JsonProperty("enable_tas")
-	private Boolean enableTas;
-
-	/**
 	 * task description
 	 */
 	private String description;
-
-	/**
-	 * acceleration agent id
-	 */
-	@JsonProperty("agent_id")
-	private String agentId;
 
 	/**
 	 * smn

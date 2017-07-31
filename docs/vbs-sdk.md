@@ -25,7 +25,7 @@ AsyncVolumeBackupJob jobDetail = osclient.blockStorage().jobs().get(job.getId())
 ### Create Volume Backup（OpenStack Native）
 ```java
 VolumeBackupCreate create = Builders.volumeBackupCreate().volumeId("volume-id").container("container123")
-				.description("description123").name(name).incremental(false).build();
+		.snapshotId("snapshot-id").description("description123").name("").incremental(false).build();
 VolumeBackup backup = osclient.blockStorage().backups().create(create);
 ```
 

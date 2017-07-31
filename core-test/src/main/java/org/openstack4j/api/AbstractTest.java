@@ -85,6 +85,7 @@ public abstract class AbstractTest {
         KEY_MANAGEMENT(10005),
         CLOUD_TRACE(10006),
         ANTI_DDOS(10007),
+        MAAS(10008),
         NOTIFICATION(10010),
         MESSAGE_QUEUE(10011),
         ;

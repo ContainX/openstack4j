@@ -1,6 +1,6 @@
 # Anti-DDoS SDK
 
-HuaWei OpenStack4j MaaS SDK, entry point is: `osclient.antiddos()`
+HuaWei OpenStack4j Anti-DDoS SDK, entry point is: `osclient.antiddos()`
 
 ## API document
 Not provided for now.

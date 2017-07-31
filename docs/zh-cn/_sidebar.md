@@ -11,4 +11,5 @@
   - [SMN](zh-cn/smn-sdk.md)
   - [DMS](zh-cn/dms-sdk.md)
   - [Anti-DDoS](zh-cn/antiddos-sdk.md)
+  - [MaaS](zh-cn/maas-sdk.md)
 - [贡献代码](zh-cn/contributing.md)

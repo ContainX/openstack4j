@@ -89,17 +89,6 @@ public class Task implements ModelEntity {
 	private Boolean enableKMS;
 	
 	/**
-	 * whether enable acceleration
-	 */
-	@JsonProperty("enable_tas")
-	private Boolean enableTas;
-	
-	/**
-	 * acceleration agent
-	 */
-	private Agent agent;
-	
-	/**
 	 * description
 	 */
 	private String description;
@@ -108,7 +97,7 @@ public class Task implements ModelEntity {
 	 * task error reason
 	 */
 	@JsonProperty("error_reason")
-	private ErrorReason errorReason;
+	private Object errorReason;
 	
 	/**
 	 * total size
@@ -194,25 +183,6 @@ public class Task implements ModelEntity {
 	@Builder(toBuilder = true)
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class Agent {
-		
-		/**
-		 * agent name
-		 */
-		@JsonProperty("agent_name")
-		private String agentName;
-		
-		/**
-		 * agent ip
-		 */
-		private String ip;
-	}
-
-	@Getter
-	@ToString
-	@Builder(toBuilder = true)
-	@NoArgsConstructor
-	@AllArgsConstructor
 	public static class SmnInfo {
 		/**
 		 * notify result
@@ -228,25 +198,6 @@ public class Task implements ModelEntity {
 		 * topic name
 		 */
 		private String topicName;
-	}
-	
-	@Getter
-	@ToString
-	@Builder(toBuilder = true)
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class ErrorReason {
-		/**
-		 * error code
-		 */
-		@JsonProperty("error_code")
-		private String errorCode;
-		
-		/**
-		 * error message
-		 */
-		@JsonProperty("error_msg")
-		private String errorMsg;
 	}
 	
 	
