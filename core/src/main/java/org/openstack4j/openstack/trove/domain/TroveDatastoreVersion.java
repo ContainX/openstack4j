@@ -15,23 +15,37 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import org.openstack4j.model.trove.DatastoreVersion;
-import org.openstack4j.openstack.common.ListResult;
-
 import java.util.List;
 
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.ListResult;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 /**
- * Model implementation for Datastore version
+ * Model represent attributes of data-store version
  *
- * @author sumit gandhi
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:12:39
  */
-
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonRootName("version")
-public class TroveDatastoreVersion implements DatastoreVersion {
+public class TroveDatastoreVersion implements ModelEntity {
 
-    private String name;
+	private static final long serialVersionUID = 4185143839454760141L;
+	
+	private String name;
     private String id;
     @JsonProperty("datastore")
     private String datastoreId;
@@ -45,36 +59,17 @@ public class TroveDatastoreVersion implements DatastoreVersion {
         return name;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getDatastoreId() {
-        return datastoreId;
-    }
-
-    public int getIsActive() {
-        return isActive;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
 
     public static class Versions extends ListResult<TroveDatastoreVersion> {
 
-        private static final long serialVersionUID = 1L;
-        @JsonProperty("versions")
+		private static final long serialVersionUID = 7831092478216356910L;
+		
+		@JsonProperty("versions")
         private List<TroveDatastoreVersion> troveDatastoreVersionList;
 
         @Override
         protected List<TroveDatastoreVersion> value() {
             return troveDatastoreVersionList;
         }
-
     }
 }

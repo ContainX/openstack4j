@@ -16,6 +16,8 @@
 package org.openstack4j.api.trove;
 
 import org.openstack4j.common.RestService;
+import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
+import org.openstack4j.openstack.trove.internal.VersionServiceImpl;
 
 /**
  * This interface contains all available Trove Services
@@ -24,6 +26,13 @@ import org.openstack4j.common.RestService;
  *
  */
 public interface TroveService extends RestService {
+	
+    /**
+     * Service implementation which provides methods for manipulation of version
+     *
+     * @return {@link VersionServiceImpl} instance
+     */
+    public VersionServiceImpl versions();
 
     /**
      * Service implementation which provides methods for manipulation of databases
@@ -58,6 +67,6 @@ public interface TroveService extends RestService {
      *
      * @return InstanceService
      */
-    InstanceService instanceService();
+    DBInstanceServiceImpl instanceService();
 
 }

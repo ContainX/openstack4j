@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -16,58 +14,71 @@
 package org.openstack4j.openstack.trove.internal;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.DatabaseService;
 import org.openstack4j.api.trove.DatastoreService;
-import org.openstack4j.api.trove.InstanceService;
-import org.openstack4j.api.trove.TroveService;
+import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.UserService;
 
 /**
- * Trove API Implementation
+ * Trove (Relation Database) Operations API implementation
  *
- * @author sumit gandhi
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:25:44
  */
-public class TroveServiceImpl extends BaseTroveServices implements TroveService {
+public class TroveServiceImpl extends BaseTroveServices {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DatastoreService datastoreService() {
-        return Apis.get(DatastoreService.class);
-    }
+	/**
+	 * Service implementation which provides methods for manipulation of version
+	 *
+	 * @return {@link VersionServiceImpl} instance
+	 */
+	public VersionServiceImpl versions() {
+		return Apis.get(VersionServiceImpl.class);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DatabaseService databaseService() {
-        return Apis.get(DatabaseService.class);
-    }
+	/**
+	 * Service implementation which provides methods for manipulation of datastores
+	 *
+	 * @return DatastoreService
+	 */
+	public DatastoreService datastores() {
+		return Apis.get(DatastoreService.class);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UserService databaseUsersService() {
-        return Apis.get(UserService.class);
-    }
+	/**
+	 * Service implementation which provides methods for manipulation of databases
+	 *
+	 * @return DatabaseService
+	 */
+	public DatabaseService databases() {
+		return Apis.get(DatabaseService.class);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public InstanceFlavorService flavorService() {
-        return Apis.get(InstanceFlavorService.class);
-    }
+	/**
+	 * Service implementation which provides methods for manipulation of database users
+	 *
+	 * @return UserService
+	 */
+	public UserService databaseUsers() {
+		return Apis.get(UserService.class);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public InstanceService instanceService() {
-        return Apis.get(InstanceService.class);
-    }
+	/**
+	 * Service implementation which provides methods for manipulation of database instance flavors
+	 *
+	 * @return DBInstanceFlavorService
+	 */
+	public InstanceFlavorService flavors() {
+		return Apis.get(InstanceFlavorService.class);
+	}
+
+	/**
+	 * Service implementation which provides methods for manipulation of database instances
+	 *
+	 * @return InstanceService
+	 */
+	public DBInstanceServiceImpl instances() {
+		return Apis.get(DBInstanceServiceImpl.class);
+	}
 
 }

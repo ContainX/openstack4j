@@ -196,11 +196,6 @@ import org.openstack4j.api.telemetry.ResourceService;
 import org.openstack4j.api.telemetry.SampleService;
 import org.openstack4j.api.telemetry.TelemetryAodhService;
 import org.openstack4j.api.telemetry.TelemetryService;
-import org.openstack4j.api.trove.DatabaseService;
-import org.openstack4j.api.trove.DatastoreService;
-import org.openstack4j.api.trove.InstanceFlavorService;
-import org.openstack4j.api.trove.InstanceService;
-import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.workflow.ActionDefinitionService;
 import org.openstack4j.api.workflow.WorkbookDefinitionService;
 import org.openstack4j.api.workflow.WorkflowDefinitionService;
@@ -411,6 +406,7 @@ import org.openstack4j.openstack.trove.internal.DBFlavorServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
+import org.openstack4j.openstack.trove.internal.VersionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.ActionDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkbookDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkflowDefinitionServiceImpl;
@@ -583,12 +579,16 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ListenerV2Service.class, ListenerV2ServiceImpl.class);
 		bind(HealthMonitorV2Service.class, HealthMonitorV2ServiceImpl.class);
 		bind(LbPoolV2Service.class, LbPoolV2ServiceImpl.class);
-		bind(TroveService.class, TroveServiceImpl.class);
-		bind(InstanceFlavorService.class, DBFlavorServiceImpl.class);
-		bind(DatastoreService.class, DBDatastoreServiceImpl.class);
-		bind(DatabaseService.class, DBDatabaseServiceImpl.class);
-		bind(org.openstack4j.api.trove.UserService.class, DBUserServiceImpl.class);
-		bind(InstanceService.class, DBInstanceServiceImpl.class);
+
+		// trove
+		bind(TroveServiceImpl.class, TroveServiceImpl.class);
+		bind(DBFlavorServiceImpl.class, DBFlavorServiceImpl.class);
+		bind(DBDatastoreServiceImpl.class, DBDatastoreServiceImpl.class);
+		bind(DBDatabaseServiceImpl.class, DBDatabaseServiceImpl.class);
+		bind(DBUserServiceImpl.class, DBUserServiceImpl.class);
+		bind(DBInstanceServiceImpl.class, DBInstanceServiceImpl.class);
+		bind(VersionServiceImpl.class, VersionServiceImpl.class);
+
 		bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
 		bind(BarbicanService.class, BarbicanServiceImpl.class);
 		bind(ContainerService.class, ContainerServiceImpl.class);
@@ -662,16 +662,16 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(TraceService.class, TraceService.class);
 		bind(TrackerService.class, TrackerService.class);
 		bind(CloudTraceV1Service.class, CloudTraceV1Service.class);
-		
+
 		bind(org.openstack4j.openstack.cloud.trace.v2.internal.TraceService.class,
 				org.openstack4j.openstack.cloud.trace.v2.internal.TraceService.class);
 		bind(CloudTraceV2Service.class, CloudTraceV2Service.class);
-		
-		//anti-ddos
+
+		// anti-ddos
 		bind(AntiDDoSServices.class, AntiDDoSServices.class);
 		bind(AntiDDoSService.class, AntiDDoSService.class);
 		bind(AntiDDoSWarnService.class, AntiDDoSWarnService.class);
-		
+
 		// simple message notification
 		bind(NotificationService.class, NotificationService.class);
 		bind(TopicService.class, TopicService.class);
@@ -679,19 +679,20 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(MessageTemplateService.class, MessageTemplateService.class);
 		bind(MessageService.class, MessageService.class);
 		bind(SmsService.class, SmsService.class);
-		
+
 		// distributed message
 		bind(MessageQueueService.class, MessageQueueService.class);
 		bind(QueueMessageService.class, QueueMessageService.class);
 		bind(QueueService.class, QueueService.class);
 		bind(ConsumerGroupService.class, ConsumerGroupService.class);
 		bind(MessageQueueQuotaService.class, MessageQueueQuotaService.class);
-		
-		//maas
+
+		// maas
 		bind(MaaSService.class, MaaSService.class);
 		bind(VersionService.class, VersionService.class);
-		bind(org.openstack4j.openstack.maas.internal.TaskService.class, org.openstack4j.openstack.maas.internal.TaskService.class);
-		
+		bind(org.openstack4j.openstack.maas.internal.TaskService.class,
+				org.openstack4j.openstack.maas.internal.TaskService.class);
+
 	}
 
 	/**

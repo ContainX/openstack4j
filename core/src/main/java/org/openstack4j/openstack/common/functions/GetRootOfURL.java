@@ -1,4 +1,6 @@
 /*******************************************************************************
+ *  Copyright 2017 HuaWei and OTC tld
+ * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -11,27 +13,37 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.builder;
+package org.openstack4j.openstack.common.functions;
 
-import org.openstack4j.openstack.trove.domain.TroveDatabase;
-import org.openstack4j.openstack.trove.domain.TroveDatabase.TroveDatabaseBuilder;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser.TroveDatabaseUserBuilder;
-import org.openstack4j.openstack.trove.domain.TroveInstanceCreate;
-import org.openstack4j.openstack.trove.domain.TroveInstanceCreate.TroveInstanceCreateBuilder;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-public class TroveBuilders {
+import org.openstack4j.api.exceptions.OS4JException;
 
-	public TroveInstanceCreateBuilder instanceCreate() {
-		return TroveInstanceCreate.builder();
+import com.google.common.base.Function;
+
+/**
+ */
+public class GetRootOfURL implements Function<String, String> {
+
+	public static GetRootOfURL instance() {
+		return new GetRootOfURL();
 	}
 
-	public TroveDatabaseBuilder databaseCreate() {
-		return TroveDatabase.builder();
+	@Override
+	public String apply(String input) {
+		try {
+			URL url = new URL(input);
+			String authority = url.getAuthority();
+			return input.substring(0, input.indexOf(authority) + authority.length());
+		} catch (MalformedURLException e) {
+			throw new OS4JException(String.format("endpoint `%s` is not a valid URL", input), e);
+		}
 	}
-
-	public TroveDatabaseUserBuilder databaseUserCreate() {
-		return TroveDatabaseUser.builder();
+	
+	public static void main(String[] args) {
+		String apply = GetRootOfURL.instance().apply("http://www.baidu.com:10000/abc/xd");
+		System.out.println(apply);
 	}
 
 }

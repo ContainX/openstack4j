@@ -15,25 +15,40 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import org.openstack4j.model.trove.Flavor;
-import org.openstack4j.openstack.common.ListResult;
-
 import java.util.List;
 
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.ListResult;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 /**
- * Model implementation for Database instance flavor
+ * Model represent for attributes of Database instance Flavor
  *
- * @author sumit gandhi
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:12:39
  */
-
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonRootName("flavor")
-public class TroveInstanceFlavor implements Flavor {
-
-    private static final long serialVersionUID = 1L;
-    private String name;
+public class TroveInstanceFlavor implements ModelEntity {
+    
+	private static final long serialVersionUID = 1640365078802343096L;
+	
     private String id;
+    
+	private String name;
+    
     @JsonProperty("str_id")
     private String strId;
 
@@ -41,33 +56,11 @@ public class TroveInstanceFlavor implements Flavor {
     private int vcpus;
     private int disk;
 
-    public String getName() {
-        return name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getStrId() {
-        return strId;
-    }
-
-    public int getRam() {
-        return ram;
-    }
-
-    public int getVcpus() {
-        return vcpus;
-    }
-
-    public int getDisk() {
-        return disk;
-    }
 
     public static class Flavors extends ListResult<TroveInstanceFlavor> {
 
         private static final long serialVersionUID = 1L;
+        
         @JsonProperty("flavors")
         private List<TroveInstanceFlavor> troveInstanceFlavorList;
 

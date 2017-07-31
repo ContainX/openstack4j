@@ -1,4 +1,6 @@
 /*******************************************************************************
+ * 	Copyright 2017 HuaWei and OTC                                       
+ * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -13,42 +15,42 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.internal;
 
-import static com.google.common.base.Preconditions.*;
-
 import java.util.List;
 
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.openstack.trove.domain.TroveInstance;
-import org.openstack4j.openstack.trove.domain.TroveInstance.DBInstances;
-import org.openstack4j.openstack.trove.domain.TroveInstanceCreate;
-
+import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.openstack.common.ServiceVersion;
+import org.openstack4j.openstack.common.ServiceVersion.ServiceVersionWrap;
+import org.openstack4j.openstack.common.ServiceVersion.ServiceVersions;
+import org.openstack4j.openstack.common.functions.GetRootOfURL;
 
 /**
- * The implementation of manipulation of {@link TroveInstance}
- *
+ * 
+ * Trove Version API Implementation
+ * 
  * @author QianBiao.NG
- * @date   2017-07-31 11:13:41
+ * @date   2017-07-28 16:46:41
  */
-public class DBInstanceServiceImpl extends BaseTroveServices {
+public class VersionServiceImpl extends BaseTroveServices {
 
-	public List<TroveInstance> list() {
-		return get(DBInstances.class, uri("/instances")).execute().getList();
-
+	public VersionServiceImpl() {
+		super(ServiceType.DATABASE, GetRootOfURL.instance());
 	}
 
-	public TroveInstance get(String instanceId) {
-		checkNotNull(instanceId);
-		TroveInstance instance = get(TroveInstance.class, uri("/instances/%s", instanceId)).execute();
-		return instance;
+	/**
+	 * list versions of Trove Service
+	 */
+	public List<ServiceVersion> list() {
+		return get(ServiceVersions.class, "/rds/").execute().getList();
 	}
 
-	public TroveInstance create(TroveInstanceCreate instanceCreate) {
-		return post(TroveInstance.class, uri("/instances")).entity(instanceCreate).execute();
-
+	/**
+	 * get a special version details 
+	 * 
+	 * @param versionId the version ID
+	 * @return {@link ServiceVersion} instance
+	 */
+	public ServiceVersion get(String versionId) {
+		return get(ServiceVersionWrap.class, "/rds/" + versionId).execute().getVersion();
 	}
 
-	public ActionResponse delete(String id) {
-		checkNotNull(id);
-		return deleteWithResponse(uri("/instances/%s", id)).execute();
-	}
 }

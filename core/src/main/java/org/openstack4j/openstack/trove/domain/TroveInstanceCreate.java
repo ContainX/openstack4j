@@ -15,199 +15,69 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.domain;
 
+import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.trove.Datastore;
-import org.openstack4j.model.trove.InstanceCreate;
-import org.openstack4j.model.trove.builder.InstanceCreateBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 /**
- * Model implementation for Database instance creation
+ * Model represent for attributes of Database instance creation
  *
- * @author Shital Patil
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:12:39
  */
-
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonRootName("instance")
-public class TroveInstanceCreate implements InstanceCreate {
+public class TroveInstanceCreate implements ModelEntity {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7844139328996206764L;
 
-    @JsonProperty("volume")
-    private Volume volume;
-    @JsonProperty("flavorRef")
-    private String flavorRef;
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("datastore")
-    private Datastore datastore;
+	@JsonProperty("volume")
+	private Volume volume;
 
-    /**
-     *
-     * @param volume
-     *            The volume
-     */
-    public void setVolume(Volume volume) {
-        this.volume = volume;
-    }
+	@JsonProperty("flavorRef")
+	private String flavorRef;
 
-    /**
-     *
-     * @param flavorRef
-     *            The flavorRef
-     */
-    @Override
-    public void setFlavor(String flavorRef) {
-        this.flavorRef = flavorRef;
-    }
+	@JsonProperty("name")
+	private String name;
 
-    /**
-     *
-     * @param name
-     *            The name
-     */
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+	@JsonProperty("datastore")
+	private Datastore datastore;
 
-    /**
-     * 
-     * @param volumeType
-     */
-    @Override
-    public void setVolumetype(String volumeType) {
-        this.volume.setType(volumeType);
-    }
+	public class Volume {
 
-    /**
-     * 
-     * @param size
-     */
-    @Override
-    public void setvolumeSize(int size) {
-        this.volume.setSize(size);
-    }
+		@JsonProperty("type")
+		private String type;
+		@JsonProperty("size")
+		private Integer size;
 
-    /**
-     * @param datastore
-     */
-    @Override
-    public void setDatastore(Datastore datastore) {
-        this.datastore = datastore;
-    }
+		public String getType() {
+			return type;
+		}
 
-    public class Volume {
+		public void setType(String type) {
+			this.type = type;
+		}
 
-        @JsonProperty("type")
-        private String type;
-        @JsonProperty("size")
-        private Integer size;
+		public int getSize() {
+			return size;
+		}
 
-        /**
-         *
-         * @return
-         *         The type
-         */
+		public void setSize(Integer size) {
+			this.size = size;
+		}
 
-        public String getType() {
-            return type;
-        }
-
-        /**
-         *
-         * @param type
-         *            The type
-         */
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        /**
-         *
-         * @param size
-         *            The size
-         */
-
-        public int getSize() {
-            return size;
-        }
-
-        /**
-         *
-         * @param size
-         *            The size
-         */
-
-        public void setSize(Integer size) {
-            this.size = size;
-        }
-
-    }
-
-    public static class ConcereteInstanceBuilder implements InstanceCreateBuilder {
-        private TroveInstanceCreate instance;
-
-        public ConcereteInstanceBuilder() {
-            this(new TroveInstanceCreate());
-        }
-
-        public ConcereteInstanceBuilder(TroveInstanceCreate instance) {
-            this.instance = instance;
-            this.instance.setVolume(instance.new Volume());
-        }
-
-        @Override
-        public InstanceCreate build() {
-            return instance;
-        }
-
-        @Override
-        public InstanceCreateBuilder from(InstanceCreate in) {
-            instance = (TroveInstanceCreate) in;
-            return this;
-        }
-
-        @Override
-        public InstanceCreateBuilder flavor(String flavorRef) {
-            instance.setFlavor(flavorRef);
-            return this;
-        }
-
-        @Override
-        public InstanceCreateBuilder name(String name) {
-            instance.setName(name);
-            return this;
-        }
-
-        @Override
-        public InstanceCreateBuilder datastore(Datastore datastore) {
-            instance.setDatastore(datastore);
-            return this;
-        }
-
-        @Override
-        public InstanceCreateBuilder volumeType(String volumeType) {
-            instance.setVolumetype(volumeType);
-            return this;
-        }
-
-        @Override
-        public InstanceCreateBuilder volumeSize(int size) {
-            instance.setvolumeSize(size);
-            return this;
-        }
-
-    }
-
-    public static InstanceCreateBuilder builder() {
-        return new ConcereteInstanceBuilder();
-    }
-
-    @Override
-    public InstanceCreateBuilder toBuilder() {
-        return new ConcereteInstanceBuilder(this);
-    }
+	}
 
 }

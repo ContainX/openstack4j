@@ -17,56 +17,58 @@ package org.openstack4j.openstack.trove.domain;
 
 import java.util.List;
 
-import org.openstack4j.model.trove.Datastore;
+import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 /**
- * Model implementation for Datastore
+ * Model represent attributes of Trove data-store
  *
- * @author sumit gandhi
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:12:39
  */
-
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonRootName("datastore")
-public class TroveDatastore implements Datastore {
+public class TroveDatastore implements ModelEntity {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private String id;
-    private String name;
-    private String default_version;
-    @JsonProperty("versions")
-    private List<TroveDatastoreVersion> troveDatastoreVersionList;
+	private String id;
+	private String name;
+	
+	@JsonProperty("default_version")
+	private String defaultVersion;
+	
+	@JsonProperty("versions")
+	private List<TroveDatastoreVersion> troveDatastoreVersionList;
 
-    public String getDefault_version() {
-        return default_version;
-    }
+	public List<TroveDatastoreVersion> getTroveDatastoreVersionList() {
+		return troveDatastoreVersionList;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public static class Datastores extends ListResult<TroveDatastore> {
+		
+		private static final long serialVersionUID = -3999288230060678693L;
+		
+		@JsonProperty("datastores")
+		private List<TroveDatastore> troveDatastoreList;
 
-    public String getId() {
-        return id;
-    }
-
-    public List<TroveDatastoreVersion> getTroveDatastoreVersionList() {
-        return troveDatastoreVersionList;
-    }
-
-    public static class Datastores extends ListResult<TroveDatastore> {
-
-        private static final long serialVersionUID = 1L;
-        @JsonProperty("datastores")
-        private List<TroveDatastore> troveDatastoreList;
-
-        @Override
-        protected List<TroveDatastore> value() {
-            return troveDatastoreList;
-        }
-
-    }
+		@Override
+		protected List<TroveDatastore> value() {
+			return troveDatastoreList;
+		}
+	}
 
 }

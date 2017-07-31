@@ -139,7 +139,6 @@ import org.openstack4j.model.storage.block.builder.VolumeTypeBuilder;
 import org.openstack4j.model.tacker.builder.NfvBuilders;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
-import org.openstack4j.model.trove.builder.DBServiceBuilders;
 import org.openstack4j.model.workflow.builder.WorkflowBuilders;
 import org.openstack4j.openstack.artifact.domain.ArtifactUpdateModel;
 import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
@@ -1152,7 +1151,7 @@ public class Builders {
 	 *
 	 * @return the trove builders
 	 */
-	public static DBServiceBuilders trove() {
+	public static TroveBuilders trove() {
 		return new TroveBuilders();
 	}
 

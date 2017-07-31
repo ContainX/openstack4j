@@ -15,13 +15,13 @@
  *******************************************************************************/
 package org.openstack4j.api.trove;
 
+import java.util.List;
+
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.trove.Database;
 import org.openstack4j.model.trove.DatabaseUser;
+import org.openstack4j.openstack.trove.domain.TroveDatabase;
 import org.openstack4j.openstack.trove.domain.TroveDatabase.Databases;
 import org.openstack4j.openstack.trove.domain.TroveDatabaseUser.DatabaseUsers;
-
-import java.util.List;
 
 /**
  * This interface defines all methods for the manipulation of trove database instance users
@@ -44,7 +44,7 @@ public interface UserService {
      * @param userName
      * @return the list of databases for a user
      */
-    List<? extends Database> listUserDatabases(String instanceId, String userName);
+    List<TroveDatabase> listUserDatabases(String instanceId, String userName);
 
     /**
      * Create a user for the database instance

@@ -1,4 +1,6 @@
 /*******************************************************************************
+ *  Copyright 2017 Huawei TLD
+ * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -11,27 +13,26 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.builder;
+/*******************************************************************************
+ *******************************************************************************/
+package org.openstack4j.sample.trove;
 
-import org.openstack4j.openstack.trove.domain.TroveDatabase;
-import org.openstack4j.openstack.trove.domain.TroveDatabase.TroveDatabaseBuilder;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser.TroveDatabaseUserBuilder;
-import org.openstack4j.openstack.trove.domain.TroveInstanceCreate;
-import org.openstack4j.openstack.trove.domain.TroveInstanceCreate.TroveInstanceCreateBuilder;
+import org.openstack4j.sample.AbstractSample;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.Test;
 
-public class TroveBuilders {
+@Test(suiteName = "Trove/Version/Sample")
+public class DBInstanceSample extends AbstractSample {
 
-	public TroveInstanceCreateBuilder instanceCreate() {
-		return TroveInstanceCreate.builder();
+	private static final Logger logger = LoggerFactory.getLogger(DBInstanceSample.class);
+
+
+	@Test
+	public void testListVersion() {
+//		InstanceCreate instanceCreate = TroveInstanceCreate.builder().build();
+//		Instance instance = osclient.trove().instanceService().create(instanceCreate);
 	}
 
-	public TroveDatabaseBuilder databaseCreate() {
-		return TroveDatabase.builder();
-	}
-
-	public TroveDatabaseUserBuilder databaseUserCreate() {
-		return TroveDatabaseUser.builder();
-	}
 
 }

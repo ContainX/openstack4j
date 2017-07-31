@@ -15,41 +15,56 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.internal;
 
-import org.openstack4j.api.trove.DatastoreService;
-import org.openstack4j.model.trove.Datastore;
-import org.openstack4j.model.trove.DatastoreVersion;
+import java.util.List;
+
 import org.openstack4j.openstack.trove.domain.TroveDatastore;
 import org.openstack4j.openstack.trove.domain.TroveDatastore.Datastores;
 import org.openstack4j.openstack.trove.domain.TroveDatastoreVersion;
 import org.openstack4j.openstack.trove.domain.TroveDatastoreVersion.Versions;
 
-import java.util.List;
-
 /**
- * Datastore API Implementation
+ * The implementation of manipulation of {@link TroveDatastore}
  *
- * @author sumit gandhi
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:41:17
  */
-public class DBDatastoreServiceImpl extends BaseTroveServices implements DatastoreService {
+public class DBDatastoreServiceImpl extends BaseTroveServices {
 
-    @Override
-    public List<? extends Datastore> list() {
-        return get(Datastores.class, uri("/datastores")).execute().getList();
-    }
+	/**
+	* Returns list of available datastores
+	* @return the list of datastores
+	*/
+	public List<TroveDatastore> list() {
+		return get(Datastores.class, uri("/datastores")).execute().getList();
+	}
 
-    @Override
-    public Datastore get(String id) {
-        return get(TroveDatastore.class, uri("/datastores/%s", id)).execute();
-    }
+	/**
+	 * Gets a datastore specified by ID
+	 * @param id
+	 * @return the datastore or null if not found
+	 */
+	public TroveDatastore get(String id) {
+		return get(TroveDatastore.class, uri("/datastores/%s", id)).execute();
+	}
 
-    @Override
-    public List<? extends DatastoreVersion> listDatastoreVersions(String datasoreId) {
-        return get(Versions.class, uri("/datastores/%s/versions",datasoreId)).execute().getList();
-    }
+	/**
+	 * Returns list of all datastore versions
+	 * @param datasoreId
+	 * @return list of datastore versions
+	 */
+	public List<TroveDatastoreVersion> listDatastoreVersions(String datasoreId) {
+		return get(Versions.class, uri("/datastores/%s/versions", datasoreId)).execute().getList();
+	}
 
-    @Override
-    public DatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
-        return get(TroveDatastoreVersion.class, uri("/datastores/%s/versions/%s",datastoreId,versionId)).execute();
-    }
+	/**
+	 * Get the datastore version specified by ID
+	 * 
+	 * @param datastoreId
+	 * @param versionId
+	 * @return the datastore version or null if not found
+	 */
+	public TroveDatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
+		return get(TroveDatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
+	}
 
 }

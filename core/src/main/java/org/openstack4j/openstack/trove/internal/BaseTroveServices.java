@@ -16,19 +16,46 @@
 package org.openstack4j.openstack.trove.internal;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
+
+import com.google.common.base.Function;
 
 
 /**
- * Trove services
+ * Base Service of Trove Service
  *
- * @author sumit gandhi
+ * @author QianBiao.NG
+ * @date   2017-07-31 14:30:05
  */
-
 public class BaseTroveServices extends BaseOpenStackService {
 
-    protected BaseTroveServices() {
-        super(ServiceType.DATABASE);
-    }
+	public static String CONTENT_JSON = "application/json;charset=utf-8";
+
+	public BaseTroveServices() {
+		super(ServiceType.DATABASE);
+	}
+
+	/**
+	 * @param serviceType
+	 */
+	public BaseTroveServices(ServiceType serviceType) {
+		super(serviceType);
+	}
+
+	/**
+	 * @param serviceType
+	 * @param endpointFunc
+	 */
+	public BaseTroveServices(ServiceType serviceType, Function<String, String> endpointFunc) {
+		super(serviceType, endpointFunc);
+	}
+
+	/**
+	 * HuaWei Relation DataBase Service(known as Trove) validate the content-type in every request
+	 */
+	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON);
+	}
 
 }

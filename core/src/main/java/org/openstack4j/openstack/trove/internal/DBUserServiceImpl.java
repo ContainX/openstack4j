@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -15,52 +13,61 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.internal;
 
-import org.openstack4j.api.trove.UserService;
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.trove.Database;
-import org.openstack4j.model.trove.DatabaseUser;
-import org.openstack4j.openstack.trove.domain.TroveDatabase.Databases;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser.DatabaseUsers;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.trove.domain.TroveDatabase;
+import org.openstack4j.openstack.trove.domain.TroveDatabase.Databases;
+import org.openstack4j.openstack.trove.domain.TroveDatabaseUser;
+import org.openstack4j.openstack.trove.domain.TroveDatabaseUser.DatabaseUsers;
 
 /**
- * User API Implementation
+ * The implementation of manipulation of {@link TroveDatabaseUser}
  *
- * @author sumit gandhi
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:50:37
  */
-public class DBUserServiceImpl extends BaseTroveServices implements UserService {
+public class DBUserServiceImpl extends BaseTroveServices {
+	
 
     /**
-     * {@inheritDoc}
+     * Returns list of all users for the database instance
+     * @param instanceId
+     * @return the list of users for the database instance
      */
-    @Override
-    public List<? extends DatabaseUser> list(String instanceId) {
+    public List<TroveDatabaseUser> list(String instanceId) {
         return get(DatabaseUsers.class, uri("/instances/%s/users",instanceId)).execute().getList();
     }
 
+
     /**
-     * {@inheritDoc}
+     * Returns list of all databases which the user has access to on the database instance
+     * @param instanceId
+     * @param userName
+     * @return the list of databases for a user
      */
-    @Override
-    public List<? extends Database> listUserDatabases(String instanceId, String userName) {
+    public List<TroveDatabase> listUserDatabases(String instanceId, String userName) {
         return get(Databases.class, uri("/instances/%s/users/%s/databases",instanceId,userName)).execute().getList();
     }
 
     /**
-     * {@inheritDoc}
+     * Create a user for the database instance
+     * @param instanceId
+     * @param databaseUsers
+     * @return the action response
      */
-    @Override
     public ActionResponse create(String instanceId, DatabaseUsers databaseUsers) {
         return post(ActionResponse.class, uri("/instances/%s/users",instanceId)).entity(databaseUsers).execute();
     }
 
     /**
-     * {@inheritDoc}
+     * Deletes a user for the database instance
+     * @param instanceId
+     * @param userName
+     * @return the action response
      */
-    @Override
     public ActionResponse delete(String instanceId, String userName) {
         checkNotNull(instanceId);
         checkNotNull(userName);
@@ -68,9 +75,12 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
     }
 
     /**
-     * {@inheritDoc}
+     * Grant user access to a database on the database instance
+     * @param instanceId
+     * @param userName
+     * @param databases
+     * @return the action response
      */
-    @Override
     public ActionResponse grantUserDBAccess(String instanceId, String userName, Databases databases) {
         checkNotNull(instanceId);
         checkNotNull(userName);
@@ -79,9 +89,12 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
     }
 
     /**
-     * {@inheritDoc}
+     * Revoke user access to a database on the database instance
+     * @param instanceId
+     * @param userName
+     * @param dbName
+     * @return the action response
      */
-    @Override
     public ActionResponse revokeUserDBAccess(String instanceId, String userName, String dbName) {
         checkNotNull(instanceId);
         checkNotNull(userName);
