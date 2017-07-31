@@ -49,7 +49,6 @@ import org.openstack4j.api.storage.ObjectStorageService;
 import org.openstack4j.api.tacker.TackerService;
 import org.openstack4j.api.telemetry.TelemetryAodhService;
 import org.openstack4j.api.telemetry.TelemetryService;
-import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.api.workflow.WorkflowService;
@@ -66,6 +65,7 @@ import org.openstack4j.openstack.key.management.internal.KeyManagementService;
 import org.openstack4j.openstack.maas.internal.MaaSService;
 import org.openstack4j.openstack.message.notification.internal.NotificationService;
 import org.openstack4j.openstack.message.queue.internal.MessageQueueService;
+import org.openstack4j.openstack.trove.internal.TroveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -29,7 +29,7 @@ import org.openstack4j.openstack.trove.domain.TroveInstanceCreate;
  * @author QianBiao.NG
  * @date   2017-07-31 11:13:41
  */
-public class DBInstanceServiceImpl extends BaseTroveServices {
+public class TroveDBInstanceService extends BaseTroveServices {
 
 	public List<TroveInstance> list() {
 		return get(DBInstances.class, uri("/instances")).execute().getList();

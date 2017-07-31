@@ -33,8 +33,8 @@ import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.tacker.TackerService;
-import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.workflow.WorkflowService;
+import org.openstack4j.openstack.trove.internal.TroveService;
 
 /**
  * Provides access to the Major APIs and Buildables

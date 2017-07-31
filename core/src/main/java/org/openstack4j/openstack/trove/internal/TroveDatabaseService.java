@@ -15,56 +15,53 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.internal;
 
+import static com.google.common.base.Preconditions.*;
+
 import java.util.List;
 
-import org.openstack4j.openstack.trove.domain.TroveDatastore;
-import org.openstack4j.openstack.trove.domain.TroveDatastore.Datastores;
-import org.openstack4j.openstack.trove.domain.TroveDatastoreVersion;
-import org.openstack4j.openstack.trove.domain.TroveDatastoreVersion.Versions;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.trove.domain.TroveDatabase;
+import org.openstack4j.openstack.trove.domain.TroveDatabase.Databases;
 
 /**
- * The implementation of manipulation of {@link TroveDatastore}
+ * The implementation of manipulation of {@link TroveDatabase}
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:41:17
  */
-public class DBDatastoreServiceImpl extends BaseTroveServices {
+public class TroveDatabaseService extends BaseTroveServices {
 
 	/**
-	* Returns list of available datastores
-	* @return the list of datastores
-	*/
-	public List<TroveDatastore> list() {
-		return get(Datastores.class, uri("/datastores")).execute().getList();
+	 * Gets the database specified by ID
+	 * @param instanceId
+	 * @return the database or null if not found
+	 */
+	public List<TroveDatabase> list(String instanceId) {
+		return get(Databases.class, uri("/instances/%s/databases", instanceId)).execute().getList();
 	}
 
 	/**
-	 * Gets a datastore specified by ID
+	 * Create a new database
 	 * @param id
-	 * @return the datastore or null if not found
+	 * @param databases
+	 * @return the action response
 	 */
-	public TroveDatastore get(String id) {
-		return get(TroveDatastore.class, uri("/datastores/%s", id)).execute();
+	public ActionResponse create(String instanceId, Databases databases) {
+		checkNotNull(instanceId);
+		checkNotNull(databases);
+		return post(ActionResponse.class, uri("/instances/%s/databases", instanceId)).entity(databases).execute();
 	}
 
 	/**
-	 * Returns list of all datastore versions
-	 * @param datasoreId
-	 * @return list of datastore versions
+	 * Deletes the database
+	 * @param instanceId
+	 * @param name
+	 * @return the action response
 	 */
-	public List<TroveDatastoreVersion> listDatastoreVersions(String datasoreId) {
-		return get(Versions.class, uri("/datastores/%s/versions", datasoreId)).execute().getList();
-	}
-
-	/**
-	 * Get the datastore version specified by ID
-	 * 
-	 * @param datastoreId
-	 * @param versionId
-	 * @return the datastore version or null if not found
-	 */
-	public TroveDatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
-		return get(TroveDatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
+	public ActionResponse delete(String instanceId, String dbName) {
+		checkNotNull(instanceId);
+		checkNotNull(dbName);
+		return deleteWithResponse(uri("/instances/%s/databases/%s", instanceId, dbName)).execute();
 	}
 
 }

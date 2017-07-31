@@ -16,7 +16,6 @@
 package org.openstack4j.openstack.trove.domain;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.trove.Datastore;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -53,7 +52,7 @@ public class TroveInstanceCreate implements ModelEntity {
 	private String name;
 
 	@JsonProperty("datastore")
-	private Datastore datastore;
+	private TroveDatastore datastore;
 
 	public class Volume {
 

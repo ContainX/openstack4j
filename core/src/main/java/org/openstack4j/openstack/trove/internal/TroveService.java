@@ -14,10 +14,6 @@
 package org.openstack4j.openstack.trove.internal;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.trove.DatabaseService;
-import org.openstack4j.api.trove.DatastoreService;
-import org.openstack4j.api.trove.InstanceFlavorService;
-import org.openstack4j.api.trove.UserService;
 
 /**
  * Trove (Relation Database) Operations API implementation
@@ -25,7 +21,7 @@ import org.openstack4j.api.trove.UserService;
  * @author QianBiao.NG
  * @date   2017-07-31 11:25:44
  */
-public class TroveServiceImpl extends BaseTroveServices {
+public class TroveService extends BaseTroveServices {
 
 	/**
 	 * Service implementation which provides methods for manipulation of version
@@ -39,46 +35,46 @@ public class TroveServiceImpl extends BaseTroveServices {
 	/**
 	 * Service implementation which provides methods for manipulation of datastores
 	 *
-	 * @return DatastoreService
+	 * @return {@link TroveDatastoreService} instance
 	 */
-	public DatastoreService datastores() {
-		return Apis.get(DatastoreService.class);
+	public TroveDatastoreService datastores() {
+		return Apis.get(TroveDatastoreService.class);
 	}
 
 	/**
 	 * Service implementation which provides methods for manipulation of databases
 	 *
-	 * @return DatabaseService
+	 * @return {@link TroveDatabaseService} instance
 	 */
-	public DatabaseService databases() {
-		return Apis.get(DatabaseService.class);
+	public TroveDatabaseService databases() {
+		return Apis.get(TroveDatabaseService.class);
 	}
 
 	/**
 	 * Service implementation which provides methods for manipulation of database users
 	 *
-	 * @return UserService
+	 * @return {@link TroveDBUserService} instance
 	 */
-	public UserService databaseUsers() {
-		return Apis.get(UserService.class);
+	public TroveDBUserService databaseUsers() {
+		return Apis.get(TroveDBUserService.class);
 	}
 
 	/**
 	 * Service implementation which provides methods for manipulation of database instance flavors
 	 *
-	 * @return DBInstanceFlavorService
+	 * @return {@link TroveDBUserService} instance
 	 */
-	public InstanceFlavorService flavors() {
-		return Apis.get(InstanceFlavorService.class);
+	public TroveInstanceFlavorService flavors() {
+		return Apis.get(TroveInstanceFlavorService.class);
 	}
 
 	/**
 	 * Service implementation which provides methods for manipulation of database instances
 	 *
-	 * @return InstanceService
+	 * @return {@link TroveDBInstanceService} instance
 	 */
-	public DBInstanceServiceImpl instances() {
-		return Apis.get(DBInstanceServiceImpl.class);
+	public TroveDBInstanceService instances() {
+		return Apis.get(TroveDBInstanceService.class);
 	}
 
 }

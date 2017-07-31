@@ -29,7 +29,7 @@ import org.openstack4j.openstack.trove.domain.TroveDatabaseUser.DatabaseUsers;
  * @author QianBiao.NG
  * @date   2017-07-31 11:50:37
  */
-public class DBUserServiceImpl extends BaseTroveServices {
+public class TroveDBUserService extends BaseTroveServices {
 	
 
     /**

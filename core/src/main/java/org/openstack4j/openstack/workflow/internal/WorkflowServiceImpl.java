@@ -16,9 +16,17 @@
 package org.openstack4j.openstack.workflow.internal;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.trove.*;
-import org.openstack4j.api.workflow.*;
-import org.openstack4j.openstack.trove.internal.BaseTroveServices;
+import org.openstack4j.api.workflow.ActionDefinitionService;
+import org.openstack4j.api.workflow.ActionExecutionService;
+import org.openstack4j.api.workflow.CronTriggerService;
+import org.openstack4j.api.workflow.EventTriggerService;
+import org.openstack4j.api.workflow.TaskExecutionService;
+import org.openstack4j.api.workflow.ValidationService;
+import org.openstack4j.api.workflow.WorkbookDefinitionService;
+import org.openstack4j.api.workflow.WorkflowDefinitionService;
+import org.openstack4j.api.workflow.WorkflowEnvironmentService;
+import org.openstack4j.api.workflow.WorkflowExecutionService;
+import org.openstack4j.api.workflow.WorkflowService;
 
 /**
  * Trove API Implementation

@@ -24,7 +24,7 @@ import org.openstack4j.openstack.trove.domain.TroveInstanceFlavor.Flavors;
  * @author QianBiao.NG
  * @date   2017-07-31 11:13:41
  */
-public class DBFlavorServiceImpl extends BaseTroveServices {
+public class TroveInstanceFlavorService extends BaseTroveServices {
 
 	/**
 	 * Returns all the available database instance flavors
