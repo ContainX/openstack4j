@@ -42,6 +42,7 @@ public abstract class AbstractTest {
         BLOCK_STORAGE(8776),
         METERING(8087),
         TELEMETRY(8087),
+        SAHARA(8386),
         SHARE(8786),
         OBJECT_STORAGE(8800),
         BARBICAN(9311),

@@ -1,0 +1,29 @@
+{
+  "name" : "cluster-test-1",
+  "cluster_configs" : {
+    "HDFS" : {
+      "dfs.replication" : 1
+    },
+    "Spark" : {
+      "spark.executor.memory" : "1g",
+      "spark.executor.cores" : 2
+    }
+  },
+  "default_image_id" : "f56cc7c5-9588-49fa-8bcd-5c5d5eda5466",
+  "user_keypair_id" : "tester",
+  "plugin_name" : "spark",
+  "neutron_management_network" : "4c065f9c-ad1b-43c4-ba1e-893d330da079",
+  "node_groups" : [ {
+    "name" : "worker",
+    "count" : 2,
+    "node_group_template_id" : "f78dda4d-17e1-48cd-ab85-ee56261382ef",
+    "flavor_id" : "ef7f4d7f-267f-4762-abe2-729fe350256c"
+  }, {
+    "name" : "master",
+    "count" : 1,
+    "node_group_template_id" : "0febf422-98ee-47e6-a1c5-60f90f1f9c96",
+    "flavor_id" : "ef7f4d7f-267f-4762-abe2-729fe350256c"
+  } ],
+  "hadoop_version" : "1.6.2"
+}
+
