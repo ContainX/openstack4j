@@ -16,7 +16,7 @@
 package org.openstack4j.openstack.trove.domain;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.trove.constant.DataStoreType;
+import org.openstack4j.openstack.trove.constant.DatastoreType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -44,7 +44,7 @@ public class Datastore implements ModelEntity {
 	private static final long serialVersionUID = 5294355671374520846L;
 
 	@JsonProperty("type")
-	DataStoreType type;
+	DatastoreType type;
 	
 	@JsonProperty("version")
 	String version;

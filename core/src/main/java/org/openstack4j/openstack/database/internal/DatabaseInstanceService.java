@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -13,39 +11,43 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+package org.openstack4j.openstack.database.internal;
+
+import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
 
-import org.openstack4j.openstack.trove.domain.DatastoreVersion;
-import org.openstack4j.openstack.trove.domain.DatastoreVersion.Versions;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.trove.domain.DatabaseInstance;
+import org.openstack4j.openstack.trove.domain.DatabaseInstance.DatabaseInstances;
+import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate;
+
 
 /**
- * The implementation of manipulation of {@link DatastoreDetail}
+ * The implementation of manipulation of {@link DatabaseInstance}
  *
  * @author QianBiao.NG
- * @date   2017-07-31 11:41:17
+ * @date   2017-07-31 11:13:41
  */
-public class TroveDatastoreService extends BaseTroveServices {
+public class DatabaseInstanceService extends BaseDatabaseServices {
 
-	/**
-	 * Returns list of all datastore versions
-	 * @param datasoreId
-	 * @return list of datastore versions
-	 */
-	public List<DatastoreVersion> listDatastoreVersions(String datasoreId) {
-		return get(Versions.class, uri("/datastores/%s/versions", datasoreId)).execute().getList();
+	public List<DatabaseInstance> list() {
+		return get(DatabaseInstances.class, uri("/instances")).execute().getList();
+
 	}
 
-	/**
-	 * Get the datastore version specified by ID
-	 * 
-	 * @param datastoreId
-	 * @param versionId
-	 * @return the datastore version or null if not found
-	 */
-	public DatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
-		return get(DatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
+	public DatabaseInstance get(String instanceId) {
+		checkNotNull(instanceId);
+		DatabaseInstance instance = get(DatabaseInstance.class, uri("/instances/%s", instanceId)).execute();
+		return instance;
 	}
 
+	public DatabaseInstance create(DatabaseInstanceCreate instanceCreate) {
+		return post(DatabaseInstance.class, uri("/instances")).entity(instanceCreate).execute();
+	}
+
+	public ActionResponse delete(String id) {
+		checkNotNull(id);
+		return deleteWithResponse(uri("/instances/%s", id)).execute();
+	}
 }

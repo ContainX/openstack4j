@@ -1,6 +1,4 @@
 /*******************************************************************************
- *  Copyright 2017 HuaWei and OTC tld
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -13,37 +11,36 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common.functions;
+package org.openstack4j.openstack.database.internal;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.List;
 
-import org.openstack4j.api.exceptions.OS4JException;
-
-import com.google.common.base.Function;
+import org.openstack4j.openstack.trove.domain.InstanceFlavor;
+import org.openstack4j.openstack.trove.domain.InstanceFlavor.Flavors;
 
 /**
+ * The implementation of manipulation of {@link InstanceFlavor}
+ *
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:13:41
  */
-public class GetRootOfURL implements Function<String, String> {
+public class DatabaseInstanceFlavorService extends BaseDatabaseServices {
 
-	public static GetRootOfURL instance() {
-		return new GetRootOfURL();
+	/**
+	 * Returns all the available database instance flavors
+	 * @return the list of available flavors
+	 */
+	public List<InstanceFlavor> list() {
+		return get(Flavors.class, uri("/flavors")).execute().getList();
 	}
 
-	@Override
-	public String apply(String input) {
-		try {
-			URL url = new URL(input);
-			String authority = url.getAuthority();
-			return input.substring(0, input.indexOf(authority) + authority.length());
-		} catch (MalformedURLException e) {
-			throw new OS4JException(String.format("endpoint `%s` is not a valid URL", input), e);
-		}
-	}
-	
-	public static void main(String[] args) {
-		String apply = GetRootOfURL.instance().apply("http://www.baidu.com:10000/");
-		System.out.println(apply);
+	/**
+	 * Get the instance flavor specified by ID
+	 * @param id
+	 * @return the flavor or null if not found
+	 */
+	public InstanceFlavor get(String id) {
+		return get(InstanceFlavor.class, uri("/flavors/%s", id)).execute();
 	}
 
 }

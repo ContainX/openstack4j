@@ -13,16 +13,16 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.domain;
+package org.openstack4j.openstack.database.domain;
 
-import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
-import org.openstack4j.openstack.trove.constant.ParameterValueType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,9 +31,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * <h3>Model represent attributes of Database parameter</h3>
- * 
- * Database parameter is the configurable options of the database
+ * Model represent attributes of database instance
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -43,58 +41,44 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class DatabaseParam implements ModelEntity {
+@JsonRootName("instance")
+public class DatabaseInstance implements ModelEntity {
 
-	static final long serialVersionUID = -3324036820846287512L;
+	private static final long serialVersionUID = -7399474725379713926L;
 
-	/**
-	 * parameter name
-	 */
-	@JsonProperty("name")
-	String name;
+	private Date created;
 
-	/**
-	 * parameter type. (string, boolean, integer, float, etc)
-	 */
-	@JsonProperty("type")
-	ParameterValueType type;
+	private InstanceFlavor flavor;
 
-	/**
-	 * parameter max value
-	 */
-	@JsonProperty("max")
-	BigInteger max;
+	private String hostname;
 
-	/**
-	 * parameter min value
-	 */
-	@JsonProperty("min")
-	BigInteger min;
+	private List<String> ip;
 
-	/**
-	 * datastore version id of this parameter
-	 */
-	@JsonProperty("datastore_version_id")
-	String datastoreVersionId;
+	private String id;
 
-	/**
-	 * is restart required when parameter value modified
-	 */
-	@JsonProperty("restart_required")
-	Boolean restartRequired;
-	
-	
-	public static class Parameters extends ListResult<DatabaseParam> {
-		private static final long serialVersionUID = 7666104777418585874L;
-		
-		@JsonProperty("configuration-parameters")
-		List<DatabaseParam> params;
+	private String name;
+
+	private String status;
+
+	private Date updated;
+
+	private Volume volume;
+
+	private Datastore datastore;
+
+
+
+	public static class DatabaseInstances extends ListResult<DatabaseInstance> {
+
+		private static final long serialVersionUID = 1L;
+
+		@JsonProperty("instances")
+		private List<DatabaseInstance> instances;
 
 		@Override
-		protected List<DatabaseParam> value() {
-			return params;
+		protected List<DatabaseInstance> value() {
+			return instances;
 		}
-
 	}
 
 }

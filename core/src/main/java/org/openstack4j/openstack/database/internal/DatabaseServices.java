@@ -11,72 +11,73 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+package org.openstack4j.openstack.database.internal;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.openstack.trove.domain.DatabaseConfig;
 import org.openstack4j.openstack.trove.domain.DatabaseParam;
 
 /**
- * Trove (Relation Database) Operations API implementation
+ * Relation Database Operations API implementation
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:25:44
  */
-public class TroveService extends BaseTroveServices {
+public class DatabaseServices extends BaseDatabaseServices {
 
 	/**
 	 * Service implementation which provides methods for manipulation of version
 	 *
-	 * @return {@link TroveVersionService} instance
+	 * @return {@link DatabaseServiceVersionService} instance
 	 */
-	public TroveVersionService versions() {
-		return Apis.get(TroveVersionService.class);
+	public DatabaseServiceVersionService versions() {
+		return Apis.get(DatabaseServiceVersionService.class);
 	}
 
 	/**
 	 * Service implementation which provides methods for manipulation of datastores
 	 *
-	 * @return {@link TroveDatastoreService} instance
+	 * @return {@link DatastoreService} instance
 	 */
-	public TroveDatastoreService datastores() {
-		return Apis.get(TroveDatastoreService.class);
+	public DatastoreService datastores() {
+		return Apis.get(DatastoreService.class);
 	}
+
 
 	/**
 	 * Service implementation which provides methods for manipulation of database instance flavors
 	 *
 	 * @return {@link TroveDBUserService} instance
 	 */
-	public TroveInstanceFlavorService flavors() {
-		return Apis.get(TroveInstanceFlavorService.class);
+	public DatabaseInstanceFlavorService flavors() {
+		return Apis.get(DatabaseInstanceFlavorService.class);
 	}
 
 	/**
 	 * Service implementation which provides methods for manipulation of database instances
 	 *
-	 * @return {@link TroveDatabaseInstanceService} instance
+	 * @return {@link DatabaseInstanceService} instance
 	 */
-	public TroveDatabaseInstanceService instances() {
-		return Apis.get(TroveDatabaseInstanceService.class);
+	public DatabaseInstanceService instances() {
+		return Apis.get(DatabaseInstanceService.class);
 	}
 	
 	/**
 	 * Service implementation which provides methods for manipulation of {@link DatabaseConfig}
 	 *
-	 * @return {@link TroveDatabaseConfigService} instance
+	 * @return {@link DatabaseConfigService} instance
 	 */
-	public TroveDatabaseConfigService configs() {
-		return Apis.get(TroveDatabaseConfigService.class);
+	public DatabaseConfigService configs() {
+		return Apis.get(DatabaseConfigService.class);
 	}
 	
 	/**
 	 * Service implementation which provides methods for manipulation of {@link DatabaseParam}
 	 *
-	 * @return {@link TroveDatabaseParamService} instance
+	 * @return {@link DatabaseParamService} instance
 	 */
-	public TroveDatabaseParamService params() {
-		return Apis.get(TroveDatabaseParamService.class);
+	public DatabaseParamService params() {
+		return Apis.get(DatabaseParamService.class);
 	}
 
 }

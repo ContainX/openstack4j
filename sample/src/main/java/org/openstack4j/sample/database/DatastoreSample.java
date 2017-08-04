@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright 2017 HuaWei and OTC tld
+ *  Copyright 2017 Huawei TLD
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,37 +13,35 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common.functions;
+/*******************************************************************************
+ *******************************************************************************/
+package org.openstack4j.sample.database;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.List;
 
-import org.openstack4j.api.exceptions.OS4JException;
+import org.openstack4j.openstack.trove.constant.DatastoreType;
+import org.openstack4j.openstack.trove.domain.DatastoreVersion;
+import org.openstack4j.sample.AbstractSample;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import com.google.common.base.Function;
+@Test(suiteName = "Database/datastore/Sample")
+public class DatastoreSample extends AbstractSample {
 
-/**
- */
-public class GetRootOfURL implements Function<String, String> {
-
-	public static GetRootOfURL instance() {
-		return new GetRootOfURL();
-	}
-
-	@Override
-	public String apply(String input) {
-		try {
-			URL url = new URL(input);
-			String authority = url.getAuthority();
-			return input.substring(0, input.indexOf(authority) + authority.length());
-		} catch (MalformedURLException e) {
-			throw new OS4JException(String.format("endpoint `%s` is not a valid URL", input), e);
+	@Test
+	public void testListDatastoreVersions() {
+		List<DatastoreVersion> versions = osclient.database().datastores().listDatastoreVersions(DatastoreType.MySQL);
+		Assert.assertTrue(versions.size() > 0);
+		
+		for (DatastoreVersion version : versions) {
+			Assert.assertNotNull(version.getId());
+			Assert.assertNotNull(version.getImage());
+			Assert.assertNotNull(version.getDatastoreId());
+			Assert.assertNotNull(version.getIsActive());
+			Assert.assertNotNull(version.getName());
+			Assert.assertTrue(version.getPackageName().startsWith("MySQL"));
 		}
-	}
-	
-	public static void main(String[] args) {
-		String apply = GetRootOfURL.instance().apply("http://www.baidu.com:10000/");
-		System.out.println(apply);
+		
 	}
 
 }

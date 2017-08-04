@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright 2017 Huawei TLD
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,41 +13,40 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-package org.openstack4j.sample.trove;
+package org.openstack4j.openstack.database.domain;
 
-import java.util.List;
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.trove.constant.DatastoreType;
 
-import org.openstack4j.openstack.common.ServiceVersion;
-import org.openstack4j.sample.AbstractSample;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
-@Test(suiteName = "Trove/Version/Sample")
-public class VersionSample extends AbstractSample {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-	private static final Logger logger = LoggerFactory.getLogger(VersionSample.class);
+/**
+ * Model represent attributes of Trove datastore
+ *
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:12:39
+ */
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonRootName("datastore")
+public class Datastore implements ModelEntity {
 
-	List<ServiceVersion> versions = null;
+	private static final long serialVersionUID = 5294355671374520846L;
 
-	@Test
-	public void testListVersion() {
-		// list version first
-		versions = osclient.trove().versions().list();
-		logger.info("versions: {}", versions);
-		Assert.assertTrue(versions.size() >= 1);
-	}
-
-	@Test(dependsOnMethods = { "testListVersion" })
-	public void testGetVersion() {
-		// list version first
-		String id = versions.get(0).getId();
-		ServiceVersion version = osclient.trove().versions().get(id);
-		logger.info("version: {}", version);
-		Assert.assertEquals(version.getId(), id);
-	}
+	@JsonProperty("type")
+	DatastoreType type;
+	
+	@JsonProperty("version")
+	String version;
 
 }

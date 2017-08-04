@@ -13,55 +13,51 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+package org.openstack4j.openstack.database.internal;
 
-import static com.google.common.base.Preconditions.*;
+import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.HttpMethod;
+import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-import java.util.List;
-
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.openstack.trove.domain.Database;
-import org.openstack4j.openstack.trove.domain.Database.Databases;
+import com.google.common.base.Function;
 
 /**
- * The implementation of manipulation of {@link Database}
+ * Base Service of Database Service
  *
  * @author QianBiao.NG
- * @date   2017-07-31 11:41:17
+ * @date   2017-07-31 14:30:05
  */
-public class TroveDatabaseService extends BaseTroveServices {
+public class BaseDatabaseServices extends BaseOpenStackService {
 
-	/**
-	 * Gets the database specified by ID
-	 * @param instanceId
-	 * @return the database or null if not found
-	 */
-	public List<Database> list(String instanceId) {
-		return get(Databases.class, uri("/instances/%s/databases", instanceId)).execute().getList();
+	public static String CONTENT_JSON = "application/json;charset=utf-8";
+
+	public BaseDatabaseServices() {
+		super(ServiceType.DATABASE);
 	}
 
 	/**
-	 * Create a new database
-	 * @param id
-	 * @param databases
-	 * @return the action response
+	 * @param serviceType
 	 */
-	public ActionResponse create(String instanceId, Databases databases) {
-		checkNotNull(instanceId);
-		checkNotNull(databases);
-		return post(ActionResponse.class, uri("/instances/%s/databases", instanceId)).entity(databases).execute();
+	public BaseDatabaseServices(ServiceType serviceType) {
+		super(serviceType);
 	}
 
 	/**
-	 * Deletes the database
-	 * @param instanceId
-	 * @param name
-	 * @return the action response
+	 * @param serviceType
+	 * @param endpointFunc
 	 */
-	public ActionResponse delete(String instanceId, String dbName) {
-		checkNotNull(instanceId);
-		checkNotNull(dbName);
-		return deleteWithResponse(uri("/instances/%s/databases/%s", instanceId, dbName)).execute();
+	public BaseDatabaseServices(ServiceType serviceType, Function<String, String> endpointFunc) {
+		super(serviceType, endpointFunc);
+	}
+
+	/**
+	 * HuaWei Relation DataBase Service validate the content-type in every request
+	 */
+	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		path = "/rds/v1/%(project_id)s" + path;
+		// TODO x-language
+		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON).header("X-Language",
+				"en-us");
 	}
 
 }

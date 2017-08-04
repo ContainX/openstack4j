@@ -13,12 +13,12 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.domain;
+package org.openstack4j.openstack.database.domain;
 
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.common.ListResult;
+import org.openstack4j.openstack.common.IdResourceEntity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of Trove data-store
+ * Model represent for attributes of Database instance creation
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -40,35 +40,87 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("datastore")
-public class DatastoreDetail implements ModelEntity {
+@JsonRootName("instance")
+public class DatabaseInstanceCreate implements ModelEntity {
 
-	private static final long serialVersionUID = 1L;
+	static final long serialVersionUID = -7844139328996206764L;
 
-	private String id;
-	private String name;
+	/**
+	 * datastore to be created
+	 */
+	@JsonProperty("datastore")
+	Datastore datastore;
+
+	/**
+	 * DB instance name
+	 */
+	@JsonProperty("name")
+	String name;
+
+	/**
+	 * DB Flavor to be used to created the DB instance
+	 */
+	@JsonProperty("flavorRef")
+	String flavorRef;
 	
-	@JsonProperty("default_version")
-	private String defaultVersion;
+	/**
+	 * <h3>database users</h3>
+	 * 
+	 * It must contain the administrator username (for mysql and postgres, the administrator username is root) 
+	 * and the administrator password.
+	 */
+	@JsonProperty("users")
+	List<DatabaseUser> users;
+
+	/**
+	 * Volume used for the DB instance
+	 */
+	@JsonProperty("volume")
+	Volume volume;
+
+	/**
+	 *  Database configuration parameter set reference used for initializing the database
+	 */
+	@JsonProperty("configuration")
+	String configurationId;
 	
-	@JsonProperty("versions")
-	private List<DatastoreVersion> troveDatastoreVersionList;
-
-	public List<DatastoreVersion> getTroveDatastoreVersionList() {
-		return troveDatastoreVersionList;
-	}
-
-	public static class Datastores extends ListResult<DatastoreDetail> {
-		
-		private static final long serialVersionUID = -3999288230060678693L;
-		
-		@JsonProperty("datastores")
-		private List<DatastoreDetail> troveDatastoreList;
-
-		@Override
-		protected List<DatastoreDetail> value() {
-			return troveDatastoreList;
-		}
-	}
+	/**
+	 * availability zone of the DB instance
+	 */
+	@JsonProperty("availability_zone")
+	String availabilityZone;
+	
+	
+	/**
+	 * VPC (known as Router) of the DB instance
+	 */
+	@JsonProperty("vpc")
+	String vpcId;
+	
+	/**
+	 * NICs (known as Subnet) of the DB instance
+	 */
+	@JsonProperty("nics")
+	List<NIC> nics;
+	
+	
+	/**
+	 * (Reserved)
+	 */
+	@JsonProperty("modules")
+	List<String> modules;
+	
+	/**
+	 * (Reserved) Create the DB instance from a Database backup point
+	 */
+	@JsonProperty("restorePoint")
+	RestorePoint restorePoint;
+	
+	
+	/**
+	 * (Reserved) 
+	 */
+	@JsonProperty("cluster_config")
+	IdResourceEntity clusterConfig;
 
 }

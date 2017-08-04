@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright 2017 HuaWei and OTC tld
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,37 +13,37 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common.functions;
+package org.openstack4j.openstack.database.domain;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.openstack4j.model.ModelEntity;
 
-import org.openstack4j.api.exceptions.OS4JException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import com.google.common.base.Function;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
+ * Model represent attributes of DB Restore
+ *
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:12:39
  */
-public class GetRootOfURL implements Function<String, String> {
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class RestorePoint implements ModelEntity {
 
-	public static GetRootOfURL instance() {
-		return new GetRootOfURL();
-	}
+	private static final long serialVersionUID = 5294355671374520846L;
 
-	@Override
-	public String apply(String input) {
-		try {
-			URL url = new URL(input);
-			String authority = url.getAuthority();
-			return input.substring(0, input.indexOf(authority) + authority.length());
-		} catch (MalformedURLException e) {
-			throw new OS4JException(String.format("endpoint `%s` is not a valid URL", input), e);
-		}
-	}
-	
-	public static void main(String[] args) {
-		String apply = GetRootOfURL.instance().apply("http://www.baidu.com:10000/");
-		System.out.println(apply);
-	}
+	/**
+	 * the backup file Identifier to be restored 
+	 */
+	@JsonProperty("backupRef")
+	String backupRef;
 
 }

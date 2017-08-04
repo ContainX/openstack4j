@@ -21,7 +21,6 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +29,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of data-store version
+ * Model represent attributes of datastore version
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -40,7 +39,6 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("version")
 public class DatastoreVersion implements ModelEntity {
 
 	private static final long serialVersionUID = 4185143839454760141L;
@@ -57,19 +55,19 @@ public class DatastoreVersion implements ModelEntity {
     private String packageName;
     
     @JsonProperty("active")
-    private int isActive;
+    private Boolean isActive;
 
 
     public static class Versions extends ListResult<DatastoreVersion> {
 
 		private static final long serialVersionUID = 7831092478216356910L;
 		
-		@JsonProperty("versions")
-        private List<DatastoreVersion> troveDatastoreVersionList;
+		@JsonProperty("dataStores")
+        private List<DatastoreVersion> versions;
 
         @Override
         protected List<DatastoreVersion> value() {
-            return troveDatastoreVersionList;
+            return versions;
         }
     }
 }

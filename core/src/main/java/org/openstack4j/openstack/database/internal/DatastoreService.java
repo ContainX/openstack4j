@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright 2017 HuaWei and OTC tld
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,37 +13,29 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common.functions;
+package org.openstack4j.openstack.database.internal;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.List;
 
-import org.openstack4j.api.exceptions.OS4JException;
-
-import com.google.common.base.Function;
+import org.openstack4j.openstack.trove.constant.DatastoreType;
+import org.openstack4j.openstack.trove.domain.DatastoreVersion;
+import org.openstack4j.openstack.trove.domain.DatastoreVersion.Versions;
 
 /**
+ * The implementation of manipulation of {@link DatastoreDetail}
+ *
+ * @author QianBiao.NG
+ * @date   2017-07-31 11:41:17
  */
-public class GetRootOfURL implements Function<String, String> {
+public class DatastoreService extends BaseDatabaseServices {
 
-	public static GetRootOfURL instance() {
-		return new GetRootOfURL();
-	}
-
-	@Override
-	public String apply(String input) {
-		try {
-			URL url = new URL(input);
-			String authority = url.getAuthority();
-			return input.substring(0, input.indexOf(authority) + authority.length());
-		} catch (MalformedURLException e) {
-			throw new OS4JException(String.format("endpoint `%s` is not a valid URL", input), e);
-		}
-	}
-	
-	public static void main(String[] args) {
-		String apply = GetRootOfURL.instance().apply("http://www.baidu.com:10000/");
-		System.out.println(apply);
+	/**
+	 * Returns list of all datastore versions
+	 * @param datastore	datastore type
+	 * @return list of {@link DatastoreVersion} instances
+	 */
+	public List<DatastoreVersion> listDatastoreVersions(DatastoreType datastore) {
+		return get(Versions.class, uri("/datastores/%s/versions", datastore.name())).execute().getList();
 	}
 
 }

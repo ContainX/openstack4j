@@ -15,42 +15,43 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package org.openstack4j.sample.trove;
+package org.openstack4j.sample.database;
 
-import org.openstack4j.openstack.key.management.domain.Key;
+import java.util.List;
+
+import org.openstack4j.openstack.database.domain.DatabaseParam;
 import org.openstack4j.openstack.trove.constant.DatastoreType;
-import org.openstack4j.openstack.trove.domain.Datastore;
-import org.openstack4j.openstack.trove.domain.DatabaseInstance;
-import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate;
+import org.openstack4j.openstack.trove.domain.DatastoreVersion;
 import org.openstack4j.sample.AbstractSample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-@Test(suiteName = "Trove/Instance/Sample")
-public class DBInstanceSample extends AbstractSample {
+@Test(suiteName = "Database/Version/Sample")
+public class DatabaseParamSample extends AbstractSample {
 
-	private static final Logger logger = LoggerFactory.getLogger(DBInstanceSample.class);
+	private static final Logger logger = LoggerFactory.getLogger(DatabaseParamSample.class);
 
-	String name = randomName();
-	Key key = null;
-
-	/**
-	 * create a key for test
-	 */
+	DatastoreVersion datastoreVersion = null;
+	
 	@BeforeClass
 	public void prepare() {
-		Datastore datastore = Datastore.builder().type(DatastoreType.MySQL).version("5.6.34").build();
-		DatabaseInstanceCreate instanceCreate = DatabaseInstanceCreate.builder().name(name).datastore(datastore).build();
-		DatabaseInstance instance = osclient.trove().instances().create(instanceCreate);
+		// get the first datastore version of MySQL for test
+		List<DatastoreVersion> versions = osclient.database().datastores().listDatastoreVersions(DatastoreType.MySQL);
+		datastoreVersion = versions.get(0);
 	}
 
 	@Test
-	public void testCreateInstance() {
-		DatabaseInstanceCreate instanceCreate = DatabaseInstanceCreate.builder().build();
+	public void testListDatabaseParams() {
+		List<DatabaseParam> params = osclient.database().params().list(datastoreVersion.getId());
+		logger.info("versions: {}", params);
+		Assert.assertTrue(params.size() >= 1);
+	}
 
-		DatabaseInstance instance = osclient.trove().instances().create(instanceCreate);
+	@Test(dependsOnMethods = { "testListDatabaseParams" })
+	public void testGetVersion() {
 	}
 
 }

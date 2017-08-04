@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei and OTC                                       
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,39 +13,41 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+package org.openstack4j.openstack.database.internal;
 
 import java.util.List;
 
-import org.openstack4j.openstack.trove.domain.DatastoreVersion;
-import org.openstack4j.openstack.trove.domain.DatastoreVersion.Versions;
+import org.openstack4j.openstack.database.domain.DatabaseParam;
+import org.openstack4j.openstack.database.domain.DatabaseParam.Parameters;
 
 /**
- * The implementation of manipulation of {@link DatastoreDetail}
+ * The implementation of manipulation of {@link DatabaseParam}
  *
  * @author QianBiao.NG
- * @date   2017-07-31 11:41:17
+ * @date   2017-08-03 11:06:34
  */
-public class TroveDatastoreService extends BaseTroveServices {
+public class DatabaseParamService extends BaseDatabaseServices {
 
 	/**
-	 * Returns list of all datastore versions
-	 * @param datasoreId
-	 * @return list of datastore versions
+	 * list all configuration parameters of a specification version	 of datastore
+	 * 
+	 * @param dataStoreVersionId	datastore version identifier
+	 * @return a list of {@link DatabaseParam} instances 
 	 */
-	public List<DatastoreVersion> listDatastoreVersions(String datasoreId) {
-		return get(Versions.class, uri("/datastores/%s/versions", datasoreId)).execute().getList();
+	public List<DatabaseParam> list(String dataStoreVersionId) {
+		return get(Parameters.class, uri("/datastores/versions/%s/parameters", dataStoreVersionId)).execute().getList();
 	}
 
 	/**
-	 * Get the datastore version specified by ID
+	 * get the details of a configuration parameter
 	 * 
-	 * @param datastoreId
-	 * @param versionId
-	 * @return the datastore version or null if not found
+	 * @param dataStoreVersionId	datastore version identifier
+	 * @param paramName				datastore configuration parameter name
+	 * @return an instance of {@link DatabaseParam}
 	 */
-	public DatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
-		return get(DatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
+	public DatabaseParam get(String dataStoreVersionId, String paramName) {
+		return get(DatabaseParam.class, uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName))
+				.execute();
 	}
 
 }

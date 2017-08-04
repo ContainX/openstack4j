@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright 2017 HuaWei and OTC tld
+ *  Copyright 2017 Huawei TLD
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,37 +13,41 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common.functions;
+/*******************************************************************************
+ *******************************************************************************/
+package org.openstack4j.sample.trove;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.List;
 
-import org.openstack4j.api.exceptions.OS4JException;
+import org.openstack4j.openstack.common.ServiceVersion;
+import org.openstack4j.sample.AbstractSample;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import com.google.common.base.Function;
+@Test(suiteName = "Trove/Version/Sample")
+public class TroveServiceVersionSample extends AbstractSample {
 
-/**
- */
-public class GetRootOfURL implements Function<String, String> {
+	private static final Logger logger = LoggerFactory.getLogger(TroveServiceVersionSample.class);
 
-	public static GetRootOfURL instance() {
-		return new GetRootOfURL();
+	List<ServiceVersion> versions = null;
+
+	@Test
+	public void testListVersion() {
+		// list version first
+		versions = osclient.trove().versions().list();
+		logger.info("versions: {}", versions);
+		Assert.assertTrue(versions.size() >= 1);
 	}
 
-	@Override
-	public String apply(String input) {
-		try {
-			URL url = new URL(input);
-			String authority = url.getAuthority();
-			return input.substring(0, input.indexOf(authority) + authority.length());
-		} catch (MalformedURLException e) {
-			throw new OS4JException(String.format("endpoint `%s` is not a valid URL", input), e);
-		}
-	}
-	
-	public static void main(String[] args) {
-		String apply = GetRootOfURL.instance().apply("http://www.baidu.com:10000/");
-		System.out.println(apply);
+	@Test(dependsOnMethods = { "testListVersion" })
+	public void testGetVersion() {
+		// list version first
+		String id = versions.get(0).getId();
+		ServiceVersion version = osclient.trove().versions().get(id);
+		logger.info("version: {}", version);
+		Assert.assertEquals(version.getId(), id);
 	}
 
 }

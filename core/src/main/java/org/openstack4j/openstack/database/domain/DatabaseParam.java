@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.domain;
+package org.openstack4j.openstack.database.domain;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -70,6 +70,12 @@ public class DatabaseParam implements ModelEntity {
 	 */
 	@JsonProperty("min")
 	BigInteger min;
+	
+	@JsonProperty("value_range")
+	String valueRange;
+	
+	@JsonProperty("description")
+	String description;
 
 	/**
 	 * datastore version id of this parameter
@@ -82,6 +88,7 @@ public class DatabaseParam implements ModelEntity {
 	 */
 	@JsonProperty("restart_required")
 	Boolean restartRequired;
+	
 	
 	
 	public static class Parameters extends ListResult<DatabaseParam> {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	Copyright 2017 HuaWei and OTC                                       
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,50 +13,53 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+package org.openstack4j.openstack.database.internal;
+
+import java.util.List;
 
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.HttpMethod;
+import org.openstack4j.openstack.common.ServiceVersion;
+import org.openstack4j.openstack.common.ServiceVersion.ServiceVersionWrap;
+import org.openstack4j.openstack.common.ServiceVersion.ServiceVersions;
+import org.openstack4j.openstack.common.functions.GetRootOfURL;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-import com.google.common.base.Function;
-
-
 /**
- * Base Service of Trove Service
- *
+ * 
+ * Database Service Version API Implementation
+ * 
  * @author QianBiao.NG
- * @date   2017-07-31 14:30:05
+ * @date   2017-07-28 16:46:41
  */
-public class BaseTroveServices extends BaseOpenStackService {
+public class DatabaseServiceVersionService extends BaseOpenStackService {
 
-	String CONTENT_JSON = "application/json;charset=utf-8";
-
-	public BaseTroveServices() {
-		super(ServiceType.DATABASE);
+	public DatabaseServiceVersionService() {
+		super(ServiceType.DATABASE, GetRootOfURL.instance());
 	}
 
 	/**
-	 * @param serviceType
-	 */
-	public BaseTroveServices(ServiceType serviceType) {
-		super(serviceType);
-	}
-
-	/**
-	 * @param serviceType
-	 * @param endpointFunc
-	 */
-	public BaseTroveServices(ServiceType serviceType, Function<String, String> endpointFunc) {
-		super(serviceType, endpointFunc);
-	}
-
-	/**
-	 * HuaWei Relation DataBase Service(known as Trove) validate the content-type in every request
+	 * HuaWei Relation DataBase Service(known as Trove) validate the content-type in every request.
 	 */
 	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
-		path = "/v1.0/%(project_id)s" + path;
 		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON);
+	}
+
+	/**
+	 * list versions of Trove Service
+	 */
+	public List<ServiceVersion> list() {
+		return get(ServiceVersions.class, "/rds/").execute().getList();
+	}
+
+	/**
+	 * get a special version details 
+	 * 
+	 * @param versionId the version ID
+	 * @return {@link ServiceVersion} instance
+	 */
+	public ServiceVersion get(String versionId) {
+		return get(ServiceVersionWrap.class, "/rds/" + versionId).execute().getVersion();
 	}
 
 }

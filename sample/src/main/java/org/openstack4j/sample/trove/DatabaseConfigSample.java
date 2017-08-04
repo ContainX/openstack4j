@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.openstack.trove.constant.DataStoreType;
+import org.openstack4j.openstack.trove.constant.DatastoreType;
 import org.openstack4j.openstack.trove.domain.DatabaseConfig;
 import org.openstack4j.openstack.trove.domain.DatabaseConfigCreate;
 import org.openstack4j.openstack.trove.domain.DatabaseConfigParam;
@@ -49,7 +49,7 @@ public class DatabaseConfigSample extends AbstractSample {
 		Map<String, Object> values = Maps.newHashMap();
 		values.put("max_connections", "10");
 		values.put("autocommit", "OFF");
-		Datastore datastore = Datastore.builder().type(DataStoreType.MySQL).version("5.6").build();
+		Datastore datastore = Datastore.builder().type(DatastoreType.MySQL).version("5.6").build();
 		DatabaseConfigCreate creation = DatabaseConfigCreate.builder().datastore(datastore).name(name)
 				.description("openstack4j sdk unittest").values(values).build();
 		create = osclient.trove().configs().create(creation);

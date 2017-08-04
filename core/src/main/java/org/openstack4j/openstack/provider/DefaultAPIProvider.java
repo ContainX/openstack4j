@@ -237,6 +237,13 @@ import org.openstack4j.openstack.compute.internal.ext.InstanceActionsServiceImpl
 import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
+import org.openstack4j.openstack.database.internal.DatabaseConfigService;
+import org.openstack4j.openstack.database.internal.DatabaseInstanceFlavorService;
+import org.openstack4j.openstack.database.internal.DatabaseInstanceService;
+import org.openstack4j.openstack.database.internal.DatabaseParamService;
+import org.openstack4j.openstack.database.internal.DatabaseServices;
+import org.openstack4j.openstack.database.internal.DatabaseServiceVersionService;
+import org.openstack4j.openstack.database.internal.DatastoreService;
 import org.openstack4j.openstack.dns.v2.internal.DNSServiceImpl;
 import org.openstack4j.openstack.dns.v2.internal.PTRServiceImpl;
 import org.openstack4j.openstack.dns.v2.internal.RecordsetServiceImpl;
@@ -400,10 +407,9 @@ import org.openstack4j.openstack.telemetry.internal.ResourceServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.SampleServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryAodhServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
-import org.openstack4j.openstack.trove.internal.TroveDatabaseParamService;
 import org.openstack4j.openstack.trove.internal.TroveDatabaseConfigService;
 import org.openstack4j.openstack.trove.internal.TroveDatabaseInstanceService;
-import org.openstack4j.openstack.trove.internal.TroveDatabaseService;
+import org.openstack4j.openstack.trove.internal.TroveDatabaseParamService;
 import org.openstack4j.openstack.trove.internal.TroveInstanceFlavorService;
 import org.openstack4j.openstack.trove.internal.TroveService;
 import org.openstack4j.openstack.trove.internal.TroveVersionService;
@@ -583,11 +589,19 @@ public class DefaultAPIProvider implements APIProvider {
 		// trove
 		bind(TroveService.class, TroveService.class);
 		bind(TroveInstanceFlavorService.class, TroveInstanceFlavorService.class);
-		bind(TroveDatabaseService.class, TroveDatabaseService.class);
 		bind(TroveDatabaseInstanceService.class, TroveDatabaseInstanceService.class);
 		bind(TroveVersionService.class, TroveVersionService.class);
 		bind(TroveDatabaseConfigService.class, TroveDatabaseConfigService.class);
 		bind(TroveDatabaseParamService.class, TroveDatabaseParamService.class);
+		
+		// database
+		bind(DatabaseServices.class, DatabaseServices.class);
+		bind(DatastoreService.class, DatastoreService.class);
+		bind(DatabaseServiceVersionService.class, DatabaseServiceVersionService.class);
+		bind(DatabaseConfigService.class, DatabaseConfigService.class);
+		bind(DatabaseParamService.class, DatabaseParamService.class);
+		bind(DatabaseInstanceFlavorService.class, DatabaseInstanceFlavorService.class);
+		bind(DatabaseInstanceService.class, DatabaseInstanceService.class);
 
 		bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
 		bind(BarbicanService.class, BarbicanServiceImpl.class);

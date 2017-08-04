@@ -45,6 +45,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 
 public class BaseOpenStackService {
+	
+	public static String CONTENT_JSON = "application/json;charset=utf-8";
 
 	ServiceType serviceType = ServiceType.IDENTITY;
 	Function<String, String> endpointFunc;

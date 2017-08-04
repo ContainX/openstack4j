@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
+ *  Copyright 2017 Huawei TLD
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,39 +13,41 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+/*******************************************************************************
+ *******************************************************************************/
+package org.openstack4j.sample.database;
 
 import java.util.List;
 
-import org.openstack4j.openstack.trove.domain.DatastoreVersion;
-import org.openstack4j.openstack.trove.domain.DatastoreVersion.Versions;
+import org.openstack4j.openstack.common.ServiceVersion;
+import org.openstack4j.sample.AbstractSample;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-/**
- * The implementation of manipulation of {@link DatastoreDetail}
- *
- * @author QianBiao.NG
- * @date   2017-07-31 11:41:17
- */
-public class TroveDatastoreService extends BaseTroveServices {
+@Test(suiteName = "Database/Version/Sample")
+public class DatabaseServiceVersionSample extends AbstractSample {
 
-	/**
-	 * Returns list of all datastore versions
-	 * @param datasoreId
-	 * @return list of datastore versions
-	 */
-	public List<DatastoreVersion> listDatastoreVersions(String datasoreId) {
-		return get(Versions.class, uri("/datastores/%s/versions", datasoreId)).execute().getList();
+	private static final Logger logger = LoggerFactory.getLogger(DatabaseServiceVersionSample.class);
+
+	List<ServiceVersion> versions = null;
+
+	@Test
+	public void testListVersion() {
+		// list version first
+		versions = osclient.database().versions().list();
+		logger.info("versions: {}", versions);
+		Assert.assertTrue(versions.size() >= 1);
 	}
 
-	/**
-	 * Get the datastore version specified by ID
-	 * 
-	 * @param datastoreId
-	 * @param versionId
-	 * @return the datastore version or null if not found
-	 */
-	public DatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
-		return get(DatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
+	@Test(dependsOnMethods = { "testListVersion" })
+	public void testGetVersion() {
+		// list version first
+		String id = versions.get(0).getId();
+		ServiceVersion version = osclient.database().versions().get(id);
+		logger.info("version: {}", version);
+		Assert.assertEquals(version.getId(), id);
 	}
 
 }
