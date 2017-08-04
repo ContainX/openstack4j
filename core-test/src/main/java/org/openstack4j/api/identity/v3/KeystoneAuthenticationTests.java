@@ -26,6 +26,7 @@ public class KeystoneAuthenticationTests extends AbstractTest {
     private static final String JSON_AUTH_PROJECT = "/identity/v3/authv3_project.json";
     private static final String JSON_AUTH_DOMAIN = "/identity/v3/authv3_domain.json";
     private static final String JSON_AUTH_TOKEN = "/identity/v3/authv3_token.json";
+    private static final String JSON_AUTH_TOKEN_UNSCOPED = "/identity/v3/authv3_token_unscoped.json";
     private static final String JSON_AUTH_UNSCOPED = "/identity/v3/authv3_unscoped.json";
     private static final String JSON_AUTH_ERROR_401 = "/identity/v3/authv3_authorizationerror.json";
     private static final String JSON_USERS = "/identity/v3/users.json";
@@ -43,6 +44,7 @@ public class KeystoneAuthenticationTests extends AbstractTest {
     private static final String PROJECT_DOMAIN_ID = "default";
     private static final String PASSWORD = "test";
     private static final String REGION_EUROPE = "europe";
+    private static final String TOKEN_UNSCOPED_ID = "3ecb5c2063904566be4b10406c0f7568";
 
     /**
      * @return the identity service
@@ -349,6 +351,22 @@ public class KeystoneAuthenticationTests extends AbstractTest {
 
     }
 
+    /*
+     * token based authentication
+     *
+     * @throws Exception
+     */
+    public void authenticate_token_unscoped() throws Exception {
 
+        respondWithHeaderAndResource(HEADER_AUTH_TOKEN_RESPONSE, 201, JSON_AUTH_TOKEN_UNSCOPED);
+
+        OSClientV3 osclient_token_unscoped = (OSFactory.builderV3()
+        .endpoint(authURL("/v3"))
+        .token(TOKEN_UNSCOPED_ID)
+        .authenticate());
+
+        assertEquals(osclient_token_unscoped.getToken().getId(),TOKEN_UNSCOPED_ID);
+
+    }
 
 }
