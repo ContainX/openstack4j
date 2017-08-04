@@ -55,6 +55,7 @@ public class BaseTroveServices extends BaseOpenStackService {
 	 * HuaWei Relation DataBase Service(known as Trove) validate the content-type in every request
 	 */
 	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		path = "/v1.0/%(project_id)s" + path;
 		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON);
 	}
 
