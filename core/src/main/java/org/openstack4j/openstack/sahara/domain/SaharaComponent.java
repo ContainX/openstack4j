@@ -20,13 +20,16 @@ import lombok.ToString;
 @AllArgsConstructor
 public class SaharaComponent {
 
-	@JsonProperty("componentId")
+	@JsonProperty("component_id")
 	String id;
-	@JsonProperty("componentName")
+
+	@JsonProperty("component_name")
 	String name;
-	@JsonProperty("componentVersion")
+
+	@JsonProperty("component_version")
 	String version;
-	@JsonProperty("componentDesc")
+
+	@JsonProperty("component_desc")
 	String desc;
 
 }
