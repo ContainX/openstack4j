@@ -400,13 +400,13 @@ import org.openstack4j.openstack.telemetry.internal.ResourceServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.SampleServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryAodhServiceImpl;
 import org.openstack4j.openstack.telemetry.internal.TelemetryServiceImpl;
+import org.openstack4j.openstack.trove.internal.TroveDatabaseParamService;
+import org.openstack4j.openstack.trove.internal.TroveDatabaseConfigService;
+import org.openstack4j.openstack.trove.internal.TroveDatabaseInstanceService;
 import org.openstack4j.openstack.trove.internal.TroveDatabaseService;
-import org.openstack4j.openstack.trove.internal.TroveDatastoreService;
 import org.openstack4j.openstack.trove.internal.TroveInstanceFlavorService;
-import org.openstack4j.openstack.trove.internal.TroveDBInstanceService;
-import org.openstack4j.openstack.trove.internal.TroveDBUserService;
 import org.openstack4j.openstack.trove.internal.TroveService;
-import org.openstack4j.openstack.trove.internal.VersionServiceImpl;
+import org.openstack4j.openstack.trove.internal.TroveVersionService;
 import org.openstack4j.openstack.workflow.internal.ActionDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkbookDefinitionServiceImpl;
 import org.openstack4j.openstack.workflow.internal.WorkflowDefinitionServiceImpl;
@@ -583,11 +583,11 @@ public class DefaultAPIProvider implements APIProvider {
 		// trove
 		bind(TroveService.class, TroveService.class);
 		bind(TroveInstanceFlavorService.class, TroveInstanceFlavorService.class);
-		bind(TroveDatastoreService.class, TroveDatastoreService.class);
 		bind(TroveDatabaseService.class, TroveDatabaseService.class);
-		bind(TroveDBUserService.class, TroveDBUserService.class);
-		bind(TroveDBInstanceService.class, TroveDBInstanceService.class);
-		bind(VersionServiceImpl.class, VersionServiceImpl.class);
+		bind(TroveDatabaseInstanceService.class, TroveDatabaseInstanceService.class);
+		bind(TroveVersionService.class, TroveVersionService.class);
+		bind(TroveDatabaseConfigService.class, TroveDatabaseConfigService.class);
+		bind(TroveDatabaseParamService.class, TroveDatabaseParamService.class);
 
 		bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
 		bind(BarbicanService.class, BarbicanServiceImpl.class);

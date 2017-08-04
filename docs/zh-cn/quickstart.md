@@ -181,3 +181,23 @@ try {
 我们提供了一个[Sample](https://github.com/Huawei/openstack4j/blob/master/sample) 项目，里面包含了这次开发的所有服务的每一个API的使用例子。如果你想运行那些例子，
 - 修改 AbstractSample 里的认证所需的 auth-url，user，password，user-domain-id, project-id
 - 修改各个TestNG测试用例中的部分参数（因为环境不同，部分API需要关联的资源ID不一样）
+
+## 附录
+
+### 德电 endpoint
+
+| ServiceName |      ServiceType     |                              URL example                             |
+|:-----------:|:--------------------:|:--------------------------------------------------------------------:|
+|     VBS     |     volume-backup    |         https://vbs.eu-de.otc.t-systems.com/v2/%(project_id)s        |
+|     CES     |       cloud-eye      |        https://ces.eu-de.otc.t-systems.com/v1.0/%(project_id)s       |
+|      AS     |     auto-scaling     | https://as.eu-de.otc.t-systems.com/autoscaling-api/v1/%(project_id)s |
+|     ELB     |     load-balance     |    https://elb.eu-de.otc.t-systems.com/v1.0/elbaas/%(project_id)s    |
+|     DNS     |          dns         |                https://dns.eu-de.otc.t-systems.com/v2                |
+|    sahara   |    data_processing   |        https://mrs.eu-de.otc.t-systems.com/v1.1/%(project_id)s       |
+|     KMS     |    key-management    | https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s              |
+|     CTS     |      cloud-trace     | https://cts.eu-de.otc.t-systems.com/v1.0/%(project_id)s              |
+|   antiddos  |       anti-ddos      | https://antiddos.eu-de.otc.t-systems.com/v1/%(project_id)s           |
+|     SMN     | notification-message | https://smn.eu-de.otc.t-systems.com/v2/%(project_id)s                |
+|     DMS     |  distributed-message | https://dms.eu-de.otc.t-systems.com/v1.0/%(project_id)s              |
+|     MaaS    |         MaaS         | https://maas.eu-de.otc.t-systems.com/v1/%(project_id)s/objectstorage |
+

@@ -15,16 +15,15 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.domain;
 
-import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.google.common.base.MoreObjects;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,7 +32,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of database instance
+ * Model represent for attributes of Database instance Flavor
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -43,93 +42,108 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("instance")
-public class TroveInstance implements ModelEntity {
+public class InstanceFlavor implements ModelEntity {
 
-	private static final long serialVersionUID = -7399474725379713926L;
+	static final long serialVersionUID = 1640365078802343096L;
 
-	private Date created;
+	String id;
 
-	private TroveInstanceFlavor flavor;
+	String name;
 
-	private String hostname;
+	@JsonProperty("str_id")
+	String strId;
 
-	private List<String> ip;
+	Integer ram;
 
-	private String id;
+	@JsonProperty("links")
+	List<GenericLink> links;
 
-	private String name;
+	@JsonProperty("flavor_detail")
+	List<InstanceFlavorSpec> flavorDetail;
 
-	private String status;
+	@JsonProperty("price_detail")
+	List<InstanceFlavorCharging> priceDetail;
 
-	private Date updated;
+	/**
+	 * Model represent an Instance Flavor Specification
+	 *
+	 * @author QianBiao.NG
+	 * @date   2017-08-03 10:19:41
+	 */
+	public static class InstanceFlavorSpec {
 
-	private Volume volume;
+		String name;
+		String value;
 
-	private InstanceDatastore datastore;
+		public String getName() {
+			return name;
+		}
 
-	public class Volume {
+		public void setName(String name) {
+			this.name = name;
+		}
 
-		private String type;
-		private Integer size;
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
+		}
 		
-		public String getType() {
-			return type;
-		}
-
-		public Integer getSize() {
-			return size;
-		}
-
 		@Override
 		public String toString() {
 			return MoreObjects.toStringHelper(this).toString();
 		}
+
 	}
 
-	public class InstanceDatastore {
+	/**
+	 * Model represent an Instance Flavor charging
+	 *
+	 * @author QianBiao.NG
+	 * @date   2017-08-03 10:19:41
+	 */
+	public static class InstanceFlavorCharging {
 
-		private String type;
+		String timeUnit;
+		String price;
 
-		private String version;
-
-		public String getType() {
-			return type;
+		public String getTimeUnit() {
+			return timeUnit;
 		}
 
-		public String getVersion() {
-			return version;
+		public void setTimeUnit(String timeUnit) {
+			this.timeUnit = timeUnit;
 		}
 
+		public String getPrice() {
+			return price;
+		}
+
+		public void setPrice(String price) {
+			this.price = price;
+		}
+		
 		@Override
 		public String toString() {
-			final StringBuilder sb = new StringBuilder("InstanceDatastore{");
-			sb.append("type='").append(type).append('\'');
-			sb.append(", version='").append(version).append('\'');
-			sb.append('}');
-			return sb.toString();
+			return MoreObjects.toStringHelper(this).toString();
 		}
+		
 	}
 
-	public Volume getVolume() {
-		return volume;
-	}
+	public static class Flavors extends ListResult<InstanceFlavor> {
 
-	public InstanceDatastore getDatastore() {
-		return datastore;
-	}
+		static final long serialVersionUID = 1L;
 
-	public static class DBInstances extends ListResult<TroveInstance> {
-
-		private static final long serialVersionUID = 1L;
-
-		@JsonProperty("instances")
-		private List<TroveInstance> instances;
+		@JsonProperty("flavors")
+		List<InstanceFlavor> flavors;
 
 		@Override
-		protected List<TroveInstance> value() {
-			return instances;
+		protected List<InstanceFlavor> value() {
+			return flavors;
 		}
+
 	}
 
 }

@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei and OTC                                       
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -15,42 +13,41 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.internal;
 
+import static com.google.common.base.Preconditions.*;
+
 import java.util.List;
 
-import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.openstack.common.ServiceVersion;
-import org.openstack4j.openstack.common.ServiceVersion.ServiceVersionWrap;
-import org.openstack4j.openstack.common.ServiceVersion.ServiceVersions;
-import org.openstack4j.openstack.common.functions.GetRootOfURL;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.trove.domain.DatabaseInstance;
+import org.openstack4j.openstack.trove.domain.DatabaseInstance.DatabaseInstances;
+import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate;
+
 
 /**
- * 
- * Trove Version API Implementation
- * 
+ * The implementation of manipulation of {@link DatabaseInstance}
+ *
  * @author QianBiao.NG
- * @date   2017-07-28 16:46:41
+ * @date   2017-07-31 11:13:41
  */
-public class VersionServiceImpl extends BaseTroveServices {
+public class TroveDatabaseInstanceService extends BaseTroveServices {
 
-	public VersionServiceImpl() {
-		super(ServiceType.DATABASE, GetRootOfURL.instance());
+	public List<DatabaseInstance> list() {
+		return get(DatabaseInstances.class, uri("/instances")).execute().getList();
+
 	}
 
-	/**
-	 * list versions of Trove Service
-	 */
-	public List<ServiceVersion> list() {
-		return get(ServiceVersions.class, "/rds/").execute().getList();
+	public DatabaseInstance get(String instanceId) {
+		checkNotNull(instanceId);
+		DatabaseInstance instance = get(DatabaseInstance.class, uri("/instances/%s", instanceId)).execute();
+		return instance;
 	}
 
-	/**
-	 * get a special version details 
-	 * 
-	 * @param versionId the version ID
-	 * @return {@link ServiceVersion} instance
-	 */
-	public ServiceVersion get(String versionId) {
-		return get(ServiceVersionWrap.class, "/rds/" + versionId).execute().getVersion();
+	public DatabaseInstance create(DatabaseInstanceCreate instanceCreate) {
+		return post(DatabaseInstance.class, uri("/instances")).entity(instanceCreate).execute();
 	}
 
+	public ActionResponse delete(String id) {
+		checkNotNull(id);
+		return deleteWithResponse(uri("/instances/%s", id)).execute();
+	}
 }

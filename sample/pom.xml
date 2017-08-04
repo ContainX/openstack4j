@@ -20,18 +20,22 @@
 			<groupId>org.pacesys</groupId>
 			<artifactId>openstack4j</artifactId>
 			<version>${project.version}</version>
+			<!-- 
 			<exclusions>
 				<exclusion>
 					<groupId>org.pacesys.openstack4j.connectors</groupId>
 					<artifactId>openstack4j-jersey2</artifactId>
 				</exclusion>
 			</exclusions>
+			 -->
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.pacesys.openstack4j.connectors</groupId>
 			<artifactId>openstack4j-httpclient</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		 -->
 		<!-- logging -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

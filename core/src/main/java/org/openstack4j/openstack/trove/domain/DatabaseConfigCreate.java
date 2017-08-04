@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -15,10 +13,9 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.domain;
 
-import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -30,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of data-store version
+ * Model represent attributes of Database Configuration Creation
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -40,36 +37,33 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("version")
-public class TroveDatastoreVersion implements ModelEntity {
+@JsonRootName("configuration")
+public class DatabaseConfigCreate implements ModelEntity {
 
-	private static final long serialVersionUID = 4185143839454760141L;
+	static final long serialVersionUID = -3324036820846287512L;
+
+	/**
+	 * configuration name 
+	 */
+	@JsonProperty("name")
+	String name;
+
+	/**
+	 * configuration description 
+	 */
+	@JsonProperty("description")
+	String description;
+
+	/**
+	 * configuration parameter values 
+	 */
+	@JsonProperty("values")
+	Map<String, Object> values;
 	
-	private String name;
-    private String id;
-    @JsonProperty("datastore")
-    private String datastoreId;
-    @JsonProperty("active")
-    private int isActive;
-    private String image;
-    @JsonProperty("packages")
-    private String packageName;
+	/**
+	 * the datastore this configuration belongs to
+	 */
+	@JsonProperty("datastore")
+	Datastore datastore;
 
-    public String getName() {
-        return name;
-    }
-
-
-    public static class Versions extends ListResult<TroveDatastoreVersion> {
-
-		private static final long serialVersionUID = 7831092478216356910L;
-		
-		@JsonProperty("versions")
-        private List<TroveDatastoreVersion> troveDatastoreVersionList;
-
-        @Override
-        protected List<TroveDatastoreVersion> value() {
-            return troveDatastoreVersionList;
-        }
-    }
 }

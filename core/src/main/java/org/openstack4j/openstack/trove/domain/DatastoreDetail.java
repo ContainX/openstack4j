@@ -1,4 +1,6 @@
 /*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -11,16 +13,15 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common;
+package org.openstack4j.openstack.trove.domain;
 
-import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,75 +30,45 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * A model represent OTC Service Version
+ * Model represent attributes of Trove data-store
  *
  * @author QianBiao.NG
- * @date   2017-07-28 16:22:17
+ * @date   2017-07-31 11:12:39
  */
 @Getter
 @ToString
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceVersion implements ModelEntity {
+@JsonRootName("datastore")
+public class DatastoreDetail implements ModelEntity {
 
-	static final long serialVersionUID = -3477831655673026786L;
+	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("id")
-	String id;
+	private String id;
+	private String name;
+	
+	@JsonProperty("default_version")
+	private String defaultVersion;
+	
+	@JsonProperty("versions")
+	private List<DatastoreVersion> troveDatastoreVersionList;
 
-	@JsonProperty("links")
-	List<GenericLink> links;
-
-	@JsonProperty("status")
-	ServiceStatus status;
-
-	@JsonProperty("updated")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
-	Date updated;
-
-	public enum ServiceStatus {
-
-		DEPRECATED, CURRENT, STABLE;
-
-		@JsonCreator
-		public static ServiceStatus forValue(String value) {
-			if (value != null) {
-				for (ServiceStatus state : ServiceStatus.values()) {
-					if (value.equalsIgnoreCase(state.name())) {
-						return state;
-					}
-				}
-			}
-			return null;
-		}
+	public List<DatastoreVersion> getTroveDatastoreVersionList() {
+		return troveDatastoreVersionList;
 	}
 
-	public static class ServiceVersionWrap {
+	public static class Datastores extends ListResult<DatastoreDetail> {
+		
+		private static final long serialVersionUID = -3999288230060678693L;
+		
+		@JsonProperty("datastores")
+		private List<DatastoreDetail> troveDatastoreList;
 
-		@JsonProperty("version")
-		private ServiceVersion version;
-
-		public ServiceVersion getVersion() {
-			return version;
+		@Override
+		protected List<DatastoreDetail> value() {
+			return troveDatastoreList;
 		}
-
-		public void setVersion(ServiceVersion version) {
-			this.version = version;
-		}
-	}
-
-	public static class ServiceVersions extends ListResult<ServiceVersion> {
-
-		private static final long serialVersionUID = 1L;
-
-		@JsonProperty("versions")
-		private List<ServiceVersion> versions;
-
-		public List<ServiceVersion> value() {
-			return versions;
-		}
-
 	}
 
 }

@@ -15,12 +15,14 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +31,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of Database User
+ * Model represent attributes of database instance
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -39,34 +41,43 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class TroveDatabaseUser implements ModelEntity {
+@JsonRootName("instance")
+public class DatabaseInstance implements ModelEntity {
 
-	private static final long serialVersionUID = -3324036820846287512L;
+	private static final long serialVersionUID = -7399474725379713926L;
 
-	@JsonProperty("name")
-	private String username;
-	@JsonProperty("password")
-	private String password;
-	@JsonProperty("databases")
-	List<TroveDatabase> troveDatabaseList;
+	private Date created;
 
-	public static class DatabaseUsers extends ListResult<TroveDatabaseUser> {
+	private InstanceFlavor flavor;
+
+	private String hostname;
+
+	private List<String> ip;
+
+	private String id;
+
+	private String name;
+
+	private String status;
+
+	private Date updated;
+
+	private Volume volume;
+
+	private Datastore datastore;
+
+
+
+	public static class DatabaseInstances extends ListResult<DatabaseInstance> {
+
 		private static final long serialVersionUID = 1L;
 
-		@JsonProperty("users")
-		private List<TroveDatabaseUser> troveDatabaseUserList;
-
-		public List<TroveDatabaseUser> getTroveDatabaseUserList() {
-			return troveDatabaseUserList;
-		}
-
-		public void setTroveDatabaseUserList(List<TroveDatabaseUser> troveDatabaseUserList) {
-			this.troveDatabaseUserList = troveDatabaseUserList;
-		}
+		@JsonProperty("instances")
+		private List<DatabaseInstance> instances;
 
 		@Override
-		protected List<TroveDatabaseUser> value() {
-			return troveDatabaseUserList;
+		protected List<DatabaseInstance> value() {
+			return instances;
 		}
 	}
 

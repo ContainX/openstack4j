@@ -11,44 +11,60 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+package org.openstack4j.openstack.trove.domain;
 
-import static com.google.common.base.Preconditions.*;
+import java.util.Map;
 
-import java.util.List;
+import org.openstack4j.model.ModelEntity;
 
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.openstack.trove.domain.TroveInstance;
-import org.openstack4j.openstack.trove.domain.TroveInstance.DBInstances;
-import org.openstack4j.openstack.trove.domain.TroveInstanceCreate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
- * The implementation of manipulation of {@link TroveInstance}
+ * Model represent attributes of Database Configuration update
  *
  * @author QianBiao.NG
- * @date   2017-07-31 11:13:41
+ * @date   2017-07-31 11:12:39
  */
-public class TroveDBInstanceService extends BaseTroveServices {
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonRootName("configuration")
+public class DatabaseConfigUpdate implements ModelEntity {
 
-	public List<TroveInstance> list() {
-		return get(DBInstances.class, uri("/instances")).execute().getList();
+	static final long serialVersionUID = -3324036820846287512L;
 
-	}
+	/**
+	 * configuration identifier
+	 */
+	@JsonIgnore
+	String id;
 
-	public TroveInstance get(String instanceId) {
-		checkNotNull(instanceId);
-		TroveInstance instance = get(TroveInstance.class, uri("/instances/%s", instanceId)).execute();
-		return instance;
-	}
+	/**
+	 * configuration name to be updated
+	 */
+	@JsonProperty("name")
+	String name;
 
-	public TroveInstance create(TroveInstanceCreate instanceCreate) {
-		return post(TroveInstance.class, uri("/instances")).entity(instanceCreate).execute();
+	/**
+	 * configuration description to be updated
+	 */
+	@JsonProperty("description")
+	String description;
 
-	}
+	/**
+	 * configuration parameter values to be updated
+	 */
+	@JsonProperty("values")
+	Map<String, Object> values;
 
-	public ActionResponse delete(String id) {
-		checkNotNull(id);
-		return deleteWithResponse(uri("/instances/%s", id)).execute();
-	}
 }

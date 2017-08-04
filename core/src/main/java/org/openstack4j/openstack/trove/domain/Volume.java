@@ -16,9 +16,9 @@
 package org.openstack4j.openstack.trove.domain;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.trove.constant.VolumeType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent for attributes of Database instance creation
+ * Model represent attributes of DB instance Volume
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -37,46 +37,14 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("instance")
-public class TroveInstanceCreate implements ModelEntity {
+public class Volume implements ModelEntity {
 
-	private static final long serialVersionUID = -7844139328996206764L;
+	private static final long serialVersionUID = 5294355671374520846L;
 
-	@JsonProperty("volume")
-	private Volume volume;
+	@JsonProperty("type")
+	VolumeType type;
 
-	@JsonProperty("flavorRef")
-	private String flavorRef;
-
-	@JsonProperty("name")
-	private String name;
-
-	@JsonProperty("datastore")
-	private TroveDatastore datastore;
-
-	public class Volume {
-
-		@JsonProperty("type")
-		private String type;
-		@JsonProperty("size")
-		private Integer size;
-
-		public String getType() {
-			return type;
-		}
-
-		public void setType(String type) {
-			this.type = type;
-		}
-
-		public int getSize() {
-			return size;
-		}
-
-		public void setSize(Integer size) {
-			this.size = size;
-		}
-
-	}
+	@JsonProperty("size")
+	Integer size;
 
 }

@@ -329,6 +329,7 @@ public interface OSClient<T extends OSClient<T>> {
 
 		
 		/**
+		 * get the Auto Scaling service 
 		 * @return the OTC AutoScaling Service
 		 */
 		AutoScalingService autoScaling();
@@ -378,7 +379,7 @@ public interface OSClient<T extends OSClient<T>> {
 		MessageQueueService messageQueue();
 		
 		/**
-		 * MaaS service
+		 * get the MaaS service 
 		 * @return the OTC MaaS service instance
 		 */
 		MaaSService maas();

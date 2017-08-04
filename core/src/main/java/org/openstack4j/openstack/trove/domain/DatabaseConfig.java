@@ -1,4 +1,6 @@
 /*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -11,16 +13,19 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.common;
+package org.openstack4j.openstack.trove.domain;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.DateTimeUtils;
+import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,75 +34,69 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * A model represent OTC Service Version
+ * Model represent attributes of Database Configuration
  *
  * @author QianBiao.NG
- * @date   2017-07-28 16:22:17
+ * @date   2017-07-31 11:12:39
  */
 @Getter
 @ToString
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceVersion implements ModelEntity {
+@JsonRootName("configuration")
+public class DatabaseConfig implements ModelEntity {
 
-	static final long serialVersionUID = -3477831655673026786L;
+	static final long serialVersionUID = -3324036820846287512L;
 
 	@JsonProperty("id")
 	String id;
 
-	@JsonProperty("links")
-	List<GenericLink> links;
+	@JsonProperty("name")
+	String name;
+	
+	@JsonProperty("description")
+	String description;
 
-	@JsonProperty("status")
-	ServiceStatus status;
+	@JsonProperty("datastore_version_id")
+	String datastoreVersionId;
+
+	@JsonProperty("datastore_version_name")
+	String datastoreVersionName;
+
+	@JsonProperty("datastore_name")
+	String datastoreName;
+
+	@JsonProperty("instance_count")
+	Integer instanceCount;
+	
+	@JsonProperty("allowed_updated")
+	Boolean allowedUpdated;
+
+	@JsonProperty("created")
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMS)
+	Date created;
 
 	@JsonProperty("updated")
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMS)
 	Date updated;
 
-	public enum ServiceStatus {
+	@JsonProperty("values")
+	Map<String, Object> values;
 
-		DEPRECATED, CURRENT, STABLE;
+	@JsonProperty("parameters")
+	List<DatabaseConfigParam> parameters;
 
-		@JsonCreator
-		public static ServiceStatus forValue(String value) {
-			if (value != null) {
-				for (ServiceStatus state : ServiceStatus.values()) {
-					if (value.equalsIgnoreCase(state.name())) {
-						return state;
-					}
-				}
-			}
-			return null;
-		}
-	}
+	public static class Configs extends ListResult<DatabaseConfig> {
+		private static final long serialVersionUID = 7666104777418585874L;
 
-	public static class ServiceVersionWrap {
+		@JsonProperty("configurations")
+		List<DatabaseConfig> configs;
 
-		@JsonProperty("version")
-		private ServiceVersion version;
-
-		public ServiceVersion getVersion() {
-			return version;
-		}
-
-		public void setVersion(ServiceVersion version) {
-			this.version = version;
-		}
-	}
-
-	public static class ServiceVersions extends ListResult<ServiceVersion> {
-
-		private static final long serialVersionUID = 1L;
-
-		@JsonProperty("versions")
-		private List<ServiceVersion> versions;
-
-		public List<ServiceVersion> value() {
-			return versions;
+		@Override
+		protected List<DatabaseConfig> value() {
+			return configs;
 		}
 
 	}
-
 }

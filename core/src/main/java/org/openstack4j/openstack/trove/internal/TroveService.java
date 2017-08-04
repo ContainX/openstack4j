@@ -14,6 +14,8 @@
 package org.openstack4j.openstack.trove.internal;
 
 import org.openstack4j.api.Apis;
+import org.openstack4j.openstack.trove.domain.DatabaseConfig;
+import org.openstack4j.openstack.trove.domain.DatabaseParam;
 
 /**
  * Trove (Relation Database) Operations API implementation
@@ -26,10 +28,10 @@ public class TroveService extends BaseTroveServices {
 	/**
 	 * Service implementation which provides methods for manipulation of version
 	 *
-	 * @return {@link VersionServiceImpl} instance
+	 * @return {@link TroveVersionService} instance
 	 */
-	public VersionServiceImpl versions() {
-		return Apis.get(VersionServiceImpl.class);
+	public TroveVersionService versions() {
+		return Apis.get(TroveVersionService.class);
 	}
 
 	/**
@@ -51,15 +53,6 @@ public class TroveService extends BaseTroveServices {
 	}
 
 	/**
-	 * Service implementation which provides methods for manipulation of database users
-	 *
-	 * @return {@link TroveDBUserService} instance
-	 */
-	public TroveDBUserService databaseUsers() {
-		return Apis.get(TroveDBUserService.class);
-	}
-
-	/**
 	 * Service implementation which provides methods for manipulation of database instance flavors
 	 *
 	 * @return {@link TroveDBUserService} instance
@@ -71,10 +64,28 @@ public class TroveService extends BaseTroveServices {
 	/**
 	 * Service implementation which provides methods for manipulation of database instances
 	 *
-	 * @return {@link TroveDBInstanceService} instance
+	 * @return {@link TroveDatabaseInstanceService} instance
 	 */
-	public TroveDBInstanceService instances() {
-		return Apis.get(TroveDBInstanceService.class);
+	public TroveDatabaseInstanceService instances() {
+		return Apis.get(TroveDatabaseInstanceService.class);
+	}
+	
+	/**
+	 * Service implementation which provides methods for manipulation of {@link DatabaseConfig}
+	 *
+	 * @return {@link TroveDatabaseConfigService} instance
+	 */
+	public TroveDatabaseConfigService configs() {
+		return Apis.get(TroveDatabaseConfigService.class);
+	}
+	
+	/**
+	 * Service implementation which provides methods for manipulation of {@link DatabaseParam}
+	 *
+	 * @return {@link TroveDatabaseParamService} instance
+	 */
+	public TroveDatabaseParamService configParams() {
+		return Apis.get(TroveDatabaseParamService.class);
 	}
 
 }

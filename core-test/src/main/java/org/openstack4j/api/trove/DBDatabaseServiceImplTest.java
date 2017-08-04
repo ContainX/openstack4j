@@ -15,21 +15,21 @@
  *******************************************************************************/
 package org.openstack4j.api.trove;
 
-import com.google.common.base.Preconditions;
-import org.openstack4j.api.AbstractTest;
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.trove.Database;
-import org.openstack4j.openstack.trove.builder.TroveBuilders;
-import org.openstack4j.openstack.trove.domain.TroveDatabase;
-import org.openstack4j.openstack.trove.domain.TroveDatabase.Databases;
-import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import org.openstack4j.api.AbstractTest;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.trove.Database;
+import org.openstack4j.openstack.trove.builder.TroveBuilders;
+import org.openstack4j.openstack.trove.domain.Database;
+import org.openstack4j.openstack.trove.domain.Database.Databases;
+import org.testng.annotations.Test;
+
+import com.google.common.base.Preconditions;
 
 /**
  * Created by sumit gandhi on 8/22/2016.
@@ -60,9 +60,9 @@ public class DBDatabaseServiceImplTest extends AbstractTest{
         String databaseInstanceId = "54c91755526e44b9808385a263db4aa6";
         respondWith(200);
         TroveBuilders troveBuilders = new TroveBuilders();
-        TroveDatabase database = (TroveDatabase) troveBuilders.databaseCreate().name("exampledb").build();
+        Database database = (Database) troveBuilders.databaseCreate().name("exampledb").build();
         Databases troveDatabases = new Databases();
-        List<TroveDatabase> troveDatabaseList = new ArrayList<>();
+        List<Database> troveDatabaseList = new ArrayList<>();
         troveDatabaseList.add(database);
         troveDatabases.setTroveDatabaseList(troveDatabaseList);
         ActionResponse result = osv2().trove().databaseService().create(databaseInstanceId, troveDatabases);

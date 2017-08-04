@@ -17,40 +17,31 @@
  *******************************************************************************/
 package org.openstack4j.sample.trove;
 
-import org.openstack4j.openstack.key.management.domain.Key;
-import org.openstack4j.openstack.trove.constant.DataStoreType;
-import org.openstack4j.openstack.trove.domain.Datastore;
-import org.openstack4j.openstack.trove.domain.DatabaseInstance;
-import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate;
+import java.util.List;
+
+import org.openstack4j.openstack.trove.domain.InstanceFlavor;
 import org.openstack4j.sample.AbstractSample;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.annotations.BeforeClass;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test(suiteName = "Trove/Instance/Sample")
-public class DBInstanceSample extends AbstractSample {
+@Test(suiteName = "Trove/Flavor/Sample")
+public class DBInstanceFlavorSample extends AbstractSample {
 
-	private static final Logger logger = LoggerFactory.getLogger(DBInstanceSample.class);
-
-	String name = randomName();
-	Key key = null;
-
-	/**
-	 * create a key for test
-	 */
-	@BeforeClass
-	public void prepare() {
-		Datastore datastore = Datastore.builder().type(DataStoreType.MySQL).version("5.6.34").build();
-		DatabaseInstanceCreate instanceCreate = DatabaseInstanceCreate.builder().name(name).datastore(datastore).build();
-		DatabaseInstance instance = osclient.trove().instances().create(instanceCreate);
-	}
+	List<InstanceFlavor> flavors = null;
 
 	@Test
-	public void testCreateInstance() {
-		DatabaseInstanceCreate instanceCreate = DatabaseInstanceCreate.builder().build();
-
-		DatabaseInstance instance = osclient.trove().instances().create(instanceCreate);
+	public void testListInstanceFlavors() {
+		flavors = osclient.trove().flavors().list();
+		Assert.assertTrue(flavors.size() > 0);
 	}
 
+	@Test(dependsOnMethods = { "testListInstanceFlavors" })
+	public void testGetInstanceFlavors() {
+		InstanceFlavor flavor = flavors.get(0);
+		InstanceFlavor get = osclient.trove().flavors().get(flavor.getStrId());
+		Assert.assertEquals(flavor.getId(), get.getId());
+		Assert.assertEquals(flavor.getName(), get.getName());
+		Assert.assertEquals(flavor.getStrId(), get.getStrId());
+		Assert.assertEquals(flavor.getRam().intValue() / 1024, get.getRam().intValue());
+	}
 }

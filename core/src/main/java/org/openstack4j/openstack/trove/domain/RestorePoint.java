@@ -1,4 +1,6 @@
 /*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -11,36 +13,37 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+package org.openstack4j.openstack.trove.domain;
 
-import java.util.List;
+import org.openstack4j.model.ModelEntity;
 
-import org.openstack4j.openstack.trove.domain.InstanceFlavor;
-import org.openstack4j.openstack.trove.domain.InstanceFlavor.Flavors;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
- * The implementation of manipulation of {@link InstanceFlavor}
+ * Model represent attributes of DB Restore
  *
  * @author QianBiao.NG
- * @date   2017-07-31 11:13:41
+ * @date   2017-07-31 11:12:39
  */
-public class TroveInstanceFlavorService extends BaseTroveServices {
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class RestorePoint implements ModelEntity {
+
+	private static final long serialVersionUID = 5294355671374520846L;
 
 	/**
-	 * Returns all the available database instance flavors
-	 * @return the list of available flavors
+	 * the backup file Identifier to be restored 
 	 */
-	public List<InstanceFlavor> list() {
-		return get(Flavors.class, uri("/flavors")).execute().getList();
-	}
-
-	/**
-	 * Get the instance flavor specified by ID
-	 * @param id
-	 * @return the flavor or null if not found
-	 */
-	public InstanceFlavor get(String id) {
-		return get(InstanceFlavor.class, uri("/flavors/%s", id)).execute();
-	}
+	@JsonProperty("backupRef")
+	String backupRef;
 
 }

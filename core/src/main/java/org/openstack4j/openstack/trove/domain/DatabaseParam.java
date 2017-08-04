@@ -19,9 +19,9 @@ import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
+import org.openstack4j.openstack.trove.constant.ParameterValueType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +30,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent for attributes of Database instance Flavor
+ * <h3>Model represent attributes of Database parameter</h3>
+ * 
+ * Database parameter is the configurable options of the database
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -40,35 +42,58 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("flavor")
-public class TroveInstanceFlavor implements ModelEntity {
-    
-	private static final long serialVersionUID = 1640365078802343096L;
+public class DatabaseParam implements ModelEntity {
+
+	static final long serialVersionUID = -3324036820846287512L;
+
+	/**
+	 * parameter name
+	 */
+	@JsonProperty("name")
+	String name;
+
+	/**
+	 * parameter type. (string, boolean, integer, float, etc)
+	 */
+	@JsonProperty("type")
+	ParameterValueType type;
+
+	/**
+	 * parameter max value
+	 */
+	@JsonProperty("max")
+	Integer max;
+
+	/**
+	 * parameter min value
+	 */
+	@JsonProperty("min")
+	Integer min;
+
+	/**
+	 * datastore version id of this parameter
+	 */
+	@JsonProperty("datastore_version_id")
+	String datastoreVersionId;
+
+	/**
+	 * is restart required when parameter value modified
+	 */
+	@JsonProperty("restart_required")
+	Boolean restartRequired;
 	
-    private String id;
-    
-	private String name;
-    
-    @JsonProperty("str_id")
-    private String strId;
+	
+	public static class Parameters extends ListResult<DatabaseParam> {
+		private static final long serialVersionUID = 7666104777418585874L;
+		
+		@JsonProperty("configuration-parameters")
+		List<DatabaseParam> params;
 
-    private int ram;
-    private int vcpus;
-    private int disk;
+		@Override
+		protected List<DatabaseParam> value() {
+			return params;
+		}
 
-
-    public static class Flavors extends ListResult<TroveInstanceFlavor> {
-
-        private static final long serialVersionUID = 1L;
-        
-        @JsonProperty("flavors")
-        private List<TroveInstanceFlavor> troveInstanceFlavorList;
-
-        @Override
-        protected List<TroveInstanceFlavor> value() {
-            return troveInstanceFlavorList;
-        }
-
-    }
+	}
 
 }

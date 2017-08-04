@@ -17,13 +17,13 @@ package org.openstack4j.openstack.trove.internal;
 
 import java.util.List;
 
-import org.openstack4j.openstack.trove.domain.TroveDatastore;
-import org.openstack4j.openstack.trove.domain.TroveDatastore.Datastores;
-import org.openstack4j.openstack.trove.domain.TroveDatastoreVersion;
-import org.openstack4j.openstack.trove.domain.TroveDatastoreVersion.Versions;
+import org.openstack4j.openstack.trove.domain.DatastoreDetail;
+import org.openstack4j.openstack.trove.domain.DatastoreDetail.Datastores;
+import org.openstack4j.openstack.trove.domain.DatastoreVersion;
+import org.openstack4j.openstack.trove.domain.DatastoreVersion.Versions;
 
 /**
- * The implementation of manipulation of {@link TroveDatastore}
+ * The implementation of manipulation of {@link DatastoreDetail}
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:41:17
@@ -34,7 +34,7 @@ public class TroveDatastoreService extends BaseTroveServices {
 	* Returns list of available datastores
 	* @return the list of datastores
 	*/
-	public List<TroveDatastore> list() {
+	public List<DatastoreDetail> list() {
 		return get(Datastores.class, uri("/datastores")).execute().getList();
 	}
 
@@ -43,8 +43,8 @@ public class TroveDatastoreService extends BaseTroveServices {
 	 * @param id
 	 * @return the datastore or null if not found
 	 */
-	public TroveDatastore get(String id) {
-		return get(TroveDatastore.class, uri("/datastores/%s", id)).execute();
+	public DatastoreDetail get(String id) {
+		return get(DatastoreDetail.class, uri("/datastores/%s", id)).execute();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class TroveDatastoreService extends BaseTroveServices {
 	 * @param datasoreId
 	 * @return list of datastore versions
 	 */
-	public List<TroveDatastoreVersion> listDatastoreVersions(String datasoreId) {
+	public List<DatastoreVersion> listDatastoreVersions(String datasoreId) {
 		return get(Versions.class, uri("/datastores/%s/versions", datasoreId)).execute().getList();
 	}
 
@@ -63,8 +63,8 @@ public class TroveDatastoreService extends BaseTroveServices {
 	 * @param versionId
 	 * @return the datastore version or null if not found
 	 */
-	public TroveDatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
-		return get(TroveDatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
+	public DatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
+		return get(DatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
 	}
 
 }

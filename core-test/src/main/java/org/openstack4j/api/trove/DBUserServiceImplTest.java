@@ -20,8 +20,8 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.trove.DatabaseUser;
 import org.openstack4j.openstack.trove.builder.TroveBuilders;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser.DatabaseUsers;
+import org.openstack4j.openstack.trove.domain.DatabaseUser;
+import org.openstack4j.openstack.trove.domain.DatabaseUser.DatabaseUsers;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -60,9 +60,9 @@ public class DBUserServiceImplTest extends AbstractTest {
         String databaseInstanceId = "54c91755526e44b9808385a263db4aa6";
         respondWith(200);
         TroveBuilders troveBuilders = new TroveBuilders();
-        TroveDatabaseUser databaseUser = (TroveDatabaseUser)troveBuilders.databaseUserCreate().username("dbuser4")
+        DatabaseUser databaseUser = (DatabaseUser)troveBuilders.databaseUserCreate().username("dbuser4")
                 .password("password").build();
-        List<TroveDatabaseUser> troveDatabaseUsers = new ArrayList<>();
+        List<DatabaseUser> troveDatabaseUsers = new ArrayList<>();
         troveDatabaseUsers.add(databaseUser);
         DatabaseUsers databaseUsers = new DatabaseUsers();
         databaseUsers.setTroveDatabaseUserList(troveDatabaseUsers);

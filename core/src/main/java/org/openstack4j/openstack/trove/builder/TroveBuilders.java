@@ -13,25 +13,25 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.builder;
 
-import org.openstack4j.openstack.trove.domain.TroveDatabase;
-import org.openstack4j.openstack.trove.domain.TroveDatabase.TroveDatabaseBuilder;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser;
-import org.openstack4j.openstack.trove.domain.TroveDatabaseUser.TroveDatabaseUserBuilder;
-import org.openstack4j.openstack.trove.domain.TroveInstanceCreate;
-import org.openstack4j.openstack.trove.domain.TroveInstanceCreate.TroveInstanceCreateBuilder;
+import org.openstack4j.openstack.trove.domain.Database;
+import org.openstack4j.openstack.trove.domain.Database.DatabaseBuilder;
+import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate;
+import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate.DatabaseInstanceCreateBuilder;
+import org.openstack4j.openstack.trove.domain.DatabaseUser;
+import org.openstack4j.openstack.trove.domain.DatabaseUser.DatabaseUserBuilder;
 
 public class TroveBuilders {
 
-	public TroveInstanceCreateBuilder instanceCreate() {
-		return TroveInstanceCreate.builder();
+	public DatabaseInstanceCreateBuilder instanceCreate() {
+		return DatabaseInstanceCreate.builder();
 	}
 
-	public TroveDatabaseBuilder databaseCreate() {
-		return TroveDatabase.builder();
+	public DatabaseBuilder databaseCreate() {
+		return Database.builder();
 	}
 
-	public TroveDatabaseUserBuilder databaseUserCreate() {
-		return TroveDatabaseUser.builder();
+	public DatabaseUserBuilder databaseUserCreate() {
+		return DatabaseUser.builder();
 	}
 
 }

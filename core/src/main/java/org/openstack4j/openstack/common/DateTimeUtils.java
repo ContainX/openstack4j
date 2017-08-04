@@ -29,6 +29,11 @@ public class DateTimeUtils {
 	public static final String FORMAT_YMDHMS = "yyyy-MM-dd HH:mm:ss";
 	
 	/**
+	 * DateTime format yyyy-MM-dd HH:mm:ss
+	 */
+	public static final String FORMAT_YMDTHMS = "yyyy-MM-dd'T'HH:mm:ss";
+	
+	/**
 	 * DateTime format yyyy-MM-d
 	 */
 	public static final String FORMAT_YMD = "yyyy-MM-d";
@@ -43,7 +48,4 @@ public class DateTimeUtils {
 		return new SimpleDateFormat(format).format(date);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(format(new Date(), FORMAT_YMDTHMS_SSSZ));
-	}
 }

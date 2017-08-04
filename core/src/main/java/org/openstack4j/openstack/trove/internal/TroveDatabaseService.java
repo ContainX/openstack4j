@@ -20,11 +20,11 @@ import static com.google.common.base.Preconditions.*;
 import java.util.List;
 
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.openstack.trove.domain.TroveDatabase;
-import org.openstack4j.openstack.trove.domain.TroveDatabase.Databases;
+import org.openstack4j.openstack.trove.domain.Database;
+import org.openstack4j.openstack.trove.domain.Database.Databases;
 
 /**
- * The implementation of manipulation of {@link TroveDatabase}
+ * The implementation of manipulation of {@link Database}
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:41:17
@@ -36,7 +36,7 @@ public class TroveDatabaseService extends BaseTroveServices {
 	 * @param instanceId
 	 * @return the database or null if not found
 	 */
-	public List<TroveDatabase> list(String instanceId) {
+	public List<Database> list(String instanceId) {
 		return get(Databases.class, uri("/instances/%s/databases", instanceId)).execute().getList();
 	}
 

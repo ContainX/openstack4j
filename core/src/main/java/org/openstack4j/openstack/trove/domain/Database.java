@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -21,7 +19,6 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of Trove data-store
+ * Model represent attributes of Trove Database instance
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -40,34 +37,34 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("datastore")
-public class TroveDatastore implements ModelEntity {
+public class Database implements ModelEntity {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4318036798508606114L;
 
-	private String id;
 	private String name;
-	
-	@JsonProperty("default_version")
-	private String defaultVersion;
-	
-	@JsonProperty("versions")
-	private List<TroveDatastoreVersion> troveDatastoreVersionList;
+	@JsonProperty("character_set")
+	private String dbCharacterSet;
+	@JsonProperty("collate")
+	private String dbCollation;
 
-	public List<TroveDatastoreVersion> getTroveDatastoreVersionList() {
-		return troveDatastoreVersionList;
-	}
+	public static class Databases extends ListResult<Database> {
 
-	public static class Datastores extends ListResult<TroveDatastore> {
-		
-		private static final long serialVersionUID = -3999288230060678693L;
-		
-		@JsonProperty("datastores")
-		private List<TroveDatastore> troveDatastoreList;
+		private static final long serialVersionUID = 1L;
+
+		@JsonProperty("databases")
+		private List<Database> troveDatabaseList;
+
+		public List<Database> getTroveDatabaseList() {
+			return troveDatabaseList;
+		}
+
+		public void setTroveDatabaseList(List<Database> troveDatabaseList) {
+			this.troveDatabaseList = troveDatabaseList;
+		}
 
 		@Override
-		protected List<TroveDatastore> value() {
-			return troveDatastoreList;
+		protected List<Database> value() {
+			return troveDatabaseList;
 		}
 	}
 
