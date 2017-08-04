@@ -18,6 +18,7 @@ package org.openstack4j.openstack.trove.internal;
 import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.trove.domain.DatabaseConfig;
@@ -66,6 +67,20 @@ public class TroveDatabaseConfigService extends BaseTroveServices {
 		checkNotNull(update, "parameter `update` should not be null");
 		checkArgument(!Strings.isNullOrEmpty(update.getId()), "parameter `update.id` should not be empty");
 		return put(ActionResponse.class, "/configurations/", update.getId()).entity(update).execute();
+	}
+
+	/**
+	 * add parameters to a database configuration identified by a specified ID.
+	 * 
+	 * @param configurationId	database configuration identifier
+	 * @param params			parameters to add, key is parameter name, value is parameter value
+	 * @return {@linkplain ActionResponse} instance
+	 */
+	public ActionResponse updateParams(String configurationId, Map<String, String> params) {
+		checkArgument(!Strings.isNullOrEmpty(configurationId), "parameter `configurationId` should not be empty");
+		checkArgument(params != null && !params.isEmpty(), "parameter `customerParams` should not be empty");
+		DatabaseConfigUpdate build = DatabaseConfigUpdate.builder().values(params).build();
+		return patch(ActionResponse.class, "/configurations/", configurationId).entity(build).execute();
 	}
 
 	/**

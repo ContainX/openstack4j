@@ -65,6 +65,6 @@ public class DatabaseConfigUpdate implements ModelEntity {
 	 * configuration parameter values to be updated
 	 */
 	@JsonProperty("values")
-	Map<String, Object> values;
+	Map<String, String> values;
 
 }

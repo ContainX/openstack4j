@@ -101,7 +101,7 @@ public class DBConfigurationSample extends AbstractSample {
 
 	@Test(dependsOnMethods = { "testGetConfig" })
 	public void testUpdateConfig() {
-		Map<String, Object> values = Maps.newHashMap();
+		Map<String, String> values = Maps.newHashMap();
 		values.put("max_connections", "100");
 		values.put("autocommit", "ON");
 
@@ -119,6 +119,26 @@ public class DBConfigurationSample extends AbstractSample {
 		Assert.assertEquals(updated.getValues().get("max_connections"), "100");
 		Assert.assertEquals(updated.getValues().get("autocommit"), "ON");
 	}
+	
+	@Test(dependsOnMethods = { "testUpdateConfig" })
+	public void testAddParams() {
+		Map<String, String> params = Maps.newHashMap();
+		params.put("max_connections", "20");
+		params.put("autocommit", "OFF");
+
+		ActionResponse response = osclient.trove().configs().updateParams(create.getId(), params);
+		Assert.assertTrue(response.isSuccess());
+
+		DatabaseConfig updated = osclient.trove().configs().get(create.getId());
+
+		Assert.assertEquals(updated.getName(), "sdk-unittest-updated-name");
+		Assert.assertEquals(updated.getDescription(), "openstack4j sdk unittest2");
+
+		// assert the values we setup
+		Assert.assertEquals(updated.getValues().get("max_connections"), "20");
+		Assert.assertEquals(updated.getValues().get("autocommit"), "OFF");
+	}
+
 
 	@Test
 	public void testListInstances() {

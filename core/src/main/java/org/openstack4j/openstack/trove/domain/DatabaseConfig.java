@@ -82,7 +82,7 @@ public class DatabaseConfig implements ModelEntity {
 	Date updated;
 
 	@JsonProperty("values")
-	Map<String, Object> values;
+	Map<String, String> values;
 
 	@JsonProperty("parameters")
 	List<DatabaseConfigParam> parameters;
