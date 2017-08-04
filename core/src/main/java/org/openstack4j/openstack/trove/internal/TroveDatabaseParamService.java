@@ -16,9 +16,13 @@
 package org.openstack4j.openstack.trove.internal;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.openstack.trove.domain.DatabaseParam;
 import org.openstack4j.openstack.trove.domain.DatabaseParam.Parameters;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * The implementation of manipulation of {@link DatabaseParam}
@@ -38,7 +42,6 @@ public class TroveDatabaseParamService extends BaseTroveServices {
 		return get(Parameters.class, uri("/datastores/versions/%s/parameters", dataStoreVersionId)).execute().getList();
 	}
 
-
 	/**
 	 * 
 	 * get the details of a configuration parameter
@@ -48,8 +51,35 @@ public class TroveDatabaseParamService extends BaseTroveServices {
 	 * @return an instance of {@link DatabaseParam}
 	 */
 	public DatabaseParam get(String dataStoreVersionId, String paramName) {
-		return get(DatabaseParam.class,
-				uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName)).execute();
+		return get(DatabaseParam.class, uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName))
+				.execute();
+	}
+
+	/**
+	 * 
+	 * @param instanceId
+	 * @return
+	 */
+	public Map<String, String> getDefaultParamsByInstance(String instanceId) {
+		GetDefaultParamsResponse response = get(GetDefaultParamsResponse.class,
+				uri("/instances/%s/configuration", instanceId)).execute();
+		return response.getParams();
+	}
+
+	@JsonRootName("instance")
+	class GetDefaultParamsResponse {
+
+		@JsonProperty("configuration")
+		Map<String, String> params;
+
+		public Map<String, String> getParams() {
+			return params;
+		}
+
+		public void setParams(Map<String, String> params) {
+			this.params = params;
+		}
+
 	}
 
 }

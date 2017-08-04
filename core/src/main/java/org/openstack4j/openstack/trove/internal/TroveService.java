@@ -84,7 +84,7 @@ public class TroveService extends BaseTroveServices {
 	 *
 	 * @return {@link TroveDatabaseParamService} instance
 	 */
-	public TroveDatabaseParamService configParams() {
+	public TroveDatabaseParamService params() {
 		return Apis.get(TroveDatabaseParamService.class);
 	}
 

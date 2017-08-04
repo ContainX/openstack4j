@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 import jersey.repackaged.com.google.common.collect.Maps;
 
 @Test(suiteName = "Trove/Config/Sample")
-public class DBConfigurationSample extends AbstractSample {
+public class DatabaseConfigSample extends AbstractSample {
 
 	DatabaseConfig create;
 	List<DatabaseConfig> configs = null;
