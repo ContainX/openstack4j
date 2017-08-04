@@ -465,10 +465,8 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 		 */
 		@Override
 		public String getEndpoint(ServiceType service) {
-
 			final EndpointURLResolver eUrlResolver = (config != null && config.getEndpointURLResolver() != null)
 					? config.getEndpointURLResolver() : fallbackEndpointUrlResolver;
-
 			return addNATIfApplicable(eUrlResolver.findURLV2(URLResolverParams.create(access, service)
 					.resolver(config != null ? config.getV2Resolver() : null).perspective(perspective).region(region)));
 		}

@@ -61,7 +61,7 @@ public class AbstractSample {
 		endpointResolver.addOverrideEndpoint(ServiceType.MAAS,
 				"https://maas.eu-de.otc.t-systems.com/v1/%(project_id)s/objectstorage");
 		endpointResolver.addOverrideEndpoint(ServiceType.DATABASE,
-				"https://rds.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
+				"https://rds.eu-de.otc.t-systems.com");
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
