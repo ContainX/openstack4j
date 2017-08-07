@@ -16,6 +16,7 @@
 package org.openstack4j.openstack.database.internal;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
@@ -54,10 +55,13 @@ public class BaseDatabaseServices extends BaseOpenStackService {
 	 * HuaWei Relation DataBase Service validate the content-type in every request
 	 */
 	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		// add common base path for database service
 		path = "/rds/v1/%(project_id)s" + path;
-		// TODO x-language
-		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON).header("X-Language",
-				"en-us");
+		
+		// setup common headers for database service
+		Invocation<R> invocation = super.builder(returnType, path, method);
+		Config config = invocation.getRequest().getConfig();
+		return invocation.header("Content-Type", CONTENT_JSON).header("X-Language", config.getLanguage());
 	}
 
 }

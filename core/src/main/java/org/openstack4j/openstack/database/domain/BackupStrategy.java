@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -13,39 +11,48 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.internal;
+package org.openstack4j.openstack.database.domain;
 
-import java.util.List;
+import org.openstack4j.model.ModelEntity;
 
-import org.openstack4j.openstack.trove.domain.DatastoreVersion;
-import org.openstack4j.openstack.trove.domain.DatastoreVersion.Versions;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
- * The implementation of manipulation of {@link DatastoreDetail}
+ * Model represent attributes of Database Backup Strategy
  *
  * @author QianBiao.NG
- * @date   2017-07-31 11:41:17
+ * @date   2017-07-31 11:12:39
  */
-public class TroveDatastoreService extends BaseTroveServices {
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class BackupStrategy implements ModelEntity {
+
+	private static final long serialVersionUID = 5294355671374520846L;
 
 	/**
-	 * Returns list of all datastore versions
-	 * @param datasoreId
-	 * @return list of datastore versions
-	 */
-	public List<DatastoreVersion> listDatastoreVersions(String datasoreId) {
-		return get(Versions.class, uri("/datastores/%s/versions", datasoreId)).execute().getList();
-	}
-
-	/**
-	 * Get the datastore version specified by ID
+	 * Specifies the time when automated backup is triggered. 
 	 * 
-	 * @param datastoreId
-	 * @param versionId
-	 * @return the datastore version or null if not found
+	 * <li>The value cannot be empty and must use the following format: hh:mm:ss. </li>
+	 * <li>Its value must indicate a valid time.</li>
 	 */
-	public DatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
-		return get(DatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
-	}
+	@JsonProperty("startTime")
+	String startTime;
+	
+	
+	/** 
+	 * Specifies the number of days the generated backup files can be stored. Its value range is 0 to 35. 
+	 * If this parameter is not specified or set to 0, the automated backup policy is not set 
+	 */
+	@JsonProperty("keepDays")
+	String keepDays;
 
 }

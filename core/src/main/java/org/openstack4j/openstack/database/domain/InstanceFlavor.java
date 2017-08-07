@@ -18,12 +18,10 @@ package org.openstack4j.openstack.database.domain;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.google.common.base.MoreObjects;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +40,7 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonRootName("flavor")
 public class InstanceFlavor implements ModelEntity {
 
 	static final long serialVersionUID = 1640365078802343096L;
@@ -50,87 +49,9 @@ public class InstanceFlavor implements ModelEntity {
 
 	String name;
 
-	@JsonProperty("str_id")
-	String strId;
-
 	Integer ram;
 
-	@JsonProperty("links")
-	List<GenericLink> links;
-
-	@JsonProperty("flavor_detail")
-	List<InstanceFlavorSpec> flavorDetail;
-
-	@JsonProperty("price_detail")
-	List<InstanceFlavorCharging> priceDetail;
-
-	/**
-	 * Model represent an Instance Flavor Specification
-	 *
-	 * @author QianBiao.NG
-	 * @date   2017-08-03 10:19:41
-	 */
-	public static class InstanceFlavorSpec {
-
-		String name;
-		String value;
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
-		public void setValue(String value) {
-			this.value = value;
-		}
-		
-		@Override
-		public String toString() {
-			return MoreObjects.toStringHelper(this).toString();
-		}
-
-	}
-
-	/**
-	 * Model represent an Instance Flavor charging
-	 *
-	 * @author QianBiao.NG
-	 * @date   2017-08-03 10:19:41
-	 */
-	public static class InstanceFlavorCharging {
-
-		String timeUnit;
-		String price;
-
-		public String getTimeUnit() {
-			return timeUnit;
-		}
-
-		public void setTimeUnit(String timeUnit) {
-			this.timeUnit = timeUnit;
-		}
-
-		public String getPrice() {
-			return price;
-		}
-
-		public void setPrice(String price) {
-			this.price = price;
-		}
-		
-		@Override
-		public String toString() {
-			return MoreObjects.toStringHelper(this).toString();
-		}
-		
-	}
+	String specCode;
 
 	public static class Flavors extends ListResult<InstanceFlavor> {
 
@@ -145,5 +66,4 @@ public class InstanceFlavor implements ModelEntity {
 		}
 
 	}
-
 }

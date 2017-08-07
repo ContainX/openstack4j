@@ -16,7 +16,7 @@
 package org.openstack4j.openstack.database.domain;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.trove.constant.DatastoreType;
+import org.openstack4j.openstack.database.constants.DatastoreType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;

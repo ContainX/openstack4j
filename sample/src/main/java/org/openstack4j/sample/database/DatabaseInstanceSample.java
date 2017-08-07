@@ -17,47 +17,34 @@
  *******************************************************************************/
 package org.openstack4j.sample.database;
 
-import java.util.List;
-
 import org.openstack4j.openstack.database.constants.DatastoreType;
-import org.openstack4j.openstack.database.domain.DatabaseParam;
-import org.openstack4j.openstack.database.domain.DatastoreVersion;
+import org.openstack4j.openstack.database.domain.DatabaseInstanceCreate;
+import org.openstack4j.openstack.database.domain.Datastore;
+import org.openstack4j.openstack.key.management.domain.Key;
 import org.openstack4j.sample.AbstractSample;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-@Test(suiteName = "Database/Param/Sample")
-public class DatabaseParamSample extends AbstractSample {
+@Test(suiteName = "Database/Instance/Sample")
+public class DatabaseInstanceSample extends AbstractSample {
 
-	DatastoreVersion datastoreVersion = null;
-	List<DatabaseParam> params = null;
+
+	String name = randomName();
+	Key key = null;
 
 	@BeforeClass
 	public void prepare() {
-		// get the first datastore version of MySQL for test
-		List<DatastoreVersion> versions = osclient.database().datastores().listDatastoreVersions(DatastoreType.MySQL);
-		datastoreVersion = versions.get(0);
+		osclient.database().datastores().listDatastoreVersions(DatastoreType.MySQL);
+		Datastore datastore = Datastore.builder().type(DatastoreType.MySQL).version("5.6.34").build();
+		DatabaseInstanceCreate instanceCreate = DatabaseInstanceCreate.builder().name(name).datastore(datastore)
+				.build();
+//		DatabaseInstance instance = osclient.trove().instances().create(instanceCreate);
 	}
 
 	@Test
-	public void testListDatabaseParams() {
-		params = osclient.database().params().list(datastoreVersion.getId());
-		Assert.assertTrue(params.size() >= 1);
-	}
-
-	@Test(dependsOnMethods = { "testListDatabaseParams" })
-	public void testGetDatabaseParam() {
-		DatabaseParam databaseParam = params.get(0);
-		DatabaseParam get = osclient.database().params().get(datastoreVersion.getId(), databaseParam.getName());
-		Assert.assertEquals(get.getDatastoreVersionId(), databaseParam.getDatastoreVersionId());
-		Assert.assertEquals(get.getDescription(), databaseParam.getDescription());
-		Assert.assertEquals(get.getName(), databaseParam.getName());
-		Assert.assertEquals(get.getValueRange(), databaseParam.getValueRange());
-		Assert.assertEquals(get.getMax(), databaseParam.getMax());
-		Assert.assertEquals(get.getMin(), databaseParam.getMin());
-		Assert.assertEquals(get.getRestartRequired(), databaseParam.getRestartRequired());
-		Assert.assertEquals(get.getType(), databaseParam.getType());
+	public void testCreateInstance() {
+//		DatabaseInstanceCreate instanceCreate = DatabaseInstanceCreate.builder().build();
+//		DatabaseInstance instance = osclient.trove().instances().create(instanceCreate);
 	}
 
 }

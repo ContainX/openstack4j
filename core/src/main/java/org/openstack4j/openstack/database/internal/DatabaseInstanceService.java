@@ -18,9 +18,9 @@ import static com.google.common.base.Preconditions.*;
 import java.util.List;
 
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.openstack.trove.domain.DatabaseInstance;
-import org.openstack4j.openstack.trove.domain.DatabaseInstance.DatabaseInstances;
-import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate;
+import org.openstack4j.openstack.database.domain.DatabaseInstance;
+import org.openstack4j.openstack.database.domain.DatabaseInstance.DatabaseInstances;
+import org.openstack4j.openstack.database.domain.DatabaseInstanceCreate;
 
 
 /**

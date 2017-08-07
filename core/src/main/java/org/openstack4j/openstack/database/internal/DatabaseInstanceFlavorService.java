@@ -15,8 +15,11 @@ package org.openstack4j.openstack.database.internal;
 
 import java.util.List;
 
-import org.openstack4j.openstack.trove.domain.InstanceFlavor;
-import org.openstack4j.openstack.trove.domain.InstanceFlavor.Flavors;
+import org.openstack4j.openstack.database.domain.InstanceFlavor;
+import org.openstack4j.openstack.database.domain.InstanceFlavor.Flavors;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 /**
  * The implementation of manipulation of {@link InstanceFlavor}
@@ -27,11 +30,17 @@ import org.openstack4j.openstack.trove.domain.InstanceFlavor.Flavors;
 public class DatabaseInstanceFlavorService extends BaseDatabaseServices {
 
 	/**
-	 * Returns all the available database instance flavors
-	 * @return the list of available flavors
+	 * list all the available database instance flavors of a particular database in region
+	 * 
+	 * @param databaseId	a particular database id (Database is a specify version of datastore)
+	 * @param region		the cloud region 
+	 * @return
 	 */
-	public List<InstanceFlavor> list() {
-		return get(Flavors.class, uri("/flavors")).execute().getList();
+	public List<InstanceFlavor> list(String databaseId, String region) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(databaseId), "parameter `databaseId` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(region), "parameter `region` should not be empty");
+		return get(Flavors.class, uri("/flavors")).param("dbId", databaseId).param("region", region).execute()
+				.getList();
 	}
 
 	/**

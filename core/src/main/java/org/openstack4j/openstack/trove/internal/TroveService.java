@@ -35,15 +35,6 @@ public class TroveService extends BaseTroveServices {
 	}
 
 	/**
-	 * Service implementation which provides methods for manipulation of datastores
-	 *
-	 * @return {@link TroveDatastoreService} instance
-	 */
-	public TroveDatastoreService datastores() {
-		return Apis.get(TroveDatastoreService.class);
-	}
-
-	/**
 	 * Service implementation which provides methods for manipulation of database instance flavors
 	 *
 	 * @return {@link TroveDBUserService} instance

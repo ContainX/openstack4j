@@ -237,12 +237,11 @@ import org.openstack4j.openstack.compute.internal.ext.InstanceActionsServiceImpl
 import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
-import org.openstack4j.openstack.database.internal.DatabaseConfigService;
 import org.openstack4j.openstack.database.internal.DatabaseInstanceFlavorService;
 import org.openstack4j.openstack.database.internal.DatabaseInstanceService;
 import org.openstack4j.openstack.database.internal.DatabaseParamService;
-import org.openstack4j.openstack.database.internal.DatabaseServices;
 import org.openstack4j.openstack.database.internal.DatabaseServiceVersionService;
+import org.openstack4j.openstack.database.internal.DatabaseServices;
 import org.openstack4j.openstack.database.internal.DatastoreService;
 import org.openstack4j.openstack.dns.v2.internal.DNSServiceImpl;
 import org.openstack4j.openstack.dns.v2.internal.PTRServiceImpl;
@@ -598,7 +597,6 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(DatabaseServices.class, DatabaseServices.class);
 		bind(DatastoreService.class, DatastoreService.class);
 		bind(DatabaseServiceVersionService.class, DatabaseServiceVersionService.class);
-		bind(DatabaseConfigService.class, DatabaseConfigService.class);
 		bind(DatabaseParamService.class, DatabaseParamService.class);
 		bind(DatabaseInstanceFlavorService.class, DatabaseInstanceFlavorService.class);
 		bind(DatabaseInstanceService.class, DatabaseInstanceService.class);

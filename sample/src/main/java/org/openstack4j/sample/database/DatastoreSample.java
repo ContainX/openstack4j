@@ -19,8 +19,8 @@ package org.openstack4j.sample.database;
 
 import java.util.List;
 
-import org.openstack4j.openstack.trove.constant.DatastoreType;
-import org.openstack4j.openstack.trove.domain.DatastoreVersion;
+import org.openstack4j.openstack.database.constants.DatastoreType;
+import org.openstack4j.openstack.database.domain.DatastoreVersion;
 import org.openstack4j.sample.AbstractSample;
 import org.testng.Assert;
 import org.testng.annotations.Test;

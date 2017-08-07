@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -14,8 +12,6 @@
  * 	the License.                                                                     
  *******************************************************************************/
 package org.openstack4j.openstack.database.domain;
-
-import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.IdResourceEntity;
@@ -62,15 +58,6 @@ public class DatabaseInstanceCreate implements ModelEntity {
 	 */
 	@JsonProperty("flavorRef")
 	String flavorRef;
-	
-	/**
-	 * <h3>database users</h3>
-	 * 
-	 * It must contain the administrator username (for mysql and postgres, the administrator username is root) 
-	 * and the administrator password.
-	 */
-	@JsonProperty("users")
-	List<DatabaseUser> users;
 
 	/**
 	 * Volume used for the DB instance
@@ -79,15 +66,15 @@ public class DatabaseInstanceCreate implements ModelEntity {
 	Volume volume;
 
 	/**
-	 *  Database configuration parameter set reference used for initializing the database
+	 * Region of the DB instance
 	 */
-	@JsonProperty("configuration")
-	String configurationId;
+	@JsonProperty("region")
+	String region;
 	
 	/**
 	 * availability zone of the DB instance
 	 */
-	@JsonProperty("availability_zone")
+	@JsonProperty("availabilityZone")
 	String availabilityZone;
 	
 	
@@ -98,29 +85,37 @@ public class DatabaseInstanceCreate implements ModelEntity {
 	String vpcId;
 	
 	/**
-	 * NICs (known as Subnet) of the DB instance
+	 * NIC (known as Subnet) of the DB instance
 	 */
 	@JsonProperty("nics")
-	List<NIC> nics;
+	NIC nic;
 	
 	
 	/**
-	 * (Reserved)
+	 * security group of the DB instance
 	 */
-	@JsonProperty("modules")
-	List<String> modules;
-	
-	/**
-	 * (Reserved) Create the DB instance from a Database backup point
-	 */
-	@JsonProperty("restorePoint")
-	RestorePoint restorePoint;
+	@JsonProperty("securityGroup")
+	IdResourceEntity securityGroup;
 	
 	
 	/**
-	 * (Reserved) 
+	 * backup policy of the DB instance
 	 */
-	@JsonProperty("cluster_config")
-	IdResourceEntity clusterConfig;
+	@JsonProperty("backupStrategy")
+	BackupStrategy backupStrategy;
+	
+	/**
+	 * the password for user `root` of the DB instance
+	 */
+	@JsonProperty("dbRtPd")
+	String rootPassword;
+	
+	
+	/**
+	 * setup HA configuration of the DB instance
+	 * @see HA
+	 */
+	@JsonProperty("ha")
+	HA ha;
 
 }

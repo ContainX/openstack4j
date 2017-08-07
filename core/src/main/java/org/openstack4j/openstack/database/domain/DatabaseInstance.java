@@ -19,8 +19,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.DateTimeUtils;
+import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.common.ListResult;
+import org.openstack4j.openstack.database.constants.InstanceType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -44,36 +48,78 @@ import lombok.ToString;
 @JsonRootName("instance")
 public class DatabaseInstance implements ModelEntity {
 
-	private static final long serialVersionUID = -7399474725379713926L;
+	static final long serialVersionUID = -7399474725379713926L;
 
-	private Date created;
+	String id;
 
-	private InstanceFlavor flavor;
+	/**
+	 * DB instance name
+	 */
+	String name;
 
-	private String hostname;
+	/**
+	 * instance status
+	 */
+	String status;
 
-	private List<String> ip;
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	Date created;
+	
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	Date updated;
 
-	private String id;
+	String hostname;
+	InstanceType type;
+	String region;
+	String availabilityZone;
 
-	private String name;
+	String vpc;
 
-	private String status;
+	@JsonProperty("nics")
+	NIC nic;
 
-	private Date updated;
+	/**
+	 * security group of the DB instance
+	 */
+	@JsonProperty("securityGroup")
+	IdResourceEntity securityGroup;
 
-	private Volume volume;
+	@JsonProperty("flavor")
+	IdResourceEntity flavor;
 
-	private Datastore datastore;
+	List<String> ip;
 
+	@JsonProperty("volume")
+	Volume volume;
 
+	/**
+	 * datastore of this database
+	 */
+	@JsonProperty("dataStoreInfo")
+	String datastore;
+
+	/**
+	 * backup policy of the DB instance
+	 */
+	@JsonProperty("backupStrategy")
+	BackupStrategy backupStrategy;
+
+	/**
+	 * setup HA configuration of the DB instance
+	 * @see HA
+	 */
+	@JsonProperty("ha")
+	HA ha;
+
+	@JsonProperty("replica_of")
+	String replicaOf;
 
 	public static class DatabaseInstances extends ListResult<DatabaseInstance> {
 
-		private static final long serialVersionUID = 1L;
+		static final long serialVersionUID = 1L;
 
 		@JsonProperty("instances")
-		private List<DatabaseInstance> instances;
+		List<DatabaseInstance> instances;
 
 		@Override
 		protected List<DatabaseInstance> value() {

@@ -64,12 +64,12 @@ public class DatastoreVersion implements ModelEntity {
 
 		private static final long serialVersionUID = 7831092478216356910L;
 		
-		@JsonProperty("versions")
-        private List<DatastoreVersion> troveDatastoreVersionList;
+		@JsonProperty("dataStores")
+        private List<DatastoreVersion> versions;
 
         @Override
         protected List<DatastoreVersion> value() {
-            return troveDatastoreVersionList;
+            return versions;
         }
     }
 }

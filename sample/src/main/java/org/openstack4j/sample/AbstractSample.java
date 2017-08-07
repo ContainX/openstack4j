@@ -65,6 +65,7 @@ public class AbstractSample {
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
+		// TODO remove authentication before push to github
 		String user = "zhangdong";
 		String password = "hw@otc2017";
 		String projectId = "d4f2557d248e4860829f5fef030b209c";
@@ -72,8 +73,9 @@ public class AbstractSample {
 		String authUrl = "https://iam.eu-de.otc.t-systems.com/v3";
 
 		OSFactory.enableHttpLoggingFilter(true);
-		// TODO remove authentication before push to github
-		osclient = OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
+		// with language setting is required for RDS(trove&database) service
+		Config config = Config.newConfig().withEndpointURLResolver(endpointResolver).withLanguage("zh-cn");
+		osclient = OSFactory.builderV3().withConfig(config)
 				.endpoint(authUrl).credentials(user, password, Identifier.byId(userDomainId))
 				.scopeToProject(Identifier.byId(projectId)).authenticate();
 	}

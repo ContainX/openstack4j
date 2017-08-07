@@ -43,13 +43,7 @@ public class NIC implements ModelEntity {
 	/**
 	 * network identifier
 	 */
-	@JsonProperty("net-id")
-	String networkId;
-
-	/**
-	 * security group identifier
-	 */
-	@JsonProperty("securityGroupId")
-	Integer securityGroupId;
+	@JsonProperty("subnetId")
+	String subnetId;
 
 }

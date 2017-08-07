@@ -20,44 +20,40 @@ package org.openstack4j.sample.database;
 import java.util.List;
 
 import org.openstack4j.openstack.database.constants.DatastoreType;
-import org.openstack4j.openstack.database.domain.DatabaseParam;
 import org.openstack4j.openstack.database.domain.DatastoreVersion;
+import org.openstack4j.openstack.database.domain.InstanceFlavor;
 import org.openstack4j.sample.AbstractSample;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-@Test(suiteName = "Database/Param/Sample")
-public class DatabaseParamSample extends AbstractSample {
+@Test(suiteName = "Database/Flavor/Sample")
+public class DatabaseInstanceFlavorSample extends AbstractSample {
 
+	List<InstanceFlavor> flavors = null;
 	DatastoreVersion datastoreVersion = null;
-	List<DatabaseParam> params = null;
 
 	@BeforeClass
 	public void prepare() {
-		// get the first datastore version of MySQL for test
-		List<DatastoreVersion> versions = osclient.database().datastores().listDatastoreVersions(DatastoreType.MySQL);
-		datastoreVersion = versions.get(0);
+		List<DatastoreVersion> datastoreVersions = osclient.database().datastores()
+				.listDatastoreVersions(DatastoreType.MySQL);
+		Assert.assertTrue(datastoreVersions.size() > 0, "no datastore for mysql is available for testing");
+		datastoreVersion = datastoreVersions.get(0);
 	}
 
 	@Test
-	public void testListDatabaseParams() {
-		params = osclient.database().params().list(datastoreVersion.getId());
-		Assert.assertTrue(params.size() >= 1);
+	public void testListInstanceFlavors() {
+		flavors = osclient.database().flavors().list(datastoreVersion.getId(), "eu-de");
+		Assert.assertTrue(flavors.size() > 0);
 	}
 
-	@Test(dependsOnMethods = { "testListDatabaseParams" })
-	public void testGetDatabaseParam() {
-		DatabaseParam databaseParam = params.get(0);
-		DatabaseParam get = osclient.database().params().get(datastoreVersion.getId(), databaseParam.getName());
-		Assert.assertEquals(get.getDatastoreVersionId(), databaseParam.getDatastoreVersionId());
-		Assert.assertEquals(get.getDescription(), databaseParam.getDescription());
-		Assert.assertEquals(get.getName(), databaseParam.getName());
-		Assert.assertEquals(get.getValueRange(), databaseParam.getValueRange());
-		Assert.assertEquals(get.getMax(), databaseParam.getMax());
-		Assert.assertEquals(get.getMin(), databaseParam.getMin());
-		Assert.assertEquals(get.getRestartRequired(), databaseParam.getRestartRequired());
-		Assert.assertEquals(get.getType(), databaseParam.getType());
+	@Test(dependsOnMethods = { "testListInstanceFlavors" })
+	public void testGetInstanceFlavors() {
+		InstanceFlavor flavor = flavors.get(0);
+		InstanceFlavor get = osclient.database().flavors().get(flavor.getId());
+		Assert.assertEquals(flavor.getId(), get.getId());
+		Assert.assertEquals(flavor.getName(), get.getName());
+		Assert.assertEquals(flavor.getRam().intValue(), get.getRam().intValue());
+		Assert.assertEquals(flavor.getSpecCode(), get.getSpecCode());
 	}
-
 }

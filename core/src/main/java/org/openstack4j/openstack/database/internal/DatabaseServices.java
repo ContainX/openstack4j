@@ -14,7 +14,6 @@
 package org.openstack4j.openstack.database.internal;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.openstack.trove.domain.DatabaseConfig;
 import org.openstack4j.openstack.trove.domain.DatabaseParam;
 
 /**
@@ -60,15 +59,6 @@ public class DatabaseServices extends BaseDatabaseServices {
 	 */
 	public DatabaseInstanceService instances() {
 		return Apis.get(DatabaseInstanceService.class);
-	}
-	
-	/**
-	 * Service implementation which provides methods for manipulation of {@link DatabaseConfig}
-	 *
-	 * @return {@link DatabaseConfigService} instance
-	 */
-	public DatabaseConfigService configs() {
-		return Apis.get(DatabaseConfigService.class);
 	}
 	
 	/**

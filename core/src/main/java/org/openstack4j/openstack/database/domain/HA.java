@@ -13,12 +13,10 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package org.openstack4j.openstack.trove.domain;
-
-import java.util.List;
+package org.openstack4j.openstack.database.domain;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.common.ListResult;
+import org.openstack4j.openstack.database.constants.ReplicationMode;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -29,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of datastore version
+ * Model represent attributes of HA (high available)
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -39,35 +37,30 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class DatastoreVersion implements ModelEntity {
+public class HA implements ModelEntity {
 
-	private static final long serialVersionUID = 4185143839454760141L;
+	private static final long serialVersionUID = 5294355671374520846L;
+
+	/**
+	 * is HA enabled
+	 */
+	@JsonProperty("enable")
+	Boolean enable;
 	
-	private String id;
-	private String name;
 	
-    @JsonProperty("datastore")
-    private String datastoreId;
+	/**
+	 * Specifies the replication parameters on the standby DB instance. 
+	 * 
+	 * Valid value: The value cannot be empty. 
+	 * When MySQL is used, the value must be async or semisync. 
+	 * When PostgreSQL is used, the value must be async or sync. 
+	 * 
+	 * async indicates the standby DB instance is asynchronous. 
+	 * semisync indicates semi-synchronous. 
+	 * sync indicates synchronous.
+	 * 
+	 */
+	@JsonProperty("replicationMode")
+	ReplicationMode replicationMode;
 
-    private String image;
-    
-    @JsonProperty("packages")
-    private String packageName;
-    
-    @JsonProperty("active")
-    private Boolean isActive;
-
-
-    public static class Versions extends ListResult<DatastoreVersion> {
-
-		private static final long serialVersionUID = 7831092478216356910L;
-		
-		@JsonProperty("dataStores")
-        private List<DatastoreVersion> versions;
-
-        @Override
-        protected List<DatastoreVersion> value() {
-            return versions;
-        }
-    }
 }

@@ -90,7 +90,6 @@ public class DatabaseParam implements ModelEntity {
 	Boolean restartRequired;
 	
 	
-	
 	public static class Parameters extends ListResult<DatabaseParam> {
 		private static final long serialVersionUID = 7666104777418585874L;
 		

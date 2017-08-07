@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 public enum VolumeType {
 
-	SATA, SAS, SSD, COMMON;
+	SATA, SAS, SSD;
 
 	@JsonCreator
 	public static VolumeType forValue(String value) {
