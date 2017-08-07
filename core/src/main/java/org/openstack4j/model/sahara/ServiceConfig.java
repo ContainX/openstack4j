@@ -17,11 +17,11 @@ public interface ServiceConfig extends ModelEntity, Buildable<ServiceConfigBuild
      * @param name the name of the parameter
      * @return the value of the parameter
      */
-    String get(String name);
+    Object get(String name);
     
     /**
      * @return map of all configurations or null
      */
-    Map<String, String> getConfigs();
+    Map<String, Object> getConfigs();
     
 }
