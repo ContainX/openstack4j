@@ -16,7 +16,7 @@
 package org.openstack4j.openstack.database.domain;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.database.constants.VolumeType;
+import org.openstack4j.openstack.database.constants.OperateInstanceParamResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -37,14 +37,14 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Volume implements ModelEntity {
+public class InstanceParamOperationResult implements ModelEntity {
 
 	private static final long serialVersionUID = 5294355671374520846L;
 
-	@JsonProperty("type")
-	VolumeType type;
+	@JsonProperty("shouldRestart")
+	Boolean shouldRestart;
 
-	@JsonProperty("size")
-	Integer size;
+	@JsonProperty("setParameteResult")
+	OperateInstanceParamResult result;
 	
 }

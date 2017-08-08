@@ -32,6 +32,13 @@ public class IdResourceEntity implements IdEntity {
 
 	@JsonProperty
 	private String id;
+	
+	public IdResourceEntity() {
+	}
+	
+	public IdResourceEntity(String id) {
+		this.id = id;
+	}
 
 	/**
 	 * {@inheritDoc}

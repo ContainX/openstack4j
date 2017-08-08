@@ -39,7 +39,7 @@ public class DatastoreSample extends AbstractSample {
 			Assert.assertNotNull(version.getDatastoreId());
 			Assert.assertNotNull(version.getIsActive());
 			Assert.assertNotNull(version.getName());
-			Assert.assertTrue(version.getPackageName().startsWith("MySQL"));
+			Assert.assertTrue(version.getPackages().startsWith("MySQL"));
 		}
 		
 	}

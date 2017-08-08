@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum InstanceType {
 
-	Master, ReadReplica;
+	Master, ReadReplica, Slave;
 	
 	@JsonValue
 	public String value() {

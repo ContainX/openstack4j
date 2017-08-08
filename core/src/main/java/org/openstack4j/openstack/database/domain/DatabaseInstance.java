@@ -23,6 +23,7 @@ import org.openstack4j.openstack.common.DateTimeUtils;
 import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.common.ListResult;
 import org.openstack4j.openstack.database.constants.InstanceType;
+import org.openstack4j.openstack.trove.domain.ExtendParam;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -58,37 +59,70 @@ public class DatabaseInstance implements ModelEntity {
 	String name;
 
 	/**
-	 * instance status
+	 * DB instance status
 	 */
 	String status;
 
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+	/**
+	 * DB instance creation time
+	 */
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZONE)
 	Date created;
-	
-	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZ)
+
+	/**
+	 * DB instance updated time
+	 */
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMSZONE)
 	Date updated;
 
 	String hostname;
+
+	/**
+	 * DB instance type, @see InstanceType
+	 */
 	InstanceType type;
+
+	/**
+	 * DB instance region
+	 */
 	String region;
+
+	/**
+	 * DB instance availability zone
+	 */
 	String availabilityZone;
 
-	String vpc;
+	/**
+	 * router(VPC) of the DB instance
+	 */
+	@JsonProperty("vpc")
+	String vpcId;
 
+	/**
+	 * NIC(network interface) of the DB instance
+	 */
 	@JsonProperty("nics")
 	NIC nic;
 
 	/**
 	 * security group of the DB instance
 	 */
-	@JsonProperty("securityGroup")
 	IdResourceEntity securityGroup;
 
+	/**
+	 * DB instance flavor of the DB instance
+	 */
 	@JsonProperty("flavor")
 	IdResourceEntity flavor;
 
+	/**
+	 * IP list of the DB instance
+	 */
 	List<String> ip;
 
+	/**
+	 * Volume attached to the DB instance
+	 */
 	@JsonProperty("volume")
 	Volume volume;
 
@@ -96,7 +130,7 @@ public class DatabaseInstance implements ModelEntity {
 	 * datastore of this database
 	 */
 	@JsonProperty("dataStoreInfo")
-	String datastore;
+	Datastore datastore;
 
 	/**
 	 * backup policy of the DB instance
@@ -111,8 +145,22 @@ public class DatabaseInstance implements ModelEntity {
 	@JsonProperty("ha")
 	HA ha;
 
+	/**
+	 * slave instance Id (only effect when create instance with HA configed)
+	 */
+	@JsonProperty("slaveId")
+	String slaveId;
+
+	/**
+	 * the master instance id (only effect when create a read only instance)
+	 */
 	@JsonProperty("replica_of")
 	String replicaOf;
+	
+	
+	@JsonProperty("extendparam")
+	ExtendParam extendParam;
+
 
 	public static class DatabaseInstances extends ListResult<DatabaseInstance> {
 

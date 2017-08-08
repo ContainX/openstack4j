@@ -99,12 +99,6 @@ public class DatabaseInstanceCreate implements ModelEntity {
 	
 	
 	/**
-	 * backup policy of the DB instance
-	 */
-	@JsonProperty("backupStrategy")
-	BackupStrategy backupStrategy;
-	
-	/**
 	 * the password for user `root` of the DB instance
 	 */
 	@JsonProperty("dbRtPd")
@@ -112,10 +106,26 @@ public class DatabaseInstanceCreate implements ModelEntity {
 	
 	
 	/**
-	 * setup HA configuration of the DB instance
+	 * High Available(replica) configuration of the DB instance
+	 * (should not set this for create read only instance)
+	 * 
 	 * @see HA
 	 */
 	@JsonProperty("ha")
 	HA ha;
+	
+	
+	/**
+	 * backup policy of the DB instance
+	 * (should not set this for create read only instance)
+	 */
+	@JsonProperty("backupStrategy")
+	BackupStrategy backupStrategy;
+	
+	/**
+	 *  Used to create a read replica of a primary DB instance
+	 */
+	@JsonProperty("replicaOf")
+	String replicaOf;
 
 }

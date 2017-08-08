@@ -54,10 +54,10 @@ public class DatastoreVersion implements ModelEntity {
     private String image;
     
     @JsonProperty("packages")
-    private String packageName;
+    private String packages;
     
     @JsonProperty("active")
-    private int isActive;
+    private Boolean isActive;
 
 
     public static class Versions extends ListResult<DatastoreVersion> {

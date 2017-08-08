@@ -22,27 +22,30 @@ import java.util.List;
 import org.openstack4j.openstack.database.constants.DatastoreType;
 import org.openstack4j.openstack.database.domain.DatastoreVersion;
 import org.openstack4j.openstack.database.domain.InstanceFlavor;
+import org.openstack4j.sample.AbstractSample;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
-public class DatabaseInstanceFlavorSample extends BaseDatabaseSample {
+public abstract class BaseDatabaseSample extends AbstractSample {
 
-	List<InstanceFlavor> flavors = null;
+	private DatastoreVersion datastoreVersion = null;
+	private InstanceFlavor flavor;
 
-	@Test
-	public void testListInstanceFlavors() {
-		DatastoreVersion datastoreVersion = this.getFirstDatastoreVersion(DatastoreType.MySQL);
-		flavors = osclient.database().flavors().list(datastoreVersion.getId(), "eu-de");
-		Assert.assertTrue(flavors.size() > 0);
+	public synchronized DatastoreVersion getFirstDatastoreVersion(DatastoreType type) {
+		if (datastoreVersion == null) {
+			List<DatastoreVersion> datastoreVersions = osclient.database().datastores().listDatastoreVersions(type);
+			Assert.assertTrue(datastoreVersions.size() > 0, "no datastore for mysql is available for testing");
+			datastoreVersion = datastoreVersions.get(0);
+		}
+		return datastoreVersion;
 	}
 
-	@Test(dependsOnMethods = { "testListInstanceFlavors" })
-	public void testGetInstanceFlavors() {
-		InstanceFlavor flavor = flavors.get(0);
-		InstanceFlavor get = osclient.database().flavors().get(flavor.getId());
-		Assert.assertEquals(flavor.getId(), get.getId());
-		Assert.assertEquals(flavor.getName(), get.getName());
-		Assert.assertEquals(flavor.getRam().intValue(), get.getRam().intValue());
-		Assert.assertEquals(flavor.getSpecCode(), get.getSpecCode());
+	public synchronized InstanceFlavor getFirstFlavor(String databaseId) {
+		if (flavor == null) {
+			List<InstanceFlavor> flavors = osclient.database().flavors().list(databaseId, "eu-de");
+			Assert.assertTrue(flavors.size() > 0, String.format("no flavor for database [%s] available", databaseId));
+			flavor = flavors.get(0);
+		}
+		return flavor;
 	}
+
 }

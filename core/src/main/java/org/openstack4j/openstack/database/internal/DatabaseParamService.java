@@ -15,10 +15,17 @@
  *******************************************************************************/
 package org.openstack4j.openstack.database.internal;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.openstack.database.domain.DatabaseParam;
 import org.openstack4j.openstack.database.domain.DatabaseParam.Parameters;
+import org.openstack4j.openstack.database.domain.InstanceParamOperationResult;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 
 /**
  * The implementation of manipulation of {@link DatabaseParam}
@@ -35,6 +42,8 @@ public class DatabaseParamService extends BaseDatabaseServices {
 	 * @return a list of {@link DatabaseParam} instances 
 	 */
 	public List<DatabaseParam> list(String dataStoreVersionId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(dataStoreVersionId),
+				"parameter `dataStoreVersionId` should not be empty");
 		return get(Parameters.class, uri("/datastores/versions/%s/parameters", dataStoreVersionId)).execute().getList();
 	}
 
@@ -46,7 +55,41 @@ public class DatabaseParamService extends BaseDatabaseServices {
 	 * @return an instance of {@link DatabaseParam}
 	 */
 	public DatabaseParam get(String dataStoreVersionId, String paramName) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(dataStoreVersionId),
+				"parameter `dataStoreVersionId` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(paramName), "parameter `paramName` should not be empty");
 		return get(DatabaseParam.class, uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName))
+				.execute();
+	}
+
+	/**
+	 * config database parameters for an instance
+	 * 
+	 * @param instanceId	database instance identifier
+	 * @param params		database parameters map
+	 * @return {@link InstanceParamOperationResult} instance
+	 */
+	public InstanceParamOperationResult config(String instanceId, Map<String, Object> params) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(instanceId), "parameter `instanceId` should not be empty");
+		Preconditions.checkArgument(params != null && !params.isEmpty(), "parameter `params` should not be empty");
+
+		HashMap<String, Object> entity = Maps.newHashMap();
+		entity.put("values", params);
+		return put(InstanceParamOperationResult.class, uri("/instances/%s/parameters", instanceId)).entity(entity)
+				.execute();
+	}
+
+	/**
+	 * restore database parameters for an instance
+	 * 
+	 * @param instanceId	database instance identifier
+	 * @return {@link InstanceParamOperationResult} instance
+	 */
+	public InstanceParamOperationResult restore(String instanceId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(instanceId), "parameter `instanceId` should not be empty");
+
+		HashMap<String, Object> entity = Maps.newHashMap();
+		return put(InstanceParamOperationResult.class, uri("/instances/%s/parameters/default", instanceId)).entity(entity)
 				.execute();
 	}
 

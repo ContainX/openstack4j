@@ -53,6 +53,6 @@ public class BackupStrategy implements ModelEntity {
 	 * If this parameter is not specified or set to 0, the automated backup policy is not set 
 	 */
 	@JsonProperty("keepDays")
-	String keepDays;
+	Integer keepDays;
 
 }

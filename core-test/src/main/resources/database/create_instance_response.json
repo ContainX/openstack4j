@@ -1,0 +1,47 @@
+{ 
+    "instance": { 
+        "id": "252f11f1-2912-4c06-be55-1999bde659c5", 
+        "status": "BUILD", 
+        "name": "trove-instance-rep3", 
+        "created": "", 
+        "hostname": "", 
+        "type": "master", 
+        "region": "eu-de", 
+        "updated": "", 
+        "availabilityZone": "eu-de-01", 
+        "vpc": "490a4a08-ef4b-44c5-94be-3051ef9e4fce", 
+        "nics": { 
+          "subnetId": "0e2eda62-1d42-4d64-a9d1-4e9aa9cd994f" 
+        }, 
+        "securityGroup": { 
+            "id": "2a1f7fc8-3307-42a7-aa6f-42c8b9b8f8c5" 
+        }, 
+        "flavor": { 
+            "id": "bf07a6d4-844a-4023-a776-fc5c5fb71fb4" 
+        }, 
+        "volume": { 
+            "type": "COMMON", 
+            "size": 100 
+        }, 
+        "dataStoreInfo": null, 
+        "extendparam": { 
+            "jobs": [ 
+                { 
+                    "id": "ff8080815564ddf5015564f64a560024" 
+                }, 
+                { 
+                    "id": "ae3081675564ddf5357564f64a560025" 
+                } 
+ 
+            ] 
+        }, 
+        "backupStrategy": { 
+            "startTime": "01:00:00", 
+            "keepDays": 3 
+        }, 
+        "slaveId": "9405d8b8-a87d-4531-bd3a-e504c8434281", 
+        "ha": { 
+            "replicationMode": "async" 
+        } 
+    } 
+}
