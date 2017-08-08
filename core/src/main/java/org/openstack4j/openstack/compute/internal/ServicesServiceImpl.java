@@ -55,7 +55,7 @@ public class ServicesServiceImpl extends BaseComputeServices implements Services
 	 * @see org.openstack4j.api.compute.ServicesService#enableService(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public ExtService enableService(String binary, String host) {
+	public Service enableService(String binary, String host) {
 		 checkNotNull(binary);
 	        checkNotNull(host);
 
@@ -74,7 +74,7 @@ public class ServicesServiceImpl extends BaseComputeServices implements Services
 	 * @see org.openstack4j.api.compute.ServicesService#disableService(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public ExtService disableService(String binary, String host) {
+	public Service disableService(String binary, String host) {
 		checkNotNull(binary);
         checkNotNull(host);
 
