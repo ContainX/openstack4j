@@ -11,21 +11,21 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum OperateInstanceParamResult {
 	
-	SUCCESS(0), MASTER_SUCCESS_REPLICA_FAIL(1);
+	SUCCESS("0"), MASTER_SUCCESS_REPLICA_FAIL("1");
 
-	Integer value;
+	String value;
 
-	OperateInstanceParamResult(Integer value) {
+	OperateInstanceParamResult(String value) {
 		this.value = value;
 	}
 	
 	@JsonValue
-	Integer value() {
+	String value() {
 		return value;
 	}
 
 	@JsonCreator
-	public static OperateInstanceParamResult forValue(Integer value) {
+	public static OperateInstanceParamResult forValue(String value) {
 		if (value != null) {
 			for (OperateInstanceParamResult state : OperateInstanceParamResult.values()) {
 				if (value.equals(state.value)) {

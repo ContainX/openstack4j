@@ -16,9 +16,11 @@
 package org.openstack4j.openstack.database.domain;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.common.serializer.BooleanDeserializer;
 import org.openstack4j.openstack.database.constants.OperateInstanceParamResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +44,7 @@ public class InstanceParamOperationResult implements ModelEntity {
 	private static final long serialVersionUID = 5294355671374520846L;
 
 	@JsonProperty("shouldRestart")
+	@JsonDeserialize(using = BooleanDeserializer.class)
 	Boolean shouldRestart;
 
 	@JsonProperty("setParameteResult")

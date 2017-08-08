@@ -18,19 +18,26 @@
 package org.openstack4j.sample.database;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.openstack.database.constants.DatastoreType;
+import org.openstack4j.openstack.database.constants.InstanceType;
+import org.openstack4j.openstack.database.constants.OperateInstanceParamResult;
+import org.openstack4j.openstack.database.domain.DatabaseInstance;
 import org.openstack4j.openstack.database.domain.DatabaseParam;
 import org.openstack4j.openstack.database.domain.DatastoreVersion;
+import org.openstack4j.openstack.database.domain.InstanceParamOperationResult;
 import org.openstack4j.sample.AbstractSample;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.collections.Maps;
 
 @Test(suiteName = "Database/Param/Sample")
 public class DatabaseParamSample extends AbstractSample {
 
 	DatastoreVersion datastoreVersion = null;
+	DatabaseInstance instance = null;
 	List<DatabaseParam> params = null;
 
 	@BeforeClass
@@ -38,6 +45,20 @@ public class DatabaseParamSample extends AbstractSample {
 		// get the first datastore version of MySQL for test
 		List<DatastoreVersion> versions = osclient.database().datastores().listDatastoreVersions(DatastoreType.MySQL);
 		datastoreVersion = versions.get(0);
+		
+		// 从已有的实例中 查找名字以 SDK 开头（SDK创建的用于测试的实例），并且必须是 主实例，数据库类型是 MySQL
+		List<DatabaseInstance> instances = osclient.database().instances().list();
+		for (DatabaseInstance instance : instances) {
+			String name = instance.getName();
+			String status = instance.getStatus();
+			InstanceType type = instance.getType();
+			DatastoreType datastoreType = instance.getDatastore().getType();
+			if (name.startsWith("SDK") && status.equals("ACTIVE") && type.equals(InstanceType.Master)
+					&& datastoreType.equals(DatastoreType.MySQL)) {
+				this.instance = instance;
+				break;
+			}
+		}
 	}
 
 	@Test
@@ -58,6 +79,24 @@ public class DatabaseParamSample extends AbstractSample {
 		Assert.assertEquals(get.getMin(), databaseParam.getMin());
 		Assert.assertEquals(get.getRestartRequired(), databaseParam.getRestartRequired());
 		Assert.assertEquals(get.getType(), databaseParam.getType());
+	}
+
+	@Test
+	public void testConfigDatabaseParams() {
+		Assert.assertNotNull(this.instance);
+		Map<String, Object> params = Maps.newHashMap();
+		params.put("connect_timeout", 100);
+		InstanceParamOperationResult result = osclient.database().params().config(instance.getId(), params);
+		Assert.assertFalse(result.getShouldRestart());
+		Assert.assertEquals(result.getResult(), OperateInstanceParamResult.SUCCESS);
+	}
+	
+	@Test
+	public void testRestoreDatabaseParams() {
+		Assert.assertNotNull(this.instance);
+		InstanceParamOperationResult result = osclient.database().params().restore(instance.getId());
+		Assert.assertTrue(result.getShouldRestart());
+		Assert.assertEquals(result.getResult(), OperateInstanceParamResult.SUCCESS);
 	}
 
 }
