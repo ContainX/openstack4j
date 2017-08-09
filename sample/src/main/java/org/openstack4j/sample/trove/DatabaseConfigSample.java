@@ -34,8 +34,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import jersey.repackaged.com.google.common.collect.Maps;
+import org.testng.collections.Maps;
 
 @Test(suiteName = "Trove/Config/Sample")
 public class DatabaseConfigSample extends AbstractSample {
@@ -53,6 +52,7 @@ public class DatabaseConfigSample extends AbstractSample {
 		DatabaseConfigCreate creation = DatabaseConfigCreate.builder().datastore(datastore).name(name)
 				.description("openstack4j sdk unittest").values(values).build();
 		create = osclient.trove().configs().create(creation);
+		Assert.assertEquals(create.getName(), name);
 	}
 
 	@AfterClass

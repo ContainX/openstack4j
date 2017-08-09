@@ -21,9 +21,9 @@ import java.util.Map;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.openstack.database.constants.OperateInstanceParamResult;
+import org.openstack4j.openstack.database.constants.ParameterValueType;
 import org.openstack4j.openstack.database.domain.DatabaseParam;
 import org.openstack4j.openstack.database.domain.InstanceParamOperationResult;
-import org.openstack4j.openstack.trove.constant.ParameterValueType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

@@ -1,0 +1,29 @@
+{  
+  "configuration-parameters" : [ {  
+    "name" : "autocommit",  
+    "type" : "boolean",  
+    "restart_required" : false,  
+    "datastore_version_id" : "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61"  
+  }, {  
+    "name" : "auto_increment_increment",  
+    "min" : 1,  
+    "max" : 65535,  
+    "type" : "integer",  
+    "restart_required" : false,  
+    "datastore_version_id" : "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61"  
+  }, {  
+    "name" : "auto_increment_offset",  
+    "min" : 1,  
+    "max" : 65535,  
+    "type" : "integer",  
+    "restart_required" : false,  
+    "datastore_version_id" : "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61"  
+  }, {  
+    "name" : "back_log",  
+    "min" : 1,  
+    "max" : 65535,  
+    "type" : "integer",  
+    "restart_required" : true,  
+    "datastore_version_id" : "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61"  
+    } ]  
+}

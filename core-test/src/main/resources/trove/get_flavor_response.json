@@ -1,0 +1,38 @@
+{ 
+    "ram": 2, 
+    "id": 1, 
+    "links": null, 
+    "name": "rds.pg.c2.medium", 
+    "str_id": "9ff2a3a5-c859-bbc0-67f7-86ce59432b1d", 
+    "flavor_detail": [ 
+      { 
+        "name": "cpu", 
+        "value": "1" 
+      }, 
+      { 
+        "name": "mem", 
+        "value": "2" 
+      }, 
+      { 
+        "name": "flavor", 
+        "value": "normal1" 
+      } 
+    ], 
+    "price_detail": [], 
+    "flavor": { 
+      "ram": 2048, 
+      "id": 1, 
+      "links": [ 
+        { 
+          "rel": "self", 
+          "href": "" 
+        }, 
+        { 
+          "rel": "bookmark", 
+          "href": "" 
+        } 
+      ], 
+      "name": "rds.pg.c2.medium", 
+      "str_id": "9ff2a3a5-c859-bbc0-67f7-86ce59432b1d" 
+    } 
+}

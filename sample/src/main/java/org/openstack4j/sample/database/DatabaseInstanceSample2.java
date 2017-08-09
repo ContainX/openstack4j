@@ -19,6 +19,10 @@ package org.openstack4j.sample.database;
 
 import java.util.List;
 
+import org.openstack4j.openstack.database.constants.DatastoreType;
+import org.openstack4j.openstack.database.domain.DatabaseInstance;
+import org.openstack4j.openstack.database.domain.DatastoreVersion;
+import org.openstack4j.openstack.database.domain.InstanceFlavor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -43,7 +47,7 @@ public class DatabaseInstanceSample2 extends BaseDatabaseSample {
 		String instanceId = "bc8510b5-06bd-413d-9988-f8fec3d540cd";
 		List<String> jobIds = osclient.database().instances().resize(instanceId, 120);
 		Assert.assertTrue(jobIds.size() > 0);
-		
+
 		// 该实例有一个HA副本，所以会生成两个任务
 		Assert.assertTrue(jobIds.size() == 2);
 	}
@@ -52,13 +56,23 @@ public class DatabaseInstanceSample2 extends BaseDatabaseSample {
 	public void testResizeFlavor() {
 		// 需要改成实际的 instance id
 		String instanceId = "bc8510b5-06bd-413d-9988-f8fec3d540cd";
-		List<String> jobIds = osclient.database().instances().resize(instanceId, 120);
+
+		DatastoreVersion datastoreVersion = this.getFirstDatastoreVersion(DatastoreType.MySQL);
+		List<InstanceFlavor> flavors = osclient.database().flavors().list(datastoreVersion.getId(), "eu-de");
+
+		InstanceFlavor newFlavor = null;
+		DatabaseInstance databaseInstance = osclient.database().instances().get(instanceId);
+		String flavorId = databaseInstance.getFlavor().getId();
+		for (InstanceFlavor flavor : flavors) {
+			if (!flavor.getId().equals(flavorId)) {
+				newFlavor = flavor;
+			}
+		}
+
+		List<String> jobIds = osclient.database().instances().resize(instanceId, newFlavor.getId());
 		Assert.assertTrue(jobIds.size() > 0);
-		
-		// 该实例有一个HA副本，所以会生成两个任务
-		Assert.assertTrue(jobIds.size() == 2);
 	}
-	
+
 	@Test
 	public void testRestartInstance() {
 		// 需要改成实际的 instance id
@@ -66,8 +80,7 @@ public class DatabaseInstanceSample2 extends BaseDatabaseSample {
 		List<String> jobIds = osclient.database().instances().restart(instanceId);
 		Assert.assertTrue(jobIds.size() > 0);
 	}
-	
-	
+
 	@Test
 	public void testDeleteInstance() {
 		// 需要改成实际的 instance id

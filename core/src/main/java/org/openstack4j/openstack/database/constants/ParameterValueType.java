@@ -1,4 +1,4 @@
-package org.openstack4j.openstack.trove.constant;
+package org.openstack4j.openstack.database.constants;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

@@ -1,0 +1,35 @@
+{
+  "configurations": [
+    {
+      "id": "904ce226-bcc7-457d-b118-74ebdce59ba1",
+      "name": "default-SQLServer-2014",
+      "description": "Default parameter group for sqlserver 2014",
+      "datastore_version_id": "4f71c5b5-8939-424e-8825-8e3816e4303d",
+      "datastore_version_name": "2014",
+      "datastore_name": "sqlserver",
+      "created": "2017-01-01T10:00:00",
+      "updated": "2017-01-01T10:00:00",
+      "allowed_updated": 0,
+      "instance_count": 0
+    },
+    {
+      "id": "904ce226-bcc7-457d-b118-74ebdce59ba2",
+      "name": "test-SQLServer-2014",
+      "description": "test-SQLServer-2014",
+      "datastore_version_id": "4f71c5b5-8939-424e-8825-8e3816e4303d",
+      "datastore_version_name": "2014",
+      "datastore_name": "sqlserver",
+      "created": "2017-02-01T10:00:00",
+      "updated": "2017-02-01T10:00:00",
+      "allowed_updated": 1,
+      "instance_count": 2
+    }
+  ],
+  "links": [
+    {
+      "href": "",
+      "rel": "next"
+    }
+  ],
+  "maxgrouplimit": 100
+}

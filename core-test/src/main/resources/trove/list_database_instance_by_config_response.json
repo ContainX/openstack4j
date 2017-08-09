@@ -1,0 +1,12 @@
+{ 
+  "instances": [ 
+    { 
+      "id": "53754eff-3f95-4da8-a908-a88e6ea2f65a", 
+      "name": "instances_test_1" 
+},     
+{ 
+      "id": "53754eff-3f95-4da8-a908-a88e6ea2f65b", 
+      "name": "instances_test_2" 
+    } 
+  ] 
+}

@@ -1,0 +1,10 @@
+{
+  "configuration" : {
+    "name" : "name",
+    "description" : "desc",
+    "values" : {
+      "autocommit" : "ON",
+      "max_connections" : "100"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{ 
+  "configuration": { 
+    "id": "904ce226-bcc7-457d-b118-74ebdce59ba9", 
+    "name": "default-SQLServer-2014", 
+    "datastore_version_id": "4f71c5b5-8939-424e-8825-8e3816e4303d", 
+    "datastore_version_name": "2014", 
+    "datastore_name": "sqlserver", 
+    "description": "Default parameter group for sqlserver 2014", 
+"instance_count": 0, 
+    "created": "2017-05-05T04:40:51", 
+    "updated": "2017-05-05T04:40:51", 
+"values": { 
+      "xp_cmdshell": "0" 
+    }, 
+    "parameters": [ 
+      { 
+        "name": "auto_increment_increment", 
+        "value": "1", 
+        "needRestart": "0", 
+        "readonly": "1", 
+        "valueRange": "1-65535", 
+        "datatype": "integer", 
+        "description": "auto_increment_increment and auto_increment_offset are intended for use with master-to-master replication, and can be used to control the operation of AUTO_INCREMENT columns." 
+      }, 
+      { 
+        "name": "autocommit", 
+        "value": "ON", 
+        "needRestart": "0", 
+        "readonly": "1", 
+        "valueRange": "ON|OFF", 
+        "datatype": "boolean", 
+        "description": "The autocommit mode. If set to ON, all changes to a table take effect immediately. If set to OFF, you must use COMMIT to accept a transaction or ROLLBACK to cancel it. " 
+      } 
+    ] 
+  } 
+}

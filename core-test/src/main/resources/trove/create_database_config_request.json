@@ -1,0 +1,14 @@
+{
+  "configuration" : {
+    "name" : "sdk",
+    "description" : "openstack4j sdk unittest",
+    "values" : {
+      "autocommit" : "OFF",
+      "max_connections" : "10"
+    },
+    "datastore" : {
+      "type" : "MySQL",
+      "version" : "5.6"
+    }
+  }
+}

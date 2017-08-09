@@ -51,8 +51,8 @@ public class TroveDatabaseParamService extends BaseTroveServices {
 	 * @return an instance of {@link DatabaseParam}
 	 */
 	public DatabaseParam get(String dataStoreVersionId, String paramName) {
-		return get(DatabaseParam.class, uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName))
-				.execute();
+		return get(Parameters.class, uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName))
+				.execute().getList().get(0);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class TroveDatabaseParamService extends BaseTroveServices {
 	}
 
 	@JsonRootName("instance")
-	class GetDefaultParamsResponse {
+	static class GetDefaultParamsResponse {
 
 		@JsonProperty("configuration")
 		Map<String, String> params;

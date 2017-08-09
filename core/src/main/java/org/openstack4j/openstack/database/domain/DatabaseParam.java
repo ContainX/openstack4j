@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.common.ListResult;
-import org.openstack4j.openstack.trove.constant.ParameterValueType;
+import org.openstack4j.openstack.database.constants.ParameterValueType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
