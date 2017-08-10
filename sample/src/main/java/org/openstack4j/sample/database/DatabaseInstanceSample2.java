@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
  * @author QianBiao.NG
  * @date   2017-08-08 13:52:22
  */
-@Test(suiteName = "Database/Instance/Sample")
+@Test(suiteName = "Database/Instance/Sample2")
 public class DatabaseInstanceSample2 extends BaseDatabaseSample {
 
 	// ====================================================================//

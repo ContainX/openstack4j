@@ -1,0 +1,25 @@
+{
+  "instance" : {
+    "datastore" : {
+      "type" : "MySQL",
+      "version" : "6.3.35"
+    },
+    "name" : "name",
+    "flavorRef" : "flavor-id",
+    "users" : [ {
+      "name" : "root",
+      "password" : "Demo@234"
+    } ],
+    "volume" : {
+      "type" : "COMMON",
+      "size" : 100
+    },
+    "configuration" : "config-id",
+    "availability_zone" : "eu-de-01",
+    "vpc" : "vpc-id",
+    "nics" : [ {
+      "net-id" : "network-id",
+      "securityGroupId" : "sg-id"
+    } ]
+  }
+}

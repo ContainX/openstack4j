@@ -20,6 +20,8 @@ import org.openstack4j.model.common.builder.LinkBuilder;
 
 import com.google.common.base.MoreObjects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * A Link holds information about a URL, Relative URL and the type of the link
  *
@@ -29,17 +31,13 @@ public class GenericLink implements Link {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonProperty("rel")
 	private String rel;
+	@JsonProperty("href")
 	private String href;
+	@JsonProperty("type")
 	private String type;
-
-	public GenericLink() { }
-
-	public GenericLink(String rel, String href, String type) {
-		this.rel = rel;
-		this.type = type;
-		this.href = href;
-	}
+	
 
 	/**
 	 * @return the link builder

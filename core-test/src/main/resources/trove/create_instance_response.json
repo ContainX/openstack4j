@@ -1,0 +1,39 @@
+{ 
+  "instance": { 
+    "status": "BUILD", 
+    "updated": "2017-05-06T05:55:03", 
+    "name": "creat-trove-instance-28-MySQL-1-1", 
+    "links": [ 
+      { 
+        "herf": "", 
+        "rel": "self" 
+      }, 
+      { 
+        "herf": "", 
+        "rel": "bookmark" 
+      } 
+    ], 
+    "created": "2017-05-06T05:55:03", 
+    "id": "c90c1234-f687-462a-a6bd-cec35919c096", 
+    "volume": { 
+      "size": 100 
+    }, 
+    "flavor": { 
+      "id": "99001234-dfc2-4418-b224-fea05d358ce3", 
+      "links": [ 
+        { 
+          "herf": "", 
+          "rel": "self" 
+        }, 
+        { 
+          "herf": "", 
+          "rel": "bookmark" 
+        } 
+      ] 
+    }, 
+    "datastore": { 
+      "type": "MySQL", 
+      "version": "MySQL-5.6.33" 
+    } 
+  } 
+}

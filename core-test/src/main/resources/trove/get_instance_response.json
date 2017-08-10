@@ -1,0 +1,59 @@
+{ 
+  "instance": { 
+    "configurationStatus": "In-Sync", 
+    "paramsGroupId": "b89db814-6ba1-454f-a9ad-380064ef0c6f", 
+    "type": "MySQL", 
+    "subnetid": "0fb5d084-4e5d-463b-8920-fca10e6b4028", 
+    "role": "master", 
+    "internalSubnetId": "330a10fd-3962-44c5-b3a1-1d282617a183", 
+    "group": "1", 
+    "securegroup": "ca99fcef-502f-495f-b28d-85c9c6f4666e", 
+    "vpc": "292997f2-3bf7-4d60-86a5-4e9d593bc850", 
+    "azcode": "eu-de-01", 
+    "region": null, 
+    "created": "2017-05-12T02:18:46", 
+    "updated": "2017-05-12T02:18:46", 
+    "status": "ACTIVE", 
+    "name": "rds-MySQL-1-1", 
+    "links": [ 
+      { 
+        "rel": "self", 
+        "href": "" 
+      }, 
+      { 
+        "rel": "bookmark", 
+        "href": "" 
+      } 
+    ], 
+    "id": "e8faac23-8129-4c68-a231-480e46fc5f4f", 
+    "flavor": { 
+      "id": "31b2863c-0e15-44fd-a80d-1e83a7aca338", 
+      "links": [ 
+        { 
+          "rel": "self", 
+          "href": "" 
+        }, 
+        { 
+          "rel": "bookmark", 
+          "href": "" 
+        } 
+      ] 
+    }, 
+    "volume": { 
+      "type": "COMMON", 
+      "size": 210 
+    }, 
+    "datastore": { 
+      "type": "MySQL", 
+      "version": "MySQL-5.7.17" 
+    }, 
+    "fault": null, 
+    "configuration": null, 
+    "locality": null, 
+    "replicas": null, 
+    "dbuser": "root", 
+    "storageEngine": null, 
+    "payModel": 0, 
+    "cluster_id": "fb22f24c-0466-48f2-8275-70af04ef4935" 
+  } 
+}
