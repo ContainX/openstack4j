@@ -19,10 +19,10 @@
     "node_public_cert_name" : "keypair",
     "safe_mode" : 0,
     "component_list" : [ {
-      "componentId" : "MRS 1.3.0_001",
-      "componentName" : "Hadoop",
-      "componentVersion" : "",
-      "componentDesc" : ""
+      "component_id" : "MRS 1.3.0_001",
+      "component_name" : "Hadoop",
+      "component_version" : "",
+      "component_desc" : ""
     } ],
     "add_jobs" : [ {
       "input" : "s3a://input/",
