@@ -26,6 +26,7 @@ import org.openstack4j.openstack.trove.constant.InstanceType;
 import org.openstack4j.openstack.trove.constant.VolumeType;
 import org.openstack4j.openstack.trove.domain.DatabaseInstance;
 import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate;
+import org.openstack4j.openstack.trove.domain.DatabaseReplicaInstanceCreate;
 import org.openstack4j.openstack.trove.domain.DatabaseUser;
 import org.openstack4j.openstack.trove.domain.Datastore;
 import org.openstack4j.openstack.trove.domain.NIC;
@@ -268,48 +269,42 @@ public class DatabaseInstanceTest extends AbstractTest {
 	public void testCreateReplicaInstance() throws IOException, InterruptedException {
 		respondWith("/trove/create_instance_response.json");
 
-		// build datastore version
-		Datastore datastore = Datastore.builder().type(DatastoreType.MySQL).version("6.3.35").build();
-		// get flavor
+		Datastore datastore = Datastore.builder().type(org.openstack4j.openstack.trove.constant.DatastoreType.MySQL)
+				.version("MySQL-5.6.33").build();
+		
 		Volume volume = Volume.builder().type(VolumeType.COMMON).size(100).build();
-		NIC nic = NIC.builder().networkId("network-id").securityGroupId("sg-id").build();
-		DatabaseUser user = DatabaseUser.builder().username("root").password("Demo@234").build();
-
-		DatabaseInstanceCreate instanceCreate = DatabaseInstanceCreate.builder().name("name").datastore(datastore)
-				.flavorRef("flavor-id").users(Lists.newArrayList(user)).volume(volume)
-				.configurationId("config-id").availabilityZone("eu-de-01").vpcId("vpc-id").nics(Lists.newArrayList(nic))
-				.build();
-
-		DatabaseInstance instance = osv3().trove().instances().create(instanceCreate);
+		DatabaseReplicaInstanceCreate replicaCreate = DatabaseReplicaInstanceCreate.builder().name("sdk-replica").datastore(datastore)
+				.flavorRef("flavor-id").volume(volume).replicaOf("master-id").replicaCount(1).build();
+		DatabaseInstance replica = osv3().trove().instances().createReplica(replicaCreate);
 
 		RecordedRequest request = server.takeRequest();
 		Assert.assertEquals(request.getPath(), "/v1.0/project-id/instances");
 		Assert.assertEquals(request.getMethod(), "POST");
-
+		
 		String requestBody = request.getBody().readUtf8();
-		String expectBody = this.getResource("/trove/create_instance_request.json");
+		String expectBody = this.getResource("/trove/create_replica_instance_request.json");
 		Assert.assertEquals(requestBody, expectBody);
 		
-		Assert.assertEquals(instance.getId(), "c90c1234-f687-462a-a6bd-cec35919c096");
-		Assert.assertEquals(instance.getStatus(), "BUILD");
-		Assert.assertEquals(instance.getName(), "creat-trove-instance-28-MySQL-1-1");
-		Assert.assertEquals(instance.getLinks().size(), 2);
-		Assert.assertEquals(instance.getLinks().get(0).getHref(), null);
-		Assert.assertEquals(instance.getLinks().get(0).getRel(), "self");
-		Assert.assertEquals(instance.getLinks().get(1).getHref(), null);
-		Assert.assertEquals(instance.getLinks().get(1).getRel(), "bookmark");
+		Assert.assertEquals(replica.getId(), "c90c1234-f687-462a-a6bd-cec35919c096");
+		Assert.assertEquals(replica.getStatus(), "BUILD");
+		Assert.assertEquals(replica.getName(), "creat-trove-instance-28-MySQL-1-1");
+		Assert.assertEquals(replica.getLinks().size(), 2);
+		Assert.assertEquals(replica.getLinks().get(0).getHref(), null);
+		Assert.assertEquals(replica.getLinks().get(0).getRel(), "self");
+		Assert.assertEquals(replica.getLinks().get(1).getHref(), null);
+		Assert.assertEquals(replica.getLinks().get(1).getRel(), "bookmark");
 
-		Assert.assertEquals(instance.getVolume().getSize().intValue(), 100);
+		Assert.assertEquals(replica.getVolume().getSize().intValue(), 100);
 
-		Assert.assertEquals(instance.getDatastore().getType(), DatastoreType.MySQL);
-		Assert.assertEquals(instance.getDatastore().getVersion(), "MySQL-5.6.33");
+		Assert.assertEquals(replica.getDatastore().getType(), DatastoreType.MySQL);
+		Assert.assertEquals(replica.getDatastore().getVersion(), "MySQL-5.6.33");
 
-		Assert.assertEquals(instance.getFlavor().getId(), "99001234-dfc2-4418-b224-fea05d358ce3");
-		Assert.assertEquals(instance.getFlavor().getLinks().size(), 2);
-		Assert.assertEquals(instance.getFlavor().getLinks().get(0).getHref(), null);
-		Assert.assertEquals(instance.getFlavor().getLinks().get(0).getRel(), "self");
-		Assert.assertEquals(instance.getFlavor().getLinks().get(1).getHref(), null);
-		Assert.assertEquals(instance.getFlavor().getLinks().get(1).getRel(), "bookmark");
+		Assert.assertEquals(replica.getFlavor().getId(), "99001234-dfc2-4418-b224-fea05d358ce3");
+		Assert.assertEquals(replica.getFlavor().getLinks().size(), 2);
+		Assert.assertEquals(replica.getFlavor().getLinks().get(0).getHref(), null);
+		Assert.assertEquals(replica.getFlavor().getLinks().get(0).getRel(), "self");
+		Assert.assertEquals(replica.getFlavor().getLinks().get(1).getHref(), null);
+		Assert.assertEquals(replica.getFlavor().getLinks().get(1).getRel(), "bookmark");
 
 	}
 

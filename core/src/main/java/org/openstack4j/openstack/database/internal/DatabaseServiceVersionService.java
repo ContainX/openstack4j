@@ -25,6 +25,9 @@ import org.openstack4j.openstack.common.ServiceVersion.ServiceVersions;
 import org.openstack4j.openstack.common.functions.GetRootOfURL;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+
 /**
  * 
  * Database Service Version API Implementation
@@ -59,6 +62,7 @@ public class DatabaseServiceVersionService extends BaseOpenStackService {
 	 * @return {@link ServiceVersion} instance
 	 */
 	public ServiceVersion get(String versionId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(versionId), "parameter `versionId` should not be empty");
 		return get(ServiceVersionWrap.class, "/rds/" + versionId).execute().getVersion();
 	}
 

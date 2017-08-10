@@ -21,6 +21,7 @@ import org.openstack4j.openstack.database.constants.DatastoreType;
 import org.openstack4j.openstack.database.domain.DatastoreVersion;
 import org.openstack4j.openstack.database.domain.DatastoreVersion.Versions;
 
+import com.google.common.base.Preconditions;
 
 /**
  * The implementation of manipulation of {@link DatastoreDetail}
@@ -36,6 +37,7 @@ public class DatastoreService extends BaseDatabaseServices {
 	 * @return list of {@link DatastoreVersion} instances
 	 */
 	public List<DatastoreVersion> listDatastoreVersions(DatastoreType datastore) {
+		Preconditions.checkArgument(datastore != null, "parameter `datastore` should not be null");
 		return get(Versions.class, uri("/datastores/%s/versions", datastore.name())).execute().getList();
 	}
 

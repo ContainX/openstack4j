@@ -25,6 +25,9 @@ import org.openstack4j.openstack.common.ServiceVersion.ServiceVersions;
 import org.openstack4j.openstack.common.functions.GetRootOfURL;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+
 /**
  * 
  * Trove Version API Implementation
@@ -59,6 +62,7 @@ public class TroveVersionService extends BaseOpenStackService {
 	 * @return {@link ServiceVersion} instance
 	 */
 	public ServiceVersion get(String versionId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(versionId), "parameter `versionId` should not be empty");
 		return get(ServiceVersionWrap.class, "/" + versionId).execute().getVersion();
 	}
 

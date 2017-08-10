@@ -13,8 +13,6 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.internal;
 
-import static com.google.common.base.Preconditions.*;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,7 +51,6 @@ public class TroveDatabaseInstanceService extends BaseTroveServices {
 		for (DatabaseInstanceWrap wrap : list) {
 			result.add(wrap.getInstance());
 		}
-
 		return result;
 	}
 
@@ -64,7 +61,7 @@ public class TroveDatabaseInstanceService extends BaseTroveServices {
 	 * @return {@link DatabaseInstance} instance
 	 */
 	public DatabaseInstance get(String instanceId) {
-		checkNotNull(instanceId);
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(instanceId), "parameter `instanceId` should not be empty");
 		DatabaseInstance instance = get(DatabaseInstance.class, uri("/instances/%s", instanceId)).execute();
 		return instance;
 	}
@@ -75,18 +72,46 @@ public class TroveDatabaseInstanceService extends BaseTroveServices {
 	 * @param creation	a model represent the attributes of database instance creation
 	 * @return {@link DatabaseInstance} instance
 	 */
-	public DatabaseInstance create(DatabaseInstanceCreate instanceCreate) {
-		return post(DatabaseInstance.class, uri("/instances")).entity(instanceCreate).execute();
+	public DatabaseInstance create(DatabaseInstanceCreate creation) {
+		Preconditions.checkNotNull(creation, "parameter `creation` should not be null");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getName()),
+				"parameter `creation.name` should not be empty");
+		Preconditions.checkNotNull(creation.getDatastore(), "parameter `creation.datastore` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getDatastore().getVersion()),
+				"parameter `creation.datastore.version` should not be empty");
+		Preconditions.checkNotNull(creation.getDatastore().getType(),
+				"parameter `creation.datastore.type` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getFlavorRef()),
+				"parameter `creation.flavorRef` should not be empty");
+		Preconditions.checkArgument(creation.getUsers() != null && creation.getUsers().size() > 0,
+				"parameter `creation.users` should not be empty");
+		Preconditions.checkArgument(creation.getVolume() != null, "parameter `creation.volume` should not be null");
+		Preconditions.checkArgument(creation.getVolume().getSize() != null, "parameter `creation.volume.size` should not be null");
+		return post(DatabaseInstance.class, uri("/instances")).entity(creation).execute();
 	}
-	
+
 	/**
 	 * create replicas of a database instance 
 	 * 
 	 * @param creation	a model represent the attributes of database replica instance creation
 	 * @return {@link DatabaseInstance} instance
 	 */
-	public DatabaseInstance createReplica(DatabaseReplicaInstanceCreate instanceCreate) {
-		return post(DatabaseInstance.class, uri("/instances")).entity(instanceCreate).execute();
+	public DatabaseInstance createReplica(DatabaseReplicaInstanceCreate creation) {
+		Preconditions.checkNotNull(creation, "parameter `creation` should not be null");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getName()),
+				"parameter `creation.name` should not be empty");
+		Preconditions.checkNotNull(creation.getDatastore(), "parameter `creation.datastore` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getDatastore().getVersion()),
+				"parameter `creation.datastore.version` should not be empty");
+		Preconditions.checkNotNull(creation.getDatastore().getType(),
+				"parameter `creation.datastore.type` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getFlavorRef()),
+				"parameter `creation.flavorRef` should not be empty");
+		Preconditions.checkArgument(creation.getVolume() != null, "parameter `creation.volume` should not be null");
+		Preconditions.checkArgument(creation.getVolume().getSize() != null, "parameter `creation.volume.size` should not be null");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getReplicaOf()),
+				"parameter `creation.replicaOf` should not be empty");
+		return post(DatabaseInstance.class, uri("/instances")).entity(creation).execute();
 	}
 
 	/**
@@ -94,9 +119,9 @@ public class TroveDatabaseInstanceService extends BaseTroveServices {
 	 * @param instanceId	database instance identifier
 	 * @return				asynchronous job id of the database deletion job
 	 */
-	public ActionResponse delete(String id) {
-		checkNotNull(id);
-		return deleteWithResponse(uri("/instances/%s", id)).execute();
+	public ActionResponse delete(String instanceId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(instanceId), "parameter `instanceId` should not be empty");
+		return deleteWithResponse(uri("/instances/%s", instanceId)).execute();
 	}
 
 	/**

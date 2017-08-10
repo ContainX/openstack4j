@@ -45,11 +45,12 @@ public class DatabaseInstanceFlavorService extends BaseDatabaseServices {
 
 	/**
 	 * Get the instance flavor specified by ID
-	 * @param id
+	 * @param flavorId 	the flavor identifier
 	 * @return the flavor or null if not found
 	 */
-	public InstanceFlavor get(String id) {
-		return get(InstanceFlavor.class, uri("/flavors/%s", id)).execute();
+	public InstanceFlavor get(String flavorId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(flavorId), "parameter `flavorId` should not be empty");
+		return get(InstanceFlavor.class, uri("/flavors/%s", flavorId)).execute();
 	}
 
 }

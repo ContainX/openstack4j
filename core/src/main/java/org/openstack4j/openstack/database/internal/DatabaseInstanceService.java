@@ -67,6 +67,37 @@ public class DatabaseInstanceService extends BaseDatabaseServices {
 	 * @return {@link DatabaseInstance} instance
 	 */
 	public DatabaseInstance create(DatabaseInstanceCreate creation) {
+		Preconditions.checkNotNull(creation, "parameter `creation` should not be null");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getName()),
+				"parameter `creation.name` should not be empty");
+		Preconditions.checkNotNull(creation.getDatastore(), "parameter `creation.datastore` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getDatastore().getVersion()),
+				"parameter `creation.datastore.version` should not be empty");
+		Preconditions.checkNotNull(creation.getDatastore().getType(),
+				"parameter `creation.datastore.type` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getFlavorRef()),
+				"parameter `creation.flavorRef` should not be empty");
+		
+		// fields below is not required by create replica instance
+		/** 
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getRegion()),
+				"parameter `creation.region` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getAvailabilityZone()),
+				"parameter `creation.availabilityZone` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getVpcId()),
+				"parameter `creation.vpcId` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(creation.getRootPassword()),
+				"parameter `creation.rootPassword` should not be empty");
+		Preconditions.checkArgument(
+				creation.getSecurityGroup() != null && !Strings.isNullOrEmpty(creation.getSecurityGroup().getId()),
+				"parameter `creation.securityGroup.id` should not be empty");
+		Preconditions.checkArgument(
+				creation.getNic() != null && !Strings.isNullOrEmpty(creation.getNic().getSubnetId()),
+				"parameter `creation.nic.subnetId` should not be empty");
+		Preconditions.checkArgument(creation.getVolume() != null, "parameter `creation.volume` should not be null");
+		Preconditions.checkArgument(creation.getVolume().getSize() != null,
+				"parameter `creation.volume.size` should not be null");
+				*/
 		return post(DatabaseInstance.class, uri("/instances")).entity(creation).execute();
 	}
 
@@ -173,7 +204,7 @@ public class DatabaseInstanceService extends BaseDatabaseServices {
 		}
 
 	}
-	
+
 	@JsonRootName("resize")
 	class ResizeFlavorRequest {
 
@@ -201,6 +232,5 @@ public class DatabaseInstanceService extends BaseDatabaseServices {
 			this.jobIds = jobIds;
 		}
 	}
-	
-	
+
 }
