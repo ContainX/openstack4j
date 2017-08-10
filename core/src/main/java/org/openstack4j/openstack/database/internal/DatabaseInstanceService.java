@@ -113,11 +113,8 @@ public class DatabaseInstanceService extends BaseDatabaseServices {
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(instanceId), "parameter `instanceId` should not be empty");
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(flavorRef), "parameter `flavorRef` should not be empty");
 
-		HashMap<Object, Object> flavor = Maps.newHashMap();
-		flavor.put("flavorRef", flavorRef);
-		HashMap<Object, Object> entity = Maps.newHashMap();
-		entity.put("resize", flavor);
-
+		ResizeFlavorRequest entity = new ResizeFlavorRequest();
+		entity.setFlavorRef(flavorRef);
 		ResizeInstanceResponse execute = post(ResizeInstanceResponse.class, uri("/instances/%s/action", instanceId))
 				.entity(entity).execute();
 		return execute.getJobIds();
@@ -176,6 +173,21 @@ public class DatabaseInstanceService extends BaseDatabaseServices {
 		}
 
 	}
+	
+	@JsonRootName("resize")
+	class ResizeFlavorRequest {
+
+		@JsonProperty("flavorRef")
+		String flavorRef;
+
+		public String getFlavorRef() {
+			return flavorRef;
+		}
+
+		public void setFlavorRef(String flavorRef) {
+			this.flavorRef = flavorRef;
+		}
+	}
 
 	static class ResizeInstanceResponse {
 		@JsonProperty("jobId")
@@ -189,4 +201,6 @@ public class DatabaseInstanceService extends BaseDatabaseServices {
 			this.jobIds = jobIds;
 		}
 	}
+	
+	
 }

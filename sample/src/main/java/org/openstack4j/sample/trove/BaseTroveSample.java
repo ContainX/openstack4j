@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.openstack4j.openstack.database.constants.DatastoreType;
 import org.openstack4j.openstack.database.domain.DatastoreVersion;
-import org.openstack4j.openstack.trove.domain.InstanceFlavor;
+import org.openstack4j.openstack.database.domain.InstanceFlavor;
 import org.openstack4j.sample.AbstractSample;
 import org.testng.Assert;
 
@@ -41,7 +41,7 @@ public abstract class BaseTroveSample extends AbstractSample {
 
 	public synchronized InstanceFlavor getFirstFlavor(String databaseId) {
 		if (flavor == null) {
-			List<InstanceFlavor> flavors = osclient.trove().flavors().list();
+			List<InstanceFlavor> flavors = osclient.database().flavors().list(databaseId, "eu-de");
 			Assert.assertTrue(flavors.size() > 0, String.format("no flavor for database [%s] available", databaseId));
 			flavor = flavors.get(0);
 		}
