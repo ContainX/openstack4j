@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.model.compute.ext.Service;
-import org.openstack4j.openstack.compute.domain.ext.ExtService;
 import org.openstack4j.openstack.compute.domain.ext.ExtService.Services;
 import org.openstack4j.openstack.manila.domain.actions.ServiceAction;
 
@@ -59,7 +58,7 @@ public class ServicesServiceImpl extends BaseComputeServices implements Services
 		 checkNotNull(binary);
 	        checkNotNull(host);
 
-	        return put(ExtService.class, uri("/os-services/enable"))
+	        return put(Service.class, uri("/os-services/enable"))
 	                .entity(ServiceAction.enable(binary, host))
 	                .execute();
 	}
@@ -78,7 +77,7 @@ public class ServicesServiceImpl extends BaseComputeServices implements Services
 		checkNotNull(binary);
         checkNotNull(host);
 
-        return put(ExtService.class, uri("/os-services/disable"))
+        return put(Service.class, uri("/os-services/disable"))
                 .entity(ServiceAction.disable(binary, host))
                 .execute();
 	}
