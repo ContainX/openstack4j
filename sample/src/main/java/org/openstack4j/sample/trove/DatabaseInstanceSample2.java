@@ -23,7 +23,11 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.database.constants.DatastoreType;
 import org.openstack4j.openstack.database.domain.DatastoreVersion;
 import org.openstack4j.openstack.database.domain.InstanceFlavor;
+import org.openstack4j.openstack.trove.constant.VolumeType;
 import org.openstack4j.openstack.trove.domain.DatabaseInstance;
+import org.openstack4j.openstack.trove.domain.DatabaseReplicaInstanceCreate;
+import org.openstack4j.openstack.trove.domain.Datastore;
+import org.openstack4j.openstack.trove.domain.Volume;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -41,6 +45,30 @@ public class DatabaseInstanceSample2 extends BaseTroveSample {
 	// 数据库实例的操作，都是耗时操作（有的需要好几十分钟）， //
 	// 而且这些操作都要求实例处于某个状态中，所以测试用例要自己手动一个个去跑。 //
 	// ====================================================================//
+
+	@Test
+	public void testCreateReplica() {
+		// 需要改成实际的 instance id
+		String masterInstanceId = "4313ce3e-e928-4701-89f7-be68d72080df";
+
+		DatabaseInstance instance = osclient.trove().instances().get(masterInstanceId);
+
+		Datastore datastore = Datastore.builder().type(org.openstack4j.openstack.trove.constant.DatastoreType.MySQL)
+				.version("MySQL-5.6.33").build();
+		
+		Volume volume = Volume.builder().type(VolumeType.COMMON).size(100).build();
+
+		DatabaseReplicaInstanceCreate replicaCreate = DatabaseReplicaInstanceCreate.builder().name("sdk-replica").datastore(datastore)
+				.flavorRef(instance.getFlavor().getId()).volume(volume).replicaOf(masterInstanceId).replicaCount(1).build();
+		DatabaseInstance replica = osclient.trove().instances().createReplica(replicaCreate);
+		
+		Assert.assertEquals(replica.getName(), "sdk-replica");
+		Assert.assertEquals(replica.getStatus(), "BUILD");
+		Assert.assertEquals(replica.getDatastore().getType(), org.openstack4j.openstack.trove.constant.DatastoreType.MySQL);
+		Assert.assertEquals(replica.getDatastore().getVersion(), "MySQL-5.6.33");
+		Assert.assertEquals(replica.getFlavor().getId(), instance.getFlavor().getId());
+		Assert.assertEquals(replica.getVolume().getSize().intValue(), 100);
+	}
 
 	@Test
 	public void testResizeVolume() {

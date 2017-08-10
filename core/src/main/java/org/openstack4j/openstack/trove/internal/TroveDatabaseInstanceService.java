@@ -24,6 +24,7 @@ import org.openstack4j.openstack.trove.domain.DatabaseInstance;
 import org.openstack4j.openstack.trove.domain.DatabaseInstance.DatabaseInstanceWrap;
 import org.openstack4j.openstack.trove.domain.DatabaseInstance.DatabaseInstanceWraps;
 import org.openstack4j.openstack.trove.domain.DatabaseInstanceCreate;
+import org.openstack4j.openstack.trove.domain.DatabaseReplicaInstanceCreate;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -69,12 +70,22 @@ public class TroveDatabaseInstanceService extends BaseTroveServices {
 	}
 
 	/**
-	 * create a new database instance (new instance or read only(replica) instance)
+	 * create a new database instance 
 	 * 
 	 * @param creation	a model represent the attributes of database instance creation
 	 * @return {@link DatabaseInstance} instance
 	 */
 	public DatabaseInstance create(DatabaseInstanceCreate instanceCreate) {
+		return post(DatabaseInstance.class, uri("/instances")).entity(instanceCreate).execute();
+	}
+	
+	/**
+	 * create replicas of a database instance 
+	 * 
+	 * @param creation	a model represent the attributes of database replica instance creation
+	 * @return {@link DatabaseInstance} instance
+	 */
+	public DatabaseInstance createReplica(DatabaseReplicaInstanceCreate instanceCreate) {
 		return post(DatabaseInstance.class, uri("/instances")).entity(instanceCreate).execute();
 	}
 

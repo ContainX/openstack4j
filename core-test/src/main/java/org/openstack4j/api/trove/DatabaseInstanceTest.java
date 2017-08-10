@@ -263,6 +263,55 @@ public class DatabaseInstanceTest extends AbstractTest {
 		Assert.assertEquals(instance.getFlavor().getLinks().get(1).getRel(), "bookmark");
 
 	}
+	
+	@Test
+	public void testCreateReplicaInstance() throws IOException, InterruptedException {
+		respondWith("/trove/create_instance_response.json");
+
+		// build datastore version
+		Datastore datastore = Datastore.builder().type(DatastoreType.MySQL).version("6.3.35").build();
+		// get flavor
+		Volume volume = Volume.builder().type(VolumeType.COMMON).size(100).build();
+		NIC nic = NIC.builder().networkId("network-id").securityGroupId("sg-id").build();
+		DatabaseUser user = DatabaseUser.builder().username("root").password("Demo@234").build();
+
+		DatabaseInstanceCreate instanceCreate = DatabaseInstanceCreate.builder().name("name").datastore(datastore)
+				.flavorRef("flavor-id").users(Lists.newArrayList(user)).volume(volume)
+				.configurationId("config-id").availabilityZone("eu-de-01").vpcId("vpc-id").nics(Lists.newArrayList(nic))
+				.build();
+
+		DatabaseInstance instance = osv3().trove().instances().create(instanceCreate);
+
+		RecordedRequest request = server.takeRequest();
+		Assert.assertEquals(request.getPath(), "/v1.0/project-id/instances");
+		Assert.assertEquals(request.getMethod(), "POST");
+
+		String requestBody = request.getBody().readUtf8();
+		String expectBody = this.getResource("/trove/create_instance_request.json");
+		Assert.assertEquals(requestBody, expectBody);
+		
+		Assert.assertEquals(instance.getId(), "c90c1234-f687-462a-a6bd-cec35919c096");
+		Assert.assertEquals(instance.getStatus(), "BUILD");
+		Assert.assertEquals(instance.getName(), "creat-trove-instance-28-MySQL-1-1");
+		Assert.assertEquals(instance.getLinks().size(), 2);
+		Assert.assertEquals(instance.getLinks().get(0).getHref(), null);
+		Assert.assertEquals(instance.getLinks().get(0).getRel(), "self");
+		Assert.assertEquals(instance.getLinks().get(1).getHref(), null);
+		Assert.assertEquals(instance.getLinks().get(1).getRel(), "bookmark");
+
+		Assert.assertEquals(instance.getVolume().getSize().intValue(), 100);
+
+		Assert.assertEquals(instance.getDatastore().getType(), DatastoreType.MySQL);
+		Assert.assertEquals(instance.getDatastore().getVersion(), "MySQL-5.6.33");
+
+		Assert.assertEquals(instance.getFlavor().getId(), "99001234-dfc2-4418-b224-fea05d358ce3");
+		Assert.assertEquals(instance.getFlavor().getLinks().size(), 2);
+		Assert.assertEquals(instance.getFlavor().getLinks().get(0).getHref(), null);
+		Assert.assertEquals(instance.getFlavor().getLinks().get(0).getRel(), "self");
+		Assert.assertEquals(instance.getFlavor().getLinks().get(1).getHref(), null);
+		Assert.assertEquals(instance.getFlavor().getLinks().get(1).getRel(), "bookmark");
+
+	}
 
 	@Override
 	protected Service service() {
