@@ -114,7 +114,7 @@ public class SaharaCluster2 implements ModelEntity {
 	String errorInfo;
 	String chargingStartTime;
 	
-	class SaharaComponent {
+	static class SaharaComponent {
 		
 		@JsonProperty("componentId")
 		String id;
