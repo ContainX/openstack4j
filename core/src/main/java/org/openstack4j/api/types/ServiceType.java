@@ -43,15 +43,21 @@ public enum ServiceType {
 	}
 
 	public static ServiceType forName(String name) {
-		for (ServiceType s : ServiceType.values())
-		{
-			if (s.getServiceName().equalsIgnoreCase(name))
-			    return s;
-			if (s.name().equalsIgnoreCase(name))
-				return s;
-			if (s.type.equalsIgnoreCase(name))
-				return s;
-		}
-		return ServiceType.UNKNOWN;
-	}
+            if (name == null || name.isEmpty()) {
+                return ServiceType.UNKNOWN;
+            }
+
+            for (ServiceType s : ServiceType.values()) {
+                if (name.toLowerCase().startsWith(s.getServiceName().toLowerCase())) {
+                    return s;
+                }
+                if (name.toLowerCase().startsWith(s.name().toLowerCase())) {
+                    return s;
+                }
+                if (name.toLowerCase().startsWith(s.type.toLowerCase())) {
+                    return s;
+                }
+            }
+            return ServiceType.UNKNOWN;
+        }
 }
