@@ -55,12 +55,10 @@ public class ServicesServiceImpl extends BaseComputeServices implements Services
 	 */
 	@Override
 	public Service enableService(String binary, String host) {
-		 checkNotNull(binary);
-	        checkNotNull(host);
+		checkNotNull(binary);
+		checkNotNull(host);
 
-	        return put(Service.class, uri("/os-services/enable"))
-	                .entity(ServiceAction.enable(binary, host))
-	                .execute();
+		return put(Service.class, uri("/os-services/enable")).entity(ServiceAction.enable(binary, host)).execute();
 	}
 
 	/**
@@ -75,10 +73,8 @@ public class ServicesServiceImpl extends BaseComputeServices implements Services
 	@Override
 	public Service disableService(String binary, String host) {
 		checkNotNull(binary);
-        checkNotNull(host);
+		checkNotNull(host);
 
-        return put(Service.class, uri("/os-services/disable"))
-                .entity(ServiceAction.disable(binary, host))
-                .execute();
+		return put(Service.class, uri("/os-services/disable")).entity(ServiceAction.disable(binary, host)).execute();
 	}
 }

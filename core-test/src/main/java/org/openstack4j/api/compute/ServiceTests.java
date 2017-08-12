@@ -49,7 +49,7 @@ public class ServiceTests extends AbstractTest {
     public void disableServiceTest() throws Exception {
         respondWith(JSON_DISABLE_SERVICE);
 
-        org.openstack4j.model.compute.ext.Service s = osv3().compute().services().enableService("nova-compute", "some_host");
+        org.openstack4j.model.compute.ext.Service s = osv3().compute().services().disableService("nova-compute", "some_host");
         assertEquals("nova-compute", s.getBinary());
         assertEquals("some_host", s.getHost());
         assertEquals(Status.DISABLED, s.getStatus());
