@@ -19,8 +19,8 @@ import org.testng.annotations.Test;
 public class ServiceTests extends AbstractTest {
 
     private static final String JSON_SERVICES = "/compute/services.json";
-    private static final String JSON_ENABLE_SERVICE = "/compute/enable_services.json";
-    private static final String JSON_DISABLE_SERVICE = "/compute/disable_services.json";
+    private static final String JSON_ENABLE_SERVICE = "/compute/enable_service.json";
+    private static final String JSON_DISABLE_SERVICE = "/compute/disable_service.json";
 
     public void serviceListingTest() throws Exception {
         respondWith(JSON_SERVICES);
