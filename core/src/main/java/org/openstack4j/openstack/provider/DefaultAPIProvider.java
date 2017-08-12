@@ -237,8 +237,10 @@ import org.openstack4j.openstack.compute.internal.ext.InstanceActionsServiceImpl
 import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
+import org.openstack4j.openstack.database.internal.DatabaseBackupService;
 import org.openstack4j.openstack.database.internal.DatabaseInstanceFlavorService;
 import org.openstack4j.openstack.database.internal.DatabaseInstanceService;
+import org.openstack4j.openstack.database.internal.DatabaseLogService;
 import org.openstack4j.openstack.database.internal.DatabaseParamService;
 import org.openstack4j.openstack.database.internal.DatabaseServiceVersionService;
 import org.openstack4j.openstack.database.internal.DatabaseServices;
@@ -600,6 +602,8 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(DatabaseParamService.class, DatabaseParamService.class);
 		bind(DatabaseInstanceFlavorService.class, DatabaseInstanceFlavorService.class);
 		bind(DatabaseInstanceService.class, DatabaseInstanceService.class);
+		bind(DatabaseBackupService.class, DatabaseBackupService.class);
+		bind(DatabaseLogService.class, DatabaseLogService.class);
 
 		bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
 		bind(BarbicanService.class, BarbicanServiceImpl.class);

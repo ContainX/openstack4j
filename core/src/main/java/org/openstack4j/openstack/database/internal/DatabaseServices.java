@@ -70,4 +70,23 @@ public class DatabaseServices extends BaseDatabaseServices {
 		return Apis.get(DatabaseParamService.class);
 	}
 
+	
+	/**
+	 * Service implementation which provides methods for manipulation of database backup & restore
+	 *
+	 * @return {@link DatabaseBackupService} instance
+	 */
+	public DatabaseBackupService backups() {
+		return Apis.get(DatabaseBackupService.class);
+	}
+	
+	/**
+	 * Service implementation which provides methods for manipulation of database logs
+	 *
+	 * @return {@link DatabaseParamService} instance
+	 */
+	public DatabaseLogService logs() {
+		return Apis.get(DatabaseLogService.class);
+	}
+
 }

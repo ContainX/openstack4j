@@ -43,6 +43,9 @@ public class DateTimeUtils {
 	 */
 	public static final String FORMAT_YMD = "yyyy-MM-d";
 	
+	
+	public static final String FORMAT_YMD_HM = "yyyy-MM-dd'+'HH:mm";
+	
 	/**
 	 * format date
 	 * @param date
