@@ -40,7 +40,7 @@ public interface ServicesService {
      * 
      * @author Wang Ting/王婷
      */
-    Service enableService(String binary, String host);
+    ExtService enableService(String binary, String host);
 
     /**
      * Disables a service.
@@ -51,6 +51,6 @@ public interface ServicesService {
      * 
      * @author Wang Ting/王婷
      */
-    Service disableService(String binary, String host);
+    ExtService disableService(String binary, String host);
 
 }

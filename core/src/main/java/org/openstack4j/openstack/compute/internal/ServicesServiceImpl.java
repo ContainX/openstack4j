@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.model.compute.ext.Service;
+import org.openstack4j.openstack.compute.domain.ext.ExtService;
 import org.openstack4j.openstack.compute.domain.ext.ExtService.Services;
 import org.openstack4j.openstack.manila.domain.actions.ServiceAction;
 
@@ -54,11 +55,11 @@ public class ServicesServiceImpl extends BaseComputeServices implements Services
 	 * @see org.openstack4j.api.compute.ServicesService#enableService(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Service enableService(String binary, String host) {
+	public ExtService enableService(String binary, String host) {
 		checkNotNull(binary);
 		checkNotNull(host);
 
-		return put(Service.class, uri("/os-services/enable")).entity(ServiceAction.enable(binary, host)).execute();
+		return put(ExtService.class, uri("/os-services/enable")).entity(ServiceAction.enable(binary, host)).execute();
 	}
 
 	/**
@@ -71,10 +72,10 @@ public class ServicesServiceImpl extends BaseComputeServices implements Services
 	 * @see org.openstack4j.api.compute.ServicesService#disableService(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Service disableService(String binary, String host) {
+	public ExtService disableService(String binary, String host) {
 		checkNotNull(binary);
 		checkNotNull(host);
 
-		return put(Service.class, uri("/os-services/disable")).entity(ServiceAction.disable(binary, host)).execute();
+		return put(ExtService.class, uri("/os-services/disable")).entity(ServiceAction.disable(binary, host)).execute();
 	}
 }
