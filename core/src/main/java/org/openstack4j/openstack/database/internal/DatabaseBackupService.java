@@ -15,19 +15,17 @@
  *******************************************************************************/
 package org.openstack4j.openstack.database.internal;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.database.domain.DatabaseBackup;
+import org.openstack4j.openstack.database.domain.DatabaseBackup.Backups;
+import org.openstack4j.openstack.database.domain.DatabaseBackupCreate;
+import org.openstack4j.openstack.database.domain.DatabaseBackupCreateResponse;
 import org.openstack4j.openstack.database.domain.DatabaseBackupPolicy;
-import org.openstack4j.openstack.database.domain.DatabaseParam;
-import org.openstack4j.openstack.database.domain.DatabaseParam.Parameters;
-import org.openstack4j.openstack.database.domain.InstanceParamOperationResult;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
 
 /**
  * The implementation of manipulation of database backup
@@ -64,61 +62,32 @@ public class DatabaseBackupService extends BaseDatabaseServices {
 	}
 
 	/**
-	 * list all configuration parameters of a specification version	 of datastore
+	 * get the backup policy of a database instance
 	 * 
-	 * @param dataStoreVersionId	datastore version identifier
-	 * @return a list of {@link DatabaseParam} instances 
+	 * @param creation	model represent the attributes of database backup creation
+	 * @return {@link DatabaseBackupCreateResponse} instance
 	 */
-	public List<DatabaseParam> list(String dataStoreVersionId) {
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(dataStoreVersionId),
-				"parameter `dataStoreVersionId` should not be empty");
-		return get(Parameters.class, uri("/datastores/versions/%s/parameters", dataStoreVersionId)).execute().getList();
+	public DatabaseBackupCreateResponse create(DatabaseBackupCreate creation) {
+		return post(DatabaseBackupCreateResponse.class, "/backups").entity(creation).execute();
 	}
 
 	/**
-	 * get the details of a configuration parameter
+	 * list all backup snapshots
 	 * 
-	 * @param dataStoreVersionId	datastore version identifier
-	 * @param paramName				datastore configuration parameter name
-	 * @return an instance of {@link DatabaseParam}
+	 * @return list of {@link DatabaseBackup} instances
 	 */
-	public DatabaseParam get(String dataStoreVersionId, String paramName) {
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(dataStoreVersionId),
-				"parameter `dataStoreVersionId` should not be empty");
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(paramName), "parameter `paramName` should not be empty");
-		return get(DatabaseParam.class, uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName))
-				.execute();
+	public List<DatabaseBackup> list() {
+		return get(Backups.class, "/backups").execute().getList();
 	}
 
 	/**
-	 * config database parameters for an instance
+	 * delete backup snapshot
 	 * 
-	 * @param instanceId	database instance identifier
-	 * @param params		database parameters map
-	 * @return {@link InstanceParamOperationResult} instance
+	 * @return {@link ActionResponse} instance
 	 */
-	public InstanceParamOperationResult config(String instanceId, Map<String, Object> params) {
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(instanceId), "parameter `instanceId` should not be empty");
-		Preconditions.checkArgument(params != null && !params.isEmpty(), "parameter `params` should not be empty");
-
-		HashMap<String, Object> entity = Maps.newHashMap();
-		entity.put("values", params);
-		return put(InstanceParamOperationResult.class, uri("/instances/%s/parameters", instanceId)).entity(entity)
-				.execute();
-	}
-
-	/**
-	 * restore database parameters for an instance
-	 * 
-	 * @param instanceId	database instance identifier
-	 * @return {@link InstanceParamOperationResult} instance
-	 */
-	public InstanceParamOperationResult restore(String instanceId) {
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(instanceId), "parameter `instanceId` should not be empty");
-
-		HashMap<String, Object> entity = Maps.newHashMap();
-		return put(InstanceParamOperationResult.class, uri("/instances/%s/parameters/default", instanceId))
-				.entity(entity).execute();
+	public ActionResponse delete(String backupId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(backupId), "parameter `backupId` should not be empty");
+		return deleteWithResponse("/backups/", backupId).execute();
 	}
 
 }

@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -16,39 +14,27 @@
 package org.openstack4j.openstack.database.domain;
 
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.openstack.database.constants.DatastoreType;
+import org.openstack4j.openstack.trove.domain.ExtendParam;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of Trove datastore
+ * Model represent attributes of Database Backup Creation response
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
  */
 @Getter
 @ToString
-@Builder(toBuilder = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@JsonRootName("datastore")
-public class Datastore implements ModelEntity {
+public class DatabaseBackupCreateResponse implements ModelEntity {
 
 	private static final long serialVersionUID = 5294355671374520846L;
 
-	@JsonProperty("type")
-	DatastoreType type;
-	
-	@JsonProperty("version")
-	String version;
+	DatabaseBackup backup;
 
-	@JsonProperty("version_id")
-	String versionId;
+	@JsonProperty("extendparam")
+	ExtendParam extendParam;
 }

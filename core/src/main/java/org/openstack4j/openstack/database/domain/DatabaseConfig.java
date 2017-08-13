@@ -86,7 +86,6 @@ public class DatabaseConfig implements ModelEntity {
 
 	@JsonProperty("parameters")
 	List<DatabaseConfigParam> parameters;
-	
 
 
 	public static class Configs extends ListResult<DatabaseConfig> {

@@ -1,0 +1,6 @@
+{ 	
+  "policy": { 
+  "keepday": 7, 
+  "starttime": "00:00:00" 
+ } 
+}
