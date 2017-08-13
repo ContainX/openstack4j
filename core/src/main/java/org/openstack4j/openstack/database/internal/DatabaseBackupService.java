@@ -18,14 +18,20 @@ package org.openstack4j.openstack.database.internal;
 import java.util.List;
 
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.common.IdResourceEntity;
 import org.openstack4j.openstack.database.domain.DatabaseBackup;
 import org.openstack4j.openstack.database.domain.DatabaseBackup.Backups;
 import org.openstack4j.openstack.database.domain.DatabaseBackupCreate;
 import org.openstack4j.openstack.database.domain.DatabaseBackupCreateResponse;
 import org.openstack4j.openstack.database.domain.DatabaseBackupPolicy;
+import org.openstack4j.openstack.database.domain.DatabaseInstance;
+import org.openstack4j.openstack.database.domain.DatabaseInstanceRestore;
+import org.openstack4j.openstack.database.domain.DatabaseRestorePoint;
+import org.openstack4j.openstack.trove.domain.ExtendParam;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 /**
  * The implementation of manipulation of database backup
@@ -88,6 +94,57 @@ public class DatabaseBackupService extends BaseDatabaseServices {
 	public ActionResponse delete(String backupId) {
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(backupId), "parameter `backupId` should not be empty");
 		return deleteWithResponse("/backups/", backupId).execute();
+	}
+
+	/**
+	 * restore to an exist database instance
+	 * 
+	 * @param restoreToInstanceId	the database instance-id to be restored
+	 * @param restorePoint			the restore point of source database
+	 * @return	the identifier list of asynchronous restore job 
+	 */
+	public List<String> restoreToExistInstance(String restoreToInstanceId, DatabaseRestorePoint restorePoint) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(restoreToInstanceId),
+				"parameter `restoreToInstanceId` should not be empty");
+		Preconditions.checkArgument(restorePoint != null, "parameter `restorePoint` should not be empty");
+		Preconditions.checkArgument(
+				!Strings.isNullOrEmpty(restorePoint.getBackupRef()) || restorePoint.getRestoreTime() != null,
+				"parameter `restorePoint.backupRef` and `restorePoint.restoreTime` should not both be null");
+		// reset unused field
+		restorePoint = restorePoint.toBuilder().sourceInstanceId(null).build();
+		ExtendParam execute = post(ExtendParam.class, uri("/instances/%s/action", restoreToInstanceId))
+				.entity(restorePoint).execute();
+
+		List<String> jobIds = Lists.newArrayList();
+		for (IdResourceEntity job : execute.getJobs()) {
+			jobIds.add(job.getId());
+		}
+		return jobIds;
+	}
+
+	/**
+	 * restore backup snapshot to a new instance
+	 * 
+	 * @param restore model represent the attributes of restore
+	 * @return
+	 */
+	public DatabaseInstance restoreToNewInstance(DatabaseInstanceRestore restore) {
+		Preconditions.checkArgument(restore != null, "parameter `restore` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(restore.getName()),
+				"parameter `restore.name` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(restore.getFlavorRef()),
+				"parameter `restore.flavorRef` should not be empty");
+		Preconditions.checkArgument(restore.getVolume() != null, "parameter `restore.volume` should not be null");
+		Preconditions.checkArgument(restore.getVolume().getSize() != null,
+				"parameter `restore.volume.size` should not be null");
+
+		Preconditions.checkArgument(restore.getRestorePoint() != null,
+				"parameter `restore.restorePoint` should not be null");
+		Preconditions.checkArgument(
+				!Strings.isNullOrEmpty(restore.getRestorePoint().getBackupRef())
+						|| restore.getRestorePoint().getRestoreTime() != null,
+				"parameter `restore.restorePoint.backupRef` and `restore.restorePoint.restoreTime` should not both be null");
+		return post(DatabaseInstance.class, "/instances").entity(restore).execute();
 	}
 
 }

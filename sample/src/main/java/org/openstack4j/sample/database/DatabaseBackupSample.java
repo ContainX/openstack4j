@@ -26,9 +26,11 @@ import org.openstack4j.openstack.database.domain.DatabaseBackupCreate;
 import org.openstack4j.openstack.database.domain.DatabaseBackupCreateResponse;
 import org.openstack4j.openstack.database.domain.DatabaseBackupPolicy;
 import org.openstack4j.openstack.database.domain.DatabaseInstance;
+import org.openstack4j.openstack.database.domain.DatabaseRestorePoint;
 import org.openstack4j.sample.AbstractSample;
 import org.openstack4j.sample.Retry;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -51,6 +53,37 @@ public class DatabaseBackupSample extends AbstractSample {
 		}
 
 		Assert.assertNotNull(instance);
+	}
+
+	@AfterClass
+	public void testDeleteDatabaseBackup() {
+		if (backup != null) {
+			// 等待还原完成
+			this.retry(new Retry() {
+				@Override
+				public Integer maxRetryTimes() {
+					return 30;
+				}
+
+				@Override
+				public Integer delay() {
+					return 15;
+				}
+
+				@Override
+				public Object run() {
+					DatabaseInstance dbInstance = osclient.database().instances().get(instance.getId());
+					if(dbInstance.getStatus().equals("ACTIVE")) {
+						return dbInstance;
+					}
+					return null;
+				}
+				
+			});
+			
+			ActionResponse delete = osclient.database().backups().delete(backup.getId());
+			Assert.assertTrue(delete.isSuccess());
+		}
 	}
 
 	@Test(priority = 1)
@@ -93,6 +126,42 @@ public class DatabaseBackupSample extends AbstractSample {
 		Assert.assertEquals(backup.getBackupType(), "1");
 		Assert.assertEquals(backup.getInstanceId(), instance.getId());
 		Assert.assertEquals(backup.getStatus(), BackupStatus.BUILDING);
+
+		// 等待备份完成
+		this.retry(new Retry() {
+			@Override
+			public Integer maxRetryTimes() {
+				return 30;
+			}
+
+			@Override
+			public Integer delay() {
+				return 15;
+			}
+
+			@Override
+			public Object run() {
+				List<DatabaseBackup> list = osclient.database().backups().list();
+				DatabaseBackup found = null;
+				for (DatabaseBackup temp : list) {
+					if (temp.getId().equals(backup.getId())) {
+						found = temp;
+						break;
+					}
+				}
+
+				if (found != null) {
+					if (found.getStatus().equals(BackupStatus.COMPLETED)) {
+						return found;
+					}
+					if (found.getStatus().equals(BackupStatus.FAILED)) {
+						throw new RuntimeException("create backup failed");
+					}
+				}
+
+				return null;
+			}
+		});
 	}
 
 	@Test(dependsOnMethods = { "testCreateDatabaseBackup" })
@@ -114,53 +183,16 @@ public class DatabaseBackupSample extends AbstractSample {
 		Assert.assertEquals(found.getName(), name);
 		Assert.assertEquals(found.getBackupType(), "1");
 		Assert.assertEquals(found.getInstanceId(), instance.getId());
-		Assert.assertEquals(found.getStatus(), BackupStatus.BUILDING);
+		Assert.assertEquals(found.getStatus(), BackupStatus.COMPLETED);
 	}
 
-	/**
-	 */
 	@Test(dependsOnMethods = { "testListDatabaseBackup" })
-	public void testDeleteDatabaseBackup() {
-
-		// 等待备份完成后，才能正常删除
-		final String backupId = this.backup.getId();
-		this.retry(new Retry() {
-			@Override
-			public Integer maxRetryTimes() {
-				return 20;
-			}
-
-			@Override
-			public Integer delay() {
-				return 10;
-			}
-
-			@Override
-			public Object run() {
-				List<DatabaseBackup> list = osclient.database().backups().list();
-				DatabaseBackup found = null;
-				for (DatabaseBackup temp : list) {
-					if (temp.getId().equals(backupId)) {
-						found = temp;
-						break;
-					}
-				}
-
-				if (found != null) {
-					if (found.getStatus().equals(BackupStatus.COMPLETED)) {
-						return found;
-					}
-					if (found.getStatus().equals(BackupStatus.FAILED)) {
-						return found;
-					}
-				}
-
-				return null;
-			}
-		});
-		
-		ActionResponse delete = osclient.database().backups().delete(backup.getId());
-		Assert.assertTrue(delete.isSuccess());
+	public void testRestoreToExistsInstance() {
+		DatabaseRestorePoint point = DatabaseRestorePoint.builder().backupRef(backup.getId())
+				// .restoreTime(new Date())
+				.build();
+		List<String> jobIds = osclient.database().backups().restoreToExistInstance(instance.getId(), point);
+		Assert.assertTrue(jobIds.size() > 0);
 	}
 
 }

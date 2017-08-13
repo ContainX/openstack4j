@@ -1,6 +1,4 @@
 /*******************************************************************************
- * 	Copyright 2016 ContainX and OpenStack4j                                          
- * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
  * 	the License at                                                                   
@@ -15,9 +13,12 @@
  *******************************************************************************/
 package org.openstack4j.openstack.database.domain;
 
+import java.util.Date;
+
 import org.openstack4j.model.ModelEntity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Model represent attributes of DB Restore
+ * Model represent attributes of database restore point
  *
  * @author QianBiao.NG
  * @date   2017-07-31 11:12:39
@@ -36,7 +37,8 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestorePoint implements ModelEntity {
+@JsonRootName("restore")
+public class DatabaseRestorePoint implements ModelEntity {
 
 	private static final long serialVersionUID = 5294355671374520846L;
 
@@ -45,5 +47,21 @@ public class RestorePoint implements ModelEntity {
 	 */
 	@JsonProperty("backupRef")
 	String backupRef;
+	
+	/**
+	 * time point the DB instance is restored to. 
+	 * 
+	 * At least one of the backupRef and restoreTime parameters should be specified. 
+	 * If both parameters are specified, the DB instance is restored using the full backup file.
+	 */
+	@JsonProperty("restoreTime")
+	Date restoreTime;
+	
+	
+	/**
+	 * the source DB instance ID.
+	 */
+	@JsonProperty("sourceInstanceId")
+	String sourceInstanceId;
 
 }

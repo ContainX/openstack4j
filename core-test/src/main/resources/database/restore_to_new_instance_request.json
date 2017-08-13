@@ -1,0 +1,18 @@
+{
+  "restore" : {
+    "name" : "bakup",
+    "flavorRef" : "flavor-ref",
+    "volume" : {
+      "size" : 100
+    },
+    "ha" : {
+      "enable" : true,
+      "replicationMode" : "async"
+    },
+    "restorePoint" : {
+      "backupRef" : "backup-ref",
+      "restoreTime" : 1502617216267,
+      "sourceInstanceId" : "source-instance"
+    }
+  }
+}
