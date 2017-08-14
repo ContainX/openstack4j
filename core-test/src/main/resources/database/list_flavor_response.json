@@ -1,0 +1,16 @@
+{ 
+    "flavors": [ 
+        { 
+            "id": "bf07a6d4-844a-4023-a776-fc5c5fb71fb4", 
+            "name": "OTC_MYHP_LARGE", 
+            "ram": 4096, 
+            "specCode": "rds.mysql.c2.large" 
+        }, 
+        { 
+            "id": "f7f51f85-cfcd-4409-ae91-b3eae186d0ea", 
+            "name": "OTC_MYLM_XLARGE", 
+            "ram": 32768, 
+            "specCode": "rds.mysql.m1.xlarge" 
+        } 
+    ] 
+}

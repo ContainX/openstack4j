@@ -21,6 +21,9 @@ import java.util.Map;
 import org.openstack4j.openstack.trove.domain.DatabaseParam;
 import org.openstack4j.openstack.trove.domain.DatabaseParam.Parameters;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -39,6 +42,8 @@ public class TroveDatabaseParamService extends BaseTroveServices {
 	 * @return a list of {@link DatabaseParam} instances 
 	 */
 	public List<DatabaseParam> list(String dataStoreVersionId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(dataStoreVersionId),
+				"parameter `dataStoreVersionId` should not be empty");
 		return get(Parameters.class, uri("/datastores/versions/%s/parameters", dataStoreVersionId)).execute().getList();
 	}
 
@@ -51,8 +56,11 @@ public class TroveDatabaseParamService extends BaseTroveServices {
 	 * @return an instance of {@link DatabaseParam}
 	 */
 	public DatabaseParam get(String dataStoreVersionId, String paramName) {
-		return get(DatabaseParam.class, uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName))
-				.execute();
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(dataStoreVersionId),
+				"parameter `dataStoreVersionId` should not be empty");
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(paramName), "parameter `paramName` should not be empty");
+		return get(Parameters.class, uri("/datastores/versions/%s/parameters/%s", dataStoreVersionId, paramName))
+				.execute().getList().get(0);
 	}
 
 	/**
@@ -61,13 +69,14 @@ public class TroveDatabaseParamService extends BaseTroveServices {
 	 * @return
 	 */
 	public Map<String, String> getDefaultParamsByInstance(String instanceId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(instanceId), "parameter `instanceId` should not be empty");
 		GetDefaultParamsResponse response = get(GetDefaultParamsResponse.class,
 				uri("/instances/%s/configuration", instanceId)).execute();
 		return response.getParams();
 	}
 
 	@JsonRootName("instance")
-	class GetDefaultParamsResponse {
+	static class GetDefaultParamsResponse {
 
 		@JsonProperty("configuration")
 		Map<String, String> params;

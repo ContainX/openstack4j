@@ -1,0 +1,9 @@
+{ 
+    "name": "connect_timeout", 
+    "min": 2, 
+    "max": 31536000, 
+    "restart_required": false, 
+    "type": "integer", 
+    "description": " mysqld在用‘Bad handshake’消息响应连接请求包之前等待的秒数。", 
+    "datastore_version_id": "f8e67741-e767-4137-b394-3fb8a3fafd2f" 
+}

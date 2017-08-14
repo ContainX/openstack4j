@@ -1,0 +1,12 @@
+{ 
+"configuration-parameters": [ 
+ { 
+   "name": "connect_timeout", 
+   "type": "integer", 
+   "max": "31536000", 
+   "min": "2", 
+   "datastore_version_id": "de90043f-7f29-4a3e-ba82-f8beb5678b46", 
+   "restart_required": "false" 
+  } 
+ ] 
+}

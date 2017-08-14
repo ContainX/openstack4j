@@ -12,4 +12,6 @@
   - [DMS](zh-cn/dms-sdk.md)
   - [Anti-DDoS](zh-cn/antiddos-sdk.md)
   - [MaaS](zh-cn/maas-sdk.md)
+  - [Trove](zh-cn/trove-sdk.md)
+  - [Database](zh-cn/databse-sdk.md)
 - [贡献代码](zh-cn/contributing.md)

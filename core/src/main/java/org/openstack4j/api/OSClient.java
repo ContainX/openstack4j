@@ -48,6 +48,7 @@ import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.openstack.antiddos.internal.AntiDDoSServices;
 import org.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
 import org.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
+import org.openstack4j.openstack.database.internal.DatabaseServices;
 import org.openstack4j.openstack.key.management.internal.KeyManagementService;
 import org.openstack4j.openstack.maas.internal.MaaSService;
 import org.openstack4j.openstack.message.notification.internal.NotificationService;
@@ -383,6 +384,12 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the OTC MaaS service instance
 		 */
 		MaaSService maas();
+		
+		/**
+		 * get the Database service 
+		 * @return the OTC {@link DatabaseServices} instance
+		 */
+		DatabaseServices database();
 	}
 
 	/**

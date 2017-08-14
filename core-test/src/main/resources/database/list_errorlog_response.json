@@ -1,0 +1,73 @@
+{
+  "errorLogList": [
+    {
+      "datetime": "2017-08-12 08:01:50",
+      "content": "[Warning] file ./mysql-bin.000002 was not purged because it was being readby thread number 15829"
+    },
+    {
+      "datetime": "2017-08-10 03:15:08",
+      "content": "[Warning] 'proxies_priv' entry '@ root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:58",
+      "content": "[Warning] 'proxies_priv' entry '@ root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:58",
+      "content": "[Warning] 'proxies_priv' entry '@ root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:57",
+      "content": "[Warning] 'proxies_priv' entry '@ root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:52",
+      "content": "[Warning] 'proxies_priv' entry '@ root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:52",
+      "content": "[Warning] 'proxies_priv' entry '@ root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:52",
+      "content": "[Warning] 'user' entry '@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:52",
+      "content": "[Warning] 'user' entry 'root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:51",
+      "content": "[Warning] 'proxies_priv' entry '@ root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:51",
+      "content": "[Warning] 'user' entry '@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:51",
+      "content": "[Warning] 'user' entry 'root@host-172-16-1-176' ignored in --skip-name-resolve mode."
+    },
+    {
+      "datetime": "2017-08-09 09:48:51",
+      "content": "[Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: f2d8e76e-7ce7-11e7-86af-fa163e9b7674."
+    },
+    {
+      "datetime": "2017-08-09 09:48:40",
+      "content": "[Warning] Bootstrap mode disables GTIDs. Bootstrap mode should only be used by mysql_install_db which initializes the MySQL data directory and creates system tables."
+    },
+    {
+      "datetime": "2017-08-09 09:48:36",
+      "content": "[Warning] Bootstrap mode disables GTIDs. Bootstrap mode should only be used by mysql_install_db which initializes the MySQL data directory and creates system tables."
+    },
+    {
+      "datetime": "2017-08-09 09:48:36",
+      "content": "[Warning] InnoDB: Creating foreign key constraint system tables."
+    },
+    {
+      "datetime": "2017-08-09 09:48:36",
+      "content": "[Warning] InnoDB: New log files created, LSN=45781"
+    }
+  ],
+  "totalRecord": 17
+}

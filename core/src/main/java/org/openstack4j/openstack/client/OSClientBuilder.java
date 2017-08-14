@@ -15,7 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.client;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
@@ -146,6 +146,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         Identifier domain;
         AuthScope scope;
         String tokenId;
+        String language;
 
         @Override
         public ClientV3 domainName(String domainName) {

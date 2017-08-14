@@ -1,0 +1,8 @@
+{ 
+    "flavor": { 
+        "id": "f7f51f85-cfcd-4409-ae91-b3eae186d0ea", 
+        "name": "OTC_MYLM_XLARGE", 
+        "ram": 32768, 
+        "specCode": "rds.mysql.m1.xlarge" 
+    } 
+}

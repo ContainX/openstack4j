@@ -16,6 +16,11 @@ public class DateTimeUtils {
 	
 	/**
 	 * DateTime format yyyy-MM-dd'T'HH:mm:ss'Z'
+	 */
+	public static final String FORMAT_YMDTHMSZONE = "yyyy-MM-dd'T'HH:mm:ssZ";
+	
+	/**
+	 * DateTime format yyyy-MM-dd'T'HH:mm:ss'Z'
 	 * 
 	 * example: 2016-12-02T13:00:00.121
 	 */
@@ -37,6 +42,9 @@ public class DateTimeUtils {
 	 * DateTime format yyyy-MM-d
 	 */
 	public static final String FORMAT_YMD = "yyyy-MM-d";
+	
+	
+	public static final String FORMAT_YMD_HM = "yyyy-MM-dd'+'HH:mm";
 	
 	/**
 	 * format date

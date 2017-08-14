@@ -1,0 +1,44 @@
+{ 
+  "dataStores": [ 
+    { 
+      "id": "e8a8b8cc-63f8-4fb5-8d4a-24c502317a62", 
+      "name": "5.6.33", 
+      "datastore": "736270b9-27c7-4f03-823b-447d8245e1c2", 
+      "image": "988f7639-4bc9-4225-bdfe-f47bcde1a5f2", 
+      "packages": "MySQL-server-5.6.33", 
+      "active": 1 
+    }, 
+    { 
+      "id": "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61", 
+      "name": "5.6.30", 
+      "datastore": "736270b9-27c7-4f03-823b-447d8245e1c2", 
+      "image": "14daaee9-f2c6-4c5c-9736-bbbd40bcb327", 
+      "packages": "MySQL-server-5.6.30", 
+      "active": 1 
+    }, 
+    { 
+      "id": "96cccede-bc51-11e6-bd4d-286ed488dd62", 
+      "name": "5.6.34", 
+      "datastore": "736270b9-27c7-4f03-823b-447d8245e1c2", 
+      "image": "fdf4cf41-2a5a-49e9-be75-bdc4d73ad1e8", 
+      "packages": "MySQL-server-5.6.34", 
+      "active": 1 
+    }, 
+    { 
+      "id": "35a3d5ba-6f74-4b29-824d-6de20f1ac090", 
+      "name": "5.6.35", 
+      "datastore": "736270b9-27c7-4f03-823b-447d8245e1c2", 
+      "image": "8dad6ec4-775b-4aaf-90c6-5020ceccd53d", 
+      "packages": "MySQL-server-5.6.35", 
+      "active": 1 
+    }, 
+    { 
+      "id": "87620726-6802-46c0-9028-a8785e1f1922", 
+      "name": "5.7.17", 
+      "datastore": "736270b9-27c7-4f03-823b-447d8245e1c2", 
+      "image": "e59a0bac-5509-493b-a033-10b4bec25873", 
+      "packages": "MySQL-server-5.7.17", 
+      "active": 1 
+    } 
+  ] 
+}

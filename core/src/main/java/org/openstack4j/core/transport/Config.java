@@ -28,279 +28,296 @@ import org.openstack4j.model.common.resolvers.ServiceVersionResolver;
  */
 public final class Config {
 
-    public static final Config DEFAULT = new Config();
+	public static final String DEFAULT_LANGUAGE = "en-us";
+	public static final Config DEFAULT = new Config();
 
-    private int connectTimeout;
-    private int readTimeout;
-    private SSLContext sslContext;
-    private HostnameVerifier hostNameVerifier;
-    private boolean ignoreSSLVerification;
-    private String natHostOrIP;
-    private int maxConnections;
-    private int maxConnectionsPerRoute;
-    private ProxyHost proxy;
-    private ServiceVersionResolver resolver;
-    private EndpointURLResolver endpointURLResolver;
+	private String language = DEFAULT_LANGUAGE;
+	private int connectTimeout;
+	private int readTimeout;
+	private SSLContext sslContext;
+	private HostnameVerifier hostNameVerifier;
+	private boolean ignoreSSLVerification;
+	private String natHostOrIP;
+	private int maxConnections;
+	private int maxConnectionsPerRoute;
+	private ProxyHost proxy;
+	private ServiceVersionResolver resolver;
+	private EndpointURLResolver endpointURLResolver;
 
-    private Config() {
-    }
+	private Config() {
+	}
 
-    /**
-     * @return A new client configuration
-     */
-    public static Config newConfig() {
-        return new Config();
-    }
+	/**
+	 * @return A new client configuration
+	 */
+	public static Config newConfig() {
+		return new Config();
+	}
 
-    /**
-     * Sets the Service version resolver to use in determining which API version to use with a particular OpenStack service
-     *
-     * @param resolver the version 2 version resolver
-     * @return Config
-     */
-    public Config withResolver(ServiceVersionResolver resolver) {
-        this.resolver = resolver;
-        return this;
-    }
-    
-    /**
-     * Sets the Endpoint URL resolver for providing the URL resolution strategy
-     *
-     * @param endpointURLResolver the endpoint URL resolver
-     * @return Config
-     */
-    public Config withEndpointURLResolver(EndpointURLResolver endpointURLResolver) {
-    	this.endpointURLResolver = endpointURLResolver;
-    	return this;
-    }
+	/**
+	 * Sets the language to use for some particular OpenStack services, "Trove | database" for example
+	 * 
+	 * @param language 	the language user prefer, (en-us, zh-cn)
+	 * @return {@link Config} instance
+	 */
+	public Config withLanguage(String language) {
+		this.language = language;
+		return this;
+	}
 
+	/**
+	 * Sets the Service version resolver to use in determining which API version to use with a particular OpenStack service
+	 *
+	 * @param resolver the version 2 version resolver
+	 * @return Config
+	 */
+	public Config withResolver(ServiceVersionResolver resolver) {
+		this.resolver = resolver;
+		return this;
+	}
 
-    /**
-     * Sets the connection timeout in milliseconds
-     *
-     * @param connectTimeout timeout in milliseconds
-     * @return Config
-     */
-    public Config withConnectionTimeout(int connectTimeout) {
-        this.connectTimeout = connectTimeout;
-        return this;
-    }
+	/**
+	 * Sets the Endpoint URL resolver for providing the URL resolution strategy
+	 *
+	 * @param endpointURLResolver the endpoint URL resolver
+	 * @return Config
+	 */
+	public Config withEndpointURLResolver(EndpointURLResolver endpointURLResolver) {
+		this.endpointURLResolver = endpointURLResolver;
+		return this;
+	}
 
-    /**
-     * Sets the read timeout in milliseconds
-     *
-     * @param readTimeout timeout in milliseconds
-     * @return Config
-     */
-    public Config withReadTimeout(int readTimeout) {
-        this.readTimeout = readTimeout;
-        return this;
-    }
+	/**
+	 * Sets the connection timeout in milliseconds
+	 *
+	 * @param connectTimeout timeout in milliseconds
+	 * @return Config
+	 */
+	public Config withConnectionTimeout(int connectTimeout) {
+		this.connectTimeout = connectTimeout;
+		return this;
+	}
 
-    /**
-     * Associates the <b>initialized</b> SSL Context to use when querying secure endpoints
-     *
-     * @param sslContext
-     * @return Config
-     */
-    public Config withSSLContext(SSLContext sslContext) {
-        this.sslContext = sslContext;
-        return this;
-    }
+	/**
+	 * Sets the read timeout in milliseconds
+	 *
+	 * @param readTimeout timeout in milliseconds
+	 * @return Config
+	 */
+	public Config withReadTimeout(int readTimeout) {
+		this.readTimeout = readTimeout;
+		return this;
+	}
 
-    /**
-     * This sets the max allowed connections for connectors who are using a connection pool.  This option if set will be
-     * a no-op to connectors that don't offer this setting.
-     *
-     * @param maxConnections the max connections allowed
-     * @return Config
-     */
-    public Config withMaxConnections(int maxConnections) {
-        this.maxConnections = maxConnections;
-        return this;
-    }
+	/**
+	 * Associates the <b>initialized</b> SSL Context to use when querying secure endpoints
+	 *
+	 * @param sslContext
+	 * @return Config
+	 */
+	public Config withSSLContext(SSLContext sslContext) {
+		this.sslContext = sslContext;
+		return this;
+	}
 
-    /**
-     * This sets the max allowed connections per routefor connectors who are using a connection pool.  This option if set will be
-     * a no-op to connectors that don't offer this setting.
-     *
-     * @param maxConnectionsPerRoute the max connections per route
-     * @return Config
-     */
-    public Config withMaxConnectionsPerRoute(int maxConnectionsPerRoute) {
-        this.maxConnectionsPerRoute = maxConnectionsPerRoute;
-        return this;
-    }
+	/**
+	 * This sets the max allowed connections for connectors who are using a connection pool.  This option if set will be
+	 * a no-op to connectors that don't offer this setting.
+	 *
+	 * @param maxConnections the max connections allowed
+	 * @return Config
+	 */
+	public Config withMaxConnections(int maxConnections) {
+		this.maxConnections = maxConnections;
+		return this;
+	}
 
-    /**
-     * Indicates the connector should be using a Proxy host
-     * <p>
-     * (ex: ProxyHost.of("http://myproxy", 8080)) );
-     *
-     * @param proxy the proxy host
-     * @return Config
-     */
-    public Config withProxy(ProxyHost proxy) {
-        this.proxy = proxy;
-        return this;
-    }
+	/**
+	 * This sets the max allowed connections per routefor connectors who are using a connection pool.  This option if set will be
+	 * a no-op to connectors that don't offer this setting.
+	 *
+	 * @param maxConnectionsPerRoute the max connections per route
+	 * @return Config
+	 */
+	public Config withMaxConnectionsPerRoute(int maxConnectionsPerRoute) {
+		this.maxConnectionsPerRoute = maxConnectionsPerRoute;
+		return this;
+	}
 
-    /**
-     * If connecting to an OpenStack deployment is in front of a NAT or Proxy then this option can be provided to dynamically change
-     * the service endpoints hostname/IP to the one NAT is using.
-     * <p>
-     * Example:<br>
-     * Setting NAT IP to: 24.24.24.24<br>
-     * <br>
-     * Would be substitued in any endpoint for any service.  Let's assume we're looking for Heat endpoint
-     * which is returning 192.168.0.2:8000<br>
-     * <br>
-     * The result would be translated dynamically to 24.24.24.24:8000 so we can access via NAT
-     *
-     * @param natHostOrIP the FQDN Host or IP Address
-     * @return Config
-     */
-    public Config withEndpointNATResolution(String natHostOrIP) {
-        this.natHostOrIP = natHostOrIP;
-        return this;
-    }
+	/**
+	 * Indicates the connector should be using a Proxy host
+	 * <p>
+	 * (ex: ProxyHost.of("http://myproxy", 8080)) );
+	 *
+	 * @param proxy the proxy host
+	 * @return Config
+	 */
+	public Config withProxy(ProxyHost proxy) {
+		this.proxy = proxy;
+		return this;
+	}
 
-    /**
-     * Sets the Hostname Verifier to use with SSL
-     *
-     * @param hostnameVerifier the hostname verifier
-     * @return Config
-     */
-    public Config withHostnameVerifier(HostnameVerifier hostnameVerifier) {
-        this.hostNameVerifier = hostnameVerifier;
-        return this;
-    }
+	/**
+	 * If connecting to an OpenStack deployment is in front of a NAT or Proxy then this option can be provided to dynamically change
+	 * the service endpoints hostname/IP to the one NAT is using.
+	 * <p>
+	 * Example:<br>
+	 * Setting NAT IP to: 24.24.24.24<br>
+	 * <br>
+	 * Would be substitued in any endpoint for any service.  Let's assume we're looking for Heat endpoint
+	 * which is returning 192.168.0.2:8000<br>
+	 * <br>
+	 * The result would be translated dynamically to 24.24.24.24:8000 so we can access via NAT
+	 *
+	 * @param natHostOrIP the FQDN Host or IP Address
+	 * @return Config
+	 */
+	public Config withEndpointNATResolution(String natHostOrIP) {
+		this.natHostOrIP = natHostOrIP;
+		return this;
+	}
 
-    /**
-     * If no SSL Context has been specified and this SSL Verification is disabled we will by pass certificate checks (useful for self signed certificates).
-     *
-     * NOTE: This property used to be known as "useNonStrictSSL" in previous releases
-     *
-     * @return Config
-     */
-    public Config withSSLVerificationDisabled() {
-        this.ignoreSSLVerification = Boolean.TRUE;
-        return this;
-    }
+	/**
+	 * Sets the Hostname Verifier to use with SSL
+	 *
+	 * @param hostnameVerifier the hostname verifier
+	 * @return Config
+	 */
+	public Config withHostnameVerifier(HostnameVerifier hostnameVerifier) {
+		this.hostNameVerifier = hostnameVerifier;
+		return this;
+	}
 
-    public ServiceVersionResolver getResolver() {
-        return resolver;
-    }
-    
-    public ServiceVersionResolver getV2Resolver() {
-        return resolver;
-    }
-    
-    public EndpointURLResolver getEndpointURLResolver() {
-    	return endpointURLResolver;
-    }
+	/**
+	 * If no SSL Context has been specified and this SSL Verification is disabled we will by pass certificate checks (useful for self signed certificates).
+	 *
+	 * NOTE: This property used to be known as "useNonStrictSSL" in previous releases
+	 *
+	 * @return Config
+	 */
+	public Config withSSLVerificationDisabled() {
+		this.ignoreSSLVerification = Boolean.TRUE;
+		return this;
+	}
+	
 
-    public int getConnectTimeout() {
-        return connectTimeout;
-    }
+	public String getLanguage() {
+		return language;
+	}
+	
+	public ServiceVersionResolver getResolver() {
+		return resolver;
+	}
 
-    public int getReadTimeout() {
-        return readTimeout;
-    }
+	public ServiceVersionResolver getV2Resolver() {
+		return resolver;
+	}
 
-    public SSLContext getSslContext() {
-        return sslContext;
-    }
+	public EndpointURLResolver getEndpointURLResolver() {
+		return endpointURLResolver;
+	}
 
-    public HostnameVerifier getHostNameVerifier() {
-        return hostNameVerifier;
-    }
+	public int getConnectTimeout() {
+		return connectTimeout;
+	}
 
-    public boolean isIgnoreSSLVerification() {
-        return ignoreSSLVerification;
-    }
+	public int getReadTimeout() {
+		return readTimeout;
+	}
 
-    public String getEndpointNATResolution() {
-        return natHostOrIP;
-    }
+	public SSLContext getSslContext() {
+		return sslContext;
+	}
 
-    public boolean isBehindNAT() {
-        return natHostOrIP != null;
-    }
+	public HostnameVerifier getHostNameVerifier() {
+		return hostNameVerifier;
+	}
 
-    public int getMaxConnections() {
-        return maxConnections;
-    }
+	public boolean isIgnoreSSLVerification() {
+		return ignoreSSLVerification;
+	}
 
-    public int getMaxConnectionsPerRoute() {
-        return maxConnectionsPerRoute;
-    }
+	public String getEndpointNATResolution() {
+		return natHostOrIP;
+	}
 
-    public ProxyHost getProxy() {
-        return proxy;
-    }
+	public boolean isBehindNAT() {
+		return natHostOrIP != null;
+	}
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + connectTimeout;
-        result = prime * result + maxConnections;
-        result = prime * result + maxConnectionsPerRoute;
-        result = prime * result + (ignoreSSLVerification ? 1231 : 1237);
-        result = prime * result + ((natHostOrIP == null) ? 0 : natHostOrIP.hashCode());
-        result = prime * result + readTimeout;
-        result = prime * result + ((proxy == null) ? 0 : proxy.hashCode());
-        result = prime * result + ((sslContext == null) ? 0 : sslContext.hashCode());
-        result = prime * result + ((hostNameVerifier == null) ? 0 : hostNameVerifier.hashCode());
-        return result;
-    }
+	public int getMaxConnections() {
+		return maxConnections;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Config other = (Config) obj;
-        if (connectTimeout != other.connectTimeout)
-            return false;
-        if (maxConnections != other.maxConnections)
-            return false;
-        if (maxConnectionsPerRoute != other.maxConnectionsPerRoute)
-            return false;
-        if (ignoreSSLVerification != other.ignoreSSLVerification)
-            return false;
-        if (natHostOrIP == null) {
-            if (other.natHostOrIP != null)
-                return false;
-        } else if (!natHostOrIP.equals(other.natHostOrIP))
-            return false;
-        if (readTimeout != other.readTimeout)
-            return false;
-        if (proxy == null) {
-            if (other.proxy != null)
-                return false;
-        } else if (!proxy.equals(other.proxy))
-            return false;
-        if(sslContext == null) {
-        	if(other.getSslContext() != null) {
-        		return false;
-        	}
-        } else if(!sslContext.equals(other.getSslContext())) {
-        	return false;
-        }
-        if(hostNameVerifier == null) {
-        	if(other.getHostNameVerifier() != null) {
-        		return false;
-        	}
-        } else if(!hostNameVerifier.equals(other.getHostNameVerifier())) {
-        	return false;
-        }
-        
-        return true;
-    }
+	public int getMaxConnectionsPerRoute() {
+		return maxConnectionsPerRoute;
+	}
+
+	public ProxyHost getProxy() {
+		return proxy;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + connectTimeout;
+		result = prime * result + maxConnections;
+		result = prime * result + maxConnectionsPerRoute;
+		result = prime * result + (ignoreSSLVerification ? 1231 : 1237);
+		result = prime * result + ((natHostOrIP == null) ? 0 : natHostOrIP.hashCode());
+		result = prime * result + readTimeout;
+		result = prime * result + ((proxy == null) ? 0 : proxy.hashCode());
+		result = prime * result + ((sslContext == null) ? 0 : sslContext.hashCode());
+		result = prime * result + ((hostNameVerifier == null) ? 0 : hostNameVerifier.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Config other = (Config) obj;
+		if (connectTimeout != other.connectTimeout)
+			return false;
+		if (maxConnections != other.maxConnections)
+			return false;
+		if (maxConnectionsPerRoute != other.maxConnectionsPerRoute)
+			return false;
+		if (ignoreSSLVerification != other.ignoreSSLVerification)
+			return false;
+		if (natHostOrIP == null) {
+			if (other.natHostOrIP != null)
+				return false;
+		} else if (!natHostOrIP.equals(other.natHostOrIP))
+			return false;
+		if (readTimeout != other.readTimeout)
+			return false;
+		if (proxy == null) {
+			if (other.proxy != null)
+				return false;
+		} else if (!proxy.equals(other.proxy))
+			return false;
+		if (sslContext == null) {
+			if (other.getSslContext() != null) {
+				return false;
+			}
+		} else if (!sslContext.equals(other.getSslContext())) {
+			return false;
+		}
+		if (hostNameVerifier == null) {
+			if (other.getHostNameVerifier() != null) {
+				return false;
+			}
+		} else if (!hostNameVerifier.equals(other.getHostNameVerifier())) {
+			return false;
+		}
+
+		return true;
+	}
 
 }

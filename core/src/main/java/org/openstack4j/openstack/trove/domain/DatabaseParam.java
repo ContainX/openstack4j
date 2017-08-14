@@ -15,6 +15,7 @@
  *******************************************************************************/
 package org.openstack4j.openstack.trove.domain;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
@@ -62,13 +63,13 @@ public class DatabaseParam implements ModelEntity {
 	 * parameter max value
 	 */
 	@JsonProperty("max")
-	Integer max;
+	BigInteger max;
 
 	/**
 	 * parameter min value
 	 */
 	@JsonProperty("min")
-	Integer min;
+	BigInteger min;
 
 	/**
 	 * datastore version id of this parameter

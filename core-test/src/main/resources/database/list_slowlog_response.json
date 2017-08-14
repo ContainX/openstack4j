@@ -1,0 +1,24 @@
+{   "slowLogList": [ 
+        { 
+           "count":"409  (99.76%)", 
+           "time":"1.29", 
+           "lockTime":"0", 
+           "rowsSent":"0", 
+           "rowsExamined":"0", 
+           "database":"", 
+           "users":"\trdsBackup@localhost  : 100.00% (409) of query, 99.76% (409) of all users", 
+           "querySample":"flush logs;"
+        }, 
+        { 
+           "count":"1  (0.24%)", 
+           "time":"5.0", 
+           "lockTime":"0", 
+           "rowsSent":"1", 
+           "rowsExamined":"0", 
+           "database":"", 
+           "users":"\trdsAdmin@localhost  : 100.00% (1) of query, 0.24% (1) of all users", 
+           "querySample":"select sleep(5);"
+        } 
+    ], 
+   "totalRecord": 2 
+}

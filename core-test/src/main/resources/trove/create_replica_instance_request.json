@@ -1,0 +1,16 @@
+{
+  "instance" : {
+    "datastore" : {
+      "type" : "MySQL",
+      "version" : "MySQL-5.6.33"
+    },
+    "name" : "sdk-replica",
+    "flavorRef" : "flavor-id",
+    "volume" : {
+      "type" : "COMMON",
+      "size" : 100
+    },
+    "replica_of" : "master-id",
+    "replica_count" : 1
+  }
+}

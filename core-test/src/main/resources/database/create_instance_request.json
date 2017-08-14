@@ -1,0 +1,32 @@
+{
+  "instance" : {
+    "datastore" : {
+      "type" : "MySQL",
+      "version" : "6.3.35"
+    },
+    "name" : "sdk-test",
+    "flavorRef" : "flavor-id",
+    "volume" : {
+      "type" : "COMMON",
+      "size" : 100
+    },
+    "region" : "eu-de",
+    "availabilityZone" : "eu-de-01",
+    "vpc" : "vpc-id",
+    "nics" : {
+      "subnetId" : "network-id"
+    },
+    "securityGroup" : {
+      "id" : "sg-id"
+    },
+    "dbRtPd" : "1qaz@WSX",
+    "ha" : {
+      "enable" : true,
+      "replicationMode" : "async"
+    },
+    "backupStrategy" : {
+      "startTime" : "15:00:00",
+      "keepDays" : 1
+    }
+  }
+}

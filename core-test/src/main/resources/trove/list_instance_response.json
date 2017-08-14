@@ -1,0 +1,396 @@
+{
+  "instances": [
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "SDK-ce273544-8b81-4777-8b08-b5c765e68c61-MySQL-1-1",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "3a0d68e6-8538-420c-8936-f4c832de2bb2",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "0d922098-553c-4124-80df-e627a1d41a0d",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "MySQL",
+          "version": "MySQL-5.6.33"
+        },
+        "region": "eu-de",
+        "ip": "192.168.123.248",
+        "replica_of": null,
+        "hostname": null
+      }
+    },
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "SDK-ddadd2bb-bd71-43c7-889f-fa442ec23c4d-MySQL-1-1",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "60523749-abc4-4957-9447-957dc36634a7",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "0d922098-553c-4124-80df-e627a1d41a0d",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "MySQL",
+          "version": "MySQL-5.6.33"
+        },
+        "region": "eu-de",
+        "ip": "192.168.123.78",
+        "replica_of": null,
+        "hostname": null
+      }
+    },
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "SDK-33870c17-8dbc-4c93-95a3-a759c635bc6c-MySQL-1-1",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "60f9fcbb-30a4-4eea-8e5b-1de0963ea970",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "0d922098-553c-4124-80df-e627a1d41a0d",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "MySQL",
+          "version": "MySQL-5.6.33"
+        },
+        "region": "eu-de",
+        "ip": "192.168.123.73",
+        "replica_of": null,
+        "hostname": null
+      }
+    },
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "rds-9425",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "6387e302-a58c-4b6b-900e-6bc44977933d",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "0d922098-553c-4124-80df-e627a1d41a0d",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "MySQL",
+          "version": "MySQL-5.6.35"
+        },
+        "region": "eu-de",
+        "ip": "192.168.0.77",
+        "replica_of": null,
+        "hostname": null
+      }
+    },
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "SDK-472ab5e3-0658-4622-bf0e-13d24469dbfa-MySQL-1-1",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "a16dabda-6323-4ec7-95fd-0dd1f8077d20",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "0d922098-553c-4124-80df-e627a1d41a0d",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "MySQL",
+          "version": "MySQL-5.6.33"
+        },
+        "region": "eu-de",
+        "ip": "192.168.123.41",
+        "replica_of": null,
+        "hostname": null
+      }
+    },
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "rds-fdv",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "abc36f95-8a4f-4c71-b3cc-20953cc98ab6",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "0d922098-553c-4124-80df-e627a1d41a0d",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "MySQL",
+          "version": "MySQL-5.6.34"
+        },
+        "region": "eu-de",
+        "ip": "192.168.2.4",
+        "replica_of": null,
+        "hostname": null
+      }
+    },
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "rds-d946",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "d11fb880-89dd-4fb0-b510-6dbbc29ca67a",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "0d922098-553c-4124-80df-e627a1d41a0d",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "MySQL",
+          "version": "MySQL-5.6.34"
+        },
+        "region": "eu-de",
+        "ip": "192.168.2.7",
+        "replica_of": [
+          {
+            "id": "abc36f95-8a4f-4c71-b3cc-20953cc98ab6",
+            "links": [
+              {
+                "rel": "self",
+                "href": ""
+              },
+              {
+                "rel": "bookmark",
+                "href": ""
+              }
+            ]
+          }
+        ],
+        "hostname": null
+      }
+    },
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "rds-28ice-pgsql",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "f49a2b56-3c22-4531-8dcd-50853235cc74",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "1da732d6-622d-1e74-744a-f1a0162ea98f",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "PostgreSQL",
+          "version": "PostgreSQL-9.5.5"
+        },
+        "region": "eu-de",
+        "ip": "192.168.3.6",
+        "replica_of": null,
+        "hostname": null
+      }
+    },
+    {
+      "instance": {
+        "status": "ACTIVE",
+        "name": "rds-4533",
+        "links": [
+          {
+            "rel": "self",
+            "href": ""
+          },
+          {
+            "rel": "bookmark",
+            "href": ""
+          }
+        ],
+        "id": "f78ff44c-7a1f-4f52-be01-a3c4c5eff8c6",
+        "volume": {
+          "type": "COMMON",
+          "size": 100
+        },
+        "flavor": {
+          "id": "31b2863c-0e15-44fd-a80d-1e83a7aca338",
+          "links": [
+            {
+              "rel": "self",
+              "href": ""
+            },
+            {
+              "rel": "bookmark",
+              "href": ""
+            }
+          ]
+        },
+        "datastore": {
+          "type": "MySQL",
+          "version": "MySQL-5.6.34"
+        },
+        "region": "eu-de",
+        "ip": "192.168.1.140",
+        "replica_of": null,
+        "hostname": null
+      }
+    }
+  ]
+}

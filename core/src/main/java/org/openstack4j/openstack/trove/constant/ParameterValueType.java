@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum ParameterValueType {
 
-	Integer("integer"), String("string"), Boolean("boolean"), Float("float");
+	Integer("integer"), String("string"), Boolean("boolean"), Float("float"), List("list");
 
 	String value;
 

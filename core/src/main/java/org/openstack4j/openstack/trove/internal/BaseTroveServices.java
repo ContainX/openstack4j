@@ -16,6 +16,7 @@
 package org.openstack4j.openstack.trove.internal;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
@@ -30,7 +31,7 @@ import com.google.common.base.Function;
  */
 public class BaseTroveServices extends BaseOpenStackService {
 
-	public static String CONTENT_JSON = "application/json;charset=utf-8";
+	String CONTENT_JSON = "application/json;charset=utf-8";
 
 	public BaseTroveServices() {
 		super(ServiceType.DATABASE);
@@ -55,8 +56,13 @@ public class BaseTroveServices extends BaseOpenStackService {
 	 * HuaWei Relation DataBase Service(known as Trove) validate the content-type in every request
 	 */
 	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		// add common base path for database service
 		path = "/v1.0/%(project_id)s" + path;
-		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON);
+		
+		// setup common headers for database service
+		Invocation<R> invocation = super.builder(returnType, path, method);
+		Config config = invocation.getRequest().getConfig();
+		return invocation.header("Content-Type", CONTENT_JSON).header("X-Language", config.getLanguage());
 	}
 
 }

@@ -1,0 +1,8 @@
+{
+  "configuration" : {
+    "values" : {
+      "autocommit" : "OFF",
+      "max_connections" : "10"
+    }
+  }
+}

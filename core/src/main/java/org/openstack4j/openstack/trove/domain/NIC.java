@@ -50,6 +50,6 @@ public class NIC implements ModelEntity {
 	 * security group identifier
 	 */
 	@JsonProperty("securityGroupId")
-	Integer securityGroupId;
+	String securityGroupId;
 
 }

@@ -42,7 +42,7 @@ public class GetRootOfURL implements Function<String, String> {
 	}
 	
 	public static void main(String[] args) {
-		String apply = GetRootOfURL.instance().apply("http://www.baidu.com:10000/abc/xd");
+		String apply = GetRootOfURL.instance().apply("http://www.baidu.com:10000/");
 		System.out.println(apply);
 	}
 

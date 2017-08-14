@@ -19,8 +19,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.openstack4j.model.ModelEntity;
+import org.openstack4j.openstack.common.DateTimeUtils;
+import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
+import org.openstack4j.openstack.trove.constant.DatastoreType;
+import org.openstack4j.openstack.trove.constant.InstanceType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -46,28 +51,163 @@ public class DatabaseInstance implements ModelEntity {
 
 	private static final long serialVersionUID = -7399474725379713926L;
 
-	private Date created;
+	String id;
 
-	private InstanceFlavor flavor;
+	/**
+	 * DB instance name
+	 */
+	String name;
 
-	private String hostname;
+	/**
+	 * DB instance IP addr
+	 */
+	String ip;
 
-	private List<String> ip;
+	/**
+	 * Reserved
+	 */
+	String hostname;
 
-	private String id;
+	/**
+	 * DB instance status
+	 */
+	String status;
 
-	private String name;
+	Volume volume;
 
-	private String status;
+	/**
+	 * datastore of this database
+	 */
+	Datastore datastore;
 
-	private Date updated;
+	/**
+	 * DB instance flavor of the DB instance
+	 */
+	InstanceFlavor flavor;
 
-	private Volume volume;
+	/**
+	 * DB instance creation time
+	 */
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMS)
+	Date created;
 
-	private Datastore datastore;
+	/**
+	 * DB instance updated time
+	 */
+	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMS)
+	Date updated;
 
+	@JsonProperty("links")
+	List<GenericLink> links;
 
+	/**
+	 * database configuration status
+	 */
+	@JsonProperty("configurationStatus")
+	String configurationStatus;
 
+	/**
+	 * database configuration id
+	 */
+	@JsonProperty("paramsGroupId")
+	String configurationId;
+
+	/**
+	 * datastore type, @see DatastoreType
+	 */
+	DatastoreType type;
+
+	/**
+	 * network identifier of the DB instance
+	 */
+	@JsonProperty("subnetid")
+	String subnetId;
+
+	/**
+	 * DB instance role in HA group, @see InstanceType
+	 */
+	InstanceType role;
+
+	/**
+	 * internal subnet ID
+	 */
+	String internalSubnetId;
+
+	/**
+	 * the group which the DB instance belongs to
+	 */
+	String group;
+
+	/**
+	 * security group id of the DB instance
+	 */
+	@JsonProperty("securegroup")
+	String secureGroupId;
+
+	/**
+	 * router(VPC) of the DB instance
+	 */
+	@JsonProperty("vpc")
+	String vpcId;
+
+	/**
+	 * DB instance availability zone
+	 */
+	@JsonProperty("azcode")
+	String availabilityZone;
+
+	/**
+	 * DB instance region
+	 */
+	String region;
+
+	/**
+	 * Fault reason if the DB instance is faulty
+	 */
+	String fault;
+
+	DatabaseConfig configuration;
+
+	/**
+	 * Reserved
+	 */
+	String locality;
+
+	/**
+	 * Replica DB list of the DB instance 
+	 * (not null if the current DB instance is master) 
+	 */
+	List<DatabaseInstance> replicas;
+
+	/**
+	 * Master DB instance of the DB instance
+	 * (not null if the current DB instance readreplica) 
+	 */
+	@JsonProperty("replica_of")
+	List<DatabaseInstance> replicaOf;
+
+	/**
+	 * new administrator account
+	 */
+	@JsonProperty("dbuser")
+	String dbUser;
+
+	/**
+	 * storage engine of the DB instance
+	 */
+	String storageEngine;
+
+	/**
+	 * pay model of the DB instance
+	 */
+	Integer payModel;
+
+	/**
+	 * cluster id the DB instance
+	 */
+	@JsonProperty("cluster_id")
+	String clusterId;
+	
 	public static class DatabaseInstances extends ListResult<DatabaseInstance> {
 
 		private static final long serialVersionUID = 1L;
@@ -80,5 +220,35 @@ public class DatabaseInstance implements ModelEntity {
 			return instances;
 		}
 	}
+
+	public static class DatabaseInstanceWrap {
+		
+		@JsonProperty("instance")
+		DatabaseInstance instance;
+
+		public DatabaseInstance getInstance() {
+			return instance;
+		}
+
+		public void setInstance(DatabaseInstance instance) {
+			this.instance = instance;
+		}
+		
+	}
+
+	public static class DatabaseInstanceWraps extends ListResult<DatabaseInstanceWrap> {
+
+		private static final long serialVersionUID = 1L;
+
+		@JsonProperty("instances")
+		private List<DatabaseInstanceWrap> instances;
+
+		@Override
+		protected List<DatabaseInstanceWrap> value() {
+			return instances;
+		}
+	}
+	
+	
 
 }

@@ -127,5 +127,6 @@ public class DatabaseInstanceCreate implements ModelEntity {
 	 */
 	@JsonProperty("cluster_config")
 	IdResourceEntity clusterConfig;
+	
 
 }

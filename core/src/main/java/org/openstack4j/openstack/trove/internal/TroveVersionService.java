@@ -18,10 +18,15 @@ package org.openstack4j.openstack.trove.internal;
 import java.util.List;
 
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.core.transport.HttpMethod;
 import org.openstack4j.openstack.common.ServiceVersion;
 import org.openstack4j.openstack.common.ServiceVersion.ServiceVersionWrap;
 import org.openstack4j.openstack.common.ServiceVersion.ServiceVersions;
 import org.openstack4j.openstack.common.functions.GetRootOfURL;
+import org.openstack4j.openstack.internal.BaseOpenStackService;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 /**
  * 
@@ -30,17 +35,24 @@ import org.openstack4j.openstack.common.functions.GetRootOfURL;
  * @author QianBiao.NG
  * @date   2017-07-28 16:46:41
  */
-public class TroveVersionService extends BaseTroveServices {
+public class TroveVersionService extends BaseOpenStackService {
 
 	public TroveVersionService() {
 		super(ServiceType.DATABASE, GetRootOfURL.instance());
+	}
+	
+	/**
+	 * HuaWei Relation DataBase Service(known as Trove) validate the content-type in every request.
+	 */
+	protected <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
+		return super.builder(returnType, path, method).header("Content-Type", CONTENT_JSON);
 	}
 
 	/**
 	 * list versions of Trove Service
 	 */
 	public List<ServiceVersion> list() {
-		return get(ServiceVersions.class, "/rds/").execute().getList();
+		return get(ServiceVersions.class, "/").execute().getList();
 	}
 
 	/**
@@ -50,7 +62,8 @@ public class TroveVersionService extends BaseTroveServices {
 	 * @return {@link ServiceVersion} instance
 	 */
 	public ServiceVersion get(String versionId) {
-		return get(ServiceVersionWrap.class, "/rds/" + versionId).execute().getVersion();
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(versionId), "parameter `versionId` should not be empty");
+		return get(ServiceVersionWrap.class, "/" + versionId).execute().getVersion();
 	}
 
 }

@@ -1,0 +1,36 @@
+{ 
+  "flavors": [ 
+    { 
+      "ram": 2048, 
+      "id": 1, 
+      "links": [ 
+        { 
+          "rel": "self", 
+          "href": "" 
+        }, 
+        { 
+          "rel": "bookmark", 
+          "href": "" 
+        } 
+      ], 
+      "name": "rds.pg.c2.medium", 
+      "str_id": "9ff2a3a5-c859-bbc0-67f7-86ce59432b1d" 
+    }, 
+    { 
+      "ram": 4096, 
+      "id": 1, 
+      "links": [ 
+        { 
+          "rel": "self", 
+          "href": "" 
+        }, 
+        { 
+          "rel": "bookmark", 
+          "href": "" 
+        } 
+      ], 
+      "name": "rds.pg.c2.large", 
+      "str_id": "b77b5b7e-f572-dfd9-57af-910547fe0883" 
+    } 
+  ] 
+}

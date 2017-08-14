@@ -21,6 +21,7 @@ import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
+import org.openstack4j.model.network.Router;
 import org.openstack4j.openstack.OSFactory;
 import org.openstack4j.openstack.identity.internal.OverridableEndpointURLResolver;
 import org.testng.annotations.BeforeTest;
@@ -33,6 +34,7 @@ import org.testng.annotations.BeforeTest;
 public class AbstractSample {
 
 	protected OSClientV3 osclient;
+	private Router router;
 
 	@BeforeTest
 	public void initialV3Client() {
@@ -60,11 +62,11 @@ public class AbstractSample {
 				"https://dms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.MAAS,
 				"https://maas.eu-de.otc.t-systems.com/v1/%(project_id)s/objectstorage");
-		endpointResolver.addOverrideEndpoint(ServiceType.DATABASE,
-				"https://rds.eu-de.otc.t-systems.com");
+		endpointResolver.addOverrideEndpoint(ServiceType.DATABASE, "https://rds.eu-de.otc.t-systems.com");
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
+		// TODO remove authentication before push to github
 		String user = "zhangdong";
 		String password = "hw@otc2017";
 		String projectId = "d4f2557d248e4860829f5fef030b209c";
@@ -72,10 +74,11 @@ public class AbstractSample {
 		String authUrl = "https://iam.eu-de.otc.t-systems.com/v3";
 
 		OSFactory.enableHttpLoggingFilter(true);
-		// TODO remove authentication before push to github
-		osclient = OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver))
-				.endpoint(authUrl).credentials(user, password, Identifier.byId(userDomainId))
-				.scopeToProject(Identifier.byId(projectId)).authenticate();
+		// with language setting is required for RDS(trove&database) service
+		Config config = Config.newConfig().withEndpointURLResolver(endpointResolver).withLanguage("zh-cn");
+		osclient = OSFactory.builderV3().withConfig(config).endpoint(authUrl)
+				.credentials(user, password, Identifier.byId(userDomainId)).scopeToProject(Identifier.byId(projectId))
+				.authenticate();
 	}
 
 	protected Object retry(Retry retry) {
@@ -99,5 +102,18 @@ public class AbstractSample {
 	protected static String randomName() {
 		return "SDK-" + UUID.randomUUID().toString();
 	}
+
+	/**
+	 * get first router(VPC) for testing
+	 * 
+	 * @return
+	 */
+	protected Router getFirstRouter() {
+		if (router == null) {
+			router = osclient.networking().router().list().get(0);
+		}
+		return router;
+	}
+	
 
 }

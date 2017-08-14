@@ -1,0 +1,39 @@
+{ 
+    "instance": { 
+        "id": "9fbe7995-9851-47ea-b7af-6037104a1dd5", 
+        "status": "BUILD", 
+        "name": "rds-f1d61", 
+        "created": "", 
+        "hostname": "", 
+        "type": "master", 
+        "region": "eu-de", 
+        "updated": "", 
+        "availabilityZone": "eu-de-01", 
+        "vpc": "2d6d6053-6dd1-46d7-99b4-02c62686a628", 
+        "nics": { 
+            "subnetId": "a2c3a6e3-5204-4f53-aa4c-bc3d22c98176" 
+        }, 
+        "securityGroup": { 
+            "id": "8c3f8730-f63b-48d4-a183-d0c8a091db8c" 
+        }, 
+        "flavor": { 
+            "id": "0d922098-553c-4124-80df-e627a1d41a0d" 
+        }, 
+        "volume": { 
+            "type": "COMMON", 
+            "size": 100 
+        }, 
+        "dataStoreInfo": null, 
+        "extendparam": { 
+            "jobs": [ 
+                { 
+                    "id": "ff80808156fd9aee0156fe1fef4a294f" 
+                } 
+            ] 
+        }, 
+        "backupStrategy": { 
+            "startTime": "22:00:00", 
+            "keepDays": 2 
+        } 
+    } 
+}

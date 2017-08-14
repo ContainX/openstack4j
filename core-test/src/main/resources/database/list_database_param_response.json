@@ -1,0 +1,34 @@
+{ 
+  "configuration-parameters" : [ { 
+    "name" : "autocommit", 
+    "type" : "boolean", 
+    "value_range" : "ON|OFF", 
+    "description" : "The autocommit mode. If set to ON, all changes to a table take effect immediately. If set to OFF, you must use COMMIT to accept a transaction or ROLLBACK to cancel it. ", 
+    "restart_required" : false, 
+    "datastore_version_id" : "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61" 
+  }, { 
+    "name" : "auto_increment_increment", 
+    "min" : 1, 
+    "max" : 65535, 
+    "type" : "integer", 
+    "description" : "auto_increment_increment and auto_increment_offset are intended for use with master-to-master replication, and can be used to control the operation of AUTO_INCREMENT columns.", 
+    "restart_required" : false, 
+    "datastore_version_id" : "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61" 
+  }, { 
+    "name" : "auto_increment_offset", 
+    "min" : 1, 
+    "max" : 65535, 
+    "type" : "integer", 
+    "description" : "auto_increment_increment and auto_increment_offset are intended for use with master-to-master replication, and can be used to control the operation of AUTO_INCREMENT columns. ", 
+    "restart_required" : false, 
+    "datastore_version_id" : "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61" 
+  }, { 
+    "name" : "back_log", 
+    "min" : 1, 
+    "max" : 65535, 
+    "type" : "integer", 
+    "description" : "The number of outstanding connection requests MySQL can have. This comes into play when the main MySQL thread gets very many connection requests in a very short time. It then takes some time (although very little) for the main thread to check the connection and start a new thread. The back_log value indicates how many requests can be stacked during this short time before MySQL momentarily stops answering new requests. The default value depends on system architecture.", 
+    "restart_required" : true, 
+    "datastore_version_id" : "e8a8b8cc-63f8-4fb5-8d4a-24c502317a61" 
+    } ] 
+}
