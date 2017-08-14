@@ -25,7 +25,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(suiteName = "Trove/Flavor/Sample")
-public class DBInstanceFlavorSample extends AbstractSample {
+public class DatabaseInstanceFlavorSample extends AbstractSample {
 
 	List<InstanceFlavor> flavors = null;
 

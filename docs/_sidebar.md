@@ -12,3 +12,5 @@
   - [DMS](dms-sdk.md)
   - [Anti-DDoS](antiddos-sdk.md)
   - [MaaS](maas-sdk.md)
+  - [Trove](trove-sdk.md)
+  - [RDS](rds-sdk.md)
