@@ -131,7 +131,8 @@ public class TaskService extends BaseMaaSService implements RestService {
 
 		Map result = get(Map.class, uri("/task")).param("totalcount", true).param("state", state.getVal()).execute();
 		if (result.containsKey("taskcount")) {
-			return Long.parseLong((String) result.get("taskcount"));
+			Integer taskcount = (Integer) result.get("taskcount");
+			return taskcount.longValue();
 		} else
 			return 0;
 	}

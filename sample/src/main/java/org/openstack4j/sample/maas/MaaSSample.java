@@ -126,6 +126,8 @@ public class MaaSSample extends AbstractSample {
 	public void testTaskCount() {
 		long count = osclient.maas().task().count();
 		LOGGER.info("{}", count);
+		count = osclient.maas().task().count(State.SUCCESS);
+		LOGGER.info("{}", count);
 	}
 
 	@Test(priority = 5)
