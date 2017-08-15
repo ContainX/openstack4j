@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.maas.constants.State;
 import org.openstack4j.openstack.maas.constants.TriggerCondition;
 import org.openstack4j.openstack.maas.domain.Task;
 import org.openstack4j.openstack.maas.domain.TaskCreate;
@@ -92,8 +93,12 @@ public class MaaSTest extends AbstractTest {
 
 	public void testTaskCount() throws IOException {
 		respondWith(JSON_TASK_COUNT);
+		respondWith(JSON_TASK_COUNT);
 
 		long count = osv3().maas().task().count();
+		assertTrue(count == 5l);
+		
+		count = osv3().maas().task().count(State.SUCCESS);
 		assertTrue(count == 5l);
 	}
 
