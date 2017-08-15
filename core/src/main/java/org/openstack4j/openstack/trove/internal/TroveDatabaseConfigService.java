@@ -27,7 +27,8 @@ import org.openstack4j.openstack.trove.domain.DatabaseConfigCreate;
 import org.openstack4j.openstack.trove.domain.DatabaseConfigUpdate;
 import org.openstack4j.openstack.trove.domain.DatabaseInstance;
 import org.openstack4j.openstack.trove.domain.DatabaseInstance.DatabaseInstances;
-import org.testng.util.Strings;
+
+import com.google.common.base.Strings;
 
 /**
  * The implementation of manipulation of {@link DatabaseConfig}
