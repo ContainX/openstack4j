@@ -10,9 +10,11 @@ import java.util.Map;
 
 import okhttp3.mockwebserver.RecordedRequest;
 import org.openstack4j.api.AbstractTest;
+import org.openstack4j.api.Builders;
 import org.openstack4j.api.SkipTest;
 import org.openstack4j.model.storage.block.Volume;
 import org.openstack4j.model.storage.block.VolumeAttachment;
+import org.openstack4j.model.storage.block.builder.VolumeBuilder;
 import org.testng.annotations.Test;
 
 
@@ -140,5 +142,25 @@ public class VolumeTests extends AbstractTest {
         assertEquals(volumes.get(1).encrypted(), true);
         
         
+    }
+    
+    
+    @Test
+    public void CreateVolumeV2WithMultiattach() throws Exception {
+        // Check list volumes
+        respondWith("/storage/v2/createVolume-muitiattach.json");
+        
+        VolumeBuilder volumeBuilder = Builders.volume();
+		volumeBuilder.size(10);
+		volumeBuilder.name("test_openstack4j");
+		volumeBuilder.description("test");
+		volumeBuilder.multiattach(true);
+		
+		Volume volume = osv2().blockStorage().volumes().create(volumeBuilder.build());
+		        
+        assertEquals(volume.getSize(), 10);
+        assertEquals(volume.getName(), "test_openstack4j");
+        assertEquals(volume.getDescription(), "test");
+        assertEquals(volume.isMultiattach(), true);                        
     }
 }

@@ -47,6 +47,8 @@ public class CinderVolume implements Volume {
 	private String volumeType;
 	@JsonProperty("imageRef")
 	private String imageRef;
+	@JsonProperty("multiattach")
+	private Boolean multiattach;
 	@JsonProperty("source_volid")
 	private String sourceVolid;
 	@JsonProperty("snapshot_id")
@@ -200,6 +202,14 @@ public class CinderVolume implements Volume {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public boolean isMultiattach(){
+		return multiattach;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getSourceVolid() {
 		return sourceVolid;
 	}
@@ -259,7 +269,7 @@ public class CinderVolume implements Volume {
 		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("name", name).add("description", description)
 				     .add("status", status).add("size", size).add("zone", zone).add("created", created)
-				     .add("volumeType", volumeType).add("imageRef", getImageRef())
+				     .add("volumeType", volumeType).add("imageRef", getImageRef()).add("multiattach", multiattach)
 				     .add("sourceVolid", sourceVolid).add("snapshotId", snapshotId).add("metadata", metadata)
 				     .add("bootable", bootable)
 				     .toString();
@@ -319,6 +329,12 @@ public class CinderVolume implements Volume {
 		@Override
 		public VolumeBuilder imageRef(String imageRef) {
 			m.imageRef = imageRef;
+			return this;
+		}
+		
+		@Override
+		public VolumeBuilder multiattach(boolean multiattach) {
+			m.multiattach = multiattach;
 			return this;
 		}
 
