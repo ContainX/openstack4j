@@ -152,15 +152,15 @@ public class VolumeTests extends AbstractTest {
         
         VolumeBuilder volumeBuilder = Builders.volume();
 		volumeBuilder.size(10);
-		volumeBuilder.name("test_openstack4j");
-		volumeBuilder.description("test");
+		volumeBuilder.name("test_openstack4j");		
 		volumeBuilder.multiattach(true);
 		
 		Volume volume = osv2().blockStorage().volumes().create(volumeBuilder.build());
 		        
+		server.takeRequest();	 
+		
         assertEquals(volume.getSize(), 10);
-        assertEquals(volume.getName(), "test_openstack4j");
-        assertEquals(volume.getDescription(), "test");
+        assertEquals(volume.getName(), "test_openstack4j");        
         assertEquals(volume.isMultiattach(), true);                        
     }
 }
