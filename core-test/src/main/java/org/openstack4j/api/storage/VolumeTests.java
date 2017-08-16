@@ -147,20 +147,20 @@ public class VolumeTests extends AbstractTest {
     
     @Test
     public void CreateVolumeV2WithMultiattach() throws Exception {
-        // Check list volumes
+
         respondWith("/storage/v2/createVolume-muitiattach.json");
         
         VolumeBuilder volumeBuilder = Builders.volume();
 		volumeBuilder.size(10);
-		volumeBuilder.name("test_openstack4j");		
+		volumeBuilder.name("test_openstack4j");
+		volumeBuilder.description("test");
 		volumeBuilder.multiattach(true);
 		
 		Volume volume = osv2().blockStorage().volumes().create(volumeBuilder.build());
 		        
 		server.takeRequest();	 
 		
-        assertEquals(volume.getSize(), 10);
-        assertEquals(volume.getName(), "test_openstack4j");        
+        assertEquals(volume.getSize(), 10);               
         assertEquals(volume.isMultiattach(), true);                        
     }
 }
