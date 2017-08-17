@@ -27,7 +27,7 @@ public class SmsSample extends AbstractSample {
 
 	@Test
 	public void testPublishMessage() {
-		MessageIdResponse message = osclient.notification().sms().send("15659767757", "Hello, sms", null);
+		MessageIdResponse message = osclient.notification().sms().send("+8615306980363", "Hello, sms", null);
 		Assert.assertNotNull(message.getId());
 		Assert.assertNotNull(message.getRequestId());
 	}
