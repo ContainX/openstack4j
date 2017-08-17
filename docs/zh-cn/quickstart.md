@@ -60,7 +60,7 @@ mvn clean package install -DskipTests
 
 **1. 配置maven依赖**
 
-你可以简单的将如下依赖加入你的pom.xml中，这个依赖会自动使用默认的 `resteasy`作为Connector
+你可以简单的将如下依赖加入你的pom.xml中，这个依赖会自动使用默认的 `jersey2`作为Connector
 ```xml
 <dependency>
 	<groupId>org.pacesys</groupId>
@@ -79,7 +79,7 @@ mvn clean package install -DskipTests
 </dependency>
 ```
 
-OpenStack4j 被设计成一个模块化的系统，模块化其中的一个好处是，你可以自由的选择你喜欢的`Connector`，所以如果你不喜欢默认的 resteasy connector 的话，那么你可以这样引入依赖：
+OpenStack4j 被设计成一个模块化的系统，模块化其中的一个好处是，你可以自由的选择你喜欢的`Connector`，所以如果你不喜欢默认的 jersey2 connector 的话，那么你可以这样引入依赖：
 
 ```xml
 <!-- 引入 核心包 -->
