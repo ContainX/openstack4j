@@ -1,15 +1,20 @@
 package org.openstack4j.openstack.cloudeye.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import lombok.*;
+import java.util.Date;
+import java.util.List;
+
 import org.openstack4j.model.cloudeye.Metric;
 import org.openstack4j.model.cloudeye.MetricData;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @ToString
@@ -26,6 +31,7 @@ public class CloudEyeMetricData implements MetricData {
     @JsonProperty("collect_time")
     Date collectTime;
     Number value;
+    ValueType type;
 
 
     public static class CloudEyeMetrics extends ListResult<CloudEyeMetricData> {

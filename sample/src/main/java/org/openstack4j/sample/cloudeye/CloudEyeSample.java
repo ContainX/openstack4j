@@ -8,6 +8,7 @@ import org.openstack4j.model.cloudeye.Alarm;
 import org.openstack4j.model.cloudeye.Filter;
 import org.openstack4j.model.cloudeye.Metric;
 import org.openstack4j.model.cloudeye.MetricAggregation;
+import org.openstack4j.model.cloudeye.MetricData.ValueType;
 import org.openstack4j.model.cloudeye.OrderType;
 import org.openstack4j.model.cloudeye.Period;
 import org.openstack4j.model.cloudeye.Quota;
@@ -114,7 +115,8 @@ public class CloudEyeSample extends AbstractSample {
                 .ttl(172800)
                 .collectTime(new Date())
                 .value(60)
-                .unit("%");
+                .unit("%")
+                .type(ValueType.Integer);
 
         CloudEyeMetric.CloudEyeMetricBuilder metricBuilder2 = CloudEyeMetric.builder().namespace("MINE.APP")
                 .metricName("cpu_util")
@@ -124,7 +126,8 @@ public class CloudEyeSample extends AbstractSample {
                 .ttl(172800)
                 .collectTime(new Date())
                 .value(70)
-                .unit("%");
+                .unit("%")
+                .type(ValueType.Integer);
         metrics.add(builder1.build());
         metrics.add(builder2.build());
 

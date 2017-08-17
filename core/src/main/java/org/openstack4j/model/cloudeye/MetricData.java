@@ -15,14 +15,47 @@
  *******************************************************************************/
 package org.openstack4j.model.cloudeye;
 
+import java.util.Date;
+
 import org.openstack4j.model.ModelEntity;
 
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 public interface MetricData extends ModelEntity {
+	
+	public enum ValueType {
+		
+		Integer("int"), Float("float");
+
+		String value;
+
+		ValueType(String value) {
+			this.value = value;
+		}
+		
+		@JsonValue
+		String value() {
+			return value;
+		}
+
+		@JsonCreator
+		public static ValueType forValue(String value) {
+			if (value != null) {
+				for (ValueType state : ValueType.values()) {
+					if (value.equals(state.value)) {
+						return state;
+					} 
+				}
+			}
+			return null;
+		}
+	}
+	
+	
     Metric getMetric();
     Number getTtl();
     Date getCollectTime();
     Number getValue();
+    ValueType getType();
 }
