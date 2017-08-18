@@ -39,6 +39,7 @@ import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
+import org.openstack4j.core.transport.UntrustedSSL;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -232,6 +233,12 @@ public final class HttpCommand<R> {
 					return true;
 				}
 			});
+
+			HttpsURLConnection.setDefaultSSLSocketFactory(UntrustedSSL.getSSLContext().getSocketFactory());
+		}
+
+		if (request.getConfig().getSslContext() != null) {
+			HttpsURLConnection.setDefaultSSLSocketFactory(request.getConfig().getSslContext().getSocketFactory());
 		}
 
 		if (request.getConfig() != null && request.getConfig().getProxy() != null) {

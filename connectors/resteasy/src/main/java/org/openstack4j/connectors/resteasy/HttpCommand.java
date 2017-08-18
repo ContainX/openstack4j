@@ -18,6 +18,9 @@ package org.openstack4j.connectors.resteasy;
 import java.util.List;
 import java.util.Map;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
 import javax.ws.rs.core.UriBuilder;
 
 import org.jboss.resteasy.client.ClientRequest;
@@ -25,6 +28,7 @@ import org.jboss.resteasy.client.ClientResponse;
 import org.openstack4j.connectors.resteasy.executors.ApacheHttpClientExecutor;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpRequest;
+import org.openstack4j.core.transport.UntrustedSSL;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 
 /**
@@ -58,6 +62,21 @@ public final class HttpCommand<R> {
                 ApacheHttpClientExecutor.create(request.getConfig()), ResteasyClientFactory.getInstance());
         
         client.followRedirects(true);
+        
+        if (request.getConfig().isIgnoreSSLVerification()) {
+			HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+				@Override
+				public boolean verify(String arg0, SSLSession arg1) {
+					return true;
+				}
+			});
+			HttpsURLConnection.setDefaultSSLSocketFactory(UntrustedSSL.getSSLContext().getSocketFactory());
+		}
+
+		if (request.getConfig().getSslContext() != null) {
+			HttpsURLConnection.setDefaultSSLSocketFactory(request.getConfig().getSslContext().getSocketFactory());
+		}
+        
         
         populateQueryParams(request);
         populateHeaders(request);
