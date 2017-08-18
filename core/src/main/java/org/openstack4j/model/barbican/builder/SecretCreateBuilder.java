@@ -8,5 +8,9 @@ import org.openstack4j.model.barbican.Secret;
  */
 public interface SecretCreateBuilder extends Buildable.Builder<SecretCreateBuilder, Secret> {
 
+    /**
+     * @param name Human readable name for identifying your secret.
+     * @return
+     */
     SecretCreateBuilder name(String name);
 }

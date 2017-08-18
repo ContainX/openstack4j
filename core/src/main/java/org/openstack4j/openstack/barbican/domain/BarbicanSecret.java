@@ -38,66 +38,105 @@ public class BarbicanSecret implements Secret {
     @JsonProperty("status")
     private String status;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getAlgorithm() {
         return algorithm;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getBitLength() {
         return bitLength;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getContentTypes() {
         return contentTypes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Date getCreateTime() {
         return createTime;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Date getUpdateTime() {
         return updateTime;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCreatorId() {
         return creatorId;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getExpiration() {
         return expiration;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getMode() {
         return mode;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSecretReference() {
         return secretReference;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSecretType() {
         return secretType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getStatus() {
         return status;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
@@ -109,6 +148,9 @@ public class BarbicanSecret implements Secret {
                 .add("status", status).add("updated", updateTime).toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public SecretCreateBuilder toBuilder() {
         return new SecretCreateConcreteBuilder();
@@ -132,6 +174,9 @@ public class BarbicanSecret implements Secret {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public static class SecretCreateConcreteBuilder implements SecretCreateBuilder {
 
         private BarbicanSecret internalSecret;
@@ -144,17 +189,26 @@ public class BarbicanSecret implements Secret {
             this.internalSecret = secret;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public SecretCreateBuilder name(String name) {
             internalSecret.name = name;
             return this;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public Secret build() {
             return internalSecret;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public SecretCreateBuilder from(Secret in) {
             internalSecret = (BarbicanSecret) in;

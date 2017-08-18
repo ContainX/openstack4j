@@ -14,12 +14,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by reneschollmeyer on 02.08.17.
+ *
+ * {@inheritDoc}
  */
 public class SecretServiceImpl extends BaseBarbicanServices implements SecretService {
 
     private static final String RESOURCE_PATH = "/secrets";
     private static final String SPECIFIC_RESOURCE_PATH = RESOURCE_PATH + "/%s";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<? extends Secret> list(Map<String, String> filteringParams) {
         Invocation<Secrets> req = get(Secrets.class, uri(RESOURCE_PATH));
@@ -31,23 +36,35 @@ public class SecretServiceImpl extends BaseBarbicanServices implements SecretSer
         return req.execute().getList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<? extends Secret> list(final String name) {
         return list(ImmutableMap.of("name", name));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Secret get(String secretId) {
         checkNotNull(secretId);
         return get(BarbicanSecret.class, uri(SPECIFIC_RESOURCE_PATH, secretId)).execute();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ActionResponse delete(String secretId) {
         checkNotNull(secretId);
         return deleteWithResponse(uri(SPECIFIC_RESOURCE_PATH, secretId)).execute();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Secret create(Secret secret) {
         checkNotNull(secret);
