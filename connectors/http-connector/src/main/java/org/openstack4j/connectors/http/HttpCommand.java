@@ -31,9 +31,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
 
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.HttpRequest;
@@ -227,13 +225,7 @@ public final class HttpCommand<R> {
 	private void populateHeaders() throws IOException {
 
 		if (request.getConfig().isIgnoreSSLVerification()) {
-			HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
-				@Override
-				public boolean verify(String arg0, SSLSession arg1) {
-					return true;
-				}
-			});
-
+			HttpsURLConnection.setDefaultHostnameVerifier(UntrustedSSL.getHostnameVerifier());
 			HttpsURLConnection.setDefaultSSLSocketFactory(UntrustedSSL.getSSLContext().getSocketFactory());
 		}
 

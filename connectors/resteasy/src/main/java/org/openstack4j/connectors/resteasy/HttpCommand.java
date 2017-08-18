@@ -18,9 +18,7 @@ package org.openstack4j.connectors.resteasy;
 import java.util.List;
 import java.util.Map;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
 import javax.ws.rs.core.UriBuilder;
 
 import org.jboss.resteasy.client.ClientRequest;
@@ -63,21 +61,15 @@ public final class HttpCommand<R> {
         
         client.followRedirects(true);
         
-        if (request.getConfig().isIgnoreSSLVerification()) {
-			HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
-				@Override
-				public boolean verify(String arg0, SSLSession arg1) {
-					return true;
-				}
-			});
+		if (request.getConfig().isIgnoreSSLVerification()) {
+			HttpsURLConnection.setDefaultHostnameVerifier(UntrustedSSL.getHostnameVerifier());
 			HttpsURLConnection.setDefaultSSLSocketFactory(UntrustedSSL.getSSLContext().getSocketFactory());
 		}
 
 		if (request.getConfig().getSslContext() != null) {
 			HttpsURLConnection.setDefaultSSLSocketFactory(request.getConfig().getSslContext().getSocketFactory());
 		}
-        
-        
+
         populateQueryParams(request);
         populateHeaders(request);
     }
