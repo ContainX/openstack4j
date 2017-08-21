@@ -59,7 +59,7 @@ public class MessageSample extends AbstractSample {
 		subscription = osclient.notification().subscriptions().subscribe(subscribe);
 
 		// create a message template
-		MessageTemplateCreate create = MessageTemplateCreate.builder().name(name).protocol(Protocol.EMAIL)
+		MessageTemplateCreate create = MessageTemplateCreate.builder().name(name).protocol(Protocol.Default)
 				.locale("zh-cn").content("Hello, {user}").build();
 		template = osclient.notification().messageTemplates().create(create);
 	}

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum Protocol {
 	
+	Default("default"),
 	EMAIL("email"),
 	SMS("sms"),
 	HTTP("http"),
