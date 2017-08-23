@@ -35,9 +35,9 @@ mvn clean package install
 
 ```
 <dependency>
-    <groupId>org.pacesys</groupId>
+    <groupId>com.huawei</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>huawei-3.0.5</version>
+    <version>3.0.5.1</version>
 </dependency>
 ```
 

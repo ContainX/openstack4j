@@ -9,7 +9,7 @@ Instead of depending on the normal "openstack4j" artifactId, change the dependen
 
 ```xml
 <dependency>
-    <groupId>org.pacesys</groupId>
+    <groupId>com.huawei</groupId>
     <artifactId>openstack4j-core</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 </dependency>
@@ -20,7 +20,7 @@ Now choose a connector by adding the applicable dependency below:
 **Jersey 2**
 ```xml
 <dependency>
-    <groupId>org.pacesys.openstack4j.connectors</groupId>
+    <groupId>com.huawei.openstack4j.connectors</groupId>
     <artifactId>openstack4j-jersey2</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 </dependency>
@@ -29,7 +29,7 @@ Now choose a connector by adding the applicable dependency below:
 **Resteasy**
 ```xml
 <dependency>
-    <groupId>org.pacesys.openstack4j.connectors</groupId>
+    <groupId>com.huawei.openstack4j.connectors</groupId>
     <artifactId>openstack4j-resteasy</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 </dependency>
@@ -38,7 +38,7 @@ Now choose a connector by adding the applicable dependency below:
 **Apache HttpClient**
 ```xml
 <dependency>
-    <groupId>org.pacesys.openstack4j.connectors</groupId>
+    <groupId>com.huawei.openstack4j.connectors</groupId>
     <artifactId>openstack4j-httpclient</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 </dependency>
@@ -47,7 +47,7 @@ Now choose a connector by adding the applicable dependency below:
 **OKHttp**
 ```xml
 <dependency>
-    <groupId>org.pacesys.openstack4j.connectors</groupId>
+    <groupId>com.huawei.openstack4j.connectors</groupId>
     <artifactId>openstack4j-okhttp</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 </dependency>

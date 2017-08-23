@@ -5,7 +5,7 @@ jdk:
 
 env:
   global:
-    - SKIP_JDK8_MODULES='-pl !org.pacesys.openstack4j.connectors:openstack4j-http-connector,!org.pacesys.openstack4j.connectors:openstack4j-jersey2,!org.pacesys:it-jersey2'
+    - SKIP_JDK8_MODULES='-pl !com.huawei.openstack4j.connectors:openstack4j-http-connector,!com.huawei.openstack4j.connectors:openstack4j-jersey2,!com.huawei:it-jersey2'
     - DEPLOY=0
 
 matrix:

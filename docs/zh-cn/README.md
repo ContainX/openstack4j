@@ -29,14 +29,14 @@ Maven
 
 #### Latest Release (Stable)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.pacesys/openstack4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.pacesys/openstack4j)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.huawei/openstack4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.huawei/openstack4j)
 
 OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the ability to choose the connector that you would like to use in your environment.  
 
 **Using OpenStack4j with the default Jersey2 Connector**
 ```xml
 <dependency>
-    <groupId>org.pacesys</groupId>
+    <groupId>com.huawei</groupId>
     <artifactId>openstack4j</artifactId>
     <version>3.0.4</version>
 </dependency>
@@ -52,7 +52,7 @@ See notes above about connectors (same rules apply) to development branches.
 
 ```xml
 <dependency>
-    <groupId>org.pacesys</groupId>
+    <groupId>com.huawei</groupId>
     <artifactId>openstack4j</artifactId>
     <version>3.0.5-SNAPSHOT</version>
 </dependency>
