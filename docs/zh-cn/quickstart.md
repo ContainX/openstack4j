@@ -51,7 +51,7 @@ mvn clean package install -DskipTests
 
 通过以上命令，可以将 openstack4j安装到本地的Maven仓库中
 
-!> 目前master分支上的版本号是 `OTC-3.0.5-SNAPSHOT`, 在SDK全部完成后，会修改成 `OTC-3.0.5`
+!> 目前master分支上的版本号是 `3.0.5.1`, 在SDK全部完成后，会修改成 `OTC-3.0.5`
 
 
 ## 开始使用
@@ -63,18 +63,18 @@ mvn clean package install -DskipTests
 你可以简单的将如下依赖加入你的pom.xml中，这个依赖会自动使用默认的 `jersey2`作为Connector
 ```xml
 <dependency>
-	<groupId>org.pacesys</groupId>
+	<groupId>com.huawei</groupId>
 	<artifactId>openstack4j</artifactId>
-	<version>OTC-3.0.5-SNAPSHOT</version>
+	<version>3.0.5.1</version>
 </dependency>
 ```
 
 或者，你也可以引入 all-in-one jar
 ```xml
 <dependency>
-  <groupId>org.pacesys</groupId>
+  <groupId>com.huawei</groupId>
   <artifactId>openstack4j</artifactId>
-  <version>OTC-3.0.5-SNAPSHOT</version>
+  <version>3.0.5.1</version>
   <classifier>withdeps</classifier>
 </dependency>
 ```
@@ -84,16 +84,16 @@ OpenStack4j 被设计成一个模块化的系统，模块化其中的一个好�
 ```xml
 <!-- 引入 核心包 -->
 <dependency>
-  <groupId>org.pacesys</groupId>
+  <groupId>com.huawei</groupId>
   <artifactId>openstack4j-core</artifactId>
-  <version>OTC-3.0.5-SNAPSHOT</version>
+  <version>3.0.5.1</version>
 </dependency>
 
 <!-- 引入 你想要的connector -->
 <dependency>
-  <groupId>org.pacesys.openstack4j.connectors</groupId>
+  <groupId>com.huawei.openstack4j.connectors</groupId>
   <artifactId>[connector-artifactId]</artifactId>
-  <version>OTC-3.0.5-SNAPSHOT</version>
+  <version>3.0.5.1</version>
 </dependency>
 ```
 
