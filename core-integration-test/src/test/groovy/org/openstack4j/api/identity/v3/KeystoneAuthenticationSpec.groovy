@@ -1,17 +1,17 @@
-package org.openstack4j.api.identity.v3
+package com.huawei.openstack4j.api.identity.v3
 
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
 
-import org.openstack4j.api.AbstractSpec
-import org.openstack4j.api.OSClient.OSClientV3
-import org.openstack4j.api.exceptions.RegionEndpointNotFoundException
-import org.openstack4j.api.types.ServiceType
-import org.openstack4j.model.common.Identifier
-import org.openstack4j.model.identity.AuthVersion
-import org.openstack4j.model.identity.v3.User
-import org.openstack4j.openstack.OSFactory
+import com.huawei.openstack4j.api.AbstractSpec
+import com.huawei.openstack4j.api.OSClient.OSClientV3
+import com.huawei.openstack4j.api.exceptions.RegionEndpointNotFoundException
+import com.huawei.openstack4j.api.types.ServiceType
+import com.huawei.openstack4j.model.common.Identifier
+import com.huawei.openstack4j.model.identity.AuthVersion
+import com.huawei.openstack4j.model.identity.v3.User
+import com.huawei.openstack4j.openstack.OSFactory
 
 import software.betamax.Configuration
 import software.betamax.MatchRules

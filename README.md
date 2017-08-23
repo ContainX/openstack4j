@@ -214,7 +214,7 @@ After successful v3 - authentication you can invoke any Identity (Keystone) V3 d
 Identity Services fully cover User, Role, Project, Domain, Group,.. service operations (in progess).  
 The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
 
-**NOTE**: The ```os``` used here is an instance of ```org.openstack4j.api.OSClient.OSClientV3```.
+**NOTE**: The ```os``` used here is an instance of ```com.huawei.openstack4jstack4j.api.OSClient.OSClientV3```.
 
 **User operations**
 ```java
@@ -271,7 +271,7 @@ After successful v2 - authentication you can invoke any Identity (Keystone) V2 d
 
 Identity V2 Services fully cover Tenants, Users, Roles, Services, Endpoints and Identity Extension listings.  The examples below are only a small fraction of the existing API so please refer to the API documentation for more details.
 
-**NOTE**: The ```os``` used here is an instance of ```org.openstack4j.api.OSClient.OSClientV2```.
+**NOTE**: The ```os``` used here is an instancecom.huawei.openstack4jei.openstack4j.api.OSClient.OSClientV2```.
 
 **Create a Tenant, User and associate a Role**
 ```java

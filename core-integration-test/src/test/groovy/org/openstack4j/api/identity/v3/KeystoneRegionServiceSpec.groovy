@@ -1,15 +1,15 @@
-package org.openstack4j.api.identity.v3
+package com.huawei.openstack4j.api.identity.v3
 
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
 
-import org.openstack4j.api.AbstractSpec
-import org.openstack4j.api.OSClient.OSClientV3
-import org.openstack4j.model.common.ActionResponse
-import org.openstack4j.model.common.Identifier
-import org.openstack4j.model.identity.v3.Region
-import org.openstack4j.openstack.OSFactory
+import com.huawei.openstack4j.api.AbstractSpec
+import com.huawei.openstack4j.api.OSClient.OSClientV3
+import com.huawei.openstack4j.model.common.ActionResponse
+import com.huawei.openstack4j.model.common.Identifier
+import com.huawei.openstack4j.model.identity.v3.Region
+import com.huawei.openstack4j.openstack.OSFactory
 
 import software.betamax.Configuration
 import software.betamax.MatchRules

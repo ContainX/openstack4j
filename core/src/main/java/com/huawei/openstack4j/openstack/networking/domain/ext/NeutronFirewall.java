@@ -1,0 +1,250 @@
+/*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.openstack.networking.domain.ext;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.huawei.openstack4j.model.network.ext.Firewall;
+import com.huawei.openstack4j.model.network.ext.builder.FirewallBuilder;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import com.google.common.base.MoreObjects;
+
+/**
+ * A Neutron Firewall (FwaaS) : Firewall Entity.
+ *
+ * @author Vishvesh Deshmukh
+ */
+@JsonRootName("firewall")
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class NeutronFirewall implements Firewall {
+
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * <p>The state of a Neutron (Firewall - FwaaS) entity.</p>
+	 *
+	 * <p>Indicates whether firewall resource is currently operational.</p>
+	 *
+	 * @author Vishvesh Deshmukh
+	 */
+	public enum FirewallStatus {
+		ACTIVE,
+		DOWN,
+		BUILD,
+		ERROR,
+		PENDING_CREATE,
+		PENDING_UPDATE,
+		PENDING_DELETE,
+		UNRECOGNIZED;
+
+		@JsonCreator
+		public static FirewallStatus forValue(String value) {
+			if (value != null)
+			{
+				for (FirewallStatus s : FirewallStatus.values()) {
+					if (s.name().equalsIgnoreCase(value))
+						return s;
+				}
+			}
+			return FirewallStatus.UNRECOGNIZED;
+		}
+	}
+
+	private String id;
+
+	private String name;
+
+	@JsonProperty("tenant_id")
+	private String tenantId;
+
+	private String description;
+
+	private Boolean shared;
+
+	@JsonProperty("admin_state_up")
+    private Boolean adminStateUp;
+
+	private FirewallStatus status;
+
+	@JsonProperty("firewall_policy_id")
+	private String policyId;
+
+	@JsonProperty("router_ids")
+	private List<String> routerIds;
+
+	/**
+	 * Wrap this Firewall to a builder
+	 * @return FirewallBuilder
+	 */
+	@Override
+	public FirewallBuilder toBuilder() {
+		return new FirewallConcreteBuilder(this);
+	}
+
+	/**
+	 * @return FirewallBuilder
+	 */
+	public static FirewallBuilder builder() {
+		return new FirewallConcreteBuilder();
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public Boolean isAdminStateUp() {
+		return adminStateUp != null && adminStateUp;
+	}
+
+	@Override
+	public Boolean isShared() {
+		return shared != null && shared;
+	}
+
+	@Override
+	public FirewallStatus getStatus() {
+		return status;
+	}
+
+	@Override
+	public List<String> getRouterIds() {
+		return routerIds;
+	}
+
+	@JsonIgnore
+	@Override
+	public String getPolicy() {
+		return policyId;
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this).omitNullValues()
+				.add("id", id).add("name", name)
+				.add("status", status).add("policyId", policyId)
+				.add("shared", shared).add("adminStateUp", adminStateUp)
+				.add("tenantId", tenantId).add("description", description)
+				.add("routerIds", routerIds)
+				.toString();
+	}
+
+	public static class Firewalls extends ListResult<NeutronFirewall> {
+
+		private static final long serialVersionUID = 1L;
+
+		@JsonProperty("firewalls")
+		List<NeutronFirewall> firewalls;
+
+		@Override
+		public List<NeutronFirewall> value() {
+			return firewalls;
+		}
+
+		@Override
+		public String toString() {
+			return MoreObjects.toStringHelper(this).omitNullValues()
+					.add("firewalls", firewalls).toString();
+		}
+	}
+
+	public static class FirewallConcreteBuilder implements FirewallBuilder {
+		NeutronFirewall f;
+
+		@Override
+		public Firewall build() {
+			return f;
+		}
+
+		public FirewallConcreteBuilder() {
+			this(new NeutronFirewall());
+		}
+
+		public FirewallConcreteBuilder(NeutronFirewall f){
+			this.f = f;
+		}
+
+		@Override
+		public FirewallBuilder from(Firewall in) {
+			this.f = (NeutronFirewall) in;
+			return this;
+		}
+
+		@Override
+		public FirewallBuilder tenantId(String tenantId) {
+			f.tenantId = tenantId;
+			return this;
+		}
+
+		@Override
+		public FirewallBuilder name(String name) {
+			f.name = name;
+			return this;
+		}
+
+		@Override
+		public FirewallBuilder description(String description) {
+			f.description = description;
+			return this;
+		}
+
+		@Override
+		public FirewallBuilder adminStateUp(Boolean adminStateUp) {
+			f.adminStateUp = adminStateUp;
+			return this;
+		}
+
+		@Override
+		public FirewallBuilder shared(Boolean shared) {
+			f.shared = shared;
+			return this;
+		}
+
+		@Override
+		public FirewallBuilder policy(String policyId) {
+			f.policyId = policyId;
+			return this;
+		}
+
+		@Override
+		public FirewallBuilder routerIds(List<String> routerIds) {
+			f.routerIds = routerIds;
+			return this;
+		}
+	}
+}

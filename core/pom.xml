@@ -18,9 +18,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<groupId>org.pacesys</groupId>
+		<groupId>com.huawei</groupId>
 		<artifactId>openstack4j-parent</artifactId>
-		<version>OTC-3.0.5-SNAPSHOT</version>
+		<version>3.0.5.1</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>openstack4j-core</artifactId>
@@ -93,35 +93,35 @@
 						<Bundle-Name>${project.name}</Bundle-Name>
 						<Export-Package>
 							<!-- core.transport.internal is imported by jersey2 connector! -->
-							<!-- !org.openstack4j.core.transport.internal, -->
-							!org.openstack4j.openstack.compute.internal,
-							!org.openstack4j.openstack.compute.internal.ext,
-							!org.openstack4j.openstack.heat.internal,
-							!org.openstack4j.openstack.identity.internal,
-							!org.openstack4j.openstack.image.internal,
+							<!-- !com.huawei.openstack4j.core.transport.internal, -->
+							!com.huawei.openstack4j.openstack.compute.internal,
+							!com.huawei.openstack4j.openstack.compute.internal.ext,
+							!com.huawei.openstack4j.openstack.heat.internal,
+							!com.huawei.openstack4j.openstack.identity.internal,
+							!com.huawei.openstack4j.openstack.image.internal,
 							<!-- openstack.internal is imported by connectors! -->
-							<!-- !org.openstack4j.openstack.internal, -->
+							<!-- !com.huawei.openstack4j.openstack.internal, -->
 							<!-- logging.internal is imported by logging plugins! -->
-							<!-- !org.openstack4j.openstack.logging.internal, -->
-							!org.openstack4j.openstack.networking.internal,
-							!org.openstack4j.openstack.networking.internal.ext,
-							!org.openstack4j.openstack.storage.block.internal,
-							!org.openstack4j.openstack.storage.object.internal,
-							!org.openstack4j.openstack.telemetry.internal,
-							org.openstack4j,
-							org.openstack4j.*
+							<!-- !com.huawei.openstack4j.openstack.logging.internal, -->
+							!com.huawei.openstack4j.openstack.networking.internal,
+							!com.huawei.openstack4j.openstack.networking.internal.ext,
+							!com.huawei.openstack4j.openstack.storage.block.internal,
+							!com.huawei.openstack4j.openstack.storage.object.internal,
+							!com.huawei.openstack4j.openstack.telemetry.internal,
+							com.huawei.openstack4j,
+							com.huawei.openstack4j.*
 						</Export-Package>
 						<Private-Package>
-							org.openstack4j.openstack.compute.internal,
-							org.openstack4j.openstack.compute.internal.ext,
-							org.openstack4j.openstack.heat.internal,
-							org.openstack4j.openstack.identity.internal,
-							org.openstack4j.openstack.image.internal,
-							org.openstack4j.openstack.networking.internal,
-							org.openstack4j.openstack.networking.internal.ext,
-							org.openstack4j.openstack.storage.block.internal,
-							org.openstack4j.openstack.storage.object.internal,
-							org.openstack4j.openstack.telemetry.internal
+							com.huawei.openstack4j.openstack.compute.internal,
+							com.huawei.openstack4j.openstack.compute.internal.ext,
+							com.huawei.openstack4j.openstack.heat.internal,
+							com.huawei.openstack4j.openstack.identity.internal,
+							com.huawei.openstack4j.openstack.image.internal,
+							com.huawei.openstack4j.openstack.networking.internal,
+							com.huawei.openstack4j.openstack.networking.internal.ext,
+							com.huawei.openstack4j.openstack.storage.block.internal,
+							com.huawei.openstack4j.openstack.storage.object.internal,
+							com.huawei.openstack4j.openstack.telemetry.internal
 						</Private-Package>
 						<Import-Package>
 							!org.openstack*,
@@ -129,21 +129,21 @@
 							*
 						</Import-Package>
 						<!-- Required for SPI in OSGi: http://aries.apache.org/modules/spi-fly.html#specconf This bundles uses SPI to locate 
-							implementations for: org.openstack4j.api.APIProvider org.openstack4j.core.transport.HttpExecutorService org.openstack4j.openstack.logging.LoggerFactorySupplier 
-							This bundle defines an implementation for following services in META-INF-services: org.openstack4j.api.APIProvider -->
+							implementations for: com.huawei.openstack4j.api.APIProvider com.huawei.openstack4j.core.transport.HttpExecutorService com.huawei.openstack4j.openstack.logging.LoggerFactorySupplier 
+							This bundle defines an implementation for following services in META-INF-services: com.huawei.openstack4j.api.APIProvider -->
 						<Require-Capability>
 							osgi.serviceloader;
-							filter:="(osgi.serviceloader=org.openstack4j.api.APIProvider)";cardinality:=multiple,
+							filter:="(osgi.serviceloader=com.huawei.openstack4j.api.APIProvider)";cardinality:=multiple,
 							osgi.serviceloader;
-							filter:="(osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService)";cardinality:=multiple,
+							filter:="(osgi.serviceloader=com.huawei.openstack4j.core.transport.HttpExecutorService)";cardinality:=multiple,
 							osgi.serviceloader;
-							filter:="(osgi.serviceloader=org.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple;resolution:=optional,
+							filter:="(osgi.serviceloader=com.huawei.openstack4j.openstack.logging.LoggerFactorySupplier)";cardinality:=multiple;resolution:=optional,
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)",
 							osgi.extender;
 							filter:="(osgi.extender=osgi.serviceloader.registrar)"
 						</Require-Capability>
 						<Provide-Capability>
-							osgi.serviceloader; osgi.serviceloader=org.openstack4j.api.APIProvider
+							osgi.serviceloader; osgi.serviceloader=com.huawei.openstack4j.api.APIProvider
 						</Provide-Capability>
 						<Embed-Transitive>
 							true

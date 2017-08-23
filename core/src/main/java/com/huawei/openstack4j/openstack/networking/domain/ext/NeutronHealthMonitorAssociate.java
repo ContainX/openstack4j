@@ -1,0 +1,87 @@
+/*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.openstack.networking.domain.ext;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.huawei.openstack4j.model.network.ext.HealthMonitorAssociate;
+import com.huawei.openstack4j.model.network.ext.builder.HealthMonitorAssociateBuilder;
+
+import com.google.common.base.MoreObjects;
+
+/**
+ * A  entity used to associate a healthMonitor with a pool
+ * @author liujunpeng
+ */
+@JsonRootName("health_monitor")
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class NeutronHealthMonitorAssociate implements HealthMonitorAssociate {
+
+	private static final long serialVersionUID = 1L;
+
+	private String id;
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HealthMonitorAssociateBuilder toBuilder() {
+		return new HealthMonitorAssociateConcreteBuilder(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this).add("id", id).toString();
+	}
+
+	public static HealthMonitorAssociateBuilder builder(){
+		return new HealthMonitorAssociateConcreteBuilder();
+	}
+	public static class HealthMonitorAssociateConcreteBuilder implements HealthMonitorAssociateBuilder{
+
+		NeutronHealthMonitorAssociate m;
+		public HealthMonitorAssociateConcreteBuilder(){
+			this(new NeutronHealthMonitorAssociate());
+		}
+		public HealthMonitorAssociateConcreteBuilder(NeutronHealthMonitorAssociate m){
+			this.m = m;
+		}
+		@Override
+		public HealthMonitorAssociate build() {
+			return m;
+		}
+
+		@Override
+		public HealthMonitorAssociateBuilder from(HealthMonitorAssociate in) {
+			m = (NeutronHealthMonitorAssociate)in;
+			return this;
+		}
+
+		@Override
+		public HealthMonitorAssociateBuilder id(String id) {
+			m.id = id;
+			return this;
+		}
+	}
+
+}

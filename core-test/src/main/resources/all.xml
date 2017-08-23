@@ -19,10 +19,10 @@
 <suite verbose="2" name="OpenStack4j Suite">
     <test name="All" preserve-order="true">
         <packages>
-            <package name="org.openstack4j.*" />
+            <package name="com.huawei.openstack4j.*" />
         </packages>
         <listeners>
-            <listener class-name="org.openstack4j.api.SkipTestListener" />
+            <listener class-name="com.huawei.openstack4j.api.SkipTestListener" />
         </listeners>
     </test>
 </suite>

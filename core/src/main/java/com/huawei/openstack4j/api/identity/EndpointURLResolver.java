@@ -1,0 +1,50 @@
+/*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.api.identity;
+
+import com.huawei.openstack4j.model.identity.URLResolverParams;
+
+/**
+ * Resolves an Endpoint URL based on the Service Type and Facing perspective
+ * 
+ * @author Jeremy Unruh
+ */
+public interface EndpointURLResolver {
+
+    /**
+     * Older OpenStack deployments can send invalid URL endpoints we have found.
+     * This can address the issue to apply our own logic in these cases. Only
+     * use this in rare cases
+     */
+    String LEGACY_EP_RESOLVING_PROP = "legacy.endpoint.resolving.enabled";
+
+    /**
+     * Resolves the given ServiceType and Facing perspective down to a single URL used in identity v2
+     * 
+     * @param params URLResolverParams containing mandatory and optional params
+     * @return the URL of the Endpoint
+     */
+    String findURLV2(URLResolverParams params);
+    
+    /**
+     * Resolves the given ServiceType and Facing perspective down to a single URL used in identity v3
+     * 
+     * @param params URLResolverParams containing mandatory and optional params
+     * @return the URL of the Endpoint
+     */
+    String findURLV3(URLResolverParams params);
+
+}

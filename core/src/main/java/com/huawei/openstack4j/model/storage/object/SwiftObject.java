@@ -1,0 +1,107 @@
+/*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.model.storage.object;
+
+import java.util.Date;
+import java.util.Map;
+
+import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.model.common.DLPayload;
+import com.huawei.openstack4j.model.storage.block.options.DownloadOptions;
+
+/**
+ * Represents an Object which is a File or Directory within a Container
+ * 
+ * @author Jeremy Unruh
+ */
+public interface SwiftObject extends ModelEntity {
+    
+    /**
+     * The MD5 checksum value of the object content.
+     * 
+     * @return the MD5 checksum
+     */
+    String getETag();
+    
+    /**
+     * The date and time when the object was last modified.
+     * 
+     * @return the last modified date
+     */
+    Date getLastModified();
+    
+    /**
+     * The total number of bytes that are stored in Object Storage for the account
+     * 
+     * @return total number of bytes
+     */
+    long getSizeInBytes();
+    
+    /**
+     * The name of the object
+     * 
+     * @return the name of the object
+     */
+    String getName();
+
+    /**
+     * The name of the directory
+     *
+     * @return the name of the directory
+     */
+    String getDirectoryName();
+    
+    /**
+     * The content type of the object
+     * 
+     * @return the content type
+     */
+    String getMimeType();
+    
+    /**
+     * @return the container name this object belongs to
+     */
+    String getContainerName();
+    
+    /**
+     * Determines if this object is a pseudo directory
+     * 
+     * @return true if this is a directory
+     */
+    boolean isDirectory();
+    
+    /**
+     * Gets the object metadata  (this is a lazy fetch)
+     * 
+     * @return the metadata for this object
+     */
+    Map<String, String> getMetadata();
+    
+    /**
+     * Retrieves the Payload for the data backing the current object
+     * 
+     * @return the download payload
+     */
+    DLPayload download();
+    
+    /**
+     * Retrieves the Payload for the data backing the current object
+     * 
+     * @param options the download options
+     * @return the download payload
+     */
+    DLPayload download(DownloadOptions options);
+}
