@@ -1,0 +1,179 @@
+/*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.model.magnum;
+
+import java.util.List;
+
+import com.huawei.openstack4j.common.Buildable.Builder;
+import com.huawei.openstack4j.openstack.common.GenericLink;
+
+public interface ClustertemplateBuilder extends Builder<ClustertemplateBuilder, Clustertemplate> {
+    /**
+     * @see Clustertemplate#getInsecureRegistry
+     */
+    ClustertemplateBuilder insecureRegistry(String insecureRegistry);
+
+    /**
+     * @see Clustertemplate#getLinks
+     */
+    ClustertemplateBuilder links(List<GenericLink> links);
+
+    /**
+     * @see Clustertemplate#getHttpProxy
+     */
+    ClustertemplateBuilder httpProxy(String httpProxy);
+
+    /**
+     * @see Clustertemplate#getUpdatedAt
+     */
+    ClustertemplateBuilder updatedAt(String updatedAt);
+
+    /**
+     * @see Clustertemplate#getFloatingIpEnabled
+     */
+    ClustertemplateBuilder floatingIpEnabled(Boolean floatingIpEnabled);
+
+    /**
+     * @see Clustertemplate#getFixedSubnet
+     */
+    ClustertemplateBuilder fixedSubnet(String fixedSubnet);
+
+    /**
+     * @see Clustertemplate#getMasterFlavorId
+     */
+    ClustertemplateBuilder masterFlavorId(String masterFlavorId);
+
+    /**
+     * @see Clustertemplate#getUuid
+     */
+    ClustertemplateBuilder uuid(String uuid);
+
+    /**
+     * @see Clustertemplate#getNoProxy
+     */
+    ClustertemplateBuilder noProxy(String noProxy);
+
+    /**
+     * @see Clustertemplate#getHttpsProxy
+     */
+    ClustertemplateBuilder httpsProxy(String httpsProxy);
+
+    /**
+     * @see Clustertemplate#getTlsDisabled
+     */
+    ClustertemplateBuilder tlsDisabled(Boolean tlsDisabled);
+
+    /**
+     * @see Clustertemplate#getKeypairId
+     */
+    ClustertemplateBuilder keypairId(String keypairId);
+
+    /**
+     * @see Clustertemplate#getPublicTemplate
+     */
+    ClustertemplateBuilder publicTemplate(Boolean publicTemplate);
+
+    /**
+     * @see Clustertemplate#getLabels
+     */
+    ClustertemplateBuilder labels(Label labels);
+
+    /**
+     * @see Clustertemplate#getDockerVolumeSize
+     */
+    ClustertemplateBuilder dockerVolumeSize(Integer dockerVolumeSize);
+
+    /**
+     * @see Clustertemplate#getServerType
+     */
+    ClustertemplateBuilder serverType(String serverType);
+
+    /**
+     * @see Clustertemplate#getExternalNetworkId
+     */
+    ClustertemplateBuilder externalNetworkId(String externalNetworkId);
+
+    /**
+     * @see Clustertemplate#getClusterDistro
+     */
+    ClustertemplateBuilder clusterDistro(String clusterDistro);
+
+    /**
+     * @see Clustertemplate#getImageId
+     */
+    ClustertemplateBuilder imageId(String imageId);
+
+    /**
+     * @see Clustertemplate#getVolumeDriver
+     */
+    ClustertemplateBuilder volumeDriver(String volumeDriver);
+
+    /**
+     * @see Clustertemplate#getRegistryEnabled
+     */
+    ClustertemplateBuilder registryEnabled(Boolean registryEnabled);
+
+    /**
+     * @see Clustertemplate#getDockerStorageDriver
+     */
+    ClustertemplateBuilder dockerStorageDriver(String dockerStorageDriver);
+
+    /**
+     * @see Clustertemplate#getApiserverPort
+     */
+    ClustertemplateBuilder apiserverPort(String apiserverPort);
+
+    /**
+     * @see Clustertemplate#getName
+     */
+    ClustertemplateBuilder name(String name);
+
+    /**
+     * @see Clustertemplate#getCreatedAt
+     */
+    ClustertemplateBuilder createdAt(String createdAt);
+
+    /**
+     * @see Clustertemplate#getNetworkDriver
+     */
+    ClustertemplateBuilder networkDriver(String networkDriver);
+
+    /**
+     * @see Clustertemplate#getFixedNetwork
+     */
+    ClustertemplateBuilder fixedNetwork(String fixedNetwork);
+
+    /**
+     * @see Clustertemplate#getCoe
+     */
+    ClustertemplateBuilder coe(String coe);
+
+    /**
+     * @see Clustertemplate#getFlavorId
+     */
+    ClustertemplateBuilder flavorId(String flavorId);
+
+    /**
+     * @see Clustertemplate#getMasterLbEnabled
+     */
+    ClustertemplateBuilder masterLbEnabled(Boolean masterLbEnabled);
+
+    /**
+     * @see Clustertemplate#getDnsNameserver
+     */
+    ClustertemplateBuilder dnsNameserver(String dnsNameserver);
+
+}

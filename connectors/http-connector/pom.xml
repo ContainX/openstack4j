@@ -18,9 +18,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.pacesys.openstack4j.connectors</groupId>
+        <groupId>com.huawei.openstack4j.connectors</groupId>
         <artifactId>openstack4j-connectors</artifactId>
-        <version>OTC-3.0.5-SNAPSHOT</version>
+        <version>3.0.5.1</version>
     </parent>
     <name>OpenStack4j HttpURL Connector</name>
     <artifactId>openstack4j-http-connector</artifactId>
@@ -36,10 +36,10 @@
 					<instructions>
 						<Bundle-Name>${project.name}</Bundle-Name>
 						<Export-Package>
-							org.openstack4j.connectors.http
+							com.huawei.openstack4j.connectors.http
 						</Export-Package>
 						<Import-Package>
-							!org.openstack4j.connectors.http
+							!com.huawei.openstack4j.connectors.http
 							*
 						</Import-Package>
 						<!--
@@ -47,13 +47,13 @@
 						http://aries.apache.org/modules/spi-fly.html#specconf
 
 						This bundle defines an implementation for following services in META-INF-services:
-						org.openstack4j.core.transport.HttpExecutorService
+						com.huawei.openstack4j.core.transport.HttpExecutorService
 						 -->
 						<Require-Capability>
 							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
 						</Require-Capability>
 						<Provide-Capability>
-							osgi.serviceloader; osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService
+							osgi.serviceloader; osgi.serviceloader=com.huawei.openstack4j.core.transport.HttpExecutorService
 						</Provide-Capability>
 					</instructions>
 				</configuration>

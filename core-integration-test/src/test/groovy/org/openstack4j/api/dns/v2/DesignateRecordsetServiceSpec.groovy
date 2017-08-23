@@ -1,17 +1,17 @@
 /*
-package org.openstack4j.api.dns.v2
+package com.huawei.openstack4j.api.dns.v2
 
 import co.freeside.betamax.TapeMode
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
-import org.openstack4j.api.AbstractSpec
-import org.openstack4j.api.Builders
-import org.openstack4j.api.OSClient.OSClientV3
-import org.openstack4j.model.common.ActionResponse
-import org.openstack4j.model.common.Identifier
-import org.openstack4j.model.dns.v2.Recordset
-import org.openstack4j.openstack.OSFactory
+import com.huawei.openstack4j.api.AbstractSpec
+import com.huawei.openstack4j.api.Builders
+import com.huawei.openstack4j.api.OSClient.OSClientV3
+import com.huawei.openstack4j.model.common.ActionResponse
+import com.huawei.openstack4j.model.common.Identifier
+import com.huawei.openstack4j.model.dns.v2.Recordset
+import com.huawei.openstack4j.openstack.OSFactory
 import software.betamax.Configuration
 import software.betamax.MatchRules
 import software.betamax.TapeMode

@@ -1,20 +1,20 @@
-package org.openstack4j.api
+package com.huawei.openstack4j.api
 
 import com.google.common.collect.ImmutableMap
 import groovy.util.logging.Slf4j
 
 import org.junit.Rule;
 import org.junit.rules.TestName;
-import org.openstack4j.api.Builders
-import org.openstack4j.model.identity.v3.*
-import org.openstack4j.model.identity.v2.Tenant
-import org.openstack4j.model.manila.Share
-import org.openstack4j.model.manila.Share.Protocol
-import org.openstack4j.model.manila.ShareCreate
-import org.openstack4j.model.storage.block.Volume
-import org.openstack4j.model.compute.Flavor
-import org.openstack4j.openstack.heat.domain.HeatStackCreate
-import org.openstack4j.model.sahara.Cluster
+import com.huawei.openstack4j.api.Builders
+import com.huawei.openstack4j.model.identity.v3.*
+import com.huawei.openstack4j.model.identity.v2.Tenant
+import com.huawei.openstack4j.model.manila.Share
+import com.huawei.openstack4j.model.manila.Share.Protocol
+import com.huawei.openstack4j.model.manila.ShareCreate
+import com.huawei.openstack4j.model.storage.block.Volume
+import com.huawei.openstack4j.model.compute.Flavor
+import com.huawei.openstack4j.openstack.heat.domain.HeatStackCreate
+import com.huawei.openstack4j.model.sahara.Cluster
 import spock.lang.Specification
 
 
@@ -125,7 +125,7 @@ class BuilderSpec extends Specification {
         tenant.isEnabled() == TENANT_ENABLED
 
         when: "building a User"
-        org.openstack4j.model.identity.v2.User userV2 = Builders.identityV2().user()
+        com.huawei.openstack4j.model.identity.v2.User userV2 = Builders.identityV2().user()
                 .name(USER_NAME)
                 .email(USER_EMAIL)
                 .tenantId(USER_TENANT_ID)
@@ -139,7 +139,7 @@ class BuilderSpec extends Specification {
         userV2.isEnabled() == USER_ENABLED
 
         when: "building a Role"
-        org.openstack4j.model.identity.v2.Role role = Builders.identityV2().role()
+        com.huawei.openstack4j.model.identity.v2.Role role = Builders.identityV2().role()
                 .name(ROLE_NAME)
                 .description(ROLE_DESCRIPTION)
                 .tenantId(ROLE_TENANT_ID)
@@ -153,7 +153,7 @@ class BuilderSpec extends Specification {
         role.isEnabled() == ROLE_ENABLED
 
         when: "building a Service"
-        org.openstack4j.model.identity.v2.Service service = Builders.identityV2().service()
+        com.huawei.openstack4j.model.identity.v2.Service service = Builders.identityV2().service()
                 .name(SERVICE_NAME)
                 .description(SERVICE_DESCRIPTION)
                 .type(SERVICE_TYPE)
@@ -165,7 +165,7 @@ class BuilderSpec extends Specification {
         service.getType() == SERVICE_TYPE
 
         when: "building a Service Endpoint"
-        org.openstack4j.model.identity.v2.ServiceEndpoint serviceEndpoint = Builders.identityV2().serviceEndpoint()
+        com.huawei.openstack4j.model.identity.v2.ServiceEndpoint serviceEndpoint = Builders.identityV2().serviceEndpoint()
                 .adminURL(ENDPOINT_ADMIN_URL)
                 .internalURL(ENDPOINT_INTERNAL_URL)
                 .publicURL(ENDPOINT_PUBLIC_URL)

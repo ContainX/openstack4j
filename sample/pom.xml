@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.pacesys</groupId>
+		<groupId>com.huawei</groupId>
 		<artifactId>openstack4j-parent</artifactId>
-		<version>OTC-3.0.5-SNAPSHOT</version>
+		<version>3.0.5.1</version>
 	</parent>
 	<artifactId>openstack4j-sample</artifactId>
 
@@ -17,25 +17,21 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.pacesys</groupId>
+			<groupId>com.huawei</groupId>
 			<artifactId>openstack4j</artifactId>
 			<version>${project.version}</version>
-			<!--
 			<exclusions>
 				<exclusion>
-					<groupId>org.pacesys.openstack4j.connectors</groupId>
+					<groupId>com.huawei.openstack4j.connectors</groupId>
 					<artifactId>openstack4j-jersey2</artifactId>
 				</exclusion>
 			</exclusions>
-			-->
 		</dependency>
-		<!-- 
 		<dependency>
-			<groupId>org.pacesys.openstack4j.connectors</groupId>
+			<groupId>com.huawei.openstack4j.connectors</groupId>
 			<artifactId>openstack4j-httpclient</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		 -->
 		<!-- logging -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

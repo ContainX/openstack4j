@@ -31,7 +31,7 @@ mvn clean package install
 > OpenStack4j is modular. One of the benefits to this is the ability to choose the connector that you would like to use in your environment.  
 
 
-**1. Using OpenStack4j with the default resteasy Connector**
+**1. Using OpenStack4j with the default jersey2 Connector**
 
 ```
 <dependency>

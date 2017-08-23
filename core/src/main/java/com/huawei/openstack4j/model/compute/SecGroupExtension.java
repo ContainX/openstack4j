@@ -1,0 +1,156 @@
+/*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.model.compute;
+
+import java.util.List;
+
+import com.huawei.openstack4j.common.Buildable;
+import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.model.common.Link;
+import com.huawei.openstack4j.model.compute.builder.SecurityGroupRuleBuilder;
+
+/**
+ * A Security Group which is defined the the (os-security-groups) extension
+ * 
+ * @author Jeremy Unruh
+ */
+public interface SecGroupExtension extends ModelEntity{
+
+	/**
+	 * Security Group Rule
+	 */
+	public interface Rule extends ModelEntity, Buildable<SecurityGroupRuleBuilder> 
+	{
+		
+		/**
+		 * @return the IPProtocol for this rule
+		 */
+		IPProtocol getIPProtocol();
+		
+		/**
+		 * @return the referenced security group which contains the name and tenant identifier
+		 */
+		Group getGroup();
+		
+		/**
+		 * @return the IP Range
+		 */
+		IpRange getRange();
+		
+		/**
+		 * @return the port at the start of the range
+		 */
+		int getToPort();
+		
+		/**
+		 * @return the port at the end of the range
+		 */
+		int getFromPort();
+		
+		/**
+		 * Gets the parent group id.
+		 *
+		 * @return the parent group id
+		 */
+		String getParentGroupId();
+		
+		/**
+		 * @return the name of the rule
+		 */
+		String getName();
+		
+		/**
+		 * @return the identifier for the rule
+		 */
+		String getId();
+		
+		/**
+		 * Rule Group
+		 * 
+		 */
+		public interface Group 
+		{
+			 
+ 			/**
+ 			 * @return the name of the group
+ 			 */
+ 			String getName();
+	   
+	     /**
+     	 * Gets the tenant id.
+     	 *
+     	 * @return the tenant id
+     	 */
+     	String getTenantId();
+		}
+		
+		/**
+		 * Rule IP Range
+		 */
+		public interface IpRange {
+			
+			/**
+			 * Gets the CIDR address range
+			 *
+			 * @return the CIDR address range
+			 */
+			String getCidr();
+		}
+	}
+	
+	/**
+	 * Gets the identifier for the Security Group
+	 *
+	 * @return the identifier
+	 */
+	String getId();
+
+	/**
+	 * Gets the name of the Security Group
+	 *
+	 * @return the name of the Group
+	 */
+	String getName();
+
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description of the Security Group
+	 */
+	String getDescription();
+
+	/**
+	 * Gets the tenant id associated with the group
+	 *
+	 * @return the tenant identifier
+	 */
+	String getTenantId();
+
+	/**
+	 * Gets the rules that make up this security group
+	 *
+	 * @return the list of rules
+	 */
+	List<? extends Rule> getRules();
+	
+	/**
+	 * Gets the reference / external links
+	 *
+	 * @return external/reference list of links
+	 */
+	List<? extends Link> getLinks();
+	
+}

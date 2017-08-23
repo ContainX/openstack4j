@@ -23,9 +23,9 @@
 		<version>9</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.pacesys</groupId>
+	<groupId>com.huawei</groupId>
 	<artifactId>openstack4j-parent</artifactId>
-	<version>OTC-3.0.5-SNAPSHOT</version>
+	<version>3.0.5.1</version>
 	<name>OpenStack4j Parent</name>
 	<description>OpenStack Java API</description>
 	<url>http://github.com/ContainX/openstack4j/</url>

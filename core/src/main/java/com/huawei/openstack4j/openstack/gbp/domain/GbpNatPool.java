@@ -1,0 +1,200 @@
+/*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.openstack.gbp.domain;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.huawei.openstack4j.model.gbp.IPVersionType;
+import com.huawei.openstack4j.model.gbp.NatPool;
+import com.huawei.openstack4j.model.gbp.builder.NatPoolBuilder;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import com.google.common.base.MoreObjects;
+/**
+ * Model implementation for nat pool
+ *
+ * @author vinod borole
+ */
+@JsonRootName("nat_pool")
+public class GbpNatPool implements NatPool {
+    private static final long serialVersionUID = 1L;
+    private String name;
+    @JsonProperty("tenant_id")
+    private String tenantId;
+    private String id;
+    private String description;
+    private Boolean shared;
+    @JsonProperty("external_segment_id")
+    private String externalSegmentId;
+    @JsonProperty("ip_pool")
+    private String ipPool;
+    @JsonProperty("ip_version")
+    private String ipVersion;
+    @JsonProperty("subnet_id")
+    private String subnetId;
+
+    @Override
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    @Override
+    public void setTenantId(String tenantId) {
+        this.tenantId=tenantId;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name=name;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id=id;
+    }
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public boolean isShared() {
+        return this.shared == null ? false : shared;
+    }
+
+    @Override
+    public String getExternalSegmentId() {
+        return externalSegmentId;
+    }
+
+    @Override
+    public String getIpPool() {
+        return ipPool;
+    }
+
+    @Override
+    public String getIpVersion() {
+        return ipVersion;
+    }
+
+    @Override
+    public String getSubnetId() {
+        return subnetId;
+    }
+
+    @Override
+    public NatPoolBuilder toBuilder() {
+        return new NatPoolConcreteBuilder(this);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+                .add("tenantId", tenantId).add("externalSegmentId", externalSegmentId).add("ipPool", ipPool).add("ipVersion", ipVersion)
+                .add("subnetId", subnetId).add("shared", shared).toString();
+    }
+
+    public static class NatPools extends ListResult<GbpNatPool>{
+
+        private static final long serialVersionUID = 1L;
+        @JsonProperty("nat_pools")
+        private List<GbpNatPool> natpools;
+
+        @Override
+        protected List<GbpNatPool> value() {
+            return natpools;
+        }
+
+    }
+
+    public static class NatPoolConcreteBuilder implements NatPoolBuilder{
+
+        private GbpNatPool natPool;
+
+        public NatPoolConcreteBuilder(GbpNatPool gbpNatPool) {
+           this.natPool=gbpNatPool;
+        }
+
+        public NatPoolConcreteBuilder() {
+            this(new GbpNatPool());
+        }
+
+        @Override
+        public NatPool build() {
+            return natPool;
+        }
+
+        @Override
+        public NatPoolBuilder from(NatPool in) {
+            this.natPool=(GbpNatPool) in;
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder name(String name) {
+            this.natPool.name=name;
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder description(String description) {
+            this.natPool.description=description;
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder ipVersion(IPVersionType ipVersion) {
+            this.natPool.ipVersion=ipVersion.name();
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder cidr(String cidr) {
+            this.natPool.ipPool=cidr;
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder isShared(boolean shared) {
+            this.natPool.shared=shared;
+            return this;
+        }
+
+        @Override
+        public NatPoolBuilder externalSegmentId(String id) {
+            this.natPool.externalSegmentId=id;
+            return this;
+        }
+
+    }
+
+    public static NatPoolBuilder builder() {
+        return new NatPoolConcreteBuilder();
+    }
+
+}

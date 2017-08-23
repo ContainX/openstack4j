@@ -59,7 +59,7 @@ DatabaseInstance instance = osclient.trove().instances().create(instanceCreate);
 > Create replica instance
 
 ```java
-Datastore datastore = Datastore.builder().type(org.openstack4j.openstack.trove.constant.DatastoreType.MySQL)
+Datastore datastore = Datastore.builder().type(com.huawei.openstack4j.openstack.trove.constant.DatastoreType.MySQL)
 				.version("MySQL-5.6.33").build();
 		
 Volume volume = Volume.builder().type(VolumeType.COMMON).size(100).build();

@@ -1,9 +1,9 @@
-package org.openstack4j.api
+package com.huawei.openstack4j.api
 
 import groovy.util.logging.Slf4j
-import org.openstack4j.core.transport.Config
-import org.openstack4j.core.transport.ProxyHost
-import org.openstack4j.core.transport.internal.HttpExecutor
+import com.huawei.openstack4j.core.transport.Config
+import com.huawei.openstack4j.core.transport.ProxyHost
+import com.huawei.openstack4j.core.transport.internal.HttpExecutor
 import spock.lang.Specification
 
 import java.nio.file.Paths

@@ -35,7 +35,7 @@ project
 ## Core模块
 
 ```
-org.openstack4j
+com.huawei.openstack4j
 	  |- api				// 所有服务的接口定义
 	  |- common				// 忽略
 	  |- core.transport		// HTTP transport抽象（包含了请求异常情况的处理）
@@ -59,7 +59,7 @@ Core模块中包含了实现SDK的所有逻辑，他主要功能可以分为三�
 
 ** 1. 注册新服务类型 **
 
-在 org.openstack4j.api.types.ServiceType 中新增服务类型
+在 com.huawei.openstack4j.api.types.ServiceType 中新增服务类型
 
 ```
 public enum ServiceType {
@@ -70,11 +70,11 @@ public enum ServiceType {
 
 ** 2. 创建服务的接口 **
 
-- 在org.openstack4j.api下新增包 `fake`，用于存放所有的 Fake Service相关的接口
+- 在com.huawei.openstack4j.api下新增包 `fake`，用于存放所有的 Fake Service相关的接口
 - 新建Fake服务主接口，主接口用于区分服务下的各个子模块，比如Fake服务下有 resource1, resource2 两个模块
 
 ```java
-// org.openstack4j.api.fake.FakeService.class
+// com.huawei.openstack4j.api.fake.FakeService.class
 public interface FakeService extends RestService {
 
 	/**
@@ -93,7 +93,7 @@ public interface FakeService extends RestService {
 - 创建各个子模块对应的Service接口
 
 ```java
-// org.openstack4j.api.fake.FakeResource1Service.class
+// com.huawei.openstack4j.api.fake.FakeResource1Service.class
 public interface FakeResource1Service extends RestService {
 
 	public List<? extends Resource1> list();
@@ -106,7 +106,7 @@ public interface FakeResource1Service extends RestService {
 	
 }
 
-// org.openstack4j.api.fake.FakeResource2Service.class
+// com.huawei.openstack4j.api.fake.FakeResource2Service.class
 public interface FakeResource2Service extends RestService {
 	// 同上
 }
@@ -116,7 +116,7 @@ public interface FakeResource2Service extends RestService {
 
 ** 3. 创建各个接口需要用到的实体类的接口 **
 
-?> 在org.openstack4j.model下新增包 `fake`，用于存放所有的 Fake Service相关的Model类的接口
+?> 在com.huawei.openstack4j.model下新增包 `fake`，用于存放所有的 Fake Service相关的Model类的接口
 
 第二点中用到了诸多的模型对象，我们需要为他们创建对应的接口。openstack4j为Model类提供了两个基类
 
@@ -124,7 +124,7 @@ public interface FakeResource2Service extends RestService {
 - 另一个是ResouceEntity，里面包含了资源公用的id和name属性，正常OpenStack的资源都会有这两个属性
 
 ```java
-// org.openstack4j.model.fake.Resource1Create.class
+// com.huawei.openstack4j.model.fake.Resource1Create.class
 public interface Resource1Create extends ResouceEntity {
 	
 	/**
@@ -134,7 +134,7 @@ public interface Resource1Create extends ResouceEntity {
 }
 
 
-// org.openstack4j.model.fake.Resource1.class
+// com.huawei.openstack4j.model.fake.Resource1.class
 public interface Resource1 extends Resource1Create {
 	
 	/**
@@ -143,7 +143,7 @@ public interface Resource1 extends Resource1Create {
 	String getStatus();
 }
 
-// org.openstack4j.model.fake.Resource2.class
+// com.huawei.openstack4j.model.fake.Resource2.class
 public interface Resource2 extends ModelEntity {
 
 	/**
@@ -165,7 +165,7 @@ public interface Resource2 extends ModelEntity {
 
 ** 4. 实现Model接口类 **
 
-- model实现类的位置， org.openstack4j.openstack.fake.domain
+- model实现类的位置， com.huawei.openstack4j.openstack.fake.domain
 - Model类接口实现，我们使用了 [lombok](https://projectlombok.org/) 来自动生成 
 	- getter 方法
 	- chain builder 方法
@@ -231,7 +231,7 @@ public class FakeResource1 extends FakeResource1Create implements Resource1 {
 
 ** 5. 实现上面定义的各个接口类 **
 
-- service实现类的位置， org.openstack4j.openstack.fake.internal
+- service实现类的位置， com.huawei.openstack4j.openstack.fake.internal
 - Fake Service Impl 基类，唯一的作用就是用于申明service实现所属的 ServiceType，其他所有的 接口实现类都继承该类
 
 ```java

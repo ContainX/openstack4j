@@ -1,0 +1,322 @@
+/*******************************************************************************
+ * 	Copyright 2016 ContainX and OpenStack4j                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.openstack.networking.domain.ext;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.huawei.openstack4j.model.network.ext.HealthMonitor;
+import com.huawei.openstack4j.model.network.ext.HealthMonitorType;
+import com.huawei.openstack4j.model.network.ext.builder.HealthMonitorBuilder;
+import com.huawei.openstack4j.openstack.common.ListResult;
+
+import com.google.common.base.MoreObjects;
+
+/**
+ * A health monitor entity
+ * @author liujunpeng
+ */
+@JsonRootName("health_monitor")
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class NeutronHealthMonitor implements HealthMonitor {
+
+	private static final long serialVersionUID = 1L;
+
+	private String id;
+	@JsonProperty("tenant_id")
+	private String tenantId;
+
+	private HealthMonitorType type;
+	private Integer delay;
+	private Integer timeout;
+	/**
+	 * Number of allowed connection failures before changing the status of the member to INACTIVE. A valid value is from 1 to 10.
+	 */
+	@JsonProperty("max_retries")
+	private Integer maxRetries;
+
+	/**
+	 * The HTTP method that the monitor uses for requests.
+	 */
+	@JsonProperty("http_method")
+	private String httpMethod ;
+
+	/**
+	 * URL
+	 */
+	@JsonProperty("url_path")
+	private String urlPath ;
+	/**
+	 * default 200
+	 */
+	@JsonProperty("expected_codes")
+	private String expectedCodes  ;
+
+	/**
+	 * The administrative state of the health monitor, which is up (true) or down (false)
+	 */
+	@JsonProperty("admin_state_up")
+	private boolean adminStateUp ;
+
+	/**
+	 * The status of the monitor. Indicates whether the VIP is operational.
+	 */
+	private String status;
+
+	/**
+	 * wrap this healthMonitor to a builder
+	 * @return HealthMonitorBuilder
+	 */
+	@Override
+	public HealthMonitorBuilder toBuilder() {
+		return new HealthMonitorConcretebuilder(this);
+	}
+	/**
+	 * @return HealthMonitorBuilder
+	 */
+	public  static HealthMonitorBuilder builder(){
+		return new HealthMonitorConcretebuilder();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HealthMonitorType getType() {
+		return type;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer getDelay() {
+		return delay;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer getTimeout() {
+		return timeout;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Integer getMaxRetries() {
+		return maxRetries;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getHttpMethod() {
+		return httpMethod;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getUrlPath() {
+		return urlPath;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getExpectedCodes() {
+		return expectedCodes;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isAdminStateUp() {
+		return adminStateUp;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getStatus() {
+		return status;
+	}
+
+	public static class HealthMonitors extends ListResult<NeutronHealthMonitor>{
+
+		private static final long serialVersionUID = 1L;
+		@JsonProperty("health_monitors")
+		List<NeutronHealthMonitor> healthMonitors;
+		@Override
+		public List<NeutronHealthMonitor> value() {
+			return healthMonitors;
+		}
+		@Override
+		public String toString() {
+			return MoreObjects.toStringHelper(this).omitNullValues()
+					.add("healthMonitors", healthMonitors).toString();
+		}
+	}
+	public static class HealthMonitorConcretebuilder implements HealthMonitorBuilder {
+		NeutronHealthMonitor m;
+		@Override
+		public HealthMonitor build() {
+			return m;
+		}
+		public HealthMonitorConcretebuilder(){
+			this(new NeutronHealthMonitor());
+		}
+		public HealthMonitorConcretebuilder(NeutronHealthMonitor m){
+			this.m = m;
+		}
+		@Override
+		public HealthMonitorBuilder from(HealthMonitor in) {
+			this.m = (NeutronHealthMonitor)in;
+			return this;
+		}
+
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder tenantId(String tenantId) {
+			m.tenantId = tenantId;
+			return this;
+		}
+
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder type(HealthMonitorType type) {
+			m.type = type;
+			return this;
+		}
+
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder delay(Integer delay) {
+			m.delay = delay;
+			return this;
+		}
+
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder timeout(Integer timeout) {
+			m.timeout = timeout;
+			return this;
+		}
+
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder maxRetries(Integer maxRetries) {
+			m.maxRetries = maxRetries;
+			return this;
+		}
+
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder urlPath(String urlPath) {
+			m.urlPath = urlPath;
+			return this;
+		}
+
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder expectedCodes(String expectedCodes) {
+			m.expectedCodes = expectedCodes;
+			return this;
+		}
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder httpMethod(String httpMethod) {
+			m.httpMethod = httpMethod;
+			return this;
+		}
+		/**
+		 *
+		 * {@inheritDoc}
+		 */
+		@Override
+		public HealthMonitorBuilder adminStateUp(boolean adminStateUp) {
+			m.adminStateUp = adminStateUp;
+			return this;
+		}
+	}
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this).omitNullValues()
+				.add("id",id)
+				.add("adminStateUp",adminStateUp)
+				.add("delay",delay)
+				.add("expectedCodes",expectedCodes)
+				.add("httpMethod",httpMethod)
+				.add("maxRetries",maxRetries)
+				.add("status",status)
+				.add("tenantId",tenantId)
+				.add("timeout",timeout)
+				.add("type",type)
+				.add("urlPath",urlPath)
+				.toString();
+	}
+
+}

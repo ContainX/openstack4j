@@ -1,0 +1,55 @@
+/*******************************************************************************
+ * 	Copyright 2017 HuaWei TLD and OTC                                          
+ * 	                                                                                 
+ * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
+ * 	use this file except in compliance with the License. You may obtain a copy of    
+ * 	the License at                                                                   
+ * 	                                                                                 
+ * 	    http://www.apache.org/licenses/LICENSE-2.0                                   
+ * 	                                                                                 
+ * 	Unless required by applicable law or agreed to in writing, software              
+ * 	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT        
+ * 	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the         
+ * 	License for the specific language governing permissions and limitations under    
+ * 	the License.                                                                     
+ *******************************************************************************/
+package com.huawei.openstack4j.openstack.cloud.trace.v2.internal;
+
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+
+import com.huawei.openstack4j.api.types.ServiceType;
+import com.huawei.openstack4j.common.RestService;
+import com.huawei.openstack4j.openstack.cloud.trace.v2.domain.Trace;
+import com.huawei.openstack4j.openstack.cloud.trace.v2.domain.Trace.Traces;
+import com.huawei.openstack4j.openstack.cloud.trace.v2.options.TraceListOptions;
+import com.huawei.openstack4j.openstack.common.functions.ReplaceVersionOfURL;
+import com.huawei.openstack4j.openstack.internal.BaseOpenStackService;
+
+/**
+ * 
+ *
+ * @author QianBiao.NG
+ * @date   2017-07-13 09:31:10
+ */
+public class TraceService extends BaseOpenStackService implements RestService {
+
+	public TraceService() {
+		super(ServiceType.CLOUD_TRACE, ReplaceVersionOfURL.instance("/v2.0"));
+	}
+
+	/**
+	 * List traces
+	 * 
+	 * @return
+	 */
+	public List<Trace> list(String trackerName, TraceListOptions options) {
+		Preconditions.checkNotNull(!Strings.isNullOrEmpty(trackerName), "parameter `trackerName` should not be empty");
+		Map<String, Object> params = (options == null) ? null : options.getOptions();
+		return get(Traces.class, uri("/%s/trace", trackerName)).params(params).execute().getList();
+	}
+
+}
