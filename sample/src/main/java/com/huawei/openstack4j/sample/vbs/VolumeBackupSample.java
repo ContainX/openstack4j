@@ -81,12 +81,12 @@ public class VolumeBackupSample extends AbstractSample {
 		Retry retry = new Retry() {
 			@Override
 			public Integer maxRetryTimes() {
-				return 10;
+				return 40;
 			}
 
 			@Override
 			public Integer delay() {
-				return 120;
+				return 30;
 			}
 
 			@Override
@@ -164,12 +164,12 @@ public class VolumeBackupSample extends AbstractSample {
 		Retry retry = new Retry() {
 			@Override
 			public Integer maxRetryTimes() {
-				return 10;
+				return 40;
 			}
 
 			@Override
 			public Integer delay() {
-				return 120;
+				return 30;
 			}
 
 			@Override
