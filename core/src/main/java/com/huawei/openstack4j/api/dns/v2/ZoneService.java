@@ -86,7 +86,7 @@ public interface ZoneService extends RestService {
      * @param limit per page's item quantity. Value can be 0~500
      * @return
      */
-    List<? extends Zone> list(ZoneType type, String marker, String limit);
+    List<? extends Zone> list(ZoneType type, String marker, Integer limit);
 
     /**
      * Associate a router to the zone

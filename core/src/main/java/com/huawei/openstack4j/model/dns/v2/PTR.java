@@ -25,7 +25,7 @@ import com.huawei.openstack4j.model.ModelEntity;
  */
 public interface PTR extends ModelEntity {
 	enum Status {
-		ACTIVE, UNKNOWN;
+		ACTIVE, PENDING_CREATE, UNKNOWN;
 		
 		@JsonCreator
 		public static Status forValue(String value) {

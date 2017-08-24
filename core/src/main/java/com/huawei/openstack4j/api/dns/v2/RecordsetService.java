@@ -19,7 +19,6 @@ package com.huawei.openstack4j.api.dns.v2;
 import java.util.List;
 
 import com.huawei.openstack4j.common.RestService;
-import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.dns.v2.Recordset;
 
 
@@ -83,7 +82,7 @@ public interface RecordsetService extends RestService {
 	 * @param marker the initial ID of a paging query, if null, query the first page
 	 * @return list of recordsets in a zone
 	 */
-	List<? extends Recordset> list(String limit, String marker);
+	List<? extends Recordset> list(Integer limit, String marker);
 
 	/**
 	 * list recordsets in a zone
@@ -100,6 +99,6 @@ public interface RecordsetService extends RestService {
 	 * @param marker the initial ID of a paging query, if null, query the first page
 	 * @return list of recordsets in a zone
 	 */
-	List<? extends Recordset> list(String zoneId, String limit, String marker);
+	List<? extends Recordset> list(String zoneId, Integer limit, String marker);
 
 }

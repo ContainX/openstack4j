@@ -36,8 +36,8 @@ import com.huawei.openstack4j.model.dns.v2.Zone;
 import com.huawei.openstack4j.model.dns.v2.ZoneType;
 import com.huawei.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import com.huawei.openstack4j.openstack.dns.v2.domain.DesignatePTR;
-import com.huawei.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import com.huawei.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
+import com.huawei.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import com.huawei.openstack4j.sample.AbstractSample;
 
 /**
@@ -45,6 +45,7 @@ import com.huawei.openstack4j.sample.AbstractSample;
  * @author QianBiao.NG
  * @date   2017-06-12 10:45:22
  */
+@Deprecated
 public class DNSSample extends AbstractSample {
 
 	private static final Logger logger = LoggerFactory.getLogger(DNSSample.class);
@@ -63,10 +64,10 @@ public class DNSSample extends AbstractSample {
 
 	@Test
 	public void testListZonesWithParams() {
-		List<? extends Zone> list = osclient.dns().zones().list(ZoneType.PUBLIC, null, "2");
+		List<? extends Zone> list = osclient.dns().zones().list(ZoneType.PUBLIC, null, 2);
 		logger.info("Public zones: {}", list);
 
-		list = osclient.dns().zones().list(ZoneType.PRIVATE, null, "1");
+		list = osclient.dns().zones().list(ZoneType.PRIVATE, null, 1);
 		logger.info("Private zones: {}", list);
 	}
 
@@ -162,13 +163,13 @@ public class DNSSample extends AbstractSample {
 		List<? extends Recordset> allRecordsetsOfZone = osclient.dns().recordsets().list(ZONE_ID);
 		logger.info("all recordsets of zone: {}", allRecordsetsOfZone);
 
-		List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list(ZONE_ID, "2", null);
+		List<? extends Recordset> recordsetsOfZone = osclient.dns().recordsets().list(ZONE_ID, 2, null);
 		logger.info("recordsets of zone: {}", recordsetsOfZone);
 
 		List<? extends Recordset> allRecordsets = osclient.dns().recordsets().list();
 		logger.info("all recordsets for project: {}", allRecordsets);
 
-		List<? extends Recordset> recordsetsOfProject = osclient.dns().recordsets().list("2", null);
+		List<? extends Recordset> recordsetsOfProject = osclient.dns().recordsets().list(2, null);
 		logger.info("recordsets for project: {}", recordsetsOfProject);
 	}
 

@@ -16,16 +16,15 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.dns.v2.internal;
 
+import static com.google.common.base.Preconditions.*;
+import static com.huawei.openstack4j.core.transport.ClientConstants.*;
+
 import java.util.List;
 
 import com.huawei.openstack4j.api.dns.v2.RecordsetService;
-import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.dns.v2.RecordSetType;
 import com.huawei.openstack4j.model.dns.v2.Recordset;
 import com.huawei.openstack4j.openstack.dns.v2.domain.DesignateRecordset;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.huawei.openstack4j.core.transport.ClientConstants.*;
 
 public class RecordsetServiceImpl extends BaseDNSServices implements RecordsetService {
 
@@ -61,7 +60,7 @@ public class RecordsetServiceImpl extends BaseDNSServices implements RecordsetSe
     }
 
     @Override
-    public List<? extends Recordset> list(String limit, String marker) {
+    public List<? extends Recordset> list(Integer limit, String marker) {
         Invocation<DesignateRecordset.Recordsets> invocation = get(DesignateRecordset.Recordsets.class, uri(PATH_RECORDSETS));
         invocation.param("marker", marker);
         invocation.param("limit", limit);
@@ -80,7 +79,7 @@ public class RecordsetServiceImpl extends BaseDNSServices implements RecordsetSe
     }
 
     @Override
-    public List<? extends Recordset> list(String zoneId, String limit, String marker) {
+    public List<? extends Recordset> list(String zoneId, Integer limit, String marker) {
         checkNotNull(zoneId, "Zone Id should not be null.");
         Invocation<DesignateRecordset.Recordsets> invocation = get(DesignateRecordset.Recordsets.class, PATH_ZONES, "/", zoneId, PATH_RECORDSETS);
         invocation.param("marker", marker);
