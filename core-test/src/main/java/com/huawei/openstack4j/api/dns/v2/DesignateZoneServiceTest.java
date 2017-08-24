@@ -155,7 +155,7 @@ public class DesignateZoneServiceTest extends AbstractTest {
     public void zonePublicListWithParamsTest() throws Exception {
         respondWith(JSON_ZONELIST_PUBLIC);
 
-        List<? extends Zone> zoneList = osv3().dns().zones().list(ZoneType.PUBLIC, null, "1");
+        List<? extends Zone> zoneList = osv3().dns().zones().list(ZoneType.PUBLIC, null, 1);
         assertFalse(zoneList.isEmpty());
         assertTrue(zoneList.size() == 1);
         assertEquals(zoneList.get(0).getType(), ZoneType.PUBLIC);
@@ -165,7 +165,7 @@ public class DesignateZoneServiceTest extends AbstractTest {
     public void zonePrivateListWithParamsTest() throws Exception {
         respondWith(JSON_ZONELIST_PRIVATE);
 
-        List<? extends Zone> zoneList = osv3().dns().zones().list(ZoneType.PRIVATE, null, "2");
+        List<? extends Zone> zoneList = osv3().dns().zones().list(ZoneType.PRIVATE, null, 2);
         assertFalse(zoneList.isEmpty());
         assertTrue(zoneList.size() == 2);
         assertEquals(zoneList.get(0).getType(), ZoneType.PRIVATE);
