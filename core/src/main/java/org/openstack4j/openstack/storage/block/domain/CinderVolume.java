@@ -202,7 +202,7 @@ public class CinderVolume implements Volume {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Boolean isMultiattach(){
+	public Boolean multiattach(){
 		return multiattach;
 	}
 	

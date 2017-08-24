@@ -161,6 +161,6 @@ public class VolumeTests extends AbstractTest {
 		server.takeRequest();	 
 		
         assertEquals(volume.getSize(), 10);               
-        assertEquals(volume.isMultiattach(), Boolean.TRUE);                        
+        assertEquals(volume.multiattach(), Boolean.TRUE);                        
     }
 }
