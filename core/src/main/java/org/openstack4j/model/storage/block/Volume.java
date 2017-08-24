@@ -141,7 +141,7 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	/**
 	 * @return To enable this volume to attach
 	 */
-	boolean isMultiattach();
+	Boolean isMultiattach();
 
 	/**
 	 * @return ID of source volume to clone from

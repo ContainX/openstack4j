@@ -58,7 +58,7 @@ public interface VolumeBuilder extends Builder<VolumeBuilder, Volume> {
 	 * @param To enable this volume to attach to more than one server set this value to true
 	 * @return VolumeBuilder
 	 */
-	VolumeBuilder multiattach(boolean multiattach);
+	VolumeBuilder multiattach(Boolean multiattach);
 	
 	/**
 	 * The size of the volume, in GB.
