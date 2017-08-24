@@ -19,7 +19,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.huawei.openstack4j.model.ModelEntity;
 import com.huawei.openstack4j.openstack.sahara.constants.BillingType;
 import com.huawei.openstack4j.openstack.sahara.constants.ClusterType;
@@ -37,12 +36,10 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonRootName("cluster")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaClusterCreate implements ModelEntity {
 
 	private static final long serialVersionUID = -4868885128978653274L;
-
 
 	@JsonProperty("cluster_name")
 	String name;

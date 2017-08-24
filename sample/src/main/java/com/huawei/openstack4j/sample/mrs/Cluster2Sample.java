@@ -45,14 +45,20 @@ public class Cluster2Sample extends AbstractSample {
 	}
 
 	public void testCreateClusterAndRunJob() {
+
+		String vpcId = "31d158b8-e7d7-4b4a-b2a7-a5240296b267";
+		String vpcName = "vpc-console-bosh";
+		String subnetId = "cb9a6ede-39c6-498f-ad85-c554ef7220fc";
+		String subnetName = "cf2";
+		String keypairName = "KeyPair-28ice";
 		// initial cluster create model
 		SaharaComponent component = SaharaComponent.builder().id("MRS 1.3.0_001").name("Hadoop").version("").desc("")
 				.build();
 		SaharaClusterCreate cluster = SaharaClusterCreate.builder().dataCenter("eu-de").masterNodeNum(2)
-				.masterNodeSize("c2.2xlarge.linux.mrs").coreNodeNum(3).coreNodeSize("c2.2xlarge.linux.mrs")
-				.name("newcluster").availablilityZoneId("eu-de-01").vpcName("vpc1").vpcId("vpc-id").subnetName("subnet")
-				.subnetId("subnet-id").version(ClusterVersion.MRS12).type(ClusterType.Stream).volumeSize(100)
-				.volumeType(VolumeType.SSD).keypair("keypair").safeMode(0).components(Lists.newArrayList(component))
+				.masterNodeSize("c2.4xlarge.linux.mrs").coreNodeNum(3).coreNodeSize("s1.xlarge.linux.mrs")
+				.name("newcluster").availablilityZoneId("eu-de-01").vpcName(vpcName).vpcId(vpcId).subnetName(subnetName)
+				.subnetId(subnetId).version(ClusterVersion.MRS13).type(ClusterType.Analyse).volumeSize(100)
+				.volumeType(VolumeType.SSD).keypair(keypairName).safeMode(0).components(Lists.newArrayList(component))
 				.build();
 
 		// initial job exe create model
@@ -61,7 +67,7 @@ public class Cluster2Sample extends AbstractSample {
 				.jobLog("s3a://log/").fileAction("").hql("").hiveScriptPath("").shutdownCluster(false)
 				.submitJobOnceClusterRun(true).build();
 
-		SaharaClusterCreateResult result = osclient.sahara().clusters2().createAndRunJob(cluster, jobExe);
+		SaharaClusterCreateResult result = osclient.sahara().clusters2().createAndRunJob(cluster, null);
 		Assert.assertTrue(result.getResult());
 	}
 

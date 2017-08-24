@@ -17,6 +17,8 @@ package com.huawei.openstack4j.openstack.sahara.internal;
 
 import static com.google.common.base.Preconditions.*;
 
+import java.util.ArrayList;
+
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
@@ -44,11 +46,12 @@ public class ClusterServiceImpl2 extends BaseSaharaServices implements RestServi
 
 	public SaharaClusterCreateResult createAndRunJob(SaharaClusterCreate cluster, SaharaJobExeCreate jobExe) {
 		checkNotNull(cluster, "parameter `cluster` should not be null");
-		checkNotNull(jobExe, "parameter `jobExe` should not be null");
+		// checkNotNull(jobExe, "parameter `jobExe` should not be null");
 		// setup default values
-		SaharaClusterCreate build = cluster.toBuilder().billingType(BillingType.Metered).masterNodeNum(2)
-				.jobs(Lists.newArrayList(jobExe)).build();
-		return post(SaharaClusterCreateResult.class, "/run-job-flow").entity(build).execute();
+		ArrayList<SaharaJobExeCreate> jobs = jobExe == null ? new ArrayList<SaharaJobExeCreate>() : Lists.newArrayList(jobExe);
+		SaharaClusterCreate create = cluster.toBuilder().billingType(BillingType.Metered).masterNodeNum(2).jobs(jobs)
+				.build();
+		return post(SaharaClusterCreateResult.class, "/run-job-flow").entity(create).execute();
 	}
 
 }
