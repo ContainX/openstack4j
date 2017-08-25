@@ -105,6 +105,7 @@ import org.openstack4j.api.networking.ext.LoadBalancerV2Service;
 import org.openstack4j.api.networking.ext.MemberService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 import org.openstack4j.api.networking.ext.VipService;
+import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.ClusterService;
 import org.openstack4j.api.sahara.ClusterTemplateService;
 import org.openstack4j.api.sahara.DataSourceService;
@@ -264,6 +265,7 @@ import org.openstack4j.openstack.networking.internal.ext.LoadBalancerV2ServiceIm
 import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.VipServiceImpl;
+import org.openstack4j.openstack.octavia.internal.OctaviaServiceImpl;
 import org.openstack4j.openstack.sahara.internal.ClusterServiceImpl;
 import org.openstack4j.openstack.sahara.internal.ClusterTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.DataSourceServiceImpl;
@@ -368,6 +370,11 @@ public class DefaultAPIProvider implements APIProvider {
         bind(SubnetService.class, SubnetServiceImpl.class);
         bind(PortService.class, PortServiceImpl.class);
         bind(RouterService.class, RouterServiceImpl.class);
+        bind(OctaviaService.class, OctaviaServiceImpl.class);
+        bind(org.openstack4j.api.octavia.LoadBalancerV2Service.class, org.openstack4j.openstack.octavia.internal.LoadBalancerV2ServiceImpl.class);
+        bind(org.openstack4j.api.octavia.ListenerV2Service.class, org.openstack4j.openstack.octavia.internal.ListenerV2ServiceImpl.class);
+        bind(org.openstack4j.api.octavia.LbPoolV2Service.class, org.openstack4j.openstack.octavia.internal.LbPoolV2ServiceImpl.class);
+        bind(org.openstack4j.api.octavia.HealthMonitorV2Service.class, org.openstack4j.openstack.octavia.internal.HealthMonitorV2ServiceImpl.class);
         bind(ImageService.class, ImageServiceImpl.class);
         bind(BlockStorageService.class, BlockStorageServiceImpl.class);
         bind(BlockVolumeService.class, BlockVolumeServiceImpl.class);

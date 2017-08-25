@@ -11,6 +11,7 @@ import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.trove.TroveService;
@@ -75,6 +76,15 @@ public class Apis {
      */
     public static NetworkingService getNetworkingServices() {
         return get(NetworkingService.class);
+    }
+
+    /**
+     * Gets the Octavia services API
+     *
+     * @return the Octavia services
+     */
+    public static OctaviaService getOctaviaService() {
+        return get(OctaviaService.class);
     }
     
     /**

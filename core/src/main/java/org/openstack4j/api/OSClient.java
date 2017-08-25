@@ -11,6 +11,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -170,6 +171,13 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the networking service
      */
     NetworkingService networking();
+
+    /**
+     * Returns the Load Balancer Service API
+     *
+     * @return the Load Balancer service
+     */
+    OctaviaService octavia();
 
     /**
      * Returns the Artifact Service API
