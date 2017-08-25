@@ -15,11 +15,13 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.loadbalance.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 
 import com.huawei.openstack4j.api.loadbalance.ELBServerService;
 import com.huawei.openstack4j.model.loadbalance.Server;
@@ -28,6 +30,7 @@ import com.huawei.openstack4j.model.loadbalance.ServerDelete;
 import com.huawei.openstack4j.openstack.common.IdResourceEntity;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBJob;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBServer;
+import com.huawei.openstack4j.openstack.loadbalance.domain.ELBServerDelete;
 import com.huawei.openstack4j.openstack.loadbalance.options.ELBServerListOptions;
 
 public class ELBServerServiceImpl extends BaseELBServices implements ELBServerService {
@@ -48,18 +51,18 @@ public class ELBServerServiceImpl extends BaseELBServices implements ELBServerSe
 	}
 
 	@Override
-	public ELBJob delete(String listenerId, ServerDelete serverDelete) {
+	public ELBJob delete(String listenerId, List<String> servers) {
 		checkArgument(!Strings.isNullOrEmpty(listenerId), "listenerId is required");
-		checkArgument(serverDelete != null, "serverDelete is required");
+		checkArgument(servers != null && servers.size() > 0, "servers is required");
 
-		List<IdResourceEntity> removeMember = serverDelete.getRemoveMember();
-		checkArgument(removeMember != null && !removeMember.isEmpty(), "removeMember is required");
-		for (IdResourceEntity member : removeMember) {
-			checkArgument(member != null, "member can not be null");
-			checkArgument(!Strings.isNullOrEmpty(member.getId()), "server id is required");
+		ArrayList<IdResourceEntity> toRemove = Lists.newArrayList();
+		for (String server : servers) {
+			checkArgument(!Strings.isNullOrEmpty(server), "invalid server id in `servers` parameter");
+			toRemove.add(new IdResourceEntity(server));
 		}
 
-		return post(ELBJob.class, uri("%s/%s/members/action", API_PATH, listenerId)).entity(serverDelete).execute();
+		ServerDelete delete = ELBServerDelete.builder().removeMember(toRemove).build();
+		return post(ELBJob.class, uri("%s/%s/members/action", API_PATH, listenerId)).entity(delete).execute();
 	}
 
 	@Override
@@ -73,7 +76,8 @@ public class ELBServerServiceImpl extends BaseELBServices implements ELBServerSe
 		checkArgument(!Strings.isNullOrEmpty(listenerId), "listenerId is required");
 		checkArgument(options != null, "options is required");
 
-		return get(ELBServer[].class, uri("%s/%s/members", API_PATH, listenerId)).params(options.getOptions()).execute();
+		return get(ELBServer[].class, uri("%s/%s/members", API_PATH, listenerId)).params(options.getOptions())
+				.execute();
 	}
 
 }

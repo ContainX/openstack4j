@@ -35,7 +35,7 @@ public class AsyncJob implements ModelEntity {
 	private static final long serialVersionUID = -4122799701625680047L;
 	
 	@JsonProperty
-	private String status;
+	private Status status;
 	
 	@JsonProperty
 	private Map<String, Object> entities;

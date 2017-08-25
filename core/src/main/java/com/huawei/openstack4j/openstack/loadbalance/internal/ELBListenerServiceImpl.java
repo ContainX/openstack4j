@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.loadbalance.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import com.google.common.base.Strings;
 
@@ -25,14 +25,13 @@ import com.huawei.openstack4j.model.loadbalance.Listener;
 import com.huawei.openstack4j.model.loadbalance.ListenerCreate;
 import com.huawei.openstack4j.model.loadbalance.ListenerUpdate;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBListener;
-import com.huawei.openstack4j.openstack.loadbalance.domain.ELBListenerCreate;
 import com.huawei.openstack4j.openstack.loadbalance.options.ELBListenerListOptions;
 
 public class ELBListenerServiceImpl extends BaseELBServices implements ELBListenerService {
 	private static final String API_PATH = "/elbaas/listeners";
 
 	@Override
-	public ListenerCreate create(ListenerCreate listener) {
+	public Listener create(ListenerCreate listener) {
 		checkArgument(listener != null, "listener is required");
 		checkArgument(!Strings.isNullOrEmpty(listener.getName()), "name is required");
 		checkArgument(!Strings.isNullOrEmpty(listener.getLoadBalancerId()), "loadBalancerId is required");
@@ -42,7 +41,7 @@ public class ELBListenerServiceImpl extends BaseELBServices implements ELBListen
 		checkArgument(listener.getBackendPort() != null, "backendPort is required");
 		checkArgument(listener.getLbAlgorithm() != null, "lbAlgorithm is required");
 
-		return post(ELBListenerCreate.class, uri(API_PATH)).entity(listener).execute();
+		return post(ELBListener.class, uri(API_PATH)).entity(listener).execute();
 	}
 
 	@Override

@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.api.loadbalance;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.IOException;
 
@@ -24,10 +24,10 @@ import org.testng.annotations.Test;
 import com.huawei.openstack4j.api.AbstractTest;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.loadbalance.Listener;
-import com.huawei.openstack4j.model.loadbalance.ListenerCreate;
 import com.huawei.openstack4j.model.loadbalance.Listener.BackendProtocol;
 import com.huawei.openstack4j.model.loadbalance.Listener.LbAlgorithm;
 import com.huawei.openstack4j.model.loadbalance.Listener.Protocol;
+import com.huawei.openstack4j.model.loadbalance.ListenerCreate;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBListenerCreate;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBListenerUpdate;
 import com.huawei.openstack4j.openstack.loadbalance.options.ELBListenerListOptions;
@@ -47,7 +47,7 @@ public class ELBListenerV1Tests extends AbstractTest {
 		ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener").loadBalancerId(loadBalancerId)
 				.protocol(Protocol.TCP).port(12345).backendProtocol(BackendProtocol.TCP)
 				.backendPort(54321).lbAlgorithm(LbAlgorithm.ROUND_ROBIN).build();
-		ListenerCreate create = osv3().loadBalancer().listeners().create(listener);
+		Listener create = osv3().loadBalancer().listeners().create(listener);
 		assertTrue("f5c566e27ebb4d5d8708fca77915a04b".equals(create.getId()));
 	}
 

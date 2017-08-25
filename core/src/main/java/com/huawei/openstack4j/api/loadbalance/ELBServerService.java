@@ -20,16 +20,17 @@ import java.util.List;
 import com.huawei.openstack4j.common.RestService;
 import com.huawei.openstack4j.model.loadbalance.Server;
 import com.huawei.openstack4j.model.loadbalance.ServerCreate;
-import com.huawei.openstack4j.model.loadbalance.ServerDelete;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBJob;
 import com.huawei.openstack4j.openstack.loadbalance.options.ELBServerListOptions;
 
 public interface ELBServerService extends RestService {
+
 	ELBJob create(String listenerId, List<ServerCreate> servers);
-	
-	ELBJob delete(String listenerId, ServerDelete servers);
-	
+
+	ELBJob delete(String listenerId, List<String> servers);
+
 	Server[] list(String listenerId);
-	
+
 	Server[] list(String listenerId, ELBServerListOptions options);
+	
 }

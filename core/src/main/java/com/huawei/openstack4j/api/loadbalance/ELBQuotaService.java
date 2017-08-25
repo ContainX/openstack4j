@@ -15,9 +15,12 @@
  *******************************************************************************/
 package com.huawei.openstack4j.api.loadbalance;
 
+import java.util.List;
+
 import com.huawei.openstack4j.common.RestService;
-import com.huawei.openstack4j.model.loadbalance.Quotas;
+import com.huawei.openstack4j.openstack.common.Quota;
 
 public interface ELBQuotaService extends RestService {
-	Quotas list();
+	
+	List<Quota> list();
 }

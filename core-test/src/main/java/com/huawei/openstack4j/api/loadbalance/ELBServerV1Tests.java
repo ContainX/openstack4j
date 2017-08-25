@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.api.loadbalance;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,11 +27,8 @@ import com.google.common.collect.Lists;
 import com.huawei.openstack4j.api.AbstractTest;
 import com.huawei.openstack4j.model.loadbalance.Server;
 import com.huawei.openstack4j.model.loadbalance.ServerCreate;
-import com.huawei.openstack4j.model.loadbalance.ServerDelete;
-import com.huawei.openstack4j.openstack.common.IdResourceEntity;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBJob;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBServerCreate;
-import com.huawei.openstack4j.openstack.loadbalance.domain.ELBServerDelete;
 import com.huawei.openstack4j.openstack.loadbalance.options.ELBServerListOptions;
 import com.huawei.openstack4j.openstack.loadbalance.options.ELBServerListOptions.HealthStatus;
 
@@ -56,11 +53,7 @@ public class ELBServerV1Tests extends AbstractTest {
 		respondWith(JSON_SERVER_JOB);
 		String listenerId = "3a9fe2c9703c43e1ab761552a022c11e";
 		String serverId = "b235e7d0-8f6d-4777-b9ea-1b1596241996";
-		IdResourceEntity server = new IdResourceEntity();
-		server.setId(serverId);
-		List<IdResourceEntity> removeMember = Lists.newArrayList(server);
-		ServerDelete servers = ELBServerDelete.builder().removeMember(removeMember).build();
-		ELBJob job = osv3().loadBalancer().servers().delete(listenerId, servers);
+		ELBJob job = osv3().loadBalancer().servers().delete(listenerId, Lists.newArrayList(serverId));
 		assertTrue("2c9eb2c05cbc6a07015cd8c817925b98".equals(job.getJobId()));
 	}
 

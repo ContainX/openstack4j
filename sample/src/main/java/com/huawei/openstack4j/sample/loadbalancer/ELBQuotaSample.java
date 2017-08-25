@@ -15,19 +15,32 @@
  *******************************************************************************/
 package com.huawei.openstack4j.sample.loadbalancer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.huawei.openstack4j.model.loadbalance.Quotas;
+import com.huawei.openstack4j.openstack.common.Quota;
+import com.huawei.openstack4j.openstack.common.Quota.ResourceType;
 import com.huawei.openstack4j.sample.AbstractSample;
 
 public class ELBQuotaSample extends AbstractSample {
-	private static final Logger logger = LoggerFactory.getLogger(ELBQuotaSample.class);
 
 	@Test
 	public void testListQuotas() {
-		Quotas quotas = osclient.loadBalancer().quotas().list();
-		logger.info("{}", quotas);
+		List<Quota> list = osclient.loadBalancer().quotas().list();
+		Assert.assertNotNull(list);
+		Assert.assertEquals(list.size(), 2);
+		Assert.assertEquals(list.get(0).getType(), ResourceType.ELB);
+		Assert.assertNotNull(list.get(0).getUsed());
+		Assert.assertNotNull(list.get(0).getQuota());
+		Assert.assertNotNull(list.get(0).getMax());
+		Assert.assertNotNull(list.get(0).getMin());
+		
+		Assert.assertEquals(list.get(1).getType(), ResourceType.LISTENER);
+		Assert.assertNotNull(list.get(1).getUsed());
+		Assert.assertNotNull(list.get(1).getQuota());
+		Assert.assertNotNull(list.get(1).getMax());
+		Assert.assertNotNull(list.get(1).getMin());
 	}
 }

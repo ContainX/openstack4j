@@ -60,7 +60,7 @@ ListenerCreate listener = ELBListenerCreate.builder().name("SDK-test-listener")
 		.backendPort(54321)
 		.lbAlgorithm(LbAlgorithm.ROUND_ROBIN)
 		.build();
-ListenerCreate create = osclient.loadBalancer().listeners().create(listener);
+Listener create = osclient.loadBalancer().listeners().create(listener);
 ```
 
 ### 删除监听器
@@ -93,7 +93,9 @@ Listener[] list = osclient.loadBalancer().listeners().list(options);
 ## 健康检查
 ### 创建健康检查
 ```java
-HealthCheckCreate healthCheck = ELBHealthCheckCreate.builder().listenerId("listenerId").build();
+ELBHealthCheckCreate create = ELBHealthCheckCreate.builder().listenerId("listener-id")
+				.healthCheckProtocol(HealthCheckProtocol.HTTP).healthCheckConnectPort(80).healthCheckInterval(5)
+				.healthCheckTimeout(10).healthCheckUri("/ok").healthyThreshold(3).unhealthyThreshold(3).build();
 HealthCheck create = osclient.loadBalancer().healthchecks().create(healthCheck);
 ```
 
@@ -127,10 +129,7 @@ ELBJob job = osclient.loadBalancer().servers().create("listenerId", servers);
 
 ### 移除后端云服务器
 ```java
-IdResourceEntity server = new IdResourceEntity();
-server.setId("memberId");
-List<IdResourceEntity> removeMember = Lists.newArrayList(server);
-ServerDelete servers = ELBServerDelete.builder().removeMember(removeMember).build();
+ArrayList<String> servers = Lists.newArrayList("server-id-1", "server-id-2");
 ELBJob job = osclient.loadBalancer().servers().delete("listenerId", servers);
 ```
 

@@ -16,6 +16,7 @@
 package com.huawei.openstack4j.openstack.loadbalance.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.huawei.openstack4j.model.loadbalance.HealthCheck.HealthCheckProtocol;
 import com.huawei.openstack4j.model.loadbalance.HealthCheckCreate;
 
 import lombok.AllArgsConstructor;
@@ -37,7 +38,7 @@ public class ELBHealthCheckCreate implements HealthCheckCreate {
 	private String listenerId;
 	
 	@JsonProperty("healthcheck_protocol")
-	private String healthCheckProtocol;
+	private HealthCheckProtocol healthCheckProtocol;
 	
 	@JsonProperty("healthcheck_uri")
 	private String healthCheckUri;

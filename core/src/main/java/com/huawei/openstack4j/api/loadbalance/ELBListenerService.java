@@ -23,7 +23,8 @@ import com.huawei.openstack4j.model.loadbalance.ListenerUpdate;
 import com.huawei.openstack4j.openstack.loadbalance.options.ELBListenerListOptions;
 
 public interface ELBListenerService extends RestService {
-	ListenerCreate create(ListenerCreate listener);
+	
+	Listener create(ListenerCreate listener);
 	
 	ActionResponse delete(String listenerId);
 	

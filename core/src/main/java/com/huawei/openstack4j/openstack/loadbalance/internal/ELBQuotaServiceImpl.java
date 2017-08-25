@@ -15,14 +15,16 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.loadbalance.internal;
 
+import java.util.List;
+
 import com.huawei.openstack4j.api.loadbalance.ELBQuotaService;
-import com.huawei.openstack4j.model.loadbalance.Quotas;
-import com.huawei.openstack4j.openstack.loadbalance.domain.ELBQuotas;
+import com.huawei.openstack4j.openstack.common.Quota;
+import com.huawei.openstack4j.openstack.common.Quota.Quotas;
 
 public class ELBQuotaServiceImpl extends BaseELBServices implements ELBQuotaService {
 
 	@Override
-	public Quotas list() {
-		return get(ELBQuotas.class, uri("/elbaas/quotas")).execute();
+	public List<Quota> list() {
+		return get(Quotas.class, uri("/elbaas/quotas")).execute().getList();
 	}
 }

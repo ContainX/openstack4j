@@ -15,14 +15,15 @@
  *******************************************************************************/
 package com.huawei.openstack4j.api.loadbalance;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.api.AbstractTest;
-import com.huawei.openstack4j.model.loadbalance.Quotas;
+import com.huawei.openstack4j.openstack.common.Quota;
 
 @Test(suiteName = "ELBLoadBalancer/QuotaV1")
 public class ELBQuotaV1Tests extends AbstractTest {
@@ -31,10 +32,10 @@ public class ELBQuotaV1Tests extends AbstractTest {
 
 	public void testListQuotas() throws IOException {
 		respondWith(JSON_QUOTAS);
-		Quotas quotas = osv3().loadBalancer().quotas().list();
-		assertTrue(quotas.getResources().size() == 2);
+		List<Quota> quotas = osv3().loadBalancer().quotas().list();
+		assertTrue(quotas.size() == 2);
 	}
-	
+
 	@Override
 	protected Service service() {
 		return Service.LOAD_BALANCER;

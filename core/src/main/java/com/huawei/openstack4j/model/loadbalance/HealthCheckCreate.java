@@ -16,6 +16,7 @@
 package com.huawei.openstack4j.model.loadbalance;
 
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.model.loadbalance.HealthCheck.HealthCheckProtocol;
 
 public interface HealthCheckCreate extends ModelEntity {
 
@@ -27,7 +28,7 @@ public interface HealthCheckCreate extends ModelEntity {
 	/**
 	 * @return health check protocol
 	 */
-	String getHealthCheckProtocol();
+	HealthCheckProtocol getHealthCheckProtocol();
 
 	/**
 	 * @return health check uri

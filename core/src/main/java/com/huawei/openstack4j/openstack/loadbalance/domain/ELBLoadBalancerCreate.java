@@ -16,8 +16,8 @@
 package com.huawei.openstack4j.openstack.loadbalance.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.huawei.openstack4j.model.loadbalance.LoadBalancerCreate;
 import com.huawei.openstack4j.model.loadbalance.LoadBalancer.Type;
+import com.huawei.openstack4j.model.loadbalance.LoadBalancerCreate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

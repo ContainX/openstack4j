@@ -15,63 +15,102 @@
  *******************************************************************************/
 package com.huawei.openstack4j.sample.loadbalancer;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.google.common.base.Strings;
 
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.loadbalance.HealthCheck;
-import com.huawei.openstack4j.model.loadbalance.HealthCheckCreate;
 import com.huawei.openstack4j.model.loadbalance.HealthCheck.HealthCheckProtocol;
+import com.huawei.openstack4j.model.loadbalance.Listener;
+import com.huawei.openstack4j.model.loadbalance.Listener.BackendProtocol;
+import com.huawei.openstack4j.model.loadbalance.Listener.LbAlgorithm;
+import com.huawei.openstack4j.model.loadbalance.Listener.Protocol;
+import com.huawei.openstack4j.model.loadbalance.Listener.StickySessionType;
+import com.huawei.openstack4j.model.loadbalance.ListenerCreate;
+import com.huawei.openstack4j.model.loadbalance.LoadBalancer;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBHealthCheckCreate;
 import com.huawei.openstack4j.openstack.loadbalance.domain.ELBHealthCheckUpdate;
-import com.huawei.openstack4j.sample.AbstractSample;
+import com.huawei.openstack4j.openstack.loadbalance.domain.ELBListenerCreate;
 
-public class ELBHealthCheckSample extends AbstractSample {
-	private static final Logger logger = LoggerFactory.getLogger(ELBHealthCheckSample.class);
+public class ELBHealthCheckSample extends BaseELBSample {
 
-	@Test
+	String name = randomName();
+	LoadBalancer lb = null;
+	Listener listener = null;
+	HealthCheck healthCheck = null;
+
+	@BeforeClass
 	public void testCreateHealthCheck() {
-		String listenerId = "cd9dc55344fd41b8b1aad5190d2b8dba";
-		HealthCheckCreate healthCheck = ELBHealthCheckCreate.builder().listenerId(listenerId).build();
-		HealthCheck create = osclient.loadBalancer().healthchecks().create(healthCheck);
+		// create load balancer
+		lb = this.createLoadBalancer(name, this.getFirstRouter().getId(), 1);
 
-		logger.info("create: {}", create);
-		assertTrue(!Strings.isNullOrEmpty(create.getId()));
+		// create listener
+		ListenerCreate listenerCreate = ELBListenerCreate.builder().name(name).loadBalancerId(lb.getId())
+				.protocol(Protocol.HTTP).port(10086).backendProtocol(BackendProtocol.HTTP).backendPort(80)
+				.lbAlgorithm(LbAlgorithm.ROUND_ROBIN).sessionSticky(true).stickySessionType(StickySessionType.INSERT)
+				.cookieTimeout(60).build();
+		listener = osclient.loadBalancer().listeners().create(listenerCreate);
+
+		ELBHealthCheckCreate create = ELBHealthCheckCreate.builder().listenerId(listener.getId())
+				.healthCheckProtocol(HealthCheckProtocol.HTTP).healthCheckConnectPort(80).healthCheckInterval(5)
+				.healthCheckTimeout(10).healthCheckUri("/ok").healthyThreshold(3).unhealthyThreshold(3).build();
+		healthCheck = osclient.loadBalancer().healthchecks().create(create);
+
+		assertTrue(!Strings.isNullOrEmpty(healthCheck.getId()));
 	}
 
-	@Test
+	@AfterClass
 	public void testDeleteHealthCheck() {
-		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		ActionResponse resp = osclient.loadBalancer().healthchecks().delete(healthCheckId);
+		ActionResponse resp = osclient.loadBalancer().healthchecks().delete(healthCheck.getId());
 		assertTrue(resp.isSuccess(), resp.getFault());
-	}
 
-	@Test
-	public void testUpdateHealthCheck() {
-		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		HealthCheck healthCheck = osclient.loadBalancer().healthchecks().get(healthCheckId);
+		// delete listener
+		ActionResponse response = osclient.loadBalancer().listeners().delete(listener.getId());
+		assertTrue(response.isSuccess(), response.getFault());
 
-		HealthCheckProtocol before = healthCheck.getHealthCheckProtocol();
-		HealthCheckProtocol after = HealthCheckProtocol.HTTP.equals(before) ? HealthCheckProtocol.TCP
-				: HealthCheckProtocol.HTTP;
-		ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).toBuilder()
-				.healthCheckProtocol(after).healthCheckUri("/test").build();
-
-		HealthCheck afterUpdate = osclient.loadBalancer().healthchecks().update(healthCheckId, update);
-		logger.info("update, before:{}, after:{}, {}", before, after, afterUpdate);
-		assertTrue(afterUpdate.getHealthCheckProtocol().equals(after));
+		// delete load balancer
+		deleteLoadBalancer(lb.getId());
 	}
 
 	@Test
 	public void testGetHealthCheck() {
-		String healthCheckId = "dbaad61e9d5341d7924ceac6bd2d4a77";
-		HealthCheck healthCheck = osclient.loadBalancer().healthchecks().get(healthCheckId);
-		logger.info("get:{}", healthCheck);
-		assertTrue(healthCheck.getId().equals(healthCheckId));
+		HealthCheck get = osclient.loadBalancer().healthchecks().get(healthCheck.getId());
+
+		Assert.assertEquals(get.getId(), healthCheck.getId());
+		Assert.assertEquals(get.getListenerId(), healthCheck.getListenerId());
+		Assert.assertEquals(get.getHealthCheckConnectPort(), healthCheck.getHealthCheckConnectPort());
+		Assert.assertEquals(get.getHealthCheckInterval(), healthCheck.getHealthCheckInterval());
+		Assert.assertEquals(get.getHealthCheckProtocol(), healthCheck.getHealthCheckProtocol());
+		Assert.assertEquals(get.getHealthCheckTimeout(), healthCheck.getHealthCheckTimeout());
+		Assert.assertEquals(get.getHealthCheckUri(), healthCheck.getHealthCheckUri());
+		Assert.assertEquals(get.getHealthyThreshold(), healthCheck.getHealthyThreshold());
+		Assert.assertEquals(get.getUnhealthyThreshold(), healthCheck.getUnhealthyThreshold());
+
+		healthCheck = get;
 	}
+
+	@Test(dependsOnMethods = { "testGetHealthCheck" })
+	public void testUpdateHealthCheck() {
+		ELBHealthCheckUpdate update = ELBHealthCheckUpdate.fromHealthCheck(healthCheck).toBuilder()
+				.healthCheckProtocol(HealthCheckProtocol.TCP).healthCheckConnectPort(88).healthCheckInterval(6)
+				.healthCheckTimeout(30).healthCheckUri("/ok2").healthyThreshold(2).unhealthyThreshold(2).build();
+
+		HealthCheck updated = osclient.loadBalancer().healthchecks().update(healthCheck.getId(), update);
+		Assert.assertEquals(updated.getId(), healthCheck.getId());
+		Assert.assertEquals(updated.getListenerId(), healthCheck.getListenerId());
+		Assert.assertEquals(updated.getHealthCheckConnectPort().intValue(), 88);
+		Assert.assertEquals(updated.getHealthCheckInterval().intValue(), 6);
+		Assert.assertEquals(updated.getHealthCheckProtocol(), HealthCheckProtocol.TCP);
+		Assert.assertEquals(updated.getHealthCheckTimeout().intValue(), 30);
+		Assert.assertEquals(updated.getHealthCheckUri(), "/ok2");
+		Assert.assertEquals(updated.getHealthyThreshold().intValue(), 2);
+		Assert.assertEquals(updated.getUnhealthyThreshold().intValue(), 2);
+	}
+
 }

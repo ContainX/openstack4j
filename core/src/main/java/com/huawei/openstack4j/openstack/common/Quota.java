@@ -31,7 +31,7 @@ public class Quota implements ModelEntity {
 	private static final long serialVersionUID = 8118640445519970866L;
 
 	public enum ResourceType {
-		ALARM, CMK, QUEUE;
+		ALARM, CMK, QUEUE, ELB, LISTENER;
 
 		@JsonCreator
 		public static ResourceType value(String v) {
@@ -47,7 +47,9 @@ public class Quota implements ModelEntity {
 	Integer used;
 	Integer quota;
 	String unit;
-
+	Integer max;
+	Integer min;
+	
 	@JsonRootName("quotas")
 	public static class Quotas extends ListResult<Quota> {
 
