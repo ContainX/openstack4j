@@ -27,7 +27,7 @@ public interface AlarmService extends RestService {
      * @param alarmId The id for the alarm
      * @return
      */
-    List<? extends Alarm> get(String alarmId);
+    Alarm get(String alarmId);
 
     /**
      * @param alarmId The id for the alarm which need to be started

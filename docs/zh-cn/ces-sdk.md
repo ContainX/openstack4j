@@ -152,5 +152,5 @@ ActionResponse actionResponse = osclient.cloudEye().metricsDatas().add(metrics);
 ### 获取配额
 
 ```java
-Quota quotas = osclient.cloudEye().quotas().get();
+List<Quota> list = osclient.cloudEye().quotas().get();
 ```

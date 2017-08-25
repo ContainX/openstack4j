@@ -138,8 +138,8 @@ metrics.add(builder2.build());
 ActionResponse actionResponse = osclient.cloudEye().metricsDatas().add(metrics);
 ```
 
-## Quota Data
-### Get QuotaData
+## Quota
+### Get Quota
 ```java
-Quota quotas = osclient.cloudEye().quotas().get();
+List<Quota> list = osclient.cloudEye().quotas().get();
 ```
