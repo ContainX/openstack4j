@@ -26,9 +26,9 @@ public class CloudEyeAlarmServiceImpl extends BaseCloudEyeServices implements Al
 	}
 
 	@Override
-	public List<? extends Alarm> get(String alarmId) {
+	public Alarm get(String alarmId) {
 		checkNotNull(alarmId);
-		return get(CloudEyeAlarm.CloudEyeAlarms.class, PATH_ALARMS, "/", alarmId).execute().getList();
+		return get(CloudEyeAlarm.CloudEyeAlarms.class, PATH_ALARMS, "/", alarmId).execute().getList().get(0);
 	}
 
 	@Override

@@ -21,5 +21,7 @@ import lombok.ToString;
 @JsonRootName("quotas")
 public class CloudEyeQuota implements Quota {
 	
-    List<CloudEyeResource> resources;
+	private static final long serialVersionUID = -6089596364268939628L;
+	
+	List<CloudEyeResource> resources;
 }
