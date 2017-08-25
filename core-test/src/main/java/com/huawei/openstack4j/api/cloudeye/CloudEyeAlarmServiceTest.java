@@ -1,6 +1,11 @@
 package com.huawei.openstack4j.api.cloudeye;
 
-import org.bouncycastle.jcajce.provider.asymmetric.ec.KeyFactorySpi;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
+
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.api.AbstractTest;
@@ -9,12 +14,6 @@ import com.huawei.openstack4j.model.cloudeye.AlarmState;
 import com.huawei.openstack4j.model.cloudeye.OrderType;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.openstack.cloudeye.internal.AlarmFilterOptions;
-
-import java.util.List;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertTrue;
 
 @Test(groups = "cloudeye", suiteName = "cloudeye/Alarms")
 public class CloudEyeAlarmServiceTest extends AbstractTest {
@@ -50,10 +49,9 @@ public class CloudEyeAlarmServiceTest extends AbstractTest {
     public void getAlarmByIDTest() throws Exception {
         respondWith(JSON_ALARMS);
 
-        List<? extends Alarm> alarms = osv3().cloudEye().alarms().get(ALARM_ID);
+        Alarm alarms = osv3().cloudEye().alarms().get(ALARM_ID);
         assertNotNull(alarms);
-        assertEquals(alarms.size(), 1);
-        assertEquals(alarms.get(0).getAlarmState(), AlarmState.OK);
+        assertEquals(alarms.getAlarmState(), AlarmState.OK);
     }
 
     public void startAlarmTest() throws Exception {
