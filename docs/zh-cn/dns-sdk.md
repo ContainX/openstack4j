@@ -17,7 +17,7 @@ List<? extends Zone> list = osclient.dns().zones().list();
 ```java
 ZoneType type = ZoneType.public; //null -> query all zones, public -> query all public zones, private -> query all private zones
 String marker = null; //the initial ID of a paging query, if null, query the first page
-String limit = "2"; //per page's item quantity. Value can be 0~500
+Integer limit = 2;; //per page's item quantity. Value can be 0~500
 List<? extends Zone> list = osclient.dns().zones().list(type, marker, limit);
 ```
 
@@ -89,7 +89,7 @@ DesignateZone.Router routerResult = osclient.dns().zones().disassociateRouter(zo
 
 ```java
 String zone_id = "2c9eb155587194ec01587224c9f90149";
-String limit = "2";
+Integer limit = 2;;
 String marker = null;
 
 List<? extends Recordset> allRecordsetsOfZone = osclient.dns().recordsets().list(zone_id);
@@ -199,12 +199,11 @@ List<? extends PTR> list = osclient.dns().ptrs().list();
 > 或者
 
 ```java
-String limit = "limit"; 
-String marker = "marker";
-String source_id = "eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
+Integer limit = 2; 
+String sourceId = "eu-de:9e9c6d33-51a6-4f84-b504-c13301f1cc8c";
 Map<String, Object> filters = new HashMap<>();
-filters.put(limit, "2");
-filters.put(marker, source_id); 
+filters.put(limit, limit);
+filters.put(marker, sourceId); 
 List<? extends PTR> list = osclient.dns().ptrs().list(filters);
 ```
 
