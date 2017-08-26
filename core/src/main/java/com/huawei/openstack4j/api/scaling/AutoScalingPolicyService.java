@@ -25,9 +25,15 @@ import com.huawei.openstack4j.openstack.scaling.options.ScalingPolicyListOptions
 
 public interface AutoScalingPolicyService extends RestService {
 
-	public ScalingPolicyCreateUpdate create(ScalingPolicyCreateUpdate policy);
+	/**
+	 * Create a new auto scaling configuration
+	 * 
+	 * @param config	model represent the attributes of auto scaling configuration creation
+	 * @return the created auto-scaling config identifier
+	 */
+	public String create(ScalingPolicyCreateUpdate policy);
 
-	public ScalingPolicyCreateUpdate update(ScalingPolicyCreateUpdate policy);
+	public String update(ScalingPolicyCreateUpdate policy);
 
 	public List<? extends ScalingPolicy> list(String groupId);
 

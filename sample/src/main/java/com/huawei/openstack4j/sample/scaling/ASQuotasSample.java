@@ -19,22 +19,37 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.huawei.openstack4j.model.scaling.ScalingQuota;
+import com.huawei.openstack4j.model.scaling.ScalingGroup;
+import com.huawei.openstack4j.openstack.common.Quota;
+import com.huawei.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 import com.huawei.openstack4j.sample.AbstractSample;
 
 public class ASQuotasSample extends AbstractSample {
 
 	private static final Logger logger = LoggerFactory.getLogger(ASQuotasSample.class);
+	
+	ScalingGroup scalingGroup = null;
+
+	@BeforeClass
+	public void prepare() {
+		ScalingGroupListOptions options = ScalingGroupListOptions.create().limit(1);
+		List<? extends ScalingGroup> list = osclient.autoScaling().groups().list(options);
+		if (list == null || list.size() != 1) {
+			throw new RuntimeException("no group for test");
+		}
+
+		scalingGroup = list.get(0);
+	}
 
 	@Test
 	public void testListAutoScalingQuotas() {
-		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
-		List<? extends ScalingQuota> all = osclient.autoScaling().quotas().list();
+		List<Quota> all = osclient.autoScaling().quotas().list();
 		logger.info("{}", all);
 
-		List<? extends ScalingQuota> list = osclient.autoScaling().quotas().list(groupId);
+		List<Quota> list = osclient.autoScaling().quotas().list(scalingGroup.getGroupId());
 		logger.info("{}", list);
 	}
 }

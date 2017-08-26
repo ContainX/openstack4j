@@ -15,8 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.api.scaling;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,19 +23,19 @@ import java.util.Map;
 
 import org.testng.annotations.Test;
 
+import com.google.common.collect.Lists;
+
 import com.beust.jcommander.internal.Maps;
 import com.huawei.openstack4j.api.AbstractTest;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.scaling.Disk;
+import com.huawei.openstack4j.model.scaling.Disk.DiskType;
+import com.huawei.openstack4j.model.scaling.Disk.VolumeType;
 import com.huawei.openstack4j.model.scaling.InstanceConfig;
 import com.huawei.openstack4j.model.scaling.ScalingConfig;
 import com.huawei.openstack4j.model.scaling.ScalingConfigCreate;
-import com.huawei.openstack4j.model.scaling.Disk.DiskType;
-import com.huawei.openstack4j.model.scaling.Disk.VolumeType;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingConfigCreate;
 import com.huawei.openstack4j.openstack.scaling.options.ScalingConfigListOptions;
-
-import com.google.common.collect.Lists;
 
 @Test(suiteName = "AutoScaling/AutoScalingConfigV1", enabled = true)
 public class AutoScalingConfigV1Tests extends AbstractTest {
@@ -57,8 +56,8 @@ public class AutoScalingConfigV1Tests extends AbstractTest {
 		ScalingConfigCreate config = ASAutoScalingConfigCreate.builder().configName("test-config-name")
 				.instanceConfig(instanceConfig).build();
 
-		ScalingConfigCreate result = osv3().autoScaling().configs().create(config);
-		assertEquals(result.getConfigId(), "7345948e-8511-491b-bf82-36303348fa3d");
+		String result = osv3().autoScaling().configs().create(config);
+		assertEquals(result, "7345948e-8511-491b-bf82-36303348fa3d");
 	}
 
 	public void testListAutoScalingConfig() throws IOException {

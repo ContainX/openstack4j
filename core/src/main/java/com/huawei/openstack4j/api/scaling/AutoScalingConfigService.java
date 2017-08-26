@@ -25,13 +25,19 @@ import com.huawei.openstack4j.openstack.scaling.options.ScalingConfigListOptions
 
 public interface AutoScalingConfigService extends RestService {
 	
-	public ScalingConfigCreate create(ScalingConfigCreate config);
+	/**
+	 * Create a new auto scaling configuration
+	 * 
+	 * @param config	model represent the attributes of auto scaling configuration creation
+	 * @return the created auto-scaling config identifier
+	 */
+	public String create(ScalingConfigCreate config);
 	
 	public List<? extends ScalingConfig> list(ScalingConfigListOptions options);
 	
 	public List<? extends ScalingConfig> list();
 	
-	public ScalingConfigCreate get(String configId);
+	public ScalingConfig get(String configId);
 	
 	public ActionResponse delete(String configId);
 	

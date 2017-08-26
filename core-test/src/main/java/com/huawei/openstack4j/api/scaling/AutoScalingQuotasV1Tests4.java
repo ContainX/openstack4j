@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.api.scaling;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.api.AbstractTest;
-import com.huawei.openstack4j.model.scaling.ScalingQuota;
+import com.huawei.openstack4j.openstack.common.Quota;
 
 @Test(suiteName = "AutoScaling/AutoScalingQuotasV1", enabled = true)
 public class AutoScalingQuotasV1Tests4 extends AbstractTest {
@@ -34,11 +34,11 @@ public class AutoScalingQuotasV1Tests4 extends AbstractTest {
 	public void testListAutoScalingQuotas() throws IOException {
 		respondWith(JSON_SCALING_QUOTAS_LIST);
 		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
-		List<? extends ScalingQuota> all = osv3().autoScaling().quotas().list();
+		List<Quota> all = osv3().autoScaling().quotas().list();
 		assertTrue(all != null && all.size() == 4);
 
 		respondWith(JSON_SCALING_QUOTAS_LIST2);
-		List<? extends ScalingQuota> list = osv3().autoScaling().quotas().list(groupId);
+		List<Quota> list = osv3().autoScaling().quotas().list(groupId);
 		assertTrue(list != null && list.size() == 2);
 	}
 

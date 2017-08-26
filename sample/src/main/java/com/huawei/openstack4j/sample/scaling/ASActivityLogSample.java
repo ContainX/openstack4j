@@ -15,28 +15,49 @@
  *******************************************************************************/
 package com.huawei.openstack4j.sample.scaling;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.model.scaling.ScalingActivityLog;
+import com.huawei.openstack4j.model.scaling.ScalingGroup;
 import com.huawei.openstack4j.openstack.scaling.options.ScalingActivityLogListOptions;
+import com.huawei.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 import com.huawei.openstack4j.sample.AbstractSample;
 
 public class ASActivityLogSample extends AbstractSample {
 
 	private static final Logger logger = LoggerFactory.getLogger(ASActivityLogSample.class);
 
+	ScalingGroup scalingGroup = null;
+
+	@BeforeClass
+	public void prepare() {
+		ScalingGroupListOptions options = ScalingGroupListOptions.create().limit(1);
+		List<? extends ScalingGroup> list = osclient.autoScaling().groups().list(options);
+		if (list == null || list.size() != 1) {
+			throw new RuntimeException("no group for test");
+		}
+
+		scalingGroup = list.get(0);
+	}
+
 	@Test
 	public void testListAutoScalingActivityLog() {
-		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
-		List<? extends ScalingActivityLog> all = osclient.autoScaling().activityLogs().list(groupId);
+		List<? extends ScalingActivityLog> all = osclient.autoScaling().activityLogs().list(scalingGroup.getGroupId());
 		logger.info("{}", all);
 
-		ScalingActivityLogListOptions options = ScalingActivityLogListOptions.create().startNumber(5).limit(5);
-		List<? extends ScalingActivityLog> list = osclient.autoScaling().activityLogs().list(groupId, options);
+		Date now = new Date();
+		Date threeMonthAgo = new Date(now.getTime() - 1000L * 60 * 60 * 24 * 90);
+
+		ScalingActivityLogListOptions options = ScalingActivityLogListOptions.create().startTime(threeMonthAgo)
+				.endTime(now).limit(5);
+		List<? extends ScalingActivityLog> list = osclient.autoScaling().activityLogs().list(scalingGroup.getGroupId(),
+				options);
 		logger.info("{}", list);
 	}
 }

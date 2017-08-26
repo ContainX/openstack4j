@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.sample.scaling;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -39,7 +39,7 @@ public class ASGroupInstanceSample extends AbstractSample {
 
 	@Test(priority = 2)
 	public void testListAutoScalingGroupInstance() {
-		String groupId = "6e42cf82-8157-41eb-a2bc-784f18fa9c2a";
+		String groupId = "588b4592-0998-4722-b51d-e6dbc574ec32";
 		List<? extends ScalingGroupInstance> list = osclient.autoScaling().groupInstances().list(groupId);
 		logger.info("{}", list);
 		if (list != null && !list.isEmpty()) {
@@ -64,15 +64,15 @@ public class ASGroupInstanceSample extends AbstractSample {
 
 	@Test(priority = 1)
 	public void testDeleteAutoScalingGroupInstance() {
-		String instanceId = "475db405-11b4-47f6-bb9d-f3bcbc7ac27f";
+		String instanceId = "7f8e7f05-0323-4d5f-9e48-445da24e1cee";
 		ActionResponse resp = osclient.autoScaling().groupInstances().delete(instanceId, false);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
 	@Test(priority = 0)
 	public void testBatchOperateAutoScalingGroupInstance() throws InterruptedException {
-		String groupId = "8a2462e3-6ae8-4d86-bd89-4497836fe022";
-		List<String> instanceIds = Lists.newArrayList("ebcc24c9-64b6-4f61-ab30-46e496ef31c5");
+		String groupId = "588b4592-0998-4722-b51d-e6dbc574ec32";
+		List<String> instanceIds = Lists.newArrayList("7f8e7f05-0323-4d5f-9e48-445da24e1cee");
 
 		ActionResponse resp = osclient.autoScaling().groupInstances().batchAdd(groupId, instanceIds, false);
 		assertTrue(resp.isSuccess(), resp.getFault());

@@ -1,44 +1,40 @@
 {
-  "cluster_name": "newcluster",
-  "cluster_version": "MRS 1.2",
-  "cluster_type": 1,
-  "master_node_num": 2,
-  "core_node_num": 3,
-  "master_node_size": "c2.2xlarge.linux.mrs",
-  "core_node_size": "c2.2xlarge.linux.mrs",
-  "billing_type": 12,
-  "data_center": "eu-de",
-  "available_zone_id": "eu-de-01",
-  "vpc_id": "vpc-id",
-  "vpc": "vpc1",
-  "subnet_id": "subnet-id",
-  "subnet_name": "subnet",
-  "volume_type": "SSD",
-  "volume_size": 100,
-  "node_public_cert_name": "keypair",
-  "safe_mode": 0,
-  "component_list": [
-    {
-      "component_id": "MRS 1.3.0_001",
-      "component_name": "Hadoop",
-      "component_version": "",
-      "component_desc": ""
-    }
-  ],
-  "add_jobs": [
-    {
-      "input": "s3a://input/",
-      "output": "s3a://output/",
-      "job_name": "sdk",
-      "job_type": 1,
-      "job_log": "s3a://log/",
-      "jar_path": "s3a://sdk/sdk.jar",
-      "file_action": "",
-      "arguments": "wordcount",
-      "hql": "",
-      "hive_script_path": "",
-      "shutdown_cluster": false,
-      "submit_job_once_cluster_run": true
-    }
-  ]
+  "cluster_name" : "newcluster",
+  "cluster_version" : "MRS 1.2",
+  "cluster_type" : 1,
+  "master_node_num" : 2,
+  "core_node_num" : 3,
+  "master_node_size" : "c2.2xlarge.linux.mrs",
+  "core_node_size" : "c2.2xlarge.linux.mrs",
+  "billing_type" : 12,
+  "data_center" : "eu-de",
+  "available_zone_id" : "eu-de-01",
+  "vpc_id" : "vpc-id",
+  "vpc" : "vpc1",
+  "subnet_id" : "subnet-id",
+  "subnet_name" : "subnet",
+  "volume_type" : "SSD",
+  "volume_size" : 100,
+  "node_public_cert_name" : "keypair",
+  "safe_mode" : 0,
+  "component_list" : [ {
+    "component_id" : "MRS 1.3.0_001",
+    "component_name" : "Hadoop",
+    "component_version" : "",
+    "component_desc" : ""
+  } ],
+  "add_jobs" : [ {
+    "input" : "s3a://input/",
+    "output" : "s3a://output/",
+    "job_name" : "sdk",
+    "job_type" : 1,
+    "job_log" : "s3a://log/",
+    "jar_path" : "s3a://sdk/sdk.jar",
+    "file_action" : "",
+    "arguments" : "wordcount",
+    "hql" : "",
+    "hive_script_path" : "",
+    "shutdown_cluster" : false,
+    "submit_job_once_cluster_run" : true
+  } ]
 }

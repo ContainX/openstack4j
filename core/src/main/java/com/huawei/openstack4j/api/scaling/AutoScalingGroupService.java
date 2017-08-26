@@ -26,7 +26,13 @@ import com.huawei.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 
 public interface AutoScalingGroupService extends RestService {
 	
-	public ScalingGroupCreate create(ScalingGroupCreate group); 
+	/**
+	 * create auto scaling group
+	 * 
+	 * @param group model represent the attributes of auto scaling group creation
+	 * @return the created auto scaling group identifier
+	 */
+	public String create(ScalingGroupCreate group); 
 
 	public List<? extends ScalingGroup> list(ScalingGroupListOptions options);
 	
@@ -34,7 +40,7 @@ public interface AutoScalingGroupService extends RestService {
 	
 	public ScalingGroup get(String groupId);
 	
-	public ScalingGroupUpdate update(String groupId, ScalingGroupUpdate group);
+	public String update(String groupId, ScalingGroupUpdate group);
 	
 	public ActionResponse delete(String groupId);
 	

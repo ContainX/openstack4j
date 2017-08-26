@@ -18,10 +18,10 @@ package com.huawei.openstack4j.api.scaling;
 import java.util.List;
 
 import com.huawei.openstack4j.common.RestService;
-import com.huawei.openstack4j.model.scaling.ScalingQuota;
+import com.huawei.openstack4j.openstack.common.Quota;
 
 public interface AutoScalingQuotaService extends RestService {
-	public List<? extends ScalingQuota> list();
+	public List<Quota> list();
 	
-	public List<? extends ScalingQuota> list(String groupId);
+	public List<Quota> list(String groupId);
 }

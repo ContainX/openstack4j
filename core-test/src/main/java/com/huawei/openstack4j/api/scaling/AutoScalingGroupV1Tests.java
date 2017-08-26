@@ -22,26 +22,24 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
+import com.google.common.collect.Lists;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.huawei.openstack4j.api.AbstractTest;
 import com.huawei.openstack4j.core.transport.ObjectMapperSingleton;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.scaling.ScalingGroup;
-import com.huawei.openstack4j.model.scaling.ScalingGroupCreate;
-import com.huawei.openstack4j.model.scaling.ScalingGroupUpdate;
 import com.huawei.openstack4j.model.scaling.ScalingGroup.HealthPeriodicAuditMethod;
 import com.huawei.openstack4j.model.scaling.ScalingGroup.InstanceTerminatePolicy;
 import com.huawei.openstack4j.openstack.common.IdResourceEntity;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
 
-import com.google.common.collect.Lists;
-
 import okhttp3.mockwebserver.RecordedRequest;
 
 @Test(suiteName = "AutoScaling/AutoScalingGroupV1")
 public class AutoScalingGroupV1Tests extends AbstractTest {
-	
+
 	private static final String JSON_SCALING_GROUP_LIST = "/scaling/as_scaling_group_list.json";
 	private static final String JSON_SCALING_GROUP = "/scaling/as_scaling_group.json";
 	private static final String JSON_SCALING_GROUP_CREATE = "/scaling/as_scaling_group_create.json";
@@ -62,8 +60,8 @@ public class AutoScalingGroupV1Tests extends AbstractTest {
 				.healthPeriodicAuditMethod(HealthPeriodicAuditMethod.ELB_AUDIT)
 				.instanceTerminatePolicy(InstanceTerminatePolicy.NEW_INSTANCE)
 				.availabilityZones(Lists.newArrayList("eu-de")).build();
-		
-		ScalingGroupCreate result = osv3().autoScaling().groups().create(group);
+
+		String result = osv3().autoScaling().groups().create(group);
 
 		RecordedRequest request = server.takeRequest();
 		assertTrue(request.getPath().equals("/v1/project-id/scaling_group"));
@@ -76,8 +74,7 @@ public class AutoScalingGroupV1Tests extends AbstractTest {
 		assertTrue(response.get("available_zones").isArray());
 		assertEquals("eu-de", response.get("available_zones").get(0).asText());
 
-		
-		assertEquals(result.getGroupId(), "613baa6b-32c5-4052-9cb1-45f9a22b2579");
+		assertEquals(result, "613baa6b-32c5-4052-9cb1-45f9a22b2579");
 	}
 
 	@Test(priority = 2)
@@ -102,9 +99,9 @@ public class AutoScalingGroupV1Tests extends AbstractTest {
 		assertEquals(group.getGroupName(), "as-group-349s");
 
 		respondWith(JSON_SCALING_GROUP_UPDATE);
-		ScalingGroupUpdate result = osv3().autoScaling().groups().update(group.getGroupId(),
+		String result = osv3().autoScaling().groups().update(group.getGroupId(),
 				ASAutoScalingGroupUpdate.fromScalingGroup(group).toBuilder().groupName("groupNameUpdate").build());
-		assertEquals(result.getGroupId(), group.getGroupId());
+		assertEquals(result, group.getGroupId());
 	}
 
 	@Test(priority = 5)

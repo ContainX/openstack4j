@@ -15,8 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.scaling.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
 
@@ -32,15 +31,15 @@ import com.huawei.openstack4j.model.scaling.PublicIp;
 import com.huawei.openstack4j.model.scaling.ScalingConfig;
 import com.huawei.openstack4j.model.scaling.ScalingConfigCreate;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingConfig;
+import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingConfig.ASAutoScalingConfigs;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingConfigCreate;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingConfigDelete;
-import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingConfig.ASAutoScalingConfigs;
 import com.huawei.openstack4j.openstack.scaling.options.ScalingConfigListOptions;
 
 public class AutoScalingConfigServiceImpl extends BaseAutoScalingServices implements AutoScalingConfigService {
 
 	@Override
-	public ScalingConfigCreate create(ScalingConfigCreate config) {
+	public String create(ScalingConfigCreate config) {
 		checkArgument(config != null, "config is required");
 		checkArgument(!Strings.isNullOrEmpty(config.getConfigName()), "configName is required");
 		checkArgument(config.getInstanceConfig() != null, "instanceConfig is required");
@@ -62,7 +61,9 @@ public class AutoScalingConfigServiceImpl extends BaseAutoScalingServices implem
 			instanceConfig.setDisks(null);
 		}
 
-		return post(ASAutoScalingConfigCreate.class, uri("/scaling_configuration")).entity(config).execute();
+		ASAutoScalingConfigCreate execute = post(ASAutoScalingConfigCreate.class, uri("/scaling_configuration"))
+				.entity(config).execute();
+		return execute.getConfigId();
 	}
 
 	private void checkPublicIpWhenPresent(PublicIp publicIp) {
@@ -89,7 +90,7 @@ public class AutoScalingConfigServiceImpl extends BaseAutoScalingServices implem
 	}
 
 	@Override
-	public ScalingConfigCreate get(String configId) {
+	public ScalingConfig get(String configId) {
 		checkNotNull(configId, "configId");
 		return get(ASAutoScalingConfig.class, uri("/scaling_configuration/%s", configId)).execute();
 	}

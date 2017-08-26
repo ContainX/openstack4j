@@ -15,26 +15,26 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.scaling.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
 
 import com.google.common.base.Strings;
 
 import com.huawei.openstack4j.api.scaling.AutoScalingQuotaService;
-import com.huawei.openstack4j.model.scaling.ScalingQuota;
-import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingQuota.ASAutoScalingQuotas;
+import com.huawei.openstack4j.openstack.common.Quota;
+import com.huawei.openstack4j.openstack.common.Quota.Quotas;
 
 public class AutoScalingQuotaServiceImpl extends BaseAutoScalingServices implements AutoScalingQuotaService {
 
 	@Override
-	public List<? extends ScalingQuota> list() {
-		return get(ASAutoScalingQuotas.class, uri("/quotas")).execute().getList();
+	public List<Quota> list() {
+		return get(Quotas.class, uri("/quotas")).execute().getList();
 	}
 
 	@Override
-	public List<? extends ScalingQuota> list(String groupId) {
+	public List<Quota> list(String groupId) {
 		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId required");
-		return get(ASAutoScalingQuotas.class, uri("/quotas/%s", groupId)).execute().getList();
+		return get(Quotas.class, uri("/quotas/%s", groupId)).execute().getList();
 	}
 }

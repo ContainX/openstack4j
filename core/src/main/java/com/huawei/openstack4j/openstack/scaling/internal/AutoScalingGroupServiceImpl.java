@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.scaling.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,9 +30,9 @@ import com.huawei.openstack4j.model.scaling.ScalingGroupCreate;
 import com.huawei.openstack4j.model.scaling.ScalingGroupUpdate;
 import com.huawei.openstack4j.openstack.common.IdResourceEntity;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroup;
+import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroup.ASAutoScalingGroups;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
-import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroup.ASAutoScalingGroups;
 import com.huawei.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 
 /**
@@ -43,7 +43,7 @@ import com.huawei.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
 public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices implements AutoScalingGroupService {
 
 	@Override
-	public ScalingGroupCreate create(ScalingGroupCreate group) {
+	public String create(ScalingGroupCreate group) {
 		checkArgument(group != null, "group is required");
 		checkArgument(group.getNetworks() != null && !group.getNetworks().isEmpty(), "networks is required");
 		checkArgument(group.getSecurityGroups() != null && !group.getSecurityGroups().isEmpty(),
@@ -55,7 +55,9 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 		for (IdResourceEntity securityGroup : group.getSecurityGroups()) {
 			checkArgument(!Strings.isNullOrEmpty(securityGroup.getId()), "security group id is required");
 		}
-		return post(ASAutoScalingGroupCreate.class, uri("/scaling_group")).entity(group).execute();
+		ASAutoScalingGroupCreate execute = post(ASAutoScalingGroupCreate.class, uri("/scaling_group")).entity(group)
+				.execute();
+		return execute.getGroupId();
 	}
 
 	/*
@@ -78,7 +80,7 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 	}
 
 	@Override
-	public ScalingGroupUpdate update(String groupId, ScalingGroupUpdate group) {
+	public String update(String groupId, ScalingGroupUpdate group) {
 		checkArgument(group != null, "group is required");
 		checkArgument(!Strings.isNullOrEmpty(groupId), "group id is required");
 		if (group.getNetworks() != null) {
@@ -91,7 +93,8 @@ public class AutoScalingGroupServiceImpl extends BaseAutoScalingServices impleme
 				checkArgument(!Strings.isNullOrEmpty(securityGroup.getId()), "security group id is required");
 			}
 		}
-		return put(ASAutoScalingGroupUpdate.class, uri("/scaling_group/%s", groupId)).entity(group).execute();
+		return put(ASAutoScalingGroupUpdate.class, uri("/scaling_group/%s", groupId)).entity(group).execute()
+				.getGroupId();
 	}
 
 	@Override

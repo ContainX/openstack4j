@@ -15,21 +15,19 @@
  *******************************************************************************/
 package com.huawei.openstack4j.api.scaling;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.google.common.base.Strings;
-
 import com.huawei.openstack4j.api.AbstractTest;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.scaling.ScalingPolicy;
 import com.huawei.openstack4j.model.scaling.ScalingPolicyCreateUpdate;
-import com.huawei.openstack4j.model.scaling.ScheduledPolicy;
 import com.huawei.openstack4j.model.scaling.ScalingPolicyCreateUpdate.ScalingPolicyType;
+import com.huawei.openstack4j.model.scaling.ScheduledPolicy;
 import com.huawei.openstack4j.model.scaling.ScheduledPolicy.RecurrenceType;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingPolicy;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingPolicyCreateUpdate;
@@ -50,8 +48,8 @@ public class AutoScalingPolicyV1Tests2 extends AbstractTest {
 				.recurrenceType(RecurrenceType.DAILY).recurrenceValue(null).build();
 		ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder().policyName("policyTestName")
 				.groupId(groupId).policyType(ScalingPolicyType.RECURRENCE).scheduledPolicy(scheduledPolicy).build();
-		ScalingPolicyCreateUpdate create = osv3().autoScaling().policies().create(policy);
-		assertTrue(create != null && !Strings.isNullOrEmpty(create.getPolicyId()));
+		String create = osv3().autoScaling().policies().create(policy);
+		assertEquals(create, "50bbaf82-f4c1-4870-a55c-61a52cdcfa27");
 	}
 
 	public void testUpdateAutoScalingPolicy() throws IOException {
@@ -61,9 +59,9 @@ public class AutoScalingPolicyV1Tests2 extends AbstractTest {
 
 		respondWith(JSON_SCALING_POLICY_CREATE);
 		String after = new StringBuilder(policy.getPolicyName()).reverse().toString();
-		ScalingPolicyCreateUpdate update = osv3().autoScaling().policies().update(
+		String update = osv3().autoScaling().policies().update(
 				ASAutoScalingPolicyCreateUpdate.fromScalingPolicy(policy).toBuilder().policyName(after).build());
-		assertTrue(policyId.equals(update.getPolicyId()));
+		assertTrue(policyId.equals(update));
 	}
 
 	public void testListAutoScalingPolicy() throws IOException {
@@ -72,7 +70,6 @@ public class AutoScalingPolicyV1Tests2 extends AbstractTest {
 		List<? extends ScalingPolicy> all = osv3().autoScaling().policies().list(groupId);
 		assertTrue(all != null && all.size() == 2);
 
-		
 		respondWith(JSON_SCALING_POLICY_LIST2);
 		String policyName = "policyName";
 		ScalingPolicyListOptions options = ScalingPolicyListOptions.create().policyName(policyName);
@@ -99,7 +96,7 @@ public class AutoScalingPolicyV1Tests2 extends AbstractTest {
 		String policyId = "50bbaf82-f4c1-4870-a55c-61a52cdcfa27";
 		ActionResponse resp = osv3().autoScaling().policies().resume(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
-		
+
 		resp = osv3().autoScaling().policies().execute(policyId);
 		assertTrue(resp.isSuccess(), resp.getFault());
 

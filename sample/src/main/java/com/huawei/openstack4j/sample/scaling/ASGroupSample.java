@@ -17,248 +17,106 @@
  *******************************************************************************/
 package com.huawei.openstack4j.sample.scaling;
 
-import static org.testng.Assert.*;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.beust.jcommander.internal.Maps;
 import com.huawei.openstack4j.model.common.ActionResponse;
-import com.huawei.openstack4j.model.compute.Keypair;
-import com.huawei.openstack4j.model.scaling.Disk;
-import com.huawei.openstack4j.model.scaling.InstanceConfig;
-import com.huawei.openstack4j.model.scaling.ScalingConfig;
-import com.huawei.openstack4j.model.scaling.ScalingConfigCreate;
 import com.huawei.openstack4j.model.scaling.ScalingGroup;
-import com.huawei.openstack4j.model.scaling.ScalingGroupCreate;
-import com.huawei.openstack4j.model.scaling.ScalingGroupUpdate;
-import com.huawei.openstack4j.model.scaling.Disk.DiskType;
-import com.huawei.openstack4j.model.scaling.Disk.VolumeType;
+import com.huawei.openstack4j.model.scaling.ScalingGroup.HealthPeriodicAuditMethod;
+import com.huawei.openstack4j.model.scaling.ScalingGroup.InstanceTerminatePolicy;
 import com.huawei.openstack4j.model.scaling.ScalingGroup.ScalingGroupStatus;
-import com.huawei.openstack4j.openstack.common.IdResourceEntity;
-import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingConfigCreate;
-import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupCreate;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupUpdate;
-import com.huawei.openstack4j.openstack.scaling.options.ScalingConfigListOptions;
 import com.huawei.openstack4j.openstack.scaling.options.ScalingGroupListOptions;
-import com.huawei.openstack4j.sample.AbstractSample;
-
-import com.google.common.collect.Lists;
 
 /**
  *
  * @author Woo Cubic
  * @date 2017-06-06 20:40:10
  */
-public class ASGroupSample extends AbstractSample {
+public class ASGroupSample extends BaseAutoScalingSample {
 
-	private static final Logger logger = LoggerFactory.getLogger(ASGroupSample.class);
+	String name = randomName();
+	String asConfigId;
+	String asGroupId;
+	ScalingGroup create = null;
 
-	@Test
-	public void testCreateAutoScalingGroup() {
-		String groupId = createScalingGroup();
-		logger.info(groupId);
+	@BeforeClass
+	public void testCreateGroup() {
+		asConfigId = createConfig(name);
+		asGroupId = createGroup(name, asConfigId);
 	}
 
-	@Test
-	public void testListAutoScalingGroups() {
-		List<? extends ScalingGroup> list = osclient.autoScaling().groups()
-				.list(ScalingGroupListOptions.create().groupName("test-4-bill").limit(5).startNumber(1));
-		logger.info("{}", list);
-		Assert.assertTrue(!list.isEmpty());
-		Assert.assertEquals(list.get(0).getGroupName(), "test-4-bill");
-		list = osclient.autoScaling().groups().list(ScalingGroupListOptions.create().groupName("$&"));
-		logger.info("{}", list);
-		Assert.assertTrue(list.isEmpty());
-		list = osclient.autoScaling().groups().list();
-		logger.info("{}", list);
-		Assert.assertTrue(!list.isEmpty());
+	@AfterClass
+	public void testDeleteGroup() {
+		osclient.autoScaling().groups().delete(asGroupId);
+		osclient.autoScaling().configs().delete(asConfigId);
 	}
 
 	@Test
 	public void testGetAutoScalingGroup() {
-		ScalingGroup group = osclient.autoScaling().groups().get("9d841f24-755a-4706-ba1a-11fcd27d5891");
-		logger.info("{}", group);
-		Assert.assertNotNull(group);
-		Assert.assertEquals(group.getGroupName(), "as-group-349s");
+		ScalingGroup group = osclient.autoScaling().groups().get(asGroupId);
+		validateGroup(group);
+		create = group;
 	}
 
 	@Test
+	public void testListAutoScalingGroups() {
+		ScalingGroupListOptions options = ScalingGroupListOptions.create().groupName(name).limit(5);
+		List<? extends ScalingGroup> list = osclient.autoScaling().groups().list(options);
+		Assert.assertEquals(list.size(), 1);
+		ScalingGroup scalingGroup = list.get(0);
+		validateGroup(scalingGroup);
+	}
+
+	/**
+	 * @param group
+	 */
+	public void validateGroup(ScalingGroup group) {
+		Assert.assertNotNull(group);
+		Assert.assertEquals(group.getGroupName(), name);
+		Assert.assertEquals(group.getConfigId(), asConfigId);
+		Assert.assertEquals(group.getVpcId(), vpcId);
+		Assert.assertEquals(group.getNetworks().size(), 1);
+		Assert.assertEquals(group.getNetworks().get(0).getId(), networkId);
+		Assert.assertEquals(group.getSecurityGroups().size(), 1);
+		Assert.assertEquals(group.getSecurityGroups().get(0).getId(), sgId);
+		Assert.assertEquals(group.getMaxInstanceNumber().intValue(), 2);
+		Assert.assertEquals(group.getMinInstanceNumber().intValue(), 0);
+		Assert.assertEquals(group.getDesireInstanceNumber().intValue(), 1);
+		Assert.assertEquals(group.getCoolDownTime().intValue(), 200);
+		Assert.assertEquals(group.getHealthPeriodicAuditMethod(), HealthPeriodicAuditMethod.NOVA_AUDIT);
+		Assert.assertEquals(group.getHealthPeriodicAuditTime().intValue(), 5);
+		Assert.assertEquals(group.getInstanceTerminatePolicy(), InstanceTerminatePolicy.OLD_CONFIG_OLD_INSTANCE);
+	}
+
+	@Test(dependsOnMethods = { "testGetAutoScalingGroup", "testListAutoScalingGroups" })
 	public void testUpdateAutoScalingGroup() {
-		String groupId = "8f633489-ec05-4a22-b8b5-2fa1006f6b60";
-		ScalingGroup group = osclient.autoScaling().groups().get(groupId);
-		Assert.assertNotNull(group);
+		ASAutoScalingGroupUpdate update = ASAutoScalingGroupUpdate.builder().groupName(name + "-updated").build();
+		String groupId = osclient.autoScaling().groups().update(asGroupId, update);
+		Assert.assertNotNull(groupId);
 
-		String before = group.getGroupName();
-		String after = new StringBuilder(before).reverse().toString();
-		
-		ASAutoScalingGroupUpdate updated = ASAutoScalingGroupUpdate.builder().groupName(after).build();
-		ScalingGroupUpdate update = osclient.autoScaling().groups().update(group.getGroupId(), updated);
-		Assert.assertNotNull(update.getGroupId());
-
-		ScalingGroup afterUpdate = osclient.autoScaling().groups().get(groupId);
-		Assert.assertEquals(afterUpdate.getGroupName(), after);
+		ScalingGroup updated = osclient.autoScaling().groups().get(groupId);
+		Assert.assertEquals(updated.getGroupName(), name + "-updated");
 	}
 
-	@Test
-	public void testDeleteAutoScalingGroup() {
-		String groupId = createScalingGroup();
-
-		ActionResponse resp = osclient.autoScaling().groups().delete(groupId);
-		Assert.assertTrue(resp.isSuccess(), resp.getFault());
-
-		ScalingGroup deletedGroup = osclient.autoScaling().groups().get(groupId);
-		Assert.assertNull(deletedGroup);
-	}
-
-	@Test
+	@Test(dependsOnMethods = { "testUpdateAutoScalingGroup" })
 	public void testOperateAutoScalingGroup() {
-
-		String groupId = createScalingGroup();
-		ActionResponse resp = osclient.autoScaling().groups().resume(groupId);
+		ActionResponse resp = osclient.autoScaling().groups().pause(asGroupId);
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
 
-		ScalingGroup group = osclient.autoScaling().groups().get(groupId);
-		Assert.assertEquals(group.getGroupStatus(), ScalingGroupStatus.INSERVICE);
-
-		resp = osclient.autoScaling().groups().pause(groupId);
-		Assert.assertTrue(resp.isSuccess(), resp.getFault());
-
-		group = osclient.autoScaling().groups().get(groupId);
+		ScalingGroup group = osclient.autoScaling().groups().get(asGroupId);
 		Assert.assertEquals(group.getGroupStatus(), ScalingGroupStatus.PAUSED);
 
-		resp = osclient.autoScaling().groups().delete(groupId);
+		resp = osclient.autoScaling().groups().resume(asGroupId);
 		Assert.assertTrue(resp.isSuccess(), resp.getFault());
+
+		group = osclient.autoScaling().groups().get(asGroupId);
+		Assert.assertEquals(group.getGroupStatus(), ScalingGroupStatus.INSERVICE);
+
 	}
 
-	@Test
-	public void testCreateAutoScalingConfig() {
-		String configId = createScalingConfig();
-		logger.info("{}", configId);
-		assertNotNull(configId);
-	}
-
-	@Test
-	public void testListAutoScalingConfig() {
-		List<? extends ScalingConfig> all = osclient.autoScaling().configs().list();
-		logger.info("{}", all);
-
-		createScalingConfig();
-		ScalingConfigListOptions options = ScalingConfigListOptions.create().configName("test-config-name");
-		List<? extends ScalingConfig> list = osclient.autoScaling().configs().list(options);
-		logger.info("{}", list);
-		assertTrue(!list.isEmpty());
-		for (ScalingConfig config : list) {
-			assertEquals(config.getConfigName(), "test-config-name");
-		}
-	}
-
-	@Test
-	public void testGetAutoScalingConfig() {
-		String configId = createScalingConfig();
-
-		ScalingConfigCreate newCfg = osclient.autoScaling().configs().get(configId);
-		assertEquals(newCfg.getConfigName(), "test-config-name");
-	}
-
-	@Test
-	public void testDeleteAutoScalingConfig() {
-		String configId = createScalingConfig();
-		ActionResponse resp = osclient.autoScaling().configs().delete(configId);
-		assertTrue(resp.isSuccess(), resp.getFault());
-		ScalingConfigCreate config = osclient.autoScaling().configs().get(configId);
-		assertNull(config);
-
-		ArrayList<String> configIds = Lists.newArrayList();
-		for (int i = 0; i < 5; i++) {
-			configIds.add(createScalingConfig());
-		}
-		resp = osclient.autoScaling().configs().delete(configIds);
-		assertTrue(resp.isSuccess(), resp.getFault());
-		for (String cid : configIds) {
-			assertNull(osclient.autoScaling().configs().get(cid));
-		}
-	}
-
-	/**
-	 * create scaling group
-	 * 
-	 * @return group id
-	 */
-	private String createScalingGroup() {
-		IdResourceEntity network = new IdResourceEntity();
-		network.setId("d2c9712f-84a8-4511-bebf-ec6eac62daf8");
-
-		IdResourceEntity securityGroup = new IdResourceEntity();
-		securityGroup.setId("0005ba27-b937-4a7c-a280-c7b65cea2e47");
-
-		ASAutoScalingGroupCreate group = ASAutoScalingGroupCreate.builder().groupName("test-4-bill")
-				.vpcId("31d158b8-e7d7-4b4a-b2a7-a5240296b267").networks(Lists.newArrayList(network))
-				.configId("21114dcf-7d42-4c7b-84b8-35983da4fccb").securityGroups(Lists.newArrayList(securityGroup))
-				.maxInstanceNumber(2).minInstanceNumber(1).desireInstanceNumber(1).build();
-
-		ScalingGroupCreate result = osclient.autoScaling().groups().create(group);
-		Assert.assertNotNull(result.getGroupId());
-		return result.getGroupId();
-	}
-
-	/**
-	 * create scaling configuration
-	 * 
-	 * @return configuration id
-	 */
-	private String createScalingConfig() {
-		String keyname = "KeyPair-28ice";
-		Keypair keypair = osclient.compute().keypairs().get(keyname);
-		if (keypair == null) {
-			osclient.compute().keypairs().create(keyname, null);
-		}
-
-		Map<String, String> metaData = Maps.newHashMap();
-		metaData.put("key1", "val1");
-		metaData.put("key2", "val2");
-		Disk disk = Disk.builder().size(40).volumeType(VolumeType.SATA).diskType(DiskType.SYS).build();
-		InstanceConfig instanceConfig = InstanceConfig.builder().flavorRef("computev1-1")
-				.imageRef("cb6ad86a-f69e-4a36-b65b-1038b19e15d3").disks(Lists.newArrayList(disk)).keyName(keyname)
-				.metadata(metaData).build();
-		ScalingConfigCreate config = ASAutoScalingConfigCreate.builder().configName("test-config-name")
-				.instanceConfig(instanceConfig).build();
-
-		ScalingConfigCreate result = osclient.autoScaling().configs().create(config);
-		assertNotNull(result.getConfigId());
-		return result.getConfigId();
-	}
-	
-	@Test
-	public void create() {
-		//add by cym
-		IdResourceEntity network = new IdResourceEntity();
-		network.setId("814fcf7b-2a78-4a6f-b68e-0646a6384bf1");
-
-		IdResourceEntity securityGroup = new IdResourceEntity();
-		securityGroup.setId("6c22a6c0-b5d2-4a84-ac56-51090dcc33be");
-
-		String availabilityZone = "az1.dc1";
-
-		ASAutoScalingGroupCreate group = ASAutoScalingGroupCreate.builder().groupName("test-4-bill")
-				.vpcId("eb83b023-3ffe-4ec7-b868-f2818fdc401f").networks(Lists.newArrayList(network))
-				.securityGroups(Lists.newArrayList(securityGroup))
-				.maxInstanceNumber(2).minInstanceNumber(1).desireInstanceNumber(1).coolDownTime(800)
-				.lbListenerId("47c134f775834f9991fbe5e8c41b296b")
-				.lbListenerId("e68450203ddf49be96232e9ec8951049")
-				.availabilityZones(Lists.newArrayList(availabilityZone))
-		//		.healthPeriodicAuditMethod("NOVA_AUDIT")
-				.healthPeriodicAuditTime(15)
-		//		.instanceTerminatePolicy("OLD_INSTANCE")
-				.deletePublicip(true)
-				.build();
-		ScalingGroupCreate result = osclient.autoScaling().groups().create(group);
-		Assert.assertNotNull(result.getGroupId());
-	}
 }

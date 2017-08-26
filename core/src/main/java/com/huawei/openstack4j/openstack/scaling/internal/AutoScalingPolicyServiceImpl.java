@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.scaling.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,31 +29,32 @@ import com.huawei.openstack4j.model.scaling.ScalingPolicy;
 import com.huawei.openstack4j.model.scaling.ScalingPolicyCreateUpdate;
 import com.huawei.openstack4j.model.scaling.ScheduledPolicy;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingPolicy;
-import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingPolicyCreateUpdate;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingPolicy.ASAutoScalingPolicys;
+import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingPolicyCreateUpdate;
 import com.huawei.openstack4j.openstack.scaling.options.ScalingPolicyListOptions;
 
 public class AutoScalingPolicyServiceImpl extends BaseAutoScalingServices implements AutoScalingPolicyService {
 
 	@Override
-	public ScalingPolicyCreateUpdate create(ScalingPolicyCreateUpdate policy) {
+	public String create(ScalingPolicyCreateUpdate policy) {
 		checkArgument(policy != null, "policy required");
 		checkArgument(!Strings.isNullOrEmpty(policy.getPolicyName()), "policyName required");
 		checkArgument(!Strings.isNullOrEmpty(policy.getGroupId()), "groupId required");
 		checkArgument(policy.getPolicyType() != null, "policyType required");
 
 		checkScheduledPolicyWhenPresent(policy.getScheduledPolicy());
-		return post(ASAutoScalingPolicyCreateUpdate.class, uri("/scaling_policy")).entity(policy).execute();
+		return post(ASAutoScalingPolicyCreateUpdate.class, uri("/scaling_policy")).entity(policy).execute()
+				.getPolicyId();
 	}
 
 	@Override
-	public ScalingPolicyCreateUpdate update(ScalingPolicyCreateUpdate policy) {
+	public String update(ScalingPolicyCreateUpdate policy) {
 		checkArgument(policy != null, "policy required");
 		String policyId = policy.getPolicyId();
 		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
 		
-		
-		return put(ASAutoScalingPolicyCreateUpdate.class, uri("/scaling_policy/%s", policyId)).entity(resetPolicyId((ASAutoScalingPolicyCreateUpdate) policy)).execute();
+		return put(ASAutoScalingPolicyCreateUpdate.class, uri("/scaling_policy/%s", policyId))
+				.entity(resetPolicyId((ASAutoScalingPolicyCreateUpdate) policy)).execute().getPolicyId();
 	}
 
 	private ScalingPolicyCreateUpdate resetPolicyId(ASAutoScalingPolicyCreateUpdate policy) {
@@ -78,7 +79,7 @@ public class AutoScalingPolicyServiceImpl extends BaseAutoScalingServices implem
 		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
 		return get(ASAutoScalingPolicy.class, uri("/scaling_policy/%s", policyId)).execute();
 	}
-	
+
 	@Override
 	public ActionResponse execute(String policyId) {
 		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
@@ -86,7 +87,7 @@ public class AutoScalingPolicyServiceImpl extends BaseAutoScalingServices implem
 		entity.put("action", "execute");
 		return post(ActionResponse.class, uri("/scaling_policy/%s/action", policyId)).entity(entity).execute();
 	}
-	
+
 	@Override
 	public ActionResponse resume(String policyId) {
 		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
@@ -94,7 +95,7 @@ public class AutoScalingPolicyServiceImpl extends BaseAutoScalingServices implem
 		entity.put("action", "resume");
 		return post(ActionResponse.class, uri("/scaling_policy/%s/action", policyId)).entity(entity).execute();
 	}
-	
+
 	@Override
 	public ActionResponse pause(String policyId) {
 		checkArgument(!Strings.isNullOrEmpty(policyId), "policyId required");
