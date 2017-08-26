@@ -15,6 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.sample;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.testng.annotations.BeforeTest;
@@ -23,6 +24,9 @@ import com.huawei.openstack4j.api.OSClient.OSClientV3;
 import com.huawei.openstack4j.api.types.ServiceType;
 import com.huawei.openstack4j.core.transport.Config;
 import com.huawei.openstack4j.model.common.Identifier;
+import com.huawei.openstack4j.model.compute.Flavor;
+import com.huawei.openstack4j.model.compute.Image;
+import com.huawei.openstack4j.model.compute.Keypair;
 import com.huawei.openstack4j.model.network.Router;
 import com.huawei.openstack4j.openstack.OSFactory;
 import com.huawei.openstack4j.openstack.identity.internal.OverridableEndpointURLResolver;
@@ -34,11 +38,14 @@ import com.huawei.openstack4j.openstack.identity.internal.OverridableEndpointURL
  */
 public class AbstractSample {
 
-	protected OSClientV3 osclient;
+	protected static OSClientV3 osclient;
 	private Router router;
+	private Flavor flavor;
+	private Image image;
+	private Keypair keypair;
 
 	@BeforeTest
-	public void initialV3Client() {
+	public static void initialV3Client() {
 		// add override endpoint
 		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
 		endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
@@ -76,7 +83,8 @@ public class AbstractSample {
 
 		OSFactory.enableHttpLoggingFilter(true);
 		// with language setting is required for RDS(trove&database) service
-		Config config = Config.newConfig().withEndpointURLResolver(endpointResolver).withLanguage("zh-cn").withSSLVerificationDisabled();
+		Config config = Config.newConfig().withEndpointURLResolver(endpointResolver).withLanguage("zh-cn")
+				.withSSLVerificationDisabled();
 		osclient = OSFactory.builderV3().withConfig(config).endpoint(authUrl)
 				.credentials(user, password, Identifier.byId(userDomainId)).scopeToProject(Identifier.byId(projectId))
 				.authenticate();
@@ -115,6 +123,38 @@ public class AbstractSample {
 		}
 		return router;
 	}
-	
 
+	protected Flavor getFirstFlavor() {
+		if (flavor == null) {
+			List<? extends Flavor> flavors = osclient.compute().flavors().list();
+			if (flavors == null || flavors.size() == 0) {
+				throw new RuntimeException("no flavor available for testing");
+			}
+			flavor = flavors.get(0);
+		}
+		return flavor;
+	}
+
+	protected Image getFirstImage() {
+		if (image == null) {
+			List<? extends Image> images = osclient.compute().images().list();
+			if (images == null || images.size() == 0) {
+				throw new RuntimeException("no image available for testing");
+			}
+			image = images.get(0);
+		}
+		return image;
+	}
+
+	protected Keypair getFirstKeypair() {
+		if (keypair == null) {
+			List<? extends Keypair> list = osclient.compute().keypairs().list();
+			if (list == null || list.size() == 0) {
+				keypair = osclient.compute().keypairs().create("sdk-unittest", null);
+			} else {
+				keypair = list.get(0);
+			}
+		}
+		return keypair;
+	}
 }
