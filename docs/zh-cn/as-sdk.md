@@ -21,7 +21,7 @@ ASAutoScalingGroupCreate group = ASAutoScalingGroupCreate.builder()
 		.securityGroups(Lists.newArrayList(securityGroup))
 		.build();
 
-ScalingGroupCreate result = osclient.autoScaling().groups().create(group);
+String groupId = osclient.autoScaling().groups().create(group);
 ```
 
 ### 查询弹性伸缩组列表
@@ -44,7 +44,7 @@ ScalingGroup group = osclient.autoScaling().groups().get("groupId");
 ```java
 ScalingGroup group = osclient.autoScaling().groups().get("groupId");
 
-ScalingGroupUpdate result = osclient.autoScaling().groups().update(group.groupId(),
+String groupId = osclient.autoScaling().groups().update(group.groupId(),
 	ASAutoScalingGroupUpdate.fromScalingGroup(group).toBuilder()
 		.groupName("updateGroupName").build());
 ```
@@ -88,7 +88,8 @@ ScalingConfigCreate config = ASAutoScalingConfigCreate.builder()
 	.instanceConfig(instanceConfig)
 	.build();
 
-ScalingConfigCreate result = osv3().autoScaling().configs().create(config);
+
+String configId = osv3().autoScaling().configs().create(config);
 ```
 
 ### 查询弹性伸缩配置列表
@@ -154,13 +155,13 @@ ScalingPolicyCreateUpdate policy = ASAutoScalingPolicyCreateUpdate.builder()
 		.policyType(PolicyType.SCHEDULED.name())
 		.scheduledPolicy(scheduledPolicy)
 		.build();
-ScalingPolicyCreateUpdate create = osclient.autoScaling().policies().create(policy);
+String policyId = osclient.autoScaling().policies().create(policy);
 ```
 
 ### 修改弹性伸缩策略
 ```java
 ASAutoScalingPolicy policy = ...; //get policy
-ScalingPolicyCreateUpdate update = osclient.autoScaling().policies()
+String policyId = osclient.autoScaling().policies()
 		.update(policy.toBuilder().policyName("newPolicyName").build());
 ```
 
@@ -211,7 +212,7 @@ List<? extends ScalingActivityLog> list = osclient.autoScaling().activityLogs().
 ## 配额
 ### 查询配额
 ```java
-List<? extends ScalingQuota> all = osclient.autoScaling().quotas().list();
+List<Quota> all = osclient.autoScaling().quotas().list();
 
-List<? extends ScalingQuota> list = osclient.autoScaling().quotas().list("groupId");
+List<Quota> list = osclient.autoScaling().quotas().list("groupId");
 ```
