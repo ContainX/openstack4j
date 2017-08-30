@@ -401,6 +401,34 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
+            "url": "http://127.0.0.1:9876",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "6e82c8912d3f49a09df51035681d9012"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:9876",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "7e44d321ae80457abc3728fa1e6f5678"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:9876",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "c9a090a4597040849c03bc1358809876"
+          }
+        ],
+        "type": "load-balancer",
+        "id": "0d56500210a24c38a3702b6825e67890",
+        "name": "octavia"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
             "url": "http://127.0.0.1:8800",
             "region": "RegionOne",
             "interface": "public",

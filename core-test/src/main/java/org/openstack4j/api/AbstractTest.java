@@ -38,6 +38,7 @@ public abstract class AbstractTest {
     protected enum Service {
         IDENTITY(5000),
         NETWORK(9696),
+        OCTAVIA(9876),
         COMPUTE(8774),
         BLOCK_STORAGE(8776),
         METERING(8087),

@@ -1,0 +1,42 @@
+{
+  "pools": [
+    {
+      "lb_algorithm": "LEAST_CONNECTIONS",
+      "protocol": "HTTP",
+      "description": "im a swimming pool",
+      "admin_state_up": true,
+      "project_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
+      "session_persistence": null,
+      "healthmonitor_id": "350576d8-5015-4d4e-b73f-23df2397e4c4",
+      "listeners": [
+        {
+          "id": "c07058a9-8d84-4443-b8f5-508d0facfe10"
+        }
+      ],
+      "members": [
+
+      ],
+      "id": "b7f6a49f-ebd8-43c5-b792-5748366eff21",
+      "name": "testlbpool"
+    },
+    {
+      "lb_algorithm": "ROUND_ROBIN",
+      "protocol": "HTTP",
+      "description": "",
+      "admin_state_up": true,
+      "project_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
+      "session_persistence": null,
+      "healthmonitor_id": "95a76977-a50e-42e8-b7a6-ef75ccf9dc39",
+      "listeners": [
+        {
+          "id": "342b876f-b6d5-4eb7-badf-40cbae263305"
+        }
+      ],
+      "members": [
+
+      ],
+      "id": "ff2f9954-2481-4e11-93ee-72b77b6c5c98",
+      "name": "pool1"
+    }
+  ]
+}
