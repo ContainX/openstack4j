@@ -252,4 +252,11 @@ public interface NetworkBuilders {
      * @return HealthMonitorV2UpdateBuilder
      */
     public HealthMonitorV2UpdateBuilder healthMonitorV2Update();
+
+    /**
+     * The builder to create a port pair.
+     *
+     * @return PortPairBuilder the port pair builder
+     */
+    public PortPairBuilder portPair();
 }
