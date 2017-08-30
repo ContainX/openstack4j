@@ -1204,4 +1204,13 @@ public class Builders {
     public static WorkflowBuilders workflow() {
         return new MistralBuilders();
     }
+
+    /**
+     * The builder to create a port pair.
+     *
+     * @return PortPairBuilder the port pair builder
+     */
+    public static PortPairBuilder portPair() {
+        return NeutronPortPair.builder();
+    }
 }
