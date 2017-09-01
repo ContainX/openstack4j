@@ -20,7 +20,7 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- *  OpenStack (Neutron) Lbaas vip based Operations
+ *  OpenStack (Neutron) Port Pair based Operations
  * @author Massimiliano Romano
  *
  */

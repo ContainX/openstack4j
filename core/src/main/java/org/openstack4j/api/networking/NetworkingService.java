@@ -76,4 +76,6 @@ public interface NetworkingService extends RestService {
     FirewallAsService firewalls();
 
     PortPairService portPairs();
+
+    FlowClassifierService flowClassifiers();
 }
