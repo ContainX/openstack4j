@@ -1241,4 +1241,23 @@ public class Builders {
      * @return FlowClassifierUpdateBuilder
      */
     public static FlowClassifierUpdateBuilder flowClassifierUpdate() {return NeutronFlowClassifierUpdate.builder(); }
+
+    /**
+     * The builder to create a port pair group.
+     *
+     * @return PortPairGroupBuilder the port pair group builder
+     */
+    public static PortPairGroupBuilder portPairGroup() {
+        return NeutronPortPairGroup.builder();
+    }
+
+    /**
+     * The builder to update a port pair group.
+     *
+     * @return PortPairGroupUpdateBuilder
+     */
+    public static PortPairGroupUpdateBuilder portPairGroupUpdate() {
+        return NeutronPortPairGroupUpdate.builder();
+    }
+
 }
