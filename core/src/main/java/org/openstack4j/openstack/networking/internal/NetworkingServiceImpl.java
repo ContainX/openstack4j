@@ -121,4 +121,11 @@ public class NetworkingServiceImpl implements NetworkingService {
     @Override
     public PortPairService portPairs() { return Apis.get(PortPairService.class); }
 
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FlowClassifierService flowClassifiers() { return Apis.get(FlowClassifierService.class); }
+
 }
