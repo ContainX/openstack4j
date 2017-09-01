@@ -137,6 +137,11 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return the image reference identifier (if an image was associated) otherwise null
 	 */
 	String getImageRef();
+	
+	/**
+	 * @return To enable this volume to attach
+	 */
+	Boolean multiattach();
 
 	/**
 	 * @return ID of source volume to clone from
