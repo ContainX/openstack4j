@@ -490,6 +490,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(CronTriggerService.class, CronTriggerServiceImpl.class);
         bind(PortPairService.class, PortPairServiceImpl.class);
         bind(FlowClassifierService.class, FlowClassifierServiceImpl.class);
+        bind(PortPairGroupService.class, PortPairGroupServiceImpl.class);
     }
 
     /**

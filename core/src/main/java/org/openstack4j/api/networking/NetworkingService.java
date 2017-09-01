@@ -2,6 +2,7 @@ package org.openstack4j.api.networking;
 
 import org.openstack4j.api.networking.ext.*;
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.network.ext.PortPairGroup;
 
 /**
  * OpenStack Networking Operations API
@@ -78,4 +79,6 @@ public interface NetworkingService extends RestService {
     PortPairService portPairs();
 
     FlowClassifierService flowClassifiers();
+
+    PortPairGroupService portPairGroups();
 }

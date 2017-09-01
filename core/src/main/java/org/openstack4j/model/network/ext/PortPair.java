@@ -3,10 +3,10 @@ package org.openstack4j.model.network.ext;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.network.ext.builder.PortPairBuilder;
-import org.openstack4j.model.network.ext.builder.VipBuilder;
+
 
 /**
- * a vip of a pool
+ * a port pair
  * 
  * @author Massimiliano Romano
  */
@@ -42,21 +42,21 @@ public interface PortPair extends ModelEntity, Buildable<PortPairBuilder> {
 
 
 	/**
-	 * @return Human-readable description for the VIP
+	 * @return Human-readable description for the Port Pair
 	 */
 	public String getDescription();
 
 	/**
-	 * 
-	 * 
-	 * @return The unique ID for the VIP.
+	 *
+	 *
+	 * @return The unique ID for the Port Pair.
 	 */
 	public String getId();
 
 	/**
 	 *
 	 * 
-	 * @return Human-readable name for the VIP. Does not have to be unique.
+	 * @return Human-readable name for the Port Pair. Does not have to be unique.
 	 */
 	public String getName();
 
@@ -64,12 +64,7 @@ public interface PortPair extends ModelEntity, Buildable<PortPairBuilder> {
 
 	/**
 	 * 
-	 * @return SessionPersistence.Session persistence parameters for the VIP.
-	 *         Omit the session_persistence parameter to prevent session
-	 *         persistence. When no session persistence is used, the
-	 *         session_persistence parameter does not appear in the API
-	 *         response. To clear session persistence for the VIP, set the
-	 *         session_persistence parameter to null in a VIP update request.
+	 * @return PortPairServiceFunctionParameters
 	 */
 	public PortPairServiceFunctionParameters getServiceFunctionParameters();
 
