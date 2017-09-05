@@ -1,11 +1,8 @@
 package org.openstack4j.api.networking;
 
-import org.openstack4j.api.networking.ext.AgentService;
-import org.openstack4j.api.networking.ext.FirewallAsService;
-import org.openstack4j.api.networking.ext.LbaasV2Service;
-import org.openstack4j.api.networking.ext.LoadBalancerService;
-import org.openstack4j.api.networking.ext.NetQuotaService;
+import org.openstack4j.api.networking.ext.*;
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.network.ext.PortPairGroup;
 
 /**
  * OpenStack Networking Operations API
@@ -78,4 +75,12 @@ public interface NetworkingService extends RestService {
      * @return the FwaaS service
      */
     FirewallAsService firewalls();
+
+    PortPairService portPairs();
+
+    FlowClassifierService flowClassifiers();
+
+    PortPairGroupService portPairGroups();
+
+    PortChainService portChains();
 }

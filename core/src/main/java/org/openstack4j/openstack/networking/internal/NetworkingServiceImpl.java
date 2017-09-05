@@ -9,11 +9,7 @@ import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
 import org.openstack4j.api.networking.SubnetService;
-import org.openstack4j.api.networking.ext.AgentService;
-import org.openstack4j.api.networking.ext.FirewallAsService;
-import org.openstack4j.api.networking.ext.LbaasV2Service;
-import org.openstack4j.api.networking.ext.LoadBalancerService;
-import org.openstack4j.api.networking.ext.NetQuotaService;
+import org.openstack4j.api.networking.ext.*;
 
 /**
  * OpenStack Networking Operations API
@@ -117,5 +113,31 @@ public class NetworkingServiceImpl implements NetworkingService {
     public AgentService agent() {
         return Apis.get(AgentService.class);
     }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PortPairService portPairs() { return Apis.get(PortPairService.class); }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FlowClassifierService flowClassifiers() { return Apis.get(FlowClassifierService.class); }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PortPairGroupService portPairGroups() { return Apis.get(PortPairGroupService.class); }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PortChainService portChains() { return Apis.get(PortChainService.class); }
 
 }

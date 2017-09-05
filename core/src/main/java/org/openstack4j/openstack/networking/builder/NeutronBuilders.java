@@ -190,4 +190,9 @@ public class NeutronBuilders implements NetworkBuilders {
     public ListenerV2UpdateBuilder listenerV2Update(){
         return NeutronListenerV2Update.builder();
     }
+
+    @Override
+    public PortPairBuilder portPair() {
+        return NeutronPortPair.builder();
+    }
 }

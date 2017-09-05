@@ -1204,4 +1204,78 @@ public class Builders {
     public static WorkflowBuilders workflow() {
         return new MistralBuilders();
     }
+
+    /**
+     * The builder to create a port pair.
+     *
+     * @return PortPairBuilder the port pair builder
+     */
+    public static PortPairBuilder portPair() {
+        return NeutronPortPair.builder();
+    }
+
+
+    /**
+     * The builder to create a flow classifier.
+     *
+     * @return FlowClassifierBuilder the flow classifier builder
+     */
+    public static FlowClassifierBuilder flowClassifier() {
+        return NeutronFlowClassifier.builder();
+    }
+
+
+
+    /**
+     * The builder to update a port pair.
+     *
+     * @return PortPairUpdateBuilder
+     */
+    public static PortPairUpdateBuilder portPairUpdate() {
+        return NeutronPortPairUpdate.builder();
+    }
+
+    /**
+     * The builder to update a flow classifier.
+     *
+     * @return FlowClassifierUpdateBuilder
+     */
+    public static FlowClassifierUpdateBuilder flowClassifierUpdate() {return NeutronFlowClassifierUpdate.builder(); }
+
+    /**
+     * The builder to create a port pair group.
+     *
+     * @return PortPairGroupBuilder the port pair group builder
+     */
+    public static PortPairGroupBuilder portPairGroup() {
+        return NeutronPortPairGroup.builder();
+    }
+
+    /**
+     * The builder to update a port pair group.
+     *
+     * @return PortPairGroupUpdateBuilder
+     */
+    public static PortPairGroupUpdateBuilder portPairGroupUpdate() {
+        return NeutronPortPairGroupUpdate.builder();
+    }
+
+    /**
+     * The builder to create a port chain.
+     *
+     * @return PortChainBuilder the port chain builder
+     */
+    public static PortChainBuilder portChain() {
+        return NeutronPortChain.builder();
+    }
+
+    /**
+     * The builder to update a port chain.
+     *
+     * @return PortChainUpdateBuilder
+     */
+    public static PortChainUpdateBuilder portChainUpdate() {
+        return NeutronPortChainUpdate.builder();
+    }
+
 }
