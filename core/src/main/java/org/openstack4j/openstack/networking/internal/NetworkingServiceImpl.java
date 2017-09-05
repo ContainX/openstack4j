@@ -134,4 +134,10 @@ public class NetworkingServiceImpl implements NetworkingService {
     @Override
     public PortPairGroupService portPairGroups() { return Apis.get(PortPairGroupService.class); }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PortChainService portChains() { return Apis.get(PortChainService.class); }
+
 }

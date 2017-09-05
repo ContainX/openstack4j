@@ -81,4 +81,6 @@ public interface NetworkingService extends RestService {
     FlowClassifierService flowClassifiers();
 
     PortPairGroupService portPairGroups();
+
+    PortChainService portChains();
 }

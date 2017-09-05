@@ -491,6 +491,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(PortPairService.class, PortPairServiceImpl.class);
         bind(FlowClassifierService.class, FlowClassifierServiceImpl.class);
         bind(PortPairGroupService.class, PortPairGroupServiceImpl.class);
+        bind(PortChainService.class, PortChainServiceImpl.class);
     }
 
     /**

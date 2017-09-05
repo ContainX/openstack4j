@@ -6,7 +6,7 @@ import org.openstack4j.model.network.ext.SessionPersistence;
 import org.openstack4j.model.network.ext.SessionPersistenceType;
 
 /**
- * A builder to create and update a PortPairServiceFunctionParameters
+ * A builder to create and update a PortChainParameters
  * @author Massimiliano Romano
  *
  */
@@ -16,7 +16,7 @@ public interface PortPairServiceFunctionParametersBuilder extends Builder<PortPa
 	 * required
 	 * 
 	 * @param correlation
-	 * @return PortPairServiceFunctionParametersBuilder
+	 * @return PortChainParametersBuilder
 	 */
 	public PortPairServiceFunctionParametersBuilder correlation(String correlation);
 
@@ -24,7 +24,7 @@ public interface PortPairServiceFunctionParametersBuilder extends Builder<PortPa
 	 * optional
 	 * 
 	 * @param weight
-	 * @return PortPairServiceFunctionParametersBuilder
+	 * @return PortChainParametersBuilder
 	 */
 	public PortPairServiceFunctionParametersBuilder weight(int weight);
 }
