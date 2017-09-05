@@ -1260,4 +1260,22 @@ public class Builders {
         return NeutronPortPairGroupUpdate.builder();
     }
 
+    /**
+     * The builder to create a port chain.
+     *
+     * @return PortChainBuilder the port chain builder
+     */
+    public static PortChainBuilder portChain() {
+        return NeutronPortChain.builder();
+    }
+
+    /**
+     * The builder to update a port chain.
+     *
+     * @return PortChainUpdateBuilder
+     */
+    public static PortChainUpdateBuilder portChainUpdate() {
+        return NeutronPortChainUpdate.builder();
+    }
+
 }
