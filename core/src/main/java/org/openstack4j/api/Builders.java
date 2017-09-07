@@ -95,6 +95,7 @@ import org.openstack4j.openstack.murano.v1.domain.MuranoEnvironment;
 import org.openstack4j.openstack.networking.builder.NeutronBuilders;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.octavia.builder.OctaviaBuilders;
 import org.openstack4j.openstack.sahara.builder.SaharaBuilders;
 import org.openstack4j.openstack.sahara.domain.*;
 import org.openstack4j.openstack.storage.block.builder.CinderBuilders;
@@ -960,6 +961,15 @@ public class Builders {
      */
     public static NetworkBuilders neutron() {
         return new NeutronBuilders();
+    }
+
+    /**
+     * The Octavia builders
+     *
+     * @return the octavia builders
+     */
+    public static OctaviaBuilders octavia() {
+        return new OctaviaBuilders();
     }
 
     /**
