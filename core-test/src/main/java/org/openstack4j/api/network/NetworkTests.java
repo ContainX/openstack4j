@@ -1,6 +1,5 @@
 package org.openstack4j.api.network;
 
-import static org.junit.Assert.assertFalse;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -14,12 +13,10 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.network.Agent;
 import org.openstack4j.model.network.Agent.Type;
-import org.openstack4j.model.storage.block.VolumeBackup;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.NetworkType;
 import org.openstack4j.model.network.State;
 import org.openstack4j.model.common.ActionResponse;
-import org.testng.Reporter;
 import org.testng.annotations.Test;
 
 import okhttp3.mockwebserver.RecordedRequest;
@@ -91,14 +88,6 @@ public class NetworkTests extends AbstractTest {
         assertEquals(agent.getAgentType(), Type.DHCP);
     }
 
-    @Test
-    public void attachNetworkToDhcpAgent() throws Exception {
-        respondWith(201);
-        ActionResponse result = osv3().networking().agent().attachNetworkToDhcpAgent("190ecbc2-77e0-4e4f-a96b-aa849edb357b", "4e8e5957-649f-477b-9e5b-f1f75b21c03c");
-        server.takeRequest();
-        assertTrue(result.isSuccess());
-    }
-    
     @Test
     public void detachNetworkToDhcpAgent() throws Exception {
         respondWith(204);
