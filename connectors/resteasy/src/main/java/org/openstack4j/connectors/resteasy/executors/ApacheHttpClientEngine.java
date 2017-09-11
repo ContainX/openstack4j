@@ -4,27 +4,31 @@ import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.client.DefaultRedirectStrategy;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
-import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
+import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.UntrustedSSL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
  * Default Apache HttpClient based Executor
- * 
+ *
  * @author Jeremy Unruh
  */
-public class ApacheHttpClientExecutor extends ApacheHttpClient4Executor {
+public class ApacheHttpClientEngine extends ApacheHttpClient4Engine {
 
-    ApacheHttpClientExecutor(HttpClient client) {
+    ApacheHttpClientEngine(HttpClient client) {
         super(client);
     }
-    
-    public static ApacheHttpClientExecutor create(Config config) {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApacheHttpClientEngine.class);
+
+    public static ApacheHttpClientEngine create(Config config) {
 
         RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
 
@@ -55,13 +59,21 @@ public class ApacheHttpClientExecutor extends ApacheHttpClient4Executor {
                 HttpHost proxy = new HttpHost(url.getHost(), config.getProxy().getPort(), url.getProtocol());
                 requestConfigBuilder.setProxy(proxy);
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                LOGGER.error("Invalid proxy Url :%s",config.getProxy(),e);
             }
         }
 
         httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
+        httpClientBuilder.setRedirectStrategy(new DefaultRedirectStrategy() {
+            @Override
+            protected boolean isRedirectable(String method)
+            {
+                return true;
+            }
+        });
+
         HttpClient client = httpClientBuilder.build();
-        return new ApacheHttpClientExecutor(client);
+        return new ApacheHttpClientEngine(client);
     }
-    
+
 }
