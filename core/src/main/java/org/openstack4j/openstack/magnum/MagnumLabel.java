@@ -4,7 +4,7 @@ import org.openstack4j.model.magnum.Label;
 import org.openstack4j.model.magnum.LabelBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 public class MagnumLabel implements Label {
     private static final long serialVersionUID = 1L;
@@ -14,7 +14,7 @@ public class MagnumLabel implements Label {
     public static LabelBuilder builder() {
         return new LabelConcreteBuilder();
     }
-    
+
     @Override
     public LabelBuilder toBuilder() {
         return new LabelConcreteBuilder(this);
@@ -26,7 +26,7 @@ public class MagnumLabel implements Label {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("key", key).toString();
+        return MoreObjects.toStringHelper(this).omitNullValues().add("key", key).toString();
     }
 
     /**

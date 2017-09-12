@@ -3,6 +3,7 @@ package org.openstack4j.api;
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
@@ -10,10 +11,12 @@ import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.workflow.WorkflowService;
 
 import java.util.ServiceLoader;
 
@@ -73,6 +76,15 @@ public class Apis {
      */
     public static NetworkingService getNetworkingServices() {
         return get(NetworkingService.class);
+    }
+
+    /**
+     * Gets the Octavia services API
+     *
+     * @return the Octavia services
+     */
+    public static OctaviaService getOctaviaService() {
+        return get(OctaviaService.class);
     }
     
     /**
@@ -138,6 +150,15 @@ public class Apis {
     }
 
     /**
+     * Gets the (Mistral) Workflow services API
+     *
+     * @return the workflow services
+     */
+    public static WorkflowService getWorkflowServices() {
+        return get(WorkflowService.class);
+    }
+
+    /**
      * Gets the (Manila) Shared File Systems services API
      * 
      * @return the share services
@@ -179,7 +200,6 @@ public class Apis {
         return get(MagnumService.class);
     }
 
-
     /**
      * Gets the (BarbicanService) Orchestration services API
      * @return the BarbicanService services
@@ -187,6 +207,13 @@ public class Apis {
     public static BarbicanService getBarbicanServices() {
         return get(BarbicanService.class);
     }
+
+    /**
+     * Gets the dns services API
+     * @return the dns services
+     */
+    public static DNSService getDNSService() { return get(DNSService.class); }
+
 
     private static APIProvider initializeProvider() {
         // No need to check for emptiness as there is default implementation registered

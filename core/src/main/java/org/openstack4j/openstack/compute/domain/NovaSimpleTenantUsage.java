@@ -10,7 +10,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Provides simple usage reporting for tenants
@@ -35,7 +35,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 	private String totalHours;
 	@JsonProperty("server_usages")
 	private List<NovaServerUsage> serverUsages;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -99,18 +99,18 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 	public List<? extends ServerUsage> getServerUsages() {
 		return serverUsages;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("tenantId", tenantId).add("totalMemoryMbUsage", totalMemoryMbUsage).add("totalVcpusUsage", totalVcpusUsage).add("totalLocalGbUsage", totalLocalGbUsage)
 				    .add("start", start).add("stop", stop).add("totalHours", totalHours).addValue("\n").add("serverUsages", serverUsages)
 				    .toString();
 	}
-	
+
 	/**
 	 * Tenant usages for all tenants wrapper
 	 */
@@ -119,14 +119,14 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 
 		@JsonProperty("tenant_usages")
 		private List<NovaSimpleTenantUsage> tenantUsages;
-		
+
 		public List<NovaSimpleTenantUsage> value() {
 			return tenantUsages;
 		}
 	}
-	
+
 	public static class NovaServerUsage implements ServerUsage {
-		
+
 		private static final long serialVersionUID = 1L;
 		@JsonProperty("instance_id")
 		private String instanceId;
@@ -146,7 +146,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		@JsonProperty("local_gb")
 		private int localDiskSize;
 		private String name;
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -154,7 +154,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public String getInstanceId() {
 			return instanceId;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -162,7 +162,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public int getUptime() {
 			return uptime;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -170,7 +170,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public Date getStartedAt() {
 			return startedAt;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -178,7 +178,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public Date getEndedAt() {
 			return endedAt;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -186,7 +186,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public int getMemoryMb() {
 			return memoryMb;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -194,7 +194,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public String getTenantId() {
 			return tenantId;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -202,7 +202,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public Status getState() {
 			return state;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -210,7 +210,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public double getHours() {
 			return hours;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -218,7 +218,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public int getVcpus() {
 			return vcpus;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -226,7 +226,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public String getFlavor() {
 			return flavor;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -234,7 +234,7 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public int getLocalDiskSize() {
 			return localDiskSize;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
@@ -242,13 +242,13 @@ public class NovaSimpleTenantUsage implements SimpleTenantUsage {
 		public String getName() {
 			return name;
 		}
-		
+
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					    .add("instanceId", instanceId).add("name", name).add("uptime", uptime).add("startedAt", startedAt)
 					    .add("endedAt", endedAt).add("memoryMb", memoryMb).add("tenantId", tenantId).add("state", state)
 					    .add("hours", hours).add("vcpus", vcpus).add("flavor", flavor).add("localDiskSize", localDiskSize)

@@ -7,6 +7,7 @@ import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.artifact.ToscaTemplatesArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.barbican.ContainerService;
+import org.openstack4j.api.barbican.SecretService;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
@@ -28,6 +29,8 @@ import org.openstack4j.api.compute.ext.InterfaceService;
 import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.api.compute.ext.ServicesService;
 import org.openstack4j.api.compute.ext.ZoneService;
+import org.openstack4j.api.dns.v2.DNSService;
+import org.openstack4j.api.dns.v2.RecordsetService;
 import org.openstack4j.api.exceptions.ApiNotFoundException;
 import org.openstack4j.api.gbp.ExternalPolicyService;
 import org.openstack4j.api.gbp.ExternalSegmentService;
@@ -103,6 +106,7 @@ import org.openstack4j.api.networking.ext.LoadBalancerV2Service;
 import org.openstack4j.api.networking.ext.MemberService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
 import org.openstack4j.api.networking.ext.VipService;
+import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.ClusterService;
 import org.openstack4j.api.sahara.ClusterTemplateService;
 import org.openstack4j.api.sahara.DataSourceService;
@@ -160,10 +164,12 @@ import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
+import org.openstack4j.api.workflow.*;
 import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
 import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
+import org.openstack4j.openstack.barbican.internal.SecretServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
@@ -185,6 +191,8 @@ import org.openstack4j.openstack.compute.internal.ext.InstanceActionsServiceImpl
 import org.openstack4j.openstack.compute.internal.ext.InterfaceServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.MigrationServiceImpl;
 import org.openstack4j.openstack.compute.internal.ext.ZoneServiceImpl;
+import org.openstack4j.openstack.dns.v2.internal.DNSServiceImpl;
+import org.openstack4j.openstack.dns.v2.internal.RecordsetServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalPolicyServiceImpl;
 import org.openstack4j.openstack.gbp.internal.ExternalSegmentServiceImpl;
 import org.openstack4j.openstack.gbp.internal.GbpServiceImpl;
@@ -259,6 +267,7 @@ import org.openstack4j.openstack.networking.internal.ext.LoadBalancerV2ServiceIm
 import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.VipServiceImpl;
+import org.openstack4j.openstack.octavia.internal.OctaviaServiceImpl;
 import org.openstack4j.openstack.sahara.internal.ClusterServiceImpl;
 import org.openstack4j.openstack.sahara.internal.ClusterTemplateServiceImpl;
 import org.openstack4j.openstack.sahara.internal.DataSourceServiceImpl;
@@ -317,6 +326,7 @@ import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
 
 import com.google.common.collect.Maps;
+import org.openstack4j.openstack.workflow.internal.*;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons
@@ -362,6 +372,11 @@ public class DefaultAPIProvider implements APIProvider {
         bind(SubnetService.class, SubnetServiceImpl.class);
         bind(PortService.class, PortServiceImpl.class);
         bind(RouterService.class, RouterServiceImpl.class);
+        bind(OctaviaService.class, OctaviaServiceImpl.class);
+        bind(org.openstack4j.api.octavia.LoadBalancerV2Service.class, org.openstack4j.openstack.octavia.internal.LoadBalancerV2ServiceImpl.class);
+        bind(org.openstack4j.api.octavia.ListenerV2Service.class, org.openstack4j.openstack.octavia.internal.ListenerV2ServiceImpl.class);
+        bind(org.openstack4j.api.octavia.LbPoolV2Service.class, org.openstack4j.openstack.octavia.internal.LbPoolV2ServiceImpl.class);
+        bind(org.openstack4j.api.octavia.HealthMonitorV2Service.class, org.openstack4j.openstack.octavia.internal.HealthMonitorV2ServiceImpl.class);
         bind(ImageService.class, ImageServiceImpl.class);
         bind(BlockStorageService.class, BlockStorageServiceImpl.class);
         bind(BlockVolumeService.class, BlockVolumeServiceImpl.class);
@@ -484,6 +499,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(SchedulerStatsGetPoolService.class, SchedulerStatsGetPoolServiceImpl.class);
         bind(BarbicanService.class, BarbicanServiceImpl.class);
         bind(ContainerService.class, ContainerServiceImpl.class);
+        bind(SecretService.class, SecretServiceImpl.class);
         bind(TackerService.class, TackerServiceImpl.class);
         bind(VnfdService.class, VnfdServiceImpl.class);
         bind(VnfService.class, VnfServiceImpl.class);
@@ -498,6 +514,20 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ServicesService.class, ServicesServiceImpl.class);
         bind(BlockStorageServiceService.class, BlockStorageServiceServiceImpl.class);
         bind(MagnumService.class, MagnumServiceImpl.class);
+        bind(WorkflowService.class, WorkflowServiceImpl.class);
+        bind(WorkflowDefinitionService.class, WorkflowDefinitionServiceImpl.class);
+        bind(DNSService.class, DNSServiceImpl.class);
+        bind(org.openstack4j.api.dns.v2.ZoneService.class, org.openstack4j.openstack.dns.v2.internal.ZoneServiceImpl.class);
+        bind(RecordsetService.class, RecordsetServiceImpl.class);
+        bind(WorkflowService.class, WorkflowServiceImpl.class);
+        bind(WorkflowDefinitionService.class, WorkflowDefinitionServiceImpl.class);
+        bind(WorkbookDefinitionService.class, WorkbookDefinitionServiceImpl.class);
+        bind(ActionDefinitionService.class, ActionDefinitionServiceImpl.class);
+        bind(WorkflowExecutionService.class, WorkflowExecutionServiceImpl.class);
+        bind(TaskExecutionService.class, TaskExecutionServiceImpl.class);
+        bind(ActionExecutionService.class, ActionExecutionServiceImpl.class);
+        bind(WorkflowEnvironmentService.class, WorkflowEnvironmentServiceImpl.class);
+        bind(CronTriggerService.class, CronTriggerServiceImpl.class);
     }
 
     /**

@@ -9,11 +9,11 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * For mapping JSON response to java objects
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  */
 
@@ -107,7 +107,7 @@ public class SaharaInstance implements Instance {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				   .add("instance_name",name)
                                    .add("created_at", createdAt)
                                    .add("updated_at", updatedAt)
@@ -118,14 +118,14 @@ public class SaharaInstance implements Instance {
                                    .add("id", id)
 				   .toString();
 	}
-	
+
 	public static class Instances extends ListResult<SaharaInstance> {
 
 		private static final long serialVersionUID = 1L;
 
 		@JsonProperty("instances")
 		private List<SaharaInstance> instances;
-		
+
 		public List<SaharaInstance> value() {
 			return instances;
 		}

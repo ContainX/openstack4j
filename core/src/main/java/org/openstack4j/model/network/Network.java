@@ -58,4 +58,20 @@ public interface Network extends Resource, Buildable<NetworkBuilder> {
 	 */
 	List<? extends Subnet> getNeutronSubnets();
 
+	/**
+	 * @return The maximum transmission unit (MTU) value to address fragmentation. Minimum value is 68 for IPv4, and 1280 for IPv6.
+	 */
+	Integer getMTU();
+	
+	/**
+	 * @return the list of the availability zone candidate for the network.
+	 */
+	List<String> getAvailabilityZoneHints();
+	
+	/**
+	 * @return the list of the availability zone for the network.
+	 */
+	List<String> getAvailabilityZones();
+	
+	
 }

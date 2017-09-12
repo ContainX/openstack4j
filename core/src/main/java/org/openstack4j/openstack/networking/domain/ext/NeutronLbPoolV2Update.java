@@ -3,7 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.network.ext.LbMethod;
 import org.openstack4j.model.network.ext.LbPoolV2Update;
 import org.openstack4j.model.network.ext.SessionPersistence;
@@ -70,7 +70,7 @@ public class NeutronLbPoolV2Update implements LbPoolV2Update {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("adminStateUp", adminStateUp)
                 .add("description", description)
                 .add("lbMethod", lbMethod)

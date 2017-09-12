@@ -1,0 +1,18 @@
+{
+  "id": "91fdedd9-43cd-4820-b017-a2b2fe600ef3",
+  "name": "my_trigger",
+  "scope": "private",
+  "created_at": "2017-05-30 10:35:16",
+  "updated_at": "2017-05-30 10:35:16",
+  "workflow_name": "my_wf",
+  "workflow_id" : "91fdedd9-43cd-4820-b017-a2b2fe600ef4",
+  "workflow_input": {
+    "param1": "val1",
+    "param2": "val2"
+  },
+  "workflow_params": {},
+  "pattern": "* * * * *",
+  "remaining_executions": 2,
+  "first_execution_time": "2017-05-30 10:35:16",
+  "next_execution_time": "2017-05-30 10:36:16"
+}

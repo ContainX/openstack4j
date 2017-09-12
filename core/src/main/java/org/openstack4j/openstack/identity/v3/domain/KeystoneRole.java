@@ -10,7 +10,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * v3 role implementation
@@ -52,7 +52,7 @@ public class KeystoneRole implements Role {
     public String getName() {
         return name;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -71,7 +71,7 @@ public class KeystoneRole implements Role {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", id)
                 .add("name", name)
                 .add("domain_id", domainId)
@@ -113,7 +113,7 @@ public class KeystoneRole implements Role {
             model.name = name;
             return this;
         }
-        
+
         @Override
         public RoleBuilder domainId(String domainId) {
             model.domainId = domainId;

@@ -6,11 +6,11 @@ import java.util.Map;
 import org.openstack4j.model.telemetry.Resource;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A single measurement for resource.
- * 
+ *
  * @author Shital Patil
  */
 
@@ -99,7 +99,7 @@ public class CeilometerResource implements Resource {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("userId", userId).add("projectId", projectId).add("source", source).add("firstSanpleTimestamp", firstSampleTimestamp)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("userId", userId).add("projectId", projectId).add("source", source).add("firstSanpleTimestamp", firstSampleTimestamp)
                 .add("lastSanpleTimestamp", lastSampleTimeStamp).toString();
     }
 

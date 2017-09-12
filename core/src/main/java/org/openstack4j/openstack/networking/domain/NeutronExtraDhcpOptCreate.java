@@ -3,6 +3,8 @@ package org.openstack4j.openstack.networking.domain;
 import org.openstack4j.model.network.ExtraDhcpOptCreate;
 import org.openstack4j.model.network.builder.ExtraDhcpOptBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  *
  * @author Ales Kemr
@@ -11,7 +13,9 @@ public class NeutronExtraDhcpOptCreate implements ExtraDhcpOptCreate {
 
     // {"opt_value": "testfile.1", "opt_name": "bootfile-name"}
     
+    @JsonProperty("opt_value")
     public String opt_value;
+    @JsonProperty("opt_name")
     public String opt_name;
     
     @Override

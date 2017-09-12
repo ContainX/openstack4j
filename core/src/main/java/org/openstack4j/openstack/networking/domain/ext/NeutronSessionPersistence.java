@@ -7,7 +7,7 @@ import org.openstack4j.model.network.ext.builder.SessionPersistenceBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 @JsonRootName("session_persistence")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronSessionPersistence implements SessionPersistence {
@@ -48,11 +48,11 @@ public class NeutronSessionPersistence implements SessionPersistence {
 	public static class SessionPersistenceContreteBuilder implements SessionPersistenceBuilder{
 
 		private NeutronSessionPersistence m;
-		
+
 		public SessionPersistenceContreteBuilder() {
 			this(new NeutronSessionPersistence());
 		}
-		
+
 		public SessionPersistenceContreteBuilder(NeutronSessionPersistence m) {
 			this.m = m;
 		}
@@ -91,8 +91,8 @@ public class NeutronSessionPersistence implements SessionPersistence {
 		public SessionPersistence build() {
 			return m;
 		}
-		
-	} 
+
+	}
 
 	public static SessionPersistenceBuilder builder(){
 		return new SessionPersistenceContreteBuilder();
@@ -100,11 +100,11 @@ public class NeutronSessionPersistence implements SessionPersistence {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 			    .add("type",type)
 			    .add("cookieName", cookieName)
 			    .toString();
 	}
-	
-	
+
+
 }

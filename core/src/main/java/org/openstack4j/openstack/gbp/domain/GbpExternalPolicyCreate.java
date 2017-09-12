@@ -8,11 +8,11 @@ import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
 /**
  * Model implementation for External Policy
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("external_policy")
@@ -30,11 +30,11 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
     @JsonProperty("external_segments")
     private List<String> externalSegments;
     private Boolean shared;
-    
+
     /**
      * {@inheritDoc}
      */
-    @Override 
+    @Override
     public String getTenantId() {
         return tenantId;
     }
@@ -78,7 +78,7 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
     public void setId(String id) {
         this.id=id;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -130,23 +130,23 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
     public ExternalPolicyBuilder toBuilder() {
         return new ExternalPolicyConcreteBuilder(this);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).add("externalSegments", externalSegments).add("id", id).add("description", description).add("shared", shared).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets).toString();
+        return MoreObjects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).add("externalSegments", externalSegments).add("id", id).add("description", description).add("shared", shared).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets).toString();
     }
-    
+
     public static class ExternalPolicyConcreteBuilder implements ExternalPolicyBuilder{
 
         private GbpExternalPolicyCreate extPolicy;
-        
+
         public ExternalPolicyConcreteBuilder(){
             this(new GbpExternalPolicyCreate());
         }
-        
+
         public ExternalPolicyConcreteBuilder(GbpExternalPolicyCreate gbpExternalPolicy) {
             this.extPolicy=gbpExternalPolicy;
         }
@@ -203,7 +203,7 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
             this.extPolicy.externalSegments=externalSegmentIds;
             return this;
         }
-        
+
     }
 
     public static ExternalPolicyBuilder builder() {

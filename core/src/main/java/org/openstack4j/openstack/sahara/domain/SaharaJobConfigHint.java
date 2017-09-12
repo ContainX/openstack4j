@@ -8,7 +8,7 @@ import org.openstack4j.model.sahara.JobConfigHintConfig;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * For mapping JSON response to/from java objects
@@ -45,7 +45,7 @@ public class SaharaJobConfigHint implements JobConfigHint {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                    .add("configs", configs)
                    .add("args", args)
                    .toString();

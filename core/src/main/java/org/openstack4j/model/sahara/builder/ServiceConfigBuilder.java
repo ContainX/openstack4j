@@ -21,6 +21,6 @@ public interface ServiceConfigBuilder extends Builder<ServiceConfigBuilder, Serv
 	 * @param value value of the parameter
 	 * @return ServiceConfigBuilder
 	 */
-	ServiceConfigBuilder set(String name, String value);
+	ServiceConfigBuilder set(String name, Object value);
 	
 }

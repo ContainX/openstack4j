@@ -4,11 +4,11 @@ import org.openstack4j.model.gbp.PolicyActionUpdate;
 import org.openstack4j.model.gbp.builder.PolicyActionUpdateBuilder;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Model implementation for Policy Action
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_action")
@@ -17,8 +17,8 @@ public class GbpPolicyActionUpdate implements PolicyActionUpdate {
     private String name;
     private String description;
     private Boolean shared;
-    
-     
+
+
     @Override
     public PolicyActionUpdateBuilder toBuilder() {
         return new PolicyActionUpdateConcreteBuilder(this);
@@ -30,7 +30,7 @@ public class GbpPolicyActionUpdate implements PolicyActionUpdate {
     }
 
     @Override
-    public String getDescription() { 
+    public String getDescription() {
         return description;
     }
     @Override
@@ -39,14 +39,14 @@ public class GbpPolicyActionUpdate implements PolicyActionUpdate {
     }
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("name", name).add("desription", description)
                .add("shared", shared).toString();
     }
-    
+
     public static class PolicyActionUpdateConcreteBuilder implements PolicyActionUpdateBuilder{
 
         private GbpPolicyActionUpdate policyAction;
-        
+
         public PolicyActionUpdateConcreteBuilder(GbpPolicyActionUpdate gbpPolicyAction) {
             this.policyAction=gbpPolicyAction;
         }
@@ -54,12 +54,12 @@ public class GbpPolicyActionUpdate implements PolicyActionUpdate {
         public PolicyActionUpdateConcreteBuilder() {
             this(new GbpPolicyActionUpdate());
         }
- 
+
         @Override
         public PolicyActionUpdate build() {
             return policyAction;
         }
-  
+
         @Override
         public PolicyActionUpdateBuilder name(String name) {
             this.policyAction.name=name;
@@ -84,12 +84,12 @@ public class GbpPolicyActionUpdate implements PolicyActionUpdate {
             this.policyAction=(GbpPolicyActionUpdate) in;
             return this;
         }
-        
+
     }
 
     public static PolicyActionUpdateBuilder builder() {
         return new PolicyActionUpdateConcreteBuilder();
     }
-    
+
 
 }

@@ -2,7 +2,7 @@ package org.openstack4j.openstack.networking.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.network.SecurityGroupUpdate;
 import org.openstack4j.model.network.builder.NetSecurityGroupUpdateBuilder;
 
@@ -59,7 +59,7 @@ public class NeutronSecurityGroupUpdate implements SecurityGroupUpdate {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("name", name).add("description", description).add("id", id)
                 .toString();
     }

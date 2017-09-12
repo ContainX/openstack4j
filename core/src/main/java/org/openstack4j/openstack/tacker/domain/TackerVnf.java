@@ -9,7 +9,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  *
@@ -21,38 +21,38 @@ import com.google.common.base.Objects;
 public class TackerVnf implements Vnf {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
-	
+
 	private String name;
-	
+
 	@JsonProperty("tenant_id")
 	private String tenantId;
-	
+
 	private String description;
-	
+
 	private VnfAttributes attributes;
-	
+
 	private TackerVnfStatus status;
-	
+
 	@JsonProperty("mgmt_url")
 	private String managementUrl;
-	
+
 	@JsonProperty("vnfd_id")
 	private String vnfdId;
 
 	@JsonProperty("error_reason")
 	private String errorReason;
-	
+
 	@JsonProperty("vim_id")
 	private String vimId;
-	
+
 	@JsonProperty("instance_id")
 	private String instanceId;
-	
+
 	@JsonProperty("placement_attr")
 	private VnfPlacementAttribute placementAttribute;
-	
+
 	/**
 	 * Wrap this TackerVnf to a builder
 	 * @return VnfBuilder
@@ -61,7 +61,7 @@ public class TackerVnf implements Vnf {
 	public VnfBuilder toBuilder() {
 		return new VnfConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return VnfBuilder
 	 */
@@ -89,7 +89,7 @@ public class TackerVnf implements Vnf {
 	public String getTenantId() {
 		return tenantId;
 	}
-	
+
 	/**
 	 * @return the status
 	 */
@@ -110,7 +110,7 @@ public class TackerVnf implements Vnf {
 	public VnfAttributes getAttributes() {
 		return attributes;
 	}
-	
+
 	/**
 	 * @return the managementUrl
 	 */
@@ -155,7 +155,7 @@ public class TackerVnf implements Vnf {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("id", id).add("name", name).add("tenantId", tenantId)
+		return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("tenantId", tenantId)
 				.add("description", description).add("attributes", attributes).add("status", status)
 				.add("managementUrl", managementUrl).add("vnfdId", vnfdId).add("errorReason", errorReason)
 				.add("vimId", vimId).add("instanceId", instanceId).add("placementAttribute", placementAttribute)
@@ -165,35 +165,35 @@ public class TackerVnf implements Vnf {
 	public static class TackerVnfs extends ListResult<TackerVnf> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("vnfs")
 		List<TackerVnf> vnfs;
-		
+
 		@Override
 		public List<TackerVnf> value() {
 			return vnfs;
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					.add("vnfs", vnfs).toString();
 		}
 	}
-	
+
 	public static class VnfConcreteBuilder implements VnfBuilder {
-		
+
 		TackerVnf vnf;
 
 		@Override
 		public Vnf build() {
 			return vnf;
 		}
-		
+
 		public VnfConcreteBuilder() {
 			this(new TackerVnf());
 		}
-		
+
 		public VnfConcreteBuilder(TackerVnf f) {
 			this.vnf = f;
 		}
@@ -239,7 +239,7 @@ public class TackerVnf implements Vnf {
 			vnf.vimId = vimId;
 			return this;
 		}
-		
+
 	}
-	
+
 }

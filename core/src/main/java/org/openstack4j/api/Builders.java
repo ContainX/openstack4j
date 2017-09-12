@@ -2,10 +2,15 @@ package org.openstack4j.api;
 
 import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
 import org.openstack4j.model.artifact.builder.ToscaTemplatesArtifactBuilder;
+import org.openstack4j.model.barbican.Secret;
 import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
 import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
+import org.openstack4j.model.barbican.builder.SecretCreateBuilder;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.*;
+import org.openstack4j.model.dns.v2.builder.DNSV2Builders;
+import org.openstack4j.model.dns.v2.builder.RecordsetBuilder;
+import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
 import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
@@ -47,13 +52,18 @@ import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
 import org.openstack4j.model.trove.builder.DBServiceBuilders;
 import org.openstack4j.openstack.artifact.domain.ArtifactUpdateModel;
 import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
+import org.openstack4j.model.workflow.builder.WorkflowBuilders;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
+import org.openstack4j.openstack.barbican.domain.BarbicanSecret;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.*;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.dns.v2.builder.DesignateV2Builders;
+import org.openstack4j.openstack.dns.v2.domain.DesignateRecordset;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
 import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
@@ -85,6 +95,7 @@ import org.openstack4j.openstack.murano.v1.domain.MuranoEnvironment;
 import org.openstack4j.openstack.networking.builder.NeutronBuilders;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.octavia.builder.OctaviaBuilders;
 import org.openstack4j.openstack.sahara.builder.SaharaBuilders;
 import org.openstack4j.openstack.sahara.domain.*;
 import org.openstack4j.openstack.storage.block.builder.CinderBuilders;
@@ -97,6 +108,7 @@ import org.openstack4j.openstack.tacker.builders.TackerBuilders;
 import org.openstack4j.openstack.telemetry.builder.CeilometerBuilders;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
 import org.openstack4j.openstack.trove.builder.TroveBuilders;
+import org.openstack4j.openstack.workflow.builder.MistralBuilders;
 
 /**
  * A utility class to quickly access available Builders within the OpenStack API
@@ -952,6 +964,15 @@ public class Builders {
     }
 
     /**
+     * The Octavia builders
+     *
+     * @return the octavia builders
+     */
+    public static OctaviaBuilders octavia() {
+        return new OctaviaBuilders();
+    }
+
+    /**
      * The Sahara builders
      *
      * @return the sahara builders
@@ -1112,6 +1133,12 @@ public class Builders {
     }
 
     /**
+     * Barbican secret builder
+     * @return the secret builder
+     */
+    public static SecretCreateBuilder secret() { return BarbicanSecret.builder(); }
+
+    /**
      * The Tacker builders
      * @return the tacker builders
      */
@@ -1159,5 +1186,32 @@ public class Builders {
      */
     public static EnvironmentBuilder environment() {
         return MuranoEnvironment.builder();
+    }
+
+    /**
+     * The DNS/Designate V2 builders
+     *
+     * @return the dns/designate v2 builders
+     */
+    public static DNSV2Builders dnsV2() {
+        return new DesignateV2Builders();
+    }
+
+    /**
+     * The builder to create a Zone.
+     *
+     * @return the zone builder
+     */
+    public static ZoneBuilder zone() { return DesignateZone.builder(); }
+
+    /**
+     * The builder to create a Recordset.
+     *
+     * @return the recordset builder
+     */
+    public static RecordsetBuilder recordset() { return DesignateRecordset.builder(); }
+
+    public static WorkflowBuilders workflow() {
+        return new MistralBuilders();
     }
 }

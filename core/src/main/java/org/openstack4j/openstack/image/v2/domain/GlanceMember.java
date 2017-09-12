@@ -3,7 +3,7 @@ package org.openstack4j.openstack.image.v2.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.image.v2.Member;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -111,7 +111,7 @@ public class GlanceMember implements Member {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("imageId", imageId)
                 .add("memberId", memberId)
                 .add("createdAt", createdAt)
@@ -135,7 +135,7 @@ public class GlanceMember implements Member {
 
         @Override
         public String toString() {
-            return Objects.toStringHelper(this)
+            return MoreObjects.toStringHelper(this)
                     .add("members", members)
                     .toString();
         }

@@ -2,17 +2,17 @@ package org.openstack4j.openstack.compute.domain;
 
 import org.openstack4j.model.compute.AbsoluteLimit;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
- * Absolute limits are specified as name/value pairs. The name of the absolute limit uniquely identifies the limit within a deployment. 
- * Please consult your provider for an exhaustive list of absolute value names. An absolute limit value is always specified as an integer. 
- * The name of the absolute limit determines the unit type of the integer value. 
- * 
+ * Absolute limits are specified as name/value pairs. The name of the absolute limit uniquely identifies the limit within a deployment.
+ * Please consult your provider for an exhaustive list of absolute value names. An absolute limit value is always specified as an integer.
+ * The name of the absolute limit determines the unit type of the integer value.
+ *
  * For example, the name maxServerMeta implies that the value is in terms of server metadata items.
- * 
+ *
  * Any limit which returns -1 indicates no value/no data/not supported by vendor
- * 
+ *
  * @author Jeremy Unruh
  */
 public class NovaAbsoluteLimit implements AbsoluteLimit {
@@ -47,7 +47,7 @@ public class NovaAbsoluteLimit implements AbsoluteLimit {
 	private Integer totalVolumeGigabytesUsed;
 	private Integer maxServerGroups;
 	private Integer maxServerGroupMembers;
-	
+
 	/**
 	 * Gets the max server meta.
 	 *
@@ -281,7 +281,7 @@ public class NovaAbsoluteLimit implements AbsoluteLimit {
 	public int getTotalVolumeGigabytesUsed() {
 		return wrap(totalVolumeGigabytesUsed);
 	}
-	
+
 	@Override
     public int getMaxServerGroupMembers() {
         return wrap(maxServerGroupMembers);
@@ -301,13 +301,13 @@ public class NovaAbsoluteLimit implements AbsoluteLimit {
 	private int wrap(Integer value) {
 		return value != null ? value : -1;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 					  .add("maxServerMeta", maxServerMeta).add("serverMetaUsed", serverMetaUsed).add("maxPersonality", maxPersonality)
 					  .add("personalityUsed", personalityUsed).add("maxImageMeta", maxImageMeta).add("imageMetaUsed", imageMetaUsed)
 					  .add("maxPersonalitySize", maxPersonalitySize).add("personalitySizeUsed", personalitySizeUsed).add("maxTotalCores", maxTotalCores)

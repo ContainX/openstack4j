@@ -10,7 +10,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumCluster implements Cluster {
@@ -41,7 +41,7 @@ public class MagnumCluster implements Cluster {
     public static ClusterBuilder builder() {
         return new ClusterConcreteBuilder();
     }
-    
+
     @Override
     public ClusterBuilder toBuilder() {
         return new ClusterConcreteBuilder(this);
@@ -93,7 +93,7 @@ public class MagnumCluster implements Cluster {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("status", status)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("status", status)
                 .add("clusterTemplateId", clusterTemplateId).add("uuid", uuid).add("links", links)
                 .add("stackId", stackId).add("masterCount", masterCount).add("createTimeout", createTimeout)
                 .add("nodeCount", nodeCount).add("discoveryUrl", discoveryUrl).add("keypair", keypair).add("name", name)

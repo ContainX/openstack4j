@@ -12,6 +12,7 @@ import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.identity.EndpointURLResolver;
@@ -20,6 +21,7 @@ import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -30,6 +32,7 @@ import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.URLResolverParams;
@@ -41,6 +44,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -61,6 +65,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     String region;
     Set<ServiceType> supports;
     CloudProvider provider;
+    Map<String, ? extends Object> headers;
     EndpointURLResolver fallbackEndpointUrlResolver = new DefaultEndpointURLResolver();
 
     @SuppressWarnings("rawtypes")
@@ -117,6 +122,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public NetworkingService networking() {
         return Apis.getNetworkingServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public OctaviaService octavia() {
+        return Apis.getOctaviaService();
     }
 
     /**
@@ -210,9 +222,21 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public WorkflowService workflow() {
+        return Apis.getWorkflowServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public BarbicanService barbican() {
         return Apis.getBarbicanServices();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public DNSService dns() {return Apis.getDNSService(); }
 
     /**
      * {@inheritDoc}
@@ -225,6 +249,18 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
     public CloudProvider getProvider() {
         return (provider == null) ? CloudProvider.UNKNOWN : provider;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public T headers(Map<String, ? extends Object> headers) {
+        this.headers = headers;
+        return (T) this;
+    }
+
+    public Map<String, ? extends Object> getHeaders(){
+        return this.headers;
     }
 
     /**
@@ -290,6 +326,9 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         return getSupportedServices().contains(ServiceType.TELEMETRY);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean supportsTelemetry_aodh() {
         return getSupportedServices().contains(ServiceType.TELEMETRY_AODH);
     }
@@ -302,10 +341,14 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     }
 
     /**
-     *
-     * @return
+     * {@inheritDoc}
      */
     public boolean supportsTrove() { return getSupportedServices().contains(ServiceType.DATABASE); }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean supportsDNS() { return getSupportedServices().contains(ServiceType.DNS); }
 
     public Set<ServiceType> getSupportedServices() {
         return null;

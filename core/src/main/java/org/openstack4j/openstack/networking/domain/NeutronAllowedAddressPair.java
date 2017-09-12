@@ -3,11 +3,11 @@ package org.openstack4j.openstack.networking.domain;
 import org.openstack4j.model.network.AllowedAddressPair;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Fixed IP Address
- * 
+ *
  * @author Jeremy Unruh
  */
 public class NeutronAllowedAddressPair implements AllowedAddressPair {
@@ -26,7 +26,7 @@ public class NeutronAllowedAddressPair implements AllowedAddressPair {
 		this.ipAddress = ipAddress;
 		this.macAddress = macAddress;
 	}
-  
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -45,7 +45,7 @@ public class NeutronAllowedAddressPair implements AllowedAddressPair {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("ipAddress", ipAddress).add("macAddress", macAddress).toString();
 	}
 

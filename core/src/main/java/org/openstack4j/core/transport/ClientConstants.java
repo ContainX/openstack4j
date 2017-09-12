@@ -9,6 +9,12 @@ public final class ClientConstants {
 
     public static final String HEADER_X_AUTH_TOKEN = "X-Auth-Token";
     public static final String HEADER_X_SUBJECT_TOKEN = "X-Subject-Token";
+    public static final String HEADER_X_PROJECT_ID = "X-Project-Id";
+    public static final String HEADER_X_PROJECT_NAME = "X-Project-Name";
+    public static final String HEADER_X_PROJECT_DOMAIN_ID = "X-Project-Domain-Id";
+    public static final String HEADER_X_PROJECT_DOMAIN_NAME = "X-Project-Domain-Name";
+    public static final String HEADER_X_DOMAIN_ID = "X-Domain-Id";
+    public static final String HEADER_X_DOMAIN_NAME = "X-Domain-Name";
     public static final String HEADER_CONTENT_LANGUAGE = "Content-Language";
     public static final String HEADER_CONTENT_ENCODING = "Content-Encoding";
     public static final String HEADER_CONTENT_TYPE = "Content-Type";
@@ -27,7 +33,7 @@ public final class ClientConstants {
     public static final String CONTENT_TYPE_ARTIFACT_PATCH = "application/json-patch+json";
     
     public static final String X_OPENSTACK_REQUEST_ID = "x-openstack-request-id";
-	public static final String X_COMPUTE_REQUEST_ID = "X-Compute-Request-Id";
+    public static final String X_COMPUTE_REQUEST_ID = "X-Compute-Request-Id";
 
 
     // Paths
@@ -49,8 +55,13 @@ public final class ClientConstants {
     public static final String PATH_SERVICE_CATALOGS = "auth/catalog";
     public static final String PATH_TENANTS = "/tenants";
     public static final String PATH_ARTIFACTS = "/artifacts";
-	
-	//Magnum APIs
+
+    // DNS/Designate
+    public static final String PATH_ZONES = "/zones";
+    public static final String PATH_RECORDSETS = "/recordsets";
+    public static final String PATH_NAMESERVERS = "/nameservers";
+
+    //Magnum APIs
     // list all Magnum Services
     public static final String MAGNUM_MSERVICES = "/mservices";
     // list baymodels

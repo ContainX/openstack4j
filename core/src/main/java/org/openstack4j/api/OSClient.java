@@ -3,6 +3,7 @@ package org.openstack4j.api;
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
+import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
@@ -10,6 +11,7 @@ import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -19,10 +21,12 @@ import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.api.magnum.MagnumService;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -60,6 +64,14 @@ public interface OSClient< T extends OSClient<T>> {
      * @return OSClient for method chaining
      */
     T perspective(Facing perspective);
+
+    /**
+     * Passes the Headers for the current Session(Client)
+     *
+     * @param headers the headers to use for keystone tokenless
+     * @return OSClient for method chaining
+     */
+    T headers(Map<String, ? extends Object> headers);
 
     /**
      * Gets the supported services. A set of ServiceTypes will be returned
@@ -161,6 +173,13 @@ public interface OSClient< T extends OSClient<T>> {
     NetworkingService networking();
 
     /**
+     * Returns the Load Balancer Service API
+     *
+     * @return the Load Balancer service
+     */
+    OctaviaService octavia();
+
+    /**
      * Returns the Artifact Service API
      *
      * @return the artifact service
@@ -235,7 +254,14 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the Sahara service
      */
     SaharaService sahara();
-    
+
+    /**
+     * Returns the Workflow Service API
+     *
+     * @return the Workflow service
+     */
+    WorkflowService workflow();
+
     /**
      * Returns the Magnum Service API
      * 
@@ -313,5 +339,12 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the Barbican service
      */
     BarbicanService barbican();
+
+    /**
+     * Returns the DNS Service API
+     *
+     * @return the DNS service
+     */
+    DNSService dns();
 
 }

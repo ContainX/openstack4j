@@ -11,6 +11,7 @@ import org.openstack4j.core.transport.*;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
+import org.openstack4j.model.identity.v3.Authentication;
 import org.openstack4j.model.identity.v3.Token;
 import org.openstack4j.openstack.common.Auth;
 import org.openstack4j.openstack.common.Auth.Type;
@@ -24,6 +25,9 @@ import org.openstack4j.openstack.internal.OSClientSession.OSClientSessionV2;
 import org.openstack4j.openstack.internal.OSClientSession.OSClientSessionV3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Responsible for authenticating and re-authenticating sessions for V2 and V3
@@ -48,7 +52,7 @@ public class OSAuthenticator {
     public static OSClient invoke(AuthStore auth, String endpoint, Facing perspective, Config config,
             CloudProvider provider) {
         SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
-        if (auth.getVersion() == AuthVersion.V2) {
+        if (auth.getVersion().equals(AuthVersion.V2)) {
             return authenticateV2((org.openstack4j.openstack.identity.v2.domain.Auth) auth, info, config);
         }
         return authenticateV3((KeystoneAuth) auth, info, config);
@@ -147,6 +151,35 @@ public class OSAuthenticator {
     }
 
     private static OSClientV3 authenticateV3(KeystoneAuth auth, SessionInfo info, Config config) {
+        if (auth.getType().equals(Type.TOKENLESS)){
+            Map headers = new HashMap();
+            Authentication.Scope.Project project = auth.getScope().getProject();
+            if (project != null){
+                if (!isEmpty(project.getId()))
+                    headers.put(ClientConstants.HEADER_X_PROJECT_ID, project.getId());
+                if (!isEmpty(project.getName()))
+                    headers.put(ClientConstants.HEADER_X_PROJECT_NAME, project.getName());
+                Authentication.Scope.Domain domain = project.getDomain();
+                if (domain != null){
+                    if (!isEmpty(domain.getId()))
+                        headers.put(ClientConstants.HEADER_X_PROJECT_DOMAIN_ID, domain.getId());
+                    if (!isEmpty(domain.getName()))
+                        headers.put(ClientConstants.HEADER_X_PROJECT_DOMAIN_NAME, domain.getName());
+                }
+            }else{
+                Authentication.Scope.Domain domain = auth.getScope().getDomain();
+                if (domain != null){
+                    if (!isEmpty(domain.getId()))
+                        headers.put(ClientConstants.HEADER_X_DOMAIN_ID, domain.getId());
+                    if (!isEmpty(domain.getName()))
+                        headers.put(ClientConstants.HEADER_X_DOMAIN_NAME, domain.getName());
+                }
+            }
+            KeystoneToken keystoneToken = new KeystoneToken();
+            keystoneToken.setEndpoint(info.endpoint);
+            return OSClientSessionV3.createSession(keystoneToken, null, null, config).headers(headers);
+        }
+
         HttpRequest<KeystoneToken> request = HttpRequest.builder(KeystoneToken.class)
                 .header(ClientConstants.HEADER_OS4J_AUTH, TOKEN_INDICATOR).endpoint(info.endpoint)
                 .method(HttpMethod.POST).path("/auth/tokens").config(config).entity(auth).build();
@@ -163,15 +196,18 @@ public class OSAuthenticator {
         KeystoneToken token = response.getEntity(KeystoneToken.class);
         token.setId(response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN));
 
-        if (auth.getType() == Type.CREDENTIALS) {
+        if (auth.getType().equals(Type.CREDENTIALS)) {
             token = token.applyContext(info.endpoint, auth);
         } else {
             if (token.getProject() != null) {
                 token = token.applyContext(info.endpoint, new TokenAuth(token.getId(),
                         auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
-            } else {
+
+            } else if (token.getDomain() != null ) {
                 token = token.applyContext(info.endpoint, new TokenAuth(token.getId(),
                         auth.getScope().getDomain().getName(), auth.getScope().getDomain().getId()));
+            } else {
+                token = token.applyContext(info.endpoint, new TokenAuth(token.getId(),null,null));
             }
         }
 
@@ -202,5 +238,11 @@ public class OSAuthenticator {
             this.reLinkToExistingSession = reLinkToExistingSession;
             this.provider = provider;
         }
+    }
+
+    private static boolean isEmpty(String str){
+        if (str != null && str.length() > 0)
+            return false;
+        return true;
     }
 }

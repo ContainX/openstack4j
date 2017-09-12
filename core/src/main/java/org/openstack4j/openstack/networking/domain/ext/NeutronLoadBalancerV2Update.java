@@ -3,7 +3,7 @@ package org.openstack4j.openstack.networking.domain.ext;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.network.ext.LoadBalancerV2Update;
 import org.openstack4j.model.network.ext.builder.LoadBalancerV2UpdateBuilder;
 
@@ -48,7 +48,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("adminStateUp", adminStateUp)
                 .add("description", description)
                 .add("name", name)

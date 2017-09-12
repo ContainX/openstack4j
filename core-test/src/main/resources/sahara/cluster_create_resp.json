@@ -1,0 +1,106 @@
+{
+	"cluster": {
+		"provision_progress": [],
+		"user_keypair_id": "tester",
+		"updated_at": "2017-08-04T08:33:44",
+		"is_transient": false,
+		"use_autoconfig": true,
+		"node_groups": [
+			{
+				"volume_local_to_instance": false,
+				"availability_zone": "nova",
+				"updated_at": null,
+				"instances": [],
+				"node_group_template_id": "f78dda4d-17e1-48cd-ab85-ee56261382ef",
+				"volumes_per_node": 0,
+				"id": "36f4ecc7-e098-4fbc-826b-e645a4e0561c",
+				"security_groups": [
+					"0a3f7e8d-3769-45ac-ac74-89efaa179404"
+				],
+				"shares": [],
+				"node_configs": {
+					"HDFS": {}
+				},
+				"auto_security_group": false,
+				"volumes_availability_zone": null,
+				"volume_mount_prefix": "/volumes/disk",
+				"floating_ip_pool": "7c6358b6-11da-4da5-9ae6-cb42dd51f483",
+				"image_id": "f56cc7c5-9588-49fa-8bcd-5c5d5eda5466",
+				"volumes_size": null,
+				"is_proxy_gateway": false,
+				"count": 2,
+				"name": "worker",
+				"created_at": "2017-08-04T08:33:43",
+				"volume_type": null,
+				"node_processes": [
+					"datanode",
+					"slave"
+				],
+				"flavor_id": "ef7f4d7f-267f-4762-abe2-729fe350256c",
+				"use_autoconfig": true
+			},
+			{
+				"volume_local_to_instance": false,
+				"availability_zone": "nova",
+				"updated_at": null,
+				"instances": [],
+				"node_group_template_id": "0febf422-98ee-47e6-a1c5-60f90f1f9c96",
+				"volumes_per_node": 0,
+				"id": "d4a382ca-6c9c-48ef-84c2-c9ad3360cd81",
+				"security_groups": [
+					"0a3f7e8d-3769-45ac-ac74-89efaa179404"
+				],
+				"shares": [],
+				"node_configs": {
+					"HDFS": {}
+				},
+				"auto_security_group": false,
+				"volumes_availability_zone": null,
+				"volume_mount_prefix": "/volumes/disk",
+				"floating_ip_pool": "7c6358b6-11da-4da5-9ae6-cb42dd51f483",
+				"image_id": "f56cc7c5-9588-49fa-8bcd-5c5d5eda5466",
+				"volumes_size": null,
+				"is_proxy_gateway": false,
+				"count": 1,
+				"name": "master",
+				"created_at": "2017-08-04T08:33:43",
+				"volume_type": null,
+				"node_processes": [
+					"namenode",
+					"master"
+				],
+				"flavor_id": "ef7f4d7f-267f-4762-abe2-729fe350256c",
+				"use_autoconfig": true
+			}
+		],
+		"management_public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaOGD3eWnT48rv3MlnF5D9z8B0Xw76IjlSt2fijRKUnlB3EAdMsi8QutO2Z+uPJXtZZsxfBvKabCpuSh5C6NWq2cjvEcb+HisXcRD5LDfJ7KUkNJRqJcHMiLMZv3WSfUSn37HXhPW09vz72Td8e0bkr7kbcbO5goc/hMoszP/Q5Yt62I6j6tgPBTr4mZuSXTlhIxg27RIvrHueWUhKL4iT3yCBgk+QU9PNRFDzHPg5ZLCAoQerOkj7yuN0iwWUvXx5McLQiLI5bB3th1Ov65rsLw+Me/WrTLHmbY2AK24gTQ8XtuLbKei84WGMkmZBQ15B27kC0uoos8EeiZcvO9cb Generated-by-Sahara\n",
+		"id": "c7ce1662-0ee7-4307-a7ed-a77fa1b0e667",
+		"trust_id": null,
+		"cluster_configs": {
+			"HDFS": {
+				"dfs.replication": 1
+			},
+			"Spark": {
+				"spark.executor.memory": "1g",
+				"spark.executor.cores": 2
+			}
+		},
+		"default_image_id": "f56cc7c5-9588-49fa-8bcd-5c5d5eda5466",
+		"domain_name": null,
+		"shares": null,
+		"status": "Validating",
+		"neutron_management_network": "4c065f9c-ad1b-43c4-ba1e-893d330da079",
+		"description": null,
+		"plugin_name": "spark",
+		"anti_affinity": [],
+		"is_public": false,
+		"status_description": "",
+		"hadoop_version": "1.6.2",
+		"info": {},
+		"cluster_template_id": null,
+		"name": "cluster-test-1",
+		"tenant_id": "31f13106bac54c1992077cca18f02c6e",
+		"created_at": "2017-08-04T08:33:43",
+		"is_protected": false
+	}
+}

@@ -5,7 +5,7 @@ import org.openstack4j.model.compute.VolumeAttachment;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * return a description for this volume attachment job
@@ -64,7 +64,7 @@ public class NovaVolumeAttachment implements VolumeAttachment {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("device", device).add("id", id).add("serverId", serverId)
 				.add("volumeId", volumeId).toString();
 

@@ -6,7 +6,7 @@ import org.openstack4j.model.network.ext.builder.MemberUpdateBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A updated member of a Lbaas pool
@@ -40,16 +40,16 @@ public class NeutronMemberUpdate implements MemberUpdate {
 	public Integer getWeight() {
 		return weight;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 			    .add("adminStateUp", adminStateUp)
 			    .add("weight",weight)
 			    .add("poolId", poolId)
 			    .toString();
 	}
-	
+
 	/**
 	 * Member create builder
 	 * @author liujunpeng
@@ -91,7 +91,7 @@ public class NeutronMemberUpdate implements MemberUpdate {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -100,7 +100,7 @@ public class NeutronMemberUpdate implements MemberUpdate {
 			return this;
 		}
 	}
-	
+
 	/**
 	 * Wraps this MemberUpdate into a Builder
 	 * @return the network builder
@@ -108,19 +108,19 @@ public class NeutronMemberUpdate implements MemberUpdate {
 	public MemberUpdateBuilder toBuilder() {
 		return new MemberUpdateConcreteBuilder(this);
 	}
-	
+
 	public static MemberUpdateBuilder builder(){
 		return new MemberUpdateConcreteBuilder();
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String getPoolId() {
-		
+
 		return poolId;
 	}
-	
+
 }

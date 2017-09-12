@@ -6,11 +6,11 @@ import org.openstack4j.model.sahara.ConfigInfo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * For mapping JSON response to/from java objects
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  */
 
@@ -108,7 +108,7 @@ public class SaharaConfigInfo implements ConfigInfo {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("name", name)
                 .add("description", description)
                 .add("priority", priority)
