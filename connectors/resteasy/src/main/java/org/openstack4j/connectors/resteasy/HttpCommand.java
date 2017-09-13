@@ -1,19 +1,18 @@
 package org.openstack4j.connectors.resteasy;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.openstack4j.connectors.resteasy.executors.ApacheHttpClientEngine;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.HttpRequest;
 import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
+
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import java.util.List;
+import java.util.Map;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor.
@@ -25,6 +24,7 @@ public final class HttpCommand<R> {
     private HttpRequest<R> request;
     private ResteasyWebTarget resteasyWebTarget;
     private int retries;
+    private Invocation.Builder resteasyRequest ;
 
     private HttpCommand(HttpRequest<R> request) {
         this.request = request;
@@ -48,6 +48,7 @@ public final class HttpCommand<R> {
                 .target(UriBuilder.fromUri(new EndpointURIFromRequestFunction().apply(request)));
 
         populateQueryParams(request);
+        resteasyRequest = resteasyWebTarget.request();
         populateHeaders(request);
     }
 
@@ -55,17 +56,16 @@ public final class HttpCommand<R> {
      * Executes the command and returns the Response
      *
      * @return the response
-     * @throws Exception
      */
     public Response execute(){
 
         Invocation webRequest;
         if (request.getEntity() != null) {
-            webRequest = resteasyWebTarget.request().build(request.getMethod().name(), Entity.entity(request.getEntity(), request.getContentType()));
+            webRequest = resteasyRequest.build(request.getMethod().name(), Entity.entity(request.getEntity(), request.getContentType()));
         } else if (request.hasJson()) {
-            webRequest= resteasyWebTarget.request().build(request.getMethod().name() , Entity.entity(request.getJson(),ClientConstants.CONTENT_TYPE_JSON));
+            webRequest= resteasyRequest.build(request.getMethod().name() , Entity.entity(request.getJson(),ClientConstants.CONTENT_TYPE_JSON));
         }else{
-            webRequest = resteasyWebTarget.request().build(request.getMethod().name());
+            webRequest = resteasyRequest.build(request.getMethod().name());
         }
 
         return webRequest.invoke();
@@ -104,7 +104,7 @@ public final class HttpCommand<R> {
 
         for (Map.Entry<String, List<Object>> entry : request.getQueryParams().entrySet()) {
             for (Object o : entry.getValue()) {
-                resteasyWebTarget.queryParam(entry.getKey(), o);
+                resteasyWebTarget = resteasyWebTarget.queryParam(entry.getKey(), o);
             }
         }
     }
@@ -114,7 +114,7 @@ public final class HttpCommand<R> {
         if (!request.hasHeaders()) return;
 
         for (Map.Entry<String, Object> h : request.getHeaders().entrySet()) {
-            resteasyWebTarget.request().header(h.getKey(), h.getValue());
+            resteasyRequest.header(h.getKey(), h.getValue());
         }
     }
 }
