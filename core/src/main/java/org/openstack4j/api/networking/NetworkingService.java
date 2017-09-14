@@ -78,4 +78,9 @@ public interface NetworkingService extends RestService {
      * @return the FwaaS service
      */
     FirewallAsService firewalls();
+    
+    /**
+     * @return the Availability Zone Service API
+     */
+    AvailabilityZoneService availabilityzone();
 }
