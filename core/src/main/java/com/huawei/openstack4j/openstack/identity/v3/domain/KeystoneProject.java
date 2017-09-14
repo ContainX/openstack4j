@@ -68,6 +68,10 @@ public class KeystoneProject implements Project {
     public ProjectBuilder toBuilder() {
         return new ProjectConcreteBuilder(this);
     }
+    
+    public void setId(String id) {
+        this.id=id;
+    }
 
     /**
      * {@inheritDoc}

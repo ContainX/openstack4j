@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.sample;
+package com.huawei.openstack4j.kms;
 
 import java.util.List;
 import java.util.UUID;
@@ -65,9 +65,9 @@ public class AbstractSample {
 		endpointResolver.addOverrideEndpoint(ServiceType.SAHARA,
 				"https://mrs.eu-de.otc.t-systems.com/v1.1/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
-				"https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
+				"https://kms.cn-north-1.myhwclouds.com/v1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_TRACE,
-				"https://cts.cn-north-1.myhwclouds.com/v1.0/%(project_id)s");
+				"https://cts.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.ANTI_DDOS,
 				"https://antiddos.eu-de.otc.t-systems.com/v1/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.Notification,
@@ -105,17 +105,19 @@ public class AbstractSample {
 
 		OSFactory.enableHttpLoggingFilter(true);
 //		 
- 
+//		kmsclient =   (KmsClientV3) KmsFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver)
+//				.withConnectionTimeout(6000).withSSLVerificationDisabled()).endpoint(authUrl).credentials(user, password, Identifier.byId(userDomainId))
+//				.scopeToProject(Identifier.byId(projectId)).authenticate();
 		
-		osclient =  OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver)
-		.withConnectionTimeout(6000).withSSLVerificationDisabled()).endpoint(authUrl).credentials(user, password, Identifier.byId(userDomainId))
-		.scopeToProject(Identifier.byId(projectId)).authenticate();
+//		osclient =  OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver)
+//		.withConnectionTimeout(6000).withSSLVerificationDisabled()).endpoint(authUrl).credentials(user, password, Identifier.byId(userDomainId))
+//		.scopeToProject(Identifier.byId(projectId)).authenticate();
 		
 		kmsclient =   (KmsClientV3) KmsFactory.builder().withConfig(Config.newConfig()
 				.withSSLVerificationDisabled()).withEndpoint(endpoint).credentials(user, password, Identifier.byId(userDomainId),Identifier.byId(projectId),authUrl);
 		
-//		kmsclient1 =   (KmsClientV3) KmsFactory.builder().withConfig(Config.newConfig()
-//				.withSSLVerificationDisabled()).withEndpoint(endpoint).withProjectId(projectId);
+		kmsclient1 =   (KmsClientV3) KmsFactory.builder().withConfig(Config.newConfig()
+				.withSSLVerificationDisabled()).withEndpoint(endpoint).withProjectId(projectId);
 	}
 
 	protected Object retry(Retry retry) {

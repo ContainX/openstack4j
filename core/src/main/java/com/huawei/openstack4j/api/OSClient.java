@@ -43,13 +43,14 @@ import com.huawei.openstack4j.api.telemetry.TelemetryService;
 import com.huawei.openstack4j.api.types.Facing;
 import com.huawei.openstack4j.api.types.ServiceType;
 import com.huawei.openstack4j.api.workflow.WorkflowService;
+import com.huawei.openstack4j.core.transport.Config;
+import com.huawei.openstack4j.model.common.Identifier;
 import com.huawei.openstack4j.model.identity.v2.Access;
 import com.huawei.openstack4j.model.identity.v3.Token;
 import com.huawei.openstack4j.openstack.antiddos.internal.AntiDDoSServices;
 import com.huawei.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
 import com.huawei.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import com.huawei.openstack4j.openstack.database.internal.DatabaseServices;
-import com.huawei.openstack4j.openstack.key.management.internal.KeyManagementService;
 import com.huawei.openstack4j.openstack.maas.internal.MaaSService;
 import com.huawei.openstack4j.openstack.message.notification.internal.NotificationService;
 import com.huawei.openstack4j.openstack.message.queue.internal.MessageQueueService;
@@ -327,9 +328,22 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the identity service version 3
 		 */
 		com.huawei.openstack4j.api.identity.v3.IdentityService identity();
+				
+        public OSClientV3 scopeToProject(Identifier project) ;
+        
+        public OSClientV3 credentials(String tokenId,String projectId);
 
+		public OSClientV3 withConfig(Config config);
+
+		public OSClientV3 credentials(String user, String password, Identifier domain, Identifier project,String authUrl);
+
+		public OSClientV3  withProjectId(String projectId);
 		
-		/**
+		public  OSClientV3  withToken(String tokenId);
+		
+		public OSClientV3 withEndpoint(String endpoint);
+
+	/**
 		 * get the Auto Scaling service 
 		 * @return the OTC AutoScaling Service
 		 */
@@ -340,13 +354,6 @@ public interface OSClient<T extends OSClient<T>> {
 		 * @return the OTC Elastic Load Balance service
 		 */
 		ELBService loadBalancer();
-		
-		
-		/**
-		 * get the Key Management service 
-		 * @return the OTC Key Management service instance
- 		 */
-		KeyManagementService keyManagement();
 		
 		/**
 		 * get the Cloud Trace V1 service 

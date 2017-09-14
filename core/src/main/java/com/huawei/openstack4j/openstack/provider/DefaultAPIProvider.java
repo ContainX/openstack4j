@@ -284,9 +284,6 @@ import com.huawei.openstack4j.openstack.identity.v3.internal.TokenServiceImpl;
 import com.huawei.openstack4j.openstack.identity.v3.internal.UserServiceImpl;
 import com.huawei.openstack4j.openstack.image.internal.ImageServiceImpl;
 import com.huawei.openstack4j.openstack.image.v2.internal.TaskServiceImpl;
-import com.huawei.openstack4j.openstack.key.management.internal.CryptoService;
-import com.huawei.openstack4j.openstack.key.management.internal.KeyManagementService;
-import com.huawei.openstack4j.openstack.key.management.internal.KeyService;
 import com.huawei.openstack4j.openstack.loadbalance.internal.AsyncJobServiceImpl;
 import com.huawei.openstack4j.openstack.loadbalance.internal.ELBCertificateSeviceImpl;
 import com.huawei.openstack4j.openstack.loadbalance.internal.ELBHealthCheckServiceImpl;
@@ -668,11 +665,7 @@ public class DefaultAPIProvider implements APIProvider {
 		bind(ELBQuotaService.class, ELBQuotaServiceImpl.class);
 		bind(ELBCertificateService.class, ELBCertificateSeviceImpl.class);
 		bind(AsyncJobService.class, AsyncJobServiceImpl.class);
-
-		// key management
-		bind(KeyService.class, KeyService.class);
-		bind(CryptoService.class, CryptoService.class);
-		bind(KeyManagementService.class, KeyManagementService.class);
+	
 
 		// cloud trace
 		bind(TraceService.class, TraceService.class);

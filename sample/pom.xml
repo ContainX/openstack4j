@@ -16,26 +16,28 @@
 	</properties>
 
 	<dependencies>
+		<!-- -->
 		<dependency>
 			<groupId>com.huawei</groupId>
 			<artifactId>openstack4j</artifactId>
-			<version>${project.version}</version>
-			<!-- 
+			<version>3.0.5.2</version>
+			 
 			<exclusions>
 				<exclusion>
 					<groupId>com.huawei.openstack4j.connectors</groupId>
 					<artifactId>openstack4j-jersey2</artifactId>
 				</exclusion>
 			</exclusions>
-			 -->
-		</dependency>
-		<!-- 
+			 
+		</dependency> 
+		<!--   -->
 		<dependency>
-			<groupId>com.huawei.openstack4j.connectors</groupId>
-			<artifactId>openstack4j-httpclient</artifactId>
-			<version>${project.version}</version>
+			<groupId>com.huawei</groupId>
+			<artifactId>openstack4j-kms</artifactId>
+			<version>3.0.5.1</version>
 		</dependency>
-		 -->
+		
+		 
 		<!-- logging -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
