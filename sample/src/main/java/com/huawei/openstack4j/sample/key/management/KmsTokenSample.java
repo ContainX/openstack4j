@@ -22,16 +22,21 @@ import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.huawei.openstack4j.api.types.ServiceType;
+import com.huawei.openstack4j.core.transport.Config;
+import com.huawei.openstack4j.kms.client.KmsClient;
+import com.huawei.openstack4j.kms.client.KmsFactory;
 import com.huawei.openstack4j.kms.openstack.constants.KeyState;
 import com.huawei.openstack4j.kms.openstack.domain.Key;
 import com.huawei.openstack4j.kms.openstack.domain.Key.Keys;
 import com.huawei.openstack4j.kms.openstack.options.KeyListOptions;
+import com.huawei.openstack4j.openstack.OSFactory;
 import com.huawei.openstack4j.openstack.common.Quota;
 import com.huawei.openstack4j.openstack.common.Quota.ResourceType;
-
-import com.huawei.openstack4j.sample.AbstractSample;
+import com.huawei.openstack4j.openstack.identity.internal.OverridableEndpointURLResolver;
 
 /**
  *
@@ -39,17 +44,42 @@ import com.huawei.openstack4j.sample.AbstractSample;
  * @date   2017-07-13 14:43:01
  */
 @Test(suiteName = "KeyManagement/Key/Sample")
-public class KmsTokenSample extends AbstractSample {
+public class KmsTokenSample extends AbstractKmsSample {
 
 	String name = randomName();
 	Key key = null;
-	String tokenId="MIIM3AYJKoZIhvcNAQcCoIIMzTCCDMkCAQExDTALBglghkgBZQMEAgEwggsqBgkqhkiG9w0BBwGgggsbBIILF3sidG9rZW4iOnsiaXNzdWVkX2F0IjoiMjAxNy0wOS0wN1QwMTo1MjoxNi42MjIwMDBaIiwiZXhwaXJlc19hdCI6IjIwMTctMDktMDhUMDE6NTI6MTYuNjIyMDAwWiIsIm1ldGhvZHMiOlsicGFzc3dvcmQiXSwicHJvamVjdCI6eyJuYW1lIjoic291dGhjaGluYSIsImlkIjoiNjc2NDFmZTY4ODZmNDNmY2I3OGVkYmJmMGFkMGI5OWYiLCJkb21haW4iOnsibmFtZSI6IndlaWh1YTEyMyIsImlkIjoiOTY5ODU0Mjc1OGJjNDIyMDg4YzBjM2VhYmZjMzBkMTIifX0sInJvbGVzIjpbeyJuYW1lIjoidGVfYWRtaW4iLCJpZCI6IjE5OTJjMWRmOWFkNjQxMmU5YzgzMzAzMmNkNzBjYThmIn0seyJuYW1lIjoidGVfYWdlbmN5IiwiaWQiOiJlYjNkOGUyMGI5MTI0YmZhOTc0YWE3YzVmMzI5M2FmZCJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Fpc19kZWZvZyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Fpc19zdXBlcl9yZXNvbHV0aW9uIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfR0FDUyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Fpc19wYXRoX3Byb2dyYW0ifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9jb2xkIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfYXNkYXNkIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfZXJ3ZXJ3ZXgifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9kd3NfZWNyYSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2NzYnMifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9hIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfb2JzX3dhcm1fY29sZCJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Fpc19vY3JfZm9ybSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2t2bSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Fpc19iaW5fcGFja2luZyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Nsb3VkaWRlIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfdGVzdDAwMiJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX3hpYW90YWl5YW5nIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfdGFzc3NnMSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX3Rhc3NzZzIifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF90ZXN0MDA3In0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfdGFzc3NnNCJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX3Rhc3NzZzUifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF90YXNzc2c2In0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfZHJkcyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Nsb3VkSU0ifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF8wOTE3dGVzdDIifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9vYnNfd29ybSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX3RhZyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Vjc19obWVtIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfc3Fsc2VydmVyIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfd2Vic2NhbiJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX3Jkc19jdXN0b21lcmNsb3VkIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfcmRzX3BnIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfb3BfZ2F0ZWRfc2NjX2h2ZCJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2x0cyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX29wX2dhdGVkX3NjY19zY3MifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9kZG0ifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9oanRlc3Rjb2RlIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfZGRzIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfdXF1ZXJ5In0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfY2xvdWRjYyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2RmZ2RmZyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2N1eGlhb19rNzIyMSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX0lNIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfZWNzX2dwdV9jYSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2hzcyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Fpc190aW1lX2Fub21hbHkifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF80NTYifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9kd3NfZmVhdHVyZSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX29wX2dhdGVkX3Jkc19jdXN0b21lcmNsb3VkIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfcmRzX3NxbHNlcnZlciJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2dhdGVkX2ttcyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX29wX2dhdGVkX3NjY193YWYifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9haXNfZGFya19lbmhhbmNlIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfaGp0ZXN0anVtcCJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2Nvc3QyZnJlZSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX29wX2dhdGVkX3NjY19wdHMifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9yZHMtdHJhbnNmZXIifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9pb3QifV0sInVzZXIiOnsiZG9tYWluIjp7Im5hbWUiOiJ3ZWlodWExMjMiLCJpZCI6Ijk2OTg1NDI3NThiYzQyMjA4OGMwYzNlYWJmYzMwZDEyIn0sImlkIjoiMTc0MGM2NzBjYWIyNDEwNGIwZjI4NjliZDU5ZDI2NzIiLCJuYW1lIjoid2VpaHVhMTIzIn0sImNhdGFsb2ciOltdfX0xggGFMIIBgQIBATBcMFcxCzAJBgNVBAYTAlVTMQ4wDAYDVQQIDAVVbnNldDEOMAwGA1UEBwwFVW5zZXQxDjAMBgNVBAoMBVVuc2V0MRgwFgYDVQQDDA93d3cuZXhhbXBsZS5jb20CAQEwCwYJYIZIAWUDBAIBMA0GCSqGSIb3DQEBAQUABIIBAFjl5SYJsTTFZaDCHdR4F-sdODKeY53k7+jW26IVSRaaimeKvZi4NyzeBs47azXhvjHogBQ8Aym2bLz5KUuHbN-c4tk3ofZzeMImqAHvqtmAD1d2sUKJ0uGlmOlrwdIGlkfOXdB8MSNTM4vs1-IZ5Dr9h8u7InrhvJI0L43ClyY3Q00GWQqyddTvhljgoYNUMYdh+Lsdf2MAmNQZem+HXbHwEktqwJHp6lYc0E69+T6ffiCaLFxIh8G3icE7spT7VgNkfzqTSHzYPgqRZaGy4i-ku-oIeVZIkKMziEWlyPbX57In3rsh3IYr9yT9xZzUqWqI8BXeTb3E2eSRPcMkav8=";
+	String tokenId="MIIL0AYJKoZIhvcNAQcCoIILwTCCC70CAQExDTALBglghkgBZQMEAgEwggoeBgkqhkiG9w0BBwGgggoPBIIKC3sidG9rZW4iOnsiaXNzdWVkX2F0IjoiMjAxNy0wOS0xNVQwOToxNzozOC4xNzIwMDBaIiwiZXhwaXJlc19hdCI6IjIwMTctMDktMTZUMDk6MTc6MzguMTcyMDAwWiIsIm1ldGhvZHMiOlsicGFzc3dvcmQiXSwicHJvamVjdCI6eyJuYW1lIjoic291dGhjaGluYSIsImlkIjoiNjc2NDFmZTY4ODZmNDNmY2I3OGVkYmJmMGFkMGI5OWYiLCJkb21haW4iOnsibmFtZSI6IndlaWh1YTEyMyIsImlkIjoiOTY5ODU0Mjc1OGJjNDIyMDg4YzBjM2VhYmZjMzBkMTIifX0sInJvbGVzIjpbeyJuYW1lIjoidGVfYWRtaW4iLCJpZCI6IjE5OTJjMWRmOWFkNjQxMmU5YzgzMzAzMmNkNzBjYThmIn0seyJuYW1lIjoidGVfYWdlbmN5IiwiaWQiOiJlYjNkOGUyMGI5MTI0YmZhOTc0YWE3YzVmMzI5M2FmZCJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX0dBQ1MifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9jb2xkIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfcmRzX215b3B0In0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfaXRlc3QifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9hc2Rhc2QifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9lcndlcndleCJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2EifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9vYnNfd2FybV9jb2xkIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfYWlzX29jcl9mb3JtIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfa3ZtIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfY2xvdWRpZGUifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF90ZXN0MDAyIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfeGlhb3RhaXlhbmcifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF90YXNzc2cxIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfdGFzc3NnMiJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX3Rhc3NzZzQifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF90YXNzc2c1In0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfdGFzc3NnNiJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2RyZHMifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9jbG91ZElNIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfdGVzdDIifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF90ZXN0MyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkXzA5MTd0ZXN0MiJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX29ic193b3JtIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfdGFnIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfZWNzX2htZW0ifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9zcWxzZXJ2ZXIifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF93ZWJzY2FuIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfcmRzX2N1c3RvbWVyY2xvdWQifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9yZHNfcGcifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9vcF9nYXRlZF9zY2NfaHZkIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfbHRzIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfb3BfZ2F0ZWRfc2NjX3NjcyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2RkbSJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2hqdGVzdGNvZGUifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9kZHMifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF91cXVlcnkifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9jbG91ZGNjIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfZGZnZGZnIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfY3V4aWFvX2s3MjIxIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfSU0ifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9lY3NfZ3B1X2NhIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfNDU2In0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfZHdzX2ZlYXR1cmUifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9vcF9nYXRlZF9yZHNfY3VzdG9tZXJjbG91ZCJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX3Jkc19zcWxzZXJ2ZXIifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9nYXRlZF9rbXMifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9vcF9nYXRlZF9zY2Nfd2FmIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfZGNzX2NsdXN0ZXIifSx7ImlkIjoiMCIsIm5hbWUiOiJvcF9nYXRlZF9oanRlc3RqdW1wIn0seyJpZCI6IjAiLCJuYW1lIjoib3BfZ2F0ZWRfb3BfZ2F0ZWRfc2NjX3B0cyJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX3Jkcy10cmFuc2ZlciJ9LHsiaWQiOiIwIiwibmFtZSI6Im9wX2dhdGVkX2lvdCJ9XSwidXNlciI6eyJkb21haW4iOnsibmFtZSI6IndlaWh1YTEyMyIsImlkIjoiOTY5ODU0Mjc1OGJjNDIyMDg4YzBjM2VhYmZjMzBkMTIifSwiaWQiOiIxNzQwYzY3MGNhYjI0MTA0YjBmMjg2OWJkNTlkMjY3MiIsIm5hbWUiOiJ3ZWlodWExMjMifSwiY2F0YWxvZyI6W119fTGCAYUwggGBAgEBMFwwVzELMAkGA1UEBhMCVVMxDjAMBgNVBAgMBVVuc2V0MQ4wDAYDVQQHDAVVbnNldDEOMAwGA1UECgwFVW5zZXQxGDAWBgNVBAMMD3d3dy5leGFtcGxlLmNvbQIBATALBglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEggEABM2K85IzeOhs8HXqvguTJep9e2ihigmNTqcZRQW40L94FR7zqE2d8RdmGTaKPzy0KCx34Y3p9ZbOp-LjgrW+lApX0TfYE1CjawGnGlN5CBrIFuhGZhKrNDl+5rX7pFAO25bw64bhqfzKSIHMgv6nbyJyqacbKpiM7amtiUUBTWfqZ-rozxT9CqSSy74HwUHhs5KwEl6d22thrHe9tlN0L6uAKhYj0EgJSV4HHEmZNxWkRvznu0kkLUJlzeao6MHaZyV4rLL6byCWA3gJNHhIaUGl4DI03eVG3SMvvdkY+x0vnXsJLaHxejk0latIuUfS2iPW2bjxeycPTmlCWqugsg==";
 
+	
+	@BeforeTest
+	public static void initialClient() {
+		// add override endpoint
+		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
+	 
+		endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
+				"https://kms.cn-north-1.myhwclouds.com/v1.0/%(project_id)s");
+
+		// // TODO remove authentication before push to github
+		// String user = "replace-with-your-username";
+		// String password = "replace-with-your-password";
+		// String projectId = "d4f2557d248e4860829f5fef030b209c";
+		// String userDomainId = "bb42e2cd2b784ac4bdc350fb660a2bdb";
+		// String authUrl = "https://iam.cn-north-1.myhwclouds.com/v3";
+		//
+
+		String projectId = "67641fe6886f43fcb78edbbf0ad0b99f";
+		OSFactory.enableHttpLoggingFilter(true);
+
+		kmstokenclient = (KmsClient) KmsFactory.builder()
+				.withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver).withSSLVerificationDisabled())
+				.withProjectId(projectId);
+	}
 	/**
 	 * create a key for test
 	 */
 	@BeforeClass
 	public void prepare() {
+	
 //		KeyCreate create = KeyCreate.builder().alias(name).description("desc").realm("eu-de").build();
 //		key = kmsclient.withToken(tokenId).keys().create(create);
 	}
@@ -64,7 +94,7 @@ public class KmsTokenSample extends AbstractSample {
 
 	@Test(priority = 1)
 	public void testGetKey() {
-		Key get = kmsclient1.keys().get(key.getId(), null);
+		Key get = kmstokenclient.keys().get(key.getId(), null);
 		Assert.assertEquals(get.getAlias(), name);
 		Assert.assertEquals(get.getDescription(), "desc");
 		Assert.assertEquals(get.getRealm(), "cn-north-1");
@@ -74,32 +104,32 @@ public class KmsTokenSample extends AbstractSample {
 
 	@Test(priority = 2)
 	public void testScheduleDeletion() {
-		Key deleted = kmsclient1.keys().scheduleDeletion(key.getId(), 7, null);
+		Key deleted = kmstokenclient.keys().scheduleDeletion(key.getId(), 7, null);
 		Assert.assertEquals(deleted.getState(), KeyState.ScheduledDeletion);
 	}
 
 	@Test(priority = 3)
 	public void testCancelDeletion() {
-		Key canceled = kmsclient1.keys().cancelDeletion(key.getId(), null);
+		Key canceled = kmstokenclient.keys().cancelDeletion(key.getId(), null);
 		Assert.assertEquals(canceled.getState(), KeyState.Disabled);
 	}
 
 	@Test(priority = 4)
 	public void testEnableKey() {
-		Key enabled = kmsclient1.keys().enable(key.getId(), null);
+		Key enabled = kmstokenclient.keys().enable(key.getId(), null);
 		Assert.assertEquals(enabled.getState(), KeyState.Enabled);
 	}
 
 	@Test(priority = 5)
 	public void testDisableKey() {
-		Key disabled =kmsclient1.keys().disable(key.getId(), null);
+		Key disabled =kmstokenclient.keys().disable(key.getId(), null);
 		Assert.assertEquals(disabled.getState(), KeyState.Disabled);
 	}
 
 	@Test(priority = 6)
 	public void testListKeys() {
 		KeyListOptions options = KeyListOptions.create().limit(2).keyState(KeyState.Enabled);
-		Keys keys = kmsclient1.withToken(tokenId).keys().list(options);
+		Keys keys = kmstokenclient.withToken(tokenId).keys().list(options);
 
 //		boolean contains = keys.get().contains(key.getId());
 //		while (!contains && keys.getTruncated()) {
@@ -113,13 +143,13 @@ public class KmsTokenSample extends AbstractSample {
 
 	@Test(priority = 7)
 	public void testGetAmount() {
-		Integer keyCreatedAmount = kmsclient1.keys().getKeyCreatedAmount();
+		Integer keyCreatedAmount = kmstokenclient.keys().getKeyCreatedAmount();
 		Assert.assertTrue(keyCreatedAmount > 0);
 	}
 
 	@Test(priority = 8)
 	public void testListQuota() {
-		List<Quota> quotas = kmsclient1.keys().quotas();
+		List<Quota> quotas = kmstokenclient.keys().quotas();
 		Assert.assertTrue(quotas.size() > 0);
 		boolean found = false;
 		for (Quota quota : quotas) {

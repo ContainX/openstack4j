@@ -29,10 +29,10 @@ import com.huawei.openstack4j.openstack.OSFactory;
 public class KmsFactory extends OSFactory {
 
 	public static OSClientV3 builder() {
-		return KmsClientV3.createSession();
+		return KmsClient.createSession();
 	}
 
 	public static OSClientV3 client(Config config) {
-		return KmsClientV3.createSession(config);
+		return KmsClient.createSession(config);
 	}
 }

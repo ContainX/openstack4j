@@ -135,7 +135,9 @@ public class BaseOpenStackService {
 		if (ses instanceof OSClientSessionV3) {
 			OSClientSessionV3 v3 = (OSClientSessionV3) ses;
 			Token token = v3.getToken();
-			path = path.replace("%(project_id)s", token.getProject().getId());
+			if (null != token) {
+				path = path.replace("%(project_id)s", token.getProject().getId());
+			}
 		}
 
 		RequestBuilder<R> req = HttpRequest.builder(returnType).endpointTokenProvider(ses).config(ses.getConfig())

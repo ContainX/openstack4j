@@ -336,12 +336,12 @@ public interface OSClient<T extends OSClient<T>> {
 		public OSClientV3 withConfig(Config config);
 
 		public OSClientV3 credentials(String user, String password, Identifier domain, Identifier project,String authUrl);
+		
+		public OSClientV3 credentials(String user, String password, String domainId, String projectId,String authUrl);
 
 		public OSClientV3  withProjectId(String projectId);
 		
-		public  OSClientV3  withToken(String tokenId);
-		
-		public OSClientV3 withEndpoint(String endpoint);
+		public  OSClientV3  withToken(String tokenId);		
 
 	/**
 		 * get the Auto Scaling service 

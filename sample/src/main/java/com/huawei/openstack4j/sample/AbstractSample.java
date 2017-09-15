@@ -23,8 +23,6 @@ import org.testng.annotations.BeforeTest;
 import com.huawei.openstack4j.api.OSClient.OSClientV3;
 import com.huawei.openstack4j.api.types.ServiceType;
 import com.huawei.openstack4j.core.transport.Config;
-import com.huawei.openstack4j.kms.client.KmsClientV3;
-import com.huawei.openstack4j.kms.client.KmsFactory;
 import com.huawei.openstack4j.model.common.Identifier;
 import com.huawei.openstack4j.model.compute.Flavor;
 import com.huawei.openstack4j.model.compute.Image;
@@ -41,10 +39,6 @@ import com.huawei.openstack4j.openstack.identity.internal.OverridableEndpointURL
 public class AbstractSample {
 
 	protected static OSClientV3 osclient;
-	
-	protected static KmsClientV3 kmsclient;
-	
-	protected static KmsClientV3 kmsclient1;
 	private Router router;
 	private Flavor flavor;
 	private Image image;
@@ -67,7 +61,7 @@ public class AbstractSample {
 		endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
 				"https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_TRACE,
-				"https://cts.cn-north-1.myhwclouds.com/v1.0/%(project_id)s");
+				"https://cts.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.ANTI_DDOS,
 				"https://antiddos.eu-de.otc.t-systems.com/v1/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.Notification,
@@ -80,42 +74,20 @@ public class AbstractSample {
 		// endpointResolver.addOverrideEndpoint(ServiceType.DNS,
 		// "https://dns.eu-de.otc.t-systems.com/v2/%(project_id)s");
 
-//		// TODO remove authentication before push to github
-//		String user = "replace-with-your-username";
-//		String password = "replace-with-your-password";
-//		String projectId = "d4f2557d248e4860829f5fef030b209c";
-//		String userDomainId = "bb42e2cd2b784ac4bdc350fb660a2bdb";
-//		String authUrl = "https://iam.eu-de.otc.t-systems.com/v3";
-//		
-//		
-//
-//		OSFactory.enableHttpLoggingFilter(true);
-//		// with language setting is required for RDS(trove&database) service
-//		Config config = Config.newConfig().withEndpointURLResolver(endpointResolver).withLanguage("zh-cn")
-//				.withSSLVerificationDisabled();
-//		osclient = OSFactory.builderV3().withConfig(config).endpoint(authUrl)
-//				.credentials(user, password, Identifier.byId(userDomainId)).scopeToProject(Identifier.byId(projectId))
-//				.authenticate();
-		String endpoint="kms.cn-north-1.myhwclouds.com";
-		String user = "weihua123";
-		String password = "weihua@12";
-		String projectId = "67641fe6886f43fcb78edbbf0ad0b99f";
-		String userDomainId = "9698542758bc422088c0c3eabfc30d12";
-		String authUrl = "https://192.144.35.205:31943/v3";
+		// TODO remove authentication before push to github
+		String user = "replace-with-your-username";
+		String password = "replace-with-your-password";
+		String projectId = "d4f2557d248e4860829f5fef030b209c";
+		String userDomainId = "bb42e2cd2b784ac4bdc350fb660a2bdb";
+		String authUrl = "https://iam.eu-de.otc.t-systems.com/v3";
 
 		OSFactory.enableHttpLoggingFilter(true);
-//		 
- 
-		
-		osclient =  OSFactory.builderV3().withConfig(Config.newConfig().withEndpointURLResolver(endpointResolver)
-		.withConnectionTimeout(6000).withSSLVerificationDisabled()).endpoint(authUrl).credentials(user, password, Identifier.byId(userDomainId))
-		.scopeToProject(Identifier.byId(projectId)).authenticate();
-		
-		kmsclient =   (KmsClientV3) KmsFactory.builder().withConfig(Config.newConfig()
-				.withSSLVerificationDisabled()).withEndpoint(endpoint).credentials(user, password, Identifier.byId(userDomainId),Identifier.byId(projectId),authUrl);
-		
-//		kmsclient1 =   (KmsClientV3) KmsFactory.builder().withConfig(Config.newConfig()
-//				.withSSLVerificationDisabled()).withEndpoint(endpoint).withProjectId(projectId);
+		// with language setting is required for RDS(trove&database) service
+		Config config = Config.newConfig().withEndpointURLResolver(endpointResolver).withLanguage("zh-cn")
+				.withSSLVerificationDisabled();
+		osclient = OSFactory.builderV3().withConfig(config).endpoint(authUrl)
+				.credentials(user, password, Identifier.byId(userDomainId)).scopeToProject(Identifier.byId(projectId))
+				.authenticate();
 	}
 
 	protected Object retry(Retry retry) {

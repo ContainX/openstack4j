@@ -32,14 +32,13 @@ import com.huawei.openstack4j.kms.openstack.domain.DecryptedDEK;
 import com.huawei.openstack4j.kms.openstack.domain.EncryptDEK;
 import com.huawei.openstack4j.kms.openstack.domain.EncryptedDEK;
 import com.huawei.openstack4j.kms.openstack.domain.KeyCreate;
-import com.huawei.openstack4j.sample.AbstractSample;
 
 /**
  *
  * @author QianBiao.NG
  * @date   2017-07-13 14:43:01
  */
-public class KmsCryptoSample extends AbstractSample {
+public class KmsCryptoSample extends AbstractKmsSample {
 
 	String name = randomName();
 	String keyId = null;

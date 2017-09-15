@@ -46,7 +46,6 @@ import com.huawei.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Serv
 import com.huawei.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
 import com.huawei.openstack4j.openstack.common.Auth;
 import com.huawei.openstack4j.openstack.database.internal.DatabaseServices;
-import com.huawei.openstack4j.openstack.identity.internal.OverridableEndpointURLResolver;
 import com.huawei.openstack4j.openstack.identity.v3.domain.KeystoneAuth;
 import com.huawei.openstack4j.openstack.identity.v3.domain.KeystoneProject;
 import com.huawei.openstack4j.openstack.identity.v3.domain.KeystoneToken;
@@ -68,8 +67,6 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 
 	}
 
-	// public Token token;
-	//
 	protected AuthScope scope;
 
 	private String user;
@@ -80,18 +77,12 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 
 	private String authUrl;
 
-	private OverridableEndpointURLResolver endpointResolver;
-
 	private String projectId;
-
-	private ServiceType serviceType;
-
-	private String version;
 
 	public static final String HTTPS = "https";
 
 	public static final String SEPARATOR = "/";
-	
+
 	public static final String POINT = ":";
 
 	public OSClientSessionV3(Token token, String endpoint, Facing perspective, CloudProvider provider, Config config) {
@@ -205,37 +196,20 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 
 	public OSClientV3 withConfig(Config config) {
 		this.config = config;
-		if (this.endpointResolver != null) {
-			this.config.withEndpointURLResolver(endpointResolver);
-		}
+//		if (this.endpointUrl != null) {
+//			if (null != this.config.getEndpointURLResolver()) {
+//				EndpointURLResolver endpointResolver = this.config.getEndpointURLResolver();
+//				if (endpointResolver instanceof OverridableEndpointURLResolver) {
+//					OverridableEndpointURLResolver endpointResolver1 = (OverridableEndpointURLResolver) endpointResolver;
+//					endpointResolver1.addOverrideEndpoint(serviceType, endpointUrl);
+//				}
+//			} else {
+//				OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
+//				endpointResolver.addOverrideEndpoint(serviceType, endpointUrl);
+//				this.config.withEndpointURLResolver(endpointResolver);
+//			}
+//		}
 		return this;
-	}
-
-	public OSClientV3 withEndpoint(String endpoint) {
-		setEndpointURL(endpoint);
-		if (this.config != null) {
-			this.config.withEndpointURLResolver(this.endpointResolver);
-		}
-		return this;
-	}
-
-	private void setEndpointURL(String endpoint) {
-		StringBuilder sb = new StringBuilder();
-		if (!endpoint.startsWith(HTTPS)) {
-			sb.append(HTTPS);
-			sb.append(POINT);
-			sb.append(SEPARATOR);
-			sb.append(SEPARATOR);
-		}
-		sb.append(endpoint);
-		sb.append(SEPARATOR);
-		sb.append(version);
-		sb.append(SEPARATOR);
-		sb.append("%(project_id)s");
-		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
-		endpointResolver.addOverrideEndpoint(serviceType, sb.toString());
-		this.endpointResolver = endpointResolver;
-
 	}
 
 	public OSClientV3 credentials(String tokenId, String projectId) {
@@ -273,6 +247,11 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 	}
 
 	@Override
+	public OSClientV3 credentials(String user, String password, String domainId, String projectId, String authUrl) {
+		return this.credentials(user, password, Identifier.byId(domainId), Identifier.byId(projectId), authUrl);
+	}
+
+	@Override
 	public OSClientV3 credentials(String user, String password, Identifier domain, Identifier project, String authUrl) {
 		this.user = user;
 		this.password = password;
@@ -298,14 +277,6 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 				config, provider);
 	}
 
-	public void setServiceType(ServiceType serviceType) {
-		this.serviceType = serviceType;
-	}
-
-	public void setVersion(String version) {
-		this.version = version;
-	}
-	
 	/*
 	 * {@inheritDoc}
 	 */
@@ -370,7 +341,7 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 		return Apis.get(MaaSService.class);
 	}
 
-	/* 
+	/*
 	 * {@inheritDoc}
 	 */
 	@Override

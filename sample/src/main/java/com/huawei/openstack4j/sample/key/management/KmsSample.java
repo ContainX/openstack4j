@@ -27,11 +27,11 @@ import org.testng.annotations.Test;
 import com.huawei.openstack4j.kms.openstack.constants.KeyState;
 import com.huawei.openstack4j.kms.openstack.domain.Key;
 import com.huawei.openstack4j.kms.openstack.domain.Key.Keys;
+import com.huawei.openstack4j.kms.openstack.domain.KeyCreate;
 import com.huawei.openstack4j.kms.openstack.options.KeyListOptions;
 import com.huawei.openstack4j.openstack.common.Quota;
 import com.huawei.openstack4j.openstack.common.Quota.ResourceType;
 
-import com.huawei.openstack4j.sample.AbstractSample;
 
 /**
  *
@@ -39,7 +39,7 @@ import com.huawei.openstack4j.sample.AbstractSample;
  * @date   2017-07-13 14:43:01
  */
 @Test(suiteName = "KeyManagement/Key/Sample")
-public class KmsSample extends AbstractSample {
+public class KmsSample extends AbstractKmsSample {
 
 	String name = randomName();
 	Key key = null;
@@ -49,8 +49,8 @@ public class KmsSample extends AbstractSample {
 	 */
 	@BeforeClass
 	public void prepare() {
-//		KeyCreate create = KeyCreate.builder().alias(name).description("desc").realm("eu-de").build();
-//		key = kmsclient.keys().create(create);
+		KeyCreate create = KeyCreate.builder().alias(name).description("desc").realm("eu-de").build();
+		key = kmsclient.keys().create(create);
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class KmsSample extends AbstractSample {
 	 */
 	@AfterClass
 	public void cleanup() {
-//		kmsclient.keys().scheduleDeletion(key.getId(), 7, null);
+		kmsclient.keys().scheduleDeletion(key.getId(), 7, null);
 	}
 
 	@Test(priority = 1)
@@ -100,14 +100,14 @@ public class KmsSample extends AbstractSample {
 		KeyListOptions options = KeyListOptions.create().limit(20).keyState(KeyState.Enabled);
 		Keys keys = kmsclient.keys().list(options);
 
-//		boolean contains = keys.get().contains(key.getId());
-//		while (!contains && keys.getTruncated()) {
-//			options.marker(keys.getNextMarker());
-//			keys = kmsclient.keys().list(options);
-//			contains = keys.get().contains(key.getId());
-//		}
-//
-//		Assert.assertTrue(contains);
+		boolean contains = keys.get().contains(key.getId());
+		while (!contains && keys.getTruncated()) {
+			options.marker(keys.getNextMarker());
+			keys = kmsclient.keys().list(options);
+			contains = keys.get().contains(key.getId());
+		}
+
+		Assert.assertTrue(contains);
 	}
 
 	@Test(priority = 7)
