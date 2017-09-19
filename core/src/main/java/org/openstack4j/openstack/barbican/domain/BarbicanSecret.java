@@ -228,6 +228,78 @@ public class BarbicanSecret implements Secret {
          * {@inheritDoc}
          */
         @Override
+        public SecretCreateBuilder expiration(String expiration) {
+            internalSecret.expiration = expiration;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SecretCreateBuilder algorithm(String algorithm) {
+            internalSecret.algorithm = algorithm;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SecretCreateBuilder bitLength(Integer bitLength) {
+            internalSecret.bitLength = bitLength;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SecretCreateBuilder mode(String mode) {
+            internalSecret.mode = mode;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SecretCreateBuilder payload(String payload) {
+            internalSecret.payload = payload;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SecretCreateBuilder payloadContentType(String payloadContentType) {
+            internalSecret.payloadContentType = payloadContentType;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SecretCreateBuilder payloadContentEncoding(String payloadContentEncoding) {
+            internalSecret.payloadContentEncoding = payloadContentEncoding;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SecretCreateBuilder secretType(String secretType) {
+            internalSecret.secretType = secretType;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
         public Secret build() {
             return internalSecret;
         }
