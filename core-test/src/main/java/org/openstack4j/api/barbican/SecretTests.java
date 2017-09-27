@@ -53,8 +53,16 @@ public class SecretTests extends AbstractTest {
         respondWithCodeAndResource(201, SECRET_CREATE_JSON);
         Secret test = Builders.secret()
                 .name("test-secret")
+                .algorithm("aes")
+                .bitLength(256)
+                .expiration("2015-03-23T20:46:51.650515")
+                .mode("cbc")
+                .secretType("opaque")
+                .payload("test-payload")
+                .payloadContentType("text/plain")
                 .build();
         Secret result = osv3().barbican().secrets().create(test);
+        assertNotNull(result);
         assertNotNull(result.getSecretReference());
     }
 
