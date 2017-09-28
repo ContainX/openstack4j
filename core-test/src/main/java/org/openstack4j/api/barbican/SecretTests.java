@@ -26,7 +26,7 @@ public class SecretTests extends AbstractTest {
 
     private final String secretId = "520405bc-c7c5-41ea-97ad-6c67a8d41a9e";
     private final String secretName = "test_secret";
-    private final String expiration = "Mon Dec 28 20:17:44 CET 2015";
+    private final String expiration = "Mon Dec 28 19:17:44 UTC 2015";
     private final String content_type = "application/octet-stream";
 
     public void testListSecretsByName() throws IOException {
