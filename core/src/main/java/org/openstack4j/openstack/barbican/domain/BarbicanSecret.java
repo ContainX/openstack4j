@@ -7,6 +7,7 @@ import org.openstack4j.model.barbican.Secret;
 import org.openstack4j.model.barbican.builder.SecretCreateBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,14 +24,13 @@ public class BarbicanSecret implements Secret {
     @JsonProperty("content_types")
     private Map<String, String> contentTypes;
     @JsonProperty("created")
-    private String createTime;
+    private Date createTime;
     @JsonProperty("updated")
-    private String updateTime;
+    private Date updateTime;
     @JsonProperty("creator_id")
     private String creatorId;
     @JsonProperty("expiration")
-    @JsonFormat(pattern = "YYYY-MM-DDTHH:MM:SSZ")
-    private String expiration;
+    private Date expiration;
     @JsonProperty("mode")
     private String mode;
     @JsonProperty("secret_ref")
@@ -74,7 +74,7 @@ public class BarbicanSecret implements Secret {
      * {@inheritDoc}
      */
     @Override
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
@@ -82,7 +82,7 @@ public class BarbicanSecret implements Secret {
      * {@inheritDoc}
      */
     @Override
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
@@ -98,7 +98,7 @@ public class BarbicanSecret implements Secret {
      * {@inheritDoc}
      */
     @Override
-    public String getExpiration() {
+    public Date getExpiration() {
         return expiration;
     }
 
@@ -228,7 +228,7 @@ public class BarbicanSecret implements Secret {
          * {@inheritDoc}
          */
         @Override
-        public SecretCreateBuilder expiration(String expiration) {
+        public SecretCreateBuilder expiration(Date expiration) {
             internalSecret.expiration = expiration;
             return this;
         }

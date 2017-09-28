@@ -3,6 +3,8 @@ package org.openstack4j.model.barbican.builder;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.barbican.Secret;
 
+import java.util.Date;
+
 /**
  * Created by reneschollmeyer on 02.08.17.
  */
@@ -18,7 +20,7 @@ public interface SecretCreateBuilder extends Buildable.Builder<SecretCreateBuild
      * @param expiration UTC Timestamp. If set, the secret will not be available after this time.
      * @return
      */
-    SecretCreateBuilder expiration(String expiration);
+    SecretCreateBuilder expiration(Date expiration);
 
     /**
      * @param algorithm Metadata provided by a user or system for informational purposes.

@@ -4,6 +4,7 @@ import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.barbican.builder.SecretCreateBuilder;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -29,12 +30,12 @@ public interface Secret extends ModelEntity, Buildable<SecretCreateBuilder> {
     /**
      * @return system generated creation time.
      */
-    String getCreateTime();
+    Date getCreateTime();
 
     /**
      * @return system generated last update time.
      */
-    String getUpdateTime();
+    Date getUpdateTime();
 
     /**
      * @return user uuid of the creator of this secret.
@@ -44,7 +45,7 @@ public interface Secret extends ModelEntity, Buildable<SecretCreateBuilder> {
     /**
      * @return expiration of the secret.
      */
-    String getExpiration();
+    Date getExpiration();
 
     /**
      * @return mode of the secret.

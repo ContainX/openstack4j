@@ -8,6 +8,7 @@ import org.openstack4j.model.common.ActionResponse;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class SecretTests extends AbstractTest {
 
     private final String secretId = "520405bc-c7c5-41ea-97ad-6c67a8d41a9e";
     private final String secretName = "test_secret";
-    private final String expiration = "2015-12-28T19:14:44.180394";
+    private final String expiration = "Mon Dec 28 20:17:44 CET 2015";
     private final String content_type = "application/octet-stream";
 
     public void testListSecretsByName() throws IOException {
@@ -47,7 +48,7 @@ public class SecretTests extends AbstractTest {
         Secret secret = osv3().barbican().secrets().get(secretId);
         assertNotNull(secret);
         assertNotNull(secret.getName());
-        assertEquals(secret.getExpiration(), expiration);
+        assertEquals(secret.getExpiration().toString(), expiration);
         assertTrue(!secret.getContentTypes().isEmpty());
         assertEquals(secret.getContentTypes().get("default"), content_type);
     }
@@ -58,7 +59,7 @@ public class SecretTests extends AbstractTest {
                 .name("test-secret")
                 .algorithm("aes")
                 .bitLength(256)
-                .expiration("2015-03-23T20:46:51.650515")
+                .expiration(new Date())
                 .mode("cbc")
                 .secretType("opaque")
                 .payload("test-payload")
