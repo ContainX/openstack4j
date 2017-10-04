@@ -73,7 +73,7 @@
 		<module>connectors</module>
 		<module>core-integration-test</module>
 		<module>distribution</module>
-		<module>sample</module>
+		<module>core-functional-test</module>
 	</modules>
 
 	<build>
