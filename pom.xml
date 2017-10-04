@@ -74,6 +74,7 @@
 		<module>core-integration-test</module>
 		<module>distribution</module>
 		<module>core-functional-test</module>
+		<module>core-tutorial</module>
 	</modules>
 
 	<build>
