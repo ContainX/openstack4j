@@ -68,6 +68,6 @@ public class SecretServiceImpl extends BaseBarbicanServices implements SecretSer
     @Override
     public Secret create(Secret secret) {
         checkNotNull(secret);
-        return put(BarbicanSecret.class, uri(RESOURCE_PATH)).entity(secret).execute();
+        return post(BarbicanSecret.class, uri(RESOURCE_PATH)).entity(secret).execute();
     }
 }
