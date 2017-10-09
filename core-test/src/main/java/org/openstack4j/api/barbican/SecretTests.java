@@ -26,8 +26,9 @@ public class SecretTests extends AbstractTest {
 
     private final String secretId = "520405bc-c7c5-41ea-97ad-6c67a8d41a9e";
     private final String secretName = "test_secret";
-    private final String expiration = "Mon Dec 28 19:17:44 UTC 2015";
     private final String content_type = "application/octet-stream";
+
+    private final Date expiration = new Date(1451330264394l);
 
     public void testListSecretsByName() throws IOException {
         respondWith(SECRETS_JSON);
@@ -48,7 +49,7 @@ public class SecretTests extends AbstractTest {
         Secret secret = osv3().barbican().secrets().get(secretId);
         assertNotNull(secret);
         assertNotNull(secret.getName());
-        assertEquals(secret.getExpiration().toString(), expiration);
+        assertEquals(secret.getExpiration(), expiration);
         assertTrue(!secret.getContentTypes().isEmpty());
         assertEquals(secret.getContentTypes().get("default"), content_type);
     }
