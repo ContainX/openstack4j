@@ -1,4 +1,4 @@
-﻿package org.openstack4j.openstack.storage.block.internal;
+package org.openstack4j.openstack.storage.block.internal;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.Builders;
