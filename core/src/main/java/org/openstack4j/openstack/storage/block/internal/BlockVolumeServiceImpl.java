@@ -1,4 +1,4 @@
-package org.openstack4j.openstack.storage.block.internal;
+﻿package org.openstack4j.openstack.storage.block.internal;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.Builders;
@@ -102,6 +102,20 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
                 .entity(new ExtendAction(newSize))
                 .execute();
     }
+
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse bootable(String volumeId, Boolean bootable) {
+        checkNotNull(volumeId);
+        checkNotNull(bootable);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new SetBootableAction(bootable))
+                .execute();
+    }
+
 
     /**
      * {@inheritDoc}
