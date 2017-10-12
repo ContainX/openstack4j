@@ -32,6 +32,7 @@ import com.huawei.openstack4j.kms.client.KmsFactory;
 import com.huawei.openstack4j.kms.openstack.constants.KeyState;
 import com.huawei.openstack4j.kms.openstack.domain.Key;
 import com.huawei.openstack4j.kms.openstack.domain.Key.Keys;
+import com.huawei.openstack4j.kms.openstack.domain.KeyCreate;
 import com.huawei.openstack4j.kms.openstack.options.KeyListOptions;
 import com.huawei.openstack4j.openstack.OSFactory;
 import com.huawei.openstack4j.openstack.common.Quota;
@@ -81,8 +82,8 @@ public class KmsTokenSample extends AbstractKmsSample {
 	@BeforeClass
 	public void prepare() {
 	
-//		KeyCreate create = KeyCreate.builder().alias(name).description("desc").realm("eu-de").build();
-//		key = kmsclient.withToken(tokenId).keys().create(create);
+		KeyCreate create = KeyCreate.builder().alias(name).description("desc").realm("eu-de").build();
+		key = kmsclient.withToken(tokenId).keys().create(create);
 	}
 
 	/**
@@ -90,7 +91,7 @@ public class KmsTokenSample extends AbstractKmsSample {
 	 */
 	@AfterClass
 	public void cleanup() {
-//		kmsclient.keys().scheduleDeletion(key.getId(), 7, null);
+		kmsclient.keys().scheduleDeletion(key.getId(), 7, null);
 	}
 
 	@Test(priority = 1)
@@ -132,14 +133,14 @@ public class KmsTokenSample extends AbstractKmsSample {
 		KeyListOptions options = KeyListOptions.create().limit(2).keyState(KeyState.Enabled);
 		Keys keys = kmstokenclient.withToken(tokenId).keys().list(options);
 
-//		boolean contains = keys.get().contains(key.getId());
-//		while (!contains && keys.getTruncated()) {
-//			options.marker(keys.getNextMarker());
-//			keys = kmsclient.keys().list(options);
-//			contains = keys.get().contains(key.getId());
-//		}
-//
-//		Assert.assertTrue(contains);
+		boolean contains = keys.get().contains(key.getId());
+		while (!contains && keys.getTruncated()) {
+			options.marker(keys.getNextMarker());
+			keys = kmsclient.keys().list(options);
+			contains = keys.get().contains(key.getId());
+		}
+
+		Assert.assertTrue(contains);
 	}
 
 	@Test(priority = 7)
