@@ -51,11 +51,11 @@ public class AbstractKmsSample {
 		// String authUrl = "https://iam.cn-north-1.myhwclouds.com/v3";
 		//
 
-		String user = "weihua123";
-		String password = "weihua@12";
+		String user = "replace-with-your-username";
+		String password = "replace-with-your-password";
 		String projectId = "67641fe6886f43fcb78edbbf0ad0b99f";
 		String userDomainId = "9698542758bc422088c0c3eabfc30d12";
-		String authUrl = "https://192.144.35.205:31943/v3";
+		String authUrl = "https://endpoint-of-iam/v3";
 
 		OSFactory.enableHttpLoggingFilter(true);
 
