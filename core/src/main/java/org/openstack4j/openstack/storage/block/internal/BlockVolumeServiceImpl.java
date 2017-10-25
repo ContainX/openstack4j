@@ -244,6 +244,7 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
 	@Override
 	public ActionResponse detach(String volumeId, String attachmentId) {
 		checkNotNull(volumeId);
+		checkNotNull(attachmentId);
 		DetachAction detach = new DetachAction(attachmentId);
 		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId)).entity(detach).execute();
 	}
