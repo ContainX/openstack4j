@@ -233,4 +233,19 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
         ForceDetachAction detach = new ForceDetachAction(attachmentId, connector);
         return post(ActionResponse.class, uri("/volumes/%s/action", volumeId)).entity(detach).execute();
     }
+    
+	/**
+	 * Detach volume from server
+	 * @author capitek-xuning（首信科技-徐宁）
+	 * @param volumeId
+	 * @param attachmentId
+	 * @return
+	 */
+	@Override
+	public ActionResponse detach(String volumeId, String attachmentId) {
+		checkNotNull(volumeId);
+		DetachAction detach = new DetachAction(attachmentId);
+		return post(ActionResponse.class, uri("/volumes/%s/action", volumeId)).entity(detach).execute();
+	}
+    
 }

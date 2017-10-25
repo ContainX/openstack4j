@@ -174,4 +174,12 @@ public interface BlockVolumeService extends RestService {
 	 * @return
 	 */
 	ActionResponse forceDetach(String volumeId, String initiator,String attachmentId  );
+	/**
+	 * Detach volume from server
+	 * @author capitek-xuning（首信科技-徐宁）
+	 * @param volumeId
+	 * @param attachmentId
+	 * @return
+	 */
+	ActionResponse detach(String volumeId, String attachmentId);
 }
