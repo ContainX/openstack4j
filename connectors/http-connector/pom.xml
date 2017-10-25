@@ -20,7 +20,7 @@
     <parent>
         <groupId>com.huawei.openstack4j.connectors</groupId>
         <artifactId>openstack4j-connectors</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <name>OpenStack4j HttpURL Connector</name>
     <artifactId>openstack4j-http-connector</artifactId>
