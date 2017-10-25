@@ -103,6 +103,20 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
                 .execute();
     }
 
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActionResponse bootable(String volumeId, Boolean bootable) {
+        checkNotNull(volumeId);
+        checkNotNull(bootable);
+        return post(ActionResponse.class, uri("/volumes/%s/action", volumeId))
+                .entity(new SetBootableAction(bootable))
+                .execute();
+    }
+
+
     /**
      * {@inheritDoc}
      */

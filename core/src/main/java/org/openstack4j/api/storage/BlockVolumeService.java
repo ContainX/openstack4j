@@ -174,4 +174,14 @@ public interface BlockVolumeService extends RestService {
 	 * @return
 	 */
 	ActionResponse forceDetach(String volumeId, String initiator,String attachmentId  );
+
+
+	/**
+	 * Update volume bootable status.
+	 *
+	 * @param volumeId the volume id
+	 * @param bootable Enables or disables the bootable attribute
+	 * @return the action response
+	 */
+	ActionResponse bootable(String volumeId, Boolean bootable);
 }
