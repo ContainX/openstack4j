@@ -36,6 +36,7 @@ public class NetworkTests extends AbstractTest {
     private static final String JSON_NETWORK = "/network/network.json";
     private static final String JSON_AGENTS = "/network/agents.json";
     private static final String JSON_NETWORK_EXTERNAL = "/network/network-external.json";
+    private static final String JSON_NETWORK_ZONE = "/network/network_zone.json";
     private static final String NETWORK_NAME = "net1";
     private static final String NETWORK_ID = "4e8e5957-649f-477b-9e5b-f1f75b21c03c";
 
@@ -59,6 +60,17 @@ public class NetworkTests extends AbstractTest {
         assertEquals(n.getStatus(), State.ACTIVE);
         assertEquals(n.isRouterExternal(), true);
     }
+    
+    @Test
+    public void createNetworkWithZone() throws Exception {
+        respondWith(JSON_NETWORK_ZONE);
+        Network n = osv3().networking().network()
+                .create(Builders.network().name(NETWORK_NAME).isRouterExternal(true).adminStateUp(true).addAvailabilityZoneHints("nova").build());
+        server.takeRequest();	 
+        assertEquals(n.getName(), NETWORK_NAME);
+        assertEquals(n.getStatus(), State.ACTIVE);
+        assertEquals(n.getAvailabilityZoneHints().get(0), "nova");
+    }    
 
     @Test
     public void agentList() throws Exception {

@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.compute.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.openstack.compute.domain.actions.CreateSnapshotAction.create;
 
 import java.util.HashMap;
 import java.util.List;
@@ -173,10 +174,22 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      */
     @Override
     public String createSnapshot(String serverId, String snapshotName) {
+        return invokeCreateSnapshotAction(serverId, snapshotName, null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String createSnapshot(String serverId, String snapshotName, Map<String, String> metadata) {
+        return invokeCreateSnapshotAction(serverId, snapshotName, metadata);
+    }
+
+    private String invokeCreateSnapshotAction(String serverId, String snapshotName, Map<String, String> metadata) {
         checkNotNull(serverId);
         checkNotNull(snapshotName);
-
-        HttpResponse response = invokeActionWithResponse(serverId, CreateSnapshotAction.create(snapshotName));
+        CreateSnapshotAction createSnapshotAction = metadata != null && !metadata.isEmpty() ? create(snapshotName, metadata) : create(snapshotName);
+        HttpResponse response = invokeActionWithResponse(serverId, createSnapshotAction);
         String id = null;
         if (response.getStatus() == 202) {
             String location = response.header("location");
@@ -185,7 +198,6 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
                 String[] s = location.split("/");
                 id = s[s.length - 1];
             }
-
         }
         response.getEntity(Void.class);
         return id;

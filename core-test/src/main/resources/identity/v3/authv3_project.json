@@ -401,6 +401,34 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
+            "url": "http://127.0.0.1:9876",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "6e82c8912d3f49a09df51035681d9012"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:9876",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "7e44d321ae80457abc3728fa1e6f5678"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:9876",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "c9a090a4597040849c03bc1358809876"
+          }
+        ],
+        "type": "load-balancer",
+        "id": "0d56500210a24c38a3702b6825e67890",
+        "name": "octavia"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
             "url": "http://127.0.0.1:8800",
             "region": "RegionOne",
             "interface": "public",
@@ -648,6 +676,62 @@
         "type": "nfv-orchestration",
         "id": "83dd97cc45b7417886ad4940189b2b86",
         "name": "tacker"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8989",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "2241f1ee096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8989",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "2241f446096a11e793ae92361f002671"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8989",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "2241f55e096a11e793ae92361f002671"
+          }
+        ],
+        "type": "workflow",
+        "id": "2241f6c6096a11e793ae92361f002671",
+        "name": "mistral"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8386",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "8707e3735d4415c97ae231b4841eb1a"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8386",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "8707e3735d4415c97ae231b4841eb1b"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8386",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "8707e3735d4415c97ae231b4841eb1c"
+          }
+        ],
+        "type": "data-processing",
+        "id": "8707e3735d4415c97ae231b4841eb1d",
+        "name": "sahara"
       }
     ],
     "extras": {},

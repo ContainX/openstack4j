@@ -21,6 +21,7 @@ import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
 import org.openstack4j.api.storage.BlockStorageService;
@@ -31,6 +32,7 @@ import org.openstack4j.api.telemetry.TelemetryService;
 import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.api.types.ServiceType;
+import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.URLResolverParams;
@@ -125,6 +127,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     /**
      * {@inheritDoc}
      */
+    public OctaviaService octavia() {
+        return Apis.getOctaviaService();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public ArtifactService artifact() {
         return Apis.getArtifactServices();
     }
@@ -208,6 +217,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public SaharaService sahara() {
         return Apis.getSaharaServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public WorkflowService workflow() {
+        return Apis.getWorkflowServices();
     }
 
     /**

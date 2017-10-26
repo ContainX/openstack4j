@@ -1,0 +1,16 @@
+{
+"token": {
+	"methods": ["token"],
+	"expires_at": "2015-08-26T14:14:13.719898Z",
+    "extras": {},
+    "user": {
+    	"domain": {
+    		"id": "default", 
+    		"name": "Default"}, 
+    	"id": "aa9f25defa6d4cafb48466df83106065", 
+    	"name": "admin"
+    	}, 
+    "audit_ids": ["VtEJDKwAS6G1PE1cJZBTGw"],
+    "issued_at": "2015-08-26T13:14:13.779668Z"
+	}
+}

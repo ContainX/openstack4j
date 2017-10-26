@@ -1,0 +1,44 @@
+{
+  "listeners": [
+    {
+      "protocol_port": 80,
+      "protocol": "HTTP",
+      "description": "",
+      "default_tls_container_ref": null,
+      "admin_state_up": true,
+      "loadbalancers": [
+        {
+          "id": "bca64d34-945f-4282-9587-8f95722b58f1"
+        }
+      ],
+      "project_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
+      "sni_container_refs": [
+
+      ],
+      "connection_limit": -1,
+      "default_pool_id": "b7f6a49f-ebd8-43c5-b792-5748366eff21",
+      "id": "c07058a9-8d84-4443-b8f5-508d0facfe10",
+      "name": "listener1"
+    },
+    {
+      "protocol_port": 80,
+      "protocol": "HTTP",
+      "description": "",
+      "default_tls_container_ref": null,
+      "admin_state_up": true,
+      "loadbalancers": [
+        {
+          "id": "bcecd8bd-a775-43f9-83c1-c0b5fd0cde47"
+        }
+      ],
+      "project_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
+      "sni_container_refs": [
+
+      ],
+      "connection_limit": -1,
+      "default_pool_id": "e0467102-6406-484d-8262-3922a2f2b36b",
+      "id": "0ac794b9-0eb9-4cf6-a737-c8fc46e45acb",
+      "name": "listener2"
+    }
+  ]
+}

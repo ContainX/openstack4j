@@ -1,0 +1,12 @@
+{
+    "volume": {
+        "id" : "ac9ae248-cf21-4301-87b1-568ff20a0a02", 
+		"status" : "creating", 
+		"size" : 10, 
+		"zone" : "nova", 
+		"created" : "Wed Aug 16 13:27:14 KST 2017", 
+		"multiattach" : true, 
+		"metadata" : {}, 
+		"bootable" :  false
+    }
+}

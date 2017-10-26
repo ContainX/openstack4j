@@ -14,7 +14,7 @@ import java.util.Map;
  */
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class SaharaServiceConfig extends HashMap<String,String> implements ServiceConfig {
+public class SaharaServiceConfig extends HashMap<String,Object> implements ServiceConfig {
 
 	public static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class SaharaServiceConfig extends HashMap<String,String> implements Servi
          * {@inheritDoc}
          */
 	@Override
-	public String get(String name) {
+	public Object get(String name) {
 		return super.get(name);
 	}
 
@@ -30,7 +30,7 @@ public class SaharaServiceConfig extends HashMap<String,String> implements Servi
          * {@inheritDoc}
          */
 	@Override
-	public Map<String,String> getConfigs() {
+	public Map<String,Object> getConfigs() {
 		return this;
 	}
 
@@ -63,7 +63,7 @@ public class SaharaServiceConfig extends HashMap<String,String> implements Servi
                 }
 
                 @Override
-                public ServiceConfigBuilder set(String name, String value) {
+                public ServiceConfigBuilder set(String name, Object value) {
                         m.put(name,value);
                         return this;
                 }

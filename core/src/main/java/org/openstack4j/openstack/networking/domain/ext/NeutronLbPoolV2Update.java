@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.networking.domain.ext;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
@@ -29,6 +30,7 @@ public class NeutronLbPoolV2Update implements LbPoolV2Update {
     private LbMethod lbMethod;
 
     @JsonProperty("session_persistence")
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private SessionPersistence sessionPersistence;
 
     /**

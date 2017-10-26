@@ -12,4 +12,8 @@ public interface BarbicanService extends RestService {
      * @return the Container Service API
      */
     ContainerService containers();
+    /**
+     * @return the Secrets Service API
+     */
+    SecretService secrets();
 }

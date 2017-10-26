@@ -159,6 +159,16 @@ public interface ServerService {
     String createSnapshot(String serverId, String snapshotName);
 
     /**
+     * Creates the snapshot from a server
+     *
+     * @param serverId the UUID of the server
+     * @param snapshotName the display name of the snapshot
+     * @param metadata the key/value properties for the snapshot
+     * @return the UUID for the resulting image snapshot
+     */
+    String createSnapshot(String serverId, String snapshotName, Map<String, String> metadata);
+
+    /**
      * Associates the specified Server Group by name to the Server by it's identifier
      * 
      * @param serverId the server identifier

@@ -52,7 +52,7 @@ public class OSAuthenticator {
     public static OSClient invoke(AuthStore auth, String endpoint, Facing perspective, Config config,
             CloudProvider provider) {
         SessionInfo info = new SessionInfo(endpoint, perspective, false, provider);
-        if (auth.getVersion() == AuthVersion.V2) {
+        if (auth.getVersion().equals(AuthVersion.V2)) {
             return authenticateV2((org.openstack4j.openstack.identity.v2.domain.Auth) auth, info, config);
         }
         return authenticateV3((KeystoneAuth) auth, info, config);
@@ -196,15 +196,18 @@ public class OSAuthenticator {
         KeystoneToken token = response.getEntity(KeystoneToken.class);
         token.setId(response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN));
 
-        if (auth.getType() == Type.CREDENTIALS) {
+        if (auth.getType().equals(Type.CREDENTIALS)) {
             token = token.applyContext(info.endpoint, auth);
         } else {
             if (token.getProject() != null) {
                 token = token.applyContext(info.endpoint, new TokenAuth(token.getId(),
                         auth.getScope().getProject().getName(), auth.getScope().getProject().getId()));
-            } else {
+
+            } else if (token.getDomain() != null ) {
                 token = token.applyContext(info.endpoint, new TokenAuth(token.getId(),
                         auth.getScope().getDomain().getName(), auth.getScope().getDomain().getId()));
+            } else {
+                token = token.applyContext(info.endpoint, new TokenAuth(token.getId(),null,null));
             }
         }
 

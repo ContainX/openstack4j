@@ -25,6 +25,7 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
     private static final String FIELD = "q.field";
     private static final String OPER = "q.op";
     private static final String VALUE = "q.value";
+   private static final String LIMIT = "limit";
 
     /**
      * {@inheritDoc}
@@ -52,9 +53,12 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
     @Override
     public List<? extends MeterSample> samples(String meterName, SampleCriteria criteria) {
         checkNotNull(meterName);
-
+        checkNotNull(criteria);
         Invocation<CeilometerMeterSample[]> invocation = get(CeilometerMeterSample[].class, uri("/meters/%s", meterName));
-        if (criteria != null && !criteria.getCriteriaParams().isEmpty()) {
+        if(criteria.getLimit() > 0){
+           invocation.param(LIMIT, criteria.getLimit());
+        }
+        if (!criteria.getCriteriaParams().isEmpty()) {
             for (NameOpValue c : criteria.getCriteriaParams()) {
                 invocation.param(FIELD, c.getField());
                 invocation.param(OPER, c.getOperator().getQueryValue());
@@ -87,18 +91,19 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
     @Override
     public List<? extends Statistics> statistics(String meterName, SampleCriteria criteria, int period) {
         checkNotNull(meterName);
+        checkNotNull(criteria);
         Invocation<CeilometerStatistics[]> invocation = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName))
                                                            .param(period > 0, "period", period);
-
-
-        if (criteria != null && !criteria.getCriteriaParams().isEmpty()) {
+        if(criteria.getLimit() > 0){
+           invocation.param(LIMIT, criteria.getLimit());
+        }
+        if (!criteria.getCriteriaParams().isEmpty()) {
             for (NameOpValue c : criteria.getCriteriaParams()) {
                 invocation.param(FIELD, c.getField());
                 invocation.param(OPER, c.getOperator().getQueryValue());
                 invocation.param(VALUE, c.getValue());
             }
         }
-
         CeilometerStatistics[] stats = invocation.execute();
         return wrapList(stats);
     }

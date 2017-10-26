@@ -33,7 +33,7 @@ public final class SwiftHeaders {
     
     // Generic
     public static final String CONTENT_TYPE = "Content-Type";
-    public static final String ETAG = "ETag";
+    public static final String ETAG = "Etag";
     public static final String X_COPY_FROM = "X-Copy-From";
     public static final String CONTENT_LENGTH = "Content-Length";
     public static final String LAST_MODIFIED = "Last-Modified";
