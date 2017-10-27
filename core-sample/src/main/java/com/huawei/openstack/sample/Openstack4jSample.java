@@ -1,4 +1,4 @@
-package com.huawei.openstack.tutorial;
+package com.huawei.openstack.sample;
 
 import com.huawei.openstack4j.api.Builders;
 import com.huawei.openstack4j.api.OSClient.OSClientV3;
@@ -14,7 +14,7 @@ import com.huawei.openstack4j.openstack.identity.internal.OverridableEndpointURL
  * @author QianBiao.NG
  * @date   2017-10-04 21:41:29
  */
-public class Openstack4jTutorial {
+public class Openstack4jSample {
 
 	private static final String LANGUAGE = "zh-cn";
 
