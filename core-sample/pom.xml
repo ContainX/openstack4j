@@ -6,7 +6,7 @@
 		<artifactId>openstack4j-parent</artifactId>
 		<version>1.0.1</version>
 	</parent>
-	<artifactId>openstack-core-tutorial</artifactId>
+	<artifactId>openstack-core-sample</artifactId>
 	<name>core-tutorial</name>
 
 	<properties>
