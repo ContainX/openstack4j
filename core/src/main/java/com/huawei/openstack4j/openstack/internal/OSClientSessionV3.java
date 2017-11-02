@@ -196,19 +196,6 @@ public class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClie
 
 	public OSClientV3 withConfig(Config config) {
 		this.config = config;
-//		if (this.endpointUrl != null) {
-//			if (null != this.config.getEndpointURLResolver()) {
-//				EndpointURLResolver endpointResolver = this.config.getEndpointURLResolver();
-//				if (endpointResolver instanceof OverridableEndpointURLResolver) {
-//					OverridableEndpointURLResolver endpointResolver1 = (OverridableEndpointURLResolver) endpointResolver;
-//					endpointResolver1.addOverrideEndpoint(serviceType, endpointUrl);
-//				}
-//			} else {
-//				OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
-//				endpointResolver.addOverrideEndpoint(serviceType, endpointUrl);
-//				this.config.withEndpointURLResolver(endpointResolver);
-//			}
-//		}
 		return this;
 	}
 

@@ -16,6 +16,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.kms.client;
 
+import com.huawei.openstack4j.api.exceptions.ClientResponseException;
 import com.huawei.openstack4j.core.transport.Config;
 import com.huawei.openstack4j.kms.openstack.internal.CryptoService;
 import com.huawei.openstack4j.kms.openstack.internal.KeyService;
@@ -29,37 +30,45 @@ import com.huawei.openstack4j.openstack.internal.OSClientSessionV3;
  * @author Super Stone
  */
 
-public class KmsClient extends OSClientSessionV3 {  
+public class KmsClient extends OSClientSessionV3 {
 
 	public KmsClient() {
 		super();
 	}
-	
-	public KmsClient withToken(String tokenId){
+
+	public KmsClient withToken(String tokenId) {
 		super.withToken(tokenId);
 		return this;
 	}
 
 	public KeyService keys() {
+		checkTokenNull();
 		KeyService impl = new KeyService();
 		return impl;
 	}
-	
+
 	public CryptoService crypto() {
+		checkTokenNull();
 		CryptoService impl = new CryptoService();
 		return impl;
 	}
-	
+
 	static KmsClient createSession() {
 		return new KmsClient(null);
 	}
 
-	 static KmsClient createSession(Config config) {
+	static KmsClient createSession(Config config) {
 		return new KmsClient(config);
 	}
 
-	private KmsClient( Config config) {
+	private KmsClient(Config config) {
 		this.config = config;
 		sessions.set(this);
+	}
+
+	private void checkTokenNull() {
+		if (null == this.token) {
+			throw new ClientResponseException("X-Auth-Token is null", 403);
+		}
 	}
 }

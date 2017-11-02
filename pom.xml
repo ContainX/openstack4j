@@ -25,7 +25,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.huawei</groupId>
 	<artifactId>openstack4j-parent</artifactId>
-	<version>3.0.5.1</version>
+	<version>1.0.1</version>
 	<name>OpenStack4j Parent</name>
 	<description>OpenStack Java API</description>
 	<url>http://github.com/ContainX/openstack4j/</url>
@@ -70,10 +70,13 @@
 	<modules>
 		<module>core</module>
 		<module>core-test</module>
+		
 		<module>connectors</module>
-		<module>core-integration-test</module>
+		<!--<module>core-integration-test</module>-->	
+		<module>kms</module>
 		<module>distribution</module>
-		<module>sample</module>
+		<module>core-functional-test</module>
+		<module>core-sample</module>
 	</modules>
 
 	<build>
