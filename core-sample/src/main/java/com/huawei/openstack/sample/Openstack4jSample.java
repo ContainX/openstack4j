@@ -30,7 +30,7 @@ public class Openstack4jSample {
 				"https://ces.eu-de.otc.t-systems.com/V1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.LOAD_BALANCER,
 				"https://elb.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.SAHARA,
+		endpointResolver.addOverrideEndpoint(ServiceType.MAP_REDUCE,
 				"https://mrs.eu-de.otc.t-systems.com/v1.1/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
 				"https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");

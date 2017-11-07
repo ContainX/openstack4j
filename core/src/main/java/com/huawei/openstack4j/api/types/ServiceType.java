@@ -30,7 +30,7 @@ public enum ServiceType {
 	TELEMETRY_AODH("aodh", "alarming"),
 	ORCHESTRATION("heat", "orchestration"),
 	CLUSTERING("senlin", "clustering"),
-	SAHARA("sahara", "data_processing"),
+	MAP_REDUCE("MRS", "data_processing"),
 	SHARE("manila", "share"),
 	DATABASE("trove","database"),
 	BARBICAN("barbican", "key-manager"),

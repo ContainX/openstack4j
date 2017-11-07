@@ -24,9 +24,9 @@ import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.functional.AbstractTest;
 import com.huawei.openstack4j.model.common.ActionResponse;
-import com.huawei.openstack4j.model.sahara.JobExecution;
-import com.huawei.openstack4j.model.sahara.options.JobExecutionListOptions;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobExecution;
+import com.huawei.openstack4j.model.map.reduce.JobExecution;
+import com.huawei.openstack4j.model.map.reduce.options.JobExecutionListOptions;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExecution;
 
 
 /**
@@ -42,21 +42,21 @@ public class JobExecutionTest extends AbstractTest {
 
 	@BeforeClass
 	public void testCreateJobExecution() {
-		JobExecution build = SaharaJobExecution.builder().isProtect(true).isPublic(true).build();
-		createdJobExecution = osclient.sahara().jobExecutions().create(build);
+		JobExecution build = MapReduceJobExecution.builder().isProtect(true).isPublic(true).build();
+		createdJobExecution = osclient.mrs().jobExecutions().create(build);
 		Assert.assertTrue(createdJobExecution.isProtected());
 		Assert.assertTrue(createdJobExecution.isPublic());
 	}
 
 	@AfterClass
 	public void testDeleteJobExecution() {
-		ActionResponse delete = osclient.sahara().jobExecutions().delete(createdJobExecution.getId());
+		ActionResponse delete = osclient.mrs().jobExecutions().delete(createdJobExecution.getId());
 		Assert.assertTrue(delete.isSuccess());
 	}
 
 	@Test
 	public void testGetJobExecution() {
-		JobExecution execution = osclient.sahara().jobExecutions().get(createdJobExecution.getId());
+		JobExecution execution = osclient.mrs().jobExecutions().get(createdJobExecution.getId());
 		Assert.assertEquals(execution.getId(), createdJobExecution.getId());
 		Assert.assertTrue(execution.isProtected());
 		Assert.assertTrue(execution.isPublic());
@@ -64,7 +64,7 @@ public class JobExecutionTest extends AbstractTest {
 	
 	@Test
 	public void testCancelJobExecution() {
-		JobExecution execution = osclient.sahara().jobExecutions().cancel(createdJobExecution.getId());
+		JobExecution execution = osclient.mrs().jobExecutions().cancel(createdJobExecution.getId());
 		Assert.assertEquals(execution.getId(), createdJobExecution.getId());
 		Assert.assertTrue(execution.isProtected());
 		Assert.assertTrue(execution.isPublic());
@@ -73,7 +73,7 @@ public class JobExecutionTest extends AbstractTest {
 	@Test(dependsOnMethods = { "testGetJobExecution" })
 	public void testListJobExecution() {
 		JobExecutionListOptions options = JobExecutionListOptions.create().desc("created_at").limit(10);
-		List<? extends JobExecution> list = osclient.sahara().jobExecutions().list(options);
+		List<? extends JobExecution> list = osclient.mrs().jobExecutions().list(options);
 		boolean found = false;
 		for (JobExecution jobBinary : list) {
 			if (jobBinary.getId().equals(createdJobExecution.getId())) {

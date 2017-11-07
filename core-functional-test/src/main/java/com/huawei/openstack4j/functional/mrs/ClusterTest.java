@@ -31,12 +31,12 @@ import com.huawei.openstack4j.model.common.ActionResponse;
 public class ClusterTest extends AbstractTest {
 
 	public void testDeleteCluster() {
-		ActionResponse delete = osclient.sahara().clusters().delete("cluster-id");
+		ActionResponse delete = osclient.mrs().clusters().delete("cluster-id");
 		Assert.assertTrue(delete.isSuccess());
 	}
 
 	public void testExpandCluster() {
-		ActionResponse expand = osclient.sahara().clusters().expand("cluster-id", 3);
+		ActionResponse expand = osclient.mrs().clusters().expand("cluster-id", 3);
 		Assert.assertTrue(expand.isSuccess());
 	}
 
@@ -44,7 +44,7 @@ public class ClusterTest extends AbstractTest {
 	 * 这个操作系统暂不支持
 	 */
 	public void testReduceCluster() {
-		ActionResponse reduce = osclient.sahara().clusters().reduce("cluster-id", 3,
+		ActionResponse reduce = osclient.mrs().clusters().reduce("cluster-id", 3,
 				Lists.newArrayList("instance-id-1"), Lists.newArrayList("instance-id-3"));
 		Assert.assertTrue(reduce.isSuccess());
 	}

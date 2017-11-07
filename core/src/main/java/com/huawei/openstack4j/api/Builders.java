@@ -79,6 +79,17 @@ import com.huawei.openstack4j.model.manila.builder.ShareNetworkCreateBuilder;
 import com.huawei.openstack4j.model.manila.builder.ShareSnapshotCreateBuilder;
 import com.huawei.openstack4j.model.manila.builder.ShareTypeCreateBuilder;
 import com.huawei.openstack4j.model.manila.builder.SharedFileSystemBuilders;
+import com.huawei.openstack4j.model.map.reduce.builder.ClusterBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.ClusterTemplateBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.DataProcessingBuilders;
+import com.huawei.openstack4j.model.map.reduce.builder.DataSourceBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.JobBinaryBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.JobBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.JobConfigBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.JobExecutionBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.NodeGroupBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.NodeGroupTemplateBuilder;
+import com.huawei.openstack4j.model.map.reduce.builder.ServiceConfigBuilder;
 import com.huawei.openstack4j.model.murano.v1.builder.AppCatalogBuilders;
 import com.huawei.openstack4j.model.murano.v1.builder.EnvironmentBuilder;
 import com.huawei.openstack4j.model.network.builder.ExtraDhcpOptBuilder;
@@ -119,17 +130,6 @@ import com.huawei.openstack4j.model.network.ext.builder.MemberV2UpdateBuilder;
 import com.huawei.openstack4j.model.network.ext.builder.SessionPersistenceBuilder;
 import com.huawei.openstack4j.model.network.ext.builder.VipBuilder;
 import com.huawei.openstack4j.model.network.ext.builder.VipUpdateBuilder;
-import com.huawei.openstack4j.model.sahara.builder.ClusterBuilder;
-import com.huawei.openstack4j.model.sahara.builder.ClusterTemplateBuilder;
-import com.huawei.openstack4j.model.sahara.builder.DataProcessingBuilders;
-import com.huawei.openstack4j.model.sahara.builder.DataSourceBuilder;
-import com.huawei.openstack4j.model.sahara.builder.JobBinaryBuilder;
-import com.huawei.openstack4j.model.sahara.builder.JobBuilder;
-import com.huawei.openstack4j.model.sahara.builder.JobConfigBuilder;
-import com.huawei.openstack4j.model.sahara.builder.JobExecutionBuilder;
-import com.huawei.openstack4j.model.sahara.builder.NodeGroupBuilder;
-import com.huawei.openstack4j.model.sahara.builder.NodeGroupTemplateBuilder;
-import com.huawei.openstack4j.model.sahara.builder.ServiceConfigBuilder;
 import com.huawei.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 import com.huawei.openstack4j.model.storage.block.builder.StorageBuilders;
 import com.huawei.openstack4j.model.storage.block.builder.VolumeBackupCreateBuilder;
@@ -150,13 +150,13 @@ import com.huawei.openstack4j.openstack.compute.domain.NovaBlockDeviceMappingCre
 import com.huawei.openstack4j.openstack.compute.domain.NovaFlavor;
 import com.huawei.openstack4j.openstack.compute.domain.NovaFloatingIP;
 import com.huawei.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate;
-import com.huawei.openstack4j.openstack.compute.domain.NovaServerCreate;
 import com.huawei.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
+import com.huawei.openstack4j.openstack.compute.domain.NovaServerCreate;
 import com.huawei.openstack4j.openstack.dns.v2.builder.DesignateV2Builders;
 import com.huawei.openstack4j.openstack.dns.v2.domain.DesignatePTR;
+import com.huawei.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
 import com.huawei.openstack4j.openstack.dns.v2.domain.DesignateRecordset;
 import com.huawei.openstack4j.openstack.dns.v2.domain.DesignateZone;
-import com.huawei.openstack4j.openstack.dns.v2.domain.DesignatePTR.DesignatePTRBuilder;
 import com.huawei.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
 import com.huawei.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
 import com.huawei.openstack4j.openstack.gbp.domain.GbpExternalSegment;
@@ -201,6 +201,17 @@ import com.huawei.openstack4j.openstack.manila.domain.ManilaShareManage;
 import com.huawei.openstack4j.openstack.manila.domain.ManilaShareNetworkCreate;
 import com.huawei.openstack4j.openstack.manila.domain.ManilaShareSnapshotCreate;
 import com.huawei.openstack4j.openstack.manila.domain.ManilaShareTypeCreate;
+import com.huawei.openstack4j.openstack.map.reduce.builder.MapReduceBuilders;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceCluster;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterTemplate;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceDataSource;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJob;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobBinary;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobConfig;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExecution;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceNodeGroup;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceNodeGroupTemplate;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceServiceConfig;
 import com.huawei.openstack4j.openstack.murano.v1.builder.MuranoBuilders;
 import com.huawei.openstack4j.openstack.murano.v1.domain.MuranoEnvironment;
 import com.huawei.openstack4j.openstack.networking.builder.NeutronBuilders;
@@ -241,17 +252,6 @@ import com.huawei.openstack4j.openstack.networking.domain.ext.NeutronMemberV2Upd
 import com.huawei.openstack4j.openstack.networking.domain.ext.NeutronSessionPersistence;
 import com.huawei.openstack4j.openstack.networking.domain.ext.NeutronVip;
 import com.huawei.openstack4j.openstack.networking.domain.ext.NeutronVipUpdate;
-import com.huawei.openstack4j.openstack.sahara.builder.SaharaBuilders;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaCluster;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaClusterTemplate;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaDataSource;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJob;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobBinary;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobConfig;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobExecution;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaNodeGroup;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaNodeGroupTemplate;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaServiceConfig;
 import com.huawei.openstack4j.openstack.storage.block.builder.CinderBuilders;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import com.huawei.openstack4j.openstack.storage.block.domain.CinderVolume;
@@ -667,48 +667,48 @@ public class Builders {
 	}
 
 	/**
-	 * The builder to create a sahara cluster
+	 * The builder to create a map reduce cluster
 	 *
 	 * @return the cluster builder
 	 */
 	public static ClusterBuilder cluster() {
-		return SaharaCluster.builder();
+		return MapReduceCluster.builder();
 	}
 
 	/**
-	 * The builder to create a sahara cluster template
+	 * The builder to create a map reduce cluster template
 	 *
 	 * @return the cluster template builder
 	 */
 	public static ClusterTemplateBuilder clusterTemplate() {
-		return SaharaClusterTemplate.builder();
+		return MapReduceClusterTemplate.builder();
 	}
 
 	/**
-	 * The builder to create a sahara node group
+	 * The builder to create a map reduce node group
 	 *
 	 * @return the node group builder
 	 */
 	public static NodeGroupBuilder nodeGroup() {
-		return SaharaNodeGroup.builder();
+		return MapReduceNodeGroup.builder();
 	}
 
 	/**
-	 * The builder to create a sahara node group template
+	 * The builder to create a map reduce node group template
 	 *
 	 * @return the node group template builder
 	 */
 	public static NodeGroupTemplateBuilder nodeGroupTemplate() {
-		return SaharaNodeGroupTemplate.builder();
+		return MapReduceNodeGroupTemplate.builder();
 	}
 
 	/**
-	 * The builder to create a sahara service configuration
+	 * The builder to create a map reduce service configuration
 	 *
 	 * @return the service configuration builder
 	 */
 	public static ServiceConfigBuilder serviceConfig() {
-		return SaharaServiceConfig.builder();
+		return MapReduceServiceConfig.builder();
 	}
 
 	/**
@@ -739,48 +739,48 @@ public class Builders {
 	}
 
 	/**
-	 * The builder which creates a sahara Data Source
+	 * The builder which creates a map reduce Data Source
 	 *
 	 * @return the data source builder
 	 */
 	public static DataSourceBuilder dataSource() {
-		return SaharaDataSource.builder();
+		return MapReduceDataSource.builder();
 	}
 
 	/**
-	 * The builder which creates a sahara Job Binary
+	 * The builder which creates a map reduce Job Binary
 	 *
 	 * @return the job binary builder
 	 */
 	public static JobBinaryBuilder jobBinary() {
-		return SaharaJobBinary.builder();
+		return MapReduceJobBinary.builder();
 	}
 
 	/**
-	 * The builder which creates a sahara Job
+	 * The builder which creates a map reduce Job
 	 *
 	 * @return the job builder
 	 */
 	public static JobBuilder job() {
-		return SaharaJob.builder();
+		return MapReduceJob.builder();
 	}
 
 	/**
-	 * The builder which creates a job configuration for sahara job execution
+	 * The builder which creates a job configuration for map reduce job execution
 	 *
 	 * @return the job config builder
 	 */
 	public static JobConfigBuilder jobConfig() {
-		return SaharaJobConfig.builder();
+		return MapReduceJobConfig.builder();
 	}
 
 	/**
-	 * The builder which creates a sahara job execution
+	 * The builder which creates a map reduce job execution
 	 *
 	 * @return the job execution builder
 	 */
 	public static JobExecutionBuilder jobExecution() {
-		return SaharaJobExecution.builder();
+		return MapReduceJobExecution.builder();
 	}
 
 	/**
@@ -1120,12 +1120,12 @@ public class Builders {
 	}
 
 	/**
-	 * The Sahara builders
+	 * The MapReduce builders
 	 *
-	 * @return the sahara builders
+	 * @return the MapReduce builders
 	 */
-	public static DataProcessingBuilders sahara() {
-		return new SaharaBuilders();
+	public static DataProcessingBuilders mapReduce() {
+		return new MapReduceBuilders();
 	}
 
 	/**

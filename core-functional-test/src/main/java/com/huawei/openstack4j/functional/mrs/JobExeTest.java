@@ -21,11 +21,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.functional.AbstractTest;
-import com.huawei.openstack4j.model.sahara.options.JobExeListOptions;
-import com.huawei.openstack4j.openstack.sahara.constants.JobState;
-import com.huawei.openstack4j.openstack.sahara.constants.JobType;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobExe;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobExeCreate;
+import com.huawei.openstack4j.model.map.reduce.options.JobExeListOptions;
+import com.huawei.openstack4j.openstack.map.reduce.constants.JobState;
+import com.huawei.openstack4j.openstack.map.reduce.constants.JobType;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExe;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExeCreate;
 
 /**
  *
@@ -36,24 +36,24 @@ public class JobExeTest extends AbstractTest {
 	
 	@Test
 	public void testCreateJobExe() {
-		SaharaJobExeCreate jobExeCreate = SaharaJobExeCreate.builder().jobType(JobType.Spark).jobName("sdk-unittests")
+		MapReduceJobExeCreate jobExeCreate = MapReduceJobExeCreate.builder().jobType(JobType.Spark).jobName("sdk-unittests")
 				.clusterId("cluster-id").jarPath("s3a://sdk/jar.jar").arguments("wordcount").input("s3a://sdk/input")
 				.output("s3a://sdk/output").jobLog("s3a://sdk/log").fileAction("export").hql("hql")
 				.hiveScriptPath("s3a://sdk/script.hql").isProtected(true).isPublic(false).build();
-		SaharaJobExe exe = osclient.sahara().jobExes().create(jobExeCreate);
+		MapReduceJobExe exe = osclient.mrs().jobExes().create(jobExeCreate);
 		Assert.assertEquals(exe.getJobName(), "sdk-unittests");
 	}
 
 	@Test
 	public void testGetJobExe() {
-		SaharaJobExe execution = osclient.sahara().jobExes().get("job-exe-id");
+		MapReduceJobExe execution = osclient.mrs().jobExes().get("job-exe-id");
 	}
 
 	@Test
 	public void testListJobExe() {
 		JobExeListOptions options = JobExeListOptions.create().page(1).pageSize(20)
 				.clusterId("0f4ab6b7-a723-4b6c-b326-f8a5711d365a").state(JobState.Completed);
-		List<? extends SaharaJobExe> list = osclient.sahara().jobExes().list(options);
+		List<? extends MapReduceJobExe> list = osclient.mrs().jobExes().list(options);
 	}
 
 }
