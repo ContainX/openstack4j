@@ -28,9 +28,9 @@ import com.huawei.openstack4j.api.heat.HeatService;
 import com.huawei.openstack4j.api.image.ImageService;
 import com.huawei.openstack4j.api.magnum.MagnumService;
 import com.huawei.openstack4j.api.manila.ShareService;
+import com.huawei.openstack4j.api.map.reduce.MapReduceService;
 import com.huawei.openstack4j.api.murano.v1.AppCatalogService;
 import com.huawei.openstack4j.api.networking.NetworkingService;
-import com.huawei.openstack4j.api.sahara.SaharaService;
 import com.huawei.openstack4j.api.senlin.SenlinService;
 import com.huawei.openstack4j.api.tacker.TackerService;
 import com.huawei.openstack4j.api.workflow.WorkflowService;
@@ -148,12 +148,12 @@ public class Apis {
 	}
 
 	/**
-	 * Gets the (Sahara) Data Processing services API
+	 * Gets the (MapReduce) Data Processing services API
 	 * 
-	 * @return the sahara services
+	 * @return the MapReduce services
 	 */
-	public static SaharaService getSaharaServices() {
-		return get(SaharaService.class);
+	public static MapReduceService getMapReduceServices() {
+		return get(MapReduceService.class);
 	}
 
 	/**

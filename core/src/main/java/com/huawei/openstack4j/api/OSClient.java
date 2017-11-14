@@ -31,9 +31,9 @@ import com.huawei.openstack4j.api.image.ImageService;
 import com.huawei.openstack4j.api.loadbalance.ELBService;
 import com.huawei.openstack4j.api.magnum.MagnumService;
 import com.huawei.openstack4j.api.manila.ShareService;
+import com.huawei.openstack4j.api.map.reduce.MapReduceService;
 import com.huawei.openstack4j.api.murano.v1.AppCatalogService;
 import com.huawei.openstack4j.api.networking.NetworkingService;
-import com.huawei.openstack4j.api.sahara.SaharaService;
 import com.huawei.openstack4j.api.scaling.AutoScalingService;
 import com.huawei.openstack4j.api.senlin.SenlinService;
 import com.huawei.openstack4j.api.storage.BlockStorageService;
@@ -269,11 +269,11 @@ public interface OSClient<T extends OSClient<T>> {
 	AppCatalogService murano();
 
 	/**
-	 * Returns the Sahara Service API
+	 * Returns the Map Reduce Service API
 	 *
-	 * @return the Sahara service
+	 * @return the Map Reduce service
 	 */
-	SaharaService sahara();
+	MapReduceService mrs();
 
 	/**
 	 * Returns the Workflow Service API

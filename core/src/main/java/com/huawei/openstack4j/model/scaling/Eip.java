@@ -15,12 +15,12 @@
  *******************************************************************************/
 package com.huawei.openstack4j.model.scaling;
 
+import com.google.common.base.Strings;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
-
-import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,8 +37,15 @@ public class Eip implements ModelEntity {
 
 	private static final long serialVersionUID = -1069053200085079737L;
 
+	/**
+	 * deprecated due to https://github.com/Huawei/openstack4j/issues/56
+	 *
+	 * @author QianBiao.NG
+	 * @date   2017-11-13 11:08:29
+	 */
+	@Deprecated
 	public enum IpType {
-		TELCOM5("5_telcom"), BGP5("5_bgp"), LXBGP5("5_lxbgp"), UNION5("5_union");
+		TELCOM5("5_telcom"), BGP5("5_bgp"), SBGP5("5_sbgp"), LXBGP5("5_lxbgp"), UNION5("5_union");
 
 		private String val;
 
@@ -65,7 +72,7 @@ public class Eip implements ModelEntity {
 	}
 
 	@JsonProperty("ip_type")
-	private IpType ipType;
+	private String ipType;
 
 	@JsonProperty
 	private Bandwidth bandwidth;

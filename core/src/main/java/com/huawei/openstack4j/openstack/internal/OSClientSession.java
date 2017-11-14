@@ -44,9 +44,9 @@ import com.huawei.openstack4j.api.identity.EndpointURLResolver;
 import com.huawei.openstack4j.api.image.ImageService;
 import com.huawei.openstack4j.api.magnum.MagnumService;
 import com.huawei.openstack4j.api.manila.ShareService;
+import com.huawei.openstack4j.api.map.reduce.MapReduceService;
 import com.huawei.openstack4j.api.murano.v1.AppCatalogService;
 import com.huawei.openstack4j.api.networking.NetworkingService;
-import com.huawei.openstack4j.api.sahara.SaharaService;
 import com.huawei.openstack4j.api.senlin.SenlinService;
 import com.huawei.openstack4j.api.storage.BlockStorageService;
 import com.huawei.openstack4j.api.storage.ObjectStorageService;
@@ -233,8 +233,8 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 	/**
 	 * {@inheritDoc}
 	 */
-	public SaharaService sahara() {
-		return Apis.getSaharaServices();
+	public MapReduceService mrs() {
+		return Apis.getMapReduceServices();
 	}
 
 	/**

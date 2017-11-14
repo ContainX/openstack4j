@@ -26,10 +26,10 @@ import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.functional.AbstractTest;
 import com.huawei.openstack4j.model.common.ActionResponse;
-import com.huawei.openstack4j.model.sahara.DataSource;
-import com.huawei.openstack4j.model.sahara.DataSource.DataSourceType;
-import com.huawei.openstack4j.model.sahara.options.DataSourceListOptions;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaDataSource;
+import com.huawei.openstack4j.model.map.reduce.DataSource;
+import com.huawei.openstack4j.model.map.reduce.DataSource.DataSourceType;
+import com.huawei.openstack4j.model.map.reduce.options.DataSourceListOptions;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceDataSource;
 
 public class DataSourceTest extends AbstractTest {
 
@@ -41,9 +41,9 @@ public class DataSourceTest extends AbstractTest {
 	@BeforeClass
 	public void testCreateDataSource() {
 
-		DataSource build = SaharaDataSource.builder().name(name).url("/sdk/unittest/input").type(DataSourceType.HDFS)
+		DataSource build = MapReduceDataSource.builder().name(name).url("/sdk/unittest/input").type(DataSourceType.HDFS)
 				.isProtect(true).isPublic(false).description("sdk unittests").build();
-		createdDataSource = osclient.sahara().dataSources().create(build);
+		createdDataSource = osclient.mrs().dataSources().create(build);
 		Assert.assertEquals(createdDataSource.getName(), name);
 		Assert.assertEquals(createdDataSource.getURL(), "/sdk/unittest/input");
 		Assert.assertEquals(createdDataSource.getType(), DataSourceType.HDFS);
@@ -53,13 +53,13 @@ public class DataSourceTest extends AbstractTest {
 
 	@AfterClass
 	public void testDeleteDataSource() {
-		ActionResponse delete = osclient.sahara().dataSources().delete(createdDataSource.getId());
+		ActionResponse delete = osclient.mrs().dataSources().delete(createdDataSource.getId());
 		Assert.assertTrue(delete.isSuccess());
 	}
 
 	@Test
 	public void testGetDataSource() {
-		DataSource dataSource = osclient.sahara().dataSources().get(createdDataSource.getId());
+		DataSource dataSource = osclient.mrs().dataSources().get(createdDataSource.getId());
 		Assert.assertEquals(dataSource.getId(), createdDataSource.getId());
 		Assert.assertEquals(dataSource.getName(), name);
 		Assert.assertEquals(dataSource.getURL(), "/sdk/unittest/input");
@@ -70,9 +70,9 @@ public class DataSourceTest extends AbstractTest {
 
 	@Test(dependsOnMethods = { "testGetDataSource" })
 	public void testUpdateDataSource() {
-		DataSource build = SaharaDataSource.builder().id(createdDataSource.getId()).name("sdk-new-name").type(DataSourceType.HDFS)
+		DataSource build = MapReduceDataSource.builder().id(createdDataSource.getId()).name("sdk-new-name").type(DataSourceType.HDFS)
 				.url("/sdk/unittest/input2").build();
-		createdDataSource = osclient.sahara().dataSources().update(build);
+		createdDataSource = osclient.mrs().dataSources().update(build);
 		Assert.assertEquals(createdDataSource.getURL(), "/sdk/unittest/input2");
 		Assert.assertEquals(createdDataSource.getName(), "sdk-new-name");
 	}
@@ -80,7 +80,7 @@ public class DataSourceTest extends AbstractTest {
 	@Test(dependsOnMethods = { "testUpdateDataSource" })
 	public void testListDataSource() {
 		DataSourceListOptions options = DataSourceListOptions.create().desc("created_at").limit(10);
-		List<? extends DataSource> list = osclient.sahara().dataSources().list(options);
+		List<? extends DataSource> list = osclient.mrs().dataSources().list(options);
 		boolean found = false;
 		for (DataSource dataSource : list) {
 			if (dataSource.getId().equals(createdDataSource.getId())) {

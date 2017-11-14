@@ -20,6 +20,19 @@ public class Openstack4jSample {
 
 	public static void main(String[] args) {
 
+		// ========================================================================================== // 
+		// those services's endpoint will be auto detected from V3 authentication token               // 
+		//                                                                                            // 
+		//       Nova         ->   ECS                                                                // 
+		//       Cinder       ->   EVS                                                                // 
+		//       Neutron      ->   VPC                                                                // 
+		//       Keystone     ->   IAM                                                                // 
+		//       Glance       ->   IMS                                                                // 
+		//       Heat         ->   RTS                                                                // 
+		//                                                                                            // 
+		// so, we do not need to setup the endpoint override for them.                                // 
+		// ========================================================================================== // 
+		                                                                                                 
 		// step 1: add cloud service override endpoint
 		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
 		endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
@@ -30,7 +43,7 @@ public class Openstack4jSample {
 				"https://ces.eu-de.otc.t-systems.com/V1.0/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.LOAD_BALANCER,
 				"https://elb.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.SAHARA,
+		endpointResolver.addOverrideEndpoint(ServiceType.MAP_REDUCE,
 				"https://mrs.eu-de.otc.t-systems.com/v1.1/%(project_id)s");
 		endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
 				"https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");

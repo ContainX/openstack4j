@@ -39,15 +39,15 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
 	private static final String TACKER_ERROR = "TackerError";
 	/** For HuaWei CloudEye Error Message Propagation.. */
 	private static final String CLOUDEYE_ERROR = "details";
-	/** For HuaWei SAHARA Error Message Propagation.. */
-	private static final String SAHARA_ERROR = "error_message";
+	/** For HuaWei MapReduce Error Message Propagation.. */
+	private static final String MAP_REDUCE_ERROR = "error_message";
 	private static final String KEY_MANAGEMENT_ERROR_MSG = "error_msg";
 	private static final String TROVE_ERROR_CODE = "errCode";
 	private static final String TROVE_ERROR_MSG = "externalMessage";
 
 	private static final String[] KEY_CODE_LIST = { TROVE_ERROR_CODE, "code", "errorCode", "error_code", "Code",  };
 	private static final String[] KEY_MESSAGE_LIST = { TROVE_ERROR_MSG, KEY_MESSAGE, NEUTRON_ERROR, COMPUTE_FAULT, TACKER_ERROR,
-			CLOUDEYE_ERROR, SAHARA_ERROR, KEY_MANAGEMENT_ERROR_MSG, "Message",  };
+			CLOUDEYE_ERROR, MAP_REDUCE_ERROR, KEY_MANAGEMENT_ERROR_MSG, "Message",  };
 	private HttpResponse response;
 
 	public ParseActionResponseFromJsonMap(HttpResponse response) {

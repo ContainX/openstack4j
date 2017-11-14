@@ -30,6 +30,8 @@ import com.huawei.openstack4j.model.dns.v2.Action;
 import com.huawei.openstack4j.model.dns.v2.RecordSetType;
 import com.huawei.openstack4j.model.dns.v2.Recordset;
 import com.huawei.openstack4j.model.dns.v2.Status;
+import com.huawei.openstack4j.model.dns.v2.ZoneType;
+import com.huawei.openstack4j.openstack.dns.v2.options.RecordsetListOptions;
 
 /**
  * Tests the DNS/Designate API version 2 ZoneService
@@ -106,25 +108,10 @@ public class DesignateRecordsetServiceTest extends AbstractTest {
 
 	public void recordsetListTest() throws Exception {
 		respondWith(JSON_RECORDSETLIST);
-		List<? extends Recordset> allRecordsets = osv3().dns().recordsets().list();
+		List<? extends Recordset> allRecordsets = osv3().dns().recordsets()
+				.list(RecordsetListOptions.create().limit(50).marker("last-record-set-id").zoneType(ZoneType.PRIVATE));
 		assertNotNull(allRecordsets);
 		assertEquals(allRecordsets.size(), 5);
-		assertEquals(allRecordsets.get(0).getId(), RECORDSET_ID);
-	}
-
-	public void recordsetListForProjectTest() throws Exception {
-		respondWith(JSON_RECORDSETLIST);
-		List<? extends Recordset> allRecordsets = osv3().dns().recordsets().list(5, null);
-		assertNotNull(allRecordsets);
-		assertEquals(allRecordsets.size(), 5);
-		assertEquals(allRecordsets.get(0).getId(), RECORDSET_ID);
-	}
-
-	public void recordsetListForZoneTest() throws Exception {
-		respondWith(JSON_RECORDSETLIST_ZONE);
-		List<? extends Recordset> allRecordsets = osv3().dns().recordsets().list(ZONE_ID);
-		assertNotNull(allRecordsets);
-		assertEquals(allRecordsets.size(), 3);
 		assertEquals(allRecordsets.get(0).getId(), RECORDSET_ID);
 	}
 

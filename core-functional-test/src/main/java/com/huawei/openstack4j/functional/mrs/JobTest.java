@@ -24,14 +24,14 @@ import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.functional.AbstractTest;
 import com.huawei.openstack4j.model.common.ActionResponse;
-import com.huawei.openstack4j.model.sahara.Job;
-import com.huawei.openstack4j.model.sahara.JobConfig;
-import com.huawei.openstack4j.model.sahara.JobExecution;
-import com.huawei.openstack4j.model.sahara.Job.JobType;
-import com.huawei.openstack4j.model.sahara.options.JobListOptions;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJob;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobConfig;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobExecution;
+import com.huawei.openstack4j.model.map.reduce.Job;
+import com.huawei.openstack4j.model.map.reduce.JobConfig;
+import com.huawei.openstack4j.model.map.reduce.JobExecution;
+import com.huawei.openstack4j.model.map.reduce.Job.JobType;
+import com.huawei.openstack4j.model.map.reduce.options.JobListOptions;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJob;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobConfig;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExecution;
 
 /**
  *
@@ -45,9 +45,9 @@ public class JobTest extends AbstractTest {
 
 	@BeforeClass
 	public void testCreateJob() {
-		Job build = SaharaJob.builder().name(name).type(JobType.MapReduce).description("sdk unittest").isProtect(true)
+		Job build = MapReduceJob.builder().name(name).type(JobType.MapReduce).description("sdk unittest").isProtect(true)
 				.isPublic(true).build();
-		createdJob = osclient.sahara().jobs().create(build);
+		createdJob = osclient.mrs().jobs().create(build);
 		Assert.assertEquals(name, createdJob.getName());
 		Assert.assertEquals(JobType.MapReduce, createdJob.getType());
 		Assert.assertEquals("sdk unittest", createdJob.getDescription());
@@ -57,13 +57,13 @@ public class JobTest extends AbstractTest {
 
 	@AfterClass
 	public void testDeleteJob() {
-		ActionResponse delete = osclient.sahara().jobs().delete(createdJob.getId());
+		ActionResponse delete = osclient.mrs().jobs().delete(createdJob.getId());
 		Assert.assertTrue(delete.isSuccess());
 	}
 
 	@Test
 	public void testGetJob() {
-		Job job = osclient.sahara().jobs().get(createdJob.getId());
+		Job job = osclient.mrs().jobs().get(createdJob.getId());
 		Assert.assertEquals(job.getId(), createdJob.getId());
 		Assert.assertEquals(name, createdJob.getName());
 		Assert.assertEquals(JobType.MapReduce, createdJob.getType());
@@ -74,9 +74,9 @@ public class JobTest extends AbstractTest {
 
 	@Test(dependsOnMethods = { "testGetJob" })
 	public void testUpdateJob() {
-		Job build = SaharaJob.builder().id(createdJob.getId()).name("sdk-new-name").description("updated desc")
+		Job build = MapReduceJob.builder().id(createdJob.getId()).name("sdk-new-name").description("updated desc")
 				.type(JobType.Spark).isProtect(false).isPublic(false).build();
-		createdJob = osclient.sahara().jobs().update(build);
+		createdJob = osclient.mrs().jobs().update(build);
 		Assert.assertEquals(createdJob.getType(), JobType.Spark);
 		Assert.assertEquals(createdJob.getName(), "sdk-new-name");
 		Assert.assertEquals(createdJob.getDescription(), "updated desc");
@@ -87,7 +87,7 @@ public class JobTest extends AbstractTest {
 	@Test(dependsOnMethods = { "testUpdateJob" })
 	public void testListJob() {
 		JobListOptions options = JobListOptions.create().desc("created_at").limit(10);
-		List<? extends Job> list = osclient.sahara().jobs().list(options);
+		List<? extends Job> list = osclient.mrs().jobs().list(options);
 		boolean found = false;
 		for (Job jobBinary : list) {
 			if (jobBinary.getId().equals(createdJob.getId())) {
@@ -103,13 +103,13 @@ public class JobTest extends AbstractTest {
 	 * TODO
 	 */
 	public void testExecuteJob() {
-		JobConfig jobConfig = SaharaJobConfig.builder().addConfig("mapred.map.tasks", 1)
+		JobConfig jobConfig = MapReduceJobConfig.builder().addConfig("mapred.map.tasks", 1)
 				.addConfig("mapred.reduce.tasks", 1).addArg("wordcount").addParam("param1", "value1")
 				.addParam("param2", "value2").build();
-		JobExecution jobExecution = SaharaJobExecution.builder().jobId("to-execute-job-id").clusterId("cluster-id")
+		JobExecution jobExecution = MapReduceJobExecution.builder().jobId("to-execute-job-id").clusterId("cluster-id")
 				.inputId("input-id").outputId("output-id").isProtect(true).isPublic(true).setJobConfig(jobConfig)
 				.build();
-		JobExecution execution = osclient.sahara().jobExecutions().create(jobExecution);
+		JobExecution execution = osclient.mrs().jobExecutions().create(jobExecution);
 	}
 
 }

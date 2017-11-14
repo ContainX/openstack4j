@@ -24,9 +24,9 @@ import org.testng.annotations.Test;
 
 import com.huawei.openstack4j.functional.AbstractTest;
 import com.huawei.openstack4j.model.common.ActionResponse;
-import com.huawei.openstack4j.model.sahara.JobBinary;
-import com.huawei.openstack4j.model.sahara.options.JobBinaryListOptions;
-import com.huawei.openstack4j.openstack.sahara.domain.SaharaJobBinary;
+import com.huawei.openstack4j.model.map.reduce.JobBinary;
+import com.huawei.openstack4j.model.map.reduce.options.JobBinaryListOptions;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobBinary;
 
 public class JobBinaryTest extends AbstractTest {
 
@@ -36,9 +36,9 @@ public class JobBinaryTest extends AbstractTest {
 
 	@BeforeClass
 	public void testCreateJobBinary() {
-		JobBinary build = SaharaJobBinary.builder().name(name).url("/sdk/unittest/input")
+		JobBinary build = MapReduceJobBinary.builder().name(name).url("/sdk/unittest/input")
 				.isProtect(true).isPublic(true).description("sdk unittests").build();
-		createdJobBinary = osclient.sahara().jobBinaries().create(build);
+		createdJobBinary = osclient.mrs().jobBinaries().create(build);
 		Assert.assertEquals(createdJobBinary.getName(), name);
 		Assert.assertEquals(createdJobBinary.getURL(), "/sdk/unittest/input");
 		Assert.assertTrue(createdJobBinary.isProtected());
@@ -47,13 +47,13 @@ public class JobBinaryTest extends AbstractTest {
 
 	@AfterClass
 	public void testDeleteJobBinary() {
-		ActionResponse delete = osclient.sahara().jobBinaries().delete(createdJobBinary.getId());
+		ActionResponse delete = osclient.mrs().jobBinaries().delete(createdJobBinary.getId());
 		Assert.assertTrue(delete.isSuccess());
 	}
 
 	@Test
 	public void testGetJobBinary() {
-		JobBinary jobBinary = osclient.sahara().jobBinaries().get(createdJobBinary.getId());
+		JobBinary jobBinary = osclient.mrs().jobBinaries().get(createdJobBinary.getId());
 		Assert.assertEquals(jobBinary.getId(), createdJobBinary.getId());
 		Assert.assertEquals(jobBinary.getName(), name);
 		Assert.assertEquals(jobBinary.getURL(), "/sdk/unittest/input");
@@ -63,9 +63,9 @@ public class JobBinaryTest extends AbstractTest {
 
 	@Test(dependsOnMethods = { "testGetJobBinary" })
 	public void testUpdateJobBinary() {
-		JobBinary build = SaharaJobBinary.builder().id(createdJobBinary.getId()).name("sdk-new-name")
+		JobBinary build = MapReduceJobBinary.builder().id(createdJobBinary.getId()).name("sdk-new-name")
 				.url("/sdk/unittest/input2").build();
-		createdJobBinary = osclient.sahara().jobBinaries().update(build);
+		createdJobBinary = osclient.mrs().jobBinaries().update(build);
 		Assert.assertEquals(createdJobBinary.getURL(), "/sdk/unittest/input2");
 		Assert.assertEquals(createdJobBinary.getName(), "sdk-new-name");
 	}
@@ -73,7 +73,7 @@ public class JobBinaryTest extends AbstractTest {
 	@Test(dependsOnMethods = { "testUpdateJobBinary" })
 	public void testListJobBinary() {
 		JobBinaryListOptions options = JobBinaryListOptions.create().desc("created_at").limit(10);
-		List<? extends JobBinary> list = osclient.sahara().jobBinaries().list(options);
+		List<? extends JobBinary> list = osclient.mrs().jobBinaries().list(options);
 		boolean found = false;
 		for (JobBinary jobBinary : list) {
 			if (jobBinary.getId().equals(createdJobBinary.getId())) {

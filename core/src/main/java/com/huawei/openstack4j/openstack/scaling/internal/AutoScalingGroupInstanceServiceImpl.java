@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.scaling.internal;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ import com.google.common.base.Strings;
 import com.huawei.openstack4j.api.scaling.AutoScalingGroupInstanceService;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.scaling.ScalingGroupInstance;
-import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstance.ASAutoScalingGroupInstances;
+import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch;
 import com.huawei.openstack4j.openstack.scaling.domain.ASAutoScalingGroupInstanceBatch.Action;
 import com.huawei.openstack4j.openstack.scaling.options.ScalingGroupInstanceListOptions;
 
@@ -50,18 +50,17 @@ public class AutoScalingGroupInstanceServiceImpl extends BaseAutoScalingServices
 	public ActionResponse delete(String instanceId, boolean deleteInstance) {
 		checkArgument(!Strings.isNullOrEmpty(instanceId), "instanceId is required");
 		String yesOrNo = deleteInstance ? "yes" : "no";
-		return deleteWithResponse(uri("/scaling_group_instance/%s?instance_delete=%s", instanceId, yesOrNo)).execute();
+		return deleteWithResponse("/scaling_group_instance/", instanceId).param("instance_delete", yesOrNo).execute();
 	}
 
 	@Override
 	public ActionResponse batchAdd(String groupId, List<String> instanceIds, boolean deleteInstance) {
 		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");
-		String yesOrNo = deleteInstance ? "yes" : "no";
 		ASAutoScalingGroupInstanceBatch entity = ASAutoScalingGroupInstanceBatch.builder().instanceIds(instanceIds)
-				.delete(yesOrNo).action(Action.ADD.name()).build();
+				.action(Action.ADD.name()).build();
 		return post(ActionResponse.class, uri("/scaling_group_instance/%s/action", groupId)).entity(entity).execute();
 	}
-	
+
 	@Override
 	public ActionResponse batchRemove(String groupId, List<String> instanceIds, boolean deleteInstance) {
 		checkArgument(!Strings.isNullOrEmpty(groupId), "groupId is required");

@@ -39,7 +39,7 @@ public class ASGroupInstanceTest extends AbstractTest {
 
 	@Test(priority = 2)
 	public void testListAutoScalingGroupInstance() {
-		String groupId = "588b4592-0998-4722-b51d-e6dbc574ec32";
+		String groupId = "7e4458f7-7e22-4bb7-b255-2c475a0ced61";
 		List<? extends ScalingGroupInstance> list = osclient.autoScaling().groupInstances().list(groupId);
 		logger.info("{}", list);
 		if (list != null && !list.isEmpty()) {
@@ -64,15 +64,15 @@ public class ASGroupInstanceTest extends AbstractTest {
 
 	@Test(priority = 1)
 	public void testDeleteAutoScalingGroupInstance() {
-		String instanceId = "7f8e7f05-0323-4d5f-9e48-445da24e1cee";
+		String instanceId = "970a2327-30f9-4b73-be38-03816079744f";
 		ActionResponse resp = osclient.autoScaling().groupInstances().delete(instanceId, false);
 		assertTrue(resp.isSuccess(), resp.getFault());
 	}
 
 	@Test(priority = 0)
 	public void testBatchOperateAutoScalingGroupInstance() throws InterruptedException {
-		String groupId = "588b4592-0998-4722-b51d-e6dbc574ec32";
-		List<String> instanceIds = Lists.newArrayList("7f8e7f05-0323-4d5f-9e48-445da24e1cee");
+		String groupId = "7e4458f7-7e22-4bb7-b255-2c475a0ced61";
+		List<String> instanceIds = Lists.newArrayList("970a2327-30f9-4b73-be38-03816079744f");
 
 		ActionResponse resp = osclient.autoScaling().groupInstances().batchAdd(groupId, instanceIds, false);
 		assertTrue(resp.isSuccess(), resp.getFault());

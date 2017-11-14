@@ -38,6 +38,7 @@ import com.huawei.openstack4j.model.dns.v2.Zone;
 import com.huawei.openstack4j.model.dns.v2.ZoneType;
 import com.huawei.openstack4j.model.network.Router;
 import com.huawei.openstack4j.openstack.dns.v2.domain.DesignateZone;
+import com.huawei.openstack4j.openstack.dns.v2.options.RecordsetListOptions;
 
 /**
  *
@@ -116,29 +117,30 @@ public class RecordsetTest extends AbstractTest {
 		osclient.dns().zones().delete(privateZone.getId());
 	}
 
-	@Test
-	public void listRecordsets() {
-		List<? extends Recordset> list = osclient.dns().recordsets().list(privateZone.getId());
-		List<String> collect = list.stream().map(ptr -> ptr.getId()).collect(Collectors.toList());
-		Assert.assertTrue(collect.contains(recordset.getId()));
-
-		list = osclient.dns().recordsets().list(privateZone.getId(), 50, null);
-		collect = list.stream().map(ptr -> ptr.getId()).collect(Collectors.toList());
-		Assert.assertTrue(collect.contains(recordset.getId()));
-
-		list = osclient.dns().recordsets().list();
-		collect = list.stream().map(ptr -> ptr.getId()).collect(Collectors.toList());
-		Assert.assertTrue(collect.contains(recordset.getId()));
-
-		list = osclient.dns().recordsets().list(50, null);
-		collect = list.stream().map(ptr -> ptr.getId()).collect(Collectors.toList());
-		Assert.assertTrue(collect.contains(recordset.getId()));
-	}
-
-	@Test
+	@Test(priority = 1)
 	public void getRecordset() {
-		Recordset get = osclient.dns().recordsets().get(privateZone.getId(), recordset.getId());
+		Recordset get =  (Recordset) this.retry(new Retry() {
+			@Override
+			public Integer maxRetryTimes() {
+				return 20;
+			}
 
+			@Override
+			public Integer delay() {
+				return 10;
+			}
+
+			@Override
+			public Object run() {
+				Recordset get = osclient.dns().recordsets().get(privateZone.getId(), recordset.getId());
+				if (get.getStatus().equals(Status.ACTIVE)) {
+					return get;
+				}
+				return null;
+			}
+
+		});
+		
 		Assert.assertEquals(get.getName(), recordset.getName());
 		Assert.assertEquals(get.getDescription(), "For dns recordset sdk unittest");
 		Assert.assertEquals(get.getType(), RecordSetType.A);
@@ -148,6 +150,19 @@ public class RecordsetTest extends AbstractTest {
 		Assert.assertTrue(get.getRecords().contains("192.168.10.1"));
 		Assert.assertTrue(get.getRecords().contains("192.168.10.2"));
 		Assert.assertTrue(get.getRecords().contains("192.168.10.3"));
+		
+	}
+	
+
+	@Test(priority = 2)
+	public void listRecordsets() {
+		List<? extends Recordset> list = osclient.dns().recordsets().list(privateZone.getId(), 50, null);
+		List<String> collect = list.stream().map(ptr -> ptr.getId()).collect(Collectors.toList());
+//		Assert.assertTrue(collect.contains(recordset.getId()));
+
+		list = osclient.dns().recordsets().list(RecordsetListOptions.create().limit(50).zoneType(ZoneType.PRIVATE));
+		collect = list.stream().map(ptr -> ptr.getId()).collect(Collectors.toList());
+		Assert.assertTrue(collect.contains(recordset.getId()));
 	}
 
 }
