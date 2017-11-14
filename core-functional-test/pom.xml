@@ -7,6 +7,7 @@
 		<version>1.0.1</version>
 	</parent>
 	<artifactId>openstack4j-core-functional-test</artifactId>
+	<name>OpenStack4j Core Functional Test Cases</name>
 
 	<properties>
 		<java.version>1.8</java.version>

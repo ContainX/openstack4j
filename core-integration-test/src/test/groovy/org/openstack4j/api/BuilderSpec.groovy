@@ -14,7 +14,7 @@ import com.huawei.openstack4j.model.manila.ShareCreate
 import com.huawei.openstack4j.model.storage.block.Volume
 import com.huawei.openstack4j.model.compute.Flavor
 import com.huawei.openstack4j.openstack.heat.domain.HeatStackCreate
-import com.huawei.openstack4j.model.sahara.Cluster
+import com.huawei.openstack4j.model.map.reduce.Cluster
 import spock.lang.Specification
 
 
@@ -311,7 +311,7 @@ class BuilderSpec extends Specification {
         anotherShareCreate.getSize() == SHARE_SIZE
     }
 
-    def "test sahara builders"() {
+    def "test MapReduce builders"() {
 
         when: "creating a cluster"
         Cluster cluster = Builders.cluster()
@@ -334,7 +334,7 @@ class BuilderSpec extends Specification {
         cluster.getManagementNetworkId() == CLUSTER_MANAGEMENT_NETWORK_ID
 
         when: "creating a cluster the other way"
-        Cluster anotherCluster = Builders.sahara().cluster()
+        Cluster anotherCluster = Builders.mapReduce().cluster()
                 .name(CLUSTER_NAME)
                 .pluginName(CLUSTER_PLUGIN_NAME)
                 .hadoopVersion(CLUSTER_HADOOP_VERSION)

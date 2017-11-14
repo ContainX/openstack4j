@@ -7,7 +7,7 @@
 		<version>1.0.1</version>
 	</parent>
 	<artifactId>openstack-core-sample</artifactId>
-	<name>core-tutorial</name>
+	<name>OpenStack4j Sample</name>
 
 	<properties>
 		<java.version>1.8</java.version>
