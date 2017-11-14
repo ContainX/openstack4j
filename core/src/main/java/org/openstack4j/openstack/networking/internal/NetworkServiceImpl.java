@@ -14,32 +14,34 @@ import org.openstack4j.openstack.networking.domain.NeutronNetwork.Networks;
 
 /**
  * OpenStack (Neutron) Network based Operations
- * 
+ *
  * @author Jeremy Unruh
  */
 public class NetworkServiceImpl extends BaseNetworkingServices implements NetworkService {
-	
-	 private Invocation<Networks> buildInvocation(Map<String, String> filteringParams) {
+
+	 private Invocation<Networks> buildInvocation(Map<String, List<String>> filteringParams) {
 	        Invocation<Networks> invocation = get(Networks.class, "/networks");
 	        if (filteringParams == null) {
 	            return invocation;
 	        } else {
-	            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
-	            	invocation = invocation.param(entry.getKey(), entry.getValue());
+	            for (Map.Entry<String, List<String>> entry : filteringParams.entrySet()) {
+	            	for (String value : entry.getValue()) {
+						invocation = invocation.param(entry.getKey(), value);
+					}
 	            }
 	        }
 	        return invocation;
 	    }
-	
-	
+
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<? extends Network> list(Map<String, String> filteringParams){
+	public List<? extends Network> list(Map<String, List<String>> filteringParams){
 		  Invocation<Networks> invocation = buildInvocation(filteringParams);
 	        return invocation.execute().getList();
-		
+
 	}
 
 	/**
