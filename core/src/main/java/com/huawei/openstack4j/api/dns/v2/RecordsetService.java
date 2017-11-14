@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.huawei.openstack4j.common.RestService;
 import com.huawei.openstack4j.model.dns.v2.Recordset;
+import com.huawei.openstack4j.openstack.dns.v2.options.RecordsetListOptions;
 
 
 /**
@@ -69,31 +70,15 @@ public interface RecordsetService extends RestService {
 	Recordset delete(String zoneId, String recordsetId);
 
 	/**
-	 * list all recordsets owned by project
+	 * list recordsets by filter options
 	 *
 	 * @return list of recordsets
 	 */
-	List<? extends Recordset> list();
-
-	/**
-	 * list recordsets owned by project
-	 *
-	 * @param limit per page's item amount, the value is 0~500
-	 * @param marker the initial ID of a paging query, if null, query the first page
-	 * @return list of recordsets in a zone
-	 */
-	List<? extends Recordset> list(Integer limit, String marker);
+	List<? extends Recordset> list(RecordsetListOptions options);
 
 	/**
 	 * list recordsets in a zone
-	 *
-	 * @param zoneId the identifier of the zone
-	 * @return list of recordsets in a zone
-	 */
-	List<? extends Recordset> list(String zoneId);
-
-	/**
-	 * list recordsets in a zone
+	 * 
 	 * @param zoneId zoneId the identifier of the zone
 	 * @param limit per page's item amount, the value is 0~500
 	 * @param marker the initial ID of a paging query, if null, query the first page
