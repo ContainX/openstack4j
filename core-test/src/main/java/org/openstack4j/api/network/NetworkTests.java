@@ -101,7 +101,7 @@ public class NetworkTests extends AbstractTest {
 
 		respondWith("/network/networks_filtered.json");
 
-		final String name = "netOK";
+	final String name = "netOK";
         Map<String, List<String>> filters = new HashMap<String, List<String>>();
         List<String> values = new ArrayList<>();
         values.add(name);
