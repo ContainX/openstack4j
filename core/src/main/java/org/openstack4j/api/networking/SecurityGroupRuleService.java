@@ -13,14 +13,14 @@ import org.openstack4j.model.network.SecurityGroupRule;
  * @author Nathan Anderson
  */
 public interface SecurityGroupRuleService extends RestService {
-  
+
   /**
    * List security group rules accessible by current Tenant.
    *
    * @return the list<? extends security group rules>
    */
   List<? extends SecurityGroupRule> list();
-  
+
   /**
    * Gets the Security Group rule by id
    *
@@ -28,14 +28,14 @@ public interface SecurityGroupRuleService extends RestService {
    * @return the security group rule
    */
   SecurityGroupRule get(String id);
-  
+
   /**
    * Delete security group rule by id.
    *
    * @param id the id
    */
   void delete(String id);
-  
+
   /**
    * Creates a security group rule.
    *
@@ -46,10 +46,10 @@ public interface SecurityGroupRuleService extends RestService {
 
   /**
    * List security group rules accessible by current Tenant.
-   * @param filteringParams map (name, value) of filtering parameters
+   * @param filteringParams map (name, list of value) of filtering parameters
    *
    * @return the list<? extends security group rules>
    */
-  List<? extends SecurityGroupRule> list(Map<String, String> filteringParams);
-  
+  List<? extends SecurityGroupRule> list(Map<String, List<String>> filteringParams);
+
 }

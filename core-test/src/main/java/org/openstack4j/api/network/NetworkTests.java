@@ -6,6 +6,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ import okhttp3.mockwebserver.RecordedRequest;
 /**
  * Tests the Compute -> Network API against the mock webserver and spec based
  * json responses
- * 
+ *
  * @author Yin Zhang
  * @author Qin An
  */
@@ -44,7 +45,7 @@ public class NetworkTests extends AbstractTest {
     public void getNetwork() throws Exception {
         respondWith(JSON_NETWORK);
         Network n = osv3().networking().network().get(NETWORK_ID);
-        server.takeRequest();	 
+        server.takeRequest();
         assertEquals(n.getName(), NETWORK_NAME);
         assertEquals(n.getStatus(), State.ACTIVE);
         assertEquals(n.isRouterExternal(), false);
@@ -55,28 +56,28 @@ public class NetworkTests extends AbstractTest {
         respondWith(JSON_NETWORK_EXTERNAL);
         Network n = osv3().networking().network()
                 .create(Builders.network().name(NETWORK_NAME).isRouterExternal(true).adminStateUp(true).build());
-        server.takeRequest();	 
+        server.takeRequest();
         assertEquals(n.getName(), NETWORK_NAME);
         assertEquals(n.getStatus(), State.ACTIVE);
         assertEquals(n.isRouterExternal(), true);
     }
-    
+
     @Test
     public void createNetworkWithZone() throws Exception {
         respondWith(JSON_NETWORK_ZONE);
         Network n = osv3().networking().network()
                 .create(Builders.network().name(NETWORK_NAME).isRouterExternal(true).adminStateUp(true).addAvailabilityZoneHints("nova").build());
-        server.takeRequest();	 
+        server.takeRequest();
         assertEquals(n.getName(), NETWORK_NAME);
         assertEquals(n.getStatus(), State.ACTIVE);
         assertEquals(n.getAvailabilityZoneHints().get(0), "nova");
-    }    
+    }
 
     @Test
     public void agentList() throws Exception {
         respondWith(JSON_AGENTS);
         List<? extends Agent> agentList = osv3().networking().agent().list();
-        server.takeRequest();	 
+        server.takeRequest();
         Agent agent = agentList.get(0);
         assertEquals(agentList.size(), 12);
         assertEquals(agent.getBinary(), "neutron-dhcp-agent");
@@ -94,25 +95,27 @@ public class NetworkTests extends AbstractTest {
     protected Service service() {
         return Service.NETWORK;
     }
-    
+
 	@Test
 	public void listNetworkWithFilter() throws Exception {
-		
+
 		respondWith("/network/networks_filtered.json");
-		
+
 		final String name = "netOK";
-        Map<String, String> filters = new HashMap<String, String>();
-        filters.put("name", name);
-		
+        Map<String, List<String>> filters = new HashMap<String, List<String>>();
+        List<String> values = new ArrayList<>();
+        values.add(name);
+        filters.put("name", values);
+
 		List<? extends Network> networks = osv3().networking().network().list(filters);
 		assertEquals(networks.size(), 1);
 
 		// Check that the list request is the one we expect
-		RecordedRequest listRequest = server.takeRequest();	 
-	
-		assertNotNull(listRequest.getHeader("X-Auth-Token")); 
+		RecordedRequest listRequest = server.takeRequest();
+
+		assertNotNull(listRequest.getHeader("X-Auth-Token"));
 		assertTrue(listRequest.getPath().contains("/networks?name=" + name));
-		
+
 		assertEquals(networks.get(0).getName(), name);
 		assertEquals(networks.get(0).getSubnets().get(0), "0c4faf33-8c23-4dc9-8bf5-30dd1ab452f9" );
 		assertEquals(networks.get(0).getId(), "73f6f1ac-5e58-4801-88c3-7e12c6ddfb39");
