@@ -46,7 +46,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @JsonRootName("cluster")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MapReduceCluster2 implements ModelEntity {
+public class MapReduceClusterInfo implements ModelEntity {
 
 	private static final long serialVersionUID = 1L;
 

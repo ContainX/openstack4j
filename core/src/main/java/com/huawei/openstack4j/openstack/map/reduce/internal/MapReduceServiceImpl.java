@@ -126,8 +126,8 @@ public class MapReduceServiceImpl extends BaseMapReduceServices implements MapRe
 	/* 
 	 * {@inheritDoc}
 	 */
-	@Override
-	public ClusterServiceImpl2 clusters2() {
-		return Apis.get(ClusterServiceImpl2.class);
-	}
+//	@Override
+//	public ClusterServiceImpl2 clusters2() {
+//		return Apis.get(ClusterServiceImpl2.class);
+//	}
 }

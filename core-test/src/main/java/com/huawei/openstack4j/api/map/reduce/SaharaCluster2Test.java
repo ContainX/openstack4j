@@ -29,7 +29,7 @@ import com.huawei.openstack4j.openstack.map.reduce.constants.ClusterType;
 import com.huawei.openstack4j.openstack.map.reduce.constants.ClusterVersion;
 import com.huawei.openstack4j.openstack.map.reduce.constants.JobType;
 import com.huawei.openstack4j.openstack.map.reduce.constants.VolumeType;
-import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceCluster2;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterInfo;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreate;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreateResult;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceComponent;
@@ -43,7 +43,7 @@ public class SaharaCluster2Test extends AbstractTest {
 	@Test
 	public void testGetCluster() throws IOException, InterruptedException {
 		respondWith("/sahara/get_cluster2_response.json");
-		MapReduceCluster2 cluster = osv3().mrs().clusters2().get("cluster-id");
+		MapReduceClusterInfo cluster = osv3().mrs().clusters().get("cluster-id");
 
 		RecordedRequest request = server.takeRequest();
 		Assert.assertEquals(request.getPath(), "/v1.1/project-id/cluster_infos/cluster-id");
@@ -114,7 +114,7 @@ public class SaharaCluster2Test extends AbstractTest {
 				.jobLog("s3a://log/").fileAction("").hql("").hiveScriptPath("").shutdownCluster(false)
 				.submitJobOnceClusterRun(true).build();
 		
-		MapReduceClusterCreateResult result = osv3().mrs().clusters2().createAndRunJob(cluster, jobExe);
+		MapReduceClusterCreateResult result = osv3().mrs().clusters().createAndRunJob(cluster, jobExe);
 
 		Assert.assertEquals(result.getClusterId(), "da1592c2-bb7e-468d-9ac9-83246e95447a");
 		Assert.assertEquals(result.getResult().booleanValue(), true);

@@ -24,13 +24,13 @@ import com.google.common.collect.Lists;
 
 import com.huawei.openstack4j.common.RestService;
 import com.huawei.openstack4j.openstack.map.reduce.constants.BillingType;
-import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceCluster2;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterInfo;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreate;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreateResult;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExeCreate;
 
 /**
- * The implementation of manipulation of {@link MapReduceCluster2}
+ * The implementation of manipulation of {@link MapReduceClusterInfo}
  * 
  * @author ekasit.kijsipongse@nectec.or.th
  */
@@ -39,9 +39,9 @@ public class ClusterServiceImpl2 extends BaseMapReduceServices implements RestSe
 	/**
 	 * {@inheritDoc}
 	 */
-	public MapReduceCluster2 get(String clusterId) {
+	public MapReduceClusterInfo get(String clusterId) {
 		checkNotNull(!Strings.isNullOrEmpty(clusterId), "parameter `clusterId` should not be null");
-		return get(MapReduceCluster2.class, uri("/cluster_infos/%s", clusterId)).execute();
+		return get(MapReduceClusterInfo.class, uri("/cluster_infos/%s", clusterId)).execute();
 	}
 
 	public MapReduceClusterCreateResult createAndRunJob(MapReduceClusterCreate cluster, MapReduceJobExeCreate jobExe) {

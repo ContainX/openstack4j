@@ -16,7 +16,6 @@
 package com.huawei.openstack4j.api.map.reduce;
 
 import com.huawei.openstack4j.common.RestService;
-import com.huawei.openstack4j.openstack.map.reduce.internal.ClusterServiceImpl2;
 import com.huawei.openstack4j.openstack.map.reduce.internal.JobExeServiceImpl;
 
 /**
@@ -38,7 +37,7 @@ public interface MapReduceService extends RestService {
      *
      * @return the cluster service
      */
-    ClusterServiceImpl2 clusters2();
+    // ClusterServiceImpl2 clusters2();
     
     /**
      * Node Group Template Service API

@@ -25,7 +25,7 @@ import com.huawei.openstack4j.openstack.map.reduce.constants.ClusterType;
 import com.huawei.openstack4j.openstack.map.reduce.constants.ClusterVersion;
 import com.huawei.openstack4j.openstack.map.reduce.constants.JobType;
 import com.huawei.openstack4j.openstack.map.reduce.constants.VolumeType;
-import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceCluster2;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterInfo;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreate;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreateResult;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceComponent;
@@ -40,7 +40,7 @@ import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExeCreate;
 public class Cluster2Test extends AbstractTest {
 
 	public void testGetCluster() {
-		MapReduceCluster2 cluster = osclient.mrs().clusters2().get("0f4ab6b7-a723-4b6c-b326-f8a5711d365a");
+		MapReduceClusterInfo cluster = osclient.mrs().clusters().get("0f4ab6b7-a723-4b6c-b326-f8a5711d365a");
 		Assert.assertEquals(cluster.getId(), "0f4ab6b7-a723-4b6c-b326-f8a5711d365a");
 	}
 
@@ -67,7 +67,7 @@ public class Cluster2Test extends AbstractTest {
 				.jobLog("s3a://log/").fileAction("").hql("").hiveScriptPath("").shutdownCluster(false)
 				.submitJobOnceClusterRun(true).build();
 
-		MapReduceClusterCreateResult result = osclient.mrs().clusters2().createAndRunJob(cluster, null);
+		MapReduceClusterCreateResult result = osclient.mrs().clusters().createAndRunJob(cluster, null);
 		Assert.assertTrue(result.getResult());
 	}
 

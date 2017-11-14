@@ -21,6 +21,10 @@ import com.huawei.openstack4j.common.RestService;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.map.reduce.Cluster;
 import com.huawei.openstack4j.model.map.reduce.NodeGroup;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterInfo;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreate;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreateResult;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExeCreate;
 
 /**
  * The manipulation of {@link Cluster}
@@ -41,7 +45,17 @@ public interface ClusterService extends RestService {
 	 * @param clusterId the cluster identifier
 	 * @return the cluster or null if not found
 	 */
-	Cluster get(String clusterId);
+	MapReduceClusterInfo get(String clusterId);
+	
+	
+	/**
+	 * Create a new cluster and run a job on it immediately
+	 * 
+	 * @param cluster
+	 * @param jobExe
+	 * @return
+	 */
+	MapReduceClusterCreateResult createAndRunJob(MapReduceClusterCreate cluster, MapReduceJobExeCreate jobExe);
 
 	/**
 	 * Create a new cluster

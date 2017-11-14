@@ -59,7 +59,7 @@ MapReduceJobExeCreate jobExe = MapReduceJobExeCreate.builder().jobType(JobType.M
 		.jobLog("s3a://log/").fileAction("").hql("").hiveScriptPath("").shutdownCluster(false)
 		.submitJobOnceClusterRun(true).build();
 
-MapReduceClusterCreateResult result = osclient.mrs().clusters2().createAndRunJob(cluster, jobExe);
+MapReduceClusterCreateResult result = osclient.mrs().clusters().createAndRunJob(cluster, jobExe);
 ```
 
 ### 扩容集群节点
@@ -78,7 +78,7 @@ ActionResponse reduce = osclient.mrs().clusters().reduce("cluster-id", 3, includ
 
 ### 查询集群详情
 ```java
-MapReduceCluster2 cluster = osclient.mrs().clusters2().get("0f4ab6b7-a723-4b6c-b326-f8a5711d365a");
+MapReduceClusterInfo cluster = osclient.mrs().clusters().get("0f4ab6b7-a723-4b6c-b326-f8a5711d365a");
 ```
 
 ### 终止集群

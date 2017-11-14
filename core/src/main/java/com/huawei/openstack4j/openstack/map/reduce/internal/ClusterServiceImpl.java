@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -32,9 +33,14 @@ import com.huawei.openstack4j.core.transport.propagation.PropagateOnStatus;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.map.reduce.Cluster;
 import com.huawei.openstack4j.model.map.reduce.NodeGroup;
+import com.huawei.openstack4j.openstack.map.reduce.constants.BillingType;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceCluster;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceCluster.Clusters;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterInfo;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreate;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterCreateResult;
 import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceClusterUnwrapped;
+import com.huawei.openstack4j.openstack.map.reduce.domain.MapReduceJobExeCreate;
 import com.huawei.openstack4j.openstack.map.reduce.domain.actions.MapReduceActions.AddNodeGroupAction;
 import com.huawei.openstack4j.openstack.map.reduce.domain.actions.MapReduceActions.ResizeNodeGroupAction;
 
@@ -44,6 +50,33 @@ import com.huawei.openstack4j.openstack.map.reduce.domain.actions.MapReduceActio
  * @author ekasit.kijsipongse@nectec.or.th
  */
 public class ClusterServiceImpl extends BaseMapReduceServices implements ClusterService {
+	
+	/**
+	 * Sahara original get - replaced with Huawei get
+	@Override
+	public Cluster get(String clusterId) {
+		checkNotNull(clusterId);
+		return get(MapReduceCluster.class, uri("/clusters/%s", clusterId)).execute();
+	} */
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public MapReduceClusterInfo get(String clusterId) {
+		checkNotNull(!Strings.isNullOrEmpty(clusterId), "parameter `clusterId` should not be null");
+		return get(MapReduceClusterInfo.class, uri("/cluster_infos/%s", clusterId)).execute();
+	}
+
+	public MapReduceClusterCreateResult createAndRunJob(MapReduceClusterCreate cluster, MapReduceJobExeCreate jobExe) {
+		checkNotNull(cluster, "parameter `cluster` should not be null");
+		// checkNotNull(jobExe, "parameter `jobExe` should not be null");
+		// setup default values
+		ArrayList<MapReduceJobExeCreate> jobs = jobExe == null ? new ArrayList<MapReduceJobExeCreate>() : Lists.newArrayList(jobExe);
+		MapReduceClusterCreate create = cluster.toBuilder().billingType(BillingType.Metered).masterNodeNum(2).jobs(jobs)
+				.build();
+		return post(MapReduceClusterCreateResult.class, "/run-job-flow").entity(create).execute();
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -51,15 +84,6 @@ public class ClusterServiceImpl extends BaseMapReduceServices implements Cluster
 	@Override
 	public List<? extends Cluster> list() {
 		return get(Clusters.class, uri("/clusters")).execute().getList();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Cluster get(String clusterId) {
-		checkNotNull(clusterId);
-		return get(MapReduceCluster.class, uri("/clusters/%s", clusterId)).execute();
 	}
 
 	/**
