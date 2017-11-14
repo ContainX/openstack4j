@@ -13,17 +13,17 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.domain;
+package com.huawei.openstack4j.kms.openstack.domain;
 
 import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.huawei.openstack4j.kms.openstack.constants.KeyState;
 import com.huawei.openstack4j.model.ModelEntity;
 import com.huawei.openstack4j.model.common.serializer.BooleanDeserializer;
 import com.huawei.openstack4j.openstack.common.ListResult;
-import com.huawei.openstack4j.openstack.key.management.constants.KeyState;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -126,7 +126,5 @@ public class Key implements ModelEntity {
 		public Boolean getTruncated() {
 			return truncated;
 		}
-
 	}
-
 }

@@ -32,7 +32,6 @@ import com.huawei.openstack4j.api.Apis;
 import com.huawei.openstack4j.api.EndpointTokenProvider;
 import com.huawei.openstack4j.api.OSClient;
 import com.huawei.openstack4j.api.OSClient.OSClientV2;
-import com.huawei.openstack4j.api.OSClient.OSClientV3;
 import com.huawei.openstack4j.api.artifact.ArtifactService;
 import com.huawei.openstack4j.api.barbican.BarbicanService;
 import com.huawei.openstack4j.api.client.CloudProvider;
@@ -43,18 +42,15 @@ import com.huawei.openstack4j.api.gbp.GbpService;
 import com.huawei.openstack4j.api.heat.HeatService;
 import com.huawei.openstack4j.api.identity.EndpointURLResolver;
 import com.huawei.openstack4j.api.image.ImageService;
-import com.huawei.openstack4j.api.loadbalance.ELBService;
 import com.huawei.openstack4j.api.magnum.MagnumService;
 import com.huawei.openstack4j.api.manila.ShareService;
 import com.huawei.openstack4j.api.map.reduce.MapReduceService;
 import com.huawei.openstack4j.api.murano.v1.AppCatalogService;
 import com.huawei.openstack4j.api.networking.NetworkingService;
-import com.huawei.openstack4j.api.scaling.AutoScalingService;
 import com.huawei.openstack4j.api.senlin.SenlinService;
 import com.huawei.openstack4j.api.storage.BlockStorageService;
 import com.huawei.openstack4j.api.storage.ObjectStorageService;
 import com.huawei.openstack4j.api.tacker.TackerService;
-import com.huawei.openstack4j.api.telemetry.TelemetryAodhService;
 import com.huawei.openstack4j.api.telemetry.TelemetryService;
 import com.huawei.openstack4j.api.types.Facing;
 import com.huawei.openstack4j.api.types.ServiceType;
@@ -64,15 +60,7 @@ import com.huawei.openstack4j.model.identity.AuthVersion;
 import com.huawei.openstack4j.model.identity.URLResolverParams;
 import com.huawei.openstack4j.model.identity.v2.Access;
 import com.huawei.openstack4j.model.identity.v3.Token;
-import com.huawei.openstack4j.openstack.antiddos.internal.AntiDDoSServices;
-import com.huawei.openstack4j.openstack.cloud.trace.v1.internal.CloudTraceV1Service;
-import com.huawei.openstack4j.openstack.cloud.trace.v2.internal.CloudTraceV2Service;
-import com.huawei.openstack4j.openstack.database.internal.DatabaseServices;
 import com.huawei.openstack4j.openstack.identity.internal.DefaultEndpointURLResolver;
-import com.huawei.openstack4j.openstack.key.management.internal.KeyManagementService;
-import com.huawei.openstack4j.openstack.maas.internal.MaaSService;
-import com.huawei.openstack4j.openstack.message.notification.internal.NotificationService;
-import com.huawei.openstack4j.openstack.message.queue.internal.MessageQueueService;
 import com.huawei.openstack4j.openstack.trove.internal.TroveService;
 
 /**
@@ -86,19 +74,28 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 
 	private static final Logger LOG = LoggerFactory.getLogger(OSClientSession.class);
 	@SuppressWarnings("rawtypes")
-	private static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
+	protected static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
 
-	Config config;
-	Facing perspective;
-	String region;
-	Set<ServiceType> supports;
-	CloudProvider provider;
-	Map<String, ? extends Object> headers;
-	EndpointURLResolver fallbackEndpointUrlResolver = new DefaultEndpointURLResolver();
-
-	@SuppressWarnings("rawtypes")
+	protected Config config;
+	public Facing perspective;
+	protected String region;
+	public Token token;
+	public String reqId;
+	protected Set<ServiceType> supports;
+	protected CloudProvider provider;
+	protected Map<String, ? extends Object> headers;
+	protected EndpointURLResolver fallbackEndpointUrlResolver = new DefaultEndpointURLResolver();
+	
 	public static OSClientSession getCurrent() {
 		return sessions.get();
+	}
+	
+	public Token getToken(){
+		return token;
+	}
+	
+	public void setToken(Token token){
+		this.token=token;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -493,195 +490,5 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
 						new com.huawei.openstack4j.openstack.identity.v2.functions.ServiceToServiceType()));
 			return supports;
 		}
-
 	}
-
-	public static class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClientV3> implements OSClientV3 {
-
-		Token token;
-
-		protected String reqId;
-
-		private OSClientSessionV3(Token token, String endpoint, Facing perspective, CloudProvider provider,
-				Config config) {
-			this.token = token;
-			this.config = config;
-			this.perspective = perspective;
-			this.provider = provider;
-			sessions.set(this);
-		}
-
-		private OSClientSessionV3(Token token, OSClientSessionV3 parent, String region) {
-			this.token = parent.token;
-			this.perspective = parent.perspective;
-			this.region = region;
-		}
-
-		public static OSClientSessionV3 createSession(Token token) {
-			return new OSClientSessionV3(token, token.getEndpoint(), null, null, null);
-		}
-
-		public static OSClientSessionV3 createSession(Token token, Facing perspective, CloudProvider provider,
-				Config config) {
-			return new OSClientSessionV3(token, token.getEndpoint(), perspective, provider, config);
-		}
-
-		public String getXOpenstackRequestId() {
-			return reqId;
-		}
-
-		@Override
-		public Token getToken() {
-			return token;
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public String getEndpoint() {
-			return token.getEndpoint();
-		}
-
-		@Override
-		public AuthVersion getAuthVersion() {
-			return AuthVersion.V3;
-		}
-
-		private String addNATIfApplicable(String url) {
-			if (config != null && config.isBehindNAT()) {
-				try {
-					URI uri = new URI(url);
-					return url.replace(uri.getHost(), config.getEndpointNATResolution());
-				} catch (URISyntaxException e) {
-					LoggerFactory.getLogger(OSClientSessionV3.class).error(e.getMessage(), e);
-				}
-			}
-			return url;
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public String getEndpoint(ServiceType service) {
-			final EndpointURLResolver eUrlResolver = (config != null && config.getEndpointURLResolver() != null)
-					? config.getEndpointURLResolver() : fallbackEndpointUrlResolver;
-			return addNATIfApplicable(eUrlResolver.findURLV3(URLResolverParams.create(token, service)
-					.resolver(config != null ? config.getResolver() : null).perspective(perspective).region(region)));
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public String getTokenId() {
-			return token.getId();
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public com.huawei.openstack4j.api.identity.v3.IdentityService identity() {
-			return Apis.getIdentityV3Services();
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public Set<ServiceType> getSupportedServices() {
-			if (supports == null)
-				supports = Sets.immutableEnumSet(Iterables.transform(token.getCatalog(),
-						new com.huawei.openstack4j.openstack.identity.v3.functions.ServiceToServiceType()));
-			return supports;
-		}
-
-		@Override
-		public TelemetryService telemetry() {
-			return Apis.get(TelemetryAodhService.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public AutoScalingService autoScaling() {
-			return Apis.get(AutoScalingService.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public ELBService loadBalancer() {
-			return Apis.get(ELBService.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public KeyManagementService keyManagement() {
-			return Apis.get(KeyManagementService.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public CloudTraceV1Service cloudTraceV1() {
-			return Apis.get(CloudTraceV1Service.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public CloudTraceV2Service cloudTraceV2() {
-			return Apis.get(CloudTraceV2Service.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public AntiDDoSServices antiDDoS() {
-			return Apis.get(AntiDDoSServices.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public NotificationService notification() {
-			return Apis.get(NotificationService.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public MessageQueueService messageQueue() {
-			return Apis.get(MessageQueueService.class);
-		}
-
-		/*
-		 * {@inheritDoc}
-		 */
-		@Override
-		public MaaSService maas() {
-			return Apis.get(MaaSService.class);
-		}
-
-		/* 
-		 * {@inheritDoc}
-		 */
-		@Override
-		public DatabaseServices database() {
-			return Apis.get(DatabaseServices.class);
-		}
-	}
-
 }

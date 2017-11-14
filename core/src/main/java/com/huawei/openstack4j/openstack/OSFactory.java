@@ -26,7 +26,7 @@ import com.huawei.openstack4j.model.identity.v2.Access;
 import com.huawei.openstack4j.model.identity.v3.Token;
 import com.huawei.openstack4j.openstack.client.OSClientBuilder;
 import com.huawei.openstack4j.openstack.internal.OSClientSession.OSClientSessionV2;
-import com.huawei.openstack4j.openstack.internal.OSClientSession.OSClientSessionV3;
+import com.huawei.openstack4j.openstack.internal.OSClientSessionV3;
 
 /**
  * A Factory which sets up the APIs to be used a previously non-expired authorization or new authorization.
@@ -35,8 +35,8 @@ import com.huawei.openstack4j.openstack.internal.OSClientSession.OSClientSession
  */
 public abstract class OSFactory<T extends OSFactory<T>> {
 
-    private OSFactory() { }
-
+	public OSFactory() { }
+	
     /**
      * Skips Authentication and created the API around a previously cached Token object.  This can be useful in multi-threaded environments
      * or scenarios where a client should not be re-authenticated due to a token lasting 24 hours.

@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.domain;
+package com.huawei.openstack4j.kms.openstack.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.huawei.openstack4j.model.ModelEntity;

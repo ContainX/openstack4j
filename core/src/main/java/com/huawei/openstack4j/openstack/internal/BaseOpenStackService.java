@@ -42,7 +42,6 @@ import com.huawei.openstack4j.model.identity.AuthVersion;
 import com.huawei.openstack4j.model.identity.v2.Access;
 import com.huawei.openstack4j.model.identity.v3.Service;
 import com.huawei.openstack4j.model.identity.v3.Token;
-import com.huawei.openstack4j.openstack.internal.OSClientSession.OSClientSessionV3;
 
 public class BaseOpenStackService {
 	
@@ -136,7 +135,9 @@ public class BaseOpenStackService {
 		if (ses instanceof OSClientSessionV3) {
 			OSClientSessionV3 v3 = (OSClientSessionV3) ses;
 			Token token = v3.getToken();
-			path = path.replace("%(project_id)s", token.getProject().getId());
+			if (null != token) {
+				path = path.replace("%(project_id)s", token.getProject().getId());
+			}
 		}
 
 		RequestBuilder<R> req = HttpRequest.builder(returnType).endpointTokenProvider(ses).config(ses.getConfig())
@@ -275,9 +276,9 @@ public class BaseOpenStackService {
 	protected int getServiceVersion() {
 		OSClientSession session = OSClientSession.getCurrent();
 		if (session.getAuthVersion() == AuthVersion.V3) {
-			SortedSet<? extends Service> services = ((OSClientSession.OSClientSessionV3) session).getToken()
+			SortedSet<? extends Service> services = ((OSClientSessionV3) session).getToken()
 					.getAggregatedCatalog().get(serviceType.getType());
-			Service service = ((OSClientSession.OSClientSessionV3) session).getToken().getAggregatedCatalog()
+			Service service = ((OSClientSessionV3) session).getToken().getAggregatedCatalog()
 					.get(serviceType.getType()).first();
 
 			if (services.isEmpty()) {

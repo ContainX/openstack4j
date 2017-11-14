@@ -38,7 +38,6 @@ import com.huawei.openstack4j.openstack.identity.v3.domain.KeystoneAuth;
 import com.huawei.openstack4j.openstack.identity.v3.domain.KeystoneToken;
 import com.huawei.openstack4j.openstack.identity.v3.domain.TokenAuth;
 import com.huawei.openstack4j.openstack.internal.OSClientSession.OSClientSessionV2;
-import com.huawei.openstack4j.openstack.internal.OSClientSession.OSClientSessionV3;
 
 import static com.huawei.openstack4j.core.transport.HttpExceptionHandler.*;
 
@@ -168,7 +167,7 @@ public class OSAuthenticator {
 
     private static OSClientV3 authenticateV3(KeystoneAuth auth, SessionInfo info, Config config) {
         if (auth.getType().equals(Type.TOKENLESS)){
-            Map headers = new HashMap();
+            Map<String, String> headers = new HashMap<String, String>();
             Authentication.Scope.Project project = auth.getScope().getProject();
             if (project != null){
                 if (!isEmpty(project.getId()))

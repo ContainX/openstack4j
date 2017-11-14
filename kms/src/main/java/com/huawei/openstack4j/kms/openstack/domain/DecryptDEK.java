@@ -13,7 +13,9 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.domain;
+package com.huawei.openstack4j.kms.openstack.domain;
+
+import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.huawei.openstack4j.model.ModelEntity;
@@ -29,7 +31,7 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class DEK implements ModelEntity {
+public class DecryptDEK implements ModelEntity {
 
 	private static final long serialVersionUID = -6764087311133427927L;
 
@@ -38,20 +40,24 @@ public class DEK implements ModelEntity {
 	 */
 	@JsonProperty("key_id")
 	String keyId;
-	
+
 	/**
-	 * The plain-text of a DEK is expressed in HEX format, 
-	 * and two characters indicate one byte.
-	 */
-	@JsonProperty("plain_text")
-	String plainText;
-	
-	/**
-	 * The ciphertext of a DEK is expressed in HEX format, 
-	 * and two characters indicate one byte.
+	 * The plain-text of a DEK or the SHA-256 hash value of the plain-text in HEX format, 
+	 * ( two characters indicate one byte )
 	 */
 	@JsonProperty("cipher_text")
 	String cipherText;
+
+	@Builder.Default
+	@JsonProperty(value = "datakey_cipher_length", defaultValue = "64")
+	Integer cipherTextLength = 64;
+
+
+	@JsonProperty("encryption_context")
+	HashMap<String, Object> encryptionContext;
+
+	@JsonProperty("sequence")
+	String sequence;
 
 
 }

@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.internal;
+package com.huawei.openstack4j.kms.openstack.internal;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -25,11 +25,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.huawei.openstack4j.common.RestService;
 import com.huawei.openstack4j.openstack.common.Quota;
 import com.huawei.openstack4j.openstack.common.Quota.Quotas;
-import com.huawei.openstack4j.openstack.key.management.domain.Key;
-import com.huawei.openstack4j.openstack.key.management.domain.KeyCreate;
-import com.huawei.openstack4j.openstack.key.management.domain.KeyWrap;
-import com.huawei.openstack4j.openstack.key.management.domain.Key.Keys;
-import com.huawei.openstack4j.openstack.key.management.options.KeyListOptions;
+import com.huawei.openstack4j.kms.openstack.domain.Key;
+import com.huawei.openstack4j.kms.openstack.domain.KeyCreate;
+import com.huawei.openstack4j.kms.openstack.domain.KeyWrap;
+import com.huawei.openstack4j.kms.openstack.domain.Key.Keys;
+import com.huawei.openstack4j.kms.openstack.options.KeyListOptions;
 
 /**
  * Master Key Service 
@@ -37,7 +37,7 @@ import com.huawei.openstack4j.openstack.key.management.options.KeyListOptions;
  * @author QianBiao.NG
  * @date   2017-07-13 09:31:18
  */
-public class KeyService extends BaseKeyManagementServices implements RestService {
+public class KeyService extends KeyManagementServices implements RestService {
 
 	/**
 	 * List keys with filter options

@@ -30,7 +30,7 @@ import com.huawei.openstack4j.api.identity.EndpointURLResolver;
 import com.huawei.openstack4j.api.types.ServiceType;
 import com.huawei.openstack4j.core.transport.Config;
 import com.huawei.openstack4j.model.identity.URLResolverParams;
-import com.huawei.openstack4j.openstack.internal.OSClientSession.OSClientSessionV3;
+import com.huawei.openstack4j.openstack.internal.OSClientSessionV3;
 
 /**
  * This test will validate that by default, the endpoint used is the one

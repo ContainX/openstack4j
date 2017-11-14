@@ -1,8 +1,9 @@
-package com.huawei.openstack4j.openstack.key.management.options;
+package com.huawei.openstack4j.kms.openstack.options;
 
 import java.util.Map;
 
 import com.google.common.collect.Maps;
+import com.huawei.openstack4j.kms.openstack.constants.KeyState;
 
 /**
  *
@@ -19,6 +20,10 @@ public class KeyListOptions {
 	
 	public KeyListOptions marker(String marker) {
 		return add("marker", marker);
+	}
+	
+	public KeyListOptions keyState(KeyState enabled) {
+		return add("key_state", enabled);
 	}
 	
 	public KeyListOptions sequence(String sequence) {

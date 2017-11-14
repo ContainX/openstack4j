@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.huawei.openstack4j.model.identity.AuthStore;
 import com.huawei.openstack4j.model.identity.AuthVersion;
+import com.huawei.openstack4j.model.identity.v3.Project;
 import com.huawei.openstack4j.model.identity.v3.Service;
 import com.huawei.openstack4j.model.identity.v3.Token;
 
@@ -214,4 +215,9 @@ public class KeystoneToken implements Token {
         return String.format("%s:%s", endpoint, uniq);
 
     }
+
+	@Override
+	public void setProjectInfo(Project project) {
+		this.project=(KeystoneProject) project;
+	}
 }

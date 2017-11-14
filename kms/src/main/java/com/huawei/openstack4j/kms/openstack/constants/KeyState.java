@@ -1,4 +1,4 @@
-package com.huawei.openstack4j.openstack.key.management.constants;
+package com.huawei.openstack4j.kms.openstack.constants;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

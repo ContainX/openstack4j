@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei and OTC                              
+ * 	Copyright 2017 HuaWei TLD and OTC                                    
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,23 +13,31 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.internal;
+package com.huawei.openstack4j.kms.openstack.domain;
 
-import com.huawei.openstack4j.api.types.ServiceType;
-import com.huawei.openstack4j.openstack.internal.BaseOpenStackService;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.huawei.openstack4j.model.ModelEntity;
 
 /**
- * 
  *
  * @author QianBiao.NG
- * @date   2017-07-13 09:21:47
+ * @date   2017-07-13 10:06:50
  */
-public class BaseKeyManagementServices extends BaseOpenStackService {
+public class KeyWrap implements ModelEntity {
 
-	public static String CONTENT_JSON = "application/json;charset=utf-8";
+	private static final long serialVersionUID = 1L;
 
-	protected BaseKeyManagementServices() {
-		super(ServiceType.KEY_MANAGEMENT);
+	@JsonProperty("key_info")
+	private Key key;
+	
+	public KeyWrap() {
 	}
 
+	public KeyWrap(Key key) {
+		this.key = key;
+	}
+
+	public Key getKey() {
+		return key;
+	}
 }

@@ -70,8 +70,10 @@
 	<modules>
 		<module>core</module>
 		<module>core-test</module>
+		
 		<module>connectors</module>
-		<module>core-integration-test</module>
+		<!--<module>core-integration-test</module>-->	
+		<module>kms</module>
 		<module>distribution</module>
 		<module>core-functional-test</module>
 		<module>core-sample</module>

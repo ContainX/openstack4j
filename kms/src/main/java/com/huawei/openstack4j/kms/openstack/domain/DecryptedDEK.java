@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei TLD and OTC                                    
+ * 	Copyright 2017 HuaWei TLD                               
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,31 +13,37 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.domain;
+package com.huawei.openstack4j.kms.openstack.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.huawei.openstack4j.model.ModelEntity;
 
-/**
- *
- * @author QianBiao.NG
- * @date   2017-07-13 10:06:50
- */
-public class KeyWrap implements ModelEntity {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-	private static final long serialVersionUID = 1L;
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class DecryptedDEK implements ModelEntity {
 
-	@JsonProperty("key_info")
-	private Key key;
+	private static final long serialVersionUID = -6764087311133427927L;
+
+	/**
+	 * the key identifier used to generate the DEK
+	 */
+	@JsonProperty("data_key")
+	String dataKey;
 	
-	public KeyWrap() {
-	}
+	@JsonProperty("datakey_length")
+	Integer datakeyLength;
+	
+	@JsonProperty("datakey_dgst")
+	String datakeyDigest;
 
-	public KeyWrap(Key key) {
-		this.key = key;
-	}
 
-	public Key getKey() {
-		return key;
-	}
 }

@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.domain;
+package com.huawei.openstack4j.kms.openstack.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.huawei.openstack4j.model.ModelEntity;
@@ -29,21 +29,29 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class DecryptedDEK implements ModelEntity {
+public class DEK implements ModelEntity {
 
 	private static final long serialVersionUID = -6764087311133427927L;
 
 	/**
 	 * the key identifier used to generate the DEK
 	 */
-	@JsonProperty("data_key")
-	String dataKey;
+	@JsonProperty("key_id")
+	String keyId;
 	
-	@JsonProperty("datakey_length")
-	Integer datakeyLength;
+	/**
+	 * The plain-text of a DEK is expressed in HEX format, 
+	 * and two characters indicate one byte.
+	 */
+	@JsonProperty("plain_text")
+	String plainText;
 	
-	@JsonProperty("datakey_dgst")
-	String datakeyDigest;
+	/**
+	 * The ciphertext of a DEK is expressed in HEX format, 
+	 * and two characters indicate one byte.
+	 */
+	@JsonProperty("cipher_text")
+	String cipherText;
 
 
 }

@@ -13,7 +13,7 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.internal;
+package com.huawei.openstack4j.kms.openstack.internal;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -26,11 +26,11 @@ import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
 
 import com.huawei.openstack4j.common.RestService;
-import com.huawei.openstack4j.openstack.key.management.domain.DEK;
-import com.huawei.openstack4j.openstack.key.management.domain.DecryptDEK;
-import com.huawei.openstack4j.openstack.key.management.domain.DecryptedDEK;
-import com.huawei.openstack4j.openstack.key.management.domain.EncryptDEK;
-import com.huawei.openstack4j.openstack.key.management.domain.EncryptedDEK;
+import com.huawei.openstack4j.kms.openstack.domain.DEK;
+import com.huawei.openstack4j.kms.openstack.domain.DecryptDEK;
+import com.huawei.openstack4j.kms.openstack.domain.DecryptedDEK;
+import com.huawei.openstack4j.kms.openstack.domain.EncryptDEK;
+import com.huawei.openstack4j.kms.openstack.domain.EncryptedDEK;
 
 /**
  * Crypto Service
@@ -38,7 +38,7 @@ import com.huawei.openstack4j.openstack.key.management.domain.EncryptedDEK;
  * @author QianBiao.NG
  * @date   2017-07-13 09:31:10
  */
-public class CryptoService extends BaseKeyManagementServices implements RestService {
+public class CryptoService extends KeyManagementServices implements RestService {
 
 	/**
 	 * Create a 512 bit random data

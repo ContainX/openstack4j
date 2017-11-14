@@ -1,5 +1,5 @@
 /*******************************************************************************
- * 	Copyright 2017 HuaWei TLD and OTC                                          
+ * 	Copyright 2017 HuaWei and OTC                              
  * 	                                                                                 
  * 	Licensed under the Apache License, Version 2.0 (the "License"); you may not      
  * 	use this file except in compliance with the License. You may obtain a copy of    
@@ -13,32 +13,22 @@
  * 	License for the specific language governing permissions and limitations under    
  * 	the License.                                                                     
  *******************************************************************************/
-package com.huawei.openstack4j.openstack.key.management.internal;
+package com.huawei.openstack4j.kms.openstack.internal;
 
-import com.huawei.openstack4j.api.Apis;
-import com.huawei.openstack4j.common.RestService;
+import com.huawei.openstack4j.api.types.ServiceType;
+import com.huawei.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
  * 
  *
  * @author QianBiao.NG
- * @date   2017-07-13 09:31:29
+ * @date   2017-07-13 09:21:47
  */
-public class KeyManagementService extends BaseKeyManagementServices implements RestService {
+public class KeyManagementServices extends BaseOpenStackService {
 
-	/**
-	 * Master Key Service API
-	 * @return the {@link KeyService} instance
-	 */
-	public KeyService keys() {
-		return Apis.get(KeyService.class);
-	}
-	
-	/**
-	 * Crypto Service API
-	 * @return the {@link CryptoService} instance
-	 */
-	public CryptoService crypto() {
-		return Apis.get(CryptoService.class);
+	public static String CONTENT_JSON = "application/json;charset=utf-8";
+
+	protected KeyManagementServices() {
+		super(ServiceType.KEY_MANAGEMENT);
 	}
 }
