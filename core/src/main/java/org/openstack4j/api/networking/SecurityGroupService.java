@@ -62,5 +62,5 @@ public interface SecurityGroupService extends RestService {
      *
      * @return the list<? extends security group>
      */
-    List<? extends SecurityGroup> list(Map<String, String> filteringParams);
+    List<? extends SecurityGroup> list(Map<String, List<String>> filteringParams);
 }
