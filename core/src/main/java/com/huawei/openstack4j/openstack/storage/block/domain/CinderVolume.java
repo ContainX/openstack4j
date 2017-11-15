@@ -19,16 +19,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.MoreObjects;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.huawei.openstack4j.model.storage.block.Volume;
 import com.huawei.openstack4j.model.storage.block.VolumeAttachment;
 import com.huawei.openstack4j.model.storage.block.builder.VolumeBuilder;
 import com.huawei.openstack4j.openstack.common.ListResult;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack Volume
@@ -41,9 +42,9 @@ public class CinderVolume implements Volume {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	@JsonProperty("display_name")
+	@JsonProperty("name")
 	private String name;
-	@JsonProperty("display_description")
+	@JsonProperty("description")
 	private String description;
 	private Status status;
 	@JsonInclude(Include.NON_DEFAULT)
