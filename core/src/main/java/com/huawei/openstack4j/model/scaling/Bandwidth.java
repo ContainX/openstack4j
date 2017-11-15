@@ -15,12 +15,12 @@
  *******************************************************************************/
 package com.huawei.openstack4j.model.scaling;
 
+import com.google.common.base.Strings;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.huawei.openstack4j.model.ModelEntity;
-
-import com.google.common.base.Strings;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,7 +54,7 @@ public class Bandwidth implements ModelEntity {
 	}
 
 	public enum ChargingMode {
-		TRAFFIC("traffic");
+		TRAFFIC("traffic"), BANDWIDTH("bandwidth");
 
 		private String val;
 
