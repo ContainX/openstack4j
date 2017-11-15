@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.huawei</groupId>
 		<artifactId>openstack4j-parent</artifactId>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 	</parent>
 	<artifactId>openstack4j-core-functional-test</artifactId>
 	<name>OpenStack4j Core Functional Test Cases</name>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>com.huawei</groupId>
 			<artifactId>openstack4j-kms</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2</version>
 		</dependency>
 		<!-- 
 		<dependency>
