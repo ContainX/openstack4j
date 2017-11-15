@@ -33,8 +33,8 @@ import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.storage.block.AsyncVolumeBackupJob;
 import com.huawei.openstack4j.model.storage.block.Volume;
 import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicy;
-import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicyBackupTask;
 import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicy.VolumeBackupPolicyStatus;
+import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicyBackupTask;
 import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicyResource.VolumeBackupPolicyResourceActionResult;
 import com.huawei.openstack4j.model.storage.block.options.BakcupTaskListOptions;
 import com.huawei.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicy;
@@ -182,7 +182,6 @@ public class VolumeBackupPolicyTest extends AbstractTest {
 	}
 	
 	
-
 	@Test(priority = 100, dependsOnMethods = { "testDisable" })
 	public void testPolicyDelete() {
 		osclient.blockStorage().policies().delete(this.policy.getId());

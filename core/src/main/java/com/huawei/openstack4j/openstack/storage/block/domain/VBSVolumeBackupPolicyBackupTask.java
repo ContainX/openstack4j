@@ -51,11 +51,12 @@ public class VBSVolumeBackupPolicyBackupTask implements VolumeBackupPolicyBackup
 	@JsonProperty("finished_at")
 	@JsonFormat(pattern = DateTimeUtils.FORMAT_YMDTHMS_SSS)
 	Date finishedAt;
-
+	
 	public static class VolumeBackupPolicyBackupTasks extends ListResult<VBSVolumeBackupPolicyBackupTask> {
 
 		private static final long serialVersionUID = 1L;
 
+		@JsonProperty("tasks")
 		private List<VBSVolumeBackupPolicyBackupTask> tasks;
 
 		@Override
