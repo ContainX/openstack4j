@@ -75,6 +75,24 @@ public interface RecordsetService extends RestService {
 	 * @return list of recordsets
 	 */
 	List<? extends Recordset> list(RecordsetListOptions options);
+	
+	
+	/**
+	 * list recordsets (first page)
+	 *
+	 * @return list of recordsets
+	 */
+	public List<? extends Recordset> list();
+	
+	
+	
+	/**
+	 * list records in a zone
+	 * 
+	 * @param zoneId	the identifier of the zone
+	 * @return
+	 */
+	public List<? extends Recordset> list(String zoneId);
 
 	/**
 	 * list recordsets in a zone

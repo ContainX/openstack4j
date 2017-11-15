@@ -69,6 +69,18 @@ public class RecordsetServiceImpl extends BaseDNSServices implements RecordsetSe
 		return get(DesignateRecordset.Recordsets.class, uri(PATH_RECORDSETS)).params(params).execute().getList();
 	}
 
+
+	@Override
+	public List<? extends Recordset> list() {
+		return get(DesignateRecordset.Recordsets.class, uri(PATH_RECORDSETS)).execute().getList();
+	}
+
+	@Override
+	public List<? extends Recordset> list(String zoneId) {
+		checkNotNull(zoneId, "Zone Id should not be null.");
+		return get(DesignateRecordset.Recordsets.class, PATH_ZONES, "/", zoneId, PATH_RECORDSETS).execute().getList();
+	}
+
 	@Override
 	public List<? extends Recordset> list(String zoneId, Integer limit, String marker) {
 		checkNotNull(zoneId, "Zone Id should not be null.");
