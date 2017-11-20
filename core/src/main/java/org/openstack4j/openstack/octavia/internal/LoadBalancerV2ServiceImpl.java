@@ -84,6 +84,17 @@ public class LoadBalancerV2ServiceImpl extends BaseOctaviaServices implements Lo
      * {@inheritDoc}
      */
     @Override
+    public ActionResponse cascadeDelete(String loadbalancerId){
+        checkNotNull(loadbalancerId);
+        Invocation<Void> req = delete(Void.class, uri("/lbaas/loadbalancers/%s",loadbalancerId));
+        req = req.param("cascade", "true");
+        return ToActionResponseFunction.INSTANCE.apply(req.executeWithResponse());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public LoadBalancerV2Stats stats(String loadbalancerId){
         checkNotNull(loadbalancerId);
         return get(OctaviaLoadBalancerV2Stats.class, uri("/lbaas/loadbalancers/%s/stats",loadbalancerId)).execute();
