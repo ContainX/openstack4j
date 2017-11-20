@@ -22,19 +22,21 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
+import com.google.common.collect.Lists;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.huawei.openstack4j.api.AbstractTest;
 import com.huawei.openstack4j.core.transport.ObjectMapperSingleton;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicy;
-import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicyResource;
 import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicy.VolumeBackupPolicyStatus;
 import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicy.VolumeBackupScheduledPolicy;
+import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicyBackupTask;
+import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicyBackupTask.BackupTaskStatus;
+import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicyResource;
 import com.huawei.openstack4j.model.storage.block.VolumeBackupPolicyResource.VolumeBackupPolicyResourceActionResult;
 import com.huawei.openstack4j.openstack.storage.block.domain.VBSVolumeBackupPolicy;
 import com.huawei.openstack4j.openstack.storage.block.domain.VBSVolumeBackupScheduledPolicy;
-
-import com.google.common.collect.Lists;
 
 import okhttp3.mockwebserver.RecordedRequest;
 
@@ -177,8 +179,8 @@ public class VolumeBackupPolicyTests extends AbstractTest {
 	public void testLinkResource() throws Exception {
 		respondWith("/storage/v1/policy_link_resources_response.json");
 		ArrayList<String> resources = Lists.newArrayList("r1", "r2");
-		VolumeBackupPolicyResourceActionResult result = osv3().blockStorage().policies()
-				.linkResources("policy-id", resources);
+		VolumeBackupPolicyResourceActionResult result = osv3().blockStorage().policies().linkResources("policy-id",
+				resources);
 		assertEquals(1, result.getSuccessResources().size());
 		VolumeBackupPolicyResource resource = result.getSuccessResources().get(0);
 		assertEquals("bce8d47a-af17-4169-901f-4c7ae9f29c2c", resource.getId());
@@ -189,7 +191,7 @@ public class VolumeBackupPolicyTests extends AbstractTest {
 		RecordedRequest request = server.takeRequest();
 		assertTrue(request.getPath().equals("/v2/project-id/backuppolicyresources"));
 		assertEquals(request.getMethod(), "POST");
-		
+
 		String requestBody = request.getBody().readUtf8();
 		JsonNode post = ObjectMapperSingleton.getContext(Object.class).readTree(requestBody);
 		assertEquals("policy-id", post.get("backup_policy_id").asText());
@@ -198,26 +200,44 @@ public class VolumeBackupPolicyTests extends AbstractTest {
 		assertEquals("r1", r.get("resource_id").asText());
 		assertEquals("volume", r.get("resource_type").asText());
 	}
-	
+
 	@Test
 	public void testUnlinkResource() throws Exception {
 		respondWith("/storage/v1/policy_unlink_resources_response.json");
 		ArrayList<String> resources = Lists.newArrayList("r1", "r2");
-		VolumeBackupPolicyResourceActionResult result = osv3().blockStorage().policies()
-				.unlinkResources("policy-id", resources);
+		VolumeBackupPolicyResourceActionResult result = osv3().blockStorage().policies().unlinkResources("policy-id",
+				resources);
 		assertEquals(1, result.getFailResources().size());
-		
+
 		VolumeBackupPolicyResource resource = result.getFailResources().get(0);
 		assertEquals("bbba7509-f457-4732-97f1-a8e24b6ed9bc", resource.getId());
 
 		RecordedRequest request = server.takeRequest();
 		assertTrue(request.getPath().equals("/v2/project-id/backuppolicyresources/policy-id/deleted_resources"));
 		assertEquals(request.getMethod(), "POST");
-		
+
 		String requestBody = request.getBody().readUtf8();
 		JsonNode post = ObjectMapperSingleton.getContext(Object.class).readTree(requestBody);
 		assertTrue(post.get("resources").isArray());
 		JsonNode r = post.get("resources").get(0);
 		assertEquals("r1", r.get("resource_id").asText());
+	}
+
+	@Test
+	public void testListTask() throws Exception {
+		respondWith("/storage/v1/policy_task_list_response.json");
+		List<? extends VolumeBackupPolicyBackupTask> tasks = osv3().blockStorage().policies().tasks("policy-id", null);
+		assertEquals(13, tasks.size());
+
+		RecordedRequest request = server.takeRequest();
+		assertTrue(request.getPath().equals("/v2/project-id/backuppolicy/policy-id/backuptasks"));
+		assertEquals(request.getMethod(), "GET");
+		
+		VolumeBackupPolicyBackupTask task = tasks.get(0);
+		assertEquals("7679fd78-838e-4f9f-8366-06a5c7ebf31d", task.getId());
+		assertEquals(BackupTaskStatus.EXECUTE_FAIL, task.getStatus());
+		assertEquals("autobk_829a", task.getBackupName());
+		assertEquals("ac1c4557-d051-405f-a085-e99f6b6137c3", task.getResourceId());
+		assertEquals("volume", task.getResourceType());
 	}
 }

@@ -17,6 +17,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.functional.vbs;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -138,8 +139,10 @@ public class VolumeBackupPolicyTest extends AbstractTest {
 
 		List<String> collect = result.getSuccessResources().stream().map(input -> input.getId())
 				.collect(Collectors.toList());
+		
+		Collections.sort(collect);
+		Collections.sort(resources);
 		Assert.assertEquals(collect, resources);
-
 	}
 	
 	@Test(dependsOnMethods = { "testLinkResources" })
@@ -151,7 +154,7 @@ public class VolumeBackupPolicyTest extends AbstractTest {
 	@Test(dependsOnMethods = { "testExecute" })
 	public void testListBackupTasks() {
 		BakcupTaskListOptions limit = BakcupTaskListOptions.create().asc().limit(10);
-		List<? extends VolumeBackupPolicyBackupTask> tasks = osclient.blockStorage().policies().tasks(this.policy.getId(), null);
+		List<? extends VolumeBackupPolicyBackupTask> tasks = osclient.blockStorage().policies().tasks(this.policy.getId(), limit);
 		tasks.size();
 	}
 	
