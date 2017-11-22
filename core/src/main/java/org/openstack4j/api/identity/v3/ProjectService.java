@@ -79,4 +79,11 @@ public interface ProjectService extends RestService {
 	 */
 	List<? extends Project> list();
 
+	/**
+	 * list all projects on the certain domain the current token has access to
+	 *
+	 * @return list of projects on a certain domain
+	 */
+	List<? extends Project> list(String domainId);
+
 }
