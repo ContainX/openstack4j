@@ -33,8 +33,8 @@ import com.huawei.openstack4j.core.transport.ClientConstants;
 import com.huawei.openstack4j.core.transport.ExecutionOptions;
 import com.huawei.openstack4j.core.transport.HttpMethod;
 import com.huawei.openstack4j.core.transport.HttpRequest;
-import com.huawei.openstack4j.core.transport.HttpResponse;
 import com.huawei.openstack4j.core.transport.HttpRequest.RequestBuilder;
+import com.huawei.openstack4j.core.transport.HttpResponse;
 import com.huawei.openstack4j.core.transport.internal.HttpExecutor;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.common.Payload;
@@ -44,7 +44,7 @@ import com.huawei.openstack4j.model.identity.v3.Service;
 import com.huawei.openstack4j.model.identity.v3.Token;
 
 public class BaseOpenStackService {
-	
+
 	public static String CONTENT_JSON = "application/json;charset=utf-8";
 
 	ServiceType serviceType = ServiceType.IDENTITY;
@@ -135,7 +135,7 @@ public class BaseOpenStackService {
 		if (ses instanceof OSClientSessionV3) {
 			OSClientSessionV3 v3 = (OSClientSessionV3) ses;
 			Token token = v3.getToken();
-			if (null != token) {
+			if (null != token && token.getProject() != null && token.getProject().getId() != null) {
 				path = path.replace("%(project_id)s", token.getProject().getId());
 			}
 		}
@@ -276,10 +276,10 @@ public class BaseOpenStackService {
 	protected int getServiceVersion() {
 		OSClientSession session = OSClientSession.getCurrent();
 		if (session.getAuthVersion() == AuthVersion.V3) {
-			SortedSet<? extends Service> services = ((OSClientSessionV3) session).getToken()
-					.getAggregatedCatalog().get(serviceType.getType());
-			Service service = ((OSClientSessionV3) session).getToken().getAggregatedCatalog()
-					.get(serviceType.getType()).first();
+			SortedSet<? extends Service> services = ((OSClientSessionV3) session).getToken().getAggregatedCatalog()
+					.get(serviceType.getType());
+			Service service = ((OSClientSessionV3) session).getToken().getAggregatedCatalog().get(serviceType.getType())
+					.first();
 
 			if (services.isEmpty()) {
 				return 1;
