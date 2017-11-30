@@ -36,6 +36,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
     private LbMethod lbMethod;
 
     @JsonProperty("session_persistence")
+    @JsonDeserialize(as = NeutronSessionPersistence.class)
     private SessionPersistence sessionPersistence;
 
     @JsonProperty("admin_state_up")
