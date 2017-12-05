@@ -44,12 +44,21 @@ public interface LoadBalancerV2Service extends RestService {
      * @return the action response
      */
     ActionResponse delete(String loadbalancerId);
+
+    /**
+     * Cascade delete the specified loadbalancer by ID
+     * @param loadbalancerId the loadbalancer identifier
+     * @return the action response
+     */
+    ActionResponse cascadeDelete(String loadbalancerId);
+
     /**
      * Create a loadbalancer
      * @param loadbalancer
      * @return loadbalancer
      */
     LoadBalancerV2 create(LoadBalancerV2 loadbalancer);
+
     /**
      * Update a loadbalancer
      * @param loadbalancerId the loadbalancer identifier
