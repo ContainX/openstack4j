@@ -291,6 +291,15 @@ public class OctaviaLoadBalancerV2 implements LoadBalancerV2 {
          * {@inheritDoc}
          */
         @Override
+        public LoadBalancerV2Builder portId(String vipPortId){
+            m.vipPortId = vipPortId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
         public LoadBalancerV2Builder address(String vipAddress){
             m.vipAddress = vipAddress;
             return this;
