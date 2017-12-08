@@ -52,6 +52,15 @@ public interface LoadBalancerV2Builder extends Buildable.Builder<LoadBalancerV2B
     /**
      * Optional
      *
+     * @param vipPortId
+     *            The vip port.
+     * @return LoadBalancerV2Builder
+     */
+    LoadBalancerV2Builder portId(String vipPortId);
+
+    /**
+     * Optional
+     *
      * @param vipAddress
      *            The IP address of the VIP.
      *            If provided, the system will attempt to assign the load balancer's vip address to this.
