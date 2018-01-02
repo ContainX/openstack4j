@@ -1,6 +1,7 @@
 package com.huawei.openstack.sample;
 
-import com.huawei.openstack4j.api.Builders;
+import java.util.List;
+
 import com.huawei.openstack4j.api.OSClient.OSClientV3;
 import com.huawei.openstack4j.api.types.ServiceType;
 import com.huawei.openstack4j.core.transport.Config;
@@ -20,6 +21,12 @@ public class Openstack4jSample {
 
 	public static void main(String[] args) {
 
+		                                                                                                 
+		// step 1: add cloud service override endpoint
+		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
+		// "example" in the endpoint stands for "Region.Cloud"
+		endpointResolver.addOverrideEndpoint(ServiceType.DNS, "https://dns.example.com");
+		
 		// ========================================================================================== // 
 		// those services's endpoint will be auto detected from V3 authentication token               // 
 		//                                                                                            // 
@@ -32,63 +39,59 @@ public class Openstack4jSample {
 		//                                                                                            // 
 		// so, we do not need to setup the endpoint override for them.                                // 
 		// ========================================================================================== // 
-		                                                                                                 
-		// step 1: add cloud service override endpoint
-		OverridableEndpointURLResolver endpointResolver = new OverridableEndpointURLResolver();
-		endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
-				"https://vbs.eu-de.otc.t-systems.com/v2/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.AUTO_SCALING,
-				"https://as.eu-de.otc.t-systems.com/autoscaling-api/v1/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_EYE,
-				"https://ces.eu-de.otc.t-systems.com/V1.0/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.LOAD_BALANCER,
-				"https://elb.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.MAP_REDUCE,
-				"https://mrs.eu-de.otc.t-systems.com/v1.1/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
-				"https://kms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_TRACE,
-				"https://cts.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.ANTI_DDOS,
-				"https://antiddos.eu-de.otc.t-systems.com/v1/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.Notification,
-				"https://smn.eu-de.otc.t-systems.com/v2/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.MessageQueue,
-				"https://dms.eu-de.otc.t-systems.com/v1.0/%(project_id)s");
-		endpointResolver.addOverrideEndpoint(ServiceType.MAAS,
-				"https://maas.eu-de.otc.t-systems.com/v1/%(project_id)s/objectstorage");
-		endpointResolver.addOverrideEndpoint(ServiceType.DATABASE, "https://rds.eu-de.otc.t-systems.com");
+
+		// endpoint override for the other service
+		// "example" in the endpoint stands for "Region.Cloud"
+		/*
+		 * endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
+		 * "https://vbs.example.com/v2/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.AUTO_SCALING,
+		 * "https://as.example.com/autoscaling-api/v1/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_EYE,
+		 * "https://ces.example.com/V1.0/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.LOAD_BALANCER,
+		 * "https://elb.example.com/v1.0/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.MAP_REDUCE,
+		 * "https://mrs.example.com/v1.1/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
+		 * "https://kms.example.com/v1.0/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_TRACE,
+		 * "https://cts.example.com/v1.0/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.ANTI_DDOS,
+		 * "https://antiddos.example.com/v1/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.Notification,
+		 * "https://smn.example.com/v2/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.MessageQueue,
+		 * "https://dms.example.com/v1.0/%(project_id)s");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.MAAS,
+		 * "https://maas.example.com/v1/%(project_id)s/objectstorage");
+		 * endpointResolver.addOverrideEndpoint(ServiceType.DATABASE, "https://rds.example.com");
+		 */
 
 		// step 2: setup the authentication credit
-		String user = "replace-with-your-username";
-		String password = "replace-with-your-password";
-		String projectId = "replace-with-your-project-id";
-		String userDomainId = "replace-with-your-user-domain-id";
-		String authUrl = "https://iam.eu-de.otc.t-systems.com/v3";
+		String user = "zhangdong";
+		String password = "SDK2017#";
+		String projectId = "18899b93e7be46c2b7f0d2568efabc33";
+		String userDomainId = "71629073818b445d8d30591c545056d0";
+		// "example" in the endpoint stands for "Region.Cloud"
+		String authUrl = "https://iam.example.com/v3";
 
 		// step 3: initial OpenStack4j Client
 		OSFactory.enableHttpLoggingFilter(true);
 		// config of the client
 		// with language setting is required for RDS(trove&database) service
+		// withSSLVerificationDisabled is required if the SSL certification of the cloud service is illegal
 		Config config = Config.newConfig().withEndpointURLResolver(endpointResolver).withLanguage(LANGUAGE)
 				.withSSLVerificationDisabled();
+
 		// initial client
 		OSClientV3 osclient = OSFactory.builderV3().withConfig(config).endpoint(authUrl)
-				.credentials(user, password, Identifier.byId(userDomainId)).scopeToProject(Identifier.byId(projectId))
-				.authenticate();
+				.credentials(user, password, Identifier.byId(userDomainId)).scopeToDomain(Identifier.byId(userDomainId))
+				.scopeToProject(Identifier.byId(projectId)).authenticate();
 
-		// use client to visit DNS API
-		
-		// create a public zone
-		Zone creation = Builders.zone().name("sdk.tutorial.com.").description("tutorial").ttl(600)
-				.email("admin@tutorial.com").build();
-		Zone zone = osclient.dns().zones().create(creation);
-		
-		// get the created zone
-		Zone get = osclient.dns().zones().get(zone.getId());
-		
-		// delete the created zone
-		osclient.dns().zones().delete(get.getId());
+		// Use client to visit DNS list zone API
+		List<? extends Zone> list = osclient.dns().zones().list();
+		System.out.println(list);
 	}
 
 }
