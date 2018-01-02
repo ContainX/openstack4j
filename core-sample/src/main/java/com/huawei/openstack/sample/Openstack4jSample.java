@@ -69,10 +69,10 @@ public class Openstack4jSample {
 		 */
 
 		// step 2: setup the authentication credit
-		String user = "zhangdong";
-		String password = "SDK2017#";
-		String projectId = "18899b93e7be46c2b7f0d2568efabc33";
-		String userDomainId = "71629073818b445d8d30591c545056d0";
+		String user = "replace-with-your-username";
+		String password = "replace-with-your-password";
+		String projectId = "replace-with-your-project-id";
+		String userDomainId = "replace-with-your-user-domain-id";
 		// "example" in the endpoint stands for "Region.Cloud"
 		String authUrl = "https://iam.example.com/v3";
 
