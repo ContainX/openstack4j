@@ -43,29 +43,29 @@ public class Openstack4jSample {
 		// endpoint override for the other service
 		// "example" in the endpoint stands for "Region.Cloud"
 		/*
-		 * endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
-		 * "https://vbs.example.com/v2/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.AUTO_SCALING,
-		 * "https://as.example.com/autoscaling-api/v1/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_EYE,
-		 * "https://ces.example.com/V1.0/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.LOAD_BALANCER,
-		 * "https://elb.example.com/v1.0/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.MAP_REDUCE,
-		 * "https://mrs.example.com/v1.1/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
-		 * "https://kms.example.com/v1.0/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_TRACE,
-		 * "https://cts.example.com/v1.0/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.ANTI_DDOS,
-		 * "https://antiddos.example.com/v1/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.Notification,
-		 * "https://smn.example.com/v2/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.MessageQueue,
-		 * "https://dms.example.com/v1.0/%(project_id)s");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.MAAS,
-		 * "https://maas.example.com/v1/%(project_id)s/objectstorage");
-		 * endpointResolver.addOverrideEndpoint(ServiceType.DATABASE, "https://rds.example.com");
+		 endpointResolver.addOverrideEndpoint(ServiceType.VOLUME_BACKUP,
+		 "https://vbs.example.com/v2/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.AUTO_SCALING,
+		 "https://as.example.com/autoscaling-api/v1/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_EYE,
+		 "https://ces.example.com/V1.0/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.LOAD_BALANCER,
+		 "https://elb.example.com/v1.0/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.MAP_REDUCE,
+		 "https://mrs.example.com/v1.1/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.KEY_MANAGEMENT,
+		 "https://kms.example.com/v1.0/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.CLOUD_TRACE,
+		 "https://cts.example.com/v1.0/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.ANTI_DDOS,
+		 "https://antiddos.example.com/v1/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.Notification,
+		 "https://smn.example.com/v2/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.MessageQueue,
+		 "https://dms.example.com/v1.0/%(project_id)s");
+		 endpointResolver.addOverrideEndpoint(ServiceType.MAAS,
+		 "https://maas.example.com/v1/%(project_id)s/objectstorage");
+		 endpointResolver.addOverrideEndpoint(ServiceType.DATABASE, "https://rds.example.com");
 		 */
 
 		// step 2: setup the authentication credit
