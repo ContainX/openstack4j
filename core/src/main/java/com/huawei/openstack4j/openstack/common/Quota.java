@@ -31,7 +31,7 @@ public class Quota implements ModelEntity {
 	private static final long serialVersionUID = 8118640445519970866L;
 
 	public enum ResourceType {
-		ALARM, CMK, QUEUE, ELB, LISTENER, SCALING_GROUP, SCALING_CONFIG, SCALING_POLICY, SCALING_INSTANCE;
+		ALARM, CMK, GRANT_PER_CMK, QUEUE, ELB, LISTENER, SCALING_GROUP, SCALING_CONFIG, SCALING_POLICY, SCALING_INSTANCE;
 
 		@JsonCreator
 		public static ResourceType value(String v) {
