@@ -16,6 +16,7 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
 
     private static final String KEY_MESSAGE = "message";
     private static final String NEUTRON_ERROR = "NeutronError";
+    private static final String OCTAVIA_ERROR = "faultstring";
     private static final String COMPUTE_FAULT = "computeFault";
     private static final String TACKER_ERROR = "TackerError";
     private HttpResponse response;
@@ -38,6 +39,10 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
             return null;
         
         for (String key : map.keySet()) {
+            if (map.get(key) == null) {
+                continue;
+            }
+
             if (Map.class.isAssignableFrom(map.get(key).getClass())) {
                 Map<String, Object> inner = (Map<String, Object>) map.get(key);
                 if (inner.containsKey(KEY_MESSAGE)) {
@@ -73,6 +78,12 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
         // Neutron error handling when just a message is present
         if (map.containsKey(NEUTRON_ERROR)) {
             String msg = String.valueOf(map.get(NEUTRON_ERROR));
+            return ActionResponse.actionFailed(msg, response.getStatus());
+        }
+
+        // Neutron error handling when just a message is present
+        if (map.containsKey(OCTAVIA_ERROR)) {
+            String msg = String.valueOf(map.get(OCTAVIA_ERROR));
             return ActionResponse.actionFailed(msg, response.getStatus());
         }
 
