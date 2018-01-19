@@ -1,7 +1,9 @@
 package org.openstack4j.openstack.networking.domain.ext;
 
 import java.util.List;
+import java.util.Map;
 
+import org.openstack4j.model.network.ext.Ethertype;
 import org.openstack4j.model.network.ext.FlowClassifier;
 import org.openstack4j.model.network.ext.builder.FlowClassifierBuilder;
 import org.openstack4j.openstack.common.ListResult;
@@ -10,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
- *
  *
  * @author Dmitry Gerenrot
  *
@@ -27,7 +28,7 @@ public class NeutronFlowClassifier implements FlowClassifier {
 	private String name;
 
 	@JsonProperty("project_id")
-	private String tenantId;
+	private String projectId;
 
 	@JsonProperty
 	private String description;
@@ -53,6 +54,17 @@ public class NeutronFlowClassifier implements FlowClassifier {
 	@JsonProperty("destination_ip_prefix")
 	private String destinationIpPrefix;
 
+	@JsonProperty("logical_source_port")
+	private String logicalSourcePort;
+
+	@JsonProperty("logical_destination_port")
+	private String logicalDestinationPort;
+
+	@JsonProperty("l7_parameters")
+	private Map<String, String> l7Parameters;
+
+	private Ethertype ethertype;
+
 	@Override
 	public String getId() {
 		return id;
@@ -75,12 +87,12 @@ public class NeutronFlowClassifier implements FlowClassifier {
 
 	@Override
 	public String getTenantId() {
-		return tenantId;
+		return projectId;
 	}
 
 	@Override
 	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
+		this.projectId = tenantId;
 	}
 
 	@Override
@@ -123,6 +135,26 @@ public class NeutronFlowClassifier implements FlowClassifier {
 		return destinationIpPrefix;
 	}
 
+	@Override
+	public String getLogicalSourcePort() {
+		return logicalSourcePort;
+	}
+
+	@Override
+	public String getLogicalDestinationPort() {
+		return logicalSourcePort;
+	}
+
+	@Override
+	public Map<String, String> getL7Parameters() {
+		return l7Parameters;
+	}
+
+	@Override
+	public Ethertype getEthertype() {
+		return ethertype;
+	}
+
 	public FlowClassifierBuilder toBuilder() {
 		return new FlowClassifierConcreteBuilder(this);
 	}
@@ -141,89 +173,113 @@ public class NeutronFlowClassifier implements FlowClassifier {
 
 	public static class FlowClassifierConcreteBuilder implements FlowClassifierBuilder {
 
-		private NeutronFlowClassifier m;
+		private NeutronFlowClassifier neutronFlowClassifier;
 
 		public FlowClassifierConcreteBuilder() {
-			this.m = new NeutronFlowClassifier();
+			this.neutronFlowClassifier = new NeutronFlowClassifier();
 		}
 
 		public FlowClassifierConcreteBuilder(NeutronFlowClassifier m) {
-			this.m = m;
+			this.neutronFlowClassifier = m;
 		}
 
 		public FlowClassifierBuilder id(String id) {
-			m.id = id;
+			neutronFlowClassifier.id = id;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder name(String name) {
-			m.name = name;
+			neutronFlowClassifier.name = name;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder tenandId(String tenantId) {
-			m.tenantId = tenantId;
+			neutronFlowClassifier.projectId = tenantId;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder description(String description) {
-			m.description = description;
+			neutronFlowClassifier.description = description;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder protocol(String protocol) {
-			m.protocol = protocol;
+			neutronFlowClassifier.protocol = protocol;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder sourcePortRangeMin(String sourcePortRangeMin) {
-			m.sourcePortRangeMin = sourcePortRangeMin;
+			neutronFlowClassifier.sourcePortRangeMin = sourcePortRangeMin;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder sourcePortRangeMax(String sourcePortRangeMax) {
-			m.sourcePortRangeMax = sourcePortRangeMax;
+			neutronFlowClassifier.sourcePortRangeMax = sourcePortRangeMax;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder destinationPortRangeMin(String destinationPortRangeMin) {
-			m.destinationPortRangeMin = destinationPortRangeMin;
+			neutronFlowClassifier.destinationPortRangeMin = destinationPortRangeMin;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder destinationPortRangeMax(String destinationPortRangeMax) {
-			m.destinationPortRangeMax = destinationPortRangeMax;
+			neutronFlowClassifier.destinationPortRangeMax = destinationPortRangeMax;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder sourceIpPrefix(String sourceIpPrefix) {
-			m.sourceIpPrefix = sourceIpPrefix;
+			neutronFlowClassifier.sourceIpPrefix = sourceIpPrefix;
 			return this;
 		}
 
 		@Override
 		public FlowClassifierBuilder destinationIpPrefix(String destinationIpPrefix) {
-			m.destinationIpPrefix = destinationIpPrefix;
+			neutronFlowClassifier.destinationIpPrefix = destinationIpPrefix;
+			return this;
+		}
+
+		@Override
+		public FlowClassifierBuilder logicalSourcePort(String logicalSourcePort) {
+			neutronFlowClassifier.logicalSourcePort = logicalSourcePort;
+			return this;
+		}
+
+		@Override
+		public FlowClassifierBuilder logicalDestinationPort(String logicalDestinationPort) {
+			neutronFlowClassifier.logicalDestinationPort = logicalDestinationPort;
+			return this;
+		}
+
+		@Override
+		public FlowClassifierBuilder l7Parameters(Map<String, String> l7Parameters) {
+			neutronFlowClassifier.l7Parameters = l7Parameters;
+			return this;
+		}
+
+		@Override
+		public FlowClassifierBuilder ethertype(Ethertype ethertype) {
+			neutronFlowClassifier.ethertype = ethertype;
 			return this;
 		}
 
 		@Override
 		public FlowClassifier build() {
-			return m;
+			return neutronFlowClassifier;
 		}
 
 		@Override
 		public FlowClassifierBuilder from(FlowClassifier in) {
-			m = (NeutronFlowClassifier) in;
+			neutronFlowClassifier = (NeutronFlowClassifier) in;
 			return this;
 		}
 	}

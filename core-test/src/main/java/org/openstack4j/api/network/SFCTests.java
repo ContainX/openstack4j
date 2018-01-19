@@ -16,14 +16,14 @@ public class SFCTests extends AbstractTest {
 	@Test
 	public void flowClassifiersList() throws Exception {
 		respondWith(JSON_FLOW_CLASSIFIERS);
-		List<? extends FlowClassifier> flowClassifiers = osv3().networking().sfc().listFlowClassifiers();
+		List<? extends FlowClassifier> flowClassifiers = osv3().sfc().flowclassifiers().list();
 		server.takeRequest();
 		assertNotNull(flowClassifiers);
 		assertEquals(2, flowClassifiers.size());
 		assertEquals(flowClassifiers.get(0).getName(), "FC1");
 		assertEquals(flowClassifiers.get(1).getName(), "FC2");
 	}
-	
+
 	@Override
 	protected Service service() {
 		return Service.NETWORK;
