@@ -1,5 +1,7 @@
 package org.openstack4j.api;
 
+import java.util.ServiceLoader;
+
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
@@ -11,14 +13,13 @@ import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.networking.ext.SFCService;
 import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
-import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.workflow.WorkflowService;
-
-import java.util.ServiceLoader;
 
 /**
  * Provides access to the Major APIs and Buildables
@@ -76,6 +77,15 @@ public class Apis {
      */
     public static NetworkingService getNetworkingServices() {
         return get(NetworkingService.class);
+    }
+
+    /**
+     * Gets the Service Function Chain Services API
+     *
+     * @return the Service Function Chain Services
+     */
+    public static SFCService getSfcServices() {
+        return get(SFCService.class);
     }
 
     /**
