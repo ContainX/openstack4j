@@ -2,6 +2,7 @@ package org.openstack4j.openstack.heat.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import java.util.Map;
 import org.openstack4j.model.heat.AdoptStackData;
 
@@ -65,7 +66,12 @@ public class HeatAdoptStackData implements AdoptStackData {
 
     @Override
     public String toString() {
-        return "HeatAdoptStackData{" + "id=" + id + ", name=" + name + ", status=" + status + ", resources=" + resources + '}';
+        return MoreObjects.toStringHelper(this).omitNullValues()
+                .add("id", id)
+                .add("name", name)
+                .add("status", status)
+                .add("resources", resources)
+                .toString();
     }
 
     public static HeatAdoptStackDataBuilder builder() {
