@@ -44,6 +44,9 @@ public class OctaviaLbPoolV2 implements LbPoolV2 {
     @JsonProperty("listener_id")
     private String listenerId;
 
+    @JsonProperty("loadbalancer_id")
+    private String loadbalancerId;
+
     private List<ListItem> listeners;
 
     private List<ListItem> members;
@@ -160,6 +163,7 @@ public class OctaviaLbPoolV2 implements LbPoolV2 {
                 .add("sessionPersistence", sessionPersistence)
                 .add("adminStateUp", adminStateUp)
                 .add("listenerId", listenerId)
+                .add("loadbalancerId", loadbalancerId)
                 .add("listeners", listeners)
                 .add("members", members)
                 .add("healthMonitorId", healthMonitorId)
@@ -258,6 +262,15 @@ public class OctaviaLbPoolV2 implements LbPoolV2 {
         @Override
         public LbPoolV2Builder listenerId(String listenerId){
             m.listenerId = listenerId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LbPoolV2Builder loadbalancerId(String loadbalancerId){
+            m.loadbalancerId = loadbalancerId;
             return this;
         }
     }
