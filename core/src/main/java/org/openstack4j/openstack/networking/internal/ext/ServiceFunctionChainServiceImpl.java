@@ -2,6 +2,7 @@ package org.openstack4j.openstack.networking.internal.ext;
 
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.networking.ext.FlowClassifierService;
+import org.openstack4j.api.networking.ext.PortPairGroupService;
 import org.openstack4j.api.networking.ext.PortPairService;
 import org.openstack4j.api.networking.ext.ServiceFunctionChainService;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
@@ -25,5 +26,13 @@ public class ServiceFunctionChainServiceImpl extends BaseNetworkingServices impl
     @Override
     public PortPairService portpairs() {
         return Apis.get(PortPairService.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public PortPairGroupService portpairgroups() {
+        return Apis.get(PortPairGroupService.class);
     }
 }

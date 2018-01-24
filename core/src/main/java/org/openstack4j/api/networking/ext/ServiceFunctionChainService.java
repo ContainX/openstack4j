@@ -3,7 +3,7 @@ package org.openstack4j.api.networking.ext;
 import org.openstack4j.common.RestService;
 
 /**
- * OpenStack Neutron SFC Operations API
+ * Service Function Chain Operations API
  *
  * @author Dmitry Gerenrot
  *
@@ -19,4 +19,9 @@ public interface ServiceFunctionChainService extends RestService {
      * @return the Port Pair Service API
      */
     PortPairService portpairs();
+
+    /**
+     * @return the Port Pair Service API
+     */
+    PortPairGroupService portpairgroups();
 }
