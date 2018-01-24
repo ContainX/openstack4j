@@ -9,8 +9,14 @@ import org.openstack4j.common.RestService;
  *
  */
 public interface ServiceFunctionChainService extends RestService {
+
     /**
      * @return the Flow Classifier Service API
      */
-     FlowClassifierService flowclassifiers();
+    FlowClassifierService flowclassifiers();
+
+    /**
+     * @return the Port Pair Service API
+     */
+    PortPairService portpairs();
 }
