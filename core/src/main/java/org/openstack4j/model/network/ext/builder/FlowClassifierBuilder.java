@@ -26,10 +26,10 @@ public interface FlowClassifierBuilder extends Builder<FlowClassifierBuilder, Fl
 	FlowClassifierBuilder name(String name);
 
 	/**
-	 * @param tenantId : Tenant (project) identifier
+	 * @param projectId : Project (tenant) identifier
 	 * @return FlowClassifierBuilder
 	 */
-	FlowClassifierBuilder tenandId(String tenantId);
+	FlowClassifierBuilder projectId(String projectId);
 
 	/**
 	 * @param description : Human readable description for the flow classifier

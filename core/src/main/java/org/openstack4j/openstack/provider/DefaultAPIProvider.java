@@ -167,15 +167,7 @@ import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
-import org.openstack4j.api.workflow.ActionDefinitionService;
-import org.openstack4j.api.workflow.ActionExecutionService;
-import org.openstack4j.api.workflow.CronTriggerService;
-import org.openstack4j.api.workflow.TaskExecutionService;
-import org.openstack4j.api.workflow.WorkbookDefinitionService;
-import org.openstack4j.api.workflow.WorkflowDefinitionService;
-import org.openstack4j.api.workflow.WorkflowEnvironmentService;
-import org.openstack4j.api.workflow.WorkflowExecutionService;
-import org.openstack4j.api.workflow.WorkflowService;
+import org.openstack4j.api.workflow.*;
 import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
@@ -338,17 +330,9 @@ import org.openstack4j.openstack.trove.internal.DBFlavorServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
-import org.openstack4j.openstack.workflow.internal.ActionDefinitionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.ActionExecutionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.CronTriggerServiceImpl;
-import org.openstack4j.openstack.workflow.internal.TaskExecutionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.WorkbookDefinitionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.WorkflowDefinitionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.WorkflowEnvironmentServiceImpl;
-import org.openstack4j.openstack.workflow.internal.WorkflowExecutionServiceImpl;
-import org.openstack4j.openstack.workflow.internal.WorkflowServiceImpl;
 
 import com.google.common.collect.Maps;
+import org.openstack4j.openstack.workflow.internal.*;
 
 /**
  * Simple API Provider which keeps internally Maps interface implementations as singletons

@@ -14,74 +14,64 @@ import org.openstack4j.model.network.ext.builder.FlowClassifierBuilder;
  */
 public interface FlowClassifier extends Resource, Buildable<FlowClassifierBuilder> {
 
-	/**
-	 * @return id : Flow Classifier identifer
-	 */
-	String getId();
+    /**
+     * @return description : Human readable description for the flow classifier
+     */
+    String getDescription();
 
-	/**
-	 * @return name : Human readable name for the flow classifier
-	 */
-	String getName();
+    /**
+     * @return protocol : Short name for the protocol (TCP, UDP, etc)
+     */
+    String getProtocol();
 
-	/**
-	 * @return description : Human readable description for the flow classifier
-	 */
-	String getDescription();
+    /**
+     * @return rangeMin : Minimum value for the source port, converted to String
+     */
+    String getSourcePortRangeMin();
 
-	/**
-	 * @return protocol : Short name for the protocol (TCP, UDP, etc)
-	 */
-	String getProtocol();
+    /**
+     * @return rangeMax : Maximum value for the source port, converted to String
+     */
+    String getSourcePortRangeMax();
 
-	/**
-	 * @return rangeMin : Minimum value for the source port, converted to String
-	 */
-	String getSourcePortRangeMin();
+    /**
+     * @return rangeMin : Minimum value for the destination port, converted to String
+     */
+    String getDestinationPortRangeMin();
 
-	/**
-	 * @return rangeMax : Maximum value for the source port, converted to String
-	 */
-	String getSourcePortRangeMax();
+    /**
+     * @return rangeMax : Maximum value for the destination port, converted to String
+     *
+     */
+    String getDestinationPortRangeMax();
 
-	/**
-	 * @return rangeMin : Minimum value for the destination port, converted to String
-	 */
-	String getDestinationPortRangeMin();
+    /**
+     * @return sourcePrefix : Prefix for the source ip addresses
+     */
+    String getSourceIpPrefix();
 
-	/**
-	 * @return rangeMax : Maximum value for the destination port, converted to String
-	 *
-	 */
-	String getDestinationPortRangeMax();
+    /**
+     * @return destinationPrefix : Prefix for the destination ip addresses
+     */
+    String getDestinationIpPrefix();
 
-	/**
-	 * @return sourcePrefix : Prefix for the source ip addresses
-	 */
-	String getSourceIpPrefix();
+    /**
+     * @return logicalSourcePort : Id of the port pair at the start of the port chain
+     */
+    String getLogicalSourcePort();
 
-	/**
-	 * @return destinationPrefix : Prefix for the destination ip addresses
-	 */
-	String getDestinationIpPrefix();
+    /**
+     * @return logicalDestinationPort : Id of the port pair at the end of the port chain
+     */
+    String getLogicalDestinationPort();
 
-	/**
-	 * @return logicalSourcePort : Id of the port pair at the start of the port chain
-	 */
-	String getLogicalSourcePort();
+    /**
+     * @return l7Parameters
+     */
+    Map<String, String> getL7Parameters();
 
-	/**
-	 * @return logicalDestinationPort : Id of the port pair at the end of the port chain
-	 */
-	String getLogicalDestinationPort();
-
-	/**
-	 * @return l7Parameters
-	 */
-	Map<String, String> getL7Parameters();
-
-	/**
-	 * @return ethertype
-	 */
-	Ethertype getEthertype();
+    /**
+     * @return ethertype
+     */
+    Ethertype getEthertype();
 }

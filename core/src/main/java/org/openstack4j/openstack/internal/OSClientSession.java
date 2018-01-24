@@ -57,8 +57,8 @@ import com.google.common.collect.Sets;
  * @author Jeremy Unruh
  */
 public abstract class OSClientSession<R, T extends OSClient<T>> implements EndpointTokenProvider {
-
-    private static final Logger LOG = LoggerFactory.getLogger(OSClientSession.class);
+    
+    private static final Logger LOG = LoggerFactory.getLogger(OSClientSession.class);    
     @SuppressWarnings("rawtypes")
     private static final ThreadLocal<OSClientSession> sessions = new ThreadLocal<OSClientSession>();
 
@@ -146,7 +146,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     public ArtifactService artifact() {
         return Apis.getArtifactServices();
     }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -362,7 +362,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     public Set<ServiceType> getSupportedServices() {
         return null;
     }
-
+    
     public AuthVersion getAuthVersion() {
         return null;
     }
@@ -381,7 +381,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     public TroveService trove(){
         return Apis.getTroveServices();
     }
-
+        
     public static class OSClientSessionV2 extends OSClientSession<OSClientSessionV2, OSClientV2> implements OSClientV2 {
 
         Access access;
@@ -417,7 +417,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         public String getEndpoint() {
             return access.getEndpoint();
         }
-
+        
         @Override
         public AuthVersion getAuthVersion() {
             return AuthVersion.V2;
@@ -440,9 +440,9 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
          */
         @Override
         public String getEndpoint(ServiceType service) {
-
+        	
         	final EndpointURLResolver eUrlResolver = (config != null && config.getEndpointURLResolver() != null) ? config.getEndpointURLResolver() : fallbackEndpointUrlResolver;
-
+        	
             return addNATIfApplicable(eUrlResolver.findURLV2(URLResolverParams
                     .create(access, service)
                     .resolver(config != null ? config.getV2Resolver() : null)
@@ -476,7 +476,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     public static class OSClientSessionV3 extends OSClientSession<OSClientSessionV3, OSClientV3> implements OSClientV3 {
 
         Token token;
-
+        
         protected String reqId;
 
         private OSClientSessionV3(Token token, String endpoint, Facing perspective, CloudProvider provider, Config config) {
@@ -500,7 +500,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         public static OSClientSessionV3 createSession(Token token, Facing perspective, CloudProvider provider, Config config) {
             return new OSClientSessionV3(token, token.getEndpoint(), perspective, provider, config);
         }
-
+        
         public String getXOpenstackRequestId() {
         	return reqId;
         }
@@ -517,7 +517,7 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
         public String getEndpoint() {
             return token.getEndpoint();
         }
-
+        
         @Override
         public AuthVersion getAuthVersion() {
             return AuthVersion.V3;
@@ -540,9 +540,9 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
          */
         @Override
         public String getEndpoint(ServiceType service) {
-
+        	
         	final EndpointURLResolver eUrlResolver = (config != null && config.getEndpointURLResolver() != null) ? config.getEndpointURLResolver() : fallbackEndpointUrlResolver;
-
+        	
             return addNATIfApplicable(eUrlResolver.findURLV3(URLResolverParams
                     .create(token, service)
                     .resolver(config != null ? config.getResolver() : null)
@@ -585,5 +585,5 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
     }
 
 
-
+    
 }
