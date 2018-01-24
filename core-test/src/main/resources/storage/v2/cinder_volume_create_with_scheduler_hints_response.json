@@ -1,0 +1,36 @@
+{
+    "volume": {
+        "attachments": [ ], 
+        "availability_zone": "xxx", 
+        "bootable": "false", 
+        "consistencygroup_id": null, 
+        "created_at": "2016-05-25T02:38:40.392463", 
+        "description": "create for api test", 
+        "encrypted": false, 
+        "id": "8dd7c486-8e9f-49fe-bceb-26aa7e312b66", 
+        "links": [
+            {
+                "href": "https://volume.localdomain.com:8776/v2/5dd0b0056f3d47b6ab4121667d35621a/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66", 
+                "rel": "self"
+            }, 
+            {
+                "href": "https://volume.localdomain.com:8776/5dd0b0056f3d47b6ab4121667d35621a/volumes/8dd7c486-8e9f-49fe-bceb-26aa7e312b66", 
+                "rel": "bookmark"
+            }
+        ], 
+        "metadata": {
+            "volume_owner": "openapi"
+        }, 
+        "name": "openapi_vol01", 
+        "replication_status": "disabled", 
+        "shareable": false, 
+        "multiattach": false, 
+        "size": 40, 
+        "snapshot_id": null, 
+        "source_volid": null, 
+        "status": "creating", 
+        "updated_at": null, 
+        "user_id": "39f6696ae23740708d0f358a253c2637", 
+        "volume_type": "SATA"
+    }
+}

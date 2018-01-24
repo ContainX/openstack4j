@@ -120,6 +120,15 @@ public interface BlockVolumeService extends RestService {
 	 */
 	Volume create(Volume volume);
 	
+	
+	/**
+	 * Creates a new Block Storage Volume
+	 * @param volume the volume for create
+	 * @param schedulerHints the dictionary of data to send to the scheduler.
+	 * @return the created volume
+	 */
+	Volume create(Volume volume, Map<String, Object> schedulerHints);
+	
 	/**
 	 * Uploads a volume to the image service
 	 * 
