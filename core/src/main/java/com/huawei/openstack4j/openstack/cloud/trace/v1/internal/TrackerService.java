@@ -28,8 +28,8 @@ import com.huawei.openstack4j.core.transport.ExecutionOptions;
 import com.huawei.openstack4j.core.transport.propagation.PropagateOnStatus;
 import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.openstack.cloud.trace.v1.domain.Tracker;
-import com.huawei.openstack4j.openstack.cloud.trace.v1.domain.TrackerUpdate;
 import com.huawei.openstack4j.openstack.cloud.trace.v1.domain.Tracker.Trackers;
+import com.huawei.openstack4j.openstack.cloud.trace.v1.domain.TrackerUpdate;
 
 /**
  * 
@@ -101,7 +101,9 @@ public class TrackerService extends BaseCloudTraceServices implements RestServic
 		checkNotNull(update, "parameter `update` should not be empty");
 		checkNotNull(update.getTrackerName(), "parameter `update.tracerName` should not be empty");
 		checkNotNull(update.getBucketName(), "parameter `update.bucketName` should not be empty");
-		return put(Tracker.class, "/tracker/", update.getTrackerName()).entity(update)
+		String trackerName = update.getTrackerName();
+		update = update.toBuilder().trackerName(null).build();
+		return put(Tracker.class, "/tracker/", trackerName).entity(update)
 				.execute(ExecutionOptions.<Tracker> create(PropagateOnStatus.on(404)));
 	}
 
