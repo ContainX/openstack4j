@@ -189,6 +189,15 @@ public class Builders {
     }
 
     /**
+     * The builder to create a Port Pair
+     *
+     * @return the Port Pair builder
+     */
+    public static PortPairBuilder portPair() {
+        return NeutronPortPair.builder();
+    }
+
+    /**
      * The builder to create a Subnet
      *
      * @return the subnet builder
