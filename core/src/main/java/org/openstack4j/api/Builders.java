@@ -180,6 +180,15 @@ public class Builders {
     }
 
     /**
+     * The builder to create a Flow Classifier
+     *
+     * @return the network builder
+     */
+    public static FlowClassifierBuilder flowClassifier() {
+        return NeutronFlowClassifier.builder();
+    }
+
+    /**
      * The builder to create a Subnet
      *
      * @return the subnet builder

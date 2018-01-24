@@ -7,8 +7,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 public enum Ethertype {
 
-	IPv4,
-	IPv6;
+    IPv4,
+    IPv6,
+    UNRECOGNIZED;
 
     @JsonCreator
     public static Ethertype forValue(String value) {
@@ -20,6 +21,6 @@ public enum Ethertype {
                 }
             }
         }
-        return Ethertype.IPv4;
+        return UNRECOGNIZED;
     }
 }
