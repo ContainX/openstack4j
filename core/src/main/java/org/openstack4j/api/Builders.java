@@ -198,6 +198,15 @@ public class Builders {
     }
 
     /**
+     * The builder to create a Port Pair Group
+     *
+     * @return the Port Pair Group builder
+     */
+    public static PortPairGroupBuilder portPairGroup() {
+        return NeutronPortPairGroup.builder();
+    }
+
+    /**
      * The builder to create a Subnet
      *
      * @return the subnet builder

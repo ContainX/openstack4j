@@ -9,6 +9,7 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.network.ext.Ethertype;
 import org.openstack4j.model.network.ext.FlowClassifier;
 import org.openstack4j.model.network.ext.PortPair;
+import org.openstack4j.model.network.ext.PortPairGroup;
 import org.testng.annotations.Test;
 
 @Test(suiteName = "ServiceFunctionChain")
@@ -17,6 +18,8 @@ public class SFCTests extends AbstractTest {
     private static final String JSON_FLOW_CLASSIFIER = "/network/sfc/flow_classifier.json";
     private static final String JSON_PORT_PAIRS = "/network/sfc/port_pairs.json";
     private static final String JSON_PORT_PAIR = "/network/sfc/port_pair.json";
+    private static final String JSON_PORT_PAIR_GROUPS = "/network/sfc/port_pair_groups.json";
+    private static final String JSON_PORT_PAIR_GROUP = "/network/sfc/port_pair_group.json";
 
     private static final String TEST_PROJECT_ID = "12345678909876543210abcdefabcdef";
     private static final String TEST_PARAM_KEY = "aparam";
@@ -74,6 +77,26 @@ public class SFCTests extends AbstractTest {
         server.takeRequest();
         assertNotNull(portPair);
         assertEquals(portPair.getName(), TEST_PP_NAME1);
+    }
+
+    @Test
+    public void testPortPairGroupsList() throws Exception {
+        respondWith(JSON_PORT_PAIR_GROUPS);
+        List<? extends PortPairGroup> portPairGroups = osv3().sfc().portpairgroups().list();
+        server.takeRequest();
+        assertNotNull(portPairGroups);
+        assertEquals(2, portPairGroups.size());
+        assertEquals(portPairGroups.get(0).getName(), TEST_PP_NAME1);
+        assertEquals(portPairGroups.get(1).getName(), TEST_PP_NAME2);
+    }
+
+    @Test
+    public void testGetPortPairGroup() throws Exception {
+        respondWith(JSON_PORT_PAIR_GROUP);
+        PortPairGroup portPairGroup = osv3().sfc().portpairgroups().get("abcdef");
+        server.takeRequest();
+        assertNotNull(portPairGroup);
+        assertEquals(portPairGroup.getName(), TEST_PP_NAME1);
     }
 
     @Override
