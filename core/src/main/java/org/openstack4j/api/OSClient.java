@@ -1,8 +1,5 @@
 package org.openstack4j.api;
 
-import java.util.Map;
-import java.util.Set;
-
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.compute.ComputeService;
@@ -11,11 +8,10 @@ import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
-import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
-import org.openstack4j.api.networking.ext.SFCService;
+import org.openstack4j.api.networking.ext.ServiceFunctionChainService;
 import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
@@ -29,6 +25,10 @@ import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
+import org.openstack4j.api.magnum.MagnumService;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A client which has been identified. Any calls spawned from this session will
@@ -178,7 +178,7 @@ public interface OSClient< T extends OSClient<T>> {
      *
      * @return the Service Function Chain Service API
      */
-    SFCService sfc();
+    ServiceFunctionChainService sfc();
 
     /**
      * Returns the Load Balancer Service API
