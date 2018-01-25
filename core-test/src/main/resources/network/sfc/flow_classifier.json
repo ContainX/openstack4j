@@ -13,6 +13,7 @@
         "destination_port_range_max": 80,
         "source_ip_prefix": null,
         "destination_ip_prefix": "10.20.30.40",
+        "logical_destination_port": null,
         "logical_source_port": "abcdefab-abcd-abcd-abcd-abcdefabcdef",
         "l7_parameters": {
             "aparam": "A"

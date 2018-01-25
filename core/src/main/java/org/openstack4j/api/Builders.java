@@ -182,7 +182,7 @@ public class Builders {
     /**
      * The builder to create a Flow Classifier
      *
-     * @return the network builder
+     * @return the Flow Classifier builder
      */
     public static FlowClassifierBuilder flowClassifier() {
         return NeutronFlowClassifier.builder();
@@ -1120,7 +1120,7 @@ public class Builders {
      * Magnum builder
      * @return the magnum builder
      */
-    
+
     public static BaymodelBuilder baymodel() {
         return MagnumBaymodel.builder();
     }
