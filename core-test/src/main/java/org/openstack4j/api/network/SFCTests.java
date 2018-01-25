@@ -8,6 +8,7 @@ import java.util.List;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.network.ext.Ethertype;
 import org.openstack4j.model.network.ext.FlowClassifier;
+import org.openstack4j.model.network.ext.PortChain;
 import org.openstack4j.model.network.ext.PortPair;
 import org.openstack4j.model.network.ext.PortPairGroup;
 import org.testng.annotations.Test;
@@ -20,6 +21,8 @@ public class SFCTests extends AbstractTest {
     private static final String JSON_PORT_PAIR = "/network/sfc/port_pair.json";
     private static final String JSON_PORT_PAIR_GROUPS = "/network/sfc/port_pair_groups.json";
     private static final String JSON_PORT_PAIR_GROUP = "/network/sfc/port_pair_group.json";
+    private static final String JSON_PORT_CHAINS = "/network/sfc/port_chains.json";
+    private static final String JSON_PORT_CHAIN = "/network/sfc/port_chain.json";
 
     private static final String TEST_PROJECT_ID = "12345678909876543210abcdefabcdef";
     private static final String TEST_PARAM_KEY = "aparam";
@@ -27,6 +30,8 @@ public class SFCTests extends AbstractTest {
     private static final String TEST_FC_NAME1 = "FC1";
     private static final String TEST_PP_NAME2 = "PP2";
     private static final String TEST_PP_NAME1 = "PP1";
+    private static final String TEST_PC_NAME2 = "PC2";
+    private static final String TEST_PC_NAME1 = "PC1";
 
     @Test
     public void testFlowClassifiersList() throws Exception {
@@ -97,6 +102,26 @@ public class SFCTests extends AbstractTest {
         server.takeRequest();
         assertNotNull(portPairGroup);
         assertEquals(portPairGroup.getName(), TEST_PP_NAME1);
+    }
+
+    @Test
+    public void testPortChainsList() throws Exception {
+        respondWith(JSON_PORT_CHAINS);
+        List<? extends PortChain> portChain = osv3().sfc().portchains().list();
+        server.takeRequest();
+        assertNotNull(portChain);
+        assertEquals(2, portChain.size());
+        assertEquals(portChain.get(0).getName(), TEST_PC_NAME1);
+        assertEquals(portChain.get(1).getName(), TEST_PC_NAME2);
+    }
+
+    @Test
+    public void testGetPortChain() throws Exception {
+        respondWith(JSON_PORT_CHAIN);
+        PortChain portChain = osv3().sfc().portchains().get("0abcdef");
+        server.takeRequest();
+        assertNotNull(portChain);
+        assertEquals(portChain.getName(), TEST_PC_NAME1);
     }
 
     @Override

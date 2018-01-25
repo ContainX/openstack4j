@@ -24,4 +24,9 @@ public interface ServiceFunctionChainService extends RestService {
      * @return the Port Pair Service API
      */
     PortPairGroupService portpairgroups();
+
+    /**
+     * @return the Port Chain Service API
+     */
+    PortChainService portchains();
 }
