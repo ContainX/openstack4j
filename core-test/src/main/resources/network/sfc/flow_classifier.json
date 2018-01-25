@@ -1,6 +1,6 @@
 {
     "flow_classifier": {
-        "id": "abcdef",
+        "id": "12345678-abcd-abcd-abcd-abcdefabcdef",
         "name": "FC1",
         "project_id": "12345678909876543210abcdefabcdef",
         "tenant_id": "12345678909876543210abcdefabcdef",

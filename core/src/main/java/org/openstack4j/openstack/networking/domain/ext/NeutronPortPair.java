@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.networking.domain.ext;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.model.network.ext.PortPair;
 import org.openstack4j.model.network.ext.builder.PortPairBuilder;
@@ -31,11 +32,14 @@ public class NeutronPortPair implements PortPair {
     @JsonProperty
     private String description;
 
-    @JsonProperty("egress_id")
+    @JsonProperty("egress")
     private String egressId;
 
-    @JsonProperty("ingress_id")
+    @JsonProperty("ingress")
     private String ingressId;
+
+    @JsonProperty("service_function_parameters")
+    Map<String, String> serviceFunctionParameters;
 
     @Override
     public String getId() {
@@ -94,6 +98,16 @@ public class NeutronPortPair implements PortPair {
     public void setIngressId(String ingressId) {
         this.ingressId = ingressId;
     }
+
+    @Override
+    public Map<String, String> getServiceFunctionParameters() {
+        return serviceFunctionParameters;
+    }
+
+    public void setServiceFunctionParameters(Map<String, String> serviceFunctionParameters) {
+        this.serviceFunctionParameters = serviceFunctionParameters;
+    }
+
 
     @Override
     public PortPairBuilder toBuilder() {
@@ -172,6 +186,12 @@ public class NeutronPortPair implements PortPair {
         @Override
         public PortPairBuilder ingressId(String ingressId) {
             this.neutronPortPair.ingressId = ingressId;
+            return this;
+        }
+
+        @Override
+        public PortPairBuilder serviceFunctionParameters(Map<String, String> serviceFunctionParameters) {
+            this.neutronPortPair.serviceFunctionParameters = serviceFunctionParameters;
             return this;
         }
     }

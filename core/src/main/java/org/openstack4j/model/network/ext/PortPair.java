@@ -1,5 +1,7 @@
 package org.openstack4j.model.network.ext;
 
+import java.util.Map;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.network.ext.builder.PortPairBuilder;
@@ -28,13 +30,18 @@ public interface PortPair extends Resource, Buildable<PortPairBuilder> {
     String getDescription();
 
     /**
-     * @return description : Id for the egress port
+     * @return egressId : Id for the egress port
      */
     String getEgressId();
 
     /**
-     * @return description : Id for the ingress port
+     * @return ingressId : Id for the ingress port
      */
     String getIngressId();
+
+    /**
+     * @return Service Function Parameters
+     */
+    Map<String, String> getServiceFunctionParameters();
 }
 

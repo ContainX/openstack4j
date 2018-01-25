@@ -1,5 +1,7 @@
 package org.openstack4j.model.network.ext.builder;
 
+import java.util.Map;
+
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.PortPair;
 
@@ -45,4 +47,10 @@ public interface PortPairBuilder  extends Builder<PortPairBuilder, PortPair> {
      * @return PortPairBuilder
      */
     PortPairBuilder ingressId(String ingressId);
+
+    /**
+     * @param serviceFunctionParameters : Map of service function parameters
+     * @return PortPairBuilder
+     */
+    PortPairBuilder serviceFunctionParameters(Map<String, String> serviceFunctionParameters);
 }
