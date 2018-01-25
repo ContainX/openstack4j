@@ -1,6 +1,7 @@
 package org.openstack4j.model.network.ext.builder;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.PortChain;
@@ -52,4 +53,10 @@ public interface PortChainBuilder extends Builder<PortChainBuilder, PortChain> {
      * @return PortChainBuilder
      */
     PortChainBuilder portPairGroups(List<String> portPairGroups);
+
+    /**
+     * @param chainParameters : Map of chain parameters
+     * @return PortChainBuilder
+     */
+    PortChainBuilder chainParameters(Map<String, String> chainParameters);
 }

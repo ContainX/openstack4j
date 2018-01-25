@@ -1,6 +1,7 @@
 package org.openstack4j.openstack.networking.domain.ext;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.model.network.ext.PortChain;
 import org.openstack4j.model.network.ext.builder.PortChainBuilder;
@@ -37,6 +38,9 @@ public class NeutronPortChain implements PortChain {
 
     @JsonProperty("port_pair_groups")
     List<String> portPairGroups;
+
+    @JsonProperty("chain_parameters")
+    Map<String, String> chainParameters;
 
     @Override
     public String getId() {
@@ -98,6 +102,15 @@ public class NeutronPortChain implements PortChain {
 
     public void setPortPairGroups(List<String> portPairGroups) {
         this.portPairGroups = portPairGroups;
+    }
+
+    @Override
+    public Map<String, String> getChainParameters() {
+        return chainParameters;
+    }
+
+    public void setChainParameters(Map<String, String> chainParameters) {
+        this.chainParameters = chainParameters;
     }
 
     @Override
@@ -172,6 +185,12 @@ public class NeutronPortChain implements PortChain {
         public PortChainBuilder portPairGroups(List<String> portPairGroups) {
             this.neutronPortChain.portPairGroups = portPairGroups;
             return null;
+        }
+
+        @Override
+        public PortChainBuilder chainParameters(Map<String, String> chainParameters) {
+            this.neutronPortChain.chainParameters = chainParameters;
+            return this;
         }
 
         @Override

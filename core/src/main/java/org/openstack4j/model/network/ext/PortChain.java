@@ -1,6 +1,7 @@
 package org.openstack4j.model.network.ext;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
@@ -34,4 +35,9 @@ public interface PortChain extends Resource, Buildable<PortChainBuilder> {
      * @return port pair groups : list of ids
      */
     List<String> getPortPairGroups();
+
+    /**
+     * @return Chain Parameters
+     */
+    Map<String, String> getChainParameters();
 }

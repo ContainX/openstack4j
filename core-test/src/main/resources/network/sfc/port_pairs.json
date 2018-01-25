@@ -6,8 +6,9 @@
             "project_id": "12345678909876543210abcdefabcdef",
             "tenant_id": "12345678909876543210abcdefabcdef",
             "description": "Openstack4j test flow classifier 1",
-            "egress_id": "abcdefab-abcd-abcd-abcd-abcdefabcdef",
-            "ingress_id": "12345678-abcd-abcd-abcd-abcdefabcdef"
+            "egress": "abcdefab-abcd-abcd-abcd-abcdefabcdef",
+            "ingress": "12345678-abcd-abcd-abcd-abcdefabcdef",
+            "service_function_parameters": { "aparam": "A"}
         },
         {
             "id" : "1fedcba",
@@ -15,8 +16,9 @@
             "project_id": "12345678909876543210abcdefabcdef",
             "tenant_id": "12345678909876543210abcdefabcdef",
             "description": "Openstack4j test flow classifier 2",
-            "egress_id": "abcdefab-abcd-abcd-abcd-abcdefabcdef",
-            "ingress_id": "12345678-abcd-abcd-abcd-abcdefabcdef"
+            "egress": "abcdefab-abcd-abcd-abcd-abcdefabcdef",
+            "ingress": "12345678-abcd-abcd-abcd-abcdefabcdef",
+            "service_function_parameters": { "bparam": "B"}
         }
     ]
 }

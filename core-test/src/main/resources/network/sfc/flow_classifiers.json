@@ -1,7 +1,7 @@
 {
     "flow_classifiers": [
         {
-            "id" : "0abcdef",
+            "id" : "12345678-abcd-abcd-abcd-abcdefabcdef",
             "name": "FC1",
             "project_id": "12345678909876543210abcdefabcdef",
             "tenant_id": "12345678909876543210abcdefabcdef",
@@ -16,10 +16,10 @@
             "destination_ip_prefix": "10.20.30.40",
             "logical_destination_port": "12345678-abcd-abcd-abcd-abcdefabcdef",
             "logical_source_port": "abcdefab-abcd-abcd-abcd-abcdefabcdef",
-            "l7_parameters": { "aparam":"A"}
+            "l7_parameters": { "aparam": "A"}
         },
         {
-            "id" : "1fedcba",
+            "id" : "abcdefab-abcd-abcd-abcd-abcdefabcdef",
             "name": "FC2",
             "project_id": "12345678909876543210abcdefabcdef",
             "tenant_id": "12345678909876543210abcdefabcdef",
@@ -34,7 +34,7 @@
             "destination_ip_prefix": "50.60.70.80",
             "logical_destination_port": "12345678-abcd-abcd-abcd-abcdefabcdef",
             "logical_source_port": "abcdefab-abcd-abcd-abcd-abcdefabcdef",
-            "l7_parameters": { "bparam":"B"}
+            "l7_parameters": { "bparam": "B"}
         }
     ]
 }
