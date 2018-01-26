@@ -7,6 +7,7 @@ import org.openstack4j.model.network.ext.PortPair;
 import org.openstack4j.model.network.ext.builder.PortPairBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -61,6 +62,7 @@ public class NeutronPortPair implements PortPair {
         this.name = name;
     }
 
+    @JsonIgnore
     @Override
     public String getTenantId() {
         return projectId;

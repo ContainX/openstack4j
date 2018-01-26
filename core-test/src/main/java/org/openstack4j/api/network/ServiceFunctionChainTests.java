@@ -370,6 +370,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     private static void assertPortPairGroupsEqual(PortPairGroup returned, PortPairGroup original) {
         assertEquals(returned.getId(), original.getId());
         assertEquals(returned.getName(), original.getName());
+        assertEquals(returned.getGroupId(), original.getGroupId());
         assertEquals(returned.getDescription(), original.getDescription());
         assertEquals(returned.getTenantId(), original.getTenantId());
         assertTrue(Objects.equal(returned.getPortPairGroupParameters(), original.getPortPairGroupParameters()));
