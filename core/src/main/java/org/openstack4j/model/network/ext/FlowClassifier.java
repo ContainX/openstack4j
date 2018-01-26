@@ -23,27 +23,26 @@ public interface FlowClassifier extends Resource, Buildable<FlowClassifierBuilde
      * @return protocol : Short name for the protocol (TCP, UDP, etc)
      */
     String getProtocol();
-
     /**
      * @return rangeMin : Minimum value for the source port, converted to String
      */
-    String getSourcePortRangeMin();
+    Integer getSourcePortRangeMin();
 
     /**
      * @return rangeMax : Maximum value for the source port, converted to String
      */
-    String getSourcePortRangeMax();
+    Integer getSourcePortRangeMax();
 
     /**
      * @return rangeMin : Minimum value for the destination port, converted to String
      */
-    String getDestinationPortRangeMin();
+    Integer getDestinationPortRangeMin();
 
     /**
      * @return rangeMax : Maximum value for the destination port, converted to String
      *
      */
-    String getDestinationPortRangeMax();
+    Integer getDestinationPortRangeMax();
 
     /**
      * @return sourcePrefix : Prefix for the source ip addresses

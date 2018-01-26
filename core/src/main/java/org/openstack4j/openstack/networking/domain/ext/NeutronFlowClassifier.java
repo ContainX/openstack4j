@@ -36,16 +36,16 @@ public class NeutronFlowClassifier implements FlowClassifier {
     private String protocol;
 
     @JsonProperty("source_port_range_min")
-    private String sourcePortRangeMin;
+    private Integer sourcePortRangeMin;
 
     @JsonProperty("source_port_range_max")
-    private String sourcePortRangeMax;
+    private Integer sourcePortRangeMax;
 
     @JsonProperty("destination_port_range_min")
-    private String destinationPortRangeMin;
+    private Integer destinationPortRangeMin;
 
     @JsonProperty("destination_port_range_max")
-    private String destinationPortRangeMax;
+    private Integer destinationPortRangeMax;
 
     @JsonProperty("source_ip_prefix")
     private String sourceIpPrefix;
@@ -105,22 +105,22 @@ public class NeutronFlowClassifier implements FlowClassifier {
     }
 
     @Override
-    public String getSourcePortRangeMin() {
+    public Integer getSourcePortRangeMin() {
         return sourcePortRangeMin;
     }
 
     @Override
-    public String getSourcePortRangeMax() {
+    public Integer getSourcePortRangeMax() {
         return sourcePortRangeMax;
     }
 
     @Override
-    public String getDestinationPortRangeMin() {
+    public Integer getDestinationPortRangeMin() {
         return destinationPortRangeMin;
     }
 
     @Override
-    public String getDestinationPortRangeMax() {
+    public Integer getDestinationPortRangeMax() {
         return destinationPortRangeMax;
     }
 
@@ -216,26 +216,26 @@ public class NeutronFlowClassifier implements FlowClassifier {
         }
 
         @Override
-        public FlowClassifierBuilder sourcePortRangeMin(String sourcePortRangeMin) {
+        public FlowClassifierBuilder sourcePortRangeMin(Integer sourcePortRangeMin) {
             neutronFlowClassifier.sourcePortRangeMin = sourcePortRangeMin;
             return this;
         }
 
         @Override
-        public FlowClassifierBuilder sourcePortRangeMax(String sourcePortRangeMax) {
+        public FlowClassifierBuilder sourcePortRangeMax(Integer sourcePortRangeMax) {
             neutronFlowClassifier.sourcePortRangeMax = sourcePortRangeMax;
             return this;
         }
 
 
         @Override
-        public FlowClassifierBuilder destinationPortRangeMin(String destinationPortRangeMin) {
+        public FlowClassifierBuilder destinationPortRangeMin(Integer destinationPortRangeMin) {
             neutronFlowClassifier.destinationPortRangeMin = destinationPortRangeMin;
             return this;
         }
 
         @Override
-        public FlowClassifierBuilder destinationPortRangeMax(String destinationPortRangeMax) {
+        public FlowClassifierBuilder destinationPortRangeMax(Integer destinationPortRangeMax) {
             neutronFlowClassifier.destinationPortRangeMax = destinationPortRangeMax;
             return this;
         }

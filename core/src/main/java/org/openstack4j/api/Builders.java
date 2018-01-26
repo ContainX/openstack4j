@@ -207,6 +207,15 @@ public class Builders {
     }
 
     /**
+     * The builder to create a Port Chain Group
+     *
+     * @return the Port Chain builder
+     */
+    public static PortChainBuilder portChain() {
+        return NeutronPortChain.builder();
+    }
+
+    /**
      * The builder to create a Subnet
      *
      * @return the subnet builder
