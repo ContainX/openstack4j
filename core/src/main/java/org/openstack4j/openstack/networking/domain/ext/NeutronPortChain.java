@@ -7,6 +7,7 @@ import org.openstack4j.model.network.ext.PortChain;
 import org.openstack4j.model.network.ext.builder.PortChainBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -62,6 +63,7 @@ public class NeutronPortChain implements PortChain {
         this.name = name;
     }
 
+    @JsonIgnore
     @Override
     public String getTenantId() {
         return projectId;

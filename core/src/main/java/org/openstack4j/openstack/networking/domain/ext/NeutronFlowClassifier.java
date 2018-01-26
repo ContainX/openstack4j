@@ -8,6 +8,7 @@ import org.openstack4j.model.network.ext.FlowClassifier;
 import org.openstack4j.model.network.ext.builder.FlowClassifierBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -84,6 +85,7 @@ public class NeutronFlowClassifier implements FlowClassifier {
         this.name = name;
     }
 
+    @JsonIgnore
     @Override
     public String getTenantId() {
         return projectId;
@@ -141,7 +143,7 @@ public class NeutronFlowClassifier implements FlowClassifier {
 
     @Override
     public String getLogicalDestinationPort() {
-        return logicalSourcePort;
+        return logicalDestinationPort;
     }
 
     @Override

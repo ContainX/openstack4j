@@ -1,6 +1,7 @@
 package org.openstack4j.model.network.ext.builder;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.PortPairGroup;
@@ -30,6 +31,11 @@ public interface PortPairGroupBuilder  extends Builder<PortPairGroupBuilder, Por
      */
     PortPairGroupBuilder description(String description);
 
+    /**
+     * @param groupId : Separate from this object's openstack id, which is a UUID
+     * @return PortPairGroupBuilder
+     */
+    PortPairGroupBuilder groupId(Integer groupId);
 
     /**
      * @param portPairs : port pair members in this group
@@ -43,6 +49,6 @@ public interface PortPairGroupBuilder  extends Builder<PortPairGroupBuilder, Por
      *      Possible keys: lb_fields or service_type. Check openstack documentation.
      * @return PortPairGroupBuilder
      */
-    PortPairGroupBuilder portPairGroupParameters(List<String> portPairGroupParameters);
+    PortPairGroupBuilder portPairGroupParameters(Map<String, Object> portPairGroupParameters);
 
 }

@@ -21,7 +21,7 @@ public class PortPairGroupServiceImpl extends BaseNetworkingServices implements 
      */
     @Override
     public List<? extends PortPairGroup> list() {
-        return get(PortPairGroups.class, uri("/sfc/pot_pair_groups")).execute().getList();
+        return get(PortPairGroups.class, uri("/sfc/port_pair_groups")).execute().getList();
     }
 
     /**
@@ -30,7 +30,7 @@ public class PortPairGroupServiceImpl extends BaseNetworkingServices implements 
     @Override
     public PortPairGroup create(PortPairGroup portPairGroup) {
         checkNotNull(portPairGroup);
-        return post(NeutronPortPairGroup.class, uri("/sfc/pot_pair_groups")).entity(portPairGroup).execute();
+        return post(NeutronPortPairGroup.class, uri("/sfc/port_pair_groups")).entity(portPairGroup).execute();
     }
 
     /**
@@ -39,7 +39,7 @@ public class PortPairGroupServiceImpl extends BaseNetworkingServices implements 
     @Override
     public ActionResponse delete(String portPairGroupId) {
         checkNotNull(portPairGroupId);
-        return deleteWithResponse(uri("/sfc/pot_pair_groups/%s", portPairGroupId)).execute();
+        return deleteWithResponse(uri("/sfc/port_pair_groups/%s", portPairGroupId)).execute();
     }
 
     /**
@@ -48,7 +48,7 @@ public class PortPairGroupServiceImpl extends BaseNetworkingServices implements 
     @Override
     public PortPairGroup get(String portPairGroupId) {
         checkNotNull(portPairGroupId);
-        return get(NeutronPortPairGroup.class, uri("/sfc/pot_pair_groups/%s", portPairGroupId)).execute();
+        return get(NeutronPortPairGroup.class, uri("/sfc/port_pair_groups/%s", portPairGroupId)).execute();
     }
 
     /**
@@ -57,6 +57,6 @@ public class PortPairGroupServiceImpl extends BaseNetworkingServices implements 
     @Override
     public PortPairGroup update(String portPairGroupId, PortPairGroup portPairGroup) {
         checkNotNull(portPairGroupId);
-        return put(NeutronPortPairGroup.class, uri("/sfc/pot_pair_groups/%s", portPairGroupId)).entity(portPairGroup).execute();
+        return put(NeutronPortPairGroup.class, uri("/sfc/port_pair_groups/%s", portPairGroupId)).entity(portPairGroup).execute();
     }
 }

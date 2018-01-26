@@ -1,11 +1,13 @@
 package org.openstack4j.openstack.networking.domain.ext;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openstack4j.model.network.ext.PortPairGroup;
 import org.openstack4j.model.network.ext.builder.PortPairGroupBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -30,11 +32,14 @@ public class NeutronPortPairGroup implements PortPairGroup {
     @JsonProperty
     private String description;
 
+    @JsonProperty("group_id")
+    private Integer groupId;
+
     @JsonProperty("port_pairs")
     private List<String> portPairs;
 
     @JsonProperty("port_pair_group_parameters")
-    private List<String> portPairGroupParameters;
+    private Map<String, Object> portPairGroupParameters;
 
     @Override
     public String getId() {
@@ -56,6 +61,7 @@ public class NeutronPortPairGroup implements PortPairGroup {
         this.name = name;
     }
 
+    @JsonIgnore
     @Override
     public String getTenantId() {
         return projectId;
@@ -76,6 +82,15 @@ public class NeutronPortPairGroup implements PortPairGroup {
     }
 
     @Override
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    @Override
     public List<String> getPortPairs() {
         return portPairs;
     }
@@ -85,11 +100,11 @@ public class NeutronPortPairGroup implements PortPairGroup {
     }
 
     @Override
-    public List<String> getPortPairGroupParameters() {
+    public Map<String, Object>  getPortPairGroupParameters() {
         return portPairGroupParameters;
     }
 
-    public void setPortPairGroupParameters(List<String> portPairGroupParameters) {
+    public void setPortPairGroupParameters(Map<String, Object> portPairGroupParameters) {
         this.portPairGroupParameters = portPairGroupParameters;
     }
 
@@ -162,13 +177,19 @@ public class NeutronPortPairGroup implements PortPairGroup {
         }
 
         @Override
+        public PortPairGroupBuilder groupId(Integer groupId) {
+            this.neutronPortPairGroup.groupId = groupId;
+            return this;
+        }
+
+        @Override
         public PortPairGroupBuilder portPairs(List<String> portPairs) {
             this.neutronPortPairGroup.portPairs = portPairs;
             return this;
         }
 
         @Override
-        public PortPairGroupBuilder portPairGroupParameters(List<String> portPairGroupParameters) {
+        public PortPairGroupBuilder portPairGroupParameters(Map<String, Object>  portPairGroupParameters) {
             this.neutronPortPairGroup.portPairGroupParameters = portPairGroupParameters;
             return this;
         }
