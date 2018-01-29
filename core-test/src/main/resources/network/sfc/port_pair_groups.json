@@ -2,7 +2,6 @@
     "port_pair_groups": [
         {
             "id" : "0abcdef",
-            "group_id": 42,
             "name": "PP1",
             "project_id": "12345678909876543210abcdefabcdef",
             "tenant_id": "12345678909876543210abcdefabcdef",
@@ -14,7 +13,6 @@
         },
         {
             "id" : "1fedcba",
-        	"group_id": 42,
             "name": "PP2",
             "project_id": "12345678909876543210abcdefabcdef",
             "tenant_id": "12345678909876543210abcdefabcdef",

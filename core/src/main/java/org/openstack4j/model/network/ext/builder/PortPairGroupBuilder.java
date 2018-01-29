@@ -32,17 +32,10 @@ public interface PortPairGroupBuilder  extends Builder<PortPairGroupBuilder, Por
     PortPairGroupBuilder description(String description);
 
     /**
-     * @param groupId : Separate from this object's openstack id, which is a UUID
-     * @return PortPairGroupBuilder
-     */
-    PortPairGroupBuilder groupId(Integer groupId);
-
-    /**
      * @param portPairs : port pair members in this group
      * @return PortPairGroupBuilder
      */
     PortPairGroupBuilder portPairs(List<String> portPairs);
-
 
     /**
      * @param portPairGroupParameters : parameters for this group.

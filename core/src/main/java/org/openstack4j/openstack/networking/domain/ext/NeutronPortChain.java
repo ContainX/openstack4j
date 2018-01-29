@@ -168,25 +168,25 @@ public class NeutronPortChain implements PortChain {
         @Override
         public PortChainBuilder projectId(String projectId) {
             this.neutronPortChain.projectId = projectId;
-            return null;
+            return this;
         }
 
         @Override
         public PortChainBuilder chainId(String chainId) {
             this.neutronPortChain.chainId = chainId;
-            return null;
+            return this;
         }
 
         @Override
         public PortChainBuilder flowClassifiers(List<String> flowClassifiers) {
             this.neutronPortChain.flowClassifiers = flowClassifiers;
-            return null;
+            return this;
         }
 
         @Override
         public PortChainBuilder portPairGroups(List<String> portPairGroups) {
             this.neutronPortChain.portPairGroups = portPairGroups;
-            return null;
+            return this;
         }
 
         @Override
