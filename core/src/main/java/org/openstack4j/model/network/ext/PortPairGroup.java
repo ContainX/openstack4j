@@ -16,11 +16,6 @@ import org.openstack4j.model.network.ext.builder.PortPairGroupBuilder;
 public interface PortPairGroup extends Resource, Buildable<PortPairGroupBuilder> {
 
     /**
-     * @return Group id of this port pair group
-     */
-    Integer getGroupId();
-
-    /**
      * @return description : Human readable description for the port pair group
      */
     String getDescription();

@@ -32,9 +32,6 @@ public class NeutronPortPairGroup implements PortPairGroup {
     @JsonProperty
     private String description;
 
-    @JsonProperty("group_id")
-    private Integer groupId;
-
     @JsonProperty("port_pairs")
     private List<String> portPairs;
 
@@ -79,15 +76,6 @@ public class NeutronPortPairGroup implements PortPairGroup {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public Integer getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
     }
 
     @Override
@@ -173,12 +161,6 @@ public class NeutronPortPairGroup implements PortPairGroup {
         @Override
         public PortPairGroupBuilder description(String description) {
             this.neutronPortPairGroup.description = description;
-            return this;
-        }
-
-        @Override
-        public PortPairGroupBuilder groupId(Integer groupId) {
-            this.neutronPortPairGroup.groupId = groupId;
             return this;
         }
 
