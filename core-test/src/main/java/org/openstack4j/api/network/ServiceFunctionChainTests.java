@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
+import org.openstack4j.api.Builders;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.Ethertype;
@@ -322,6 +323,86 @@ public class ServiceFunctionChainTests extends AbstractTest {
         ActionResponse response = osv3().sfc().portchains().delete(FC_ID);
         server.takeRequest();
         assertTrue(response.isSuccess());
+    }
+
+    @Test
+    public void testPortChainBuilder() throws Exception {
+        PortChain original = ObjectMapperSingleton.getContext(NeutronPortChain.class)
+                .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_CHAIN)),
+                           NeutronPortChain.class);
+        PortChain built = Builders.portChain()
+                .id(original.getId())
+                .name(original.getName())
+                .description(original.getDescription())
+                .projectId(original.getTenantId())
+                .chainId(original.getChainId())
+                .chainParameters(original.getChainParameters())
+                .flowClassifiers(original.getFlowClassifiers())
+                .portPairGroups(original.getPortPairGroups())
+                .build();
+
+        assertPortChainsEqual(built, original);
+    }
+
+    @Test
+    public void testPortPairGroupBuilder() throws Exception {
+        PortPairGroup original = ObjectMapperSingleton.getContext(NeutronPortPairGroup.class)
+                .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_PAIR_GROUP)),
+                           NeutronPortPairGroup.class);
+        PortPairGroup built = Builders.portPairGroup()
+                .id(original.getId())
+                .name(original.getName())
+                .description(original.getDescription())
+                .projectId(original.getTenantId())
+                .portPairGroupParameters(original.getPortPairGroupParameters())
+                .portPairs(original.getPortPairs())
+                .build();
+
+        assertPortPairGroupsEqual(built, original);
+    }
+
+    @Test
+    public void testPortPairBuilder() throws Exception {
+        PortPair original = ObjectMapperSingleton.getContext(NeutronPortPair.class)
+                .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_PAIR)),
+                           NeutronPortPair.class);
+        PortPair built = Builders.portPair()
+                .id(original.getId())
+                .name(original.getName())
+                .description(original.getDescription())
+                .projectId(original.getTenantId())
+                .egressId(original.getEgressId())
+                .ingressId(original.getIngressId())
+                .serviceFunctionParameters(original.getServiceFunctionParameters())
+                .build();
+
+        assertPortPairsEqual(built, original);
+    }
+
+    @Test
+    public void testFlowClassifierBuilder() throws Exception {
+        FlowClassifier original = ObjectMapperSingleton.getContext(NeutronFlowClassifier.class)
+                .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_FLOW_CLASSIFIER)),
+                           NeutronFlowClassifier.class);
+        FlowClassifier built = Builders.flowClassifier()
+                .id(original.getId())
+                .name(original.getName())
+                .description(original.getDescription())
+                .projectId(original.getTenantId())
+                .destinationIpPrefix(original.getDestinationIpPrefix())
+                .sourceIpPrefix(original.getSourceIpPrefix())
+                .sourcePortRangeMax(original.getSourcePortRangeMax())
+                .destinationPortRangeMax(original.getDestinationPortRangeMax())
+                .sourcePortRangeMin(original.getSourcePortRangeMin())
+                .destinationPortRangeMin(original.getDestinationPortRangeMin())
+                .logicalSourcePort(original.getLogicalSourcePort())
+                .logicalDestinationPort(original.getLogicalDestinationPort())
+                .l7Parameters(original.getL7Parameters())
+                .ethertype(original.getEthertype())
+                .protocol(original.getProtocol())
+                .build();
+
+        assertFlowClassifiersEqual(built, original);
     }
 
     @Override
