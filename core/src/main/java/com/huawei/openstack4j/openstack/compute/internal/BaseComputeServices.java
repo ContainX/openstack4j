@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.compute.internal;
 
+import com.google.common.base.Function;
+
 import com.huawei.openstack4j.api.types.ServiceType;
 import com.huawei.openstack4j.core.transport.HttpResponse;
 import com.huawei.openstack4j.model.common.ActionResponse;
@@ -32,8 +34,13 @@ public class BaseComputeServices extends BaseOpenStackService {
     protected BaseComputeServices() {
         super(ServiceType.COMPUTE);
     }
+    
+	public BaseComputeServices(ServiceType serviceType, Function<String, String> endpointFunc) {
+		super(serviceType, endpointFunc);
+	}
 
-    protected ActionResponse invokeAction(String serverId, ServerAction action)  {
+
+	protected ActionResponse invokeAction(String serverId, ServerAction action)  {
         return ToActionResponseFunction.INSTANCE.apply(invokeActionWithResponse(serverId, action), action.getClass().getName());
     }
 

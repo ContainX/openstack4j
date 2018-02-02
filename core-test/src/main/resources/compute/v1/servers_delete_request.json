@@ -1,0 +1,9 @@
+{
+  "delete_publicip" : false,
+  "delete_volume" : false,
+  "servers" : [ {
+    "id" : "server-id-1"
+  }, {
+    "id" : "server-id-2"
+  } ]
+}
