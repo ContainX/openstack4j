@@ -79,6 +79,20 @@ public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder
 	Integer getMax();
 	
 	/**
+	 * Get the min count (HuaWei)
+	 * 
+	 * @return
+	 */
+    Integer getMinCount();
+
+    /**
+     * Get the max count (HuaWei)
+     * 
+     * @return
+     */
+	Integer getMaxCount();
+	
+	/**
 	 * Controls how the disk is partitioned
 	 *
 	 * @return the disk configuration

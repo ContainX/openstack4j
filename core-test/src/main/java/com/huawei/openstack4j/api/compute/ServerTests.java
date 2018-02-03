@@ -15,23 +15,22 @@
  *******************************************************************************/
 package com.huawei.openstack4j.api.compute;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.huawei.openstack4j.api.AbstractTest;
 import com.huawei.openstack4j.api.Builders;
 import com.huawei.openstack4j.api.exceptions.ServerResponseException;
+import com.huawei.openstack4j.core.transport.ObjectMapperSingleton;
 import com.huawei.openstack4j.model.compute.Server;
-import com.huawei.openstack4j.model.compute.ServerPassword;
 import com.huawei.openstack4j.model.compute.Server.Status;
+import com.huawei.openstack4j.model.compute.ServerCreate;
+import com.huawei.openstack4j.model.compute.ServerPassword;
 import com.huawei.openstack4j.model.compute.actions.EvacuateOptions;
 
 import okhttp3.mockwebserver.RecordedRequest;
@@ -82,10 +81,20 @@ public class ServerTests extends AbstractTest {
     public void createServer() throws Exception {
         respondWith(JSON_SERVER_CREATE);
         
-        Server server = osv3().compute().servers().boot(Builders.server().name("server-test-1").build());
-        assertEquals("server-test-1", server.getName());
+        ServerCreate build = Builders.server().name("server-test-1").minCount(2).maxCount(3).build();
+		Server created = osv3().compute().servers().boot(build);
+        assertEquals("server-test-1", created.getName());
         
-        takeRequest();
+        RecordedRequest request = takeRequest();
+        
+        String body = request.getBody().readUtf8();
+        JsonNode node = ObjectMapperSingleton.getContext(Object.class).readTree(body);
+        JsonNode server = node.get("server");
+        assertEquals("server-test-1", server.get("name").asText());
+        assertTrue(server.get("min_count").isInt());
+        assertEquals(2, server.get("min_count").asInt());
+        assertTrue(server.get("max_count").isInt());
+        assertEquals(3, server.get("max_count").asInt());
     }
     
     @Override
