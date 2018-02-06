@@ -47,15 +47,14 @@ public class NovaServerCreate implements ServerCreate {
 	private String flavorRef;
 	private String accessIPv4;
 	private String accessIPv6;
+	
+	// http://support.huaweicloud.com/api-ecs/zh-cn_topic_0068473331.html
+	@JsonProperty("min_count")
 	private Integer min;
+	
+	@JsonProperty("max_count")
 	private Integer max;
 
-	// http://support.huaweicloud.com/api-ecs/zh-cn_topic_0068473331.html
-	// not sure why not min/max
-	@JsonProperty("min_count")
-	private Integer minCount;
-	@JsonProperty("max_count")
-	private Integer maxCount;
 
 	private DiskConfig diskConfig;
 	@JsonProperty("metadata")
@@ -83,9 +82,6 @@ public class NovaServerCreate implements ServerCreate {
 	@JsonProperty("block_device_mapping_v2")
 	private List<BlockDeviceMappingCreate> blockDeviceMapping;
 	
-	// https://developer.openstack.org/api-ref/compute/#create-multiple-servers
-	@JsonProperty("return_reservation_id")
-	private boolean returnReservationId;
 
 	public static ServerCreateBuilder builder() {
 		return new ServerCreateConcreteBuilder();
@@ -136,13 +132,6 @@ public class NovaServerCreate implements ServerCreate {
 		return max;
 	}
 
-	public Integer getMinCount() {
-		return minCount;
-	}
-
-	public Integer getMaxCount() {
-		return maxCount;
-	}
 
 	@Override
 	public DiskConfig getDiskConfig() {
@@ -225,11 +214,6 @@ public class NovaServerCreate implements ServerCreate {
 		networks.add(new NovaNetworkCreate(null, null, id));
 	}
 	
-	@Override
-	public boolean getReturnReservationId() {
-		return returnReservationId;
-	}
-
 	private void initNetworks() {
 		if (networks == null)
 			networks = Lists.newArrayList();
@@ -423,27 +407,21 @@ public class NovaServerCreate implements ServerCreate {
 			return this;
 		}
 
-		/*
+		/* 
 		 * {@inheritDoc}
 		 */
 		@Override
-		public ServerCreateBuilder minCount(Integer minCount) {
-			m.minCount = minCount;
+		public ServerCreateBuilder min(Integer min) {
+			m.min = min;
 			return this;
 		}
 
-		/*
+		/* 
 		 * {@inheritDoc}
 		 */
 		@Override
-		public ServerCreateBuilder maxCount(Integer maxCount) {
-			m.maxCount = maxCount;
-			return this;
-		}
-		
-		@Override
-		public ServerCreateBuilder returnReservationId(Boolean returnReservationId) {
-			m.returnReservationId = returnReservationId;
+		public ServerCreateBuilder max(Integer max) {
+			m.max = max;
 			return this;
 		}
 

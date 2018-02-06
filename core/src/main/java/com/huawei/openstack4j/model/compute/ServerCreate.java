@@ -78,19 +78,6 @@ public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder
 	 */
 	Integer getMax();
 	
-	/**
-	 * Get the min count (HuaWei)
-	 * 
-	 * @return
-	 */
-    Integer getMinCount();
-
-    /**
-     * Get the max count (HuaWei)
-     * 
-     * @return
-     */
-	Integer getMaxCount();
 	
 	/**
 	 * Controls how the disk is partitioned
@@ -192,13 +179,5 @@ public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder
 	 */
 	void addNetworkPort(String id);
 	
-	/**
-	 * Qianbiao.NG:: add Create Multiple Servers support.
-	 * <br/>
-	 * Document:: https://developer.openstack.org/api-ref/compute/#create-multiple-servers
-	 * 
-	 * @return
-	 */
-	boolean getReturnReservationId();
 
 }

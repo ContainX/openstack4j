@@ -56,6 +56,7 @@ import com.huawei.openstack4j.openstack.compute.domain.NovaPassword;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServer;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServerCreate;
+import com.huawei.openstack4j.openstack.compute.domain.NovaServerCreateReturnReservationIdWrap;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServerUpdate;
 import com.huawei.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import com.huawei.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
@@ -144,14 +145,14 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
      * {@inheritDoc}
      */
     @Override
-    public Server boot(ServerCreate server) {
-        checkNotNull(server);
-     // update return reservation-id to true
-        server = server.toBuilder().returnReservationId(false).build();
-        return post(NovaServer.class, uri("/servers"))
-                     .entity(WrapServerIfApplicableFunction.INSTANCE.apply(server))
-                     .execute();
-    }
+	public Server boot(ServerCreate server) {
+		checkNotNull(server);
+		// update return reservation-id to true
+		NovaServerCreateReturnReservationIdWrap wrapped = new NovaServerCreateReturnReservationIdWrap(server, false);
+		return post(NovaServer.class, uri("/servers"))
+				.entity(WrapServerIfApplicableFunction.INSTANCE.apply(wrapped))
+				.execute();
+	}
     
     /**
      * {@inheritDoc}
@@ -160,9 +161,9 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     public String bootAndReturnReservationId(ServerCreate server) {
         checkNotNull(server);
         // update return reservation-id to true
-        server = server.toBuilder().returnReservationId(true).build();
+        NovaServerCreateReturnReservationIdWrap wrapped = new NovaServerCreateReturnReservationIdWrap(server, true);
         return post(HashMap.class, uri("/servers"))
-                     .entity(WrapServerIfApplicableFunction.INSTANCE.apply(server))
+                     .entity(WrapServerIfApplicableFunction.INSTANCE.apply(wrapped))
                      .execute()
                      .get("reservation_id").toString();
     }

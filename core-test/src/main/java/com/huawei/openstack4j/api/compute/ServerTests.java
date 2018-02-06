@@ -81,7 +81,7 @@ public class ServerTests extends AbstractTest {
     public void createServer() throws Exception {
         respondWith(JSON_SERVER_CREATE);
         
-        ServerCreate build = Builders.server().name("server-test-1").minCount(2).maxCount(3).build();
+        ServerCreate build = Builders.server().name("server-test-1").min(2).max(3).build();
 		Server created = osv3().compute().servers().boot(build);
         assertEquals("server-test-1", created.getName());
         
@@ -103,7 +103,7 @@ public class ServerTests extends AbstractTest {
     public void createServerAndReturnReservationId() throws Exception {
         respondWith("/compute/server_create_and_return_reservation_id.json");
         
-        ServerCreate build = Builders.server().name("server-test-1").minCount(2).maxCount(3).build();
+        ServerCreate build = Builders.server().name("server-test-1").min(2).max(3).build();
 		String reservationId = osv3().compute().servers().bootAndReturnReservationId(build);
         assertEquals("r-3fhpjulh", reservationId);
         

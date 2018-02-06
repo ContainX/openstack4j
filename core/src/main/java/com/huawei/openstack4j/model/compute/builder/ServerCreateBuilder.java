@@ -178,27 +178,20 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
     /**
      * Sets the min create server count parameter.
      *
-     * @param minCount the min create server count
+     * @param min the min create server count
      * @return this builder
      */
     
-    ServerCreateBuilder minCount(Integer minCount);
+    ServerCreateBuilder min(Integer min);
     
     /**
      * Sets the max create server count parameter.
      *
-     * @param maxCount the max create server count
+     * @param max the max create server count
      * @return this builder
      */
     
-    ServerCreateBuilder maxCount(Integer maxCount);
+    ServerCreateBuilder max(Integer max);
 
-	/**
-	 * Set whether return reservation-id when create multiple servers
-	 * 
-	 * @param returnReservationId
-	 * @return
-	 */
-	ServerCreateBuilder returnReservationId(Boolean returnReservationId);
     
 }
