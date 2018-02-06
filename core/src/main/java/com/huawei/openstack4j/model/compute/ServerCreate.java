@@ -192,5 +192,13 @@ public interface ServerCreate extends ModelEntity, Buildable<ServerCreateBuilder
 	 */
 	void addNetworkPort(String id);
 	
+	/**
+	 * Qianbiao.NG:: add Create Multiple Servers support.
+	 * <br/>
+	 * Document:: https://developer.openstack.org/api-ref/compute/#create-multiple-servers
+	 * 
+	 * @return
+	 */
+	boolean getReturnReservationId();
 
 }

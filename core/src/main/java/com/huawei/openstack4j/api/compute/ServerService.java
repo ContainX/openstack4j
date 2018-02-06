@@ -25,13 +25,13 @@ import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.compute.Action;
 import com.huawei.openstack4j.model.compute.RebootType;
 import com.huawei.openstack4j.model.compute.Server;
+import com.huawei.openstack4j.model.compute.Server.Status;
 import com.huawei.openstack4j.model.compute.ServerCreate;
 import com.huawei.openstack4j.model.compute.ServerPassword;
 import com.huawei.openstack4j.model.compute.ServerUpdateOptions;
 import com.huawei.openstack4j.model.compute.VNCConsole;
-import com.huawei.openstack4j.model.compute.VolumeAttachment;
-import com.huawei.openstack4j.model.compute.Server.Status;
 import com.huawei.openstack4j.model.compute.VNCConsole.Type;
+import com.huawei.openstack4j.model.compute.VolumeAttachment;
 import com.huawei.openstack4j.model.compute.actions.BackupOptions;
 import com.huawei.openstack4j.model.compute.actions.EvacuateOptions;
 import com.huawei.openstack4j.model.compute.actions.LiveMigrateOptions;
@@ -91,6 +91,14 @@ public interface ServerService {
      * @return the newly created server
      */
     Server boot(ServerCreate server);
+    
+    /**
+     * Create (boot) multiple Servers and return reservation-id
+     *
+     * @param server the server to boot
+     * @return The reservation id for the created servers
+     */
+    String bootAndReturnReservationId(ServerCreate server);
 
     /**
      * Create (boot) a new Server

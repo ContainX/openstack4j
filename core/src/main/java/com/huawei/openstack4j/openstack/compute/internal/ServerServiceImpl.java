@@ -15,7 +15,7 @@
  *******************************************************************************/
 package com.huawei.openstack4j.openstack.compute.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,13 +36,13 @@ import com.huawei.openstack4j.model.common.ActionResponse;
 import com.huawei.openstack4j.model.compute.Action;
 import com.huawei.openstack4j.model.compute.RebootType;
 import com.huawei.openstack4j.model.compute.Server;
+import com.huawei.openstack4j.model.compute.Server.Status;
 import com.huawei.openstack4j.model.compute.ServerCreate;
 import com.huawei.openstack4j.model.compute.ServerPassword;
 import com.huawei.openstack4j.model.compute.ServerUpdateOptions;
 import com.huawei.openstack4j.model.compute.VNCConsole;
-import com.huawei.openstack4j.model.compute.VolumeAttachment;
-import com.huawei.openstack4j.model.compute.Server.Status;
 import com.huawei.openstack4j.model.compute.VNCConsole.Type;
+import com.huawei.openstack4j.model.compute.VolumeAttachment;
 import com.huawei.openstack4j.model.compute.actions.BackupOptions;
 import com.huawei.openstack4j.model.compute.actions.EvacuateOptions;
 import com.huawei.openstack4j.model.compute.actions.LiveMigrateOptions;
@@ -54,13 +54,19 @@ import com.huawei.openstack4j.openstack.compute.domain.ConsoleOutput;
 import com.huawei.openstack4j.openstack.compute.domain.ConsoleOutputOptions;
 import com.huawei.openstack4j.openstack.compute.domain.NovaPassword;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServer;
+import com.huawei.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServerCreate;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServerUpdate;
 import com.huawei.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import com.huawei.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
-import com.huawei.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import com.huawei.openstack4j.openstack.compute.domain.actions.BackupAction;
 import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions;
+import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.ChangePassword;
+import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.ConfirmResize;
+import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.Migrate;
+import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.Reboot;
+import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.Resize;
+import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.RevertResize;
 import com.huawei.openstack4j.openstack.compute.domain.actions.CreateSnapshotAction;
 import com.huawei.openstack4j.openstack.compute.domain.actions.EvacuateAction;
 import com.huawei.openstack4j.openstack.compute.domain.actions.LiveMigrationAction;
@@ -68,12 +74,6 @@ import com.huawei.openstack4j.openstack.compute.domain.actions.RebuildAction;
 import com.huawei.openstack4j.openstack.compute.domain.actions.ResetStateAction;
 import com.huawei.openstack4j.openstack.compute.domain.actions.SecurityGroupActions;
 import com.huawei.openstack4j.openstack.compute.domain.actions.ServerAction;
-import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.ChangePassword;
-import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.ConfirmResize;
-import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.Migrate;
-import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.Reboot;
-import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.Resize;
-import com.huawei.openstack4j.openstack.compute.domain.actions.BasicActions.RevertResize;
 import com.huawei.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import com.huawei.openstack4j.openstack.compute.functions.WrapServerIfApplicableFunction;
 
@@ -146,9 +146,25 @@ public class ServerServiceImpl extends BaseComputeServices implements ServerServ
     @Override
     public Server boot(ServerCreate server) {
         checkNotNull(server);
+     // update return reservation-id to true
+        server = server.toBuilder().returnReservationId(false).build();
         return post(NovaServer.class, uri("/servers"))
                      .entity(WrapServerIfApplicableFunction.INSTANCE.apply(server))
                      .execute();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String bootAndReturnReservationId(ServerCreate server) {
+        checkNotNull(server);
+        // update return reservation-id to true
+        server = server.toBuilder().returnReservationId(true).build();
+        return post(HashMap.class, uri("/servers"))
+                     .entity(WrapServerIfApplicableFunction.INSTANCE.apply(server))
+                     .execute()
+                     .get("reservation_id").toString();
     }
 
     /**

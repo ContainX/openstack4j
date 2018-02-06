@@ -82,6 +82,10 @@ public class NovaServerCreate implements ServerCreate {
 
 	@JsonProperty("block_device_mapping_v2")
 	private List<BlockDeviceMappingCreate> blockDeviceMapping;
+	
+	// https://developer.openstack.org/api-ref/compute/#create-multiple-servers
+	@JsonProperty("return_reservation_id")
+	private boolean returnReservationId;
 
 	public static ServerCreateBuilder builder() {
 		return new ServerCreateConcreteBuilder();
@@ -219,6 +223,11 @@ public class NovaServerCreate implements ServerCreate {
 	public void addNetworkPort(String id) {
 		initNetworks();
 		networks.add(new NovaNetworkCreate(null, null, id));
+	}
+	
+	@Override
+	public boolean getReturnReservationId() {
+		return returnReservationId;
 	}
 
 	private void initNetworks() {
@@ -429,6 +438,12 @@ public class NovaServerCreate implements ServerCreate {
 		@Override
 		public ServerCreateBuilder maxCount(Integer maxCount) {
 			m.maxCount = maxCount;
+			return this;
+		}
+		
+		@Override
+		public ServerCreateBuilder returnReservationId(Boolean returnReservationId) {
+			m.returnReservationId = returnReservationId;
 			return this;
 		}
 

@@ -95,6 +95,29 @@ public class ServerTests extends AbstractTest {
         assertEquals(2, server.get("min_count").asInt());
         assertTrue(server.get("max_count").isInt());
         assertEquals(3, server.get("max_count").asInt());
+        assertEquals(false, server.get("return_reservation_id").asBoolean());
+    }
+    
+    
+    @Test
+    public void createServerAndReturnReservationId() throws Exception {
+        respondWith("/compute/server_create_and_return_reservation_id.json");
+        
+        ServerCreate build = Builders.server().name("server-test-1").minCount(2).maxCount(3).build();
+		String reservationId = osv3().compute().servers().bootAndReturnReservationId(build);
+        assertEquals("r-3fhpjulh", reservationId);
+        
+        RecordedRequest request = takeRequest();
+        
+        String body = request.getBody().readUtf8();
+        JsonNode node = ObjectMapperSingleton.getContext(Object.class).readTree(body);
+        JsonNode server = node.get("server");
+        assertEquals("server-test-1", server.get("name").asText());
+        assertTrue(server.get("min_count").isInt());
+        assertEquals(2, server.get("min_count").asInt());
+        assertTrue(server.get("max_count").isInt());
+        assertEquals(3, server.get("max_count").asInt());
+        assertEquals(true, server.get("return_reservation_id").asBoolean());
     }
     
     @Override

@@ -192,5 +192,13 @@ public interface ServerCreateBuilder extends Buildable.Builder<ServerCreateBuild
      */
     
     ServerCreateBuilder maxCount(Integer maxCount);
+
+	/**
+	 * Set whether return reservation-id when create multiple servers
+	 * 
+	 * @param returnReservationId
+	 * @return
+	 */
+	ServerCreateBuilder returnReservationId(Boolean returnReservationId);
     
 }
