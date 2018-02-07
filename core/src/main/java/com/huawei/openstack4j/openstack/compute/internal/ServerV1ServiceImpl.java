@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.huawei.openstack4j.api.compute.ServerV1Service;
 import com.huawei.openstack4j.api.types.ServiceType;
 import com.huawei.openstack4j.model.ModelEntity;
+import com.huawei.openstack4j.model.compute.RebootType;
 import com.huawei.openstack4j.model.compute.StopType;
 import com.huawei.openstack4j.openstack.common.AsyncJobEntity;
 import com.huawei.openstack4j.openstack.common.IdResourceEntity;
@@ -57,6 +58,38 @@ public class ServerV1ServiceImpl extends BaseComputeServices implements ServerV1
 
 		BatchStopAction action = new BatchStopAction(serverIds, type);
 		return post(AsyncJobEntity.class, uri("/cloudservers/action")).entity(action).execute().getId();
+	}
+	
+	/*
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String reboot(List<String> serverIds, RebootType type) {
+		checkArgument(serverIds != null && serverIds.size() > 0, "parameter `serverIds` should not be empty");
+		checkArgument(type != null, "parameter `type` should not be null");
+		
+		BatchRebootAction action = new BatchRebootAction(serverIds, type);
+		return post(AsyncJobEntity.class, uri("/cloudservers/action")).entity(action).execute().getId();
+	}
+	
+	
+	@JsonRootName("reboot")
+	public static class BatchRebootAction implements ModelEntity {
+
+		private static final long serialVersionUID = -3993352728410832732L;
+
+		@JsonProperty("type")
+		public String type;
+
+		@JsonProperty("servers")
+		List<IdResourceEntity> servers = Lists.newArrayList();
+
+		public BatchRebootAction(List<String> serverIds, RebootType type) {
+			for (String serverId : serverIds) {
+				servers.add(new IdResourceEntity(serverId));
+			}
+			this.type = type.name().toLowerCase();
+		}
 	}
 
 	@JsonRootName("os-stop")

@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 import org.testng.collections.Lists;
 
 import com.huawei.openstack4j.api.AbstractTest;
+import com.huawei.openstack4j.model.compute.RebootType;
 import com.huawei.openstack4j.model.compute.StopType;
 
 import okhttp3.mockwebserver.RecordedRequest;
@@ -69,6 +70,23 @@ public class ServerV1Tests extends AbstractTest {
 
 		String requestBody = request.getBody().readUtf8();
 		String expectBody = this.getResource("/compute/v1/servers_stop_request.json");
+		Assert.assertEquals(requestBody, expectBody);
+	}
+	
+	@Test
+	public void batchRebootServerTest() throws Exception {
+		respondWith(200, "{\"job_id\": \"this-is-a-job-id\"}");
+
+		List<String> serverIds = Lists.newArrayList("server-id-1", "server-id-2");
+		String jobId = osv3().compute().serversV1().reboot(serverIds, RebootType.HARD);
+
+		RecordedRequest request = server.takeRequest();
+		assertEquals(request.getPath(), "/v1/project-id/cloudservers/action");
+		assertEquals(request.getMethod(), "POST");
+		assertEquals(jobId, "this-is-a-job-id");
+
+		String requestBody = request.getBody().readUtf8();
+		String expectBody = this.getResource("/compute/v1/servers_reboot_request.json");
 		Assert.assertEquals(requestBody, expectBody);
 	}
 	

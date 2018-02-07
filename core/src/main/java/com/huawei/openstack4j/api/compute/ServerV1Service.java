@@ -17,6 +17,7 @@ package com.huawei.openstack4j.api.compute;
 
 import java.util.List;
 
+import com.huawei.openstack4j.model.compute.RebootType;
 import com.huawei.openstack4j.model.compute.StopType;
 
 public interface ServerV1Service {
@@ -40,5 +41,15 @@ public interface ServerV1Service {
 	 * @return				job-id of the asynchronous stop server task
 	 */
 	String stop(List<String> serverIds, StopType type);
+
+
+	/**
+	 * batch reboot servers
+	 * 
+	 * @param serverIds		list of server identifier which to be reboot
+	 * @param type			reboot type - soft | hard
+	 * @return				job-id of the asynchronous stop server task
+	 */
+	String reboot(List<String> serverIds, RebootType type);
 
 }
