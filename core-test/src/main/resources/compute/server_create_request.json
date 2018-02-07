@@ -1,0 +1,15 @@
+{
+  "server" : {
+    "name" : "server-test-1",
+    "min_count" : 2,
+    "max_count" : 3,
+    "metadata" : {
+      "key" : "value"
+    },
+    "config_drive" : true,
+    "networks" : [ {
+      "uuid" : "network-1"
+    } ],
+    "return_reservation_id" : false
+  }
+}

@@ -56,7 +56,6 @@ import com.huawei.openstack4j.openstack.compute.domain.NovaPassword;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServer;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServer.Servers;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServerCreate;
-import com.huawei.openstack4j.openstack.compute.domain.NovaServerCreateReturnReservationIdWrap;
 import com.huawei.openstack4j.openstack.compute.domain.NovaServerUpdate;
 import com.huawei.openstack4j.openstack.compute.domain.NovaVNCConsole;
 import com.huawei.openstack4j.openstack.compute.domain.NovaVolumeAttachment;
@@ -85,428 +84,432 @@ import com.huawei.openstack4j.openstack.compute.functions.WrapServerIfApplicable
  */
 public class ServerServiceImpl extends BaseComputeServices implements ServerService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ServerServiceImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ServerServiceImpl.class);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends Server> list() {
-        return list(true);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Server> list() {
+		return list(true);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends Server> list(boolean detail) {
-        return list(detail, Boolean.FALSE);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Server> list(boolean detail) {
+		return list(detail, Boolean.FALSE);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends Server> listAll(boolean detail) {
-        return list(detail, Boolean.TRUE);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Server> listAll(boolean detail) {
+		return list(detail, Boolean.TRUE);
+	}
 
-    private List<? extends Server> list(boolean detail, boolean allTenants) {
-        Invocation<Servers> req = get(Servers.class, uri("/servers" + ((detail) ? "/detail" : "")));
-        if (allTenants)
-            req.param("all_tenants", 1);
-        return req.execute().getList();
-    }
+	private List<? extends Server> list(boolean detail, boolean allTenants) {
+		Invocation<Servers> req = get(Servers.class, uri("/servers" + ((detail) ? "/detail" : "")));
+		if (allTenants)
+			req.param("all_tenants", 1);
+		return req.execute().getList();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<? extends Server> list(Map<String, String> filteringParams) {
-        Invocation<Servers> serverInvocation = get(Servers.class, "/servers/detail");
-        if (filteringParams != null) {
-            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
-                serverInvocation = serverInvocation.param(entry.getKey(), entry.getValue());
-            }
-        }
-        return serverInvocation.execute().getList();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<? extends Server> list(Map<String, String> filteringParams) {
+		Invocation<Servers> serverInvocation = get(Servers.class, "/servers/detail");
+		if (filteringParams != null) {
+			for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+				serverInvocation = serverInvocation.param(entry.getKey(), entry.getValue());
+			}
+		}
+		return serverInvocation.execute().getList();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Server get(String serverId) {
-        checkNotNull(serverId);
-        return get(NovaServer.class, uri("/servers/%s", serverId)).execute();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Server get(String serverId) {
+		checkNotNull(serverId);
+		return get(NovaServer.class, uri("/servers/%s", serverId)).execute();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public Server boot(ServerCreate server) {
 		checkNotNull(server);
 		// update return reservation-id to true
-		NovaServerCreateReturnReservationIdWrap wrapped = new NovaServerCreateReturnReservationIdWrap(server, false);
-		return post(NovaServer.class, uri("/servers"))
-				.entity(WrapServerIfApplicableFunction.INSTANCE.apply(wrapped))
+		// NovaServerCreateReturnReservationIdWrap could not get right property value for several @JsonIgnore fields in
+		// NovaServerCreate
+		// NovaServerCreateReturnReservationIdWrap wrapped = new NovaServerCreateReturnReservationIdWrap(server,
+		// false);
+		NovaServerCreate create = (NovaServerCreate) server;
+		create.setReturnReservationId(false);
+		return post(NovaServer.class, uri("/servers")).entity(WrapServerIfApplicableFunction.INSTANCE.apply(create))
 				.execute();
 	}
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String bootAndReturnReservationId(ServerCreate server) {
-        checkNotNull(server);
-        // update return reservation-id to true
-        NovaServerCreateReturnReservationIdWrap wrapped = new NovaServerCreateReturnReservationIdWrap(server, true);
-        return post(HashMap.class, uri("/servers"))
-                     .entity(WrapServerIfApplicableFunction.INSTANCE.apply(wrapped))
-                     .execute()
-                     .get("reservation_id").toString();
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Server bootAndWaitActive(ServerCreate server, int maxWaitTime) {
-        return waitForServerStatus(boot(server).getId(), Status.ACTIVE, maxWaitTime, TimeUnit.MILLISECONDS);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String bootAndReturnReservationId(ServerCreate server) {
+		checkNotNull(server);
+		// NovaServerCreateReturnReservationIdWrap could not get right property value for several @JsonIgnore fields in
+		// NovaServerCreate
+		// NovaServerCreateReturnReservationIdWrap wrapped = new NovaServerCreateReturnReservationIdWrap(server,
+		// false);
+		NovaServerCreate create = (NovaServerCreate) server;
+		create.setReturnReservationId(true);
+		return post(HashMap.class, uri("/servers")).entity(WrapServerIfApplicableFunction.INSTANCE.apply(create))
+				.execute().get("reservation_id").toString();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse delete(String serverId) {
-        checkNotNull(serverId);
-        return ToActionResponseFunction.INSTANCE.apply(
-                    delete(Void.class, uri("/servers/%s", serverId)).executeWithResponse()
-               );
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Server bootAndWaitActive(ServerCreate server, int maxWaitTime) {
+		return waitForServerStatus(boot(server).getId(), Status.ACTIVE, maxWaitTime, TimeUnit.MILLISECONDS);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse action(String serverId, Action action) {
-        checkNotNull(serverId);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse delete(String serverId) {
+		checkNotNull(serverId);
+		return ToActionResponseFunction.INSTANCE
+				.apply(delete(Void.class, uri("/servers/%s", serverId)).executeWithResponse());
+	}
 
-        ServerAction instance = BasicActions.actionInstanceFor(action);
-        if (instance == null)
-            return ActionResponse.actionFailed(String.format("Action %s was not found in the list of invokable actions", action), 412);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse action(String serverId, Action action) {
+		checkNotNull(serverId);
 
-        return invokeAction(serverId, instance);
-    }
+		ServerAction instance = BasicActions.actionInstanceFor(action);
+		if (instance == null)
+			return ActionResponse.actionFailed(
+					String.format("Action %s was not found in the list of invokable actions", action), 412);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String createSnapshot(String serverId, String snapshotName) {
-        checkNotNull(serverId);
-        checkNotNull(snapshotName);
+		return invokeAction(serverId, instance);
+	}
 
-        HttpResponse response = invokeActionWithResponse(serverId, CreateSnapshotAction.create(snapshotName));
-        String id = null;
-        if (response.getStatus() == 202) {
-            String location = response.header("location");
-            if (location != null && location.contains("/"))
-            {
-                String[] s = location.split("/");
-                id = s[s.length - 1];
-            }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String createSnapshot(String serverId, String snapshotName) {
+		checkNotNull(serverId);
+		checkNotNull(snapshotName);
 
-        }
-        response.getEntity(Void.class);
-        return id;
-    }
+		HttpResponse response = invokeActionWithResponse(serverId, CreateSnapshotAction.create(snapshotName));
+		String id = null;
+		if (response.getStatus() == 202) {
+			String location = response.header("location");
+			if (location != null && location.contains("/")) {
+				String[] s = location.split("/");
+				id = s[s.length - 1];
+			}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse reboot(String serverId, RebootType type) {
-        checkNotNull(serverId);
-        return invokeAction(serverId, new Reboot(type));
-    }
+		}
+		response.getEntity(Void.class);
+		return id;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse rebuild(String serverId, RebuildOptions options) {
-        checkNotNull(serverId);
-        return invokeAction(serverId, RebuildAction.create(options));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse reboot(String serverId, RebootType type) {
+		checkNotNull(serverId);
+		return invokeAction(serverId, new Reboot(type));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse resize(String serverId, String flavorId) {
-        checkNotNull(serverId);
-        checkNotNull(flavorId);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse rebuild(String serverId, RebuildOptions options) {
+		checkNotNull(serverId);
+		return invokeAction(serverId, RebuildAction.create(options));
+	}
 
-        return invokeAction(serverId, new Resize(flavorId));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse resize(String serverId, String flavorId) {
+		checkNotNull(serverId);
+		checkNotNull(flavorId);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse addSecurityGroup(String serverId, String secGroupName) {
-        checkNotNull(serverId);
-        checkNotNull(secGroupName);
-        return invokeAction(serverId, SecurityGroupActions.add(secGroupName));
-    }
+		return invokeAction(serverId, new Resize(flavorId));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse removeSecurityGroup(String serverId, String secGroupName) {
-        checkNotNull(serverId);
-        checkNotNull(secGroupName);
-        return invokeAction(serverId, SecurityGroupActions.remove(secGroupName));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse addSecurityGroup(String serverId, String secGroupName) {
+		checkNotNull(serverId);
+		checkNotNull(secGroupName);
+		return invokeAction(serverId, SecurityGroupActions.add(secGroupName));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse confirmResize(String serverId) {
-        checkNotNull(serverId);
-        return invokeAction(serverId, BasicActions.instanceFor(ConfirmResize.class));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse removeSecurityGroup(String serverId, String secGroupName) {
+		checkNotNull(serverId);
+		checkNotNull(secGroupName);
+		return invokeAction(serverId, SecurityGroupActions.remove(secGroupName));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse revertResize(String serverId) {
-        checkNotNull(serverId);
-        return invokeAction(serverId, BasicActions.instanceFor(RevertResize.class));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse confirmResize(String serverId) {
+		checkNotNull(serverId);
+		return invokeAction(serverId, BasicActions.instanceFor(ConfirmResize.class));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getConsoleOutput(String serverId, int numLines) {
-        checkNotNull(serverId);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse revertResize(String serverId) {
+		checkNotNull(serverId);
+		return invokeAction(serverId, BasicActions.instanceFor(RevertResize.class));
+	}
 
-        // Build options with the given numLines or default to full output
-        ConsoleOutputOptions consoleOutputOptions;
-        if (numLines <= 0)
-        	consoleOutputOptions = new ConsoleOutputOptions();
-        else
-        	consoleOutputOptions = new ConsoleOutputOptions(numLines);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getConsoleOutput(String serverId, int numLines) {
+		checkNotNull(serverId);
 
-        ConsoleOutput c = post(ConsoleOutput.class, uri("/servers/%s/action", serverId))
-                .entity(consoleOutputOptions).execute();
-        return (c != null) ? c.getOutput() : null;
-    }
+		// Build options with the given numLines or default to full output
+		ConsoleOutputOptions consoleOutputOptions;
+		if (numLines <= 0)
+			consoleOutputOptions = new ConsoleOutputOptions();
+		else
+			consoleOutputOptions = new ConsoleOutputOptions(numLines);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public VNCConsole getVNCConsole(String serverId, Type type) {
-        checkNotNull(serverId);
-        if (type == null)
-            type = Type.NOVNC;
+		ConsoleOutput c = post(ConsoleOutput.class, uri("/servers/%s/action", serverId)).entity(consoleOutputOptions)
+				.execute();
+		return (c != null) ? c.getOutput() : null;
+	}
 
-        return post(NovaVNCConsole.class, uri("/servers/%s/action", serverId))
-                    .entity(NovaVNCConsole.getConsoleForType(type))
-                    .execute();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public VNCConsole getVNCConsole(String serverId, Type type) {
+		checkNotNull(serverId);
+		if (type == null)
+			type = Type.NOVNC;
 
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public Map<String, ? extends Number> diagnostics(String serverId) {
-        return get(HashMap.class, uri("/servers/%s/diagnostics", serverId)).execute();
-    }
+		return post(NovaVNCConsole.class, uri("/servers/%s/action", serverId))
+				.entity(NovaVNCConsole.getConsoleForType(type)).execute();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ServerCreateBuilder serverBuilder() {
-        return NovaServerCreate.builder();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, ? extends Number> diagnostics(String serverId) {
+		return get(HashMap.class, uri("/servers/%s/diagnostics", serverId)).execute();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public VolumeAttachment attachVolume(String serverId, String volumeId, String device) {
-        return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId))
-                .entity(NovaVolumeAttachment.create(volumeId, device))
-                .execute(ExecutionOptions.<NovaVolumeAttachment>create(PropagateOnStatus.on(404)));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ServerCreateBuilder serverBuilder() {
+		return NovaServerCreate.builder();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse detachVolume(String serverId, String attachmentId) {
-        return ToActionResponseFunction.INSTANCE.apply(
-                   delete(Void.class,uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId)).executeWithResponse()
-                );
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public VolumeAttachment attachVolume(String serverId, String volumeId, String device) {
+		return post(NovaVolumeAttachment.class, uri("/servers/%s/os-volume_attachments", serverId))
+				.entity(NovaVolumeAttachment.create(volumeId, device))
+				.execute(ExecutionOptions.<NovaVolumeAttachment> create(PropagateOnStatus.on(404)));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse migrateServer(String serverId) {
-        checkNotNull(serverId);
-        return invokeAction(serverId, BasicActions.instanceFor(Migrate.class));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse detachVolume(String serverId, String attachmentId) {
+		return ToActionResponseFunction.INSTANCE
+				.apply(delete(Void.class, uri("/servers/%s/os-volume_attachments/%s", serverId, attachmentId))
+						.executeWithResponse());
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse liveMigrate(String serverId, LiveMigrateOptions options) {
-        checkNotNull(serverId);
-        if (options == null)
-            options = LiveMigrateOptions.create();
-        return invokeAction(serverId, LiveMigrationAction.create(options));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse migrateServer(String serverId) {
+		checkNotNull(serverId);
+		return invokeAction(serverId, BasicActions.instanceFor(Migrate.class));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse resetState(String serverId, Status state) {
-        checkNotNull(serverId);
-        checkNotNull(state);
-        return invokeAction(serverId, ResetStateAction.create(state));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse liveMigrate(String serverId, LiveMigrateOptions options) {
+		checkNotNull(serverId);
+		if (options == null)
+			options = LiveMigrateOptions.create();
+		return invokeAction(serverId, LiveMigrationAction.create(options));
+	}
 
-    /**
-     * {{@link #invokeAction(String, String)}
-     */
-    @Override
-    public ActionResponse backupServer(String serverId, BackupOptions options) {
-        checkNotNull(serverId);
-        checkNotNull(options);
-        return invokeAction(serverId, BackupAction.create(options));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse resetState(String serverId, Status state) {
+		checkNotNull(serverId);
+		checkNotNull(state);
+		return invokeAction(serverId, ResetStateAction.create(state));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse changeAdminPassword(String serverId, String adminPassword) {
-        checkNotNull(serverId);
-        checkNotNull(adminPassword);
-        return invokeAction(serverId, new ChangePassword(adminPassword));
-    }
+	/**
+	 * {{@link #invokeAction(String, String)}
+	 */
+	@Override
+	public ActionResponse backupServer(String serverId, BackupOptions options) {
+		checkNotNull(serverId);
+		checkNotNull(options);
+		return invokeAction(serverId, BackupAction.create(options));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Server waitForServerStatus(String serverId, Status status, int maxWait, TimeUnit maxWaitUnit) {
-        checkNotNull(serverId);
-        Server server = null;
-        long duration = 0;
-        long maxTime = maxWaitUnit.toMillis(maxWait);
-        while ( duration < maxTime ) {
-            server = get(serverId);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse changeAdminPassword(String serverId, String adminPassword) {
+		checkNotNull(serverId);
+		checkNotNull(adminPassword);
+		return invokeAction(serverId, new ChangePassword(adminPassword));
+	}
 
-            if (server == null || server.getStatus() == status || server.getStatus() == Status.ERROR)
-                break;
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Server waitForServerStatus(String serverId, Status status, int maxWait, TimeUnit maxWaitUnit) {
+		checkNotNull(serverId);
+		Server server = null;
+		long duration = 0;
+		long maxTime = maxWaitUnit.toMillis(maxWait);
+		while (duration < maxTime) {
+			server = get(serverId);
 
-            duration += sleep(1000);
-        }
-        return server;
-    }
+			if (server == null || server.getStatus() == status || server.getStatus() == Status.ERROR)
+				break;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Map<String, String> getMetadata(String serverId) {
-        checkNotNull(serverId);
-        return get(Metadata.class, uri("/servers/%s/metadata", serverId)).execute();
-    }
+			duration += sleep(1000);
+		}
+		return server;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Map<String, String> updateMetadata(String serverId, Map<String, String> metadata) {
-        checkNotNull(serverId);
-        checkNotNull(metadata);
-        return put(Metadata.class, uri("/servers/%s/metadata", serverId)).entity(Metadata.toMetadata(metadata)).execute();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Map<String, String> getMetadata(String serverId) {
+		checkNotNull(serverId);
+		return get(Metadata.class, uri("/servers/%s/metadata", serverId)).execute();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ActionResponse deleteMetadataItem(String serverId, String key) {
-        checkNotNull(serverId);
-        checkNotNull(key);
-        return ToActionResponseFunction.INSTANCE.apply(
-                  delete(Void.class, uri("/servers/%s/metadata/%s", serverId, key)).executeWithResponse()
-                );
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Map<String, String> updateMetadata(String serverId, Map<String, String> metadata) {
+		checkNotNull(serverId);
+		checkNotNull(metadata);
+		return put(Metadata.class, uri("/servers/%s/metadata", serverId)).entity(Metadata.toMetadata(metadata))
+				.execute();
+	}
 
-    private int sleep(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            LOG.error(e.getMessage(), e);
-        }
-        return ms;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ActionResponse deleteMetadataItem(String serverId, String key) {
+		checkNotNull(serverId);
+		checkNotNull(key);
+		return ToActionResponseFunction.INSTANCE
+				.apply(delete(Void.class, uri("/servers/%s/metadata/%s", serverId, key)).executeWithResponse());
+	}
 
-    @Override
-    public Server update(String serverId, ServerUpdateOptions options) {
-        checkNotNull(serverId);
-        checkNotNull(options);
+	private int sleep(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		return ms;
+	}
 
-        return put(NovaServer.class, uri("/servers/%s", serverId)).entity(NovaServerUpdate.fromOptions(options)).execute();
-    }
+	@Override
+	public Server update(String serverId, ServerUpdateOptions options) {
+		checkNotNull(serverId);
+		checkNotNull(options);
 
-    @Override
-    public InterfaceService interfaces() {
-        return Apis.get(InterfaceService.class);
-    }
+		return put(NovaServer.class, uri("/servers/%s", serverId)).entity(NovaServerUpdate.fromOptions(options))
+				.execute();
+	}
 
-    @Override
-    public InstanceActionsService instanceActions() {
-        return Apis.get(InstanceActionsService.class);
-    }
+	@Override
+	public InterfaceService interfaces() {
+		return Apis.get(InterfaceService.class);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ServerPassword getPassword(String serverId) {
-        checkNotNull(serverId);
-        return get(NovaPassword.class, uri("/servers/%s/os-server-password", serverId)).execute();
-    }   
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ServerPassword evacuate(String serverId, EvacuateOptions options) {
-        checkNotNull(serverId);
-      
-        return post(AdminPass.class, uri("/servers/%s/action", serverId))
-                    .entity(EvacuateAction.create(options))
-                    .execute();            
-    }
+	@Override
+	public InstanceActionsService instanceActions() {
+		return Apis.get(InstanceActionsService.class);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ServerPassword getPassword(String serverId) {
+		checkNotNull(serverId);
+		return get(NovaPassword.class, uri("/servers/%s/os-server-password", serverId)).execute();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ServerPassword evacuate(String serverId, EvacuateOptions options) {
+		checkNotNull(serverId);
+
+		return post(AdminPass.class, uri("/servers/%s/action", serverId)).entity(EvacuateAction.create(options))
+				.execute();
+	}
 }

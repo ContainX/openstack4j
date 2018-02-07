@@ -82,6 +82,17 @@ public class NovaServerCreate implements ServerCreate {
 	@JsonProperty("block_device_mapping_v2")
 	private List<BlockDeviceMappingCreate> blockDeviceMapping;
 	
+	
+	/**
+	 * Qianbiao.NG:: add Create Multiple Servers support.
+	 * <br/>
+	 * Document:: https://developer.openstack.org/api-ref/compute/#create-multiple-servers
+	 * 
+	 * @return
+	 */
+	@JsonProperty("return_reservation_id")
+	private boolean returnReservationId;
+	
 
 	public static ServerCreateBuilder builder() {
 		return new ServerCreateConcreteBuilder();
@@ -213,11 +224,26 @@ public class NovaServerCreate implements ServerCreate {
 		initNetworks();
 		networks.add(new NovaNetworkCreate(null, null, id));
 	}
-	
+
 	private void initNetworks() {
 		if (networks == null)
 			networks = Lists.newArrayList();
 	}
+	
+	
+	public boolean isReturnReservationId() {
+		return returnReservationId;
+	}
+
+	/**
+	 * due to several complex reason, just add set method for "returnReservationId" here
+	 * 
+	 * @param returnReservationId
+	 */
+	public void setReturnReservationId(boolean returnReservationId) {
+		this.returnReservationId = returnReservationId;
+	}
+
 
 	static class SecurityGroupInternal implements SecurityGroup {
 
