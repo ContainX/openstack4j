@@ -6,6 +6,7 @@ import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.network.Subnet;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
