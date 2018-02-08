@@ -29,6 +29,7 @@ public class NeutronSubnetUpdate implements ModelEntity {
     @JsonProperty("host_routes")
     private List<NeutronHostRoute> hostRoutes;
     @JsonProperty("gateway_ip")
+    @JsonInclude
     private String gateway;
     @JsonProperty("enable_dhcp")
     private boolean enabledhcp;
