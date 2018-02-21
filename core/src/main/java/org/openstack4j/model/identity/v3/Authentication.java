@@ -40,6 +40,13 @@ public interface Authentication extends ModelEntity {
 
         }
 
+        public interface ApplicationCredential {
+
+            String getId();
+
+            String getSecret();
+        }
+
     }
 
     public interface Scope {

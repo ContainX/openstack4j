@@ -71,4 +71,9 @@ public class IdentityServiceImpl extends BaseOpenStackService implements Identit
         return get(ExtensionList.class, PATH_EXTENSIONS).execute().getList();
     }
 
+    @Override
+    public ApplicationCredentialService applicationCredential() {
+        return Apis.get(ApplicationCredentialService.class);
+    }
+
 }

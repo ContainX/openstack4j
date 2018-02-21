@@ -10,10 +10,12 @@ import org.openstack4j.api.exceptions.AuthenticationException;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.model.common.Identifier;
+import org.openstack4j.model.identity.v3.builder.ApplicationCredentialBuilder;
 import org.openstack4j.openstack.common.Auth;
 import org.openstack4j.openstack.identity.v2.domain.Credentials;
 import org.openstack4j.openstack.identity.v2.domain.RaxApiKeyCredentials;
 import org.openstack4j.openstack.identity.v2.domain.TokenAuth;
+import org.openstack4j.openstack.identity.v3.domain.KeystoneApplicationCredential;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneAuth;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneAuth.AuthScope;
 import org.openstack4j.openstack.internal.OSAuthenticator;
@@ -131,6 +133,8 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         Identifier domain;
         AuthScope scope;
         String tokenId;
+        String applicationCredentialId;
+        String applicationCredentialSecret;
 
         @Override
         public ClientV3 domainName(String domainName) {
@@ -170,6 +174,13 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             // credential based authentication
             if (user != null && user.length() > 0)
                 return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(user, password, domain, scope), endpoint, perspective, config, provider);
+
+            // application credential based authentication
+            if (applicationCredentialId != null && applicationCredentialId.length() > 0) {
+                return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(
+                        KeystoneApplicationCredential.builder().id(applicationCredentialId).secret(applicationCredentialSecret).build()
+                ), endpoint, perspective, config, provider);
+            }
             // Use tokenless auth finally
             return (OSClientV3) OSAuthenticator.invoke(new KeystoneAuth(scope, Auth.Type.TOKENLESS), endpoint, perspective, config, provider);
         }
@@ -189,6 +200,13 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
         @Override
         public ClientV3 scopeToDomain(Identifier domain) {
             this.scope = AuthScope.domain(domain);
+            return this;
+        }
+
+        @Override
+        public V3 applicationCredential(String id, String secret) {
+            this.applicationCredentialId = id;
+            this.applicationCredentialSecret = secret;
             return this;
         }
 

@@ -88,4 +88,11 @@ public interface IdentityService extends RestService {
      */
     List<? extends Extension> listExtensions();
 
+    /**
+     * Application Credential API
+     *
+     * @return the application credential service
+     */
+    ApplicationCredentialService applicationCredential();
+
 }

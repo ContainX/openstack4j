@@ -77,4 +77,11 @@ public interface IdentityV3Builders {
      */
     public UserBuilder user();
 
+    /**
+     * The builder to create an ApplicationCredential.
+     *
+     * @return the application credential builder
+     */
+    public ApplicationCredentialBuilder applicationCredential();
+
 }

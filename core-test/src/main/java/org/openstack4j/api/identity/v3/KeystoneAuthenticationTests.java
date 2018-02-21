@@ -28,6 +28,7 @@ public class KeystoneAuthenticationTests extends AbstractTest {
     private static final String JSON_AUTH_TOKEN = "/identity/v3/authv3_token.json";
     private static final String JSON_AUTH_TOKEN_UNSCOPED = "/identity/v3/authv3_token_unscoped.json";
     private static final String JSON_AUTH_UNSCOPED = "/identity/v3/authv3_unscoped.json";
+    private static final String JSON_AUTH_APPLICATION_CREDENTIAL = "/identity/v3/authv3_applicationcredential.json";
     private static final String JSON_AUTH_ERROR_401 = "/identity/v3/authv3_authorizationerror.json";
     private static final String JSON_USERS = "/identity/v3/users.json";
     private static final ImmutableMap<String, String> HEADER_AUTH_PROJECT_RESPONSE = ImmutableMap.of("X-Subject-Token", "763fd7e197ab4e00b2e6e0a8d22a8e87", "Content-Type", "application/json");
@@ -45,6 +46,8 @@ public class KeystoneAuthenticationTests extends AbstractTest {
     private static final String PASSWORD = "test";
     private static final String REGION_EUROPE = "europe";
     private static final String TOKEN_UNSCOPED_ID = "3ecb5c2063904566be4b10406c0f7568";
+    private static final String APPLICATION_CREDENTIAL_ID = "423f19a4ac1e4f48bbb4180756e6eb6c";
+    private static final String APPLICATION_CREDENTIAL_SECRET = "rEaqvJka48mpv";
 
     /**
      * @return the identity service
@@ -367,6 +370,17 @@ public class KeystoneAuthenticationTests extends AbstractTest {
 
         assertEquals(osclient_token_unscoped.getToken().getId(),TOKEN_UNSCOPED_ID);
 
+    }
+
+    public void authenticate_application_credential_Test() throws Exception {
+        respondWithHeaderAndResource(HEADER_AUTH_TOKEN_RESPONSE, 201, JSON_AUTH_APPLICATION_CREDENTIAL);
+
+        associateClientV3(OSFactory.builderV3()
+                .endpoint(authURL("/v3"))
+                .applicationCredential(APPLICATION_CREDENTIAL_ID, APPLICATION_CREDENTIAL_SECRET)
+                .authenticate());
+
+        assertTrue(osv3.getToken().getMethods().contains("application_credential"));
     }
 
 }
