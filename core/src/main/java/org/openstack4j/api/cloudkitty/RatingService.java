@@ -1,37 +1,53 @@
 package org.openstack4j.api.cloudkitty;
 
+import org.openstack4j.api.cloudkitty.hashmap.HashMapService;
+import org.openstack4j.api.cloudkitty.pyscripts.PyScriptsService;
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.cloudkitty.Module;
 import org.openstack4j.model.cloudkitty.Resource;
 import org.openstack4j.model.common.ActionResponse;
 
 import java.util.List;
 
 /**
- * Cloudkitty V1 Rating service
- *
+ * Rating service
  * @author mariusleu
  */
 public interface RatingService extends RestService {
-    /**
-     * @return the list of loaded modules
-     */
-    List<? extends Module> getModules();
 
     /**
-     * @param moduleId module name
-     * @return a module
+     * @return the info service
      */
-    Module getModule(String moduleId);
+    InfoService info();
 
     /**
-     * Change the state and priority of a module
-     *
-     * @param moduleId name of the module to modify
-     * @param module   module object describing the new desired state
-     * @return module
+     * @return the collector service
      */
-    Module updateModule(String moduleId, Module module);
+    CollectorService collector();
+
+    /**
+     * @return the reporting service
+     */
+    ReportService reporting();
+
+    /**
+     * @return the module service
+     */
+    ModuleService module();
+
+    /**
+     * @return the storage service
+     */
+    StorageService storage();
+
+    /**
+     * @return the hashmap module services
+     */
+    HashMapService hashmap();
+
+    /**
+     * @return the pyscripts module service
+     */
+    PyScriptsService pyscripts();
 
     /**
      * Get an instant quote based on multiple resource description
@@ -45,5 +61,5 @@ public interface RatingService extends RestService {
      * Trigger a module list reload
      * @return action response
      */
-    ActionResponse reloadModules();
+    ActionResponse reload();
 }

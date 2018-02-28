@@ -12,6 +12,8 @@ public interface ThresholdBuilder extends Buildable.Builder<ThresholdBuilder, Th
 
     ThresholdBuilder fieldId(String fieldId);
 
+    ThresholdBuilder level(float level);
+
     ThresholdBuilder tenantId(String tenantId);
 
     ThresholdBuilder type(Mapping.Type type);

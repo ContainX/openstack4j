@@ -11,7 +11,7 @@ public interface RatedResourceBuilder extends Buildable.Builder<RatedResourceBui
 
     RatedResourceBuilder service(String service);
 
-    RatedResourceBuilder volume(double volume);
+    RatedResourceBuilder volume(float volume);
 
-    RatedResourceBuilder rating(String rating);
+    RatedResourceBuilder rating(float rating);
 }

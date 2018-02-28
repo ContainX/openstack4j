@@ -14,5 +14,7 @@ public interface Threshold extends ModelEntity, Buildable<ThresholdBuilder> {
 
     String getTenantId();
 
+    String getFieldId();
+
     Mapping.Type getType();
 }

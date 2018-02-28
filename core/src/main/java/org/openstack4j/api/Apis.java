@@ -2,6 +2,7 @@ package org.openstack4j.api;
 
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
+import org.openstack4j.api.cloudkitty.RatingService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
@@ -224,6 +225,13 @@ public class Apis {
      */
     public static DNSService getDNSService() { return get(DNSService.class); }
 
+    /**
+     * Gets the rating service API
+     * @return the rating service
+     */
+    public static RatingService getRatingService() {
+        return get(RatingService.class);
+    }
 
     private static APIProvider initializeProvider() {
         // No need to check for emptiness as there is default implementation registered

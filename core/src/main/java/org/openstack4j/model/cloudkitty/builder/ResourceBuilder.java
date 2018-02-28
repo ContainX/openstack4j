@@ -11,5 +11,5 @@ public interface ResourceBuilder extends Buildable.Builder<ResourceBuilder, Reso
 
     ResourceBuilder service(String service);
 
-    ResourceBuilder volume(double volume);
+    ResourceBuilder volume(float volume);
 }

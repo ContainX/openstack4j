@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * A collector info service
+ *
  * @author mariusleu
  */
 public interface InfoService extends RestService {
@@ -20,7 +21,7 @@ public interface InfoService extends RestService {
     /**
      * @return List of every services
      */
-    List<ServiceInfo> services();
+    List<? extends ServiceInfo> services();
 
     /**
      * @param service service name

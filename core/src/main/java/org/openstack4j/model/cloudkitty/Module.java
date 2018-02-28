@@ -11,6 +11,11 @@ import org.openstack4j.model.cloudkitty.builder.ModuleBuilder;
 public interface Module extends ModelEntity, Buildable<ModuleBuilder> {
 
     /**
+     * @return the module id
+     */
+    String getId();
+
+    /**
      * @return Short description of the module.
      */
     String getDescription();
@@ -29,9 +34,4 @@ public interface Module extends ModelEntity, Buildable<ModuleBuilder> {
      * @return priority of the module
      */
     int getPriority();
-
-    /**
-     * @return name of the module
-     */
-    String getModuleId();
 }

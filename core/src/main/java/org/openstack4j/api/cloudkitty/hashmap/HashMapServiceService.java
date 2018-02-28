@@ -7,7 +7,6 @@ import org.openstack4j.model.common.ActionResponse;
 import java.util.List;
 
 public interface HashMapServiceService extends RestService {
-
     List<? extends Service> list();
 
     Service get(String serviceId);
@@ -15,4 +14,5 @@ public interface HashMapServiceService extends RestService {
     Service create(Service service);
 
     ActionResponse delete(String serviceId);
+
 }

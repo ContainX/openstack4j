@@ -25,5 +25,5 @@ public interface ServiceInfo extends ModelEntity, Buildable<ServiceInfoBuilder> 
     /**
      * @return the unit
      */
-    String unit();
+    String getUnit();
 }

@@ -1,0 +1,9 @@
+{
+  "metadata": [
+    "resource_id",
+    "flavor",
+    "availability_zone"
+  ],
+  "service_id": "compute",
+  "unit": "instance"
+}

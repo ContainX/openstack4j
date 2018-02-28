@@ -24,6 +24,7 @@ public enum ServiceType {
   	MAGNUM("magnum", "container"),
 	DNS("designate", "dns"),
 	WORKFLOW("mistral", "workflow"),
+	RATING("cloudkitty", "rating"),
 	UNKNOWN("NA", "NA")
 	;
 

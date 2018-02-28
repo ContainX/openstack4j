@@ -1,0 +1,8 @@
+{
+  "mappings": [
+    {
+      "collector": "ceilometer",
+      "service": "compute"
+    }
+  ]
+}

@@ -732,6 +732,34 @@
         "type": "data-processing",
         "id": "8707e3735d4415c97ae231b4841eb1d",
         "name": "sahara"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8889",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "75c1f64a978c4d13b59e0564f917ffba"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8889",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "75c1f64a978c4d13b59e0564f917ffbb"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8889",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "75c1f64a978c4d13b59e0564f917ffbc"
+          }
+        ],
+        "type": "rating",
+        "name": "cloudkitty",
+        "id": "57cffcdb228549ab9d1f9e081cd67332"
       }
     ],
     "extras": {},

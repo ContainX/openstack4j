@@ -19,7 +19,7 @@ public interface CollectorService extends RestService {
      *
      * @return the list of service to collector mappings
      */
-    List<? extends ServiceToCollectorMapping> listMappings();
+    List<? extends ServiceToCollectorMapping> list();
 
     /**
      * Get a service to collector mapping
@@ -27,7 +27,7 @@ public interface CollectorService extends RestService {
      * @param service the service name
      * @return the service to collector mapping
      */
-    ServiceToCollectorMapping getMapping(String service);
+    ServiceToCollectorMapping get(String service);
 
     /**
      * Create a service to collector mapping
@@ -36,7 +36,7 @@ public interface CollectorService extends RestService {
      * @param service the service name
      * @return the newly created service to collector mapping
      */
-    ServiceToCollectorMapping createMapping(String collector, String service);
+    ServiceToCollectorMapping create(String collector, String service);
 
     /**
      * Delte a service to collector mapping
@@ -44,7 +44,7 @@ public interface CollectorService extends RestService {
      * @param service service name
      * @return action response
      */
-    ActionResponse deleteMapping(String service);
+    ActionResponse delete(String service);
 
     /**
      * Set the enable state of a collector
