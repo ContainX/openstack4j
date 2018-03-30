@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 
-import org.jboss.resteasy.client.ClientResponse;
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpEntityHandler;
@@ -15,9 +15,9 @@ import org.openstack4j.core.transport.HttpResponse;
 
 public class HttpResponseImpl implements HttpResponse {
 
-    private final ClientResponse<?> response;
+    private final Response response;
 
-    private HttpResponseImpl(ClientResponse<?> response) {
+    private HttpResponseImpl(Response response) {
         this.response = response;
     }
 
@@ -27,7 +27,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @param response the response
      * @return the HttpResponse
      */
-    public static HttpResponseImpl wrap(ClientResponse<?> response) {
+    public static HttpResponseImpl wrap(Response response) {
         return new HttpResponseImpl(response);
     }
 
@@ -36,7 +36,7 @@ public class HttpResponseImpl implements HttpResponse {
      *
      * @return the response
      */
-    public ClientResponse<?> unwrap() {
+    public Response unwrap() {
         return response;
     }
 
@@ -77,14 +77,15 @@ public class HttpResponseImpl implements HttpResponse {
      */
     @Override
     public String getStatusMessage() {
-        return response.getResponseStatus().getReasonPhrase();
+        return response.getStatusInfo().getReasonPhrase();
     }
 
     /**
      * @return the input stream
      */
     public InputStream getInputStream() {
-        return response.getEntity(InputStream.class);
+        response.bufferEntity();
+        return response.readEntity(InputStream.class);
     }
 
     /**
@@ -94,18 +95,18 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the header as a String or null if not found
      */
     public String header(String name) {
-        return response.getHeaders().getFirst(name);
+        return response.getStringHeaders().getFirst(name);
     }
 
     /**
      * @return the a Map of Header Name to Header Value
      */
     public Map<String, String> headers() {
-        Map<String, String> headers = new HashMap<String, String>();
-        MultivaluedMap<String, String> responseHeaders = response.getHeaders();
+        Map<String, String> headers = new HashMap<>();
+        MultivaluedMap<String, String> responseHeaders = response.getStringHeaders();
 
         for (String key : responseHeaders.keySet()) {
-            headers.put(key, responseHeaders.getFirst(key).toString());
+            headers.put(key, responseHeaders.getFirst(key));
         }
 
         return headers;
@@ -113,12 +114,13 @@ public class HttpResponseImpl implements HttpResponse {
 
     @Override
     public <T> T readEntity(Class<T> typeToReadAs) {
-        return response.getEntity(typeToReadAs);
+        response.bufferEntity();
+        return response.readEntity(typeToReadAs);
     }
 
     @Override
     public void close() throws IOException {
-        response.releaseConnection();
+        response.close();
     }
     
     @Override

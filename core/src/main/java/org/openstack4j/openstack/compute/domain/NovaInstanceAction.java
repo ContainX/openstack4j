@@ -8,7 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 @JsonRootName("instanceAction")
 public class NovaInstanceAction implements InstanceAction {
@@ -69,7 +69,7 @@ public class NovaInstanceAction implements InstanceAction {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("action", action).add("instance_uuid", instanceUuid)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("action", action).add("instance_uuid", instanceUuid)
                 .add("message", message).add("project_id", projectId).add("request_id", requestId)
                 .add("start_time", startTime).add("user_id", userId).toString();
     }

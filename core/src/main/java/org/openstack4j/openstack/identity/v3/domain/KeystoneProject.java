@@ -10,6 +10,7 @@ import org.openstack4j.model.identity.v3.Project;
 import org.openstack4j.model.identity.v3.builder.ProjectBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 /**
@@ -187,7 +188,7 @@ public class KeystoneProject implements Project {
             domainId = domain.getId();
         }
 
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("domainId", domainId)
                 .add("description", description)
@@ -206,7 +207,7 @@ public class KeystoneProject implements Project {
      */
     @Override
     public int hashCode() {
-        return Objects.hashCode(id, domain.getId(), description, name, links, parentId, subtree, parents);
+        return Objects.hashCode(id, domain != null ? domain.getId() : domainId, description, name, links, parentId, subtree, parents);
     }
 
     /**

@@ -4,29 +4,32 @@ import org.openstack4j.model.storage.block.VolumeAttachment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * return a description for this volume attachment job
- * 
+ *
  * @author Octopus Zhang
  */
 @JsonRootName("volumeAttachment")
 public class CinderVolumeAttachment implements VolumeAttachment {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonProperty
 	private String device;
-	
+
 	@JsonProperty
 	private String host_name;
-	
+
 	@JsonProperty
 	private String id;
 
 	@JsonProperty
 	private String server_id;
+	
+	@JsonProperty
+	private String attachment_id;
 
 	@JsonProperty
 	private String volume_id;
@@ -35,12 +38,12 @@ public class CinderVolumeAttachment implements VolumeAttachment {
 	public String getDevice() {
 		return device;
 	}
-	
+
 	@Override
 	public String getHostname() {
 		return host_name;
 	}
-	
+
 	@Override
 	public String getId() {
 		return id;
@@ -49,7 +52,7 @@ public class CinderVolumeAttachment implements VolumeAttachment {
 	@Override
 	public String getServerId() {
 		return server_id;
-		
+
 	}
 
 	@Override
@@ -59,12 +62,12 @@ public class CinderVolumeAttachment implements VolumeAttachment {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("device", device).add("id", id).add("serverId", server_id)
 				.add("volumeId", volume_id).add("hostname", host_name).toString();
 
 	}
 
-	
+
 
 }

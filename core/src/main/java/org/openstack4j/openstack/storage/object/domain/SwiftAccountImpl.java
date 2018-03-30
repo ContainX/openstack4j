@@ -4,11 +4,11 @@ import java.util.Map;
 
 import org.openstack4j.model.storage.object.SwiftAccount;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An Account representation for OpenStack Object Storage (Swift)
- * 
+ *
  * @author Jeremy Unruh
  */
 public class SwiftAccountImpl implements SwiftAccount {
@@ -52,10 +52,10 @@ public class SwiftAccountImpl implements SwiftAccount {
     public static AccountBuilder builder() {
         return new AccountBuilder();
     }
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                   .add("containerCount", containerCount).add("objectCount", objectCount)
                   .add("bytesUsed", bytesUsed).add("temporaryUrlKey", temporaryUrlKey)
                   .add("metadata", metadata)
@@ -69,27 +69,27 @@ public class SwiftAccountImpl implements SwiftAccount {
             account.containerCount = containerCount;
             return this;
         }
-        
+
         public AccountBuilder objectCount(long objectCount) {
             account.objectCount = objectCount;
             return this;
         }
-        
+
         public AccountBuilder bytesUsed(long bytesUsed) {
             account.bytesUsed = bytesUsed;
             return this;
         }
-        
+
         public AccountBuilder temporaryUrlKey(String temporaryUrlKey) {
             account.temporaryUrlKey = temporaryUrlKey;
             return this;
         }
-        
+
         public AccountBuilder metadata(Map<String, String> metadata) {
             account.metadata = metadata;
             return this;
         }
-        
+
         public SwiftAccountImpl build() {
             return account;
         }

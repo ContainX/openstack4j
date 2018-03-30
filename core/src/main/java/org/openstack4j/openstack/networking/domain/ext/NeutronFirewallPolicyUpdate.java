@@ -9,33 +9,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An entity used to update Neutron Firewall Policy (FwaaS).
- * 
+ *
  * @author Vishvesh Deshmukh
  */
 @JsonRootName("firewall_policy")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronFirewallPolicyUpdate implements FirewallPolicyUpdate {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private String name;
-	
+
 	@JsonProperty("tenant_id")
 	private String tenantId;
-	
+
 	private String description;
-	
+
 	private Boolean shared;
-	
+
 	private Boolean audited;
-	
+
 	@JsonProperty("firewall_rules")
 	private List<String> firewallRules;
-	
+
 	/**
 	 * Wrap this FirewallPolicyUpdate to a builder
 	 * @return FirewallPolicyUpdateBuilder
@@ -44,14 +44,14 @@ public class NeutronFirewallPolicyUpdate implements FirewallPolicyUpdate {
 	public FirewallPolicyUpdateBuilder toBuilder() {
 		return new FirewallPolicyUpdateConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return FirewallPolicyUpdateBuilder
 	 */
 	public static FirewallPolicyUpdateBuilder builder() {
 		return new FirewallPolicyUpdateConcreteBuilder();
 	}
-	
+
 	@Override
 	public String getName() {
 		return name;
@@ -66,7 +66,7 @@ public class NeutronFirewallPolicyUpdate implements FirewallPolicyUpdate {
 	public Boolean isShared() {
 		return shared != null && shared;
 	}
-	
+
 	@Override
 	public Boolean isAudited() {
 		return audited != null && audited;
@@ -77,32 +77,32 @@ public class NeutronFirewallPolicyUpdate implements FirewallPolicyUpdate {
 	public List<String> getFirewallRuleIds() {
 		return firewallRules;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("name", name).add("shared", shared).add("audited", audited)
 				.add("tenantId", tenantId).add("description", description)
 				.add("firewallRuleIds", firewallRules)
 				.toString();
 	}
-	
+
 	public static class FirewallPolicyUpdateConcreteBuilder implements FirewallPolicyUpdateBuilder {
 		NeutronFirewallPolicyUpdate f;
-		
+
 		@Override
 		public FirewallPolicyUpdate build() {
 			return f;
 		}
-		
+
 		public FirewallPolicyUpdateConcreteBuilder() {
 			this(new NeutronFirewallPolicyUpdate());
 		}
-		
+
 		public FirewallPolicyUpdateConcreteBuilder(NeutronFirewallPolicyUpdate f){
 			this.f = f;
 		}
-		
+
 		@Override
 		public FirewallPolicyUpdateBuilder from(FirewallPolicyUpdate in) {
 			this.f = (NeutronFirewallPolicyUpdate) in;

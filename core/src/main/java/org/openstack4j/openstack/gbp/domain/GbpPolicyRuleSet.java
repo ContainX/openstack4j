@@ -8,10 +8,10 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 /**
  * Model implementation for Policy rule set
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_rule_set")
@@ -29,7 +29,7 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
     private List<String> childPolicyRuleSets;
     @JsonProperty("policy_rules")
     private List<String> policyRules;
-    
+
 
     @Override
     public String getTenantId() {
@@ -83,17 +83,17 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
     public List<String> getPolicyRules() {
         return policyRules;
     }
-   
+
     @Override
     public PolicyRuleSetBuilder toBuilder() {
         return new PolicyRuleSetConcreteBuilder(this);
     }
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("parentId", parentId).add("childPolicyRuleSets", childPolicyRuleSets).add("shared", shared).add("policyRules", policyRules).toString();
     }
-        
+
     public static class PolicyRuleSets extends ListResult<GbpPolicyRuleSet>{
 
         private static final long serialVersionUID = 1L;
@@ -103,12 +103,12 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
         protected List<GbpPolicyRuleSet> value() {
             return policyRuleSets;
         }
-        
+
     }
     public static class PolicyRuleSetConcreteBuilder implements PolicyRuleSetBuilder{
 
         private GbpPolicyRuleSet policyRuleSet;
-        
+
         public PolicyRuleSetConcreteBuilder(GbpPolicyRuleSet gbpPolicyRuleSet) {
             this.policyRuleSet=gbpPolicyRuleSet;
         }
@@ -151,7 +151,7 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
             this.policyRuleSet.policyRules=ruleIds;
             return this;
         }
-        
+
     }
     public static PolicyRuleSetBuilder builder() {
         return new PolicyRuleSetConcreteBuilder();

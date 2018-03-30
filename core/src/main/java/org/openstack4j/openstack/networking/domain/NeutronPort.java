@@ -3,6 +3,7 @@ package org.openstack4j.openstack.networking.domain;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.openstack4j.model.common.builder.ResourceBuilder;
@@ -17,13 +18,13 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
  * A Neutron Port
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("port")
@@ -46,7 +47,7 @@ public class NeutronPort implements Port {
 
 	@JsonProperty("fixed_ips")
 	private Set<NeutronIP> fixedIps;
-	
+
 	@JsonProperty("allowed_address_pairs")
 	private Set<NeutronAllowedAddressPair> allowedAddressPairs;
 
@@ -64,22 +65,37 @@ public class NeutronPort implements Port {
 
 	@JsonProperty("security_groups")
 	private List<String> securityGroups;
-	
+
 	@JsonProperty("extra_dhcp_opts")
 	private List<NeutronExtraDhcpOptCreate> extraDhcpOptCreates;
-	
+
 	@JsonProperty("port_security_enabled")
-	private Boolean portSecurityEnabled; 
-        
+	private Boolean portSecurityEnabled;
+
+	@JsonProperty("binding:host_id")
+	private String hostId;
+
+	@JsonProperty("binding:vif_type")
+	private String vifType;
+
+	@JsonProperty("binding:vif_details")
+	private Map<String, Object> vifDetails;
+
+	@JsonProperty("binding:vnic_type")
+	private String vNicType;
+
+	@JsonProperty("binding:profile")
+	private Map<String, Object> profile;
+
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
 	}
-	
+
 	@Override
 	public PortBuilder toBuilder() {
 		return new PortConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -151,14 +167,14 @@ public class NeutronPort implements Port {
 	public Set<? extends IP> getFixedIps() {
 		return fixedIps;
 	}
-	
+
 	/**
-   * {@inheritDoc}
-   */
-  @Override
-  public Set<? extends AllowedAddressPair> getAllowedAddressPairs() {
-    return allowedAddressPairs;
-  }
+	* {@inheritDoc}
+	*/
+	@Override
+	public Set<? extends AllowedAddressPair> getAllowedAddressPairs() {
+		return allowedAddressPairs;
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -174,6 +190,46 @@ public class NeutronPort implements Port {
 	@Override
 	public List<String> getSecurityGroups() {
 		return securityGroups;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getHostId() {
+		return hostId;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getVifType() {
+		return vifType;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Map<String, Object> getVifDetails() {
+		return vifDetails;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getvNicType() {
+		return vNicType;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Map<String, Object> getProfile() {
+		return profile;
 	}
 
 	/**
@@ -199,8 +255,28 @@ public class NeutronPort implements Port {
 	public void setTenantId(String tenantId) {
 		this.tenantId = tenantId;
 	}
-	
-    /**
+
+	public void setHostId(String hostId) {
+		this.hostId = hostId;
+	}
+
+	public void setVifType(String vifType) {
+		this.vifType = vifType;
+	}
+
+	public void setVifDetails(Map<String, Object> vifDetails) {
+		this.vifDetails = vifDetails;
+	}
+
+	public void setvNicType(String vNicType) {
+		this.vNicType = vNicType;
+	}
+
+	public void setProfile(Map<String, Object> profile) {
+		this.profile = profile;
+	}
+
+	/**
      * {@inheritDoc}
      */
     @Override
@@ -208,41 +284,88 @@ public class NeutronPort implements Port {
         return portSecurityEnabled;
     }
 
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("id", id).add("name", name).add("adminStateUp", adminStateUp).add("deviceId", deviceId)
 				    .add("deviceOwner", deviceOwner).add("fixedIps", fixedIps).add("macAddress", macAddress)
 				    .add("networkId", networkId).add("tenantId", tenantId).add("securityGroups", securityGroups)
 				    .add("allowed_address_pairs", allowedAddressPairs).add("port_security_enabled ", portSecurityEnabled)
+				    .add("binding:host_id", hostId).add("binding:vif_type", vifType).add("binding:vif_details", vifDetails)
+				    .add("binding:vnic_type", vNicType).add("binding:profile", profile)
 				    .toString();
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return java.util.Objects.hash(id, name, adminStateUp, deviceId,
+				deviceOwner, fixedIps, macAddress, networkId, tenantId,
+				securityGroups, allowedAddressPairs, portSecurityEnabled, hostId,
+				vifType, vifDetails, vNicType, profile);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj instanceof NeutronPort) {
+			NeutronPort that = (NeutronPort) obj;
+			if (java.util.Objects.equals(id, that.id) &&
+					java.util.Objects.equals(name, that.name) &&
+					java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
+					java.util.Objects.equals(deviceId, that.deviceId) &&
+					java.util.Objects.equals(deviceOwner, that.deviceOwner) &&
+					java.util.Objects.equals(fixedIps, that.fixedIps) &&
+					java.util.Objects.equals(macAddress, that.macAddress) &&
+					java.util.Objects.equals(networkId, that.networkId) &&
+					java.util.Objects.equals(tenantId, that.tenantId) &&
+					java.util.Objects.equals(securityGroups, that.securityGroups) &&
+					java.util.Objects.equals(allowedAddressPairs, that.allowedAddressPairs) &&
+					java.util.Objects.equals(portSecurityEnabled, that.portSecurityEnabled) &&
+					java.util.Objects.equals(hostId, that.hostId) &&
+					java.util.Objects.equals(vifType, that.vifType) &&
+					java.util.Objects.equals(vifDetails, that.vifDetails) &&
+					java.util.Objects.equals(vNicType, that.vNicType) &&
+					java.util.Objects.equals(profile, that.profile)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static class Ports extends ListResult<NeutronPort> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("ports")
 		private List<NeutronPort> ports;
-		
+
 		@Override
 		protected List<NeutronPort> value() {
 			return ports;
 		}
 	}
-	
+
 	public static class PortConcreteBuilder extends ResourceBuilder<Port, PortConcreteBuilder> implements PortBuilder {
 
 		private NeutronPort m;
-		
-		PortConcreteBuilder() { 
+
+		PortConcreteBuilder() {
 			this(new NeutronPort());
 		}
-		
+
 		PortConcreteBuilder(NeutronPort port) {
 			this.m = port;
 		}
@@ -274,28 +397,28 @@ public class NeutronPort implements Port {
 		public PortBuilder fixedIp(String address, String subnetId) {
 			if (m.fixedIps == null)
 				m.fixedIps = Sets.newHashSet();
-			
+
 			m.fixedIps.add(new NeutronIP(address, subnetId));
 			return this;
 		}
-		
-    @Override
+
+		@Override
         public PortBuilder removeFixedIp(String address, String subnetId) {
-      if (m.fixedIps == null)
-        m.fixedIps = Sets.newHashSet();
-      
-      Iterator<NeutronIP> iter = m.fixedIps.iterator();
-      
-      while (iter.hasNext()) {
-        NeutronIP fixedIP = iter.next();
-        if (fixedIP.getSubnetId() != null && fixedIP.getSubnetId().equals(subnetId) && 
-            fixedIP.getIpAddress() != null && fixedIP.getIpAddress().equals(address)) {
-          iter.remove();
-        }
-      }
-      
-      return this;
-    }
+			if (m.fixedIps == null)
+			  m.fixedIps = Sets.newHashSet();
+
+			Iterator<NeutronIP> iter = m.fixedIps.iterator();
+
+			while (iter.hasNext()) {
+			  NeutronIP fixedIP = iter.next();
+			  if (fixedIP.getSubnetId() != null && fixedIP.getSubnetId().equals(subnetId) &&
+			      fixedIP.getIpAddress() != null && fixedIP.getIpAddress().equals(address)) {
+			    iter.remove();
+			  }
+			}
+
+			return this;
+		}
 
 		@Override
 		public PortBuilder allowedAddressPair(String ipAddress, String macAddress) {
@@ -323,7 +446,7 @@ public class NeutronPort implements Port {
 
 			return this;
 		}
-    
+
 
 		@Override
 		public PortBuilder adminState(boolean adminStateUp) {
@@ -336,7 +459,7 @@ public class NeutronPort implements Port {
 			m.state = state;
 			return this;
 		}
-		
+
 		@Override
 		public Port build() {
 			return m;
@@ -375,6 +498,37 @@ public class NeutronPort implements Port {
             m.portSecurityEnabled=portSecurityEnabled;
             return this;
         }
+
+        @Override
+        public PortBuilder hostId(String hostId) {
+			m.hostId = hostId;
+			return this;
+    	}
+
+        @Override
+    	public PortBuilder vifType(String vifType) {
+			m.vifType = vifType;
+			return this;
+    	}
+
+        @Override
+    	public PortBuilder vifDetails(Map<String, Object> vifDetails) {
+			m.vifDetails = vifDetails;
+			return this;
+    	}
+
+        @Override
+    	public PortBuilder vNicType(String vNicType) {
+			m.vNicType = vNicType;
+			return this;
+    	}
+
+        @Override
+    	public PortBuilder profile(Map<String, Object> profile) {
+			m.profile = profile;
+			return this;
+    	}
+
 	}
 
 }

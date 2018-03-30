@@ -8,12 +8,12 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 /**
  * An OpenStack Keypair is an SSH Key
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("keypair")
@@ -27,7 +27,7 @@ public class NovaKeypair implements Keypair {
 	@JsonProperty("private_key")
 	private String privateKey;
 	private String fingerprint;
-	
+
 	@JsonProperty("user_id")
 	private String userId;
 	private Boolean deleted;
@@ -38,10 +38,10 @@ public class NovaKeypair implements Keypair {
 	@JsonProperty("deleted_at")
 	private Date deletedAt;
 	private Integer id;
-	
+
 	/**
 	 * Used internally by the domain side of the API to create a new Keypair on an OpenStack server
-	 * 
+	 *
 	 * @param name the name of the keypair
 	 * @param publicKey the public key or null to have OS generated one
 	 * @return NovaKeypair
@@ -52,7 +52,7 @@ public class NovaKeypair implements Keypair {
 	  kp.publicKey = publicKey;
 	  return kp;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -68,7 +68,7 @@ public class NovaKeypair implements Keypair {
 	public String getPublicKey() {
 		return publicKey;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -84,7 +84,7 @@ public class NovaKeypair implements Keypair {
 	public String getFingerprint() {
 		return fingerprint;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -138,20 +138,20 @@ public class NovaKeypair implements Keypair {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("name", name).add("public_key", publicKey).add("private_key",  privateKey).add("fingerprint", fingerprint)
 				     .add("user_id", userId).add("deleted", deleted).add("created_at", createdAt).add("updated_at", updatedAt)
 				     .add("deleted_at", deletedAt).add("id", id).toString();
 	}
-	
+
 	public static class Keypairs extends ListResult<NovaKeypair> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("keypairs")
 		private List<KeyPairWrapper> wrapped;
 		private transient List<NovaKeypair> unwrapped;
-		
+
 		@Override
 		protected List<NovaKeypair> value() {
 			if (wrapped != null && unwrapped == null) {
@@ -161,12 +161,12 @@ public class NovaKeypair implements Keypair {
 			}
 			return unwrapped;
 		}
-		
+
 		static final class KeyPairWrapper {
 			@JsonProperty
 			private NovaKeypair keypair;
-			
+
 		}
-		
+
 	}
 }

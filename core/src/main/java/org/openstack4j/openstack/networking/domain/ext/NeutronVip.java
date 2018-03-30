@@ -11,7 +11,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * @author liujunpeng
@@ -79,7 +79,7 @@ public class NeutronVip implements Vip {
      */
     private String status;
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -88,7 +88,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -97,7 +97,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -106,7 +106,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -115,7 +115,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -124,7 +124,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -133,7 +133,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -142,7 +142,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -151,7 +151,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -160,7 +160,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -169,7 +169,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -178,7 +178,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -187,7 +187,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -196,7 +196,7 @@ public class NeutronVip implements Vip {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override
@@ -207,7 +207,7 @@ public class NeutronVip implements Vip {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("address", address)
                 .add("adminStateUp", adminStateUp)
                 .add("connectionLimit", connectionLimit)
@@ -226,7 +226,7 @@ public class NeutronVip implements Vip {
 
 
     /**
-     * 
+     *
      * @author liujunpeng
      *
      */
@@ -241,7 +241,7 @@ public class NeutronVip implements Vip {
         }
         @Override
         public String toString() {
-            return Objects.toStringHelper(this).omitNullValues()
+            return MoreObjects.toStringHelper(this).omitNullValues()
                     .add("vips", vips).toString();
         }
 
@@ -257,7 +257,7 @@ public class NeutronVip implements Vip {
 
         }
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -272,7 +272,7 @@ public class NeutronVip implements Vip {
         }
 
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -282,7 +282,7 @@ public class NeutronVip implements Vip {
         }
 
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -292,7 +292,7 @@ public class NeutronVip implements Vip {
         }
 
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -302,7 +302,7 @@ public class NeutronVip implements Vip {
         }
 
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -312,7 +312,7 @@ public class NeutronVip implements Vip {
         }
 
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -322,7 +322,7 @@ public class NeutronVip implements Vip {
         }
 
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -332,7 +332,7 @@ public class NeutronVip implements Vip {
         }
 
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -341,7 +341,7 @@ public class NeutronVip implements Vip {
             return this;
         }
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -350,7 +350,7 @@ public class NeutronVip implements Vip {
             return this;
         }
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -360,7 +360,7 @@ public class NeutronVip implements Vip {
             return this;
         }
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override
@@ -369,7 +369,7 @@ public class NeutronVip implements Vip {
             return this;
         }
         /**
-         * 
+         *
          * {@inheritDoc}
          */
         @Override

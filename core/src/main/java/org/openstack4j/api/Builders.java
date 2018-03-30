@@ -1,9 +1,16 @@
 package org.openstack4j.api;
 
+import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
+import org.openstack4j.model.artifact.builder.ToscaTemplatesArtifactBuilder;
+import org.openstack4j.model.barbican.Secret;
 import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
 import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
+import org.openstack4j.model.barbican.builder.SecretCreateBuilder;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.*;
+import org.openstack4j.model.dns.v2.builder.DNSV2Builders;
+import org.openstack4j.model.dns.v2.builder.RecordsetBuilder;
+import org.openstack4j.model.dns.v2.builder.ZoneBuilder;
 import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
 import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
@@ -26,6 +33,7 @@ import org.openstack4j.model.identity.v3.builder.*;
 import org.openstack4j.model.image.builder.ImageBuilder;
 import org.openstack4j.model.image.v2.builder.ImageUpdateBuilder;
 import org.openstack4j.model.image.v2.builder.TaskBuilder;
+import org.openstack4j.model.magnum.BaymodelBuilder;
 import org.openstack4j.model.manila.builder.*;
 import org.openstack4j.model.murano.v1.builder.EnvironmentBuilder;
 import org.openstack4j.model.murano.v1.builder.AppCatalogBuilders;
@@ -42,13 +50,20 @@ import org.openstack4j.model.tacker.builder.NfvBuilders;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 import org.openstack4j.model.telemetry.builder.TelemetryBuilders;
 import org.openstack4j.model.trove.builder.DBServiceBuilders;
+import org.openstack4j.openstack.artifact.domain.ArtifactUpdateModel;
+import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
+import org.openstack4j.model.workflow.builder.WorkflowBuilders;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
+import org.openstack4j.openstack.barbican.domain.BarbicanSecret;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.*;
 import org.openstack4j.openstack.compute.domain.NovaSecGroupExtension.SecurityGroupRule;
 import org.openstack4j.openstack.compute.domain.NovaServerCreate;
+import org.openstack4j.openstack.dns.v2.builder.DesignateV2Builders;
+import org.openstack4j.openstack.dns.v2.domain.DesignateRecordset;
+import org.openstack4j.openstack.dns.v2.domain.DesignateZone;
 import org.openstack4j.openstack.gbp.domain.GbpExternalPolicyCreate;
 import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
 import org.openstack4j.openstack.gbp.domain.GbpExternalSegment;
@@ -72,6 +87,7 @@ import org.openstack4j.openstack.identity.v3.domain.*;
 import org.openstack4j.openstack.image.domain.GlanceImage;
 import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
 import org.openstack4j.openstack.image.v2.domain.GlanceTask;
+import org.openstack4j.openstack.magnum.MagnumBaymodel;
 import org.openstack4j.openstack.manila.builder.ManilaBuilders;
 import org.openstack4j.openstack.manila.domain.*;
 import org.openstack4j.openstack.murano.v1.builder.MuranoBuilders;
@@ -79,6 +95,7 @@ import org.openstack4j.openstack.murano.v1.domain.MuranoEnvironment;
 import org.openstack4j.openstack.networking.builder.NeutronBuilders;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.octavia.builder.OctaviaBuilders;
 import org.openstack4j.openstack.sahara.builder.SaharaBuilders;
 import org.openstack4j.openstack.sahara.domain.*;
 import org.openstack4j.openstack.storage.block.builder.CinderBuilders;
@@ -91,6 +108,7 @@ import org.openstack4j.openstack.tacker.builders.TackerBuilders;
 import org.openstack4j.openstack.telemetry.builder.CeilometerBuilders;
 import org.openstack4j.openstack.telemetry.domain.CeilometerAlarm;
 import org.openstack4j.openstack.trove.builder.TroveBuilders;
+import org.openstack4j.openstack.workflow.builder.MistralBuilders;
 
 /**
  * A utility class to quickly access available Builders within the OpenStack API
@@ -135,12 +153,66 @@ public class Builders {
     }
 
     /**
+     * The builder to create a ToscaTemplatesArtifact
+     *
+     * @return the ToscaTemplatesArtifactBuilder
+     */
+    public static ToscaTemplatesArtifactBuilder toscaTemplatesArtifact() {
+        return ToscaTemplates.builder();
+    }
+
+    /**
+     * The builder to update an Artifact
+     *
+     * @return the ArtifactUpdateBuilder
+     */
+    public static ArtifactUpdateBuilder artifactUpdate() {
+        return ArtifactUpdateModel.builder();
+    }
+
+    /**
      * The builder to create a Network
      *
      * @return the network builder
      */
     public static NetworkBuilder network() {
         return NeutronNetwork.builder();
+    }
+
+    /**
+     * The builder to create a Flow Classifier
+     *
+     * @return the Flow Classifier builder
+     */
+    public static FlowClassifierBuilder flowClassifier() {
+        return NeutronFlowClassifier.builder();
+    }
+
+    /**
+     * The builder to create a Port Pair
+     *
+     * @return the Port Pair builder
+     */
+    public static PortPairBuilder portPair() {
+        return NeutronPortPair.builder();
+    }
+
+    /**
+     * The builder to create a Port Pair Group
+     *
+     * @return the Port Pair Group builder
+     */
+    public static PortPairGroupBuilder portPairGroup() {
+        return NeutronPortPairGroup.builder();
+    }
+
+    /**
+     * The builder to create a Port Chain Group
+     *
+     * @return the Port Chain builder
+     */
+    public static PortChainBuilder portChain() {
+        return NeutronPortChain.builder();
     }
 
     /**
@@ -239,6 +311,15 @@ public class Builders {
      */
     public static NetSecurityGroupBuilder securityGroup() {
         return NeutronSecurityGroup.builder();
+    }
+
+    /**
+     * The builder to update a security group
+     *
+     * @return the security group update builder
+     */
+    public static NetSecurityGroupUpdateBuilder securityGroupUpdate() {
+        return NeutronSecurityGroupUpdate.builder();
     }
 
     /**
@@ -919,6 +1000,15 @@ public class Builders {
     }
 
     /**
+     * The Octavia builders
+     *
+     * @return the octavia builders
+     */
+    public static OctaviaBuilders octavia() {
+        return new OctaviaBuilders();
+    }
+
+    /**
      * The Sahara builders
      *
      * @return the sahara builders
@@ -1054,6 +1144,15 @@ public class Builders {
     }
 
     /**
+     * Magnum builder
+     * @return the magnum builder
+     */
+
+    public static BaymodelBuilder baymodel() {
+        return MagnumBaymodel.builder();
+    }
+
+    /**
      * Barbican container builder
      * @return the container builder
      */
@@ -1068,6 +1167,12 @@ public class Builders {
     public static ContainerSecretBuilder containerSecret() {
         return BarbicanContainerSecret.builder();
     }
+
+    /**
+     * Barbican secret builder
+     * @return the secret builder
+     */
+    public static SecretCreateBuilder secret() { return BarbicanSecret.builder(); }
 
     /**
      * The Tacker builders
@@ -1117,5 +1222,32 @@ public class Builders {
      */
     public static EnvironmentBuilder environment() {
         return MuranoEnvironment.builder();
+    }
+
+    /**
+     * The DNS/Designate V2 builders
+     *
+     * @return the dns/designate v2 builders
+     */
+    public static DNSV2Builders dnsV2() {
+        return new DesignateV2Builders();
+    }
+
+    /**
+     * The builder to create a Zone.
+     *
+     * @return the zone builder
+     */
+    public static ZoneBuilder zone() { return DesignateZone.builder(); }
+
+    /**
+     * The builder to create a Recordset.
+     *
+     * @return the recordset builder
+     */
+    public static RecordsetBuilder recordset() { return DesignateRecordset.builder(); }
+
+    public static WorkflowBuilders workflow() {
+        return new MistralBuilders();
     }
 }

@@ -1,0 +1,22 @@
+{
+  "status": "drafted",
+  "icon": null,
+  "name": "sample",
+  "license": null,
+  "template_format": null,
+  "created_at": "2016-12-22T06:17:52Z",
+  "activated_at": "2017-01-24T05:04:53Z",
+  "updated_at": "2017-01-24T05:04:53Z",
+  "visibility": "private",
+  "provided_by": null,
+  "version": "0.0.0",
+  "license_url": null,
+  "supported_by": null,
+  "template": null,
+  "owner": "12abc998271944cea08e5b9485330cda",
+  "release": [],
+  "metadata": {},
+  "id": "b8f88696-80e7-4f89-abbc-1975991ba879",
+  "tags": [],
+  "description": ""
+}

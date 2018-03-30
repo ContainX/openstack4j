@@ -1,21 +1,31 @@
 package org.openstack4j.api;
 
-import com.fasterxml.jackson.annotation.JsonInclude.*;
-import com.fasterxml.jackson.databind.*;
-import com.google.common.io.*;
-import okhttp3.mockwebserver.*;
-import org.bouncycastle.util.io.*;
-import org.openstack4j.api.OSClient.*;
-import org.openstack4j.core.transport.internal.*;
-import org.openstack4j.openstack.*;
-import org.openstack4j.openstack.identity.v2.domain.*;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.common.io.ByteStreams;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
+import org.bouncycastle.util.io.Streams;
+import org.openstack4j.api.OSClient.OSClientV2;
+import org.openstack4j.api.OSClient.OSClientV3;
+import org.openstack4j.core.transport.internal.HttpExecutor;
+import org.openstack4j.openstack.OSFactory;
+import org.openstack4j.openstack.identity.v2.domain.KeystoneAccess;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneToken;
-import org.slf4j.*;
-import org.testng.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Base Test class which handles Mocking a Webserver to fullfill and test
@@ -26,21 +36,27 @@ import java.util.*;
 public abstract class AbstractTest {
 
     protected enum Service {
-        IDENTITY(5000), 
-        NETWORK(9696), 
-        COMPUTE(8774), 
-        BLOCK_STORAGE(8776), 
-        METERING(8087), 
-        TELEMETRY(8087), 
-        SHARE(8786), 
+        IDENTITY(5000),
+        NETWORK(9696),
+        OCTAVIA(9876),
+        COMPUTE(8774),
+        BLOCK_STORAGE(8776),
+        METERING(8087),
+        TELEMETRY(8087),
+        SAHARA(8386),
+        SHARE(8786),
         OBJECT_STORAGE(8800),
         BARBICAN(9311),
+        MAGNUM(9511),
         ORCHESTRATION(8004),
         DATABASE(8779),
-    	TACKER(9890),
+        TACKER(9890),
         IMAGE(9292),
+        ARTIFACT(9494),
         CLUSTERING(8778),
-        APP_CATALOG(8082);
+        APP_CATALOG(8082),
+        DNS(9001),
+        WORKFLOW(8989);
 
         private final int port;
 
@@ -49,7 +65,7 @@ public abstract class AbstractTest {
         }
 
     }
-    
+
     private final Logger LOG = LoggerFactory.getLogger(getClass().getName());
 
     protected static final String JSON_ACCESS = "/identity/v2/access.json";
@@ -97,7 +113,7 @@ public abstract class AbstractTest {
 
     /**
      * Responds with specified status code and no body
-     * 
+     *
      * @param statusCode the status code to respond with
      */
     protected void respondWith(int statusCode) {
@@ -106,8 +122,8 @@ public abstract class AbstractTest {
 
     /**
      * Responds with specified status code, no body and optional headers
-     * 
-     * @param headers optional headers
+     *
+     * @param headers    optional headers
      * @param statusCode the status code to respond with
      */
     protected void respondWith(Map<String, String> headers, int statusCode) {
@@ -116,9 +132,9 @@ public abstract class AbstractTest {
 
     /**
      * Responds with specified status code and json body
-     * 
+     *
      * @param statusCode the status code to respond with
-     * @param body the json body
+     * @param jsonBody   the json body
      */
     protected void respondWith(int statusCode, String jsonBody) {
         Map<String, String> headers = new HashMap<String, String>();
@@ -128,10 +144,10 @@ public abstract class AbstractTest {
 
     /**
      * Responds with specified status code, body and optional headers
-     * 
-     * @param headers optional headers
+     *
+     * @param headers    optional headers
      * @param statusCode the status code to respond with
-     * @param body the response body
+     * @param body       the response body
      */
     protected void respondWith(Map<String, String> headers, int statusCode, String body) {
         MockResponse r = new MockResponse();
@@ -148,9 +164,9 @@ public abstract class AbstractTest {
     /**
      * Responds with given header, status code, body from json resource file.
      *
-     * @param headers the specified header
+     * @param headers    the specified header
      * @param statusCode the status code to respond with
-     * @param resource the json resource file
+     * @param resource   the json resource file
      * @throws IOException Signals that an I/O exception has occurred
      */
     protected void respondWithHeaderAndResource(Map<String, String> headers, int statusCode, String resource)
@@ -164,6 +180,21 @@ public abstract class AbstractTest {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
         respondWith(headers, statusCode, new String(ByteStreams.toByteArray(is)));
+    }
+
+    /**
+     * Awaits, removes and returns the next request made to the mock server.
+     * Callers should use this to verify the request was sent as intended.
+     * This method will block until the request is available, possibly forever.
+     * <br/>
+     * <b>Be aware that this method will catch all the previous requests made
+     * to the mock server, also from other previous tests!
+     * Make sure to take all the requests made by methods in the same test class.</b>
+     *
+     * @return the head of the request queue
+     */
+    protected RecordedRequest takeRequest() throws InterruptedException {
+        return server.takeRequest();
     }
 
     protected String authURL(String path) {
@@ -183,7 +214,7 @@ public abstract class AbstractTest {
     protected void associateClientV2(OSClientV2 osv2) {
         this.osv2 = osv2;
     }
-    
+
     protected void associateClientV3(OSClientV3 osv3) {
         this.osv3 = osv3;
     }

@@ -14,12 +14,12 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 /**
  * An OpenStack Sahara
- * 
+ *
  * @author Ekasit Kijsipongse
  */
 @JsonRootName("node_group")
@@ -32,10 +32,10 @@ public class SaharaNodeGroup implements NodeGroup {
         @JsonProperty("node_group_template_id")
 	private String nodeGroupTemplateId;
         @JsonProperty("created_at")
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private Date createdAt;
         @JsonProperty("updated_at")
-        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private Date updatedAt;
         @JsonProperty("image_id")
         private String imageId;
@@ -61,7 +61,7 @@ public class SaharaNodeGroup implements NodeGroup {
         @JsonProperty("node_configs")
         private Map<String, SaharaServiceConfig> serviceConfigs;
 
-      
+
         @JsonProperty("instances")
         private List<SaharaInstance> instances; // only in cluster json response
 
@@ -87,7 +87,7 @@ public class SaharaNodeGroup implements NodeGroup {
         public String getName() {
                 return name;
         }
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -214,7 +214,7 @@ public class SaharaNodeGroup implements NodeGroup {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
                      .add("name", name)
                      .add("count", count)
                      .add("created_at",createdAt)
@@ -233,28 +233,28 @@ public class SaharaNodeGroup implements NodeGroup {
                      .add("instances",instances)
                      .toString();
 	}
-	
+
 	public static class NodeGroups extends ListResult<SaharaNodeGroup> {
 
 		private static final long serialVersionUID = 1L;
-		
+
                 @JsonProperty("node_groups")
 		private List<SaharaNodeGroup> nodeGroups;
-		
+
 		@Override
 		protected List<SaharaNodeGroup> value() {
 			return nodeGroups;
 		}
 	}
-	
+
 	public static class ConcreteNodeGroupBuilder implements NodeGroupBuilder {
 
 		private SaharaNodeGroup m;
-		
+
 		ConcreteNodeGroupBuilder() {
 			this(new SaharaNodeGroup());
 		}
-		
+
 		ConcreteNodeGroupBuilder(SaharaNodeGroup m) {
 			this.m = m;
 		}
@@ -269,7 +269,7 @@ public class SaharaNodeGroup implements NodeGroup {
 			m = (SaharaNodeGroup) in;
 			return this;
                 }
-		
+
 		@Override
 		public NodeGroupBuilder name(String name) {
 			m.name = name;
@@ -309,9 +309,9 @@ public class SaharaNodeGroup implements NodeGroup {
 		@Override
 		public NodeGroupBuilder addSecurityGroup(String id) {
                         if (id != null && !id.isEmpty()) {
-                           if (m.securityGroups == null) 
+                           if (m.securityGroups == null)
                               m.securityGroups = Lists.newArrayList();
-                           m.securityGroups.add(id); 
+                           m.securityGroups.add(id);
                         }
 			return this;
 		}
@@ -329,7 +329,7 @@ public class SaharaNodeGroup implements NodeGroup {
 		@Override
                 public NodeGroupBuilder addServiceConfig(String name, ServiceConfig config) {
                         if (name != null && !name.isEmpty()) {
-                           if (m.serviceConfigs == null) 
+                           if (m.serviceConfigs == null)
                               m.serviceConfigs = new HashMap<String,SaharaServiceConfig>();
                            m.serviceConfigs.put(name,(SaharaServiceConfig) config);
                         }

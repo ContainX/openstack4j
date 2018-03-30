@@ -2,7 +2,7 @@ package org.openstack4j.openstack.tacker.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  *
@@ -14,14 +14,14 @@ import com.google.common.base.Objects;
 public class VnfUpdateAttributes {
 
 	private String config;
-	
+
 	public static VnfUpdateAttributes create() {
 		return new VnfUpdateAttributes();
 	}
-	
+
 	/**
 	 * User config file or data..
-	 * 
+	 *
 	 * @param config
 	 * @return VnfUpdateAttributes
 	 */
@@ -29,14 +29,14 @@ public class VnfUpdateAttributes {
 		this.config = config;
 		return this;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("config", config)
 				.toString();
 	}
-	
+
 	/**
 	 * @return the config
 	 */

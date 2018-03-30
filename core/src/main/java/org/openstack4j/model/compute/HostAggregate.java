@@ -16,7 +16,7 @@ public interface HostAggregate extends ModelEntity {
 	 * Availability zone of aggregate
 	 * @return Availability zone
 	 */
-	String getAvaiablityZone();
+	String getAvailabilityZone();
 	/**
 	 * 
 	 * @return created time

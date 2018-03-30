@@ -87,9 +87,21 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	String getName();
 
 	/**
+	 * @return the display name of the volume
+	 */
+	@Deprecated
+	String getDisplayName();
+
+	/**
 	 * @return the description of the volume
 	 */
 	String getDescription();
+
+	/**
+	 * @return the display description of the volume
+	 */
+	@Deprecated
+	String getDisplayDescription();
 
 	/**
 	 * @return the status of the volume
@@ -125,6 +137,11 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return the image reference identifier (if an image was associated) otherwise null
 	 */
 	String getImageRef();
+	
+	/**
+	 * @return To enable this volume to attach
+	 */
+	Boolean multiattach();
 
 	/**
 	 * @return ID of source volume to clone from
@@ -161,4 +178,10 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
 	 * @return whether this volume is encrypted.
 	 */
 	boolean encrypted();
+
+	/**
+	 *
+	 * @return current back-end of the volume.
+     */
+	String host();
 }

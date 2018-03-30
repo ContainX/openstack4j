@@ -9,7 +9,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  *
@@ -23,36 +23,36 @@ public class TackerVim implements Vim {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	
+
 	private String name;
-	
+
 	@JsonProperty("tenant_id")
 	private String tenantId;
-	
+
 	private String description;
-	
+
 	private String type;
-	
+
 	private TackerVimStatus status;
-	
+
 	@JsonProperty("is_default")
 	private Boolean isDefault;
-	
+
 	@JsonProperty("auth_cred")
 	private AuthCredentials authCredentials;
 
 	@JsonProperty("auth_url")
 	private String authUrl;
-	
+
 	@JsonProperty("placement_attr")
 	private VimPlacementAttribute placementAttribute;
-	
+
 	@JsonProperty("vim_project")
 	private VimProject vimProject;
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("id", id).add("name", name).add("tenantId", tenantId)
+		return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("tenantId", tenantId)
 				.add("description", description).add("type", type).add("status", status).add("isDefault", isDefault)
 				.add("authCredentials", authCredentials).add("authUrl", authUrl)
 				.add("placementAttribute", placementAttribute).add("vimProject", vimProject).toString();
@@ -66,7 +66,7 @@ public class TackerVim implements Vim {
 	public VimBuilder toBuilder() {
 		return new VimConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return VimBuilder
 	 */
@@ -155,35 +155,35 @@ public class TackerVim implements Vim {
 	public static class TackerVims extends ListResult<TackerVim> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("vims")
 		List<TackerVim> vims;
-		
+
 		@Override
 		public List<TackerVim> value() {
 			return vims;
 		}
-		
+
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					.add("vims", vims).toString();
 		}
 	}
-	
+
 	public static class VimConcreteBuilder implements VimBuilder {
-		
+
 		TackerVim vim;
 
 		@Override
 		public Vim build() {
 			return vim;
 		}
-		
+
 		public VimConcreteBuilder() {
 			this(new TackerVim());
 		}
-		
+
 		public VimConcreteBuilder(TackerVim f) {
 			this.vim = f;
 		}
@@ -229,7 +229,7 @@ public class TackerVim implements Vim {
 			vim.authCredentials = authCredentials;
 			return this;
 		}
-		
+
 		@Override
 		public VimBuilder type(String type) {
 			vim.type = type;

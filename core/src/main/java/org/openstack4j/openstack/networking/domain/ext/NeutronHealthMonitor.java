@@ -10,7 +10,7 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A health monitor entity
@@ -34,7 +34,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 	 */
 	@JsonProperty("max_retries")
 	private Integer maxRetries;
-	
+
 	/**
 	 * The HTTP method that the monitor uses for requests.
 	 */
@@ -51,7 +51,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 	 */
 	@JsonProperty("expected_codes")
 	private String expectedCodes  ;
-	
+
 	/**
 	 * The administrative state of the health monitor, which is up (true) or down (false)
 	 */
@@ -177,7 +177,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		}
 		@Override
 		public String toString() {
-			return Objects.toStringHelper(this).omitNullValues()
+			return MoreObjects.toStringHelper(this).omitNullValues()
 					.add("healthMonitors", healthMonitors).toString();
 		}
 	}
@@ -200,7 +200,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -210,7 +210,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -220,7 +220,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -230,7 +230,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -240,7 +240,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -250,7 +250,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -260,7 +260,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 		}
 
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -269,7 +269,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 			return this;
 		}
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -278,7 +278,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 			return this;
 		}
 		/**
-		 * 
+		 *
 		 * {@inheritDoc}
 		 */
 		@Override
@@ -289,7 +289,7 @@ public class NeutronHealthMonitor implements HealthMonitor {
 	}
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("id",id)
 				.add("adminStateUp",adminStateUp)
 				.add("delay",delay)
@@ -302,6 +302,6 @@ public class NeutronHealthMonitor implements HealthMonitor {
 				.add("type",type)
 				.add("urlPath",urlPath)
 				.toString();
-	} 
-	
+	}
+
 }

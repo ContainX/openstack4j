@@ -1,9 +1,9 @@
 package org.openstack4j.openstack.heat.utils;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -34,8 +34,6 @@ public class Environment {
 
     @SuppressWarnings("unchecked")
     private Map<String, String> getResourceRegistry(){
-        // FIXME find alternative implementation not importing com.fasterxml.jackson.dataformat.yaml.snakeyaml package
-        // this package is not visible in OSGi
         Yaml yaml = new Yaml();
         Map<String, Object> content = (Map<String, Object>) yaml.load(getEnvContent());
         return (Map<String, String>) content.get("resource_registry");

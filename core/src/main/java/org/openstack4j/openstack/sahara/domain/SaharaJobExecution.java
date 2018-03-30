@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * For mapping JSON response to/from java objects
@@ -47,10 +47,10 @@ public class SaharaJobExecution implements JobExecution {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date endTime;
     @JsonProperty("created_at")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date createdAt;
     @JsonProperty("updated_at")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date updatedAt;
     @JsonProperty("oozie_job_id")
     private String oozieJobId;
@@ -195,7 +195,7 @@ public class SaharaJobExecution implements JobExecution {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                    .add("cluster_id", clusterId)
                    .add("input_id", inputId)
                    .add("output_id", outputId)

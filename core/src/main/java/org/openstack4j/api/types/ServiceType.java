@@ -9,6 +9,7 @@ public enum ServiceType {
 	BLOCK_STORAGE("cinder", "volume"),
 	OBJECT_STORAGE("object-store", "object-store"),
 	NETWORK("neutron", "network"),
+	OCTAVIA("octavia", "load-balancer"),
 	EC2("ec2", "ec2"),
 	TELEMETRY("ceilometer", "metering"),
 	TELEMETRY_AODH("aodh", "alarming"),
@@ -19,6 +20,10 @@ public enum ServiceType {
 	DATABASE("trove","database"),
 	BARBICAN("barbican", "key-manager"),
 	TACKER("tacker", "nfv-orchestration"),
+	ARTIFACT("glare", "artifact"),
+  	MAGNUM("magnum", "container"),
+	DNS("designate", "dns"),
+	WORKFLOW("mistral", "workflow"),
 	UNKNOWN("NA", "NA")
 	;
 
@@ -39,15 +44,21 @@ public enum ServiceType {
 	}
 
 	public static ServiceType forName(String name) {
-		for (ServiceType s : ServiceType.values())
-		{
-			if (s.getServiceName().equalsIgnoreCase(name))
-			    return s;
-			if (s.name().equalsIgnoreCase(name))
-				return s;
-			if (s.type.equalsIgnoreCase(name))
-				return s;
-		}
-		return ServiceType.UNKNOWN;
-	}
+            if (name == null || name.isEmpty()) {
+                return ServiceType.UNKNOWN;
+            }
+
+            for (ServiceType s : ServiceType.values()) {
+                if (name.toLowerCase().startsWith(s.getServiceName().toLowerCase())) {
+                    return s;
+                }
+                if (name.toLowerCase().startsWith(s.name().toLowerCase())) {
+                    return s;
+                }
+                if (name.toLowerCase().startsWith(s.type.toLowerCase())) {
+                    return s;
+                }
+            }
+            return ServiceType.UNKNOWN;
+        }
 }

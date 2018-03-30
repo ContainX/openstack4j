@@ -11,7 +11,7 @@ import org.openstack4j.openstack.internal.Parser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * Neutron Agent
@@ -111,7 +111,7 @@ public class NeutronAgent implements Agent {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("binary", binary)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("binary", binary)
                 .add("description", description).add("admin_state_up", adminStateUp)
                 .add("heartbeat_timestamp", heartbeatTimeStamp).add("alive", alive).add("topic", topic)
                 .add("host", host).add("agent_type", agentType.value()).add("created_at", createdAt)

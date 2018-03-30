@@ -13,10 +13,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 /**
  * An OpenStack Flavor which is a template used for configuration against running Instances
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("flavor")
@@ -44,18 +44,18 @@ public class NovaFlavor implements Flavor {
 	private Integer rxtxCap;
 	@JsonProperty("os-flavor-access:is_public")
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private Boolean isPublic;	
+	private Boolean isPublic;
 	private List<GenericLink> links;
 
 	public static FlavorBuilder builder() {
 		return new FlavorConcreteBuilder();
 	}
-	
+
 	@Override
 	public FlavorBuilder toBuilder() {
 		return new FlavorConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -162,13 +162,13 @@ public class NovaFlavor implements Flavor {
 	public List<? extends Link> getLinks() {
 		return links;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 						.add("id", id).add("name", name).add("vcpus", vcpus)
 						.add("ram", ram).add("disk", disk).add("ephemeral", ephemeral)
 						.add("swap", swap).add("rxtx_factor", rxtxFactor).add("disabled", disabled)
@@ -176,32 +176,32 @@ public class NovaFlavor implements Flavor {
 						.add("links", links).addValue("\n")
 						.toString();
 	}
-	
+
 	public static class Flavors extends ListResult<NovaFlavor> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("flavors")
 		List<NovaFlavor> flavors;
-		
+
 		@Override
         public List<NovaFlavor> value() {
 			return flavors;
 		}
 	}
-	
+
 	public static class FlavorConcreteBuilder implements FlavorBuilder {
 
 		private NovaFlavor m;
-		
+
 		FlavorConcreteBuilder() {
 			this(new NovaFlavor());
 		}
-		
+
 		FlavorConcreteBuilder(NovaFlavor model) {
 			this.m = model;
 		}
-		
+
 		/**
 		 * @see Flavor#getName()
 		 */
@@ -210,7 +210,7 @@ public class NovaFlavor implements Flavor {
 			m.name = name;
 			return this;
 		}
-		
+
 		/**
 		 * @see Flavor#getRam()
 		 */
@@ -219,7 +219,7 @@ public class NovaFlavor implements Flavor {
 			m.ram = ram;
 			return this;
 		}
-		
+
 		/**
 		 * @see Flavor#getVcpus()
 		 */
@@ -228,7 +228,7 @@ public class NovaFlavor implements Flavor {
 			m.vcpus = vcpus;
 			return this;
 		}
-		
+
 		/**
 		 * @see Flavor#getDisk()
 		 */
@@ -237,7 +237,7 @@ public class NovaFlavor implements Flavor {
 			m.disk = disk;
 			return this;
 		}
-		
+
 		/**
 		 * @see Flavor#getSwap()
 		 */
@@ -246,7 +246,7 @@ public class NovaFlavor implements Flavor {
 			m.swap = swap;
 			return this;
 		}
-		
+
 		/**
 		 * @see Flavor#getRxtxFactor();
 		 */
@@ -263,7 +263,7 @@ public class NovaFlavor implements Flavor {
 			m.isPublic = isPublic;
 			return this;
 		}
-		
+
 		@Override
 		public Flavor build() {
 			return m;
@@ -286,7 +286,7 @@ public class NovaFlavor implements Flavor {
             m.id = id;
             return this;
         }
-		
+
 	}
 
 }

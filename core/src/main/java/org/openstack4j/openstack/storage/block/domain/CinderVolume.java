@@ -14,23 +14,27 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack Volume
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("volume")
 public class CinderVolume implements Volume {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String id;
-	@JsonProperty("display_name")
+	@JsonProperty("name")
 	private String name;
-	@JsonProperty("display_description")
+	@JsonProperty("display_name")
+	private String displayName;
+	@JsonProperty("description")
 	private String description;
+	@JsonProperty("display_description")
+	private String displayDescription;
 	private Status status;
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonProperty("size")
@@ -43,6 +47,8 @@ public class CinderVolume implements Volume {
 	private String volumeType;
 	@JsonProperty("imageRef")
 	private String imageRef;
+	@JsonProperty("multiattach")
+	private Boolean multiattach;
 	@JsonProperty("source_volid")
 	private String sourceVolid;
 	@JsonProperty("snapshot_id")
@@ -60,9 +66,11 @@ public class CinderVolume implements Volume {
 	@JsonProperty("os-vol-mig-status-attr:migstat")
 	private MigrationStatus migrateStatus;
 	@JsonProperty("os-vol-tenant-attr:tenant_id")
-	private String tenantId;	
+	private String tenantId;
 	@JsonProperty("encrypted")
 	private Boolean encrypted;
+	@JsonProperty("os-vol-host-attr:host")
+	private String host;
 	/**
 	 * {@inheritDoc}
 	 */
@@ -77,7 +85,7 @@ public class CinderVolume implements Volume {
 	public static VolumeBuilder builder() {
 		return new ConcreteVolumeBuilder();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -98,8 +106,24 @@ public class CinderVolume implements Volume {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getDescription() {
 		return description;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDisplayDescription() {
+		return displayDescription;
 	}
 
 	/**
@@ -166,14 +190,22 @@ public class CinderVolume implements Volume {
 	    if (imageRef != null)
 	        return imageRef;
 
-	    // Depending on whether this is a Listing or a direct Get the information is different so we are smart 
+	    // Depending on whether this is a Listing or a direct Get the information is different so we are smart
 	    // about returning the proper imageId if applicable
 	    if (imageId == null && imageMetadata != null && imageMetadata.containsKey("image_id"))
 	        imageId = String.valueOf(imageMetadata.get("image_id"));
-	    
+
 	    return imageId;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Boolean multiattach(){
+		return multiattach;
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -190,7 +222,7 @@ public class CinderVolume implements Volume {
 	public Map<String, String> getMetaData() {
 		return metadata;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -214,7 +246,7 @@ public class CinderVolume implements Volume {
 	public boolean bootable(){
 		return bootable;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -222,55 +254,63 @@ public class CinderVolume implements Volume {
 	public boolean encrypted(){
 		return encrypted;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String host() { return host; }
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("name", name).add("description", description)
 				     .add("status", status).add("size", size).add("zone", zone).add("created", created)
-				     .add("volumeType", volumeType).add("imageRef", getImageRef())
+				     .add("volumeType", volumeType).add("imageRef", getImageRef()).add("multiattach", multiattach)
 				     .add("sourceVolid", sourceVolid).add("snapshotId", snapshotId).add("metadata", metadata)
 				     .add("bootable", bootable)
 				     .toString();
 	}
-	
+
 	public static class Volumes extends ListResult<CinderVolume> {
 
 		private static final long serialVersionUID = 1L;
-		
+
 		@JsonProperty("volumes")
 		private List<CinderVolume> volumes;
-		
+
 		@Override
 		protected List<CinderVolume> value() {
 			return volumes;
 		}
 	}
-	
+
 	public static class ConcreteVolumeBuilder implements VolumeBuilder {
 
 		private CinderVolume m;
-		
+
 		ConcreteVolumeBuilder() {
 			this(new CinderVolume());
 		}
-		
+
 		ConcreteVolumeBuilder(CinderVolume m) {
 			this.m = m;
 		}
-		
+
 		@Override
 		public VolumeBuilder name(String name) {
 			m.name = name;
+			m.displayName = name;
 			return this;
 		}
 
 		@Override
 		public VolumeBuilder description(String description) {
 			m.description = description;
+			m.displayDescription = description;
 			return this;
 		}
 
@@ -289,6 +329,12 @@ public class CinderVolume implements Volume {
 		@Override
 		public VolumeBuilder imageRef(String imageRef) {
 			m.imageRef = imageRef;
+			return this;
+		}
+		
+		@Override
+		public VolumeBuilder multiattach(Boolean multiattach) {
+			m.multiattach = multiattach;
 			return this;
 		}
 
@@ -315,7 +361,7 @@ public class CinderVolume implements Volume {
 			m.metadata = metadata;
 			return this;
 		}
-		
+
 		@Override
 		public Volume build() {
 			return m;

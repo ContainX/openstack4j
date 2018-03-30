@@ -159,6 +159,16 @@ public interface ServerService {
     String createSnapshot(String serverId, String snapshotName);
 
     /**
+     * Creates the snapshot from a server
+     *
+     * @param serverId the UUID of the server
+     * @param snapshotName the display name of the snapshot
+     * @param metadata the key/value properties for the snapshot
+     * @return the UUID for the resulting image snapshot
+     */
+    String createSnapshot(String serverId, String snapshotName, Map<String, String> metadata);
+
+    /**
      * Associates the specified Server Group by name to the Server by it's identifier
      * 
      * @param serverId the server identifier
@@ -194,7 +204,8 @@ public interface ServerService {
     /**
      * Will attempt to tail and return the last {@code numLines} from the given servers console.
      * @param serverId the server identifier
-     * @param numLines the number of console lines to return
+     * @param numLines the number of console lines to return.
+     * 				   If lower or equal than zero, the whole console content will be returned.
      * @return console output as string or null
      */
     String getConsoleOutput(String serverId, int numLines);
@@ -347,7 +358,7 @@ public interface ServerService {
      * 
      * @param serverId the server identifier
      * @param options evaucate options
-     * @return ActionResponse
+     * @return an administrative password to access the evacuated or rebuilt instance.
      */
     ServerPassword evacuate(String serverId, EvacuateOptions options);
 }

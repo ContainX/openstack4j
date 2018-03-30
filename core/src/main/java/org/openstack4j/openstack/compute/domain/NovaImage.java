@@ -12,12 +12,12 @@ import org.openstack4j.openstack.common.ListResult;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An OpenStack image is a collection of files used to create a Server.  Users provide pre-built OS images by default and or custom
- * images can be built 
- *  
+ * images can be built
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("image")
@@ -48,8 +48,8 @@ public class NovaImage implements Image {
 		}
 	}
 
-        
-	
+
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -137,7 +137,7 @@ public class NovaImage implements Image {
 	public Map<String, Object> getMetaData() {
 		return metadata;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -146,30 +146,30 @@ public class NovaImage implements Image {
     public boolean isSnapshot() {
         return getMetaData() != null && getMetaData().containsKey("image_location") && "snapshot".equals(getMetaData().get("image_location"));
     }
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 						.add("id", id).add("name", name).add("status", status).add("isSnapshot", isSnapshot())
 						.add("progress", progress).add("size", size).add("minRam", minRam)
 						.add("minDisk", minDisk).add("created", created).add("updated", updated)
 						.add("metadata", metadata).add("links", links).addValue("\n")
 						.toString();
 	}
-	
+
 	public static class NovaImages extends ListResult<NovaImage> {
 
 		private static final long serialVersionUID = 1L;
 
 		@JsonProperty("images")
 		private List<NovaImage> images;
-		
+
 		public List<NovaImage> value() {
 			return images;
 		}
-		
+
 	}
 }

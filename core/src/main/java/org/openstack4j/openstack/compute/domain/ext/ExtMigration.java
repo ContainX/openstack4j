@@ -8,7 +8,7 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A model class implementation which enables an administrative user to fetch in-progress migrations for a region or specified cell in a region
@@ -44,7 +44,7 @@ public class ExtMigration implements Migration {
     String newInstanceTypeId;
     @JsonProperty("old_instance_type_id")
     String oldInstanceTypeId;
-    
+
     @Override
     public String getId() {
         return id;
@@ -104,24 +104,24 @@ public class ExtMigration implements Migration {
     public String getOldInstanceTypeId() {
         return oldInstanceTypeId;
     }
-    
+
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                    .add("id",id).add("instanceUUID", instanceUUID).add("status", status).add("createdAt", createdAt)
                    .add("updatedAt", updatedAt).add("destCompute", destCompute).add("destHost", destHost)
                    .add("destNode", destNode).add("sourceCompute", sourceCompute).add("sourceNode", sourceNode)
                    .add("newInstanceTypeId at", newInstanceTypeId).add("oldInstanceTypeId", oldInstanceTypeId)
                    .toString();
     }
-    
+
     public static class Migrations extends ListResult<ExtMigration> {
 
         private static final long serialVersionUID = 1L;
 
         @JsonProperty("migrations")
         private List<ExtMigration> migrations;
-        
+
         public List<ExtMigration> value() {
             return migrations;
         }

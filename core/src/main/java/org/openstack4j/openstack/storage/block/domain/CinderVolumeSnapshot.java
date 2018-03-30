@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +25,14 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	@JsonProperty("display_name")
+	@JsonProperty("name")
 	private String name;
-	@JsonProperty("display_description")
+	@JsonProperty("display_name")
+	private String displayName;
+	@JsonProperty("description")
 	private String description;
+	@JsonProperty("display_description")
+	private String displayDescription;
 	@JsonProperty("volume_id")
 	private String volumeId;
 	private Status status;
@@ -77,8 +81,24 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getDescription() {
 		return description;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getDisplayDescription() {
+		return displayDescription;
 	}
 
 	/**
@@ -127,7 +147,7 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("id", id).add("name", name).add("description", description).add("volumeId", volumeId)
 				     .add("status", status).add("created", created).add("force", force).add("size", size).add("metadata", metadata)
 				     .toString();
@@ -161,12 +181,14 @@ public class CinderVolumeSnapshot implements VolumeSnapshot {
 		@Override
 		public VolumeSnapshotBuilder name(String name) {
 			m.name = name;
+			m.displayName = name;
 			return this;
 		}
 
 		@Override
 		public VolumeSnapshotBuilder description(String description) {
 			m.description = description;
+			m.displayDescription = description;
 			return this;
 		}
 

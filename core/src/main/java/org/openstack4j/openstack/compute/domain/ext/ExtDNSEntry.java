@@ -1,6 +1,6 @@
 package org.openstack4j.openstack.compute.domain.ext;
 
-import static com.google.common.base.Objects.toStringHelper;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * A Floating IP DNS Extension - DNS Entry
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("dns_entry")
@@ -31,19 +31,19 @@ public class ExtDNSEntry implements DNSEntry {
     private String name;
     @JsonProperty
     private DNSRecordType type;
-    
+
     /* Only used during create / modify operations */
     @JsonProperty("dns_type")
     private DNSRecordType createType;
 
     public ExtDNSEntry() {
     }
-    
+
     public ExtDNSEntry(String ipAddress, DNSRecordType type) {
         this.ipAddress = ipAddress;
         this.createType = type;
     }
-    
+
     @Override
     public String getId() {
         return id;
@@ -68,7 +68,7 @@ public class ExtDNSEntry implements DNSEntry {
     public DNSRecordType getType() {
         return type;
     }
-    
+
     @Override
     public String toString() {
         return toStringHelper(this).omitNullValues()
@@ -76,19 +76,19 @@ public class ExtDNSEntry implements DNSEntry {
                  .add("name", name).add("type", type)
                  .toString();
     }
-    
+
     public static class DNSEntries extends ListResult<ExtDNSEntry> {
 
         private static final long serialVersionUID = 1L;
 
         @JsonProperty("dns_entries")
         private List<ExtDNSEntry> result;
-        
+
         @Override
         protected List<ExtDNSEntry> value() {
             return result;
         }
-        
+
     }
 
 }

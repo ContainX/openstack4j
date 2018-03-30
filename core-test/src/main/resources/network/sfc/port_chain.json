@@ -1,0 +1,13 @@
+{
+    "port_chain": {
+        "id" : "0abcdef",
+        "name": "PC1",
+        "project_id": "12345678909876543210abcdefabcdef",
+        "tenant_id": "12345678909876543210abcdefabcdef",
+        "description": "Openstack4j test port chain",
+        "chain_id": "43210",
+        "flow_classifiers":  [ "12345678-abcd-abcd-abcd-abcdefabcdef" ],
+        "port_pair_groups": [ "abcdefab-abcd-abcd-abcd-abcdefabcdef" ],
+        "chain_parameters": { "aparam": "A"}
+    }
+}

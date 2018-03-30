@@ -38,7 +38,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>3.0.3</version>
+    <version>3.1.0</version>
 </dependency>
 ```
 
@@ -54,7 +54,7 @@ See notes above about connectors (same rules apply) to development branches.
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>3.0.4-SNAPSHOT</version>
+    <version>3.1.1-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -176,6 +176,35 @@ OSClientV3 os = OSFactory.builderV3()
                 .token("token id")
                 .scopeToProject(Identifier.byId("project id"))
                 .authenticate());
+```
+(5) authenticate using client certificate
+```bash
+openssl pkcs12 -export -out client-certificate-keystore.p12  -inkey key.pem -in cert.pem -certfile ca.pem
+Enter Export Password:encrypt
+Verifying - Enter Export Password:encrypt
+```
+```java
+String encrypt =  "encrypt";
+KeyStore keyStore = KeyStore.getInstance("PKCS12");
+keyStore.load(new FileInputStream(new File("client-certificate-keystore.p12")), encrypt.toCharArray());
+SSLContext sslContext = SSLContexts.custom()
+        //ignore server verify
+        .loadTrustMaterial(new TrustStrategy() {
+            @Override
+            public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                return true;
+            }
+        })
+        .loadKeyMaterial(keyStore,encrypt.toCharArray())
+        .build();
+Config config = Config.newConfig();
+config.withSSLContext(sslContext);
+OSClient.OSClientV3 osClient = OSFactory.builderV3()
+        .endpoint("https://<fqdn>:5000/v3")
+        .withConfig(config)
+        .scopeToProject(Identifier.byId("project id"))
+        //.scopeToDomain(Identifier.byId("domain id"))
+        .authenticate();
 ```
 
 #### Identity Operations (Keystone) V3

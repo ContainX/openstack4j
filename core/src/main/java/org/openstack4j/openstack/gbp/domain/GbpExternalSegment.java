@@ -9,12 +9,12 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
 
 /**
  * Model implementation for External Segments
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("external_segment")
@@ -42,7 +42,7 @@ public class GbpExternalSegment implements ExternalSegment {
     private boolean portAddressTranslation;
     @JsonProperty("external_routes")
     private List<GbpExternalRoutes> externalRoutes;
-    
+
     @Override
     public String getTenantId() {
         return tenantId;
@@ -72,7 +72,7 @@ public class GbpExternalSegment implements ExternalSegment {
     public void setId(String id) {
         this.id=id;
     }
-    
+
     @Override
     public List<String> getExternalPolicies() {
         return externalPolicies;
@@ -111,7 +111,7 @@ public class GbpExternalSegment implements ExternalSegment {
         return natpools;
     }
 
-    @Override    
+    @Override
     public boolean isPortAddressTranslation() {
         return portAddressTranslation;
     }
@@ -127,11 +127,11 @@ public class GbpExternalSegment implements ExternalSegment {
     }
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description).add("tenantId", tenantId).add("externalPolicies", externalPolicies)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description).add("tenantId", tenantId).add("externalPolicies", externalPolicies)
                 .add("l3Policies", l3Policies).add("natpools", natpools).add("ipVersion", ipVersion).add("cidr", cidr).add("shared", shared)
                 .add("subnetId", subnetId).add("portAddressTranslation", portAddressTranslation).add("externalRoutes", externalRoutes).toString();
     }
-    
+
     public static class ExternalSegments extends ListResult<GbpExternalSegment> {
 
         private static final long serialVersionUID = 1L;
@@ -144,15 +144,15 @@ public class GbpExternalSegment implements ExternalSegment {
             return externalSegments;
         }
     }
-    
+
     public static class ExternalSegmentConcreteBuilder implements ExternalSegmentBuilder{
 
         private GbpExternalSegment extSegment;
-        
+
         public ExternalSegmentConcreteBuilder(){
             this(new GbpExternalSegment());
         }
-        
+
         public ExternalSegmentConcreteBuilder(GbpExternalSegment gbpExternalSegment) {
             this.extSegment=gbpExternalSegment;
         }
@@ -224,7 +224,7 @@ public class GbpExternalSegment implements ExternalSegment {
             this.extSegment.portAddressTranslation=isPortAddressTranslation;
             return this;
         }
-        
+
     }
 
     public static ExternalSegmentBuilder builder() {

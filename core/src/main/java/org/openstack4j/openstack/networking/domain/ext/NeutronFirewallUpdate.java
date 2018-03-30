@@ -3,37 +3,38 @@ package org.openstack4j.openstack.networking.domain.ext;
 import org.openstack4j.model.network.ext.FirewallUpdate;
 import org.openstack4j.model.network.ext.builder.FirewallUpdateBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * An entity used to update Neutron Firewall (FwaaS).
- * 
+ *
  * @author Vishvesh Deshmukh
  */
 @JsonRootName("firewall")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeutronFirewallUpdate implements FirewallUpdate {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	
+
 	@JsonProperty("tenant_id")
 	private String tenantId;
-	
+
 	private String description;
-	
+
 	private Boolean shared;
-	
+
 	@JsonProperty("admin_state_up")
     private Boolean adminStateUp;
-	
+
 	@JsonProperty("firewall_policy_id")
 	private String policyId;
-	
+
 	/**
 	 * Wrap this Firewall to a builder
 	 * @return FirewallUpdateBuilder
@@ -42,7 +43,7 @@ public class NeutronFirewallUpdate implements FirewallUpdate {
 	public FirewallUpdateBuilder toBuilder() {
 		return new FirewallUpdateConcreteBuilder(this);
 	}
-	
+
 	/**
 	 * @return FirewallUpdateBuilder
 	 */
@@ -74,37 +75,37 @@ public class NeutronFirewallUpdate implements FirewallUpdate {
 	public Boolean isShared() {
 		return shared != null && shared;
 	}
-
+	@JsonIgnore
 	@Override
 	public String getPolicy() {
 		return policyId;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("name", name).add("policyId", policyId)
 				.add("shared", shared).add("adminStateUp", adminStateUp)
 				.add("tenantId", tenantId).add("description", description)
 				.toString();
 	}
-	
+
 	public static class FirewallUpdateConcreteBuilder implements FirewallUpdateBuilder {
 		NeutronFirewallUpdate f;
-		
+
 		@Override
 		public FirewallUpdate build() {
 			return f;
 		}
-		
+
 		public FirewallUpdateConcreteBuilder() {
 			this(new NeutronFirewallUpdate());
 		}
-		
+
 		public FirewallUpdateConcreteBuilder(NeutronFirewallUpdate f) {
 			this.f = f;
 		}
-		
+
 		@Override
 		public FirewallUpdateBuilder from(FirewallUpdate in) {
 			this.f = (NeutronFirewallUpdate) in;
@@ -140,7 +141,7 @@ public class NeutronFirewallUpdate implements FirewallUpdate {
 			f.shared = shared;
 			return this;
 		}
-		
+
 		@Override
 		public FirewallUpdateBuilder policy(String policyId) {
 			f.policyId = policyId;

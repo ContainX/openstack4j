@@ -3,7 +3,7 @@ package org.openstack4j.openstack.tacker.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  *
@@ -13,29 +13,29 @@ import com.google.common.base.Objects;
 @JsonRootName("attributes")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VnfAttributes {
-	
+
 	@JsonProperty("service_type")
 	private String serviceType;
-	
+
 	@JsonProperty("param_values")
 	private String paramValues;
-	
+
 	@JsonProperty("heat_template")
 	private String heatTemplate;
-	
+
 	@JsonProperty("monitoring_policy")
 	private String monitoringPolicy;
-	
+
 	@JsonProperty("failure_policy")
 	private String failurePolicy;
-	
+
 	public static VnfAttributes create() {
 		return new VnfAttributes();
 	}
-	
+
 	/**
 	 * serviceType to Set..
-	 * 
+	 *
 	 * @param serviceType the serviceType to set
 	 * @return VnfAttributes
 	 */
@@ -43,10 +43,10 @@ public class VnfAttributes {
 		this.serviceType = serviceType;
 		return this;
 	}
-	
+
 	/**
 	 * paramValues to Set..
-	 * 
+	 *
 	 * @param paramValues the paramValues to set
 	 * @return VnfAttributes
 	 */
@@ -54,10 +54,10 @@ public class VnfAttributes {
 		this.paramValues = paramValues;
 		return this;
 	}
-	
+
 	/**
 	 * heatTemplate to Set..
-	 * 
+	 *
 	 * @param heatTemplate the heatTemplate to set
 	 * @return VnfAttributes
 	 */
@@ -65,10 +65,10 @@ public class VnfAttributes {
 		this.heatTemplate = heatTemplate;
 		return this;
 	}
-	
+
 	/**
 	 * monitoringPolicy to Set..
-	 * 
+	 *
 	 * @param monitoringPolicy the monitoringPolicy to set
 	 * @return VnfAttributes
 	 */
@@ -76,10 +76,10 @@ public class VnfAttributes {
 		this.monitoringPolicy = monitoringPolicy;
 		return this;
 	}
-	
+
 	/**
 	 * failurePolicy to Set..
-	 * 
+	 *
 	 * @param failurePolicy the failurePolicy to set
 	 * @return VnfAttributes
 	 */
@@ -87,10 +87,10 @@ public class VnfAttributes {
 		this.failurePolicy = failurePolicy;
 		return this;
 	}
-	
+
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("serviceType", serviceType)
 				.add("paramValues", paramValues)
 				.add("heatTemplate", heatTemplate)

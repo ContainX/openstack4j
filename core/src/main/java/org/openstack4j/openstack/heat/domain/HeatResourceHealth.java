@@ -17,7 +17,7 @@
 package org.openstack4j.openstack.heat.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.heat.ResourceHealth;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.builder.ResourceHealthBuilder;
@@ -76,7 +76,7 @@ public class HeatResourceHealth implements ResourceHealth {
 
     @Override
     public String toString(){
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("markUnhealthy", markUnhealthy)
                 .add("resourceStatusReason", resourceStatusReason)
                 .toString();

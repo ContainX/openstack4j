@@ -1,0 +1,16 @@
+{
+  "actions": [
+    {
+      "id": "91fdedd9-43cd-4820-b017-a2b2fe600ef3",
+      "name": "concat",
+      "description": null,
+      "project_id": "<default-project>",
+      "scope": "private",
+      "is_system": false,
+      "created_at": "2017-05-30 10:35:16",
+      "tags": ["test", "custom"],
+      "input": "s1, s2",
+      "definition": "---\nversion: '2.0'\n\nconcat:\n  base: std.echo\n  base-input:\n    output: \"<% $.s1 %>+<% $.s2 %>\"\n  input:\n    - s1\n    - s2\n"
+    }
+  ]
+}

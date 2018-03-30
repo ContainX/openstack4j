@@ -1,32 +1,30 @@
 package org.openstack4j.openstack.telemetry.domain;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.common.builder.BasicResourceBuilder;
 import org.openstack4j.model.telemetry.Alarm;
-import org.openstack4j.model.telemetry.Alarm.ThresholdRule.ComparisonOperator;
-import org.openstack4j.model.telemetry.Alarm.ThresholdRule.Query;
 import org.openstack4j.model.telemetry.builder.AlarmBuilder;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
+import java.util.List;
+import java.util.Map;
 
 /**
  * An Alarm is triggered when a specificied rule is satisfied
- * 
+ *
  * @author Massimiliano Romano
  */
 public class CeilometerAlarm implements Alarm {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonProperty("project_id")
 	private String projectId;
 
 	/**
 	 * {@inheritDoc}
 	 */
-	
+
 	@JsonProperty("name")
 	private String name;
 
@@ -69,17 +67,27 @@ public class CeilometerAlarm implements Alarm {
 	@JsonProperty("state")
 	private String state;
 
-
 	@JsonProperty("state_timestamp")
 	private String stateTimestamp;
 
 
 	@JsonProperty("threshold_rule")
 	private CeilometerThresholdRule thresholdRule;
-	
+
 	@JsonProperty("combination_rule")
 	private CeilometerCombinationRule combinationRule;
 
+	@JsonProperty("composite_rule")
+	private Map<String,Object> compositeRule;
+
+	@JsonProperty("gnocchi_resources_threshold_rule")
+	private CeilometerGnocchiResourcesThresholdRule gnocchiResourcesThresholdRule;
+
+	@JsonProperty("gnocchi_aggregation_by_metrics_threshold_rule")
+	private CeilometerGnocchiAggregationByMetricsThresholdRule gnocchiAggregationByMetricsThresholdRule;
+
+	@JsonProperty("gnocchi_aggregation_by_resources_threshold_rule")
+	private CeilometerGnocchiAggregationByResourcesThresholdRule gnocchiAggregationByResourcesThresholdRule;
 
 	@JsonProperty("timestamp")
 	private String timestamp;
@@ -99,7 +107,7 @@ public class CeilometerAlarm implements Alarm {
 	public String getProjectId() {
 		return projectId;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -109,29 +117,29 @@ public class CeilometerAlarm implements Alarm {
 	}
 
 	/**
-   * {@inheritDoc}
-   */
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getUserId() {
 		return userId;
 	}
-  	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
-				    .add("id", alarmId).add("name", name).add("enabled", isEnabled)
-				    .add("project_id", projectId).add("type", type)
-				    .add("user_id",  userId)
-				    .toString();
+		return MoreObjects.toStringHelper(this).omitNullValues()
+				.add("id", alarmId).add("name", name).add("enabled", isEnabled)
+				.add("project_id", projectId).add("type", type)
+				.add("user_id",  userId)
+				.toString();
 	}
 
 	@Override
 	public List<String> getAlarmActions() {
 		return alarmActions;
-		
+
 	}
 
 	@Override
@@ -148,7 +156,7 @@ public class CeilometerAlarm implements Alarm {
 	public boolean isEnabled() {
 		return isEnabled;
 	}
-	
+
 	@Override
 	public void isEnabled(boolean newValue) {
 		isEnabled = newValue;
@@ -189,10 +197,30 @@ public class CeilometerAlarm implements Alarm {
 	public ThresholdRule getThresholdRule() {
 		return thresholdRule;
 	}
-	
+
 	@Override
 	public CombinationRule getCombinationRule() {
 		return combinationRule;
+	}
+
+	@Override
+	public Map<String,Object> getCompositeRule() {
+		return compositeRule;
+	}
+
+	@Override
+	public GnocchiResourcesThresholdRule getGnocchiResourcesThresholdRule() {
+		return gnocchiResourcesThresholdRule;
+	}
+
+	@Override
+	public GnocchiAggregationByMetricsThresholdRule getGnocchiAggregationByMetricsThresholdRule() {
+		return gnocchiAggregationByMetricsThresholdRule;
+	}
+
+	@Override
+	public GnocchiAggregationByResourcesThresholdRule getGnocchiAggregationByResourcesThresholdRule() {
+		return gnocchiAggregationByResourcesThresholdRule;
 	}
 
 
@@ -200,15 +228,15 @@ public class CeilometerAlarm implements Alarm {
 	public String getTimestamp() {
 		return timestamp;
 	}
-	
+
 	public static class CeilometerCombinationRule implements CombinationRule {
-		
+
 		@JsonProperty("alarm_ids")
 		List<String> alarmIds;
-		
+
 		@JsonProperty("operator")
 		Operator operator;
-		
+
 		@Override
 		public List<String> getAlarmIds() {
 			return alarmIds;
@@ -228,35 +256,37 @@ public class CeilometerAlarm implements Alarm {
 		public void setOperator(Operator operator) {
 			this.operator = operator;
 		}
-		
+
 	}
-	
-	public static class CeilometerThresholdRule implements ThresholdRule{
+
+
+
+	public static class CeilometerThresholdRule implements ThresholdRule {
 
 		@JsonProperty("meter_name")
 		String meterName;
-		
+
 		@JsonProperty("evaluation_periods")
 		int evaluationPeriods;
-		
+
 		@JsonProperty("statistic")
 		Statistic statistic;
-		
+
 		@JsonProperty("period")
 		int period;
-		
+
 		@JsonProperty("threshold")
 		float threshold;
-		
+
 		@JsonProperty("query")
 		List<CeilometerQuery> query;
-		
+
 		@JsonProperty("comparison_operator")
 		ComparisonOperator comparisonOperator;
-		
+
 		@JsonProperty("exclude_outliers")
 		boolean excludeOutliers;
-		
+
 		@Override
 		public String getMeterName() {
 			return meterName;
@@ -296,7 +326,7 @@ public class CeilometerAlarm implements Alarm {
 		public boolean getExcludeOutliers() {
 			return excludeOutliers;
 		}
-		
+
 		@Override
 		public void setMeterName(String meterName) {
 			this.meterName = meterName;
@@ -324,29 +354,29 @@ public class CeilometerAlarm implements Alarm {
 
 		@Override
 		public void setQuery(List<CeilometerQuery> query) {
-			this.query = query;			
+			this.query = query;
 		}
 
 		@Override
 		public void setComparisonOperator(ComparisonOperator comparisonOperator) {
-			this.comparisonOperator = comparisonOperator;			
+			this.comparisonOperator = comparisonOperator;
 		}
 
 		@Override
 		public void setExcludeOutliers(boolean excludeOutliers) {
-			this.excludeOutliers = excludeOutliers;			
+			this.excludeOutliers = excludeOutliers;
 		}
 	}
-	
-	public static class CeilometerQuery implements Query{
+
+	public static class CeilometerQuery implements Query {
 		public CeilometerQuery(){}
-		
+
 		@JsonProperty("field")
 		String field;
-		
+
 		@JsonProperty("value")
 		String value;
-		
+
 		@JsonProperty("op")
 		ComparisonOperator op;
 
@@ -364,27 +394,300 @@ public class CeilometerAlarm implements Alarm {
 		public ComparisonOperator getOp() {
 			return op;
 		}
-		
+
 		@Override
 		public void setField(String field) {
-			this.field = field;			
+			this.field = field;
 		}
 
 		@Override
 		public void setValue(String value) {
-			this.value = value;			
+			this.value = value;
 		}
 
 		@Override
 		public void setOp(ComparisonOperator comparisonOperator) {
-			this.op = comparisonOperator;			
+			this.op = comparisonOperator;
 		}
 	}
-	
+
+	public static class CeilometerGnocchiResourcesThresholdRule implements GnocchiResourcesThresholdRule {
+		@JsonProperty("metric")
+		String metric;
+		@JsonProperty("comparison_operator")
+		ComparisonOperator comparisonOperator;
+		@JsonProperty("aggregation_method")
+		AggregationMethod aggregationMethod;
+		@JsonProperty("evaluation_periods")
+		int evaluationPeriods;
+		@JsonProperty("granularity")
+		long granularity;
+		@JsonProperty("resource_type")
+		String resourceType;
+		@JsonProperty("resource_id")
+		String resourceId;
+		@JsonProperty("threshold")
+		float threshold;
+
+		@Override
+		public String getMetric() {
+			return metric;
+		}
+
+		@Override
+		public String getResourceId() {
+			return resourceId;
+		}
+
+		@Override
+		public String getResourceType() {
+			return resourceType;
+		}
+
+		@Override
+		public ComparisonOperator getComparisonOperator() {
+			return comparisonOperator;
+		}
+
+		@Override
+		public AggregationMethod getAggregationMethod() {
+			return aggregationMethod;
+		}
+
+		@Override
+		public int getEvaluationPeriods() {
+			return evaluationPeriods;
+		}
+
+		@Override
+		public float getThreshold() {
+			return threshold;
+		}
+
+		@Override
+		public long getGranularity() {
+			return granularity;
+		}
+
+		@Override
+		public void setMetric(String metric) {
+			this.metric=metric;
+		}
+
+		@Override
+		public void setResourceId(String resourceId) {
+			this.resourceId=resourceId;
+		}
+
+		@Override
+		public void setResourceType(String resourceType) {
+			this.resourceType=resourceType;
+		}
+
+		@Override
+		public void setComparisonOperator(ComparisonOperator comparisonOperator) {
+			this.comparisonOperator=comparisonOperator;
+		}
+
+		@Override
+		public void setAggregationMethod(AggregationMethod aggregationMethod) {
+			this.aggregationMethod=aggregationMethod;
+		}
+
+		@Override
+		public void setEvaluationPeriods(int evaluationPeriod) {
+			this.evaluationPeriods=evaluationPeriod;
+		}
+
+		@Override
+		public void setThreshold(float threshold) {
+			this.threshold=threshold;
+		}
+
+		@Override
+		public void setGranularity(long granularity) {
+			this.granularity=granularity;
+		}
+	}
+
+	public static class CeilometerGnocchiAggregationByMetricsThresholdRule implements GnocchiAggregationByMetricsThresholdRule {
+		@JsonProperty("metrics")
+		List<String> metrics;
+		@JsonProperty("comparison_operator")
+		ComparisonOperator comparisonOperator;
+		@JsonProperty("aggregation_method")
+		AggregationMethod aggregationMethod;
+		@JsonProperty("threshold")
+		float threshold;
+		@JsonProperty("evaluation_periods")
+		int evaluationPeriods;
+		@JsonProperty("granularity")
+		long granularity;
+
+		@Override
+		public List<String> getMetrics() {
+			return metrics;
+		}
+
+		@Override
+		public ComparisonOperator getComparisonOperator() {
+			return comparisonOperator;
+		}
+
+		@Override
+		public AggregationMethod getAggregationMethod() {
+			return aggregationMethod;
+		}
+
+		@Override
+		public float getThreshold() {
+			return threshold;
+		}
+
+		@Override
+		public int getEvaluationPeriods() {
+			return evaluationPeriods;
+		}
+
+		@Override
+		public long getGranularity() {
+			return granularity;
+		}
+
+		@Override
+		public void setMetrics(List<String> metrics) {
+			this.metrics=metrics;
+		}
+
+		@Override
+		public void setComparisonOperator(ComparisonOperator comparisonOperator) {
+			this.comparisonOperator=comparisonOperator;
+		}
+
+		@Override
+		public void setAggregationMethod(AggregationMethod aggregationMethod) {
+			this.aggregationMethod=aggregationMethod;
+		}
+
+		@Override
+		public void setThreshold(float threshold) {
+			this.threshold=threshold;
+		}
+
+		@Override
+		public void setEvaluationPeriods(int evaluationPeriod) {
+			this.evaluationPeriods=evaluationPeriod;
+		}
+
+		@Override
+		public void setGranularity(long granularity) {
+			this.granularity=granularity;
+		}
+	}
+
+	public static class CeilometerGnocchiAggregationByResourcesThresholdRule implements GnocchiAggregationByResourcesThresholdRule {
+		@JsonProperty("metric")
+		String metric;
+		@JsonProperty("resource_type")
+		String resourceType;
+		@JsonProperty("comparison_operator")
+		ComparisonOperator comparisonOperator;
+		@JsonProperty("aggregation_method")
+		AggregationMethod aggregationMethod;
+		@JsonProperty("evaluation_periods")
+		int evaluationPeriods;
+		@JsonProperty("threshold")
+		float threshold;
+		@JsonProperty("granularity")
+		long granularity;
+		@JsonProperty("query")
+		CeilometerQuery query;
+
+		@Override
+		public String getMetric() {
+			return metric;
+		}
+
+		@Override
+		public String getResourceType() {
+			return resourceType;
+		}
+
+		@Override
+		public ComparisonOperator getComparisonOperator() {
+			return comparisonOperator;
+		}
+
+		@Override
+		public AggregationMethod getAggregationMethod() {
+			return aggregationMethod;
+		}
+
+		@Override
+		public int getEvaluationPeriods() {
+			return evaluationPeriods;
+		}
+
+		@Override
+		public float getThreshold() {
+			return threshold;
+		}
+
+		@Override
+		public long getGranularity() {
+			return granularity;
+		}
+
+		@Override
+		public Query getQuery() {
+			return query;
+		}
+
+		@Override
+		public void setMetric(String metric) {
+			this.metric=metric;
+		}
+
+		@Override
+		public void setResourceType(String resourceType) {
+			this.resourceType=resourceType;
+		}
+
+		@Override
+		public void setComparisonOperator(ComparisonOperator comparisonOperator) {
+			this.comparisonOperator=comparisonOperator;
+		}
+
+		@Override
+		public void setAggregationMethod(AggregationMethod aggregationMethod) {
+			this.aggregationMethod=aggregationMethod;
+		}
+
+		@Override
+		public void setEvaluationPeriods(int evaluationPeriod) {
+			this.evaluationPeriods=evaluationPeriod;
+		}
+
+		@Override
+		public void setThreshold(float threshold) {
+			this.threshold=threshold;
+		}
+
+		@Override
+		public void setGranularity(long granularity) {
+			this.granularity=granularity;
+		}
+
+		@Override
+		public void setQuery(CeilometerQuery query) {
+			this.query=query;
+		}
+	}
+
 	public static AlarmBuilder builder() {
 		return new AlarmConcreteBuilder();
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -392,15 +695,15 @@ public class CeilometerAlarm implements Alarm {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void setType(Type type) {
-		 this.type = type;
+		this.type = type;
 	}
-	
+
 	@Override
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -409,7 +712,7 @@ public class CeilometerAlarm implements Alarm {
 	@Override
 	public void setAlarmActions(List<String> alarmActions) {
 		this.alarmActions = alarmActions;
-		
+
 	}
 
 	@Override
@@ -431,7 +734,7 @@ public class CeilometerAlarm implements Alarm {
 	public void setRepeateActions(Boolean repeatActions) {
 		this.repeatActions = repeatActions;
 	}
-	
+
 	@Override
 	public String getId() {
 		return this.alarmId;
@@ -449,18 +752,33 @@ public class CeilometerAlarm implements Alarm {
 	}
 
 	@Override
+	public void setGnocchiAggregationByResourcesThresholdRule(CeilometerGnocchiAggregationByResourcesThresholdRule ceilometerGnocchiAggregationByResourcesThresholdRule) {
+		this.gnocchiAggregationByResourcesThresholdRule=ceilometerGnocchiAggregationByResourcesThresholdRule;
+	}
+
+	@Override
+	public void setGnocchiAggregationByMetricsThresholdRule(CeilometerGnocchiAggregationByMetricsThresholdRule ceilometerGnocchiAggregationByMetricsThresholdRule) {
+		this.gnocchiAggregationByMetricsThresholdRule=ceilometerGnocchiAggregationByMetricsThresholdRule;
+	}
+
+	@Override
+	public void setGnocchiResourcesThresholdRule(CeilometerGnocchiResourcesThresholdRule ceilometerGnocchiResourcesThresholdRule) {
+		this.gnocchiResourcesThresholdRule=ceilometerGnocchiResourcesThresholdRule;
+	}
+
+	@Override
 	public AlarmBuilder toBuilder() {
 		return new AlarmConcreteBuilder(this);
 	}
-	
+
 	public static class AlarmConcreteBuilder extends BasicResourceBuilder<Alarm, AlarmConcreteBuilder> implements AlarmBuilder {
 
 		private CeilometerAlarm m;
-		
+
 		AlarmConcreteBuilder() {
-		 	this(new CeilometerAlarm());
+			this(new CeilometerAlarm());
 		}
-		
+
 		AlarmConcreteBuilder(CeilometerAlarm m) {
 			this.m = m;
 		}
@@ -479,6 +797,12 @@ public class CeilometerAlarm implements Alarm {
 		@Override
 		public AlarmBuilder okActions(List<String> okActions) {
 			this.m.okActions = okActions;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder insufficientDataActions(List<String> insufficientDataActions) {
+			this.m.insufficientDataActions = insufficientDataActions;
 			return this;
 		}
 
@@ -529,5 +853,29 @@ public class CeilometerAlarm implements Alarm {
 			return this;
 		}
 
-    }
+		@Override
+		public AlarmBuilder compositeRule(Map<String,Object> cr) {
+			this.m.compositeRule=cr;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder gnocchiResourcesThresholdRule(CeilometerGnocchiResourcesThresholdRule ceilometerGnocchiResourcesThresholdRule) {
+			this.m.gnocchiResourcesThresholdRule=ceilometerGnocchiResourcesThresholdRule;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder gnocchiAggregationByMetricsThresholdRule(CeilometerGnocchiAggregationByMetricsThresholdRule ceilometerGnocchiAggregationByMetricsThresholdRule) {
+			this.m.gnocchiAggregationByMetricsThresholdRule=ceilometerGnocchiAggregationByMetricsThresholdRule;
+			return this;
+		}
+
+		@Override
+		public AlarmBuilder gnocchiAggregationByResourcesThresholdRule(CeilometerGnocchiAggregationByResourcesThresholdRule ceilometerGnocchiAggregationByResourcesThresholdRule) {
+			this.m.gnocchiAggregationByResourcesThresholdRule=ceilometerGnocchiAggregationByResourcesThresholdRule;
+			return this;
+		}
+
+	}
 }

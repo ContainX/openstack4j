@@ -9,10 +9,10 @@ import org.openstack4j.openstack.common.ListResult;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 /**
  * Model implementation for nat pool
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("nat_pool")
@@ -32,7 +32,7 @@ public class GbpNatPool implements NatPool {
     private String ipVersion;
     @JsonProperty("subnet_id")
     private String subnetId;
-    
+
     @Override
     public String getTenantId() {
         return tenantId;
@@ -99,7 +99,7 @@ public class GbpNatPool implements NatPool {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
+        return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("externalSegmentId", externalSegmentId).add("ipPool", ipPool).add("ipVersion", ipVersion)
                 .add("subnetId", subnetId).add("shared", shared).toString();
     }
@@ -109,18 +109,18 @@ public class GbpNatPool implements NatPool {
         private static final long serialVersionUID = 1L;
         @JsonProperty("nat_pools")
         private List<GbpNatPool> natpools;
-        
+
         @Override
         protected List<GbpNatPool> value() {
             return natpools;
         }
-        
+
     }
-    
+
     public static class NatPoolConcreteBuilder implements NatPoolBuilder{
 
         private GbpNatPool natPool;
-        
+
         public NatPoolConcreteBuilder(GbpNatPool gbpNatPool) {
            this.natPool=gbpNatPool;
         }
@@ -175,7 +175,7 @@ public class GbpNatPool implements NatPool {
             this.natPool.externalSegmentId=id;
             return this;
         }
-        
+
     }
 
     public static NatPoolBuilder builder() {

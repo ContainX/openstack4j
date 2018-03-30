@@ -2,7 +2,7 @@ package org.openstack4j.openstack.image.v2.domain;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.image.v2.ImageUpdate;
 import org.openstack4j.model.image.v2.builder.ImageUpdateBuilder;
 
@@ -51,7 +51,7 @@ public class GlanceImageUpdate implements ImageUpdate {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
+        return MoreObjects.toStringHelper(this)
                 .add("ops", ops)
                 .toString();
     }

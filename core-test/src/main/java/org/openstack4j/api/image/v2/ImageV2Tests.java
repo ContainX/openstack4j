@@ -2,6 +2,7 @@ package org.openstack4j.api.image.v2;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -34,6 +35,7 @@ import org.testng.annotations.Test;
 public class ImageV2Tests extends AbstractTest {
     private static final String IMAGES_JSON = "/image/v2/images.json";
     private static final String IMAGE_JSON = "/image/v2/image.json";
+    private static final String IMAGE_WIHT_LOCATION_JSON = "/image/v2/image-with-locations.json";
     private static final String IMAGE_UPDATE_JSON = "/image/v2/image-update.json";
     private static final String MEMBER_JSON = "/image/v2/member.json";
     private static final String MEMBER_UPDATE_JSON = "/image/v2/member-update.json";
@@ -70,6 +72,16 @@ public class ImageV2Tests extends AbstractTest {
         assertNotNull(image.getId());
         assertEquals(image.getId(),id);
     }
+    
+    public void testGetImageWithLocations() throws IOException {
+        respondWith(IMAGE_WIHT_LOCATION_JSON);
+        String id = "c73056d6-c583-4d6c-9f70-04f3bfd8dff4";
+        Image image = osv3().imagesV2().get(id);
+        assertNotNull(image);
+        assertNotNull(image.getId());
+        assertEquals(image.getId(),id);
+        assertEquals(2,image.getLocations().size());
+    }
 
     public void testCreateImage() throws IOException {
         respondWith(IMAGE_JSON);
@@ -80,6 +92,12 @@ public class ImageV2Tests extends AbstractTest {
         Long mindisk = 0L;
         Long minram = 0L;
         Image.ImageVisibility vis = Image.ImageVisibility.PUBLIC;
+        String key1 = "test-key1";
+        String key2 = "test-key2";
+        String key3 = "id";
+        String value1 = "test-value1";
+        String value2 = "test-value2";
+        String value3 = "test-value3";
         Image im = Builders.imageV2()
                 .id(id)
                 .name(name)
@@ -88,6 +106,9 @@ public class ImageV2Tests extends AbstractTest {
                 .minDisk(mindisk)
                 .minRam(minram)
                 .visibility(vis)
+                .additionalProperty(key1, value1)
+                .additionalProperty(key2, value2)
+                .additionalProperty(key3, value3)
                 .build();
         Image image = osv3().imagesV2().create(im);
         assertNotNull(image);
@@ -98,6 +119,9 @@ public class ImageV2Tests extends AbstractTest {
         assertEquals(image.getVisibility(), vis);
         assertEquals(image.getMinDisk(), mindisk);
         assertEquals(image.getMinRam(), minram);
+        assertEquals(image.getAdditionalPropertyValue(key1), value1);
+        assertEquals(image.getAdditionalPropertyValue(key2), value2);
+        assertNull(image.getAdditionalPropertyValue(key3));
     }
 
     public void testDeleteImage() throws IOException {

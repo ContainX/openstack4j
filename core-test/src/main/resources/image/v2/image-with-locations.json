@@ -1,0 +1,31 @@
+{
+  "container_format": "bare",
+  "min_ram": 0,
+  "updated_at": "2017-10-05T07:37:07Z",
+  "file": "/v2/images/xxxx/file",
+  "owner": "xxxx",
+  "id": "c73056d6-c583-4d6c-9f70-04f3bfd8dff4",
+  "size": 10000,
+  "self": "/v2/images/xxxx",
+  "disk_format": "qcow2",
+  "direct_url": "rbd://xxxx/images/xxxx/snap",
+  "hw_disk_bus": "virtio",
+  "schema": "/v2/schemas/image",
+  "status": "active",
+  "tags": [],
+  "visibility": "public",
+  "locations": [{
+    "url": "rbd://xxxx/images/xxxx/snap",
+    "metadata": {}
+  }, {
+    "url": "rbd://yyyy/images/yyyy/snap",
+    "metadata": {}
+  }],
+  "min_disk": 0,
+  "virtual_size": null,
+  "name": "some-image",
+  "checksum": "xxx",
+  "created_at": "2017-10-05T07:37:00Z",
+  "hw_vif_model": "virtio",
+  "protected": false
+}

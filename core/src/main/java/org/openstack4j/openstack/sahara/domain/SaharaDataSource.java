@@ -12,11 +12,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * For mapping JSON response to/from java objects
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */
@@ -33,10 +33,10 @@ public class SaharaDataSource implements DataSource {
     @JsonProperty("tenant_id")
     private String tenantId;
     @JsonProperty("created_at")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date createdAt;
     @JsonProperty("updated_at")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date updatedAt;
     @JsonProperty("type")
     private String type;
@@ -120,7 +120,7 @@ public class SaharaDataSource implements DataSource {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                    .add("description", description)
                    .add("url", url)
                    .add("tenant_id", tenantId)
@@ -131,14 +131,14 @@ public class SaharaDataSource implements DataSource {
                    .add("name", name)
                    .toString();
     }
-    
+
     public static class DataSources extends ListResult<SaharaDataSource> {
 
         private static final long serialVersionUID = 1L;
 
         @JsonProperty("data_sources")
         private List<SaharaDataSource> datasources;
-        
+
         public List<SaharaDataSource> value() {
             return datasources;
         }

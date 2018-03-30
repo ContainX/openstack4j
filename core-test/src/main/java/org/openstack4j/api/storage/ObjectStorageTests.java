@@ -1,6 +1,9 @@
 package org.openstack4j.api.storage;
 
 import static org.openstack4j.model.storage.object.SwiftHeaders.CONTAINER_METADATA_PREFIX;
+import static org.openstack4j.model.storage.object.SwiftHeaders.CONTENT_LENGTH;
+import static org.openstack4j.model.storage.object.SwiftHeaders.CONTENT_TYPE;
+import static org.openstack4j.model.storage.object.SwiftHeaders.ETAG;
 import static org.testng.Assert.*;
 
 import java.util.List;
@@ -8,6 +11,7 @@ import java.util.Map;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.storage.object.SwiftContainer;
+import org.openstack4j.model.storage.object.SwiftObject;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.Maps;
@@ -48,5 +52,20 @@ public class ObjectStorageTests extends AbstractTest {
         metadata.put(CONTAINER_METADATA_PREFIX+NAME_BOOK, "TestBook");
         metadata.put(CONTAINER_METADATA_PREFIX+NAME_YEAR, "2000");
         return metadata;
+    }
+
+    public void objectRetrievalTest() throws Exception {
+        Map<String, String> headers = Maps.newHashMap();
+        headers.put(CONTENT_LENGTH, "15");
+        headers.put(CONTENT_TYPE, "application/json");
+        headers.put(ETAG, "12345678901234567890");
+        respondWith(headers, 200, "[\"hello world\"]");
+
+        SwiftObject object = osv3().objectStorage().objects().get("test-container", "test-file");
+        assertEquals(object.getContainerName(), "test-container");
+        assertEquals(object.getName(), "test-file");
+        assertEquals(object.getSizeInBytes(), 15);
+        assertEquals(object.getMimeType(), "application/json");
+        assertEquals(object.getETag(), "12345678901234567890");
     }
 }

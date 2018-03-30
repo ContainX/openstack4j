@@ -2,7 +2,7 @@ package org.openstack4j.openstack.networking.domain;
 
 import org.openstack4j.model.network.HostRoute;
 
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 
 /**
  * A Network Host based Routing Entry.
@@ -15,7 +15,7 @@ public class NeutronHostRoute implements HostRoute {
 
 	private String destination;
 	private String nexthop;
-	
+
 	public NeutronHostRoute() {
 	}
 
@@ -23,7 +23,7 @@ public class NeutronHostRoute implements HostRoute {
 		this.destination = destination;
 		this.nexthop = nexthop;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -39,13 +39,13 @@ public class NeutronHostRoute implements HostRoute {
 	public String getNexthop() {
 		return nexthop;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).omitNullValues()
+		return MoreObjects.toStringHelper(this).omitNullValues()
 				     .add("destination", destination).add("nexthop", nexthop).toString();
 	}
 
