@@ -19,8 +19,7 @@ public enum ServiceType {
 	DATABASE("trove","database"),
 	BARBICAN("barbican", "key-manager"),
 	TACKER("tacker", "nfv-orchestration"),
-	UNKNOWN("NA", "NA"),
-	BAREMETAL("ironic", "baremetal")
+	UNKNOWN("NA", "NA")
 	;
 
 	private final String serviceName;
