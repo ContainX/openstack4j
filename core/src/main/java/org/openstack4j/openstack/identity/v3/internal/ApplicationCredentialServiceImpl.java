@@ -16,7 +16,7 @@ public class ApplicationCredentialServiceImpl extends BaseOpenStackService imple
     @Override
     public ApplicationCredential create(String userId, ApplicationCredential applicationCredential) {
         checkNotNull(applicationCredential);
-        return post(KeystoneApplicationCredential.class, uri(PATH_USERS, '/', userId, PATH_APPLICATION_CREDENTIALS))
+        return post(KeystoneApplicationCredential.class, PATH_USERS, "/", userId, PATH_APPLICATION_CREDENTIALS)
                 .entity(applicationCredential).execute();
     }
 
@@ -24,14 +24,14 @@ public class ApplicationCredentialServiceImpl extends BaseOpenStackService imple
     public ApplicationCredential get(String userId, String applicationCredentialId) {
         checkNotNull(userId);
         checkNotNull(applicationCredentialId);
-        return get(KeystoneApplicationCredential.class, uri(PATH_USERS, '/', userId, PATH_APPLICATION_CREDENTIALS, '/', applicationCredentialId))
+        return get(KeystoneApplicationCredential.class, PATH_USERS, "/", userId, PATH_APPLICATION_CREDENTIALS, "/", applicationCredentialId)
                 .execute();
     }
 
     @Override
     public List<? extends ApplicationCredential> list(String userId) {
         checkNotNull(userId);
-        return get(KeystoneApplicationCredential.ApplicationCredentials.class, uri(PATH_USERS, '/', PATH_APPLICATION_CREDENTIALS))
+        return get(KeystoneApplicationCredential.ApplicationCredentials.class, PATH_USERS, PATH_APPLICATION_CREDENTIALS)
                 .execute().getList();
     }
 
@@ -39,7 +39,7 @@ public class ApplicationCredentialServiceImpl extends BaseOpenStackService imple
     public ActionResponse delete(String userId, String applicationCredentialId) {
         checkNotNull(userId);
         checkNotNull(applicationCredentialId);
-        return deleteWithResponse(uri(PATH_USERS, '/', userId, PATH_CREDENTIALS, '/', applicationCredentialId))
+        return deleteWithResponse(PATH_USERS, "/", userId, PATH_APPLICATION_CREDENTIALS, "/", applicationCredentialId)
                 .execute();
     }
 }
