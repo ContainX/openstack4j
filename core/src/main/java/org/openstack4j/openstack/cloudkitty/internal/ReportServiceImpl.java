@@ -19,7 +19,7 @@ public class ReportServiceImpl extends CloudKittyBaseService implements ReportSe
                 .param("tenant_id", tenantId)
                 .param("service", service)
                 .param("groupby", groupBy)
-                .param("all_tenants", allTenants)
+                .param("all_tenants", allTenants ? 1 : null)
                 .execute()
                 .getList();
     }
@@ -36,7 +36,7 @@ public class ReportServiceImpl extends CloudKittyBaseService implements ReportSe
                 .param("end", end)
                 .param("tenant_id", tenantId)
                 .param("service", service)
-                .param("all_tenants", allTenants)
+                .param("all_tenants", allTenants ? 1 : null)
                 .execute();
     }
 }
