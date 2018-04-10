@@ -28,7 +28,7 @@ import org.openstack4j.model.identity.v3.Service;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class BaseOpenStackService {
 
@@ -222,7 +222,7 @@ public class BaseOpenStackService {
             }
              
             reqIdContainer.set(reqId);
-            return res.getEntity(request.getReturnType(), options);
+            return checkNotNull(res.getEntity(request.getReturnType(), options));
         }
 
         public HttpResponse executeWithResponse() {
