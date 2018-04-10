@@ -1,0 +1,20 @@
+{
+  "dataframes": [
+    {
+      "begin": "2015-04-22T07:00:00",
+      "end": "2015-04-22T08:00:00",
+      "resources": [
+        {
+          "desc": {
+            "flavor": "m1.tiny",
+            "vcpus": "1"
+          },
+          "rating": "1.0",
+          "service": "compute",
+          "volume": "1.0"
+        }
+      ],
+      "tenant_id": "69d12143688f413cbf5c3cfe03ed0a12"
+    }
+  ]
+}

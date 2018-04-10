@@ -1,0 +1,4 @@
+{
+  "collector": "ceilometer",
+  "service": "compute"
+}

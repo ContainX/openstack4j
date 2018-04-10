@@ -1,0 +1,10 @@
+{
+  "scripts": [
+    {
+      "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+      "data": "return 0",
+      "name": "policy1",
+      "script_id": "bc05108d-f515-4984-8077-de319cbf35aa"
+    }
+  ]
+}

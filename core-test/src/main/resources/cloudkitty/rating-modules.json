@@ -1,0 +1,11 @@
+{
+  "modules": [
+    {
+      "module_id": "hashmap",
+      "description": "Sample extension.",
+      "enabled": true,
+      "hot-config": false,
+      "priority": 2
+    }
+  ]
+}

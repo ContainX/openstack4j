@@ -8,6 +8,9 @@ import org.openstack4j.api.artifact.ToscaTemplatesArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.barbican.ContainerService;
 import org.openstack4j.api.barbican.SecretService;
+import org.openstack4j.api.cloudkitty.*;
+import org.openstack4j.api.cloudkitty.hashmap.*;
+import org.openstack4j.api.cloudkitty.pyscripts.PyScriptsService;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
@@ -176,6 +179,9 @@ import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactService
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
 import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
 import org.openstack4j.openstack.barbican.internal.SecretServiceImpl;
+import org.openstack4j.openstack.cloudkitty.internal.*;
+import org.openstack4j.openstack.cloudkitty.internal.hashmap.*;
+import org.openstack4j.openstack.cloudkitty.internal.pyscripts.PyScriptsServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
@@ -546,6 +552,18 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ActionExecutionService.class, ActionExecutionServiceImpl.class);
         bind(WorkflowEnvironmentService.class, WorkflowEnvironmentServiceImpl.class);
         bind(CronTriggerService.class, CronTriggerServiceImpl.class);
+        bind(RatingService.class, RatingServiceImpl.class);
+        bind(HashMapFieldService.class, HashMapFieldServiceImpl.class);
+        bind(HashMapService.class, HashMapServiceImpl.class);
+        bind(HashMapGroupService.class, HashMapGroupServiceImpl.class);
+        bind(HashMapServiceService.class, HashMapServiceServiceImpl.class);
+        bind(HashMapMappingService.class, HashMapMappingServiceImpl.class);
+        bind(PyScriptsService.class, PyScriptsServiceImpl.class);
+        bind(CollectorService.class, CollectorServiceImpl.class);
+        bind(InfoService.class, InfoServiceImpl.class);
+        bind(ModuleService.class, ModuleServiceImpl.class);
+        bind(ReportService.class, ReportServiceImpl.class);
+        bind(StorageService.class, StorageServiceImpl.class);
     }
 
     /**

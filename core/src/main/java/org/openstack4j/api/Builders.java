@@ -56,6 +56,7 @@ import org.openstack4j.model.workflow.builder.WorkflowBuilders;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
 import org.openstack4j.openstack.barbican.domain.BarbicanSecret;
+import org.openstack4j.openstack.cloudkitty.builder.CloudkittyBuilders;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.*;
@@ -1249,5 +1250,9 @@ public class Builders {
 
     public static WorkflowBuilders workflow() {
         return new MistralBuilders();
+    }
+
+    public static CloudkittyBuilders cloudkitty() {
+        return new CloudkittyBuilders();
     }
 }
