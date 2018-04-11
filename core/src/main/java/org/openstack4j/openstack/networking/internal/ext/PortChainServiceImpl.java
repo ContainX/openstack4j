@@ -21,7 +21,7 @@ public class PortChainServiceImpl extends BaseNetworkingServices implements Port
      */
     @Override
     public List<? extends PortChain> list() {
-        return get(PortChains.class, uri("/sfc/port_chains")).execute().getList();
+        return checkNotNull(get(PortChains.class, uri("/sfc/port_chains")).execute()).getList();
     }
 
     /**

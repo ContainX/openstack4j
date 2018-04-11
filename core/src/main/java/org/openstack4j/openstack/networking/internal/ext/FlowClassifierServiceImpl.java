@@ -21,7 +21,7 @@ public class FlowClassifierServiceImpl extends BaseNetworkingServices implements
      */
     @Override
     public List<? extends FlowClassifier> list() {
-        return get(FlowClassifiers.class, uri("/sfc/flow_classifiers")).execute().getList();
+        return checkNotNull(get(FlowClassifiers.class, uri("/sfc/flow_classifiers")).execute()).getList();
     }
 
     /**
