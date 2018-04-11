@@ -24,7 +24,7 @@ public class PortServiceImpl extends BaseNetworkingServices implements PortServi
      */
     @Override
     public List<? extends Port> list() {
-        return get(Ports.class, uri("/ports")).execute().getList();
+        return checkNotNull(get(Ports.class, uri("/ports")).execute()).getList();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class PortServiceImpl extends BaseNetworkingServices implements PortServi
         if (options == null)
             return list();
         
-        return get(Ports.class, uri("/ports")).params(options.getOptions()).execute().getList();
+        return checkNotNull(get(Ports.class, uri("/ports")).params(options.getOptions()).execute()).getList();
     }
 
     /**
@@ -72,8 +72,8 @@ public class PortServiceImpl extends BaseNetworkingServices implements PortServi
         for (Port port : ports) {
             checkNotNull(port.getNetworkId(), "NetworkId is a required field");
         }
-        return post(Ports.class, uri("/ports")).entity(NeutronPortCreate.NeutronPortsCreate.fromPorts(ports))
-                .execute().getList();
+        return checkNotNull(post(Ports.class, uri("/ports")).entity(NeutronPortCreate.NeutronPortsCreate.fromPorts(ports))
+                .execute()).getList();
     }
 
     /**

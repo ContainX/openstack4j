@@ -222,7 +222,7 @@ public class BaseOpenStackService {
             }
              
             reqIdContainer.set(reqId);
-            return checkNotNull(res.getEntity(request.getReturnType(), options));
+            return res.getEntity(request.getReturnType(), options);
         }
 
         public HttpResponse executeWithResponse() {

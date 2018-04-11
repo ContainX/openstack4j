@@ -21,7 +21,7 @@ public class PortPairGroupServiceImpl extends BaseNetworkingServices implements 
      */
     @Override
     public List<? extends PortPairGroup> list() {
-        return get(PortPairGroups.class, uri("/sfc/port_pair_groups")).execute().getList();
+        return checkNotNull(get(PortPairGroups.class, uri("/sfc/port_pair_groups")).execute()).getList();
     }
 
     /**
