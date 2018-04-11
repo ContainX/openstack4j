@@ -39,6 +39,7 @@ import org.openstack4j.model.murano.v1.builder.EnvironmentBuilder;
 import org.openstack4j.model.murano.v1.builder.AppCatalogBuilders;
 import org.openstack4j.model.network.builder.*;
 import org.openstack4j.model.network.ext.builder.*;
+import org.openstack4j.model.network.qos.builder.*;
 import org.openstack4j.model.sahara.builder.*;
 import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
 import org.openstack4j.model.storage.block.builder.StorageBuilders;
@@ -95,6 +96,7 @@ import org.openstack4j.openstack.murano.v1.domain.MuranoEnvironment;
 import org.openstack4j.openstack.networking.builder.NeutronBuilders;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.networking.domain.qos.*;
 import org.openstack4j.openstack.octavia.builder.OctaviaBuilders;
 import org.openstack4j.openstack.sahara.builder.SaharaBuilders;
 import org.openstack4j.openstack.sahara.domain.*;
@@ -338,6 +340,42 @@ public class Builders {
      */
     public static NetFloatingIPBuilder netFloatingIP() {
         return NeutronFloatingIP.builder();
+    }
+
+    /**
+     * The builder to create a Neutron QoS Policy
+     *
+     * @return the QoS Policy builder
+     */
+    public static NetQosPolicyBuilder netQosPolicy() {
+        return NeutronQosPolicy.builder();
+    }
+
+    /**
+     * The builder to create a Neutron QoS Bandwidth Limit Rule
+     *
+     * @return the QoS Policy builder
+     */
+    public static NetQosBandwidthLimitRuleBuilder netQosBandwidthLimitRule() {
+        return NeutronQosBandwidthLimitRule.builder();
+    }
+
+    /**
+     * The builder to create a Neutron QoS DSCP Marking Rule
+     *
+     * @return the QoS Policy builder
+     */
+    public static NetQosDscpMarkingRuleBuilder netQosDscpMarkingRule() {
+        return NeutronQosDscpMarkingRule.builder();
+    }
+
+    /**
+     * The builder to create a Neutron QoS Minimum Bandwidth Rule
+     *
+     * @return the QoS Policy builder
+     */
+    public static NetQosMinimumBandwidthRuleBuilder netQosMinimumBandwidthRule() {
+        return NeutronQosMinimumBandwidthRule.builder();
     }
 
     /**

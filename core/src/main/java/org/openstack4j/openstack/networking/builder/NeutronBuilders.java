@@ -2,8 +2,10 @@ package org.openstack4j.openstack.networking.builder;
 
 import org.openstack4j.model.network.builder.*;
 import org.openstack4j.model.network.ext.builder.*;
+import org.openstack4j.model.network.qos.builder.*;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.networking.domain.qos.*;
 
 /**
  * The Network V3 Builders
@@ -53,6 +55,26 @@ public class NeutronBuilders implements NetworkBuilders {
     @Override
     public NetFloatingIPBuilder netFloatingIP() {
         return NeutronFloatingIP.builder();
+    }
+
+    @Override
+    public NetQosPolicyBuilder netQosPolicy() {
+        return NeutronQosPolicy.builder();
+    }
+
+    @Override
+    public NetQosBandwidthLimitRuleBuilder netQosBandwidthLimitRule() {
+        return NeutronQosBandwidthLimitRule.builder();
+    }
+
+    @Override
+    public NetQosDscpMarkingRuleBuilder netQosDscpMarkingRule() {
+        return NeutronQosDscpMarkingRule.builder();
+    }
+
+    @Override
+    public NetQosMinimumBandwidthRuleBuilder netQosMinimumBandwidthRule() {
+        return NeutronQosMinimumBandwidthRule.builder();
     }
 
     @Override
