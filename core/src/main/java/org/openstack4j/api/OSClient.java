@@ -6,6 +6,7 @@ import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.gbp.GbpService;
+import org.openstack4j.api.gnocchi.GnocchiService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.manila.ShareService;
@@ -354,5 +355,12 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the DNS service
      */
     DNSService dns();
+
+    /**
+     * Returns the gnocchi service API
+     *
+     * @return the gnocchi service
+     */
+    GnocchiService gnocchi();
 
 }
