@@ -40,7 +40,7 @@ public class KeystoneProject implements Project {
     private String subtree;
     private String parents;
     private Boolean enabled = true;
-    private Map<String, String> extra = new HashMap<String, String>();
+    private Map<String, Object> extra = new HashMap<String, Object>();
 
     /**
      * @return the Project builder
@@ -149,17 +149,17 @@ public class KeystoneProject implements Project {
     /**
      * {@inheritDoc}
      */
-    public String getExtra(String key) {
+    public Object getExtra(String key) {
         return extra.get(key);
     }
 
     @JsonAnyGetter
-    public Map<String, String> getExtra() {
+    public Map<String, Object> getExtra() {
         return extra;
     }
 
     @JsonAnySetter
-    public void setExtra(String key, String value) {
+    public void setExtra(String key, Object value) {
         // is_domain is not necessary
         // if we don't ignore this, this will be set into extra field.
         if (Objects.equal(key, "is_domain")) {

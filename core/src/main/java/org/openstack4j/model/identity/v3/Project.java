@@ -8,7 +8,7 @@ import org.openstack4j.model.identity.v3.builder.ProjectBuilder;
 
 /**
  * Project Model class use to group/isolate resources and/or identity objects
- * 
+ *
  * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#projects-v3">API reference</a>
  */
 public interface Project extends ModelEntity, Buildable<ProjectBuilder> {
@@ -26,7 +26,7 @@ public interface Project extends ModelEntity, Buildable<ProjectBuilder> {
     String getDomainId();
 
     /**
-     * 
+     *
      * @return the domain
      */
     Domain getDomain();
@@ -37,37 +37,37 @@ public interface Project extends ModelEntity, Buildable<ProjectBuilder> {
     String getDescription();
 
     /**
-     * 
+     *
      * @return the Name of the project
      */
     String getName();
 
     /**
-     * 
+     *
      * @return the links of the project
      */
     Map<String, String> getLinks();
 
     /**
-     * 
+     *
      * @return the parentId of the project
      */
     String getParentId();
 
     /**
-     * 
+     *
      * @return the subtree of the project
      */
     String getSubtree();
 
     /**
-     * 
+     *
      * @return the parents of the project
      */
     String getParents();
 
     /**
-     * 
+     *
      * @return if the project is enabled
      */
     boolean isEnabled();
@@ -76,5 +76,5 @@ public interface Project extends ModelEntity, Buildable<ProjectBuilder> {
      *
      * @return value for the given key
      */
-    String getExtra(String key);
+    Object getExtra(String key);
 }
