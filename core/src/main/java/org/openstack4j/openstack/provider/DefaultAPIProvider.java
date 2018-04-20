@@ -8,6 +8,10 @@ import org.openstack4j.api.artifact.ToscaTemplatesArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
 import org.openstack4j.api.barbican.ContainerService;
 import org.openstack4j.api.barbican.SecretService;
+import org.openstack4j.api.bareMetal.BareMetalService;
+import org.openstack4j.api.bareMetal.ChassisService;
+import org.openstack4j.api.bareMetal.DriverService;
+import org.openstack4j.api.bareMetal.NodeService;
 import org.openstack4j.api.compute.ComputeFloatingIPService;
 import org.openstack4j.api.compute.ComputeImageService;
 import org.openstack4j.api.compute.ComputeSecurityGroupService;
@@ -170,6 +174,10 @@ import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactService
 import org.openstack4j.openstack.barbican.internal.BarbicanServiceImpl;
 import org.openstack4j.openstack.barbican.internal.ContainerServiceImpl;
 import org.openstack4j.openstack.barbican.internal.SecretServiceImpl;
+import org.openstack4j.openstack.bareMetal.internal.BareMetalServiceImpl;
+import org.openstack4j.openstack.bareMetal.internal.ChassisServiceImpl;
+import org.openstack4j.openstack.bareMetal.internal.DriverServiceImpl;
+import org.openstack4j.openstack.bareMetal.internal.NodeServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeFloatingIPServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeImageServiceImpl;
 import org.openstack4j.openstack.compute.internal.ComputeSecurityGroupServiceImpl;
@@ -528,6 +536,11 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ActionExecutionService.class, ActionExecutionServiceImpl.class);
         bind(WorkflowEnvironmentService.class, WorkflowEnvironmentServiceImpl.class);
         bind(CronTriggerService.class, CronTriggerServiceImpl.class);
+        bind(BareMetalService.class, BareMetalServiceImpl.class);
+        bind(ChassisService.class, ChassisServiceImpl.class);
+        bind(DriverService.class, DriverServiceImpl.class);
+        bind(NodeService.class, NodeServiceImpl.class);
+        bind(org.openstack4j.api.bareMetal.PortService.class, org.openstack4j.openstack.bareMetal.internal.PortServiceImpl.class);
     }
 
     /**

@@ -10,6 +10,7 @@ import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
+import org.openstack4j.api.bareMetal.BareMetalService;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
@@ -371,6 +372,10 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public TroveService trove(){
         return Apis.getTroveServices();
+    }
+
+    public BareMetalService bareMetal() {
+        return Apis.getBareMetalServices();
     }
         
     public static class OSClientSessionV2 extends OSClientSession<OSClientSessionV2, OSClientV2> implements OSClientV2 {

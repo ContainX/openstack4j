@@ -24,7 +24,8 @@ public enum ServiceType {
   	MAGNUM("magnum", "container"),
 	DNS("designate", "dns"),
 	WORKFLOW("mistral", "workflow"),
-	UNKNOWN("NA", "NA")
+	UNKNOWN("NA", "NA"),
+	BAREMETAL("ironic", "baremetal")
 	;
 
 	private final String serviceName;
