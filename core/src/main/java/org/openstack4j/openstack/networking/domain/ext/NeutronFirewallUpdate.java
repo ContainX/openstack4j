@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 
+import java.util.List;
+
 /**
  * An entity used to update Neutron Firewall (FwaaS).
  *
@@ -34,6 +36,9 @@ public class NeutronFirewallUpdate implements FirewallUpdate {
 
 	@JsonProperty("firewall_policy_id")
 	private String policyId;
+
+	@JsonProperty("router_ids")
+	private List<String> routerIds;
 
 	/**
 	 * Wrap this Firewall to a builder
@@ -82,11 +87,17 @@ public class NeutronFirewallUpdate implements FirewallUpdate {
 	}
 
 	@Override
+	public List<String> getRouterIds() {
+		return routerIds;
+	}
+
+	@Override
 	public String toString() {
 		return MoreObjects.toStringHelper(this).omitNullValues()
 				.add("name", name).add("policyId", policyId)
 				.add("shared", shared).add("adminStateUp", adminStateUp)
 				.add("tenantId", tenantId).add("description", description)
+				.add("routerIds", routerIds)
 				.toString();
 	}
 
@@ -145,6 +156,12 @@ public class NeutronFirewallUpdate implements FirewallUpdate {
 		@Override
 		public FirewallUpdateBuilder policy(String policyId) {
 			f.policyId = policyId;
+			return this;
+		}
+
+		@Override
+		public FirewallUpdateBuilder routerIds(List<String> routerIds) {
+			f.routerIds = routerIds;
 			return this;
 		}
 	}

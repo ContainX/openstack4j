@@ -3,6 +3,8 @@ package org.openstack4j.model.network.ext.builder;
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.FirewallUpdate;
 
+import java.util.List;
+
 /**
  * A Builder to Update Firewall of FwaaS
  * 
@@ -30,7 +32,7 @@ public interface FirewallUpdateBuilder extends Builder<FirewallUpdateBuilder, Fi
 	public FirewallUpdateBuilder description(String description);
 	
 	/**
-	 * @param adminstateup :  The administrative state of the firewall,
+	 * @param adminStateUp :  The administrative state of the firewall,
 	 *         which is up (true) or down (false).
 	 * @return FirewallUpdateBuilder
 	 */
@@ -44,9 +46,15 @@ public interface FirewallUpdateBuilder extends Builder<FirewallUpdateBuilder, Fi
 	public FirewallUpdateBuilder shared(Boolean shared);
 	
 	/**
-	 * @param policyid : The firewall policy uuid that this firewall is associated with. 
+	 * @param policyId : The firewall policy uuid that this firewall is associated with.
 	 * 				This firewall will implement the rules contained in the firewall policy represented by this uuid.
 	 * @return FirewallUpdateBuilder
 	 */
 	public FirewallUpdateBuilder policy(String policyId);
+
+	/**
+	 * @param routerIds : A list of UUIDs for routers that are associated with the firewall.
+	 * @return FirewallUpdateBuilder
+	 */
+	public FirewallUpdateBuilder routerIds(List<String> routerIds);
 }
