@@ -7,6 +7,7 @@ public enum ServiceType {
 	COMPUTE("nova", "compute"),
 	IMAGE("glance", "image"),
 	BLOCK_STORAGE("cinder", "volume"),
+	BLOCK_STORAGEV3("cinderv3", "volumev3"),
 	OBJECT_STORAGE("object-store", "object-store"),
 	NETWORK("neutron", "network"),
 	OCTAVIA("octavia", "load-balancer"),
