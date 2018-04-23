@@ -6,6 +6,7 @@ import org.openstack4j.api.bareMetal.BareMetalService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
+import org.openstack4j.api.gnocchi.GnocchiService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.magnum.MagnumService;
@@ -221,6 +222,13 @@ public class Apis {
      */
     public static BareMetalService getBareMetalServices() {
         return get(BareMetalService.class);
+    }
+    /**
+     * Gets the gnocchi services API
+     * @return the gnocchi services
+     */
+    public static GnocchiService getGnocchiServices() {
+        return get(GnocchiService.class);
     }
 
     private static APIProvider initializeProvider() {

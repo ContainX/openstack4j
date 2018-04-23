@@ -25,7 +25,8 @@ public enum ServiceType {
 	DNS("designate", "dns"),
 	WORKFLOW("mistral", "workflow"),
 	UNKNOWN("NA", "NA"),
-	BAREMETAL("ironic", "baremetal")
+	BAREMETAL("ironic", "baremetal"),
+	GNOCCHI("gnocchi", "metric")
 	;
 
 	private final String serviceName;

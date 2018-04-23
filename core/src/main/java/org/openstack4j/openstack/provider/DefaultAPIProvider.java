@@ -541,6 +541,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(DriverService.class, DriverServiceImpl.class);
         bind(NodeService.class, NodeServiceImpl.class);
         bind(org.openstack4j.api.bareMetal.PortService.class, org.openstack4j.openstack.bareMetal.internal.PortServiceImpl.class);
+        bind(org.openstack4j.api.gnocchi.ResourceService.class, org.openstack4j.openstack.gnocchi.internal.ResourceServiceImpl.class);
     }
 
     /**
