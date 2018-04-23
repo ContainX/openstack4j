@@ -70,10 +70,10 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
             {
                 OSAuthenticator.reAuthenticate();
                 command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
-                return invokeRequest(command.incrementRetriesAndReturn());
             } finally {
                 response.close();
             }
+            return invokeRequest(command.incrementRetriesAndReturn());
         }
 
         return HttpResponseImpl.wrap(response);

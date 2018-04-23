@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
+import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -90,10 +91,25 @@ public final class HttpCommand<R> {
         if (HttpLoggingFilter.isLoggingEnabled()) {
             okHttpClientBuilder.addInterceptor(new LoggingInterceptor());
         }
+        okHttpClientBuilder.connectionPool(getConnectionPool());
         client = okHttpClientBuilder.build();
         clientReq = new Request.Builder();
         populateHeaders(request);
         populateQueryParams(request);
+    }
+
+    /**
+     * Create ConnectionPool optimized for short lived client with little chance to reuse connections.
+     */
+    private ConnectionPool getConnectionPool() {
+        int maxIdleConnections = 0;
+        // OkHttp creates "OkHttp ConnectionPool" thread per every ConnectionPool created to mange its connections. It
+        // lives as long as the last connection made through it + its keep alive timeout. By default that it 5 min which
+        // makes no sense for openstack4j since the connections or pools are not reused (after HttpCommand completion,
+        // at least). Setting strict keepAlive duration here so the connections and threads does not hang around longer
+        // than necessary.
+        int keepAliveDuration = 500;
+        return new ConnectionPool(maxIdleConnections, keepAliveDuration, TimeUnit.MILLISECONDS);
     }
 
     /**

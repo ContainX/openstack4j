@@ -74,7 +74,6 @@
 						</Private-Package>
 						<Import-Package>
 							!org.openstack*,
-							!com.fasterxml.jackson.dataformat.yaml.snakeyaml,
 							*
 						</Import-Package>
 						<!--
@@ -177,6 +176,12 @@
 		</pluginManagement>
 	</build>
 	<dependencies>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.15</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>

@@ -12,6 +12,7 @@ import org.openstack4j.model.image.v2.DiskFormat;
 import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.builder.ImageBuilder;
 import org.openstack4j.openstack.common.ListResult;
+import org.openstack4j.openstack.common.Metadata;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -97,7 +98,7 @@ public class GlanceImage implements Image {
 
     private Long size;
 
-    private List<String> locations;
+    private List<Location> locations;
 
     @JsonProperty("direct_url")
     private String directUrl;
@@ -267,7 +268,7 @@ public class GlanceImage implements Image {
     }
 
     @Override
-    public List<String> getLocations() {
+    public List<Location> getLocations() {
         return locations;
     }
 
@@ -439,6 +440,15 @@ public class GlanceImage implements Image {
             return images;
         }
     }
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	public static class Location {
+		@JsonProperty("url")
+		private String url;
+
+		@JsonProperty("metadata")
+		private Metadata metadat;
+	}
 
     public static class ImageConcreteBuilder extends BasicResourceBuilder<Image, ImageConcreteBuilder> implements ImageBuilder {
         private GlanceImage m;

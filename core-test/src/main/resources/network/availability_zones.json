@@ -1,0 +1,9 @@
+{
+    "availability_zones": [
+        {
+            "state": "available",
+            "resource": "network",
+            "name": "nova"
+        }
+    ]
+}

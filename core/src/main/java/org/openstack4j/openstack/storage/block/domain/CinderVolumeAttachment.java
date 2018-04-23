@@ -27,6 +27,9 @@ public class CinderVolumeAttachment implements VolumeAttachment {
 
 	@JsonProperty
 	private String server_id;
+	
+	@JsonProperty
+	private String attachment_id;
 
 	@JsonProperty
 	private String volume_id;
