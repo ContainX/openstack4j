@@ -33,6 +33,11 @@ public class NovaInterfaceAttachment implements InterfaceAttachment {
         this.portId = portId;
     }
 
+    public NovaInterfaceAttachment(String portId,String netId) {
+        this.portId = portId;
+        this.netId = netId;
+    }
+
     @Override
     public List<? extends FixedIp> getFixedIps() {
         return fixedIps;
