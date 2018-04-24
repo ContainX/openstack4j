@@ -6,6 +6,7 @@ import java.util.List;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.BasicResource;
 import org.openstack4j.model.image.v2.builder.ImageBuilder;
+import org.openstack4j.openstack.image.v2.domain.GlanceImage.Location;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -188,7 +189,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
      * This list appears if the show_multiple_locations option is
      * set to true in the Image service's configuration file.
      */
-    List<String> getLocations();
+    List<Location> getLocations();
 
     /**
      * @return the URL to access the image file kept in external store

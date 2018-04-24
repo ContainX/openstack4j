@@ -115,7 +115,7 @@ public class BaseOpenStackService {
         Map headers = ses.getHeaders();
         if (headers != null && headers.size() > 0){
             return new Invocation<R>(req, serviceType, endpointFunc).headers(headers);
-        }else{
+        }else{ 
             return new Invocation<R>(req, serviceType, endpointFunc);
         }
     }

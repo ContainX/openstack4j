@@ -8,12 +8,11 @@ import org.openstack4j.model.common.ActionResponse;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * Created by reneschollmeyer on 18.08.17.
@@ -27,6 +26,9 @@ public class SecretTests extends AbstractTest {
 
     private final String secretId = "520405bc-c7c5-41ea-97ad-6c67a8d41a9e";
     private final String secretName = "test_secret";
+    private final String content_type = "application/octet-stream";
+
+    private final Date expiration = new Date(1451330264394l);
 
     public void testListSecretsByName() throws IOException {
         respondWith(SECRETS_JSON);
@@ -47,14 +49,25 @@ public class SecretTests extends AbstractTest {
         Secret secret = osv3().barbican().secrets().get(secretId);
         assertNotNull(secret);
         assertNotNull(secret.getName());
+        assertEquals(secret.getExpiration(), expiration);
+        assertTrue(!secret.getContentTypes().isEmpty());
+        assertEquals(secret.getContentTypes().get("default"), content_type);
     }
 
     public void testCreateSecret() throws IOException {
         respondWithCodeAndResource(201, SECRET_CREATE_JSON);
         Secret test = Builders.secret()
                 .name("test-secret")
+                .algorithm("aes")
+                .bitLength(256)
+                .expiration(new Date())
+                .mode("cbc")
+                .secretType("opaque")
+                .payload("test-payload")
+                .payloadContentType("text/plain")
                 .build();
         Secret result = osv3().barbican().secrets().create(test);
+        assertNotNull(result);
         assertNotNull(result.getSecretReference());
     }
 

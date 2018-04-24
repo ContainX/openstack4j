@@ -83,4 +83,12 @@ public interface LbPoolV2Builder extends Buildable.Builder<LbPoolV2Builder, LbPo
      * @return LbPoolV2Builder
      */
     LbPoolV2Builder listenerId(String listenerId);
+
+    /**
+     * The load balancer this pool will be provisioned on. A tenant can only create pool on
+     * load balancers authorized by policy (e.g. her own load balancers).
+     * @param loadbalancerId
+     * @return LbPoolV2Builder
+     */
+    LbPoolV2Builder loadbalancerId(String loadbalancerId);
 }

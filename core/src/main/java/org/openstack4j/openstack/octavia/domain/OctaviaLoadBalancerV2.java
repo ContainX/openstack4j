@@ -30,6 +30,12 @@ public class OctaviaLoadBalancerV2 implements LoadBalancerV2 {
     private String description;
 
     /**
+     * The ID of the network on which to allocate the VIP address.
+     */
+    @JsonProperty("vip_network_id")
+    private String vipNetworkId;
+
+    /**
      * The ID of the subnet on which to allocate the VIP address.
      */
     @JsonProperty("vip_subnet_id")
@@ -87,6 +93,15 @@ public class OctaviaLoadBalancerV2 implements LoadBalancerV2 {
     @Override
     public String getDescription(){
         return description;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsonProperty("vip_network_id")
+    @Override
+    public String getVipNetworkId(){
+        return vipNetworkId;
     }
 
     /**
@@ -169,6 +184,7 @@ public class OctaviaLoadBalancerV2 implements LoadBalancerV2 {
                 .add("projectId", projectId)
                 .add("name", name)
                 .add("description", description)
+                .add("vipNetworkId", vipNetworkId)
                 .add("vipSubnetId", vipSubnetId)
                 .add("vipAddress", vipAddress)
                 .add("adminStateUp", adminStateUp)
@@ -257,8 +273,26 @@ public class OctaviaLoadBalancerV2 implements LoadBalancerV2 {
          * {@inheritDoc}
          */
         @Override
+        public LoadBalancerV2Builder networkId(String vipNetworkId){
+            m.vipNetworkId = vipNetworkId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
         public LoadBalancerV2Builder subnetId(String vipSubnetId){
             m.vipSubnetId = vipSubnetId;
+            return this;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public LoadBalancerV2Builder portId(String vipPortId){
+            m.vipPortId = vipPortId;
             return this;
         }
 

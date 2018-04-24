@@ -33,6 +33,11 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
     String getDescription();
 
     /**
+     * @return The vip network id of the loadbalancer.
+     */
+    String getVipNetworkId();
+
+    /**
      * @return The vip subnet id of the loadbalancer.
      */
     String getVipSubnetId();

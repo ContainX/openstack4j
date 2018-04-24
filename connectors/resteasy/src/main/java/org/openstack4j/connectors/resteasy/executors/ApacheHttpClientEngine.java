@@ -49,6 +49,10 @@ public class ApacheHttpClientEngine extends ApacheHttpClient4Engine {
             httpClientBuilder.setSSLHostnameVerifier(new NoopHostnameVerifier());
         }
 
+        if (config.getSslContext() != null) {
+            httpClientBuilder.setSSLContext(config.getSslContext());
+        }
+
         if (config.getHostNameVerifier() != null) {
             httpClientBuilder.setSSLHostnameVerifier(config.getHostNameVerifier());
         }
