@@ -17,4 +17,25 @@ public interface NodeManagementBuilder extends Buildable.Builder<NodeManagementB
      */
     NodeManagementBuilder target(String target);
 
+    /**
+     * The boot device for a Node, eg. “pxe” or “disk”.
+     * @param bootDevice
+     * @return
+     */
+    NodeManagementBuilder bootDevice(String bootDevice);
+
+    /**
+     * Whether the boot device should be set only for the next reboot, or persistently.
+     * @param persistent
+     * @return
+     */
+    NodeManagementBuilder persistent(Boolean persistent);
+
+    /**
+     * Indicates whether console access is enabled or disabled on this node.
+     * @param enabled
+     * @return
+     */
+    NodeManagementBuilder enabled(Boolean enabled);
+
 }

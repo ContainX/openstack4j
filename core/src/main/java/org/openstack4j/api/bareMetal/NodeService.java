@@ -3,6 +3,7 @@ package org.openstack4j.api.bareMetal;
 import org.openstack4j.model.bareMetal.Node;
 import org.openstack4j.model.bareMetal.NodeManagement;
 import org.openstack4j.model.bareMetal.NodeUpdate;
+import org.openstack4j.model.bareMetal.NodeValidate;
 import org.openstack4j.model.common.ActionResponse;
 
 import java.util.List;
@@ -49,12 +50,6 @@ public interface NodeService {
      */
     Node update(String nodeIdent, NodeUpdate nodeUpdate);
 
-//    ActionResponse start(String nodeIdent);
-//
-//    ActionResponse stop(String nodeIdent);
-//
-//    ActionResponse reboot(String nodeIdent);
-
     /**
      * Change Node Power State
      * @param nodeIdent
@@ -76,5 +71,36 @@ public interface NodeService {
      * @return ActionResponse
      */
     ActionResponse clearMaintenance(String nodeIdent);
+
+    /**
+     * Set the boot device for the given Node, and set it persistently or for one-time boot.
+     * @param nodeIdent
+     * @param nodeManagement
+     * @return
+     */
+    ActionResponse setBootDevice(String nodeIdent, NodeManagement nodeManagement);
+
+    /**
+     * Start or stop the serial console.
+     * @param nodeIdent
+     * @param nodeManagement
+     * @return
+     */
+    ActionResponse setConsole(String nodeIdent, NodeManagement nodeManagement);
+
+    /**
+     * Change Node Provision State
+     * @param nodeIdent
+     * @param nodeManagement
+     * @return
+     */
+    ActionResponse setProvision(String nodeIdent, NodeManagement nodeManagement);
+
+    /**
+     * Validate Node
+     * @param nodeIdent
+     * @return
+     */
+    NodeValidate validate(String nodeIdent);
 
 }
