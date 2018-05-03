@@ -71,22 +71,26 @@ public class HttpEntityHandler {
 
     private static <T> Handle<T> handle404(Handle<T> handle) {
         if (handle.getResponse().getStatus() == 404) {
-
-            if (ListType.class.isAssignableFrom(handle.getReturnType())) {
-                try {
+            try {
+                if (ListType.class.isAssignableFrom(handle.getReturnType())) {
                     return handle.complete(handle.getReturnType().newInstance());
-                } catch (InstantiationException e) {
-                    LOG.error(e.getMessage(), e);
-                } catch (IllegalAccessException e) {
-                    LOG.error(e.getMessage(), e);
                 }
+                ActionResponse ar = ResponseToActionResponse.INSTANCE.apply(handle.getResponse());
+                if (handle.getReturnType() == ActionResponse.class) {
+                    return handle.complete((T) ar);
+                }
+                throw mapException(ar.getFault(), handle.getResponse().getStatus());
             }
-
-            if (handle.getReturnType() != ActionResponse.class) {
-                return handle.complete(null);
-            }
+            catch (InstantiationException e) {
+                LOG.error(e.getMessage(), e);
+            } catch (IllegalAccessException e) {
+                LOG.error(e.getMessage(), e);
+            } catch (ResponseException re) {
+                throw re;
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
+            }  
         }
-
         return handle.continueHandling();
     }
 
