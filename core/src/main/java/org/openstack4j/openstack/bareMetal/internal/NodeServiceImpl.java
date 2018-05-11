@@ -10,6 +10,7 @@ import org.openstack4j.openstack.bareMetal.domain.BareMetalNode;
 import org.openstack4j.openstack.bareMetal.domain.BareMetalNodeValidate;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -88,6 +89,14 @@ public class NodeServiceImpl extends BaseBareMetalServices implements NodeServic
         checkNotNull(nodeIdent);
         checkNotNull(nodeManagement);
         return put(ActionResponse.class, uri("/nodes/%s/states/provision", nodeIdent)).entity(nodeManagement).execute();
+    }
+
+    @Override
+    public ActionResponse setProvision(String nodeIdent, NodeManagement nodeManagement, Map<String, Object> headers) {
+        checkNotNull(nodeIdent);
+        checkNotNull(nodeManagement);
+        checkNotNull(headers);
+        return put(ActionResponse.class, uri("/nodes/%s/states/provision", nodeIdent)).entity(nodeManagement).headers(headers).execute();
     }
 
     @Override
