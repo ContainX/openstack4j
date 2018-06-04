@@ -44,8 +44,7 @@ public class ApacheHttpClientEngine extends ApacheHttpClient4Engine {
 
         RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
 
-        if (config.getReadTimeout() > 0) {
-            requestConfigBuilder.setConnectionRequestTimeout(config.getReadTimeout());
+        if (config.getReadTimeout() > 0) {            
             requestConfigBuilder.setSocketTimeout(config.getReadTimeout());
         }
 
