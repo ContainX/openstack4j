@@ -3,11 +3,13 @@ package org.openstack4j.connectors.resteasy.executors;
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.impl.client.DefaultRedirectStrategy;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine;
+import org.jboss.resteasy.client.jaxrs.internal.ClientInvocation;
 import org.openstack4j.core.transport.Config;
 import org.openstack4j.core.transport.UntrustedSSL;
 import org.slf4j.Logger;
@@ -28,12 +30,23 @@ public class ApacheHttpClientEngine extends ApacheHttpClient4Engine {
     }
     private static final Logger LOGGER = LoggerFactory.getLogger(ApacheHttpClientEngine.class);
 
+    @Override
+    protected void setRedirectRequired(final ClientInvocation request, HttpRequestBase httpMethod){
+    	//HttpClientParams.setRedirecting(httpMethod.getParams(), true);
+    }
+    
+    protected void setRedirectNotRequired(final ClientInvocation request, HttpRequestBase httpMethod){
+    	//HttpClientParams.setRedirecting(httpMethod.getParams(), false);
+    }
+    
+    
     public static ApacheHttpClientEngine create(Config config) {
 
         RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
 
         if (config.getReadTimeout() > 0) {
             requestConfigBuilder.setConnectionRequestTimeout(config.getReadTimeout());
+            requestConfigBuilder.setSocketTimeout(config.getReadTimeout());
         }
 
         if (config.getConnectTimeout() > 0) {
