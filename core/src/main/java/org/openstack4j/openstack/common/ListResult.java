@@ -25,6 +25,11 @@ public abstract class ListResult<T> implements ModelEntity, ListType {
 
 	
     public T first() {
+		//add by chenyan 2018.6.6 -- start
+		if(null == value()){
+			return null;
+		}
+		//add by chenyan 2018.6.6 -- end
     	return value().isEmpty() ? null : value().get(0);   	
     }
 }
