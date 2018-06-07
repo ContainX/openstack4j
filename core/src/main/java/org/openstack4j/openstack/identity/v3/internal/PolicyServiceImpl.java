@@ -12,7 +12,7 @@ import org.openstack4j.openstack.identity.v3.domain.KeystonePolicy;
 import org.openstack4j.openstack.identity.v3.domain.KeystonePolicy.Policies;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-public class PolicyServiceImpl extends BaseOpenStackService implements PolicyService {
+public class PolicyServiceImpl extends BaseIdentityServices implements PolicyService {
 
     @Override
     public Policy create(Policy policy) {

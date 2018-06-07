@@ -16,7 +16,7 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneRole.Roles;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser.Users;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-public class GroupServiceImpl extends BaseOpenStackService implements GroupService {
+public class GroupServiceImpl extends BaseIdentityServices implements GroupService {
 
     @Override
     public Group get(String groupId) {

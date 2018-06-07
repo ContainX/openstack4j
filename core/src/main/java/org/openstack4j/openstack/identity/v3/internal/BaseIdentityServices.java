@@ -9,8 +9,8 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
  *
  * @author chenyan
  */
-public class BaseProjectServices extends BaseOpenStackService{
-    protected BaseProjectServices() {
+public class BaseIdentityServices extends BaseOpenStackService{
+    protected BaseIdentityServices() {
         super(ServiceType.IDENTITY, EnforceVersionToURL.instance("/v3"));
     }
 }

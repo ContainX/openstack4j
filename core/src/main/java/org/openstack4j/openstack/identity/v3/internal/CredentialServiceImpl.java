@@ -12,7 +12,7 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneCredential;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneCredential.Credentials;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-public class CredentialServiceImpl extends BaseOpenStackService implements CredentialService {
+public class CredentialServiceImpl extends BaseIdentityServices implements CredentialService {
 
     @Override
     public Credential create(Credential credential) {

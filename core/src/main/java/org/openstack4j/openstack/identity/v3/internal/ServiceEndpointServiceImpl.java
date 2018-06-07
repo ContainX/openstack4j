@@ -22,7 +22,7 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
  * implementation of v3 service manager service
  *
  */
-public class ServiceEndpointServiceImpl extends BaseOpenStackService implements ServiceEndpointService {
+public class ServiceEndpointServiceImpl extends BaseIdentityServices implements ServiceEndpointService {
 
     @Override
     public Service create(Service service) {
