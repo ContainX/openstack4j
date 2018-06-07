@@ -12,7 +12,7 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneProject;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneProject.Projects;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-public class ProjectServiceImpl extends BaseOpenStackService implements ProjectService  {
+public class ProjectServiceImpl extends BaseProjectServices implements ProjectService  {
 
 	@Override
 	public Project create(Project project) {
