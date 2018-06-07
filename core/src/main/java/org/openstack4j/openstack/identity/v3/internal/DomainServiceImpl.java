@@ -12,7 +12,7 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneDomain;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneDomain.Domains;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-public class DomainServiceImpl extends BaseOpenStackService implements DomainService {
+public class DomainServiceImpl extends BaseIdentityServices implements DomainService {
 
     @Override
     public Domain create(Domain domain) {

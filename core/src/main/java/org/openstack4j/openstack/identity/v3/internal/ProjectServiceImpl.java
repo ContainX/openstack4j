@@ -10,9 +10,8 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Project;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneProject;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneProject.Projects;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
 
-public class ProjectServiceImpl extends BaseProjectServices implements ProjectService  {
+public class ProjectServiceImpl extends BaseIdentityServices implements ProjectService  {
 
 	@Override
 	public Project create(Project project) {

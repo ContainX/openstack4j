@@ -28,7 +28,7 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
  * implementation of v3 user service
  *
  */
-public class UserServiceImpl extends BaseOpenStackService implements UserService {
+public class UserServiceImpl extends BaseIdentityServices implements UserService {
 
     /**
      * {@inheritDoc}

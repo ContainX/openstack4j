@@ -18,7 +18,7 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
  * Identity Role based Operations Implementation
  *
  */
-public class RoleServiceImpl extends BaseOpenStackService implements RoleService {
+public class RoleServiceImpl extends BaseIdentityServices implements RoleService {
 
     /**
      * {@inheritDoc}
