@@ -27,6 +27,12 @@ public class NodeServiceImpl extends BaseBareMetalServices implements NodeServic
     }
 
     @Override
+    public List<? extends Node> list(Map<String, Object> headers) {
+        checkNotNull(headers);
+        return get(BareMetalNode.Nodes.class, uri("/nodes")).headers(headers).execute().getList();
+    }
+
+    @Override
     public Node create(Node node) {
         checkNotNull(node);
         return post(BareMetalNode.class, uri("/nodes")).entity(node).execute();
@@ -36,6 +42,13 @@ public class NodeServiceImpl extends BaseBareMetalServices implements NodeServic
     public Node findOne(String nodeIdent) {
         checkNotNull(nodeIdent);
         return get(BareMetalNode.class, uri("/nodes/%s", nodeIdent)).execute();
+    }
+
+    @Override
+    public Node findOne(String nodeIdent, Map<String, Object> headers) {
+        checkNotNull(nodeIdent);
+        checkNotNull(headers);
+        return get(BareMetalNode.class, uri("/nodes/%s", nodeIdent)).headers(headers).execute();
     }
 
     @Override
