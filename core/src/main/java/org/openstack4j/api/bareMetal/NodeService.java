@@ -23,6 +23,13 @@ public interface NodeService {
     List<? extends Node> list();
 
     /**
+     * List Nodes with http headers
+     * @param headers
+     * @return
+     */
+    List<? extends Node> list(Map<String, Object> headers);
+
+    /**
      * Create Node
      * @param node
      * @return Node
@@ -35,6 +42,14 @@ public interface NodeService {
      * @return Node
      */
     Node findOne(String nodeIdent);
+
+    /**
+     * Show Node Details with http headers
+     * @param nodeIdent
+     * @param headers
+     * @return
+     */
+    Node findOne(String nodeIdent, Map<String, Object> headers);
 
     /**
      * Delete Node
