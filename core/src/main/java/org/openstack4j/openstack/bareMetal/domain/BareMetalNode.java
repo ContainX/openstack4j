@@ -6,6 +6,7 @@ import org.openstack4j.model.bareMetal.Node;
 import org.openstack4j.model.bareMetal.builder.NodeBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +32,23 @@ public class BareMetalNode implements Node {
     @JsonProperty("power_state")
     private String powerState;
 
+    @JsonProperty("target_power_state")
+    private String targetPowerState;
+
     @JsonProperty("provision_state")
     private String provisionState;
 
+    @JsonProperty("target_provision_state")
+    private String targetProvisionState;
+
     @JsonProperty("maintenance")
     private Boolean maintenance;
+
+    @JsonProperty("maintenance_reason")
+    private String maintenanceReason;
+
+    @JsonProperty("reservation")
+    private String reservation;
 
     @JsonProperty("extra")
     private Map<String, String> extra;
@@ -45,6 +58,24 @@ public class BareMetalNode implements Node {
 
     @JsonProperty("driver_info")
     private Map<String, Object> driverInfo;
+
+    @JsonProperty("driver_internal_info")
+    private Map<String, Object> driverInternalInfo;
+
+    @JsonProperty("raid_config")
+    private Map<String, Object> raidConfig;
+
+    @JsonProperty("target_raid_config")
+    private Map<String, Object> targetRaidConfig;
+
+    @JsonProperty("instance_info")
+    private Map<String, Object> instanceInfo;
+
+    @JsonProperty("last_error")
+    private String lastError;
+
+    @JsonProperty("provision_updated_at")
+    private Date provisionUpdatedAt;
 
     @Override
     public String getDriver() {
@@ -72,13 +103,33 @@ public class BareMetalNode implements Node {
     }
 
     @Override
+    public String getTargetPowerState() {
+        return targetPowerState;
+    }
+
+    @Override
     public String getProvisionState() {
         return provisionState;
     }
 
     @Override
+    public String getTargetProvisionState() {
+        return targetProvisionState;
+    }
+
+    @Override
     public Boolean getMaintenance() {
         return maintenance;
+    }
+
+    @Override
+    public String getMaintenanceReason() {
+        return getMaintenanceReason();
+    }
+
+    @Override
+    public String getReservation() {
+        return getReservation();
     }
 
     @Override
@@ -94,6 +145,36 @@ public class BareMetalNode implements Node {
     @Override
     public Map<String, Object> getDriverInfo() {
         return driverInfo;
+    }
+
+    @Override
+    public Map<String, Object> getDriverInternalInfo() {
+        return driverInternalInfo;
+    }
+
+    @Override
+    public Map<String, Object> getRaidConfig() {
+        return raidConfig;
+    }
+
+    @Override
+    public Map<String, Object> getTargetRaidConfig() {
+        return targetRaidConfig;
+    }
+
+    @Override
+    public Map<String, Object> getInstanceInfo() {
+        return instanceInfo;
+    }
+
+    @Override
+    public String getLastError() {
+        return lastError;
+    }
+
+    @Override
+    public Date getProvisionUpdateAt() {
+        return provisionUpdatedAt;
     }
 
     public static NodeBuilder builder(){
