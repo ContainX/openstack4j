@@ -147,4 +147,8 @@ public interface Node extends Resource, Buildable<NodeBuilder> {
 
     Date getProvisionUpdateAt();
 
+    Date getInspectionStartedAt();
+
+    Date getInspectionFinishedAt();
+
 }
