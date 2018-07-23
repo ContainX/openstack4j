@@ -77,6 +77,12 @@ public class BareMetalNode implements Node {
     @JsonProperty("provision_updated_at")
     private Date provisionUpdatedAt;
 
+    @JsonProperty("inspection_started_at")
+    private Date inspectionStartedAt;
+
+    @JsonProperty("inspection_finished_at")
+    private Date inspectionFinishedAt;
+
     @Override
     public String getDriver() {
         return driver;
@@ -175,6 +181,16 @@ public class BareMetalNode implements Node {
     @Override
     public Date getProvisionUpdateAt() {
         return provisionUpdatedAt;
+    }
+
+    @Override
+    public Date getInspectionStartedAt() {
+        return inspectionStartedAt;
+    }
+
+    @Override
+    public Date getInspectionFinishedAt() {
+        return inspectionFinishedAt;
     }
 
     public static NodeBuilder builder(){
