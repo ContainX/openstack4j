@@ -74,6 +74,9 @@ public class BareMetalNode implements Node {
     @JsonProperty("last_error")
     private String lastError;
 
+    @JsonProperty("clean_step")
+    private String cleanStep;
+
     @JsonProperty("provision_updated_at")
     private Date provisionUpdatedAt;
 
@@ -176,6 +179,11 @@ public class BareMetalNode implements Node {
     @Override
     public String getLastError() {
         return lastError;
+    }
+
+    @Override
+    public String getCleanStep() {
+        return cleanStep;
     }
 
     @Override
