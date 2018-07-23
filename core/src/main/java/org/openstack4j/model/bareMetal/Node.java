@@ -145,6 +145,8 @@ public interface Node extends Resource, Buildable<NodeBuilder> {
      */
     String getLastError();
 
+    String getCleanStep();
+
     Date getProvisionUpdateAt();
 
     Date getInspectionStartedAt();
