@@ -75,7 +75,7 @@ public class BareMetalNode implements Node {
     private String lastError;
 
     @JsonProperty("clean_step")
-    private String cleanStep;
+    private Map<String, Object> cleanStep;
 
     @JsonProperty("provision_updated_at")
     private Date provisionUpdatedAt;
@@ -133,12 +133,12 @@ public class BareMetalNode implements Node {
 
     @Override
     public String getMaintenanceReason() {
-        return getMaintenanceReason();
+        return maintenanceReason;
     }
 
     @Override
     public String getReservation() {
-        return getReservation();
+        return reservation;
     }
 
     @Override
@@ -182,7 +182,7 @@ public class BareMetalNode implements Node {
     }
 
     @Override
-    public String getCleanStep() {
+    public Map<String, Object> getCleanStep() {
         return cleanStep;
     }
 
