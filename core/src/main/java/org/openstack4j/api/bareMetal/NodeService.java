@@ -1,9 +1,6 @@
 package org.openstack4j.api.bareMetal;
 
-import org.openstack4j.model.bareMetal.Node;
-import org.openstack4j.model.bareMetal.NodeManagement;
-import org.openstack4j.model.bareMetal.NodeUpdate;
-import org.openstack4j.model.bareMetal.NodeValidate;
+import org.openstack4j.model.bareMetal.*;
 import org.openstack4j.model.common.ActionResponse;
 
 import java.util.List;
@@ -127,5 +124,12 @@ public interface NodeService {
      * @return
      */
     NodeValidate validate(String nodeIdent);
+
+    /**
+     * Get Supported Boot Devices
+     * @param nodeIdent
+     * @return
+     */
+    NodeSupportedBootDevices getSupportedBootDevices(String nodeIdent);
 
 }
