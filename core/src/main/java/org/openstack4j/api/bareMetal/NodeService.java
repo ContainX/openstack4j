@@ -132,4 +132,11 @@ public interface NodeService {
      */
     NodeSupportedBootDevices getSupportedBootDevices(String nodeIdent);
 
+    /**
+     * Get Boot Device
+     * @param nodeIdent
+     * @return
+     */
+    BootDevice getBootDevice(String nodeIdent);
+
 }

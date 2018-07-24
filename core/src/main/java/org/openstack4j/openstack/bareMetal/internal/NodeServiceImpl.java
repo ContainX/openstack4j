@@ -3,6 +3,7 @@ package org.openstack4j.openstack.bareMetal.internal;
 import org.openstack4j.api.bareMetal.NodeService;
 import org.openstack4j.model.bareMetal.*;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.openstack.bareMetal.domain.BareMetalBootDevice;
 import org.openstack4j.openstack.bareMetal.domain.BareMetalNode;
 import org.openstack4j.openstack.bareMetal.domain.BareMetalNodeSupportedBootDevices;
 import org.openstack4j.openstack.bareMetal.domain.BareMetalNodeValidate;
@@ -120,5 +121,11 @@ public class NodeServiceImpl extends BaseBareMetalServices implements NodeServic
     public NodeSupportedBootDevices getSupportedBootDevices(String nodeIdent) {
         checkNotNull(nodeIdent);
         return get(BareMetalNodeSupportedBootDevices.class, uri("/v1/nodes/%s/management/boot_device/supported", nodeIdent)).execute();
+    }
+
+    @Override
+    public BootDevice getBootDevice(String nodeIdent) {
+        checkNotNull(nodeIdent);
+        return get(BareMetalBootDevice.class, uri("/v1/nodes/%s/management/boot_device", nodeIdent)).execute();
     }
 }
