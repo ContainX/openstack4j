@@ -1,12 +1,10 @@
 package org.openstack4j.openstack.bareMetal.internal;
 
 import org.openstack4j.api.bareMetal.NodeService;
-import org.openstack4j.model.bareMetal.Node;
-import org.openstack4j.model.bareMetal.NodeManagement;
-import org.openstack4j.model.bareMetal.NodeUpdate;
-import org.openstack4j.model.bareMetal.NodeValidate;
+import org.openstack4j.model.bareMetal.*;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.bareMetal.domain.BareMetalNode;
+import org.openstack4j.openstack.bareMetal.domain.BareMetalNodeSupportedBootDevices;
 import org.openstack4j.openstack.bareMetal.domain.BareMetalNodeValidate;
 
 import java.util.List;
@@ -116,5 +114,11 @@ public class NodeServiceImpl extends BaseBareMetalServices implements NodeServic
     public NodeValidate validate(String nodeIdent) {
         checkNotNull(nodeIdent);
         return get(BareMetalNodeValidate.class, uri("/nodes/%s/validate", nodeIdent)).execute();
+    }
+
+    @Override
+    public NodeSupportedBootDevices getSupportedBootDevices(String nodeIdent) {
+        checkNotNull(nodeIdent);
+        return get(BareMetalNodeSupportedBootDevices.class, uri("/v1/nodes/%s/management/boot_device/supported", nodeIdent)).execute();
     }
 }
