@@ -120,12 +120,12 @@ public class NodeServiceImpl extends BaseBareMetalServices implements NodeServic
     @Override
     public NodeSupportedBootDevices getSupportedBootDevices(String nodeIdent) {
         checkNotNull(nodeIdent);
-        return get(BareMetalNodeSupportedBootDevices.class, uri("/v1/nodes/%s/management/boot_device/supported", nodeIdent)).execute();
+        return get(BareMetalNodeSupportedBootDevices.class, uri("/nodes/%s/management/boot_device/supported", nodeIdent)).execute();
     }
 
     @Override
     public BootDevice getBootDevice(String nodeIdent) {
         checkNotNull(nodeIdent);
-        return get(BareMetalBootDevice.class, uri("/v1/nodes/%s/management/boot_device", nodeIdent)).execute();
+        return get(BareMetalBootDevice.class, uri("/nodes/%s/management/boot_device", nodeIdent)).execute();
     }
 }
