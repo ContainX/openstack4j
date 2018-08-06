@@ -11,7 +11,8 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
 public class BaseBlockStorageServices extends BaseOpenStackService {
 
 	public BaseBlockStorageServices() {
-		super(ServiceType.BLOCK_STORAGE);
+//		super(ServiceType.BLOCK_STORAGE);
+		super(ServiceType.BLOCK_STORAGEV3);
 	}
 
 }
