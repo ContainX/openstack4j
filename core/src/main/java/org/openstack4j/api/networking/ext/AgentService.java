@@ -1,8 +1,8 @@
 package org.openstack4j.api.networking.ext;
 
 import java.util.List;
-
 import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.Agent;
 
 /**
@@ -35,5 +35,21 @@ public interface AgentService extends RestService {
      * @return a new reference to the updated agent
      */
     Agent setAdminStateUp(String agentId, boolean state);
+    
+    /**
+     * Schedules the network to that the specified DHCP agent.
+     * @param agentId the id of agent with type DHCP
+     * @param networkId the id of network 
+     * @return the action response
+     */
+    ActionResponse attachNetworkToDhcpAgent(String agentId, String networkId);
+    
+    /**
+     * Removes the network from that the specified DHCP agent.
+     * @param agentId the id of agent with type DHCP
+     * @param networkId the id of network 
+     * @return the action response
+     */
+    ActionResponse detachNetworkToDhcpAgent(String agentId, String networkId);
 
 }
