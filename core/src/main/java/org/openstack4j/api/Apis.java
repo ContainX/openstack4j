@@ -2,9 +2,11 @@ package org.openstack4j.api;
 
 import org.openstack4j.api.artifact.ArtifactService;
 import org.openstack4j.api.barbican.BarbicanService;
+import org.openstack4j.api.bareMetal.BareMetalService;
 import org.openstack4j.api.compute.ComputeService;
 import org.openstack4j.api.dns.v2.DNSService;
 import org.openstack4j.api.gbp.GbpService;
+import org.openstack4j.api.gnocchi.GnocchiService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
 import org.openstack4j.api.magnum.MagnumService;
@@ -224,6 +226,20 @@ public class Apis {
      */
     public static DNSService getDNSService() { return get(DNSService.class); }
 
+    /**
+     * Get the bare metal services API
+     * @return the bare metal services
+     */
+    public static BareMetalService getBareMetalServices() {
+        return get(BareMetalService.class);
+    }
+    /**
+     * Gets the gnocchi services API
+     * @return the gnocchi services
+     */
+    public static GnocchiService getGnocchiServices() {
+        return get(GnocchiService.class);
+    }
 
     private static APIProvider initializeProvider() {
         // No need to check for emptiness as there is default implementation registered

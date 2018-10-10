@@ -8,6 +8,7 @@ public enum ServiceType {
 	COMPUTE("nova", "compute"),
 	IMAGE("glance", "image"),
 	BLOCK_STORAGE("cinder", "volume"),
+	BLOCK_STORAGEV3("cinderv3", "volumev3"),
 	OBJECT_STORAGE("object-store", "object-store"),
 	NETWORK("neutron", "network"),
 	OCTAVIA("octavia", "load-balancer"),
@@ -25,7 +26,9 @@ public enum ServiceType {
   	MAGNUM("magnum", "container"),
 	DNS("designate", "dns"),
 	WORKFLOW("mistral", "workflow"),
-	UNKNOWN("NA", "NA")
+	UNKNOWN("NA", "NA"),
+	BAREMETAL("ironic", "baremetal"),
+	GNOCCHI("gnocchi", "metric")
 	;
 
 	private final String serviceName;

@@ -32,7 +32,7 @@ public interface FirewallBuilder extends Builder<FirewallBuilder, Firewall> {
 	public FirewallBuilder description(String description);
 	
 	/**
-	 * @param adminstateup :  The administrative state of the firewall,
+	 * @param adminStateUp :  The administrative state of the firewall,
 	 *         which is up (true) or down (false).
 	 * @return FirewallBuilder
 	 */
@@ -46,7 +46,7 @@ public interface FirewallBuilder extends Builder<FirewallBuilder, Firewall> {
 	public FirewallBuilder shared(Boolean shared);
 	
 	/**
-	 * @param policyid : The firewall policy uuid that this firewall is associated with. 
+	 * @param policyId : The firewall policy uuid that this firewall is associated with.
 	 * 				This firewall will implement the rules contained in the firewall policy represented by this uuid.
 	 * @return FirewallBuilder
 	 */

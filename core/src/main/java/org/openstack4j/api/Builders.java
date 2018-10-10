@@ -6,6 +6,7 @@ import org.openstack4j.model.barbican.Secret;
 import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
 import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
 import org.openstack4j.model.barbican.builder.SecretCreateBuilder;
+import org.openstack4j.model.bareMetal.builder.BareMetalBuilders;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.*;
 import org.openstack4j.model.dns.v2.builder.DNSV2Builders;
@@ -1249,5 +1250,13 @@ public class Builders {
 
     public static WorkflowBuilders workflow() {
         return new MistralBuilders();
+    }
+
+    /**
+     * The builder to create a Bare Metal
+     * @return
+     */
+    public static BareMetalBuilders bareMetal() {
+        return new org.openstack4j.openstack.bareMetal.builder.BareMetalBuilders();
     }
 }

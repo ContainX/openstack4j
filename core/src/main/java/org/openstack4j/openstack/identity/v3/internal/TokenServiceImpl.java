@@ -18,7 +18,7 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 import java.util.List;
 
-public class TokenServiceImpl extends BaseOpenStackService implements TokenService {
+public class TokenServiceImpl extends BaseIdentityServices implements TokenService {
 
     @Override
     public Token get(String tokenId) {
