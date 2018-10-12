@@ -1,0 +1,55 @@
+{
+   "files":{
+
+   },
+   "status":"COMPLETE",
+   "name":"stack_123",
+   "tags":null,
+   "stack_user_project_id":"44ed5c0be2384092b8e8b6444812db5d",
+   "environment":{
+      "event_sinks":[
+
+      ],
+      "parameter_defaults":{
+
+      },
+      "parameters":{
+
+      },
+      "resource_registry":{
+         "resources":{
+
+         }
+      }
+   },
+   "template":{
+      "heat_template_version":"2016-04-08",
+      "description":"A heat test template",
+      "resources":{
+         "network_port":{
+            "type":"OS::Neutron::Port",
+            "properties":{
+               "network_id":"network123"
+            }
+         }
+      }
+   },
+   "action":"CREATE",
+   "project_id":"0dbd25a2a75347cf88a0a52638b8fff3",
+   "id":"416c09e9-2022-4d43-854b-0292ddff3f5d",
+   "resources":{
+      "network_port":{
+         "status":"COMPLETE",
+         "name":"network_port",
+         "resource_data":{
+
+         },
+         "resource_id":"1d0dccbb-0c99-48cd-b41b-abeca3ac6a42",
+         "action":"CREATE",
+         "type":"OS::Neutron::Port",
+         "metadata":{
+
+         }
+      }
+   }
+}

@@ -1,4 +1,4 @@
-[{
+{
 		"alarm_id" : "03757eede9c540338e732d1a7fb07966",
 		"enabled": false,
 		"name": "name_post",
@@ -27,4 +27,3 @@
 			"granularity": 180
 		}
 	}
-]

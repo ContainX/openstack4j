@@ -3,11 +3,14 @@ package org.openstack4j.openstack.heat.internal;
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.heat.StackService;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.heat.AdoptStackData;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
+import org.openstack4j.openstack.heat.domain.HeatAdoptStackData;
 import org.openstack4j.openstack.heat.domain.HeatStack;
+import org.openstack4j.openstack.heat.domain.HeatStackAdopt;
 import org.openstack4j.openstack.heat.domain.HeatStack.Stacks;
 
 import java.util.List;
@@ -90,4 +93,26 @@ public class StackServiceImpl extends BaseHeatServices implements StackService {
         checkNotNull(stackName);
         return get(HeatStack.class, uri("/stacks/%s", stackName)).execute();
     }
+    
+    @Override
+    public AdoptStackData abandon(String stackName, String stackId) {
+        checkNotNull(stackId);
+        return delete(HeatAdoptStackData.class, uri("/stacks/%s/%s/abandon", stackName, stackId)).execute();
+    }
+
+    @Override
+    public Stack adopt(AdoptStackData adoptStackData, Map<String, String> parameters, boolean disableRollback, Long timeoutMins, String template) {
+        checkNotNull(adoptStackData);
+        checkNotNull(parameters);
+        checkNotNull(timeoutMins);
+        HeatStackAdopt heatStackAdopt = HeatStackAdopt.builder()
+                .adoptStackData(adoptStackData)
+                .template(template)
+                .disableRollback(disableRollback)
+                .name(adoptStackData.getName())
+                .parameters(parameters)
+                .timeoutMins(timeoutMins)
+                .build();
+        return post(HeatStack.class, uri("/stacks")).entity(heatStackAdopt).execute();
+    }    
 }
