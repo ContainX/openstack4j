@@ -204,14 +204,14 @@ public class KeystoneProject implements Project {
      */
     @Override
     public String toString() {
-        String domainId = null;
+        String dId = null;
         if (domain != null) {
-            domainId = domain.getId();
+            dId = domain.getId();
         }
 
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
-                .add("domainId", domainId)
+                .add("domainId", dId)
                 .add("description", description)
                 .add("name", name)
                 .add("links", links)
@@ -346,6 +346,16 @@ public class KeystoneProject implements Project {
             model.extra.put(key, value);
             return this;
         }
+        
+        /**
+         * @see KeystoneProject#setTags(List<String>)
+         */
+
+		@Override
+		public ProjectBuilder setTags(List<String> tags) {
+			model.setTags(tags);
+			return this;
+		}
 
         /**
          * @see KeystoneProject#isEnabled()
@@ -379,7 +389,6 @@ public class KeystoneProject implements Project {
             model.domainId = domainId;
             return this;
         }
-
     }
 
     public static class Projects extends ListResult<KeystoneProject> {
