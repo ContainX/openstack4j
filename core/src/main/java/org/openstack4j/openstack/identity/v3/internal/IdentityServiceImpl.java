@@ -8,13 +8,12 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.identity.v3.*;
 import org.openstack4j.model.common.Extension;
 import org.openstack4j.openstack.common.ExtensionValue.ExtensionList;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
  * Identity V3 service implementation
  *
  */
-public class IdentityServiceImpl extends BaseOpenStackService implements IdentityService {
+public class IdentityServiceImpl extends BaseIdentityServices implements IdentityService {
 
     @Override
     public CredentialService credentials() {
