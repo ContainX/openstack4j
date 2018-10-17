@@ -1,0 +1,11 @@
+{
+   "stack":{
+      "id":"79370050-6038-4ea2-baaa-3e4706d59e0e",
+      "links":[
+         {
+            "href":"http://any.os.com:8004/v1/0dbd25a2a75347cf88a0a52638b8fff3/stacks/stack_123/79370050-6038-4ea2-baaa-3e4706d59e0e",
+            "rel":"self"
+         }
+      ]
+   }
+}

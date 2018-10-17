@@ -5,14 +5,15 @@ import org.openstack4j.openstack.common.functions.EnforceVersionToURL;
 import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
- * Base Identity Operations Implementation is responsible for insuring the proper endpoint is used for 
- * all extending operation  APIs
+ * Base Identity Operations Implementation is responsible for insuring the proper endpoint is used for all extending operation APIs
  *
  * @author Jyothi Saroja
  */
 public class BaseIdentityServices extends BaseOpenStackService {
 
-         protected BaseIdentityServices() {
-                 super(ServiceType.IDENTITY, EnforceVersionToURL.instance("/v3"));
+        protected BaseIdentityServices() {
+                super(ServiceType.IDENTITY, EnforceVersionToURL.instance("/v3"));
         }
 }
+
+
