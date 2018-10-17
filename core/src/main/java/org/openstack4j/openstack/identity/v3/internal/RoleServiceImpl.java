@@ -12,13 +12,12 @@ import org.openstack4j.model.identity.v3.RoleAssignment;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRole.Roles;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRoleAssignment.RoleAssignments;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
  * Identity Role based Operations Implementation
  *
  */
-public class RoleServiceImpl extends BaseOpenStackService implements RoleService {
+public class RoleServiceImpl extends BaseIdentityServices implements RoleService {
 
     /**
      * {@inheritDoc}
