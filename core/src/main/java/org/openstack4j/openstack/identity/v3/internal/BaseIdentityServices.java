@@ -16,4 +16,3 @@ public class BaseIdentityServices extends BaseOpenStackService {
         }
 }
 
-
