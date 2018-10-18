@@ -14,11 +14,10 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneDomain.Domains;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneProject.Projects;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService.Catalog;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneToken;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 import java.util.List;
 
-public class TokenServiceImpl extends BaseOpenStackService implements TokenService {
+public class TokenServiceImpl extends BaseIdentityServices implements TokenService {
 
     @Override
     public Token get(String tokenId) {

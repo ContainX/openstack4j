@@ -22,13 +22,12 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneProject.Projects;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRole.Roles;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser.Users;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
  * implementation of v3 user service
  *
  */
-public class UserServiceImpl extends BaseOpenStackService implements UserService {
+public class UserServiceImpl extends BaseIdentityServices implements UserService {
 
     /**
      * {@inheritDoc}
