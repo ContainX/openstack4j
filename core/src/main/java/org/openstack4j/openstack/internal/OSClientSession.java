@@ -21,6 +21,7 @@ import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
+import org.openstack4j.api.networking.ext.ServiceFunctionChainService;
 import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
@@ -122,6 +123,13 @@ public abstract class OSClientSession<R, T extends OSClient<T>> implements Endpo
      */
     public NetworkingService networking() {
         return Apis.getNetworkingServices();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ServiceFunctionChainService sfc() {
+        return Apis.getSfcServices();
     }
 
     /**

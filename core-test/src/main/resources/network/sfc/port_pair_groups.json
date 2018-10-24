@@ -1,0 +1,26 @@
+{
+    "port_pair_groups": [
+        {
+            "id" : "0abcdef",
+            "name": "PP1",
+            "project_id": "12345678909876543210abcdefabcdef",
+            "tenant_id": "12345678909876543210abcdefabcdef",
+            "description": "Openstack4j test flow classifier 1",
+            "port_pairs": [ "abcdefab-abcd-abcd-abcd-abcdefabcdef" ],
+	        "port_pair_group_parameters": {
+	           "lb_fields": "ip_src"
+	        }
+        },
+        {
+            "id" : "1fedcba",
+            "name": "PP2",
+            "project_id": "12345678909876543210abcdefabcdef",
+            "tenant_id": "12345678909876543210abcdefabcdef",
+            "description": "Openstack4j test flow classifier 2",
+            "port_pairs": [ "abcdefab-abcd-abcd-abcd-abcdefabcdef" ],
+	        "port_pair_group_parameters": {
+	           "lb_fields": "ip_src"
+	        }
+        }
+    ]
+}

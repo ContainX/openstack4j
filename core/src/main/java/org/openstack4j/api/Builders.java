@@ -180,6 +180,42 @@ public class Builders {
     }
 
     /**
+     * The builder to create a Flow Classifier
+     *
+     * @return the Flow Classifier builder
+     */
+    public static FlowClassifierBuilder flowClassifier() {
+        return NeutronFlowClassifier.builder();
+    }
+
+    /**
+     * The builder to create a Port Pair
+     *
+     * @return the Port Pair builder
+     */
+    public static PortPairBuilder portPair() {
+        return NeutronPortPair.builder();
+    }
+
+    /**
+     * The builder to create a Port Pair Group
+     *
+     * @return the Port Pair Group builder
+     */
+    public static PortPairGroupBuilder portPairGroup() {
+        return NeutronPortPairGroup.builder();
+    }
+
+    /**
+     * The builder to create a Port Chain Group
+     *
+     * @return the Port Chain builder
+     */
+    public static PortChainBuilder portChain() {
+        return NeutronPortChain.builder();
+    }
+
+    /**
      * The builder to create a Subnet
      *
      * @return the subnet builder
@@ -1111,7 +1147,7 @@ public class Builders {
      * Magnum builder
      * @return the magnum builder
      */
-    
+
     public static BaymodelBuilder baymodel() {
         return MagnumBaymodel.builder();
     }

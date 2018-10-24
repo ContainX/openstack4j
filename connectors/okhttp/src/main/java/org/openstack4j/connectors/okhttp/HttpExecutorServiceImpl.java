@@ -29,9 +29,6 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
         try {
             return invoke(request);
         }
-        catch (ResponseException re) {
-            throw re;
-        }
         catch (RuntimeException e) {
             throw e;
         }

@@ -1,0 +1,29 @@
+{
+		"alarm_id" : "03757eede9c540338e732d1a7fb07966",
+		"enabled": false,
+		"name": "name_post",
+		"state": "ok",
+		"type": "gnocchi_aggregation_by_metrics_threshold",
+		"severity": "critical",
+		"ok_actions": [
+			"http://something/ok"
+		],
+		"alarm_actions": [
+			"http://something/alarm"
+		],
+		"insufficient_data_actions": [
+			"http://something/no"
+		],
+		"repeat_actions": true,
+		"gnocchi_aggregation_by_metrics_threshold_rule": {
+			"metrics": [
+				"b3d9d8ab-05e8-439f-89ad-5e978dd2a5eb",
+				"009d4faf-c275-46f0-8f2d-670b15bac2b0"
+			],
+			"comparison_operator": "le",
+			"aggregation_method": "count",
+			"threshold": 50,
+			"evaluation_periods": 3,
+			"granularity": 180
+		}
+	}

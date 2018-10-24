@@ -10,13 +10,12 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Region;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRegion;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRegion.Regions;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
  * Implementation of v3 region service
  *
  */
-public class RegionServiceImpl extends BaseOpenStackService implements RegionService {
+public class RegionServiceImpl extends BaseIdentityServices implements RegionService {
 
     @Override
     public Region create(Region region) {
