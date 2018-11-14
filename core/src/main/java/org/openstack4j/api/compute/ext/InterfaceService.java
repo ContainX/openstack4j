@@ -21,6 +21,15 @@ public interface InterfaceService extends RestService {
      * @return the attached interface
      */
     InterfaceAttachment create(String serverId, String portId);
+
+    /**
+     * Creates a port interface and uses it to attach a port to a server.
+     * @param serverId：instance id
+     * @param portId： The ID of the port for which you want to create an interface. The net_id and port_id parameters are mutually exclusive. If you do not specify the port_id parameter, the OpenStack Networking API v2.0 allocates a port and creates an interface for it on the network.
+     * @param netId：The ID of the network for which you want to create a port interface. The net_id and port_id parameters are mutually exclusive. If you do not specify the net_id parameter, the OpenStack Networking API v2.0 uses the network information cache that is associated with the instance.
+     * @return
+     */
+    InterfaceAttachment create(String serverId, String portId, String netId);
     
     /**
      * List the port interfaces for the specified {@code serverId}

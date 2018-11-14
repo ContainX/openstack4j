@@ -28,6 +28,20 @@ public class InterfaceServiceImpl extends BaseComputeServices  implements Interf
     }
 
     @Override
+    public InterfaceAttachment create(String serverId, String portId,String netId) {
+        checkNotNull(serverId, "serverId");
+        if(null == portId || portId.trim().length() == 0){
+            checkNotNull(netId, "netId");
+        }
+        if(null == netId || netId.trim().length() == 0){
+            checkNotNull(portId, "portId");
+        }
+        return post(NovaInterfaceAttachment.class, uri("/servers/%s/os-interface", serverId))
+                .entity(new NovaInterfaceAttachment(portId,netId))
+                .execute();
+    }
+
+    @Override
     public List<? extends InterfaceAttachment> list(String serverId) {
         checkNotNull(serverId, "serverId");
         return get(NovaInterfaceAttachments.class , uri("/servers/%s/os-interface", serverId))
