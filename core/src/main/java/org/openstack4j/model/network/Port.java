@@ -71,4 +71,6 @@ public interface Port extends Resource, Buildable<PortBuilder> {
   String getvNicType();
 
   Map<String, Object> getProfile();
+
+  String getQosPolicyId();
 }

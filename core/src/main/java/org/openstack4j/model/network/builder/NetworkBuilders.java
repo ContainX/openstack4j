@@ -252,4 +252,13 @@ public interface NetworkBuilders {
      * @return HealthMonitorV2UpdateBuilder
      */
     public HealthMonitorV2UpdateBuilder healthMonitorV2Update();
+
+    QoSPolicyBuilder qosPolicy();
+
+    BandwidthLimitRuleBuilder bandwidthLimitRule();
+
+    DscpMarkingRuleBuilder dscpMarkingRule();
+
+    MinimumBandwidthRuleBuilder minimumBandwidthRule();
+
 }
