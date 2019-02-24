@@ -1,3 +1,9 @@
+# Cache maven cache directory so external artifacts dont need to be
+# re-downloaded.
+cache:
+  directories:
+  - $HOME/.m2
+
 language: java
 
 jdk:
