@@ -1,7 +1,10 @@
 package org.openstack4j.api.identity.v3;
 
-import static org.testng.AssertJUnit.assertNull;
 import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
@@ -26,6 +29,7 @@ public class KeystoneProjectServiceTests extends AbstractTest {
     private static final String PROJECT_EXTRA_VALUE_1 = "value1";
     private static final String PROJECT_EXTRA_KEY_2 = "extra_key2";
     private static final String PROJECT_EXTRA_VALUE_2 = "value2";
+    private static final List<String> TAGS = Arrays.asList("one", "two", "three");
     private String PROJECT_ID;
 
     @Override
@@ -49,7 +53,7 @@ public class KeystoneProjectServiceTests extends AbstractTest {
     public void projects_crud_test() throws Exception {
 
         Project project = Builders.project().name(PROJECT_NAME).description(PROJECT_DESCRIPTION)
-                .domainId(PROJECT_DOMAIN_ID).setExtra(PROJECT_EXTRA_KEY_1, PROJECT_EXTRA_VALUE_1).enabled(true).build();
+                .domainId(PROJECT_DOMAIN_ID).setExtra(PROJECT_EXTRA_KEY_1, PROJECT_EXTRA_VALUE_1).enabled(true).setTags(TAGS).build();
 
         respondWith(JSON_PROJECTS_CREATE);
 
@@ -59,17 +63,18 @@ public class KeystoneProjectServiceTests extends AbstractTest {
         assertEquals(newProject.getDomainId(), PROJECT_DOMAIN_ID);
         assertEquals(newProject.getDescription(), PROJECT_DESCRIPTION);
         assertEquals(newProject.getExtra(PROJECT_EXTRA_KEY_1), PROJECT_EXTRA_VALUE_1);
+        assertEquals(newProject.getTags(), TAGS);
 
         PROJECT_ID = newProject.getId();
 
         respondWith(JSON_PROJECTS_GET_BYID);
 
-        Project project_setToUpdate = osv3().identity().projects().get(PROJECT_ID);
+        Project projectSetToUpdate = osv3().identity().projects().get(PROJECT_ID);
 
         respondWith(JSON_PROJECTS_UPDATE);
 
         Project updatedProject = osv3().identity().projects().update(
-                project_setToUpdate.toBuilder().description(PROJECT_DESCRIPTION_UPDATE)
+                projectSetToUpdate.toBuilder().description(PROJECT_DESCRIPTION_UPDATE)
                         .setExtra(PROJECT_EXTRA_KEY_2, PROJECT_EXTRA_VALUE_2)
                         .build());
 

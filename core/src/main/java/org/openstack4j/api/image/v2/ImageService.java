@@ -3,6 +3,7 @@ package org.openstack4j.api.image.v2;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.image.v2.CachedImage;
 import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.ImageUpdate;
 import org.openstack4j.model.image.v2.Member;
@@ -32,6 +33,13 @@ public interface ImageService extends RestService {
      * @return list of images fitered by filteringParams
      */
     List<? extends Image> list(Map<String, String> filteringParams);
+    
+    /**
+     * List images currently in the glance image cache.
+     *
+     * @return list of cached images or empty list if the cache is empty or null if the cache is not enabled.
+     */
+    List<? extends CachedImage> listCachedImages() ;
 
     /**
      * Show details for an image by imageid.

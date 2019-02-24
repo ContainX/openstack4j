@@ -16,13 +16,12 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneEndpoint;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneEndpoint.Endpoints;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService.Services;
-import org.openstack4j.openstack.internal.BaseOpenStackService;
 /**
  *
  * implementation of v3 service manager service
  *
  */
-public class ServiceEndpointServiceImpl extends BaseOpenStackService implements ServiceEndpointService {
+public class ServiceEndpointServiceImpl extends BaseIdentityServices implements ServiceEndpointService {
 
     @Override
     public Service create(Service service) {

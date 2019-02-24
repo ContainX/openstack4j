@@ -13,6 +13,8 @@ public class ServiceTypeTest {
 
    private Map<ServiceType, Collection<String>> types;
 
+    private Map<ServiceType, Collection<String>> unknownTypes;
+
    @BeforeSuite
    public void setup() {
        types = new HashMap<>();
@@ -37,6 +39,10 @@ public class ServiceTypeTest {
        types.put(ServiceType.MAGNUM, Arrays.asList("container","ContainerV3","containerv1"));
        types.put(ServiceType.DNS, Arrays.asList("dns","dnsv2","dnsV3"));
        types.put(ServiceType.WORKFLOW, Arrays.asList("workflow","workflowv3","workflowv2"));
+
+       unknownTypes = new HashMap();
+       unknownTypes.put(ServiceType.ORCHESTRATION, Arrays.asList("heat-cfg","heatother","heatvm","heat-cfg4"));
+
    }
 
    @Test
@@ -47,4 +53,13 @@ public class ServiceTypeTest {
            }
        }
    }
+
+    @Test
+    public void testNameNotResolved() {
+        for (Map.Entry<ServiceType, Collection<String>> entry : unknownTypes.entrySet()) {
+            for(String type : entry.getValue()){
+                assertEquals(ServiceType.UNKNOWN, ServiceType.forName(type));
+            }
+        }
+    }
 }

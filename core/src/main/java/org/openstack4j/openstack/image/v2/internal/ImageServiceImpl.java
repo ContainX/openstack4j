@@ -5,14 +5,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jsonpatch.diff.JsonDiff;
 import org.openstack4j.api.Apis;
+import org.openstack4j.api.exceptions.ResponseException;
 import org.openstack4j.api.image.v2.ImageService;
 import org.openstack4j.api.image.v2.TaskService;
+import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.core.transport.propagation.PropagateOnStatus;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.image.v2.CachedImage;
 import org.openstack4j.model.image.v2.Image;
 import org.openstack4j.model.image.v2.ImageUpdate;
 import org.openstack4j.model.image.v2.Member;
+import org.openstack4j.openstack.image.v2.domain.CachedGlanceImage.CachedImages;
 import org.openstack4j.openstack.image.v2.domain.GlanceImage;
 import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
 import org.openstack4j.openstack.image.v2.domain.GlanceMember;
@@ -51,6 +56,20 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     @Override
     public List<? extends Image> list(Map<String, String> filteringParams) {
         return get(GlanceImage.Images.class, uri("/images")).params(filteringParams).execute().getList();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends CachedImage> listCachedImages() {
+    	try {
+            return get(CachedImages.class, uri("/cached_images"))
+                    .execute(ExecutionOptions.<CachedImages>create(PropagateOnStatus.on(404))).getList();
+        }
+        catch (ResponseException e) {
+            return null;
+        }
     }
 
     /**
