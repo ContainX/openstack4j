@@ -21,6 +21,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 
 ## Requirements
 
+* OpenStack4j 3.2.X - Java 8+
 * OpenStack4j 3.0.X - Java 7 (JDK 8 preferred)
 * OpenStack4j 2.0.X - Java 7
 
@@ -38,7 +39,7 @@ OpenStack4j version 2.0.0+ is now modular.  One of the benefits to this is the a
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
@@ -54,7 +55,7 @@ See notes above about connectors (same rules apply) to development branches.
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>3.1.1-SNAPSHOT</version>
+    <version>3.2.1-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -79,25 +80,23 @@ Contributing
 ------------
 If you would like to contribute please see our contributing [guidelines](https://github.com/ContainX/openstack4j/blob/master/CONTRIBUTING.md)
 
-#### Top 15 Contributors
+#### Thank you contributors
 
-| Rank | Login | Contributions |
-| :--- | :---- | :------------ |
-| 1  | @gondor           | 527 |
-| 2  | @auhlig       	   | 57 |
-| 3  | @octupszhang      | 26 |
-| 4  | @gonzolino        | 18 |
-| 5  | @ekasitk          | 17 |
-| 6  | @magixyu          | 17 |
-| 7  | @maxrome          | 12 |
-| 8  | @isartcanyameres  | 9 |
-| 9  | @iviireczech      | 8 |
-| 10  | @n-r-anderson     | 7 |
-| 11 | @krishnabrucelee  | 6 |
-| 12 | @peter-nordquist  | 4 |
-| 13 | @RibeiroAna       | 4 |
-| 14 | @symcssn          | 4 |
-| 15 | @olivergondza     | 5 |
+- @gondor         
+- @auhlig       	 
+- @octupszhang    
+- @gonzolino      
+- @ekasitk        
+- @magixyu        
+- @maxrome        
+- @isartcanyameres
+- @iviireczech    
+- @n-r-anderson  
+- @krishnabrucelee
+- @peter-nordquist
+- @RibeiroAna     
+- @symcssn        
+- @olivergondza   
 
 #### Throughput
 
@@ -398,7 +397,7 @@ License
 ```
 This software is licensed under the Apache 2 license, quoted below.
 
-Copyright 2016 ContainX and OpenStack4j
+Copyright 2019 ContainX and OpenStack4j
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
 use this file except in compliance with the License. You may obtain a copy of
