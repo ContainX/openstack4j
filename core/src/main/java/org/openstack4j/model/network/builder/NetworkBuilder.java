@@ -55,4 +55,11 @@ public interface NetworkBuilder extends Builder<NetworkBuilder, Network> {
 	 * @see Network#getAvailabilityZoneHints()
 	 */
 	NetworkBuilder addAvailabilityZoneHints(String availabilityZone);
+
+	/**
+	 * Requires the net-mtu-writable extension
+	 *
+	 * @see Network#getMTU()
+	 */
+	NetworkBuilder mtu(Integer mtu);
 }

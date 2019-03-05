@@ -33,4 +33,12 @@ public interface NetworkUpdateBuilder extends Builder<NetworkUpdateBuilder, Netw
      * @return the builder
      */
     NetworkUpdateBuilder shared(boolean shared);
+
+    /**
+     * Requires the net-mtu-writable extension
+     *
+     * @param mtu MTU integer
+     * @return the builder
+     */
+    NetworkUpdateBuilder mtu(Integer mtu);
 }
