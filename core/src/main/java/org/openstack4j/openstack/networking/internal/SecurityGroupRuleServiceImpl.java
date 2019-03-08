@@ -48,11 +48,13 @@ public class SecurityGroupRuleServiceImpl extends BaseNetworkingServices impleme
      * {@inheritDoc}
      */
     @Override
-    public List<? extends SecurityGroupRule> list(Map<String, String> filteringParams) {
+    public List<? extends SecurityGroupRule> list(Map<String, List<String>> filteringParams) {
         Invocation<SecurityGroupRules> securityGroupRulesInvocation = get(SecurityGroupRules.class, "/security-group-rules");
         if (filteringParams != null) {
-            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
-                securityGroupRulesInvocation = securityGroupRulesInvocation.param(entry.getKey(), entry.getValue());
+            for (Map.Entry<String, List<String>> entry : filteringParams.entrySet()) {
+                for (String value : entry.getValue()) {
+                    securityGroupRulesInvocation = securityGroupRulesInvocation.param(entry.getKey(), value);
+                }
             }
         }
         return securityGroupRulesInvocation.execute().getList();

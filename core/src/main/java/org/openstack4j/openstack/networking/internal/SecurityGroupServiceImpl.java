@@ -69,11 +69,13 @@ public class SecurityGroupServiceImpl extends BaseNetworkingServices implements 
      * {@inheritDoc}
      */
     @Override
-    public List<? extends SecurityGroup> list(Map<String, String> filteringParams) {
+    public List<? extends SecurityGroup> list(Map<String, List<String>> filteringParams) {
         Invocation<SecurityGroups> securityGroupInvocation = get(SecurityGroups.class, "/security-groups");
         if (filteringParams != null) {
-            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
-                securityGroupInvocation = securityGroupInvocation.param(entry.getKey(), entry.getValue());
+            for (Map.Entry<String, List<String>> entry : filteringParams.entrySet()) {
+                for (String value : entry.getValue()) {
+                    securityGroupInvocation = securityGroupInvocation.param(entry.getKey(), value);
+                }
             }
         }
         return securityGroupInvocation.execute().getList();

@@ -58,9 +58,9 @@ public interface SecurityGroupService extends RestService {
 
     /**
      * Get list of security groups accessible by the current tenant
-     * @param filteringParams map (name, value) of filtering parameters
+     * @param filteringParams map (name, list of value) of filtering parameters
      *
      * @return the list<? extends security group>
      */
-    List<? extends SecurityGroup> list(Map<String, String> filteringParams);
+    List<? extends SecurityGroup> list(Map<String, List<String>> filteringParams);
 }
