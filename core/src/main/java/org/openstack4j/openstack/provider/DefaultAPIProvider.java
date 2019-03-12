@@ -107,6 +107,7 @@ import org.openstack4j.api.networking.ext.LoadBalancerService;
 import org.openstack4j.api.networking.ext.LoadBalancerV2Service;
 import org.openstack4j.api.networking.ext.MemberService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
+import org.openstack4j.api.networking.ext.NetworkIPAvailabilityService;
 import org.openstack4j.api.networking.ext.ServiceFunctionChainService;
 import org.openstack4j.api.networking.ext.PortPairService;
 import org.openstack4j.api.networking.ext.PortPairGroupService;
@@ -274,6 +275,7 @@ import org.openstack4j.openstack.networking.internal.ext.LoadBalancerServiceImpl
 import org.openstack4j.openstack.networking.internal.ext.LoadBalancerV2ServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.MemberServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.NetQuotaServiceImpl;
+import org.openstack4j.openstack.networking.internal.ext.NetworkIPAvailabilityServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.ServiceFunctionChainServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.PortPairServiceImpl;
 import org.openstack4j.openstack.networking.internal.ext.PortPairGroupServiceImpl;
@@ -338,6 +340,7 @@ import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
 
 import com.google.common.collect.Maps;
+
 import org.openstack4j.openstack.workflow.internal.*;
 
 /**
@@ -546,6 +549,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ActionExecutionService.class, ActionExecutionServiceImpl.class);
         bind(WorkflowEnvironmentService.class, WorkflowEnvironmentServiceImpl.class);
         bind(CronTriggerService.class, CronTriggerServiceImpl.class);
+        bind(NetworkIPAvailabilityService.class, NetworkIPAvailabilityServiceImpl.class);
     }
 
     /**
