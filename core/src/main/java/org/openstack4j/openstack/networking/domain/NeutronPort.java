@@ -63,6 +63,15 @@ public class NeutronPort implements Port {
 	@JsonProperty("tenant_id")
 	private String tenantId;
 
+	@JsonProperty("trunkport:type")
+	private String trunkPortType;
+
+	@JsonProperty("trunkport:parent_id")
+	private String trunkPortParentId;
+
+	@JsonProperty("trunkport:vid")
+	private String trunkPortVlanId;
+	
 	@JsonProperty("security_groups")
 	private List<String> securityGroups;
 
@@ -191,7 +200,7 @@ public class NeutronPort implements Port {
 	public List<String> getSecurityGroups() {
 		return securityGroups;
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -231,7 +240,7 @@ public class NeutronPort implements Port {
 	public Map<String, Object> getProfile() {
 		return profile;
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -292,6 +301,7 @@ public class NeutronPort implements Port {
 	public String toString() {
 		return MoreObjects.toStringHelper(this).omitNullValues()
 				    .add("id", id).add("name", name).add("adminStateUp", adminStateUp).add("deviceId", deviceId)
+				    .add("trunkPortType", trunkPortType).add("trunkPortParentId", trunkPortParentId).add("trunkPortVlanId", trunkPortVlanId)
 				    .add("deviceOwner", deviceOwner).add("fixedIps", fixedIps).add("macAddress", macAddress)
 				    .add("networkId", networkId).add("tenantId", tenantId).add("securityGroups", securityGroups)
 				    .add("allowed_address_pairs", allowedAddressPairs).add("port_security_enabled ", portSecurityEnabled)
@@ -459,7 +469,7 @@ public class NeutronPort implements Port {
 			m.state = state;
 			return this;
 		}
-
+		
 		@Override
 		public Port build() {
 			return m;

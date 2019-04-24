@@ -16,6 +16,7 @@ import java.util.Map;
 /**
  * OpenStack (Glance) Image V2 support
  * @author emjburns
+ * @author zdagjyo - 2018-11-26 - Add method listCachedImages
  */
 public interface ImageService extends RestService {
 

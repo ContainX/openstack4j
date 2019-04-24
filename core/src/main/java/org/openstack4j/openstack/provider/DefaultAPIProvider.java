@@ -170,6 +170,8 @@ import org.openstack4j.api.trove.DatastoreService;
 import org.openstack4j.api.trove.InstanceFlavorService;
 import org.openstack4j.api.trove.InstanceService;
 import org.openstack4j.api.trove.TroveService;
+import org.openstack4j.api.networking.TrunkService;
+
 import org.openstack4j.api.workflow.*;
 import org.openstack4j.openstack.artifact.internal.ArtifactServiceImpl;
 import org.openstack4j.openstack.artifact.internal.ToscaTemplatesArtifactServiceImpl;
@@ -336,6 +338,8 @@ import org.openstack4j.openstack.trove.internal.DBFlavorServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBInstanceServiceImpl;
 import org.openstack4j.openstack.trove.internal.DBUserServiceImpl;
 import org.openstack4j.openstack.trove.internal.TroveServiceImpl;
+import org.openstack4j.openstack.networking.internal.TrunkServiceImpl;
+
 
 import com.google.common.collect.Maps;
 import org.openstack4j.openstack.workflow.internal.*;
@@ -546,6 +550,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(ActionExecutionService.class, ActionExecutionServiceImpl.class);
         bind(WorkflowEnvironmentService.class, WorkflowEnvironmentServiceImpl.class);
         bind(CronTriggerService.class, CronTriggerServiceImpl.class);
+        bind(TrunkService.class, TrunkServiceImpl.class);
     }
 
     /**
