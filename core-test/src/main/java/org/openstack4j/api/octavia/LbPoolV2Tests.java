@@ -39,7 +39,7 @@ public class LbPoolV2Tests extends AbstractTest {
 
     public void testListPoolV2Filter() throws IOException {
         respondWith(LBPOOLSV2_JSON);
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map.put("protocol", "HTTP");
         List<? extends LbPoolV2> list = osv3().octavia().lbPoolV2().list(map);
         assertEquals(list.size(), 2);
