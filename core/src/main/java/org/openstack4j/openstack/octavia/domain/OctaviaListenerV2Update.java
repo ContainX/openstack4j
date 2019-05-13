@@ -1,5 +1,8 @@
 package org.openstack4j.openstack.octavia.domain;
 
+import org.openstack4j.model.octavia.ListenerV2Update;
+import org.openstack4j.model.octavia.builder.ListenerV2UpdateBuilder;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -21,6 +24,9 @@ public class OctaviaListenerV2Update implements ListenerV2Update {
 
     private String description;
 
+    @JsonProperty("default_pool_id")
+    private String defaultPoolId;
+    
     @JsonProperty("admin_state_up")
     private boolean adminStateUp = true;
 
@@ -81,6 +87,12 @@ public class OctaviaListenerV2Update implements ListenerV2Update {
         return defaultTlsContainerRef;
     }
 
+    @Override
+    public String getDefaultPoolId()
+    {
+    	return defaultPoolId;
+    }
+    
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
@@ -164,6 +176,12 @@ public class OctaviaListenerV2Update implements ListenerV2Update {
             m.defaultTlsContainerRef = defaultTlsContainerRef;
             return this;
         }
+
+		@Override
+		public ListenerV2UpdateBuilder defaultPoolId(String defaultPoolId) {
+			m.defaultPoolId = defaultPoolId;
+            return this;
+		}
     }
 
     public static ListenerV2UpdateBuilder builder() {

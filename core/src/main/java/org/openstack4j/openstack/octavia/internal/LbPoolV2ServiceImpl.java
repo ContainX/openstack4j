@@ -32,10 +32,10 @@ public class LbPoolV2ServiceImpl extends BaseOctaviaServices implements LbPoolV2
      * {@inheritDoc}
      */
     @Override
-    public List<? extends LbPoolV2> list(Map<String, String> filteringParams){
+    public List<? extends LbPoolV2> list(Map<String, Object> filteringParams){
         Invocation<OctaviaLbPoolV2.LbPoolsV2> req = get(OctaviaLbPoolV2.LbPoolsV2.class, uri("/lbaas/pools"));
         if (filteringParams != null) {
-            for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
+            for (Map.Entry<String, Object> entry : filteringParams.entrySet()) {
                 req = req.param(entry.getKey(), entry.getValue());
             }
         }

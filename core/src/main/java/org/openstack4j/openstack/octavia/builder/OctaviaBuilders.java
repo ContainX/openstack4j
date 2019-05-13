@@ -51,4 +51,20 @@ public class OctaviaBuilders {
     public ListenerV2UpdateBuilder listenerV2Update(){
         return OctaviaListenerV2Update.builder();
     }
+    
+    public L7PolicyBuilder l7Policy(){
+        return OctaviaL7Policy.builder();
+    }
+    
+    public L7PolicyUpdateBuilder l7PolicyUpdate(){
+        return OctaviaL7PolicyUpdate.builder();
+    }
+    
+    public L7RuleBuilder l7Rule(){
+        return OctaviaL7Rule.builder();
+    }
+    
+    public L7RuleUpdateBuilder l7RuleUpdate(){
+        return OctaviaL7RuleUpdate.builder();
+    }
 }

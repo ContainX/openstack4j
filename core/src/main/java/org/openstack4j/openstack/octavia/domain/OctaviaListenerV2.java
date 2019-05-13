@@ -1,15 +1,18 @@
 package org.openstack4j.openstack.octavia.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
+
+import org.openstack4j.model.octavia.LbOperatingStatus;
+import org.openstack4j.model.octavia.LbProvisioningStatus;
 import org.openstack4j.model.octavia.ListenerProtocol;
 import org.openstack4j.model.octavia.ListenerV2;
 import org.openstack4j.model.octavia.builder.ListenerV2Builder;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 
 /**
  * lbaas v2 listener
@@ -53,6 +56,7 @@ public class OctaviaListenerV2 implements ListenerV2 {
     @JsonProperty("loadbalancer_id")
     private String loadbalancerId;
 
+    @JsonProperty("loadbalancers")
     private List<ListItem> loadbalancers;
 
     @JsonProperty("admin_state_up")
@@ -63,7 +67,15 @@ public class OctaviaListenerV2 implements ListenerV2 {
 
     @JsonProperty("sni_container_refs")
     private List<String> sniContainerRefs;
+    
+    @JsonProperty("provisioning_status")
+    private LbProvisioningStatus provisioningStatus;
 
+    @JsonProperty("operating_status")
+    private LbOperatingStatus operatingStatus;
+
+    @JsonProperty("l7policies")
+    private  List<ListItem> l7Policies;
     /**
      * {@inheritDoc}
      */
@@ -159,6 +171,25 @@ public class OctaviaListenerV2 implements ListenerV2 {
     public String getId(){
         return id;
     }
+    
+    @Override
+    public LbProvisioningStatus getProvisioningStatus(){
+        return provisioningStatus;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LbOperatingStatus getOperatingStatus(){
+        return operatingStatus;
+    }
+    
+    @Override
+    public List<ListItem> getL7Policies(){
+    	return l7Policies;
+    }
+
 
     @Override
     public String toString(){
@@ -286,6 +317,12 @@ public class OctaviaListenerV2 implements ListenerV2 {
             m.defaultTlsContainerRef = tlsContainerRef;
             return this;
         }
+
+		@Override
+		public ListenerV2Builder defaultPoolId(String defaultPoolId) {
+			m.defaultPoolId = defaultPoolId;
+            return this;
+		}
     }
 
     @Override

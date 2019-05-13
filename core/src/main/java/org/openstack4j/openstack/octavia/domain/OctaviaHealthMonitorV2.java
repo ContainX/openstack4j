@@ -68,6 +68,14 @@ public class OctaviaHealthMonitorV2 implements HealthMonitorV2 {
     @JsonProperty("pool_id")
     private String poolId;
 
+    @JsonProperty("provisioning_status")
+    private String provisioningStatus;
+    
+    @JsonProperty("operating_status")
+    private String operatingStatus;
+    
+    private List<String> tags;
+    
     @Override
     public String getId(){
         return id;
@@ -126,6 +134,24 @@ public class OctaviaHealthMonitorV2 implements HealthMonitorV2 {
     @Override
     public List<ListItem> getPools(){
         return pools;
+    }
+    
+    @Override
+    public String getProvisioningStatus()
+    {
+    	return provisioningStatus;
+    }
+    
+    @Override
+    public String getOperatingStatus()
+    {
+    	return operatingStatus;
+    }
+    
+    @Override
+    public List<String> getTags()
+    {
+    	return tags;
     }
 
     /**

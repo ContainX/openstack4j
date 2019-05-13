@@ -1,5 +1,7 @@
 package org.openstack4j.model.octavia.builder;
 
+import java.util.List;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.octavia.ListenerProtocol;
 import org.openstack4j.model.octavia.ListenerV2;
@@ -90,4 +92,13 @@ public interface ListenerV2Builder extends Buildable.Builder<ListenerV2Builder, 
      * @return ListenerV2Builder
      */
     ListenerV2Builder sniContainerRefs(List<String> sniContainerRefs);
+    
+    /**
+     * Optional
+     *
+     * @param defaultPoolId
+     *            Default pool for the listener.
+     * @return ListenerV2Builder
+     */
+    ListenerV2Builder defaultPoolId(String defaultPoolId);
 }
