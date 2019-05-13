@@ -29,7 +29,7 @@ public interface LbPoolV2Service extends RestService {
      *            map (name, value) of filtering parameters
      * @return List
      */
-    List<? extends LbPoolV2> list(Map<String, String> filteringParams);
+    List<? extends LbPoolV2> list(Map<String, Object> filteringParams);
 
     /**
      * Get the specified lb pool by ID
