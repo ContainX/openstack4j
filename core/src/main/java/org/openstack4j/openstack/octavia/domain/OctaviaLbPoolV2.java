@@ -1,17 +1,22 @@
 package org.openstack4j.openstack.octavia.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
+
 import org.openstack4j.model.octavia.LbMethod;
+import org.openstack4j.model.octavia.LbOperatingStatus;
 import org.openstack4j.model.octavia.LbPoolV2;
+import org.openstack4j.model.octavia.LbProvisioningStatus;
 import org.openstack4j.model.octavia.Protocol;
 import org.openstack4j.model.octavia.SessionPersistence;
 import org.openstack4j.model.octavia.builder.LbPoolV2Builder;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 
 /**
  * Lbaas V2 load balancer pool
@@ -51,8 +56,15 @@ public class OctaviaLbPoolV2 implements LbPoolV2 {
 
     private List<ListItem> members;
 
+    private List<ListItem> loadbalancers;
     @JsonProperty("healthmonitor_id")
     private String healthMonitorId;
+    
+    @JsonProperty("provisioning_status")
+    private LbProvisioningStatus provisioningStatus;
+
+    @JsonProperty("operating_status")
+    private LbOperatingStatus operatingStatus;
 
     /**
      * {@inheritDoc}
@@ -134,6 +146,11 @@ public class OctaviaLbPoolV2 implements LbPoolV2 {
     public List<ListItem> getListeners(){
         return listeners;
     }
+    
+    @Override
+    public List<ListItem> getLoadbalancers(){
+        return loadbalancers;
+    }
 
     /**
      * {@inheritDoc}
@@ -149,6 +166,19 @@ public class OctaviaLbPoolV2 implements LbPoolV2 {
     @Override
     public String getHealthMonitorId(){
         return healthMonitorId;
+    }
+    
+    @Override
+    public LbProvisioningStatus getProvisioningStatus(){
+        return provisioningStatus;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LbOperatingStatus getOperatingStatus(){
+        return operatingStatus;
     }
 
     @Override

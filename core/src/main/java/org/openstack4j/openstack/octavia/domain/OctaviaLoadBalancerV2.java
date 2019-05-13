@@ -1,16 +1,19 @@
 package org.openstack4j.openstack.octavia.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
 import org.openstack4j.model.octavia.LbOperatingStatus;
 import org.openstack4j.model.octavia.LbProvisioningStatus;
 import org.openstack4j.model.octavia.LoadBalancerV2;
 import org.openstack4j.model.octavia.builder.LoadBalancerV2Builder;
 import org.openstack4j.openstack.common.ListResult;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 
 /**
  * lbaas v2 loadbalancer
@@ -62,7 +65,12 @@ public class OctaviaLoadBalancerV2 implements LoadBalancerV2 {
     private String vipPortId;
 
     private String provider;
-
+    
+    private List<HashMap<String, Object>> pools;
+    
+    @JsonProperty("created_at")
+    private Date createdAt;
+    
     /**
      * {@inheritDoc}
      */
@@ -168,6 +176,12 @@ public class OctaviaLoadBalancerV2 implements LoadBalancerV2 {
     public String getProvider(){
         return provider;
     }
+    
+    @Override
+    public Date getCreatedAt(){
+        return createdAt;
+    }
+
 
     /**
      * {@inheritDoc}

@@ -1,5 +1,8 @@
 package org.openstack4j.model.octavia;
 
+import java.util.Date;
+import java.util.HashMap;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.octavia.builder.LoadBalancerV2Builder;
@@ -81,4 +84,12 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
      * @return provider
      */
     String getProvider();
+    
+    /**
+     * @return list pool.
+     */
+    List<HashMap<String, Object>> getPools();
+    
+    
+    Date getCreatedAt();
 }

@@ -45,4 +45,10 @@ public interface MemberV2  extends ModelEntity, Buildable<MemberV2Builder> {
      */
     boolean isAdminStateUp();
 
+    String getName();
+    
+    String getOperatingStatus();
+    
+    String getProvisioningStatus();
+    
 }

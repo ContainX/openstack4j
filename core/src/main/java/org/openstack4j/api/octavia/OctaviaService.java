@@ -28,4 +28,14 @@ public interface OctaviaService extends RestService {
      * @return the healthMonitorV2 Service API
      */
     HealthMonitorV2Service healthMonitorV2();
+    
+    /**
+     * @return the L7Policy Service API
+     */
+    L7PolicyService l7Policy();
+    
+    /**
+     * @return the L7Rule Service API
+     */
+    L7RuleService l7Rule();
 }

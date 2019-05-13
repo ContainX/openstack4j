@@ -1,5 +1,7 @@
 package org.openstack4j.model.octavia;
 
+import java.util.List;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.octavia.builder.HealthMonitorV2Builder;
@@ -92,4 +94,9 @@ public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2B
      */
     List<ListItem> getPools();
 
+    String getProvisioningStatus();
+    
+    String getOperatingStatus();
+    
+    List<String> getTags();
 }

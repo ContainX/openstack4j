@@ -53,4 +53,6 @@ public interface ListenerV2UpdateBuilder extends Buildable.Builder<ListenerV2Upd
      * @return ListenerV2UpdateBuilder
      */
     ListenerV2UpdateBuilder defaultTlsContainerRef(String defaultTlsContainerRef);
+
+    ListenerV2UpdateBuilder defaultPoolId(String defaultPoolId);
 }
