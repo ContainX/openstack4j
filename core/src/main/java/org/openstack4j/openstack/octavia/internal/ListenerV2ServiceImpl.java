@@ -4,8 +4,10 @@ import org.openstack4j.api.octavia.ListenerV2Service;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.octavia.ListenerV2;
 import org.openstack4j.model.octavia.ListenerV2Update;
+import org.openstack4j.model.octavia.LoadBalancerV2Stats;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.octavia.domain.OctaviaListenerV2;
+import org.openstack4j.openstack.octavia.domain.OctaviaLoadBalancerV2Stats;
 
 import java.util.List;
 import java.util.Map;
@@ -72,5 +74,14 @@ public class ListenerV2ServiceImpl extends BaseOctaviaServices implements Listen
         checkNotNull(listenerId);
         checkNotNull(listener);
         return put(OctaviaListenerV2.class, uri("/lbaas/listeners/%s",listenerId)).entity(listener).execute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LoadBalancerV2Stats stats(String listenerId) {
+        checkNotNull(listenerId);
+        return get(OctaviaLoadBalancerV2Stats.class, uri("/lbaas/listeners/%s/stats", listenerId)).execute();
     }
 }

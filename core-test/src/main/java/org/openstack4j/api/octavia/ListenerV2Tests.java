@@ -7,6 +7,7 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.octavia.ListenerV2;
 import org.openstack4j.model.octavia.ListenerV2Update;
 import org.openstack4j.model.octavia.ListenerProtocol;
+import org.openstack4j.model.octavia.LoadBalancerV2Stats;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ import static org.testng.Assert.assertTrue;
 public class ListenerV2Tests extends AbstractTest {
     private static final String LISTENERSV2_JSON = "/octavia/listenersv2.json";
     private static final String LISTENERV2_JSON = "/octavia/listenerv2.json";
+    private static final String LISTENERV2_STATS_JSON = "/octavia/listenerv2_stats.json";
     private static final String LISTENERV2_UPDATE_JSON = "/octavia/listenerv2_update.json";
 
     public void testListListenersV2() throws IOException {
@@ -100,6 +102,16 @@ public class ListenerV2Tests extends AbstractTest {
         respondWith(204);
         ActionResponse result = osv3().octavia().listenerV2().delete("c07058a9-8d84-4443-b8f5-508d0facfe10");
         assertTrue(result.isSuccess());
+    }
+
+    public void testGetListenerV2Stats() throws IOException {
+        respondWith(LISTENERV2_STATS_JSON);
+        LoadBalancerV2Stats result = osv3().octavia().listenerV2().stats("023f2e34-7806-443b-bfae-16c324569a3d");
+        assertEquals(result.getBytesIn(), Long.valueOf(65671420));
+        assertEquals(result.getTotalConnections(), Integer.valueOf(26189172));
+        assertEquals(result.getActiveConnections(), Integer.valueOf(48629));
+        assertEquals(result.getBytesOut(), Long.valueOf(774771186));
+        assertEquals(result.getRequestErrors(), Integer.valueOf(0));
     }
 
     @Override

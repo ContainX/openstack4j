@@ -4,6 +4,7 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.octavia.ListenerV2;
 import org.openstack4j.model.octavia.ListenerV2Update;
+import org.openstack4j.model.octavia.LoadBalancerV2Stats;
 
 import java.util.List;
 import java.util.Map;
@@ -59,4 +60,12 @@ public interface ListenerV2Service extends RestService {
      * @return ListenerV2
      */
     ListenerV2 update(String listenerId, ListenerV2Update listener);
+
+    /**
+     * Shows the current statistics for a listener.
+     *
+     * @param listenerId
+     * @return LoadBalancerV2Stats
+     */
+    LoadBalancerV2Stats stats(String listenerId);
 }
