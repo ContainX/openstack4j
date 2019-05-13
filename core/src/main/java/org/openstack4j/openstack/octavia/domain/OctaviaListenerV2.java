@@ -317,6 +317,12 @@ public class OctaviaListenerV2 implements ListenerV2 {
             m.defaultTlsContainerRef = tlsContainerRef;
             return this;
         }
+
+		@Override
+		public ListenerV2Builder defaultPoolId(String defaultPoolId) {
+			m.defaultPoolId = defaultPoolId;
+            return this;
+		}
     }
 
     @Override

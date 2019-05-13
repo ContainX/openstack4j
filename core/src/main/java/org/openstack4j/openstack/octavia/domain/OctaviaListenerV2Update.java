@@ -176,6 +176,12 @@ public class OctaviaListenerV2Update implements ListenerV2Update {
             m.defaultTlsContainerRef = defaultTlsContainerRef;
             return this;
         }
+
+		@Override
+		public ListenerV2UpdateBuilder defaultPoolId(String defaultPoolId) {
+			m.defaultPoolId = defaultPoolId;
+            return this;
+		}
     }
 
     public static ListenerV2UpdateBuilder builder() {

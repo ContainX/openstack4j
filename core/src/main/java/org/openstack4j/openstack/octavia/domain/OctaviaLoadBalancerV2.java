@@ -338,5 +338,10 @@ public class OctaviaLoadBalancerV2 implements LoadBalancerV2 {
     public static LoadBalancerV2Builder builder() {
         return new LoadBalancerV2ConcreteBuilder();
     }
+
+	@Override
+	public List<HashMap<String, Object>> getPools() {
+		return pools;
+	}
 }
 
