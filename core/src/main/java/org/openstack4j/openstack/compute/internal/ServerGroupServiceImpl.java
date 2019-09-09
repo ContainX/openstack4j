@@ -10,7 +10,11 @@ import org.openstack4j.model.compute.ServerGroup;
 import org.openstack4j.openstack.compute.domain.NovaServerGroup;
 import org.openstack4j.openstack.compute.domain.NovaServerGroup.ServerGroups;
 
-public class ServerGroupServiceImpl extends BaseComputeServices implements ServerGroupService {
+public class ServerGroupServiceImpl extends BaseMicroVersionedComputeServices implements ServerGroupService {
+
+	public ServerGroupServiceImpl() {
+		super(MICRO_VERSION_2_15);
+	}
 
 	@Override
 	public List<? extends ServerGroup> list() {
