@@ -41,9 +41,10 @@ import com.google.common.io.ByteStreams;
 public final class HttpCommand<R> {
 
     private static final Logger LOG = LoggerFactory.getLogger(HttpCommand.class);
+    private static OkHttpClient client;
 
-    private HttpRequest<R> request;
-    private OkHttpClient client;
+    private final HttpRequest<R> request;
+    private OkHttpClient reqClient;
     private Request.Builder clientReq;
     private int retries;
 
@@ -63,7 +64,15 @@ public final class HttpCommand<R> {
     }
 
     private void initialize() {
-        OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
+        if (client == null) {
+            synchronized (HttpCommand.class) {
+                if (client == null) {
+                    client = getClient(request.getConfig());
+                }
+            }
+        }
+
+        OkHttpClient.Builder okHttpClientBuilder = client.newBuilder();
         Config config = request.getConfig();
 
         if (config.getProxy() != null) {
@@ -91,8 +100,8 @@ public final class HttpCommand<R> {
         if (HttpLoggingFilter.isLoggingEnabled()) {
             okHttpClientBuilder.addInterceptor(new LoggingInterceptor());
         }
-        okHttpClientBuilder.connectionPool(getConnectionPool());
-        client = okHttpClientBuilder.build();
+
+        reqClient = okHttpClientBuilder.build();
         clientReq = new Request.Builder();
         populateHeaders(request);
         populateQueryParams(request);
@@ -101,7 +110,7 @@ public final class HttpCommand<R> {
     /**
      * Create ConnectionPool optimized for short lived client with little chance to reuse connections.
      */
-    private ConnectionPool getConnectionPool() {
+    private static OkHttpClient getClient(Config config) {
         int maxIdleConnections = 0;
         // OkHttp creates "OkHttp ConnectionPool" thread per every ConnectionPool created to mange its connections. It
         // lives as long as the last connection made through it + its keep alive timeout. By default that it 5 min which
@@ -109,7 +118,15 @@ public final class HttpCommand<R> {
         // at least). Setting strict keepAlive duration here so the connections and threads does not hang around longer
         // than necessary.
         int keepAliveDuration = 500;
-        return new ConnectionPool(maxIdleConnections, keepAliveDuration, TimeUnit.MILLISECONDS);
+        ConnectionPool cp = new ConnectionPool(maxIdleConnections, keepAliveDuration, TimeUnit.MILLISECONDS);
+
+        // OkHttp performs best when you create a single `OkHttpClient` instance and reuse it for all of
+        // your HTTP calls. This is because each client holds its own connection pool and thread pools.
+        // Reusing connections and threads reduces latency and saves memory. Conversely, creating a client
+        // for each request wastes resources on idle pools.
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        clientBuilder.connectionPool(cp).build();
+        return clientBuilder.build();
     }
 
     /**
@@ -138,7 +155,7 @@ public final class HttpCommand<R> {
             body = RequestBody.create(null, Util.EMPTY_BYTE_ARRAY);
         }
         clientReq.method(request.getMethod().name(), body);
-        Call call = client.newCall(clientReq.build());
+        Call call = reqClient.newCall(clientReq.build());
         return call.execute();
     }
 
