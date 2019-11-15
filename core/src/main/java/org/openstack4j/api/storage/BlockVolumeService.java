@@ -56,6 +56,13 @@ public interface BlockVolumeService extends RestService {
 	*/
 	List<? extends Volume> list(Map<String, String> filteringParams);
 
+      /**
+       * Lists all Block Storage volumes for all tenants.
+       *
+       * @return List of all Volumes
+       */
+      List<? extends Volume> listAll();
+
 	/**
 	 * Gets a Block Storage volume by ID
 	 * @param volumeId the volume identifier
