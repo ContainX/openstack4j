@@ -119,10 +119,10 @@ The legacy Identity V2 API now uses the class ```OSClientV2``` in place of the c
 ```java
 // Identity V2 Authentication Example
 OSClientV2 os = OSFactory.builderV2()
-                       .endpoint("http://127.0.0.1:5000/v2.0")
-                       .credentials("admin","sample")
-                       .tenantName("admin")
-                       .authenticate();
+                .endpoint("http://127.0.0.1:5000/v2.0")
+                .credentials("admin","sample")
+                .tenantName("admin")
+                .authenticate();
 ```
 
 ##### Using Identity V3 authentication
@@ -253,7 +253,6 @@ os.identity().roles().getByName("role name);
 ```
 
 **Project operations**
-
 ```java
 // Create a project
 os.identity().project().create(Builders.project()
