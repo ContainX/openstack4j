@@ -32,4 +32,6 @@ public interface BlockQuotaSetBuilder extends Builder<BlockQuotaSetBuilder, Bloc
      * @return space consumed in the Block Storage.
      */
     BlockQuotaSetBuilder gigabytes(int gigabytes);
+
+    BlockQuotaSetBuilder volumeTypeQuota(String key, int quota);
 }

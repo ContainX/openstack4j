@@ -1,0 +1,6 @@
+{
+    "quota_set": {
+        "gigabytes_ruby": 100,
+        "volumes": 5
+    }
+}
