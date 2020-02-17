@@ -45,18 +45,4 @@ public class VolumeTypeTests extends AbstractTest {
         ActionResponse response = osv3().blockStorage().volumes().extend(volumeId, 30);
         assertTrue(response.isSuccess(), "The http response was not successful");
     }
-
-    @Test
-    public void volumeTypeGigabytesQuota() throws Exception {
-        respondWith("/storage/v2/updateQuotaSetResponse.json");
-        String volumeTypeGigabytesQuota = "gigabytes_ruby";
-        BlockQuotaSet blockQuotaSet = new CinderBlockQuotaSet()
-                .toBuilder()
-                .volumeTypeQuota( volumeTypeGigabytesQuota, 100 )
-                .build();
-        blockQuotaSet = osv3().blockStorage().quotaSets().updateForTenant("1-2-3", blockQuotaSet);
-        String requestBody = server.takeRequest().getBody().readUtf8();
-        assertTrue(requestBody.contains("\"gigabytes_ruby\" : 100"));
-        assertTrue(blockQuotaSet.getVolumeTypesQuotas().containsKey( volumeTypeGigabytesQuota ), "Should contain the ruby volume type gigabytes quota");
-    }
 }
