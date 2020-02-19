@@ -119,10 +119,10 @@ The legacy Identity V2 API now uses the class ```OSClientV2``` in place of the c
 ```java
 // Identity V2 Authentication Example
 OSClientV2 os = OSFactory.builderV2()
-                       .endpoint("http://127.0.0.1:5000/v2.0")
-                       .credentials("admin","sample")
-                       .tenantName("admin")
-                       .authenticate();
+                .endpoint("http://127.0.0.1:5000/v2.0")
+                .credentials("admin","sample")
+                .tenantName("admin")
+                .authenticate();
 ```
 
 ##### Using Identity V3 authentication
@@ -219,12 +219,12 @@ The examples below are only a small fraction of the existing API so please refer
 ```java
 // Create a User associated to the new Project
 User user = os.identity().users().create(Builders.user()
-													.domainId("domain id")
-													.name("foobar")
-													.password("secret")
-													.email("foobar@example.com")
-													.enabled(true)
-													.build());
+	      .domainId("domain id")
+	      .name("foobar")
+	      .password("secret")
+	      .email("foobar@example.com")
+	      .enabled(true)
+	      .build());
 //or
 User user = os.identity().users().create("domain id", "foobar", "secret", "foobar@example.org", true);
 
@@ -253,15 +253,14 @@ os.identity().roles().getByName("role name);
 ```
 
 **Project operations**
-
 ```java
 // Create a project
 os.identity().project().create(Builders.project()
-											.name("project name")
-											.description("project description")
-											.domainId("project domain id")
-											.enabled(true)
-											.build());
+  .name("project name")
+  .description("project description")
+  .domainId("project domain id")
+  .enabled(true)
+  .build());
 ```
 
 #### Identity Operations (Keystone) V2
@@ -385,11 +384,10 @@ InputStream is = os.images().getAsStream("imageId");
 // (URL Payload in this example, File, InputStream are other payloads available)
 Image image = os.images().create(Builders.image()
                 .name("Cirros 0.3.0 x64")
-				.isPublic(true)
-				.containerFormat(ContainerFormat.BARE)
-				.diskFormat(DiskFormat.QCOW2)
-				.build()
-				), Payloads.create(new URL("https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img")));
+		.isPublic(true)
+		.containerFormat(ContainerFormat.BARE)
+		.diskFormat(DiskFormat.QCOW2)
+		.build()), Payloads.create(new URL("https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img")));
 ```
 
 License

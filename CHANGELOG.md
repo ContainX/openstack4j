@@ -129,7 +129,7 @@ As a result we have added 2.0-maintenance branch which is the path to EOL for Op
 * Instead of the old version-mixed OSClient a OSClientV2 for only Identity V2 API and OSClientV3 for only Identity V3 API are available
 * Same refactoring for the OSClientSession: introducing new OSClientSessionV2 and OSClientV3
 
-### 2.20
+### 2.1.0
 
 This marks the last of the 2.X OpenStack4j versioning scheme.  Going forward only critical or specific pull requests will justify future release.  It is strongly encourage to consider moving to OpenStack4j 3.0.X which offers the full Identity V3 Support.
 
