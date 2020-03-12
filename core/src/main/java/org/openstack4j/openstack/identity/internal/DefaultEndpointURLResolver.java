@@ -132,7 +132,7 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
         }
 
         for (org.openstack4j.model.identity.v3.Service service : token.getCatalog()) {
-            if (p.type == ServiceType.forName(service.getType())) {
+            if (p.type == ServiceType.forName(service.getType()) || p.type == ServiceType.forName(service.getName())) {
                 if (p.perspective == null) {
                     p.perspective = Facing.PUBLIC;
                 }

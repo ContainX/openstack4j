@@ -1,6 +1,116 @@
 # Change Log
 
-### 3.0.0 (Latest / Stable)
+### 3.2.0 (Latest / Stable)
+
+- Implement listCachedImages() for Glance V2 Images #1226
+- Make all keystone v3 services (ProjectService, RoleService,..) work #1222
+- Add support for “tags” of project which introduced in KeyStone v3.9 #1219
+- Solves the issue #1198: "Identity service not working with OS4j". #1199
+- neutron attach and detach network to agent dhcp #1082
+- aodh-gnocchi alarm support #1130
+- Fix for issue #979: Disable Gateway problem #1149
+- Fix for issue #1124:openstack4j mistaken heat-cfn service as heat ser… #1142
+- Heat service, adding support for stack abandon and adopt #1136
+- Alarm test case fix #1209
+- aodh-gnocchi alarm  support #1134
+- Consider the SSLContext of an HttpRequest's Config object when using the Resteasy connector #1162
+- Fix issue #1165. #1166
+- Make sure the number of okhttp CLOSE_WAIT connections is always manageable #1151
+- add loadbalancer_id to LbPoolV2Builder #1143
+- Added SFC Service, all calls. #1141
+- Better format used in toString method #1135
+- Fix JSON deserialize bug cause by 'sessionPersistence' is abstract type #1127
+- Add octavia error msg to ActionResponse #1140
+- add vip_network_id and vip_port_id for lb post #1133
+- Heat, add support for stack abandon and adopt #1135
+- pull master #14
+- aodh gnocchi driver support #13
+- merge #12
+- Fix parsing error when Glance V2 image contains optional locations #1096
+- Add cascade delete load balancer, it will delete all child objects of… #1120
+- Adding device_owner and device_id support for Port #1119
+- add detach method to blockstorage api #1106
+- merge #11
+- Fix octavia pool update session_persistence with value "null" #1099
+- Update volume bootable status #1098
+- [issue 1094] Fix NPEs caused by okhttp HttpExecutorServiceImpl #1095
+- add rescue server status #1100
+- fix(secret): fix wrong representation of Secret values & add payload #1088
+- Switch to standalone snakeyaml #1092
+- Support Availability zones API in Neutron. #1086
+
+### 3.1.0
+
+- Issue : #[1070](https://github.com/ContainX/openstack4j/issues/1070) #1072
+- fix  Firewall policy param cannot be updated #1074
+- Added API for Octavia #1081
+- Feature/barbican secret #1080
+- Support multiattach property in volume #1079
+- Wrong return type of disable/enable service actions #1076
+- Fix in ServiceTypeEnum #1078
+- Allow identity V3 to lookup service by name #1077
+- Update javadoc for BlockDeviceMappingBuilder #1075
+- Allow value to be object type in ServiceConfig #1061
+- fix unscoped token authentication #1066
+- Fix ETag header to match documented name: 'Etag' #1062
+- Added a new method createSnapshot() to invoke create image action API with metadata properties #1056
+- Adding limit to SampleCriteria for Ceilometer APIs #1052
+- Update builder to set old deprecated fields to support volume creation (preserving name and description) for cinder API V1 #1058
+- Mistral: add workflow environment and cron trigger endpoint #1055
+- 928 ceilometer statistics date parsing #1049
+- Renamed CinderVolume properties to be compatible with block storage API v2, fixed broken VolumeTests #1046
+- Mistral: add task and action execution endpoints #1048
+- Mistral: adding workflow executions endpoint #1043
+- Mistral: implement endpoints for action definitions and workbook definitions #1039
+- Mistral client: workflow definitions #1009
+- Added missing fields in Magnum bay #1034
+- Fix cpu info in hypervisor #1028
+- Fix cinder volume snapshot #1031
+- Add additional properties of the availability zone hint for the network. #1030
+- merge #10
+- Fix NeutronExtraDhcpOptCreate #1029
+- Fix UntrustedSSL SSLVerificationDisabled may cause NullPointerException #1026
+- merge #8
+- Add http headers for supporting keystone tokenless #1002
+- Api for glance image cache, list cached #1020
+- update guava version to 20.0 #1021
+- Override equal and hashcode method of some Neutron classes #1015
+- cherry-picking #932 #1017
+- 3.0.4 release #999
+- designate v2 service #1011
+- SenlinNodeService: details about physical object that backs the node #1001
+- Add additional properties of block device mapping api v2 #989
+- Allow Port Creation in Bulk #988
+- Allow passing additional properties for Glance V2 #986
+- Fix for correcting return result type in Magnum Container APIs #984
+- add security group and rules filterable list method #981
+- Implement Security Group Update API & Support Enable DHCP #978
+- support ipv6 properties in subnet again #976
+- support Blockstorage Service List #968
+- Allow set ID when creating image #972
+- Change date-time format in Sahara API to ISO 8601 #961
+- Extended OS4J to support OpenStack Magnum Service APIs #969
+- Adding neutron port binding data support. #967
+- support ipv6 properties in subnet #964
+- Fixing port name list option. #965
+- add public host property getter #962
+- issue 957: run as non-root user in docker #959
+- Issue 944: etag support in os.objectStorage().objects().get() #958
+- Fix get console output not working with Resteasy connector (#795) #949
+- add missed 'os-vol-host-attr:host' property on CinderVolume #952
+- fix domain null pointer exception #947
+- added unit test readme #945
+- OS4J client for Openstack Glare #926
+- add Evacuate Server (evacuate Action) #931
+- use Long insead of Integer in class GlanceImage #876
+- Bug #913: add SSLContext and HostnameVerifier to hashCode and equals #923
+- Issue 903 remove last route #917
+- Add api for nova service list #914
+- Trove Update #910
+- Openstack telemetry aodh support #900
+- Kept the portsecurityenabled property as undefined #904
+
+### 3.0.0 
 
 This is a major milestone release which was driven and lead by @auhlig and @dhague. Special thanks for their major contributions and making this release possible.
 

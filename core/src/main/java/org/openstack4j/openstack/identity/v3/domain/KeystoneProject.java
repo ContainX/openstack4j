@@ -1,17 +1,23 @@
 package org.openstack4j.openstack.identity.v3.domain;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.*;
 import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.identity.v3.Project;
 import org.openstack4j.model.identity.v3.builder.ProjectBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * Project model class for identity/v3
@@ -40,7 +46,8 @@ public class KeystoneProject implements Project {
     private String subtree;
     private String parents;
     private Boolean enabled = true;
-    private Map<String, String> extra = new HashMap<String, String>();
+    private Map<String, String> extra = Maps.newHashMap();
+    private List<String> tags = Lists.newArrayList();
 
     /**
      * @return the Project builder
@@ -169,6 +176,20 @@ public class KeystoneProject implements Project {
     }
 
     /**
+	 * @return the tags
+	 */
+	public List<String> getTags() {
+		return tags;
+	}
+
+	/**
+	 * @param tags the tags to set
+	 */
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
+	/**
      * set project enabled
      *
      * @param enabled
@@ -183,14 +204,14 @@ public class KeystoneProject implements Project {
      */
     @Override
     public String toString() {
-        String domainId = null;
+        String dId = null;
         if (domain != null) {
-            domainId = domain.getId();
+            dId = domain.getId();
         }
 
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
-                .add("domainId", domainId)
+                .add("domainId", dId)
                 .add("description", description)
                 .add("name", name)
                 .add("links", links)
@@ -325,6 +346,16 @@ public class KeystoneProject implements Project {
             model.extra.put(key, value);
             return this;
         }
+        
+        /**
+         * @see KeystoneProject#setTags(List<String>)
+         */
+
+		@Override
+		public ProjectBuilder setTags(List<String> tags) {
+			model.setTags(tags);
+			return this;
+		}
 
         /**
          * @see KeystoneProject#isEnabled()
@@ -358,7 +389,6 @@ public class KeystoneProject implements Project {
             model.domainId = domainId;
             return this;
         }
-
     }
 
     public static class Projects extends ListResult<KeystoneProject> {

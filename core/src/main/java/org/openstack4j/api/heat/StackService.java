@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.heat.AdoptStackData;
 import org.openstack4j.model.heat.Stack;
 import org.openstack4j.model.heat.StackCreate;
 import org.openstack4j.model.heat.StackUpdate;
@@ -100,5 +101,26 @@ public interface StackService {
 	 */
 	ActionResponse delete(String stackName, String stackId);
 
-
+        /**
+         * Deletes a stack but leaves its resources intact, and returns data that describes the stack and its resources.
+         * 
+         * @param stackName Name of {@link Stack}
+         * @param stackId Id of {@link Stack}
+         * 
+         * @return <code>adopt_stack_data</code> element representing by {@link AdoptStackData}
+         */
+        AdoptStackData abandon(String stackName, String stackId);
+        
+        /**
+         * Creates a stack from existing resources.
+         * 
+         * @param adoptStackData Structure {@link AdoptStackData}, representing existing resources
+         * @param parameters Map of parameters
+         * @param disableRollback Enable or disable rollback
+         * @param timeOutMins Timeout in minutes
+         * @param template Template in Json-Format or YAML format. It is optional, used just in case there will be new resources (not included in adoptStackData)
+         * @return 
+         */
+        Stack adopt(AdoptStackData adoptStackData, Map<String, String> parameters,
+			boolean disableRollback, Long timeOutMins, String template);
 }

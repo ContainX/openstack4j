@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openstack4j.model.compute.ext.Service;
+import org.openstack4j.openstack.compute.domain.ext.ExtService;
 
 /**
  * API which supports the "os-services" extension.
@@ -35,21 +36,21 @@ public interface ServicesService {
      *
      * @param binary the name of the service binary that you want to enable
      * @param host the host name of the service that you want to enable
-     * @return the status of the enabled service
+     * @return the enabled service
      * 
      * @author Wang Ting/王婷
      */
-    Service.Status enableService(String binary, String host);
+    ExtService enableService(String binary, String host);
 
     /**
      * Disables a service.
      *
      * @param binary the name of the service binary that you want to disable
      * @param host the host name of the service that you want to disable
-     * @return the status of the disabled service
+     * @return the disabled service
      * 
      * @author Wang Ting/王婷
      */
-    Service.Status disableService(String binary, String host);
+    ExtService disableService(String binary, String host);
 
 }

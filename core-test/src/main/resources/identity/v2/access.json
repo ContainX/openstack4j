@@ -148,6 +148,25 @@
 						"adminURL": "http:\/\/127.0.0.1:8087\/v2.0",
 						"region": "RegionOne",
 						"internalURL": "http:\/\/127.0.0.1:8087\/v2.0",
+						"id": "9c66xrg3gruv2a3hj8aatd7smmas23fy",
+						"publicURL": "http:\/\/127.0.0.1:8087\/v2.0"
+					}, {
+						"adminURL": "http:\/\/127.0.0.1:8087\/v2.0",
+						"region": "RegionTwo",
+						"internalURL": "http:\/\/127.0.0.1:8087\/v2.0",
+						"id": "9c66xrgerruv2a3hj8batd7smmas23fy",
+						"publicURL": "http:\/\/127.0.0.1:8087\/v2.0"
+					}
+				],
+				"endpoints_links": [],
+				"type": "aodh",
+				"name": "alarming"
+			}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8087\/v2.0",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8087\/v2.0",
 						"id": "9c66xrg3rruv2a3hj8tatd7smmas23fy",
 						"publicURL": "http:\/\/127.0.0.1:8087\/v2.0"
 					}, {
@@ -187,6 +206,19 @@
 				"endpoints_links": [],
 				"type": "workflow",
 				"name": "mistral"
+		  	}, {
+				"endpoints": [
+					{
+						"adminURL": "http:\/\/127.0.0.1:8386\/v2",
+						"region": "RegionOne",
+						"internalURL": "http:\/\/127.0.0.1:8386\/v2",
+						"id": "8707e3735d4415c97ae231b4841eb1d",
+						"publicURL": "http:\/\/127.0.0.1:8386\/v2"
+					}
+				],
+				"endpoints_links": [],
+				"type": "data-processing",
+				"name": "sahara"
 			}
 		],
 		"user": {

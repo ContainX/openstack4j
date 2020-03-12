@@ -68,6 +68,8 @@ public interface Server extends ModelEntity {
 		SHELVED,
 		/** The server is shelved_offloaded, server removed from the hypervisor to minimize resource usage. */
 		SHELVED_OFFLOADED,
+		/** The server is in rescue mode*/
+		RESCUE,
 		/** OpenStack4j could not find a Status mapping for the current reported Status.  File an issue indicating the missing state */
 		UNRECOGNIZED;
 

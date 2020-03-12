@@ -1,0 +1,22 @@
+{
+    "flow_classifier": {
+        "id": "12345678-abcd-abcd-abcd-abcdefabcdef",
+        "name": "FC1",
+        "project_id": "12345678909876543210abcdefabcdef",
+        "tenant_id": "12345678909876543210abcdefabcdef",
+        "description": "Openstack4j test flow classifier 1",
+        "protocol": "TCP",
+        "ethertype": "IPv4",
+        "source_port_range_min": 22,
+        "source_port_range_max": 3000,
+        "destination_port_range_min": 80,
+        "destination_port_range_max": 80,
+        "source_ip_prefix": null,
+        "destination_ip_prefix": "10.20.30.40",
+        "logical_destination_port": null,
+        "logical_source_port": "abcdefab-abcd-abcd-abcd-abcdefabcdef",
+        "l7_parameters": {
+            "aparam": "A"
+        }
+    }
+}

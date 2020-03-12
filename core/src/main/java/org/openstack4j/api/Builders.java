@@ -2,8 +2,10 @@ package org.openstack4j.api;
 
 import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
 import org.openstack4j.model.artifact.builder.ToscaTemplatesArtifactBuilder;
+import org.openstack4j.model.barbican.Secret;
 import org.openstack4j.model.barbican.builder.ContainerCreateBuilder;
 import org.openstack4j.model.barbican.builder.ContainerSecretBuilder;
+import org.openstack4j.model.barbican.builder.SecretCreateBuilder;
 import org.openstack4j.model.common.builder.LinkBuilder;
 import org.openstack4j.model.compute.builder.*;
 import org.openstack4j.model.dns.v2.builder.DNSV2Builders;
@@ -53,6 +55,7 @@ import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
 import org.openstack4j.model.workflow.builder.WorkflowBuilders;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainer;
 import org.openstack4j.openstack.barbican.domain.BarbicanContainerSecret;
+import org.openstack4j.openstack.barbican.domain.BarbicanSecret;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.compute.builder.NovaBuilders;
 import org.openstack4j.openstack.compute.domain.*;
@@ -92,6 +95,7 @@ import org.openstack4j.openstack.murano.v1.domain.MuranoEnvironment;
 import org.openstack4j.openstack.networking.builder.NeutronBuilders;
 import org.openstack4j.openstack.networking.domain.*;
 import org.openstack4j.openstack.networking.domain.ext.*;
+import org.openstack4j.openstack.octavia.builder.OctaviaBuilders;
 import org.openstack4j.openstack.sahara.builder.SaharaBuilders;
 import org.openstack4j.openstack.sahara.domain.*;
 import org.openstack4j.openstack.storage.block.builder.CinderBuilders;
@@ -173,6 +177,42 @@ public class Builders {
      */
     public static NetworkBuilder network() {
         return NeutronNetwork.builder();
+    }
+
+    /**
+     * The builder to create a Flow Classifier
+     *
+     * @return the Flow Classifier builder
+     */
+    public static FlowClassifierBuilder flowClassifier() {
+        return NeutronFlowClassifier.builder();
+    }
+
+    /**
+     * The builder to create a Port Pair
+     *
+     * @return the Port Pair builder
+     */
+    public static PortPairBuilder portPair() {
+        return NeutronPortPair.builder();
+    }
+
+    /**
+     * The builder to create a Port Pair Group
+     *
+     * @return the Port Pair Group builder
+     */
+    public static PortPairGroupBuilder portPairGroup() {
+        return NeutronPortPairGroup.builder();
+    }
+
+    /**
+     * The builder to create a Port Chain Group
+     *
+     * @return the Port Chain builder
+     */
+    public static PortChainBuilder portChain() {
+        return NeutronPortChain.builder();
     }
 
     /**
@@ -960,6 +1000,15 @@ public class Builders {
     }
 
     /**
+     * The Octavia builders
+     *
+     * @return the octavia builders
+     */
+    public static OctaviaBuilders octavia() {
+        return new OctaviaBuilders();
+    }
+
+    /**
      * The Sahara builders
      *
      * @return the sahara builders
@@ -1098,7 +1147,7 @@ public class Builders {
      * Magnum builder
      * @return the magnum builder
      */
-    
+
     public static BaymodelBuilder baymodel() {
         return MagnumBaymodel.builder();
     }
@@ -1118,6 +1167,12 @@ public class Builders {
     public static ContainerSecretBuilder containerSecret() {
         return BarbicanContainerSecret.builder();
     }
+
+    /**
+     * Barbican secret builder
+     * @return the secret builder
+     */
+    public static SecretCreateBuilder secret() { return BarbicanSecret.builder(); }
 
     /**
      * The Tacker builders

@@ -1,5 +1,6 @@
 package org.openstack4j.api.types;
 
+import java.util.regex.Pattern;
 public enum ServiceType {
 
 	IDENTITY("keystone", "identity"),
@@ -9,6 +10,7 @@ public enum ServiceType {
 	BLOCK_STORAGE("cinder", "volume"),
 	OBJECT_STORAGE("object-store", "object-store"),
 	NETWORK("neutron", "network"),
+	OCTAVIA("octavia", "load-balancer"),
 	EC2("ec2", "ec2"),
 	TELEMETRY("ceilometer", "metering"),
 	TELEMETRY_AODH("aodh", "alarming"),
@@ -28,11 +30,17 @@ public enum ServiceType {
 
 	private final String serviceName;
 	private final String type;
+    private final Pattern servicePattern;
+    private static final String SERVICE_PATTERN_SUFFIX = "[v|\\d|\\.]*";
 
 	ServiceType(String serviceName, String type) {
 		this.serviceName = serviceName;
 		this.type = type;
-	}
+        this.servicePattern = Pattern.compile(Pattern.quote(serviceName) + SERVICE_PATTERN_SUFFIX +
+                        "|" + Pattern.quote(type) + SERVICE_PATTERN_SUFFIX +
+                        "|" + Pattern.quote(this.name()) + SERVICE_PATTERN_SUFFIX
+                , Pattern.CASE_INSENSITIVE);
+    }
 
 	public String getServiceName() {
 		return this.serviceName;
@@ -42,16 +50,22 @@ public enum ServiceType {
 		return this.type;
 	}
 
-	public static ServiceType forName(String name) {
-		for (ServiceType s : ServiceType.values())
-		{
-			if (s.getServiceName().equalsIgnoreCase(name))
-			    return s;
-			if (s.name().equalsIgnoreCase(name))
-				return s;
-			if (s.type.equalsIgnoreCase(name))
-				return s;
-		}
-		return ServiceType.UNKNOWN;
-	}
+    private Pattern getServicePattern()
+    {
+        return this.servicePattern;
+    }
+
+    public static ServiceType forName(String name)
+    {
+        if (name == null || name.isEmpty())
+        {
+            return ServiceType.UNKNOWN;
+        }
+        for (ServiceType s : ServiceType.values())
+        {
+            if(s.getServicePattern().matcher(name).matches())
+                return s;
+        }
+        return ServiceType.UNKNOWN;
+    }
 }
