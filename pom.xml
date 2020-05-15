@@ -17,7 +17,7 @@
         <release.version>2.0.0</release.version>
         <aries.spifly.version>1.0.0</aries.spifly.version>
         <slf4j.version>1.7.21</slf4j.version>
-        <jackson.version>2.7.3</jackson.version>
+        <jackson.version>2.11.0</jackson.version>
         <maven.jar.plugin.version>2.6</maven.jar.plugin.version>
         <additionalparam>-Xdoclint:none</additionalparam>
     </properties>
