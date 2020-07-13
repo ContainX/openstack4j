@@ -39,6 +39,18 @@ public class SecurityGroupRuleServiceImpl extends BaseNetworkingServices impleme
      * {@inheritDoc}
      */
     @Override
+    public void batchDelete(List<String> ruleIds) {
+        if (ruleIds != null && ruleIds.size() > 0){
+            for (String ruleId: ruleIds) {
+                delete(Void.class, uri("/security-group-rules/%s", ruleId)).execute();
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public SecurityGroupRule create(SecurityGroupRule rule) {
         checkNotNull(rule);
         return post(NeutronSecurityGroupRule.class, uri("/security-group-rules")).entity(rule).execute();
