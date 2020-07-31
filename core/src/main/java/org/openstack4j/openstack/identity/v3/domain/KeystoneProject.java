@@ -166,13 +166,16 @@ public class KeystoneProject implements Project {
     }
 
     @JsonAnySetter
-    public void setExtra(String key, String value) {
+    public void setExtra(String key, Object value) {
         // is_domain is not necessary
         // if we don't ignore this, this will be set into extra field.
         if (Objects.equal(key, "is_domain")) {
             return;
         }
-        extra.put(key, value);
+
+        if (value instanceof String) {
+            extra.put(key, (String) value);
+        }
     }
 
     /**
@@ -339,7 +342,7 @@ public class KeystoneProject implements Project {
 
 
         /**
-         * @see KeystoneProject#setExtra(String, String)
+         * @see KeystoneProject#setExtra(String, Object)
          */
         @Override
         public ProjectBuilder setExtra(String key, String value) {
