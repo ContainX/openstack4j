@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * A listener for v2 loadbalancer
+ *
  * @author wei
  */
 @JsonDeserialize(as = OctaviaListenerV2.class)
@@ -69,7 +70,7 @@ public interface ListenerV2 extends ModelEntity, Buildable<ListenerV2Builder> {
 
     /**
      * @return The administrative state of the listener, which is up (true) or
-     *         down (false).
+     * down (false).
      */
     boolean isAdminStateUp();
 

@@ -10,55 +10,55 @@ import java.util.List;
 
 /**
  * Mistral workbook definition.
- * 
+ *
  * @author Renat Akhmerov
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MistralWorkbookDefinition extends BaseDefinition implements WorkbookDefinition {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public static MistralWorkbookDefinitionBuilder builder() {
-		return new MistralWorkbookDefinitionBuilder();
-	}
-	
-	@Override
-	public MistralWorkbookDefinitionBuilder toBuilder() {
-		return new MistralWorkbookDefinitionBuilder(this);
-	}
+    public static MistralWorkbookDefinitionBuilder builder() {
+        return new MistralWorkbookDefinitionBuilder();
+    }
 
-	/**
-	 * Mistral workbook definition builder.
-	 *
-	 * @author Renat Akhmerov
-	 */
-	public static class MistralWorkbookDefinitionBuilder extends
-			BaseDefinitionBuilder<MistralWorkbookDefinitionBuilder, MistralWorkbookDefinition>
-			implements WorkbookDefinitionBuilder<MistralWorkbookDefinitionBuilder, MistralWorkbookDefinition> {
+    @Override
+    public MistralWorkbookDefinitionBuilder toBuilder() {
+        return new MistralWorkbookDefinitionBuilder(this);
+    }
 
-		MistralWorkbookDefinitionBuilder() {
-			this(new MistralWorkbookDefinition());
-		}
+    /**
+     * Mistral workbook definition builder.
+     *
+     * @author Renat Akhmerov
+     */
+    public static class MistralWorkbookDefinitionBuilder extends
+            BaseDefinitionBuilder<MistralWorkbookDefinitionBuilder, MistralWorkbookDefinition>
+            implements WorkbookDefinitionBuilder<MistralWorkbookDefinitionBuilder, MistralWorkbookDefinition> {
 
-		MistralWorkbookDefinitionBuilder(MistralWorkbookDefinition model) {
-			super(model);
-		}
+        MistralWorkbookDefinitionBuilder() {
+            this(new MistralWorkbookDefinition());
+        }
 
-		@Override
-		public MistralWorkbookDefinitionBuilder from(MistralWorkbookDefinition in) {
-			return null;
-		}
-	}
+        MistralWorkbookDefinitionBuilder(MistralWorkbookDefinition model) {
+            super(model);
+        }
 
-	public static class MistralWorkbookDefinitions extends ListResult<MistralWorkbookDefinition> {
-		private static final long serialVersionUID = 1L;
+        @Override
+        public MistralWorkbookDefinitionBuilder from(MistralWorkbookDefinition in) {
+            return null;
+        }
+    }
 
-		@JsonProperty("workbooks")
-		private List<MistralWorkbookDefinition> list;
+    public static class MistralWorkbookDefinitions extends ListResult<MistralWorkbookDefinition> {
+        private static final long serialVersionUID = 1L;
 
-		@Override
-		protected List<MistralWorkbookDefinition> value() {
-			return this.list;
-		}
-	}
+        @JsonProperty("workbooks")
+        private List<MistralWorkbookDefinition> list;
+
+        @Override
+        protected List<MistralWorkbookDefinition> value() {
+            return this.list;
+        }
+    }
 }

@@ -13,11 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
-@Test(suiteName="Barbican/Containers", enabled = true)
+@Test(suiteName = "Barbican/Containers", enabled = true)
 public class ContainerTests extends AbstractTest {
     private static final String CONTAINER_JSON = "/barbican/container.json";
     private static final String CONTAINER_CREATE_JSON = "/barbican/container_create.json";

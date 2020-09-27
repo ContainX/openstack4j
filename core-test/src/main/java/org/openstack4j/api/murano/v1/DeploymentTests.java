@@ -9,14 +9,12 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * @author nmakhotkin
  */
-@Test(suiteName="Murano/AppCatalog", enabled = true)
+@Test(suiteName = "Murano/AppCatalog", enabled = true)
 public class DeploymentTests extends AbstractTest {
     private static final String DEPLOYMENTS_JSON = "/murano/v1/deployments.json";
     private static final String REPORTS_JSON = "/murano/v1/reports.json";
@@ -46,9 +44,9 @@ public class DeploymentTests extends AbstractTest {
     public void testFilteredReports() throws IOException {
         respondWith(FILTERED_REPORTS_JSON);
         List<? extends Report> reports = osv3().murano().deployments().reports(
-            envId,
-            deploymentId,
-            Collections.singletonList("5c2a7dae-097d-4a1c-85cb-e7db2ed62d90")
+                envId,
+                deploymentId,
+                Collections.singletonList("5c2a7dae-097d-4a1c-85cb-e7db2ed62d90")
         );
 
         assertNotNull(reports);

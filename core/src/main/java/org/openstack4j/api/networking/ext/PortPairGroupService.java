@@ -1,15 +1,14 @@
 package org.openstack4j.api.networking.ext;
 
-import java.util.List;
-
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.PortPairGroup;
+
+import java.util.List;
 
 /**
  * Port Pair Group Service
  *
  * @author Dmitry Gerenrot
- *
  */
 public interface PortPairGroupService {
 
@@ -22,6 +21,7 @@ public interface PortPairGroupService {
 
     /**
      * Get a port pair group by id.
+     *
      * @param id
      * @return PortPairGroup
      */

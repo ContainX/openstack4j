@@ -1,7 +1,5 @@
 package org.openstack4j.model.identity.v3.builder;
 
-import org.openstack4j.model.identity.v3.builder.*;
-
 /**
  * The Identity V3 builders
  */

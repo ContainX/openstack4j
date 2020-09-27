@@ -9,6 +9,7 @@ import org.openstack4j.model.network.ext.builder.LoadBalancerV2UpdateBuilder;
 
 /**
  * Entity used to update lbaas v2 loadbalancer
+ *
  * @author emjburns
  */
 @JsonRootName("loadbalancer")
@@ -26,7 +27,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
      * {@inheritDoc}
      */
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -34,7 +35,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
      * {@inheritDoc}
      */
     @Override
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -42,7 +43,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
      * {@inheritDoc}
      */
     @Override
-    public boolean isAdminStateUp(){
+    public boolean isAdminStateUp() {
         return adminStateUp;
     }
 
@@ -59,11 +60,11 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
 
         private NeutronLoadBalancerV2Update m;
 
-        public LoadBalancerV2UpdateConcreteBuilder (){
+        public LoadBalancerV2UpdateConcreteBuilder() {
             this(new NeutronLoadBalancerV2Update());
         }
 
-        public LoadBalancerV2UpdateConcreteBuilder (NeutronLoadBalancerV2Update m){
+        public LoadBalancerV2UpdateConcreteBuilder(NeutronLoadBalancerV2Update m) {
             this.m = m;
         }
 
@@ -71,7 +72,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
          * {@inheritDoc}
          */
         @Override
-        public LoadBalancerV2Update build(){
+        public LoadBalancerV2Update build() {
             return m;
         }
 
@@ -79,7 +80,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
          * {@inheritDoc}
          */
         @Override
-        public LoadBalancerV2UpdateBuilder from(LoadBalancerV2Update in){
+        public LoadBalancerV2UpdateBuilder from(LoadBalancerV2Update in) {
             m = (NeutronLoadBalancerV2Update) in;
             return this;
         }
@@ -88,7 +89,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
          * {@inheritDoc}
          */
         @Override
-        public LoadBalancerV2UpdateBuilder description(String description){
+        public LoadBalancerV2UpdateBuilder description(String description) {
             m.description = description;
             return this;
         }
@@ -97,7 +98,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
          * {@inheritDoc}
          */
         @Override
-        public LoadBalancerV2UpdateBuilder name(String name){
+        public LoadBalancerV2UpdateBuilder name(String name) {
             m.name = name;
             return this;
         }
@@ -106,13 +107,14 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
          * {@inheritDoc}
          */
         @Override
-        public LoadBalancerV2UpdateBuilder adminStateUp(boolean adminStateUp){
+        public LoadBalancerV2UpdateBuilder adminStateUp(boolean adminStateUp) {
             m.adminStateUp = adminStateUp;
             return this;
         }
 
     }
-    public static LoadBalancerV2UpdateBuilder builder(){
+
+    public static LoadBalancerV2UpdateBuilder builder() {
         return new LoadBalancerV2UpdateConcreteBuilder();
     }
 
@@ -120,7 +122,7 @@ public class NeutronLoadBalancerV2Update implements LoadBalancerV2Update {
      * {@inheritDoc}
      */
     @Override
-    public LoadBalancerV2UpdateBuilder toBuilder(){
+    public LoadBalancerV2UpdateBuilder toBuilder() {
         return new LoadBalancerV2UpdateConcreteBuilder();
     }
 }

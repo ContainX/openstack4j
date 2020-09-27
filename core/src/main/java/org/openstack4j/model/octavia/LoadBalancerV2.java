@@ -9,9 +9,10 @@ import java.util.List;
 
 /**
  * An entity used to update an lbaas v2 loadbalancer
+ *
  * @author wei
  */
-public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Builder> {
+public interface LoadBalancerV2 extends ModelEntity, Buildable<LoadBalancerV2Builder> {
     /**
      * @return id. The unique ID for the loadbalancer.
      */
@@ -54,7 +55,7 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
 
     /**
      * @return The administrative state of the loadbalancer, which is up (true) or
-     *         down (false).
+     * down (false).
      */
     boolean isAdminStateUp();
 
@@ -65,19 +66,20 @@ public interface LoadBalancerV2  extends ModelEntity, Buildable<LoadBalancerV2Bu
 
     /**
      * @return provisioningStatus.The provisioning status of the loadbalancer. Indicates whether the
-     *         loadbalancer is provisioning.
-     *         Either ACTIVE, PENDING_CREATE or ERROR.
+     * loadbalancer is provisioning.
+     * Either ACTIVE, PENDING_CREATE or ERROR.
      */
     LbProvisioningStatus getProvisioningStatus();
 
     /**
      * @return operatingStatus.The operating status of the loadbalancer. Indicates whether the
-     *         loadbalancer is operational.
+     * loadbalancer is operational.
      */
     LbOperatingStatus getOperatingStatus();
 
     /**
      * Retrieve provider the load balancer is provisioned with
+     *
      * @return provider
      */
     String getProvider();

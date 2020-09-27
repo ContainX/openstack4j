@@ -1,17 +1,17 @@
 package org.openstack4j.model.gbp;
 
-import java.util.List;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.gbp.builder.PolicyRuleBuilder;
 
+import java.util.List;
+
 /**
  * Policy rule Model Entity
- * 
+ *
  * @author vinod borole
  */
-public interface PolicyRule extends Resource,Buildable<PolicyRuleBuilder> {
+public interface PolicyRule extends Resource, Buildable<PolicyRuleBuilder> {
 
     /**
      * Is policy rule enabled

@@ -31,7 +31,7 @@ public interface ShareInstanceService extends RestService {
      * Administrator only. Explicitly updates the state of a share instance.
      *
      * @param shareInstanceId the share instance ID
-     * @param status the status to set
+     * @param status          the status to set
      * @return the action response
      */
     ActionResponse resetState(String shareInstanceId, ShareInstance.Status status);

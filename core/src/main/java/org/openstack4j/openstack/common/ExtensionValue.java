@@ -18,90 +18,90 @@ import java.util.List;
  */
 public class ExtensionValue implements Extension {
 
-	private static final long serialVersionUID = 1L;
-	String name;
-	URI namespace;
-	String alias;
-	Date updated;
-	String description;
-	List<GenericLink> links;
+    private static final long serialVersionUID = 1L;
+    String name;
+    URI namespace;
+    String alias;
+    Date updated;
+    String description;
+    List<GenericLink> links;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public URI getNamespace() {
-		return namespace;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public URI getNamespace() {
+        return namespace;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public String getAlias() {
-		return alias;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public String getAlias() {
+        return alias;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ssX")
-	public Date getUpdated() {
-		return updated;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssX")
+    public Date getUpdated() {
+        return updated;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public List<? extends Link> getLinks() {
-		return links;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public List<? extends Link> getLinks() {
+        return links;
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(Extension.class).omitNullValues()
-						.add("name", name)
-						.add("namespace", namespace)
-						.add("description", description)
-						.add("alias", alias)
-						.add("updated", updated)
-						.add("links", links)
-						.addValue("\n")
-						.toString();
-	}
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(Extension.class).omitNullValues()
+                .add("name", name)
+                .add("namespace", namespace)
+                .add("description", description)
+                .add("alias", alias)
+                .add("updated", updated)
+                .add("links", links)
+                .addValue("\n")
+                .toString();
+    }
 
-	@JsonRootName("extensions")
-	public static class ExtensionList extends ListResult<ExtensionValue> {
-		private static final long serialVersionUID = 1L;
+    @JsonRootName("extensions")
+    public static class ExtensionList extends ListResult<ExtensionValue> {
+        private static final long serialVersionUID = 1L;
 
-		@JsonProperty("values")
-		private List<ExtensionValue> list;
+        @JsonProperty("values")
+        private List<ExtensionValue> list;
 
-		public List<ExtensionValue> value() {
-			return list;
-		}
-	}
+        public List<ExtensionValue> value() {
+            return list;
+        }
+    }
 
-	public static class Extensions extends ListResult<ExtensionValue> {
-		private static final long serialVersionUID = 1L;
+    public static class Extensions extends ListResult<ExtensionValue> {
+        private static final long serialVersionUID = 1L;
 
-		@JsonProperty("extensions")
-		private List<ExtensionValue> list;
+        @JsonProperty("extensions")
+        private List<ExtensionValue> list;
 
-		public List<ExtensionValue> value() {
-			return list;
-		}
-	}
+        public List<ExtensionValue> value() {
+            return list;
+        }
+    }
 }

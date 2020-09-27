@@ -47,7 +47,7 @@ public interface ShareSnapshotService extends RestService {
     /**
      * Updates a share snapshot.
      *
-     * @param snapshotId the snapshot ID
+     * @param snapshotId            the snapshot ID
      * @param snapshotUpdateOptions the options to update on the snapshot
      * @return the snapshot
      */
@@ -65,7 +65,7 @@ public interface ShareSnapshotService extends RestService {
      * Administrator only. Explicitly updates the state of a share snapshot.
      *
      * @param snapshotId the snapshot ID
-     * @param status the status to set
+     * @param status     the status to set
      * @return the action response
      */
     ActionResponse resetState(String snapshotId, ShareSnapshot.Status status);

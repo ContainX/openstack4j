@@ -11,6 +11,10 @@
     "domain_id": "7a71863c2d1d4444b3e6c2cd36955e1e",
     "name": "ProjectX",
     "extra_key1": "value1",
-    "tags": ["one", "two", "three"]
+    "tags": [
+      "one",
+      "two",
+      "three"
+    ]
   }
 }

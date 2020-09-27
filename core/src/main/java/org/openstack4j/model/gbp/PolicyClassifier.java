@@ -6,11 +6,11 @@ import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
 
 /**
  * Policy Classifier Model Entity
- * 
+ *
  * @author vinod borole
  */
 public interface PolicyClassifier extends Buildable<PolicyClassifierBuilder>, Resource {
-    
+
     /**
      * Is Policy classifier shared
      *

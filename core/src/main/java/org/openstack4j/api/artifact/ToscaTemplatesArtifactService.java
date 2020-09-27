@@ -3,7 +3,6 @@ package org.openstack4j.api.artifact;
 
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.artifact.ArtifactUpdate;
-import org.openstack4j.model.artifact.Artifacts;
 import org.openstack4j.model.artifact.ToscaTemplatesArtifact;
 import org.openstack4j.model.artifact.ToscaTemplatesArtifacts;
 import org.openstack4j.model.common.ActionResponse;

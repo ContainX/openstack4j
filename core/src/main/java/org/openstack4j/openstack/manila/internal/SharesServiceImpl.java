@@ -51,7 +51,7 @@ public class SharesServiceImpl extends BaseShareServices implements SharesServic
     }
 
     private List<? extends Share> list(boolean detail) {
-        return get(ManilaShare.Shares.class, uri("/shares" +  (detail ? "/detail" : "")))
+        return get(ManilaShare.Shares.class, uri("/shares" + (detail ? "/detail" : "")))
                 .execute()
                 .getList();
     }
@@ -217,9 +217,9 @@ public class SharesServiceImpl extends BaseShareServices implements SharesServic
      * Invoke the action on teh given share and unserialize the response body into the given return type.
      *
      * @param returnType the return type to unserialize to
-     * @param shareId the share ID
-     * @param action the action to invoke
-     * @param <R> The type of the return type
+     * @param shareId    the share ID
+     * @param action     the action to invoke
+     * @param <R>        The type of the return type
      * @return the unserialized response body of the server
      */
     private <R> R invokeAction(Class<R> returnType, String shareId, ShareAction action) {
@@ -232,7 +232,7 @@ public class SharesServiceImpl extends BaseShareServices implements SharesServic
      * Invoke the action on the given share.
      *
      * @param shareId the share ID
-     * @param action the action to invoke
+     * @param action  the action to invoke
      * @return the action response of the server
      */
     private ActionResponse invokeAction(String shareId, ShareAction action) {

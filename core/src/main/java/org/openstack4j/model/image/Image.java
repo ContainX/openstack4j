@@ -1,20 +1,18 @@
 package org.openstack4j.model.image;
 
-import java.util.Date;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.BasicResource;
 import org.openstack4j.model.image.builder.ImageBuilder;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import javax.annotation.Nullable;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * A Glance v1.1 Image
- * 
+ *
  * @author Jeremy Unruh
  * @see http://docs.openstack.org/api/openstack-image-service/1.1/content/index.html
  */
@@ -24,8 +22,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
         UNRECOGNIZED, ACTIVE, SAVING, QUEUED, KILLED, PENDING_DELETE, DELETED;
 
         @JsonCreator
-        public static Status value(String v) 
-        {
+        public static Status value(String v) {
             if (v == null) return UNRECOGNIZED;
             try {
                 return valueOf(v.toUpperCase());
@@ -80,14 +77,14 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
     /**
      * Timestamp when an image's metadata was last updated, not its image data, as all image data is immutable once stored in Glance
-     * 
+     *
      * @return the last updated date/time
      */
     Date getUpdatedAt();
 
     /**
      * The timestamp of when the image was created
-     * 
+     *
      * @return the created date/time
      */
     Date getCreatedAt();
@@ -105,6 +102,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
     /**
      * Indicates  whether the image is publicly available
+     *
      * @return true if the image is publicly available
      */
     boolean isPublic();
@@ -121,25 +119,26 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
     /**
      * A mapping of free-form key/value pairs that have been saved with the image metadata
+     *
      * @return Map of key to value
      */
     Map<String, String> getProperties();
 
     /**
      * This will always be null on any list or get request.  It is intented as an option for creating, updating or reserving images
+     *
      * @return the store type
      */
     StoreType getStoreType();
 
     /**
      * Determines if this image is a snapshot
-     * 
+     *
      * @return true if this image is a snapshot
      */
     boolean isSnapshot();
 
     /**
-     *
      * @return the image url as String
      */
     String getCopyFrom();

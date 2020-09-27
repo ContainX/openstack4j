@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Service that provides CRUD operations for workbook definitions.
- * 
+ *
  * @author Renat Akhmerov
  */
 public interface WorkbookDefinitionService extends RestService {
@@ -25,7 +25,7 @@ public interface WorkbookDefinitionService extends RestService {
      * Create a new workbook definition.
      *
      * @param wbText Text in YAML format (Mistral language) with a workbook definition.
-     * @param scope Scope of newly created workbook.
+     * @param scope  Scope of newly created workbook.
      * @return Created workbook definition.
      */
     WorkbookDefinition create(InputStream wbText, Scope scope);

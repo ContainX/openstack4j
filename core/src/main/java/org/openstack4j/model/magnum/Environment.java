@@ -6,6 +6,7 @@ import org.openstack4j.model.ModelEntity;
 public interface Environment extends ModelEntity, Buildable<EnvironmentBuilder> {
     /**
      * Gets path
+     *
      * @return path
      */
     String getPath();
@@ -13,6 +14,7 @@ public interface Environment extends ModelEntity, Buildable<EnvironmentBuilder> 
 
     /**
      * Gets ldLibraryPath
+     *
      * @return ldLibraryPath
      */
     String getLdLibraryPath();

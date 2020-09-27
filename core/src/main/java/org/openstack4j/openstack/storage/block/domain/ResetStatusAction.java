@@ -8,20 +8,20 @@ import org.openstack4j.model.storage.block.Volume;
 @JsonRootName("os-reset_status")
 public class ResetStatusAction implements ModelEntity {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@JsonProperty("status")
-	private final Volume.Status status;
+    @JsonProperty("status")
+    private final Volume.Status status;
 
-	public ResetStatusAction(Volume.Status status) {
-		this.status = status;
-	}
+    public ResetStatusAction(Volume.Status status) {
+        this.status = status;
+    }
 
-	public static ResetStatusAction create(Volume.Status status) {
-		return new ResetStatusAction(status);
-	}
+    public static ResetStatusAction create(Volume.Status status) {
+        return new ResetStatusAction(status);
+    }
 
-	public Volume.Status getStatus() {
-		return status;
-	}
+    public Volume.Status getStatus() {
+        return status;
+    }
 }

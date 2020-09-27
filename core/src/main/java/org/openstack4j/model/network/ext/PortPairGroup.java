@@ -1,17 +1,16 @@
 package org.openstack4j.model.network.ext;
 
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.network.ext.builder.PortPairGroupBuilder;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * A Port Pair Group Entity.
  *
  * @author Dmitry Gerenrot.
- *
  */
 public interface PortPairGroup extends Resource, Buildable<PortPairGroupBuilder> {
 
@@ -27,7 +26,7 @@ public interface PortPairGroup extends Resource, Buildable<PortPairGroupBuilder>
 
     /**
      * @return Dictionary of parameters for this group.
-     *      Possible keys: lb_fields or service_type. Check openstack documentation.
+     * Possible keys: lb_fields or service_type. Check openstack documentation.
      */
     Map<String, Object> getPortPairGroupParameters();
 }

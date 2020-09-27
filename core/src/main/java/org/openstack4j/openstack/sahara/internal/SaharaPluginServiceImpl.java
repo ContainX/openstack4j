@@ -1,9 +1,5 @@
 package org.openstack4j.openstack.sahara.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.sahara.SaharaPluginService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
@@ -14,9 +10,13 @@ import org.openstack4j.openstack.sahara.domain.SaharaClusterTemplate;
 import org.openstack4j.openstack.sahara.domain.SaharaPlugin;
 import org.openstack4j.openstack.sahara.domain.SaharaPlugin.SaharaPlugins;
 
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Sahara Data Processing Operations
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  */
 public class SaharaPluginServiceImpl extends BaseSaharaServices implements SaharaPluginService {
@@ -47,6 +47,7 @@ public class SaharaPluginServiceImpl extends BaseSaharaServices implements Sahar
         checkNotNull(version);
         return get(SaharaPlugin.class, uri("/plugins/%s/%s", name, version)).execute();
     }
+
     /**
      * {@inheritDoc}
      */
@@ -56,7 +57,7 @@ public class SaharaPluginServiceImpl extends BaseSaharaServices implements Sahar
         checkNotNull(version);
         checkNotNull(templateName);
         return post(SaharaClusterTemplate.class, uri("/plugins/%s/%s/convert-config/%s", name, version, templateName)).entity(payload)  // setup request
-                     .execute(ExecutionOptions.<SaharaClusterTemplate>create(PropagateOnStatus.on(404))); // Use respongse progagation for "Not found" status to throw exception instead of return null
+                .execute(ExecutionOptions.<SaharaClusterTemplate>create(PropagateOnStatus.on(404))); // Use respongse progagation for "Not found" status to throw exception instead of return null
 
 
     }

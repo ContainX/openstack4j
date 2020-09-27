@@ -1,17 +1,16 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import static com.google.common.base.MoreObjects.toStringHelper;
-
-import java.util.Date;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.common.Link;
 import org.openstack4j.model.storage.block.VolumeTransfer;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.Date;
+import java.util.List;
+
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 /**
  * Represents a Volume Transfer Entity which is used for creating a volume transfer

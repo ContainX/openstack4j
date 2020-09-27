@@ -1,4 +1,5 @@
 package org.openstack4j.api.network;
+
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.common.ActionResponse;
@@ -11,17 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.*;
 
 /**
- *
  * @author ashleykasim
- *
  */
-@Test(suiteName="Network/memberV2", enabled = true)
+@Test(suiteName = "Network/memberV2", enabled = true)
 public class MemberV2Tests extends AbstractTest {
     private static final String MEMBERSV2_JSON = "/network/membersv2.json";
     private static final String MEMBERV2_JSON = "/network/memberv2.json";

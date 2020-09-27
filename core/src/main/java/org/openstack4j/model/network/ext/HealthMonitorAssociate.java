@@ -6,15 +6,14 @@ import org.openstack4j.model.network.ext.builder.HealthMonitorAssociateBuilder;
 
 /**
  * An entity used to associate  a healthMonitor with a lb pool
- * 
- * @author liujunpeng
  *
+ * @author liujunpeng
  */
 public interface HealthMonitorAssociate extends ModelEntity,
-		Buildable<HealthMonitorAssociateBuilder> {
+        Buildable<HealthMonitorAssociateBuilder> {
 
-	/**
-	 * @return id the healthMonitor identifier
-	 */
-	public String getId();
+    /**
+     * @return id the healthMonitor identifier
+     */
+    public String getId();
 }

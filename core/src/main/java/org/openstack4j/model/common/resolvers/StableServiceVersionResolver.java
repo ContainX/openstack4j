@@ -1,10 +1,10 @@
 package org.openstack4j.model.common.resolvers;
 
-import java.util.SortedSet;
-
 import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.model.identity.v3.Service;
 import org.openstack4j.model.identity.v2.Access;
+import org.openstack4j.model.identity.v3.Service;
+
+import java.util.SortedSet;
 
 /**
  * Resolves each service to the lowest version which we consider most stable and

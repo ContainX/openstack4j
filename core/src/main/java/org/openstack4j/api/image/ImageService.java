@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * OpenStack (Glance) Image based Operations
- * 
+ *
  * @author Jeremy Unruh
  */
 public interface ImageService extends RestService {
@@ -27,37 +27,38 @@ public interface ImageService extends RestService {
     List<? extends CachedImage> listChachedImages();
 
     /**
-     * Lists public VM images by the default page size defined by openstack 
-     * 
+     * Lists public VM images by the default page size defined by openstack
+     *
      * @return list of images or empty
      */
     List<? extends Image> list();
 
     /**
      * * Returns list of public VM images filtered by parameters.
-     * 
+     *
      * @param filteringParams map (name, value) of filtering parameters
-     * @return 
+     * @return
      */
     List<? extends Image> list(Map<String, String> filteringParams);
+
     /**
      * Lists all public VM images
-     * 
+     *
      * @return list of images or empty
      */
     List<? extends Image> listAll();
 
     /**
      * * Returns list of public VM images filtered by parameters when the result greater than the default page size defined by openstack
-     * 
+     *
      * @param filteringParams map (name, value) of filtering parameters
-     * @return 
+     * @return
      */
     List<? extends Image> listAll(Map<String, String> filteringParams);
 
     /**
      * Gets an Image by ID
-     * 
+     *
      * @param imageId the image identifier
      * @return the image or null if not found
      */
@@ -65,7 +66,7 @@ public interface ImageService extends RestService {
 
     /**
      * Deletes an Image by ID
-     * 
+     *
      * @param imageId the image identifier
      * @return the action response
      */
@@ -73,7 +74,7 @@ public interface ImageService extends RestService {
 
     /**
      * Updates an Image.  The image must have the id set or a validation exception will be thrown
-     * 
+     *
      * @param image the image to update
      * @return the updated image
      */
@@ -81,14 +82,16 @@ public interface ImageService extends RestService {
 
     /**
      * Return the image date for the image by ID
+     *
      * @param imageId the image identifier
      * @return the input stream or null if not found
      */
     InputStream getAsStream(String imageId);
 
     /**
-     * Creates a new Image 
-     * @param image the image to create
+     * Creates a new Image
+     *
+     * @param image   the image to create
      * @param payload the payload (image data to upload).  Note: if the payload is null then {@link #reserve(Image)} will be called internally
      * @return the updated data from the newly stored image
      */
@@ -96,7 +99,7 @@ public interface ImageService extends RestService {
 
     /**
      * Reserves a new image to be uploaded later. See {@link #upload(String, Payload, Image)}
-     * 
+     *
      * @param image the image to reserve
      * @return the updated data from the newly stored image
      */
@@ -109,16 +112,17 @@ public interface ImageService extends RestService {
      * image data can be added using this method. If the image already as data
      * associated with it (e.g. not in the queued state), then you will receive a
      * 409 Conflict exception
-     * 
+     *
      * @param imageId the image identifier of the previously reserved image
      * @param payload the playload to upload
-     * @param image the optional Image which will be used to update meta data during this transaction
+     * @param image   the optional Image which will be used to update meta data during this transaction
      * @return
      */
     Image upload(String imageId, Payload<?> payload, @Nullable Image image);
 
     /**
      * List of the other system tenants that may access a given virtual machine image that the Glance server knows about.
+     *
      * @param imageId the image identifer
      * @return List of ImageMember or empty
      */
@@ -126,8 +130,8 @@ public interface ImageService extends RestService {
 
     /**
      * Authorize a tenant to access a private image
-     * 
-     * @param imageId the image identifier
+     *
+     * @param imageId  the image identifier
      * @param tenantId the tenant
      * @return true if successful
      */
@@ -135,8 +139,8 @@ public interface ImageService extends RestService {
 
     /**
      * Authorize a tenant to access a private image
-     * 
-     * @param imageId the image identifier
+     *
+     * @param imageId  the image identifier
      * @param tenantId the tenant
      * @param canShare both existing and new memberships will have `can_share` set to the provided value
      * @return true if successful
@@ -145,7 +149,8 @@ public interface ImageService extends RestService {
 
     /**
      * Revoke a tenant's right to access a private image.
-     * @param imageId the image identifier
+     *
+     * @param imageId  the image identifier
      * @param tenantId the tenant to remove (identifier)
      * @return true if successful
      */

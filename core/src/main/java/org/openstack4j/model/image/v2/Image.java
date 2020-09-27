@@ -1,18 +1,18 @@
 package org.openstack4j.model.image.v2;
 
-import java.util.Date;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.BasicResource;
 import org.openstack4j.model.image.v2.builder.ImageBuilder;
 import org.openstack4j.openstack.image.v2.domain.GlanceImage.Location;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A Glance v2.0-2.3 Image
+ *
  * @author emjburns
  * @see http://developer.openstack.org/api-ref-image-v2.html#showImage-v2
  */
@@ -65,8 +65,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
         PENDING_DELETE;
 
         @JsonCreator
-        public static ImageStatus value(String v)
-        {
+        public static ImageStatus value(String v) {
             if (v == null) return UNRECOGNIZED;
             try {
                 return valueOf(v.toUpperCase());
@@ -88,8 +87,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
         @JsonCreator
         public static ImageVisibility forValue(String value) {
-            if (value != null)
-            {
+            if (value != null) {
                 for (ImageVisibility s : ImageVisibility.values()) {
                     if (s.name().equalsIgnoreCase(value)) {
                         return s;
@@ -185,7 +183,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
     /**
      * @return A list of URLs to access the image file in external store.
-     *
+     * <p>
      * This list appears if the show_multiple_locations option is
      * set to true in the Image service's configuration file.
      */
@@ -215,6 +213,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
     /**
      * Pattern: ^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$
+     *
      * @return ID of image stored in Glance that should be used as the ramdisk when booting an AMI-style image.
      */
     String getRamdiskId();
@@ -232,6 +231,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
     /**
      * Pattern: ^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$
+     *
      * @return ID of image stored in Glance that should be used as the kernel when booting an AMI-style image
      */
     String getKernelId();

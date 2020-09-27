@@ -4,7 +4,7 @@ import org.openstack4j.model.ModelEntity;
 
 /**
  * OS Host describes capabilities of each compute host where Nova servers are running on
- * 
+ *
  * @author Qin An
  */
 public interface HostResource extends ModelEntity {
@@ -32,21 +32,21 @@ public interface HostResource extends ModelEntity {
      * @return the project id (or special name like total, used_now, used_max)
      */
     public String getProject();
-    
 
-	/**
-	 * @return service
-	 */
-	String getService();
-	
-	/**
-	 * @return zone
-	 */
-	String getZone();
-	
-	/**
-	 * @return host name
-	 */
-	String getHostName();
+
+    /**
+     * @return service
+     */
+    String getService();
+
+    /**
+     * @return zone
+     */
+    String getZone();
+
+    /**
+     * @return host name
+     */
+    String getHostName();
 
 }

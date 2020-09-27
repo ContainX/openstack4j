@@ -3,7 +3,6 @@ package org.openstack4j.api.identity.v3
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
-
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException
@@ -12,20 +11,20 @@ import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.AuthVersion
 import org.openstack4j.model.identity.v3.User
 import org.openstack4j.openstack.OSFactory
-
 import software.betamax.Configuration
 import software.betamax.MatchRules
 import software.betamax.TapeMode
 import software.betamax.junit.Betamax
 import software.betamax.junit.RecorderRule
-
 import spock.lang.IgnoreIf
 
 @Slf4j
 class KeystoneAuthenticationSpec extends AbstractSpec {
 
-    @Rule TestName KeystoneAuthenticationTest
-    @Rule public RecorderRule recorderRule = new RecorderRule(
+    @Rule
+    TestName KeystoneAuthenticationTest
+    @Rule
+    public RecorderRule recorderRule = new RecorderRule(
             Configuration.builder()
                     .tapeRoot(new File(TAPEROOT + "identity.v3"))
                     .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
@@ -36,29 +35,28 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
 
     // skipTest will evaluate to true if not all mandatory attributes are set causing the project to build without running the tests.
     static {
-        if(
+        if (
         USER_ID == null ||
-        USER_NAME == null ||
-        USER_DOMAIN_ID == null ||
-        AUTH_URL == null ||
-        PASSWORD == null ||
-        PROJECT_ID == null ||
-        PROJECT_NAME == null ||
-        PROJECT_DOMAIN_ID == null ||
-        DOMAIN_ID == null ||
-        DOMAIN_NAME == null ||
-        REGION_ONE == null ) {
+                USER_NAME == null ||
+                USER_DOMAIN_ID == null ||
+                AUTH_URL == null ||
+                PASSWORD == null ||
+                PROJECT_ID == null ||
+                PROJECT_NAME == null ||
+                PROJECT_DOMAIN_ID == null ||
+                DOMAIN_ID == null ||
+                DOMAIN_NAME == null ||
+                REGION_ONE == null) {
 
             skipTest = true
-        }
-        else{
+        } else {
             skipTest = false
         }
     }
 
     def setupSpec() {
 
-        if( skipTest != true ) {
+        if (skipTest != true) {
             log.info("USER_ID: " + USER_ID)
             log.info("USER_NAME: " + USER_NAME)
             log.info("USER_DOMAIN_ID: " + USER_DOMAIN_ID)
@@ -70,8 +68,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
             log.info("DOMAIN_ID: " + DOMAIN_ID)
             log.info("DOMAIN_NAME: " + DOMAIN_NAME)
             log.info("REGION_ONE: " + REGION_ONE)
-        }
-        else {
+        } else {
             log.warn("Skipping integration-test cases because not all mandatory attributes are set.");
         }
     }
@@ -81,11 +78,10 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     }
 
 
-
     // ------------ Authentification Tests ------------
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userId_password_projectId")
+    @Betamax(tape = "authenticate_v3_userId_password_projectId")
     def "authenticate with userId, password and scope projectId"() {
 
         given: "authenticate using credentials and projectId-scope to get a valid, scoped token"
@@ -104,7 +100,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     }
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userId_password_projectName_projectDomainId")
+    @Betamax(tape = "authenticate_v3_userId_password_projectName_projectDomainId")
     def "authenticate with userId, password and scope projectName, projectDomainId"() {
 
         given: "authenticate with using credentials and scope given by projectName and the projects domain to get a valid, scoped token"
@@ -124,7 +120,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     }
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userName_password_userDomainId_projectId")
+    @Betamax(tape = "authenticate_v3_userName_password_userDomainId_projectId")
     def "authenticate with userName, password, userDomainId and scope projectId"() {
 
         given:
@@ -142,7 +138,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     }
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userId_password_domainId")
+    @Betamax(tape = "authenticate_v3_userId_password_domainId")
     def "authenticate with userId, password, and scope domainId"() {
 
         given:
@@ -161,7 +157,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     }
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userName_password_domainId")
+    @Betamax(tape = "authenticate_v3_userName_password_domainId")
     def "authenticate with userName, password, domainId and scope domainId"() {
 
         given:
@@ -213,7 +209,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     //    proxyServer.stop()
     //
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_token.tape")
+    @Betamax(tape = "authenticate_v3_token.tape")
     def "authenticate with userId, password, scope projectId and use that token to re-authenticate"() {
 
         given: "authenticate with credentials and project scope to get a valid token"
@@ -260,7 +256,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     //    Therefore the tokenId's are identical when we verify, because we only check one http interaction.
     //    Need to manually configure when to start and stop the recording.
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userId_password_unscoped_reauth")
+    @Betamax(tape = "authenticate_v3_userId_password_unscoped_reauth")
     def "authenticate with userId, password to get an unscoped token and then reauthenticate with it to get a scoped token"() {
 
         given: "authenticate with credentials but no scope to get a valid, unscoped token"
@@ -290,7 +286,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     //    Therefore the tokenId's are identical when we verify, because we only check one http interaction.
     //    Need to manually configure when to start and stop the recording.
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userId_password_unscopedTokenToScopedToken")
+    @Betamax(tape = "authenticate_v3_userId_password_unscopedTokenToScopedToken")
     def "authenticate with userId, password to get and unscoped token used to get scoped token"() {
 
         given:
@@ -320,7 +316,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     }
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userId_password_domainId_regionValid")
+    @Betamax(tape = "authenticate_v3_userId_password_domainId_regionValid")
     def "authenticate with userId, password and scope domainId and get a list of users in a valid region"() {
 
         given: "authenticate with credentials and scope specified by domainId to get a valid, scoped token"
@@ -344,7 +340,7 @@ class KeystoneAuthenticationSpec extends AbstractSpec {
     }
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="authenticate_v3_userId_password_domainId_regionInvalid")
+    @Betamax(tape = "authenticate_v3_userId_password_domainId_regionInvalid")
     def "authenticating with userId, password and scope domainId in an non-existend region should throw an RegionEndpointNotFoundException"() {
 
         given: "authenticate with credentials and scope specified by domainId to get a valid, scoped token"

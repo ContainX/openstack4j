@@ -10,18 +10,18 @@ public enum NetworkServiceParamValue {
 
     SELF_SUBNET,
     NAT_POOL,
-    UNRECOGNIZED
-    ;
+    UNRECOGNIZED;
 
     @JsonValue
-    public String value() { return name().toLowerCase(); }
+    public String value() {
+        return name().toLowerCase();
+    }
 
     @JsonCreator
     public static NetworkServiceParamValue value(String paramValue) {
         try {
             return valueOf(paramValue.toUpperCase());
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return UNRECOGNIZED;
         }
     }

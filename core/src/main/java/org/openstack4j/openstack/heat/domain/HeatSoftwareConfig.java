@@ -1,17 +1,16 @@
 package org.openstack4j.openstack.heat.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import org.openstack4j.model.heat.SoftwareConfig;
-import org.openstack4j.model.heat.builder.SoftwareConfigBuilder;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Lists;
+import org.openstack4j.model.heat.SoftwareConfig;
+import org.openstack4j.model.heat.builder.SoftwareConfigBuilder;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Model implementation for Software Config
@@ -81,10 +80,10 @@ public class HeatSoftwareConfig implements SoftwareConfig {
 
     public String toString() {
         return MoreObjects.toStringHelper(SoftwareConfig.class).omitNullValues()
-                      .add("id", id).add("name", name).add("group", group).addValue("\n")
-                      .add("inputs", inputs).addValue("\n").add("outputs", outputs)
-                      .addValue("\n").add("config", config).add("options", options)
-                      .toString();
+                .add("id", id).add("name", name).add("group", group).addValue("\n")
+                .add("inputs", inputs).addValue("\n").add("outputs", outputs)
+                .addValue("\n").add("config", config).add("options", options)
+                .toString();
     }
 
     public static class SCInput implements Input {
@@ -98,7 +97,8 @@ public class HeatSoftwareConfig implements SoftwareConfig {
         @JsonProperty("type")
         String type;
 
-        public SCInput() { }
+        public SCInput() {
+        }
 
         public SCInput(String name, String type, String description, String defaultValue) {
             this.name = name;
@@ -129,9 +129,9 @@ public class HeatSoftwareConfig implements SoftwareConfig {
 
         public String toString() {
             return MoreObjects.toStringHelper(Input.class).omitNullValues()
-                          .add("name", name).add("type", type)
-                          .add("description", description).add("default", defaultValue)
-                          .toString();
+                    .add("name", name).add("type", type)
+                    .add("description", description).add("default", defaultValue)
+                    .toString();
         }
     }
 
@@ -146,7 +146,8 @@ public class HeatSoftwareConfig implements SoftwareConfig {
         @JsonProperty("type")
         String type;
 
-        public SCOutput() { }
+        public SCOutput() {
+        }
 
         public SCOutput(String name, String type, String description, boolean errorOutput) {
             this.name = name;
@@ -177,9 +178,9 @@ public class HeatSoftwareConfig implements SoftwareConfig {
 
         public String toString() {
             return MoreObjects.toStringHelper(Output.class).omitNullValues()
-                          .add("name", name).add("type", type)
-                          .add("description", description).add("errorOutput", errorOutput)
-                          .toString();
+                    .add("name", name).add("type", type)
+                    .add("description", description).add("errorOutput", errorOutput)
+                    .toString();
         }
     }
 
@@ -202,7 +203,7 @@ public class HeatSoftwareConfig implements SoftwareConfig {
 
         @Override
         public SoftwareConfigBuilder from(SoftwareConfig in) {
-            return new Builder((HeatSoftwareConfig)in);
+            return new Builder((HeatSoftwareConfig) in);
         }
 
         @Override

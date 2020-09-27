@@ -1,8 +1,8 @@
 package org.openstack4j.api.workflow;
 
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.workflow.Scope;
 import org.openstack4j.model.workflow.CronTrigger;
+import org.openstack4j.model.workflow.Scope;
 import org.openstack4j.openstack.workflow.domain.MistralCronTrigger;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -10,9 +10,7 @@ import org.testng.annotations.Test;
 import java.util.Collections;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
+import static org.testng.Assert.*;
 
 /**
  * Test cases for {@link CronTriggerService}.

@@ -1,12 +1,11 @@
 package org.openstack4j.core.transport.functions;
 
-import java.util.Map;
-
+import com.google.common.base.Function;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.openstack.internal.Parser;
 
-import com.google.common.base.Function;
+import java.util.Map;
 
 /**
  * Takes an HttpResponse as input and returns an ActionResponse as an output
@@ -19,7 +18,7 @@ public class ResponseToActionResponse implements Function<HttpResponse, ActionRe
 
     @Override
     public ActionResponse apply(HttpResponse response) {
-       return apply(response, false);
+        return apply(response, false);
     }
 
     public ActionResponse apply(HttpResponse response, boolean returnNullIfNotMapped) {

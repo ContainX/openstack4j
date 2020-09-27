@@ -1,16 +1,14 @@
 package org.openstack4j.api.identity.v3;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
-import java.util.List;
-
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.identity.v3.RoleAssignment;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static org.testng.Assert.*;
 
 /**
  * Tests the Identity/Keystone API version 3 RoleService
@@ -56,7 +54,7 @@ public class KeystoneRoleServiceTests extends AbstractTest {
         respondWith(JSON_ROLES_ONE_ENTRY);
         List<? extends Role> list = osv3().identity().roles().getByName(ROLE_NAME);
         assertTrue(list.size() == 1);
-        assertEquals(list.get(0).getId(),ROLE_ID);
+        assertEquals(list.get(0).getId(), ROLE_ID);
         assertEquals(list.get(0).getName(), ROLE_NAME);
         assertEquals(list.get(0).getDomainId(), USER_DOMAIN_ID);
     }
@@ -109,6 +107,7 @@ public class KeystoneRoleServiceTests extends AbstractTest {
 
     // TODO: this test is disabled due to a malformed response returned by
     // OpenStack as described in issue #530
+
     /**
      * checks if a user has a role in domain context
      *
@@ -190,6 +189,7 @@ public class KeystoneRoleServiceTests extends AbstractTest {
 
     // TODO: this test is disabled due to a malformed response returned by
     // OpenStack as described in issue #530
+
     /**
      * checks if a user has a role in domain context
      *
@@ -235,7 +235,7 @@ public class KeystoneRoleServiceTests extends AbstractTest {
 
         respondWithCodeAndResource(404, JSON_ROLES_GRANTROLE_ERROR);
 
-        ActionResponse response_fail = osv3().identity().roles().grantDomainUserRole(USER_DOMAIN_ID, USER_ID,"nonExistingRoleId");
+        ActionResponse response_fail = osv3().identity().roles().grantDomainUserRole(USER_DOMAIN_ID, USER_ID, "nonExistingRoleId");
 
         assertFalse(response_fail.isSuccess());
 

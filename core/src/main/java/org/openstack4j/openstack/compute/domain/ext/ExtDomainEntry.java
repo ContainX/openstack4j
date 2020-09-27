@@ -1,13 +1,12 @@
 package org.openstack4j.openstack.compute.domain.ext;
 
-import java.util.List;
-
-import org.openstack4j.model.compute.ext.DomainEntry;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.compute.ext.DomainEntry;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * A Floating IP DNS Extension - Domain Entry
@@ -60,9 +59,9 @@ public class ExtDomainEntry implements DomainEntry {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                  .add("availabilityZone", availabilityZone).add("domain", domain)
-                  .add("project", project).add("scope", scope)
-                  .toString();
+                .add("availabilityZone", availabilityZone).add("domain", domain)
+                .add("project", project).add("scope", scope)
+                .toString();
     }
 
     public static class DomainEntries extends ListResult<ExtDomainEntry> {

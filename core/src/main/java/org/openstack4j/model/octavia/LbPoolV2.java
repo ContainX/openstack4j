@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * A v2 loadbanlance pool
+ *
  * @author wei
  */
 public interface LbPoolV2 extends ModelEntity, Buildable<LbPoolV2Builder> {
@@ -43,19 +44,19 @@ public interface LbPoolV2 extends ModelEntity, Buildable<LbPoolV2Builder> {
     LbMethod getLbMethod();
 
     /**
-     *
      * @return SessionPersistence
      */
     SessionPersistence getSessionPersistence();
 
     /**
      * @return The administrative state of the lb pool, which is up (true) or
-     *         down (false).
+     * down (false).
      */
     boolean isAdminStateUp();
 
     /**
      * Listeners associated with the pool
+     *
      * @return listeners associated with the pool
      */
     List<ListItem> getListeners();

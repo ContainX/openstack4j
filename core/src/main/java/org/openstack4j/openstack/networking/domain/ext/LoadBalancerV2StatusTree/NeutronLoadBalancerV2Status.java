@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * An object to hold status of lbaas v2 loadbalancer
+ *
  * @author emjburns
  */
 @JsonRootName("loadbalancer")
@@ -23,16 +24,16 @@ public class NeutronLoadBalancerV2Status extends Status implements LoadBalancerV
     private List<ListenerV2Status> listenerStatuses;
 
     @Override
-    public List<ListenerV2Status> getListenerStatuses(){
+    public List<ListenerV2Status> getListenerStatuses() {
         return listenerStatuses;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("name", name)

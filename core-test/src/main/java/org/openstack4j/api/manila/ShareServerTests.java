@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-@Test(suiteName="ShareServer")
+@Test(suiteName = "ShareServer")
 public class ShareServerTests extends AbstractTest {
     private static final String JSON_SHARE_SERVERS = "/manila/share_servers.json";
     private static final String JSON_SHARE_SERVER = "/manila/share_server.json";

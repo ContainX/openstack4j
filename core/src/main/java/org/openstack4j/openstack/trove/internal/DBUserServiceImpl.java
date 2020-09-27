@@ -23,7 +23,7 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
      */
     @Override
     public List<? extends DatabaseUser> list(String instanceId) {
-        return get(DatabaseUsers.class, uri("/instances/%s/users",instanceId)).execute().getList();
+        return get(DatabaseUsers.class, uri("/instances/%s/users", instanceId)).execute().getList();
     }
 
     /**
@@ -31,7 +31,7 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
      */
     @Override
     public List<? extends Database> listUserDatabases(String instanceId, String userName) {
-        return get(Databases.class, uri("/instances/%s/users/%s/databases",instanceId,userName)).execute().getList();
+        return get(Databases.class, uri("/instances/%s/users/%s/databases", instanceId, userName)).execute().getList();
     }
 
     /**
@@ -39,7 +39,7 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
      */
     @Override
     public ActionResponse create(String instanceId, DatabaseUsers databaseUsers) {
-        return post(ActionResponse.class, uri("/instances/%s/users",instanceId)).entity(databaseUsers).execute();
+        return post(ActionResponse.class, uri("/instances/%s/users", instanceId)).entity(databaseUsers).execute();
     }
 
     /**
@@ -49,7 +49,7 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
     public ActionResponse delete(String instanceId, String userName) {
         checkNotNull(instanceId);
         checkNotNull(userName);
-        return deleteWithResponse(uri("/instances/%s/users/%s",instanceId,userName)).execute();
+        return deleteWithResponse(uri("/instances/%s/users/%s", instanceId, userName)).execute();
     }
 
     /**
@@ -60,7 +60,7 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
         checkNotNull(instanceId);
         checkNotNull(userName);
         checkNotNull(databases);
-        return put(ActionResponse.class, uri("/instances/%s/users/%s/databases",instanceId,userName)).entity(databases).execute();
+        return put(ActionResponse.class, uri("/instances/%s/users/%s/databases", instanceId, userName)).entity(databases).execute();
     }
 
     /**
@@ -71,7 +71,7 @@ public class DBUserServiceImpl extends BaseTroveServices implements UserService 
         checkNotNull(instanceId);
         checkNotNull(userName);
         checkNotNull(dbName);
-        return deleteWithResponse(uri("/instances/%s/users/%s/databases/%s",instanceId,userName,dbName)).execute();
+        return deleteWithResponse(uri("/instances/%s/users/%s/databases/%s", instanceId, userName, dbName)).execute();
     }
 
 }

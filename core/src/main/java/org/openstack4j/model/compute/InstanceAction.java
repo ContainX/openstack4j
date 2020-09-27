@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * An action executed on an instance
- * 
+ *
  * @author Christian Banse
  */
 public interface InstanceAction {

@@ -20,8 +20,8 @@ import static org.testng.Assert.assertTrue;
  * Created by sumit gandhi on 8/22/2016.
  */
 
-@Test(suiteName="trove/databases")
-public class DBDatabaseServiceImplTest extends AbstractTest{
+@Test(suiteName = "trove/databases")
+public class DBDatabaseServiceImplTest extends AbstractTest {
 
     private static final String TROVE_DATABASES = "/trove/databases.json";
 
@@ -31,17 +31,17 @@ public class DBDatabaseServiceImplTest extends AbstractTest{
     }
 
     @Test
-    public void testListDatabases() throws Exception{
+    public void testListDatabases() throws Exception {
         String databaseInstanceId = "54c91755526e44b9808385a263db4aa6";
         respondWith(TROVE_DATABASES);
         List<? extends Database> databases = osv2().trove().databaseService().list(databaseInstanceId);
         assertEquals(5, databases.size());
         Preconditions.checkNotNull(databases.get(0));
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Database from List : "+ databases.get(0));
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Database from List : " + databases.get(0));
     }
 
     @Test
-    public void testCreateDatabase() throws Exception{
+    public void testCreateDatabase() throws Exception {
         String databaseInstanceId = "54c91755526e44b9808385a263db4aa6";
         respondWith(200);
         TroveBuilders troveBuilders = new TroveBuilders();

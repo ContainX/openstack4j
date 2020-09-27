@@ -11,14 +11,17 @@ import org.openstack4j.model.manila.actions.AccessOptions;
  */
 public final class ShareActions {
     @JsonRootName("os-access_list")
-    public static class ListAccessRulesAction implements ShareAction {}
+    public static class ListAccessRulesAction implements ShareAction {
+    }
 
     @JsonRootName("os-force_delete")
-    public static class ForceDeleteAction implements ShareAction {}
+    public static class ForceDeleteAction implements ShareAction {
+    }
 
     public static GrantAccessAction grantAccess(AccessOptions options) {
         return new GrantAccessAction(options.getAccessLevel(), options.getAccessType(), options.getAccessTo());
     }
+
     public static RevokeAccessAction revokeAccess(String accessId) {
         return new RevokeAccessAction(accessId);
     }

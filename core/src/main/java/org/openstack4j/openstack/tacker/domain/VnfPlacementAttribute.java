@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 
 /**
- *
  * @author Vishvesh Deshmukh
  * @date Aug 16, 2016
  */
@@ -14,20 +13,20 @@ import com.google.common.base.MoreObjects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VnfPlacementAttribute {
 
-	@JsonProperty("vim_name")
-	private String vimName;
+    @JsonProperty("vim_name")
+    private String vimName;
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).omitNullValues()
-				.add("vimName", vimName)
-				.toString();
-	}
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).omitNullValues()
+                .add("vimName", vimName)
+                .toString();
+    }
 
-	/**
-	 * @return the vimName
-	 */
-	public String getVimName() {
-		return vimName;
-	}
+    /**
+     * @return the vimName
+     */
+    public String getVimName() {
+        return vimName;
+    }
 }

@@ -7,6 +7,7 @@ import org.openstack4j.model.octavia.LoadBalancerV2Stats;
 
 /**
  * The statistics about an lbaas v2 loadbalancer
+ *
  * @author wei
  */
 @JsonRootName("stats")
@@ -25,31 +26,30 @@ public class OctaviaLoadBalancerV2Stats implements LoadBalancerV2Stats {
     private Integer activeConnections;
 
     /**
-     *
      * {@inheritDoc}
      */
     @Override
     public Long getBytesIn() {
         return bytesIn;
     }
+
     /**
-     *
      * {@inheritDoc}
      */
     @Override
     public Long getBytesOut() {
         return bytesOut;
     }
+
     /**
-     *
      * {@inheritDoc}
      */
     @Override
     public Integer getTotalConnections() {
         return totalConnections;
     }
+
     /**
-     *
      * {@inheritDoc}
      */
     @Override
@@ -58,7 +58,7 @@ public class OctaviaLoadBalancerV2Stats implements LoadBalancerV2Stats {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("bytesIn", bytesIn)
                 .add("bytesOut", bytesOut)

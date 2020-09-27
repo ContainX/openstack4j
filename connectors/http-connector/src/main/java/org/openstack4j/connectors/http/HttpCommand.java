@@ -10,6 +10,7 @@ import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,8 +20,6 @@ import java.net.*;
 import java.net.Proxy.Type;
 import java.util.List;
 import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the
@@ -75,10 +74,8 @@ public final class HttpCommand<R> {
 
         if (request.getEntity() != null) {
             if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) {
-                requestBody = ByteStreams.toByteArray((InputStream)request.getEntity());
-            }
-            else
-            {
+                requestBody = ByteStreams.toByteArray((InputStream) request.getEntity());
+            } else {
                 String content = ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity());
                 requestBody = content.getBytes();
             }
@@ -115,10 +112,9 @@ public final class HttpCommand<R> {
     }
 
     /**
-     * @see <a href= "https://java.net/jira/browse/JERSEY-639">https://java.net/jira/browse/JERSEY-639</a>
-     *
      * @param httpURLConnection the HttpURLConnection
-     * @param method the methods name (GET, PUT, POST,... exception is thrown when trying to do a PATCH)
+     * @param method            the methods name (GET, PUT, POST,... exception is thrown when trying to do a PATCH)
+     * @see <a href= "https://java.net/jira/browse/JERSEY-639">https://java.net/jira/browse/JERSEY-639</a>
      */
     private static final void setRequestMethodUsingWorkaroundForJREBug(final HttpURLConnection httpURLConnection, final String method) {
         try {
@@ -210,9 +206,7 @@ public final class HttpCommand<R> {
             Proxy proxy = new Proxy(Type.HTTP,
                     new InetSocketAddress(config.getProxy().getRawHost(), config.getProxy().getPort()));
             connection = (HttpURLConnection) connectionUrl.openConnection(proxy);
-        }
-        else
-        {
+        } else {
             connection = (HttpURLConnection) connectionUrl.openConnection();
         }
         connection.setRequestProperty("Content-Type", request.getContentType());

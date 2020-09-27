@@ -14,7 +14,7 @@ public interface JobExecutionBuilder extends Builder<JobExecutionBuilder, JobExe
 
     /**
      * See {@link JobExecution#getClusterId()}
-     * 
+     *
      * @param clusterId the cluster identifier
      * @return JobExecutionBuilder
      */
@@ -22,7 +22,7 @@ public interface JobExecutionBuilder extends Builder<JobExecutionBuilder, JobExe
 
     /**
      * See {@link JobExecution#getInputId()}
-     * 
+     *
      * @param inputId the input identifier
      * @return JobExecutionBuilder
      */
@@ -30,7 +30,7 @@ public interface JobExecutionBuilder extends Builder<JobExecutionBuilder, JobExe
 
     /**
      * See {@link JobExecution#getOutputId()}
-     * 
+     *
      * @param outputId the output identifier
      * @return JobExecutionBuilder
      */
@@ -38,7 +38,7 @@ public interface JobExecutionBuilder extends Builder<JobExecutionBuilder, JobExe
 
     /**
      * See {@link JobExecution#getJobConfigs()}
-     * 
+     *
      * @param jobConfig the job configuration
      * @return JobExecutionBuilder
      */
@@ -46,7 +46,7 @@ public interface JobExecutionBuilder extends Builder<JobExecutionBuilder, JobExe
 
     /**
      * See {@link JobExecution#getJobId()}
-     * 
+     *
      * @param jobId the job identifier
      * @return JobExecutionBuilder
      */

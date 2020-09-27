@@ -20,7 +20,7 @@ import static org.testng.Assert.*;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-@Test(suiteName="ShareType")
+@Test(suiteName = "ShareType")
 public class ShareTypeTests extends AbstractTest {
     private static final String JSON_EXTRA_SPECS_SET = "/manila/extra_specs_set.json";
     private static final String JSON_EXTRA_SPECS = "/manila/extra_specs.json";
@@ -46,7 +46,7 @@ public class ShareTypeTests extends AbstractTest {
                 .build();
 
         ShareType shareType = osv3().share().shareTypes().create(shareTypeCreate);
-        
+
         assertTrue(shareType.getOsShareTypeAccessIsPublic());
         assertEquals(shareType.getRequiredExtraSpecs().get("driver_handles_share_servers"), "true");
         assertEquals(shareType.getExtraSpecs().get("snapshot_support"), "True");

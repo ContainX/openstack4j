@@ -15,17 +15,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.*;
 
 /**
- *
  * @author wei
- *
  */
-@Test(suiteName="Octavia/loadBalancerV2", enabled = true)
+@Test(suiteName = "Octavia/loadBalancerV2", enabled = true)
 public class LoadBalancerV2Tests extends AbstractTest {
     private static final String LOADBALANCERSV2_JSON = "/octavia/loadbalancersv2.json";
     private static final String LOADBALANCERV2_JSON = "/octavia/loadbalancerv2.json";

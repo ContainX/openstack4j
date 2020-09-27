@@ -1,17 +1,16 @@
 package org.openstack4j.connectors.resteasy;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-
 import org.openstack4j.core.transport.ClientConstants;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
+
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HttpResponseImpl implements HttpResponse {
 
@@ -43,7 +42,7 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Gets the entity and Maps any errors which will result in a ResponseException
      *
-     * @param <T> the generic type
+     * @param <T>        the generic type
      * @param returnType the return type
      * @return the entity
      */
@@ -54,9 +53,9 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Gets the entity and Maps any errors which will result in a ResponseException
      *
-     * @param <T> the generic type
+     * @param <T>        the generic type
      * @param returnType the return type
-     * @param options execution based options
+     * @param options    execution based options
      * @return the entity
      */
     @Override
@@ -122,7 +121,7 @@ public class HttpResponseImpl implements HttpResponse {
     public void close() throws IOException {
         response.close();
     }
-    
+
     @Override
     public String getContentType() {
         return header(ClientConstants.HEADER_CONTENT_TYPE);

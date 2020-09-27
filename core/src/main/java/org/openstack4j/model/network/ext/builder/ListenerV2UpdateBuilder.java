@@ -5,6 +5,7 @@ import org.openstack4j.model.network.ext.ListenerV2Update;
 
 /**
  * A Builder to update a lbaas v2 listener
+ *
  * @author emjburns
  */
 public interface ListenerV2UpdateBuilder extends Buildable.Builder<ListenerV2UpdateBuilder, ListenerV2Update> {
@@ -12,8 +13,7 @@ public interface ListenerV2UpdateBuilder extends Buildable.Builder<ListenerV2Upd
     /**
      * Optional
      *
-     * @param name
-     *            Human-readable name for the listener. Does not have to be unique.
+     * @param name Human-readable name for the listener. Does not have to be unique.
      * @return ListenerV2UpdateBuilder
      */
     ListenerV2UpdateBuilder name(String name);
@@ -21,8 +21,7 @@ public interface ListenerV2UpdateBuilder extends Buildable.Builder<ListenerV2Upd
     /**
      * Optional
      *
-     * @param description
-     *            Human-readable description for the listener.
+     * @param description Human-readable description for the listener.
      * @return ListenerV2UpdateBuilder
      */
     ListenerV2UpdateBuilder description(String description);
@@ -30,9 +29,8 @@ public interface ListenerV2UpdateBuilder extends Buildable.Builder<ListenerV2Upd
     /**
      * Optional
      *
-     * @param adminStateUp
-     *            The administrative state of the listener. A valid value is true
-     *            (UP) or false (DOWN).
+     * @param adminStateUp The administrative state of the listener. A valid value is true
+     *                     (UP) or false (DOWN).
      * @return ListenerV2UpdateBuilder
      */
     ListenerV2UpdateBuilder adminStateUp(boolean adminStateUp);
@@ -40,6 +38,7 @@ public interface ListenerV2UpdateBuilder extends Buildable.Builder<ListenerV2Upd
     /**
      * Optional
      * The maximum number of connections allowed for the listener. Default is -1, meaning no limit.
+     *
      * @param connectionLimit
      * @return ListenerV2UpdateBuilder
      */
@@ -47,8 +46,9 @@ public interface ListenerV2UpdateBuilder extends Buildable.Builder<ListenerV2Upd
 
     /**
      * Optional
-     *
+     * <p>
      * The tls container reference
+     *
      * @param defaultTlsContainerRef
      * @return ListenerV2UpdateBuilder
      */

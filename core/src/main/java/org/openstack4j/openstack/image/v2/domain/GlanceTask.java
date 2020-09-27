@@ -1,18 +1,18 @@
 package org.openstack4j.openstack.image.v2.domain;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.image.v2.Task;
 import org.openstack4j.model.image.v2.builder.TaskBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A Glance v2 task model implementation
+ *
  * @author emjburns
  */
 public class GlanceTask implements Task {

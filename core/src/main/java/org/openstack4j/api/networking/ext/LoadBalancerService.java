@@ -6,7 +6,6 @@ package org.openstack4j.api.networking.ext;
 public interface LoadBalancerService {
 
     /**
-     *
      * @return the Lbaas member Service API
      */
     MemberService member();
@@ -15,12 +14,12 @@ public interface LoadBalancerService {
      * @return the Lbaas vip Service API
      */
     VipService vip();
-    
+
     /**
      * @return the Lbaas healthmonitor Service API
      */
     HealthMonitorService healthMonitor();
-    
+
 
     /**
      * @return the Lbaas pool Service API

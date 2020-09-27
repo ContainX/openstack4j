@@ -8,7 +8,7 @@ import org.openstack4j.api.storage.ObjectStorageService;
 
 /**
  * OpenStack Object Storage service implementation
- * 
+ *
  * @author Jeremy Unruh
  */
 public class ObjectStorageServiceImpl implements ObjectStorageService {

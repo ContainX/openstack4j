@@ -1,10 +1,9 @@
 package org.openstack4j.model.magnum;
 
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.openstack.common.GenericLink;
+
+import java.util.List;
 
 public interface BaymodelBuilder extends Builder<BaymodelBuilder, Baymodel> {
     /**

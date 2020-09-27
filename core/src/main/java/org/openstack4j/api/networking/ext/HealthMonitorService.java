@@ -1,15 +1,17 @@
 package org.openstack4j.api.networking.ext;
 
-import java.util.List;
-import java.util.Map;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.HealthMonitor;
 import org.openstack4j.model.network.ext.HealthMonitorUpdate;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * Networking (Neutron) Lbaas healthmonitor Extension API
- * @author liujunpeng
  *
+ * @author liujunpeng
  */
 public interface HealthMonitorService extends RestService {
     /**
@@ -21,9 +23,9 @@ public interface HealthMonitorService extends RestService {
 
     /**
      * Returns list of healthMonitor filtered by parameters.
-     * 
+     *
      * @param filteringParams map (name, value) of filtering parameters
-     * @return 
+     * @return
      */
     List<? extends HealthMonitor> list(Map<String, String> filteringParams);
 
@@ -35,24 +37,29 @@ public interface HealthMonitorService extends RestService {
      * @return the healthMonitor or null if not found
      */
     HealthMonitor get(String healthMonitorId);
-    
+
     /**
      * Delete the specified healthMonitor by ID
+     *
      * @param healthMonitorId the healthMonitor identifier
      * @return the action response
      */
     ActionResponse delete(String healthMonitorId);
+
     /**
      * Create a healthMonitor
-     * @param healthMonitor 
+     *
+     * @param healthMonitor
      * @return HealthMonitor
      */
     HealthMonitor create(HealthMonitor healthMonitor);
+
     /**
      * Update a healthMonitor
+     *
      * @param healthMonitorId the healthMonitor identifier
-     * @param healthMonitor HealthMonitorUpdate
+     * @param healthMonitor   HealthMonitorUpdate
      * @return HealthMonitor
      */
-    HealthMonitor update(String healthMonitorId,HealthMonitorUpdate healthMonitor);
+    HealthMonitor update(String healthMonitorId, HealthMonitorUpdate healthMonitor);
 }

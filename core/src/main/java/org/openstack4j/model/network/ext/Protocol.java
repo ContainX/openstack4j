@@ -12,8 +12,7 @@ public enum Protocol {
 
     @JsonCreator
     public static Protocol forValue(String value) {
-        if (value != null)
-        {
+        if (value != null) {
             for (Protocol s : Protocol.values()) {
                 if (s.name().equalsIgnoreCase(value)) {
                     return s;

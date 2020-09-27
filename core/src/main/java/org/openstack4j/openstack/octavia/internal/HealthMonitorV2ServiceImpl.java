@@ -15,14 +15,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * OpenStack (Octavia) lbaas v2 health monitor operations
+ *
  * @author wei
  */
-public class HealthMonitorV2ServiceImpl extends BaseOctaviaServices implements HealthMonitorV2Service{
+public class HealthMonitorV2ServiceImpl extends BaseOctaviaServices implements HealthMonitorV2Service {
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<? extends HealthMonitorV2> list(){
+    public List<? extends HealthMonitorV2> list() {
         return get(HealthMonitorsV2.class, uri("/lbaas/healthmonitors")).execute().getList();
     }
 
@@ -30,7 +31,7 @@ public class HealthMonitorV2ServiceImpl extends BaseOctaviaServices implements H
      * {@inheritDoc}
      */
     @Override
-    public List<? extends HealthMonitorV2> list(Map<String, String> filteringParams){
+    public List<? extends HealthMonitorV2> list(Map<String, String> filteringParams) {
         Invocation<HealthMonitorsV2> req = get(HealthMonitorsV2.class, uri("/lbaas/healthmonitors"));
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
@@ -44,7 +45,7 @@ public class HealthMonitorV2ServiceImpl extends BaseOctaviaServices implements H
      * {@inheritDoc}
      */
     @Override
-    public HealthMonitorV2 get(String healthMonitorId){
+    public HealthMonitorV2 get(String healthMonitorId) {
         checkNotNull(healthMonitorId);
         return get(OctaviaHealthMonitorV2.class, uri("/lbaas/healthmonitors/%s", healthMonitorId)).execute();
     }
@@ -53,7 +54,7 @@ public class HealthMonitorV2ServiceImpl extends BaseOctaviaServices implements H
      * {@inheritDoc}
      */
     @Override
-    public ActionResponse delete(String healthMonitorId){
+    public ActionResponse delete(String healthMonitorId) {
         checkNotNull(healthMonitorId);
         return ToActionResponseFunction.INSTANCE.apply(delete(Void.class, uri("/lbaas/healthmonitors/%s", healthMonitorId)).executeWithResponse());
     }
@@ -62,9 +63,9 @@ public class HealthMonitorV2ServiceImpl extends BaseOctaviaServices implements H
      * {@inheritDoc}
      */
     @Override
-    public HealthMonitorV2 create(HealthMonitorV2 healthMonitor){
+    public HealthMonitorV2 create(HealthMonitorV2 healthMonitor) {
         checkNotNull(healthMonitor);
-        return post(OctaviaHealthMonitorV2.class,uri("/lbaas/healthmonitors")).entity(healthMonitor).execute();
+        return post(OctaviaHealthMonitorV2.class, uri("/lbaas/healthmonitors")).entity(healthMonitor).execute();
     }
 
     /**
@@ -72,9 +73,9 @@ public class HealthMonitorV2ServiceImpl extends BaseOctaviaServices implements H
      */
     @Override
     public HealthMonitorV2 update(String healthMonitorId,
-                                HealthMonitorV2Update healthMonitor) {
+                                  HealthMonitorV2Update healthMonitor) {
         checkNotNull(healthMonitorId);
         checkNotNull(healthMonitor);
-        return put(OctaviaHealthMonitorV2.class,uri("/lbaas/healthmonitors/%s",healthMonitorId)).entity(healthMonitor).execute();
+        return put(OctaviaHealthMonitorV2.class, uri("/lbaas/healthmonitors/%s", healthMonitorId)).entity(healthMonitor).execute();
     }
 }

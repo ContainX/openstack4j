@@ -1,15 +1,15 @@
 package org.openstack4j.openstack.gbp.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.gbp.Direction;
 import org.openstack4j.model.gbp.PolicyClassifierUpdate;
 import org.openstack4j.model.gbp.Protocol;
 import org.openstack4j.model.gbp.builder.PolicyClassifierUpdateBuilder;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 /**
  * Model implementation for Policy Classifier Update
- * 
+ *
  * @author vinod borole
  */
 @JsonRootName("policy_classifier")
@@ -23,7 +23,7 @@ public class GbpPolicyClassifierUpdate implements PolicyClassifierUpdate {
     private Protocol protocol;
     private Boolean shared;
     private String name;
-     
+
     @Override
     public String getDescription() {
         return description;
@@ -60,7 +60,7 @@ public class GbpPolicyClassifierUpdate implements PolicyClassifierUpdate {
     public Protocol getProtocol() {
         return protocol;
     }
-      
+
     public void setProtocol(Protocol protocol) {
         this.protocol = protocol;
     }
@@ -79,9 +79,9 @@ public class GbpPolicyClassifierUpdate implements PolicyClassifierUpdate {
     }
 
     public static PolicyClassifierUpdateBuilder builder() {
-        return new PolicyClassifierUpdateConcreteBuilder() ;
+        return new PolicyClassifierUpdateConcreteBuilder();
     }
-    
+
     public String getName() {
         return name;
     }
@@ -90,75 +90,83 @@ public class GbpPolicyClassifierUpdate implements PolicyClassifierUpdate {
         this.name = name;
     }
 
-    public static class PolicyClassifierUpdateConcreteBuilder implements PolicyClassifierUpdateBuilder{
+    public static class PolicyClassifierUpdateConcreteBuilder implements PolicyClassifierUpdateBuilder {
         private GbpPolicyClassifierUpdate policyClassfierUpdate;
+
         @Override
         public PolicyClassifierUpdate build() {
             return policyClassfierUpdate;
         }
+
         public PolicyClassifierUpdateConcreteBuilder(GbpPolicyClassifierUpdate gbpPolicyClassifierUpdate) {
-            this.policyClassfierUpdate=gbpPolicyClassifierUpdate;
+            this.policyClassfierUpdate = gbpPolicyClassifierUpdate;
         }
- 
+
         public PolicyClassifierUpdateConcreteBuilder() {
             this(new GbpPolicyClassifierUpdate());
         }
+
         @Override
         public PolicyClassifierUpdateBuilder from(PolicyClassifierUpdate in) {
-            this.policyClassfierUpdate=(GbpPolicyClassifierUpdate) in;
+            this.policyClassfierUpdate = (GbpPolicyClassifierUpdate) in;
             return this;
         }
+
         @Override
         public PolicyClassifierUpdateBuilder name(String name) {
-           this.policyClassfierUpdate.name=name;
+            this.policyClassfierUpdate.name = name;
             return this;
         }
+
         @Override
         public PolicyClassifierUpdateBuilder description(String description) {
-            this.policyClassfierUpdate.description=description;
+            this.policyClassfierUpdate.description = description;
             return this;
         }
+
         @Override
         public PolicyClassifierUpdateBuilder shared(boolean shared) {
-            this.policyClassfierUpdate.shared=shared;
+            this.policyClassfierUpdate.shared = shared;
             return this;
         }
+
         @Override
         public PolicyClassifierUpdateBuilder portRangeMin(int min) {
-            String range="";
-            if(this.policyClassfierUpdate.portRange!=null && !this.policyClassfierUpdate.portRange.isEmpty())
-                range=min+":"+this.policyClassfierUpdate.portRange;
+            String range = "";
+            if (this.policyClassfierUpdate.portRange != null && !this.policyClassfierUpdate.portRange.isEmpty())
+                range = min + ":" + this.policyClassfierUpdate.portRange;
             else
-                range=""+min;
-            
-            this.policyClassfierUpdate.portRange=range;
-            return this;        
+                range = "" + min;
+
+            this.policyClassfierUpdate.portRange = range;
+            return this;
         }
-        
+
         @Override
         public PolicyClassifierUpdateBuilder portRangeMax(int max) {
-            String range="";
-            if(this.policyClassfierUpdate.portRange!=null && !this.policyClassfierUpdate.portRange.isEmpty())
-                range=this.policyClassfierUpdate.portRange+":"+max;
+            String range = "";
+            if (this.policyClassfierUpdate.portRange != null && !this.policyClassfierUpdate.portRange.isEmpty())
+                range = this.policyClassfierUpdate.portRange + ":" + max;
             else
-                range=""+max;
-            
-            this.policyClassfierUpdate.portRange=range;
-            return this;        
+                range = "" + max;
+
+            this.policyClassfierUpdate.portRange = range;
+            return this;
         }
-        
+
         @Override
         public PolicyClassifierUpdateBuilder direction(Direction direction) {
-            this.policyClassfierUpdate.direction=direction;
+            this.policyClassfierUpdate.direction = direction;
             return this;
         }
+
         @Override
         public PolicyClassifierUpdateBuilder protocol(Protocol protocol) {
-            this.policyClassfierUpdate.protocol=protocol;
+            this.policyClassfierUpdate.protocol = protocol;
             return this;
         }
-       
-        
+
+
     }
 
 }

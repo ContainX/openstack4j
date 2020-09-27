@@ -14,7 +14,7 @@ import static org.testng.AssertJUnit.assertTrue;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-@Test(suiteName="SchedulerStats")
+@Test(suiteName = "SchedulerStats")
 public class SchedulerStatsTests extends AbstractTest {
     private static final String JSON_SCHEDULER_STATS = "/manila/scheduler-stats.json";
     private static final String JSON_SCHEDULER_STATS_DETAIL = "/manila/scheduler-stats_detail.json";

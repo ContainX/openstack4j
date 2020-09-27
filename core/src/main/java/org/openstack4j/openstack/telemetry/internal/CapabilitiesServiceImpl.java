@@ -6,7 +6,7 @@ import org.openstack4j.openstack.telemetry.domain.CeilometerCapabilities;
 
 /**
  * Provides Measurements for Telemetry capabilities within an OpenStack deployment
- * 
+ *
  * @author Shital Patil
  */
 public class CapabilitiesServiceImpl extends BaseTelemetryServices implements CapabilitiesService {

@@ -1,5 +1,6 @@
 package org.openstack4j.api.telemetry;
 
+import okhttp3.mockwebserver.RecordedRequest;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.telemetry.Alarm;
 import org.testng.annotations.Test;
@@ -9,18 +10,18 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import okhttp3.mockwebserver.RecordedRequest;
+
 /**
  * telemetry alarm test cases
- * @author zhangjianweibj
  *
+ * @author zhangjianweibj
  */
-@Test(suiteName="Alarms")
+@Test(suiteName = "Alarms")
 public class AlarmTests extends AbstractTest {
 
     private static final String JSON_ALARMS = "/telemetry/alarms.json";
 
-    private static final String JSON_ALARM= "/telemetry/alarm.json";
+    private static final String JSON_ALARM = "/telemetry/alarm.json";
 
     @Override
     protected Service service() {
@@ -28,25 +29,24 @@ public class AlarmTests extends AbstractTest {
     }
 
 
-    public void listAlarmTest() throws IOException , InterruptedException {
+    public void listAlarmTest() throws IOException, InterruptedException {
         respondWith(JSON_ALARMS);
-        List<? extends Alarm> list=osv3().telemetry().alarms().list();
+        List<? extends Alarm> list = osv3().telemetry().alarms().list();
 
         RecordedRequest listRequest = server.takeRequest();
-        assertEquals(7,list.size());
+        assertEquals(7, list.size());
 
     }
 
 
-    public void getAlarmTest() throws IOException, InterruptedException{
+    public void getAlarmTest() throws IOException, InterruptedException {
         respondWith(JSON_ALARM);
 
-        Alarm alarm=osv3().telemetry().alarms().getById("03757eede9c540338e732d1a7fb07966");
+        Alarm alarm = osv3().telemetry().alarms().getById("03757eede9c540338e732d1a7fb07966");
         RecordedRequest listRequest = server.takeRequest();
         assertNotNull(alarm);
-        assertEquals(alarm.getAlarmId(),"03757eede9c540338e732d1a7fb07966");
+        assertEquals(alarm.getAlarmId(), "03757eede9c540338e732d1a7fb07966");
     }
-
 
 
 }

@@ -8,23 +8,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum Action {
 
-	NONE, CREATE, DELETE, UPDATE;
+    NONE, CREATE, DELETE, UPDATE;
 
-	@JsonValue
-	public String value() {
-		return name().toUpperCase();
-	}
+    @JsonValue
+    public String value() {
+        return name().toUpperCase();
+    }
 
-	//default to PRIMARY
-	@JsonCreator
-	public static Action value(String v)
-	{
-		if (v == null) return NONE;
-		try {
-			return valueOf(v.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			return NONE;
-		}
-	}
+    //default to PRIMARY
+    @JsonCreator
+    public static Action value(String v) {
+        if (v == null) return NONE;
+        try {
+            return valueOf(v.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return NONE;
+        }
+    }
 
 }

@@ -4,15 +4,14 @@ import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.network.Port;
 import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
 /**
- *
  * @author Rizwan Qamar
- *
  */
 @Test(suiteName = "Port")
 public class PortTests extends AbstractTest {

@@ -43,6 +43,7 @@ public class MuranoDeployment implements Deployment {
 
     @JsonProperty
     private MuranoDeploymentResult result;
+
     /**
      * {@inheritDoc}
      */

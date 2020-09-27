@@ -13,8 +13,7 @@ public enum Ethertype {
 
     @JsonCreator
     public static Ethertype forValue(String value) {
-        if (value != null)
-        {
+        if (value != null) {
             for (Ethertype s : Ethertype.values()) {
                 if (s.name().equalsIgnoreCase(value)) {
                     return s;

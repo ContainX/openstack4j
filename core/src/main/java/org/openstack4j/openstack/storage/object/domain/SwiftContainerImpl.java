@@ -1,13 +1,12 @@
 package org.openstack4j.openstack.storage.object.domain;
 
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.api.Apis;
 import org.openstack4j.api.storage.ObjectStorageContainerService;
 import org.openstack4j.model.storage.object.SwiftContainer;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
+import java.util.Map;
 
 /**
  * Represents an OpenStack Swift Container which holds Objects
@@ -53,7 +52,7 @@ public class SwiftContainerImpl implements SwiftContainer {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("name", name).add("count", objectCount).add("total size", totalSize)
-                   .toString();
+                .add("name", name).add("count", objectCount).add("total size", totalSize)
+                .toString();
     }
 }

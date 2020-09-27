@@ -9,6 +9,7 @@ import org.openstack4j.model.octavia.status.LoadBalancerV2Status;
 
 /**
  * The status tree of a lbaas v2 loadbalancer
+ *
  * @author wei
  */
 @JsonRootName("statuses")
@@ -19,12 +20,12 @@ public class OctaviaLoadBalancerV2StatusTree implements LoadBalancerV2StatusTree
     private OctaviaLoadBalancerV2Status loadBalancerStatus;
 
     @Override
-    public LoadBalancerV2Status getLoadBalancerV2Status(){
+    public LoadBalancerV2Status getLoadBalancerV2Status() {
         return loadBalancerStatus;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("loadbalancer", loadBalancerStatus)
                 .toString();

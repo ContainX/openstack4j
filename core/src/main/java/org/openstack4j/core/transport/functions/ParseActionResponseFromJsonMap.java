@@ -1,18 +1,17 @@
 package org.openstack4j.core.transport.functions;
 
-import java.util.Map;
-
+import com.google.common.base.Function;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.common.ActionResponse;
 
-import com.google.common.base.Function;
+import java.util.Map;
 
 /**
- * Attempts to Parse a JSON Map created from an error response and map the message to an ActionResponse.  
- * 
+ * Attempts to Parse a JSON Map created from an error response and map the message to an ActionResponse.
+ *
  * @author Jeremy Unruh
  */
-public class ParseActionResponseFromJsonMap implements Function<Map<String, Object>, ActionResponse>{
+public class ParseActionResponseFromJsonMap implements Function<Map<String, Object>, ActionResponse> {
 
     private static final String KEY_MESSAGE = "message";
     private static final String NEUTRON_ERROR = "NeutronError";
@@ -20,16 +19,16 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
     private static final String COMPUTE_FAULT = "computeFault";
     private static final String TACKER_ERROR = "TackerError";
     private HttpResponse response;
-    
+
     public ParseActionResponseFromJsonMap(HttpResponse response) {
         this.response = response;
     }
-    
+
     /**
      * Parses the JSON Map for an Error message.  An OpenStack error response typically is a Map of Map containing a single key
      * which is "error", "badRequest", etc which contains a value of another Map containing the underlying message
-     * 
-     * @param map the JSON Map 
+     *
+     * @param map the JSON Map
      * @return ActionResponse or null if the map could not be parsed
      */
     @SuppressWarnings("unchecked")
@@ -37,7 +36,7 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
     public ActionResponse apply(Map<String, Object> map) {
         if (map == null || map.isEmpty())
             return null;
-        
+
         for (String key : map.keySet()) {
             if (map.get(key) == null) {
                 continue;
@@ -54,12 +53,12 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
                     return ActionResponse.actionFailed(msg, response.getStatus());
                 }
                 if (inner.containsKey(COMPUTE_FAULT)) {
-                	/** For 'computeFault' Error Message Propagation.. */
+                    /** For 'computeFault' Error Message Propagation.. */
                     String msg = String.valueOf(map.get(COMPUTE_FAULT));
                     return ActionResponse.actionFailed(msg, response.getStatus());
-                 }
+                }
                 if (inner.containsKey(TACKER_ERROR)) {
-                	/** For 'TackerError' Error Message Propagation.. */
+                    /** For 'TackerError' Error Message Propagation.. */
                     String msg = String.valueOf(inner.get(TACKER_ERROR));
                     return ActionResponse.actionFailed(msg, response.getStatus());
                 }
@@ -71,10 +70,10 @@ public class ParseActionResponseFromJsonMap implements Function<Map<String, Obje
         //   "error_message": "error message",
         //   "error_code": XXX }
         if (map.containsKey("error_message")) {
-           String msg = String.valueOf(map.get("error_message"));    
-           return ActionResponse.actionFailed(msg, response.getStatus());
+            String msg = String.valueOf(map.get("error_message"));
+            return ActionResponse.actionFailed(msg, response.getStatus());
         }
-        
+
         // Neutron error handling when just a message is present
         if (map.containsKey(NEUTRON_ERROR)) {
             String msg = String.valueOf(map.get(NEUTRON_ERROR));

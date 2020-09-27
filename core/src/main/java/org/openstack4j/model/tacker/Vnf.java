@@ -8,81 +8,68 @@ import org.openstack4j.openstack.tacker.domain.VnfAttributes;
 import org.openstack4j.openstack.tacker.domain.VnfPlacementAttribute;
 
 /**
- *
  * @author Vishvesh Deshmukh
  * @date Aug 11, 2016
  */
 public interface Vnf extends ModelEntity, Buildable<VnfBuilder> {
-	/**
-	 * 
-	 * @return id : Unique identifier for the Vnf.
-	 */
-	String getId();
-	
-	/**
-	 * 
-	 * @return name : Human readable name for the Vnf (255 characters limit). Does not have to be unique.
-	 */
-	String getName();
+    /**
+     * @return id : Unique identifier for the Vnf.
+     */
+    String getId();
 
-	/**
-	 * 
-	 * @return tenantId : Owner of the Vnf. Only an administrative user can specify a tenant ID other than its own.
-	 */
-	String getTenantId();
+    /**
+     * @return name : Human readable name for the Vnf (255 characters limit). Does not have to be unique.
+     */
+    String getName();
 
-	/**
-	 * 
-	 * @return description : Human readable description for the Vnf (1024 characters limit).
-	 */
-	String getDescription();
-	
-	/**
-	 * 
-	 * @return attributes
-	 */
-	VnfAttributes getAttributes();
-	
-	/**
-	 * 
-	 * @return managementUrl
-	 */
-	String getManagementUrl();
+    /**
+     * @return tenantId : Owner of the Vnf. Only an administrative user can specify a tenant ID other than its own.
+     */
+    String getTenantId();
 
-	/**
-	 * 
-	 * @return the vnfdId
-	 */
-	String getVnfdId();
+    /**
+     * @return description : Human readable description for the Vnf (1024 characters limit).
+     */
+    String getDescription();
 
-	/**
-	 * 
-	 * @return the errorReason
-	 */
-	String getErrorReason();
+    /**
+     * @return attributes
+     */
+    VnfAttributes getAttributes();
 
-	/**
-	 * 
-	 * @return the vimId
-	 */
-	String getVimId();
+    /**
+     * @return managementUrl
+     */
+    String getManagementUrl();
 
-	/**
-	 * 
-	 * @return the instanceId
-	 */
-	String getInstanceId();
-	
-	/**
-	 * 
-	 * @return the status
-	 */
-	TackerVnfStatus getStatus();
+    /**
+     * @return the vnfdId
+     */
+    String getVnfdId();
 
-	/**
-	 * 
-	 * @return the placementAttribute
-	 */
-	VnfPlacementAttribute getPlacementAttribute();
+    /**
+     * @return the errorReason
+     */
+    String getErrorReason();
+
+    /**
+     * @return the vimId
+     */
+    String getVimId();
+
+    /**
+     * @return the instanceId
+     */
+    String getInstanceId();
+
+    /**
+     * @return the status
+     */
+    TackerVnfStatus getStatus();
+
+    /**
+     * @return the placementAttribute
+     */
+    VnfPlacementAttribute getPlacementAttribute();
 
 }

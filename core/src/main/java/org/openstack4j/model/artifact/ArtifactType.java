@@ -18,8 +18,7 @@ public enum ArtifactType {
     }
 
     @JsonCreator
-    public static ArtifactType value(String v)
-    {
+    public static ArtifactType value(String v) {
         if (v == null) return ALL;
         try {
             return valueOf(v.toUpperCase());

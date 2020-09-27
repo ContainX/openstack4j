@@ -4,7 +4,6 @@ import org.openstack4j.common.RestService;
 
 /**
  * Barbican (Key Management) Operations API
- *
  */
 public interface BarbicanService extends RestService {
 
@@ -12,6 +11,7 @@ public interface BarbicanService extends RestService {
      * @return the Container Service API
      */
     ContainerService containers();
+
     /**
      * @return the Secrets Service API
      */

@@ -6,7 +6,7 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 public class BaseDNSServices extends BaseOpenStackService {
 
-	protected BaseDNSServices() {
-		super(ServiceType.DNS, EnforceVersionToURL.instance("/v2"));
-	}
+    protected BaseDNSServices() {
+        super(ServiceType.DNS, EnforceVersionToURL.instance("/v2"));
+    }
 }

@@ -35,7 +35,7 @@ public interface ShareSnapshotCreateBuilder extends Buildable.Builder<ShareSnaps
 
     /**
      * Set the snapshot name.
-     *
+     * <p>
      * The Shared File Systems API supports the use of both <code>name</code> and <code>display_name</code> attributes,
      * which are inherited attributes from the Block Storage API.
      *
@@ -54,7 +54,7 @@ public interface ShareSnapshotCreateBuilder extends Buildable.Builder<ShareSnaps
 
     /**
      * Set the snapshot description.
-     *
+     * <p>
      * The Shared File Systems API supports the use of both <code>description</code> and
      * <code>display_description</code> parameters, which are inherited attributes from the Block Storage API.
      *

@@ -1,10 +1,9 @@
 package org.openstack4j.openstack.storage.object.domain;
 
-import java.util.Map;
-
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.storage.object.SwiftAccount;
 
-import com.google.common.base.MoreObjects;
+import java.util.Map;
 
 /**
  * An Account representation for OpenStack Object Storage (Swift)
@@ -56,10 +55,10 @@ public class SwiftAccountImpl implements SwiftAccount {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                  .add("containerCount", containerCount).add("objectCount", objectCount)
-                  .add("bytesUsed", bytesUsed).add("temporaryUrlKey", temporaryUrlKey)
-                  .add("metadata", metadata)
-                  .toString();
+                .add("containerCount", containerCount).add("objectCount", objectCount)
+                .add("bytesUsed", bytesUsed).add("temporaryUrlKey", temporaryUrlKey)
+                .add("metadata", metadata)
+                .toString();
     }
 
     public static class AccountBuilder {

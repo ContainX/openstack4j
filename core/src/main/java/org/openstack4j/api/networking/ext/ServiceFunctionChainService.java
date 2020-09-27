@@ -6,7 +6,6 @@ import org.openstack4j.common.RestService;
  * Service Function Chain Operations API
  *
  * @author Dmitry Gerenrot
- *
  */
 public interface ServiceFunctionChainService extends RestService {
 

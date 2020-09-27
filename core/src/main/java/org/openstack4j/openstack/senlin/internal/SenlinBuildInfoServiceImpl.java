@@ -6,13 +6,13 @@ import org.openstack4j.openstack.senlin.domain.SenlinBuildInfo;
 
 /**
  * This class contains getters for all implementation of the available build-info services
- * 
+ *
  * @author lion
  */
 public class SenlinBuildInfoServiceImpl extends BaseSenlinServices implements SenlinBuildInfoService {
 
-	@Override
-	public  BuildInfo get() {
-		return get(SenlinBuildInfo.class, uri("/build-info")).execute();
-	}
+    @Override
+    public BuildInfo get() {
+        return get(SenlinBuildInfo.class, uri("/build-info")).execute();
+    }
 }

@@ -1,6 +1,9 @@
 package org.openstack4j.openstack.compute.domain.ext;
 
-import static com.google.common.base.MoreObjects.toStringHelper;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import org.openstack4j.model.compute.ext.AvailabilityZone;
+import org.openstack4j.openstack.common.ListResult;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -8,11 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.openstack4j.model.compute.ext.AvailabilityZone;
-import org.openstack4j.openstack.common.ListResult;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 public class ExtAvailabilityZone implements AvailabilityZone {
 
@@ -44,8 +43,7 @@ public class ExtAvailabilityZone implements AvailabilityZone {
     @Override
     public Map<String, Map<String, ? extends NovaService>> getHosts() {
         Map<String, Map<String, ? extends NovaService>> map = new HashMap<String, Map<String, ? extends NovaService>>();
-        if (hosts != null)
-        {
+        if (hosts != null) {
             for (Entry<String, Map<String, ExtNovaService>> entry : hosts.entrySet()) {
                 map.put(entry.getKey(), entry.getValue());
             }
@@ -56,8 +54,8 @@ public class ExtAvailabilityZone implements AvailabilityZone {
     @Override
     public String toString() {
         return toStringHelper(this).omitNullValues()
-                 .add("zoneState", zoneState).add("zoneName", zoneName).add("hosts", hosts)
-                 .toString();
+                .add("zoneState", zoneState).add("zoneName", zoneName).add("hosts", hosts)
+                .toString();
     }
 
     @JsonRootName("zoneState")
@@ -77,8 +75,8 @@ public class ExtAvailabilityZone implements AvailabilityZone {
         @Override
         public String toString() {
             return toStringHelper(this).omitNullValues()
-                     .add("available", available)
-                     .toString();
+                    .add("available", available)
+                    .toString();
         }
     }
 
@@ -118,8 +116,8 @@ public class ExtAvailabilityZone implements AvailabilityZone {
         @Override
         public String toString() {
             return toStringHelper(this).omitNullValues()
-                     .add("available", available).add("active", statusActive).add("updateTime", updateTime)
-                     .toString();
+                    .add("available", available).add("active", statusActive).add("updateTime", updateTime)
+                    .toString();
         }
     }
 

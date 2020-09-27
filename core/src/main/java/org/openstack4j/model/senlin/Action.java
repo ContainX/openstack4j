@@ -10,11 +10,9 @@ import java.util.Map;
  * This interface describes the getter-methods (and thus components) of a Action.
  * All getters map to the possible return values of
  * <code> GET /v1/actions/​{action_id}​</code>
- * 
- * @see http://developer.openstack.org/api-ref-clustering-v1.html
- * 
+ *
  * @author lion
- * 
+ * @see http://developer.openstack.org/api-ref-clustering-v1.html
  */
 public interface Action extends ResourceEntity {
 

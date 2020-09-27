@@ -1,9 +1,9 @@
 package org.openstack4j.api.identity.v3;
 
-import static org.testng.Assert.assertEquals;
-
 import org.openstack4j.api.AbstractTest;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests the Identity/Keystone API version 3 ServiceEndpointsService

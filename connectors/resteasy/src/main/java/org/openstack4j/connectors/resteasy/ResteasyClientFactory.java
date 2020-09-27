@@ -1,17 +1,16 @@
 package org.openstack4j.connectors.resteasy;
 
-import javax.ws.rs.ext.ContextResolver;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import org.jboss.resteasy.plugins.providers.InputStreamProvider;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import javax.ws.rs.ext.ContextResolver;
 
 /**
  * Rest Easy provider setup to play nice with Jackson
- * 
+ *
  * @author Jeremy Unruh
  */
 public class ResteasyClientFactory extends ResteasyProviderFactory {
@@ -23,9 +22,9 @@ public class ResteasyClientFactory extends ResteasyProviderFactory {
 
     public ResteasyClientFactory() {
         super();
-        
+
         addContextResolver(new CustomContextResolver());
-        
+
         jsonProvider = new JacksonJsonProvider();
         addMessageBodyReader(jsonProvider);
         addMessageBodyWriter(jsonProvider);
@@ -38,7 +37,7 @@ public class ResteasyClientFactory extends ResteasyProviderFactory {
     public static ResteasyClientFactory getInstance() {
         return INSTANCE;
     }
-    
+
 
     private static final class CustomContextResolver implements ContextResolver<ObjectMapper> {
 

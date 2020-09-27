@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Event represents the state of an object in an OpenStack service
  * at a point in time when something of interest has occurred
- * 
+ *
  * @author Miroslav Lacina
  */
 public interface Event extends ModelEntity {

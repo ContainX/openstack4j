@@ -1,15 +1,14 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.image.ContainerFormat;
 import org.openstack4j.model.image.DiskFormat;
 import org.openstack4j.model.storage.block.Volume.Status;
 import org.openstack4j.model.storage.block.VolumeUploadImage;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.Date;
 
 /**
  * Represents an action state when uploading a volume to the image service
@@ -85,9 +84,9 @@ public class CinderVolumeUploadImage implements VolumeUploadImage {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                 .add("id", id).add("status", status).add("display_description", displayDescription)
-                 .add("updatedAt", updatedAt).add("image_id", imageId).add("image_name", imageName)
-                 .add("container_format", containerFormat).add("disk_format", diskFormat)
-                 .toString();
+                .add("id", id).add("status", status).add("display_description", displayDescription)
+                .add("updatedAt", updatedAt).add("image_id", imageId).add("image_name", imageName)
+                .add("container_format", containerFormat).add("disk_format", diskFormat)
+                .toString();
     }
 }

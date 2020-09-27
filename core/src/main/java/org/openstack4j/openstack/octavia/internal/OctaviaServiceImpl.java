@@ -5,7 +5,7 @@ import org.openstack4j.api.octavia.*;
 
 /**
  * OpenStack Networking Operations API
- * 
+ *
  * @author wei
  */
 public class OctaviaServiceImpl implements OctaviaService {

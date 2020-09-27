@@ -1,9 +1,5 @@
 package org.openstack4j.openstack.compute.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.compute.QuotaSetService;
 import org.openstack4j.model.compute.Limits;
 import org.openstack4j.model.compute.QuotaSet;
@@ -17,9 +13,13 @@ import org.openstack4j.openstack.compute.domain.NovaQuotaSetUpdate.NovaQuotaSetU
 import org.openstack4j.openstack.compute.domain.NovaSimpleTenantUsage;
 import org.openstack4j.openstack.compute.domain.NovaSimpleTenantUsage.NovaSimpleTenantUsages;
 
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * OpenStack Quota-Set API Implementation
- * 
+ *
  * @author Jeremy Unruh
  */
 public class QuotaSetServiceImpl extends BaseComputeServices implements QuotaSetService {
@@ -88,34 +88,34 @@ public class QuotaSetServiceImpl extends BaseComputeServices implements QuotaSet
         checkNotNull(tenantId);
         return get(NovaSimpleTenantUsage.class, uri("/os-simple-tenant-usage/%s", tenantId)).execute();
     }
-    
+
     /**
      * {@inheritDoc}
      */
-	@Override
-	public List<? extends SimpleTenantUsage> listTenantUsages(String startTime,
-			String endTime) {
-		checkNotNull(startTime);
-		checkNotNull(endTime);
-		return get(NovaSimpleTenantUsages.class, uri("/os-simple-tenant-usage"))
-				.param("start", startTime)
-				.param("end", endTime)
-				.execute().getList();
-	}
-	
-	/**
+    @Override
+    public List<? extends SimpleTenantUsage> listTenantUsages(String startTime,
+                                                              String endTime) {
+        checkNotNull(startTime);
+        checkNotNull(endTime);
+        return get(NovaSimpleTenantUsages.class, uri("/os-simple-tenant-usage"))
+                .param("start", startTime)
+                .param("end", endTime)
+                .execute().getList();
+    }
+
+    /**
      * {@inheritDoc}
      */
-	@Override
-	public SimpleTenantUsage getTenantUsage(String tenantId, String startTime,
-			String endTime) {
-		checkNotNull(tenantId);
-		checkNotNull(startTime);
-		checkNotNull(endTime);
+    @Override
+    public SimpleTenantUsage getTenantUsage(String tenantId, String startTime,
+                                            String endTime) {
+        checkNotNull(tenantId);
+        checkNotNull(startTime);
+        checkNotNull(endTime);
         return get(NovaSimpleTenantUsage.class, uri("/os-simple-tenant-usage/%s", tenantId))
-        		.param("start", startTime)
-				.param("end", endTime)
-				.param("detailed", "1")
-        		.execute();
-	}
+                .param("start", startTime)
+                .param("end", endTime)
+                .param("detailed", "1")
+                .execute();
+    }
 }

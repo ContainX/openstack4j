@@ -1,17 +1,15 @@
 package org.openstack4j.api.networking.ext;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.FlowClassifier;
 
+import java.util.List;
+
 /**
- *
  * Flow Classifier Service
  *
  * @author Dmitry Gerenrot
- *
  */
 public interface FlowClassifierService extends RestService {
 

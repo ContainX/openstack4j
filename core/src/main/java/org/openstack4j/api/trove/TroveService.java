@@ -6,7 +6,6 @@ import org.openstack4j.common.RestService;
  * This interface contains all available Trove Services
  *
  * @author sumit gandhi
- *
  */
 public interface TroveService extends RestService {
 

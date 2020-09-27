@@ -24,7 +24,7 @@ public final class HttpCommand<R> {
     private HttpRequest<R> request;
     private ResteasyWebTarget resteasyWebTarget;
     private int retries;
-    private Invocation.Builder resteasyRequest ;
+    private Invocation.Builder resteasyRequest;
 
     private HttpCommand(HttpRequest<R> request) {
         this.request = request;
@@ -32,6 +32,7 @@ public final class HttpCommand<R> {
 
     /**
      * Creates a new HttpCommand from the given request
+     *
      * @param request the request
      * @return the command
      */
@@ -43,7 +44,7 @@ public final class HttpCommand<R> {
 
     private void initialize() {
 
-       resteasyWebTarget = new ResteasyClientBuilder().httpEngine(ApacheHttpClientEngine.create(request.getConfig()))
+        resteasyWebTarget = new ResteasyClientBuilder().httpEngine(ApacheHttpClientEngine.create(request.getConfig()))
                 .providerFactory(ResteasyClientFactory.getInstance()).build()
                 .target(UriBuilder.fromUri(new EndpointURIFromRequestFunction().apply(request)));
 
@@ -57,14 +58,14 @@ public final class HttpCommand<R> {
      *
      * @return the response
      */
-    public Response execute(){
+    public Response execute() {
 
         Invocation webRequest;
         if (request.getEntity() != null) {
             webRequest = resteasyRequest.build(request.getMethod().name(), Entity.entity(request.getEntity(), request.getContentType()));
         } else if (request.hasJson()) {
-            webRequest= resteasyRequest.build(request.getMethod().name() , Entity.entity(request.getJson(),ClientConstants.CONTENT_TYPE_JSON));
-        }else{
+            webRequest = resteasyRequest.build(request.getMethod().name(), Entity.entity(request.getJson(), ClientConstants.CONTENT_TYPE_JSON));
+        } else {
             webRequest = resteasyRequest.build(request.getMethod().name());
         }
 

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-
 import org.openstack4j.model.dns.v2.Action;
 import org.openstack4j.model.dns.v2.Status;
 import org.openstack4j.model.dns.v2.Zone;
@@ -157,7 +156,7 @@ public class DesignateZone implements Zone {
                 .add("serial", serial)
                 .add("status", status)
                 .add("action", action)
-                .add("description",description)
+                .add("description", description)
                 .add("masters", masters)
                 .add("type", type)
                 .add("transferredAt", transferredAt)

@@ -1,12 +1,12 @@
 package org.openstack4j.model.network.ext.builder;
 
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.PortPairGroup;
 
-public interface PortPairGroupBuilder  extends Builder<PortPairGroupBuilder, PortPairGroup> {
+import java.util.List;
+import java.util.Map;
+
+public interface PortPairGroupBuilder extends Builder<PortPairGroupBuilder, PortPairGroup> {
     /**
      * @param id : Port Pair Group identifer
      * @return PortPairGroupBuilder
@@ -39,7 +39,7 @@ public interface PortPairGroupBuilder  extends Builder<PortPairGroupBuilder, Por
 
     /**
      * @param portPairGroupParameters : parameters for this group.
-     *      Possible keys: lb_fields or service_type. Check openstack documentation.
+     *                                Possible keys: lb_fields or service_type. Check openstack documentation.
      * @return PortPairGroupBuilder
      */
     PortPairGroupBuilder portPairGroupParameters(Map<String, Object> portPairGroupParameters);

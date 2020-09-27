@@ -6,7 +6,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.AssertJUnit.assertTrue;
 
 /**
@@ -14,7 +15,7 @@ import static org.testng.AssertJUnit.assertTrue;
  *
  * @author Chen guofeng gf.chen40@gmail.com
  */
-@Test(suiteName="SchedulerStatsGetPool")
+@Test(suiteName = "SchedulerStatsGetPool")
 public class SchedulerStatsGetPoolTests extends AbstractTest {
     private static final String JSON_SCHEDULER_STATS = "/storage/v2/cinder_scheduler-stats.json";
     private static final String JSON_SCHEDULER_STATS_DETAIL = "/storage/v2/cinder_scheduler-stats_detail.json";

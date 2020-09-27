@@ -1,7 +1,5 @@
 package org.openstack4j.model.telemetry.builder;
 
-import org.openstack4j.model.telemetry.Alarm;
-
 /**
  * The Ceilometer builders
  */

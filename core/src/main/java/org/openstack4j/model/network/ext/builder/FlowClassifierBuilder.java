@@ -1,15 +1,15 @@
 package org.openstack4j.model.network.ext.builder;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.Ethertype;
 import org.openstack4j.model.network.ext.FlowClassifier;
 
+import java.util.Map;
+
 /**
- * 	A builder to create a flow classifier
- * @author Dmitry Gerenrot
+ * A builder to create a flow classifier
  *
+ * @author Dmitry Gerenrot
  */
 public interface FlowClassifierBuilder extends Builder<FlowClassifierBuilder, FlowClassifier> {
 
@@ -38,7 +38,6 @@ public interface FlowClassifierBuilder extends Builder<FlowClassifierBuilder, Fl
     FlowClassifierBuilder description(String description);
 
     /**
-     *
      * @param protocol : Short name for the protocol (TCP, UDP, etc)
      * @return FlowClassifierBuilder
      */

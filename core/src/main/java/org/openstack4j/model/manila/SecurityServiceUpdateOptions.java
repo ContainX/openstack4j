@@ -14,7 +14,7 @@ public class SecurityServiceUpdateOptions {
     private String password;
     private String domain;
     private String server;
-    
+
     public static SecurityServiceUpdateOptions create() {
         return new SecurityServiceUpdateOptions();
     }
@@ -32,6 +32,7 @@ public class SecurityServiceUpdateOptions {
 
     /**
      * Update the security service name.
+     *
      * @param name the security service name
      * @return SecurityServiceUpdateOptions
      */
@@ -42,6 +43,7 @@ public class SecurityServiceUpdateOptions {
 
     /**
      * Update the security service description.
+     *
      * @param description the security service description
      * @return SecurityServiceUpdateOptions
      */
@@ -52,6 +54,7 @@ public class SecurityServiceUpdateOptions {
 
     /**
      * Update the security service DNS IP.
+     *
      * @param dnsIp the security service DNS IP
      * @return SecurityServiceUpdateOptions
      */
@@ -62,6 +65,7 @@ public class SecurityServiceUpdateOptions {
 
     /**
      * Update the security service user.
+     *
      * @param user the security service user
      * @return SecurityServiceUpdateOptions
      */
@@ -72,6 +76,7 @@ public class SecurityServiceUpdateOptions {
 
     /**
      * Update the security service password.
+     *
      * @param password the security service password
      * @return SecurityServiceUpdateOptions
      */
@@ -82,6 +87,7 @@ public class SecurityServiceUpdateOptions {
 
     /**
      * Update the security service domain.
+     *
      * @param domain the security service domain
      * @return SecurityServiceUpdateOptions
      */
@@ -92,6 +98,7 @@ public class SecurityServiceUpdateOptions {
 
     /**
      * Update the security service server.
+     *
      * @param server the security service server
      * @return SecurityServiceUpdateOptions
      */

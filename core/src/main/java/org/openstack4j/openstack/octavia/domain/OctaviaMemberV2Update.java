@@ -9,6 +9,7 @@ import org.openstack4j.model.octavia.builder.MemberV2UpdateBuilder;
 
 /**
  * Entity for updating lbaas v2 members
+ *
  * @author wei
  */
 @JsonRootName("member")
@@ -27,12 +28,12 @@ public class OctaviaMemberV2Update implements MemberV2Update {
     private boolean adminStateUp = true;
 
     @Override
-    public boolean isAdminStateUp(){
+    public boolean isAdminStateUp() {
         return adminStateUp;
     }
 
     @Override
-    public Integer getWeight(){
+    public Integer getWeight() {
         return weight;
     }
 
@@ -40,7 +41,7 @@ public class OctaviaMemberV2Update implements MemberV2Update {
     public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("weight", weight)
-                .add("adminStateUp",adminStateUp)
+                .add("adminStateUp", adminStateUp)
                 .toString();
     }
 
@@ -59,7 +60,7 @@ public class OctaviaMemberV2Update implements MemberV2Update {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2Update build(){
+        public MemberV2Update build() {
             return m;
         }
 
@@ -67,7 +68,7 @@ public class OctaviaMemberV2Update implements MemberV2Update {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2UpdateBuilder from(MemberV2Update in){
+        public MemberV2UpdateBuilder from(MemberV2Update in) {
             m = (OctaviaMemberV2Update) in;
             return this;
         }
@@ -76,7 +77,7 @@ public class OctaviaMemberV2Update implements MemberV2Update {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2UpdateBuilder adminStateUp(boolean adminStateUp){
+        public MemberV2UpdateBuilder adminStateUp(boolean adminStateUp) {
             m.adminStateUp = adminStateUp;
             return this;
         }
@@ -85,18 +86,18 @@ public class OctaviaMemberV2Update implements MemberV2Update {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2UpdateBuilder weight(Integer weight){
+        public MemberV2UpdateBuilder weight(Integer weight) {
             m.weight = weight;
             return this;
         }
     }
 
     @Override
-    public MemberV2UpdateBuilder toBuilder(){
+    public MemberV2UpdateBuilder toBuilder() {
         return new MemberV2UpdateConcreteBuilder(this);
     }
 
-    public static MemberV2UpdateBuilder builder(){
+    public static MemberV2UpdateBuilder builder() {
         return new MemberV2UpdateConcreteBuilder();
     }
 }

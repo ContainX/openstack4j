@@ -6,9 +6,10 @@ import org.openstack4j.model.network.ext.builder.MemberV2Builder;
 
 /**
  * A member of a Lbaas V2 pool
+ *
  * @author emjburns
  */
-public interface MemberV2  extends ModelEntity, Buildable<MemberV2Builder> {
+public interface MemberV2 extends ModelEntity, Buildable<MemberV2Builder> {
     /**
      * @return the member identifier
      */
@@ -41,7 +42,7 @@ public interface MemberV2  extends ModelEntity, Buildable<MemberV2Builder> {
 
     /**
      * @return The administrative state of the member, which is up (true) or
-     *         down (false).
+     * down (false).
      */
     boolean isAdminStateUp();
 

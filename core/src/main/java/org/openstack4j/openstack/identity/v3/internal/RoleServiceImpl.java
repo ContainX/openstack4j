@@ -1,10 +1,5 @@
 package org.openstack4j.openstack.identity.v3.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.core.transport.ClientConstants.PATH_ROLES;
-
-import java.util.List;
-
 import org.openstack4j.api.identity.v3.RoleService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Role;
@@ -13,9 +8,13 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneRole;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRole.Roles;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRoleAssignment.RoleAssignments;
 
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.ClientConstants.PATH_ROLES;
+
 /**
  * Identity Role based Operations Implementation
- *
  */
 public class RoleServiceImpl extends BaseIdentityServices implements RoleService {
 

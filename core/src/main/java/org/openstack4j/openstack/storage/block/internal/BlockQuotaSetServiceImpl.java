@@ -1,7 +1,5 @@
 package org.openstack4j.openstack.storage.block.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import org.openstack4j.api.storage.BlockQuotaSetService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.storage.block.BlockQuotaSet;
@@ -9,9 +7,11 @@ import org.openstack4j.model.storage.block.BlockQuotaSetUsage;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSet;
 import org.openstack4j.openstack.storage.block.domain.CinderBlockQuotaSetUsage;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Quota-Set Extension API for Block Storage
- * 
+ *
  * @author Jeremy Unruh
  */
 public class BlockQuotaSetServiceImpl extends BaseBlockStorageServices implements BlockQuotaSetService {
@@ -67,9 +67,9 @@ public class BlockQuotaSetServiceImpl extends BaseBlockStorageServices implement
         checkNotNull(tenantId, "Tenant cannot be null");
         checkNotNull(userId, "User cannot be null");
         return get(CinderBlockQuotaSetUsage.class, uri("/os-quota-sets/%s", tenantId))
-                   .param("user_id", userId)
-                   .param("usage", true)
-                   .execute();
+                .param("user_id", userId)
+                .param("usage", true)
+                .execute();
     }
 
 }

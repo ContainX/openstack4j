@@ -8,22 +8,24 @@ import org.testng.annotations.Test;
 import java.util.logging.Logger;
 
 import static org.testng.Assert.assertEquals;
+
 /**
  * Test cases for webhook on Senlin
  *
  * @author lion
  */
-@Test(suiteName="senlin/webhook")
+@Test(suiteName = "senlin/webhook")
 public class WebHookServiceTest extends AbstractTest {
 
-    private static final String RASPACTION="/senlin/v1/resp_action.json";
+    private static final String RASPACTION = "/senlin/v1/resp_action.json";
 
     @Override
     protected Service service() {
         return Service.CLUSTERING;
     }
+
     @Test
-    public void testWebHook() throws Exception{
+    public void testWebHook() throws Exception {
         respondWith(RASPACTION);
         ActionID respAction = osv3().senlin().webHook().action("http://127.0.0.1:8778/v1/webhooks/51575fae-a83c-44ac-9214-337663dd04f9/trigger?V=1&count=1");
         Preconditions.checkNotNull(respAction);

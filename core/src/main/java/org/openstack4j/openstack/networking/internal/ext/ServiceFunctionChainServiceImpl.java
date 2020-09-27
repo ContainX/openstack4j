@@ -1,11 +1,7 @@
 package org.openstack4j.openstack.networking.internal.ext;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.networking.ext.FlowClassifierService;
-import org.openstack4j.api.networking.ext.PortChainService;
-import org.openstack4j.api.networking.ext.PortPairGroupService;
-import org.openstack4j.api.networking.ext.PortPairService;
-import org.openstack4j.api.networking.ext.ServiceFunctionChainService;
+import org.openstack4j.api.networking.ext.*;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
 /**

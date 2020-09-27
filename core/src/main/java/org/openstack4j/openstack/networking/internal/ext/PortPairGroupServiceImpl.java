@@ -1,15 +1,15 @@
 package org.openstack4j.openstack.networking.internal.ext;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.networking.ext.PortPairGroupService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.PortPairGroup;
 import org.openstack4j.openstack.networking.domain.ext.NeutronPortPairGroup;
 import org.openstack4j.openstack.networking.domain.ext.NeutronPortPairGroup.PortPairGroups;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
+
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * {@inheritDoc}

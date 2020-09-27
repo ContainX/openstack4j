@@ -1,7 +1,7 @@
 {
-    "error": {
-        "message": "Could not find role: nonExistingRoleId",
-        "code": 404,
-        "title": "Not Found"
-    }
+  "error": {
+    "message": "Could not find role: nonExistingRoleId",
+    "code": 404,
+    "title": "Not Found"
+  }
 }

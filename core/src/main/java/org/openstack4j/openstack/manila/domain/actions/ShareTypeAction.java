@@ -7,4 +7,5 @@ import org.openstack4j.model.ModelEntity;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-public interface ShareTypeAction extends ModelEntity {}
+public interface ShareTypeAction extends ModelEntity {
+}

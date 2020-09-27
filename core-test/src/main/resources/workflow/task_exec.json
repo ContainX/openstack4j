@@ -9,8 +9,12 @@
   "workflow_execution_id": "79d187f4-b8e5-4288-b2cd-ed27ee31e4b0",
   "state": "SUCCESS",
   "state_info": null,
-  "runtime_context": {"retry_cnt": 1},
-  "published": {"my_var": "my_val"},
+  "runtime_context": {
+    "retry_cnt": 1
+  },
+  "published": {
+    "my_var": "my_val"
+  },
   "result": "my task result",
   "processed": true
 }

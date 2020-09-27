@@ -1,20 +1,18 @@
 package org.openstack4j.openstack.magnum;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.magnum.Baymodel;
 import org.openstack4j.model.magnum.BaymodelBuilder;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MagnumBaymodel implements Baymodel{
+public class MagnumBaymodel implements Baymodel {
     /**
      *
      */
@@ -90,6 +88,7 @@ public class MagnumBaymodel implements Baymodel{
     public static BaymodelBuilder builder() {
         return new BaymodelConcreteBuilder();
     }
+
     @Override
     public BaymodelBuilder toBuilder() {
 
@@ -99,90 +98,119 @@ public class MagnumBaymodel implements Baymodel{
     public String getInsecureRegistry() {
         return insecureRegistry;
     }
+
     public List<GenericLink> getLinks() {
         return links;
     }
+
     public String getHttpProxy() {
         return httpProxy;
     }
+
     public String getUpdatedAt() {
         return updatedAt;
     }
+
     public Boolean isFloatingIpEnabled() {
         return floatingIpEnabled;
     }
+
     public String getFixedSubnet() {
         return fixedSubnet;
     }
+
     public String getMasterFlavorId() {
         return masterFlavorId;
     }
+
     public String getUuid() {
         return uuid;
     }
+
     public String getNoProxy() {
         return noProxy;
     }
+
     public String getHttpsProxy() {
         return httpsProxy;
     }
+
     public Boolean isTlsDisabled() {
         return tlsDisabled;
     }
+
     public String getKeypairId() {
         return keypairId;
     }
+
     public Boolean isPublicBaymodel() {
         return publicBaymodel;
     }
+
     public String getDockerVolumeSize() {
         return dockerVolumeSize;
     }
+
     public String getServerType() {
         return serverType;
     }
+
     public String getExternalNetworkId() {
         return externalNetworkId;
     }
+
     public String getClusterDistro() {
         return clusterDistro;
     }
+
     public String getImageId() {
         return imageId;
     }
+
     public String getVolumeDriver() {
         return volumeDriver;
     }
+
     public Boolean isRegistryEnabled() {
         return registryEnabled;
     }
+
     public String getDockerStorageDriver() {
         return dockerStorageDriver;
     }
+
     public String getApiserverPort() {
         return apiserverPort;
     }
+
     public String getName() {
         return name;
     }
+
     public String getCreatedAt() {
         return createdAt;
     }
+
     public String getNetworkDriver() {
         return networkDriver;
     }
+
     public String getFixedNetwork() {
         return fixedNetwork;
     }
+
     public String getCoe() {
         return coe;
     }
+
     public String getFlavorId() {
         return flavorId;
     }
+
     public Boolean isMasterLbEnabled() {
         return masterLbEnabled;
     }
+
     public String getDnsNameserver() {
         return dnsNameserver;
     }
@@ -225,9 +253,8 @@ public class MagnumBaymodel implements Baymodel{
 
     /**
      * Concrete builder containing MagnumBaymodel as model
-     *
      */
-    public static class BaymodelConcreteBuilder implements BaymodelBuilder{
+    public static class BaymodelConcreteBuilder implements BaymodelBuilder {
 
         MagnumBaymodel model;
 
@@ -246,8 +273,8 @@ public class MagnumBaymodel implements Baymodel{
 
         @Override
         public BaymodelBuilder from(Baymodel in) {
-            if(in != null)
-                this.model = (MagnumBaymodel)in;
+            if (in != null)
+                this.model = (MagnumBaymodel) in;
             return this;
         }
 
@@ -435,8 +462,6 @@ public class MagnumBaymodel implements Baymodel{
 
     /**
      * list of baymodels
-     *
-     *
      */
     public static class Baymodels extends ListResult<MagnumBaymodel> {
 

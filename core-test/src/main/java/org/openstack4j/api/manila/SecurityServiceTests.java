@@ -17,7 +17,7 @@ import static org.testng.Assert.*;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-@Test(suiteName="SecurityService")
+@Test(suiteName = "SecurityService")
 public class SecurityServiceTests extends AbstractTest {
     private static final String JSON_SECURITY_SERVICE = "/manila/security_service.json";
     private static final String JSON_SECURITY_SERVICE_CREATE = "/manila/security_service_create.json";

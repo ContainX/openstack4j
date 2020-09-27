@@ -7,14 +7,12 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * @author nmakhotkin
  */
-@Test(suiteName="Murano/AppCatalog", enabled = true)
+@Test(suiteName = "Murano/AppCatalog", enabled = true)
 public class SessionTests extends AbstractTest {
     private static final String SESSION_JSON = "/murano/v1/session.json";
     private static final String envId = "e1c1b5a0b3284f188c5d91ab18bf0451";

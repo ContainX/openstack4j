@@ -1,16 +1,13 @@
 package org.openstack4j.model.identity.v3.builder;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.identity.v3.User;
 
+import java.util.Map;
+
 /**
  * A Builder which creates a identity v3 project
- * 
- * 
- * 
  */
 public interface UserBuilder extends Builder<UserBuilder, User> {
 
@@ -41,7 +38,7 @@ public interface UserBuilder extends Builder<UserBuilder, User> {
 
     /**
      * Accepts an existing domain and uses its id
-     * 
+     *
      * @see User#getDomain()
      */
     UserBuilder domain(Domain domain);

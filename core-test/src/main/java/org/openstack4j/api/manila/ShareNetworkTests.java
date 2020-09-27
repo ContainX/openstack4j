@@ -17,7 +17,7 @@ import static org.testng.Assert.*;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-@Test(suiteName="ShareNetwork")
+@Test(suiteName = "ShareNetwork")
 public class ShareNetworkTests extends AbstractTest {
     private static final String JSON_SHARE_NETWORK = "/manila/share_network.json";
     private static final String JSON_SHARE_NETWORK_CREATE = "/manila/share_network_create.json";

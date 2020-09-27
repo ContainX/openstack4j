@@ -1,10 +1,9 @@
 package org.openstack4j.openstack.sahara.domain;
 
-import org.openstack4j.model.sahara.DataSourceCredentials;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.sahara.DataSourceCredentials;
 
 /**
  * For mapping JSON response to/from java objects
@@ -13,7 +12,7 @@ import com.google.common.base.MoreObjects;
  * @author siwat.pru@outlook.com
  */
 @JsonRootName("credentials")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaDataSourceCredentials implements DataSourceCredentials {
 
     private static final long serialVersionUID = 1L;
@@ -45,9 +44,9 @@ public class SaharaDataSourceCredentials implements DataSourceCredentials {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("password", password)
-                   .add("user", user)
-                   .toString();
+                .add("password", password)
+                .add("user", user)
+                .toString();
     }
 
 }

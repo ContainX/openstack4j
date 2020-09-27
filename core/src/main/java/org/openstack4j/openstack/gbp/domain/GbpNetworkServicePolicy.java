@@ -41,7 +41,9 @@ public class GbpNetworkServicePolicy implements NetworkServicePolicy {
     }
 
     @Override
-    public void setId(String id) { this.id = id; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;
@@ -116,31 +118,31 @@ public class GbpNetworkServicePolicy implements NetworkServicePolicy {
 
         @Override
         public NetworkServicePolicyBuilder from(NetworkServicePolicy in) {
-            this.networkServicePolicy=(GbpNetworkServicePolicy) in;
+            this.networkServicePolicy = (GbpNetworkServicePolicy) in;
             return this;
         }
 
         @Override
         public NetworkServicePolicyBuilder name(String name) {
-            this.networkServicePolicy.name=name;
+            this.networkServicePolicy.name = name;
             return this;
         }
 
         @Override
         public NetworkServicePolicyBuilder description(String description) {
-            this.networkServicePolicy.description=description;
+            this.networkServicePolicy.description = description;
             return this;
         }
 
         @Override
         public NetworkServicePolicyBuilder isShared(boolean shared) {
-            this.networkServicePolicy.shared=shared;
+            this.networkServicePolicy.shared = shared;
             return this;
         }
 
         @Override
         public NetworkServicePolicyBuilder gbpNetworkServiceParams(List<GbpNetworkServiceParams> gbpNetworkServiceParamsList) {
-            this.networkServicePolicy.gbpNetworkServiceParamsList=gbpNetworkServiceParamsList;
+            this.networkServicePolicy.gbpNetworkServiceParamsList = gbpNetworkServiceParamsList;
             return this;
         }
 

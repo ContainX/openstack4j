@@ -12,52 +12,50 @@ import java.util.Map;
 /**
  * This is a model of a senlinPolicy_type. It uses Jackson annotations for
  * (de)serialization into JSON format
- * 
+ *
  * @author lion
- * 
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName("policy_type")
 public class SenlinPolicyType implements PolicyType {
-	private static final long serialVersionUID = -8893826725585696810L;
+    private static final long serialVersionUID = -8893826725585696810L;
 
-	@JsonProperty("name")
-	private String name;
-	@JsonProperty("schema")
-	private Map<String, Object> schema;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("schema")
+    private Map<String, Object> schema;
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public Map<String, Object> getSchema() {
-		return schema;
-	}
+    @Override
+    public Map<String, Object> getSchema() {
+        return schema;
+    }
 
-	@Override
-	public String toString() {
-		return "SenlinPolicyType{" +
-				"name='" + name + '\'' +
-				", schema=" + schema +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "SenlinPolicyType{" +
+                "name='" + name + '\'' +
+                ", schema=" + schema +
+                '}';
+    }
 
-	/**
-	 * An inner class for representing lists of senlinPolicy_type
-	 * 
-	 * @author lion
-	 * 
-	 */
-	public static class PolicyType extends ListResult<SenlinPolicyType> {
-		private static final long serialVersionUID = -4755855096962007407L;
+    /**
+     * An inner class for representing lists of senlinPolicy_type
+     *
+     * @author lion
+     */
+    public static class PolicyType extends ListResult<SenlinPolicyType> {
+        private static final long serialVersionUID = -4755855096962007407L;
 
-		@JsonProperty("policy_types")
-		private List<SenlinPolicyType> list;
+        @JsonProperty("policy_types")
+        private List<SenlinPolicyType> list;
 
-		protected List<SenlinPolicyType> value() {
-			return list;
-		}
-	}
+        protected List<SenlinPolicyType> value() {
+            return list;
+        }
+    }
 }

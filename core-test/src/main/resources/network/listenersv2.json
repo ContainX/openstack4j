@@ -13,7 +13,6 @@
       ],
       "tenant_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
       "sni_container_refs": [
-
       ],
       "connection_limit": -1,
       "default_pool_id": "b7f6a49f-ebd8-43c5-b792-5748366eff21",
@@ -33,7 +32,6 @@
       ],
       "tenant_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
       "sni_container_refs": [
-
       ],
       "connection_limit": -1,
       "default_pool_id": "e0467102-6406-484d-8262-3922a2f2b36b",

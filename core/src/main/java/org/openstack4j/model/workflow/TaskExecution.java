@@ -1,10 +1,7 @@
 /*
- * 
+ *
  */
 package org.openstack4j.model.workflow;
-
-import org.openstack4j.common.Buildable;
-import org.openstack4j.model.workflow.builder.TaskExecutionBuilder;
 
 import java.util.Map;
 

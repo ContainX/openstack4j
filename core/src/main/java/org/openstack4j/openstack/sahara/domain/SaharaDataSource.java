@@ -1,18 +1,17 @@
 package org.openstack4j.openstack.sahara.domain;
 
-import java.util.Date;
-import java.util.List;
-
-import org.openstack4j.model.sahara.DataSource;
-import org.openstack4j.model.sahara.DataSourceCredentials;
-import org.openstack4j.model.sahara.builder.DataSourceBuilder;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.sahara.DataSource;
+import org.openstack4j.model.sahara.DataSourceCredentials;
+import org.openstack4j.model.sahara.builder.DataSourceBuilder;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * For mapping JSON response to/from java objects
@@ -21,7 +20,7 @@ import com.google.common.base.MoreObjects;
  * @author siwat.pru@outlook.com
  */
 @JsonRootName("data_source")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaDataSource implements DataSource {
 
     private static final long serialVersionUID = 1L;
@@ -111,8 +110,8 @@ public class SaharaDataSource implements DataSource {
     }
 
     /**
-    * {@inheritDoc}
-    */
+     * {@inheritDoc}
+     */
     @Override
     public DataSourceCredentials getCredentials() {
         return credentials;
@@ -121,15 +120,15 @@ public class SaharaDataSource implements DataSource {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("description", description)
-                   .add("url", url)
-                   .add("tenant_id", tenantId)
-                   .add("created_at", createdAt)
-                   .add("updated_at", updatedAt)
-                   .add("type", type)
-                   .add("id",id)
-                   .add("name", name)
-                   .toString();
+                .add("description", description)
+                .add("url", url)
+                .add("tenant_id", tenantId)
+                .add("created_at", createdAt)
+                .add("updated_at", updatedAt)
+                .add("type", type)
+                .add("id", id)
+                .add("name", name)
+                .toString();
     }
 
     public static class DataSources extends ListResult<SaharaDataSource> {
@@ -149,14 +148,14 @@ public class SaharaDataSource implements DataSource {
      */
     @Override
     public DataSourceBuilder toBuilder() {
-            return new ConcreteDataSourceBuilder(this);
+        return new ConcreteDataSourceBuilder(this);
     }
 
     /**
      * @return the data source Builder
      */
     public static DataSourceBuilder builder() {
-            return new ConcreteDataSourceBuilder();
+        return new ConcreteDataSourceBuilder();
     }
 
     public static class ConcreteDataSourceBuilder implements DataSourceBuilder {

@@ -1,8 +1,8 @@
 package org.openstack4j.api.telemetry;
 
-import java.util.List;
-
 import org.openstack4j.model.telemetry.Resource;
+
+import java.util.List;
 
 public interface ResourceService {
 

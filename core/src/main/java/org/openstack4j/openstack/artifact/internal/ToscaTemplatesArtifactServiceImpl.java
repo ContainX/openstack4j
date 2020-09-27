@@ -2,27 +2,17 @@ package org.openstack4j.openstack.artifact.internal;
 
 import com.google.common.base.Preconditions;
 import org.openstack4j.api.artifact.ToscaTemplatesArtifactService;
-import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.model.artifact.ArtifactType;
 import org.openstack4j.model.artifact.ArtifactUpdate;
 import org.openstack4j.model.artifact.ToscaTemplatesArtifact;
 import org.openstack4j.model.artifact.ToscaTemplatesArtifacts;
-import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.common.payloads.FilePayload;
-import org.openstack4j.openstack.artifact.domain.ArtifactUpdateModel;
 import org.openstack4j.openstack.artifact.domain.ToscaTemplates;
 import org.openstack4j.openstack.artifact.domain.ToscaTemplatesList;
-import org.openstack4j.openstack.common.ListEntity;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_OCTECT_STREAM;
-import static org.openstack4j.core.transport.ClientConstants.HEADER_ACCEPT;
 
 /**
  * Created by vadavi on 19-01-2017.

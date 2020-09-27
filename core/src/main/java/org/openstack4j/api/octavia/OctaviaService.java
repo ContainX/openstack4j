@@ -4,7 +4,7 @@ import org.openstack4j.common.RestService;
 
 /**
  * OpenStack Octavia Operations API
- * 
+ *
  * @author wei
  */
 public interface OctaviaService extends RestService {

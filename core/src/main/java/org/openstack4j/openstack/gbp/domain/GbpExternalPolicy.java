@@ -1,20 +1,20 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-
-import org.openstack4j.model.gbp.ExternalPolicy;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.gbp.ExternalPolicy;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
+
 /**
  * Model implementation for External Policy
  *
  * @author vinod borole
  */
 @JsonRootName("external_policy")
-public class GbpExternalPolicy implements ExternalPolicy{
+public class GbpExternalPolicy implements ExternalPolicy {
     private static final long serialVersionUID = 1L;
     private String name;
     private String description;
@@ -42,7 +42,7 @@ public class GbpExternalPolicy implements ExternalPolicy{
      */
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     /**
@@ -58,7 +58,7 @@ public class GbpExternalPolicy implements ExternalPolicy{
      */
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     /**
@@ -74,7 +74,7 @@ public class GbpExternalPolicy implements ExternalPolicy{
      */
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
 
     /**

@@ -15,12 +15,14 @@ import java.util.Map;
 
 /**
  * OpenStack (Glance) Image V2 support
+ *
  * @author emjburns
  */
 public interface ImageService extends RestService {
 
     /**
      * List all available operating system images
+     *
      * @return list of images
      */
     List<? extends Image> list();
@@ -29,21 +31,23 @@ public interface ImageService extends RestService {
      * Returns list of images filtered by parameters.
      * For filtering guidelines, see http://developer.openstack.org/api-ref/image/v2/index.html#show-images
      * To paginate, use "limit" and "marker" parameters
+     *
      * @param filteringParams map (name, value) of filtering parameters
      * @return list of images fitered by filteringParams
      */
     List<? extends Image> list(Map<String, String> filteringParams);
-    
+
     /**
      * List images currently in the glance image cache.
      *
      * @return list of cached images or empty list if the cache is empty or null if the cache is not enabled.
      */
-    List<? extends CachedImage> listCachedImages() ;
+    List<? extends CachedImage> listCachedImages();
 
     /**
      * Show details for an image by imageid.
      * The image must exist
+     *
      * @param imageId
      * @return the image
      */
@@ -51,6 +55,7 @@ public interface ImageService extends RestService {
 
     /**
      * Creates a catalog record for an operating system disk image.
+     *
      * @param image
      * @return Image
      */
@@ -58,6 +63,7 @@ public interface ImageService extends RestService {
 
     /**
      * Update image by providing the changed image object.
+     *
      * @param image
      * @return image
      */
@@ -67,6 +73,7 @@ public interface ImageService extends RestService {
      * Update an image by building the string of json operations
      * that represent the json transformation
      * instead of the building the whole image
+     *
      * @param imageId
      * @param imageUpdate
      * @return Image
@@ -76,6 +83,7 @@ public interface ImageService extends RestService {
     /**
      * Deletes an image.
      * You cannot delete images with the protected attribute set to true (boolean).
+     *
      * @param imageId
      */
     ActionResponse delete(String imageId);
@@ -84,12 +92,14 @@ public interface ImageService extends RestService {
      * Deactivate an image
      * If you try to download a deactivated image, you will receive a 403 (Forbidden) response code.
      * Additionally, only administrative users can view image locations for deactivated images.
+     *
      * @param imageId
      */
     ActionResponse deactivate(String imageId);
 
     /**
      * Reactivate an image
+     *
      * @param imageId
      * @return
      */
@@ -98,6 +108,7 @@ public interface ImageService extends RestService {
     /**
      * List members of a particular image.
      * These members are projects or tenants that can see the image.
+     *
      * @param imageId
      * @return List of members
      */
@@ -106,6 +117,7 @@ public interface ImageService extends RestService {
     /**
      * List members of a particular image.
      * These members are projects or tenants that can see the image.
+     *
      * @param imageId
      * @return List of members
      */
@@ -114,14 +126,16 @@ public interface ImageService extends RestService {
     /**
      * The image must exist, be private, and be owned by the author of the request.
      * Otherwise, this will fail.
-     * @param imageId the image to share
+     *
+     * @param imageId  the image to share
      * @param memberId
-     * @return  member
+     * @return member
      */
     Member createMember(String imageId, String memberId);
 
     /**
      * Get details about a member
+     *
      * @param imageId
      * @param memberId
      * @return member
@@ -131,6 +145,7 @@ public interface ImageService extends RestService {
     /**
      * Change status of an image member
      * For more details see http://specs.openstack.org/openstack/glance-specs/specs/api/v2/sharing-image-api-v2.html
+     *
      * @param imageId
      * @param memberId
      * @param memberStatus
@@ -140,6 +155,7 @@ public interface ImageService extends RestService {
 
     /**
      * You must be the owner of the image to delete the member
+     *
      * @param imageId
      * @param memberId
      */
@@ -148,6 +164,7 @@ public interface ImageService extends RestService {
     /**
      * Add tag to image.
      * Can also be done with ImagesService#update(image)
+     *
      * @param imageId
      * @param tag
      * @return
@@ -157,6 +174,7 @@ public interface ImageService extends RestService {
     /**
      * Delete tag from image.
      * Can also be done with ImagesService#update(image)
+     *
      * @param imageId
      * @param tag
      * @return
@@ -165,6 +183,7 @@ public interface ImageService extends RestService {
 
     /**
      * Uploads binary image data
+     *
      * @param imageId
      * @param payload
      * @param image
@@ -174,6 +193,7 @@ public interface ImageService extends RestService {
 
     /**
      * Downloads binary image data
+     *
      * @param imageId
      * @param filename
      * @return

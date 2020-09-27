@@ -12,7 +12,9 @@ import org.openstack4j.model.trove.builder.DatabaseBuilder;
 public interface Database extends ModelEntity, Buildable<DatabaseBuilder> {
 
     String getName();
+
     String getDbCharacterSet();
+
     String getDbCollation();
 
 }

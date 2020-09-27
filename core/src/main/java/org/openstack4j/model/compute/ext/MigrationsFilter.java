@@ -5,21 +5,21 @@ import org.openstack4j.model.compute.ext.Migration.Status;
 
 /**
  * Filter options used for Migration results
- * 
+ *
  * @author Jeremy Unruh
  */
 public class MigrationsFilter extends BaseFilter {
 
-    private MigrationsFilter() { 
+    private MigrationsFilter() {
     }
-    
+
     public static MigrationsFilter create() {
         return new MigrationsFilter();
     }
-    
+
     /**
-     * Filters the response by host name 
-     * 
+     * Filters the response by host name
+     *
      * @param host the host name
      * @return MigrationsFilter
      */
@@ -27,10 +27,10 @@ public class MigrationsFilter extends BaseFilter {
         filter("host", host);
         return this;
     }
-    
+
     /**
      * Filters the response by status.
-     * 
+     *
      * @param status the status to filter by
      * @return MigrationsFilter
      */
@@ -38,10 +38,10 @@ public class MigrationsFilter extends BaseFilter {
         filter("status", status.name());
         return this;
     }
-    
+
     /**
-     * Filters the response by cell name 
-     * 
+     * Filters the response by cell name
+     *
      * @param cellName the cell name
      * @return MigrationsFilter
      */
@@ -49,5 +49,5 @@ public class MigrationsFilter extends BaseFilter {
         filter("cell_name", cellName);
         return this;
     }
-    
+
 }

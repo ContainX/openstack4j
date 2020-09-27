@@ -9,7 +9,7 @@ import org.openstack4j.model.artifact.ToscaTemplatesArtifact;
  *
  * @author Pavan Vadavi
  */
-public interface ToscaTemplatesArtifactBuilder extends ArtifactBuilder,  Builder<ToscaTemplatesArtifactBuilder, ToscaTemplatesArtifact> {
+public interface ToscaTemplatesArtifactBuilder extends ArtifactBuilder, Builder<ToscaTemplatesArtifactBuilder, ToscaTemplatesArtifact> {
 
     ToscaTemplatesArtifactBuilder template(Template template);
 

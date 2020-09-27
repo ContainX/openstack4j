@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Implementation of Glance V2 member
+ *
  * @author emjburns
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -42,6 +43,7 @@ public class GlanceMember implements Member {
 
     /**
      * Constructor used in createMember
+     *
      * @param memberId
      */
     public GlanceMember(String memberId) {
@@ -50,6 +52,7 @@ public class GlanceMember implements Member {
 
     /**
      * Constructor used in updateMember
+     *
      * @param status
      */
     public GlanceMember(MemberStatus status) {

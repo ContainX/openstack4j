@@ -23,7 +23,7 @@ public class HttpResponseImpl implements HttpResponse {
     private byte[] data;
 
     private HttpResponseImpl(Map<String, List<String>> headers,
-            int responseCode, String responseMessage, byte[] data) {
+                             int responseCode, String responseMessage, byte[] data) {
         this.headers = headers;
         this.responseCode = responseCode;
         this.responseMessage = responseMessage;
@@ -39,7 +39,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the HttpResponse
      */
     public static HttpResponseImpl wrap(Map<String, List<String>> headers,
-            int responseCode, String responseMessage, byte[] data) {
+                                        int responseCode, String responseMessage, byte[] data) {
         return new HttpResponseImpl(headers, responseCode, responseMessage, data);
     }
 
@@ -47,7 +47,7 @@ public class HttpResponseImpl implements HttpResponse {
      * Gets the entity and Maps any errors which will result in a
      * ResponseException
      *
-     * @param <T> the generic type
+     * @param <T>        the generic type
      * @param returnType the return type
      * @return the entity
      */
@@ -59,9 +59,9 @@ public class HttpResponseImpl implements HttpResponse {
      * Gets the entity and Maps any errors which will result in a
      * ResponseException
      *
-     * @param <T> the generic type
+     * @param <T>        the generic type
      * @param returnType the return type
-     * @param options the execution options
+     * @param options    the execution options
      * @return the entity
      */
     @Override
@@ -90,8 +90,8 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the input stream
      */
     public InputStream getInputStream() {
-    	if (data == null)
-    		return null;
+        if (data == null)
+            return null;
 
         return new ByteArrayInputStream(data);
     }
@@ -103,14 +103,13 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the header as a String or null if not found
      */
     public String header(String name) {
-    	if (name == null) return null;
-    	for (String key : headers.keySet()) {
-    		if (key != null && key.equalsIgnoreCase(name))
-    		{
-    			return headers.get(key).get(0);
-    		}
-    	}
-    	return null;
+        if (name == null) return null;
+        for (String key : headers.keySet()) {
+            if (key != null && key.equalsIgnoreCase(name)) {
+                return headers.get(key).get(0);
+            }
+        }
+        return null;
     }
 
     /**
@@ -147,13 +146,13 @@ public class HttpResponseImpl implements HttpResponse {
         }
     }
 
-		@Override
-		public void close() throws IOException {
-			// Not Implemented - closing handle by HttpCommand
-		}
+    @Override
+    public void close() throws IOException {
+        // Not Implemented - closing handle by HttpCommand
+    }
 
-        @Override
-        public String getContentType() {
-            return header(ClientConstants.HEADER_CONTENT_TYPE);
-        }
+    @Override
+    public String getContentType() {
+        return header(ClientConstants.HEADER_CONTENT_TYPE);
+    }
 }

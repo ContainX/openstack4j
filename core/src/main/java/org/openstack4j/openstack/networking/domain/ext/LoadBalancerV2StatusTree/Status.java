@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Abstract class for common status fields
+ *
  * @author emjburns
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -17,15 +18,15 @@ public abstract class Status {
     @JsonProperty("provisioning_status")
     public String provisioningStatus;
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public String getOperatingStatus(){
+    public String getOperatingStatus() {
         return operatingStatus;
     }
 
-    public String getProvisioningStatus(){
+    public String getProvisioningStatus() {
         return provisioningStatus;
     }
 }

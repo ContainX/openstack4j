@@ -1,11 +1,6 @@
 package org.openstack4j.api.identity.v3;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
-import java.util.List;
-
+import com.google.common.collect.ImmutableMap;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
@@ -15,7 +10,9 @@ import org.openstack4j.model.identity.v3.User;
 import org.openstack4j.openstack.OSFactory;
 import org.testng.annotations.Test;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.List;
+
+import static org.testng.Assert.*;
 
 /**
  * Tests the Identity/Keystone API version 3 Authentication
@@ -223,32 +220,32 @@ public class KeystoneAuthenticationTests extends AbstractTest {
         respondWithHeaderAndResource(HEADER_AUTH_PROJECT_RESPONSE, 201, JSON_AUTH_UNSCOPED);
 
         OSClientV3 osclient_unscoped = OSFactory.builderV3()
-                                .endpoint(authURL("/v3"))
-                                .credentials(USER_ID, PASSWORD)
-                                .authenticate();
+                .endpoint(authURL("/v3"))
+                .credentials(USER_ID, PASSWORD)
+                .authenticate();
 
-       String tokenId_unscoped = osclient_unscoped.getToken().getId();
+        String tokenId_unscoped = osclient_unscoped.getToken().getId();
 
-       respondWithHeaderAndResource(HEADER_AUTH_TOKEN_RESPONSE, 200, JSON_AUTH_PROJECT);
+        respondWithHeaderAndResource(HEADER_AUTH_TOKEN_RESPONSE, 200, JSON_AUTH_PROJECT);
 
-       OSClientV3 osclient_scoped = (OSFactory.builderV3()
-               .endpoint(authURL("/v3"))
-               .token(tokenId_unscoped)
-               .scopeToProject(Identifier.byId(PROJECT_ID))
-               .authenticate());
+        OSClientV3 osclient_scoped = (OSFactory.builderV3()
+                .endpoint(authURL("/v3"))
+                .token(tokenId_unscoped)
+                .scopeToProject(Identifier.byId(PROJECT_ID))
+                .authenticate());
 
-       String tokenId_scoped = osclient_scoped.getToken().getId();
+        String tokenId_scoped = osclient_scoped.getToken().getId();
 
-       respondWithHeaderAndResource(HEADER_REAUTH_TOKEN_RESPONSE, 200, JSON_AUTH_PROJECT);
+        respondWithHeaderAndResource(HEADER_REAUTH_TOKEN_RESPONSE, 200, JSON_AUTH_PROJECT);
 
-       associateClientV3(OSFactory.builderV3()
-               .endpoint(authURL("/v3"))
-               .token(tokenId_scoped)
-               .scopeToProject(Identifier.byId(PROJECT_ID))
-               .authenticate());
+        associateClientV3(OSFactory.builderV3()
+                .endpoint(authURL("/v3"))
+                .token(tokenId_scoped)
+                .scopeToProject(Identifier.byId(PROJECT_ID))
+                .authenticate());
 
-       assertEquals(osv3.getToken().getUser().getId(), USER_ID);
-       assertEquals(osv3.getToken().getProject().getId(), PROJECT_ID);
+        assertEquals(osv3.getToken().getUser().getId(), USER_ID);
+        assertEquals(osv3.getToken().getProject().getId(), PROJECT_ID);
 
     }
 
@@ -262,19 +259,19 @@ public class KeystoneAuthenticationTests extends AbstractTest {
         respondWithHeaderAndResource(HEADER_AUTH_TOKEN_RESPONSE, 201, JSON_AUTH_UNSCOPED);
 
         OSClientV3 osclient_unscoped = OSFactory.builderV3()
-                                        .endpoint(authURL("/v3"))
-                                        .credentials(USER_ID, PASSWORD)
-                                        .authenticate();
+                .endpoint(authURL("/v3"))
+                .credentials(USER_ID, PASSWORD)
+                .authenticate();
 
         String tokenUnscopedId = osclient_unscoped.getToken().getId();
 
         respondWithHeaderAndResource(HEADER_AUTH_PROJECT_RESPONSE, 200, JSON_AUTH_PROJECT);
 
         OSClientV3 osclient_scoped = OSFactory.builderV3()
-                                        .endpoint(authURL("/v3"))
-                                        .token(tokenUnscopedId)
-                                        .scopeToProject(Identifier.byId(PROJECT_ID))
-                                        .authenticate();
+                .endpoint(authURL("/v3"))
+                .token(tokenUnscopedId)
+                .scopeToProject(Identifier.byId(PROJECT_ID))
+                .authenticate();
 
         String tokenScopedId = osclient_scoped.getToken().getId();
 
@@ -287,7 +284,7 @@ public class KeystoneAuthenticationTests extends AbstractTest {
      *
      * @throws Exception
      */
-    @Test(priority=-1)
+    @Test(priority = -1)
     public void authenticate_userId_password_domain_region_Test() throws Exception {
 
         try {
@@ -297,8 +294,7 @@ public class KeystoneAuthenticationTests extends AbstractTest {
             respondWith(JSON_USERS);
             List<? extends User> userList = osv3().identity().users().list();
             assertNotNull(userList);
-        }
-        finally {
+        } finally {
             osv3().removeRegion();
         }
     }
@@ -308,15 +304,14 @@ public class KeystoneAuthenticationTests extends AbstractTest {
      *
      * @throws Exception
      */
-    @Test(expectedExceptions= {RegionEndpointNotFoundException.class})
+    @Test(expectedExceptions = {RegionEndpointNotFoundException.class})
     public void authenticate_userId_password_domain_regionInvalid_Test() throws Exception {
 
         try {
             osv3().useRegion("regionInvalid");
 
             osv3().identity().users().list();
-        }
-        finally {
+        } finally {
             osv3().removeRegion();
         }
 
@@ -361,11 +356,11 @@ public class KeystoneAuthenticationTests extends AbstractTest {
         respondWithHeaderAndResource(HEADER_AUTH_TOKEN_RESPONSE, 201, JSON_AUTH_TOKEN_UNSCOPED);
 
         OSClientV3 osclient_token_unscoped = (OSFactory.builderV3()
-        .endpoint(authURL("/v3"))
-        .token(TOKEN_UNSCOPED_ID)
-        .authenticate());
+                .endpoint(authURL("/v3"))
+                .token(TOKEN_UNSCOPED_ID)
+                .authenticate());
 
-        assertEquals(osclient_token_unscoped.getToken().getId(),TOKEN_UNSCOPED_ID);
+        assertEquals(osclient_token_unscoped.getToken().getId(), TOKEN_UNSCOPED_ID);
 
     }
 

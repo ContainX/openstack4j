@@ -71,7 +71,7 @@ public class ManilaShareManage implements ShareManage {
     public ShareManageBuilder toBuilder() {
         return new ShareManageConcreteBuilder(this);
     }
-    
+
     public static class ShareManageConcreteBuilder implements ShareManageBuilder {
         ManilaShareManage shareManage;
 

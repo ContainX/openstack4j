@@ -9,7 +9,7 @@ import static org.testng.Assert.*;
 public class MicroVersionTest {
     @DataProvider
     public static Object[][] invalidMicroVersions() {
-        return new Object[][] {
+        return new Object[][]{
                 {"1.2.3"},
                 {"1,0"},
                 {"1"},
@@ -29,8 +29,7 @@ public class MicroVersionTest {
         try {
             new MicroVersion(v);
             fail("Expected IllegalArgumentException");
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertEquals(e.getMessage(), "Invalid version pattern " + v + ", should be 'X.Y' (Major.Minor)");
         }
     }

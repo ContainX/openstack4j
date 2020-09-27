@@ -1,16 +1,15 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
 import org.openstack4j.model.gbp.ExternalRoutes;
 import org.openstack4j.model.gbp.ExternalSegment;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
-import com.google.common.collect.Lists;
+import java.util.List;
 
 /**
  * Model implementation for External Segments
@@ -50,7 +49,7 @@ public class GbpExternalSegment implements ExternalSegment {
 
     @Override
     public void setTenantId(String tenantId) {
-       this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -60,7 +59,7 @@ public class GbpExternalSegment implements ExternalSegment {
 
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -70,13 +69,14 @@ public class GbpExternalSegment implements ExternalSegment {
 
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
 
     @Override
     public List<String> getExternalPolicies() {
         return externalPolicies;
     }
+
     @Override
     public int getIpVersion() {
         return ipVersion;
@@ -101,6 +101,7 @@ public class GbpExternalSegment implements ExternalSegment {
     public String getSubnetId() {
         return subnetId;
     }
+
     @Override
     public List<String> getL3Policies() {
         return l3Policies;
@@ -125,6 +126,7 @@ public class GbpExternalSegment implements ExternalSegment {
     public ExternalSegmentBuilder toBuilder() {
         return new ExternalSegmentConcreteBuilder(this);
     }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description).add("tenantId", tenantId).add("externalPolicies", externalPolicies)
@@ -145,16 +147,16 @@ public class GbpExternalSegment implements ExternalSegment {
         }
     }
 
-    public static class ExternalSegmentConcreteBuilder implements ExternalSegmentBuilder{
+    public static class ExternalSegmentConcreteBuilder implements ExternalSegmentBuilder {
 
         private GbpExternalSegment extSegment;
 
-        public ExternalSegmentConcreteBuilder(){
+        public ExternalSegmentConcreteBuilder() {
             this(new GbpExternalSegment());
         }
 
         public ExternalSegmentConcreteBuilder(GbpExternalSegment gbpExternalSegment) {
-            this.extSegment=gbpExternalSegment;
+            this.extSegment = gbpExternalSegment;
         }
 
         @Override
@@ -164,64 +166,64 @@ public class GbpExternalSegment implements ExternalSegment {
 
         @Override
         public ExternalSegmentBuilder from(ExternalSegment in) {
-            extSegment = (GbpExternalSegment)in;
+            extSegment = (GbpExternalSegment) in;
             return this;
         }
 
         @Override
         public ExternalSegmentBuilder name(String name) {
-            extSegment.name=name;
+            extSegment.name = name;
             return this;
         }
 
         @Override
         public ExternalSegmentBuilder description(String description) {
-            this.extSegment.description=description;
+            this.extSegment.description = description;
             return this;
         }
 
         @Override
         public ExternalSegmentBuilder externalPolicies(List<String> extPolicyIds) {
-            this.extSegment.externalPolicies=extPolicyIds;
+            this.extSegment.externalPolicies = extPolicyIds;
             return this;
         }
 
         @Override
         public ExternalSegmentBuilder ipVersion(int ipVersion) {
-            this.extSegment.ipVersion=ipVersion;
+            this.extSegment.ipVersion = ipVersion;
             return this;
         }
 
         @Override
         public ExternalSegmentBuilder cidr(String cidr) {
-            this.extSegment.cidr=cidr;
+            this.extSegment.cidr = cidr;
             return this;
         }
 
         @Override
         public ExternalSegmentBuilder isShared(boolean shared) {
-            this.extSegment.shared=shared;
+            this.extSegment.shared = shared;
             return this;
         }
 
         @Override
         public ExternalSegmentBuilder externalRoutes(List<ExternalRoutes> extRoutes) {
-           this.extSegment.externalRoutes = Lists.newArrayList();
-           for(ExternalRoutes externalRoute : extRoutes){
-               this.extSegment.externalRoutes.add((GbpExternalRoutes) externalRoute);
-           }
-           return this;
+            this.extSegment.externalRoutes = Lists.newArrayList();
+            for (ExternalRoutes externalRoute : extRoutes) {
+                this.extSegment.externalRoutes.add((GbpExternalRoutes) externalRoute);
+            }
+            return this;
         }
 
         @Override
         public ExternalSegmentBuilder subnetId(String subnetId) {
-            this.extSegment.subnetId=subnetId;
+            this.extSegment.subnetId = subnetId;
             return this;
         }
 
         @Override
         public ExternalSegmentBuilder isPortAddressTranslation(boolean isPortAddressTranslation) {
-            this.extSegment.portAddressTranslation=isPortAddressTranslation;
+            this.extSegment.portAddressTranslation = isPortAddressTranslation;
             return this;
         }
 

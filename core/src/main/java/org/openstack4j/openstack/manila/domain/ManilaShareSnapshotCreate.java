@@ -73,11 +73,12 @@ public class ManilaShareSnapshotCreate implements ShareSnapshotCreate {
     public static ShareSnapshotCreateBuilder builder() {
         return new ShareSnapshotCreateConcreteBuilder();
     }
+
     @Override
     public ShareSnapshotCreateBuilder toBuilder() {
         return new ShareSnapshotCreateConcreteBuilder(this);
     }
-    
+
     public static class ShareSnapshotCreateConcreteBuilder implements ShareSnapshotCreateBuilder {
         ManilaShareSnapshotCreate shareSnapshotCreate;
 

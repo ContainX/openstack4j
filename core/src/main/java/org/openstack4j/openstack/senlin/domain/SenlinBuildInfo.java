@@ -10,35 +10,34 @@ import java.util.Map;
 /**
  * This is a model of a senlinBuild_info. It uses Jackson annotations for
  * (de)serialization into JSON format
- * 
+ *
  * @author lion
- * 
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName("build_info")
 public class SenlinBuildInfo implements BuildInfo {
-	private static final long serialVersionUID = -7596480972776554810L;
+    private static final long serialVersionUID = -7596480972776554810L;
 
-	@JsonProperty("api")
-	private Map<String, String> api;
-	@JsonProperty("engine")
-	private Map<String, String> engine;
+    @JsonProperty("api")
+    private Map<String, String> api;
+    @JsonProperty("engine")
+    private Map<String, String> engine;
 
-	@Override
-	public Map<String, String> getApi() {
-		return api;
-	}
+    @Override
+    public Map<String, String> getApi() {
+        return api;
+    }
 
-	@Override
-	public Map<String, String> getEngine() {
-		return engine;
-	}
+    @Override
+    public Map<String, String> getEngine() {
+        return engine;
+    }
 
-	@Override
-	public String toString() {
-		return "SenlinBuildInfo{" +
-				"api=" + api +
-				", engine=" + engine +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "SenlinBuildInfo{" +
+                "api=" + api +
+                ", engine=" + engine +
+                '}';
+    }
 }

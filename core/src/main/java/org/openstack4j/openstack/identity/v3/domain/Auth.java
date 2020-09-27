@@ -2,7 +2,7 @@ package org.openstack4j.openstack.identity.v3.domain;
 
 /**
  * an v3 auth object
- * 
+ *
  * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#authenticate">API reference</a>
  */
 public abstract class Auth implements org.openstack4j.openstack.common.Auth {

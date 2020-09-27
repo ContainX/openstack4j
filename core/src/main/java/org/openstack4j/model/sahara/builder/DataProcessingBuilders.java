@@ -1,7 +1,5 @@
 package org.openstack4j.model.sahara.builder;
 
-import org.openstack4j.model.sahara.DataSource;
-
 /**
  * The Data Processing (Sahara) builders
  */

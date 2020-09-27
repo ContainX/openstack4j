@@ -4,7 +4,7 @@ import org.openstack4j.model.identity.URLResolverParams;
 
 /**
  * Resolves an Endpoint URL based on the Service Type and Facing perspective
- * 
+ *
  * @author Jeremy Unruh
  */
 public interface EndpointURLResolver {
@@ -18,15 +18,15 @@ public interface EndpointURLResolver {
 
     /**
      * Resolves the given ServiceType and Facing perspective down to a single URL used in identity v2
-     * 
+     *
      * @param params URLResolverParams containing mandatory and optional params
      * @return the URL of the Endpoint
      */
     String findURLV2(URLResolverParams params);
-    
+
     /**
      * Resolves the given ServiceType and Facing perspective down to a single URL used in identity v3
-     * 
+     *
      * @param params URLResolverParams containing mandatory and optional params
      * @return the URL of the Endpoint
      */

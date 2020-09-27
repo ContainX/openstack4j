@@ -1,13 +1,13 @@
 package org.openstack4j.model.compute.ext;
 
+import org.openstack4j.model.ModelEntity;
+
 import java.util.Date;
 import java.util.Map;
 
-import org.openstack4j.model.ModelEntity;
-
 /**
  * Availability Zone Model Entity
- * 
+ *
  * @author octopus zhang
  */
 public interface AvailabilityZone extends ModelEntity {
@@ -26,8 +26,8 @@ public interface AvailabilityZone extends ModelEntity {
      * @return zone's name
      */
     String getZoneName();
-    
-    
+
+
     public interface ZoneState extends ModelEntity {
 
         /**
@@ -38,7 +38,7 @@ public interface AvailabilityZone extends ModelEntity {
 
     public interface NovaService extends ModelEntity {
         /**
-         * @return whether the service is available 
+         * @return whether the service is available
          */
         boolean getAvailable();
 

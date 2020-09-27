@@ -11,8 +11,8 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
  */
 public class BaseIdentityServices extends BaseOpenStackService {
 
-        protected BaseIdentityServices() {
-                super(ServiceType.IDENTITY, EnforceVersionToURL.instance("/v3"));
-        }
+    protected BaseIdentityServices() {
+        super(ServiceType.IDENTITY, EnforceVersionToURL.instance("/v3"));
+    }
 }
 

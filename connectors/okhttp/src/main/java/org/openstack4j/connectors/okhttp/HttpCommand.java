@@ -1,5 +1,14 @@
 package org.openstack4j.connectors.okhttp;
 
+import com.google.common.io.ByteStreams;
+import okhttp3.*;
+import okhttp3.internal.Util;
+import org.openstack4j.core.transport.*;
+import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
+import org.openstack4j.core.transport.internal.HttpLoggingFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -10,28 +19,6 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import okhttp3.Call;
-import okhttp3.ConnectionPool;
-import okhttp3.Interceptor;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import okhttp3.internal.Util;
-import org.openstack4j.core.transport.ClientConstants;
-import org.openstack4j.core.transport.Config;
-import org.openstack4j.core.transport.HttpMethod;
-import org.openstack4j.core.transport.HttpRequest;
-import org.openstack4j.core.transport.ObjectMapperSingleton;
-import org.openstack4j.core.transport.UntrustedSSL;
-import org.openstack4j.core.transport.functions.EndpointURIFromRequestFunction;
-import org.openstack4j.core.transport.internal.HttpLoggingFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.io.ByteStreams;
 
 /**
  * HttpCommand is responsible for executing the actual request driven by the HttpExecutor.
@@ -53,6 +40,7 @@ public final class HttpCommand<R> {
 
     /**
      * Creates a new HttpCommand from the given request
+     *
      * @param request the request
      * @return the command
      */
@@ -77,8 +65,7 @@ public final class HttpCommand<R> {
         if (config.getReadTimeout() > 0)
             okHttpClientBuilder.readTimeout(config.getReadTimeout(), TimeUnit.MILLISECONDS);
 
-        if (config.isIgnoreSSLVerification())
-        {
+        if (config.isIgnoreSSLVerification()) {
             okHttpClientBuilder.hostnameVerifier(UntrustedSSL.getHostnameVerifier());
             okHttpClientBuilder.sslSocketFactory(UntrustedSSL.getSSLContext().getSocketFactory());
         }
@@ -122,19 +109,18 @@ public final class HttpCommand<R> {
         RequestBody body = null;
         if (request.getEntity() != null) {
             if (InputStream.class.isAssignableFrom(request.getEntity().getClass())) {
-                byte[] content = ByteStreams.toByteArray((InputStream)request.getEntity());
+                byte[] content = ByteStreams.toByteArray((InputStream) request.getEntity());
                 body = RequestBody.create(MediaType.parse(request.getContentType()), content);
             } else {
                 String content = ObjectMapperSingleton.getContext(request.getEntity().getClass()).writer().writeValueAsString(request.getEntity());
                 body = RequestBody.create(MediaType.parse(request.getContentType()), content);
             }
-        }
-        else if(request.hasJson()) {
+        } else if (request.hasJson()) {
             body = RequestBody.create(MediaType.parse(ClientConstants.CONTENT_TYPE_JSON), request.getJson());
         }
         //Added to address https://github.com/square/okhttp/issues/751
         //Set body as empty byte array if request is POST or PUT and body is sent as null
-        if((request.getMethod() == HttpMethod.POST || request.getMethod() == HttpMethod.PUT) && body == null){
+        if ((request.getMethod() == HttpMethod.POST || request.getMethod() == HttpMethod.PUT) && body == null) {
             body = RequestBody.create(null, Util.EMPTY_BYTE_ARRAY);
         }
         clientReq.method(request.getMethod().name(), body);
@@ -169,27 +155,24 @@ public final class HttpCommand<R> {
         return request;
     }
 
-    private void populateQueryParams(HttpRequest<R> request)  {
+    private void populateQueryParams(HttpRequest<R> request) {
 
         StringBuilder url = new StringBuilder();
         url.append(new EndpointURIFromRequestFunction().apply(request));
 
-        if (!request.hasQueryParams())
-        {
+        if (!request.hasQueryParams()) {
             clientReq.url(url.toString());
             return;
         }
 
         url.append("?");
 
-        for(Map.Entry<String, List<Object> > entry : request.getQueryParams().entrySet()) {
+        for (Map.Entry<String, List<Object>> entry : request.getQueryParams().entrySet()) {
             for (Object o : entry.getValue()) {
-                try
-                {
+                try {
                     url.append(URLEncoder.encode(entry.getKey(), "UTF-8")).append("=").append(URLEncoder.encode(String.valueOf(o), "UTF-8"));
                     url.append("&");
-                }
-                catch (UnsupportedEncodingException e) {
+                } catch (UnsupportedEncodingException e) {
                     LOG.error(e.getMessage(), e);
                 }
             }
@@ -204,13 +187,14 @@ public final class HttpCommand<R> {
 
         if (!request.hasHeaders()) return;
 
-        for(Map.Entry<String, Object> h : request.getHeaders().entrySet()) {
+        for (Map.Entry<String, Object> h : request.getHeaders().entrySet()) {
             clientReq.addHeader(h.getKey(), String.valueOf(h.getValue()));
         }
     }
 
     static class LoggingInterceptor implements Interceptor {
-        @Override public Response intercept(Chain chain) throws IOException {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
 
             long t1 = System.nanoTime();

@@ -5,8 +5,8 @@
       "id": "648d260d-c346-4145-8a2d-bbd4d78aedf6",
       "links": [
         {
-        "href": "https://127.0.0.1:8779/v1.0/d6ac65efd0e14ef3b9c9bc33f8f809fa/datastores/versions/15b7d828-49a5-4d05-af65-e974e0aca7eb",
-        "rel": "self"
+          "href": "https://127.0.0.1:8779/v1.0/d6ac65efd0e14ef3b9c9bc33f8f809fa/datastores/versions/15b7d828-49a5-4d05-af65-e974e0aca7eb",
+          "rel": "self"
         }
       ],
       "name": "mongodb",

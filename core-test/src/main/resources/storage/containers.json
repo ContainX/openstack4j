@@ -1,10 +1,12 @@
 [
-{
-	   "count": 2, 
-	   "bytes": 100, 
-	   "name": "Test"}, 
-{
-       "count": 1,
-       "bytes": 14,
-       "name": "marktwain"
-}]
+  {
+    "count": 2,
+    "bytes": 100,
+    "name": "Test"
+  },
+  {
+    "count": 1,
+    "bytes": 14,
+    "name": "marktwain"
+  }
+]

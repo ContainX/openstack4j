@@ -18,6 +18,7 @@ public interface UserService {
 
     /**
      * Returns list of all users for the database instance
+     *
      * @param instanceId
      * @return the list of users for the database instance
      */
@@ -25,6 +26,7 @@ public interface UserService {
 
     /**
      * Returns list of all databases which the user has access to on the database instance
+     *
      * @param instanceId
      * @param userName
      * @return the list of databases for a user
@@ -33,6 +35,7 @@ public interface UserService {
 
     /**
      * Create a user for the database instance
+     *
      * @param instanceId
      * @param databaseUsers
      * @return the action response
@@ -41,6 +44,7 @@ public interface UserService {
 
     /**
      * Deletes a user for the database instance
+     *
      * @param instanceId
      * @param userName
      * @return the action response
@@ -49,6 +53,7 @@ public interface UserService {
 
     /**
      * Grant user access to a database on the database instance
+     *
      * @param instanceId
      * @param userName
      * @param databases
@@ -58,6 +63,7 @@ public interface UserService {
 
     /**
      * Revoke user access to a database on the database instance
+     *
      * @param instanceId
      * @param userName
      * @param dbName

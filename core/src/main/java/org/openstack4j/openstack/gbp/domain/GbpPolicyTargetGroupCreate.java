@@ -1,16 +1,15 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-import java.util.Map;
-
-import org.openstack4j.model.gbp.PolicyTargetGroupCreate;
-import org.openstack4j.model.gbp.builder.PolicyTargetGroupBuilder;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
+import org.openstack4j.model.gbp.PolicyTargetGroupCreate;
+import org.openstack4j.model.gbp.builder.PolicyTargetGroupBuilder;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Model implementation for Policy target group create
@@ -27,9 +26,9 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
     private String id;
     private String description;
     @JsonProperty("consumed_policy_rule_sets")
-    private Map<String,String>  consumedPolicyRuleSets;
+    private Map<String, String> consumedPolicyRuleSets;
     @JsonProperty("provided_policy_rule_sets")
-    private Map<String,String>  providedPolicyRuleSets;
+    private Map<String, String> providedPolicyRuleSets;
     @JsonProperty("l2_policy_id")
     private String l2PolicyId;
     @JsonProperty("network_service_policy_id")
@@ -41,6 +40,7 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
     private Boolean shared;
     @JsonProperty("subnets")
     private List<String> subnets;
+
     @Override
     public PolicyTargetGroupBuilder toBuilder() {
         return new PolicyTargetConcreteGroupBuilder(this);
@@ -53,7 +53,7 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
 
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
 
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -73,19 +73,21 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
 
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
+
     @Override
     public String getDescription() {
         return description;
     }
+
     @Override
-    public Map<String,String>  getConsumedPolicyRuleSets() {
+    public Map<String, String> getConsumedPolicyRuleSets() {
         return consumedPolicyRuleSets;
     }
 
     @Override
-    public Map<String,String>  getProvidedPolicyRuleSets() {
+    public Map<String, String> getProvidedPolicyRuleSets() {
         return providedPolicyRuleSets;
     }
 
@@ -128,8 +130,7 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
     }
 
 
-
-    public static class PolicyTargetGroups extends ListResult<GbpPolicyTargetGroupCreate>{
+    public static class PolicyTargetGroups extends ListResult<GbpPolicyTargetGroupCreate> {
         private static final long serialVersionUID = 1L;
 
         @JsonProperty("policy_target_groups")
@@ -141,11 +142,11 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
         }
     }
 
-    public static class PolicyTargetConcreteGroupBuilder implements PolicyTargetGroupBuilder{
+    public static class PolicyTargetConcreteGroupBuilder implements PolicyTargetGroupBuilder {
         private GbpPolicyTargetGroupCreate policyTargetGroup;
 
         public PolicyTargetConcreteGroupBuilder(GbpPolicyTargetGroupCreate gbpPolicyTargetGroup) {
-            this.policyTargetGroup=gbpPolicyTargetGroup;
+            this.policyTargetGroup = gbpPolicyTargetGroup;
         }
 
         public PolicyTargetConcreteGroupBuilder() {
@@ -159,67 +160,67 @@ public class GbpPolicyTargetGroupCreate implements PolicyTargetGroupCreate {
 
         @Override
         public PolicyTargetGroupBuilder from(PolicyTargetGroupCreate in) {
-            policyTargetGroup=(GbpPolicyTargetGroupCreate) in;
+            policyTargetGroup = (GbpPolicyTargetGroupCreate) in;
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder name(String name) {
-            policyTargetGroup.name=name;
+            policyTargetGroup.name = name;
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder description(String description) {
-            this.policyTargetGroup.description=description;
+            this.policyTargetGroup.description = description;
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder isShared(boolean shared) {
-            this.policyTargetGroup.shared=shared;
+            this.policyTargetGroup.shared = shared;
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder consumedPolicyRuleSets(List<String> policyRuleSet) {
-            this.policyTargetGroup.consumedPolicyRuleSets=Maps.newHashMap();
-            for(String id : policyRuleSet ){
-               this.policyTargetGroup.consumedPolicyRuleSets.put(id, "");
+            this.policyTargetGroup.consumedPolicyRuleSets = Maps.newHashMap();
+            for (String id : policyRuleSet) {
+                this.policyTargetGroup.consumedPolicyRuleSets.put(id, "");
             }
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder providedPolicyRuleSets(List<String> policyRuleSet) {
-            this.policyTargetGroup.providedPolicyRuleSets=Maps.newHashMap();
-            for(String id : policyRuleSet ){
-               this.policyTargetGroup.providedPolicyRuleSets.put(id, "");
+            this.policyTargetGroup.providedPolicyRuleSets = Maps.newHashMap();
+            for (String id : policyRuleSet) {
+                this.policyTargetGroup.providedPolicyRuleSets.put(id, "");
             }
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder policyTargets(List<String> policyTargets) {
-            this.policyTargetGroup.policyTargets=policyTargets;
+            this.policyTargetGroup.policyTargets = policyTargets;
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder networkServicePolicyId(String id) {
-            this.policyTargetGroup.networkServicePolicyId=id;
+            this.policyTargetGroup.networkServicePolicyId = id;
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder l2Policy(String id) {
-            this.policyTargetGroup.l2PolicyId=id;
+            this.policyTargetGroup.l2PolicyId = id;
             return this;
         }
 
         @Override
         public PolicyTargetGroupBuilder serviceManagement(boolean serviceManagement) {
-            this.policyTargetGroup.serviceManagement=serviceManagement;
+            this.policyTargetGroup.serviceManagement = serviceManagement;
             return this;
         }
 

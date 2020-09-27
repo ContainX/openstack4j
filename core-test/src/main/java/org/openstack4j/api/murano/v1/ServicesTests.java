@@ -14,14 +14,12 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * @author nmakhotkin
  */
-@Test(suiteName="Murano/AppCatalog", enabled = true)
+@Test(suiteName = "Murano/AppCatalog", enabled = true)
 public class ServicesTests extends AbstractTest {
     private static final String SERVICE_JSON = "/murano/v1/service.json";
     private static final String SERVICES_JSON = "/murano/v1/services.json";

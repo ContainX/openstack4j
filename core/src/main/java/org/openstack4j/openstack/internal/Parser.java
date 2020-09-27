@@ -17,6 +17,7 @@ import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_TEXT_H
 
 /**
  * Provides common parser routines when dealing with Headers or other non-json payloads
+ *
  * @author Jeremy Unruh
  * @author Qin An - Added parser function for Neutron Agent List
  */
@@ -36,6 +37,7 @@ public final class Parser {
 
     /**
      * Takes a String Numeric and returns null or the Long value
+     *
      * @param number the number in string form
      * @return the Long or null
      */
@@ -45,7 +47,8 @@ public final class Parser {
 
     /**
      * Takes a String Numeric and returns null or the Long value
-     * @param number the number in string form
+     *
+     * @param number       the number in string form
      * @param defaultValue the default value if number is null
      * @return the Long or null
      */
@@ -56,6 +59,7 @@ public final class Parser {
 
     /**
      * Takes a String Boolean and returns null or as Boolean value
+     *
      * @param bool the boolean in String form
      * @return the Boolean or null
      */
@@ -66,6 +70,7 @@ public final class Parser {
 
     /**
      * Takes a String Date and decodes it into a date.  Returns null if the date is null
+     *
      * @param date the date in String form
      * @return Date or null
      */
@@ -73,39 +78,38 @@ public final class Parser {
         try {
             if (date != null)
                 return StdDateFormat.instance.parse(date);
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
         }
         return null;
     }
-    
+
     /**
      * Parse a string with format "yyyy-MM-dd HH:mm:ss" into a Date
      * The string format is used in Neutron Agent-List
-     * 
+     *
      * @param date - string to be parsed
      * @return Date
      */
     public static Date parseSimpleDate(String date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-        	if (date != null) {
-        		return format.parse(date);
-        	}
+            if (date != null) {
+                return format.parse(date);
+            }
         } catch (ParseException e) {
-        	LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
+            LoggerFactory.getLogger(Parser.class).error(e.getMessage(), e);
         }
         return null;
-    }    
+    }
 
     /**
      * Takes a Date and returns it's equivalent in RFC 1123
+     *
      * @param date the date to format
      * @return the formatted date string
      */
-    public static String toRFC1123(Date date)
-    {
+    public static String toRFC1123(Date date) {
         if (DF == null) {
             DF = new SimpleDateFormat(PATTERN_RFC1123, Locale.US);
             DF.setTimeZone(TimeZone.getTimeZone("GMT"));

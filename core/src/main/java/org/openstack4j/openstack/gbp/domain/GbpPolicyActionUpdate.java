@@ -1,10 +1,9 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import org.openstack4j.model.gbp.PolicyActionUpdate;
-import org.openstack4j.model.gbp.builder.PolicyActionUpdateBuilder;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.gbp.PolicyActionUpdate;
+import org.openstack4j.model.gbp.builder.PolicyActionUpdateBuilder;
 
 /**
  * Model implementation for Policy Action
@@ -33,22 +32,24 @@ public class GbpPolicyActionUpdate implements PolicyActionUpdate {
     public String getDescription() {
         return description;
     }
+
     @Override
     public boolean isShared() {
         return this.shared == null ? false : shared;
     }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues().add("name", name).add("desription", description)
-               .add("shared", shared).toString();
+                .add("shared", shared).toString();
     }
 
-    public static class PolicyActionUpdateConcreteBuilder implements PolicyActionUpdateBuilder{
+    public static class PolicyActionUpdateConcreteBuilder implements PolicyActionUpdateBuilder {
 
         private GbpPolicyActionUpdate policyAction;
 
         public PolicyActionUpdateConcreteBuilder(GbpPolicyActionUpdate gbpPolicyAction) {
-            this.policyAction=gbpPolicyAction;
+            this.policyAction = gbpPolicyAction;
         }
 
         public PolicyActionUpdateConcreteBuilder() {
@@ -62,26 +63,26 @@ public class GbpPolicyActionUpdate implements PolicyActionUpdate {
 
         @Override
         public PolicyActionUpdateBuilder name(String name) {
-            this.policyAction.name=name;
+            this.policyAction.name = name;
             return this;
         }
 
         @Override
         public PolicyActionUpdateBuilder description(String description) {
-            this.policyAction.description=description;
+            this.policyAction.description = description;
             return this;
         }
 
 
         @Override
         public PolicyActionUpdateBuilder shared(boolean shared) {
-            this.policyAction.shared=shared;
+            this.policyAction.shared = shared;
             return this;
         }
 
         @Override
         public PolicyActionUpdateBuilder from(PolicyActionUpdate in) {
-            this.policyAction=(GbpPolicyActionUpdate) in;
+            this.policyAction = (GbpPolicyActionUpdate) in;
             return this;
         }
 

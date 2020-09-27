@@ -6,25 +6,24 @@ import org.openstack4j.model.octavia.SessionPersistenceType;
 
 /**
  * A builder to create and update a SessionPersistence
- * @author wei
  *
+ * @author wei
  */
-public interface SessionPersistenceBuilder extends Builder<SessionPersistenceBuilder, SessionPersistence>{
+public interface SessionPersistenceBuilder extends Builder<SessionPersistenceBuilder, SessionPersistence> {
 
-	/**
-	 * required
-	 * 
-	 * @param type
-	 *            APP_COOKIE,HTTP_COOKIE,SOURCE_IP
-	 * @return SessionPersistenceBuilder
-	 */
-	public SessionPersistenceBuilder type(SessionPersistenceType type);
+    /**
+     * required
+     *
+     * @param type APP_COOKIE,HTTP_COOKIE,SOURCE_IP
+     * @return SessionPersistenceBuilder
+     */
+    public SessionPersistenceBuilder type(SessionPersistenceType type);
 
-	/**
-	 * optional
-	 * 
-	 * @param cookieName
-	 * @return SessionPersistenceBuilder
-	 */
-	public SessionPersistenceBuilder cookieName(String cookieName);
+    /**
+     * optional
+     *
+     * @param cookieName
+     * @return SessionPersistenceBuilder
+     */
+    public SessionPersistenceBuilder cookieName(String cookieName);
 }

@@ -1,7 +1,8 @@
 package org.openstack4j.model.sahara;
 
-import java.util.List;
 import org.openstack4j.model.ModelEntity;
+
+import java.util.List;
 
 /**
  * Hints for job configuration that can be applied to job exeuctions.

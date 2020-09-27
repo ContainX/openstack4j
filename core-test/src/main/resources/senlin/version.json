@@ -1,14 +1,14 @@
 {
-    "versions": [
+  "versions": [
+    {
+      "status": "CURRENT",
+      "id": "v1.0",
+      "links": [
         {
-            "status": "CURRENT",
-            "id": "v1.0",
-            "links": [
-                {
-                    "href": "http://192.168.12.34:8778/v1/",
-                    "rel": "self"
-                }
-            ]
+          "href": "http://192.168.12.34:8778/v1/",
+          "rel": "self"
         }
-    ]
+      ]
+    }
+  ]
 }

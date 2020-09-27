@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Service that provides CRUD operations for action definitions.
- * 
+ *
  * @author Renat Akhmerov
  */
 public interface ActionDefinitionService extends RestService {
@@ -26,7 +26,7 @@ public interface ActionDefinitionService extends RestService {
      * Create a new action definition.
      *
      * @param actionText Text in YAML format (Mistral language) with one or more action definitions.
-     * @param scope Scope of newly created workflows.
+     * @param scope      Scope of newly created workflows.
      * @return Created action definition.
      */
     List<? extends ActionDefinition> create(InputStream actionText, Scope scope);

@@ -1,25 +1,12 @@
 package org.openstack4j.openstack.gbp.internal;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.gbp.ExternalPolicyService;
-import org.openstack4j.api.gbp.ExternalSegmentService;
-import org.openstack4j.api.gbp.GbpService;
-import org.openstack4j.api.gbp.GroupService;
-import org.openstack4j.api.gbp.L2policyService;
-import org.openstack4j.api.gbp.L3policyService;
-import org.openstack4j.api.gbp.NatPoolService;
-import org.openstack4j.api.gbp.NetworkPolicyService;
-import org.openstack4j.api.gbp.PolicyActionService;
-import org.openstack4j.api.gbp.PolicyClassifierService;
-import org.openstack4j.api.gbp.PolicyRuleService;
-import org.openstack4j.api.gbp.PolicyRuleSetService;
-import org.openstack4j.api.gbp.PolicyTargetService;
-import org.openstack4j.api.gbp.ServiceProfileService;
-import org.openstack4j.api.gbp.ServicechainService;
+import org.openstack4j.api.gbp.*;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
+
 /**
  * GBP services
- * 
+ *
  * @author vinod borole
  */
 public class GbpServiceImpl extends BaseNetworkingServices implements GbpService {
@@ -44,7 +31,7 @@ public class GbpServiceImpl extends BaseNetworkingServices implements GbpService
      * {@inheritDoc}
      */
     @Override
-    public GroupService group() { 
+    public GroupService group() {
         return Apis.get(GroupService.class);
     }
 
@@ -91,17 +78,19 @@ public class GbpServiceImpl extends BaseNetworkingServices implements GbpService
     /**
      * {@inheritDoc}
      */
-   @Override
+    @Override
     public PolicyRuleService policyRule() {
         return Apis.get(PolicyRuleService.class);
     }
-   /**
-    * {@inheritDoc}
-    */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PolicyRuleSetService policyRuleSet() {
         return Apis.get(PolicyRuleSetService.class);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -129,7 +118,7 @@ public class GbpServiceImpl extends BaseNetworkingServices implements GbpService
     /**
      * {@inheritDoc}
      */
-   @Override
+    @Override
     public ServiceProfileService serviceProfile() {
         return Apis.get(ServiceProfileService.class);
     }

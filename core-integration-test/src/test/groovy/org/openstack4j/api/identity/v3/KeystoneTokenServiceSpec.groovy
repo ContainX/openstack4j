@@ -3,10 +3,8 @@ package org.openstack4j.api.identity.v3
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
-
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.OSClient.OSClientV3
-import org.openstack4j.api.types.ServiceType
 import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.v3.Domain
@@ -14,23 +12,24 @@ import org.openstack4j.model.identity.v3.Project
 import org.openstack4j.model.identity.v3.Service
 import org.openstack4j.model.identity.v3.Token
 import org.openstack4j.openstack.OSFactory
-
 import software.betamax.Configuration
 import software.betamax.MatchRules
 import software.betamax.TapeMode
 import software.betamax.junit.Betamax
 import software.betamax.junit.RecorderRule
-
 import spock.lang.IgnoreIf
 import spock.lang.Shared
 import spock.lang.Stepwise
 
 @Slf4j
-@Stepwise // Needs to be stepwise to ensure USER_TOKEN_ID is acquired first
+@Stepwise
+// Needs to be stepwise to ensure USER_TOKEN_ID is acquired first
 class KeystoneTokenServiceSpec extends AbstractSpec {
 
-    @Rule TestName KeystoneTokenServiceTest
-    @Rule public RecorderRule recorderRule = new RecorderRule(
+    @Rule
+    TestName KeystoneTokenServiceTest
+    @Rule
+    public RecorderRule recorderRule = new RecorderRule(
             Configuration.builder()
                     .tapeRoot(new File(TAPEROOT + "identity.v3"))
                     .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
@@ -38,18 +37,19 @@ class KeystoneTokenServiceSpec extends AbstractSpec {
                     .build());
 
     // additional attributes for token service tests
-    @Shared String USER_TOKEN_ID
+    @Shared
+    String USER_TOKEN_ID
     def String ADMIN_TOKEN_ID
 
     static final boolean skipTest
 
     static {
         if (
-            USER_ID == null ||
-            AUTH_URL == null ||
-            PASSWORD == null ||
-            DOMAIN_ID == null ||
-            PROJECT_ID == null) {
+        USER_ID == null ||
+                AUTH_URL == null ||
+                PASSWORD == null ||
+                DOMAIN_ID == null ||
+                PROJECT_ID == null) {
             skipTest = true
         } else {
             skipTest = false
@@ -128,7 +128,7 @@ class KeystoneTokenServiceSpec extends AbstractSpec {
 
         then: "this should contain at least contain one service"
         serviceCatalog.isEmpty() == false
-        serviceCatalog.find{ it.getName() == "keystone" }
+        serviceCatalog.find { it.getName() == "keystone" }
 
         when: "getting available project scopes"
         List<? extends Project> availableProjectScopes = os.identity().tokens().getProjectScopes(USER_TOKEN_ID);

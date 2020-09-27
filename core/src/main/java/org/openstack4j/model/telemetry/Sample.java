@@ -1,12 +1,12 @@
 package org.openstack4j.model.telemetry;
 
-import java.util.Map;
-
 import org.openstack4j.model.ModelEntity;
+
+import java.util.Map;
 
 /**
  * A single measurement for Sample.
- * 
+ *
  * @author Shital Patil
  */
 

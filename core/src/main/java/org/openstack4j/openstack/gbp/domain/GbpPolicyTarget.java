@@ -1,14 +1,14 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.gbp.PolicyTarget;
 import org.openstack4j.model.gbp.builder.PolicyTargetBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
+
 /**
  * Model implementation for Policy Target
  *
@@ -38,7 +38,7 @@ public class GbpPolicyTarget implements PolicyTarget {
 
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class GbpPolicyTarget implements PolicyTarget {
 
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -58,8 +58,9 @@ public class GbpPolicyTarget implements PolicyTarget {
 
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
+
     @Override
     public String getDescription() {
         return description;
@@ -84,17 +85,19 @@ public class GbpPolicyTarget implements PolicyTarget {
     public PolicyTargetBuilder toBuilder() {
         return new PolicyTargetConcreteBuilder(this);
     }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("clusterId", clusterId).add("policyTargetGroupId", policyTargetGroupId).add("portId", portId).toString();
     }
 
-    public static class PolicyTargets extends ListResult<GbpPolicyTarget>{
+    public static class PolicyTargets extends ListResult<GbpPolicyTarget> {
 
         private static final long serialVersionUID = 1L;
         @JsonProperty("policy_targets")
         private List<GbpPolicyTarget> policyTargets;
+
         @Override
         protected List<GbpPolicyTarget> value() {
             return policyTargets;
@@ -102,11 +105,12 @@ public class GbpPolicyTarget implements PolicyTarget {
 
     }
 
-    public static class PolicyTargetConcreteBuilder implements PolicyTargetBuilder{
+    public static class PolicyTargetConcreteBuilder implements PolicyTargetBuilder {
 
         private GbpPolicyTarget policyTarget;
+
         public PolicyTargetConcreteBuilder(GbpPolicyTarget gbpPolicyTarget) {
-            this.policyTarget=gbpPolicyTarget;
+            this.policyTarget = gbpPolicyTarget;
         }
 
         public PolicyTargetConcreteBuilder() {
@@ -120,37 +124,37 @@ public class GbpPolicyTarget implements PolicyTarget {
 
         @Override
         public PolicyTargetBuilder from(PolicyTarget in) {
-            policyTarget=(GbpPolicyTarget) in;
+            policyTarget = (GbpPolicyTarget) in;
             return this;
         }
 
         @Override
         public PolicyTargetBuilder portId(String portId) {
-            policyTarget.portId=portId;
+            policyTarget.portId = portId;
             return this;
         }
 
         @Override
         public PolicyTargetBuilder policyTargetGroupId(String policyTargetGroupId) {
-            policyTarget.policyTargetGroupId=policyTargetGroupId;
+            policyTarget.policyTargetGroupId = policyTargetGroupId;
             return this;
         }
 
         @Override
         public PolicyTargetBuilder clusterId(String clusterId) {
-            policyTarget.clusterId=clusterId;
+            policyTarget.clusterId = clusterId;
             return this;
         }
 
         @Override
         public PolicyTargetBuilder description(String description) {
-            policyTarget.description=description;
+            policyTarget.description = description;
             return this;
         }
 
         @Override
         public PolicyTargetBuilder name(String name) {
-            policyTarget.name=name;
+            policyTarget.name = name;
             return this;
         }
 

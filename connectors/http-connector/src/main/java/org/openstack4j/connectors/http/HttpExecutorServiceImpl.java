@@ -38,7 +38,7 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
     /**
      * Invokes the given request
      *
-     * @param <R> the return type
+     * @param <R>     the return type
      * @param request the request to invoke
      * @return the response
      * @throws Exception the exception
@@ -59,13 +59,11 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
         HttpResponse response = command.execute();
 
         if (command.getRetries() == 0 && response.getStatus() == 401 && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH)) {
-            try
-            {
+            try {
                 OSAuthenticator.reAuthenticate();
                 command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
                 return invokeRequest(command.incrementRetriesAndReturn());
-            }
-            finally {
+            } finally {
                 response.close();
             }
         }

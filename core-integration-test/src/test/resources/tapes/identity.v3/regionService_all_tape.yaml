@@ -1,48 +1,48 @@
 !tape
 name: regionService_all.tape
 interactions:
-- recorded: 2016-03-16T15:01:58.697Z
-  request:
-    method: POST
-    uri: http://devstack.openstack.stack:5000/v3/auth/tokens
-    headers:
-      Accept: application/json
-      Content-Length: '327'
-      Content-Type: application/json
-      Host: devstack.openstack.stack:5000
-      OS4J-Auth-Command: Tokens
-      Proxy-Connection: keep-alive
-      User-Agent: Jersey/2.22.1 (HttpUrlConnection 1.8.0_66)
-    body: |-
-      {
-        "auth" : {
-          "identity" : {
-            "password" : {
-              "user" : {
-                "id" : "71a7dcb0d60a43088a6c8e9b69a39e69",
-                "password" : "devstack"
+  - recorded: 2016-03-16T15:01:58.697Z
+    request:
+      method: POST
+      uri: http://devstack.openstack.stack:5000/v3/auth/tokens
+      headers:
+        Accept: application/json
+        Content-Length: '327'
+        Content-Type: application/json
+        Host: devstack.openstack.stack:5000
+        OS4J-Auth-Command: Tokens
+        Proxy-Connection: keep-alive
+        User-Agent: Jersey/2.22.1 (HttpUrlConnection 1.8.0_66)
+      body: |-
+        {
+          "auth" : {
+            "identity" : {
+              "password" : {
+                "user" : {
+                  "id" : "71a7dcb0d60a43088a6c8e9b69a39e69",
+                  "password" : "devstack"
+                }
+              },
+              "methods" : [ "password" ]
+            },
+            "scope" : {
+              "domain" : {
+                "id" : "default"
               }
             },
-            "methods" : [ "password" ]
-          },
-          "scope" : {
-            "domain" : {
-              "id" : "default"
-            }
-          },
-          "type" : "CREDENTIALS"
+            "type" : "CREDENTIALS"
+          }
         }
-      }
-  response:
-    status: 201
-    headers:
-      Content-Type: application/json
-      Date: Wed, 16 Mar 2016 15:01:58 GMT
-      Server: Apache/2.4.7 (Ubuntu)
-      Vary: X-Auth-Token
-      X-Subject-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
-      x-openstack-request-id: req-738a6b5b-63e1-44d7-b403-e65d48a1146e
-    body: '{"token": {"domain": {"id": "default", "name": "Default"}, "methods": ["password"], "roles": [{"id": "aae88952465d4c32b0a1140a76601b68", "name": "admin"}], "expires_at": "2016-03-16T16:01:58.702118Z", "catalog": [{"endpoints": [{"region_id": "RegionOne",
+    response:
+      status: 201
+      headers:
+        Content-Type: application/json
+        Date: Wed, 16 Mar 2016 15:01:58 GMT
+        Server: Apache/2.4.7 (Ubuntu)
+        Vary: X-Auth-Token
+        X-Subject-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
+        x-openstack-request-id: req-738a6b5b-63e1-44d7-b403-e65d48a1146e
+      body: '{"token": {"domain": {"id": "default", "name": "Default"}, "methods": ["password"], "roles": [{"id": "aae88952465d4c32b0a1140a76601b68", "name": "admin"}], "expires_at": "2016-03-16T16:01:58.702118Z", "catalog": [{"endpoints": [{"region_id": "RegionOne",
       "url": "http://devstack.openstack.stack:8773/", "region": "RegionOne", "interface": "internal", "id": "1986b6750b784f88a0f1f1e83e511df8"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:8773/", "region": "RegionOne", "interface": "admin", "id": "64afe603967b4fd5880792840c659a4d"},
       {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:8773/", "region": "RegionOne", "interface": "public", "id": "eb3e556f4e2c446e907524447cbb8a5d"}], "type": "ec2", "id": "057b697545694c22b3d20bfe95a2cd7d", "name": "ec2"}, {"endpoints": [], "type": "compute",
       "id": "110b628369654c83bb58c573df7f88c6", "name": "nova"}, {"endpoints": [{"region_id": "RegionOne", "url": "http://devstack.openstack.stack:5000/v3", "region": "RegionOne", "interface": "admin", "id": "3dc90fc97a944ea8abad75fced928309"}, {"region_id": "RegionOne",
@@ -56,108 +56,108 @@ interactions:
       "name": "novav21"}, {"endpoints": [{"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9696/", "region": "RegionOne", "interface": "public", "id": "0af60b8c25bb43a3900e3965b22f7458"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9696/", "region":
       "RegionOne", "interface": "admin", "id": "523f2db6ab7542ad8d0cfb67a4a45c1e"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9696/", "region": "RegionOne", "interface": "internal", "id": "c86b9137fe3a49d58ad027581f7005a7"}], "type": "network", "id":
       "f6028c7a65c14663946bfeb37c5477ca", "name": "neutron"}], "extras": {}, "user": {"domain": {"id": "default", "name": "Default"}, "id": "71a7dcb0d60a43088a6c8e9b69a39e69", "name": "admin"}, "audit_ids": ["Elio305lTtScId4Hwv_yUw"], "issued_at": "2016-03-16T15:01:58.702154Z"}}'
-- recorded: 2016-03-16T15:01:58.769Z
-  request:
-    method: POST
-    uri: http://devstack.openstack.stack:5000/v3/regions
-    headers:
-      Accept: application/json
-      Content-Length: '138'
-      Content-Type: application/json
-      Host: devstack.openstack.stack:5000
-      Proxy-Connection: keep-alive
-      User-Agent: OpenStack4j / OpenStack Client
-      X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
-    body: |-
-      {
-        "region" : {
-          "id" : "Region_CRUD",
-          "description" : "A region used for CRUD tests.",
-          "parent_region_id" : "RegionOne"
+  - recorded: 2016-03-16T15:01:58.769Z
+    request:
+      method: POST
+      uri: http://devstack.openstack.stack:5000/v3/regions
+      headers:
+        Accept: application/json
+        Content-Length: '138'
+        Content-Type: application/json
+        Host: devstack.openstack.stack:5000
+        Proxy-Connection: keep-alive
+        User-Agent: OpenStack4j / OpenStack Client
+        X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
+      body: |-
+        {
+          "region" : {
+            "id" : "Region_CRUD",
+            "description" : "A region used for CRUD tests.",
+            "parent_region_id" : "RegionOne"
+          }
         }
-      }
-  response:
-    status: 201
-    headers:
-      Content-Type: application/json
-      Date: Wed, 16 Mar 2016 15:01:58 GMT
-      Server: Apache/2.4.7 (Ubuntu)
-      Vary: X-Auth-Token
-      x-openstack-request-id: req-a1da88e9-da83-43d0-9207-08df1129e8af
-    body: '{"region": {"parent_region_id": "RegionOne", "id": "Region_CRUD", "links": {"self": "http://devstack.openstack.stack:5000/v3/regions/Region_CRUD"}, "description": "A region used for CRUD tests."}}'
-- recorded: 2016-03-16T15:01:58.815Z
-  request:
-    method: GET
-    uri: http://devstack.openstack.stack:5000/v3/regions
-    headers:
-      Accept: application/json
-      Host: devstack.openstack.stack:5000
-      Proxy-Connection: keep-alive
-      User-Agent: OpenStack4j / OpenStack Client
-      X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
-  response:
-    status: 200
-    headers:
-      Content-Type: application/json
-      Date: Wed, 16 Mar 2016 15:01:58 GMT
-      Server: Apache/2.4.7 (Ubuntu)
-      Vary: X-Auth-Token
-      X-Betamax: PLAY
-      x-openstack-request-id: req-3bda5b96-7a40-4125-a82c-0362e08af1e9
-    body: '{"regions": [{"parent_region_id": null, "id": "RegionOne", "links": {"self": "http://devstack.openstack.stack:5000/v3/regions/RegionOne"}, "description": ""}, {"parent_region_id": "RegionOne", "id": "Region_CRUD", "links": {"self": "http://devstack.openstack.stack:5000/v3/regions/Region_CRUD"},
+    response:
+      status: 201
+      headers:
+        Content-Type: application/json
+        Date: Wed, 16 Mar 2016 15:01:58 GMT
+        Server: Apache/2.4.7 (Ubuntu)
+        Vary: X-Auth-Token
+        x-openstack-request-id: req-a1da88e9-da83-43d0-9207-08df1129e8af
+      body: '{"region": {"parent_region_id": "RegionOne", "id": "Region_CRUD", "links": {"self": "http://devstack.openstack.stack:5000/v3/regions/Region_CRUD"}, "description": "A region used for CRUD tests."}}'
+  - recorded: 2016-03-16T15:01:58.815Z
+    request:
+      method: GET
+      uri: http://devstack.openstack.stack:5000/v3/regions
+      headers:
+        Accept: application/json
+        Host: devstack.openstack.stack:5000
+        Proxy-Connection: keep-alive
+        User-Agent: OpenStack4j / OpenStack Client
+        X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
+    response:
+      status: 200
+      headers:
+        Content-Type: application/json
+        Date: Wed, 16 Mar 2016 15:01:58 GMT
+        Server: Apache/2.4.7 (Ubuntu)
+        Vary: X-Auth-Token
+        X-Betamax: PLAY
+        x-openstack-request-id: req-3bda5b96-7a40-4125-a82c-0362e08af1e9
+      body: '{"regions": [{"parent_region_id": null, "id": "RegionOne", "links": {"self": "http://devstack.openstack.stack:5000/v3/regions/RegionOne"}, "description": ""}, {"parent_region_id": "RegionOne", "id": "Region_CRUD", "links": {"self": "http://devstack.openstack.stack:5000/v3/regions/Region_CRUD"},
       "description": "A region used for CRUD tests."}], "links": {"self": "http://devstack.openstack.stack:5000/v3/regions", "previous": null, "next": null}}'
-- recorded: 2016-03-16T15:01:58.861Z
-  request:
-    method: GET
-    uri: http://devstack.openstack.stack:5000/v3/regions/Region_CRUD
-    headers:
-      Accept: application/json
-      Host: devstack.openstack.stack:5000
-      Proxy-Connection: keep-alive
-      User-Agent: OpenStack4j / OpenStack Client
-      X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
-  response:
-    status: 200
-    headers:
-      Content-Type: application/json
-      Date: Wed, 16 Mar 2016 15:01:58 GMT
-      Server: Apache/2.4.7 (Ubuntu)
-      Vary: X-Auth-Token
-      x-openstack-request-id: req-326f3280-e9f7-468a-9e7d-6e11833e1c2e
-    body: '{"region": {"parent_region_id": "RegionOne", "id": "Region_CRUD", "links": {"self": "http://devstack.openstack.stack:5000/v3/regions/Region_CRUD"}, "description": "A region used for CRUD tests."}}'
-- recorded: 2016-03-16T15:01:58.917Z
-  request:
-    method: DELETE
-    uri: http://devstack.openstack.stack:5000/v3/regions/Region_CRUD
-    headers:
-      Accept: application/json
-      Host: devstack.openstack.stack:5000
-      Proxy-Connection: keep-alive
-      User-Agent: OpenStack4j / OpenStack Client
-      X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
-  response:
-    status: 204
-    headers:
-      Date: Wed, 16 Mar 2016 15:01:58 GMT
-      Server: Apache/2.4.7 (Ubuntu)
-      Vary: X-Auth-Token
-      x-openstack-request-id: req-d428e41d-104e-4d70-ba47-0878e914b200
-- recorded: 2016-03-16T15:01:58.961Z
-  request:
-    method: GET
-    uri: http://devstack.openstack.stack:5000/v3/regions/nonExistentRegionId
-    headers:
-      Accept: application/json
-      Host: devstack.openstack.stack:5000
-      Proxy-Connection: keep-alive
-      User-Agent: OpenStack4j / OpenStack Client
-      X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
-  response:
-    status: 404
-    headers:
-      Content-Type: application/json
-      Date: Wed, 16 Mar 2016 15:01:58 GMT
-      Server: Apache/2.4.7 (Ubuntu)
-      Vary: X-Auth-Token
-      x-openstack-request-id: req-9699ed7f-05d3-4e0c-86e9-09f2744f7362
-    body: '{"error": {"message": "Could not find region: nonExistentRegionId", "code": 404, "title": "Not Found"}}'
+  - recorded: 2016-03-16T15:01:58.861Z
+    request:
+      method: GET
+      uri: http://devstack.openstack.stack:5000/v3/regions/Region_CRUD
+      headers:
+        Accept: application/json
+        Host: devstack.openstack.stack:5000
+        Proxy-Connection: keep-alive
+        User-Agent: OpenStack4j / OpenStack Client
+        X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
+    response:
+      status: 200
+      headers:
+        Content-Type: application/json
+        Date: Wed, 16 Mar 2016 15:01:58 GMT
+        Server: Apache/2.4.7 (Ubuntu)
+        Vary: X-Auth-Token
+        x-openstack-request-id: req-326f3280-e9f7-468a-9e7d-6e11833e1c2e
+      body: '{"region": {"parent_region_id": "RegionOne", "id": "Region_CRUD", "links": {"self": "http://devstack.openstack.stack:5000/v3/regions/Region_CRUD"}, "description": "A region used for CRUD tests."}}'
+  - recorded: 2016-03-16T15:01:58.917Z
+    request:
+      method: DELETE
+      uri: http://devstack.openstack.stack:5000/v3/regions/Region_CRUD
+      headers:
+        Accept: application/json
+        Host: devstack.openstack.stack:5000
+        Proxy-Connection: keep-alive
+        User-Agent: OpenStack4j / OpenStack Client
+        X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
+    response:
+      status: 204
+      headers:
+        Date: Wed, 16 Mar 2016 15:01:58 GMT
+        Server: Apache/2.4.7 (Ubuntu)
+        Vary: X-Auth-Token
+        x-openstack-request-id: req-d428e41d-104e-4d70-ba47-0878e914b200
+  - recorded: 2016-03-16T15:01:58.961Z
+    request:
+      method: GET
+      uri: http://devstack.openstack.stack:5000/v3/regions/nonExistentRegionId
+      headers:
+        Accept: application/json
+        Host: devstack.openstack.stack:5000
+        Proxy-Connection: keep-alive
+        User-Agent: OpenStack4j / OpenStack Client
+        X-Auth-Token: 2cbb0e8b0b9e471a8ddf9ca588e9af67
+    response:
+      status: 404
+      headers:
+        Content-Type: application/json
+        Date: Wed, 16 Mar 2016 15:01:58 GMT
+        Server: Apache/2.4.7 (Ubuntu)
+        Vary: X-Auth-Token
+        x-openstack-request-id: req-9699ed7f-05d3-4e0c-86e9-09f2744f7362
+      body: '{"error": {"message": "Could not find region: nonExistentRegionId", "code": 404, "title": "Not Found"}}'

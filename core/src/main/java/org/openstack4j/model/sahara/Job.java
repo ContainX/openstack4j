@@ -1,19 +1,19 @@
 package org.openstack4j.model.sahara;
 
-import java.util.Date;
-import java.util.List;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.JobBuilder;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * An Openstack Sahara Job
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */
-public interface Job extends ModelEntity, Buildable<JobBuilder>   {
+public interface Job extends ModelEntity, Buildable<JobBuilder> {
 
     /**
      * @return the description of the job
@@ -49,7 +49,7 @@ public interface Job extends ModelEntity, Buildable<JobBuilder>   {
      * @return the type of the job
      */
     String getType();
-    
+
     /**
      * @return mains
      */

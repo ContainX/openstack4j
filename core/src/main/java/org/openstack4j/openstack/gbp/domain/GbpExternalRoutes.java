@@ -1,10 +1,10 @@
 package org.openstack4j.openstack.gbp.domain;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.gbp.ExternalRoutes;
 import org.openstack4j.model.gbp.builder.ExternalRoutesBuilder;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
 /**
  * Model implementation for External Routes
  *
@@ -20,9 +20,9 @@ public class GbpExternalRoutes implements ExternalRoutes {
     public GbpExternalRoutes() {
     }
 
-    public GbpExternalRoutes(String destination, String nexthop){
-        this.destination=destination;
-        this.nexthop=nexthop;
+    public GbpExternalRoutes(String destination, String nexthop) {
+        this.destination = destination;
+        this.nexthop = nexthop;
     }
 
     /**
@@ -40,13 +40,14 @@ public class GbpExternalRoutes implements ExternalRoutes {
     public String getNexthop() {
         return nexthop;
     }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                     .add("destination", destination).add("nexthop", nexthop).toString();
+                .add("destination", destination).add("nexthop", nexthop).toString();
     }
 
     @Override
@@ -54,11 +55,11 @@ public class GbpExternalRoutes implements ExternalRoutes {
         return new ExternalRoutesConcreteBuilder(this);
     }
 
-    public static class ExternalRoutesConcreteBuilder implements ExternalRoutesBuilder{
+    public static class ExternalRoutesConcreteBuilder implements ExternalRoutesBuilder {
         private GbpExternalRoutes extRoutes;
 
         public ExternalRoutesConcreteBuilder(GbpExternalRoutes gbpExternalRoutes) {
-            this.extRoutes=gbpExternalRoutes;
+            this.extRoutes = gbpExternalRoutes;
         }
 
         public ExternalRoutesConcreteBuilder() {
@@ -72,19 +73,19 @@ public class GbpExternalRoutes implements ExternalRoutes {
 
         @Override
         public ExternalRoutesBuilder from(ExternalRoutes in) {
-            extRoutes=(GbpExternalRoutes) in;
+            extRoutes = (GbpExternalRoutes) in;
             return this;
         }
 
         @Override
         public ExternalRoutesBuilder destination(String destination) {
-            extRoutes.destination=destination;
+            extRoutes.destination = destination;
             return this;
         }
 
         @Override
         public ExternalRoutesBuilder nextHop(String nextHop) {
-            extRoutes.nexthop=nextHop;
+            extRoutes.nexthop = nextHop;
             return this;
         }
 

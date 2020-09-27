@@ -1,130 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" name="openstack4j">
 
-	<feature name="openstack4j-httpclient-log4j" version="${project.version}">
-		<feature version="${project.version}">openstack4j-httpclient</feature>
-		<feature version="${project.version}">openstack4j-plugin-log4j</feature>
-	</feature>
-	
-	<!-- 
-		Due to SPI in OSGi requirements, at least one provider for an HTTPExecutorService 
-		must be present in the OSGi container for the core to be successfully resolved.
-	 -->
-	<feature name="openstack4j-httpclient" version="${project.version}">
-		<feature version="${project.version}">openstack4j-core</feature>
-		<feature version="${project.version}">openstack4j-connector-httpclient</feature>
-	</feature>
+    <feature name="openstack4j-httpclient-log4j" version="${project.version}">
+        <feature version="${project.version}">openstack4j-httpclient</feature>
+        <feature version="${project.version}">openstack4j-plugin-log4j</feature>
+    </feature>
 
-	<!--
-	SPI Fly is required in order to support SPI in OSGi.
-	
-	SPI Fly dynamic bundle has to load before any other bundle requiring the dynamic weaving of SPI.
-	https://aries.apache.org/modules/spi-fly.html#usage
+    <!--
+        Due to SPI in OSGi requirements, at least one provider for an HTTPExecutorService
+        must be present in the OSGi container for the core to be successfully resolved.
+     -->
+    <feature name="openstack4j-httpclient" version="${project.version}">
+        <feature version="${project.version}">openstack4j-core</feature>
+        <feature version="${project.version}">openstack4j-connector-httpclient</feature>
+    </feature>
 
-	This can be achieved by setting spi-fly bundle start-level to a lower one than the ones in openstack4j using SPI 
-	(using default karaf bundle start-level 80)
-	-->
-	<feature name="spi-fly" version="1.0.0">
-		<bundle dependency="true">mvn:org.apache.aries/org.apache.aries.util/1.1.0</bundle>
-		<!-- already in karaf 3.0.1 -->
-		<bundle dependency="true">mvn:org.ow2.asm/asm-debug-all/4.1</bundle>
-		<bundle start-level="35">mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.0</bundle>
-	</feature>
-	
-	<feature name="spi-fly" version="1.0.1">
-		<bundle dependency="true">mvn:org.apache.aries/org.apache.aries.util/1.1.0</bundle>
-		<!-- already in karaf 3.0.2 -->
-		<bundle dependency="true">mvn:org.ow2.asm/asm-debug-all/5.0.3</bundle>
-		<bundle start-level="35">mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.1</bundle>
-	</feature>
-	
-	<!-- 
-		[INFO] maven-dependency-plugin:2.1:tree (default-cli) @ openstack4j-core
-		[INFO] org.pacesys:openstack4j-core:bundle:2.0.2-SNAPSHOT
-		[INFO] +- org.testng:testng:jar:6.8:test
-		[INFO] |  +- org.beanshell:bsh:jar:2.0b4:test
-		[INFO] |  +- com.beust:jcommander:jar:1.27:test
-		[INFO] |  \- org.yaml:snakeyaml:jar:1.6:test
-		[INFO] +- com.google.guava:guava:jar:17.0:compile
-		[INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.4.1.3:compile
-		[INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.4.0:compile
-		[INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.4.1.1:compile
-		[INFO] +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.4.1:compile
-		[INFO] \- com.google.code.findbugs:jsr305:jar:2.0.0:compile
-	 -->
-	<feature name="openstack4j-core" version="${project.version}">
-		<!-- SPI Fly is required in order to support SPI in OSGi -->
-		<feature version="${aries.spifly.version}">spi-fly</feature>
-		
-		<bundle dependency="true">mvn:com.google.guava/guava/17.0</bundle>
-		
-		<bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/2.4.1.3</bundle>
-		<bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/2.4.0</bundle>
-		<bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/2.4.1.1</bundle>
-		
-		<bundle dependency="true">mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/2.4.1</bundle>
-		<bundle dependency="true">mvn:org.yaml/snakeyaml/1.14</bundle>
-		
-		<bundle dependency="true">wrap:mvn:com.google.code.findbugs/jsr305/2.0.0</bundle>
-		
-		<bundle start-level="80" >mvn:org.pacesys/openstack4j-core/${project.version}</bundle>
-	</feature>
+    <!--
+    SPI Fly is required in order to support SPI in OSGi.
 
-	<!--
-		[INFO] maven-dependency-plugin:2.1:tree (default-cli) @ openstack4j-httpclient
-		[INFO] org.pacesys.openstack4j.connectors:openstack4j-httpclient:bundle:2.0.2-SNAPSHOT
-		[INFO] +- org.apache.httpcomponents:httpclient:jar:4.3.1:compile
-		[INFO] |  +- org.apache.httpcomponents:httpcore:jar:4.3:compile
-		[INFO] |  +- commons-logging:commons-logging:jar:1.1.3:compile
-		[INFO] |  \- commons-codec:commons-codec:jar:1.6:compile
-		[INFO] +- org.pacesys:openstack4j-core:jar:2.0.2-SNAPSHOT:compile
-		[INFO] +- org.pacesys:openstack4j-core-test:jar:2.0.2-SNAPSHOT:test
-		[INFO] +- com.squareup.okhttp:mockwebserver:jar:2.1.0:test
-		[INFO] |  +- com.squareup.okhttp:okhttp:jar:2.1.0:test
-		[INFO] |  |  \- com.squareup.okio:okio:jar:1.0.1:test
-		[INFO] |  \- org.bouncycastle:bcprov-jdk15on:jar:1.50:test
-		[INFO] +- org.mockito:mockito-core:jar:1.9.0:test
-		[INFO] |  +- org.hamcrest:hamcrest-core:jar:1.1:test
-		[INFO] |  \- org.objenesis:objenesis:jar:1.0:test
-		[INFO] +- org.testng:testng:jar:6.8:test
-		[INFO] |  +- org.beanshell:bsh:jar:2.0b4:test
-		[INFO] |  +- com.beust:jcommander:jar:1.27:test
-		[INFO] |  \- org.yaml:snakeyaml:jar:1.6:test
-		[INFO] +- com.google.guava:guava:jar:17.0:compile
-		[INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.4.1.3:compile
-		[INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.4.0:compile
-		[INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.4.1.1:compile
-		[INFO] +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.4.1:compile
-		[INFO] \- com.google.code.findbugs:jsr305:jar:2.0.0:compile 
-	-->
-	<feature name="openstack4j-connector-httpclient" version="${project.version}">
-		<bundle dependency="true">wrap:mvn:commons-logging/commons-logging/1.1.3</bundle>
-		
-		<bundle dependency="true">wrap:mvn:org.apache.httpcomponents/httpclient/4.3.1$overwrite=merge&amp;Export-Package=!org,!org.apache,!org.apache.http,*</bundle>
-		<bundle dependency="true">wrap:mvn:org.apache.httpcomponents/httpcore/4.3$overwrite=merge&amp;Export-Package=!org,!org.apache,*</bundle>
-		
-		<bundle start-level="80">mvn:org.pacesys.openstack4j.connectors/openstack4j-httpclient/${project.version}</bundle>	
-	</feature>
-	
-	<!-- 
-	[INFO] maven-dependency-plugin:2.1:tree (default-cli) @ openstack4j-log4j 
-	[INFO] org.pacesys.openstack4j.plugins:openstack4j-log4j:bundle:2.0.2-SNAPSHOT
-	[INFO] +- org.pacesys:openstack4j-core:jar:2.0.2-SNAPSHOT:compile
-	[INFO] +- org.pacesys:openstack4j-core-test:jar:2.0.2-SNAPSHOT:test
-	[INFO] +- log4j:log4j:jar:1.2.17:compile
-	[INFO] +- org.testng:testng:jar:6.8:test
-	[INFO] |  +- org.beanshell:bsh:jar:2.0b4:test
-	[INFO] |  +- com.beust:jcommander:jar:1.27:test
-	[INFO] |  \- org.yaml:snakeyaml:jar:1.6:test
-	[INFO] +- com.google.guava:guava:jar:17.0:compile
-	[INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.4.1.3:compile
-	[INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.4.0:compile
-	[INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.4.1.1:compile
-	[INFO] +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.4.1:compile
-	[INFO] \- com.google.code.findbugs:jsr305:jar:2.0.0:compile
-	-->
-	<feature name="openstack4j-plugin-log4j" version="${project.version}">
-		<bundle dependency="true">mvn:log4j/log4j/1.2.17</bundle>
-		<bundle start-level="80">mvn:org.pacesys.openstack4j.plugins/openstack4j-log4j/${project.version}</bundle>
-	</feature>
+    SPI Fly dynamic bundle has to load before any other bundle requiring the dynamic weaving of SPI.
+    https://aries.apache.org/modules/spi-fly.html#usage
+
+    This can be achieved by setting spi-fly bundle start-level to a lower one than the ones in openstack4j using SPI
+    (using default karaf bundle start-level 80)
+    -->
+    <feature name="spi-fly" version="1.0.0">
+        <bundle dependency="true">mvn:org.apache.aries/org.apache.aries.util/1.1.0</bundle>
+        <!-- already in karaf 3.0.1 -->
+        <bundle dependency="true">mvn:org.ow2.asm/asm-debug-all/4.1</bundle>
+        <bundle start-level="35">mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.0</bundle>
+    </feature>
+
+    <feature name="spi-fly" version="1.0.1">
+        <bundle dependency="true">mvn:org.apache.aries/org.apache.aries.util/1.1.0</bundle>
+        <!-- already in karaf 3.0.2 -->
+        <bundle dependency="true">mvn:org.ow2.asm/asm-debug-all/5.0.3</bundle>
+        <bundle start-level="35">mvn:org.apache.aries.spifly/org.apache.aries.spifly.dynamic.bundle/1.0.1</bundle>
+    </feature>
+
+    <!--
+        [INFO] maven-dependency-plugin:2.1:tree (default-cli) @ openstack4j-core
+        [INFO] org.pacesys:openstack4j-core:bundle:2.0.2-SNAPSHOT
+        [INFO] +- org.testng:testng:jar:6.8:test
+        [INFO] |  +- org.beanshell:bsh:jar:2.0b4:test
+        [INFO] |  +- com.beust:jcommander:jar:1.27:test
+        [INFO] |  \- org.yaml:snakeyaml:jar:1.6:test
+        [INFO] +- com.google.guava:guava:jar:17.0:compile
+        [INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.4.1.3:compile
+        [INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.4.0:compile
+        [INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.4.1.1:compile
+        [INFO] +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.4.1:compile
+        [INFO] \- com.google.code.findbugs:jsr305:jar:2.0.0:compile
+     -->
+    <feature name="openstack4j-core" version="${project.version}">
+        <!-- SPI Fly is required in order to support SPI in OSGi -->
+        <feature version="${aries.spifly.version}">spi-fly</feature>
+
+        <bundle dependency="true">mvn:com.google.guava/guava/17.0</bundle>
+
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/2.4.1.3</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/2.4.0</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/2.4.1.1</bundle>
+
+        <bundle dependency="true">mvn:com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/2.4.1</bundle>
+        <bundle dependency="true">mvn:org.yaml/snakeyaml/1.14</bundle>
+
+        <bundle dependency="true">wrap:mvn:com.google.code.findbugs/jsr305/2.0.0</bundle>
+
+        <bundle start-level="80">mvn:org.pacesys/openstack4j-core/${project.version}</bundle>
+    </feature>
+
+    <!--
+        [INFO] maven-dependency-plugin:2.1:tree (default-cli) @ openstack4j-httpclient
+        [INFO] org.pacesys.openstack4j.connectors:openstack4j-httpclient:bundle:2.0.2-SNAPSHOT
+        [INFO] +- org.apache.httpcomponents:httpclient:jar:4.3.1:compile
+        [INFO] |  +- org.apache.httpcomponents:httpcore:jar:4.3:compile
+        [INFO] |  +- commons-logging:commons-logging:jar:1.1.3:compile
+        [INFO] |  \- commons-codec:commons-codec:jar:1.6:compile
+        [INFO] +- org.pacesys:openstack4j-core:jar:2.0.2-SNAPSHOT:compile
+        [INFO] +- org.pacesys:openstack4j-core-test:jar:2.0.2-SNAPSHOT:test
+        [INFO] +- com.squareup.okhttp:mockwebserver:jar:2.1.0:test
+        [INFO] |  +- com.squareup.okhttp:okhttp:jar:2.1.0:test
+        [INFO] |  |  \- com.squareup.okio:okio:jar:1.0.1:test
+        [INFO] |  \- org.bouncycastle:bcprov-jdk15on:jar:1.50:test
+        [INFO] +- org.mockito:mockito-core:jar:1.9.0:test
+        [INFO] |  +- org.hamcrest:hamcrest-core:jar:1.1:test
+        [INFO] |  \- org.objenesis:objenesis:jar:1.0:test
+        [INFO] +- org.testng:testng:jar:6.8:test
+        [INFO] |  +- org.beanshell:bsh:jar:2.0b4:test
+        [INFO] |  +- com.beust:jcommander:jar:1.27:test
+        [INFO] |  \- org.yaml:snakeyaml:jar:1.6:test
+        [INFO] +- com.google.guava:guava:jar:17.0:compile
+        [INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.4.1.3:compile
+        [INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.4.0:compile
+        [INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.4.1.1:compile
+        [INFO] +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.4.1:compile
+        [INFO] \- com.google.code.findbugs:jsr305:jar:2.0.0:compile
+    -->
+    <feature name="openstack4j-connector-httpclient" version="${project.version}">
+        <bundle dependency="true">wrap:mvn:commons-logging/commons-logging/1.1.3</bundle>
+
+        <bundle dependency="true">wrap:mvn:org.apache.httpcomponents/httpclient/4.3.1$overwrite=merge&amp;Export-Package=!org,!org.apache,!org.apache.http,*</bundle>
+        <bundle dependency="true">wrap:mvn:org.apache.httpcomponents/httpcore/4.3$overwrite=merge&amp;Export-Package=!org,!org.apache,*</bundle>
+
+        <bundle start-level="80">mvn:org.pacesys.openstack4j.connectors/openstack4j-httpclient/${project.version}
+        </bundle>
+    </feature>
+
+    <!--
+    [INFO] maven-dependency-plugin:2.1:tree (default-cli) @ openstack4j-log4j
+    [INFO] org.pacesys.openstack4j.plugins:openstack4j-log4j:bundle:2.0.2-SNAPSHOT
+    [INFO] +- org.pacesys:openstack4j-core:jar:2.0.2-SNAPSHOT:compile
+    [INFO] +- org.pacesys:openstack4j-core-test:jar:2.0.2-SNAPSHOT:test
+    [INFO] +- log4j:log4j:jar:1.2.17:compile
+    [INFO] +- org.testng:testng:jar:6.8:test
+    [INFO] |  +- org.beanshell:bsh:jar:2.0b4:test
+    [INFO] |  +- com.beust:jcommander:jar:1.27:test
+    [INFO] |  \- org.yaml:snakeyaml:jar:1.6:test
+    [INFO] +- com.google.guava:guava:jar:17.0:compile
+    [INFO] +- com.fasterxml.jackson.core:jackson-databind:jar:2.4.1.3:compile
+    [INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.4.0:compile
+    [INFO] |  \- com.fasterxml.jackson.core:jackson-core:jar:2.4.1.1:compile
+    [INFO] +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.4.1:compile
+    [INFO] \- com.google.code.findbugs:jsr305:jar:2.0.0:compile
+    -->
+    <feature name="openstack4j-plugin-log4j" version="${project.version}">
+        <bundle dependency="true">mvn:log4j/log4j/1.2.17</bundle>
+        <bundle start-level="80">mvn:org.pacesys.openstack4j.plugins/openstack4j-log4j/${project.version}</bundle>
+    </feature>
 </features>

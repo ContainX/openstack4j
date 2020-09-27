@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
  * Load Balancer Algorithm
- * 
- * @author wei
  *
+ * @author wei
  */
 public enum LbMethod {
     ROUND_ROBIN,
@@ -15,8 +14,7 @@ public enum LbMethod {
 
     @JsonCreator
     public static LbMethod forValue(String value) {
-        if (value != null)
-        {
+        if (value != null) {
             for (LbMethod s : LbMethod.values()) {
                 if (s.name().equalsIgnoreCase(value)) {
                     return s;

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * A member of a v2 lbaas pool
+ *
  * @author wei
  */
 @JsonRootName("member")
@@ -42,7 +43,7 @@ public class OctaviaMemberV2 implements MemberV2 {
      * {@inheritDoc}
      */
     @Override
-    public boolean isAdminStateUp(){
+    public boolean isAdminStateUp() {
         return adminStateUp;
     }
 
@@ -50,7 +51,7 @@ public class OctaviaMemberV2 implements MemberV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getSubnetId(){
+    public String getSubnetId() {
         return subnetId;
     }
 
@@ -58,7 +59,7 @@ public class OctaviaMemberV2 implements MemberV2 {
      * {@inheritDoc}
      */
     @Override
-    public Integer getWeight(){
+    public Integer getWeight() {
         return weight;
     }
 
@@ -66,7 +67,7 @@ public class OctaviaMemberV2 implements MemberV2 {
      * {@inheritDoc}
      */
     @Override
-    public Integer getProtocolPort(){
+    public Integer getProtocolPort() {
         return protocolPort;
     }
 
@@ -74,7 +75,7 @@ public class OctaviaMemberV2 implements MemberV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getAddress(){
+    public String getAddress() {
         return address;
     }
 
@@ -82,7 +83,7 @@ public class OctaviaMemberV2 implements MemberV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getProjectId(){
+    public String getProjectId() {
         return projectId;
     }
 
@@ -90,20 +91,20 @@ public class OctaviaMemberV2 implements MemberV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getId(){
+    public String getId() {
         return id;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("projectId", projectId)
                 .add("address", address)
                 .add("protocolPort", protocolPort)
                 .add("adminStateUp", adminStateUp)
-                .add("weight",weight)
-                .add("subnetId",subnetId)
+                .add("weight", weight)
+                .add("subnetId", subnetId)
                 .toString();
     }
 
@@ -142,12 +143,12 @@ public class OctaviaMemberV2 implements MemberV2 {
         }
 
         @Override
-        public MemberV2 build(){
+        public MemberV2 build() {
             return m;
         }
 
         @Override
-        public MemberV2Builder from(MemberV2 in){
+        public MemberV2Builder from(MemberV2 in) {
             m = (OctaviaMemberV2) in;
             return this;
         }
@@ -156,7 +157,7 @@ public class OctaviaMemberV2 implements MemberV2 {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2Builder projectId(String projectId){
+        public MemberV2Builder projectId(String projectId) {
             m.projectId = projectId;
             return this;
         }
@@ -165,7 +166,7 @@ public class OctaviaMemberV2 implements MemberV2 {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2Builder address(String address){
+        public MemberV2Builder address(String address) {
             m.address = address;
             return this;
         }
@@ -174,7 +175,7 @@ public class OctaviaMemberV2 implements MemberV2 {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2Builder protocolPort(Integer protocolPort){
+        public MemberV2Builder protocolPort(Integer protocolPort) {
             m.protocolPort = protocolPort;
             return this;
         }
@@ -183,7 +184,7 @@ public class OctaviaMemberV2 implements MemberV2 {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2Builder subnetId(String subnetId){
+        public MemberV2Builder subnetId(String subnetId) {
             m.subnetId = subnetId;
             return this;
         }
@@ -192,7 +193,7 @@ public class OctaviaMemberV2 implements MemberV2 {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2Builder weight(Integer weight){
+        public MemberV2Builder weight(Integer weight) {
             m.weight = weight;
             return this;
         }
@@ -201,18 +202,18 @@ public class OctaviaMemberV2 implements MemberV2 {
          * {@inheritDoc}
          */
         @Override
-        public MemberV2Builder adminStateUp(boolean adminStateUp){
+        public MemberV2Builder adminStateUp(boolean adminStateUp) {
             m.adminStateUp = adminStateUp;
             return this;
         }
     }
 
     @Override
-    public MemberV2Builder toBuilder(){
+    public MemberV2Builder toBuilder() {
         return new MemberV2ConcreteBuilder(this);
     }
 
-    public static MemberV2Builder builder(){
+    public static MemberV2Builder builder() {
         return new MemberV2ConcreteBuilder();
     }
 }

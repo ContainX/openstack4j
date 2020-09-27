@@ -1,11 +1,10 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import org.openstack4j.model.storage.block.BlockLimits;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.storage.block.BlockLimits;
 
 /**
  * Show absolute limits for a tenant
@@ -13,7 +12,7 @@ import com.google.common.base.MoreObjects;
  * @author Jeremy Unruh
  */
 @JsonRootName("limits")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CinderBlockLimits implements BlockLimits {
 
     @JsonProperty
@@ -95,12 +94,12 @@ public class CinderBlockLimits implements BlockLimits {
         @Override
         public String toString() {
             return MoreObjects.toStringHelper(this)
-                     .add("totalSnapshotsUsed", totalSnapshotsUsed).add("maxTotalBackups", maxTotalBackups)
-                     .add("maxTotalVolumeGigabytes", maxTotalVolumeGigabytes).add("maxTotalSnapshots", maxTotalSnapshots)
-                     .add("maxTotalBackupGigabytes", maxTotalBackupGigabytes).add("totalBackupGigabytesUsed", totalBackupGigabytesUsed)
-                     .add("maxTotalVolumes", maxTotalVolumes).add("totalVolumesUsed", totalVolumesUsed)
-                     .add("totalBackupsUsed", totalBackupsUsed).add("totalGigabytesUsed", totalGigabytesUsed)
-                     .toString();
+                    .add("totalSnapshotsUsed", totalSnapshotsUsed).add("maxTotalBackups", maxTotalBackups)
+                    .add("maxTotalVolumeGigabytes", maxTotalVolumeGigabytes).add("maxTotalSnapshots", maxTotalSnapshots)
+                    .add("maxTotalBackupGigabytes", maxTotalBackupGigabytes).add("totalBackupGigabytesUsed", totalBackupGigabytesUsed)
+                    .add("maxTotalVolumes", maxTotalVolumes).add("totalVolumesUsed", totalVolumesUsed)
+                    .add("totalBackupsUsed", totalBackupsUsed).add("totalGigabytesUsed", totalGigabytesUsed)
+                    .toString();
         }
     }
 }

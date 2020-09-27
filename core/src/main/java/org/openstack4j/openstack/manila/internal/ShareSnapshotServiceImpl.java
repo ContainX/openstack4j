@@ -35,7 +35,7 @@ public class ShareSnapshotServiceImpl extends BaseShareServices implements Share
     }
 
     private List<? extends ShareSnapshot> list(boolean detail) {
-        return get(ManilaShareSnapshot.ShareSnapshots.class, uri("/snapshots" +  (detail ? "/detail" : "")))
+        return get(ManilaShareSnapshot.ShareSnapshots.class, uri("/snapshots" + (detail ? "/detail" : "")))
                 .execute()
                 .getList();
     }
@@ -81,7 +81,7 @@ public class ShareSnapshotServiceImpl extends BaseShareServices implements Share
      * Invoke the action on the given snapshot.
      *
      * @param snapshotId the snapshot ID
-     * @param action the action to invoke
+     * @param action     the action to invoke
      * @return the action response of the server
      */
     private ActionResponse invokeAction(String snapshotId, ShareSnapshotAction action) {

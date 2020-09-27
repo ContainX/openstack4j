@@ -13,13 +13,13 @@ import java.util.List;
  *
  * @author Miroslav Lacina
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CeilometerEvent implements Event {
 
     private static final long serialVersionUID = 1L;
 
-	@JsonProperty("event_type")
-	private String eventType;
+    @JsonProperty("event_type")
+    private String eventType;
     @JsonProperty("generated")
     private String generated;
     @JsonProperty("message_id")

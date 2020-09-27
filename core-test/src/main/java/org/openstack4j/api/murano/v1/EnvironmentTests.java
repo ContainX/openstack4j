@@ -10,14 +10,12 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * @author nmakhotkin
  */
-@Test(suiteName="Murano/AppCatalog", enabled = true)
+@Test(suiteName = "Murano/AppCatalog", enabled = true)
 public class EnvironmentTests extends AbstractTest {
     private static final String ENVIRONMENTS_JSON = "/murano/v1/environments.json";
     private static final String ENVIRONMENT_JSON = "/murano/v1/environment.json";

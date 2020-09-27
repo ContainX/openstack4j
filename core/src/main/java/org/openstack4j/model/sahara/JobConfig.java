@@ -1,15 +1,15 @@
 package org.openstack4j.model.sahara;
 
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.JobConfigBuilder;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * An Configuration for Sahara Job Execution
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */

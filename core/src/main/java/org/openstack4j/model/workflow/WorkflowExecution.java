@@ -1,10 +1,7 @@
 /*
- * 
+ *
  */
 package org.openstack4j.model.workflow;
-
-import org.openstack4j.common.Buildable;
-import org.openstack4j.model.workflow.builder.WorkflowExecutionBuilder;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -18,8 +15,8 @@ import java.util.Map;
 public interface WorkflowExecution extends Execution {
     /**
      * @return The meta parameters of workflow execution specific to workflow type.
-     *      Example: a reverse workflow requires the parameter 'task_name' which
-     *      specifies the target task in the workflow graph.
+     * Example: a reverse workflow requires the parameter 'task_name' which
+     * specifies the target task in the workflow graph.
      */
     Map<String, Object> getParameters();
 

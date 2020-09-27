@@ -1,9 +1,8 @@
 package org.openstack4j.openstack.sahara.domain;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.Job;
-
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 /**
  * An OpenStack Sahara

@@ -1,13 +1,13 @@
 package org.openstack4j.model.sahara;
 
+import org.openstack4j.model.ModelEntity;
+
 import java.util.Date;
 import java.util.List;
 
-import org.openstack4j.model.ModelEntity;
-
 /**
  * An Info of Sahara Job Execution
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */

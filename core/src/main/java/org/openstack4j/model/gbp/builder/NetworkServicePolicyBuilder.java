@@ -11,7 +11,10 @@ import java.util.List;
  */
 public interface NetworkServicePolicyBuilder extends Buildable.Builder<NetworkServicePolicyBuilder, NetworkServicePolicy> {
     NetworkServicePolicyBuilder name(String name);
+
     NetworkServicePolicyBuilder description(String description);
+
     NetworkServicePolicyBuilder isShared(boolean shared);
+
     NetworkServicePolicyBuilder gbpNetworkServiceParams(List<GbpNetworkServiceParams> gbpNetworkServiceParams);
 }

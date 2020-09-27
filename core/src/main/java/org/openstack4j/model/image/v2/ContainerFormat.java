@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * The container format refers to whether the virtual machine image is in a file format that also
  * contains metadata about the actual virtual machine.
- *
+ * <p>
  * Note that the container format string is not currently used by Glance or other OpenStack
  * components, so it is safe to simply specify {@link #BARE} as the container format if you are
  * unsure.
@@ -62,11 +62,9 @@ public enum ContainerFormat {
     @JsonCreator
     public static ContainerFormat value(String cf) {
         if (cf == null || cf.isEmpty()) return UNRECOGNIZED;
-        try
-        {
+        try {
             return valueOf(cf.toUpperCase());
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return UNRECOGNIZED;
         }
     }

@@ -1,17 +1,17 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.openstack4j.model.gbp.L3Policy;
-import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
+import org.openstack4j.model.gbp.L3Policy;
+import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Model implementation for L3 Policy
  *
@@ -39,7 +39,6 @@ public class GbpL3Policy implements L3Policy {
     private String subnetPrefixLength;
 
 
-
     @Override
     public String getTenantId() {
         return tenantId;
@@ -47,7 +46,7 @@ public class GbpL3Policy implements L3Policy {
 
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -57,7 +56,7 @@ public class GbpL3Policy implements L3Policy {
 
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -67,8 +66,9 @@ public class GbpL3Policy implements L3Policy {
 
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
+
     @Override
     public String getDescription() {
         return description;
@@ -121,7 +121,7 @@ public class GbpL3Policy implements L3Policy {
                 .add("l2Policies", l2Policies).add("routers", routers).add("shared", shared).add("subnetPrefixLength", subnetPrefixLength).toString();
     }
 
-    public static class L3Policies extends ListResult<GbpL3Policy>{
+    public static class L3Policies extends ListResult<GbpL3Policy> {
 
         private static final long serialVersionUID = 1L;
         @JsonProperty("l3_policies")
@@ -134,12 +134,12 @@ public class GbpL3Policy implements L3Policy {
 
     }
 
-    public static class L3PolicyConcreteBuilder implements L3PolicyBuilder{
+    public static class L3PolicyConcreteBuilder implements L3PolicyBuilder {
 
         private GbpL3Policy l3Policy;
 
         public L3PolicyConcreteBuilder(GbpL3Policy gbpL3Policy) {
-            this.l3Policy=gbpL3Policy;
+            this.l3Policy = gbpL3Policy;
         }
 
         public L3PolicyConcreteBuilder() {
@@ -159,44 +159,44 @@ public class GbpL3Policy implements L3Policy {
 
         @Override
         public L3PolicyBuilder name(String name) {
-            this.l3Policy.name=name;
+            this.l3Policy.name = name;
             return this;
         }
 
         @Override
         public L3PolicyBuilder description(String description) {
-            this.l3Policy.description=description;
+            this.l3Policy.description = description;
             return this;
         }
 
         @Override
         public L3PolicyBuilder ipVersion(int ipVersion) {
-            this.l3Policy.ipVersion=ipVersion;
+            this.l3Policy.ipVersion = ipVersion;
             return this;
         }
 
         @Override
         public L3PolicyBuilder ippool(String ippool) {
-            this.l3Policy.ipPool=ippool;
+            this.l3Policy.ipPool = ippool;
             return this;
         }
 
         @Override
         public L3PolicyBuilder subnetPrefixLength(String subnetPrefixLength) {
-            this.l3Policy.subnetPrefixLength=subnetPrefixLength;
+            this.l3Policy.subnetPrefixLength = subnetPrefixLength;
             return this;
         }
 
         @Override
         public L3PolicyBuilder isShared(boolean shared) {
-            this.l3Policy.shared=shared;
+            this.l3Policy.shared = shared;
             return this;
         }
 
         @Override
         public L3PolicyBuilder externalSegments(List<String> extSegmentIds) {
             this.l3Policy.externalSegments = Maps.newHashMap();
-            for(String extSegId : extSegmentIds){
+            for (String extSegId : extSegmentIds) {
                 this.l3Policy.externalSegments.put(extSegId, new ArrayList<String>());
             }
             return this;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
  * Protocol options for lbaas v2 listener
+ *
  * @author wei
  */
 public enum ListenerProtocol {
@@ -14,8 +15,7 @@ public enum ListenerProtocol {
 
     @JsonCreator
     public static ListenerProtocol forValue(String value) {
-        if (value != null)
-        {
+        if (value != null) {
             for (ListenerProtocol s : ListenerProtocol.values()) {
                 if (s.name().equalsIgnoreCase(value)) {
                     return s;

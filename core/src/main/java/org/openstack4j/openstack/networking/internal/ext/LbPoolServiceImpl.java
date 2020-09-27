@@ -1,19 +1,9 @@
-
 package org.openstack4j.openstack.networking.internal.ext;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-import java.util.Map;
 
 import org.openstack4j.api.Builders;
 import org.openstack4j.api.networking.ext.LbPoolService;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.network.ext.HealthMonitor;
-import org.openstack4j.model.network.ext.HealthMonitorAssociate;
-import org.openstack4j.model.network.ext.LbPool;
-import org.openstack4j.model.network.ext.LbPoolStats;
-import org.openstack4j.model.network.ext.LbPoolUpdate;
+import org.openstack4j.model.network.ext.*;
 import org.openstack4j.openstack.compute.functions.ToActionResponseFunction;
 import org.openstack4j.openstack.networking.domain.ext.NeutronHealthMonitor;
 import org.openstack4j.openstack.networking.domain.ext.NeutronLbPool;
@@ -21,13 +11,18 @@ import org.openstack4j.openstack.networking.domain.ext.NeutronLbPool.LbPools;
 import org.openstack4j.openstack.networking.domain.ext.NeutronLbPoolStats;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
 
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
- *  OpenStack (Neutron) Lbaas pool based Operations
- * @author liujunpeng
+ * OpenStack (Neutron) Lbaas pool based Operations
  *
+ * @author liujunpeng
  */
 public class LbPoolServiceImpl extends BaseNetworkingServices implements
-LbPoolService {
+        LbPoolService {
 
     /**
      * {@inheritDoc}
@@ -57,7 +52,7 @@ LbPoolService {
     @Override
     public LbPool get(String lbPoolId) {
         checkNotNull(lbPoolId);
-        return get(NeutronLbPool.class, uri("/lb/pools/%s",lbPoolId)).execute();
+        return get(NeutronLbPool.class, uri("/lb/pools/%s", lbPoolId)).execute();
     }
 
     /**
@@ -76,7 +71,7 @@ LbPoolService {
     @Override
     public LbPool create(LbPool lbPool) {
         checkNotNull(lbPool);
-        return post(NeutronLbPool.class,uri("/lb/pools")).entity(lbPool).execute();
+        return post(NeutronLbPool.class, uri("/lb/pools")).entity(lbPool).execute();
     }
 
     /**
@@ -96,7 +91,7 @@ LbPoolService {
     @Override
     public LbPoolStats stats(String lbPoolId) {
         checkNotNull(lbPoolId);
-        return get(NeutronLbPoolStats.class, uri("/lb/pools/%s/stats.json",lbPoolId)).execute();
+        return get(NeutronLbPoolStats.class, uri("/lb/pools/%s/stats.json", lbPoolId)).execute();
     }
 
     /**
@@ -116,7 +111,7 @@ LbPoolService {
     public HealthMonitor associateHealthMonitor(String lbPoolId, HealthMonitorAssociate associate) {
         checkNotNull(lbPoolId);
         checkNotNull(associate);
-        return post(NeutronHealthMonitor.class,uri("/lb/pools/%s/health_monitors",lbPoolId)).entity(associate).execute();
+        return post(NeutronHealthMonitor.class, uri("/lb/pools/%s/health_monitors", lbPoolId)).entity(associate).execute();
     }
 
     /**
@@ -127,6 +122,6 @@ LbPoolService {
         checkNotNull(lbPoolId);
         checkNotNull(healthMonitorId);
         return ToActionResponseFunction.INSTANCE.apply(delete(void.class,
-                uri("/lb/pools/%s/health_monitors/%s", lbPoolId,healthMonitorId)).executeWithResponse());
+                uri("/lb/pools/%s/health_monitors/%s", lbPoolId, healthMonitorId)).executeWithResponse());
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
-@Test(suiteName="Event Tests")
+@Test(suiteName = "Event Tests")
 public class EventTests extends AbstractTest {
 
     private static final String JSON_EVENTS = "/telemetry/events.json";

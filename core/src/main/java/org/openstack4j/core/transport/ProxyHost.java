@@ -3,7 +3,7 @@ package org.openstack4j.core.transport;
 
 /**
  * Proxy host configuration
- * 
+ *
  * @author Jeremy Unruh
  */
 public final class ProxyHost {
@@ -12,7 +12,7 @@ public final class ProxyHost {
     private int port;
     private String username;
     private String password;
-    
+
     public ProxyHost(String host, int port) {
         this(host, port, null, null);
     }
@@ -24,10 +24,10 @@ public final class ProxyHost {
         this.username = username;
         this.password = password;
     }
-    
+
     /**
      * Creates a new ProxyHost configuration
-     * 
+     *
      * @param host the proxy host (ex. http://myproxy)
      * @param port the proxy port (ex. 8080)
      * @return ProxyHost
@@ -35,12 +35,12 @@ public final class ProxyHost {
     public static ProxyHost of(String host, int port) {
         return new ProxyHost(host, port);
     }
-    
+
     /**
      * Creates a new ProxyHost configuration with credentials
-     * 
-     * @param host the proxy host (ex. http://myproxy)
-     * @param port the proxy port (ex. 8080)
+     *
+     * @param host     the proxy host (ex. http://myproxy)
+     * @param port     the proxy port (ex. 8080)
      * @param username the username for proxy authentication
      * @param password the password for proxy authentication
      * @return ProxyHost
@@ -52,10 +52,10 @@ public final class ProxyHost {
     public String getHost() {
         return host;
     }
-    
+
     public String getRawHost() {
         if (host != null && host.startsWith("http")) {
-            return host.substring(host.indexOf("://")+3);
+            return host.substring(host.indexOf("://") + 3);
         }
         return host;
     }
@@ -71,7 +71,7 @@ public final class ProxyHost {
     public String getPassword() {
         return password;
     }
-    
+
     public String getHostWithPort() {
         return String.format("%s:%d", host, port);
     }
@@ -115,6 +115,6 @@ public final class ProxyHost {
             return false;
         return true;
     }
-    
-    
+
+
 }

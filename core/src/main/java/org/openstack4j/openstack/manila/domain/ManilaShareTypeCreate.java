@@ -21,7 +21,7 @@ public class ManilaShareTypeCreate implements ShareTypeCreate {
     @JsonProperty("os-share-type-access:is_public")
     Boolean osShareTypeAccessIsPublic;
     String name;
-    
+
     @Override
     public ExtraSpecs getExtraSpecs() {
         return extraSpecs;
@@ -45,14 +45,14 @@ public class ManilaShareTypeCreate implements ShareTypeCreate {
     public ShareTypeCreateBuilder toBuilder() {
         return new ShareTypeCreateConcreteBuilder(this);
     }
-    
+
     public static class ShareTypeCreateConcreteBuilder implements ShareTypeCreateBuilder {
         ManilaShareTypeCreate shareTypeCreate;
-        
+
         public ShareTypeCreateConcreteBuilder() {
             this(new ManilaShareTypeCreate());
         }
-        
+
         public ShareTypeCreateConcreteBuilder(ManilaShareTypeCreate shareTypeCreate) {
             this.shareTypeCreate = shareTypeCreate;
         }
@@ -62,7 +62,7 @@ public class ManilaShareTypeCreate implements ShareTypeCreate {
             if (shareTypeCreate.extraSpecs == null)
                 shareTypeCreate.extraSpecs = ExtraSpecs.toExtraSpecs(
                         Maps.<String, String>newHashMap());
-            
+
             shareTypeCreate.extraSpecs.put(key, value);
             return this;
         }

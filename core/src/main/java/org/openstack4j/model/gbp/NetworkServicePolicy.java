@@ -14,24 +14,28 @@ public interface NetworkServicePolicy extends Resource, Buildable<NetworkService
 
     /**
      * Is the network service policy shared
+     *
      * @return boolean
      */
     boolean isShared();
 
     /**
      * Gets the network service parameters
+     *
      * @return network service parameters
      */
-    List<GbpNetworkServiceParams>  getGbpNetworkServiceParamsList();
+    List<GbpNetworkServiceParams> getGbpNetworkServiceParamsList();
 
     /**
      * Gets the policy target groups associated with the service policy
+     *
      * @return list of policy target groups
      */
     List<PolicyTargetGroup> getPolicyTargetGroupList();
 
     /**
      * Gets the description of the network service policy
+     *
      * @return description
      */
     String getDescription();

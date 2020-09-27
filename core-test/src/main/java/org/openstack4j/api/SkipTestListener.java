@@ -1,22 +1,22 @@
 package org.openstack4j.api;
 
-import java.lang.reflect.Method;
-import java.util.logging.Logger;
-
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 import org.testng.SkipException;
 
+import java.lang.reflect.Method;
+import java.util.logging.Logger;
+
 /**
- * A TestNG listener checking test methods for the presence of {@code @SkipTest} 
+ * A TestNG listener checking test methods for the presence of {@code @SkipTest}
  * annotation
- * 
+ *
  * <p>If annotation is present on test method and current HTTP connector matches
  * the HTTP connector specified by {@code @SkipTest}, the listener will skip the test
  * by throwing TestNG {@code SkipException}.</p>
- * 
+ *
  * @author Bruno Semperlotti
  */
 public class SkipTestListener implements IInvokedMethodListener {

@@ -11,23 +11,23 @@ import java.io.InputStream;
  */
 public interface Payload<T> extends Closeable {
 
-	/**
-	 * Opens and returns the input stream.
-	 *
-	 * @return the input stream
-	 */
-	InputStream open();
-	
-	/**
-	 * Closes the stream and releases state.
-	 */
-	void closeQuietly();
-	
-	/**
-	 * Gets the raw underlying object for the Payload.
-	 *
-	 * @return the raw object
-	 */
-	T getRaw();
-	
+    /**
+     * Opens and returns the input stream.
+     *
+     * @return the input stream
+     */
+    InputStream open();
+
+    /**
+     * Closes the stream and releases state.
+     */
+    void closeQuietly();
+
+    /**
+     * Gets the raw underlying object for the Payload.
+     *
+     * @return the raw object
+     */
+    T getRaw();
+
 }

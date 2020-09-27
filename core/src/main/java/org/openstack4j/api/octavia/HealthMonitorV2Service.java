@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  * Octavia V2 healthmonitor Extention API
+ *
  * @author wei
  */
 public interface HealthMonitorV2Service extends RestService {
@@ -38,6 +39,7 @@ public interface HealthMonitorV2Service extends RestService {
 
     /**
      * Delete the specified healthMonitor by ID
+     *
      * @param healthMonitorId the healthMonitorV2 identifier
      * @return the action response
      */
@@ -45,6 +47,7 @@ public interface HealthMonitorV2Service extends RestService {
 
     /**
      * Create a healthMonitorV2
+     *
      * @param healthMonitor
      * @return HealthMonitorV2
      */
@@ -52,8 +55,9 @@ public interface HealthMonitorV2Service extends RestService {
 
     /**
      * Update a healthMonitorV2
+     *
      * @param healthMonitorId the healthMonitorV2 identifier
-     * @param healthMonitor HealthMonitorV2Update
+     * @param healthMonitor   HealthMonitorV2Update
      * @return HealthMonitorV2
      */
     HealthMonitorV2 update(String healthMonitorId, HealthMonitorV2Update healthMonitor);

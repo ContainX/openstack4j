@@ -27,7 +27,6 @@ import org.openstack4j.model.heat.builder.ResourceHealthBuilder;
  * (de)serialization into JSON format
  *
  * @author Dan Maas
- *
  */
 public class HeatResourceHealth implements ResourceHealth {
 
@@ -75,7 +74,7 @@ public class HeatResourceHealth implements ResourceHealth {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("markUnhealthy", markUnhealthy)
                 .add("resourceStatusReason", resourceStatusReason)
@@ -87,7 +86,6 @@ public class HeatResourceHealth implements ResourceHealth {
      * {@link StackCreate} object.
      *
      * @author Matthias Reisser
-     *
      */
     public static class HeatResourceHealthBuilder implements ResourceHealthBuilder {
 
@@ -119,7 +117,7 @@ public class HeatResourceHealth implements ResourceHealth {
 
         @Override
         public ResourceHealthBuilder from(ResourceHealth in) {
-            model = (HeatResourceHealth)in;
+            model = (HeatResourceHealth) in;
             return this;
         }
 

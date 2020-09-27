@@ -135,7 +135,7 @@ public class ShareTypeServiceImpl extends BaseShareServices implements ShareType
      * Invoke the action on the given share type.
      *
      * @param shareTypeId the share type ID
-     * @param action the action to invoke
+     * @param action      the action to invoke
      * @return the action response of the server
      */
     private ActionResponse invokeAction(String shareTypeId, ShareTypeAction action) {

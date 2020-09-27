@@ -14,12 +14,14 @@ public interface InstanceFlavorService {
 
     /**
      * Returns all the available database instance flavors
+     *
      * @return the list of available flavors
      */
     List<? extends Flavor> list();
 
     /**
      * Get the instance flavor specified by ID
+     *
      * @param id
      * @return the flavor or null if not found
      */

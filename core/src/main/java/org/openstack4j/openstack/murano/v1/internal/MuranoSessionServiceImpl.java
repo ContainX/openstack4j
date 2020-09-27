@@ -1,9 +1,7 @@
 package org.openstack4j.openstack.murano.v1.internal;
 
 import org.openstack4j.api.murano.v1.MuranoSessionService;
-import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.murano.v1.domain.AppCatalogSession;
 import org.openstack4j.openstack.murano.v1.domain.MuranoEnvironment;
 import org.openstack4j.openstack.murano.v1.domain.MuranoSession;
 
@@ -13,7 +11,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * This class implements all methods for manipulation of {@link MuranoEnvironment} objects.
  *
  * @author Nikolay Mahotkin
- *
  */
 public class MuranoSessionServiceImpl extends BaseMuranoServices implements MuranoSessionService {
     /**

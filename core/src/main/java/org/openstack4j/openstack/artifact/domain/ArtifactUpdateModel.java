@@ -4,7 +4,6 @@ package org.openstack4j.openstack.artifact.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openstack4j.model.artifact.ArtifactUpdate;
 import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
-import org.openstack4j.model.common.builder.BasicResourceBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import java.util.List;

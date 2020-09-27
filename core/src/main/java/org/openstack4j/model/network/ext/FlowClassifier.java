@@ -1,16 +1,15 @@
 package org.openstack4j.model.network.ext;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.network.ext.builder.FlowClassifierBuilder;
+
+import java.util.Map;
 
 /**
  * A Flow Classifier Entity.
  *
  * @author Dmitry Gerenrot.
- *
  */
 public interface FlowClassifier extends Resource, Buildable<FlowClassifierBuilder> {
 
@@ -23,6 +22,7 @@ public interface FlowClassifier extends Resource, Buildable<FlowClassifierBuilde
      * @return protocol : Short name for the protocol (TCP, UDP, etc)
      */
     String getProtocol();
+
     /**
      * @return rangeMin : Minimum value for the source port, converted to String
      */
@@ -40,7 +40,6 @@ public interface FlowClassifier extends Resource, Buildable<FlowClassifierBuilde
 
     /**
      * @return rangeMax : Maximum value for the destination port, converted to String
-     *
      */
     Integer getDestinationPortRangeMax();
 

@@ -1,12 +1,5 @@
 package org.openstack4j.openstack.identity.v3.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.core.transport.ClientConstants.PATH_ENDPOINTS;
-import static org.openstack4j.core.transport.ClientConstants.PATH_SERVICES;
-
-import java.net.URL;
-import java.util.List;
-
 import org.openstack4j.api.identity.v3.ServiceEndpointService;
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.model.common.ActionResponse;
@@ -16,10 +9,16 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneEndpoint;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneEndpoint.Endpoints;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneService.Services;
+
+import java.net.URL;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.ClientConstants.PATH_ENDPOINTS;
+import static org.openstack4j.core.transport.ClientConstants.PATH_SERVICES;
+
 /**
- *
  * implementation of v3 service manager service
- *
  */
 public class ServiceEndpointServiceImpl extends BaseIdentityServices implements ServiceEndpointService {
 

@@ -1,16 +1,14 @@
 package org.openstack4j.openstack.magnum;
 
-import java.util.List;
-
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.magnum.Certificate;
 import org.openstack4j.model.magnum.CertificateBuilder;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumCertificate implements Certificate {
@@ -51,7 +49,6 @@ public class MagnumCertificate implements Certificate {
 
     /**
      * Concrete builder containing MagnumCertificate as model
-     *
      */
     public static class CertificateConcreteBuilder implements CertificateBuilder {
         MagnumCertificate model;

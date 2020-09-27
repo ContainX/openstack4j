@@ -2,21 +2,19 @@ package org.openstack4j.api
 
 import com.google.common.collect.ImmutableMap
 import groovy.util.logging.Slf4j
-
-import org.junit.Rule;
-import org.junit.rules.TestName;
+import org.junit.Rule
+import org.junit.rules.TestName
 import org.openstack4j.api.Builders
-import org.openstack4j.model.identity.v3.*
+import org.openstack4j.model.compute.Flavor
 import org.openstack4j.model.identity.v2.Tenant
+import org.openstack4j.model.identity.v3.User
 import org.openstack4j.model.manila.Share
 import org.openstack4j.model.manila.Share.Protocol
 import org.openstack4j.model.manila.ShareCreate
-import org.openstack4j.model.storage.block.Volume
-import org.openstack4j.model.compute.Flavor
-import org.openstack4j.openstack.heat.domain.HeatStackCreate
 import org.openstack4j.model.sahara.Cluster
+import org.openstack4j.model.storage.block.Volume
+import org.openstack4j.openstack.heat.domain.HeatStackCreate
 import spock.lang.Specification
-
 
 @Slf4j
 class BuilderSpec extends Specification {
@@ -354,7 +352,6 @@ class BuilderSpec extends Specification {
         anotherCluster.getManagementNetworkId() == CLUSTER_MANAGEMENT_NETWORK_ID
 
     }
-
 
 
 }

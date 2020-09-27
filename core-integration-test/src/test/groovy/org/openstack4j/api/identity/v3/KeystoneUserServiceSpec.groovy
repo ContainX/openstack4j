@@ -3,7 +3,6 @@ package org.openstack4j.api.identity.v3
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
-
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.model.common.ActionResponse
@@ -12,20 +11,20 @@ import org.openstack4j.model.identity.v3.Group
 import org.openstack4j.model.identity.v3.Role
 import org.openstack4j.model.identity.v3.User
 import org.openstack4j.openstack.OSFactory
-
 import software.betamax.Configuration
 import software.betamax.MatchRules
 import software.betamax.TapeMode
 import software.betamax.junit.Betamax
 import software.betamax.junit.RecorderRule
-
 import spock.lang.IgnoreIf
 
 @Slf4j
 class KeystoneUserServiceSpec extends AbstractSpec {
 
-    @Rule TestName KeystoneUserServiceTest
-    @Rule public RecorderRule recorderRule = new RecorderRule(
+    @Rule
+    TestName KeystoneUserServiceTest
+    @Rule
+    public RecorderRule recorderRule = new RecorderRule(
             Configuration.builder()
                     .tapeRoot(new File(TAPEROOT + "identity.v3"))
                     .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)

@@ -32,7 +32,7 @@ import static org.openstack4j.core.transport.HttpEntityHandler.statusAndClose;
 
 /**
  * OpenStack (Glance) Image based Operations
- * 
+ *
  * @author Jeremy Unruh
  */
 public class ImageServiceImpl extends BaseImageServices implements ImageService {
@@ -47,8 +47,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
         try {
             return get(CachedImages.class, uri("/cached_images"))
                     .execute(ExecutionOptions.<CachedImages>create(PropagateOnStatus.on(404))).getList();
-        }
-        catch (ResponseException e) {
+        } catch (ResponseException e) {
             return null;
         }
     }
@@ -70,31 +69,31 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
         Invocation<Images> imageInvocation = buildInvocation(filteringParams);
         return imageInvocation.execute().getList();
     }
-    
+
     public List<? extends Image> listAll(Map<String, String> filteringParams) {
         Invocation<Images> imageInvocation = buildInvocation(filteringParams);
-        
+
         int limit = DEFAULT_PAGE_SIZE;
-        if(filteringParams != null && filteringParams.containsKey("limit")) {
+        if (filteringParams != null && filteringParams.containsKey("limit")) {
             limit = Integer.parseInt(filteringParams.get("limit"));
         }
-        
+
         List<GlanceImage> totalList = imageInvocation.execute().getList();
         List<GlanceImage> currList = totalList;
         while (currList.size() == limit) {
-          
+
             imageInvocation.updateParam("marker", currList.get(limit - 1).getId());
             currList = imageInvocation.execute().getList();
             totalList.addAll(currList);
-        }        
-        
+        }
+
         return totalList;
     }
 
     public List<? extends Image> listAll() {
         return listAll(null);
     }
-    
+
     private Invocation<Images> buildInvocation(Map<String, String> filteringParams) {
         Invocation<Images> imageInvocation = get(Images.class, "/images/detail");
         if (filteringParams == null) {
@@ -109,7 +108,6 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     }
 
     /**
-     * 
      * {@inheritDoc}
      */
     @Override

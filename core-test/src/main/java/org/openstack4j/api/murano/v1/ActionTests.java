@@ -15,7 +15,7 @@ import static org.testng.Assert.*;
 /**
  * @author nmakhotkin
  */
-@Test(suiteName="Murano/AppCatalog", enabled = true)
+@Test(suiteName = "Murano/AppCatalog", enabled = true)
 public class ActionTests extends AbstractTest {
     private static final String ENVIRONMENT_JSON = "/murano/v1/environment.json";
     private static final String ACTION_RESULT = "/murano/v1/action_result.json";

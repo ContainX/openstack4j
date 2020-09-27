@@ -2,7 +2,7 @@ package org.openstack4j.model.storage.object;
 
 /**
  * Common Object Storage (Swift) headers
- * 
+ *
  * @author Jeremy Unruh
  */
 public final class SwiftHeaders {
@@ -18,19 +18,19 @@ public final class SwiftHeaders {
     // Container Headers
     public static final String CONTAINER_METADATA_PREFIX = "X-Container-Meta-";
     public static final String CONTAINER_REMOVE_METADATA_PREFIX = "X-Remove-Container-Meta-";
-    
+
     // Object Headers
     public static final String OBJECT_METADATA_PREFIX = "X-Object-Meta-";
 
     // Versioning
     public static final String VERSIONS_LOCATION = "X-Versions-Location";
-    
+
     // ACL's (not all implementations support this)
     public static final String CONTAINER_READ = "X-Container-Read";
     public static final String CONTAINER_WRITE = "X-Container-Write";
     public static final String CONTAINER_ACL_ANYBODY_READ = ".r:*,.rlistings";
-    
-    
+
+
     // Generic
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String ETAG = "Etag";

@@ -13,7 +13,7 @@ public interface JobBuilder extends Builder<JobBuilder, Job> {
 
     /**
      * See {@link Job#getDescription()}
-     * 
+     *
      * @param description the description of the job
      * @return JobBuilder
      */
@@ -21,7 +21,7 @@ public interface JobBuilder extends Builder<JobBuilder, Job> {
 
     /**
      * See {@link Job#getType()}
-     * 
+     *
      * @param type the type of the job
      * @return JobBuilder
      */
@@ -29,7 +29,7 @@ public interface JobBuilder extends Builder<JobBuilder, Job> {
 
     /**
      * See {@link Job#getName()}
-     * 
+     *
      * @param name the name of the job
      * @return JobBuilder
      */
@@ -37,7 +37,7 @@ public interface JobBuilder extends Builder<JobBuilder, Job> {
 
     /**
      * See {@link Job#getMainIds()}
-     * 
+     *
      * @param id the id of the job binary
      * @return JobBuilder
      */
@@ -45,7 +45,7 @@ public interface JobBuilder extends Builder<JobBuilder, Job> {
 
     /**
      * See {@link Job#getLibId()}
-     * 
+     *
      * @param name the name of the job
      * @return JobBuilder
      */

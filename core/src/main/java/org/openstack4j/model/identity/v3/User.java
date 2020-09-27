@@ -1,10 +1,10 @@
 package org.openstack4j.model.identity.v3;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.identity.v3.builder.UserBuilder;
+
+import java.util.Map;
 
 /**
  * identity v3 user model class

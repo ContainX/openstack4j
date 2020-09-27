@@ -2,9 +2,10 @@ package org.openstack4j.model.gbp;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Protocol enum
- * 
+ *
  * @author vinod borole
  */
 public enum Protocol {
@@ -16,13 +17,12 @@ public enum Protocol {
     SMTP,
     DNS,
     FTP,
-    NONE,  
+    NONE,
     UNRECOGNIZED;
-    
+
     @JsonCreator
     public static Protocol forValue(String value) {
-        if (value != null) 
-        {
+        if (value != null) {
             for (Protocol s : Protocol.values()) {
                 if (s.name().equalsIgnoreCase(value))
                     return s;
@@ -30,7 +30,7 @@ public enum Protocol {
         }
         return Protocol.UNRECOGNIZED;
     }
-    
+
     @JsonValue
     public String value() {
         return name().toLowerCase();

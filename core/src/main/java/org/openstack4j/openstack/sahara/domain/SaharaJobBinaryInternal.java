@@ -1,16 +1,15 @@
 package org.openstack4j.openstack.sahara.domain;
 
-import java.util.Date;
-import java.util.List;
-
-import org.openstack4j.model.sahara.JobBinaryInternal;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.sahara.JobBinaryInternal;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * For mapping JSON response to/from java objects
@@ -20,7 +19,7 @@ import com.google.common.base.MoreObjects;
  */
 
 @JsonRootName("job_binary_internal")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaJobBinaryInternal implements JobBinaryInternal {
 
     private static final long serialVersionUID = 1L;
@@ -91,13 +90,13 @@ public class SaharaJobBinaryInternal implements JobBinaryInternal {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("name", name)
-                   .add("tenant_id", tenantId)
-                   .add("created_at", createdAt)
-                   .add("updated_at", updatedAt)
-                   .add("id",id)
-                   .add("datasize", dataSize)
-                   .toString();
+                .add("name", name)
+                .add("tenant_id", tenantId)
+                .add("created_at", createdAt)
+                .add("updated_at", updatedAt)
+                .add("id", id)
+                .add("datasize", dataSize)
+                .toString();
     }
 
     public static class JobBinaryInternals extends ListResult<SaharaJobBinaryInternal> {

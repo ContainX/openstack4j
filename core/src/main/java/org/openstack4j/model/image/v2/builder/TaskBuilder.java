@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Builder for Glance V2 tasks
+ *
  * @author emjburns
  */
 public interface TaskBuilder extends Buildable.Builder<TaskBuilder, Task> {
@@ -18,5 +19,5 @@ public interface TaskBuilder extends Buildable.Builder<TaskBuilder, Task> {
     /**
      * @see Task#getInput()
      */
-    TaskBuilder input(Map<String,Object> input);
+    TaskBuilder input(Map<String, Object> input);
 }

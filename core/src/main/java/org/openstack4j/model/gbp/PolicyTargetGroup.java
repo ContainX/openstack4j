@@ -1,12 +1,12 @@
 package org.openstack4j.model.gbp;
 
-import java.util.List;
-
 import org.openstack4j.model.common.Resource;
+
+import java.util.List;
 
 /**
  * Policy Target group Model Entity
- * 
+ *
  * @author vinod borole
  */
 public interface PolicyTargetGroup extends Resource {

@@ -15,5 +15,6 @@ import java.util.List;
 public interface DatabaseUser extends ModelEntity, Buildable<DatabaseUserBuilder> {
 
     String getUsername();
+
     List<TroveDatabase> getTroveDatabaseList();
 }

@@ -1,13 +1,12 @@
 package org.openstack4j.openstack.sahara.domain;
 
-import java.util.Date;
-
-import org.openstack4j.model.sahara.JobExecutionAction;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.sahara.JobExecutionAction;
+
+import java.util.Date;
 
 /**
  * For mapping JSON response to/from java objects
@@ -16,7 +15,7 @@ import com.google.common.base.MoreObjects;
  * @author siwat.pru@outlook.com
  */
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaJobExecutionAction implements JobExecutionAction {
 
     private static final long serialVersionUID = 1L;
@@ -167,26 +166,26 @@ public class SaharaJobExecutionAction implements JobExecutionAction {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("status", status)
-                   .add("retries", retries)
-                   .add("transition", transition)
-                   .add("stats", stats)
-                   .add("startTime", startTime)
-                   .add("cred", cred)
-                   .add("errorMessage", errorMessage)
-                   .add("externalId", externalId)
-                   .add("errorCode", errorCode)
-                   .add("consoleUrl", consoleUrl)
-                   .add("toString", toString)
-                   .add("externalStatus", externalStatus)
-                   .add("conf", conf)
-                   .add("type", type)
-                   .add("trackerUri", trackerUri)
-                   .add("externalChildIDs", externalChildIds)
-                   .add("endTime", endTime)
-                   .add("data", data)
-                   .add("id", id)
-                   .add("name", name)
-                   .toString();
+                .add("status", status)
+                .add("retries", retries)
+                .add("transition", transition)
+                .add("stats", stats)
+                .add("startTime", startTime)
+                .add("cred", cred)
+                .add("errorMessage", errorMessage)
+                .add("externalId", externalId)
+                .add("errorCode", errorCode)
+                .add("consoleUrl", consoleUrl)
+                .add("toString", toString)
+                .add("externalStatus", externalStatus)
+                .add("conf", conf)
+                .add("type", type)
+                .add("trackerUri", trackerUri)
+                .add("externalChildIDs", externalChildIds)
+                .add("endTime", endTime)
+                .add("data", data)
+                .add("id", id)
+                .add("name", name)
+                .toString();
     }
 }

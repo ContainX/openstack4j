@@ -1,14 +1,13 @@
 package org.openstack4j.api.identity.v3;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.identity.v3.Region;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.identity.v3.Region;
+
+import java.util.List;
 
 /**
  * Identity V3 Region operations
- *
  */
 public interface RegionService extends RestService {
 
@@ -23,8 +22,8 @@ public interface RegionService extends RestService {
     /**
      * Create a new region
      *
-     * @param regionId the user-defined region id
-     * @param description the description of the region
+     * @param regionId       the user-defined region id
+     * @param description    the description of the region
      * @param parentRegionId the region id of the parent region
      * @return the newly created region
      */

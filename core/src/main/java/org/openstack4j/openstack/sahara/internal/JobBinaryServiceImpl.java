@@ -1,20 +1,20 @@
 package org.openstack4j.openstack.sahara.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.io.InputStream;
-import java.util.List;
-
 import org.openstack4j.api.sahara.JobBinaryService;
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.common.Payload;
 import org.openstack4j.model.common.Payloads;
-import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.JobBinary;
 import org.openstack4j.openstack.sahara.domain.SaharaJobBinary;
 import org.openstack4j.openstack.sahara.domain.SaharaJobBinary.JobBinaries;
 import org.openstack4j.openstack.sahara.domain.SaharaJobBinaryUnwrapped;
+
+import java.io.InputStream;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Sahara Data Processing Operations
@@ -50,8 +50,8 @@ public class JobBinaryServiceImpl extends BaseSaharaServices implements JobBinar
         checkNotNull(jobBinary);
         SaharaJobBinaryUnwrapped unwrapped = new SaharaJobBinaryUnwrapped(jobBinary);
         return post(SaharaJobBinary.class, uri("/job-binaries"))
-                     .entity(unwrapped)  // setup request
-                     .execute();
+                .entity(unwrapped)  // setup request
+                .execute();
     }
 
     /**
@@ -69,13 +69,11 @@ public class JobBinaryServiceImpl extends BaseSaharaServices implements JobBinar
     @Override
     public Payload<InputStream> getData(String JobBinaryId) {
         HttpResponse response = get(Void.class, uri("/job-binaries/%s/data", JobBinaryId)).executeWithResponse();
-        try
-        {
+        try {
             if (response.getStatus() < 400)
                 return Payloads.create(response.getInputStream());
             return null;
-        }
-        finally {
+        } finally {
             HttpEntityHandler.closeQuietly(response);
         }
     }

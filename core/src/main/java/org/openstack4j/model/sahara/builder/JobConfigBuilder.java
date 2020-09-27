@@ -13,8 +13,8 @@ public interface JobConfigBuilder extends Builder<JobConfigBuilder, JobConfig> {
 
     /**
      * See {@link JobConfig#getConfigs()}
-     * 
-     * @param name the name of the configuration
+     *
+     * @param name  the name of the configuration
      * @param value the value of the configuration
      * @return JobConfigBuilder
      */
@@ -22,7 +22,7 @@ public interface JobConfigBuilder extends Builder<JobConfigBuilder, JobConfig> {
 
     /**
      * See {@link JobConfig#getArgs()}
-     * 
+     *
      * @param arg the argument
      * @return JobConfigBuilder
      */
@@ -30,7 +30,7 @@ public interface JobConfigBuilder extends Builder<JobConfigBuilder, JobConfig> {
 
     /**
      * See {@link JobConfig#getParams()}
-     * 
+     *
      * @param param the name of the parameter
      * @param value the value of the parameter
      * @return JobConfigBuilder

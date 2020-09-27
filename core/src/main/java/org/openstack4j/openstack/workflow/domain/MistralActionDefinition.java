@@ -10,69 +10,69 @@ import java.util.List;
 
 /**
  * Mistral action definition.
- * 
+ *
  * @author Renat Akhmerov
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MistralActionDefinition extends BaseDefinition implements ActionDefinition {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String input;
+    private String input;
 
-	public static MistralActionDefinitionBuilder builder() {
-		return new MistralActionDefinitionBuilder();
-	}
-	
-	@Override
-	public MistralActionDefinitionBuilder toBuilder() {
-		return new MistralActionDefinitionBuilder(this);
-	}
+    public static MistralActionDefinitionBuilder builder() {
+        return new MistralActionDefinitionBuilder();
+    }
 
-	@Override
-	public String getInput() {
-		return input;
-	}
+    @Override
+    public MistralActionDefinitionBuilder toBuilder() {
+        return new MistralActionDefinitionBuilder(this);
+    }
 
-	/**
-	 * Mistral action definition builder.
-	 *
-	 * @author Renat Akhmerov
-	 */
-	public static class MistralActionDefinitionBuilder extends
-			BaseDefinitionBuilder<MistralActionDefinitionBuilder, MistralActionDefinition>
-			implements ActionDefinitionBuilder<MistralActionDefinitionBuilder, MistralActionDefinition> {
+    @Override
+    public String getInput() {
+        return input;
+    }
 
-		MistralActionDefinitionBuilder() {
-			this(new MistralActionDefinition());
-		}
+    /**
+     * Mistral action definition builder.
+     *
+     * @author Renat Akhmerov
+     */
+    public static class MistralActionDefinitionBuilder extends
+            BaseDefinitionBuilder<MistralActionDefinitionBuilder, MistralActionDefinition>
+            implements ActionDefinitionBuilder<MistralActionDefinitionBuilder, MistralActionDefinition> {
 
-		MistralActionDefinitionBuilder(MistralActionDefinition model) {
-			super(model);
-		}
+        MistralActionDefinitionBuilder() {
+            this(new MistralActionDefinition());
+        }
 
-		@Override
-		public MistralActionDefinitionBuilder from(MistralActionDefinition in) {
-			return null;
-		}
+        MistralActionDefinitionBuilder(MistralActionDefinition model) {
+            super(model);
+        }
 
-		@Override
-		public MistralActionDefinitionBuilder input(String input) {
+        @Override
+        public MistralActionDefinitionBuilder from(MistralActionDefinition in) {
+            return null;
+        }
+
+        @Override
+        public MistralActionDefinitionBuilder input(String input) {
             this.model.input = input;
 
-			return this;
-		}
-	}
+            return this;
+        }
+    }
 
-	public static class MistralActionDefinitions extends ListResult<MistralActionDefinition> {
-		private static final long serialVersionUID = 1L;
+    public static class MistralActionDefinitions extends ListResult<MistralActionDefinition> {
+        private static final long serialVersionUID = 1L;
 
-		@JsonProperty("actions")
-		private List<MistralActionDefinition> list;
+        @JsonProperty("actions")
+        private List<MistralActionDefinition> list;
 
-		@Override
-		protected List<MistralActionDefinition> value() {
-			return this.list;
-		}
-	}
+        @Override
+        protected List<MistralActionDefinition> value() {
+            return this.list;
+        }
+    }
 }

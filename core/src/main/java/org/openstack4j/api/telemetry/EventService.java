@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * OpenStack (Ceilometer) Event based Operations
- * 
+ *
  * @author Miroslav Lacina
  */
 public interface EventService extends RestService {
@@ -27,7 +27,7 @@ public interface EventService extends RestService {
      * Return all Events matching the query filters
      *
      * @param eventCriteria the event query criteria for filtering results
-     * @param limit maximum number of samples to be returned
+     * @param limit         maximum number of samples to be returned
      * @return list of Events
      */
     List<? extends Event> list(EventCriteria eventCriteria, int limit);

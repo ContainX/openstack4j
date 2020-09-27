@@ -1,12 +1,11 @@
 package org.openstack4j.openstack.networking.domain;
 
-import org.openstack4j.model.network.NetworkUpdate;
-import org.openstack4j.model.network.builder.NetworkUpdateBuilder;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.network.NetworkUpdate;
+import org.openstack4j.model.network.builder.NetworkUpdateBuilder;
 
 /**
  * An entity used to update a network
@@ -54,8 +53,8 @@ public class NeutronNetworkUpdate implements NetworkUpdate {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                  .add("name", name).add("adminStateUp", adminStateUp).add("shared", shared)
-                  .toString();
+                .add("name", name).add("adminStateUp", adminStateUp).add("shared", shared)
+                .toString();
     }
 
     public static class NetworkUpdateConcreteBuilder implements NetworkUpdateBuilder {

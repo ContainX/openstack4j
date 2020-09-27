@@ -23,7 +23,8 @@ public class ShareSnapshotActions {
     }
 
     @JsonRootName("os-force_delete")
-    public static class ForceDeleteAction implements ShareSnapshotAction {}
+    public static class ForceDeleteAction implements ShareSnapshotAction {
+    }
 
     public static ResetStateAction resetState(ShareSnapshot.Status status) {
         return new ResetStateAction(status);

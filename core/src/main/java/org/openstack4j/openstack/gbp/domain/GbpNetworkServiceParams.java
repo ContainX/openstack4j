@@ -9,7 +9,7 @@ import org.openstack4j.model.gbp.NetworkServiceParams;
  * Created by sumit gandhi on 7/4/2016.
  */
 
-public class GbpNetworkServiceParams implements NetworkServiceParams{
+public class GbpNetworkServiceParams implements NetworkServiceParams {
 
     @JsonProperty("type")
     private NetworkServiceParamType paramType;

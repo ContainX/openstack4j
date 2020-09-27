@@ -7,7 +7,7 @@ import org.openstack4j.api.compute.ext.FloatingIPDNSService;
 
 /**
  * API Service that manages the 'os-floating-ip-dns' extension
- * 
+ *
  * @author Jeremy Unruh
  */
 public class FloatingIPDNSServiceImpl implements FloatingIPDNSService {

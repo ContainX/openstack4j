@@ -1,19 +1,20 @@
 package org.openstack4j.openstack.gbp.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.api.gbp.PolicyRuleService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.gbp.PolicyRule;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyRule;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyRule.PolicyRules;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
+
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Policy Rule API Implementation
- * 
+ *
  * @author vinod borole
  */
 public class PolicyRuleServiceImpl extends BaseNetworkingServices implements PolicyRuleService {
@@ -21,7 +22,7 @@ public class PolicyRuleServiceImpl extends BaseNetworkingServices implements Pol
     /**
      * {@inheritDoc}
      */
-    @Override 
+    @Override
     public List<? extends PolicyRule> list() {
         return get(PolicyRules.class, uri("/grouppolicy/policy_rules")).execute().getList();
     }
@@ -34,12 +35,12 @@ public class PolicyRuleServiceImpl extends BaseNetworkingServices implements Pol
         Invocation<PolicyRules> policyruleInvocation = buildInvocation(filteringParams);
         return policyruleInvocation.execute().getList();
     }
-    
+
     private Invocation<PolicyRules> buildInvocation(Map<String, String> filteringParams) {
         Invocation<PolicyRules> policyruleInvocation = get(PolicyRules.class, "/grouppolicy/policy_rules");
-        if (filteringParams == null) { 
+        if (filteringParams == null) {
             return policyruleInvocation;
-        } 
+        }
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
                 policyruleInvocation = policyruleInvocation.param(entry.getKey(), entry.getValue());
@@ -47,7 +48,7 @@ public class PolicyRuleServiceImpl extends BaseNetworkingServices implements Pol
         }
         return policyruleInvocation;
     }
-    
+
     /**
      * {@inheritDoc}
      */

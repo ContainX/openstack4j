@@ -17,7 +17,7 @@ import java.util.Map;
 @JsonRootName("share")
 public class ManilaShareCreate implements ShareCreate {
     private static final long serialVersionUID = 1L;
-    
+
     @JsonProperty("share_proto")
     private Share.Protocol shareProto;
     private Integer size;
@@ -34,7 +34,7 @@ public class ManilaShareCreate implements ShareCreate {
     @JsonProperty("snapshot_id")
     private String snapshotId;
     @JsonProperty("is_public")
-    private Boolean isPublic ;
+    private Boolean isPublic;
     private Map<String, String> metadata;
     @JsonProperty("share_network_id")
     private String shareNetworkId;
@@ -154,16 +154,16 @@ public class ManilaShareCreate implements ShareCreate {
     public String getAvailabilityZone() {
         return availabilityZone;
     }
-    
+
     public static ShareCreateBuilder builder() {
         return new ShareCreateConcreteBuilder();
     }
-    
+
     @Override
     public ShareCreateBuilder toBuilder() {
         return new ShareCreateConcreteBuilder(this);
     }
-    
+
     public static class ShareCreateConcreteBuilder implements ShareCreateBuilder {
         ManilaShareCreate shareCreate;
 

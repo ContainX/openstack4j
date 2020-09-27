@@ -1,9 +1,8 @@
 package org.openstack4j.openstack.common;
 
-import org.openstack4j.model.common.IdEntity;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.common.IdEntity;
 
 /**
  * Basic Id based Entity Model implementation
@@ -36,7 +35,7 @@ public class IdResourceEntity implements IdEntity {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(getClass()).omitNullValues()
-                     .add("id", id)
-                     .toString();
+                .add("id", id)
+                .toString();
     }
 }

@@ -4,7 +4,6 @@ import org.openstack4j.api.Apis;
 import org.openstack4j.api.telemetry.*;
 
 /**
- * 
  * @author zhangjianweibj
  */
 public class TelemetryAodhServiceImpl implements TelemetryAodhService {

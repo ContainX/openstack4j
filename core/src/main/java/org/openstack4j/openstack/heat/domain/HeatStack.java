@@ -13,132 +13,130 @@ import java.util.Map;
 /**
  * This is a model of a heatstack. It uses Jackson annotations for
  * (de)serialization into JSON format
- * 
+ *
  * @author Matthias Reisser
- * 
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonRootName("stack")
 public class HeatStack implements Stack {
-	private static final long serialVersionUID = 2151261616427716429L;
-	
-	@JsonProperty("id")
-	private String id;
-	@JsonProperty("stack_name")
-	private String name;
-	@JsonProperty("stack_status")
-	private String status;
-	@JsonProperty("stack_status_reason")
-	private String stackStatusReason;
-	@JsonProperty("description")
-	private String description;
-	@JsonProperty("template_description")
-	private String templateDescription;
-	@JsonProperty("timeout_mins")
-	private Long timeoutMins;
-	@JsonProperty("outputs")
-	private List<Map<String, Object>> outputs;
-	@JsonProperty("parameters")
-	private Map<String, String> parameters;
-	@JsonProperty("creation_time")
-	private String creationTime;
-	@JsonProperty("links")
-	private List<GenericLink> links;
-	@JsonProperty("updated_time")
-	private String updatedTime;
-	@JsonProperty("tags")
-	private List<String> tags;
+    private static final long serialVersionUID = 2151261616427716429L;
 
-	@Override
-	public String getId() {
-		return id;
-	}
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("stack_name")
+    private String name;
+    @JsonProperty("stack_status")
+    private String status;
+    @JsonProperty("stack_status_reason")
+    private String stackStatusReason;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("template_description")
+    private String templateDescription;
+    @JsonProperty("timeout_mins")
+    private Long timeoutMins;
+    @JsonProperty("outputs")
+    private List<Map<String, Object>> outputs;
+    @JsonProperty("parameters")
+    private Map<String, String> parameters;
+    @JsonProperty("creation_time")
+    private String creationTime;
+    @JsonProperty("links")
+    private List<GenericLink> links;
+    @JsonProperty("updated_time")
+    private String updatedTime;
+    @JsonProperty("tags")
+    private List<String> tags;
 
-	@Override
-	public String getName() {
+    @Override
+    public String getId() {
+        return id;
+    }
 
-		return name;
-	}
+    @Override
+    public String getName() {
 
-	@Override
-	public String getStatus() {
-		return status;
-	}
+        return name;
+    }
 
-	@Override
-	public String getDescription() {
-		return description;
-	}
+    @Override
+    public String getStatus() {
+        return status;
+    }
 
-	@Override
-	public String getTemplateDescription() {
-		return templateDescription;
-	}
+    @Override
+    public String getDescription() {
+        return description;
+    }
 
-	@Override
-	public Long getTimeoutMins() {
-		return timeoutMins;
-	}
+    @Override
+    public String getTemplateDescription() {
+        return templateDescription;
+    }
 
-	@Override
-	public List<Map<String, Object>> getOutputs() {
-		return outputs;
-	}
+    @Override
+    public Long getTimeoutMins() {
+        return timeoutMins;
+    }
 
-	@Override
-	public Map<String, String> getParameters() {
-		return parameters;
-	}
+    @Override
+    public List<Map<String, Object>> getOutputs() {
+        return outputs;
+    }
 
-	@Override
-	public String getCreationTime() {
-		return creationTime;
-	}
+    @Override
+    public Map<String, String> getParameters() {
+        return parameters;
+    }
 
-	@Override
-	public List<GenericLink> getLinks() {
-		return links;
-	}
+    @Override
+    public String getCreationTime() {
+        return creationTime;
+    }
 
-	@Override
-	public String getUpdatedTime() {
-		return updatedTime;
-	}
+    @Override
+    public List<GenericLink> getLinks() {
+        return links;
+    }
 
-	@Override
-	public List<String> getTags() {
-		return tags;
-	}
+    @Override
+    public String getUpdatedTime() {
+        return updatedTime;
+    }
 
-	@Override
-	public String getStackStatusReason() {
-		return stackStatusReason;
-	}
+    @Override
+    public List<String> getTags() {
+        return tags;
+    }
 
-	@Override
-	public String toString() {
-		return "HeatStack [id=" + id + ", name=" + name + ", status=" + status
-				+ ", description=" + description + ", templateDescription="
-				+ templateDescription + ", timeoutMins=" + timeoutMins
-				+ ", outputs=" + outputs + ", parameters=" + parameters
-				+ ", creationTime=" + creationTime + ", links=" + links
-				+ ", updatedTime=" + updatedTime + ", tags=" + tags + "]";
-	}
+    @Override
+    public String getStackStatusReason() {
+        return stackStatusReason;
+    }
 
-	/**
-	 * An inner class for representing lists of HeatStacks
-	 * 
-	 * @author Matthias Reisser
-	 * 
-	 */
-	public static class Stacks extends ListResult<HeatStack> {
-		private static final long serialVersionUID = 600661296207420793L;
-		
-		@JsonProperty("stacks")
-		private List<HeatStack> list;
+    @Override
+    public String toString() {
+        return "HeatStack [id=" + id + ", name=" + name + ", status=" + status
+                + ", description=" + description + ", templateDescription="
+                + templateDescription + ", timeoutMins=" + timeoutMins
+                + ", outputs=" + outputs + ", parameters=" + parameters
+                + ", creationTime=" + creationTime + ", links=" + links
+                + ", updatedTime=" + updatedTime + ", tags=" + tags + "]";
+    }
 
-		protected List<HeatStack> value() {
-			return list;
-		}
-	}
+    /**
+     * An inner class for representing lists of HeatStacks
+     *
+     * @author Matthias Reisser
+     */
+    public static class Stacks extends ListResult<HeatStack> {
+        private static final long serialVersionUID = 600661296207420793L;
+
+        @JsonProperty("stacks")
+        private List<HeatStack> list;
+
+        protected List<HeatStack> value() {
+            return list;
+        }
+    }
 }

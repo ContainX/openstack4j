@@ -20,12 +20,12 @@ public class ShareTypeAccess implements ModelEntity {
     private String projectId;
 
     public String getShareTypeId() {
-            return shareTypeId;
-        }
+        return shareTypeId;
+    }
 
     public String getProjectId() {
-            return projectId;
-        }
+        return projectId;
+    }
 
     public static class ShareTypeAccessList extends ListResult<ShareTypeAccess> {
         private static final long serialVersionUID = 1L;

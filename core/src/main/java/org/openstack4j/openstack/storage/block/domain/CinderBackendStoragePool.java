@@ -9,7 +9,6 @@ import java.util.List;
  * Represents a back-end storage pool for Cinder.
  *
  * @author chenguofeng
- *
  */
 public class CinderBackendStoragePool implements VolumeBackendPool {
     private String name;
@@ -69,39 +68,71 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         private String storageProtocol;
 
 
-
         @Override
         public String getPoolname() {
             return poolname;
         }
 
         @Override
-        public String getGoodnessfunction() { return goodnessfunction; }
+        public String getGoodnessfunction() {
+            return goodnessfunction;
+        }
+
         @Override
         public Integer getTotalvolumes() {
             return totalvolumes;
         }
-        @Override
-        public Boolean getMultiattach() { return multiattach; }
-        @Override
-        public Long getProvisionedcapacitygb() { return provisionedcapacitygb; }
-        @Override
-        public String getTimestamp() { return timestamp; }
-        @Override
-        public Integer getAllocatedcapacitygb() { return allocatedcapacitygb; }
 
         @Override
-        public Boolean getThinprovisioningsupport() { return thinprovisioningsupport; }
+        public Boolean getMultiattach() {
+            return multiattach;
+        }
+
         @Override
-        public String getLocationinfo() { return locationinfo; }
+        public Long getProvisionedcapacitygb() {
+            return provisionedcapacitygb;
+        }
+
         @Override
-        public Boolean getThickprovisioningsupport() { return thickprovisioningsupport; }
+        public String getTimestamp() {
+            return timestamp;
+        }
+
         @Override
-        public Long getMaxoversubscription_ratio() { return maxoversubscription_ratio; }
+        public Integer getAllocatedcapacitygb() {
+            return allocatedcapacitygb;
+        }
+
         @Override
-        public String getvendorname() { return vendorname; }
+        public Boolean getThinprovisioningsupport() {
+            return thinprovisioningsupport;
+        }
+
         @Override
-        public String getFilterfunction() { return filterfunction; }
+        public String getLocationinfo() {
+            return locationinfo;
+        }
+
+        @Override
+        public Boolean getThickprovisioningsupport() {
+            return thickprovisioningsupport;
+        }
+
+        @Override
+        public Long getMaxoversubscription_ratio() {
+            return maxoversubscription_ratio;
+        }
+
+        @Override
+        public String getvendorname() {
+            return vendorname;
+        }
+
+        @Override
+        public String getFilterfunction() {
+            return filterfunction;
+        }
+
         @Override
         public Boolean getQosSupport() {
             return qosSupport;

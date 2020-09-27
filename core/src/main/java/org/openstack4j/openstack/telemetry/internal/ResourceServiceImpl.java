@@ -1,16 +1,16 @@
 package org.openstack4j.openstack.telemetry.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.telemetry.ResourceService;
 import org.openstack4j.model.telemetry.Resource;
 import org.openstack4j.openstack.telemetry.domain.CeilometerResource;
 
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Provides Measurements for Telemetry resources within an OpenStack deployment
- * 
+ *
  * @author Shital Patil
  */
 public class ResourceServiceImpl extends BaseTelemetryServices implements ResourceService {

@@ -65,7 +65,7 @@ public interface ShareTypeService extends RestService {
     /**
      * Unsets an extra specification for the share type.
      *
-     * @param shareTypeId the share type ID
+     * @param shareTypeId  the share type ID
      * @param extraSpecKey the key of the extra specification to unset
      * @return the action response
      */
@@ -75,7 +75,7 @@ public interface ShareTypeService extends RestService {
      * Adds share type access for a project.
      *
      * @param shareTypeId the share type ID
-     * @param projectId the project ID
+     * @param projectId   the project ID
      * @return the action response
      */
     ActionResponse addShareTypeAccess(String shareTypeId, String projectId);
@@ -84,7 +84,7 @@ public interface ShareTypeService extends RestService {
      * Removes share type access from a project.
      *
      * @param shareTypeId the share type ID
-     * @param projectId the project ID
+     * @param projectId   the project ID
      * @return the action response
      */
     ActionResponse removeShareTypeAccess(String shareTypeId, String projectId);

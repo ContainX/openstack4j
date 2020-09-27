@@ -10,9 +10,14 @@ import org.openstack4j.model.ModelEntity;
 public interface DatastoreVersion extends ModelEntity {
 
     String getName();
+
     String getId();
+
     String getDatastoreId();
+
     int getIsActive();
+
     String getImage();
+
     String getPackageName();
 }

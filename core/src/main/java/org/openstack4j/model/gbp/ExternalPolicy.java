@@ -1,14 +1,15 @@
 package org.openstack4j.model.gbp;
 
+import org.openstack4j.model.common.Resource;
+
 import java.util.List;
 
-import org.openstack4j.model.common.Resource;
 /**
  * External Policy Model Entity
- * 
+ *
  * @author vinod borole
  */
-public interface ExternalPolicy extends Resource{
+public interface ExternalPolicy extends Resource {
     /**
      * Gets the consumed policy rule sets Ids
      *
@@ -29,7 +30,7 @@ public interface ExternalPolicy extends Resource{
      * @return the external segment ids
      */
     List<String> getExternalSegments();
-   
+
     /**
      * Gets the description
      *

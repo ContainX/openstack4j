@@ -1,12 +1,11 @@
 package org.openstack4j.model.network;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.network.builder.AgentBuilder;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.Date;
 
 /**
  * This class represents a neutron agent

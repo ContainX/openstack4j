@@ -1,14 +1,13 @@
 package org.openstack4j.openstack.trove.domain;
 
-import java.util.Date;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.trove.Flavor;
 import org.openstack4j.model.trove.Instance;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Model implementation for Database instance
@@ -47,9 +46,7 @@ public class TroveInstance implements Instance {
         private Integer size;
 
         /**
-         *
-         * @return
-         *         The type
+         * @return The type
          */
 
         public String getType() {
@@ -57,9 +54,7 @@ public class TroveInstance implements Instance {
         }
 
         /**
-         *
-         * @return
-         *         The size
+         * @return The size
          */
 
         public int getSize() {
@@ -82,9 +77,13 @@ public class TroveInstance implements Instance {
 
         private String version;
 
-        public String getType() { return type; }
+        public String getType() {
+            return type;
+        }
 
-        public String getVersion() { return version; }
+        public String getVersion() {
+            return version;
+        }
 
         @Override
         public String toString() {
@@ -127,7 +126,9 @@ public class TroveInstance implements Instance {
     }
 
     @Override
-    public List<String> getIp() { return ip; }
+    public List<String> getIp() {
+        return ip;
+    }
 
     @Override
     public String getId() {
@@ -148,7 +149,9 @@ public class TroveInstance implements Instance {
         return volume;
     }
 
-    public InstanceDatastore getDatastore() { return datastore; }
+    public InstanceDatastore getDatastore() {
+        return datastore;
+    }
 
     @Override
     public String getDatastoreType() {

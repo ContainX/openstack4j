@@ -26,6 +26,7 @@ public class ApacheHttpClientEngine extends ApacheHttpClient4Engine {
     ApacheHttpClientEngine(HttpClient client) {
         super(client);
     }
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ApacheHttpClientEngine.class);
 
     public static ApacheHttpClientEngine create(Config config) {
@@ -63,15 +64,14 @@ public class ApacheHttpClientEngine extends ApacheHttpClient4Engine {
                 HttpHost proxy = new HttpHost(url.getHost(), config.getProxy().getPort(), url.getProtocol());
                 requestConfigBuilder.setProxy(proxy);
             } catch (MalformedURLException e) {
-                LOGGER.error("Invalid proxy Url :%s",config.getProxy(),e);
+                LOGGER.error("Invalid proxy Url :%s", config.getProxy(), e);
             }
         }
 
         httpClientBuilder.setDefaultRequestConfig(requestConfigBuilder.build());
         httpClientBuilder.setRedirectStrategy(new DefaultRedirectStrategy() {
             @Override
-            protected boolean isRedirectable(String method)
-            {
+            protected boolean isRedirectable(String method) {
                 return true;
             }
         });

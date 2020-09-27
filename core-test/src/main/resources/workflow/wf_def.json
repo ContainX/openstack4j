@@ -1,7 +1,10 @@
 {
   "id": "0169affc-e6a1-4013-a59e-c89dfd5523f2",
   "name": "parallel_join_2",
-  "tags": ["test", "private"],
+  "tags": [
+    "test",
+    "private"
+  ],
   "project_id": "<default-project>",
   "scope": "private",
   "created_at": "2016-08-17 10:33:24",

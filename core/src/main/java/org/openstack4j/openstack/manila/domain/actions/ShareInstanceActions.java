@@ -24,7 +24,8 @@ public final class ShareInstanceActions {
     }
 
     @JsonRootName("os-force_delete")
-    public static class ForceDeleteAction implements ModelEntity {}
+    public static class ForceDeleteAction implements ModelEntity {
+    }
 
     public static ResetStateAction resetState(ShareInstance.Status status) {
         return new ResetStateAction(status);

@@ -1,14 +1,14 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.gbp.PolicyRuleSet;
 import org.openstack4j.model.gbp.builder.PolicyRuleSetBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
+
 /**
  * Model implementation for Policy rule set
  *
@@ -38,7 +38,7 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
 
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
 
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -58,8 +58,9 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
 
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
+
     @Override
     public String getDescription() {
         return description;
@@ -79,6 +80,7 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
     public List<String> getChildPolicyRuleSets() {
         return childPolicyRuleSets;
     }
+
     @Override
     public List<String> getPolicyRules() {
         return policyRules;
@@ -88,29 +90,32 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
     public PolicyRuleSetBuilder toBuilder() {
         return new PolicyRuleSetConcreteBuilder(this);
     }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("parentId", parentId).add("childPolicyRuleSets", childPolicyRuleSets).add("shared", shared).add("policyRules", policyRules).toString();
     }
 
-    public static class PolicyRuleSets extends ListResult<GbpPolicyRuleSet>{
+    public static class PolicyRuleSets extends ListResult<GbpPolicyRuleSet> {
 
         private static final long serialVersionUID = 1L;
         @JsonProperty("policy_rule_sets")
         private List<GbpPolicyRuleSet> policyRuleSets;
+
         @Override
         protected List<GbpPolicyRuleSet> value() {
             return policyRuleSets;
         }
 
     }
-    public static class PolicyRuleSetConcreteBuilder implements PolicyRuleSetBuilder{
+
+    public static class PolicyRuleSetConcreteBuilder implements PolicyRuleSetBuilder {
 
         private GbpPolicyRuleSet policyRuleSet;
 
         public PolicyRuleSetConcreteBuilder(GbpPolicyRuleSet gbpPolicyRuleSet) {
-            this.policyRuleSet=gbpPolicyRuleSet;
+            this.policyRuleSet = gbpPolicyRuleSet;
         }
 
         public PolicyRuleSetConcreteBuilder() {
@@ -124,35 +129,36 @@ public class GbpPolicyRuleSet implements PolicyRuleSet {
 
         @Override
         public PolicyRuleSetBuilder from(PolicyRuleSet in) {
-            this.policyRuleSet=(GbpPolicyRuleSet) in;
+            this.policyRuleSet = (GbpPolicyRuleSet) in;
             return this;
         }
 
         @Override
         public PolicyRuleSetBuilder name(String name) {
-            this.policyRuleSet.name=name;
+            this.policyRuleSet.name = name;
             return this;
         }
 
         @Override
         public PolicyRuleSetBuilder description(String description) {
-            this.policyRuleSet.description=description;
+            this.policyRuleSet.description = description;
             return this;
         }
 
         @Override
         public PolicyRuleSetBuilder shared(boolean shared) {
-            this.policyRuleSet.shared=shared;
+            this.policyRuleSet.shared = shared;
             return this;
         }
 
         @Override
         public PolicyRuleSetBuilder rules(List<String> ruleIds) {
-            this.policyRuleSet.policyRules=ruleIds;
+            this.policyRuleSet.policyRules = ruleIds;
             return this;
         }
 
     }
+
     public static PolicyRuleSetBuilder builder() {
         return new PolicyRuleSetConcreteBuilder();
     }

@@ -1,6 +1,5 @@
 package org.openstack4j.openstack.internal;
 
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

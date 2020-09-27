@@ -19,7 +19,7 @@ public class Environment {
     private Map<String, String> files = new HashMap<String, String>();
     private URL baseUrl;
 
-    public Environment(URL environmentRes) throws JsonParseException, IOException, URISyntaxException{
+    public Environment(URL environmentRes) throws JsonParseException, IOException, URISyntaxException {
         setEnvContent(Resources.toString(environmentRes, Charsets.UTF_8));
         setBaseUrl(TemplateUtils.baseUrl(environmentRes.toString()));
         getFileContent();
@@ -27,13 +27,13 @@ public class Environment {
 
     public Environment(String environmentLoc)
             throws JsonParseException, MalformedURLException,
-                   UnsupportedEncodingException, IOException, URISyntaxException {
+            UnsupportedEncodingException, IOException, URISyntaxException {
         this(TemplateUtils.normaliseFilePathToUrl(environmentLoc));
     }
 
 
     @SuppressWarnings("unchecked")
-    private Map<String, String> getResourceRegistry(){
+    private Map<String, String> getResourceRegistry() {
         Yaml yaml = new Yaml();
         Map<String, Object> content = (Map<String, Object>) yaml.load(getEnvContent());
         return (Map<String, String>) content.get("resource_registry");
@@ -45,22 +45,22 @@ public class Environment {
     private void getFileContent()
             throws JsonParseException, MalformedURLException, UnsupportedEncodingException, IOException, URISyntaxException {
         Map<String, String> rr = getResourceRegistry();
-        if (rr == null ) return;
-        if(rr.get("base_url") != null ) setBaseUrl(new URL(rr.get("base_url")));
-        for(String resourceType: rr.keySet()) {
-        	if(resourceType.equals("base_url"))
+        if (rr == null) return;
+        if (rr.get("base_url") != null) setBaseUrl(new URL(rr.get("base_url")));
+        for (String resourceType : rr.keySet()) {
+            if (resourceType.equals("base_url"))
                 continue;
-            
-            if("OS::Heat::None".equals(rr.get(resourceType)))
-            		continue;
-            
+
+            if ("OS::Heat::None".equals(rr.get(resourceType)))
+                continue;
+
             URL tplUrl = new URL(baseUrl, rr.get(resourceType));
 
             Template tpl = new Template(tplUrl);
             files.put(rr.get(resourceType), tpl.getTplContent());
             Map<String, String> fileFromTemplate = tpl.getFiles();
-            for(String file : fileFromTemplate.keySet()) {
-                if(! files.containsKey(file)) {
+            for (String file : fileFromTemplate.keySet()) {
+                if (!files.containsKey(file)) {
                     files.put(file, fileFromTemplate.get(file));
                 }
             }

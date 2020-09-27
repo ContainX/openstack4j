@@ -12,12 +12,12 @@ import org.openstack4j.model.network.Agent;
  * </p>
  *
  * @author emagnbr 2016- initial version
- *
  */
 public interface AgentBuilder extends Builder<AgentBuilder, Agent> {
 
     /**
      * Sets the admin_state_up
+     *
      * @param state the state of admin_state_up
      * @return the agent builder
      */

@@ -7,7 +7,7 @@ import org.openstack4j.api.exceptions.ServerResponseException;
 
 /**
  * Exception Handles for common Http messages and status codes
- * 
+ *
  * @author Jeremy Unruh
  */
 public class HttpExceptionHandler {
@@ -16,7 +16,7 @@ public class HttpExceptionHandler {
      * Maps an Exception based on the underlying status code
      *
      * @param message the message
-     * @param status the status
+     * @param status  the status
      * @return the response exception
      */
     public static ResponseException mapException(String message, int status) {
@@ -27,8 +27,8 @@ public class HttpExceptionHandler {
      * Maps an Exception based on the underlying status code
      *
      * @param message the message
-     * @param status the status
-     * @param cause the cause
+     * @param status  the status
+     * @param cause   the cause
      * @return the response exception
      */
     public static ResponseException mapException(String message, int status, Throwable cause) {
@@ -41,5 +41,5 @@ public class HttpExceptionHandler {
 
         return new ResponseException(message, status, cause);
     }
-    
+
 }

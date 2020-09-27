@@ -6,9 +6,9 @@ import org.openstack4j.model.compute.builder.QuotaSetUpdateBuilder;
 
 /**
  * Represents an updateable quota set
- * 
+ *
  * @author Jeremy Unruh
  */
-public interface QuotaSetUpdate extends ModelEntity, Buildable<QuotaSetUpdateBuilder>{
+public interface QuotaSetUpdate extends ModelEntity, Buildable<QuotaSetUpdateBuilder> {
 
 }

@@ -3,28 +3,27 @@ package org.openstack4j.api.identity.v3
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
-
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.v3.Role
 import org.openstack4j.openstack.OSFactory
-
 import software.betamax.Configuration
 import software.betamax.MatchRules
 import software.betamax.TapeMode
 import software.betamax.junit.Betamax
 import software.betamax.junit.RecorderRule
-
 import spock.lang.IgnoreIf
 import spock.lang.Shared
 
 @Slf4j
 class KeystoneRoleServiceSpec extends AbstractSpec {
 
-    @Rule TestName KeystoneRoleServiceTest
-    @Rule public RecorderRule recorderRule = new RecorderRule(
+    @Rule
+    TestName KeystoneRoleServiceTest
+    @Rule
+    public RecorderRule recorderRule = new RecorderRule(
             Configuration.builder()
                     .tapeRoot(new File(TAPEROOT + "identity.v3"))
                     .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
@@ -34,7 +33,8 @@ class KeystoneRoleServiceSpec extends AbstractSpec {
     // additional attributes for role tests
     def static String ROLE_CRUD_NAME = "Role_CRUD"
     def static String ROLE_EMPTY_NAME = "roleNotFound"
-    @Shared String ROLE_CRUD_ID, ROLE_CRUD_USER_ID, ROLE_CRUD_GROUP_ID, ROLE_CRUD_ANOTHER_ROLE_ID
+    @Shared
+    String ROLE_CRUD_ID, ROLE_CRUD_USER_ID, ROLE_CRUD_GROUP_ID, ROLE_CRUD_ANOTHER_ROLE_ID
 
     static final boolean skipTest
 

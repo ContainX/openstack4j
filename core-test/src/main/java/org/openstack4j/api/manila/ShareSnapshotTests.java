@@ -19,7 +19,7 @@ import static org.testng.Assert.assertTrue;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-@Test(suiteName="ShareSnapshot")
+@Test(suiteName = "ShareSnapshot")
 public class ShareSnapshotTests extends AbstractTest {
     private static final String JSON_SHARE_SNAPSHOT = "/manila/share_snapshot.json";
     private static final String JSON_SHARE_SNAPSHOT_CREATE = "/manila/share_snapshot_create.json";

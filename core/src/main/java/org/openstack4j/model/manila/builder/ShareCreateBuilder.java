@@ -31,7 +31,7 @@ public interface ShareCreateBuilder extends Buildable.Builder<ShareCreateBuilder
     /**
      * Set the share name.
      *
-     * @param name  the share name
+     * @param name the share name
      * @return ShareCreateBuilder
      */
     ShareCreateBuilder name(String name);
@@ -94,10 +94,10 @@ public interface ShareCreateBuilder extends Buildable.Builder<ShareCreateBuilder
 
     /**
      * Adds a new metadata item to the share.
-     * 
-     * @param key the key of the metadata item
+     *
+     * @param key   the key of the metadata item
      * @param value the value of the metadata item
-     * ShareCreateBuilder
+     *              ShareCreateBuilder
      * @return ShareCreateBuilder
      */
     ShareCreateBuilder addMetadataItem(String key, String value);

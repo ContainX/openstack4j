@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * Designate V2 Zone Service
- *
  */
 public interface ZoneService extends RestService {
 
@@ -24,9 +23,8 @@ public interface ZoneService extends RestService {
     /**
      * creates a new zone
      *
-     * @param name the zone name
+     * @param name  the zone name
      * @param email the e-mail for the zone
-     *
      * @return the newly created group
      */
     Zone create(String name, String email);

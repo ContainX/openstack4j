@@ -1,18 +1,16 @@
 package org.openstack4j.openstack.magnum;
 
-import java.util.List;
-
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.magnum.Clustertemplate;
 import org.openstack4j.model.magnum.ClustertemplateBuilder;
 import org.openstack4j.model.magnum.Label;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumClustertemplate implements Clustertemplate {
@@ -238,7 +236,6 @@ public class MagnumClustertemplate implements Clustertemplate {
 
     /**
      * Concrete builder containing MagnumClustertemplate as model
-     *
      */
     public static class ClustertemplateConcreteBuilder implements ClustertemplateBuilder {
         MagnumClustertemplate model;

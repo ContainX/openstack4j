@@ -16,7 +16,7 @@ import static org.testng.Assert.assertNull;
 /**
  * Created by esommar on 5/8/2017.
  */
-@Test(suiteName="Image/imagesv1", enabled=true)
+@Test(suiteName = "Image/imagesv1", enabled = true)
 public class ImageV1Tests extends AbstractTest {
 
     private static final String CACHED_IMAGES_JSON = "/image/cachedImages.json";
@@ -38,8 +38,8 @@ public class ImageV1Tests extends AbstractTest {
         assertEquals(first.getHits().intValue(), 0);
         assertEquals(second.getHits().intValue(), 23);
 
-        Date firstDate = new Date((long)Double.parseDouble("1492607597169.914"));
-        Date secondDate = new Date((long)Double.parseDouble("1494248723169"));
+        Date firstDate = new Date((long) Double.parseDouble("1492607597169.914"));
+        Date secondDate = new Date((long) Double.parseDouble("1494248723169"));
 
         assertEquals(first.getLastAccessed().equals(firstDate), true);
         assertEquals(second.getLastAccessed().equals(secondDate), true);
@@ -55,8 +55,8 @@ public class ImageV1Tests extends AbstractTest {
     }
 
     public void testCacheNotEnabled() {
-        Map<String, String> headers = new HashMap<String,String>();
-        headers.put("Content-Type","text/html");
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Content-Type", "text/html");
         respondWith(headers, 404, "");
         List<? extends CachedImage> list = osv3().images().listChachedImages();
         assertNull(list);

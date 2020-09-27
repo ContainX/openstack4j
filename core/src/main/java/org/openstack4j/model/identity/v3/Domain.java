@@ -1,14 +1,14 @@
 package org.openstack4j.model.identity.v3;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.identity.v3.builder.DomainBuilder;
 
+import java.util.Map;
+
 /**
  * Domain model.
- * 
+ *
  * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#domains-v3">API reference</a>
  */
 public interface Domain extends ModelEntity, Buildable<DomainBuilder> {

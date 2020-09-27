@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 
 /**
- *
  * @author Vishvesh Deshmukh
  * @date Aug 11, 2016
  */
@@ -13,34 +12,34 @@ import com.google.common.base.MoreObjects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VnfUpdateAttributes {
 
-	private String config;
+    private String config;
 
-	public static VnfUpdateAttributes create() {
-		return new VnfUpdateAttributes();
-	}
+    public static VnfUpdateAttributes create() {
+        return new VnfUpdateAttributes();
+    }
 
-	/**
-	 * User config file or data..
-	 *
-	 * @param config
-	 * @return VnfUpdateAttributes
-	 */
-	public VnfUpdateAttributes config(String config) {
-		this.config = config;
-		return this;
-	}
+    /**
+     * User config file or data..
+     *
+     * @param config
+     * @return VnfUpdateAttributes
+     */
+    public VnfUpdateAttributes config(String config) {
+        this.config = config;
+        return this;
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).omitNullValues()
-				.add("config", config)
-				.toString();
-	}
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).omitNullValues()
+                .add("config", config)
+                .toString();
+    }
 
-	/**
-	 * @return the config
-	 */
-	public String getConfig() {
-		return config;
-	}
+    /**
+     * @return the config
+     */
+    public String getConfig() {
+        return config;
+    }
 }

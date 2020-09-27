@@ -1,12 +1,11 @@
 package org.openstack4j.openstack.telemetry.domain;
 
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.telemetry.Meter.Type;
 import org.openstack4j.model.telemetry.Sample;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
+import java.util.Map;
 
 /**
  * A single measurement for sample.
@@ -197,7 +196,7 @@ public class CeiloMeterSample implements Sample {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues().add("meter", meter).add("type", type).add("unit", unit).add("volume", volume).add("timestamp", timestamp)
-              .add("source", source).add("project", projectId).add("user", userId).add("resource", resourceId).addValue("\n").add("metadata", metadata)
-              .add("recorded_at", recordedAt).toString();
+                .add("source", source).add("project", projectId).add("user", userId).add("resource", resourceId).addValue("\n").add("metadata", metadata)
+                .add("recorded_at", recordedAt).toString();
     }
 }

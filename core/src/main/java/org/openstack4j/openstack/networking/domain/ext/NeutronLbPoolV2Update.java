@@ -12,6 +12,7 @@ import org.openstack4j.model.network.ext.builder.LbPoolV2UpdateBuilder;
 
 /**
  * Used to update lbaas V2 lb pool
+ *
  * @author emjburns
  */
 @JsonRootName("pool")
@@ -41,32 +42,32 @@ public class NeutronLbPoolV2Update implements LbPoolV2Update {
         return new NeutronLbPoolV2Update.LbPoolV2UpdateContreteBuilder(this);
     }
 
-    public static LbPoolV2UpdateBuilder builder(){
+    public static LbPoolV2UpdateBuilder builder() {
         return new LbPoolV2UpdateContreteBuilder();
     }
 
     @Override
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
     @Override
-    public boolean isAdminStateUp(){
+    public boolean isAdminStateUp() {
         return adminStateUp;
     }
 
     @Override
-    public LbMethod getLbMethod(){
+    public LbMethod getLbMethod() {
         return lbMethod;
     }
 
     @Override
-    public SessionPersistence getSessionPersistence(){
+    public SessionPersistence getSessionPersistence() {
         return sessionPersistence;
     }
 
@@ -84,11 +85,11 @@ public class NeutronLbPoolV2Update implements LbPoolV2Update {
 
         private NeutronLbPoolV2Update m;
 
-        public LbPoolV2UpdateContreteBuilder (){
+        public LbPoolV2UpdateContreteBuilder() {
             this(new NeutronLbPoolV2Update());
         }
 
-        public LbPoolV2UpdateContreteBuilder(NeutronLbPoolV2Update m){
+        public LbPoolV2UpdateContreteBuilder(NeutronLbPoolV2Update m) {
             this.m = m;
         }
 
@@ -100,7 +101,7 @@ public class NeutronLbPoolV2Update implements LbPoolV2Update {
 
         @Override
         public LbPoolV2UpdateContreteBuilder from(LbPoolV2Update in) {
-            m = (NeutronLbPoolV2Update)in;
+            m = (NeutronLbPoolV2Update) in;
             return this;
         }
 
@@ -135,7 +136,7 @@ public class NeutronLbPoolV2Update implements LbPoolV2Update {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2UpdateBuilder sessionPersistence(SessionPersistence sessionPersistence){
+        public LbPoolV2UpdateBuilder sessionPersistence(SessionPersistence sessionPersistence) {
             m.sessionPersistence = sessionPersistence;
             return this;
         }

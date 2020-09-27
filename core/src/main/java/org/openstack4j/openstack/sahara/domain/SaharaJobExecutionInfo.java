@@ -1,15 +1,14 @@
 package org.openstack4j.openstack.sahara.domain;
 
-import java.util.Date;
-import java.util.List;
-
-import org.openstack4j.model.sahara.JobExecutionAction;
-import org.openstack4j.model.sahara.JobExecutionInfo;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.sahara.JobExecutionAction;
+import org.openstack4j.model.sahara.JobExecutionInfo;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * For mapping JSON response to/from java objects
@@ -18,7 +17,7 @@ import com.google.common.base.MoreObjects;
  * @author siwat.pru@outlook.com
  */
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaJobExecutionInfo implements JobExecutionInfo {
 
     private static final long serialVersionUID = 1L;
@@ -157,24 +156,24 @@ public class SaharaJobExecutionInfo implements JobExecutionInfo {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("status", status)
-                   .add("externalId", externalId)
-                   .add("run", run)
-                   .add("startTime", startTime)
-                   .add("appName", appName)
-                   .add("lastModTime", lastModTime)
-                   .add("actions", actions)
-                   .add("acl", acl)
-                   .add("consoleUrl", consoleUrl)
-                   .add("appPath", appPath)
-                   .add("toString", toString)
-                   .add("user", user)
-                   .add("conf", conf)
-                   .add("parentId", parentId)
-                   .add("createdTime", createdTime)
-                   .add("group", group)
-                   .add("group", group)
-                   .add("id", id)
-                   .toString();
+                .add("status", status)
+                .add("externalId", externalId)
+                .add("run", run)
+                .add("startTime", startTime)
+                .add("appName", appName)
+                .add("lastModTime", lastModTime)
+                .add("actions", actions)
+                .add("acl", acl)
+                .add("consoleUrl", consoleUrl)
+                .add("appPath", appPath)
+                .add("toString", toString)
+                .add("user", user)
+                .add("conf", conf)
+                .add("parentId", parentId)
+                .add("createdTime", createdTime)
+                .add("group", group)
+                .add("group", group)
+                .add("id", id)
+                .toString();
     }
 }

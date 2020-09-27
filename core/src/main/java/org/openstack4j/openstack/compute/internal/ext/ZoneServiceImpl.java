@@ -1,11 +1,11 @@
 package org.openstack4j.openstack.compute.internal.ext;
 
-import java.util.List;
-
 import org.openstack4j.api.compute.ext.ZoneService;
 import org.openstack4j.model.compute.ext.AvailabilityZone;
 import org.openstack4j.openstack.compute.domain.ext.ExtAvailabilityZone.AvailabilityZones;
 import org.openstack4j.openstack.compute.internal.BaseComputeServices;
+
+import java.util.List;
 
 /**
  * Service implementation for ZoneService API

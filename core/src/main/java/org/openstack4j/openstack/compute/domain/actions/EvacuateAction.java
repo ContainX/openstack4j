@@ -1,14 +1,12 @@
 package org.openstack4j.openstack.compute.domain.actions;
 
-import org.openstack4j.model.compute.actions.EvacuateOptions;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import org.openstack4j.model.compute.actions.EvacuateOptions;
 
 /**
  * Evacuate for a server from a failed host to a new host
- *  
  */
 @JsonRootName("evacuate")
 public class EvacuateAction implements ServerAction {
@@ -17,15 +15,15 @@ public class EvacuateAction implements ServerAction {
 
     @JsonProperty("host")
     private String host;
-    
+
     @JsonProperty("adminPass")
     private String adminPass;
-    
+
     @JsonProperty("onSharedStorage")
     private boolean onSharedStorage;
-    
+
     public static EvacuateAction create(EvacuateOptions options) {
-    	EvacuateAction action = new EvacuateAction();
+        EvacuateAction action = new EvacuateAction();
         action.host = options.getHost();
         action.adminPass = options.getAdminPass();
         action.onSharedStorage = options.isOnSharedStorage();
@@ -45,10 +43,10 @@ public class EvacuateAction implements ServerAction {
     public boolean isOnSharedStorage() {
         return onSharedStorage;
     }
-    
+
     @Override
     public String toString() {
         return "evacuate";
     }
-    
+
 }

@@ -1,12 +1,12 @@
 package org.openstack4j.api.telemetry;
 
-import static org.testng.Assert.assertNotNull;
-
-import java.io.IOException;
-
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.telemetry.Capabilities;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+
+import static org.testng.Assert.assertNotNull;
 
 @Test(suiteName = "Capabilities Tests")
 public class CapabilitiesTest extends AbstractTest {

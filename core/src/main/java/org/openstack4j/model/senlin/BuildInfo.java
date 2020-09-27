@@ -8,11 +8,9 @@ import java.util.Map;
  * This interface describes the getter-methods (and thus components) of a BuildInfo.
  * All getters map to the possible return values of
  * <code> GET /v1/build-info</code>
- * 
- * @see http://developer.openstack.org/api-ref-clustering-v1.html
- * 
+ *
  * @author lion
- * 
+ * @see http://developer.openstack.org/api-ref-clustering-v1.html
  */
 public interface BuildInfo extends ModelEntity {
 

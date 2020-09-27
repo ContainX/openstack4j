@@ -14,7 +14,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Network service policy API Implementation
- * 
+ *
  * @author sumit gandhi
  */
 public class NetworkPolicyServiceImpl extends BaseNetworkingServices implements NetworkPolicyService {
@@ -80,7 +80,7 @@ public class NetworkPolicyServiceImpl extends BaseNetworkingServices implements 
      * {@inheritDoc}
      */
     @Override
-    public NetworkServicePolicy update(String gbpServicePolicyId , NetworkServicePolicy gbpServicePolicy) {
+    public NetworkServicePolicy update(String gbpServicePolicyId, NetworkServicePolicy gbpServicePolicy) {
         checkNotNull(gbpServicePolicy);
         checkNotNull(gbpServicePolicyId);
         return put(GbpNetworkServicePolicy.class, uri("/grouppolicy/network_service_policies/%s", gbpServicePolicyId)).

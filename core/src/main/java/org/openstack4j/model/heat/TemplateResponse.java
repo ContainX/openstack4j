@@ -11,7 +11,8 @@ public final class TemplateResponse {
 
     private String message;
 
-    private TemplateResponse() { }
+    private TemplateResponse() {
+    }
 
     private TemplateResponse(String message) {
         this.message = message;

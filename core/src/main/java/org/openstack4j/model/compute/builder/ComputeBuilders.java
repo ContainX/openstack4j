@@ -1,7 +1,5 @@
 package org.openstack4j.model.compute.builder;
 
-import org.openstack4j.openstack.compute.domain.*;
-
 /**
  * The Compute Builders
  */

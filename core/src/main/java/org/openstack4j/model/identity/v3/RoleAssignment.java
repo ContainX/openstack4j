@@ -1,21 +1,19 @@
 package org.openstack4j.model.identity.v3;
 
-import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.identity.v3.builder.RoleBuilder;
 
 import java.util.Map;
 
 /**
  * identity v3 role assignment class
- * 
+ *
  * @see <a href="http://developer.openstack.org/api-ref-identity-v3.html#roles-v3">API reference</a>
  */
 public interface RoleAssignment extends ModelEntity {
 
     /**
      * Get role id for role assignment
-     * 
+     *
      * @return the id of the role
      */
     String getRoleId();

@@ -6,7 +6,7 @@ import org.openstack4j.model.gbp.builder.PolicyActionUpdateBuilder;
 
 /**
  * Policy Action Model Entity
- * 
+ *
  * @author vinod borole
  */
 public interface PolicyActionUpdate extends ModelEntity, Buildable<PolicyActionUpdateBuilder> {
@@ -22,14 +22,14 @@ public interface PolicyActionUpdate extends ModelEntity, Buildable<PolicyActionU
      * Gets the description
      *
      * @return the description
-     */ 
+     */
     String getDescription();
 
     /**
      * Gets the name
      *
      * @return the name
-     */ 
+     */
     String getName();
 
 }

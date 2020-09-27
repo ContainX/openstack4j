@@ -51,7 +51,7 @@ public interface SharesService extends RestService {
     /**
      * Updates a share.
      *
-     * @param shareId the share ID
+     * @param shareId            the share ID
      * @param shareUpdateOptions the options to update on the share
      * @return the updated share
      */
@@ -68,7 +68,7 @@ public interface SharesService extends RestService {
     /**
      * Deletes a share.
      *
-     * @param shareId the share ID
+     * @param shareId            the share ID
      * @param consistencyGroupId the UUID of the consistency group where the share was created
      * @return the action response
      */
@@ -85,7 +85,7 @@ public interface SharesService extends RestService {
     /**
      * Updates the metadata for a share.
      *
-     * @param shareId the share ID
+     * @param shareId  the share ID
      * @param metadata the metadata to update
      * @return the updated metadata
      */
@@ -94,7 +94,7 @@ public interface SharesService extends RestService {
     /**
      * Sets the metadata on a share.
      *
-     * @param shareId the share ID
+     * @param shareId  the share ID
      * @param metadata the metadata to set
      * @return the updated metadata
      */
@@ -103,7 +103,7 @@ public interface SharesService extends RestService {
     /**
      * Unsets the metadata on a share.
      *
-     * @param shareId the share ID
+     * @param shareId     the share ID
      * @param metadataKey the metadata key to unset
      * @return the action response
      */
@@ -121,14 +121,14 @@ public interface SharesService extends RestService {
     /**
      * Revokes access from a share.
      *
-     * @param shareId the share ID
+     * @param shareId  the share ID
      * @param accessId the access ID to revoke
      * @return the action response
      */
     ActionResponse revokeAccess(String shareId, String accessId);
 
     /**
-     *  List access rules for a share.
+     * List access rules for a share.
      *
      * @param shareId the share ID
      * @return a list fo all access rules for the given share
@@ -137,8 +137,9 @@ public interface SharesService extends RestService {
 
     /**
      * Administrators only. Explicitly updates the state of a share.
+     *
      * @param shareId the share ID
-     * @param status the status to set
+     * @param status  the status to set
      * @return the action response
      */
     ActionResponse resetState(String shareId, Share.Status status);

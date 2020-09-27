@@ -20,7 +20,7 @@ public interface MuranoSessionService extends RestService {
      * Gets session details.
      *
      * @param environmentId environment identifier.
-     * @param sessionId session identifier.
+     * @param sessionId     session identifier.
      * @return Session object.
      */
     AppCatalogSession get(String environmentId, String sessionId);
@@ -29,7 +29,7 @@ public interface MuranoSessionService extends RestService {
      * Sends signal to deploy to OpenStack.
      *
      * @param environmentId environment identifier.
-     * @param sessionId session identifier.
+     * @param sessionId     session identifier.
      * @return ActionResponse (status 200 in case of success)
      */
     ActionResponse deploy(String environmentId, String sessionId);
@@ -38,7 +38,7 @@ public interface MuranoSessionService extends RestService {
      * Deletes a configuration session.
      *
      * @param environmentId environment identifier.
-     * @param sessionId session identifier.
+     * @param sessionId     session identifier.
      * @return ActionResponse (status 200 in case of success)
      */
     ActionResponse delete(String environmentId, String sessionId);

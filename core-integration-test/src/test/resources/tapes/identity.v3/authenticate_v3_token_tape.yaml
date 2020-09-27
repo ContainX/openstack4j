@@ -1,49 +1,49 @@
 !tape
 name: authenticate_v3_token.tape
 interactions:
-- recorded: 2016-01-15T16:52:54.501Z
-  request:
-    method: POST
-    uri: http://devstack.openstack.stack:5000/v3/auth/tokens
-    headers:
-      Accept: application/json
-      Content-Length: '353'
-      Content-Type: application/json
-      Host: devstack.openstack.stack:5000
-      OS4J-Auth-Command: Tokens
-      Proxy-Connection: keep-alive
-      User-Agent: Jersey/2.22.1 (HttpUrlConnection 1.8.0_60)
-    body: |-
-      {
-        "auth" : {
-          "identity" : {
-            "password" : {
-              "user" : {
-                "id" : "71a7dcb0d60a43088a6c8e9b69a39e69",
-                "password" : "devstack"
+  - recorded: 2016-01-15T16:52:54.501Z
+    request:
+      method: POST
+      uri: http://devstack.openstack.stack:5000/v3/auth/tokens
+      headers:
+        Accept: application/json
+        Content-Length: '353'
+        Content-Type: application/json
+        Host: devstack.openstack.stack:5000
+        OS4J-Auth-Command: Tokens
+        Proxy-Connection: keep-alive
+        User-Agent: Jersey/2.22.1 (HttpUrlConnection 1.8.0_60)
+      body: |-
+        {
+          "auth" : {
+            "identity" : {
+              "password" : {
+                "user" : {
+                  "id" : "71a7dcb0d60a43088a6c8e9b69a39e69",
+                  "password" : "devstack"
+                }
+              },
+              "methods" : [ "password" ]
+            },
+            "scope" : {
+              "project" : {
+                "id" : "194dfdddb6bc43e09701035b52edb0d9"
               }
             },
-            "methods" : [ "password" ]
-          },
-          "scope" : {
-            "project" : {
-              "id" : "194dfdddb6bc43e09701035b52edb0d9"
-            }
-          },
-          "type" : "CREDENTIALS"
+            "type" : "CREDENTIALS"
+          }
         }
-      }
-  response:
-    status: 201
-    headers:
-      Content-Type: application/json
-      Date: Fri, 15 Jan 2016 16:52:54 GMT
-      Server: Apache/2.4.7 (Ubuntu)
-      Vary: X-Auth-Token
-      X-Betamax: PLAY
-      X-Subject-Token: 5ea410ca9cb945f29674bcda7c2080db
-      x-openstack-request-id: req-83611568-0568-47ba-adc1-78073dadf775
-    body: '{"token": {"methods": ["password"], "roles": [{"id": "aae88952465d4c32b0a1140a76601b68", "name": "admin"}], "expires_at": "2016-01-15T17:52:54.476906Z", "project": {"domain": {"id": "default", "name": "Default"}, "id": "194dfdddb6bc43e09701035b52edb0d9",
+    response:
+      status: 201
+      headers:
+        Content-Type: application/json
+        Date: Fri, 15 Jan 2016 16:52:54 GMT
+        Server: Apache/2.4.7 (Ubuntu)
+        Vary: X-Auth-Token
+        X-Betamax: PLAY
+        X-Subject-Token: 5ea410ca9cb945f29674bcda7c2080db
+        x-openstack-request-id: req-83611568-0568-47ba-adc1-78073dadf775
+      body: '{"token": {"methods": ["password"], "roles": [{"id": "aae88952465d4c32b0a1140a76601b68", "name": "admin"}], "expires_at": "2016-01-15T17:52:54.476906Z", "project": {"domain": {"id": "default", "name": "Default"}, "id": "194dfdddb6bc43e09701035b52edb0d9",
       "name": "admin"}, "catalog": [{"endpoints": [{"region_id": "RegionOne", "url": "http://devstack.openstack.stack:8773/", "region": "RegionOne", "interface": "internal", "id": "1986b6750b784f88a0f1f1e83e511df8"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:8773/",
       "region": "RegionOne", "interface": "admin", "id": "64afe603967b4fd5880792840c659a4d"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:8773/", "region": "RegionOne", "interface": "public", "id": "eb3e556f4e2c446e907524447cbb8a5d"}], "type": "ec2",
       "id": "057b697545694c22b3d20bfe95a2cd7d", "name": "ec2"}, {"endpoints": [{"region_id": "RegionOne", "url": "http://devstack.openstack.stack:8774/v2/194dfdddb6bc43e09701035b52edb0d9", "region": "RegionOne", "interface": "internal", "id": "16fd2c85ec774496b2cbf27147a23d11"},
@@ -66,26 +66,26 @@ interactions:
       "name": "novav21"}, {"endpoints": [{"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9696/", "region": "RegionOne", "interface": "public", "id": "0af60b8c25bb43a3900e3965b22f7458"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9696/", "region":
       "RegionOne", "interface": "admin", "id": "523f2db6ab7542ad8d0cfb67a4a45c1e"}, {"region_id": "RegionOne", "url": "http://devstack.openstack.stack:9696/", "region": "RegionOne", "interface": "internal", "id": "c86b9137fe3a49d58ad027581f7005a7"}], "type": "network", "id":
       "f6028c7a65c14663946bfeb37c5477ca", "name": "neutron"}], "extras": {}, "user": {"domain": {"id": "default", "name": "Default"}, "id": "71a7dcb0d60a43088a6c8e9b69a39e69", "name": "admin"}, "audit_ids": ["Y6l7BMQUTqyzsDagpayWUg"], "issued_at": "2016-01-15T16:52:54.476934Z"}}'
-- recorded: 2016-01-15T16:52:54.620Z
-  request:
-    method: GET
-    uri: http://devstack.openstack.stack:5000/v3/users
-    headers:
-      Accept: application/json
-      Host: devstack.openstack.stack:5000
-      Proxy-Connection: keep-alive
-      User-Agent: OpenStack4j / OpenStack Client
-      X-Auth-Token: 5ea410ca9cb945f29674bcda7c2080db
-  response:
-    status: 200
-    headers:
-      Content-Type: application/json
-      Date: Fri, 15 Jan 2016 16:52:54 GMT
-      Server: Apache/2.4.7 (Ubuntu)
-      Vary: X-Auth-Token
-      X-Betamax: PLAY
-      x-openstack-request-id: req-48448083-6951-467b-8634-4e2c13db5272
-    body: '{"users": [{"name": "nova", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/415bae4bb22a463a910641260ebae794"}, "domain_id": "default", "enabled": true, "email": null, "id": "415bae4bb22a463a910641260ebae794"}, {"name": "demo", "links": {"self":
+  - recorded: 2016-01-15T16:52:54.620Z
+    request:
+      method: GET
+      uri: http://devstack.openstack.stack:5000/v3/users
+      headers:
+        Accept: application/json
+        Host: devstack.openstack.stack:5000
+        Proxy-Connection: keep-alive
+        User-Agent: OpenStack4j / OpenStack Client
+        X-Auth-Token: 5ea410ca9cb945f29674bcda7c2080db
+    response:
+      status: 200
+      headers:
+        Content-Type: application/json
+        Date: Fri, 15 Jan 2016 16:52:54 GMT
+        Server: Apache/2.4.7 (Ubuntu)
+        Vary: X-Auth-Token
+        X-Betamax: PLAY
+        x-openstack-request-id: req-48448083-6951-467b-8634-4e2c13db5272
+      body: '{"users": [{"name": "nova", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/415bae4bb22a463a910641260ebae794"}, "domain_id": "default", "enabled": true, "email": null, "id": "415bae4bb22a463a910641260ebae794"}, {"name": "demo", "links": {"self":
       "http://devstack.openstack.stack:5000/v3/users/7174b49851d64276b72601c67ce347e2"}, "domain_id": "default", "enabled": true, "email": "demo@example.com", "id": "7174b49851d64276b72601c67ce347e2"}, {"domain_id": "default", "name": "admin", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/71a7dcb0d60a43088a6c8e9b69a39e69"},
       "id": "71a7dcb0d60a43088a6c8e9b69a39e69", "enabled": true, "email": null, "default_project_id": "194dfdddb6bc43e09701035b52edb0d9"}, {"name": "glance", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/72267f82e55144e1bb672491628b0ab5"}, "domain_id":
       "default", "enabled": true, "email": null, "id": "72267f82e55144e1bb672491628b0ab5"}, {"name": "neutron", "links": {"self": "http://devstack.openstack.stack:5000/v3/users/9e60d839513b4631b11992458cdb75ff"}, "domain_id": "default", "enabled": true, "email": null, "id":

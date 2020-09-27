@@ -1,19 +1,20 @@
 package org.openstack4j.openstack.gbp.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.api.gbp.NatPoolService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.gbp.NatPool;
 import org.openstack4j.openstack.gbp.domain.GbpNatPool;
 import org.openstack4j.openstack.gbp.domain.GbpNatPool.NatPools;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
+
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Nat Pool API Implementation
- * 
+ *
  * @author vinod borole
  */
 public class NatPoolServiceImpl extends BaseNetworkingServices implements NatPoolService {
@@ -21,7 +22,7 @@ public class NatPoolServiceImpl extends BaseNetworkingServices implements NatPoo
     /**
      * {@inheritDoc}
      */
-    @Override 
+    @Override
     public List<? extends NatPool> list() {
         return get(NatPools.class, uri("/grouppolicy/nat_pools")).execute().getList();
     }
@@ -34,12 +35,12 @@ public class NatPoolServiceImpl extends BaseNetworkingServices implements NatPoo
         Invocation<NatPools> natpoolInvocation = buildInvocation(filteringParams);
         return natpoolInvocation.execute().getList();
     }
-    
+
     private Invocation<NatPools> buildInvocation(Map<String, String> filteringParams) {
         Invocation<NatPools> natpoolInvocation = get(NatPools.class, "/grouppolicy/nat_pools");
-        if (filteringParams == null) { 
+        if (filteringParams == null) {
             return natpoolInvocation;
-        } 
+        }
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
                 natpoolInvocation = natpoolInvocation.param(entry.getKey(), entry.getValue());

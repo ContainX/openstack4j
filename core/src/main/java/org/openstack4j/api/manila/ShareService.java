@@ -1,8 +1,8 @@
 package org.openstack4j.api.manila;
 
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.common.Extension;
 import org.openstack4j.model.manila.*;
 import org.openstack4j.openstack.manila.domain.ManilaService;
 
@@ -75,7 +75,7 @@ public interface ShareService extends RestService {
      * Enables a service.
      *
      * @param binary the name of the service binary that you want to enable
-     * @param host the host name of the service that you want to enable
+     * @param host   the host name of the service that you want to enable
      * @return the status of the enabled service
      */
     ManilaService.ServiceStatus enableService(String binary, String host);
@@ -84,7 +84,7 @@ public interface ShareService extends RestService {
      * Disables a service.
      *
      * @param binary the name of the service binary that you want to disable
-     * @param host the host name of the service that you want to disable
+     * @param host   the host name of the service that you want to disable
      * @return the status of the disabled service
      */
     ManilaService.ServiceStatus disableService(String binary, String host);

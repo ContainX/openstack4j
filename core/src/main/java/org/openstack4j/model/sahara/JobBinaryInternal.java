@@ -1,12 +1,12 @@
 package org.openstack4j.model.sahara;
 
-import java.util.Date;
-
 import org.openstack4j.model.ModelEntity;
+
+import java.util.Date;
 
 /**
  * An Openstack Sahara Job Binary Internal
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */

@@ -7,21 +7,21 @@ import org.openstack4j.model.ModelEntity;
 @JsonRootName("os-update_readonly_flag")
 public class UpdateReadOnlyFlagAction implements ModelEntity {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@JsonProperty("readonly")
-	private final boolean readonly;
+    @JsonProperty("readonly")
+    private final boolean readonly;
 
-	public UpdateReadOnlyFlagAction(boolean readonly) {
-		this.readonly = readonly;
-	}
+    public UpdateReadOnlyFlagAction(boolean readonly) {
+        this.readonly = readonly;
+    }
 
-	public static UpdateReadOnlyFlagAction create(boolean readonly) {
-		return new UpdateReadOnlyFlagAction(readonly);
-	}
+    public static UpdateReadOnlyFlagAction create(boolean readonly) {
+        return new UpdateReadOnlyFlagAction(readonly);
+    }
 
-	public boolean isReadonly() {
-		return readonly;
-	}
+    public boolean isReadonly() {
+        return readonly;
+    }
 
 }

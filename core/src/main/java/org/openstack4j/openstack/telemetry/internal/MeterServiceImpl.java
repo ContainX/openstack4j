@@ -1,9 +1,5 @@
 package org.openstack4j.openstack.telemetry.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.telemetry.MeterService;
 import org.openstack4j.model.telemetry.Meter;
 import org.openstack4j.model.telemetry.MeterSample;
@@ -15,9 +11,13 @@ import org.openstack4j.openstack.telemetry.domain.CeilometerMeter;
 import org.openstack4j.openstack.telemetry.domain.CeilometerMeterSample;
 import org.openstack4j.openstack.telemetry.domain.CeilometerStatistics;
 
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Provides Measurements against Meters within an OpenStack deployment
- * 
+ *
  * @author Jeremy Unruh
  */
 public class MeterServiceImpl extends BaseTelemetryServices implements MeterService {
@@ -25,7 +25,7 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
     private static final String FIELD = "q.field";
     private static final String OPER = "q.op";
     private static final String VALUE = "q.value";
-   private static final String LIMIT = "limit";
+    private static final String LIMIT = "limit";
 
     /**
      * {@inheritDoc}
@@ -55,8 +55,8 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
         checkNotNull(meterName);
         checkNotNull(criteria);
         Invocation<CeilometerMeterSample[]> invocation = get(CeilometerMeterSample[].class, uri("/meters/%s", meterName));
-        if(criteria.getLimit() > 0){
-           invocation.param(LIMIT, criteria.getLimit());
+        if (criteria.getLimit() > 0) {
+            invocation.param(LIMIT, criteria.getLimit());
         }
         if (!criteria.getCriteriaParams().isEmpty()) {
             for (NameOpValue c : criteria.getCriteriaParams()) {
@@ -93,9 +93,9 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
         checkNotNull(meterName);
         checkNotNull(criteria);
         Invocation<CeilometerStatistics[]> invocation = get(CeilometerStatistics[].class, uri("/meters/%s/statistics", meterName))
-                                                           .param(period > 0, "period", period);
-        if(criteria.getLimit() > 0){
-           invocation.param(LIMIT, criteria.getLimit());
+                .param(period > 0, "period", period);
+        if (criteria.getLimit() > 0) {
+            invocation.param(LIMIT, criteria.getLimit());
         }
         if (!criteria.getCriteriaParams().isEmpty()) {
             for (NameOpValue c : criteria.getCriteriaParams()) {
@@ -110,7 +110,7 @@ public class MeterServiceImpl extends BaseTelemetryServices implements MeterServ
 
     @Override
     public void putSamples(List<MeterSample> sampleList, String meterName) {
-        ListEntity<MeterSample> listEntity= new ListEntity<MeterSample>(sampleList);
-        post(Void.class,uri("/meters/%s",meterName)).entity(listEntity).execute();
+        ListEntity<MeterSample> listEntity = new ListEntity<MeterSample>(sampleList);
+        post(Void.class, uri("/meters/%s", meterName)).entity(listEntity).execute();
     }
 }

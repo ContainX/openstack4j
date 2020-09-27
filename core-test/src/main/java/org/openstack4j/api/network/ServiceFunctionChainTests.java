@@ -1,28 +1,21 @@
 package org.openstack4j.api.network;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
-import java.io.InputStreamReader;
-import java.util.List;
-
+import com.google.common.base.Objects;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.core.transport.ObjectMapperSingleton;
 import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.network.ext.Ethertype;
-import org.openstack4j.model.network.ext.FlowClassifier;
-import org.openstack4j.model.network.ext.PortChain;
-import org.openstack4j.model.network.ext.PortPair;
-import org.openstack4j.model.network.ext.PortPairGroup;
+import org.openstack4j.model.network.ext.*;
 import org.openstack4j.openstack.networking.domain.ext.NeutronFlowClassifier;
 import org.openstack4j.openstack.networking.domain.ext.NeutronPortChain;
 import org.openstack4j.openstack.networking.domain.ext.NeutronPortPair;
 import org.openstack4j.openstack.networking.domain.ext.NeutronPortPairGroup;
 import org.testng.annotations.Test;
 
-import com.google.common.base.Objects;
+import java.io.InputStreamReader;
+import java.util.List;
+
+import static org.testng.Assert.*;
 
 @Test(suiteName = "ServiceFunctionChain")
 public class ServiceFunctionChainTests extends AbstractTest {
@@ -74,7 +67,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
         assertNotNull(flowClassifiers.get(1).getL7Parameters());
         assertNotNull(flowClassifiers.get(1).getL7Parameters().get(PARAM_KEY_B));
         assertEquals(flowClassifiers.get(1).getL7Parameters().get(PARAM_KEY_B), PARAM_VALUE_B);
-}
+    }
 
     @Test
     public void testGetFlowClassifier() throws Exception {
@@ -95,7 +88,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testCreateFlowClassifier() throws Exception {
         FlowClassifier original = ObjectMapperSingleton.getContext(NeutronFlowClassifier.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_FLOW_CLASSIFIER)),
-                           NeutronFlowClassifier.class);
+                        NeutronFlowClassifier.class);
         respondWith(JSON_FLOW_CLASSIFIER);
         FlowClassifier returned = osv3().sfc().flowclassifiers().create(original);
         server.takeRequest();
@@ -107,7 +100,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testUpdateFlowClassifier() throws Exception {
         FlowClassifier original = ObjectMapperSingleton.getContext(NeutronFlowClassifier.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_FLOW_CLASSIFIER)),
-                           NeutronFlowClassifier.class);
+                        NeutronFlowClassifier.class);
         respondWith(JSON_FLOW_CLASSIFIER);
         FlowClassifier returned = osv3().sfc().flowclassifiers().update(FC_ID, original);
         server.takeRequest();
@@ -119,7 +112,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testDeleteFlowClassifier() throws Exception {
         FlowClassifier original = ObjectMapperSingleton.getContext(NeutronFlowClassifier.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_FLOW_CLASSIFIER)),
-                           NeutronFlowClassifier.class);
+                        NeutronFlowClassifier.class);
         respondWith(200);
         ActionResponse response = osv3().sfc().flowclassifiers().delete(FC_ID);
         server.takeRequest();
@@ -163,7 +156,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testCreatePortPair() throws Exception {
         PortPair original = ObjectMapperSingleton.getContext(NeutronPortPair.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_PAIR)),
-                           NeutronPortPair.class);
+                        NeutronPortPair.class);
         respondWith(JSON_PORT_PAIR);
         PortPair returned = osv3().sfc().portpairs().create(original);
         server.takeRequest();
@@ -175,7 +168,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testUpdatePortPair() throws Exception {
         PortPair original = ObjectMapperSingleton.getContext(NeutronPortPair.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_PAIR)),
-                           NeutronPortPair.class);
+                        NeutronPortPair.class);
         respondWith(JSON_PORT_PAIR);
         PortPair returned = osv3().sfc().portpairs().update(FC_ID, original);
         server.takeRequest();
@@ -215,7 +208,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testCreatePortPairGroup() throws Exception {
         PortPairGroup original = ObjectMapperSingleton.getContext(NeutronPortPairGroup.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_PAIR_GROUP)),
-                           NeutronPortPairGroup.class);
+                        NeutronPortPairGroup.class);
         respondWith(JSON_PORT_PAIR_GROUP);
         PortPairGroup returned = osv3().sfc().portpairgroups().create(original);
         server.takeRequest();
@@ -227,7 +220,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testUpdatePortPairGroup() throws Exception {
         PortPairGroup original = ObjectMapperSingleton.getContext(NeutronPortPairGroup.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_PAIR_GROUP)),
-                           NeutronPortPairGroup.class);
+                        NeutronPortPairGroup.class);
         respondWith(JSON_PORT_PAIR_GROUP);
         PortPairGroup returned = osv3().sfc().portpairgroups().update(FC_ID, original);
         server.takeRequest();
@@ -297,7 +290,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testCreatePortChain() throws Exception {
         PortChain original = ObjectMapperSingleton.getContext(NeutronPortChain.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_CHAIN)),
-                           NeutronPortChain.class);
+                        NeutronPortChain.class);
         respondWith(JSON_PORT_CHAIN);
         PortChain returned = osv3().sfc().portchains().create(original);
         server.takeRequest();
@@ -309,7 +302,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testUpdatePortChain() throws Exception {
         PortChain original = ObjectMapperSingleton.getContext(NeutronPortChain.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_CHAIN)),
-                           NeutronPortChain.class);
+                        NeutronPortChain.class);
         respondWith(JSON_PORT_CHAIN);
         PortChain returned = osv3().sfc().portchains().update(FC_ID, original);
         server.takeRequest();
@@ -329,7 +322,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testPortChainBuilder() throws Exception {
         PortChain original = ObjectMapperSingleton.getContext(NeutronPortChain.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_CHAIN)),
-                           NeutronPortChain.class);
+                        NeutronPortChain.class);
         PortChain built = Builders.portChain()
                 .id(original.getId())
                 .name(original.getName())
@@ -348,7 +341,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testPortPairGroupBuilder() throws Exception {
         PortPairGroup original = ObjectMapperSingleton.getContext(NeutronPortPairGroup.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_PAIR_GROUP)),
-                           NeutronPortPairGroup.class);
+                        NeutronPortPairGroup.class);
         PortPairGroup built = Builders.portPairGroup()
                 .id(original.getId())
                 .name(original.getName())
@@ -365,7 +358,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testPortPairBuilder() throws Exception {
         PortPair original = ObjectMapperSingleton.getContext(NeutronPortPair.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_PORT_PAIR)),
-                           NeutronPortPair.class);
+                        NeutronPortPair.class);
         PortPair built = Builders.portPair()
                 .id(original.getId())
                 .name(original.getName())
@@ -383,7 +376,7 @@ public class ServiceFunctionChainTests extends AbstractTest {
     public void testFlowClassifierBuilder() throws Exception {
         FlowClassifier original = ObjectMapperSingleton.getContext(NeutronFlowClassifier.class)
                 .readValue(new InputStreamReader(getClass().getResourceAsStream(JSON_FLOW_CLASSIFIER)),
-                           NeutronFlowClassifier.class);
+                        NeutronFlowClassifier.class);
         FlowClassifier built = Builders.flowClassifier()
                 .id(original.getId())
                 .name(original.getName())

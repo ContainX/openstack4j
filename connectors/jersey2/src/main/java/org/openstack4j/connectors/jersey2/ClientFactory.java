@@ -38,12 +38,13 @@ class ClientFactory {
 
     private static final CustomContextResolver RESOLVER = new CustomContextResolver();
     private static LoadingCache<Config, Client> CACHE = CacheBuilder.newBuilder()
-                                                                    .expireAfterAccess(20, TimeUnit.MINUTES)
-                                                                    .build(new CacheLoader<Config, Client>() {
-                                                                        @Override
-                                                                        public Client load(Config config) throws Exception {
-                                                                            return buildClientFromConfig(config);
-                                                                        } });
+            .expireAfterAccess(20, TimeUnit.MINUTES)
+            .build(new CacheLoader<Config, Client>() {
+                @Override
+                public Client load(Config config) throws Exception {
+                    return buildClientFromConfig(config);
+                }
+            });
 
     /**
      * Creates or Returns a Client
@@ -67,11 +68,11 @@ class ClientFactory {
         }
 
         ClientBuilder cb = ClientBuilder.newBuilder()
-                            .withConfig(clientConfig)
-                            .property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, "true")
-                            .register(JacksonFeature.class)
-                            .register(RESOLVER)
-                            .register(new RequestFilter());
+                .withConfig(clientConfig)
+                .property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, "true")
+                .register(JacksonFeature.class)
+                .register(RESOLVER)
+                .register(new RequestFilter());
 
         if (config.getSslContext() != null)
             cb.sslContext(config.getSslContext());
@@ -104,7 +105,8 @@ class ClientFactory {
                 @Override
                 public HttpURLConnection getConnection(URL url) throws IOException {
                     return (HttpURLConnection) url.openConnection(proxy);
-                }});
+                }
+            });
         }
     }
 

@@ -1,16 +1,16 @@
 package org.openstack4j.openstack.compute.internal.ext;
 
-import java.util.List;
-
 import org.openstack4j.api.compute.ext.MigrationService;
 import org.openstack4j.model.compute.ext.Migration;
 import org.openstack4j.model.compute.ext.MigrationsFilter;
 import org.openstack4j.openstack.compute.domain.ext.ExtMigration.Migrations;
 import org.openstack4j.openstack.compute.internal.BaseComputeServices;
 
+import java.util.List;
+
 /**
- * API which supports the "os-migrations" extension.  
- * 
+ * API which supports the "os-migrations" extension.
+ *
  * @author Jeremy Unruh
  */
 public class MigrationServiceImpl extends BaseComputeServices implements MigrationService {

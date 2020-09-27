@@ -21,7 +21,8 @@ public class ManilaQuotaSetUpdate implements ModelEntity {
     private Integer shareNetworks;
     private Boolean force;
 
-    private ManilaQuotaSetUpdate() {}
+    private ManilaQuotaSetUpdate() {
+    }
 
     /**
      * Creates a quota set update from options.

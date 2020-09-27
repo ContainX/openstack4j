@@ -16,7 +16,8 @@ public class ManilaShareNetworkUpdate implements ModelEntity {
     private String name;
     private String description;
 
-    private ManilaShareNetworkUpdate() {}
+    private ManilaShareNetworkUpdate() {
+    }
 
     /**
      * Creates a share network from options.

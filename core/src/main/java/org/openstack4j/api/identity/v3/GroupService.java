@@ -1,17 +1,16 @@
 package org.openstack4j.api.identity.v3;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Group;
 import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.identity.v3.User;
 
+import java.util.List;
+
 
 /**
  * Identity V3 Group Service
- *
  */
 public interface GroupService extends RestService {
 
@@ -35,7 +34,7 @@ public interface GroupService extends RestService {
      * get detailed information about groups matching specified by name and domain
      *
      * @param groupName the group name
-     * @param domainId the domain id
+     * @param domainId  the domain id
      * @return the of list groups matching the name in a specific domain or null if not found
      */
     Group getByName(String groupName, String domainId);
@@ -67,10 +66,9 @@ public interface GroupService extends RestService {
     /**
      * creates a new group
      *
-     * @param domainId the domain id
-     * @param name the group name
+     * @param domainId    the domain id
+     * @param name        the group name
      * @param description the description
-     *
      * @return the newly created group
      */
     Group create(String domainId, String name, String description);
@@ -92,7 +90,7 @@ public interface GroupService extends RestService {
     /**
      * list role for group on a project
      *
-     * @param groupId the group id
+     * @param groupId   the group id
      * @param projectId the project id
      * @return the list of project roles for the group
      */
@@ -101,7 +99,7 @@ public interface GroupService extends RestService {
     /**
      * list roles for a group on a domain
      *
-     * @param groupId the group id
+     * @param groupId  the group id
      * @param domainId the domain id
      * @return the list of domain roles for a group
      */
@@ -111,7 +109,7 @@ public interface GroupService extends RestService {
      * adds an existing user to a group
      *
      * @param groupId the group id
-     * @param userId the user id
+     * @param userId  the user id
      * @return the ActionResponse
      */
     ActionResponse addUserToGroup(String groupId, String userId);
@@ -120,7 +118,7 @@ public interface GroupService extends RestService {
      * removes a user from a group
      *
      * @param groupId the group id
-     * @param userId the user id
+     * @param userId  the user id
      * @return the ActionResponse
      */
     ActionResponse removeUserFromGroup(String groupId, String userId);
@@ -129,7 +127,7 @@ public interface GroupService extends RestService {
      * check whether a user belongs to a group
      *
      * @param groupId the group id
-     * @param userId the user id
+     * @param userId  the user id
      * @return the ActionResponse
      */
     ActionResponse checkGroupUser(String groupId, String userId);

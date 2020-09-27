@@ -7,7 +7,7 @@ package org.openstack4j.model.sahara;
  * @author siwat.pru@outlook.com
  */
 public interface JobConfigHintConfig {
-    
+
     /**
      * @return name of the configuration
      */

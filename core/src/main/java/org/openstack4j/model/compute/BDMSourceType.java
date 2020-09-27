@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Block Device Mapping Source Type
- * 
+ *
  * @author Jeremy Unruh
  * @see http://docs.openstack.org/developer/nova/block_device_mapping.html
  */
@@ -13,9 +13,8 @@ public enum BDMSourceType {
     BLANK,
     IMAGE,
     SNAPSHOT,
-    VOLUME
-    ;
-    
+    VOLUME;
+
     @JsonCreator
     public static BDMSourceType value(String v) {
         if (v == null)
@@ -31,5 +30,5 @@ public enum BDMSourceType {
     public String value() {
         return name().toLowerCase();
     }
-    
+
 }

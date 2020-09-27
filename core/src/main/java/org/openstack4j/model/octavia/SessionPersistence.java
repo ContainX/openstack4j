@@ -12,22 +12,24 @@ import org.openstack4j.openstack.octavia.domain.OctaviaSessionPersistence;
  * used, the session_persistence parameter does not appear in the API response.
  * To clear session persistence for the VIP, set the session_persistence
  * parameter to null in a VIP update request.
- * 
- * @author wei
  *
+ * @author wei
  */
 @JsonDeserialize(as = OctaviaSessionPersistence.class)
-public interface SessionPersistence extends ModelEntity,Buildable<SessionPersistenceBuilder>{
+public interface SessionPersistence extends ModelEntity, Buildable<SessionPersistenceBuilder> {
 
-	/**
-	 * optional
-	 * @return cookie name
-	 */
-	public String getCookieName();
-	/**
-	 * required
-	 * @return type. APP_COOKIE,HTTP_COOKIE,SOURCE_IP
-	 */
-	public SessionPersistenceType getType();
+    /**
+     * optional
+     *
+     * @return cookie name
+     */
+    public String getCookieName();
+
+    /**
+     * required
+     *
+     * @return type. APP_COOKIE,HTTP_COOKIE,SOURCE_IP
+     */
+    public SessionPersistenceType getType();
 
 }

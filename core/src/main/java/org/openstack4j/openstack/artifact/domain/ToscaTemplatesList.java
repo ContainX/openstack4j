@@ -1,7 +1,6 @@
 package org.openstack4j.openstack.artifact.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.openstack4j.model.artifact.Artifacts;
 import org.openstack4j.model.artifact.ToscaTemplatesArtifacts;
 
 import java.util.List;

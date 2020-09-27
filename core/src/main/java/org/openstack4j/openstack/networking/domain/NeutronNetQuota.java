@@ -1,16 +1,15 @@
 package org.openstack4j.openstack.networking.domain;
 
-import static com.google.common.base.MoreObjects.toStringHelper;
-
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.network.NetQuota;
 import org.openstack4j.model.network.builder.NetQuotaBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.List;
+
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 /**
  * Network quotas that are bound to a Tenant
@@ -158,15 +157,15 @@ public class NeutronNetQuota implements NetQuota {
 
     public static class NeutronNetQuotas extends ListResult<NeutronNetQuota> {
 
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		@JsonProperty("quotas")
-    	private List<NeutronNetQuota> quotas;
+        @JsonProperty("quotas")
+        private List<NeutronNetQuota> quotas;
 
-		@Override
-		protected List<NeutronNetQuota> value() {
-			return quotas;
-		}
+        @Override
+        protected List<NeutronNetQuota> value() {
+            return quotas;
+        }
     }
 
 }

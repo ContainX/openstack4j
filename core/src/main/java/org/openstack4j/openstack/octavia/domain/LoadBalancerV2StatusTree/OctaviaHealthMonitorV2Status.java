@@ -9,6 +9,7 @@ import org.openstack4j.model.octavia.status.HealthMonitorV2Status;
 
 /**
  * An object to hold status of lbaas v2 healthmonitor
+ *
  * @author wei
  */
 @JsonRootName("healthmonitor")
@@ -18,12 +19,12 @@ public class OctaviaHealthMonitorV2Status extends Status implements HealthMonito
     @JsonProperty("type")
     private HealthMonitorType type;
 
-    public HealthMonitorType getType(){
+    public HealthMonitorType getType() {
         return type;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("type", type)

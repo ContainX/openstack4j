@@ -46,7 +46,7 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Gets the entity and Maps any errors which will result in a ResponseException
      *
-     * @param <T> the generic type
+     * @param <T>        the generic type
      * @param returnType the return type
      * @return the entity
      */
@@ -57,9 +57,9 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Gets the entity and Maps any errors which will result in a ResponseException
      *
-     * @param <T> the generic type
+     * @param <T>        the generic type
      * @param returnType the return type
-     * @param options execution options
+     * @param options    execution options
      * @return the entity
      */
     @Override
@@ -114,7 +114,7 @@ public class HttpResponseImpl implements HttpResponse {
      */
     public Map<String, String> headers() {
         Map<String, String> retHeaders = new HashMap<String, String>();
-        Header[] headers =  response.getAllHeaders();
+        Header[] headers = response.getAllHeaders();
 
         for (Header h : headers) {
             retHeaders.put(h.getName(), h.getValue());

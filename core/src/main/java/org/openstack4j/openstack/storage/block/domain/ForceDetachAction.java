@@ -1,53 +1,52 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import org.openstack4j.model.ModelEntity;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import org.openstack4j.model.ModelEntity;
 
 /**
  * os force detach
- * @author Wang Ting/王婷
  *
+ * @author Wang Ting/王婷
  */
 @JsonRootName("os-force_detach")
 public class ForceDetachAction implements ModelEntity {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * The interface ID
-	 */
-	@JsonProperty("attachment_id ")
-	private String attachmentId ;
-	
-	/**
-	 * The connector object.
-	 */
-	@JsonProperty
-	private ForceDetachConnector connector;
-	
-	public ForceDetachAction(String attachmentId, ForceDetachConnector connector) {
-		super();
-		this.attachmentId = attachmentId;
-		this.connector = connector;
-	}
+    /**
+     * The interface ID
+     */
+    @JsonProperty("attachment_id ")
+    private String attachmentId;
 
-	public String getAttachmentId() {
-		return attachmentId;
-	}
+    /**
+     * The connector object.
+     */
+    @JsonProperty
+    private ForceDetachConnector connector;
 
-	public void setAttachmentId(String attachmentId) {
-		this.attachmentId = attachmentId;
-	}
+    public ForceDetachAction(String attachmentId, ForceDetachConnector connector) {
+        super();
+        this.attachmentId = attachmentId;
+        this.connector = connector;
+    }
 
-	public ForceDetachConnector getConnector() {
-		return connector;
-	}
+    public String getAttachmentId() {
+        return attachmentId;
+    }
 
-	public void setConnector(ForceDetachConnector connector) {
-		this.connector = connector;
-	}
+    public void setAttachmentId(String attachmentId) {
+        this.attachmentId = attachmentId;
+    }
 
-	
+    public ForceDetachConnector getConnector() {
+        return connector;
+    }
+
+    public void setConnector(ForceDetachConnector connector) {
+        this.connector = connector;
+    }
+
+
 }

@@ -1,13 +1,5 @@
 package org.openstack4j.api.identity.v3;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-import static org.testng.AssertJUnit.assertNull;
-
-import java.util.List;
-
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Group;
@@ -16,6 +8,11 @@ import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.identity.v3.User;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneUser;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static org.testng.Assert.*;
+import static org.testng.AssertJUnit.assertNull;
 
 /**
  * Tests the Identity/Keystone API version 3 UserService
@@ -43,7 +40,7 @@ public class KeystoneUserServiceTests extends AbstractTest {
     private static final String USER_ID = "aa9f25defa6d4cafb48466df83106065";
     private static final String USER_DOMAIN_ID = "default";
     private static final String PROJECT_ID = "123ac695d4db400a9001b91bb3b8aa46";
-	
+
 
     /**
      * @return the identity service
@@ -116,7 +113,7 @@ public class KeystoneUserServiceTests extends AbstractTest {
         assertEquals(user.getId(), USER_ID);
         assertEquals(user.getDomainId(), USER_DOMAIN_ID);
     }
-    
+
     /**
      * returns null for an non-existing user when the user specified by name and domain.
      *
@@ -166,12 +163,12 @@ public class KeystoneUserServiceTests extends AbstractTest {
         respondWith(JSON_USER_UPDATE);
 
         User updatedUser = osv3().identity().users().update(KeystoneUser.builder()
-                                                                    .id(crudUserId)
-                                                                    .email("updatedFoobar@example.org")
-                                                                    .enabled(true)
-                                                                    .build());
+                .id(crudUserId)
+                .email("updatedFoobar@example.org")
+                .enabled(true)
+                .build());
 
-        assertEquals(updatedUser.getEmail(),"updatedFoobar@example.org");
+        assertEquals(updatedUser.getEmail(), "updatedFoobar@example.org");
         assertEquals(updatedUser.getName(), "foobar");
         assertEquals(updatedUser.isEnabled(), true);
         assertEquals(updatedUser.getId(), crudUserId);
@@ -248,21 +245,21 @@ public class KeystoneUserServiceTests extends AbstractTest {
 
         List<? extends Project> userProjectsList = osv3().identity().users().listUserProjects(USER_ID);
         assertEquals(userProjectsList.size(), 2);
-    } 
-    
+    }
+
     /**
      * Changes the password for a user
      *
      * @throws Exception
      */
     public void changeUserPassword_Test() throws Exception {
-    	
-    	respondWith(204);
+
+        respondWith(204);
 
         ActionResponse response_changeUserPassword = osv3().identity().users().changePassword("aa9f25defa6d4cafb48466df83106065", "originalPassword", "password");
         assertTrue(response_changeUserPassword.isSuccess());
     }
-    
+
     /**
      * tries to change the password for an non existent user fails
      *

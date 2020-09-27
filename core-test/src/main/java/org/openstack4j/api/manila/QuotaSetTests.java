@@ -14,7 +14,7 @@ import static org.testng.Assert.assertTrue;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-@Test(suiteName="QuotaSet")
+@Test(suiteName = "QuotaSet")
 public class QuotaSetTests extends AbstractTest {
     private static final String JSON_QUOTA_SET = "/manila/quota_set.json";
     private static final String JSON_QUOTA_SET_UPDATE = "/manila/quota_set_update.json";
@@ -42,7 +42,6 @@ public class QuotaSetTests extends AbstractTest {
     @Test
     public void update() throws Exception {
         respondWith(JSON_QUOTA_SET_UPDATE);
-
 
 
         QuotaSet quotaSet = osv3().share().quotaSets().update(

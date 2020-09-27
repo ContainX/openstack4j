@@ -4,26 +4,26 @@ import org.openstack4j.common.RestService;
 
 /**
  * Workflow Service (Mistral) API
- *
+ * <p>
  * TODO: add 'services' and 'resources'.
  *
  * @author Renat Akhmerov
  */
 public interface WorkflowService extends RestService {
 
-	/**
-	 * Workflow definition Service API.
-	 *
-	 * @return The workflow definition service.
-	 */
-	WorkflowDefinitionService workflowDefinitions();
+    /**
+     * Workflow definition Service API.
+     *
+     * @return The workflow definition service.
+     */
+    WorkflowDefinitionService workflowDefinitions();
 
-	/**
-	 * Action definition Service API.
-	 *
-	 * @return The action definition service.
-	 */
-	ActionDefinitionService actionDefinitions();
+    /**
+     * Action definition Service API.
+     *
+     * @return The action definition service.
+     */
+    ActionDefinitionService actionDefinitions();
 
     /**
      * Workbook definition Service API

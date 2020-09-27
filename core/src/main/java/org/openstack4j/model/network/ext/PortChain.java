@@ -1,17 +1,16 @@
 package org.openstack4j.model.network.ext;
 
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.network.ext.builder.PortChainBuilder;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * A Port Chain Entity.
  *
  * @author Dmitry Gerenrot.
- *
  */
 public interface PortChain extends Resource, Buildable<PortChainBuilder> {
 

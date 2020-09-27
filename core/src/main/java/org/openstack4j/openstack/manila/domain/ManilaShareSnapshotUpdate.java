@@ -19,7 +19,8 @@ public class ManilaShareSnapshotUpdate implements ModelEntity {
     @JsonProperty("display_description")
     private String displayDescription;
 
-    private ManilaShareSnapshotUpdate() {}
+    private ManilaShareSnapshotUpdate() {
+    }
 
     public static ManilaShareSnapshotUpdate fromOptions(ShareSnapshotUpdateOptions options) {
         ManilaShareSnapshotUpdate shareSnapshotUpdate = new ManilaShareSnapshotUpdate();

@@ -1,9 +1,9 @@
 package org.openstack4j.model.identity.v3;
 
-import java.util.List;
-
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.ResourceEntity;
+
+import java.util.List;
 
 public interface Authentication extends ModelEntity {
 

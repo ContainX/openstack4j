@@ -1,21 +1,19 @@
 package org.openstack4j.test.common;
 
-import static org.testng.Assert.assertTrue;
-
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Lists;
 import org.openstack4j.model.common.header.HeaderNameValue;
 import org.openstack4j.openstack.common.functions.HeaderNameValuesToHeaderMap;
 import org.testng.annotations.Test;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Map;
+
+import static org.testng.Assert.assertTrue;
 
 /**
  * Tests HeaderNameValue based transformation
- * 
- * @author Jeremy Unruh
  *
+ * @author Jeremy Unruh
  */
 public class HeaderNameValuesToHeaderMapTest {
 
@@ -25,7 +23,7 @@ public class HeaderNameValuesToHeaderMapTest {
             new HeaderNameValue("Test 3", "Value 3"),
             new HeaderNameValue("Test 4", "Value 4")
     );
-    
+
     @Test
     public void keyTest() {
         Map<String, Object> map = HeaderNameValuesToHeaderMap.INSTANCE.apply(VALUES);
@@ -33,7 +31,7 @@ public class HeaderNameValuesToHeaderMapTest {
             assertTrue(map.containsKey(hnv.getName()));
         }
     }
-    
+
     @Test
     public void valueTest() {
         Map<String, Object> map = HeaderNameValuesToHeaderMap.INSTANCE.apply(VALUES);
@@ -41,5 +39,5 @@ public class HeaderNameValuesToHeaderMapTest {
             assertTrue(map.containsValue(hnv.getValue()));
         }
     }
-    
+
 }

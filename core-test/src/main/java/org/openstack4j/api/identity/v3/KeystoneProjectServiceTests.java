@@ -1,15 +1,15 @@
 package org.openstack4j.api.identity.v3;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertNull;
-
-import java.util.Arrays;
-import java.util.List;
-
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.identity.v3.Project;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
 
 /**
  * Tests the Identity/Keystone API version 3 ProjectService
@@ -85,12 +85,12 @@ public class KeystoneProjectServiceTests extends AbstractTest {
         assertEquals(updatedProject.getExtra(PROJECT_EXTRA_KEY_1), PROJECT_EXTRA_VALUE_1);
         assertEquals(updatedProject.getExtra(PROJECT_EXTRA_KEY_2), PROJECT_EXTRA_VALUE_2);
     }
-    
+
     public void projects_getByName_not_exist_test() throws Exception {
         respondWith(JSON_PROJECTS_GET_BY_NAME_EMPTY);
         Project project = osv3().identity().projects().getByName(PROJECT_NAME, PROJECT_DOMAIN_ID);
         assertNull(project);
-    
+
     }
 
 }

@@ -1,6 +1,5 @@
 package org.openstack4j.openstack.barbican.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import org.openstack4j.model.barbican.Secret;
@@ -146,19 +145,25 @@ public class BarbicanSecret implements Secret {
      * {@inheritDoc}
      */
     @Override
-    public String getPayload() { return payload; }
+    public String getPayload() {
+        return payload;
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getPayloadContentType() { return payloadContentType; }
+    public String getPayloadContentType() {
+        return payloadContentType;
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getPayloadContentEncoding() { return payloadContentEncoding; }
+    public String getPayloadContentEncoding() {
+        return payloadContentEncoding;
+    }
 
     /**
      * {@inheritDoc}

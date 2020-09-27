@@ -5,11 +5,11 @@ import org.openstack4j.model.compute.QuotaSetUpdate;
 
 /**
  * A builder which creates a QuotaSetUpdate object
- * 
+ *
  * @author Jeremy Unruh
  */
 public interface QuotaSetUpdateBuilder extends Builder<QuotaSetUpdateBuilder, QuotaSetUpdate> {
-    
+
     /**
      * Metadata items permitted
      */

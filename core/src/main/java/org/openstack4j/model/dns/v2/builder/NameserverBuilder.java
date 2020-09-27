@@ -8,14 +8,14 @@ import org.openstack4j.model.dns.v2.Nameserver;
  */
 public interface NameserverBuilder extends Builder<NameserverBuilder, Nameserver> {
 
-	/**
-	 * @see Nameserver#getHostname()
-	 */
-	NameserverBuilder hostname(String hostname);
+    /**
+     * @see Nameserver#getHostname()
+     */
+    NameserverBuilder hostname(String hostname);
 
-	/**
-	 * @see Nameserver#getPriority()
-	 */
-	NameserverBuilder priority(Integer priority);
+    /**
+     * @see Nameserver#getPriority()
+     */
+    NameserverBuilder priority(Integer priority);
 
 }

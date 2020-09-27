@@ -1,13 +1,12 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import static com.google.common.base.MoreObjects.toStringHelper;
-
-import org.openstack4j.model.storage.block.BlockQuotaSet;
-import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import org.openstack4j.model.storage.block.BlockQuotaSet;
+import org.openstack4j.model.storage.block.builder.BlockQuotaSetBuilder;
+
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 /**
  * An OpenStack Quota-Set
@@ -15,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
  * @author Jeremy Unruh
  */
 @JsonRootName("quota_set")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CinderBlockQuotaSet implements BlockQuotaSet {
 
     private static final long serialVersionUID = 1L;

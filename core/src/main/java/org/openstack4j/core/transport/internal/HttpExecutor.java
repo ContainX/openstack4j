@@ -15,20 +15,20 @@ import java.util.ServiceLoader;
  *
  * @author Jeremy Unruh
  */
-public class HttpExecutor  {
+public class HttpExecutor {
 
     private static final Logger LOG = LoggerFactory.getLogger(HttpExecutor.class);
     private static final HttpExecutor INSTANCE = new HttpExecutor();
     private HttpExecutorService service;
 
-    private HttpExecutor() {}
+    private HttpExecutor() {
+    }
 
     private HttpExecutorService service() {
         if (service != null) return service;
 
         Iterator<HttpExecutorService> it = ServiceLoader.load(HttpExecutorService.class, getClass().getClassLoader()).iterator();
-        if (!it.hasNext())
-        {
+        if (!it.hasNext()) {
             LOG.error("No OpenStack4j connector found in classpath");
             throw new ConnectorNotFoundException("No OpenStack4j connector found in classpath");
         }

@@ -10,11 +10,13 @@ import java.util.Map;
 
 /**
  * Networking (Neutron) Lbaas V2 listener Extension API
+ *
  * @author emjburns
  */
 public interface ListenerV2Service extends RestService {
     /**
      * List all listeners that the current tenant has access to
+     *
      * @return list of all listeners
      */
     List<? extends ListenerV2> list();

@@ -1,17 +1,16 @@
 package org.openstack4j.api.identity.v3;
 
+import org.openstack4j.api.types.Facing;
+import org.openstack4j.common.RestService;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.identity.v3.Endpoint;
+import org.openstack4j.model.identity.v3.Service;
+
 import java.net.URL;
 import java.util.List;
 
-import org.openstack4j.api.types.Facing;
-import org.openstack4j.common.RestService;
-import org.openstack4j.model.identity.v3.Endpoint;
-import org.openstack4j.model.identity.v3.Service;
-import org.openstack4j.model.common.ActionResponse;
-
 /**
  * Identity V3 ServiceManager
- *
  */
 public interface ServiceEndpointService extends RestService {
 
@@ -26,10 +25,10 @@ public interface ServiceEndpointService extends RestService {
     /**
      * Creates a new service
      *
-     * @param type the type of the service
-     * @param name the name of the service
+     * @param type        the type of the service
+     * @param name        the name of the service
      * @param description the description of the service
-     * @param enabled the enabled status of the service
+     * @param enabled     the enabled status of the service
      * @return the created service
      */
     Service create(String type, String name, String description, boolean enabled);
@@ -66,7 +65,6 @@ public interface ServiceEndpointService extends RestService {
     List<? extends Service> list();
 
 
-
     /**
      * Lists available endpoints
      *
@@ -85,12 +83,12 @@ public interface ServiceEndpointService extends RestService {
     /**
      * Creates a new endpoint
      *
-     * @param name the name of the endpoint
-     * @param url the url of the endpont
-     * @param iface the interface type of the endpoint
-     * @param regionId the region id of the region that contains the endpoint
+     * @param name      the name of the endpoint
+     * @param url       the url of the endpont
+     * @param iface     the interface type of the endpoint
+     * @param regionId  the region id of the region that contains the endpoint
      * @param serviceId the service id of the service the endpoint belongs to
-     * @param enabled the enabled status of the endpoint
+     * @param enabled   the enabled status of the endpoint
      * @return
      */
     Endpoint createEndpoint(String name, URL url, Facing iface, String regionId, String serviceId, boolean enabled);

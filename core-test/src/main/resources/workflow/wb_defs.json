@@ -6,7 +6,10 @@
       "created_at": "2017-05-30 08:40:29",
       "project_id": "<default-project>",
       "scope": "private",
-      "tags": ["test", "private"],
+      "tags": [
+        "test",
+        "private"
+      ],
       "definition": "---\nversion: '2.0'\n\nparallel_join_2:\n  tasks:\n    join_task:\n      join: all\n    task_1:\n      on-success: join_task\n    task_2:\n      on-success: join_task\n"
     },
     {

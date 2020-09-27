@@ -9,7 +9,7 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
 
 /**
  * Base class for Computer / Nova services
- * 
+ *
  * @author Jeremy Unruh
  */
 public class BaseComputeServices extends BaseOpenStackService {
@@ -18,14 +18,14 @@ public class BaseComputeServices extends BaseOpenStackService {
         super(ServiceType.COMPUTE);
     }
 
-    protected ActionResponse invokeAction(String serverId, ServerAction action)  {
+    protected ActionResponse invokeAction(String serverId, ServerAction action) {
         return ToActionResponseFunction.INSTANCE.apply(invokeActionWithResponse(serverId, action), action.getClass().getName());
     }
 
-    protected HttpResponse invokeActionWithResponse(String serverId, ServerAction action)  {
-        HttpResponse response  = post(Void.class, uri("/servers/%s/action", serverId))
-                                        .entity(action)
-                                        .executeWithResponse();
+    protected HttpResponse invokeActionWithResponse(String serverId, ServerAction action) {
+        HttpResponse response = post(Void.class, uri("/servers/%s/action", serverId))
+                .entity(action)
+                .executeWithResponse();
         return response;
     }
 

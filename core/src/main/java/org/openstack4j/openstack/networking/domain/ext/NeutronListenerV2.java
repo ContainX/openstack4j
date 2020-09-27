@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
-import org.openstack4j.model.network.ext.ListenerV2;
 import org.openstack4j.model.network.ext.ListenerProtocol;
+import org.openstack4j.model.network.ext.ListenerV2;
 import org.openstack4j.model.network.ext.builder.ListenerV2Builder;
 import org.openstack4j.openstack.common.ListResult;
 
@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * lbaas v2 listener
+ *
  * @author emjburns
  */
 @JsonRootName("listener")
@@ -68,7 +69,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public List<ListItem> getLoadBalancers(){
+    public List<ListItem> getLoadBalancers() {
         return loadbalancers;
     }
 
@@ -76,7 +77,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public boolean isAdminStateUp(){
+    public boolean isAdminStateUp() {
         return adminStateUp;
     }
 
@@ -84,7 +85,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getDefaultPoolId(){
+    public String getDefaultPoolId() {
         return defaultPoolId;
     }
 
@@ -92,7 +93,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public Integer getConnectionLimit(){
+    public Integer getConnectionLimit() {
         return connectionLimit;
     }
 
@@ -100,7 +101,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public Integer getProtocolPort(){
+    public Integer getProtocolPort() {
         return protocolPort;
     }
 
@@ -108,7 +109,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public ListenerProtocol getProtocol(){
+    public ListenerProtocol getProtocol() {
         return protocol;
     }
 
@@ -116,7 +117,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -124,7 +125,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -132,7 +133,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getTenantId(){
+    public String getTenantId() {
         return tenantId;
     }
 
@@ -140,7 +141,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getDefaultTlsContainerRef(){
+    public String getDefaultTlsContainerRef() {
         return defaultTlsContainerRef;
     }
 
@@ -148,7 +149,7 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public List<String> getSniContainerRefs(){
+    public List<String> getSniContainerRefs() {
         return sniContainerRefs;
     }
 
@@ -156,12 +157,12 @@ public class NeutronListenerV2 implements ListenerV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getId(){
+    public String getId() {
         return id;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("adminStateUp", adminStateUp)
@@ -190,18 +191,18 @@ public class NeutronListenerV2 implements ListenerV2 {
         }
 
         @Override
-        public ListenerV2 build(){
+        public ListenerV2 build() {
             return m;
         }
 
         @Override
-        public ListenerV2Builder from(ListenerV2 in){
+        public ListenerV2Builder from(ListenerV2 in) {
             m = (NeutronListenerV2) in;
             return this;
         }
 
         @Override
-        public ListenerV2Builder loadBalancerId(String loadbalancerId){
+        public ListenerV2Builder loadBalancerId(String loadbalancerId) {
             m.loadbalancerId = loadbalancerId;
             return this;
         }
@@ -210,7 +211,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder tenantId(String tenantId){
+        public ListenerV2Builder tenantId(String tenantId) {
             m.tenantId = tenantId;
             return this;
         }
@@ -219,7 +220,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder protocol(ListenerProtocol protocol){
+        public ListenerV2Builder protocol(ListenerProtocol protocol) {
             m.protocol = protocol;
             return this;
         }
@@ -228,7 +229,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder protocolPort(Integer protocolPort){
+        public ListenerV2Builder protocolPort(Integer protocolPort) {
             m.protocolPort = protocolPort;
             return this;
         }
@@ -237,7 +238,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder adminStateUp(boolean adminStateUp){
+        public ListenerV2Builder adminStateUp(boolean adminStateUp) {
             m.adminStateUp = adminStateUp;
             return this;
         }
@@ -246,7 +247,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder name(String name){
+        public ListenerV2Builder name(String name) {
             m.name = name;
             return this;
         }
@@ -255,7 +256,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder description(String description){
+        public ListenerV2Builder description(String description) {
             m.description = description;
             return this;
         }
@@ -264,7 +265,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder connectionLimit(Integer connectionLimit){
+        public ListenerV2Builder connectionLimit(Integer connectionLimit) {
             m.connectionLimit = connectionLimit;
             return this;
         }
@@ -273,7 +274,7 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder sniContainerRefs(List<String> sniContainerRefs){
+        public ListenerV2Builder sniContainerRefs(List<String> sniContainerRefs) {
             m.sniContainerRefs = sniContainerRefs;
             return this;
         }
@@ -282,18 +283,18 @@ public class NeutronListenerV2 implements ListenerV2 {
          * {@inheritDoc}
          */
         @Override
-        public ListenerV2Builder defaultTlsContainerRef(String tlsContainerRef){
+        public ListenerV2Builder defaultTlsContainerRef(String tlsContainerRef) {
             m.defaultTlsContainerRef = tlsContainerRef;
             return this;
         }
     }
 
     @Override
-    public ListenerV2Builder toBuilder(){
+    public ListenerV2Builder toBuilder() {
         return new ListenerConcreteBuilder(this);
     }
 
-    public static ListenerV2Builder builder(){
+    public static ListenerV2Builder builder() {
         return new ListenerConcreteBuilder();
     }
 
@@ -312,7 +313,7 @@ public class NeutronListenerV2 implements ListenerV2 {
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return MoreObjects.toStringHelper(this)
                     .add("listeners", listeners)
                     .toString();

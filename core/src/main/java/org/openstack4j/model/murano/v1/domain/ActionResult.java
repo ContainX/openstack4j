@@ -14,14 +14,14 @@ public interface ActionResult extends ModelEntity {
     /**
      * @return the Result object.
      * It might be one of:
-     *  - String
-     *  - boolean
-     *  - int
-     *  - float
-     *  - List
-     *  - Map<String, Object>
-     *
-     *  depending on Action itself.
+     * - String
+     * - boolean
+     * - int
+     * - float
+     * - List
+     * - Map<String, Object>
+     * <p>
+     * depending on Action itself.
      */
     Object getResult();
 }

@@ -21,7 +21,8 @@ public class ManilaShareUpdate implements ModelEntity {
     @JsonProperty("is_public")
     private Boolean isPublic;
 
-    private ManilaShareUpdate() {}
+    private ManilaShareUpdate() {
+    }
 
     public static ManilaShareUpdate fromOptions(ShareUpdateOptions options) {
         ManilaShareUpdate shareUpdate = new ManilaShareUpdate();

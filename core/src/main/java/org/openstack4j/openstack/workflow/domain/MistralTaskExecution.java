@@ -12,128 +12,128 @@ import java.util.Map;
 
 /**
  * Mistral task execution.
- * 
+ *
  * @author Renat Akhmerov
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MistralTaskExecution extends BaseExecution implements TaskExecution {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String name;
+    private String name;
 
-	private String type;
+    private String type;
 
-	@JsonProperty("workflow_id")
-	private String wfDefId;
+    @JsonProperty("workflow_id")
+    private String wfDefId;
 
-	@JsonProperty("workflow_execution_id")
-	private String wfExecId;
+    @JsonProperty("workflow_execution_id")
+    private String wfExecId;
 
-	private Map<String, Object> published;
+    private Map<String, Object> published;
 
-	@JsonProperty("runtime_context")
-	private Map<String, Object> runtimeContext;
+    @JsonProperty("runtime_context")
+    private Map<String, Object> runtimeContext;
 
-	private Object result;
+    private Object result;
 
-	private Boolean processed;
+    private Boolean processed;
 
-	private Boolean reset;
+    private Boolean reset;
 
-	private Map<String, Object> env;
+    private Map<String, Object> env;
 
 
-	public static MistralTaskExecutionBuilder builder() {
-		return new MistralTaskExecutionBuilder();
-	}
-	
-	@Override
-	public MistralTaskExecutionBuilder toBuilder() {
-		return new MistralTaskExecutionBuilder(this);
-	}
+    public static MistralTaskExecutionBuilder builder() {
+        return new MistralTaskExecutionBuilder();
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public MistralTaskExecutionBuilder toBuilder() {
+        return new MistralTaskExecutionBuilder(this);
+    }
 
-	@Override
-	public String getType() {
-		return type;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public String getWorkflowDefinitionId() {
-		return wfDefId;
-	}
+    @Override
+    public String getType() {
+        return type;
+    }
 
-	@Override
-	public String getWorkflowExecutionId() {
-		return wfExecId;
-	}
+    @Override
+    public String getWorkflowDefinitionId() {
+        return wfDefId;
+    }
 
-	@Override
-	public Map<String, Object> getRuntimeContext() {
-		return runtimeContext;
-	}
+    @Override
+    public String getWorkflowExecutionId() {
+        return wfExecId;
+    }
 
-	@Override
-	public Object getResult() {
-		return result;
-	}
+    @Override
+    public Map<String, Object> getRuntimeContext() {
+        return runtimeContext;
+    }
 
-	@Override
-	public Map<String, Object> getPublished() {
-		return published;
-	}
+    @Override
+    public Object getResult() {
+        return result;
+    }
 
-	@Override
-	public Boolean isProcessed() {
-		return processed;
-	}
+    @Override
+    public Map<String, Object> getPublished() {
+        return published;
+    }
 
-	@Override
-	public Boolean isReset() {
-		return reset;
-	}
+    @Override
+    public Boolean isProcessed() {
+        return processed;
+    }
 
-	@Override
-	public Map<String, Object> getEnvironment() {
-		return env;
-	}
+    @Override
+    public Boolean isReset() {
+        return reset;
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-				.add("createdAt", createdAt)
-				.add("updatedAt", updatedAt)
-				.add("id", id)
-				.add("name", name)
-				.toString();
-	}
+    @Override
+    public Map<String, Object> getEnvironment() {
+        return env;
+    }
 
-	/**
-	 * Mistral task execution builder.
-	 *
-	 * @author Renat Akhmerov
-	 */
-	public static class MistralTaskExecutionBuilder extends
-			BaseExecutionBuilder<MistralTaskExecutionBuilder, MistralTaskExecution>
-			implements TaskExecutionBuilder<MistralTaskExecutionBuilder, MistralTaskExecution> {
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("createdAt", createdAt)
+                .add("updatedAt", updatedAt)
+                .add("id", id)
+                .add("name", name)
+                .toString();
+    }
 
-		public MistralTaskExecutionBuilder() {
-			this(new MistralTaskExecution());
-		}
+    /**
+     * Mistral task execution builder.
+     *
+     * @author Renat Akhmerov
+     */
+    public static class MistralTaskExecutionBuilder extends
+            BaseExecutionBuilder<MistralTaskExecutionBuilder, MistralTaskExecution>
+            implements TaskExecutionBuilder<MistralTaskExecutionBuilder, MistralTaskExecution> {
+
+        public MistralTaskExecutionBuilder() {
+            this(new MistralTaskExecution());
+        }
 
         public MistralTaskExecutionBuilder(MistralTaskExecution model) {
-			super(model);
-		}
+            super(model);
+        }
 
-		@Override
-		public MistralTaskExecutionBuilder from(MistralTaskExecution in) {
-			return null;
-		}
+        @Override
+        public MistralTaskExecutionBuilder from(MistralTaskExecution in) {
+            return null;
+        }
 
         @Override
         public MistralTaskExecutionBuilder type(String type) {
@@ -144,70 +144,70 @@ public class MistralTaskExecution extends BaseExecution implements TaskExecution
 
         @Override
         public MistralTaskExecutionBuilder workflowDefinitionId(String wfDefId) {
-		    this.model.wfDefId = wfDefId;
+            this.model.wfDefId = wfDefId;
 
             return this;
         }
 
         @Override
         public MistralTaskExecutionBuilder workflowExecutionId(String wfExecId) {
-		    this.model.wfExecId = wfExecId;
+            this.model.wfExecId = wfExecId;
 
             return this;
         }
 
         @Override
         public MistralTaskExecutionBuilder runtimeContext(Map<String, Object> runtimeContext) {
-		    this.model.runtimeContext = runtimeContext;
+            this.model.runtimeContext = runtimeContext;
 
             return this;
         }
 
         @Override
         public MistralTaskExecutionBuilder result(Object result) {
-		    this.model.result = result;
+            this.model.result = result;
 
             return this;
         }
 
         @Override
         public MistralTaskExecutionBuilder published(Map<String, Object> published) {
-		    this.model.published = published;
+            this.model.published = published;
 
             return this;
         }
 
         @Override
         public MistralTaskExecutionBuilder processed(Boolean processed) {
-		    this.model.processed = processed;
+            this.model.processed = processed;
 
             return this;
         }
 
         @Override
         public MistralTaskExecutionBuilder reset(Boolean reset) {
-		    this.model.reset = reset;
+            this.model.reset = reset;
 
             return this;
         }
 
         @Override
         public MistralTaskExecutionBuilder environment(Map<String, Object> env) {
-		    this.model.env = env;
+            this.model.env = env;
 
             return this;
         }
     }
 
-	public static class MistralTaskExecutions extends ListResult<MistralTaskExecution> {
-		private static final long serialVersionUID = 1L;
+    public static class MistralTaskExecutions extends ListResult<MistralTaskExecution> {
+        private static final long serialVersionUID = 1L;
 
-		@JsonProperty("tasks")
-		private List<MistralTaskExecution> list;
+        @JsonProperty("tasks")
+        private List<MistralTaskExecution> list;
 
-		@Override
-		protected List<MistralTaskExecution> value() {
-			return this.list;
-		}
-	}
+        @Override
+        protected List<MistralTaskExecution> value() {
+            return this.list;
+        }
+    }
 }

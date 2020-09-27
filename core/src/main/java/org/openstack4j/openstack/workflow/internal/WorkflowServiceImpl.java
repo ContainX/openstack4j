@@ -1,9 +1,7 @@
 package org.openstack4j.openstack.workflow.internal;
 
 import org.openstack4j.api.Apis;
-import org.openstack4j.api.trove.*;
 import org.openstack4j.api.workflow.*;
-import org.openstack4j.openstack.trove.internal.BaseTroveServices;
 
 /**
  * Trove API Implementation

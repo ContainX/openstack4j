@@ -1,9 +1,8 @@
 package org.openstack4j.openstack.sahara.domain;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.JobBinary;
-
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 /**
  * An OpenStack Sahara
@@ -14,8 +13,8 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
  */
 public class SaharaJobBinaryUnwrapped implements ModelEntity {
 
- private static final long serialVersionUID = 1L;
-    
+    private static final long serialVersionUID = 1L;
+
     @JsonUnwrapped
     //@JsonProperty("job_binary")
     private JobBinary jobBinary;

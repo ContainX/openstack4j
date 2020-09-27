@@ -48,7 +48,7 @@ public interface SecurityServiceService extends RestService {
     /**
      * Updates a security service.
      *
-     * @param securityServiceId the security service id
+     * @param securityServiceId            the security service id
      * @param securityServiceUpdateOptions the options to update on the security service
      * @return the updated security service
      */

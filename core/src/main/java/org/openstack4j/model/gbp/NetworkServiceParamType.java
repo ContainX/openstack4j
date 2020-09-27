@@ -12,18 +12,18 @@ public enum NetworkServiceParamType {
 
     IP_SINGLE,
     IP_POOL,
-    UNRECOGNIZED
-    ;
+    UNRECOGNIZED;
 
     @JsonValue
-    public String value() { return name().toLowerCase(); }
+    public String value() {
+        return name().toLowerCase();
+    }
 
     @JsonCreator
     public static NetworkServiceParamType value(String paramType) {
         try {
             return valueOf(paramType.toUpperCase());
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return UNRECOGNIZED;
         }
     }

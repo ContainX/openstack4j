@@ -1,14 +1,13 @@
 package org.openstack4j.api.identity.v3;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.identity.v3.Domain;
+
+import java.util.List;
 
 /**
  * Identity V3 Domain Service
- *
  */
 public interface DomainService extends RestService {
 
@@ -23,9 +22,9 @@ public interface DomainService extends RestService {
     /**
      * Creates a new domain
      *
-     * @param name the name of the new domain
+     * @param name        the name of the new domain
      * @param description the description of the new domain
-     * @param enabled the enabled status of the new domain
+     * @param enabled     the enabled status of the new domain
      * @return the new domain
      */
     Domain create(String name, String description, boolean enabled);

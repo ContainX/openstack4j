@@ -36,7 +36,7 @@ public class HttpClientFactory {
      */
     CloseableHttpClient getClient(Config config) {
         if (client == null) {
-            synchronized(this) {
+            synchronized (this) {
                 if (client == null) {
                     client = buildClient(config);
                 }
@@ -67,8 +67,7 @@ public class HttpClientFactory {
             }
         }
 
-        if (config.isIgnoreSSLVerification())
-        {
+        if (config.isIgnoreSSLVerification()) {
             cb.setSslcontext(UntrustedSSL.getSSLContext());
             cb.setHostnameVerifier(new AllowAllHostnameVerifier());
         }

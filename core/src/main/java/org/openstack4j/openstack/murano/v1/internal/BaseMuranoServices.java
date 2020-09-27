@@ -9,7 +9,6 @@ import org.openstack4j.openstack.internal.BaseOpenStackService;
  * the correct endpoint (url) for murano calls.
  *
  * @author Nikolay Makhotkin
- *
  */
 class BaseMuranoServices extends BaseOpenStackService {
 

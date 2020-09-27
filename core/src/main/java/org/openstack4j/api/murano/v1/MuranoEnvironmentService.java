@@ -25,6 +25,7 @@ public interface MuranoEnvironmentService extends RestService {
 
     /**
      * Gets an environment by ID
+     *
      * @param id the environment identifier
      * @return the cluster or null if not found
      */

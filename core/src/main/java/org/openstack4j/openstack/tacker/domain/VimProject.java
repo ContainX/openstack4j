@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 
 /**
- *
  * @author Vishvesh Deshmukh
  * @date Aug 18, 2016
  */
@@ -14,74 +13,74 @@ import com.google.common.base.MoreObjects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VimProject {
 
-	private String id;
+    private String id;
 
-	private String name;
+    private String name;
 
-	@JsonProperty("project_domain_name")
-	private String projectDomainName;
+    @JsonProperty("project_domain_name")
+    private String projectDomainName;
 
-	public static VimProject create() {
-		return new VimProject();
-	}
+    public static VimProject create() {
+        return new VimProject();
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("projectDomainName", projectDomainName)
-				.toString();
-	}
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("projectDomainName", projectDomainName)
+                .toString();
+    }
 
-	/**
-	 * ID to Set
-	 *
-	 * @param id the id to set
-	 * @return VimProject
-	 */
-	public VimProject id(String id) {
-		this.id = id;
-		return this;
-	}
+    /**
+     * ID to Set
+     *
+     * @param id the id to set
+     * @return VimProject
+     */
+    public VimProject id(String id) {
+        this.id = id;
+        return this;
+    }
 
-	/**
-	 * Project Name to Set
-	 *
-	 * @param name the name to set
-	 * @return VimProject
-	 */
-	public VimProject name(String name) {
-		this.name = name;
-		return this;
-	}
+    /**
+     * Project Name to Set
+     *
+     * @param name the name to set
+     * @return VimProject
+     */
+    public VimProject name(String name) {
+        this.name = name;
+        return this;
+    }
 
-	/**
-	 * ProjectDomainName to Set
-	 *
-	 * @param projectDomainName the projectDomainName to set
-	 * @return VimProject
-	 */
-	public VimProject projectDomainName(String projectDomainName) {
-		this.projectDomainName = projectDomainName;
-		return this;
-	}
+    /**
+     * ProjectDomainName to Set
+     *
+     * @param projectDomainName the projectDomainName to set
+     * @return VimProject
+     */
+    public VimProject projectDomainName(String projectDomainName) {
+        this.projectDomainName = projectDomainName;
+        return this;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @return the projectDomainName
-	 */
-	public String getProjectDomainName() {
-		return projectDomainName;
-	}
+    /**
+     * @return the projectDomainName
+     */
+    public String getProjectDomainName() {
+        return projectDomainName;
+    }
 }

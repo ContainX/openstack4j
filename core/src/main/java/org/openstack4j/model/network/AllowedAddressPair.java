@@ -5,19 +5,19 @@ import org.openstack4j.model.ModelEntity;
 
 /**
  * Allowed Address Pair for Neutron Port
- * 
+ *
  * @author Nathan Anderson
  */
 public interface AllowedAddressPair extends ModelEntity {
 
-  /**
-   * @return the ip address
-   */
-  String getIpAddress();
+    /**
+     * @return the ip address
+     */
+    String getIpAddress();
 
-  /**
-   * @return the mac address
-   */
-  String getMacAddress();
-	
+    /**
+     * @return the mac address
+     */
+    String getMacAddress();
+
 }

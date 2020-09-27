@@ -1,10 +1,9 @@
 package org.openstack4j.model.storage.block.ext;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.openstack4j.model.ModelEntity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.Date;
 
 /**
  * A Service represents a Block storage service
@@ -81,7 +80,6 @@ public interface Service extends ModelEntity {
     Status getStatus();
 
     /**
-     * 
      * @return last updated time
      */
     Date getUpdatedAt();

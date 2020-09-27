@@ -14,62 +14,62 @@ import java.io.Serializable;
  */
 public class ActionResponse implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String message;
-	private int code;
+    private String message;
+    private int code;
 
-	private ActionResponse(int code) {
-	    this.code = code;
-	}
+    private ActionResponse(int code) {
+        this.code = code;
+    }
 
-	private ActionResponse(String message, int code) {
-	    this(code);
-		this.message = message;
-	}
+    private ActionResponse(String message, int code) {
+        this(code);
+        this.message = message;
+    }
 
     public static ActionResponse actionSuccess(int code) {
         return new ActionResponse(code);
     }
 
     public static ActionResponse actionSuccess() {
-		return new ActionResponse(200);
-	}
+        return new ActionResponse(200);
+    }
 
-	public static ActionResponse actionFailed(String message, int code) {
-		return new ActionResponse(message, code);
-	}
+    public static ActionResponse actionFailed(String message, int code) {
+        return new ActionResponse(message, code);
+    }
 
-	/**
-	 * Returns the underlying error code (status code)
-	 *
-	 * @return the error code
-	 */
-	public int getCode() {
-	    return code;
-	}
+    /**
+     * Returns the underlying error code (status code)
+     *
+     * @return the error code
+     */
+    public int getCode() {
+        return code;
+    }
 
-	/**
-	 * @return true if the action was successful
-	 */
-	public boolean isSuccess() {
-		return message == null;
-	}
+    /**
+     * @return true if the action was successful
+     */
+    public boolean isSuccess() {
+        return message == null;
+    }
 
-	/**
-	 * @return the fault if the action was unsuccessful otherwise null
-	 */
-	public String getFault() {
-		return message;
-	}
+    /**
+     * @return the fault if the action was unsuccessful otherwise null
+     */
+    public String getFault() {
+        return message;
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).
                 omitNullValues().
                 add("success", message == null).
                 add("fault", message).
                 add("code", code).
                 toString();
-	}
+    }
 }

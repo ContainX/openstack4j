@@ -1,10 +1,9 @@
 package org.openstack4j.openstack.identity.v3.domain;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.io.Serializable;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.collect.Lists;
 import org.openstack4j.model.common.Identifier;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
@@ -13,16 +12,13 @@ import org.openstack4j.openstack.common.Auth.Type;
 import org.openstack4j.openstack.common.BasicResourceEntity;
 import org.openstack4j.openstack.common.IdResourceEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.collect.Lists;
+import java.io.Serializable;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- *
  * Represents an v3 Auth object.
- *
- *
  */
 @JsonRootName("auth")
 public class KeystoneAuth implements Authentication, AuthStore {
@@ -33,9 +29,9 @@ public class KeystoneAuth implements Authentication, AuthStore {
     private AuthScope scope;
     @JsonIgnore
     private transient Type type;
-    
+
     public KeystoneAuth() {
-    	super();
+        super();
     }
 
     public KeystoneAuth(String tokenId) {
@@ -59,7 +55,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
         this.type = Type.CREDENTIALS;
     }
 
-    public KeystoneAuth(AuthScope scope, Type type){
+    public KeystoneAuth(AuthScope scope, Type type) {
         this.scope = scope;
         this.type = type;
     }
@@ -108,9 +104,9 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
     public static final class AuthIdentity implements Identity, Serializable {
 
-		private static final long serialVersionUID = 1L;
-		
-		private AuthPassword password;
+        private static final long serialVersionUID = 1L;
+
+        private AuthPassword password;
         private AuthToken token;
         private List<String> methods = Lists.newArrayList();
 
@@ -149,9 +145,9 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
         public static final class AuthToken implements Token, Serializable {
 
-			private static final long serialVersionUID = 1L;
-			
-			@JsonProperty
+            private static final long serialVersionUID = 1L;
+
+            @JsonProperty
             private String id;
 
             AuthToken() {
@@ -169,9 +165,9 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
         public static final class AuthPassword implements Password, Serializable {
 
-			private static final long serialVersionUID = 1L;
-			
-			private AuthUser user;
+            private static final long serialVersionUID = 1L;
+
+            private AuthUser user;
 
             public AuthPassword() {
             }
@@ -204,8 +200,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
                         else
                             domain.setName(domainIdentifier.getId());
                         setName(username);
-                    }
-                    else
+                    } else
                         setId(username);
                 }
 
@@ -230,9 +225,9 @@ public class KeystoneAuth implements Authentication, AuthStore {
 
     public static final class AuthScope implements Scope, Serializable {
 
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		@JsonProperty("project")
+        @JsonProperty("project")
         private ScopeProject project;
 
         @JsonProperty("domain")
@@ -310,8 +305,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
                 scope.domain = new AuthDomain(domain);
                 if (project.isTypeID()) {
                     scope.id = project.getId();
-                }
-                else {
+                } else {
                     scope.name = project.getId();
                 }
                 return scope;

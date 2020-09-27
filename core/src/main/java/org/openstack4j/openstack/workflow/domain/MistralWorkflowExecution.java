@@ -12,52 +12,52 @@ import java.util.Map;
 
 /**
  * Mistral workflow execution.
- * 
+ *
  * @author Renat Akhmerov
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MistralWorkflowExecution extends BaseExecution implements WorkflowExecution {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @JsonProperty("params")
-	private Map<String, Object> parameters;
+    private Map<String, Object> parameters;
 
-	@JsonProperty("input")
-	private Map<String, Object> input;
+    @JsonProperty("input")
+    private Map<String, Object> input;
 
-	private Map<String, Object> output;
+    private Map<String, Object> output;
 
-	private String taskExecutionId;
+    private String taskExecutionId;
 
-	public static MistralWorkflowExecutionBuilder builder() {
-		return new MistralWorkflowExecutionBuilder();
-	}
-	
-	@Override
-	public MistralWorkflowExecutionBuilder toBuilder() {
-		return new MistralWorkflowExecutionBuilder(this);
-	}
-
-	@Override
-	public Map<String, Object> getParameters() {
-		return parameters;
-	}
-
-	@Override
-	public Map<String, Object> getInput() {
-		return input;
-	}
+    public static MistralWorkflowExecutionBuilder builder() {
+        return new MistralWorkflowExecutionBuilder();
+    }
 
     @Override
-	public Map<String, Object> getOutput() {
-		return output;
-	}
+    public MistralWorkflowExecutionBuilder toBuilder() {
+        return new MistralWorkflowExecutionBuilder(this);
+    }
 
-	@Override
-	public String getTaskExecutionId() {
-		return taskExecutionId;
-	}
+    @Override
+    public Map<String, Object> getParameters() {
+        return parameters;
+    }
+
+    @Override
+    public Map<String, Object> getInput() {
+        return input;
+    }
+
+    @Override
+    public Map<String, Object> getOutput() {
+        return output;
+    }
+
+    @Override
+    public String getTaskExecutionId() {
+        return taskExecutionId;
+    }
 
     @Override
     public String toString() {
@@ -70,65 +70,65 @@ public class MistralWorkflowExecution extends BaseExecution implements WorkflowE
     }
 
     /**
-	 * Mistral workflow execution builder.
-	 *
-	 * @author Renat Akhmerov
-	 */
-	public static class MistralWorkflowExecutionBuilder extends
-			BaseExecutionBuilder<MistralWorkflowExecutionBuilder, MistralWorkflowExecution>
-			implements WorkflowExecutionBuilder<MistralWorkflowExecutionBuilder, MistralWorkflowExecution> {
+     * Mistral workflow execution builder.
+     *
+     * @author Renat Akhmerov
+     */
+    public static class MistralWorkflowExecutionBuilder extends
+            BaseExecutionBuilder<MistralWorkflowExecutionBuilder, MistralWorkflowExecution>
+            implements WorkflowExecutionBuilder<MistralWorkflowExecutionBuilder, MistralWorkflowExecution> {
 
-		public MistralWorkflowExecutionBuilder() {
-			this(new MistralWorkflowExecution());
-		}
+        public MistralWorkflowExecutionBuilder() {
+            this(new MistralWorkflowExecution());
+        }
 
         public MistralWorkflowExecutionBuilder(MistralWorkflowExecution model) {
-			super(model);
-		}
+            super(model);
+        }
 
-		@Override
-		public MistralWorkflowExecutionBuilder from(MistralWorkflowExecution in) {
-			return null;
-		}
+        @Override
+        public MistralWorkflowExecutionBuilder from(MistralWorkflowExecution in) {
+            return null;
+        }
 
-		@Override
-		public MistralWorkflowExecutionBuilder parameters(Map<String, Object> parameters) {
+        @Override
+        public MistralWorkflowExecutionBuilder parameters(Map<String, Object> parameters) {
             this.model.parameters = parameters;
 
-			return this;
-		}
+            return this;
+        }
 
-		@Override
-		public MistralWorkflowExecutionBuilder input(Map<String, Object> input) {
-			this.model.input = input;
+        @Override
+        public MistralWorkflowExecutionBuilder input(Map<String, Object> input) {
+            this.model.input = input;
 
-			return this;
-		}
+            return this;
+        }
 
-		@Override
-		public MistralWorkflowExecutionBuilder output(Map<String, Object> output) {
-			this.model.output = output;
+        @Override
+        public MistralWorkflowExecutionBuilder output(Map<String, Object> output) {
+            this.model.output = output;
 
-			return this;
-		}
+            return this;
+        }
 
-		@Override
-		public MistralWorkflowExecutionBuilder taskExecutionId(String taskExecutionId) {
-			this.model.taskExecutionId = taskExecutionId;
+        @Override
+        public MistralWorkflowExecutionBuilder taskExecutionId(String taskExecutionId) {
+            this.model.taskExecutionId = taskExecutionId;
 
-			return this;
-		}
-	}
+            return this;
+        }
+    }
 
-	public static class MistralWorkflowExecutions extends ListResult<MistralWorkflowExecution> {
-		private static final long serialVersionUID = 1L;
+    public static class MistralWorkflowExecutions extends ListResult<MistralWorkflowExecution> {
+        private static final long serialVersionUID = 1L;
 
-		@JsonProperty("executions")
-		private List<MistralWorkflowExecution> list;
+        @JsonProperty("executions")
+        private List<MistralWorkflowExecution> list;
 
-		@Override
-		protected List<MistralWorkflowExecution> value() {
-			return this.list;
-		}
-	}
+        @Override
+        protected List<MistralWorkflowExecution> value() {
+            return this.list;
+        }
+    }
 }

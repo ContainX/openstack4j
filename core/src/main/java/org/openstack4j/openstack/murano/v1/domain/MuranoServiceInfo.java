@@ -1,6 +1,8 @@
 package org.openstack4j.openstack.murano.v1.domain;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openstack4j.model.murano.v1.domain.ServiceInfo;
 
@@ -11,7 +13,7 @@ import java.util.Map;
 /**
  * @author Nikolay Mahotkin.
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MuranoServiceInfo implements ServiceInfo {
     private static final long serialVersionUID = 1L;
 

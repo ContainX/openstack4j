@@ -22,10 +22,11 @@ public interface MuranoDeploymentService extends RestService {
      * Get the reports (deployment logs) of the specified deployment.
      *
      * @param environmentId environment id.
-     * @param deploymentId deployment id.
-     * @param serviceIds (optional) list of service ids.
+     * @param deploymentId  deployment id.
+     * @param serviceIds    (optional) list of service ids.
      * @return Report list.
      */
     List<? extends Report> reports(String environmentId, String deploymentId, List<String> serviceIds);
+
     List<? extends Report> reports(String environmentId, String deploymentId);
 }

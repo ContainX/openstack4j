@@ -4,7 +4,7 @@ import org.openstack4j.common.RestService;
 
 /**
  * (Sahara) Data Processing Operations API
- * 
+ *
  * @author Ekasit Kijsipongse
  */
 public interface SaharaService extends RestService {
@@ -15,7 +15,7 @@ public interface SaharaService extends RestService {
      * @return the cluster service
      */
     ClusterService clusters();
-    
+
     /**
      * Node Group Template Service API
      *
@@ -56,7 +56,7 @@ public interface SaharaService extends RestService {
      *
      * @return the job binary internal service
      */
-	JobBinaryInternalService jobBinaryInternals();
+    JobBinaryInternalService jobBinaryInternals();
 
     /**
      * Job Binary Service API

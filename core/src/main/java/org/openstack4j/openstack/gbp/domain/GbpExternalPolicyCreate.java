@@ -1,22 +1,22 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-import java.util.Map;
-
-import org.openstack4j.model.gbp.ExternalPolicyCreate;
-import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
+import org.openstack4j.model.gbp.ExternalPolicyCreate;
+import org.openstack4j.model.gbp.builder.ExternalPolicyBuilder;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * Model implementation for External Policy
  *
  * @author vinod borole
  */
 @JsonRootName("external_policy")
-public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
+public class GbpExternalPolicyCreate implements ExternalPolicyCreate {
     private static final long serialVersionUID = 1L;
     private String name;
     private String description;
@@ -24,9 +24,9 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
     private String tenantId;
     private String id;
     @JsonProperty("consumed_policy_rule_sets")
-    private Map<String,String> consumedPolicyRuleSets;
+    private Map<String, String> consumedPolicyRuleSets;
     @JsonProperty("provided_policy_rule_sets")
-    private Map<String,String> providedPolicyRuleSets;
+    private Map<String, String> providedPolicyRuleSets;
     @JsonProperty("external_segments")
     private List<String> externalSegments;
     private Boolean shared;
@@ -44,7 +44,7 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
      */
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     /**
@@ -60,7 +60,7 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
      */
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     /**
@@ -76,14 +76,14 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
      */
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Map<String,String> getConsumedPolicyRuleSets() {
+    public Map<String, String> getConsumedPolicyRuleSets() {
         return consumedPolicyRuleSets;
     }
 
@@ -91,7 +91,7 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
      * {@inheritDoc}
      */
     @Override
-    public Map<String,String> getProvidedPolicyRuleSets() {
+    public Map<String, String> getProvidedPolicyRuleSets() {
         return providedPolicyRuleSets;
 
     }
@@ -139,16 +139,16 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
         return MoreObjects.toStringHelper(this).omitNullValues().add("name", name).add("tenantId", tenantId).add("externalSegments", externalSegments).add("id", id).add("description", description).add("shared", shared).add("consumedPolicyRuleSets", consumedPolicyRuleSets).add("providedPolicyRuleSets", providedPolicyRuleSets).toString();
     }
 
-    public static class ExternalPolicyConcreteBuilder implements ExternalPolicyBuilder{
+    public static class ExternalPolicyConcreteBuilder implements ExternalPolicyBuilder {
 
         private GbpExternalPolicyCreate extPolicy;
 
-        public ExternalPolicyConcreteBuilder(){
+        public ExternalPolicyConcreteBuilder() {
             this(new GbpExternalPolicyCreate());
         }
 
         public ExternalPolicyConcreteBuilder(GbpExternalPolicyCreate gbpExternalPolicy) {
-            this.extPolicy=gbpExternalPolicy;
+            this.extPolicy = gbpExternalPolicy;
         }
 
         @Override
@@ -158,49 +158,49 @@ public class GbpExternalPolicyCreate implements ExternalPolicyCreate{
 
         @Override
         public ExternalPolicyBuilder from(ExternalPolicyCreate in) {
-            extPolicy = (GbpExternalPolicyCreate)in;
+            extPolicy = (GbpExternalPolicyCreate) in;
             return this;
         }
 
         @Override
         public ExternalPolicyBuilder name(String name) {
-            extPolicy.name=name;
+            extPolicy.name = name;
             return this;
         }
 
         @Override
         public ExternalPolicyBuilder description(String description) {
-            this.extPolicy.description=description;
+            this.extPolicy.description = description;
             return this;
         }
 
         @Override
         public ExternalPolicyBuilder isShared(boolean shared) {
-            this.extPolicy.shared=shared;
+            this.extPolicy.shared = shared;
             return this;
         }
 
         @Override
         public ExternalPolicyBuilder consumedPolicyRuleSets(List<String> policyRuleSet) {
-            this.extPolicy.consumedPolicyRuleSets=Maps.newHashMap();
-              for(String id : policyRuleSet ){
-                 this.extPolicy.consumedPolicyRuleSets.put(id, "");
-              }
+            this.extPolicy.consumedPolicyRuleSets = Maps.newHashMap();
+            for (String id : policyRuleSet) {
+                this.extPolicy.consumedPolicyRuleSets.put(id, "");
+            }
             return this;
         }
 
         @Override
         public ExternalPolicyBuilder providedPolicyRuleSets(List<String> policyRuleSet) {
-            this.extPolicy.providedPolicyRuleSets=Maps.newHashMap();
-            for(String id : policyRuleSet ){
+            this.extPolicy.providedPolicyRuleSets = Maps.newHashMap();
+            for (String id : policyRuleSet) {
                 this.extPolicy.providedPolicyRuleSets.put(id, "");
-             }
+            }
             return this;
         }
 
         @Override
         public ExternalPolicyBuilder externalSegments(List<String> externalSegmentIds) {
-            this.extPolicy.externalSegments=externalSegmentIds;
+            this.extPolicy.externalSegments = externalSegmentIds;
             return this;
         }
 

@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package org.openstack4j.model.workflow;
 
@@ -27,6 +27,7 @@ public interface EventTrigger extends ModelEntity, Buildable<CronTriggerBuilder>
      * @return The name of this definition.
      */
     String getName();
+
     /**
      * @return The name of workflow that this trigger needs to run.
      */

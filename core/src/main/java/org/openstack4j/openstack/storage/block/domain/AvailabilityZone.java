@@ -4,8 +4,8 @@ import org.openstack4j.model.ModelEntity;
 
 /**
  * Availability Zone Model Entity
- * 
- * @author Jeff Hu 
+ *
+ * @author Jeff Hu
  */
 public interface AvailabilityZone extends ModelEntity {
 
@@ -19,8 +19,8 @@ public interface AvailabilityZone extends ModelEntity {
      * @return zone's name
      */
     String getZoneName();
-    
-    
+
+
     public interface ZoneState extends ModelEntity {
 
         /**
@@ -28,7 +28,6 @@ public interface AvailabilityZone extends ModelEntity {
          */
         boolean getAvailable();
     }
-
 
 
 }

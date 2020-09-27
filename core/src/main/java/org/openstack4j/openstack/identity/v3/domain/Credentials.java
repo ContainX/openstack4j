@@ -1,11 +1,10 @@
 package org.openstack4j.openstack.identity.v3.domain;
 
-import org.openstack4j.model.identity.AuthStore;
-import org.openstack4j.model.identity.AuthVersion;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import org.openstack4j.model.identity.AuthStore;
+import org.openstack4j.model.identity.AuthVersion;
 
 @JsonRootName("auth")
 public class Credentials extends Auth implements AuthStore {

@@ -1,24 +1,22 @@
 {
-  "extensions":[
+  "extensions": [
     {
-      "updated":"2014-12-03T00:00:00Z",
-      "name":"Multinic",
-      "links":[
-
+      "updated": "2014-12-03T00:00:00Z",
+      "name": "Multinic",
+      "links": [
       ],
-      "namespace":"http://docs.openstack.org/compute/ext/fake_xml",
-      "alias":"NMN",
-      "description":"Multiple network support."
+      "namespace": "http://docs.openstack.org/compute/ext/fake_xml",
+      "alias": "NMN",
+      "description": "Multiple network support."
     },
     {
-      "updated":"2014-12-03T00:00:00Z",
-      "name":"DiskConfig",
-      "links":[
-
+      "updated": "2014-12-03T00:00:00Z",
+      "name": "DiskConfig",
+      "links": [
       ],
-      "namespace":"http://docs.openstack.org/compute/ext/fake_xml",
-      "alias":"OS-DCF",
-      "description":"Disk Management Extension."
+      "namespace": "http://docs.openstack.org/compute/ext/fake_xml",
+      "alias": "OS-DCF",
+      "description": "Disk Management Extension."
     }
   ]
 }

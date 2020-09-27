@@ -49,7 +49,7 @@ public interface ShareNetworkService extends RestService {
     /**
      * Updates a share network.
      *
-     * @param shareNetworkId the share network ID
+     * @param shareNetworkId            the share network ID
      * @param shareNetworkUpdateOptions the options to update on the share network
      * @return the updated share network
      */
@@ -66,7 +66,7 @@ public interface ShareNetworkService extends RestService {
     /**
      * Adds a security service to a share network.
      *
-     * @param shareNetworkId the share network ID
+     * @param shareNetworkId    the share network ID
      * @param securityServiceId the security service ID
      * @return the share network the security service was added to
      */
@@ -75,7 +75,7 @@ public interface ShareNetworkService extends RestService {
     /**
      * Removes a security service from a share network.
      *
-     * @param shareNetworkId the share network ID
+     * @param shareNetworkId    the share network ID
      * @param securityServiceId the security service ID
      * @return the share network the security service was removed from
      */

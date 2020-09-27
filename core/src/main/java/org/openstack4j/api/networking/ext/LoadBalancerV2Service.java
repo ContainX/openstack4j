@@ -12,6 +12,7 @@ import java.util.Map;
 
 /**
  * Networking (Neutron Lbaas) V2 loadbalancer Extention API
+ *
  * @author emjburns
  */
 public interface LoadBalancerV2Service extends RestService {
@@ -40,26 +41,32 @@ public interface LoadBalancerV2Service extends RestService {
 
     /**
      * Delete the specified loadbalancer by ID
+     *
      * @param loadbalancerId the loadbalancer identifier
      * @return the action response
      */
     ActionResponse delete(String loadbalancerId);
+
     /**
      * Create a loadbalancer
+     *
      * @param loadbalancer
      * @return loadbalancer
      */
     LoadBalancerV2 create(LoadBalancerV2 loadbalancer);
+
     /**
      * Update a loadbalancer
+     *
      * @param loadbalancerId the loadbalancer identifier
-     * @param loadbalancer LoadBalancerV2Update
+     * @param loadbalancer   LoadBalancerV2Update
      * @return loadbalancer
      */
     LoadBalancerV2 update(String loadbalancerId, LoadBalancerV2Update loadbalancer);
 
     /**
      * Retrieve statistics on a loadbalancer
+     *
      * @param loadbalancerId
      * @return LoadBalancerV2Stats
      */
@@ -67,6 +74,7 @@ public interface LoadBalancerV2Service extends RestService {
 
     /**
      * Retrieve the status tree of a loadbalancer
+     *
      * @param loadbalancerId
      * @return status
      */

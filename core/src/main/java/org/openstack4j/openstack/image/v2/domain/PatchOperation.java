@@ -8,6 +8,7 @@ import org.openstack4j.model.ModelEntity;
 
 /**
  * Representation of a json patch operation for an openstack image update
+ *
  * @author emjburns
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,8 +20,7 @@ public class PatchOperation implements ModelEntity {
         UNKNOWN;
 
         @JsonCreator
-        public static OperationType value(String v)
-        {
+        public static OperationType value(String v) {
             if (v == null) return UNKNOWN;
             try {
                 return valueOf(v.toUpperCase());
@@ -39,7 +39,8 @@ public class PatchOperation implements ModelEntity {
     private String path;
     private Object value;
 
-    public PatchOperation() {}
+    public PatchOperation() {
+    }
 
     public PatchOperation(OperationType op, String path, Object value) {
         this.op = op;

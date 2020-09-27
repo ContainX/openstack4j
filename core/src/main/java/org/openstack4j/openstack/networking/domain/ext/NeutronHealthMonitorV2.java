@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * A lbaas v2 health monitor entity
+ *
  * @author ashleykasim
  */
 @JsonRootName("healthmonitor")
@@ -37,13 +38,13 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
      * The HTTP method that the monitor uses for requests.
      */
     @JsonProperty("http_method")
-    private String httpMethod ;
+    private String httpMethod;
 
     /**
      * URL
      */
     @JsonProperty("url_path")
-    private String urlPath ;
+    private String urlPath;
 
     /**
      * default 200
@@ -63,78 +64,79 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
     private String poolId;
 
     @Override
-    public String getId(){
+    public String getId() {
         return id;
     }
 
     @Override
-    public String getTenantId(){
+    public String getTenantId() {
         return tenantId;
     }
 
     @Override
-    public HealthMonitorType getType(){
+    public HealthMonitorType getType() {
         return type;
     }
 
     @Override
-    public Integer getDelay(){
+    public Integer getDelay() {
         return delay;
     }
 
     @Override
-    public Integer getTimeout(){
+    public Integer getTimeout() {
         return timeout;
     }
 
     @Override
-    public Integer getMaxRetries(){
+    public Integer getMaxRetries() {
         return maxRetries;
     }
 
     @Override
-    public String getHttpMethod(){
+    public String getHttpMethod() {
         return httpMethod;
     }
 
     @Override
-    public String getUrlPath(){
+    public String getUrlPath() {
         return urlPath;
     }
 
     @Override
-    public String getExpectedCodes(){
+    public String getExpectedCodes() {
         return expectedCodes;
     }
 
     @Override
-    public boolean isAdminStateUp(){
+    public boolean isAdminStateUp() {
         return adminStateUp;
     }
 
     @Override
-    public List<ListItem> getPools(){
+    public List<ListItem> getPools() {
         return pools;
     }
 
     /**
      * wrap this healthMonitorV2 to a builder
+     *
      * @return HealthMonitorV2Builder
      */
     @Override
-    public HealthMonitorV2Builder toBuilder(){
+    public HealthMonitorV2Builder toBuilder() {
         return new HealthMonitorV2Concretebuilder(this);
     }
 
     /**
      * @return HealthMonitorV2Builder
      */
-    public static HealthMonitorV2Builder builder(){
+    public static HealthMonitorV2Builder builder() {
         return new HealthMonitorV2Concretebuilder();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("tenantId", tenantId)
@@ -155,10 +157,12 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
 
         @JsonProperty("healthmonitors")
         List<NeutronHealthMonitorV2> healthMonitors;
+
         @Override
         public List<NeutronHealthMonitorV2> value() {
             return healthMonitors;
         }
+
         @Override
         public String toString() {
             return MoreObjects.toStringHelper(this).omitNullValues()
@@ -168,23 +172,27 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
 
     public static class HealthMonitorV2Concretebuilder implements HealthMonitorV2Builder {
         NeutronHealthMonitorV2 m;
+
         @Override
         public HealthMonitorV2 build() {
             return m;
         }
-        public HealthMonitorV2Concretebuilder(){
+
+        public HealthMonitorV2Concretebuilder() {
             this(new NeutronHealthMonitorV2());
         }
-        public HealthMonitorV2Concretebuilder(NeutronHealthMonitorV2 m){
+
+        public HealthMonitorV2Concretebuilder(NeutronHealthMonitorV2 m) {
             this.m = m;
         }
+
         @Override
         public HealthMonitorV2Builder from(HealthMonitorV2 in) {
-            this.m = (NeutronHealthMonitorV2)in;
+            this.m = (NeutronHealthMonitorV2) in;
             return this;
         }
+
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -194,7 +202,6 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -204,7 +211,6 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -214,7 +220,6 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -224,7 +229,6 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -234,7 +238,6 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -244,7 +247,6 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -254,7 +256,6 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -264,7 +265,6 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
@@ -274,11 +274,10 @@ public class NeutronHealthMonitorV2 implements HealthMonitorV2 {
         }
 
         /**
-         *
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2Builder poolId(String poolId){
+        public HealthMonitorV2Builder poolId(String poolId) {
             m.poolId = poolId;
             return this;
         }

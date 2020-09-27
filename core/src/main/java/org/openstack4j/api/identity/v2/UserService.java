@@ -1,14 +1,14 @@
 package org.openstack4j.api.identity.v2;
 
-import java.util.List;
-
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v2.Role;
 import org.openstack4j.model.identity.v2.User;
 
+import java.util.List;
+
 /**
  * Identity User based Operations
- * 
+ *
  * @author Jeremy Unruh
  */
 public interface UserService {
@@ -21,7 +21,8 @@ public interface UserService {
      */
     User get(String userId);
 
-    /**API added by @ Sandeep Kumar Singh
+    /**
+     * API added by @ Sandeep Kumar Singh
      * Gets detailed information about a specified user by name
      *
      * @param userName the user name
@@ -48,16 +49,17 @@ public interface UserService {
      * Creates a new User
      *
      * @param tenantId the tenant id
-     * @param name the name of the user
+     * @param name     the name of the user
      * @param password the password for the user
-     * @param email the email address of the user
-     * @param enabled if true the user will be immediately enabled
+     * @param email    the email address of the user
+     * @param enabled  if true the user will be immediately enabled
      * @return the newly created user
      */
     User create(String tenantId, String name, String password, String email, boolean enabled);
 
     /**
      * Creates a User
+     *
      * @param user the user to create
      * @return the newly created user
      */
@@ -69,12 +71,12 @@ public interface UserService {
      * @param userId the user id
      * @return the action response
      */
-     ActionResponse delete(String userId);
+    ActionResponse delete(String userId);
 
     /**
      * Enables/Disables a user by ID
      *
-     * @param userId the user id
+     * @param userId  the user id
      * @param enabled true to enable the user
      * @return the updated User
      */
@@ -91,7 +93,7 @@ public interface UserService {
     /**
      * Changes a password for the specified user by ID
      *
-     * @param userId the user id
+     * @param userId   the user id
      * @param password the new password
      * @return the action response
      */
@@ -114,9 +116,9 @@ public interface UserService {
     List<? extends Role> listRoles(User user);
 
     /**
-     * Lists the tenant roles for a specified user. 
+     * Lists the tenant roles for a specified user.
      *
-     * @param userId the user id
+     * @param userId   the user id
      * @param tenantId the tenant id
      * @return List of Role
      */

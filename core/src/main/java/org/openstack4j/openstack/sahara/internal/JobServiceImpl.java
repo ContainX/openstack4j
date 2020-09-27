@@ -1,9 +1,5 @@
 package org.openstack4j.openstack.sahara.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.sahara.JobService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.sahara.Job;
@@ -12,6 +8,10 @@ import org.openstack4j.openstack.sahara.domain.SaharaJob;
 import org.openstack4j.openstack.sahara.domain.SaharaJob.Jobs;
 import org.openstack4j.openstack.sahara.domain.SaharaJobConfigHint;
 import org.openstack4j.openstack.sahara.domain.SaharaJobUnwrapped;
+
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Sahara Data Processing Operations
@@ -46,8 +46,8 @@ public class JobServiceImpl extends BaseSaharaServices implements JobService {
         checkNotNull(job);
         SaharaJobUnwrapped unwrapped = new SaharaJobUnwrapped(job);
         return post(SaharaJob.class, uri("/jobs"))
-                     .entity(unwrapped)  // setup request
-                     .execute();
+                .entity(unwrapped)  // setup request
+                .execute();
     }
 
     /**

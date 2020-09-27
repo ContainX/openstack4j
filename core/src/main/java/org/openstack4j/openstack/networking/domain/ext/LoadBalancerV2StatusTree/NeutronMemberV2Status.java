@@ -8,6 +8,7 @@ import org.openstack4j.model.network.ext.status.MemberV2Status;
 
 /**
  * An object to hold status of lbaas v2 member
+ *
  * @author emjburns
  */
 @JsonRootName("members")
@@ -20,16 +21,16 @@ public class NeutronMemberV2Status extends Status implements MemberV2Status {
     @JsonProperty("address")
     private String address;
 
-    public Integer getProtocolPort(){
+    public Integer getProtocolPort() {
         return protocolPort;
     }
 
-    public String getAddress(){
+    public String getAddress() {
         return address;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("protocolPort", protocolPort)

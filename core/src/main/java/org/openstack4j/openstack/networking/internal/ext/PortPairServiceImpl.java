@@ -1,15 +1,15 @@
 package org.openstack4j.openstack.networking.internal.ext;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.networking.ext.PortPairService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.ext.PortPair;
 import org.openstack4j.openstack.networking.domain.ext.NeutronPortPair;
 import org.openstack4j.openstack.networking.domain.ext.NeutronPortPair.PortPairs;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
+
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * {@inheritDoc}
@@ -39,7 +39,7 @@ public class PortPairServiceImpl extends BaseNetworkingServices implements PortP
     @Override
     public ActionResponse delete(String portPairId) {
         checkNotNull(portPairId);
-        return deleteWithResponse(uri("/sfc/port_pairs/%s", portPairId  )).execute();
+        return deleteWithResponse(uri("/sfc/port_pairs/%s", portPairId)).execute();
     }
 
     /**

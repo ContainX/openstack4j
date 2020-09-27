@@ -16,33 +16,33 @@ import java.util.Map;
 
 public interface AlarmBuilder extends Builder<AlarmBuilder, Alarm> {
 
-	AlarmBuilder name(String name);
+    AlarmBuilder name(String name);
 
-	AlarmBuilder okActions(List<String> okActions);
+    AlarmBuilder okActions(List<String> okActions);
 
-	AlarmBuilder alarmActions(List<String> alarmActions);
+    AlarmBuilder alarmActions(List<String> alarmActions);
 
-	AlarmBuilder type(Type type);
+    AlarmBuilder type(Type type);
 
-	AlarmBuilder thresholeRule(CeilometerThresholdRule te);
+    AlarmBuilder thresholeRule(CeilometerThresholdRule te);
 
-	AlarmBuilder combinationRule(CeilometerCombinationRule ce);
+    AlarmBuilder combinationRule(CeilometerCombinationRule ce);
 
-	AlarmBuilder compositeRule(Map<String, Object> cr);
+    AlarmBuilder compositeRule(Map<String, Object> cr);
 
-	AlarmBuilder gnocchiResourcesThresholdRule(CeilometerGnocchiResourcesThresholdRule ceilometerGnocchiResourcesThreshold);
+    AlarmBuilder gnocchiResourcesThresholdRule(CeilometerGnocchiResourcesThresholdRule ceilometerGnocchiResourcesThreshold);
 
-	AlarmBuilder gnocchiAggregationByMetricsThresholdRule(CeilometerGnocchiAggregationByMetricsThresholdRule ceilometerGnocchiAggregationByMetricsThreshold);
+    AlarmBuilder gnocchiAggregationByMetricsThresholdRule(CeilometerGnocchiAggregationByMetricsThresholdRule ceilometerGnocchiAggregationByMetricsThreshold);
 
-	AlarmBuilder gnocchiAggregationByResourcesThresholdRule(CeilometerGnocchiAggregationByResourcesThresholdRule ceilometerGnocchiAggregationByResourcesThreshold);
+    AlarmBuilder gnocchiAggregationByResourcesThresholdRule(CeilometerGnocchiAggregationByResourcesThresholdRule ceilometerGnocchiAggregationByResourcesThreshold);
 
-	AlarmBuilder repeatActions(boolean repeatActions);
+    AlarmBuilder repeatActions(boolean repeatActions);
 
-	AlarmBuilder description(String description);
+    AlarmBuilder description(String description);
 
-	AlarmBuilder isEnabled(boolean isEnabled);
+    AlarmBuilder isEnabled(boolean isEnabled);
 
-	AlarmBuilder insufficientDataActions(List<String> insufficientDataActions) ;
+    AlarmBuilder insufficientDataActions(List<String> insufficientDataActions);
 
 
 }

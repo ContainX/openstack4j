@@ -1,7 +1,6 @@
 package org.openstack4j.openstack.compute.functions;
 
 import com.google.common.base.Function;
-
 import org.openstack4j.core.transport.HttpEntityHandler;
 import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.functions.ResponseToActionResponse;

@@ -1,16 +1,16 @@
 package org.openstack4j.api.compute.ext;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.List;
-
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.model.compute.InstanceAction;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+
 /**
  * Tests the os-instance-actions Compute API extension.
- * 
+ *
  * @author Christian Banse
  */
 @Test(suiteName = "Compute")

@@ -15,8 +15,8 @@ import org.openstack4j.api.networking.ext.ServiceFunctionChainService;
 import org.openstack4j.api.octavia.OctaviaService;
 import org.openstack4j.api.sahara.SaharaService;
 import org.openstack4j.api.senlin.SenlinService;
-import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.tacker.TackerService;
+import org.openstack4j.api.trove.TroveService;
 import org.openstack4j.api.workflow.WorkflowService;
 
 import java.util.ServiceLoader;
@@ -33,10 +33,8 @@ public class Apis {
     /**
      * Gets the API implementation based on Type
      *
-     * @param <T>
-     *            the API type
-     * @param api
-     *            the API implementation
+     * @param <T> the API type
+     * @param api the API implementation
      * @return the API implementation
      */
     public static <T> T get(Class<T> api) {
@@ -51,7 +49,7 @@ public class Apis {
     public static org.openstack4j.api.identity.v3.IdentityService getIdentityV3Services() {
         return get(org.openstack4j.api.identity.v3.IdentityService.class);
     }
-    
+
     /**
      * Gets the identity v2 services API
      *
@@ -96,7 +94,7 @@ public class Apis {
     public static OctaviaService getOctaviaService() {
         return get(OctaviaService.class);
     }
-    
+
     /**
      * Gets the Artifact services API
      *
@@ -126,6 +124,7 @@ public class Apis {
 
     /**
      * Gets the (Glance) Image v2 services API
+     *
      * @return the image v2 services
      */
     public static org.openstack4j.api.image.v2.ImageService getImageV2Service() {
@@ -134,7 +133,7 @@ public class Apis {
 
     /**
      * Gets the (Heat) Orchestration services API
-     * 
+     *
      * @return the heat services
      */
     public static HeatService getHeatServices() {
@@ -152,7 +151,7 @@ public class Apis {
 
     /**
      * Gets the (Sahara) Data Processing services API
-     * 
+     *
      * @return the sahara services
      */
     public static SaharaService getSaharaServices() {
@@ -170,16 +169,17 @@ public class Apis {
 
     /**
      * Gets the (Manila) Shared File Systems services API
-     * 
+     *
      * @return the share services
      */
     public static ShareService getShareServices() {
         return get(ShareService.class);
     }
 
-	/**
+    /**
      * Gets the group based policy services API
-     * @return the gbp services 
+     *
+     * @return the gbp services
      */
     public static GbpService getGbpServices() {
         return get(GbpService.class);
@@ -187,21 +187,23 @@ public class Apis {
 
     /**
      * Gets the trove services API
+     *
      * @return the trove services
      */
-    public static TroveService getTroveServices(){
+    public static TroveService getTroveServices() {
         return get(TroveService.class);
     }
 
-	/**
-	 * Gets the (Senlin) Orchestration services API
-	 * @return the Senlin services
-	 */
-	public static SenlinService getSenlinServices() {
-		return get(SenlinService.class);
-	}
+    /**
+     * Gets the (Senlin) Orchestration services API
+     *
+     * @return the Senlin services
+     */
+    public static SenlinService getSenlinServices() {
+        return get(SenlinService.class);
+    }
 
-	/**
+    /**
      * Gets the Magnum services API
      *
      * @return the Magnum Service
@@ -212,6 +214,7 @@ public class Apis {
 
     /**
      * Gets the (BarbicanService) Orchestration services API
+     *
      * @return the BarbicanService services
      */
     public static BarbicanService getBarbicanServices() {
@@ -220,9 +223,12 @@ public class Apis {
 
     /**
      * Gets the dns services API
+     *
      * @return the dns services
      */
-    public static DNSService getDNSService() { return get(DNSService.class); }
+    public static DNSService getDNSService() {
+        return get(DNSService.class);
+    }
 
 
     private static APIProvider initializeProvider() {

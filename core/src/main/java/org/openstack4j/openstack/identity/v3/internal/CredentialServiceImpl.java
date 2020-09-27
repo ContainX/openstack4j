@@ -1,15 +1,15 @@
 package org.openstack4j.openstack.identity.v3.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.core.transport.ClientConstants.PATH_CREDENTIALS;
-
-import java.util.List;
-
 import org.openstack4j.api.identity.v3.CredentialService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Credential;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneCredential;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneCredential.Credentials;
+
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.ClientConstants.PATH_CREDENTIALS;
 
 public class CredentialServiceImpl extends BaseIdentityServices implements CredentialService {
 

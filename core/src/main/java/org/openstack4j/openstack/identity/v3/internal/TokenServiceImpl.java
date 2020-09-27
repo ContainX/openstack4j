@@ -1,10 +1,6 @@
 package org.openstack4j.openstack.identity.v3.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.core.transport.ClientConstants.*;
-
 import org.openstack4j.api.identity.v3.TokenService;
-
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Domain;
 import org.openstack4j.model.identity.v3.Project;
@@ -16,6 +12,9 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneService.Catalog;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneToken;
 
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.ClientConstants.*;
 
 public class TokenServiceImpl extends BaseIdentityServices implements TokenService {
 

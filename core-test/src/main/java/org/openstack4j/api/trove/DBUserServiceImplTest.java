@@ -31,21 +31,21 @@ public class DBUserServiceImplTest extends AbstractTest {
     }
 
     @Test
-    public void testListDatabaseUsers() throws Exception{
+    public void testListDatabaseUsers() throws Exception {
         String databaseInstanceId = "54c91755526e44b9808385a263db4aa6";
         respondWith(TROVE_DATABASE_USERS);
         List<? extends DatabaseUser> databaseUsers = osv2().trove().databaseUsersService().list(databaseInstanceId);
         assertEquals(2, databaseUsers.size());
         Preconditions.checkNotNull(databaseUsers.get(0));
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Database User from List : "+ databaseUsers.get(0));
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Database User from List : " + databaseUsers.get(0));
     }
 
     @Test
-    public void testCreateDatabaseUser() throws Exception{
+    public void testCreateDatabaseUser() throws Exception {
         String databaseInstanceId = "54c91755526e44b9808385a263db4aa6";
         respondWith(200);
         TroveBuilders troveBuilders = new TroveBuilders();
-        TroveDatabaseUser databaseUser = (TroveDatabaseUser)troveBuilders.databaseUserCreate().username("dbuser4")
+        TroveDatabaseUser databaseUser = (TroveDatabaseUser) troveBuilders.databaseUserCreate().username("dbuser4")
                 .password("password").build();
         List<TroveDatabaseUser> troveDatabaseUsers = new ArrayList<>();
         troveDatabaseUsers.add(databaseUser);

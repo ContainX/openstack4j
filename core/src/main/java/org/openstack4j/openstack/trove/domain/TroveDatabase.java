@@ -93,7 +93,7 @@ public class TroveDatabase implements Database {
 
         @Override
         public DatabaseBuilder from(Database in) {
-            this.database = (TroveDatabase)in;
+            this.database = (TroveDatabase) in;
             return this;
         }
 

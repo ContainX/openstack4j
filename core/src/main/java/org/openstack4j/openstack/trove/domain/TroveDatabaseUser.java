@@ -87,7 +87,7 @@ public class TroveDatabaseUser implements DatabaseUser {
 
         @Override
         public DatabaseUserBuilder from(DatabaseUser in) {
-            this.databaseUser = (TroveDatabaseUser)in;
+            this.databaseUser = (TroveDatabaseUser) in;
             return this;
         }
 

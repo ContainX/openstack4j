@@ -1,10 +1,5 @@
 package org.openstack4j.openstack.networking.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.api.networking.NetFloatingIPService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
@@ -12,6 +7,11 @@ import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.NetFloatingIP;
 import org.openstack4j.openstack.networking.domain.NeutronFloatingIP;
 import org.openstack4j.openstack.networking.domain.NeutronFloatingIP.FloatingIPs;
+
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * FloatingIPService implementation that provides Neutron Floating-IP based Service Operations.
@@ -67,7 +67,7 @@ public class FloatingIPServiceImpl extends BaseNetworkingServices implements Net
     public NetFloatingIP create(NetFloatingIP floatingIp) {
         checkNotNull(floatingIp);
         checkNotNull(floatingIp.getFloatingNetworkId());
-        return post(NeutronFloatingIP.class, uri("/floatingips")).entity(floatingIp).execute(); 
+        return post(NeutronFloatingIP.class, uri("/floatingips")).entity(floatingIp).execute();
     }
 
     /**
@@ -79,7 +79,7 @@ public class FloatingIPServiceImpl extends BaseNetworkingServices implements Net
         checkNotNull(portId);
         String inner = String.format("{ \"port_id\":\"%s\" }", portId);
         String json = String.format("{ \"%s\": %s }", "floatingip", inner);
-        return put(NeutronFloatingIP.class, uri("/floatingips/%s",id)).json(json)
+        return put(NeutronFloatingIP.class, uri("/floatingips/%s", id)).json(json)
                 .execute(ExecutionOptions.<NeutronFloatingIP>create(PropagateOnStatus.on(404)));
 
     }
@@ -91,7 +91,7 @@ public class FloatingIPServiceImpl extends BaseNetworkingServices implements Net
     public NetFloatingIP disassociateFromPort(String id) {
         checkNotNull(id);
         String json = String.format("{ \"%s\": %s }", "floatingip", "{ \"port_id\":null }");
-        return put(NeutronFloatingIP.class, uri("/floatingips/%s",id)).json(json)
+        return put(NeutronFloatingIP.class, uri("/floatingips/%s", id)).json(json)
                 .execute(ExecutionOptions.<NeutronFloatingIP>create(PropagateOnStatus.on(404)));
     }
 }

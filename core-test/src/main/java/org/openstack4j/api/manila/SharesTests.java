@@ -22,8 +22,8 @@ import static org.testng.Assert.*;
  *
  * @author Daniel Gonzalez Nothnagel
  */
-@Test(suiteName="Shares")
-public class SharesTests extends AbstractTest{
+@Test(suiteName = "Shares")
+public class SharesTests extends AbstractTest {
     private static final String JSON_SHARE = "/manila/share.json";
     private static final String JSON_SHARE_CREATE = "/manila/share_create.json";
     private static final String JSON_SHARE_UPDATE = "/manila/share_update.json";

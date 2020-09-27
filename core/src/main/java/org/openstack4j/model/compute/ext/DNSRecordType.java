@@ -5,54 +5,84 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * DNS Record Types
- * 
+ *
  * @author Jeremy Unruh
  */
 public enum DNSRecordType {
 
-    /**  a host address */
+    /**
+     * a host address
+     */
     A,
-    /**  an authoritative name server */
+    /**
+     * an authoritative name server
+     */
     NS,
-    /**  a mail destination (Obsolete - use MX) */
+    /**
+     * a mail destination (Obsolete - use MX)
+     */
     MD,
-    /**  a mail forwarder (Obsolete - use MX) */
+    /**
+     * a mail forwarder (Obsolete - use MX)
+     */
     MF,
-    /**  the canonical name for an alias */
+    /**
+     * the canonical name for an alias
+     */
     CNAME,
-    /**  marks the start of a zone of authority */
+    /**
+     * marks the start of a zone of authority
+     */
     SOA,
-    /**  a mailbox domain name (EXPERIMENTAL) */
+    /**
+     * a mailbox domain name (EXPERIMENTAL)
+     */
     MB,
-    /**  a mail group member (EXPERIMENTAL) */
+    /**
+     * a mail group member (EXPERIMENTAL)
+     */
     MG,
-    /**  a mail rename domain name (EXPERIMENTAL) */
+    /**
+     * a mail rename domain name (EXPERIMENTAL)
+     */
     MR,
-    /**  a null RR (EXPERIMENTAL) */
+    /**
+     * a null RR (EXPERIMENTAL)
+     */
     NULL,
-    /**  a well known service description */
+    /**
+     * a well known service description
+     */
     WKS,
-    /**  a domain name pointer */
+    /**
+     * a domain name pointer
+     */
     PTR,
-    /**  host information */
+    /**
+     * host information
+     */
     HINFO,
-    /**  mailbox or mail list information */
+    /**
+     * mailbox or mail list information
+     */
     MINFO,
-    /**  mail exchange */
+    /**
+     * mail exchange
+     */
     MX,
-    /**  text strings */
-    TXT
-    ;
-    
+    /**
+     * text strings
+     */
+    TXT;
+
     @JsonValue
     public String value() {
         return name();
     }
-    
+
     @JsonCreator
     public static DNSRecordType forValue(String value) {
-        if (value != null)
-        {
+        if (value != null) {
             for (DNSRecordType rt : DNSRecordType.values()) {
                 if (rt.name().equalsIgnoreCase(value))
                     return rt;

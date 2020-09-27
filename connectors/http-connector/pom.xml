@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.pacesys.openstack4j.connectors</groupId>
@@ -10,87 +11,87 @@
     <artifactId>openstack4j-http-connector</artifactId>
     <packaging>jar</packaging>
 
- 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-                                <version>1.0.0</version>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-Name>${project.name}</Bundle-Name>
-						<Export-Package>
-							org.openstack4j.connectors.http
-						</Export-Package>
-						<Import-Package>
-							!org.openstack4j.connectors.http
-							*
-						</Import-Package>
-						<!--
-						Required for SPI in OSGi:
-						http://aries.apache.org/modules/spi-fly.html#specconf
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>1.0.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Export-Package>
+                            org.openstack4j.connectors.http
+                        </Export-Package>
+                        <Import-Package>
+                            !org.openstack4j.connectors.http
+                            *
+                        </Import-Package>
+                        <!--
+                        Required for SPI in OSGi:
+                        http://aries.apache.org/modules/spi-fly.html#specconf
 
-						This bundle defines an implementation for following services in META-INF-services:
-						org.openstack4j.core.transport.HttpExecutorService
-						 -->
-						<Require-Capability>
-							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
-						</Require-Capability>
-						<Provide-Capability>
-							osgi.serviceloader; osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService
-						</Provide-Capability>
-					</instructions>
-				</configuration>
-			</plugin>
+                        This bundle defines an implementation for following services in META-INF-services:
+                        org.openstack4j.core.transport.HttpExecutorService
+                         -->
+                        <Require-Capability>
+                            osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
+                        </Require-Capability>
+                        <Provide-Capability>
+                            osgi.serviceloader; osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService
+                        </Provide-Capability>
+                    </instructions>
+                </configuration>
+            </plugin>
 
-			<!-- JDK 1.8 required by this connector (https://github.com/ContainX/openstack4j/issues/673) -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.felix
-										</groupId>
-										<artifactId>
-											maven-bundle-plugin
-										</artifactId>
-										<versionRange>
-											[1.0.0,)
-										</versionRange>
-										<goals>
-											<goal>manifest</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
- 	</build>
+            <!-- JDK 1.8 required by this connector (https://github.com/ContainX/openstack4j/issues/673) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.apache.felix
+                                        </groupId>
+                                        <artifactId>
+                                            maven-bundle-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [1.0.0,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>manifest</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>

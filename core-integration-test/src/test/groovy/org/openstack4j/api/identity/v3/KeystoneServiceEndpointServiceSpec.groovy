@@ -3,7 +3,6 @@ package org.openstack4j.api.identity.v3
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
-
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.Builders
 import org.openstack4j.api.OSClient.OSClientV3
@@ -13,20 +12,20 @@ import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.v3.Endpoint
 import org.openstack4j.model.identity.v3.Service
 import org.openstack4j.openstack.OSFactory
-
 import software.betamax.Configuration
 import software.betamax.MatchRules
 import software.betamax.TapeMode
 import software.betamax.junit.Betamax
 import software.betamax.junit.RecorderRule
-
 import spock.lang.IgnoreIf
 
 @Slf4j
 class KeystoneServiceEndpointServiceSpec extends AbstractSpec {
 
-    @Rule TestName KeystoneServiceEndpointServiceTest
-    @Rule public RecorderRule recorderRule = new RecorderRule(
+    @Rule
+    TestName KeystoneServiceEndpointServiceTest
+    @Rule
+    public RecorderRule recorderRule = new RecorderRule(
             Configuration.builder()
                     .tapeRoot(new File(TAPEROOT + "identity.v3"))
                     .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
@@ -39,8 +38,8 @@ class KeystoneServiceEndpointServiceSpec extends AbstractSpec {
     def static final String SERVICE_CRUD_DESCRIPTION = "A service used for tests."
     def static final String SERVICE_CRUD_DESCRIPTION_UPDATE = "A updated service used for tests."
     def static final String ENDPOINT_CRUD_NAME = "Endpoint_CRUD"
-    def static final URL ENDPOINT_CRUD_URL = new URL( "http", "devstack.openstack.stack", 5000, "/v3")
-    def static final URL ENDPOINT_CRUD_URL_UPDATE = new URL( "http", "stack.openstack.devstack", 5000, "/v3");
+    def static final URL ENDPOINT_CRUD_URL = new URL("http", "devstack.openstack.stack", 5000, "/v3")
+    def static final URL ENDPOINT_CRUD_URL_UPDATE = new URL("http", "stack.openstack.devstack", 5000, "/v3");
     def static final Facing ENDPOINT_CRUD_IFACE = Facing.ADMIN
     def static final String ENDPOINT_CRUD_REGIONID = "RegionOne"
     def String SERVICE_CRUD_ID
@@ -49,30 +48,28 @@ class KeystoneServiceEndpointServiceSpec extends AbstractSpec {
     static final boolean skipTest
 
     static {
-        if(
+        if (
         USER_ID == null ||
-        AUTH_URL == null ||
-        PASSWORD == null ||
-        DOMAIN_ID == null ||
-        PROJECT_ID == null  ) {
+                AUTH_URL == null ||
+                PASSWORD == null ||
+                DOMAIN_ID == null ||
+                PROJECT_ID == null) {
 
             skipTest = true
-        }
-        else{
+        } else {
             skipTest = false
         }
     }
 
     def setupSpec() {
 
-        if( skipTest != true ) {
+        if (skipTest != true) {
             log.info("USER_ID: " + USER_ID)
             log.info("AUTH_URL: " + AUTH_URL)
             log.info("PASSWORD: " + PASSWORD)
             log.info("DOMAIN_ID: " + DOMAIN_ID)
             log.info("PROJECT_ID: " + PROJECT_ID)
-        }
-        else {
+        } else {
             log.warn("Skipping integration-test cases because not all mandatory attributes are set.")
         }
     }
@@ -85,7 +82,7 @@ class KeystoneServiceEndpointServiceSpec extends AbstractSpec {
     // ------------ ServiceEndpointService Tests ------------
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="serviceEndpoints_all.tape")
+    @Betamax(tape = "serviceEndpoints_all.tape")
     def "service manager service test cases"() {
 
         given: "authenticated v3 OSClient"
@@ -121,7 +118,7 @@ class KeystoneServiceEndpointServiceSpec extends AbstractSpec {
 
         then: "the list should contain at least the recently created service"
         serviceList.isEmpty() == false
-        serviceList.find { it.getId() == SERVICE_CRUD_ID}
+        serviceList.find { it.getId() == SERVICE_CRUD_ID }
 
         when: "we get the recently created service by id"
         Service service_byId = os.identity().serviceEndpoints().get(SERVICE_CRUD_ID)
@@ -167,7 +164,7 @@ class KeystoneServiceEndpointServiceSpec extends AbstractSpec {
 
         then: "the list should contain at least one endpoint"
         endpointList.isEmpty() == false
-        endpointList.find { it.getId() == ENDPOINT_CRUD_ID}
+        endpointList.find { it.getId() == ENDPOINT_CRUD_ID }
 
         when: "get details on the recently created endpoint specified by id"
         Endpoint endpoint_byId = os.identity().serviceEndpoints().getEndpoint(ENDPOINT_CRUD_ID)

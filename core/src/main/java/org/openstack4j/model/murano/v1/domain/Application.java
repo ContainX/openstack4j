@@ -9,13 +9,11 @@ import java.util.Map;
  */
 public interface Application extends ModelEntity {
     /**
-     *
      * @return data in map format (Map<String, Object>).
      */
     Map<String, Object> getData();
 
     /**
-     *
      * @return service internal info
      */
     ServiceInfo getService();

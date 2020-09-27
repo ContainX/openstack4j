@@ -1,14 +1,15 @@
 package org.openstack4j.model.gbp;
 
-import java.util.List;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.gbp.builder.ExternalSegmentBuilder;
 import org.openstack4j.openstack.gbp.domain.GbpExternalRoutes;
+
+import java.util.List;
+
 /**
  * External Segment Model Entity
- * 
+ *
  * @author vinod borole
  */
 public interface ExternalSegment extends Resource, Buildable<ExternalSegmentBuilder> {

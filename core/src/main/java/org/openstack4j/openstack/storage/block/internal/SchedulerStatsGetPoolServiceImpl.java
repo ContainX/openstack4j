@@ -20,7 +20,7 @@ public class SchedulerStatsGetPoolServiceImpl extends BaseBlockStorageServices i
 
     private List<? extends VolumeBackendPool> list(boolean detail) {
         return get(CinderBackendStoragePool.VolumeBackendPools.class, uri("/scheduler-stats/get_pools"))
-                .param("detail" , detail)
+                .param("detail", detail)
                 .execute()
                 .getList();
     }

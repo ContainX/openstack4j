@@ -1,10 +1,10 @@
 package org.openstack4j.model.identity.v3;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.identity.v3.builder.PolicyBuilder;
+
+import java.util.Map;
 
 /**
  * policy model class

@@ -31,6 +31,7 @@ public interface ShareManageBuilder extends Buildable.Builder<ShareManageBuilder
 
     /**
      * Set the share type name.
+     *
      * @param shareType the share type
      * @return ShareManageBuilder
      */
@@ -39,7 +40,7 @@ public interface ShareManageBuilder extends Buildable.Builder<ShareManageBuilder
     /**
      * Add a driver option.
      *
-     * @param key the key of the driver option
+     * @param key   the key of the driver option
      * @param value the value of the driver option
      * @return ShareManageBuilder
      */

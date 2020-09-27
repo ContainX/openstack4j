@@ -1,21 +1,20 @@
 package org.openstack4j.openstack.compute.domain.ext;
 
-import java.util.Date;
-import java.util.List;
-
-import org.openstack4j.model.compute.ext.Migration;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.compute.ext.Migration;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * A model class implementation which enables an administrative user to fetch in-progress migrations for a region or specified cell in a region
  *
  * @author Jeremy Unruh
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ExtMigration implements Migration {
 
     private static final long serialVersionUID = 1L;
@@ -108,11 +107,11 @@ public class ExtMigration implements Migration {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("id",id).add("instanceUUID", instanceUUID).add("status", status).add("createdAt", createdAt)
-                   .add("updatedAt", updatedAt).add("destCompute", destCompute).add("destHost", destHost)
-                   .add("destNode", destNode).add("sourceCompute", sourceCompute).add("sourceNode", sourceNode)
-                   .add("newInstanceTypeId at", newInstanceTypeId).add("oldInstanceTypeId", oldInstanceTypeId)
-                   .toString();
+                .add("id", id).add("instanceUUID", instanceUUID).add("status", status).add("createdAt", createdAt)
+                .add("updatedAt", updatedAt).add("destCompute", destCompute).add("destHost", destHost)
+                .add("destNode", destNode).add("sourceCompute", sourceCompute).add("sourceNode", sourceNode)
+                .add("newInstanceTypeId at", newInstanceTypeId).add("oldInstanceTypeId", oldInstanceTypeId)
+                .toString();
     }
 
     public static class Migrations extends ListResult<ExtMigration> {

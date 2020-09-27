@@ -23,10 +23,8 @@ import org.openstack4j.model.heat.builder.ResourceHealthBuilder;
 /**
  * This interface describes the getter-methods (and thus components) of a mark resource unhealthy request.
  *
- * @see http://developer.openstack.org/api-ref-orchestration-v1.html
- *
  * @author Dan Maas
- *
+ * @see http://developer.openstack.org/api-ref-orchestration-v1.html
  */
 public interface ResourceHealth extends ModelEntity, Buildable<ResourceHealthBuilder> {
 

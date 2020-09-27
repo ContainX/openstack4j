@@ -1,15 +1,14 @@
 package org.openstack4j.openstack.storage.block.domain.ext;
 
-import java.util.Date;
-import java.util.List;
-
-import org.openstack4j.model.storage.block.ext.Service;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.storage.block.ext.Service;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.Date;
+import java.util.List;
 
 @JsonRootName("service")
 @JsonIgnoreProperties(ignoreUnknown = true)

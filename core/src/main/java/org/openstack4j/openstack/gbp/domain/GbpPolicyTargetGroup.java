@@ -1,13 +1,12 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-
-import org.openstack4j.model.gbp.PolicyTargetGroup;
-import org.openstack4j.openstack.common.ListResult;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.gbp.PolicyTargetGroup;
+import org.openstack4j.openstack.common.ListResult;
+
+import java.util.List;
 
 /**
  * Model implementation for Policy target group
@@ -47,7 +46,7 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
 
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -57,7 +56,7 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
 
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -67,12 +66,14 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
 
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
+
     @Override
     public String getDescription() {
         return description;
     }
+
     @Override
     public List<String> getConsumedPolicyRuleSets() {
         return consumedPolicyRuleSets;
@@ -122,8 +123,7 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
     }
 
 
-
-    public static class PolicyTargetGroups extends ListResult<GbpPolicyTargetGroup>{
+    public static class PolicyTargetGroups extends ListResult<GbpPolicyTargetGroup> {
         private static final long serialVersionUID = 1L;
 
         @JsonProperty("policy_target_groups")
@@ -134,7 +134,6 @@ public class GbpPolicyTargetGroup implements PolicyTargetGroup {
             return policyTargetGroups;
         }
     }
-
 
 
 }

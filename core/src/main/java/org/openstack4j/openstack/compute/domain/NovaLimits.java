@@ -1,13 +1,12 @@
 package org.openstack4j.openstack.compute.domain;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.compute.AbsoluteLimit;
 import org.openstack4j.model.compute.Limits;
 import org.openstack4j.model.compute.RateLimit;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
 
 /**
  * Accounts may be pre-configured with a set of thresholds (or limits) to manage capacity and prevent abuse of the system.
@@ -20,34 +19,35 @@ import com.google.common.base.MoreObjects;
 @JsonRootName("limits")
 public class NovaLimits implements Limits {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private List<NovaRateLimit> rate;
-	private NovaAbsoluteLimit absolute;
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<? extends RateLimit> getRate() {
-		return rate;
-	}
+    private List<NovaRateLimit> rate;
+    private NovaAbsoluteLimit absolute;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public AbsoluteLimit getAbsolute() {
-		return absolute;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends RateLimit> getRate() {
+        return rate;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).omitNullValues()
-				    .add("rate", rate).add("absolute", absolute)
-				    .toString();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AbsoluteLimit getAbsolute() {
+        return absolute;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).omitNullValues()
+                .add("rate", rate).add("absolute", absolute)
+                .toString();
+    }
 
 }

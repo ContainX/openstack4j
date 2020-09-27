@@ -17,10 +17,10 @@ public interface AppCatalogSession extends ModelEntity {
     String getEnvId();
 
     /**
-     *
      * @return the user id
      */
     String getUserId();
+
     /**
      * @return the created date
      */

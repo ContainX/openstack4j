@@ -8,11 +8,13 @@ import java.util.Map;
 
 /**
  * Image (Glance) V2 Tasks Api
+ *
  * @author emjburns
  */
 public interface TaskService extends RestService {
     /**
      * List tasks
+     *
      * @return a list of tasks.
      */
     List<? extends Task> list();
@@ -21,6 +23,7 @@ public interface TaskService extends RestService {
      * List tasks filtering by parameters.
      * Use these parameters to do pagination as described in
      * http://developer.openstack.org/api-ref/image/v2/index.html#list-tasks
+     *
      * @param filteringParams
      * @return a list of tasks
      */
@@ -28,6 +31,7 @@ public interface TaskService extends RestService {
 
     /**
      * Show details for a task.
+     *
      * @param taskId
      * @return a specific task
      */
@@ -35,6 +39,7 @@ public interface TaskService extends RestService {
 
     /**
      * Create a task
+     *
      * @return the task
      */
     Task create(Task task);

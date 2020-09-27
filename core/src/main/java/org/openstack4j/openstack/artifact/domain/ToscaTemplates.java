@@ -49,7 +49,7 @@ public class ToscaTemplates extends ArtifactImpl implements ToscaTemplatesArtifa
         return new ToscaTemplatesConcreteBuilder();
     }
 
-    public static class ToscaTemplatesConcreteBuilder extends BasicResourceBuilder<ToscaTemplatesArtifact,ToscaTemplatesConcreteBuilder> implements ToscaTemplatesArtifactBuilder {
+    public static class ToscaTemplatesConcreteBuilder extends BasicResourceBuilder<ToscaTemplatesArtifact, ToscaTemplatesConcreteBuilder> implements ToscaTemplatesArtifactBuilder {
 
         private ToscaTemplates artifact;
 

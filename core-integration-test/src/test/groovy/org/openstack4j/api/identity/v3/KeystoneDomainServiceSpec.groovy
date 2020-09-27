@@ -3,7 +3,6 @@ package org.openstack4j.api.identity.v3
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
-
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.Builders
 import org.openstack4j.api.OSClient.OSClientV3
@@ -11,20 +10,20 @@ import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.v3.Domain
 import org.openstack4j.openstack.OSFactory
-
 import software.betamax.Configuration
 import software.betamax.MatchRules
 import software.betamax.TapeMode
 import software.betamax.junit.Betamax
 import software.betamax.junit.RecorderRule
-
 import spock.lang.IgnoreIf
 
 @Slf4j
 class KeystoneDomainServiceSpec extends AbstractSpec {
 
-    @Rule TestName KeystoneDomainServiceTest
-    @Rule public RecorderRule recorderRule = new RecorderRule(
+    @Rule
+    TestName KeystoneDomainServiceTest
+    @Rule
+    public RecorderRule recorderRule = new RecorderRule(
             Configuration.builder()
                     .tapeRoot(new File(TAPEROOT + "identity.v3"))
                     .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
@@ -39,15 +38,14 @@ class KeystoneDomainServiceSpec extends AbstractSpec {
     static final boolean skipTest
 
     static {
-        if(
+        if (
         USER_ID == null ||
-        AUTH_URL == null ||
-        PASSWORD == null ||
-        DOMAIN_ID == null ) {
+                AUTH_URL == null ||
+                PASSWORD == null ||
+                DOMAIN_ID == null) {
 
             skipTest = true
-        }
-        else{
+        } else {
             skipTest = false
         }
     }
@@ -56,13 +54,12 @@ class KeystoneDomainServiceSpec extends AbstractSpec {
     // run before the first feature method; similar to JUnit's @BeforeClass
     def setupSpec() {
 
-        if( skipTest != true ) {
+        if (skipTest != true) {
             log.info("USER_ID: " + USER_ID)
             log.info("AUTH_URL: " + AUTH_URL)
             log.info("PASSWORD: " + PASSWORD)
             log.info("DOMAIN_ID: " + DOMAIN_ID)
-        }
-        else {
+        } else {
             log.warn("Skipping integration-test cases because not all mandatory attributes are set.");
         }
     }
@@ -75,7 +72,7 @@ class KeystoneDomainServiceSpec extends AbstractSpec {
     // ------------ DomainService Tests ------------
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="domainService_crud.tape")
+    @Betamax(tape = "domainService_crud.tape")
     def "create, read, update, delete domain service test cases"() {
 
         given: "an authenticated OSClient"

@@ -1,12 +1,11 @@
 package org.openstack4j.openstack.sahara.domain;
 
-import java.util.List;
-
-import org.openstack4j.model.sahara.ConfigInfo;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.sahara.ConfigInfo;
+
+import java.util.List;
 
 /**
  * For mapping JSON response to/from java objects
@@ -14,7 +13,7 @@ import com.google.common.base.MoreObjects;
  * @author ekasit.kijsipongse@nectec.or.th
  */
 
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaConfigInfo implements ConfigInfo {
 
     private static final long serialVersionUID = 1L;
@@ -112,12 +111,12 @@ public class SaharaConfigInfo implements ConfigInfo {
                 .add("name", name)
                 .add("description", description)
                 .add("priority", priority)
-                .add("config_type",type)
+                .add("config_type", type)
                 .add("default_value", defaultValue)
-                .add("config_values",configValues)
-                .add("is_optional",isOptional)
-                .add("scope",scope)
-                .add("applicable_target",applicableTarget)
+                .add("config_values", configValues)
+                .add("is_optional", isOptional)
+                .add("scope", scope)
+                .add("applicable_target", applicableTarget)
                 .toString();
     }
 

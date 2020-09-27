@@ -17,7 +17,7 @@ import static org.testng.Assert.assertTrue;
  *
  * @author Jeremy Unruh
  */
-@Test(suiteName="ExtensionList")
+@Test(suiteName = "ExtensionList")
 public class ExtensionTests extends AbstractTest {
     private static final String JSON_EXTENSIONS = "/compute/extensions.json";
 

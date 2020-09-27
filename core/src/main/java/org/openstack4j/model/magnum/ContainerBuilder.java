@@ -1,10 +1,10 @@
 package org.openstack4j.model.magnum;
 
-import java.util.List;
-
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.openstack.common.GenericLink;
 import org.openstack4j.openstack.magnum.MagnumEnvironment;
+
+import java.util.List;
 
 
 public interface ContainerBuilder extends Builder<ContainerBuilder, Container> {

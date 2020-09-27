@@ -1,10 +1,5 @@
 package org.openstack4j.openstack.gbp.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.api.gbp.PolicyActionService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.gbp.PolicyAction;
@@ -12,9 +7,15 @@ import org.openstack4j.model.gbp.PolicyActionUpdate;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyAction;
 import org.openstack4j.openstack.gbp.domain.GbpPolicyAction.PolicyActions;
 import org.openstack4j.openstack.networking.internal.BaseNetworkingServices;
+
+import java.util.List;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Policy Action API Implementation
- * 
+ *
  * @author vinod borole
  */
 public class PolicyActionServiceImpl extends BaseNetworkingServices implements PolicyActionService {
@@ -22,7 +23,7 @@ public class PolicyActionServiceImpl extends BaseNetworkingServices implements P
     /**
      * {@inheritDoc}
      */
-    @Override 
+    @Override
     public List<? extends PolicyAction> list() {
         return get(PolicyActions.class, uri("/grouppolicy/policy_actions")).execute().getList();
     }
@@ -35,12 +36,12 @@ public class PolicyActionServiceImpl extends BaseNetworkingServices implements P
         Invocation<PolicyActions> policyactionInvocation = buildInvocation(filteringParams);
         return policyactionInvocation.execute().getList();
     }
-    
+
     private Invocation<PolicyActions> buildInvocation(Map<String, String> filteringParams) {
         Invocation<PolicyActions> policyactionInvocation = get(PolicyActions.class, "/grouppolicy/policy_actions");
-        if (filteringParams == null) { 
+        if (filteringParams == null) {
             return policyactionInvocation;
-        } 
+        }
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
                 policyactionInvocation = policyactionInvocation.param(entry.getKey(), entry.getValue());

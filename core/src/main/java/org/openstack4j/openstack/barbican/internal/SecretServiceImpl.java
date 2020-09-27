@@ -14,7 +14,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by reneschollmeyer on 02.08.17.
- *
+ * <p>
  * {@inheritDoc}
  */
 public class SecretServiceImpl extends BaseBarbicanServices implements SecretService {

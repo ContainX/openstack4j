@@ -30,11 +30,9 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
     public <R> HttpResponse execute(HttpRequest<R> request) {
         try {
             return invoke(request);
-        }
-        catch (ResponseException re) {
+        } catch (ResponseException re) {
             throw re;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return null;
         }
@@ -43,7 +41,7 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
     /**
      * Invokes the given request
      *
-     * @param <R> the return type
+     * @param <R>     the return type
      * @param request the request to invoke
      * @return the response
      * @throws Exception the exception
@@ -55,7 +53,7 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
         try {
             return invokeRequest(command);
         } catch (ResponseException re) {
-        	throw re;
+            throw re;
         } catch (Exception pe) {
             throw new ConnectionException(pe.getMessage(), 0, pe);
         }
@@ -64,10 +62,8 @@ public class HttpExecutorServiceImpl implements HttpExecutorService {
     private <R> HttpResponse invokeRequest(HttpCommand<R> command) throws Exception {
         CloseableHttpResponse response = command.execute();
 
-        if (command.getRetries() == 0 && response.getStatusLine().getStatusCode() == 401 && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH))
-        {
-            try
-            {
+        if (command.getRetries() == 0 && response.getStatusLine().getStatusCode() == 401 && !command.getRequest().getHeaders().containsKey(ClientConstants.HEADER_OS4J_AUTH)) {
+            try {
                 OSAuthenticator.reAuthenticate();
                 command.getRequest().getHeaders().put(ClientConstants.HEADER_X_AUTH_TOKEN, OSClientSession.getCurrent().getTokenId());
             } finally {

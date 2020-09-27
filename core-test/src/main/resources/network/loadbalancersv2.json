@@ -6,7 +6,6 @@
       "tenant_id": "6f759d84e3ca496ab77f8c0ffaa0311e",
       "provisioning_status": "ACTIVE",
       "listeners": [
-
       ],
       "vip_address": "10.0.0.13",
       "vip_port_id": "82fbaa1c-a8af-47d3-94fe-a0ac1a33257b",

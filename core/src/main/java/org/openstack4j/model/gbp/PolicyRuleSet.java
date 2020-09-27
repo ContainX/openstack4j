@@ -1,14 +1,14 @@
 package org.openstack4j.model.gbp;
 
-import java.util.List;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.gbp.builder.PolicyRuleSetBuilder;
 
+import java.util.List;
+
 /**
  * Policy rule set Model Entity
- * 
+ *
  * @author vinod borole
  */
 public interface PolicyRuleSet extends Resource, Buildable<PolicyRuleSetBuilder> {

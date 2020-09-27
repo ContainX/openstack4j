@@ -28,6 +28,7 @@ public interface ShareServer extends ModelEntity {
             return name().toLowerCase();
         }
     }
+
     /**
      * @return the share server ID
      */

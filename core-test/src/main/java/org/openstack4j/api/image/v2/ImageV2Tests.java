@@ -1,9 +1,12 @@
 package org.openstack4j.api.image.v2;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertTrue;
+import org.openstack4j.api.AbstractTest;
+import org.openstack4j.api.Builders;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.common.Payloads;
+import org.openstack4j.model.image.v2.*;
+import org.testng.annotations.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -16,22 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openstack4j.api.AbstractTest;
-import org.openstack4j.api.Builders;
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.common.Payloads;
-import org.openstack4j.model.image.v2.ContainerFormat;
-import org.openstack4j.model.image.v2.DiskFormat;
-import org.openstack4j.model.image.v2.Image;
-import org.openstack4j.model.image.v2.Member;
-import org.openstack4j.model.image.v2.Task;
-import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 
 /**
  * @author emjburns
  */
-@Test(suiteName="Image/imagesv2", enabled=true)
+@Test(suiteName = "Image/imagesv2", enabled = true)
 public class ImageV2Tests extends AbstractTest {
     private static final String IMAGES_JSON = "/image/v2/images.json";
     private static final String IMAGE_JSON = "/image/v2/image.json";
@@ -45,9 +38,9 @@ public class ImageV2Tests extends AbstractTest {
     private static final String TASKS_FILTERED_JSON = "/image/v2/tasks-filtered.json";
     private static final String BINARY_IMAGE_DATA =
             "943c 7b3c 3ef4 eac8 e906 b220 1efb f01f\n" +
-            "00b4 5b1b b4fa 0707 c2ac 378b e722 514d\n" +
-            "5fb9 e9a0 7f9f fa4c 645d 113c 0524 b380\n" +
-            "acee 6344 1f45 b58b 1eb2 8776 3e9b 9aef";
+                    "00b4 5b1b b4fa 0707 c2ac 378b e722 514d\n" +
+                    "5fb9 e9a0 7f9f fa4c 645d 113c 0524 b380\n" +
+                    "acee 6344 1f45 b58b 1eb2 8776 3e9b 9aef";
 
     public void testListImages() throws IOException {
         respondWith(IMAGES_JSON);
@@ -70,17 +63,17 @@ public class ImageV2Tests extends AbstractTest {
         Image image = osv3().imagesV2().get(id);
         assertNotNull(image);
         assertNotNull(image.getId());
-        assertEquals(image.getId(),id);
+        assertEquals(image.getId(), id);
     }
-    
+
     public void testGetImageWithLocations() throws IOException {
         respondWith(IMAGE_WIHT_LOCATION_JSON);
         String id = "c73056d6-c583-4d6c-9f70-04f3bfd8dff4";
         Image image = osv3().imagesV2().get(id);
         assertNotNull(image);
         assertNotNull(image.getId());
-        assertEquals(image.getId(),id);
-        assertEquals(2,image.getLocations().size());
+        assertEquals(image.getId(), id);
+        assertEquals(2, image.getLocations().size());
     }
 
     public void testCreateImage() throws IOException {
@@ -240,7 +233,7 @@ public class ImageV2Tests extends AbstractTest {
     public void listTaskWithParams() throws IOException {
         respondWith(TASKS_FILTERED_JSON);
         String id = "78925244-2951-462d-b979-773a49274d7f";
-        Map<String,String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>();
         params.put("id", id);
         List<? extends Task> list = osv3().imagesV2().tasks().list(params);
         assertNotNull(list);
@@ -253,24 +246,24 @@ public class ImageV2Tests extends AbstractTest {
         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
         InputStream s = new ByteArrayInputStream(BINARY_IMAGE_DATA.getBytes(StandardCharsets.UTF_8));
         Payload<InputStream> payload = Payloads.create(s);
-        ActionResponse upload  = osv3().imagesV2().upload(imageId, payload, null);
+        ActionResponse upload = osv3().imagesV2().upload(imageId, payload, null);
         assertTrue(upload.isSuccess());
     }
 
-     public void DownloadImage() throws IOException {
-         respondWith(200);
-         String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
-         URI uri = null;
-         try {
-             uri = new URI("file:////test.iso");
-         }catch (URISyntaxException e) {
-             e.printStackTrace();
-         }
-         File file = new File(uri);
-         ActionResponse download = osv3().imagesV2().download(imageId, file);
-         // Should fail to write to file
-         assertEquals(download.getCode(), 400);
-     }
+    public void DownloadImage() throws IOException {
+        respondWith(200);
+        String imageId = "4b434528-032b-4467-946c-b5880ce15c06";
+        URI uri = null;
+        try {
+            uri = new URI("file:////test.iso");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        File file = new File(uri);
+        ActionResponse download = osv3().imagesV2().download(imageId, file);
+        // Should fail to write to file
+        assertEquals(download.getCode(), 400);
+    }
 
     @Override
     protected Service service() {

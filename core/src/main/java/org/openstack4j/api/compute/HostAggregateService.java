@@ -1,13 +1,15 @@
 package org.openstack4j.api.compute;
 
-import java.util.List;
-import java.util.Map;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.compute.HostAggregate;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * Host aggregate Operations API
- * 
+ *
  * @author liujunpeng
  */
 public interface HostAggregateService extends RestService {
@@ -21,9 +23,9 @@ public interface HostAggregateService extends RestService {
 
     /**
      * Returns list of Aggregates filtered by parameters.
-     * 
+     *
      * @param filteringParams map (name, value) of filtering parameters
-     * @return 
+     * @return
      */
     List<? extends HostAggregate> list(Map<String, String> filteringParams);
 
@@ -36,52 +38,57 @@ public interface HostAggregateService extends RestService {
      */
     HostAggregate get(String aggregateId);
 
-	/**
-	 * Delete of the aggregate
-	 * 
-	 * @param aggregateId  the aggregate identifier
-	 * @return the action response
-	 */
-	ActionResponse delete(String aggregateId);
+    /**
+     * Delete of the aggregate
+     *
+     * @param aggregateId the aggregate identifier
+     * @return the action response
+     */
+    ActionResponse delete(String aggregateId);
 
-	/**
-	 * Create a hostAggregate
-	 * @param name
-	 * @param availabilityZone
-	 * @return HostAggregate
-	 */
-	HostAggregate create(String name,String availabilityZone);
-	
-	/**
-	 * Updates the name, and optionally the availability zone, for a specified aggregate.
-	 * @param hostAggregateId the aggregate identifier
-	 * @param name
-	 * @param availabilityZone
-	 * @return HostAggregate
-	 */
-	HostAggregate update(String hostAggregateId,String name,String availabilityZone);
+    /**
+     * Create a hostAggregate
+     *
+     * @param name
+     * @param availabilityZone
+     * @return HostAggregate
+     */
+    HostAggregate create(String name, String availabilityZone);
 
-	/**
-	 * Sets metadata for an aggregate.
-	 * @param hostAggregateId the aggregate identifier
-	 * @param metadata
-	 * @return HostAggregate
-	 */
-	HostAggregate setMetadata(String hostAggregateId,Map<String, String> metadata);
+    /**
+     * Updates the name, and optionally the availability zone, for a specified aggregate.
+     *
+     * @param hostAggregateId  the aggregate identifier
+     * @param name
+     * @param availabilityZone
+     * @return HostAggregate
+     */
+    HostAggregate update(String hostAggregateId, String name, String availabilityZone);
 
-	/**
-	 * Add host to aggregate
-	 * @param hostAggregateId The ID associated with an aggregate.
-	 * @param host Host ID to add to an aggregate, which is a collection of multiple groups of hosts that share common resources like storage and network.
-	 * @return HostAggregate
-	 */
-	HostAggregate addHost(String hostAggregateId,String host);
-	
-	/**
-	 * remove host from aggregate
-	 * @param hostAggregateId The ID associated with an aggregate.
-	 * @param host Host ID to add to an aggregate, which is a collection of multiple groups of hosts that share common resources like storage and network.
-	 * @return HostAggregate
-	 */
-	HostAggregate removeHost(String hostAggregateId,String host);
+    /**
+     * Sets metadata for an aggregate.
+     *
+     * @param hostAggregateId the aggregate identifier
+     * @param metadata
+     * @return HostAggregate
+     */
+    HostAggregate setMetadata(String hostAggregateId, Map<String, String> metadata);
+
+    /**
+     * Add host to aggregate
+     *
+     * @param hostAggregateId The ID associated with an aggregate.
+     * @param host            Host ID to add to an aggregate, which is a collection of multiple groups of hosts that share common resources like storage and network.
+     * @return HostAggregate
+     */
+    HostAggregate addHost(String hostAggregateId, String host);
+
+    /**
+     * remove host from aggregate
+     *
+     * @param hostAggregateId The ID associated with an aggregate.
+     * @param host            Host ID to add to an aggregate, which is a collection of multiple groups of hosts that share common resources like storage and network.
+     * @return HostAggregate
+     */
+    HostAggregate removeHost(String hostAggregateId, String host);
 }

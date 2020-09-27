@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Service that provides CRUD operations for workflow definitions.
- * 
+ *
  * @author Renat Akhmerov
  */
 public interface WorkflowDefinitionService extends RestService {
@@ -26,7 +26,7 @@ public interface WorkflowDefinitionService extends RestService {
      * Create one or more workflow definitions.
      *
      * @param wfText Text in YAML format (Mistral language) with one or more workflow definitions.
-     * @param scope Scope of newly created workflows.
+     * @param scope  Scope of newly created workflows.
      * @return Created workflow definitions.
      */
     List<? extends WorkflowDefinition> create(InputStream wfText, Scope scope);

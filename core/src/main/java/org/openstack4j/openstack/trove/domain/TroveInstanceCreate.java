@@ -1,11 +1,10 @@
 package org.openstack4j.openstack.trove.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.trove.Datastore;
 import org.openstack4j.model.trove.InstanceCreate;
 import org.openstack4j.model.trove.builder.InstanceCreateBuilder;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * Model implementation for Database instance creation
@@ -28,18 +27,14 @@ public class TroveInstanceCreate implements InstanceCreate {
     private Datastore datastore;
 
     /**
-     *
-     * @param volume
-     *            The volume
+     * @param volume The volume
      */
     public void setVolume(Volume volume) {
         this.volume = volume;
     }
 
     /**
-     *
-     * @param flavorRef
-     *            The flavorRef
+     * @param flavorRef The flavorRef
      */
     @Override
     public void setFlavor(String flavorRef) {
@@ -47,9 +42,7 @@ public class TroveInstanceCreate implements InstanceCreate {
     }
 
     /**
-     *
-     * @param name
-     *            The name
+     * @param name The name
      */
     @Override
     public void setName(String name) {
@@ -57,7 +50,6 @@ public class TroveInstanceCreate implements InstanceCreate {
     }
 
     /**
-     * 
      * @param volumeType
      */
     @Override
@@ -66,7 +58,6 @@ public class TroveInstanceCreate implements InstanceCreate {
     }
 
     /**
-     * 
      * @param size
      */
     @Override
@@ -90,9 +81,7 @@ public class TroveInstanceCreate implements InstanceCreate {
         private Integer size;
 
         /**
-         *
-         * @return
-         *         The type
+         * @return The type
          */
 
         public String getType() {
@@ -100,9 +89,7 @@ public class TroveInstanceCreate implements InstanceCreate {
         }
 
         /**
-         *
-         * @param type
-         *            The type
+         * @param type The type
          */
 
         public void setType(String type) {
@@ -110,9 +97,7 @@ public class TroveInstanceCreate implements InstanceCreate {
         }
 
         /**
-         *
-         * @param size
-         *            The size
+         * @param size The size
          */
 
         public int getSize() {
@@ -120,9 +105,7 @@ public class TroveInstanceCreate implements InstanceCreate {
         }
 
         /**
-         *
-         * @param size
-         *            The size
+         * @param size The size
          */
 
         public void setSize(Integer size) {

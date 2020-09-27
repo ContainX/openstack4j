@@ -1,15 +1,15 @@
 package org.openstack4j.model.network.ext.builder;
 
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.network.ext.PortChain;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- *  A builder to create a port chain
- * @author Dmitry Gerenrot
+ * A builder to create a port chain
  *
+ * @author Dmitry Gerenrot
  */
 public interface PortChainBuilder extends Builder<PortChainBuilder, PortChain> {
 

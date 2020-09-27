@@ -1,15 +1,14 @@
 package org.openstack4j.openstack.magnum;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.magnum.Label;
 import org.openstack4j.model.magnum.Pod;
 import org.openstack4j.model.magnum.PodBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumPod implements Pod {
@@ -81,7 +80,6 @@ public class MagnumPod implements Pod {
 
     /**
      * Concrete builder containing MagnumPod as model
-     *
      */
     public static class PodConcreteBuilder implements PodBuilder {
         MagnumPod model;

@@ -3,13 +3,9 @@ package org.openstack4j.openstack.internal;
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.core.transport.HttpMethod;
-import org.openstack4j.core.transport.HttpRequest;
-import org.openstack4j.openstack.internal.MicroVersion;
-import org.openstack4j.openstack.internal.MicroVersionedOpenStackService;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;

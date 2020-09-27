@@ -9,6 +9,7 @@ import org.openstack4j.model.octavia.builder.HealthMonitorV2UpdateBuilder;
 
 /**
  * Entity used to update lbaas v2 heathmonitor
+ *
  * @author wei
  */
 @JsonRootName("healthmonitor")
@@ -37,19 +38,19 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * The HTTP method that the monitor uses for requests.
      */
     @JsonProperty("http_method")
-    private String httpMethod ;
+    private String httpMethod;
 
     /**
      * URL
      */
     @JsonProperty("url_path")
-    private String urlPath ;
+    private String urlPath;
 
     /**
      * default 200
      */
     @JsonProperty("expected_codes")
-    private String expectedCodes  ;
+    private String expectedCodes;
 
     /**
      * The administrative state of the health monitor, which is up (true) or down (false)
@@ -61,7 +62,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public Integer getDelay(){
+    public Integer getDelay() {
         return delay;
     }
 
@@ -69,7 +70,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public String getUrlPath(){
+    public String getUrlPath() {
         return urlPath;
     }
 
@@ -77,7 +78,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public Integer getTimeout(){
+    public Integer getTimeout() {
         return timeout;
     }
 
@@ -85,7 +86,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public Integer getMaxRetries(){
+    public Integer getMaxRetries() {
         return maxRetries;
     }
 
@@ -93,7 +94,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public Integer getMaxRetriesDown(){
+    public Integer getMaxRetriesDown() {
         return maxRetriesDown;
     }
 
@@ -101,7 +102,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public String getHttpMethod(){
+    public String getHttpMethod() {
         return httpMethod;
     }
 
@@ -109,7 +110,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public String getExpectedCodes(){
+    public String getExpectedCodes() {
         return expectedCodes;
     }
 
@@ -117,7 +118,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public boolean isAdminStateUp(){
+    public boolean isAdminStateUp() {
         return adminStateUp;
     }
 
@@ -129,8 +130,8 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
                 .add("adminStateUp", adminStateUp)
                 .add("expectedCodes", expectedCodes)
                 .add("httpMethod", httpMethod)
-                .add("maxRetries",maxRetries)
-                .add("maxRetriesDown",maxRetriesDown)
+                .add("maxRetries", maxRetries)
+                .add("maxRetriesDown", maxRetriesDown)
                 .add("timeout", timeout)
                 .toString();
     }
@@ -139,22 +140,22 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
      * {@inheritDoc}
      */
     @Override
-    public HealthMonitorV2UpdateBuilder toBuilder(){
+    public HealthMonitorV2UpdateBuilder toBuilder() {
         return new HealthMonitorV2UpdateConcreteBuilder(this);
     }
 
-    public static HealthMonitorV2UpdateBuilder builder(){
+    public static HealthMonitorV2UpdateBuilder builder() {
         return new HealthMonitorV2UpdateConcreteBuilder();
     }
 
     public static class HealthMonitorV2UpdateConcreteBuilder implements HealthMonitorV2UpdateBuilder {
         OctaviaHealthMonitorV2Update m;
 
-        public HealthMonitorV2UpdateConcreteBuilder(){
-            this (new OctaviaHealthMonitorV2Update());
+        public HealthMonitorV2UpdateConcreteBuilder() {
+            this(new OctaviaHealthMonitorV2Update());
         }
 
-        public HealthMonitorV2UpdateConcreteBuilder(OctaviaHealthMonitorV2Update m){
+        public HealthMonitorV2UpdateConcreteBuilder(OctaviaHealthMonitorV2Update m) {
             this.m = m;
         }
 
@@ -162,7 +163,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2Update build(){
+        public HealthMonitorV2Update build() {
             return m;
         }
 
@@ -170,7 +171,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder from(HealthMonitorV2Update in){
+        public HealthMonitorV2UpdateBuilder from(HealthMonitorV2Update in) {
             m = (OctaviaHealthMonitorV2Update) in;
             return this;
         }
@@ -179,7 +180,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder delay(Integer delay){
+        public HealthMonitorV2UpdateBuilder delay(Integer delay) {
             m.delay = delay;
             return this;
         }
@@ -188,7 +189,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder urlPath(String urlPath){
+        public HealthMonitorV2UpdateBuilder urlPath(String urlPath) {
             m.urlPath = urlPath;
             return this;
         }
@@ -197,7 +198,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder expectedCodes(String expectedCodes){
+        public HealthMonitorV2UpdateBuilder expectedCodes(String expectedCodes) {
             m.expectedCodes = expectedCodes;
             return this;
         }
@@ -206,7 +207,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder httpMethod(String httpMethod){
+        public HealthMonitorV2UpdateBuilder httpMethod(String httpMethod) {
             m.httpMethod = httpMethod;
             return this;
         }
@@ -215,7 +216,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder maxRetries(Integer maxRetries){
+        public HealthMonitorV2UpdateBuilder maxRetries(Integer maxRetries) {
             m.maxRetries = maxRetries;
             return this;
         }
@@ -224,7 +225,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder maxRetriesDown(Integer maxRetriesDown){
+        public HealthMonitorV2UpdateBuilder maxRetriesDown(Integer maxRetriesDown) {
             m.maxRetriesDown = maxRetriesDown;
             return this;
         }
@@ -233,7 +234,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder adminStateUp(boolean adminStateUp){
+        public HealthMonitorV2UpdateBuilder adminStateUp(boolean adminStateUp) {
             m.adminStateUp = adminStateUp;
             return this;
         }
@@ -242,7 +243,7 @@ public class OctaviaHealthMonitorV2Update implements HealthMonitorV2Update {
          * {@inheritDoc}
          */
         @Override
-        public HealthMonitorV2UpdateBuilder timeout(Integer timeout){
+        public HealthMonitorV2UpdateBuilder timeout(Integer timeout) {
             m.timeout = timeout;
             return this;
         }

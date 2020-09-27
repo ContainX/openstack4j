@@ -19,8 +19,8 @@ public class MuranoDeploymentServiceImpl extends BaseMuranoServices implements M
     @Override
     public List<? extends Deployment> list(String environmentId) {
         return get(
-            MuranoDeployment.MuranoDeployments.class,
-            uri("/environments/%s/deployments", environmentId)
+                MuranoDeployment.MuranoDeployments.class,
+                uri("/environments/%s/deployments", environmentId)
         ).execute().getList();
     }
 

@@ -6,7 +6,7 @@ import org.openstack4j.model.gbp.builder.NatPoolBuilder;
 
 /**
  * Nat Pool Model Entity
- * 
+ *
  * @author vinod borole
  */
 public interface NatPool extends Resource, Buildable<NatPoolBuilder> {

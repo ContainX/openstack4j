@@ -25,7 +25,8 @@ public class ManilaSecurityServiceUpdate implements ModelEntity {
     private String domain;
     private String server;
 
-    private ManilaSecurityServiceUpdate() {}
+    private ManilaSecurityServiceUpdate() {
+    }
 
     /**
      * Creates a security service from options.

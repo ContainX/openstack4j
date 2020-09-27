@@ -29,12 +29,12 @@ public class DBDatastoreServiceImpl extends BaseTroveServices implements Datasto
 
     @Override
     public List<? extends DatastoreVersion> listDatastoreVersions(String datasoreId) {
-        return get(Versions.class, uri("/datastores/%s/versions",datasoreId)).execute().getList();
+        return get(Versions.class, uri("/datastores/%s/versions", datasoreId)).execute().getList();
     }
 
     @Override
     public DatastoreVersion getDatastoreVersion(String datastoreId, String versionId) {
-        return get(TroveDatastoreVersion.class, uri("/datastores/%s/versions/%s",datastoreId,versionId)).execute();
+        return get(TroveDatastoreVersion.class, uri("/datastores/%s/versions/%s", datastoreId, versionId)).execute();
     }
 
 }

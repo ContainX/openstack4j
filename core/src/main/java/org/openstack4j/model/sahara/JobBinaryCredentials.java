@@ -4,7 +4,7 @@ import org.openstack4j.model.ModelEntity;
 
 /**
  * Credentials for JobBinary
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */

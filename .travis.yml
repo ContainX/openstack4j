@@ -2,7 +2,7 @@
 # re-downloaded.
 cache:
   directories:
-  - $HOME/.m2
+    - $HOME/.m2
 
 language: java
 

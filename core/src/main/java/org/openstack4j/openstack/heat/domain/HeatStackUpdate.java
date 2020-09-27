@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,7 +54,7 @@ public class HeatStackUpdate implements StackUpdate {
         return templateURL;
     }
 
-    public String getEnvironment(){
+    public String getEnvironment() {
         return environment;
     }
 
@@ -132,13 +131,13 @@ public class HeatStackUpdate implements StackUpdate {
         }
 
         @Override
-        public StackUpdateBuilder environment(String environment){
+        public StackUpdateBuilder environment(String environment) {
             model.environment = environment;
             return this;
         }
 
         @Override
-        public StackUpdateBuilder environmentFromFile(String envFile){
+        public StackUpdateBuilder environmentFromFile(String envFile) {
             try {
                 Environment env = new Environment(envFile);
                 model.environment = env.getEnvContent();

@@ -1,9 +1,5 @@
 package org.openstack4j.openstack.sahara.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.List;
-
 import org.openstack4j.api.sahara.SaharaImageService;
 import org.openstack4j.core.transport.ExecutionOptions;
 import org.openstack4j.core.transport.propagation.PropagateOnStatus;
@@ -13,9 +9,13 @@ import org.openstack4j.model.sahara.Image;
 import org.openstack4j.openstack.sahara.domain.SaharaImage;
 import org.openstack4j.openstack.sahara.domain.SaharaImage.SaharaImages;
 
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Sahara Data Processing Operations
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  */
 public class SaharaImageServiceImpl extends BaseSaharaServices implements SaharaImageService {
@@ -35,7 +35,7 @@ public class SaharaImageServiceImpl extends BaseSaharaServices implements Sahara
     public List<? extends Image> list(String... tags) {
         Invocation<SaharaImages> invoke = get(SaharaImages.class, uri("/images"));
         for (String tag : tags) {
-           invoke = invoke.param("tags",tag);
+            invoke = invoke.param("tags", tag);
         }
         return invoke.execute().getList();
     }
@@ -56,10 +56,10 @@ public class SaharaImageServiceImpl extends BaseSaharaServices implements Sahara
     public Image register(String imageId, String username, String description) {
         checkNotNull(imageId);
         checkNotNull(username);
-        RegisterImageRequest reg = new RegisterImageRequest(username,description);
-        return post(SaharaImage.class, uri("/images/%s",imageId))
-                     .entity(reg)  // setup request
-                     .execute(ExecutionOptions.<SaharaImage>create(PropagateOnStatus.on(404))); // Use respongse progagation for "Not found" status to throw exception instead of return null
+        RegisterImageRequest reg = new RegisterImageRequest(username, description);
+        return post(SaharaImage.class, uri("/images/%s", imageId))
+                .entity(reg)  // setup request
+                .execute(ExecutionOptions.<SaharaImage>create(PropagateOnStatus.on(404))); // Use respongse progagation for "Not found" status to throw exception instead of return null
     }
 
     /**
@@ -98,22 +98,22 @@ public class SaharaImageServiceImpl extends BaseSaharaServices implements Sahara
         private String description;
 
         public RegisterImageRequest(String username, String description) {
-           this.username = username;
-           this.description = description;
+            this.username = username;
+            this.description = description;
         }
 
         /**
          * @return username information
          */
         public String getUsername() {
-           return username;
+            return username;
         }
 
         /**
          * @return description
          */
         public String getDescription() {
-           return description;
+            return description;
         }
 
     }
@@ -124,14 +124,14 @@ public class SaharaImageServiceImpl extends BaseSaharaServices implements Sahara
         private String[] tags;
 
         public UpdateTagsRequest(String... tags) {
-           this.tags = tags;
+            this.tags = tags;
         }
 
         /**
          * @return tags
          */
         public String[] getTags() {
-           return tags;
+            return tags;
         }
 
     }

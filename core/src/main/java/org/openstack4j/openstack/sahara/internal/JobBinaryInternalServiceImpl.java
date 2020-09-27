@@ -1,20 +1,20 @@
 package org.openstack4j.openstack.sahara.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.openstack4j.api.sahara.JobBinaryInternalService;
+import org.openstack4j.core.transport.HttpEntityHandler;
+import org.openstack4j.core.transport.HttpResponse;
+import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.common.Payload;
+import org.openstack4j.model.common.Payloads;
+import org.openstack4j.model.sahara.JobBinaryInternal;
+import org.openstack4j.openstack.sahara.domain.SaharaJobBinaryInternal;
+import org.openstack4j.openstack.sahara.domain.SaharaJobBinaryInternal.JobBinaryInternals;
 
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
-import org.openstack4j.api.sahara.JobBinaryInternalService;
-import org.openstack4j.core.transport.HttpEntityHandler;
-import org.openstack4j.core.transport.HttpResponse;
-import org.openstack4j.model.common.Payload;
-import org.openstack4j.model.common.Payloads;
-import org.openstack4j.model.common.ActionResponse;
-import org.openstack4j.model.sahara.JobBinaryInternal;
-import org.openstack4j.openstack.sahara.domain.SaharaJobBinaryInternal;
-import org.openstack4j.openstack.sahara.domain.SaharaJobBinaryInternal.JobBinaryInternals;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Sahara Data Processing Operations
@@ -57,8 +57,8 @@ public class JobBinaryInternalServiceImpl extends BaseSaharaServices implements 
     public JobBinaryInternal create(Payload<File> payload) {
         checkNotNull(payload);
         return put(SaharaJobBinaryInternal.class, uri("/job-binary-internals/%s", payload.getRaw().getName()))
-                     .entity(payload)
-                     .execute();
+                .entity(payload)
+                .execute();
     }
 
     /**
@@ -67,13 +67,11 @@ public class JobBinaryInternalServiceImpl extends BaseSaharaServices implements 
     @Override
     public Payload<InputStream> getData(String jobBinaryInternalId) {
         HttpResponse response = get(Void.class, uri("/job-binary-internals/%s/data", jobBinaryInternalId)).executeWithResponse();
-        try
-        {
+        try {
             if (response.getStatus() < 400)
                 return Payloads.create(response.getInputStream());
             return null;
-        }
-        finally {
+        } finally {
             HttpEntityHandler.closeQuietly(response);
         }
     }

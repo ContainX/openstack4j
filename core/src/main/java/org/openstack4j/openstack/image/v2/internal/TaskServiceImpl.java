@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * Glance V2 task service implementation
+ *
  * @author emjburns
  */
 public class TaskServiceImpl extends BaseImageServices implements TaskService {
@@ -34,7 +35,7 @@ public class TaskServiceImpl extends BaseImageServices implements TaskService {
      */
     @Override
     public Task get(String taskId) {
-        return get(GlanceTask.class, uri("/tasks/%s",taskId)).execute();
+        return get(GlanceTask.class, uri("/tasks/%s", taskId)).execute();
     }
 
     /**

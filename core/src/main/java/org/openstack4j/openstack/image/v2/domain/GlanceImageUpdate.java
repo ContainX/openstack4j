@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Implementation of updating a glance image
+ *
  * @author emjburns
  */
 public class GlanceImageUpdate implements ImageUpdate {
@@ -22,8 +23,8 @@ public class GlanceImageUpdate implements ImageUpdate {
     }
 
     public GlanceImageUpdate(JsonNode value) {
-        if (value.isArray()){
-            for(Iterator<JsonNode> iterator = value.iterator(); iterator.hasNext();) {
+        if (value.isArray()) {
+            for (Iterator<JsonNode> iterator = value.iterator(); iterator.hasNext(); ) {
                 JsonNode next = iterator.next();
                 iterator.remove();
                 PatchOperation p = new PatchOperation(

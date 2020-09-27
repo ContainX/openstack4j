@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package org.openstack4j.model.workflow;
 

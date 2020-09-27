@@ -21,7 +21,7 @@ public class DBDatabaseServiceImpl extends BaseTroveServices implements Database
      */
     @Override
     public List<? extends Database> list(String instanceId) {
-        return get(Databases.class, uri("/instances/%s/databases",instanceId)).execute().getList();
+        return get(Databases.class, uri("/instances/%s/databases", instanceId)).execute().getList();
     }
 
     /**
@@ -31,7 +31,7 @@ public class DBDatabaseServiceImpl extends BaseTroveServices implements Database
     public ActionResponse create(String instanceId, Databases databases) {
         checkNotNull(instanceId);
         checkNotNull(databases);
-        return post(ActionResponse.class,uri("/instances/%s/databases", instanceId)).entity(databases).execute();
+        return post(ActionResponse.class, uri("/instances/%s/databases", instanceId)).entity(databases).execute();
     }
 
     /**
@@ -41,7 +41,7 @@ public class DBDatabaseServiceImpl extends BaseTroveServices implements Database
     public ActionResponse delete(String instanceId, String dbName) {
         checkNotNull(instanceId);
         checkNotNull(dbName);
-        return deleteWithResponse(uri("/instances/%s/databases/%s",instanceId,dbName)).execute();
+        return deleteWithResponse(uri("/instances/%s/databases/%s", instanceId, dbName)).execute();
     }
 
 }

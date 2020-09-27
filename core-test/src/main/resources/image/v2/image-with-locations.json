@@ -14,13 +14,16 @@
   "status": "active",
   "tags": [],
   "visibility": "public",
-  "locations": [{
-    "url": "rbd://xxxx/images/xxxx/snap",
-    "metadata": {}
-  }, {
-    "url": "rbd://yyyy/images/yyyy/snap",
-    "metadata": {}
-  }],
+  "locations": [
+    {
+      "url": "rbd://xxxx/images/xxxx/snap",
+      "metadata": {}
+    },
+    {
+      "url": "rbd://yyyy/images/yyyy/snap",
+      "metadata": {}
+    }
+  ],
   "min_disk": 0,
   "virtual_size": null,
   "name": "some-image",

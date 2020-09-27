@@ -7,13 +7,13 @@ import org.openstack4j.openstack.tacker.domain.VnfUpdateAttributes;
 
 /**
  * A Builder to Update Firewall of FwaaS
- * 
+ *
  * @author Vishvesh Deshmukh
  */
 public interface VnfUpdate extends ModelEntity, Buildable<VnfUpdateBuilder> {
 
-	/**
-	 * @return attributes : VnfUpdateAttributes
-	 */
-	VnfUpdateAttributes getAttributes();
+    /**
+     * @return attributes : VnfUpdateAttributes
+     */
+    VnfUpdateAttributes getAttributes();
 }

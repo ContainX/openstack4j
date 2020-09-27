@@ -1,7 +1,6 @@
 package org.openstack4j.openstack.compute.domain.actions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 import org.openstack4j.model.compute.Action;
 import org.openstack4j.model.compute.RebootType;
@@ -16,55 +15,72 @@ import org.slf4j.LoggerFactory;
 public final class BasicActions {
 
     @JsonRootName("pause")
-    public static class Pause implements ServerAction { }
+    public static class Pause implements ServerAction {
+    }
 
     @JsonRootName("unpause")
-    public static class UnPause implements ServerAction { }
+    public static class UnPause implements ServerAction {
+    }
 
     @JsonRootName("lock")
-    public static class Lock implements ServerAction { }
+    public static class Lock implements ServerAction {
+    }
 
     @JsonRootName("unlock")
-    public static class UnLock implements ServerAction { }
+    public static class UnLock implements ServerAction {
+    }
 
     @JsonRootName("os-start")
-    public static class Start implements ServerAction { }
+    public static class Start implements ServerAction {
+    }
 
     @JsonRootName("os-stop")
-    public static class Stop implements ServerAction { }
+    public static class Stop implements ServerAction {
+    }
 
     @JsonRootName("resume")
-    public static class Resume implements ServerAction { }
+    public static class Resume implements ServerAction {
+    }
 
     @JsonRootName("rescue")
-    public static class Rescue implements ServerAction { }
+    public static class Rescue implements ServerAction {
+    }
 
     @JsonRootName("unrescue")
-    public static class UnRescue implements ServerAction { }
+    public static class UnRescue implements ServerAction {
+    }
 
     @JsonRootName("shelve")
-    public static class Shelve implements ServerAction { }
+    public static class Shelve implements ServerAction {
+    }
 
     @JsonRootName("shelveOffload")
-    public static class ShelveOffload implements ServerAction { }
+    public static class ShelveOffload implements ServerAction {
+    }
 
     @JsonRootName("unshelve")
-    public static class UnShelve implements ServerAction { }
+    public static class UnShelve implements ServerAction {
+    }
 
     @JsonRootName("suspend")
-    public static class Suspend implements ServerAction { }
+    public static class Suspend implements ServerAction {
+    }
 
     @JsonRootName("confirmResize")
-    public static class ConfirmResize implements ServerAction { }
+    public static class ConfirmResize implements ServerAction {
+    }
 
     @JsonRootName("revertResize")
-    public static class RevertResize implements ServerAction { }
+    public static class RevertResize implements ServerAction {
+    }
 
     @JsonRootName("migrate")
-    public static class Migrate implements ServerAction { }
-    
+    public static class Migrate implements ServerAction {
+    }
+
     @JsonRootName("forceDelete")
-    public static class ForceDelete implements ServerAction { }
+    public static class ForceDelete implements ServerAction {
+    }
 
     @JsonRootName("reboot")
     public static class Reboot implements ServerAction {
@@ -106,23 +122,36 @@ public final class BasicActions {
      * @param action the type of action to return an instance for
      * @return the ServerAction instance or null
      */
-    public static ServerAction actionInstanceFor(Action action)
-    {
+    public static ServerAction actionInstanceFor(Action action) {
         switch (action) {
-            case PAUSE: return instanceFor(Pause.class);
-            case UNPAUSE: return instanceFor(UnPause.class);
-            case LOCK: return instanceFor(Lock.class);
-            case UNLOCK: return instanceFor(UnLock.class);
-            case START: return instanceFor( Start.class);
-            case STOP: return instanceFor(Stop.class);
-            case RESUME: return instanceFor(Resume.class);
-            case RESCUE: return instanceFor(Rescue.class);
-            case UNRESCUE: return instanceFor(UnRescue.class);
-            case SHELVE: return instanceFor(Shelve.class);
-            case SHELVE_OFFLOAD: return instanceFor(ShelveOffload.class);
-            case UNSHELVE: return instanceFor(UnShelve.class);
-            case SUSPEND: return instanceFor(Suspend.class);
-            case FORCEDELETE: return instanceFor(ForceDelete.class);
+            case PAUSE:
+                return instanceFor(Pause.class);
+            case UNPAUSE:
+                return instanceFor(UnPause.class);
+            case LOCK:
+                return instanceFor(Lock.class);
+            case UNLOCK:
+                return instanceFor(UnLock.class);
+            case START:
+                return instanceFor(Start.class);
+            case STOP:
+                return instanceFor(Stop.class);
+            case RESUME:
+                return instanceFor(Resume.class);
+            case RESCUE:
+                return instanceFor(Rescue.class);
+            case UNRESCUE:
+                return instanceFor(UnRescue.class);
+            case SHELVE:
+                return instanceFor(Shelve.class);
+            case SHELVE_OFFLOAD:
+                return instanceFor(ShelveOffload.class);
+            case UNSHELVE:
+                return instanceFor(UnShelve.class);
+            case SUSPEND:
+                return instanceFor(Suspend.class);
+            case FORCEDELETE:
+                return instanceFor(ForceDelete.class);
             default:
                 return null;
         }

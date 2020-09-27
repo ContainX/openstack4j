@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Lbaas V2 load balancer pool
+ *
  * @author emjburns
  */
 @JsonRootName("pool")
@@ -66,7 +67,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getId(){
+    public String getId() {
         return id;
     }
 
@@ -74,7 +75,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getTenantId(){
+    public String getTenantId() {
         return tenantId;
     }
 
@@ -82,7 +83,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -90,7 +91,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -98,7 +99,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public Protocol getProtocol(){
+    public Protocol getProtocol() {
         return protocol;
     }
 
@@ -106,7 +107,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public LbMethod getLbMethod(){
+    public LbMethod getLbMethod() {
         return lbMethod;
     }
 
@@ -114,7 +115,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public SessionPersistence getSessionPersistence(){
+    public SessionPersistence getSessionPersistence() {
         return sessionPersistence;
     }
 
@@ -122,7 +123,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public boolean isAdminStateUp(){
+    public boolean isAdminStateUp() {
         return adminStateUp;
     }
 
@@ -130,7 +131,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public List<ListItem> getListeners(){
+    public List<ListItem> getListeners() {
         return listeners;
     }
 
@@ -138,7 +139,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public List<ListItem> getMembers(){
+    public List<ListItem> getMembers() {
         return members;
     }
 
@@ -146,12 +147,12 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
      * {@inheritDoc}
      */
     @Override
-    public String getHealthMonitorId(){
+    public String getHealthMonitorId() {
         return healthMonitorId;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("tenantId", tenantId)
@@ -168,7 +169,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
                 .toString();
     }
 
-    public static class LbPoolV2ConcreteBuilder implements LbPoolV2Builder{
+    public static class LbPoolV2ConcreteBuilder implements LbPoolV2Builder {
 
         private NeutronLbPoolV2 m;
 
@@ -186,7 +187,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
         }
 
         @Override
-        public LbPoolV2Builder from(LbPoolV2 in){
+        public LbPoolV2Builder from(LbPoolV2 in) {
             m = (NeutronLbPoolV2) in;
             return this;
         }
@@ -195,7 +196,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2Builder tenantId(String tenantId){
+        public LbPoolV2Builder tenantId(String tenantId) {
             m.tenantId = tenantId;
             return this;
         }
@@ -204,7 +205,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2Builder name(String name){
+        public LbPoolV2Builder name(String name) {
             m.name = name;
             return this;
         }
@@ -213,7 +214,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2Builder description(String description){
+        public LbPoolV2Builder description(String description) {
             m.description = description;
             return this;
         }
@@ -222,7 +223,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2Builder protocol(Protocol protocol){
+        public LbPoolV2Builder protocol(Protocol protocol) {
             m.protocol = protocol;
             return this;
         }
@@ -231,7 +232,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2Builder lbMethod(LbMethod lbMethod){
+        public LbPoolV2Builder lbMethod(LbMethod lbMethod) {
             m.lbMethod = lbMethod;
             return this;
         }
@@ -240,7 +241,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2Builder sessionPersistence(SessionPersistence sessionPersistence){
+        public LbPoolV2Builder sessionPersistence(SessionPersistence sessionPersistence) {
             m.sessionPersistence = sessionPersistence;
             return this;
         }
@@ -249,7 +250,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2Builder adminStateUp(boolean adminStateUp){
+        public LbPoolV2Builder adminStateUp(boolean adminStateUp) {
             m.adminStateUp = adminStateUp;
             return this;
         }
@@ -258,7 +259,7 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
          * {@inheritDoc}
          */
         @Override
-        public LbPoolV2Builder listenerId(String listenerId){
+        public LbPoolV2Builder listenerId(String listenerId) {
             m.listenerId = listenerId;
             return this;
         }
@@ -267,16 +268,17 @@ public class NeutronLbPoolV2 implements LbPoolV2 {
     public static class LbPoolsV2 extends ListResult<NeutronLbPoolV2> {
         @JsonProperty("pools")
         List<NeutronLbPoolV2> lbPools;
+
         /**
          * {@inheritDoc}
          */
         @Override
-        protected List<NeutronLbPoolV2> value(){
+        protected List<NeutronLbPoolV2> value() {
             return lbPools;
         }
 
         @Override
-        public String toString(){
+        public String toString() {
             return MoreObjects.toStringHelper(this)
                     .add("lbPools", lbPools)
                     .toString();

@@ -1,19 +1,18 @@
 package org.openstack4j.openstack.identity.v3.internal;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.core.transport.ClientConstants.PATH_REGIONS;
-
-import java.util.List;
-
 import org.openstack4j.api.identity.v3.RegionService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.identity.v3.Region;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRegion;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneRegion.Regions;
 
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static org.openstack4j.core.transport.ClientConstants.PATH_REGIONS;
+
 /**
  * Implementation of v3 region service
- *
  */
 public class RegionServiceImpl extends BaseIdentityServices implements RegionService {
 

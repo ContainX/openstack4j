@@ -160,11 +160,11 @@ public class NeutronRouter implements Router {
     /**
      * {@inheritDoc}
      */
-		@Override
-		public int hashCode() {
-			return java.util.Objects.hash(id, name, status, tenantId, adminStateUp,
-							externalGatewayInfo, routes);
-		}
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, name, status, tenantId, adminStateUp,
+                externalGatewayInfo, routes);
+    }
 
     /**
      * {@inheritDoc}
@@ -172,7 +172,7 @@ public class NeutronRouter implements Router {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
-          return true;
+            return true;
         }
 
         if (obj instanceof NeutronRouter) {
@@ -184,7 +184,7 @@ public class NeutronRouter implements Router {
                     java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
                     java.util.Objects.equals(externalGatewayInfo, that.externalGatewayInfo) &&
                     java.util.Objects.equals(routes, that.routes)) {
-              return true;
+                return true;
             }
         }
         return false;

@@ -10,6 +10,7 @@ import java.util.Date;
 
 /**
  * A Glance V2 Member
+ *
  * @author emjburns
  */
 @JsonDeserialize(as = GlanceMember.class)
@@ -36,8 +37,7 @@ public interface Member extends ModelEntity {
 
         @JsonCreator
         public static MemberStatus forValue(String value) {
-            if (value != null)
-            {
+            if (value != null) {
                 for (MemberStatus s : MemberStatus.values()) {
                     if (s.name().equalsIgnoreCase(value)) {
                         return s;
@@ -56,36 +56,42 @@ public interface Member extends ModelEntity {
     /**
      * An identifier for the image
      * Pattern: ^([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}$
+     *
      * @return imageId
      */
     String getImageId();
 
     /**
      * An identifier for the image member (tenantId or projectId)
+     *
      * @return memberId
      */
     String getMemberId();
 
     /**
      * The date and time of image member creation
+     *
      * @return createdAt
      */
     Date getCreatedAt();
 
     /**
      * The date and time of last modification of image member
+     *
      * @return updatedAt
      */
     Date getUpdatedAt();
 
     /**
      * The status of the image member
+     *
      * @return status
      */
     MemberStatus getStatus();
 
     /**
      * The json schema for the member object
+     *
      * @return
      */
     String getSchema();

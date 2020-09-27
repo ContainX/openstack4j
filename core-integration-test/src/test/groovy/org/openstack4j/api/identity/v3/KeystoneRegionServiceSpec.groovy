@@ -3,32 +3,31 @@ package org.openstack4j.api.identity.v3
 import groovy.util.logging.Slf4j
 import org.junit.Rule
 import org.junit.rules.TestName
-
 import org.openstack4j.api.AbstractSpec
 import org.openstack4j.api.OSClient.OSClientV3
 import org.openstack4j.model.common.ActionResponse
 import org.openstack4j.model.common.Identifier
 import org.openstack4j.model.identity.v3.Region
 import org.openstack4j.openstack.OSFactory
-
 import software.betamax.Configuration
 import software.betamax.MatchRules
 import software.betamax.TapeMode
 import software.betamax.junit.Betamax
 import software.betamax.junit.RecorderRule
-
 import spock.lang.IgnoreIf
 
 @Slf4j
 class KeystoneRegionServiceSpec extends AbstractSpec {
 
-    @Rule TestName KeystoneRegionServiceTest
-    @Rule public RecorderRule recorderRule = new RecorderRule(
+    @Rule
+    TestName KeystoneRegionServiceTest
+    @Rule
+    public RecorderRule recorderRule = new RecorderRule(
             Configuration.builder()
                     .tapeRoot(new File(TAPEROOT + "identity.v3"))
                     .defaultMatchRules(MatchRules.method, MatchRules.path, MatchRules.queryParams)
                     .defaultMode(TapeMode.READ_WRITE)
-                    .build());;
+                    .build()); ;
 
     // additional attributes for region tests
     def static String REGION_CRUD_ID = "Region_CRUD"
@@ -39,29 +38,27 @@ class KeystoneRegionServiceSpec extends AbstractSpec {
     static final boolean skipTest
 
     static {
-        if(
+        if (
         USER_ID == null ||
-        AUTH_URL == null ||
-        PASSWORD == null ||
-        DOMAIN_ID == null  ) {
+                AUTH_URL == null ||
+                PASSWORD == null ||
+                DOMAIN_ID == null) {
 
             skipTest = true
-        }
-        else{
+        } else {
             skipTest = false
         }
     }
 
     def setupSpec() {
 
-        if( skipTest != true ) {
+        if (skipTest != true) {
             log.info("USER_ID: " + USER_ID)
             log.info("AUTH_URL: " + AUTH_URL)
             log.info("PASSWORD: " + PASSWORD)
             log.info("DOMAIN_ID: " + DOMAIN_ID)
             log.info("PROJECT_ID: " + PROJECT_ID)
-        }
-        else {
+        } else {
             log.warn("Skipping integration-test cases because not all mandatory attributes are set.")
         }
     }
@@ -74,7 +71,7 @@ class KeystoneRegionServiceSpec extends AbstractSpec {
     // ------------ RegionService Tests ------------
 
     @IgnoreIf({ skipTest })
-    @Betamax(tape="regionService_all.tape")
+    @Betamax(tape = "regionService_all.tape")
     def "region service CRUD test cases"() {
 
         given: "authenticated v3 OSClient"

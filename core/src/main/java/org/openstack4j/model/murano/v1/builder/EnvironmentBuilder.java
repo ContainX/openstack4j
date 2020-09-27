@@ -6,7 +6,6 @@ import org.openstack4j.model.murano.v1.domain.Environment;
 /**
  * Builder interface used for {@link Environment} object.
  * For mapping from object builder to JSON request
- *
  */
 public interface EnvironmentBuilder extends Builder<EnvironmentBuilder, Environment> {
 

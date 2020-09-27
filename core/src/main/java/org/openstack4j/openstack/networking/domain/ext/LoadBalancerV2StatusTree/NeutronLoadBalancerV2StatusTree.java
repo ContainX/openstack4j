@@ -9,6 +9,7 @@ import org.openstack4j.model.network.ext.status.LoadBalancerV2Status;
 
 /**
  * The status tree of a lbaas v2 loadbalancer
+ *
  * @author emjburns
  */
 @JsonRootName("statuses")
@@ -19,12 +20,12 @@ public class NeutronLoadBalancerV2StatusTree implements LoadBalancerV2StatusTree
     private NeutronLoadBalancerV2Status loadBalancerStatus;
 
     @Override
-    public LoadBalancerV2Status getLoadBalancerV2Status(){
+    public LoadBalancerV2Status getLoadBalancerV2Status() {
         return loadBalancerStatus;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("loadbalancer", loadBalancerStatus)
                 .toString();

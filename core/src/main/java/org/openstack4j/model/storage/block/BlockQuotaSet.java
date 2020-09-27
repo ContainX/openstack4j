@@ -17,19 +17,16 @@ public interface BlockQuotaSet extends ModelEntity, Buildable<BlockQuotaSetBuild
     String getId();
 
     /**
-     *
      * @return the Snapshots.
      */
     int getSnapshots();
 
     /**
-     *
      * @return the Volumes
      */
     int getVolumes();
 
     /**
-     *
      * @return the gigabytes
      */
     int getGigabytes();

@@ -1,14 +1,13 @@
 package org.openstack4j.openstack.sahara.domain;
 
-import java.util.List;
-
-import org.openstack4j.model.sahara.JobConfigHint;
-import org.openstack4j.model.sahara.JobConfigHintConfig;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.sahara.JobConfigHint;
+import org.openstack4j.model.sahara.JobConfigHintConfig;
+
+import java.util.List;
 
 /**
  * For mapping JSON response to/from java objects
@@ -18,7 +17,7 @@ import com.google.common.base.MoreObjects;
  */
 
 @JsonRootName("job_config")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SaharaJobConfigHint implements JobConfigHint {
 
     private static final long serialVersionUID = 1L;
@@ -46,9 +45,9 @@ public class SaharaJobConfigHint implements JobConfigHint {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues()
-                   .add("configs", configs)
-                   .add("args", args)
-                   .toString();
+                .add("configs", configs)
+                .add("args", args)
+                .toString();
     }
 
 }

@@ -12,7 +12,9 @@ import java.util.List;
 public interface DatabaseUserBuilder extends Buildable.Builder<DatabaseUserBuilder, DatabaseUser> {
 
     DatabaseUserBuilder username(String username);
+
     DatabaseUserBuilder password(String password);
+
     DatabaseUserBuilder troveDatabaseList(List<TroveDatabase> troveDatabaseList);
 
 }

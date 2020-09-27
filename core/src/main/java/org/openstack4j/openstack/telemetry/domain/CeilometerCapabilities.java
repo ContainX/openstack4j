@@ -1,12 +1,12 @@
 package org.openstack4j.openstack.telemetry.domain;
 
-import java.util.Map;
-
 import org.openstack4j.model.telemetry.Capabilities;
+
+import java.util.Map;
 
 /**
  * A single Representation for capabilities.
- * 
+ *
  * @author Shital Patil
  */
 

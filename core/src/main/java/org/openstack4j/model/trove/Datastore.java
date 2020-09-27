@@ -1,9 +1,9 @@
 package org.openstack4j.model.trove;
 
-import java.util.List;
-
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.openstack.trove.domain.TroveDatastoreVersion;
+
+import java.util.List;
 
 /**
  * Datastore Model Entity

@@ -17,6 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * OpenStack (Octavia) lbaas v2 lb pool operations
+ *
  * @author wei
  */
 public class LbPoolV2ServiceImpl extends BaseOctaviaServices implements LbPoolV2Service {
@@ -24,7 +25,7 @@ public class LbPoolV2ServiceImpl extends BaseOctaviaServices implements LbPoolV2
      * {@inheritDoc}
      */
     @Override
-    public List<? extends LbPoolV2> list(){
+    public List<? extends LbPoolV2> list() {
         return get(OctaviaLbPoolV2.LbPoolsV2.class, uri("/lbaas/pools")).execute().getList();
     }
 
@@ -32,7 +33,7 @@ public class LbPoolV2ServiceImpl extends BaseOctaviaServices implements LbPoolV2
      * {@inheritDoc}
      */
     @Override
-    public List<? extends LbPoolV2> list(Map<String, String> filteringParams){
+    public List<? extends LbPoolV2> list(Map<String, String> filteringParams) {
         Invocation<OctaviaLbPoolV2.LbPoolsV2> req = get(OctaviaLbPoolV2.LbPoolsV2.class, uri("/lbaas/pools"));
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
@@ -46,16 +47,16 @@ public class LbPoolV2ServiceImpl extends BaseOctaviaServices implements LbPoolV2
      * {@inheritDoc}
      */
     @Override
-    public LbPoolV2 get(String lbPoolId){
+    public LbPoolV2 get(String lbPoolId) {
         checkNotNull(lbPoolId);
-        return get(OctaviaLbPoolV2.class, uri("/lbaas/pools/%s",lbPoolId)).execute();
+        return get(OctaviaLbPoolV2.class, uri("/lbaas/pools/%s", lbPoolId)).execute();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public LbPoolV2 create(LbPoolV2 lbPool){
+    public LbPoolV2 create(LbPoolV2 lbPool) {
         checkNotNull(lbPool);
         return post(OctaviaLbPoolV2.class, uri("/lbaas/pools")).entity(lbPool).execute();
     }
@@ -64,34 +65,34 @@ public class LbPoolV2ServiceImpl extends BaseOctaviaServices implements LbPoolV2
      * {@inheritDoc}
      */
     @Override
-    public LbPoolV2 update(String lbPoolId, LbPoolV2Update lbPool){
+    public LbPoolV2 update(String lbPoolId, LbPoolV2Update lbPool) {
         checkNotNull(lbPoolId);
         checkNotNull(lbPool);
-        return put(OctaviaLbPoolV2.class, uri("/lbaas/pools/%s",lbPoolId)).entity(lbPool).execute();
+        return put(OctaviaLbPoolV2.class, uri("/lbaas/pools/%s", lbPoolId)).entity(lbPool).execute();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ActionResponse delete(String lbPoolId){
+    public ActionResponse delete(String lbPoolId) {
         checkNotNull(lbPoolId);
-        return ToActionResponseFunction.INSTANCE.apply(delete(void.class, uri("/lbaas/pools/%s",lbPoolId)).executeWithResponse());
+        return ToActionResponseFunction.INSTANCE.apply(delete(void.class, uri("/lbaas/pools/%s", lbPoolId)).executeWithResponse());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<? extends MemberV2> listMembers(String lbPoolId){
-        return get(OctaviaMemberV2.MembersV2.class, uri("/lbaas/pools/%s/members",lbPoolId)).execute().getList();
+    public List<? extends MemberV2> listMembers(String lbPoolId) {
+        return get(OctaviaMemberV2.MembersV2.class, uri("/lbaas/pools/%s/members", lbPoolId)).execute().getList();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<? extends MemberV2> listMembers(String lbPoolId, Map<String, String> filteringParams){
+    public List<? extends MemberV2> listMembers(String lbPoolId, Map<String, String> filteringParams) {
         Invocation<OctaviaMemberV2.MembersV2> req = get(OctaviaMemberV2.MembersV2.class, uri("/lbaas/pools/%s/members", lbPoolId));
         if (filteringParams != null) {
             for (Map.Entry<String, String> entry : filteringParams.entrySet()) {
@@ -105,38 +106,38 @@ public class LbPoolV2ServiceImpl extends BaseOctaviaServices implements LbPoolV2
      * {@inheritDoc}
      */
     @Override
-    public MemberV2 getMember(String lbPoolId, String memberId){
+    public MemberV2 getMember(String lbPoolId, String memberId) {
         checkNotNull(lbPoolId);
         checkNotNull(memberId);
-        return get(OctaviaMemberV2.class, uri("/lbaas/pools/%s/members/%s",lbPoolId,memberId)).execute();
+        return get(OctaviaMemberV2.class, uri("/lbaas/pools/%s/members/%s", lbPoolId, memberId)).execute();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public MemberV2 createMember(String lbPoolId, MemberV2 member){
+    public MemberV2 createMember(String lbPoolId, MemberV2 member) {
         checkNotNull(lbPoolId);
         checkNotNull(member);
-        return post(OctaviaMemberV2.class, uri("/lbaas/pools/%s/members",lbPoolId)).entity(member).execute();
+        return post(OctaviaMemberV2.class, uri("/lbaas/pools/%s/members", lbPoolId)).entity(member).execute();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public MemberV2 updateMember(String lbPoolId, String memberId, MemberV2Update member){
+    public MemberV2 updateMember(String lbPoolId, String memberId, MemberV2Update member) {
         checkNotNull(lbPoolId);
         checkNotNull(memberId);
         checkNotNull(member);
-        return put(OctaviaMemberV2.class, uri("/lbaas/pools/%s/members/%s",lbPoolId,memberId)).entity(member).execute();
+        return put(OctaviaMemberV2.class, uri("/lbaas/pools/%s/members/%s", lbPoolId, memberId)).entity(member).execute();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public ActionResponse deleteMember(String lbPoolId, String memberId){
+    public ActionResponse deleteMember(String lbPoolId, String memberId) {
         checkNotNull(lbPoolId);
         checkNotNull(memberId);
         return ToActionResponseFunction.INSTANCE.apply(delete(void.class, uri("/lbaas/pools/%s/members/%s", lbPoolId, memberId)).executeWithResponse());

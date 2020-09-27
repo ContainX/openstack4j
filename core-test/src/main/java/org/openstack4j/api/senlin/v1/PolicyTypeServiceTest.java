@@ -16,30 +16,32 @@ import static org.testng.Assert.assertNotNull;
  *
  * @author lion
  */
-@Test(suiteName="senlin/policyType")
+@Test(suiteName = "senlin/policyType")
 public class PolicyTypeServiceTest extends AbstractTest {
 
-    private static final String POLICYTYPES="/senlin/v1/policy_types.json";
-    private static final String POLICYTYPE="/senlin/v1/policy_type.json";
+    private static final String POLICYTYPES = "/senlin/v1/policy_types.json";
+    private static final String POLICYTYPE = "/senlin/v1/policy_type.json";
 
     @Override
     protected Service service() {
         return Service.CLUSTERING;
     }
+
     @Test
-    public void testListPolicyType() throws Exception{
+    public void testListPolicyType() throws Exception {
         respondWith(POLICYTYPES);
         List<? extends PolicyType> policyTypeList = osv3().senlin().policyType().list();
         assertEquals(6, policyTypeList.size());
         Preconditions.checkNotNull(policyTypeList.get(0));
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : PolicyType from List : "+ policyTypeList.get(0));
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : PolicyType from List : " + policyTypeList.get(0));
         assertEquals(policyTypeList.get(0).getName(), "ScalingPolicy");
     }
+
     @Test
-    public void testGetPolicyType() throws Exception{
+    public void testGetPolicyType() throws Exception {
         respondWith(POLICYTYPE);
         PolicyType policyType = osv3().senlin().policyType().get("senlin.policy.deletion");
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : PolicyType by name : "+ policyType);
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : PolicyType by name : " + policyType);
         assertNotNull(policyType);
         assertEquals("senlin.policy.deletion", policyType.getName());
     }

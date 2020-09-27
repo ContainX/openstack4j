@@ -13,7 +13,7 @@ public interface ShareTypeCreateBuilder extends Buildable.Builder<ShareTypeCreat
     /**
      * Adds an extra specification for the share type.
      *
-     * @param key the key of the extra specification
+     * @param key   the key of the extra specification
      * @param value the value of the extra specification
      * @return ShareTypeCreateBuilder
      */
@@ -27,13 +27,13 @@ public interface ShareTypeCreateBuilder extends Buildable.Builder<ShareTypeCreat
      */
     ShareTypeCreateBuilder extraSpecs(ExtraSpecs extraSpecs);
 
-     /**
-      * Set whether a share type is publicly accessible. Default is true, or publicly accessible.
-      *
-      * @param osShareTypeAccessIsPublic whether the share type is public accessible
-      * @return ShareTypeCreateBuilder
-      */
-     ShareTypeCreateBuilder osShareTypeAccessIsPublic(boolean osShareTypeAccessIsPublic);
+    /**
+     * Set whether a share type is publicly accessible. Default is true, or publicly accessible.
+     *
+     * @param osShareTypeAccessIsPublic whether the share type is public accessible
+     * @return ShareTypeCreateBuilder
+     */
+    ShareTypeCreateBuilder osShareTypeAccessIsPublic(boolean osShareTypeAccessIsPublic);
 
     /**
      * Set the share type name.

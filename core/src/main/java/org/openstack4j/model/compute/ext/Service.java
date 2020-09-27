@@ -1,10 +1,9 @@
 package org.openstack4j.model.compute.ext;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.openstack4j.model.ModelEntity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.Date;
 
 /**
  * A Service represents a Nova compute service
@@ -81,7 +80,6 @@ public interface Service extends ModelEntity {
     Status getStatus();
 
     /**
-     * 
      * @return last updated time
      */
     Date getUpdatedAt();
@@ -90,7 +88,7 @@ public interface Service extends ModelEntity {
      * @return the zone for this service
      */
     String getZone();
-    
+
     /**
      * @return Whether or not this service was forced down manually by an administrator
      */

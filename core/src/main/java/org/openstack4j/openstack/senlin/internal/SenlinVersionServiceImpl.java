@@ -10,17 +10,17 @@ import java.util.List;
 
 /**
  * This class contains getters for all implementation of the available version services
- * 
+ *
  * @author lion
  */
 public class SenlinVersionServiceImpl extends BaseOpenStackService implements SenlinVersionService {
 
-	public SenlinVersionServiceImpl() {
-		super(ServiceType.CLUSTERING);
-	}
+    public SenlinVersionServiceImpl() {
+        super(ServiceType.CLUSTERING);
+    }
 
-	@Override
-	public List<? extends Version> list() {
-		return get(SenlinVersion.Version.class, uri("/")).execute().getList();
-	}
+    @Override
+    public List<? extends Version> list() {
+        return get(SenlinVersion.Version.class, uri("/")).execute().getList();
+    }
 }

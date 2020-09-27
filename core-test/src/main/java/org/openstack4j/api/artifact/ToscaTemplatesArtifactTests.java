@@ -7,11 +7,8 @@ import org.openstack4j.model.artifact.ToscaTemplatesArtifact;
 import org.openstack4j.model.artifact.ToscaTemplatesArtifacts;
 import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
 import org.openstack4j.model.artifact.builder.ToscaTemplatesArtifactBuilder;
-import org.openstack4j.model.common.ActionResponse;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +73,7 @@ public class ToscaTemplatesArtifactTests extends AbstractTest {
         builder.path("/template_format");
         builder.value("yaml");
         List<ArtifactUpdate> updates = new ArrayList<>();
-        ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().update("b8f88696-80e7-4f89-abbc-1975991ba879",updates);
+        ToscaTemplatesArtifact toscaTemplatesArtifact = osv3().artifact().toscaTemplatesArtifact().update("b8f88696-80e7-4f89-abbc-1975991ba879", updates);
         assertEquals(toscaTemplatesArtifact.getName(), "sample");
         assertEquals(toscaTemplatesArtifact.getTemplateFormat(), "yaml");
         assertEquals(toscaTemplatesArtifact.getStatus(), "drafted");

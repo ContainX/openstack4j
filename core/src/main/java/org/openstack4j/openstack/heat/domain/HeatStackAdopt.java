@@ -3,16 +3,17 @@ package org.openstack4j.openstack.heat.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.openstack4j.model.ModelEntity;
+import org.openstack4j.model.heat.AdoptStackData;
+
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.openstack4j.model.ModelEntity;
-import org.openstack4j.model.heat.AdoptStackData;
 
 /**
  * This class contains all elements required for the adoption of a HeatStack. It
  * uses Jackson annotation for (de)serialization into JSON
- * 
+ *
  * @author Ales Kemr
  */
 public class HeatStackAdopt implements ModelEntity {
@@ -55,7 +56,7 @@ public class HeatStackAdopt implements ModelEntity {
     public String getTemplate() {
         return template;
     }
-    
+
     public static HeatStackAdoptBuilder builder() {
         return new HeatStackAdoptBuilder();
     }
@@ -71,7 +72,7 @@ public class HeatStackAdopt implements ModelEntity {
         public HeatStackAdoptBuilder() {
             this.model = new HeatStackAdopt();
         }
-        
+
         public HeatStackAdoptBuilder name(String name) {
             this.model.name = name;
             return this;
@@ -101,7 +102,7 @@ public class HeatStackAdopt implements ModelEntity {
                 throw new RuntimeException(ex);
             }
         }
-        
+
         public HeatStackAdoptBuilder template(String template) {
             this.model.template = template;
             return this;
@@ -111,6 +112,6 @@ public class HeatStackAdopt implements ModelEntity {
             return model;
         }
     }
-    
-    
+
+
 }

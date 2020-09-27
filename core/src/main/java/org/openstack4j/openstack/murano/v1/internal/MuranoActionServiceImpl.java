@@ -137,7 +137,7 @@ public class MuranoActionServiceImpl extends BaseMuranoServices implements Muran
                 .entity(entity)
                 .execute();
 
-        return (String)result.get("task_id");
+        return (String) result.get("task_id");
     }
 
     /**

@@ -8,23 +8,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum ZoneType {
 
-	PRIMARY, SECONDARY;
+    PRIMARY, SECONDARY;
 
-	@JsonValue
-	public String value() {
-		return name().toUpperCase();
-	}
+    @JsonValue
+    public String value() {
+        return name().toUpperCase();
+    }
 
-	//default to PRIMARY
-	@JsonCreator
-	public static ZoneType value(String v)
-	{
-		if (v == null) return PRIMARY;
-		try {
-			return valueOf(v.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			return PRIMARY;
-		}
-	}
+    //default to PRIMARY
+    @JsonCreator
+    public static ZoneType value(String v) {
+        if (v == null) return PRIMARY;
+        try {
+            return valueOf(v.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return PRIMARY;
+        }
+    }
 
 }

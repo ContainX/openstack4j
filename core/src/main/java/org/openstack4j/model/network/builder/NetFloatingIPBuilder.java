@@ -9,21 +9,21 @@ import org.openstack4j.model.network.NetFloatingIP;
  * @author Nathan Anderson
  */
 public interface NetFloatingIPBuilder extends Builder<NetFloatingIPBuilder, NetFloatingIP> {
-	
-	/**
-	 * sets Id of floating network
-	 *
-	 * @param networkId the network id
-	 * @return the floating ip builder
-	 */
-	NetFloatingIPBuilder floatingNetworkId(String networkId);
-  
-  /**
-   * Port id.
-   *
-   * @param portId the port id
-   * @return the floating ip builder
-   */
-  NetFloatingIPBuilder portId(String portId);
-	
+
+    /**
+     * sets Id of floating network
+     *
+     * @param networkId the network id
+     * @return the floating ip builder
+     */
+    NetFloatingIPBuilder floatingNetworkId(String networkId);
+
+    /**
+     * Port id.
+     *
+     * @param portId the port id
+     * @return the floating ip builder
+     */
+    NetFloatingIPBuilder portId(String portId);
+
 }

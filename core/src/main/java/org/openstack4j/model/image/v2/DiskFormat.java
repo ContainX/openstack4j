@@ -70,11 +70,9 @@ public enum DiskFormat {
     @JsonCreator
     public static DiskFormat value(String df) {
         if (df == null || df.isEmpty()) return UNRECOGNIZED;
-        try
-        {
+        try {
             return valueOf(df.toUpperCase());
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return UNRECOGNIZED;
         }
     }

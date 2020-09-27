@@ -8,6 +8,7 @@ import org.openstack4j.api.exceptions.RegionEndpointNotFoundException;
 import org.openstack4j.api.gbp.GbpService;
 import org.openstack4j.api.heat.HeatService;
 import org.openstack4j.api.image.ImageService;
+import org.openstack4j.api.magnum.MagnumService;
 import org.openstack4j.api.manila.ShareService;
 import org.openstack4j.api.murano.v1.AppCatalogService;
 import org.openstack4j.api.networking.NetworkingService;
@@ -25,7 +26,6 @@ import org.openstack4j.api.types.ServiceType;
 import org.openstack4j.api.workflow.WorkflowService;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Token;
-import org.openstack4j.api.magnum.MagnumService;
 
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +37,7 @@ import java.util.Set;
  *
  * @author Jeremy Unruh
  */
-public interface OSClient< T extends OSClient<T>> {
+public interface OSClient<T extends OSClient<T>> {
 
     /**
      * Specifies the region that should be used for further invocations with
@@ -193,7 +193,7 @@ public interface OSClient< T extends OSClient<T>> {
      * @return the artifact service
      */
     ArtifactService artifact();
-    
+
     /**
      * Returns the Tacker Service API
      *
@@ -224,6 +224,7 @@ public interface OSClient< T extends OSClient<T>> {
 
     /**
      * Returns the Image V2 Service API
+     *
      * @return the image v2 service
      */
     org.openstack4j.api.image.v2.ImageService imagesV2();
@@ -272,7 +273,7 @@ public interface OSClient< T extends OSClient<T>> {
 
     /**
      * Returns the Magnum Service API
-     * 
+     *
      * @return the Magnum Service
      */
     MagnumService magnum();
@@ -281,61 +282,61 @@ public interface OSClient< T extends OSClient<T>> {
      * OpenStack4j Client which authenticates against version V2
      */
     public interface OSClientV2 extends OSClient<OSClient.OSClientV2> {
-        
+
         /**
          * Returns the Identity V2 Access object assigned during authentication
-         * 
+         *
          * @return the Access object
          */
         Access getAccess();
-        
+
         /**
          * Returns the Identity Service API V2
-         * 
+         *
          * @return the identity service version 2
          */
         org.openstack4j.api.identity.v2.IdentityService identity();
-        
+
     }
-    
+
     /**
      * OpenStack4j Client which authenticates against version V3
      */
     public interface OSClientV3 extends OSClient<OSClient.OSClientV3> {
-        
-        
+
+
         /**
          * Gets the token that was assigned during authorization
          *
          * @return the authentication token
          */
         Token getToken();
-         
+
         /**
          * Returns the Identity Service API V3
          *
          * @return the identity service version 3
          */
         org.openstack4j.api.identity.v3.IdentityService identity();
-        
+
     }
- 
-	/**
-     * Returns the Gbp Service API
-     * 
-     * @return the Gbp service
-     */
-	GbpService gbp();
-	
-	/**
-	 * Returns the Senlin Service API
-	 *
-	 * @return the Senlin service
-	 */
-	SenlinService senlin();
 
     /**
-     *  Returns the Trove Service API
+     * Returns the Gbp Service API
+     *
+     * @return the Gbp service
+     */
+    GbpService gbp();
+
+    /**
+     * Returns the Senlin Service API
+     *
+     * @return the Senlin service
+     */
+    SenlinService senlin();
+
+    /**
+     * Returns the Trove Service API
      *
      * @return the Trove service
      */

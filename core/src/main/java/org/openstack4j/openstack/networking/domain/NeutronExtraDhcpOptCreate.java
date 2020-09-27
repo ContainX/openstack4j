@@ -1,23 +1,21 @@
 package org.openstack4j.openstack.networking.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openstack4j.model.network.ExtraDhcpOptCreate;
 import org.openstack4j.model.network.builder.ExtraDhcpOptBuilder;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
- *
  * @author Ales Kemr
  */
 public class NeutronExtraDhcpOptCreate implements ExtraDhcpOptCreate {
 
     // {"opt_value": "testfile.1", "opt_name": "bootfile-name"}
-    
+
     @JsonProperty("opt_value")
     public String opt_value;
     @JsonProperty("opt_name")
     public String opt_name;
-    
+
     @Override
     public String getOptValue() {
         return opt_value;
@@ -36,7 +34,7 @@ public class NeutronExtraDhcpOptCreate implements ExtraDhcpOptCreate {
     public ExtraDhcpOptBuilder toBuilder() {
         return new NeutronExtraDhcpOptBuilder(this);
     }
-    
+
     public static class NeutronExtraDhcpOptBuilder implements ExtraDhcpOptBuilder {
 
         NeutronExtraDhcpOptCreate create;
@@ -44,7 +42,7 @@ public class NeutronExtraDhcpOptCreate implements ExtraDhcpOptCreate {
         public NeutronExtraDhcpOptBuilder(NeutronExtraDhcpOptCreate create) {
             this.create = create;
         }
-        
+
         @Override
         public ExtraDhcpOptBuilder optValue(String optValue) {
             create.opt_value = optValue;
@@ -66,6 +64,6 @@ public class NeutronExtraDhcpOptCreate implements ExtraDhcpOptCreate {
         public ExtraDhcpOptBuilder from(ExtraDhcpOptCreate in) {
             return new NeutronExtraDhcpOptBuilder((NeutronExtraDhcpOptCreate) in);
         }
-        
+
     }
 }

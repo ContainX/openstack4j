@@ -11,18 +11,18 @@ public enum DBCharacterSet {
     UTF8,
     UTF16,
     UTF32,
-    UNRECOGNIZED
-    ;
+    UNRECOGNIZED;
 
     @JsonValue
-    public String value() { return name().toLowerCase(); }
+    public String value() {
+        return name().toLowerCase();
+    }
 
     @JsonCreator
     public static DBCharacterSet value(String paramType) {
         try {
             return valueOf(paramType.toUpperCase());
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return UNRECOGNIZED;
         }
     }

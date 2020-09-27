@@ -1,14 +1,13 @@
 package org.openstack4j.openstack.networking.domain;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.network.SecurityGroupRule;
 import org.openstack4j.model.network.builder.NetSecurityGroupRuleBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
 
 /**
  * An OpenStack Neutron Security Group Rule model.
@@ -200,7 +199,6 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
     /**
      * The Class SecurityGroupRules.
      *
-     *
      * @author Nathan Anderson
      */
     public static class SecurityGroupRules extends ListResult<NeutronSecurityGroupRule> {
@@ -221,7 +219,6 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
 
     /**
      * The Class SecurityGroupRuleConcreteBuilder.
-     *
      *
      * @author Nathan Anderson
      */

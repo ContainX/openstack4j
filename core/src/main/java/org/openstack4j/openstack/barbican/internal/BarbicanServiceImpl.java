@@ -16,5 +16,7 @@ public class BarbicanServiceImpl extends BaseBarbicanServices implements Barbica
     }
 
     @Override
-    public SecretService secrets() { return Apis.get(SecretService.class); }
+    public SecretService secrets() {
+        return Apis.get(SecretService.class);
+    }
 }

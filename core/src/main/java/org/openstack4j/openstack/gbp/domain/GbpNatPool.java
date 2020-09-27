@@ -1,15 +1,15 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.gbp.IPVersionType;
 import org.openstack4j.model.gbp.NatPool;
 import org.openstack4j.model.gbp.builder.NatPoolBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
+
 /**
  * Model implementation for nat pool
  *
@@ -40,7 +40,7 @@ public class GbpNatPool implements NatPool {
 
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class GbpNatPool implements NatPool {
 
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -60,8 +60,9 @@ public class GbpNatPool implements NatPool {
 
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
+
     @Override
     public String getDescription() {
         return description;
@@ -104,7 +105,7 @@ public class GbpNatPool implements NatPool {
                 .add("subnetId", subnetId).add("shared", shared).toString();
     }
 
-    public static class NatPools extends ListResult<GbpNatPool>{
+    public static class NatPools extends ListResult<GbpNatPool> {
 
         private static final long serialVersionUID = 1L;
         @JsonProperty("nat_pools")
@@ -117,12 +118,12 @@ public class GbpNatPool implements NatPool {
 
     }
 
-    public static class NatPoolConcreteBuilder implements NatPoolBuilder{
+    public static class NatPoolConcreteBuilder implements NatPoolBuilder {
 
         private GbpNatPool natPool;
 
         public NatPoolConcreteBuilder(GbpNatPool gbpNatPool) {
-           this.natPool=gbpNatPool;
+            this.natPool = gbpNatPool;
         }
 
         public NatPoolConcreteBuilder() {
@@ -136,43 +137,43 @@ public class GbpNatPool implements NatPool {
 
         @Override
         public NatPoolBuilder from(NatPool in) {
-            this.natPool=(GbpNatPool) in;
+            this.natPool = (GbpNatPool) in;
             return this;
         }
 
         @Override
         public NatPoolBuilder name(String name) {
-            this.natPool.name=name;
+            this.natPool.name = name;
             return this;
         }
 
         @Override
         public NatPoolBuilder description(String description) {
-            this.natPool.description=description;
+            this.natPool.description = description;
             return this;
         }
 
         @Override
         public NatPoolBuilder ipVersion(IPVersionType ipVersion) {
-            this.natPool.ipVersion=ipVersion.name();
+            this.natPool.ipVersion = ipVersion.name();
             return this;
         }
 
         @Override
         public NatPoolBuilder cidr(String cidr) {
-            this.natPool.ipPool=cidr;
+            this.natPool.ipPool = cidr;
             return this;
         }
 
         @Override
         public NatPoolBuilder isShared(boolean shared) {
-            this.natPool.shared=shared;
+            this.natPool.shared = shared;
             return this;
         }
 
         @Override
         public NatPoolBuilder externalSegmentId(String id) {
-            this.natPool.externalSegmentId=id;
+            this.natPool.externalSegmentId = id;
             return this;
         }
 

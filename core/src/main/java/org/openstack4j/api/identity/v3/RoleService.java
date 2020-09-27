@@ -1,15 +1,14 @@
 package org.openstack4j.api.identity.v3;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.identity.v3.Role;
 import org.openstack4j.model.identity.v3.RoleAssignment;
+
+import java.util.List;
 
 /**
  * Identity Role based Operations
- *
  */
 public interface RoleService extends RestService {
 
@@ -81,8 +80,8 @@ public interface RoleService extends RestService {
      * grants a role to a specified user in project context
      *
      * @param projectId the project id
-     * @param userId the user id
-     * @param roleId the role id
+     * @param userId    the user id
+     * @param roleId    the role id
      * @return the action response
      */
     ActionResponse grantProjectUserRole(String projectId, String userId, String roleId);
@@ -91,8 +90,8 @@ public interface RoleService extends RestService {
      * revokes a role to a specified user in project context
      *
      * @param projectId the project id
-     * @param userId the user id
-     * @param roleId the role id
+     * @param userId    the user id
+     * @param roleId    the role id
      * @return the action response
      */
     ActionResponse revokeProjectUserRole(String projectId, String userId, String roleId);
@@ -101,8 +100,8 @@ public interface RoleService extends RestService {
      * checks if a user has a specific role in a given project-context
      *
      * @param projectId the project id
-     * @param userId the user id
-     * @param roleId the role id
+     * @param userId    the user id
+     * @param roleId    the role id
      * @return the ActionResponse
      */
     ActionResponse checkProjectUserRole(String projectId, String userId, String roleId);
@@ -111,8 +110,8 @@ public interface RoleService extends RestService {
      * grants a role to a specified user in domain context
      *
      * @param domainId the domain id
-     * @param userId the user id
-     * @param roleId the role id
+     * @param userId   the user id
+     * @param roleId   the role id
      * @return the action response
      */
     ActionResponse grantDomainUserRole(String domainId, String userId, String roleId);
@@ -121,8 +120,8 @@ public interface RoleService extends RestService {
      * revokes a role to a specified user in domain context
      *
      * @param domainId the domain id
-     * @param userId the user id
-     * @param roleId the role id
+     * @param userId   the user id
+     * @param roleId   the role id
      * @return the action response
      */
     ActionResponse revokeDomainUserRole(String domainId, String userId, String roleId);
@@ -131,8 +130,8 @@ public interface RoleService extends RestService {
      * checks if a user has a specific role in a given domain-context
      *
      * @param domainId the domain id
-     * @param userId the user id
-     * @param roleId the role id
+     * @param userId   the user id
+     * @param roleId   the role id
      * @return the ActionResponse
      */
     ActionResponse checkDomainUserRole(String domainId, String userId, String roleId);
@@ -141,8 +140,8 @@ public interface RoleService extends RestService {
      * grants a role to a specified group in project context
      *
      * @param projectId the project id
-     * @param groupId the group id
-     * @param roleId the role id
+     * @param groupId   the group id
+     * @param roleId    the role id
      * @return the ActionResponse
      */
     ActionResponse grantProjectGroupRole(String projectId, String groupId, String roleId);
@@ -151,8 +150,8 @@ public interface RoleService extends RestService {
      * revokes a role from a specified group in project context
      *
      * @param projectId the project id
-     * @param groupId the group id
-     * @param roleId the role id
+     * @param groupId   the group id
+     * @param roleId    the role id
      * @return the ActionResponse
      */
     ActionResponse revokeProjectGroupRole(String projectId, String groupId, String roleId);
@@ -161,8 +160,8 @@ public interface RoleService extends RestService {
      * check if a group has a specific role in a given project
      *
      * @param projectId the project id
-     * @param groupId the group id
-     * @param roleId the role id
+     * @param groupId   the group id
+     * @param roleId    the role id
      * @return the ActionResponse
      */
     ActionResponse checkProjectGroupRole(String projectId, String groupId, String roleId);
@@ -171,8 +170,8 @@ public interface RoleService extends RestService {
      * grant a role to a specified group in domain context
      *
      * @param domainId the domain id
-     * @param groupId the group id
-     * @param roleId the role id
+     * @param groupId  the group id
+     * @param roleId   the role id
      * @return the ActionResponse
      */
     ActionResponse grantDomainGroupRole(String domainId, String groupId, String roleId);
@@ -181,8 +180,8 @@ public interface RoleService extends RestService {
      * revoke a role from a specified group in domain context
      *
      * @param domainId the domain id
-     * @param groupId the group id
-     * @param roleId the role id
+     * @param groupId  the group id
+     * @param roleId   the role id
      * @return the ActionResponse
      */
     ActionResponse revokeDomainGroupRole(String domainId, String groupId, String roleId);
@@ -191,8 +190,8 @@ public interface RoleService extends RestService {
      * checks if a group has a specific role in a given domain
      *
      * @param domainId the domain id
-     * @param groupId the group id
-     * @param roleId the role id
+     * @param groupId  the group id
+     * @param roleId   the role id
      * @return the ActionResponse
      */
     ActionResponse checkDomainGroupRole(String domainId, String groupId, String roleId);

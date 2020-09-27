@@ -17,8 +17,7 @@ public enum LbProvisioningStatus {
 
     @JsonCreator
     public static LbProvisioningStatus forValue(String value) {
-        if (value != null)
-        {
+        if (value != null) {
             for (LbProvisioningStatus s : LbProvisioningStatus.values()) {
                 if (s.name().equalsIgnoreCase(value)) {
                     return s;

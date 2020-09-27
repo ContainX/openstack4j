@@ -23,22 +23,16 @@ import org.openstack4j.openstack.image.v2.domain.GlanceImageUpdate;
 import org.openstack4j.openstack.image.v2.domain.GlanceMember;
 
 import javax.annotation.Nullable;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_IMAGE_V2_PATCH;
-import static org.openstack4j.core.transport.ClientConstants.CONTENT_TYPE_OCTECT_STREAM;
-import static org.openstack4j.core.transport.ClientConstants.HEADER_ACCEPT;
-import static org.openstack4j.core.transport.ClientConstants.HEADER_CONTENT_TYPE;
+import static org.openstack4j.core.transport.ClientConstants.*;
 
 /**
  * Implementation of Glance V2 Image Service
+ *
  * @author emjburns
  */
 public class ImageServiceImpl extends BaseImageServices implements ImageService {
@@ -57,17 +51,16 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     public List<? extends Image> list(Map<String, String> filteringParams) {
         return get(GlanceImage.Images.class, uri("/images")).params(filteringParams).execute().getList();
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public List<? extends CachedImage> listCachedImages() {
-    	try {
+        try {
             return get(CachedImages.class, uri("/cached_images"))
                     .execute(ExecutionOptions.<CachedImages>create(PropagateOnStatus.on(404))).getList();
-        }
-        catch (ResponseException e) {
+        } catch (ResponseException e) {
             return null;
         }
     }
@@ -113,7 +106,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
             GlanceImageUpdate giu = new GlanceImageUpdate(jsonDiff);
             return update(image.getId(), giu);
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -135,7 +128,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     @Override
     public ActionResponse delete(String imageId) {
         checkNotNull(imageId);
-        return deleteWithResponse(uri("/images/%s", imageId)).param("format","json").execute();
+        return deleteWithResponse(uri("/images/%s", imageId)).param("format", "json").execute();
     }
 
     /**
@@ -144,7 +137,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     @Override
     public ActionResponse deactivate(String imageId) {
         checkNotNull(imageId);
-        return post(ActionResponse.class, uri("/images/%s/actions/deactivate",imageId)).execute();
+        return post(ActionResponse.class, uri("/images/%s/actions/deactivate", imageId)).execute();
     }
 
     /**
@@ -153,7 +146,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     @Override
     public ActionResponse reactivate(String imageId) {
         checkNotNull(imageId);
-        return post(ActionResponse.class, uri("/images/%s/actions/reactivate",imageId)).execute();
+        return post(ActionResponse.class, uri("/images/%s/actions/reactivate", imageId)).execute();
     }
 
     /**
@@ -163,7 +156,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     public ActionResponse upload(String imageId, Payload<?> payload, @Nullable Image image) {
         checkNotNull(imageId);
         checkNotNull(payload);
-        return put(ActionResponse.class, uri("/images/%s/file",imageId)).header(HEADER_CONTENT_TYPE,CONTENT_TYPE_OCTECT_STREAM).entity(payload).execute();
+        return put(ActionResponse.class, uri("/images/%s/file", imageId)).header(HEADER_CONTENT_TYPE, CONTENT_TYPE_OCTECT_STREAM).entity(payload).execute();
     }
 
     /**
@@ -182,14 +175,14 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
                 outputStream = new FileOutputStream(filename);
                 byte[] buffer = new byte[1024];
                 int bytesRead;
-                while((bytesRead = inputStream.read(buffer)) !=-1){
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
                     outputStream.write(buffer, 0, bytesRead);
                 }
                 inputStream.close();
                 outputStream.flush();
                 outputStream.close();
                 return ActionResponse.actionSuccess();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 return ActionResponse.actionFailed("Failed to write to file " + e.getMessage(), 400);
             }
@@ -258,7 +251,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     public Member createMember(String imageId, String memberId) {
         checkNotNull(imageId);
         checkNotNull(memberId);
-        return post(Member.class, uri("/images/%s/members",imageId)).entity(new GlanceMember(memberId)).execute();
+        return post(Member.class, uri("/images/%s/members", imageId)).entity(new GlanceMember(memberId)).execute();
     }
 
     /**
@@ -278,8 +271,9 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     public ActionResponse deleteMember(String imageId, String memberId) {
         checkNotNull(imageId);
         checkNotNull(memberId);
-        return deleteWithResponse(uri("/images/%s/members/%s",imageId, memberId)).execute();
+        return deleteWithResponse(uri("/images/%s/members/%s", imageId, memberId)).execute();
     }
+
     /**
      * {@inheritDoc}
      */

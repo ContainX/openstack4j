@@ -37,9 +37,8 @@ public final class HttpCommand<R> {
 
     /**
      * Creates a new HttpCommand from the given request
-     * 
-     * @param request
-     *            the request
+     *
+     * @param request the request
      * @return the command
      */
     public static <R> HttpCommand<R> create(HttpRequest<R> request) {
@@ -58,27 +57,27 @@ public final class HttpCommand<R> {
         client = HttpClientFactory.INSTANCE.getClient(request.getConfig());
 
         switch (request.getMethod()) {
-        case POST:
-            clientReq = new HttpPost(url);
-            break;
-        case PUT:
-            clientReq = new HttpPut(url);
-            break;
-        case DELETE:
-            clientReq = new HttpDelete(url);
-            break;
-        case HEAD:
-            clientReq = new HttpHead(url);
-            break;
-        case PATCH:
-            clientReq = new HttpPatch(url);
-            break;
-        case GET:
-            clientReq = new HttpGet(url);
-            break;
-        default:
-            throw new IllegalArgumentException("Unsupported http method: " + request.getMethod());
-        } 
+            case POST:
+                clientReq = new HttpPost(url);
+                break;
+            case PUT:
+                clientReq = new HttpPut(url);
+                break;
+            case DELETE:
+                clientReq = new HttpDelete(url);
+                break;
+            case HEAD:
+                clientReq = new HttpHead(url);
+                break;
+            case PATCH:
+                clientReq = new HttpPatch(url);
+                break;
+            case GET:
+                clientReq = new HttpGet(url);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported http method: " + request.getMethod());
+        }
         clientReq.setHeader("Accept", MediaType.JSON_UTF_8.toString());
         populateHeaders(request);
     }

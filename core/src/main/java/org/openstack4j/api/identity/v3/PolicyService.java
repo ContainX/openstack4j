@@ -1,10 +1,10 @@
 package org.openstack4j.api.identity.v3;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
-import org.openstack4j.model.identity.v3.Policy;
 import org.openstack4j.model.common.ActionResponse;
+import org.openstack4j.model.identity.v3.Policy;
+
+import java.util.List;
 
 public interface PolicyService extends RestService {
 
@@ -19,10 +19,10 @@ public interface PolicyService extends RestService {
     /**
      * Create a policy
      *
-     * @param blob the policy rule itself as a serialized blob
-     * @param type the MIME media type of the serialized policy blob
+     * @param blob      the policy rule itself as a serialized blob
+     * @param type      the MIME media type of the serialized policy blob
      * @param projectId the uuid for the associated project
-     * @param userId the id of the user who owns the policy
+     * @param userId    the id of the user who owns the policy
      * @return the newly created policy
      */
     Policy create(String blob, String type, String projectId, String userId);
@@ -47,7 +47,7 @@ public interface PolicyService extends RestService {
      * Delete a policy
      *
      * @param policyId the policy id
-     * @return  the ActionResponse
+     * @return the ActionResponse
      */
     ActionResponse delete(String policyId);
 

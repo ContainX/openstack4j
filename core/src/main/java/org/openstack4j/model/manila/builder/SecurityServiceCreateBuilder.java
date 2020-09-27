@@ -13,6 +13,7 @@ public interface SecurityServiceCreateBuilder
         extends Buildable.Builder<SecurityServiceCreateBuilder, SecurityServiceCreate> {
     /**
      * Set the security service type
+     *
      * @param type the security service type
      * @return SecurityServiceCreateBuilder
      */
@@ -20,6 +21,7 @@ public interface SecurityServiceCreateBuilder
 
     /**
      * Set the security service name
+     *
      * @param name the security service name
      * @return SecurityServiceCreateBuilder
      */
@@ -27,6 +29,7 @@ public interface SecurityServiceCreateBuilder
 
     /**
      * Set the security service description
+     *
      * @param description the security service description
      * @return SecurityServiceCreateBuilder
      */
@@ -34,6 +37,7 @@ public interface SecurityServiceCreateBuilder
 
     /**
      * Set the security service DNS IP
+     *
      * @param dnsIp the security service DNS IP
      * @return SecurityServiceCreateBuilder
      */
@@ -41,6 +45,7 @@ public interface SecurityServiceCreateBuilder
 
     /**
      * Set the security service user
+     *
      * @param user the security service user
      * @return SecurityServiceCreateBuilder
      */
@@ -48,6 +53,7 @@ public interface SecurityServiceCreateBuilder
 
     /**
      * Set the security service password
+     *
      * @param password the security service password
      * @return SecurityServiceCreateBuilder
      */
@@ -55,6 +61,7 @@ public interface SecurityServiceCreateBuilder
 
     /**
      * Set the security service domain
+     *
      * @param domain the security service domain
      * @return SecurityServiceCreateBuilder
      */
@@ -62,6 +69,7 @@ public interface SecurityServiceCreateBuilder
 
     /**
      * Set the security service server
+     *
      * @param server the security service server
      * @return SecurityServiceCreateBuilder
      */

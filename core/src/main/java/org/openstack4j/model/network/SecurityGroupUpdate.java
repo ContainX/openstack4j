@@ -6,7 +6,7 @@ import org.openstack4j.model.network.builder.NetSecurityGroupUpdateBuilder;
 
 /**
  * The Interface SecurityGroupUpdate.
- *
+ * <p>
  * Created by Ayberk CAL on 17.03.2017.
  */
 public interface SecurityGroupUpdate extends ModelEntity, Buildable<NetSecurityGroupUpdateBuilder> {

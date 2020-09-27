@@ -28,7 +28,7 @@ public class Template {
 
     private final static String GET_FILE = "get_file";
 
-    public Template(URL templateRes) throws JsonParseException, IOException{
+    public Template(URL templateRes) throws JsonParseException, IOException {
         setTplContent(Resources.toString(templateRes, Charsets.UTF_8));
         baseUrl = TemplateUtils.baseUrl(templateRes.toString());
         getFileContents();
@@ -36,7 +36,7 @@ public class Template {
 
     public Template(String templateLoc)
             throws JsonParseException, MalformedURLException,
-                   UnsupportedEncodingException, IOException, URISyntaxException {
+            UnsupportedEncodingException, IOException, URISyntaxException {
         this(TemplateUtils.normaliseFilePathToUrl(templateLoc));
     }
 
@@ -56,25 +56,25 @@ public class Template {
         }
     }
 
-    private void resolveTemplateType(Map<?,?> map) throws MalformedURLException, IOException {
-        for(Object key : map.keySet()) {
+    private void resolveTemplateType(Map<?, ?> map) throws MalformedURLException, IOException {
+        for (Object key : map.keySet()) {
             // Ignore if the key is not string. Actually not happening
-            if(!(key instanceof String)) {
+            if (!(key instanceof String)) {
                 continue;
             }
 
             String skey = (String) key;
             Object value = map.get(skey);
 
-            if(value instanceof String) {
+            if (value instanceof String) {
                 String valueInString = (String) value;
                 //Processing the nested template
-                if(isTemplate(skey, valueInString)) {
+                if (isTemplate(skey, valueInString)) {
                     try {
                         final String templateName = valueInString;
-                    	final URL fullTemplateName =  TemplateUtils.normaliseFilePathToUrl(baseUrl.toString(), templateName);
+                        final URL fullTemplateName = TemplateUtils.normaliseFilePathToUrl(baseUrl.toString(), templateName);
 
-                        if(! files.containsKey(templateName)) {
+                        if (!files.containsKey(templateName)) {
                             final Template tpl = new Template(fullTemplateName);
                             files.put(templateName, tpl.getTplContent());
                             files.putAll(tpl.getFiles());
@@ -85,8 +85,8 @@ public class Template {
                 }
             }
 
-            if (value instanceof Map<?,?>){
-                resolveTemplateType((Map<?,?>)value);
+            if (value instanceof Map<?, ?>) {
+                resolveTemplateType((Map<?, ?>) value);
             } else if (value instanceof List<?>) {
                 for (Object item : (List<?>) value) {
                     if (item instanceof Map<?, ?>) {
@@ -97,25 +97,25 @@ public class Template {
         }
     }
 
-    private void resolveTemplateGetFiles(Map<?,?> map) throws IOException  {
-        for(Object key : map.keySet()){
+    private void resolveTemplateGetFiles(Map<?, ?> map) throws IOException {
+        for (Object key : map.keySet()) {
             // Ignore if the key is not string. Actually not happening
-            if(!(key instanceof String)) {
+            if (!(key instanceof String)) {
                 continue;
             }
 
             String skey = (String) key;
             Object value = map.get(skey);
 
-            if(isGetFile(skey)) {
+            if (isGetFile(skey)) {
                 //if key="get_file", the value is the filename
-                addToFiles((String)value);
+                addToFiles((String) value);
                 continue;
             }
 
             Object subMap = map.get(skey);
-            if (subMap instanceof Map<?,?>){
-                resolveTemplateGetFiles((Map<?,?>)subMap);
+            if (subMap instanceof Map<?, ?>) {
+                resolveTemplateGetFiles((Map<?, ?>) subMap);
             } else if (subMap instanceof List<?>) {
                 for (Object item : (List<?>) subMap) {
                     if (item instanceof Map<?, ?>) {
@@ -127,12 +127,12 @@ public class Template {
     }
 
     private void addToFiles(String filename) throws IOException {
-        if(! files.containsKey(filename)) {
-        	if (filename.startsWith("/")){
-        	    files.put(filename, TemplateUtils.readToString(filename));
-        	} else {
-        		files.put(filename, TemplateUtils.readToString(baseUrl + filename));
-        	}
+        if (!files.containsKey(filename)) {
+            if (filename.startsWith("/")) {
+                files.put(filename, TemplateUtils.readToString(filename));
+            } else {
+                files.put(filename, TemplateUtils.readToString(baseUrl + filename));
+            }
         }
     }
 
@@ -141,7 +141,7 @@ public class Template {
     }
 
     private boolean isTemplate(String key, String value) {
-        if (! key.equals("type")) {
+        if (!key.equals("type")) {
             return false;
         }
         if (value.endsWith(".yaml") || value.endsWith(".template")) {

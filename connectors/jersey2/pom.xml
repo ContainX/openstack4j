@@ -1,81 +1,82 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>org.pacesys.openstack4j.connectors</groupId>
-		<artifactId>openstack4j-connectors</artifactId>
-		<version>3.2.1-SNAPSHOT</version>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>openstack4j-jersey2</artifactId>
-	<name>OpenStack4j Jersey2 Connector</name>
-	<url>http://github.com/ContainX/openstack4j/</url>
-	<packaging>jar</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.pacesys.openstack4j.connectors</groupId>
+        <artifactId>openstack4j-connectors</artifactId>
+        <version>3.2.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>openstack4j-jersey2</artifactId>
+    <name>OpenStack4j Jersey2 Connector</name>
+    <url>http://github.com/ContainX/openstack4j/</url>
+    <packaging>jar</packaging>
 
-	<properties>
-		<jersey-client-version>2.22.1</jersey-client-version>
-	</properties>
+    <properties>
+        <jersey-client-version>2.22.1</jersey-client-version>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>${jersey-client-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-json-jackson</artifactId>
-			<version>2.11</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey-client-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.11</version>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-Name>${project.name}</Bundle-Name>
-						<Export-Package>
-							org.openstack4j.connectors.jersey2
-						</Export-Package>
-						<Import-Package>
-							!org.openstack4j.connectors.jersey2,
-							*
-						</Import-Package>
-						<!--
-						Required for SPI in OSGi:
-						http://aries.apache.org/modules/spi-fly.html#specconf
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Export-Package>
+                            org.openstack4j.connectors.jersey2
+                        </Export-Package>
+                        <Import-Package>
+                            !org.openstack4j.connectors.jersey2,
+                            *
+                        </Import-Package>
+                        <!--
+                        Required for SPI in OSGi:
+                        http://aries.apache.org/modules/spi-fly.html#specconf
 
-						This bundle defines an implementation for following services in META-INF-services:
-						org.openstack4j.core.transport.HttpExecutorService
-						 -->
-						<Require-Capability>
-							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
-						</Require-Capability>
-						<Provide-Capability>
-							osgi.serviceloader; osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService
-						</Provide-Capability>
-					</instructions>
-				</configuration>
-			</plugin>
+                        This bundle defines an implementation for following services in META-INF-services:
+                        org.openstack4j.core.transport.HttpExecutorService
+                         -->
+                        <Require-Capability>
+                            osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
+                        </Require-Capability>
+                        <Provide-Capability>
+                            osgi.serviceloader; osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService
+                        </Provide-Capability>
+                    </instructions>
+                </configuration>
+            </plugin>
 
-			<!-- JDK 1.8 required by this connector (https://github.com/ContainX/openstack4j/issues/673) -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+            <!-- JDK 1.8 required by this connector (https://github.com/ContainX/openstack4j/issues/673) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

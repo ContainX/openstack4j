@@ -21,15 +21,18 @@ public class UntrustedSSL {
     private HostnameVerifier verifier;
 
     private UntrustedSSL() {
-        try
-        {
-            TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
                 public X509Certificate[] getAcceptedIssuers() {
-                	return new X509Certificate[]{};
+                    return new X509Certificate[]{};
                 }
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
-                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
-            } };
+
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
+            }};
             SSLContext ssc = SSLContext.getInstance("TLS");
             ssc.init(null, trustAllCerts, new SecureRandom());
 
@@ -38,9 +41,9 @@ public class UntrustedSSL {
                 @Override
                 public boolean verify(String s, SSLSession session) {
                     return true;
-                } };
-        }
-        catch (Throwable t) {
+                }
+            };
+        } catch (Throwable t) {
             LOG.error(t.getMessage(), t);
         }
     }

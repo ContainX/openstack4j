@@ -9,9 +9,10 @@ import java.util.List;
 
 /**
  * A healthMonitor of a Lbaas V2 pool
+ *
  * @author emjburns
  */
-public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2Builder>{
+public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2Builder> {
     /**
      * @return id the healthMonitor identifier
      */
@@ -19,14 +20,13 @@ public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2B
 
     /**
      * @return tenantId Owner of the VIP. Only an administrative user can
-     *         specify a tenant ID other than its own.
+     * specify a tenant ID other than its own.
      */
     String getTenantId();
 
     /**
-     *
      * @return type The type of probe sent by the load balancer to verify the
-     *         member state, which is TCP, HTTP, or HTTPS.
+     * member state, which is TCP, HTTP, or HTTPS.
      */
     HealthMonitorType getType();
 
@@ -37,15 +37,15 @@ public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2B
 
     /**
      * @return timeout The maximum number of seconds for a monitor to wait for a
-     *         connection to be established before it times out. This value must
-     *         be less than the delay value.
+     * connection to be established before it times out. This value must
+     * be less than the delay value.
      */
     Integer getTimeout();
 
     /**
      * @return maxRetries Number of allowed connection failures before changing
-     *         the status of the member to INACTIVE. A valid value is from 1 to
-     *         10.
+     * the status of the member to INACTIVE. A valid value is from 1 to
+     * 10.
      */
     Integer getMaxRetries();
 
@@ -60,8 +60,8 @@ public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2B
      * Optional.
      *
      * @return urlPath The HTTP path of the request sent by the monitor to test
-     *         the health of a member. Must be a string beginning with a forward
-     *         slash (/).
+     * the health of a member. Must be a string beginning with a forward
+     * slash (/).
      */
     String getUrlPath();
 
@@ -76,12 +76,13 @@ public interface HealthMonitorV2 extends ModelEntity, Buildable<HealthMonitorV2B
      * Optional.
      *
      * @return adminstateup The administrative state of the health monitor,
-     *         which is up (true) or down (false). Default true.
+     * which is up (true) or down (false). Default true.
      */
     boolean isAdminStateUp();
 
     /**
      * The pools that this health monitor will monitor.
+     *
      * @return pools
      */
     List<ListItem> getPools();

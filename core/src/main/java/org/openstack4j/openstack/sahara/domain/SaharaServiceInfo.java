@@ -12,25 +12,25 @@ import java.util.Map;
  * @author ekasit.kijsipongse@nectec.or.th
  */
 
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class SaharaServiceInfo extends HashMap<String,String> implements ServiceInfo {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class SaharaServiceInfo extends HashMap<String, String> implements ServiceInfo {
 
-	public static final long serialVersionUID = 1L;
+    public static final long serialVersionUID = 1L;
 
-        /**
-         * {@inheritDoc}
-         */
-	@Override
-	public String get(String name) {
-		return super.get(name);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String get(String name) {
+        return super.get(name);
+    }
 
-        /**
-         * {@inheritDoc}
-         */
-	@Override
-	public Map<String,String> getInfos() {
-		return this;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<String, String> getInfos() {
+        return this;
+    }
 
 }

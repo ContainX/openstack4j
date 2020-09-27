@@ -15,12 +15,14 @@ public interface DatastoreService {
 
     /**
      * Returns list of available datastores
+     *
      * @return the list of datastores
      */
     List<? extends Datastore> list();
 
     /**
      * Gets a datastore specified by ID
+     *
      * @param id
      * @return the datastore or null if not found
      */
@@ -28,6 +30,7 @@ public interface DatastoreService {
 
     /**
      * Returns list of all datastore versions
+     *
      * @param datasoreId
      * @return list of datastore versions
      */
@@ -35,6 +38,7 @@ public interface DatastoreService {
 
     /**
      * Get the datastore version specified by ID
+     *
      * @param datastoreId
      * @param versionId
      * @return the datastore version or null if not found

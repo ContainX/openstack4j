@@ -15,46 +15,47 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * Test cases for cluster on Senlin
  *
  * @author lion
  */
-@Test(suiteName="senlin/cluster")
+@Test(suiteName = "senlin/cluster")
 public class ClusterServiceTest extends AbstractTest {
 
-    private static final String CLUSTERS="/senlin/v1/clusters.json";
-    private static final String CLUSTER="/senlin/v1/cluster.json";
-    private static final String RASPACTION="/senlin/v1/resp_action.json";
-    private static final String ID="45edadcb-c73b-4920-87e1-518b2f29f54b";
+    private static final String CLUSTERS = "/senlin/v1/clusters.json";
+    private static final String CLUSTER = "/senlin/v1/cluster.json";
+    private static final String RASPACTION = "/senlin/v1/resp_action.json";
+    private static final String ID = "45edadcb-c73b-4920-87e1-518b2f29f54b";
 
     @Override
     protected Service service() {
         return Service.CLUSTERING;
     }
+
     @Test
-    public void testListCluster() throws Exception{
+    public void testListCluster() throws Exception {
         respondWith(CLUSTERS);
         List<? extends Cluster> clusterList = osv3().senlin().cluster().list();
         assertEquals(4, clusterList.size());
         Preconditions.checkNotNull(clusterList.get(0));
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Cluster from List : "+clusterList.get(0));
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Cluster from List : " + clusterList.get(0));
         assertEquals(clusterList.get(0).getId(), "7e0c9843-54bf-4823-b545-d2f6ffb4ed25");
     }
+
     @Test
-    public void testGetCluster() throws Exception{
+    public void testGetCluster() throws Exception {
         respondWith(CLUSTER);
         Cluster cluster = osv3().senlin().cluster().get(ID);
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Cluster by ID : " + cluster);
         assertNotNull(cluster);
         assertEquals(ID, cluster.getId());
     }
+
     @Test
-    public void testCreateCluster() throws Exception{
+    public void testCreateCluster() throws Exception {
         respondWith(CLUSTER);
         String clusterName = "test_cluster";
         ClusterCreate newCluster = new SenlinClusterCreate();
@@ -64,8 +65,9 @@ public class ClusterServiceTest extends AbstractTest {
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Created Cluster : " + cluster);
         assertEquals(clusterName, cluster.getName());
     }
+
     @Test
-    public void testUpdateCluster() throws Exception{
+    public void testUpdateCluster() throws Exception {
         respondWith(CLUSTER);
         String clusterName = "test_cluster";
         ClusterCreate newCluster = new SenlinClusterCreate();
@@ -77,14 +79,16 @@ public class ClusterServiceTest extends AbstractTest {
         Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Updated Cluster : " + cluster);
         assertEquals(clusterName, cluster.getName());
     }
+
     @Test
     public void testDeleteCluster() {
         respondWith(200);
         ActionResponse result = osv3().senlin().cluster().delete(ID);
         assertTrue(result.isSuccess());
     }
+
     @Test
-    public void testNodeAction() throws Exception{
+    public void testNodeAction() throws Exception {
         respondWith(RASPACTION);
         ClusterActionCreate newClusterAction = new SenlinClusterActionCreate();
         newClusterAction.toBuilder().check(new HashMap<String, String>());

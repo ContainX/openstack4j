@@ -1,14 +1,14 @@
 package org.openstack4j.api.networking;
 
-import java.util.List;
-
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.Subnet;
 
+import java.util.List;
+
 /**
  * OpenStack (Neutron) Subnet based Operations
- * 
+ *
  * @author Jeremy Unruh
  */
 public interface SubnetService extends RestService {
@@ -22,7 +22,7 @@ public interface SubnetService extends RestService {
 
     /**
      * Gets a Subnet by ID
-     * 
+     *
      * @param subnetId the subnet identifier
      * @return the Subnet or null if not found
      */
@@ -30,7 +30,7 @@ public interface SubnetService extends RestService {
 
     /**
      * Delete a Subnet by ID
-     * 
+     *
      * @param subnetId the subnet identifier to delete
      * @return the action response
      */
@@ -38,29 +38,29 @@ public interface SubnetService extends RestService {
 
     /**
      * Creates a new Subnet
-     * 
+     *
      * @param subnet the subnet to create
      * @return the newly created subnet
      */
     Subnet create(Subnet subnet);
 
     /**
-     * Updates a Subnet. 
+     * Updates a Subnet.
      * <p>
      * Example:<br>
      * Subnet updateSN = update(existingSubnet.toBuilder().someChange(change).build());
-     * 
+     *
      * @param subnet the subnet to update
      * @return the new subnet info
      */
     Subnet update(Subnet subnet);
-    
+
     /**
      * This method is needed if you are updating a subnet without pre-fetching the subnet prior.
      * See example at {@linkplain #update(Subnet)}
-     * 
+     *
      * @param subnetId the subnet identifier to update
-     * @param subnet the subnet to update
+     * @param subnet   the subnet to update
      * @return the updated subnet
      */
     Subnet update(String subnetId, Subnet subnet);

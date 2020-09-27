@@ -8,13 +8,14 @@ import java.util.Map;
 
 /**
  * Created by reneschollmeyer on 02.08.17.
- *
+ * <p>
  * Secret service provides CRUD capabilities for Secret(s).
  */
 public interface SecretService {
 
     /**
      * Returns a list of secrets filtered by parameters.
+     *
      * @param filteringParams map (name, value) of filtering parameters
      * @return list of secrets filtered by filteringParameters
      */
@@ -29,6 +30,7 @@ public interface SecretService {
 
     /**
      * Get a specified secret by its ID.
+     *
      * @param secretId
      * @return
      */
@@ -36,6 +38,7 @@ public interface SecretService {
 
     /**
      * Delete a specified secret by its ID.
+     *
      * @param secretId
      * @return
      */
@@ -43,6 +46,7 @@ public interface SecretService {
 
     /**
      * Create a secret.
+     *
      * @param secret
      * @return
      */

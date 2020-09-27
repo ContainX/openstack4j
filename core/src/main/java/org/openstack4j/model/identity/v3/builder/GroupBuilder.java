@@ -1,14 +1,12 @@
 package org.openstack4j.model.identity.v3.builder;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.identity.v3.Group;
 
+import java.util.Map;
+
 /**
  * A Builder which creates a identity v3 group
- * 
- * 
  */
 public interface GroupBuilder extends Builder<GroupBuilder, Group> {
 

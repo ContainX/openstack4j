@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * An object to hold status of lbaas v2 loadbalancer pool
+ *
  * @author emjburns
  */
 @JsonRootName("pools")
@@ -28,21 +29,21 @@ public class NeutronLbPoolV2Status extends Status implements LbPoolV2Status {
     private HealthMonitorV2Status healthMonitorStatus;
 
     @Override
-    public List<MemberV2Status> getMemberStatuses(){
+    public List<MemberV2Status> getMemberStatuses() {
         return memberStatuses;
     }
 
     @Override
-    public HealthMonitorV2Status getHeathMonitorStatus(){
+    public HealthMonitorV2Status getHeathMonitorStatus() {
         return healthMonitorStatus;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("name", name)

@@ -1,12 +1,12 @@
 package org.openstack4j.api.identity.v3;
 
-import static org.testng.AssertJUnit.assertNull;
-import static org.testng.Assert.assertEquals;
-
 import org.openstack4j.api.AbstractTest;
 import org.openstack4j.api.Builders;
 import org.openstack4j.model.identity.v3.Group;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertNull;
 
 /**
  * Tests the Identity/Keystone API version 3 GroupService
@@ -67,13 +67,13 @@ public class KeystoneGroupServiceTests extends AbstractTest {
         assertEquals(updatedGroup.getDescription(), GROUP_DESCRIPTION_UPDATE);
 
     }
-    
-    
-    public void group_get_byName_byDomainId_NotExist_Test() throws Exception {    	
-    	respondWith(JSON_GROUPS_EMPTY_LIST);    
-    	Group group = osv3().identity().groups().getByName(GROUP_NAME, GROUP_DOMAIN_ID);    	
-    	assertNull(group);
-    	
+
+
+    public void group_get_byName_byDomainId_NotExist_Test() throws Exception {
+        respondWith(JSON_GROUPS_EMPTY_LIST);
+        Group group = osv3().identity().groups().getByName(GROUP_NAME, GROUP_DOMAIN_ID);
+        assertNull(group);
+
     }
 
 }

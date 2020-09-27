@@ -1,18 +1,16 @@
 package org.openstack4j.openstack.heat.domain;
 
-import org.openstack4j.model.heat.Template;
-import org.openstack4j.model.heat.builder.TemplateBuilder;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRawValue;
+import org.openstack4j.model.heat.Template;
+import org.openstack4j.model.heat.builder.TemplateBuilder;
 
 /**
  * This class represents a HeatTemplate. It uses jackson for (de)serialization
  * of contents.
- * 
+ *
  * @author Matthias Reisser
- * 
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HeatTemplate implements Template {
@@ -40,7 +38,7 @@ public class HeatTemplate implements Template {
     /**
      * returns a {@link HeatTemplateConcreteBuilder} for configuration and
      * creation of a {@link HeatTemplate}
-     * 
+     *
      * @return a {@link HeatTemplateConcreteBuilder}
      */
     public static HeatTemplateConcreteBuilder build() {
@@ -55,9 +53,8 @@ public class HeatTemplate implements Template {
     /**
      * builder class for configuration and creation of {@link HeatTemplate}
      * objects. Use {@link #build()} to create the {@link HeatTemplate} object.
-     * 
+     *
      * @author Matthias Reisser
-     * 
      */
     public static class HeatTemplateConcreteBuilder implements TemplateBuilder {
         HeatTemplate model;
@@ -73,9 +70,8 @@ public class HeatTemplate implements Template {
         /**
          * Constructor to create a {@link HeatTemplateConcreteBuilder} object
          * for an existing {@link HeatTemplate} object.
-         * 
-         * @param template
-         *            existing {@link HeatTemplate} object.
+         *
+         * @param template existing {@link HeatTemplate} object.
          */
         public HeatTemplateConcreteBuilder(HeatTemplate template) {
             this.model = template;

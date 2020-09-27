@@ -6,7 +6,7 @@ import org.openstack4j.model.gbp.builder.PolicyTargetBuilder;
 
 /**
  * Policy Target Model Entity
- * 
+ *
  * @author vinod borole
  */
 public interface PolicyTarget extends Resource, Buildable<PolicyTargetBuilder> {

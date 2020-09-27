@@ -4,7 +4,7 @@ import org.openstack4j.model.ModelEntity;
 
 /**
  * Credentials for Data Source
- * 
+ *
  * @author ekasit.kijsipongse@nectec.or.th
  * @author siwat.pru@outlook.com
  */

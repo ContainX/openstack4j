@@ -10,9 +10,14 @@ import org.openstack4j.model.ModelEntity;
 public interface Flavor extends ModelEntity {
 
     String getName();
+
     String getId();
+
     String getStrId();
+
     int getRam();
+
     int getVcpus();
+
     int getDisk();
 }

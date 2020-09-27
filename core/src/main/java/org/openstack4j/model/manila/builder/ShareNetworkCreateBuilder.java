@@ -12,7 +12,7 @@ public interface ShareNetworkCreateBuilder extends Buildable.Builder<ShareNetwor
     /**
      * Set the neutron network and subnet.
      *
-     * @param neutronNetId the neutron network ID
+     * @param neutronNetId    the neutron network ID
      * @param neutronSubnetId the neutron subnet ID
      * @return ShareNetworkCreateBuilder
      */

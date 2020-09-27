@@ -13,20 +13,21 @@ import static org.testng.Assert.assertNotNull;
  *
  * @author lion
  */
-@Test(suiteName="senlin/buildInfo")
+@Test(suiteName = "senlin/buildInfo")
 public class BuildInfoServiceTest extends AbstractTest {
 
-    private static final String BUILDINFO="/senlin/v1/build_info.json";
+    private static final String BUILDINFO = "/senlin/v1/build_info.json";
 
     @Override
     protected Service service() {
         return Service.CLUSTERING;
     }
+
     @Test
-    public void testGetAction() throws Exception{
+    public void testGetAction() throws Exception {
         respondWith(BUILDINFO);
         BuildInfo buildInfo = osv3().senlin().buildInfo().get();
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : BuildInfo : "+ buildInfo);
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : BuildInfo : " + buildInfo);
         assertNotNull(buildInfo);
     }
 

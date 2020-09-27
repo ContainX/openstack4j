@@ -1,10 +1,10 @@
 package org.openstack4j.model.sahara;
 
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.sahara.builder.ServiceConfigBuilder;
+
+import java.util.Map;
 
 /**
  * Service Configuration Model
@@ -18,10 +18,10 @@ public interface ServiceConfig extends ModelEntity, Buildable<ServiceConfigBuild
      * @return the value of the parameter
      */
     Object get(String name);
-    
+
     /**
      * @return map of all configurations or null
      */
     Map<String, Object> getConfigs();
-    
+
 }

@@ -12,101 +12,101 @@ import java.util.Map;
 
 /**
  * Mistral action execution.
- * 
+ *
  * @author Renat Akhmerov
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MistralActionExecution extends BaseExecution implements ActionExecution {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String name;
+    private String name;
 
-	private String type;
+    private String type;
 
-	@JsonProperty("task_name")
-	private String taskName;
+    @JsonProperty("task_name")
+    private String taskName;
 
-	@JsonProperty("task_execution_id")
-	private String taskExecId;
+    @JsonProperty("task_execution_id")
+    private String taskExecId;
 
-	private Map<String, Object> input;
+    private Map<String, Object> input;
 
-	private Map<String, Object> output;
+    private Map<String, Object> output;
 
-	private Boolean accepted;
+    private Boolean accepted;
 
-	public static MistralActionExecutionBuilder builder() {
-		return new MistralActionExecutionBuilder();
-	}
-	
-	@Override
-	public MistralActionExecutionBuilder toBuilder() {
-		return new MistralActionExecutionBuilder(this);
-	}
+    public static MistralActionExecutionBuilder builder() {
+        return new MistralActionExecutionBuilder();
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public MistralActionExecutionBuilder toBuilder() {
+        return new MistralActionExecutionBuilder(this);
+    }
 
-	@Override
-	public String getTaskName() {
-		return taskName;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public String getTaskExecutionId() {
-		return taskExecId;
-	}
+    @Override
+    public String getTaskName() {
+        return taskName;
+    }
+
+    @Override
+    public String getTaskExecutionId() {
+        return taskExecId;
+    }
 
 
-	@Override
-	public Boolean isAccepted() {
-		return accepted;
-	}
+    @Override
+    public Boolean isAccepted() {
+        return accepted;
+    }
 
-	@Override
-	public Map<String, Object> getInput() {
-		return input;
-	}
+    @Override
+    public Map<String, Object> getInput() {
+        return input;
+    }
 
-	@Override
-	public Map<String, Object> getOutput() {
-		return output;
-	}
+    @Override
+    public Map<String, Object> getOutput() {
+        return output;
+    }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this)
-				.add("createdAt", createdAt)
-				.add("updatedAt", updatedAt)
-				.add("id", id)
-				.add("name", name)
-				.toString();
-	}
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("createdAt", createdAt)
+                .add("updatedAt", updatedAt)
+                .add("id", id)
+                .add("name", name)
+                .toString();
+    }
 
-	/**
-	 * Mistral task execution builder.
-	 *
-	 * @author Renat Akhmerov
-	 */
-	public static class MistralActionExecutionBuilder extends
-			BaseExecutionBuilder<MistralActionExecutionBuilder, MistralActionExecution>
-			implements ActionExecutionBuilder<MistralActionExecutionBuilder, MistralActionExecution> {
+    /**
+     * Mistral task execution builder.
+     *
+     * @author Renat Akhmerov
+     */
+    public static class MistralActionExecutionBuilder extends
+            BaseExecutionBuilder<MistralActionExecutionBuilder, MistralActionExecution>
+            implements ActionExecutionBuilder<MistralActionExecutionBuilder, MistralActionExecution> {
 
-		public MistralActionExecutionBuilder() {
-			this(new MistralActionExecution());
-		}
+        public MistralActionExecutionBuilder() {
+            this(new MistralActionExecution());
+        }
 
         public MistralActionExecutionBuilder(MistralActionExecution model) {
-			super(model);
-		}
+            super(model);
+        }
 
-		@Override
-		public MistralActionExecutionBuilder from(MistralActionExecution in) {
-			return null;
-		}
+        @Override
+        public MistralActionExecutionBuilder from(MistralActionExecution in) {
+            return null;
+        }
 
         @Override
         public MistralActionExecutionBuilder name(String name) {
@@ -151,15 +151,15 @@ public class MistralActionExecution extends BaseExecution implements ActionExecu
         }
     }
 
-	public static class MistralActionExecutions extends ListResult<MistralActionExecution> {
-		private static final long serialVersionUID = 1L;
+    public static class MistralActionExecutions extends ListResult<MistralActionExecution> {
+        private static final long serialVersionUID = 1L;
 
-		@JsonProperty("action_executions")
-		private List<MistralActionExecution> list;
+        @JsonProperty("action_executions")
+        private List<MistralActionExecution> list;
 
-		@Override
-		protected List<MistralActionExecution> value() {
-			return this.list;
-		}
-	}
+        @Override
+        protected List<MistralActionExecution> value() {
+            return this.list;
+        }
+    }
 }

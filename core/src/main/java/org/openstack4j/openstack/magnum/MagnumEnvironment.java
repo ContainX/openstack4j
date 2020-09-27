@@ -1,12 +1,11 @@
 package org.openstack4j.openstack.magnum;
 
 
-import org.openstack4j.model.magnum.Environment;
-import org.openstack4j.model.magnum.EnvironmentBuilder;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
+import org.openstack4j.model.magnum.Environment;
+import org.openstack4j.model.magnum.EnvironmentBuilder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MagnumEnvironment implements Environment {
@@ -41,7 +40,6 @@ public class MagnumEnvironment implements Environment {
 
     /**
      * Concrete builder containing MagnumEnvironment as model
-     *
      */
     public static class EnvironmentConcreteBuilder implements EnvironmentBuilder {
         MagnumEnvironment model;

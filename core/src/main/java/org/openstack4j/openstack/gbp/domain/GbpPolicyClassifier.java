@@ -1,16 +1,15 @@
 package org.openstack4j.openstack.gbp.domain;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.gbp.Direction;
 import org.openstack4j.model.gbp.PolicyClassifier;
 import org.openstack4j.model.gbp.Protocol;
 import org.openstack4j.model.gbp.builder.PolicyClassifierBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.google.common.base.MoreObjects;
+import java.util.List;
 
 /**
  * Model implementation for Policy Classifier
@@ -32,7 +31,6 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     private Boolean shared;
 
 
-
     @Override
     public PolicyClassifierBuilder toBuilder() {
         return new PolicyClassifierConcreteBuilder(this);
@@ -45,7 +43,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
     @Override
     public void setTenantId(String tenantId) {
-        this.tenantId=tenantId;
+        this.tenantId = tenantId;
     }
 
     @Override
@@ -55,7 +53,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
     @Override
     public void setName(String name) {
-        this.name=name;
+        this.name = name;
     }
 
     @Override
@@ -65,8 +63,9 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
     @Override
     public void setId(String id) {
-        this.id=id;
+        this.id = id;
     }
+
     @Override
     public String getDescription() {
         return description;
@@ -91,16 +90,19 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     public boolean isShared() {
         return this.shared == null ? false : shared;
     }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).omitNullValues().add("id", id).add("name", name).add("desription", description)
                 .add("tenantId", tenantId).add("portRange", portRange).add("protocol", protocol).add("shared", shared).toString();
     }
-    public static class PolicyClassifiers extends ListResult<GbpPolicyClassifier>{
+
+    public static class PolicyClassifiers extends ListResult<GbpPolicyClassifier> {
 
         private static final long serialVersionUID = 1L;
         @JsonProperty("policy_classifiers")
         private List<GbpPolicyClassifier> policyClassfiers;
+
         @Override
         protected List<GbpPolicyClassifier> value() {
             return policyClassfiers;
@@ -108,11 +110,12 @@ public class GbpPolicyClassifier implements PolicyClassifier {
     }
 
 
-    public static class PolicyClassifierConcreteBuilder implements PolicyClassifierBuilder{
+    public static class PolicyClassifierConcreteBuilder implements PolicyClassifierBuilder {
 
         private GbpPolicyClassifier policyClassfier;
+
         public PolicyClassifierConcreteBuilder(GbpPolicyClassifier gbpPolicyClassifier) {
-            this.policyClassfier=gbpPolicyClassifier;
+            this.policyClassfier = gbpPolicyClassifier;
         }
 
         public PolicyClassifierConcreteBuilder() {
@@ -126,61 +129,61 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
         @Override
         public PolicyClassifierBuilder from(PolicyClassifier in) {
-            this.policyClassfier=(GbpPolicyClassifier) in;
+            this.policyClassfier = (GbpPolicyClassifier) in;
             return this;
         }
 
         @Override
         public PolicyClassifierBuilder name(String name) {
-            this.policyClassfier.name=name;
+            this.policyClassfier.name = name;
             return this;
         }
 
         @Override
         public PolicyClassifierBuilder description(String description) {
-            this.policyClassfier.description=description;
+            this.policyClassfier.description = description;
             return this;
         }
 
         @Override
         public PolicyClassifierBuilder portRangeMin(int min) {
-            String range="";
-            if(this.policyClassfier.portRange!=null && !this.policyClassfier.portRange.isEmpty())
-                range=min+":"+this.policyClassfier.portRange;
+            String range = "";
+            if (this.policyClassfier.portRange != null && !this.policyClassfier.portRange.isEmpty())
+                range = min + ":" + this.policyClassfier.portRange;
             else
-                range=""+min;
+                range = "" + min;
 
-            this.policyClassfier.portRange=range;
+            this.policyClassfier.portRange = range;
             return this;
         }
 
         @Override
         public PolicyClassifierBuilder portRangeMax(int max) {
-            String range="";
-            if(this.policyClassfier.portRange!=null && !this.policyClassfier.portRange.isEmpty())
-                range=this.policyClassfier.portRange+":"+max;
+            String range = "";
+            if (this.policyClassfier.portRange != null && !this.policyClassfier.portRange.isEmpty())
+                range = this.policyClassfier.portRange + ":" + max;
             else
-                range=""+max;
+                range = "" + max;
 
-            this.policyClassfier.portRange=range;
+            this.policyClassfier.portRange = range;
             return this;
         }
 
         @Override
         public PolicyClassifierBuilder direction(Direction direction) {
-            this.policyClassfier.direction=direction.value();
+            this.policyClassfier.direction = direction.value();
             return this;
         }
 
         @Override
         public PolicyClassifierBuilder protocol(Protocol protocol) {
-            this.policyClassfier.protocol=protocol.value();
+            this.policyClassfier.protocol = protocol.value();
             return this;
         }
 
         @Override
         public PolicyClassifierBuilder shared(boolean shared) {
-            this.policyClassfier.shared=shared;
+            this.policyClassfier.shared = shared;
             return this;
         }
 
@@ -188,7 +191,7 @@ public class GbpPolicyClassifier implements PolicyClassifier {
 
 
     public static PolicyClassifierBuilder builder() {
-        return new PolicyClassifierConcreteBuilder() ;
+        return new PolicyClassifierConcreteBuilder();
     }
 
 }

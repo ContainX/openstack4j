@@ -1,8 +1,8 @@
 package org.openstack4j.api.exceptions;
 
 /**
- * Base OpenStackj Exception 
- * 
+ * Base OpenStackj Exception
+ *
  * @author Jeremy Unruh
  */
 public class OS4JException extends RuntimeException {
@@ -12,11 +12,11 @@ public class OS4JException extends RuntimeException {
     public OS4JException(String message) {
         super(message);
     }
-    
+
     public OS4JException(String message, Throwable cause) {
         super(message, cause);
     }
-    
+
     public OS4JException(Throwable cause) {
         super(cause);
     }

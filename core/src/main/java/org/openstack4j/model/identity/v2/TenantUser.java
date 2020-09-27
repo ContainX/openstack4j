@@ -4,7 +4,7 @@ import org.openstack4j.model.ModelEntity;
 
 /**
  * A User from a Tenant perspective
- * 
+ *
  * @author Jeremy Unruh
  */
 public interface TenantUser extends ModelEntity {
@@ -18,15 +18,15 @@ public interface TenantUser extends ModelEntity {
      * @return the name of the user
      */
     String getName();
-    
+
     /**
      * @return the email address of the user
      */
     String getEmail();
-    
+
     /**
      * @return true, if the user is enabled (active)
      */
     boolean isEnabled();
-    
+
 }

@@ -1,13 +1,12 @@
 package org.openstack4j.openstack.storage.block.domain;
 
-import static com.google.common.base.MoreObjects.toStringHelper;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import org.openstack4j.openstack.common.ListResult;
 
 import java.util.List;
 
-import org.openstack4j.openstack.common.ListResult;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 public class ExtAvailabilityZone implements AvailabilityZone {
 
@@ -50,8 +49,8 @@ public class ExtAvailabilityZone implements AvailabilityZone {
         @Override
         public String toString() {
             return toStringHelper(this).omitNullValues()
-                     .add("available", available)
-                     .toString();
+                    .add("available", available)
+                    .toString();
         }
     }
 

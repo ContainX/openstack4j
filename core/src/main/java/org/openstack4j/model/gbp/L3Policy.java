@@ -1,15 +1,15 @@
 package org.openstack4j.model.gbp;
 
-import java.util.List;
-import java.util.Map;
-
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
 import org.openstack4j.model.gbp.builder.L3PolicyBuilder;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * L3 Policy Model Entity
- * 
+ *
  * @author vinod borole
  */
 public interface L3Policy extends Resource, Buildable<L3PolicyBuilder> {

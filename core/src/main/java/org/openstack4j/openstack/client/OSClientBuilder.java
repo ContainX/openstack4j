@@ -1,7 +1,5 @@
 package org.openstack4j.openstack.client;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 import org.openstack4j.api.OSClient.OSClientV2;
 import org.openstack4j.api.OSClient.OSClientV3;
 import org.openstack4j.api.client.CloudProvider;
@@ -18,11 +16,12 @@ import org.openstack4j.openstack.identity.v3.domain.KeystoneAuth;
 import org.openstack4j.openstack.identity.v3.domain.KeystoneAuth.AuthScope;
 import org.openstack4j.openstack.internal.OSAuthenticator;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * Builder definitions for creating a Client
  *
  * @author Jeremy Unruh
- *
  */
 public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> implements IOSClientBuilder<R, T> {
 
@@ -112,10 +111,10 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             }
 
             if (raxApiKey) {
-                return (OSClientV2) OSAuthenticator.invoke( new RaxApiKeyCredentials(user, password), endpoint, perspective, config, provider);
+                return (OSClientV2) OSAuthenticator.invoke(new RaxApiKeyCredentials(user, password), endpoint, perspective, config, provider);
             }
 
-            return (OSClientV2) OSAuthenticator.invoke( new Credentials(user, password, tenantName, tenantId), endpoint, perspective, config, provider);
+            return (OSClientV2) OSAuthenticator.invoke(new Credentials(user, password, tenantName, tenantId), endpoint, perspective, config, provider);
         }
 
         @Override
@@ -123,7 +122,7 @@ public abstract class OSClientBuilder<R, T extends IOSClientBuilder<R, T>> imple
             this.tokenId = tokenId;
             return this;
         }
-        
+
     }
 
     public static class ClientV3 extends OSClientBuilder<OSClientV3, IOSClientBuilder.V3> implements IOSClientBuilder.V3 {

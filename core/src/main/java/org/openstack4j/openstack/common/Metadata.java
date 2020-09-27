@@ -1,15 +1,14 @@
 package org.openstack4j.openstack.common;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+import org.openstack4j.model.ModelEntity;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openstack4j.model.ModelEntity;
-
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 /**
  * A generic MetaData model class which is just a Map of Key to Value
- * 
+ *
  * @author Jeremy Unruh
  */
 @JsonRootName("metadata")
@@ -22,5 +21,5 @@ public class Metadata extends HashMap<String, String> implements ModelEntity {
         md.putAll(from);
         return md;
     }
-    
+
 }

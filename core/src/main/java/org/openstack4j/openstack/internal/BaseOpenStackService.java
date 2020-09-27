@@ -1,23 +1,12 @@
 package org.openstack4j.openstack.internal;
 
-import static org.openstack4j.core.transport.ClientConstants.HEADER_USER_AGENT;
-import static org.openstack4j.core.transport.ClientConstants.USER_AGENT;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
-
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import org.openstack4j.api.client.CloudProvider;
 import org.openstack4j.api.exceptions.OS4JException;
 import org.openstack4j.api.types.ServiceType;
-import org.openstack4j.core.transport.ClientConstants;
-import org.openstack4j.core.transport.ExecutionOptions;
-import org.openstack4j.core.transport.HttpMethod;
-import org.openstack4j.core.transport.HttpRequest;
+import org.openstack4j.core.transport.*;
 import org.openstack4j.core.transport.HttpRequest.RequestBuilder;
-import org.openstack4j.core.transport.HttpResponse;
 import org.openstack4j.core.transport.internal.HttpExecutor;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.common.ActionResponse;
@@ -26,19 +15,21 @@ import org.openstack4j.model.identity.AuthVersion;
 import org.openstack4j.model.identity.v2.Access;
 import org.openstack4j.model.identity.v3.Service;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
+import java.util.*;
+
+import static org.openstack4j.core.transport.ClientConstants.HEADER_USER_AGENT;
+import static org.openstack4j.core.transport.ClientConstants.USER_AGENT;
 
 
 public class BaseOpenStackService {
 
     ServiceType serviceType = ServiceType.IDENTITY;
     Function<String, String> endpointFunc;
-    
+
     private static ThreadLocal<String> reqIdContainer = new ThreadLocal<String>();
-    
+
     public String getXOpenstackRequestId() {
-    	return reqIdContainer.get();
+        return reqIdContainer.get();
     }
 
     protected BaseOpenStackService() {
@@ -113,9 +104,9 @@ public class BaseOpenStackService {
         RequestBuilder<R> req = HttpRequest.builder(returnType).endpointTokenProvider(ses).config(ses.getConfig())
                 .method(method).path(path);
         Map headers = ses.getHeaders();
-        if (headers != null && headers.size() > 0){
+        if (headers != null && headers.size() > 0) {
             return new Invocation<R>(req, serviceType, endpointFunc).headers(headers);
-        }else{ 
+        } else {
             return new Invocation<R>(req, serviceType, endpointFunc);
         }
     }
@@ -211,31 +202,31 @@ public class BaseOpenStackService {
             header(HEADER_USER_AGENT, USER_AGENT);
             HttpRequest<R> request = req.build();
             HttpResponse res = HttpExecutor.create().execute(request);
-            
+
             reqIdContainer.remove();
-             
+
             String reqId = null;
-            if(res.headers().containsKey(ClientConstants.X_COMPUTE_REQUEST_ID)) {
-            	reqId = res.header(ClientConstants.X_COMPUTE_REQUEST_ID);
+            if (res.headers().containsKey(ClientConstants.X_COMPUTE_REQUEST_ID)) {
+                reqId = res.header(ClientConstants.X_COMPUTE_REQUEST_ID);
             } else {
-            	reqId = res.header(ClientConstants.X_OPENSTACK_REQUEST_ID);
+                reqId = res.header(ClientConstants.X_OPENSTACK_REQUEST_ID);
             }
-             
+
             reqIdContainer.set(reqId);
             return res.getEntity(request.getReturnType(), options);
         }
 
         public HttpResponse executeWithResponse() {
-        	HttpResponse res = HttpExecutor.create().execute(req.build());
-        	reqIdContainer.remove();
-            
+            HttpResponse res = HttpExecutor.create().execute(req.build());
+            reqIdContainer.remove();
+
             String reqId = null;
-            if(res.headers().containsKey(ClientConstants.X_COMPUTE_REQUEST_ID)) {
-            	reqId = res.header(ClientConstants.X_COMPUTE_REQUEST_ID);
+            if (res.headers().containsKey(ClientConstants.X_COMPUTE_REQUEST_ID)) {
+                reqId = res.header(ClientConstants.X_COMPUTE_REQUEST_ID);
             } else {
-            	reqId = res.header(ClientConstants.X_OPENSTACK_REQUEST_ID);
+                reqId = res.header(ClientConstants.X_OPENSTACK_REQUEST_ID);
             }
-             
+
             reqIdContainer.set(reqId);
             return res;
         }

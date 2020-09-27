@@ -7,103 +7,107 @@ import com.google.common.base.MoreObjects;
 import org.openstack4j.model.octavia.SessionPersistence;
 import org.openstack4j.model.octavia.SessionPersistenceType;
 import org.openstack4j.model.octavia.builder.SessionPersistenceBuilder;
+
 @JsonRootName("session_persistence")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OctaviaSessionPersistence implements SessionPersistence {
 
-	private static final long serialVersionUID = 1L;
-	@JsonProperty("cookie_name")
-	private String cookieName;
-	private SessionPersistenceType type;
-	/**
-	 * wrap the SessionPersistence to builder
-	 * @return SessionPersistenceBuilder
-	 */
-	@Override
-	public SessionPersistenceBuilder toBuilder() {
-		return new SessionPersistenceContreteBuilder();
-	}
+    private static final long serialVersionUID = 1L;
+    @JsonProperty("cookie_name")
+    private String cookieName;
+    private SessionPersistenceType type;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getCookieName() {
-		return cookieName;
-	}
+    /**
+     * wrap the SessionPersistence to builder
+     *
+     * @return SessionPersistenceBuilder
+     */
+    @Override
+    public SessionPersistenceBuilder toBuilder() {
+        return new SessionPersistenceContreteBuilder();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public SessionPersistenceType getType() {
-		return type;
-	}
-	/**
-	 * SessionPersistence Builder
-	 * @author wei
-	 *
-	 */
-	public static class SessionPersistenceContreteBuilder implements SessionPersistenceBuilder{
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCookieName() {
+        return cookieName;
+    }
 
-		private OctaviaSessionPersistence m;
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SessionPersistenceType getType() {
+        return type;
+    }
 
-		public SessionPersistenceContreteBuilder() {
-			this(new OctaviaSessionPersistence());
-		}
+    /**
+     * SessionPersistence Builder
+     *
+     * @author wei
+     */
+    public static class SessionPersistenceContreteBuilder implements SessionPersistenceBuilder {
 
-		public SessionPersistenceContreteBuilder(OctaviaSessionPersistence m) {
-			this.m = m;
-		}
+        private OctaviaSessionPersistence m;
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public SessionPersistenceBuilder from(SessionPersistence in) {
-			m = (OctaviaSessionPersistence)in;
-			return this;
-		}
+        public SessionPersistenceContreteBuilder() {
+            this(new OctaviaSessionPersistence());
+        }
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public SessionPersistenceBuilder type(SessionPersistenceType type) {
-			m.type = type;
-			return this;
-		}
+        public SessionPersistenceContreteBuilder(OctaviaSessionPersistence m) {
+            this.m = m;
+        }
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public SessionPersistenceBuilder cookieName(String cookieName) {
-			m.cookieName = cookieName;
-			return this;
-		}
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SessionPersistenceBuilder from(SessionPersistence in) {
+            m = (OctaviaSessionPersistence) in;
+            return this;
+        }
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public SessionPersistence build() {
-			return m;
-		}
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SessionPersistenceBuilder type(SessionPersistenceType type) {
+            m.type = type;
+            return this;
+        }
 
-	}
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SessionPersistenceBuilder cookieName(String cookieName) {
+            m.cookieName = cookieName;
+            return this;
+        }
 
-	public static SessionPersistenceBuilder builder(){
-		return new SessionPersistenceContreteBuilder();
-	}
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public SessionPersistence build() {
+            return m;
+        }
 
-	@Override
-	public String toString() {
-		return MoreObjects.toStringHelper(this).omitNullValues()
-			    .add("type",type)
-			    .add("cookieName", cookieName)
-			    .toString();
-	}
+    }
+
+    public static SessionPersistenceBuilder builder() {
+        return new SessionPersistenceContreteBuilder();
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).omitNullValues()
+                .add("type", type)
+                .add("cookieName", cookieName)
+                .toString();
+    }
 
 
 }

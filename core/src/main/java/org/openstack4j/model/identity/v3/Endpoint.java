@@ -1,12 +1,12 @@
 package org.openstack4j.model.identity.v3;
 
-import java.net.URL;
-import java.util.Map;
-
 import org.openstack4j.api.types.Facing;
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.identity.v3.builder.EndpointBuilder;
+
+import java.net.URL;
+import java.util.Map;
 
 /**
  * Endpoint model for identity v3.

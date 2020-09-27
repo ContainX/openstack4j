@@ -15,8 +15,8 @@ import static org.testng.Assert.assertEquals;
  * Created by sumit gandhi on 8/22/2016.
  */
 
-@Test(suiteName="trove/datastores")
-public class DBDatastoreServiceImplTest extends AbstractTest{
+@Test(suiteName = "trove/datastores")
+public class DBDatastoreServiceImplTest extends AbstractTest {
 
     private static final String TROVE_DATASTORES = "/trove/datastores.json";
     private static final String TROVE_DATASTORE = "/trove/datastore.json";
@@ -29,16 +29,16 @@ public class DBDatastoreServiceImplTest extends AbstractTest{
     }
 
     @Test
-    public void testListDatastores() throws Exception{
+    public void testListDatastores() throws Exception {
         respondWith(TROVE_DATASTORES);
         List<? extends Datastore> datastores = osv2().trove().datastoreService().list();
         assertEquals(2, datastores.size());
         Preconditions.checkNotNull(datastores.get(0));
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Datastore from List : "+ datastores.get(0));
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Datastore from List : " + datastores.get(0));
     }
 
     @Test
-    public void testGetOneDatabastore() throws Exception{
+    public void testGetOneDatabastore() throws Exception {
         String datastoreId = "648d260d-c346-4145-8a2d-bbd4d78aedf6";
         respondWith(TROVE_DATASTORE);
         Datastore datastore = osv2().trove().datastoreService().get(datastoreId);
@@ -47,17 +47,17 @@ public class DBDatastoreServiceImplTest extends AbstractTest{
     }
 
     @Test
-    public void testListDatastoreVersions() throws Exception{
+    public void testListDatastoreVersions() throws Exception {
         String datastoreId = "648d260d-c346-4145-8a2d-bbd4d78aedf6";
         respondWith(TROVE_DATASTORE_VERSIONS);
         List<? extends DatastoreVersion> datastoreVersions = osv2().trove().datastoreService().listDatastoreVersions(datastoreId);
         assertEquals(2, datastoreVersions.size());
         Preconditions.checkNotNull(datastoreVersions.get(0));
-        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Datastore version from List : "+ datastoreVersions.get(0));
+        Logger.getLogger(getClass().getName()).info(getClass().getName() + " : Datastore version from List : " + datastoreVersions.get(0));
     }
 
     @Test
-    public void testGetOneDatastoreVersion() throws Exception{
+    public void testGetOneDatastoreVersion() throws Exception {
         String datastoreId = "648d260d-c346-4145-8a2d-bbd4d78aedf6";
         String datastoreVersionId = "15b7d828-49a5-4d05-af65-e974e0aca7eb";
         respondWith(TROVE_DATASTORE_VERSION);

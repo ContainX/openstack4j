@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * An object to hold status of lbaas v2 listener
+ *
  * @author emjburns
  */
 @JsonRootName("listeners")
@@ -24,16 +25,16 @@ public class NeutronListenerV2Status extends Status implements ListenerV2Status 
     List<LbPoolV2Status> lbPoolStatuses;
 
     @Override
-    public List<LbPoolV2Status> getLbPoolV2Statuses(){
+    public List<LbPoolV2Status> getLbPoolV2Statuses() {
         return lbPoolStatuses;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("id", id)
                 .add("name", name)

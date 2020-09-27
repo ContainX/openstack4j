@@ -8,23 +8,22 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum Status {
 
-	ERROR, PENDING, ACTIVE;
+    ERROR, PENDING, ACTIVE;
 
-	@JsonValue
-	public String value() {
-		return name().toUpperCase();
-	}
+    @JsonValue
+    public String value() {
+        return name().toUpperCase();
+    }
 
-	//default to PRIMARY
-	@JsonCreator
-	public static Status value(String v)
-	{
-		if (v == null) return ERROR;
-		try {
-			return valueOf(v.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			return ERROR;
-		}
-	}
+    //default to PRIMARY
+    @JsonCreator
+    public static Status value(String v) {
+        if (v == null) return ERROR;
+        try {
+            return valueOf(v.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return ERROR;
+        }
+    }
 
 }
