@@ -7,7 +7,7 @@ cache:
 language: java
 
 jdk:
-  - openjdk8
+  - oraclejdk7
 
 env:
   global:
@@ -16,7 +16,7 @@ env:
 
 matrix:
   include:
-    - jdk: "openjdk8"
+    - jdk: "oraclejdk8"
       env:
         - SKIP_JDK8_MODULES=""
         - DEPLOY=1
@@ -36,3 +36,4 @@ after_success:
 # infrastructure. This should prevent the buffer overflow from
 # https://github.com/travis-ci/travis-ci/issues/5227
 sudo: false
+dist: trusty
