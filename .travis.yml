@@ -7,7 +7,7 @@ cache:
 language: java
 
 jdk:
-  - oraclejdk7
+  - openjdk8
 
 env:
   global:
@@ -16,7 +16,7 @@ env:
 
 matrix:
   include:
-    - jdk: "oraclejdk8"
+    - jdk: "openjdk8"
       env:
         - SKIP_JDK8_MODULES=""
         - DEPLOY=1
