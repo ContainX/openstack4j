@@ -27,7 +27,7 @@ notifications:
 install: /bin/true
 
 # When run on JDK7, modules that require JDK8 needs to be skipped
-script: mvn clean verify -B $SKIP_JDK8_MODULES
+#script: mvn clean verify -B $SKIP_JDK8_MODULES
 
 after_success:
   - "[[ $DEPLOY == 1 && $TRAVIS_BRANCH == \"master\" ]] && { mvn deploy --settings distribution/settings.xml -DskipTests=true -B; };"
