@@ -55,7 +55,7 @@ See notes above about connectors (same rules apply) to development branches.
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j</artifactId>
-    <version>3.2.1-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 </dependency>
 ```
 

@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.pacesys</groupId>
         <artifactId>openstack4j-parent</artifactId>
-        <version>3.2.1-SNAPSHOT</version>
+        <version>4.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.pacesys.openstack4j.connectors</groupId>

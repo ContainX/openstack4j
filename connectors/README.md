@@ -11,7 +11,7 @@ Instead of depending on the normal "openstack4j" artifactId, change the dependen
 <dependency>
     <groupId>org.pacesys</groupId>
     <artifactId>openstack4j-core</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -22,7 +22,7 @@ Now choose a connector by adding the applicable dependency below:
 <dependency>
     <groupId>org.pacesys.openstack4j.connectors</groupId>
     <artifactId>openstack4j-jersey2</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -31,7 +31,7 @@ Now choose a connector by adding the applicable dependency below:
 <dependency>
     <groupId>org.pacesys.openstack4j.connectors</groupId>
     <artifactId>openstack4j-resteasy</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -40,7 +40,7 @@ Now choose a connector by adding the applicable dependency below:
 <dependency>
     <groupId>org.pacesys.openstack4j.connectors</groupId>
     <artifactId>openstack4j-httpclient</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -49,7 +49,7 @@ Now choose a connector by adding the applicable dependency below:
 <dependency>
     <groupId>org.pacesys.openstack4j.connectors</groupId>
     <artifactId>openstack4j-okhttp</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
