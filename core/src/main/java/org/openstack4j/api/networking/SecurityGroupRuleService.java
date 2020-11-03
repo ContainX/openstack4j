@@ -35,6 +35,13 @@ public interface SecurityGroupRuleService extends RestService {
    * @param id the id
    */
   void delete(String id);
+
+  /**
+   * Batch delete security group rule by ids.
+   *
+   * @param ruleIds The security group rule ids.
+   */
+  void batchDelete(List<String> ruleIds);
   
   /**
    * Creates a security group rule.
