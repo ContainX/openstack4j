@@ -48,6 +48,10 @@ public class BaseOpenStackService {
         return builder(returnType, path, HttpMethod.GET);
     }
 
+    protected Invocation<ActionResponse> getWithResponse(String... path) {
+        return builder(ActionResponse.class, path, HttpMethod.GET);
+    }
+
     protected <R> Invocation<R> post(Class<R> returnType, String... path) {
         return builder(returnType, path, HttpMethod.POST);
     }
@@ -58,6 +62,10 @@ public class BaseOpenStackService {
 
     protected <R> Invocation<R> put(Class<R> returnType, String... path) {
         return builder(returnType, path, HttpMethod.PUT);
+    }
+
+    protected Invocation<ActionResponse> putWithResponse(String... path) {
+        return builder(ActionResponse.class, path, HttpMethod.PUT);
     }
 
     protected <R> Invocation<R> patch(Class<R> returnType, String... path) {

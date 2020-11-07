@@ -115,4 +115,11 @@ public class NetworkingServiceImpl implements NetworkingService {
         return Apis.get(AvailabilityZoneService.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NeutronResourceTagService resourceTags() {
+        return Apis.get(NeutronResourceTagService.class);
+    }
 }
