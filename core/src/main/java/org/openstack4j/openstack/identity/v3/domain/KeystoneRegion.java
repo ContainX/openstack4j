@@ -73,7 +73,7 @@ public class KeystoneRegion implements Region {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        KeystoneRegion that = KeystoneRegion.class.cast(obj);
+        KeystoneRegion that = (KeystoneRegion) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.description, that.description)
                 && Objects.equal(this.parentRegionId, that.parentRegionId);

@@ -15,19 +15,19 @@ public interface LoadBalancerV2Update extends ModelEntity, Buildable<LoadBalance
      *
      * @see LoadBalancerV2#getDescription()
      */
-    public String getDescription();
+    String getDescription();
 
     /**
      * Optional
      *
      * @see LoadBalancerV2#getName()
      */
-    public String getName();
+    String getName();
 
     /**
      * Optional
      *
      * @see LoadBalancerV2#isAdminStateUp()
      */
-    public boolean isAdminStateUp();
+    boolean isAdminStateUp();
 }

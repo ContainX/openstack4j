@@ -17,7 +17,7 @@ public interface SessionPersistenceBuilder extends Builder<SessionPersistenceBui
      * @param type APP_COOKIE,HTTP_COOKIE,SOURCE_IP
      * @return SessionPersistenceBuilder
      */
-    public SessionPersistenceBuilder type(SessionPersistenceType type);
+    SessionPersistenceBuilder type(SessionPersistenceType type);
 
     /**
      * optional
@@ -25,5 +25,5 @@ public interface SessionPersistenceBuilder extends Builder<SessionPersistenceBui
      * @param cookieName
      * @return SessionPersistenceBuilder
      */
-    public SessionPersistenceBuilder cookieName(String cookieName);
+    SessionPersistenceBuilder cookieName(String cookieName);
 }

@@ -71,7 +71,7 @@ public interface StackService {
      * @param filteringParams The parameters used to filter the stacks returned.
      * @return the list of {@link Stack} objects.
      */
-    public List<? extends Stack> list(Map<String, String> filteringParams);
+    List<? extends Stack> list(Map<String, String> filteringParams);
 
     /**
      * returns details of a {@link Stack}.

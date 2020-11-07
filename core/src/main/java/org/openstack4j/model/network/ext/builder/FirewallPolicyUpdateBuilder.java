@@ -16,20 +16,20 @@ public interface FirewallPolicyUpdateBuilder extends Builder<FirewallPolicyUpdat
      * @param name : Human readable name for the FirewallPolicy (255 characters limit). Does not have to be unique.
      * @return FirewallPolicyUpdateBuilder
      */
-    public FirewallPolicyUpdateBuilder name(String name);
+    FirewallPolicyUpdateBuilder name(String name);
 
     /**
      * @param description : Human readable description for the FirewallPolicy (1024 characters limit).
      * @return FirewallPolicyUpdateBuilder
      */
-    public FirewallPolicyUpdateBuilder description(String description);
+    FirewallPolicyUpdateBuilder description(String description);
 
     /**
      * @param shared : When set to True makes this FirewallPolicy visible to tenants other
      *               than its owner, and can be used in FirewallPolicy not owned by its tenant.
      * @return FirewallPolicyUpdateBuilder
      */
-    public FirewallPolicyUpdateBuilder shared(Boolean shared);
+    FirewallPolicyUpdateBuilder shared(Boolean shared);
 
     /**
      * @param audited : When set to True by the policy owner indicates that the firewall policy has been audited.
@@ -39,12 +39,12 @@ public interface FirewallPolicyUpdateBuilder extends Builder<FirewallPolicyUpdat
      *                to True through an update operation.
      * @return FirewallPolicyUpdateBuilder
      */
-    public FirewallPolicyUpdateBuilder audited(Boolean audited);
+    FirewallPolicyUpdateBuilder audited(Boolean audited);
 
     /**
      * @param firewallRules(UUID)List : This is an ordered list of firewall rule uuids.
      *                                The firewall applies the rules in the order in which they appear in this list.
      * @return FirewallPolicyUpdateBuilder
      */
-    public FirewallPolicyUpdateBuilder firewallRules(List<String> ruleIdList);
+    FirewallPolicyUpdateBuilder firewallRules(List<String> ruleIdList);
 }

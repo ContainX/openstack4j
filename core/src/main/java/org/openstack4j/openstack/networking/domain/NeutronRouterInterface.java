@@ -93,12 +93,10 @@ public class NeutronRouterInterface implements RouterInterface {
 
         if (obj instanceof NeutronRouterInterface) {
             NeutronRouterInterface that = (NeutronRouterInterface) obj;
-            if (java.util.Objects.equals(id, that.id) &&
+            return java.util.Objects.equals(id, that.id) &&
                     java.util.Objects.equals(subnetId, that.subnetId) &&
                     java.util.Objects.equals(portId, that.portId) &&
-                    java.util.Objects.equals(tenantId, that.tenantId)) {
-                return true;
-            }
+                    java.util.Objects.equals(tenantId, that.tenantId);
         }
         return false;
     }

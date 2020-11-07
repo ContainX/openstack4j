@@ -330,27 +330,25 @@ public class NeutronPort implements Port {
 
         if (obj instanceof NeutronPort) {
             NeutronPort that = (NeutronPort) obj;
-            if (java.util.Objects.equals(id, that.id) &&
-                    java.util.Objects.equals(name, that.name) &&
-                    java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
-                    java.util.Objects.equals(deviceId, that.deviceId) &&
-                    java.util.Objects.equals(deviceOwner, that.deviceOwner) &&
-                    java.util.Objects.equals(fixedIps, that.fixedIps) &&
-                    java.util.Objects.equals(macAddress, that.macAddress) &&
-                    java.util.Objects.equals(networkId, that.networkId) &&
-                    java.util.Objects.equals(tenantId, that.tenantId) &&
-                    java.util.Objects.equals(securityGroups, that.securityGroups) &&
-                    java.util.Objects.equals(allowedAddressPairs, that.allowedAddressPairs) &&
-                    java.util.Objects.equals(portSecurityEnabled, that.portSecurityEnabled) &&
-                    java.util.Objects.equals(hostId, that.hostId) &&
-                    java.util.Objects.equals(vifType, that.vifType) &&
-                    java.util.Objects.equals(vifDetails, that.vifDetails) &&
-                    java.util.Objects.equals(vNicType, that.vNicType) &&
-                    java.util.Objects.equals(profile, that.profile) &&
-            java.util.Objects.equals(createdTime, that.createdTime) &&
-                    java.util.Objects.equals(updatedTime, that.updatedTime)) {
-                return true;
-            }
+            return Objects.equals(id, that.id) &&
+                    Objects.equals(name, that.name) &&
+                    Objects.equals(adminStateUp, that.adminStateUp) &&
+                    Objects.equals(deviceId, that.deviceId) &&
+                    Objects.equals(deviceOwner, that.deviceOwner) &&
+                    Objects.equals(fixedIps, that.fixedIps) &&
+                    Objects.equals(macAddress, that.macAddress) &&
+                    Objects.equals(networkId, that.networkId) &&
+                    Objects.equals(tenantId, that.tenantId) &&
+                    Objects.equals(securityGroups, that.securityGroups) &&
+                    Objects.equals(allowedAddressPairs, that.allowedAddressPairs) &&
+                    Objects.equals(portSecurityEnabled, that.portSecurityEnabled) &&
+                    Objects.equals(hostId, that.hostId) &&
+                    Objects.equals(vifType, that.vifType) &&
+                    Objects.equals(vifDetails, that.vifDetails) &&
+                    Objects.equals(vNicType, that.vNicType) &&
+                    Objects.equals(profile, that.profile) &&
+                    Objects.equals(createdTime, that.createdTime) &&
+                    Objects.equals(updatedTime, that.updatedTime);
         }
         return false;
     }

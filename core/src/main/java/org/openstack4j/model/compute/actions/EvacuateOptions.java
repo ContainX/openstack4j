@@ -11,7 +11,7 @@ public class EvacuateOptions extends BaseActionOptions {
         ON_SHARED_STORAGE("onSharedStorage");
         private final String param;
 
-        private Option(String param) {
+        Option(String param) {
             this.param = param;
         }
 

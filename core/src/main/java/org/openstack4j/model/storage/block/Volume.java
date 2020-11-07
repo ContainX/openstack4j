@@ -24,7 +24,7 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
     /**
      * The current Volume Status
      */
-    public enum Status {
+    enum Status {
         AVAILABLE, ATTACHING, BACKING_UP, CREATING, DELETING, DOWNLOADING, UPLOADING, ERROR, ERROR_DELETING, ERROR_RESTORING, IN_USE, RESTORING_BACKUP, DETACHING, UNRECOGNIZED;
 
         @JsonValue
@@ -47,7 +47,7 @@ public interface Volume extends ModelEntity, Buildable<VolumeBuilder> {
         }
     }
 
-    public enum MigrationStatus {
+    enum MigrationStatus {
         NONE, MIGRATING;
 
         @JsonValue

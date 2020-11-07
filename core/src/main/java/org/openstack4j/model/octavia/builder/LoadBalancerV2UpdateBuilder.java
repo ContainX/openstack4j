@@ -15,13 +15,13 @@ public interface LoadBalancerV2UpdateBuilder extends Buildable.Builder<LoadBalan
      * @param description Human-readable description for the load balancer.
      * @return LoadBalancerV2UpdateBuilder
      */
-    public LoadBalancerV2UpdateBuilder description(String description);
+    LoadBalancerV2UpdateBuilder description(String description);
 
     /**
      * @param name Human-readable name for the load balancer.
      * @return LoadBalancerV2UpdateBuilder
      */
-    public LoadBalancerV2UpdateBuilder name(String name);
+    LoadBalancerV2UpdateBuilder name(String name);
 
     /**
      * Optional
@@ -30,6 +30,6 @@ public interface LoadBalancerV2UpdateBuilder extends Buildable.Builder<LoadBalan
      *                     (UP) or false (DOWN).
      * @return LoadBalancerV2UpdateBuilder
      */
-    public LoadBalancerV2UpdateBuilder adminStateUp(boolean adminStateUp);
+    LoadBalancerV2UpdateBuilder adminStateUp(boolean adminStateUp);
 
 }

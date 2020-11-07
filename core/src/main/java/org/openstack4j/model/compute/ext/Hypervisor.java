@@ -155,7 +155,7 @@ public interface Hypervisor extends ModelEntity {
     /**
      * The Hypervisor Services Detail
      */
-    public interface Service extends ModelEntity {
+    interface Service extends ModelEntity {
 
         /**
          * Gets the host.
@@ -173,7 +173,7 @@ public interface Hypervisor extends ModelEntity {
 
     }
 
-    public interface CPUInfo extends ModelEntity {
+    interface CPUInfo extends ModelEntity {
 
         /**
          * @return cpu vendor
@@ -202,7 +202,7 @@ public interface Hypervisor extends ModelEntity {
         CPUTopology getTopology();
     }
 
-    public interface CPUTopology extends ModelEntity {
+    interface CPUTopology extends ModelEntity {
 
         /**
          * @return core count

@@ -13,7 +13,7 @@ import org.openstack4j.model.gbp.builder.PolicyActionCreateBuilder;
  */
 public interface PolicyAction extends Buildable<PolicyActionCreateBuilder>, Resource {
 
-    public enum PolicyActionProtocol {
+    enum PolicyActionProtocol {
         ALLOW,
         REDIRECT,
         COPY,

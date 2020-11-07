@@ -19,15 +19,15 @@ public class Environment {
     private Map<String, String> files = new HashMap<String, String>();
     private URL baseUrl;
 
-    public Environment(URL environmentRes) throws JsonParseException, IOException, URISyntaxException {
+    public Environment(URL environmentRes) throws IOException, URISyntaxException {
         setEnvContent(Resources.toString(environmentRes, Charsets.UTF_8));
         setBaseUrl(TemplateUtils.baseUrl(environmentRes.toString()));
         getFileContent();
     }
 
     public Environment(String environmentLoc)
-            throws JsonParseException, MalformedURLException,
-            UnsupportedEncodingException, IOException, URISyntaxException {
+            throws
+            IOException, URISyntaxException {
         this(TemplateUtils.normaliseFilePathToUrl(environmentLoc));
     }
 
@@ -43,7 +43,7 @@ public class Environment {
      * Processing the template files located in the resource_registry part in the environment file
      */
     private void getFileContent()
-            throws JsonParseException, MalformedURLException, UnsupportedEncodingException, IOException, URISyntaxException {
+            throws IOException, URISyntaxException {
         Map<String, String> rr = getResourceRegistry();
         if (rr == null) return;
         if (rr.get("base_url") != null) setBaseUrl(new URL(rr.get("base_url")));

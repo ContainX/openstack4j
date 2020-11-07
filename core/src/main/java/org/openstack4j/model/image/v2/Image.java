@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
-    public enum ImageStatus {
+    enum ImageStatus {
         /**
          * Image status is not one of the documented options.
          * http://docs.openstack.org/developer/glance/statuses.html
@@ -80,7 +80,7 @@ public interface Image extends BasicResource, Buildable<ImageBuilder> {
         }
     }
 
-    public enum ImageVisibility {
+    enum ImageVisibility {
         PUBLIC,
         PRIVATE,
         UNKNOWN;

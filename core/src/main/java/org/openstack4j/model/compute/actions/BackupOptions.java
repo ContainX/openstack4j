@@ -15,7 +15,7 @@ public final class BackupOptions extends BaseActionOptions {
         ROTATION("rotation");
         private final String param;
 
-        private Option(String param) {
+        Option(String param) {
             this.param = param;
         }
 

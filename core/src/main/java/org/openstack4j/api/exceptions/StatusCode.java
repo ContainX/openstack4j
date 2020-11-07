@@ -115,7 +115,7 @@ public enum StatusCode {
     CODE_UNKNOWN(0);
     private final int code;
 
-    private StatusCode(int code) {
+    StatusCode(int code) {
         this.code = code;
     }
 

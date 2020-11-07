@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public interface Task extends ModelEntity, Buildable<TaskBuilder> {
 
-    public enum TaskStatus {
+    enum TaskStatus {
         /**
          * The task identifier has been reserved for a task in the Glance.
          * No processing has begun on it yet.

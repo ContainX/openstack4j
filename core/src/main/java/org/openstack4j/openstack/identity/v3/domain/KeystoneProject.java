@@ -233,7 +233,7 @@ public class KeystoneProject implements Project {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        KeystoneProject that = KeystoneProject.class.cast(obj);
+        KeystoneProject that = (KeystoneProject) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.domain, that.domain)
                 && Objects.equal(this.description, that.description)

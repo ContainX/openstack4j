@@ -10,69 +10,69 @@ public interface IdentityV3Builders {
      *
      * @return the credential builder
      */
-    public CredentialBuilder credential();
+    CredentialBuilder credential();
 
     /**
      * The builder to create a Domain.
      *
      * @return the domain builder
      */
-    public DomainBuilder domain();
+    DomainBuilder domain();
 
     /**
      * The builder to create a Endpoint.
      *
      * @return the endpoint builder
      */
-    public EndpointBuilder endpoint();
+    EndpointBuilder endpoint();
 
     /**
      * The builder to create a Group.
      *
      * @return the group builder
      */
-    public GroupBuilder group();
+    GroupBuilder group();
 
     /**
      * The builder to create a Policy.
      *
      * @return the policy builder
      */
-    public PolicyBuilder policy();
+    PolicyBuilder policy();
 
     /**
      * The builder to create a Project.
      *
      * @return the project builder
      */
-    public ProjectBuilder project();
+    ProjectBuilder project();
 
     /**
      * The builder to create a Region.
      *
      * @return the region builder
      */
-    public RegionBuilder region();
+    RegionBuilder region();
 
     /**
      * The builder to create a Role.
      *
      * @return the role builder
      */
-    public RoleBuilder role();
+    RoleBuilder role();
 
     /**
      * The builder to create a Service.
      *
      * @return the service builder
      */
-    public ServiceBuilder service();
+    ServiceBuilder service();
 
     /**
      * The builder to create a User.
      *
      * @return the user builder
      */
-    public UserBuilder user();
+    UserBuilder user();
 
 }

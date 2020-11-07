@@ -17,38 +17,38 @@ public interface LbPoolBuilder extends Builder<LbPoolBuilder, LbPool> {
      *                 tenant ID other than its own.
      * @return LbPoolBuilder
      */
-    public LbPoolBuilder tenantId(String tenantId);
+    LbPoolBuilder tenantId(String tenantId);
 
     /**
      * @param protocol The protocol of the VIP address. A valid value is TCP, HTTP,
      *                 or HTTPS.
      * @return LbPoolBuilder
      */
-    public LbPoolBuilder protocol(Protocol protocol);
+    LbPoolBuilder protocol(Protocol protocol);
 
     /**
      * @param name Pool name. Does not have to be unique.
      * @return LbPoolBuilder
      */
-    public LbPoolBuilder name(String name);
+    LbPoolBuilder name(String name);
 
     /**
      * @param description Description for the pool.
      * @return LbPoolBuilder
      */
-    public LbPoolBuilder description(String description);
+    LbPoolBuilder description(String description);
 
     /**
      * @param subnentId The ID of the subnet on which to allocate the VIP address.
      * @return LbPoolBuilder
      */
-    public LbPoolBuilder subnetId(String subnentId);
+    LbPoolBuilder subnetId(String subnentId);
 
     /**
      * @param provider Loadbalance provider which openstack supports,such as haproxy
      * @return LbPoolBuilder
      */
-    public LbPoolBuilder provider(String provider);
+    LbPoolBuilder provider(String provider);
 
     /**
      * @param lbMethod The load-balancer algorithm, which is round-robin,
@@ -57,12 +57,12 @@ public interface LbPoolBuilder extends Builder<LbPoolBuilder, LbPool> {
      *                 robin must be supported.
      * @return LbPoolBuilder
      */
-    public LbPoolBuilder lbMethod(LbMethod lbMethod);
+    LbPoolBuilder lbMethod(LbMethod lbMethod);
 
     /**
      * @param adminStateUp The administrative state of the lb pool, which is up (true) or
      *                     down (false).
      * @return LbPoolBuilder
      */
-    public LbPoolBuilder adminStateUp(boolean adminStateUp);
+    LbPoolBuilder adminStateUp(boolean adminStateUp);
 }

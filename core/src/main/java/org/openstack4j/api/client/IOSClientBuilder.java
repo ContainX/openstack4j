@@ -91,7 +91,7 @@ public interface IOSClientBuilder<R, T extends IOSClientBuilder<R, T>> {
     /**
      * OpenStack4j Client builder which authenticates against version V3
      */
-    public interface V2 extends IOSClientBuilder<OSClientV2, V2> {
+    interface V2 extends IOSClientBuilder<OSClientV2, V2> {
 
         /**
          * The tenant/project to authenticate as
@@ -134,7 +134,7 @@ public interface IOSClientBuilder<R, T extends IOSClientBuilder<R, T>> {
     /**
      * OpenStack4j Client builder which authenticates against version V3
      */
-    public interface V3 extends IOSClientBuilder<OSClientV3, V3> {
+    interface V3 extends IOSClientBuilder<OSClientV3, V3> {
 
         /**
          * The authentication credentials and default scoped domain

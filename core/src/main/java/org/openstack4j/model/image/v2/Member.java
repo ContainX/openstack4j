@@ -16,7 +16,7 @@ import java.util.Date;
 @JsonDeserialize(as = GlanceMember.class)
 public interface Member extends ModelEntity {
 
-    public enum MemberStatus {
+    enum MemberStatus {
         /**
          * Indicates to owner that image has not been updated.
          */

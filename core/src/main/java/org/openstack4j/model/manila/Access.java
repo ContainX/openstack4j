@@ -24,7 +24,7 @@ public interface Access extends ModelEntity {
         }
     }
 
-    public enum Type {
+    enum Type {
         IP, CERT, USER;
 
         @JsonCreator

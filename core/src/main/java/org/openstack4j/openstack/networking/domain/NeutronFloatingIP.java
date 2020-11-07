@@ -211,16 +211,14 @@ public class NeutronFloatingIP implements NetFloatingIP {
 
         if (obj instanceof NeutronFloatingIP) {
             NeutronFloatingIP that = (NeutronFloatingIP) obj;
-            if (java.util.Objects.equals(id, that.id) &&
+            return java.util.Objects.equals(id, that.id) &&
                     java.util.Objects.equals(routerId, that.routerId) &&
                     java.util.Objects.equals(tenantId, that.tenantId) &&
                     java.util.Objects.equals(floatingNetworkId, that.floatingNetworkId) &&
                     java.util.Objects.equals(floatingIpAddress, that.floatingIpAddress) &&
                     java.util.Objects.equals(fixedIpAddress, that.fixedIpAddress) &&
                     java.util.Objects.equals(portId, that.portId) &&
-                    java.util.Objects.equals(status, that.status)) {
-                return true;
-            }
+                    java.util.Objects.equals(status, that.status);
         }
         return false;
     }

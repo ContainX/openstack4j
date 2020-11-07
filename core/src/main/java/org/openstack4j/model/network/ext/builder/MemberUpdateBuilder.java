@@ -15,17 +15,17 @@ public interface MemberUpdateBuilder extends Builder<MemberUpdateBuilder, Member
      *                     down (false).
      * @return MemberUpdateBuilder
      */
-    public MemberUpdateBuilder adminStateUp(boolean adminStateUp);
+    MemberUpdateBuilder adminStateUp(boolean adminStateUp);
 
     /**
      * @param weight Weight of member.from 1 to 256
      * @return MemberUpdateBuilder
      */
-    public MemberUpdateBuilder weight(Integer weight);
+    MemberUpdateBuilder weight(Integer weight);
 
     /**
      * @param poolId the lb pool identifier
      * @return MemberUpdateBuilder
      */
-    public MemberUpdateBuilder poolId(String poolId);
+    MemberUpdateBuilder poolId(String poolId);
 }

@@ -13,33 +13,33 @@ public interface ListenerV2Status extends ModelEntity {
      *
      * @return name
      */
-    public String getName();
+    String getName();
 
     /**
      * The id of the listener
      *
      * @return id
      */
-    public String getId();
+    String getId();
 
     /**
      * The operating status of the listener
      *
      * @return operating status
      */
-    public String getOperatingStatus();
+    String getOperatingStatus();
 
     /**
      * The provisioning status of the listener
      *
      * @return provisioning status
      */
-    public String getProvisioningStatus();
+    String getProvisioningStatus();
 
     /**
      * The statuses of the pools associated with this listener
      *
      * @return list of the status of the pools
      */
-    public List<LbPoolV2Status> getLbPoolV2Statuses();
+    List<LbPoolV2Status> getLbPoolV2Statuses();
 }

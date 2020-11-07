@@ -748,7 +748,7 @@ public class CeilometerAlarm implements Alarm {
 
     @Override
     public void setThresholdRule(CeilometerThresholdRule tr) {
-        this.thresholdRule = (CeilometerThresholdRule) tr;
+        this.thresholdRule = tr;
     }
 
     @Override

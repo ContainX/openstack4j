@@ -28,7 +28,7 @@ public interface AvailabilityZone extends ModelEntity {
     String getZoneName();
 
 
-    public interface ZoneState extends ModelEntity {
+    interface ZoneState extends ModelEntity {
 
         /**
          * @return the state of zone
@@ -36,7 +36,7 @@ public interface AvailabilityZone extends ModelEntity {
         boolean getAvailable();
     }
 
-    public interface NovaService extends ModelEntity {
+    interface NovaService extends ModelEntity {
         /**
          * @return whether the service is available
          */

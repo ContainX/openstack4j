@@ -18,25 +18,25 @@ public interface LbPoolUpdateBuilder extends Builder<LbPoolUpdateBuilder, LbPool
      *                 robin must be supported.
      * @return LbPoolUpdateBuilder
      */
-    public LbPoolUpdateBuilder lbMethod(LbMethod lbMethod);
+    LbPoolUpdateBuilder lbMethod(LbMethod lbMethod);
 
     /**
      * @param name Pool name. Does not have to be unique.
      * @return LbPoolUpdateBuilder
      */
-    public LbPoolUpdateBuilder name(String name);
+    LbPoolUpdateBuilder name(String name);
 
     /**
      * @param description Description for the pool.
      * @return LbPoolUpdateBuilder
      */
-    public LbPoolUpdateBuilder description(String description);
+    LbPoolUpdateBuilder description(String description);
 
     /**
      * @param adminStateUp The administrative state of the lb pool, which is up (true) or
      *                     down (false).
      * @return LbPoolUpdateBuilder
      */
-    public LbPoolUpdateBuilder adminStateUp(boolean adminStateUp);
+    LbPoolUpdateBuilder adminStateUp(boolean adminStateUp);
 
 }

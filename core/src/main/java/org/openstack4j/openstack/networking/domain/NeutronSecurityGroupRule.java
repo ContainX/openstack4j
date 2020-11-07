@@ -180,7 +180,7 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
 
         if (obj instanceof NeutronSecurityGroupRule) {
             NeutronSecurityGroupRule that = (NeutronSecurityGroupRule) obj;
-            if (java.util.Objects.equals(id, that.id) &&
+            return java.util.Objects.equals(id, that.id) &&
                     java.util.Objects.equals(tenantId, that.tenantId) &&
                     java.util.Objects.equals(securityGroupId, that.securityGroupId) &&
                     java.util.Objects.equals(direction, that.direction) &&
@@ -189,9 +189,7 @@ public class NeutronSecurityGroupRule implements SecurityGroupRule {
                     java.util.Objects.equals(portRangeMax, that.portRangeMax) &&
                     java.util.Objects.equals(protocol, that.protocol) &&
                     java.util.Objects.equals(remoteGroupId, that.remoteGroupId) &&
-                    java.util.Objects.equals(remoteIpPrefix, that.remoteIpPrefix)) {
-                return true;
-            }
+                    java.util.Objects.equals(remoteIpPrefix, that.remoteIpPrefix);
         }
         return false;
     }

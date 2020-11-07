@@ -14,7 +14,7 @@ public interface Meter extends ModelEntity {
     /**
      * The Meter Type
      */
-    public enum Type {
+    enum Type {
         GAUGE, DELTA, CUMULATIVE, UNRECOGNIZED;
 
         @JsonValue

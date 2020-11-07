@@ -13,7 +13,7 @@ public enum IPVersionType {
     V6(6);
     private final int version;
 
-    private IPVersionType(int version) {
+    IPVersionType(int version) {
         this.version = version;
     }
 

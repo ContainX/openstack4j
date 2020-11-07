@@ -146,7 +146,7 @@ public class EventCriteria {
             this.field = field;
             this.operator = operator;
             if (value instanceof Date)
-                this.value = Parser.toISO8601DateFormat(Date.class.cast(value));
+                this.value = Parser.toISO8601DateFormat((Date) value);
             else
                 this.value = String.valueOf(value);
         }

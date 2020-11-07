@@ -10,41 +10,41 @@ public interface IdentityV2Builders {
      *
      * @return the endpoint builder
      */
-    public EndpointBuilder endpoint();
+    EndpointBuilder endpoint();
 
     /**
      * The builder to create a Role.
      *
      * @return the role builder
      */
-    public RoleBuilder role();
+    RoleBuilder role();
 
     /**
      * The builder to create a service.
      *
      * @return the service builder
      */
-    public ServiceBuilder service();
+    ServiceBuilder service();
 
     /**
      * The builder to create a Service Endpoint.
      *
      * @return the service endpoint builder
      */
-    public ServiceEndpointBuilder serviceEndpoint();
+    ServiceEndpointBuilder serviceEndpoint();
 
     /**
      * The builder to create a tenant
      *
      * @return the tenant builder
      */
-    public TenantBuilder tenant();
+    TenantBuilder tenant();
 
     /**
      * The builder to create a user
      *
      * @return the user builder
      */
-    public UserBuilder user();
+    UserBuilder user();
 
 }

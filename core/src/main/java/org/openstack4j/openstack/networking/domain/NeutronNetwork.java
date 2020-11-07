@@ -277,7 +277,7 @@ public class NeutronNetwork implements Network {
 
         if (obj instanceof NeutronNetwork) {
             NeutronNetwork that = (NeutronNetwork) obj;
-            if (java.util.Objects.equals(name, that.name) &&
+            return java.util.Objects.equals(name, that.name) &&
                     java.util.Objects.equals(status, that.status) &&
                     java.util.Objects.equals(subnets, that.subnets) &&
                     java.util.Objects.equals(providerPhyNet, that.providerPhyNet) &&
@@ -291,9 +291,7 @@ public class NeutronNetwork implements Network {
                     java.util.Objects.equals(availabilityZoneHints, that.availabilityZoneHints) &&
                     java.util.Objects.equals(availabilityZones, that.availabilityZones) &&
                     java.util.Objects.equals(createdTime, that.createdTime) &&
-                    java.util.Objects.equals(updatedTime, that.updatedTime)) {
-                return true;
-            }
+                    java.util.Objects.equals(updatedTime, that.updatedTime);
         }
         return false;
     }

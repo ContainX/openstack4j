@@ -70,7 +70,7 @@ public class DesignateNameserver implements Nameserver {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        DesignateNameserver that = DesignateNameserver.class.cast(obj);
+        DesignateNameserver that = (DesignateNameserver) obj;
         return Objects.equal(this.hostname, that.hostname)
                 && Objects.equal(this.priority, that.priority);
     }

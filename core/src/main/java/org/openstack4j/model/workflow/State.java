@@ -11,5 +11,5 @@ public enum State {
     PAUSED,
     SUCCESS,
     CANCELLED,
-    ERROR;
+    ERROR
 }

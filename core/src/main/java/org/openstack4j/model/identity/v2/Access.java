@@ -61,7 +61,7 @@ public interface Access extends ModelEntity {
      */
     AuthVersion getVersion();
 
-    public interface UserDetails {
+    interface UserDetails {
         String getId();
 
         String getName();
@@ -75,7 +75,7 @@ public interface Access extends ModelEntity {
         List<? extends Link> getRolesLinks();
     }
 
-    public interface Service {
+    interface Service {
         String getType();
 
         String getName();

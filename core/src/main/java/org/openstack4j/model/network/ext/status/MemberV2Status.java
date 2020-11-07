@@ -16,33 +16,33 @@ public interface MemberV2Status extends ModelEntity {
      *
      * @return id
      */
-    public String getId();
+    String getId();
 
     /**
      * The address of the memeber
      *
      * @return address
      */
-    public String getAddress();
+    String getAddress();
 
     /**
      * The protocol port of the member
      *
      * @return protocol port
      */
-    public Integer getProtocolPort();
+    Integer getProtocolPort();
 
     /**
      * The operating status of the member
      *
      * @return operating status
      */
-    public String getOperatingStatus();
+    String getOperatingStatus();
 
     /**
      * The provisioning status of the member
      *
      * @return provisioning status
      */
-    public String getProvisioningStatus();
+    String getProvisioningStatus();
 }

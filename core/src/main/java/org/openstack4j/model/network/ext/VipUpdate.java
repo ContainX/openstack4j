@@ -15,41 +15,41 @@ public interface VipUpdate extends ModelEntity, Buildable<VipUpdateBuilder> {
      *
      * @see Vip#isAdminStateUp()
      */
-    public boolean isAdminStateUp();
+    boolean isAdminStateUp();
 
     /**
      * Optional
      *
      * @see Vip#getConnectionLimit()
      */
-    public Integer getConnectionLimit();
+    Integer getConnectionLimit();
 
     /**
      * Optional
      *
      * @see Vip#getDescription()
      */
-    public String getDescription();
+    String getDescription();
 
     /**
      * Optional
      *
      * @see Vip#getName()
      */
-    public String getName();
+    String getName();
 
     /**
      * Optional
      *
      * @see Vip#getPoolId()
      */
-    public String getPoolId();
+    String getPoolId();
 
     /**
      * Optional
      *
      * @see Vip#getSessionPersistence()
      */
-    public SessionPersistence getSessionPersistence();
+    SessionPersistence getSessionPersistence();
 
 }

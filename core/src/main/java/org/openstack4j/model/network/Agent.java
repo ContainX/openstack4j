@@ -16,7 +16,7 @@ public interface Agent extends ModelEntity, Buildable<AgentBuilder> {
     /**
      * neutron agent type
      */
-    public enum Type {
+    enum Type {
         DHCP("DHCP agent"), L3("L3 agent"), OPEN_VSWITCH("Open vSwitch agent"), METADATA("Metadata agent"), UNRECOGNIZED(
                 "");
 

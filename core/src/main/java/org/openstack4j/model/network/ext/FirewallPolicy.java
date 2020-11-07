@@ -21,29 +21,29 @@ public interface FirewallPolicy extends ModelEntity, Buildable<FirewallPolicyBui
     /**
      * @return id : Unique identifier for the firewall policy.
      */
-    public String getId();
+    String getId();
 
     /**
      * @return name : Human readable name for the FirewallPolicy (255 characters limit). Does not have to be unique.
      */
-    public String getName();
+    String getName();
 
     /**
      * @return tenantId : Owner of the Firewall Policy. Only an administrative user can
      * specify a tenant ID other than its own.
      */
-    public String getTenantId();
+    String getTenantId();
 
     /**
      * @return description : Human readable description for the FirewallPolicy (1024 characters limit).
      */
-    public String getDescription();
+    String getDescription();
 
     /**
      * @return shared :  When set to True makes this FirewallPolicy visible to tenants other
      * than its owner, and can be used in FirewallPolicy not owned by its tenant.
      */
-    public Boolean isShared();
+    Boolean isShared();
 
     /**
      * @return audited : When set to True by the policy owner indicates that the firewall policy has been audited.
@@ -52,24 +52,24 @@ public interface FirewallPolicy extends ModelEntity, Buildable<FirewallPolicyBui
      * this attribute will be set to False and will have to be explicitly set
      * to True through an update operation.
      */
-    public Boolean isAudited();
+    Boolean isAudited();
 
     /**
      * @return firewallRules(UUID)List : This is an ordered list of firewall rule uuids.
      * The firewall applies the rules in the order in which they appear in this list.
      */
-    public List<String> getFirewallRuleIds();
+    List<String> getFirewallRuleIds();
 
     /**
      * @return firewallList(UUID)List : This is a list of Firewalls associated with Firewall Policy.
      * This is returned when a firewall rule is added or removed from a firewall policy.
      */
-    public List<String> getFirewallList();
+    List<String> getFirewallList();
 
     /**
      * @return neutronFirewallRulesList : This is an ordered list of firewall rules (by uuid).
      * The firewall applies the rules in the order in which they appear in this list.
      * @see FirewallRule
      */
-    public List<? extends FirewallRule> getNeutronFirewallRules();
+    List<? extends FirewallRule> getNeutronFirewallRules();
 }

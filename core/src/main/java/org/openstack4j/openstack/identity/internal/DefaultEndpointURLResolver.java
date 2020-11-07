@@ -235,11 +235,8 @@ public class DefaultEndpointURLResolver implements EndpointURLResolver {
             if (type != other.type)
                 return false;
             if (uid == null) {
-                if (other.uid != null)
-                    return false;
-            } else if (!uid.equals(other.uid))
-                return false;
-            return true;
+                return other.uid == null;
+            } else return uid.equals(other.uid);
         }
     }
 

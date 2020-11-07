@@ -9,7 +9,7 @@ public interface BlockLimits {
 
     Absolute getAbsolute();
 
-    public interface Absolute {
+    interface Absolute {
 
         /**
          * @return the total snapshots used

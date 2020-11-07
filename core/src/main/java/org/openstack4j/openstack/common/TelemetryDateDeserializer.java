@@ -33,7 +33,7 @@ public class TelemetryDateDeserializer extends StdDeserializer<Date> {
 
     @Override
     public Date deserialize(JsonParser jsonParser, DeserializationContext ctxt)
-            throws IOException, JsonProcessingException {
+            throws IOException {
         String date = jsonParser.getText();
         SimpleDateFormat sdf = new SimpleDateFormat(MILLIS_DATE_FORMAT);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));

@@ -278,14 +278,9 @@ public final class Config {
             return false;
         }
         if (hostNameVerifier == null) {
-            if (other.getHostNameVerifier() != null) {
-                return false;
-            }
-        } else if (!hostNameVerifier.equals(other.getHostNameVerifier())) {
-            return false;
-        }
+            return other.getHostNameVerifier() == null;
+        } else return hostNameVerifier.equals(other.getHostNameVerifier());
 
-        return true;
     }
 
 }

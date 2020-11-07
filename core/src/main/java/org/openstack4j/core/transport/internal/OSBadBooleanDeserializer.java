@@ -22,7 +22,7 @@ public class OSBadBooleanDeserializer extends JsonDeserializer<Boolean> {
      * {@inheritDoc}
      */
     @Override
-    public Boolean deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public Boolean deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
         JsonToken t = jp.getCurrentToken();
         if (t == JsonToken.VALUE_TRUE) {
             return Boolean.TRUE;

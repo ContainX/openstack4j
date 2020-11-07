@@ -21,7 +21,7 @@ public interface AvailabilityZone extends ModelEntity {
     String getZoneName();
 
 
-    public interface ZoneState extends ModelEntity {
+    interface ZoneState extends ModelEntity {
 
         /**
          * @return the state of zone

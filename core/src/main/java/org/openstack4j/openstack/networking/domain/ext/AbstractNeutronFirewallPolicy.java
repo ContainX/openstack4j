@@ -104,9 +104,9 @@ public class AbstractNeutronFirewallPolicy implements FirewallPolicy {
     @JsonIgnore
     @Override
     public List<? extends FirewallRule> getNeutronFirewallRules() {
-        neutronFirewallRules = new ArrayList<NeutronFirewallRule>();
+        neutronFirewallRules = new ArrayList<>();
         if (neutronFirewallRules == null && (firewallRules != null && firewallRules.size() > 0)) {
-            neutronFirewallRules = new ArrayList<NeutronFirewallRule>();
+            neutronFirewallRules = new ArrayList<>();
             for (String ruleId : firewallRules) {
                 NeutronFirewallRule rule = (NeutronFirewallRule) Apis.getNetworkingServices().
                         firewalls().firewallrule().get(ruleId);

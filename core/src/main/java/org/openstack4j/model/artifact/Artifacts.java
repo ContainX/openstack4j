@@ -11,8 +11,8 @@ public interface Artifacts extends ModelEntity {
 
     ArtifactType artifactType = ArtifactType.ALL;
 
-    public String getSchema();
+    String getSchema();
 
-    public String getFirst();
+    String getFirst();
 
 }

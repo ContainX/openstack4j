@@ -76,11 +76,9 @@ public class NeutronAvailabilityZone implements AvailabilityZone {
 
         if (obj instanceof NeutronAvailabilityZone) {
             NeutronAvailabilityZone that = (NeutronAvailabilityZone) obj;
-            if (java.util.Objects.equals(state, that.state) &&
+            return java.util.Objects.equals(state, that.state) &&
                     java.util.Objects.equals(resource, that.resource) &&
-                    java.util.Objects.equals(name, that.name)) {
-                return true;
-            }
+                    java.util.Objects.equals(name, that.name);
         }
         return false;
     }

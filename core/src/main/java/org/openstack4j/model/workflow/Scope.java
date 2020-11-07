@@ -16,5 +16,5 @@ public enum Scope {
      * Entities with this scope belong to one tenant.
      */
     @JsonProperty("private")
-    PRIVATE;
+    PRIVATE
 }

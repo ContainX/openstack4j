@@ -10,34 +10,34 @@ public interface OrchestrationBuilders {
      *
      * @return the TemplateBuilder
      */
-    public TemplateBuilder template();
+    TemplateBuilder template();
 
     /**
      * The builder to create a StackCreate
      *
      * @return the StackCreate builder
      */
-    public StackCreateBuilder stack();
+    StackCreateBuilder stack();
 
     /**
      * The builder to create a SoftwareConfig
      *
      * @return the software config builder
      */
-    public SoftwareConfigBuilder softwareConfig();
+    SoftwareConfigBuilder softwareConfig();
 
     /**
      * The builder to create a StackUpdate
      *
      * @return the StackUpdate builder
      */
-    public StackUpdateBuilder stackUpdate();
+    StackUpdateBuilder stackUpdate();
 
     /**
      * The builder to create a resource health update
      *
      * @return
      */
-    public ResourceHealthBuilder resourceHealth();
+    ResourceHealthBuilder resourceHealth();
 
 }

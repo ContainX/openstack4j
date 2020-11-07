@@ -13,7 +13,7 @@ public class LiveMigrateOptions extends BaseActionOptions {
         DISK_OVER_COMMIT("disk_over_commit");
         private final String param;
 
-        private Option(String param) {
+        Option(String param) {
             this.param = param;
         }
 

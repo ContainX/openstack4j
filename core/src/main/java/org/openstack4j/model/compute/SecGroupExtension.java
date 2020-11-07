@@ -17,7 +17,7 @@ public interface SecGroupExtension extends ModelEntity {
     /**
      * Security Group Rule
      */
-    public interface Rule extends ModelEntity, Buildable<SecurityGroupRuleBuilder> {
+    interface Rule extends ModelEntity, Buildable<SecurityGroupRuleBuilder> {
 
         /**
          * @return the IPProtocol for this rule
@@ -64,7 +64,7 @@ public interface SecGroupExtension extends ModelEntity {
         /**
          * Rule Group
          */
-        public interface Group {
+        interface Group {
 
             /**
              * @return the name of the group
@@ -82,7 +82,7 @@ public interface SecGroupExtension extends ModelEntity {
         /**
          * Rule IP Range
          */
-        public interface IpRange {
+        interface IpRange {
 
             /**
              * Gets the CIDR address range

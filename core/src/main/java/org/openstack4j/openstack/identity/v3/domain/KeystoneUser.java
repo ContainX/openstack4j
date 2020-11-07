@@ -163,7 +163,7 @@ public class KeystoneUser implements User {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        KeystoneUser that = KeystoneUser.class.cast(obj);
+        KeystoneUser that = (KeystoneUser) obj;
         return Objects.equal(this.name, that.name)
                 && Objects.equal(this.id, that.id)
                 && Objects.equal(this.email, that.email)

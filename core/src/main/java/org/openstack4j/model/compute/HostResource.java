@@ -11,27 +11,27 @@ public interface HostResource extends ModelEntity {
     /**
      * @return the number of CPUs of the compute host
      */
-    public int getCpu();
+    int getCpu();
 
     /**
      * @return the size of Disk the compute host has, in GB
      */
-    public int getDiskInGb();
+    int getDiskInGb();
 
     /**
      * @return the Hostname of the compute host
      */
-    public String getHost();
+    String getHost();
 
     /**
      * @return the size of Memory of the compute host has, in MB
      */
-    public int getMemoryInMb();
+    int getMemoryInMb();
 
     /**
      * @return the project id (or special name like total, used_now, used_max)
      */
-    public String getProject();
+    String getProject();
 
 
     /**

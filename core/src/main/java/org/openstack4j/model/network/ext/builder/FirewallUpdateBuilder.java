@@ -15,26 +15,26 @@ public interface FirewallUpdateBuilder extends Builder<FirewallUpdateBuilder, Fi
      *                 specify a tenant ID other than its own.
      * @return FirewallUpdateBuilder
      */
-    public FirewallUpdateBuilder tenantId(String tenantId);
+    FirewallUpdateBuilder tenantId(String tenantId);
 
     /**
      * @param name : Human readable name for the firewall (255 characters limit). Does not have to be unique.
      * @return FirewallUpdateBuilder
      */
-    public FirewallUpdateBuilder name(String name);
+    FirewallUpdateBuilder name(String name);
 
     /**
      * @param description : Human readable description for the firewall (1024 characters limit).
      * @return FirewallUpdateBuilder
      */
-    public FirewallUpdateBuilder description(String description);
+    FirewallUpdateBuilder description(String description);
 
     /**
      * @param adminstateup :  The administrative state of the firewall,
      *                     which is up (true) or down (false).
      * @return FirewallUpdateBuilder
      */
-    public FirewallUpdateBuilder adminStateUp(Boolean adminStateUp);
+    FirewallUpdateBuilder adminStateUp(Boolean adminStateUp);
 
     /**
      * shared :  When set to True makes this firewall rule visible to tenants other
@@ -42,12 +42,12 @@ public interface FirewallUpdateBuilder extends Builder<FirewallUpdateBuilder, Fi
      *
      * @return FirewallUpdateBuilder
      */
-    public FirewallUpdateBuilder shared(Boolean shared);
+    FirewallUpdateBuilder shared(Boolean shared);
 
     /**
      * @param policyid : The firewall policy uuid that this firewall is associated with.
      *                 This firewall will implement the rules contained in the firewall policy represented by this uuid.
      * @return FirewallUpdateBuilder
      */
-    public FirewallUpdateBuilder policy(String policyId);
+    FirewallUpdateBuilder policy(String policyId);
 }

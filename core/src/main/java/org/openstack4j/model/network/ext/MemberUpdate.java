@@ -15,15 +15,15 @@ public interface MemberUpdate extends ModelEntity, Buildable<MemberUpdateBuilder
     /**
      * @see Member#isAdminStateUp()
      */
-    public boolean isAdminStateUp();
+    boolean isAdminStateUp();
 
     /**
      * @see Member#getWeight()
      */
-    public Integer getWeight();
+    Integer getWeight();
 
     /**
      * @see Member#getPoolId()
      */
-    public String getPoolId();
+    String getPoolId();
 }

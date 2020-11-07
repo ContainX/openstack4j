@@ -17,19 +17,19 @@ public interface HealthMonitorV2Status extends ModelEntity {
      *
      * @return id
      */
-    public String getId();
+    String getId();
 
     /**
      * The health monitor type
      *
      * @return HealthMonitorType
      */
-    public HealthMonitorType getType();
+    HealthMonitorType getType();
 
     /**
      * Provisioning status of the health monitor
      *
      * @return provisioningStatus
      */
-    public String getProvisioningStatus();
+    String getProvisioningStatus();
 }

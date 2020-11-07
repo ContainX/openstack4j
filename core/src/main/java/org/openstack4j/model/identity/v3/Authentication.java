@@ -11,7 +11,7 @@ public interface Authentication extends ModelEntity {
 
     Scope getScope();
 
-    public interface Identity {
+    interface Identity {
 
         Password getPassword();
 
@@ -19,22 +19,22 @@ public interface Authentication extends ModelEntity {
 
         List<String> getMethods();
 
-        public interface Password {
+        interface Password {
 
             User getUser();
 
-            public interface User extends ResourceEntity {
+            interface User extends ResourceEntity {
 
                 Domain getDomain();
 
                 String getPassword();
 
-                public interface Domain extends ResourceEntity {
+                interface Domain extends ResourceEntity {
                 }
             }
         }
 
-        public interface Token {
+        interface Token {
 
             String getId();
 
@@ -42,18 +42,18 @@ public interface Authentication extends ModelEntity {
 
     }
 
-    public interface Scope {
+    interface Scope {
 
         Project getProject();
 
         Domain getDomain();
 
-        public interface Project extends ResourceEntity {
+        interface Project extends ResourceEntity {
 
             Domain getDomain();
         }
 
-        public interface Domain extends ResourceEntity {
+        interface Domain extends ResourceEntity {
         }
 
     }

@@ -19,7 +19,7 @@ public interface HostService extends RestService {
      * @param hostName
      * @return the Resource of the Host specified
      */
-    public List<? extends HostResource> hostDescribe(String hostName);
+    List<? extends HostResource> hostDescribe(String hostName);
 
     /**
      * List all host that the current tenant has access to

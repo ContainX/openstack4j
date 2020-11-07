@@ -46,7 +46,7 @@ public interface InterfaceAttachment extends ModelEntity {
      */
     PortState getPortState();
 
-    public interface FixedIp extends ModelEntity {
+    interface FixedIp extends ModelEntity {
 
         /**
          * @return the IpAddress

@@ -168,7 +168,7 @@ public class DesignateRecordset implements Recordset {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        DesignateRecordset that = DesignateRecordset.class.cast(obj);
+        DesignateRecordset that = (DesignateRecordset) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.projectId, that.projectId)
                 && Objects.equal(this.name, that.name)

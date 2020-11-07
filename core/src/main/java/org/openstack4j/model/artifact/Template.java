@@ -9,17 +9,17 @@ import org.openstack4j.model.ModelEntity;
  */
 public interface Template extends ModelEntity {
 
-    public String getMd5();
+    String getMd5();
 
-    public String getSha256();
+    String getSha256();
 
-    public String getContentType();
+    String getContentType();
 
-    public Boolean getExternal();
+    Boolean getExternal();
 
-    public String getUrl();
+    String getUrl();
 
-    public String getSha1();
+    String getSha1();
 
-    public String getStatus();
+    String getStatus();
 }

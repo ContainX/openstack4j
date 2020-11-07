@@ -15,45 +15,45 @@ public interface HealthMonitor extends ModelEntity,
     /**
      * @return id the healthMonitor identifier
      */
-    public String getId();
+    String getId();
 
     /**
      * @return tenantId Owner of the VIP. Only an administrative user can
      * specify a tenant ID other than its own.
      */
-    public String getTenantId();
+    String getTenantId();
 
     /**
      * @return type The type of probe sent by the load balancer to verify the
      * member state, which is PING, TCP, HTTP, or HTTPS.
      */
-    public HealthMonitorType getType();
+    HealthMonitorType getType();
 
     /**
      * @return delay The time, in seconds, between sending probes to members.
      */
-    public Integer getDelay();
+    Integer getDelay();
 
     /**
      * @return timeout The maximum number of seconds for a monitor to wait for a
      * connection to be established before it times out. This value must
      * be less than the delay value.
      */
-    public Integer getTimeout();
+    Integer getTimeout();
 
     /**
      * @return maxRetries Number of allowed connection failures before changing
      * the status of the member to INACTIVE. A valid value is from 1 to
      * 10.
      */
-    public Integer getMaxRetries();
+    Integer getMaxRetries();
 
     /**
      * Optional.
      *
      * @return httpMethod The HTTP method that the monitor uses for requests.
      */
-    public String getHttpMethod();
+    String getHttpMethod();
 
     /**
      * Optional.
@@ -62,14 +62,14 @@ public interface HealthMonitor extends ModelEntity,
      * the health of a member. Must be a string beginning with a forward
      * slash (/).
      */
-    public String getUrlPath();
+    String getUrlPath();
 
     /**
      * Optional.
      *
      * @return expectedCodes Expected HTTP codes for a passing HTTP(S) monitor.
      */
-    public String getExpectedCodes();
+    String getExpectedCodes();
 
     /**
      * Optional.
@@ -77,11 +77,11 @@ public interface HealthMonitor extends ModelEntity,
      * @return adminstateup The administrative state of the health monitor,
      * which is up (true) or down (false).
      */
-    public boolean isAdminStateUp();
+    boolean isAdminStateUp();
 
     /**
      * @return status The status of the health monitor. Indicates whether the
      * health monitor is operational.
      */
-    public String getStatus();
+    String getStatus();
 }

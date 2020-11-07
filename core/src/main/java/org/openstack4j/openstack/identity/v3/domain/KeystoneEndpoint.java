@@ -189,7 +189,7 @@ public class KeystoneEndpoint implements Endpoint {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        KeystoneEndpoint that = KeystoneEndpoint.class.cast(obj);
+        KeystoneEndpoint that = (KeystoneEndpoint) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.type, that.type)
                 && Objects.equal(this.name, that.name)

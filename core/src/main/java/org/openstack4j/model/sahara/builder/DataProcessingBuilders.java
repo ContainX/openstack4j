@@ -10,70 +10,70 @@ public interface DataProcessingBuilders {
      *
      * @return the cluster builder
      */
-    public ClusterBuilder cluster();
+    ClusterBuilder cluster();
 
     /**
      * The builder to create a sahara cluster template
      *
      * @return the cluster template builder
      */
-    public ClusterTemplateBuilder clusterTemplate();
+    ClusterTemplateBuilder clusterTemplate();
 
     /**
      * The builder to create a sahara node group
      *
      * @return the node group builder
      */
-    public NodeGroupBuilder nodeGroup();
+    NodeGroupBuilder nodeGroup();
 
     /**
      * The builder to create a sahara node group template
      *
      * @return the node group template builder
      */
-    public NodeGroupTemplateBuilder nodeGroupTemplate();
+    NodeGroupTemplateBuilder nodeGroupTemplate();
 
     /**
      * The builder to create a sahara service configuration
      *
      * @return the service configuration builder
      */
-    public ServiceConfigBuilder serviceConfig();
+    ServiceConfigBuilder serviceConfig();
 
     /**
      * The builder which creates a sahara Data Source
      *
      * @return the data source builder
      */
-    public DataSourceBuilder dataSource();
+    DataSourceBuilder dataSource();
 
     /**
      * The builder which creates a sahara Job Binary
      *
      * @return the job binary builder
      */
-    public JobBinaryBuilder jobBinary();
+    JobBinaryBuilder jobBinary();
 
     /**
      * The builder which creates a sahara Job
      *
      * @return the job builder
      */
-    public JobBuilder job();
+    JobBuilder job();
 
     /**
      * The builder which creates a job configuration for sahara job execution
      *
      * @return the job config builder
      */
-    public JobConfigBuilder jobConfig();
+    JobConfigBuilder jobConfig();
 
     /**
      * The builder which creates a sahara job execution
      *
      * @return the job execution builder
      */
-    public JobExecutionBuilder jobExecution();
+    JobExecutionBuilder jobExecution();
 
 
 }

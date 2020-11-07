@@ -130,7 +130,7 @@ public class KeystoneTenant implements Tenant {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        KeystoneTenant that = KeystoneTenant.class.cast(obj);
+        KeystoneTenant that = (KeystoneTenant) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.name, that.name)
                 && Objects.equal(this.description, that.description);

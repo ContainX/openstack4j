@@ -66,10 +66,8 @@ public class NeutronPool implements Pool {
 
         if (obj instanceof NeutronPool) {
             NeutronPool that = (NeutronPool) obj;
-            if (java.util.Objects.equals(start, that.start) &&
-                    java.util.Objects.equals(end, that.end)) {
-                return true;
-            }
+            return java.util.Objects.equals(start, that.start) &&
+                    java.util.Objects.equals(end, that.end);
         }
         return false;
     }

@@ -21,18 +21,18 @@ public interface FirewallPolicyUpdate extends ModelEntity, Buildable<FirewallPol
     /**
      * @return name : Human readable name for the FirewallPolicyUpdate (255 characters limit). Does not have to be unique.
      */
-    public String getName();
+    String getName();
 
     /**
      * @return description : Human readable description for the FirewallPolicyUpdate (1024 characters limit).
      */
-    public String getDescription();
+    String getDescription();
 
     /**
      * @return shared :  When set to True makes this FirewallPolicyUpdate visible to tenants other
      * than its owner, and can be used in FirewallPolicyUpdate not owned by its tenant.
      */
-    public Boolean isShared();
+    Boolean isShared();
 
     /**
      * @return audited : When set to True by the policy owner indicates that the firewall policy has been audited.
@@ -41,11 +41,11 @@ public interface FirewallPolicyUpdate extends ModelEntity, Buildable<FirewallPol
      * this attribute will be set to False and will have to be explicitly set
      * to True through an update operation.
      */
-    public Boolean isAudited();
+    Boolean isAudited();
 
     /**
      * @return firewallRules(UUID)List : This is an ordered list of firewall rule uuids.
      * The firewall applies the rules in the order in which they appear in this list.
      */
-    public List<String> getFirewallRuleIds();
+    List<String> getFirewallRuleIds();
 }

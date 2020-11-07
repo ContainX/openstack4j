@@ -28,15 +28,15 @@ public class Template {
 
     private final static String GET_FILE = "get_file";
 
-    public Template(URL templateRes) throws JsonParseException, IOException {
+    public Template(URL templateRes) throws IOException {
         setTplContent(Resources.toString(templateRes, Charsets.UTF_8));
         baseUrl = TemplateUtils.baseUrl(templateRes.toString());
         getFileContents();
     }
 
     public Template(String templateLoc)
-            throws JsonParseException, MalformedURLException,
-            UnsupportedEncodingException, IOException, URISyntaxException {
+            throws
+            IOException, URISyntaxException {
         this(TemplateUtils.normaliseFilePathToUrl(templateLoc));
     }
 
@@ -56,7 +56,7 @@ public class Template {
         }
     }
 
-    private void resolveTemplateType(Map<?, ?> map) throws MalformedURLException, IOException {
+    private void resolveTemplateType(Map<?, ?> map) throws IOException {
         for (Object key : map.keySet()) {
             // Ignore if the key is not string. Actually not happening
             if (!(key instanceof String)) {
@@ -144,11 +144,7 @@ public class Template {
         if (!key.equals("type")) {
             return false;
         }
-        if (value.endsWith(".yaml") || value.endsWith(".template")) {
-            return true;
-        } else {
-            return false;
-        }
+        return value.endsWith(".yaml") || value.endsWith(".template");
     }
 
     public String getTplContent() {

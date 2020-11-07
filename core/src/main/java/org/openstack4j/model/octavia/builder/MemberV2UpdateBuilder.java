@@ -15,11 +15,11 @@ public interface MemberV2UpdateBuilder extends Buildable.Builder<MemberV2UpdateB
      *                     down (false).
      * @return MemberV2UpdateBuilder
      */
-    public MemberV2UpdateBuilder adminStateUp(boolean adminStateUp);
+    MemberV2UpdateBuilder adminStateUp(boolean adminStateUp);
 
     /**
      * @param weight Weight of member.from 1 to 256
      * @return MemberUpdateBuilder
      */
-    public MemberV2UpdateBuilder weight(Integer weight);
+    MemberV2UpdateBuilder weight(Integer weight);
 }

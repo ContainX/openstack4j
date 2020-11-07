@@ -112,7 +112,7 @@ public class KeystoneGroup implements Group {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        KeystoneGroup that = KeystoneGroup.class.cast(obj);
+        KeystoneGroup that = (KeystoneGroup) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.domainId, that.domainId)
                 && Objects.equal(this.description, that.description)

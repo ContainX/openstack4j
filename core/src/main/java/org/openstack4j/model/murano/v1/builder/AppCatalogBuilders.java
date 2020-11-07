@@ -9,5 +9,5 @@ public interface AppCatalogBuilders {
      *
      * @return the environment builder
      */
-    public EnvironmentBuilder environment();
+    EnvironmentBuilder environment();
 }

@@ -14,5 +14,5 @@ public interface HealthMonitorAssociateBuilder extends Builder<HealthMonitorAsso
      * @param id the healthMonitor identifier
      * @return HealthMonitorAssociateBuilder
      */
-    public HealthMonitorAssociateBuilder id(String id);
+    HealthMonitorAssociateBuilder id(String id);
 }

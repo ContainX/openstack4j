@@ -11,13 +11,13 @@ public interface DNSV2Builders {
      *
      * @return the zone builder
      */
-    public ZoneBuilder zone();
+    ZoneBuilder zone();
 
     /**
      * The builder to create a Recordset.
      *
      * @return the recordset builder
      */
-    public RecordsetBuilder recordset();
+    RecordsetBuilder recordset();
 
 }

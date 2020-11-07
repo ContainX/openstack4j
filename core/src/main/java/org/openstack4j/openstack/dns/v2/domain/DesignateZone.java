@@ -184,7 +184,7 @@ public class DesignateZone implements Zone {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        DesignateZone that = DesignateZone.class.cast(obj);
+        DesignateZone that = (DesignateZone) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.poolId, that.poolId)
                 && Objects.equal(this.projectId, that.projectId)

@@ -25,8 +25,7 @@ import java.util.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GlanceImage implements Image {
 
-    private static final Set<String> RESERVED_KEYS = Sets.newHashSet(Arrays.asList(new String[]{
-            "id",
+    private static final Set<String> RESERVED_KEYS = Sets.newHashSet(Arrays.asList("id",
             "name",
             "tags",
             "status",
@@ -52,7 +51,7 @@ public class GlanceImage implements Image {
             "os_version",
             "os_distro",
             "ramdisk_id",
-            "virtual_size"}));
+            "virtual_size"));
 
     private static final long serialVersionUID = 1L;
 

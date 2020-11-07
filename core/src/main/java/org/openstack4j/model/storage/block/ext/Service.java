@@ -14,7 +14,7 @@ public interface Service extends ModelEntity {
     /**
      * The status of a Block storage service entity
      */
-    public enum Status {
+    enum Status {
         DISABLED, ENABLED, UNRECOGNIZED;
 
         @JsonCreator
@@ -33,7 +33,7 @@ public interface Service extends ModelEntity {
     /**
      * The state of a Block storage service entity
      */
-    public enum State {
+    enum State {
         DOWN, UNRECOGNIZED, UP;
 
         @JsonCreator

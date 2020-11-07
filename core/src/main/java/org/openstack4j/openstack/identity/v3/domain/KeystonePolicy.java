@@ -119,7 +119,7 @@ public class KeystonePolicy implements Policy {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        KeystonePolicy that = KeystonePolicy.class.cast(obj);
+        KeystonePolicy that = (KeystonePolicy) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.type, that.type)
                 && Objects.equal(this.projectId, that.projectId)

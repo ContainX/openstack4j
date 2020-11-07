@@ -26,7 +26,7 @@ public interface RateLimit extends ModelEntity {
 
     List<? extends LimitEntry> getLimit();
 
-    public interface LimitEntry {
+    interface LimitEntry {
 
         /**
          * @return the nextAvailable date/time

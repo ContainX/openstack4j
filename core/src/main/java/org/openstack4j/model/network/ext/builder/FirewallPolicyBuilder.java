@@ -16,27 +16,27 @@ public interface FirewallPolicyBuilder extends Builder<FirewallPolicyBuilder, Fi
      * @param name : Human readable name for the FirewallPolicy (255 characters limit). Does not have to be unique.
      * @return FirewallPolicyBuilder
      */
-    public FirewallPolicyBuilder name(String name);
+    FirewallPolicyBuilder name(String name);
 
     /**
      * @param tenantId : Owner of the FirewallPolicy. Only an administrative user can
      *                 specify a tenant ID other than its own.
      * @return FirewallPolicyBuilder
      */
-    public FirewallPolicyBuilder tenantId(String tenantId);
+    FirewallPolicyBuilder tenantId(String tenantId);
 
     /**
      * @param description : Human readable description for the FirewallPolicy (1024 characters limit).
      * @return FirewallPolicyBuilder
      */
-    public FirewallPolicyBuilder description(String description);
+    FirewallPolicyBuilder description(String description);
 
     /**
      * @param shared : When set to True makes this FirewallPolicy visible to tenants other
      *               than its owner, and can be used in FirewallPolicy not owned by its tenant.
      * @return FirewallPolicyBuilder
      */
-    public FirewallPolicyBuilder shared(Boolean shared);
+    FirewallPolicyBuilder shared(Boolean shared);
 
     /**
      * @param audited : When set to True by the policy owner indicates that the firewall policy has been audited.
@@ -46,12 +46,12 @@ public interface FirewallPolicyBuilder extends Builder<FirewallPolicyBuilder, Fi
      *                to True through an update operation.
      * @return FirewallPolicyBuilder
      */
-    public FirewallPolicyBuilder audited(Boolean audited);
+    FirewallPolicyBuilder audited(Boolean audited);
 
     /**
      * @param firewallRules(UUID)List : This is an ordered list of firewall rule uuids.
      *                                The firewall applies the rules in the order in which they appear in this list.
      * @return FirewallPolicyBuilder
      */
-    public FirewallPolicyBuilder firewallRules(List<String> ruleIdList);
+    FirewallPolicyBuilder firewallRules(List<String> ruleIdList);
 }

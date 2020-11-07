@@ -62,7 +62,7 @@ public interface SoftwareConfig extends ModelEntity, Buildable<SoftwareConfigBui
      */
     Map<String, Object> getOptions();
 
-    public interface Input {
+    interface Input {
 
         /**
          * @return the name of this input
@@ -85,7 +85,7 @@ public interface SoftwareConfig extends ModelEntity, Buildable<SoftwareConfigBui
         String getType();
     }
 
-    public interface Output {
+    interface Output {
 
         /**
          * @return the name of this output

@@ -108,7 +108,7 @@ public class ObjectStorageObjectServiceImpl extends BaseObjectStorageService imp
         checkNotNull(options);
 
         if (payload != null && FilePayload.class.isAssignableFrom(payload.getClass()) && name == null)
-            name = FilePayload.class.cast(payload).getRaw().getName();
+            name = ((FilePayload) payload).getRaw().getName();
         else
             checkNotNull(name);
 

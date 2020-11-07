@@ -15,5 +15,5 @@ public interface VnfUpdateBuilder extends Builder<VnfUpdateBuilder, VnfUpdate> {
      * @param attributes : VnfUpdateAttributes
      * @return VnfUpdateBuilder
      */
-    public VnfUpdateBuilder attributes(VnfUpdateAttributes attributes);
+    VnfUpdateBuilder attributes(VnfUpdateAttributes attributes);
 }

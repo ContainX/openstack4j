@@ -22,7 +22,7 @@ public class SenlinWebHookServiceImpl extends BaseOpenStackService implements Se
         checkNotNull(webHookUrl);
         HttpRequest newReq = new HttpRequest();
         newReq.toBuilder().methodPost().endpoint(webHookUrl).path("");
-        newReq.builder(SenlinAction.class);
+        HttpRequest.builder(SenlinAction.class);
         return HttpExecutor.create().execute(newReq).getEntity(SenlinActionID.class);
     }
 }

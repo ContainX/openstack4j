@@ -15,42 +15,42 @@ public interface Member extends ModelEntity, Buildable<MemberBuilder> {
      * @return status The status of the member. Indicates whether the member is
      * operational.
      */
-    public String getStatus();
+    String getStatus();
 
     /**
      * @return address the IP address of a member
      */
-    public String getAddress();
+    String getAddress();
 
     /**
      * @return The administrative state of the member, which is up (true) or
      * down (false).
      */
-    public boolean isAdminStateUp();
+    boolean isAdminStateUp();
 
     /**
      * @return the id of a tenant. Owner of the member.
      */
-    public String getTenantId();
+    String getTenantId();
 
     /**
      * @return the member identifier
      */
-    public String getId();
+    String getId();
 
     /**
      * @return The port on which the application is hosted.such as 80
      */
-    public Integer getProtocolPort();
+    Integer getProtocolPort();
 
     /**
      * @return Weight of member.1~256
      */
-    public Integer getWeight();
+    Integer getWeight();
 
     /**
      * @return The Loadbalance pool identifier
      */
-    public String getPoolId();
+    String getPoolId();
 
 }

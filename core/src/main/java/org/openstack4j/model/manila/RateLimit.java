@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface RateLimit {
     enum TimeIntervalUnit {
-        SECOND, MINUTE, HOUR, DAY;
+        SECOND, MINUTE, HOUR, DAY
     }
 
     /**

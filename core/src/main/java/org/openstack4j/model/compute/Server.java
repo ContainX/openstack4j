@@ -20,7 +20,7 @@ public interface Server extends ModelEntity {
      * Servers contain a status attribute that can be used as an indication of the current server
      * state. Servers with an ACTIVE status are available for use.
      */
-    public enum Status {
+    enum Status {
         /**
          * The server is active
          */

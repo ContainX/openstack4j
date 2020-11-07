@@ -11,9 +11,9 @@ import org.openstack4j.model.artifact.builder.ArtifactUpdateBuilder;
  */
 public interface ArtifactUpdate extends ModelEntity, Buildable<ArtifactUpdateBuilder> {
 
-    public String getOp();
+    String getOp();
 
-    public String getPath();
+    String getPath();
 
-    public String getValue();
+    String getValue();
 }

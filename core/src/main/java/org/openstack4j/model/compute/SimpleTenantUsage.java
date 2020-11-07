@@ -56,7 +56,7 @@ public interface SimpleTenantUsage extends ModelEntity {
     List<? extends ServerUsage> getServerUsages();
 
 
-    public interface ServerUsage extends Serializable {
+    interface ServerUsage extends Serializable {
 
         /**
          * @return the instance id of the server

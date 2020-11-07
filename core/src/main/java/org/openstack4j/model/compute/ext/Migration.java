@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public interface Migration extends ModelEntity {
 
-    public enum Status {
+    enum Status {
         MIGRATING,
         ERROR,
         DONE;

@@ -16,7 +16,7 @@ public enum Ipv6AddressMode {
 
     private final String ipv6AddressMode;
 
-    private Ipv6AddressMode(String ipv6AddressMode) {
+    Ipv6AddressMode(String ipv6AddressMode) {
         this.ipv6AddressMode = ipv6AddressMode;
     }
 

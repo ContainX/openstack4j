@@ -17,7 +17,7 @@ public interface Buildable<B> {
      * @param <M> The ouput IModelEntity type
      * @author Jeremy Unruh
      */
-    public interface Builder<T extends Builder<T, M>, M extends Buildable<?>> {
+    interface Builder<T extends Builder<T, M>, M extends Buildable<?>> {
 
         /**
          * Creates and return the Model Entity M

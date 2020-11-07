@@ -14,7 +14,7 @@ public final class RebuildOptions extends BaseActionOptions {
         ADMIN_PASS("adminPass");
         private final String param;
 
-        private Option(String param) {
+        Option(String param) {
             this.param = param;
         }
 

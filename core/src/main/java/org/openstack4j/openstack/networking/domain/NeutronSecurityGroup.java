@@ -147,13 +147,11 @@ public class NeutronSecurityGroup implements SecurityGroup {
 
         if (obj instanceof NeutronSecurityGroup) {
             NeutronSecurityGroup that = (NeutronSecurityGroup) obj;
-            if (java.util.Objects.equals(id, that.id) &&
+            return java.util.Objects.equals(id, that.id) &&
                     java.util.Objects.equals(tenantId, that.tenantId) &&
                     java.util.Objects.equals(name, that.name) &&
                     java.util.Objects.equals(description, that.description) &&
-                    java.util.Objects.equals(rules, that.rules)) {
-                return true;
-            }
+                    java.util.Objects.equals(rules, that.rules);
         }
         return false;
     }

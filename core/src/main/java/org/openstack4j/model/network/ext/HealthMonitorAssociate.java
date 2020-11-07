@@ -15,5 +15,5 @@ public interface HealthMonitorAssociate extends ModelEntity,
     /**
      * @return id the healthMonitor identifier
      */
-    public String getId();
+    String getId();
 }

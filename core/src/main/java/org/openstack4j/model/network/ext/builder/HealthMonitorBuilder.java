@@ -16,55 +16,55 @@ public interface HealthMonitorBuilder extends Builder<HealthMonitorBuilder, Heal
      *                 tenant ID other than its own.
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder tenantId(String tenantId);
+    HealthMonitorBuilder tenantId(String tenantId);
 
     /**
      * @param type The type of probe, which is PING, TCP, HTTP, or HTTPS, that is
      *             sent by the load balancer to verify the member state.
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder type(HealthMonitorType type);
+    HealthMonitorBuilder type(HealthMonitorType type);
 
     /**
      * @param delay The time, in seconds, between sending probes to members.
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder delay(Integer delay);
+    HealthMonitorBuilder delay(Integer delay);
 
     /**
      * @param timeout Time in seconds to timeout each probe.
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder timeout(Integer timeout);
+    HealthMonitorBuilder timeout(Integer timeout);
 
     /**
      * @param maxRetries Maximum consecutive health probe tries.
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder maxRetries(Integer maxRetries);
+    HealthMonitorBuilder maxRetries(Integer maxRetries);
 
     /**
      * @param urlPath Path portion of URI that will be probed if type is HTTP(S).
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder urlPath(String urlPath);
+    HealthMonitorBuilder urlPath(String urlPath);
 
     /**
      * @param expectedCodes Expected HTTP codes for a passing HTTP(S) monitor.
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder expectedCodes(String expectedCodes);
+    HealthMonitorBuilder expectedCodes(String expectedCodes);
 
     /**
      * @param httpMethod GET/PUT/POST
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder httpMethod(String httpMethod);
+    HealthMonitorBuilder httpMethod(String httpMethod);
 
     /**
      * @param adminStateUp The administrative state of the VIP. A valid value is true
      *                     (UP) or false (DOWN).
      * @return HealthMonitorBuilder
      */
-    public HealthMonitorBuilder adminStateUp(boolean adminStateUp);
+    HealthMonitorBuilder adminStateUp(boolean adminStateUp);
 }

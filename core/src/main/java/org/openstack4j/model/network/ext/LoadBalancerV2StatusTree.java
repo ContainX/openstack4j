@@ -14,5 +14,5 @@ public interface LoadBalancerV2StatusTree extends ModelEntity {
      *
      * @return the loadbalancer status tree
      */
-    public LoadBalancerV2Status getLoadBalancerV2Status();
+    LoadBalancerV2Status getLoadBalancerV2Status();
 }

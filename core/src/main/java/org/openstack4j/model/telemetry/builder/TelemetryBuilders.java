@@ -10,6 +10,6 @@ public interface TelemetryBuilders {
      *
      * @return the image builder
      */
-    public AlarmBuilder alarm();
+    AlarmBuilder alarm();
 
 }

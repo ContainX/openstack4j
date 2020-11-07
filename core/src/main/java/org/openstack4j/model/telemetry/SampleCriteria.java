@@ -39,7 +39,7 @@ public class SampleCriteria {
         EQUALS("eq");
         private final String queryValue;
 
-        private Oper(String queryValue) {
+        Oper(String queryValue) {
             this.queryValue = queryValue;
         }
 
@@ -150,7 +150,7 @@ public class SampleCriteria {
             this.field = field;
             this.operator = operator;
             if (value instanceof Date) {
-                this.value = Parser.toISO8601DateFormat(Date.class.cast(value));
+                this.value = Parser.toISO8601DateFormat((Date) value);
             } else {
                 this.value = String.valueOf(value);
             }

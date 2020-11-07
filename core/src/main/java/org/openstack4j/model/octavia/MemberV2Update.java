@@ -13,10 +13,10 @@ public interface MemberV2Update extends ModelEntity, Buildable<MemberV2UpdateBui
     /**
      * @see MemberV2#isAdminStateUp()
      */
-    public boolean isAdminStateUp();
+    boolean isAdminStateUp();
 
     /**
      * @see MemberV2#getWeight()
      */
-    public Integer getWeight();
+    Integer getWeight();
 }

@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public interface Image extends BasicResource, Buildable<ImageBuilder> {
 
-    public enum Status {
+    enum Status {
         UNRECOGNIZED, ACTIVE, SAVING, QUEUED, KILLED, PENDING_DELETE, DELETED;
 
         @JsonCreator

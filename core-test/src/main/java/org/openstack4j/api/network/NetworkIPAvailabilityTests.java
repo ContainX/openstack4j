@@ -40,7 +40,7 @@ public class NetworkIPAvailabilityTests extends AbstractTest {
     public void listByOptions() throws Exception {
         respondWith(NETWORK_IP_AVAILABILITIES_JSON);
         NetIpAvailListOptions options = NetIpAvailListOptions.create().networkId("networkId");
-        List<? extends NetworkIPAvailability> networkIPAvailabilities = osv3().networking().networkIPAvailability().list();
+        List<? extends NetworkIPAvailability> networkIPAvailabilities = osv3().networking().networkIPAvailability().list(options);
         server.takeRequest();
         assertEquals(2, networkIPAvailabilities.size());
     }

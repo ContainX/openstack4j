@@ -18,26 +18,26 @@ public interface LbPoolV2UpdateBuilder extends Buildable.Builder<LbPoolV2UpdateB
      *                 robin must be supported.
      * @return LbPoolV2UpdateBuilder
      */
-    public LbPoolV2UpdateBuilder lbMethod(LbMethod lbMethod);
+    LbPoolV2UpdateBuilder lbMethod(LbMethod lbMethod);
 
     /**
      * @param name Pool name. Does not have to be unique.
      * @return LbPoolV2UpdateBuilder
      */
-    public LbPoolV2UpdateBuilder name(String name);
+    LbPoolV2UpdateBuilder name(String name);
 
     /**
      * @param description Description for the pool.
      * @return LbPoolV2UpdateBuilder
      */
-    public LbPoolV2UpdateBuilder description(String description);
+    LbPoolV2UpdateBuilder description(String description);
 
     /**
      * @param adminStateUp The administrative state of the lb pool, which is up (true) or
      *                     down (false).
      * @return LbPoolV2UpdateBuilder
      */
-    public LbPoolV2UpdateBuilder adminStateUp(boolean adminStateUp);
+    LbPoolV2UpdateBuilder adminStateUp(boolean adminStateUp);
 
     /**
      * Optional

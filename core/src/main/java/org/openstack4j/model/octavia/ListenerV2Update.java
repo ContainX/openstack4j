@@ -15,33 +15,33 @@ public interface ListenerV2Update extends ModelEntity, Buildable<ListenerV2Updat
      *
      * @see ListenerV2#isAdminStateUp()
      */
-    public boolean isAdminStateUp();
+    boolean isAdminStateUp();
 
     /**
      * Optional
      *
      * @see ListenerV2#getDescription()
      */
-    public String getDescription();
+    String getDescription();
 
     /**
      * Optional
      *
      * @see ListenerV2#getName()
      */
-    public String getName();
+    String getName();
 
     /**
      * Optional
      *
      * @see ListenerV2#getConnectionLimit()
      */
-    public Integer getConnectionLimit();
+    Integer getConnectionLimit();
 
     /**
      * Optional
      *
      * @see ListenerV2#getDefaultTlsContainerRef()
      */
-    public String getDefaultTlsContainerRef();
+    String getDefaultTlsContainerRef();
 }

@@ -20,13 +20,13 @@ public interface SessionPersistence extends ModelEntity, Buildable<SessionPersis
      *
      * @return cookie name
      */
-    public String getCookieName();
+    String getCookieName();
 
     /**
      * required
      *
      * @return type. APP_COOKIE,HTTP_COOKIE,SOURCE_IP
      */
-    public SessionPersistenceType getType();
+    SessionPersistenceType getType();
 
 }

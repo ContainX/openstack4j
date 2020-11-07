@@ -14,7 +14,7 @@ public interface VNCConsole extends ModelEntity {
     /**
      * The OpenStack VNC Console Type
      */
-    public enum Type {
+    enum Type {
         NOVNC("novnc"),
         XVPVNC("xvpvnc"),
         SPICE("spice-html5"),
@@ -22,7 +22,7 @@ public interface VNCConsole extends ModelEntity {
 
         private final String value;
 
-        private Type(String value) {
+        Type(String value) {
             this.value = value;
         }
 

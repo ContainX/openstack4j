@@ -115,7 +115,7 @@ public class KeystoneServiceEndpoint implements ServiceEndpoint {
             return true;
         if (obj == null || getClass() != obj.getClass())
             return false;
-        KeystoneServiceEndpoint that = KeystoneServiceEndpoint.class.cast(obj);
+        KeystoneServiceEndpoint that = (KeystoneServiceEndpoint) obj;
         return Objects.equal(this.id, that.id)
                 && Objects.equal(this.publicURL, that.publicURL) && Objects.equal(this.region, that.region)
                 && Objects.equal(this.internalURL, that.internalURL) && Objects.equal(this.adminURL, that.adminURL)

@@ -75,7 +75,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
     /**
      * The Alarm Type
      */
-    public enum Type {
+    enum Type {
         GNOCCHI_AGGREGATION_BY_METRICS_THRESHOLD, COMPOSITE, GNOCCHI_RESOURCES_THRESHOLD, GNOCCHI_AGGREGATION_BY_RESOURCES_THRESHOLD, THRESHOLD, EVENT, COMBINATION, UNRECOGNIZED;
         //THRESHOLD, COMBINATION, UNRECOGNIZED;
 
@@ -99,7 +99,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         }
     }
 
-    public enum Statistic {
+    enum Statistic {
         MAX, MIN, AVG, SUM, COUNT, UNRECOGNIZED;
 
         @JsonValue
@@ -122,7 +122,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         }
     }
 
-    public enum ComparisonOperator {
+    enum ComparisonOperator {
         LT, LE, EQ, NE, GE, GT, UNRECOGNIZED;
 
         @JsonValue
@@ -145,7 +145,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         }
     }
 
-    public enum Operator {
+    enum Operator {
         AND, OR, UNRECOGNIZED;
 
         @JsonValue
@@ -168,7 +168,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         }
     }
 
-    public enum AggregationMethod {
+    enum AggregationMethod {
         COUNT, MAX, SUM, MIN, MEAN, UNRECOGNIZED;
 
         @JsonValue
@@ -191,7 +191,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         }
     }
 
-    public interface CombinationRule {
+    interface CombinationRule {
         List<String> getAlarmIds();
 
         Operator getOperator();
@@ -201,7 +201,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         void setOperator(Operator operator);
     }
 
-    public interface ThresholdRule {
+    interface ThresholdRule {
         String getMeterName();
 
         int getEvaluationPeriods();
@@ -236,7 +236,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
 
     }
 
-    public interface Query {
+    interface Query {
         String getField();
 
         String getValue();
@@ -251,7 +251,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
     }
 
     //gnocchi_resources_threshold
-    public interface GnocchiResourcesThresholdRule {
+    interface GnocchiResourcesThresholdRule {
         String getMetric();
 
         String getResourceId();
@@ -286,7 +286,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
     }
 
     //gnocchi_aggregation_by_metrics_threshold
-    public interface GnocchiAggregationByMetricsThresholdRule {
+    interface GnocchiAggregationByMetricsThresholdRule {
         List<String> getMetrics();
 
         ComparisonOperator getComparisonOperator();
@@ -313,7 +313,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
     }
 
     //gnocchi_aggregation_by_resources_threshold
-    public interface GnocchiAggregationByResourcesThresholdRule {
+    interface GnocchiAggregationByResourcesThresholdRule {
         String getMetric();
 
         String getResourceType();
@@ -348,11 +348,11 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
     }
 
     //event
-    public interface GnocchiEvent {
+    interface GnocchiEvent {
 
     }
 
-    public interface MetricOfResourceRule {
+    interface MetricOfResourceRule {
         String getMetric();
 
         String getResourceId();
@@ -366,7 +366,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         void setResourceType(String resourceType);
     }
 
-    public interface AggregationMetricByResourcesLookupRule {
+    interface AggregationMetricByResourcesLookupRule {
         String getMetric();
 
         String getResourceType();
@@ -376,13 +376,13 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         void setResourceType(String resourceType);
     }
 
-    public interface AggregationMetricsByIdLookupRule {
+    interface AggregationMetricsByIdLookupRule {
         String getMetric();
 
         void setMetric(String metric);
     }
 
-    public interface AlarmTimeConstraint {
+    interface AlarmTimeConstraint {
         String getDescription();
 
         int getDuration();
@@ -404,7 +404,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         void setTimezone(String timezone);
     }
 
-    public interface AlarmChange {
+    interface AlarmChange {
         String getAlarmId();
 
         String getDetail();
@@ -438,7 +438,7 @@ public interface Alarm extends ModelEntity, BasicResource, Buildable<AlarmBuilde
         void setUserId(String userId);
 
         //The type of change
-        public enum ChangeType {
+        enum ChangeType {
             CREATION, RULE_CHANGE, STATE_TRANSITION, DELETION, UNRECOGNIZED;
 
             @JsonValue

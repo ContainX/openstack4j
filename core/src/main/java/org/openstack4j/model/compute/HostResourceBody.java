@@ -10,6 +10,6 @@ public interface HostResourceBody {
     /**
      * @return the Host Resource contained in the unamed body
      */
-    public HostResource getHostResource();
+    HostResource getHostResource();
 
 }

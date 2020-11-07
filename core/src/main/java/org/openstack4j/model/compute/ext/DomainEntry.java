@@ -11,7 +11,7 @@ import org.openstack4j.model.ModelEntity;
  */
 public interface DomainEntry extends ModelEntity {
 
-    public enum Scope {
+    enum Scope {
         PUBLIC,
         PRIVATE;
 

@@ -15,7 +15,7 @@ public enum Ipv6RaMode {
 
     private final String ipv6RaMode;
 
-    private Ipv6RaMode(String ipv6RaMode) {
+    Ipv6RaMode(String ipv6RaMode) {
         this.ipv6RaMode = ipv6RaMode;
     }
 

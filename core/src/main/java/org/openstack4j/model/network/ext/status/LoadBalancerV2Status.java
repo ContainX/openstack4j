@@ -18,33 +18,33 @@ public interface LoadBalancerV2Status extends ModelEntity {
      *
      * @return id
      */
-    public String getId();
+    String getId();
 
     /**
      * The name of the loadbalancer
      *
      * @return name
      */
-    public String getName();
+    String getName();
 
     /**
      * The operating status of the loadbalancer
      *
      * @return operating status
      */
-    public String getOperatingStatus();
+    String getOperatingStatus();
 
     /**
      * The provisioning status of the loadbalancer
      *
      * @return provisioning status
      */
-    public String getProvisioningStatus();
+    String getProvisioningStatus();
 
     /**
      * The listeners associated with the loadbalancer
      *
      * @return list of listener statuses
      */
-    public List<ListenerV2Status> getListenerStatuses();
+    List<ListenerV2Status> getListenerStatuses();
 }

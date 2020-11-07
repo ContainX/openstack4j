@@ -259,7 +259,7 @@ public class NeutronSubnet implements Subnet {
 
         if (obj instanceof NeutronSubnet) {
             NeutronSubnet that = (NeutronSubnet) obj;
-            if (java.util.Objects.equals(id, that.id) &&
+            return java.util.Objects.equals(id, that.id) &&
                     java.util.Objects.equals(name, that.name) &&
                     java.util.Objects.equals(enableDHCP, that.enableDHCP) &&
                     java.util.Objects.equals(networkId, that.networkId) &&
@@ -273,9 +273,7 @@ public class NeutronSubnet implements Subnet {
                     java.util.Objects.equals(ipv6AddressMode, that.ipv6AddressMode) &&
                     java.util.Objects.equals(ipv6RaMode, that.ipv6RaMode) &&
                     java.util.Objects.equals(createdTime, that.createdTime) &&
-                    java.util.Objects.equals(updatedTime, that.updatedTime)) {
-                return true;
-            }
+                    java.util.Objects.equals(updatedTime, that.updatedTime);
         }
         return false;
     }

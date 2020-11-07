@@ -177,15 +177,13 @@ public class NeutronRouter implements Router {
 
         if (obj instanceof NeutronRouter) {
             NeutronRouter that = (NeutronRouter) obj;
-            if (java.util.Objects.equals(id, that.id) &&
+            return java.util.Objects.equals(id, that.id) &&
                     java.util.Objects.equals(name, that.name) &&
                     java.util.Objects.equals(status, that.status) &&
                     java.util.Objects.equals(tenantId, that.tenantId) &&
                     java.util.Objects.equals(adminStateUp, that.adminStateUp) &&
                     java.util.Objects.equals(externalGatewayInfo, that.externalGatewayInfo) &&
-                    java.util.Objects.equals(routes, that.routes)) {
-                return true;
-            }
+                    java.util.Objects.equals(routes, that.routes);
         }
         return false;
     }

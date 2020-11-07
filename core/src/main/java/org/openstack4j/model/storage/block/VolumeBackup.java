@@ -15,7 +15,7 @@ public interface VolumeBackup extends ModelEntity {
      * The volume backup Status
      */
 
-    public enum Status {
+    enum Status {
         AVAILABLE, CREATING, DELETING, ERROR, ERROR_RESTORING, RESTORING, UNRECOGNIZED;
 
         @JsonValue
