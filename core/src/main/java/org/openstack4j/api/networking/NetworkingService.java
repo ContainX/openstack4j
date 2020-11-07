@@ -81,4 +81,9 @@ public interface NetworkingService extends RestService {
      * @return the (Neutron) Resource Tag Service API
      */
     NeutronResourceTagService resourceTags();
+
+    /**
+     * @return the Network IP Availability Service API
+     */
+    NetworkIPAvailabilityService networkIPAvailability();
 }

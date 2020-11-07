@@ -283,6 +283,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(WorkflowEnvironmentService.class, WorkflowEnvironmentServiceImpl.class);
         bind(CronTriggerService.class, CronTriggerServiceImpl.class);
         bind(NeutronResourceTagService.class, NeutronResourceTagServiceImpl.class);
+        bind(NetworkIPAvailabilityService.class, NetworkIPAvailabilityServiceImpl.class);
     }
 
     /**

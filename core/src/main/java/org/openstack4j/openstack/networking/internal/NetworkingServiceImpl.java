@@ -122,4 +122,12 @@ public class NetworkingServiceImpl implements NetworkingService {
     public NeutronResourceTagService resourceTags() {
         return Apis.get(NeutronResourceTagService.class);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NetworkIPAvailabilityService networkIPAvailability() {
+        return Apis.get(NetworkIPAvailabilityService.class);
+    }
 }
