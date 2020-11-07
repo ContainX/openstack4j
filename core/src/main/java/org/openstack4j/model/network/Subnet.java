@@ -2,6 +2,7 @@ package org.openstack4j.model.network;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.common.TimeEntity;
 import org.openstack4j.model.network.builder.SubnetBuilder;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  *
  * @author Jeremy Unruh
  */
-public interface Subnet extends Resource, Buildable<SubnetBuilder> {
+public interface Subnet extends Resource, TimeEntity, Buildable<SubnetBuilder> {
 
     /**
      * @return true if DHCP is enabled for this subnet, false if not.

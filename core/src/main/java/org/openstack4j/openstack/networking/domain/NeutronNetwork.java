@@ -13,6 +13,7 @@ import org.openstack4j.model.network.builder.NetworkBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,7 +50,9 @@ public class NeutronNetwork implements Network {
     @JsonProperty("availability_zones")
     private List<String> availabilityZones;
     @JsonProperty("created_at")
-    private String createdTime;
+    private Date createdTime;
+    @JsonProperty("updated_at")
+    private Date updatedTime;
 
     /**
      * The maximum transmission unit (MTU) value to address fragmentation. Minimum value is 68 for IPv4, and 1280 for IPv6.
@@ -222,6 +225,21 @@ public class NeutronNetwork implements Network {
         return availabilityZones;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
 
     /**
      * {@inheritDoc}
@@ -233,6 +251,7 @@ public class NeutronNetwork implements Network {
                 .add("adminStateUp", adminStateUp).add("tenantId", tenantId).add("provider:network_type", networkType).add("router:external", routerExternal)
                 .add("id", id).add("shared", shared).add("provider:segmentation_id", providerSegID)
                 .add("mtu", mtu).add("availabilityZoneHints", availabilityZoneHints).add("availabilityZones", availabilityZones)
+                .add("created_at", createdTime).add("updated_at", updatedTime)
                 .toString();
     }
 
@@ -243,7 +262,8 @@ public class NeutronNetwork implements Network {
     public int hashCode() {
         return java.util.Objects.hash(name, status, subnets,
                 providerPhyNet, adminStateUp, tenantId, networkType,
-                routerExternal, id, shared, providerSegID, availabilityZoneHints, availabilityZones);
+                routerExternal, id, shared, providerSegID, availabilityZoneHints, availabilityZones,
+                createdTime, updatedTime);
     }
 
     /**
@@ -269,7 +289,9 @@ public class NeutronNetwork implements Network {
                     java.util.Objects.equals(shared, that.shared) &&
                     java.util.Objects.equals(providerSegID, that.providerSegID) &&
                     java.util.Objects.equals(availabilityZoneHints, that.availabilityZoneHints) &&
-                    java.util.Objects.equals(availabilityZones, that.availabilityZones)) {
+                    java.util.Objects.equals(availabilityZones, that.availabilityZones) &&
+                    java.util.Objects.equals(createdTime, that.createdTime) &&
+                    java.util.Objects.equals(updatedTime, that.updatedTime)) {
                 return true;
             }
         }

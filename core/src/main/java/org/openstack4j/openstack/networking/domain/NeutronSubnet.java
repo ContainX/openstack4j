@@ -10,6 +10,7 @@ import org.openstack4j.model.network.*;
 import org.openstack4j.model.network.builder.SubnetBuilder;
 import org.openstack4j.openstack.common.ListResult;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,13 +47,17 @@ public class NeutronSubnet implements Subnet {
     private Ipv6AddressMode ipv6AddressMode;
     @JsonProperty("ipv6_ra_mode")
     private Ipv6RaMode ipv6RaMode;
+    @JsonProperty("created_at")
+    private Date createdTime;
+    @JsonProperty("updated_at")
+    private Date updatedTime;
 
     public NeutronSubnet() {
     }
 
     public NeutronSubnet(String id, String name, boolean enableDHCP, String networkId, String tenantId, List<String> dnsNames,
                          List<NeutronPool> pools, List<NeutronHostRoute> hostRoutes, IPVersionType ipVersion,
-                         String gateway, String cidr, Ipv6AddressMode ipv6AddressMode, Ipv6RaMode ipv6RaMode) {
+                         String gateway, String cidr, Ipv6AddressMode ipv6AddressMode, Ipv6RaMode ipv6RaMode, Date createdTime, Date updatedTime) {
         this.id = id;
         this.name = name;
         this.enableDHCP = enableDHCP;
@@ -66,6 +71,8 @@ public class NeutronSubnet implements Subnet {
         this.cidr = cidr;
         this.ipv6AddressMode = ipv6AddressMode;
         this.ipv6RaMode = ipv6RaMode;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
     }
 
     public static SubnetBuilder builder() {
@@ -207,6 +214,16 @@ public class NeutronSubnet implements Subnet {
         return ipv6RaMode;
     }
 
+    @Override
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    @Override
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -217,6 +234,7 @@ public class NeutronSubnet implements Subnet {
                 .add("tenant_id", tenantId).add("dns_nameservers", dnsNames).add("allocation_pools", pools)
                 .add("host_routes", hostRoutes).add("ip_version", ipVersion).add("gateway_ip", gateway).add("cidr", cidr)
                 .add("ipv6AddressMode", ipv6AddressMode).add("ipv6RaMode", ipv6RaMode)
+                .add("created_at", createdTime).add("updated_at", updatedTime)
                 .toString();
     }
 
@@ -227,7 +245,7 @@ public class NeutronSubnet implements Subnet {
     public int hashCode() {
         return java.util.Objects.hash(id, name, enableDHCP, networkId,
                 tenantId, dnsNames, pools, hostRoutes, ipVersion, gateway,
-                cidr, ipv6AddressMode, ipv6RaMode);
+                cidr, ipv6AddressMode, ipv6RaMode, createdTime, updatedTime);
     }
 
     /**
@@ -253,7 +271,9 @@ public class NeutronSubnet implements Subnet {
                     java.util.Objects.equals(gateway, that.gateway) &&
                     java.util.Objects.equals(cidr, that.cidr) &&
                     java.util.Objects.equals(ipv6AddressMode, that.ipv6AddressMode) &&
-                    java.util.Objects.equals(ipv6RaMode, that.ipv6RaMode)) {
+                    java.util.Objects.equals(ipv6RaMode, that.ipv6RaMode) &&
+                    java.util.Objects.equals(createdTime, that.createdTime) &&
+                    java.util.Objects.equals(updatedTime, that.updatedTime)) {
                 return true;
             }
         }
@@ -270,8 +290,10 @@ public class NeutronSubnet implements Subnet {
 
         public NeutronSubnetNoGateway(String id, String name, boolean enableDHCP, String networkId, String tenantId,
                                       List<String> dnsNames, List<NeutronPool> pools, List<NeutronHostRoute> hostRoutes,
-                                      IPVersionType ipVersion, String cidr, Ipv6AddressMode ipv6AddressMode, Ipv6RaMode ipv6RaMode) {
-            super(id, name, enableDHCP, networkId, tenantId, dnsNames, pools, hostRoutes, ipVersion, null, cidr, ipv6AddressMode, ipv6RaMode);
+                                      IPVersionType ipVersion, String cidr, Ipv6AddressMode ipv6AddressMode, Ipv6RaMode ipv6RaMode,
+                                      Date createdTime, Date updatedTime) {
+            super(id, name, enableDHCP, networkId, tenantId, dnsNames, pools, hostRoutes, ipVersion, null,
+                    cidr, ipv6AddressMode, ipv6RaMode, createdTime, updatedTime);
             this.gateway = null;
         }
     }
@@ -368,7 +390,8 @@ public class NeutronSubnet implements Subnet {
         public Subnet build() {
             if (isNoGateway) {
                 return new NeutronSubnetNoGateway(m.id, m.name, m.enableDHCP, m.networkId,
-                        m.tenantId, m.dnsNames, m.pools, m.hostRoutes, m.ipVersion, m.cidr, m.ipv6AddressMode, m.ipv6RaMode);
+                        m.tenantId, m.dnsNames, m.pools, m.hostRoutes, m.ipVersion, m.cidr,
+                        m.ipv6AddressMode, m.ipv6RaMode, m.createdTime, m.updatedTime);
             }
             return m;
         }

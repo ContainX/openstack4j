@@ -19,6 +19,8 @@
     ],
     "shared": false,
     "port_security_enabled": true,
-    "id": "4e8e5957-649f-477b-9e5b-f1f75b21c03c"
+    "id": "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
+    "created_at": "2020-10-30T22:16:01Z",
+    "updated_at": "2020-10-30T22:16:01Z"
   }
 }

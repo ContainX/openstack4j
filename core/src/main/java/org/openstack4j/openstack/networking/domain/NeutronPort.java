@@ -78,6 +78,12 @@ public class NeutronPort implements Port {
     @JsonProperty("binding:profile")
     private Map<String, Object> profile;
 
+    @JsonProperty("created_at")
+    private Date createdTime;
+
+    @JsonProperty("updated_at")
+    private Date updatedTime;
+
     public static PortBuilder builder() {
         return new PortConcreteBuilder();
     }
@@ -223,6 +229,16 @@ public class NeutronPort implements Port {
         return profile;
     }
 
+    @Override
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    @Override
+    public Date getUpdatedTime() {
+        return updatedTime;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -288,6 +304,7 @@ public class NeutronPort implements Port {
                 .add("allowed_address_pairs", allowedAddressPairs).add("port_security_enabled ", portSecurityEnabled)
                 .add("binding:host_id", hostId).add("binding:vif_type", vifType).add("binding:vif_details", vifDetails)
                 .add("binding:vnic_type", vNicType).add("binding:profile", profile)
+                .add("created_at", createdTime).add("updated_at", updatedTime)
                 .toString();
     }
 
@@ -299,7 +316,7 @@ public class NeutronPort implements Port {
         return java.util.Objects.hash(id, name, adminStateUp, deviceId,
                 deviceOwner, fixedIps, macAddress, networkId, tenantId,
                 securityGroups, allowedAddressPairs, portSecurityEnabled, hostId,
-                vifType, vifDetails, vNicType, profile);
+                vifType, vifDetails, vNicType, profile, createdTime, updatedTime);
     }
 
     /**
@@ -329,7 +346,9 @@ public class NeutronPort implements Port {
                     java.util.Objects.equals(vifType, that.vifType) &&
                     java.util.Objects.equals(vifDetails, that.vifDetails) &&
                     java.util.Objects.equals(vNicType, that.vNicType) &&
-                    java.util.Objects.equals(profile, that.profile)) {
+                    java.util.Objects.equals(profile, that.profile) &&
+            java.util.Objects.equals(createdTime, that.createdTime) &&
+                    java.util.Objects.equals(updatedTime, that.updatedTime)) {
                 return true;
             }
         }

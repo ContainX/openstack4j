@@ -2,6 +2,7 @@ package org.openstack4j.model.network;
 
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.common.Resource;
+import org.openstack4j.model.common.TimeEntity;
 import org.openstack4j.model.network.builder.PortBuilder;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Set;
  *
  * @author Jeremy Unruh
  */
-public interface Port extends Resource, Buildable<PortBuilder> {
+public interface Port extends Resource, TimeEntity, Buildable<PortBuilder> {
 
     /**
      * @return the current state of the port

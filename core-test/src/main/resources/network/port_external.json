@@ -13,6 +13,8 @@
     },
     "binding:vnic_type": "baremetal",
     "device_id": "d90a13da-be41-461f-9f99-1dbcf438fdf2",
-    "device_owner": "baremetal:none"
+    "device_owner": "baremetal:none",
+    "created_at": "2020-10-30T22:16:01Z",
+    "updated_at": "2020-10-30T22:16:01Z"
   }
 }

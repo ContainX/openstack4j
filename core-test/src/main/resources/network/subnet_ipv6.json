@@ -18,13 +18,13 @@
     "gateway_ip": "2620:0:2d0:200::1",
     "cidr": "2620:0:2d0:200::/64",
     "id": "3b80198d-4f7b-4f77-9ef5-774d54e17126",
-    "created_at": "2016-10-10T14:35:47Z",
     "description": "",
     "ipv6_address_mode": "dhcpv6-stateful",
     "ipv6_ra_mode": "dhcpv6-stateful",
     "revision_number": 2,
     "service_types": [],
     "subnetpool_id": null,
-    "updated_at": "2016-10-10T14:35:47Z"
+    "created_at": "2020-10-30T22:16:01Z",
+    "updated_at": "2020-10-30T22:16:01Z"
   }
 }
