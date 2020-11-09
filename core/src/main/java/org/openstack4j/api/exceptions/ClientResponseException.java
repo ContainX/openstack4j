@@ -11,7 +11,7 @@ public class ClientResponseException extends ResponseException {
 
     private static final long serialVersionUID = 1L;
 
-    private StatusCode code;
+    private final StatusCode code;
 
     public ClientResponseException(String message, int status, Throwable cause) {
         super(message, status, cause);

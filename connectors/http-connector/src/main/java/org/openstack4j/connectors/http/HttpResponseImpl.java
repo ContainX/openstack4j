@@ -104,9 +104,10 @@ public class HttpResponseImpl implements HttpResponse {
      */
     public String header(String name) {
         if (name == null) return null;
-        for (String key : headers.keySet()) {
+        for (Map.Entry<String, List<String>> kv : headers.entrySet()) {
+            String key = kv.getKey();
             if (key != null && key.equalsIgnoreCase(name)) {
-                return headers.get(key).get(0);
+                return kv.getValue().get(0);
             }
         }
         return null;
@@ -116,7 +117,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the a Map of Header Name to Header Value
      */
     public Map<String, String> headers() {
-        Map<String, String> retHeaders = new HashMap<String, String>();
+        Map<String, String> retHeaders = new HashMap<>();
 
         Set<String> keys = headers.keySet();
 
@@ -139,7 +140,7 @@ public class HttpResponseImpl implements HttpResponse {
         }
 
         try {
-            return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(data);
+            return ObjectMapperSingleton.getContext(typeToReadAs).readerFor(typeToReadAs).readValue(data);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             throw new ClientResponseException(e.getMessage(), 0, e);

@@ -11,7 +11,7 @@ public class ResponseException extends OS4JException {
 
     private static final long serialVersionUID = 7294957362769575271L;
 
-    protected int status;
+    protected final int status;
 
     public ResponseException(String message, int status) {
         super(message);

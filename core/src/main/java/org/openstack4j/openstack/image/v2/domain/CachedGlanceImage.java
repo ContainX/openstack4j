@@ -2,7 +2,7 @@ package org.openstack4j.openstack.image.v2.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Objects;
+import com.google.common.base.MoreObjects;
 import org.openstack4j.model.image.v2.CachedImage;
 import org.openstack4j.openstack.common.CustomEpochToDateDeserializer;
 import org.openstack4j.openstack.common.ListResult;
@@ -62,7 +62,7 @@ public class CachedGlanceImage implements CachedImage {
      */
     @Override
     public String toString() {
-        return Objects.toStringHelper(this).omitNullValues()
+        return MoreObjects.toStringHelper(this).omitNullValues()
                 .add("id", imageId).add("size", size).add("hits", hits).add("lastAccessed", lastAccessed)
                 .add("lastModified", lastModified).addValue("\n")
                 .toString();

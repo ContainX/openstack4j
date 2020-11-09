@@ -103,7 +103,7 @@ public class HttpResponseImpl implements HttpResponse {
      * @return the a Map of Header Name to Header Value
      */
     public Map<String, String> headers() {
-        Map<String, String> retHeaders = new HashMap<String, String>();
+        Map<String, String> retHeaders = new HashMap<>();
         Headers headers = response.headers();
 
         for (String name : headers.names()) {
@@ -115,7 +115,7 @@ public class HttpResponseImpl implements HttpResponse {
     @Override
     public <T> T readEntity(Class<T> typeToReadAs) {
         try {
-            return ObjectMapperSingleton.getContext(typeToReadAs).reader(typeToReadAs).readValue(response.body().string());
+            return ObjectMapperSingleton.getContext(typeToReadAs).readerFor(typeToReadAs).readValue(response.body().string());
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             throw new ClientResponseException(e.getMessage(), 0, e);

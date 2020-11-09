@@ -102,7 +102,7 @@ public class BaseOpenStackService {
         return builder(returnType, Joiner.on("").join(path), method);
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({"rawtypes","unchecked"})
     private <R> Invocation<R> builder(Class<R> returnType, String path, HttpMethod method) {
         OSClientSession ses = OSClientSession.getCurrent();
         if (ses == null) {
@@ -113,9 +113,9 @@ public class BaseOpenStackService {
                 .method(method).path(path);
         Map headers = ses.getHeaders();
         if (headers != null && headers.size() > 0) {
-            return new Invocation<R>(req, serviceType, endpointFunc).headers(headers);
+            return new Invocation<>(req, serviceType, endpointFunc).headers(headers);
         } else {
-            return new Invocation<R>(req, serviceType, endpointFunc);
+            return new Invocation<>(req, serviceType, endpointFunc);
         }
     }
 
