@@ -18,6 +18,7 @@ OpenStack4j is a fluent OpenStack client that allows provisioning and control of
 ## Bug Reports
 
 * GitHub Issues: [Click Here](https://github.com/ContainX/openstack4j/issues)
+* GitHub Issues: [Click Here](https://github.com/bboyHan/openstack4j/issues)
 
 ## Requirements
 
@@ -96,7 +97,8 @@ If you would like to contribute please see our contributing [guidelines](https:/
 - @peter-nordquist
 - @RibeiroAna     
 - @symcssn        
-- @olivergondza   
+- @olivergondza
+- @bboyHan 
 
 #### Throughput
 
