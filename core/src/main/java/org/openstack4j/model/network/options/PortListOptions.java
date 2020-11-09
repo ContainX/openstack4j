@@ -10,7 +10,7 @@ import com.google.common.collect.Maps;
  * @author Jeremy Unruh
  *
  */
-public class PortListOptions {
+public class PortListOptions extends BaseListOptions<PortListOptions> {
     
     private Map<String,String> queryParams = Maps.newHashMap();
 
@@ -102,14 +102,31 @@ public class PortListOptions {
     public PortListOptions macAddress(String macAddress) {
         return add("mac_address", macAddress);
     }
-    
-    private PortListOptions add(String param, String value) {
-        if (value != null)
-            this.queryParams.put(param, value);
-        return this;
+
+    /**
+     * port status - ACTIVE, DOWN, BUILD and ERROR
+     *
+     * @param status - ACTIVE, DOWN, BUILD and ERROR
+     * @return options
+     */
+    public PortListOptions status(String status) {
+        return add("status", status);
     }
-    
-    public Map<String, String> getOptions() {
-        return queryParams;
+
+    public PortListOptions fixedIpWithSub(String subnetId) {
+        return add("fixed_ips", "subnet_id=" + subnetId);
+    }
+
+    public PortListOptions fixedIpWithIp(String ipAddr) {
+        return add("fixed_ips", "ip_address=" + ipAddr);
+    }
+
+    public PortListOptions fixedIpWithIpPre(String ipAddr) {
+        return add("fixed_ips", "ip_address_substr=" + ipAddr);
+    }
+
+    public PortListOptions add(String key, String value) {
+        putParams(key, value);
+        return this;
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.Subnet;
+import org.openstack4j.model.network.options.SubnetListOptions;
 
 /**
  * OpenStack (Neutron) Subnet based Operations
@@ -19,6 +20,15 @@ public interface SubnetService extends RestService {
      * @return the list of subnets or empty
      */
     List<? extends Subnet> list();
+
+    /**
+     * List the Subnet(s) which are authorized by the current Tenant
+     *
+     * @author bboyHan (bboyHan@yeah.net)
+     * @param options filter parameters
+     * @return the list of subnets or empty
+     */
+    List<? extends Subnet> list(SubnetListOptions options);
 
     /**
      * Gets a Subnet by ID

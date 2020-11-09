@@ -7,6 +7,7 @@ import java.util.List;
 import org.openstack4j.api.networking.SubnetService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.Subnet;
+import org.openstack4j.model.network.options.SubnetListOptions;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet;
 import org.openstack4j.openstack.networking.domain.NeutronSubnet.Subnets;
 import org.openstack4j.openstack.networking.domain.NeutronSubnetUpdate;
@@ -24,6 +25,16 @@ public class SubnetServiceImpl extends BaseNetworkingServices implements SubnetS
     @Override
     public List<? extends Subnet> list() {
         return get(Subnets.class, uri("/subnets")).execute().getList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<? extends Subnet> list(SubnetListOptions options) {
+        if (options == null)
+            return list();
+        return get(Subnets.class, uri("/subnets")).paramLists(options.getOptions()).execute().getList();
     }
 
     /**
