@@ -130,4 +130,12 @@ public class NetworkingServiceImpl implements NetworkingService {
     public NetworkIPAvailabilityService networkIPAvailability() {
         return Apis.get(NetworkIPAvailabilityService.class);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NetQosPolicyService netQosPolicy() {
+        return Apis.get(NetQosPolicyService.class);
+    }
 }

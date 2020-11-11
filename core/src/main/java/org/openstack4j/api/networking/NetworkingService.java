@@ -86,4 +86,9 @@ public interface NetworkingService extends RestService {
      * @return the Network IP Availability Service API
      */
     NetworkIPAvailabilityService networkIPAvailability();
+
+    /**
+     * @return the Network Qos Policy Service API
+     */
+    NetQosPolicyService netQosPolicy();
 }

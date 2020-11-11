@@ -284,6 +284,7 @@ public class DefaultAPIProvider implements APIProvider {
         bind(CronTriggerService.class, CronTriggerServiceImpl.class);
         bind(NeutronResourceTagService.class, NeutronResourceTagServiceImpl.class);
         bind(NetworkIPAvailabilityService.class, NetworkIPAvailabilityServiceImpl.class);
+        bind(NetQosPolicyService.class, NetQosPolicyServiceImpl.class);
     }
 
     /**
