@@ -61,7 +61,7 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         @JsonProperty("QoS_support")
         private Boolean qosSupport;
         @JsonProperty("max_over_subscription_ratio")
-        private Long maxoversubscription_ratio;
+        private Float maxoversubscription_ratio;
         @JsonProperty("vendor_name")
         private String vendorname;
         private String pools;
@@ -97,7 +97,9 @@ public class CinderBackendStoragePool implements VolumeBackendPool {
         @Override
         public Boolean getThickprovisioningsupport() { return thickprovisioningsupport; }
         @Override
-        public Long getMaxoversubscription_ratio() { return maxoversubscription_ratio; }
+        public Float getMaxoversubscription_ratio() { 
+            return maxoversubscription_ratio; 
+        }
         @Override
         public String getvendorname() { return vendorname; }
         @Override
