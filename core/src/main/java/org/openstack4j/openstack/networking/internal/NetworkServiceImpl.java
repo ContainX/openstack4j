@@ -39,7 +39,6 @@ public class NetworkServiceImpl extends BaseNetworkingServices implements Networ
 	public List<? extends Network> list(Map<String, String> filteringParams){
 		  Invocation<Networks> invocation = buildInvocation(filteringParams);
 	        return invocation.execute().getList();
-		
 	}
 
 	/**
