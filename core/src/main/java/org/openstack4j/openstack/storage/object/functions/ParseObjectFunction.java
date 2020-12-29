@@ -38,7 +38,7 @@ public class ParseObjectFunction implements Function<HttpResponse, SwiftObject> 
                   .name(location.getObjectName())
                   .containerName(location.getContainerName())
                   .mimeType(resp.header(CONTENT_TYPE))
-                  .sizeBytes(asLong(resp.header(CONTENT_LENGTH)))
+                  .sizeBytes(asLong(resp.header(CONTENT_LENGTH), 0L))
                   .eTag(resp.header(ETAG))
                   .metadata(MapWithoutMetaPrefixFunction.INSTANCE.apply(resp.headers()))
                   .lastModified(Parser.toRFC822DateParse(resp.header(LAST_MODIFIED)))
