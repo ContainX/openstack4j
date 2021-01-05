@@ -1,0 +1,63 @@
+{
+  "drivers": [
+    {
+      "name": "openvswitch",
+      "supported_parameters": [
+        {
+          "parameter_name": "max_kbps",
+          "parameter_type": "range",
+          "parameter_values": {
+            "end": 2147483647,
+            "start": 0
+          }
+        },
+        {
+          "parameter_name": "direction",
+          "parameter_type": "choices",
+          "parameter_values": [
+            "ingress",
+            "egress"
+          ]
+        },
+        {
+          "parameter_name": "max_burst_kbps",
+          "parameter_type": "range",
+          "parameter_values": {
+            "end": 2147483647,
+            "start": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "linuxbridge",
+      "supported_parameters": [
+        {
+          "parameter_name": "max_kbps",
+          "parameter_type": "range",
+          "parameter_values": {
+            "end": 2147483647,
+            "start": 0
+          }
+        },
+        {
+          "parameter_name": "direction",
+          "parameter_type": "choices",
+          "parameter_values": [
+            "ingress",
+            "egress"
+          ]
+        },
+        {
+          "parameter_name": "max_burst_kbps",
+          "parameter_type": "range",
+          "parameter_values": {
+            "end": 2147483647,
+            "start": 0
+          }
+        }
+      ]
+    }
+  ],
+  "type": "bandwidth_limit"
+}

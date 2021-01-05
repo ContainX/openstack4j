@@ -1,0 +1,7 @@
+{
+  "minimum_bandwidth_rule": {
+    "id": "1eddf7af-0b4c-42c5-8ae1-390b32f1de08",
+    "min_kbps": "10000",
+    "direction": "egress"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "bandwidth_limit_rules": [
+    {
+      "id": "5f126d84-551a-4dcf-bb01-0e9c0df0c793",
+      "max_kbps": 10000,
+      "max_burst_kbps": 0,
+      "direction": "egress"
+    }
+  ]
+}

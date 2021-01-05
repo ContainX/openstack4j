@@ -1,0 +1,29 @@
+{
+  "policies": [
+    {
+      "project_id": "8d4c70a21fed4aeba121a1a429ba0d04",
+      "tenant_id": "8d4c70a21fed4aeba121a1a429ba0d04",
+      "id": "46ebaec0-0570-43ac-82f6-60d2b03168c4",
+      "is_default": false,
+      "name": "10Mbit",
+      "description": "This policy limits the ports to 10Mbit max.",
+      "revision_number": 3,
+      "shared": false,
+      "rules": [
+        {
+          "max_kbps": 10000,
+          "type": "bandwidth_limit",
+          "id": "b1866696-032a-4228-857f-846075f63487",
+          "max_burst_kbps": 0,
+          "qos_policy_id": "46ebaec0-0570-43ac-82f6-60d2b03168c4"
+        },
+        {
+          "dscp_mark": 20,
+          "type": "dscp_marking",
+          "id": "d9c021d5-5433-4d7c-8bfa-69cca486aac8",
+          "qos_policy_id": "46ebaec0-0570-43ac-82f6-60d2b03168c4"
+        }
+      ]
+    }
+  ]
+}
