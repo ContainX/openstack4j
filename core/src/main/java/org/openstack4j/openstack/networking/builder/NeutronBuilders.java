@@ -145,7 +145,6 @@ public class NeutronBuilders implements NetworkBuilders {
         return NeutronMemberV2.builder();
     }
 
-
     @Override
     public MemberV2UpdateBuilder memberV2Update(){
         return NeutronMemberV2Update.builder();
@@ -189,5 +188,10 @@ public class NeutronBuilders implements NetworkBuilders {
     @Override
     public ListenerV2UpdateBuilder listenerV2Update(){
         return NeutronListenerV2Update.builder();
+    }
+
+    @Override
+    public NetworkIPAvailabilityBuilder networkIPAvailability(){
+        return NeutronNetworkIPAvailability.builder();
     }
 }
