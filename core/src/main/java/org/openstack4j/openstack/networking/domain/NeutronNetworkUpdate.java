@@ -25,6 +25,9 @@ public class NeutronNetworkUpdate implements NetworkUpdate {
     @JsonProperty("admin_state_up")
     private Boolean adminStateUp;
 
+    @JsonProperty("mtu")
+    private Integer mtu;
+
     public static NetworkUpdateBuilder builder() {
         return new NetworkUpdateConcreteBuilder();
     }
@@ -49,6 +52,12 @@ public class NeutronNetworkUpdate implements NetworkUpdate {
     @Override
     public boolean isShared() {
         return shared == null ? false : shared;
+    }
+
+    @JsonIgnore
+    @Override
+    public Integer getMTU() {
+        return mtu;
     }
 
     @Override
@@ -99,5 +108,10 @@ public class NeutronNetworkUpdate implements NetworkUpdate {
             return this;
         }
 
+        @Override
+        public NetworkUpdateBuilder mtu(Integer mtu) {
+            model.mtu = mtu;
+            return this;
+        }
     }
 }
