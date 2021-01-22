@@ -260,6 +260,11 @@ public class NovaServerCreate implements ServerCreate {
             return this;
         }
 
+        public ServerCreateConcreteBuilder addNetwork(String id, String fixedIP) {
+            m.addNetwork(id, fixedIP);
+            return this;
+        }
+
         @Override
         public ServerCreateBuilder addNetworkPort(String portId) {
             m.addNetworkPort(portId);
