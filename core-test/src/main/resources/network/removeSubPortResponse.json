@@ -1,0 +1,15 @@
+{
+	"status": "DOWN",
+	"sub_ports": [],
+	"name": "changedName",
+	"admin_state_up": true,
+	"tenant_id": "1b9ef7f7ec0c41ac83e3ea0df5257f60",
+	"created_at": "2019-03-28T10:16:40Z",
+	"tags": [],
+	"updated_at": "2019-03-28T10:42:03Z",
+	"revision_number": 3,
+	"project_id": "1b9ef7f7ec0c41ac83e3ea0df5257f60",
+	"port_id": "e88917ca-039d-4758-ad0c-5e0e03dc75ae",
+	"id": "f98559e9-8e92-4100-96ac-a805e0340abd",
+	"description": ""
+}

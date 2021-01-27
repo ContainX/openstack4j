@@ -1,0 +1,29 @@
+{
+	"port": {
+		"allowed_address_pairs": [],
+		"extra_dhcp_opts": [],
+		"updated_at": "2019-03-28T11:39:07Z",
+		"device_owner": "",
+		"revision_number": 2,
+		"binding:profile": {},
+		"port_security_enabled": true,
+		"fixed_ips": [],
+		"id": "0908f280-d0e8-45c6-acec-85714181ddb1",
+		"security_groups": ["942bf27c-1282-4ab8-8fdc-01518bf54e11"],
+		"binding:vif_details": {},
+		"binding:vif_type": "unbound",
+		"mac_address": "fa:16:3e:05:ef:74",
+		"project_id": "1b9ef7f7ec0c41ac83e3ea0df5257f60",
+		"status": "DOWN",
+		"binding:host_id": "",
+		"description": "",
+		"tags": [],
+		"device_id": "",
+		"name": "port1",
+		"admin_state_up": true,
+		"network_id": "3466e612-73a3-45df-96b6-4c084dfe1fc7",
+		"tenant_id": "1b9ef7f7ec0c41ac83e3ea0df5257f60",
+		"created_at": "2019-03-28T11:39:07Z",
+		"binding:vnic_type": "normal"
+	}
+}

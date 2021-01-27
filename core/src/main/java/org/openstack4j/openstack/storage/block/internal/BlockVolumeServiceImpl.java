@@ -54,6 +54,14 @@ public class BlockVolumeServiceImpl extends BaseBlockStorageServices implements 
      * {@inheritDoc}
      */
     @Override
+    public List<? extends Volume> listAll() {
+        return get(Volumes.class, uri("/volumes/detail")).param("all_tenants", 1).execute().getList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Volume get(String volumeId) {
         checkNotNull(volumeId);
         return get(CinderVolume.class, uri("/volumes/%s", volumeId)).execute();

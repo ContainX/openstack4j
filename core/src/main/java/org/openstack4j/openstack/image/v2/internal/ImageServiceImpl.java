@@ -57,13 +57,13 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
     public List<? extends Image> list(Map<String, String> filteringParams) {
         return get(GlanceImage.Images.class, uri("/images")).params(filteringParams).execute().getList();
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public List<? extends CachedImage> listCachedImages() {
-    	try {
+        try {
             return get(CachedImages.class, uri("/cached_images"))
                     .execute(ExecutionOptions.<CachedImages>create(PropagateOnStatus.on(404))).getList();
         }

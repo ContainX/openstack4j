@@ -36,3 +36,4 @@ after_success:
 # infrastructure. This should prevent the buffer overflow from
 # https://github.com/travis-ci/travis-ci/issues/5227
 sudo: false
+dist: trusty

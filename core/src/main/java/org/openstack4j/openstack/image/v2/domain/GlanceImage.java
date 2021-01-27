@@ -441,14 +441,14 @@ public class GlanceImage implements Image {
         }
     }
 
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	public static class Location {
-		@JsonProperty("url")
-		private String url;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public static class Location {
+        @JsonProperty("url")
+        private String url;
 
-		@JsonProperty("metadata")
-		private Metadata metadat;
-	}
+        @JsonProperty("metadata")
+        private Metadata metadat;
+    }
 
     public static class ImageConcreteBuilder extends BasicResourceBuilder<Image, ImageConcreteBuilder> implements ImageBuilder {
         private GlanceImage m;
