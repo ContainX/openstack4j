@@ -234,6 +234,15 @@ public class Builders {
     }
 
     /**
+     * The builder to create a Trunk
+     * 
+     * @return the trunk builder
+     */
+    public static TrunkBuilder trunk() {
+        return NeutronTrunk.builder();
+    }
+
+    /**
      * The builder to create a Router
      *
      * @return the router builder
