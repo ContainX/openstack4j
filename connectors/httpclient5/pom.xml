@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>org.pacesys.openstack4j.connectors</groupId>
+		<artifactId>openstack4j-connectors</artifactId>
+		<version>2.11-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>openstack4j-httpclient5</artifactId>
+	<name>OpenStack4j HttpComponents-HttpClient5 Connector</name>
+	<url>http://github.com/gondor/openstack4j/</url>
+	<packaging>jar</packaging>
+
+	<properties>
+		<httpcore5.version>5.0-alpha1</httpcore5.version>
+		<httpclient5.version>5.0-alpha1</httpclient5.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.httpcomponents.core5</groupId>
+			<artifactId>httpcore5</artifactId>
+			<version>${httpcore5.version}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5</artifactId>
+			<version>${httpclient5.version}</version>
+			<type>jar</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-Name>${project.name}</Bundle-Name>
+						<Export-Package>
+							org.openstack4j.connectors.httpclient
+						</Export-Package>
+						<Import-Package>
+							!org.openstack4j.connectors.httpclient,
+							*
+						</Import-Package>
+						<!--
+						Required for SPI in OSGi:
+						http://aries.apache.org/modules/spi-fly.html#specconf
+
+						This bundle defines an implementation for following services in META-INF-services:
+						org.openstack4j.core.transport.HttpExecutorService
+						 -->
+						<Require-Capability>
+							osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)"
+						</Require-Capability>
+						<Provide-Capability>
+							osgi.serviceloader; osgi.serviceloader=org.openstack4j.core.transport.HttpExecutorService
+						</Provide-Capability>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>apache.snapshots</id>
+			<url>https://repository.apache.org/content/groups/staging/</url>
+			<!--<releases>true</releases>-->
+			<!--<snapshots>true</snapshots>-->
+		</repository>
+	</repositories>
+</project>
