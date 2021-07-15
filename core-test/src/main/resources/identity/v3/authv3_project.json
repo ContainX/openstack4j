@@ -569,6 +569,34 @@
         "endpoints": [
           {
             "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8087",
+            "region": "RegionOne",
+            "interface": "public",
+            "id": "123458912d3f49a09df51035681d59a8"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8087",
+            "region": "RegionOne",
+            "interface": "admin",
+            "id": "123453dd1ae80457abc3728fa1e6f123"
+          },
+          {
+            "region_id": "RegionOne",
+            "url": "http://127.0.0.1:8087",
+            "region": "RegionOne",
+            "interface": "internal",
+            "id": "123451a45a7040849c03bc1358854321"
+          }
+        ],
+        "type": "aodh",
+        "id": "1236500210a24c38a1702e6825e12345",
+        "name": "alarming"
+      },
+      {
+        "endpoints": [
+          {
+            "region_id": "RegionOne",
             "url": "http://127.0.0.1:8082",
             "region": "RegionOne",
             "interface": "public",
