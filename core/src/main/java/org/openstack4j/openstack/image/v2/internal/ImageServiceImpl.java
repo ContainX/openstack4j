@@ -177,6 +177,7 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService 
         HttpResponse response = get(Void.class, uri("/images/%s/file", imageId)).header(HEADER_ACCEPT, CONTENT_TYPE_OCTECT_STREAM).executeWithResponse();
         if (response.getStatus() < 400) {
             InputStream inputStream = response.getInputStream();
+            //java.lang.OutOfMemoryError: Java heap space
             OutputStream outputStream;
             try {
                 outputStream = new FileOutputStream(filename);
