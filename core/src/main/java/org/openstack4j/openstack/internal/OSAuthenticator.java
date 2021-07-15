@@ -196,7 +196,7 @@ public class OSAuthenticator {
         KeystoneToken token = response.getEntity(KeystoneToken.class);
         token.setId(response.header(ClientConstants.HEADER_X_SUBJECT_TOKEN));
 
-        if (auth.getType().equals(Type.CREDENTIALS)) {
+        if (auth.getType().equals(Type.CREDENTIALS) || auth.getType().equals(Type.APPLICATION_CREDENTIAL)) {
             token = token.applyContext(info.endpoint, auth);
         } else {
             if (token.getProject() != null) {

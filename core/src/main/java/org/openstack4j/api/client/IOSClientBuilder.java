@@ -206,6 +206,16 @@ public interface IOSClientBuilder<R, T extends IOSClientBuilder<R, T>> {
          */
         V3 scopeToDomain(Identifier domain);
 
+        /**
+         * The application credentials id and secret to use with the
+         * application credentials authentication type
+         *
+         * @param id
+         * @param secret
+         * @return self for method chaining
+         */
+        V3 applicationCredential(String id, String secret);
+
     }
 
 }

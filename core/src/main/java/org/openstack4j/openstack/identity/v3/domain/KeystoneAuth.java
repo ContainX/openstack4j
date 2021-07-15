@@ -8,6 +8,7 @@ import java.util.List;
 import org.openstack4j.model.common.Identifier;
 import org.openstack4j.model.identity.AuthStore;
 import org.openstack4j.model.identity.AuthVersion;
+import org.openstack4j.model.identity.v3.ApplicationCredential;
 import org.openstack4j.model.identity.v3.Authentication;
 import org.openstack4j.openstack.common.Auth.Type;
 import org.openstack4j.openstack.common.BasicResourceEntity;
@@ -57,6 +58,11 @@ public class KeystoneAuth implements Authentication, AuthStore {
         this.identity = AuthIdentity.createCredentialType(user, password, domain);
         this.scope = scope;
         this.type = Type.CREDENTIALS;
+    }
+
+    public KeystoneAuth(ApplicationCredential credential) {
+        this.identity = AuthIdentity.createApplicationCredentialType(credential.getId(), credential.getSecret());
+        this.type = Type.APPLICATION_CREDENTIAL;
     }
 
     public KeystoneAuth(AuthScope scope, Type type){
@@ -112,6 +118,8 @@ public class KeystoneAuth implements Authentication, AuthStore {
 		
 		private AuthPassword password;
         private AuthToken token;
+        @JsonProperty("application_credential")
+        private AuthApplicationCredential applicationCredential;
         private List<String> methods = Lists.newArrayList();
 
         static AuthIdentity createTokenType(String tokenId) {
@@ -129,6 +137,13 @@ public class KeystoneAuth implements Authentication, AuthStore {
             AuthIdentity identity = new AuthIdentity();
             identity.password = new AuthPassword(username, password, domain);
             identity.methods.add("password");
+            return identity;
+        }
+
+        static AuthIdentity createApplicationCredentialType(String id, String secret) {
+            AuthIdentity identity = new AuthIdentity();
+            identity.applicationCredential = new AuthApplicationCredential(id, secret);
+            identity.methods.add("application_credential");
             return identity;
         }
 
@@ -170,7 +185,7 @@ public class KeystoneAuth implements Authentication, AuthStore {
         public static final class AuthPassword implements Password, Serializable {
 
 			private static final long serialVersionUID = 1L;
-			
+
 			private AuthUser user;
 
             public AuthPassword() {
@@ -224,6 +239,30 @@ public class KeystoneAuth implements Authentication, AuthStore {
                     private static final long serialVersionUID = 1L;
 
                 }
+            }
+        }
+
+        public static final class AuthApplicationCredential implements ApplicationCredential, Serializable {
+
+            private static final long serialVersionUID = 1L;
+
+            private String id;
+            private String secret;
+
+            public AuthApplicationCredential(String id, String secret) {
+                this.id = id;
+                this.secret = secret;
+            }
+
+
+            @Override
+            public String getId() {
+                return id;
+            }
+
+            @Override
+            public String getSecret() {
+                return secret;
             }
         }
     }

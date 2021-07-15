@@ -61,4 +61,9 @@ public class KeystoneV3Builders implements IdentityV3Builders {
     public UserBuilder user() {
         return KeystoneUser.builder();
     }
+
+    @Override
+    public ApplicationCredentialBuilder applicationCredential() {
+        return KeystoneApplicationCredential.builder();
+    }
 }
