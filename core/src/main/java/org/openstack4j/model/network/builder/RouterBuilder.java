@@ -4,6 +4,8 @@ import org.openstack4j.common.Buildable.Builder;
 import org.openstack4j.model.identity.v3.Tenant;
 import org.openstack4j.model.network.ExternalGateway;
 import org.openstack4j.model.network.Router;
+import org.openstack4j.openstack.networking.domain.ExternalFixedIps;
+import java.util.List;
 
 /**
  * A Builder that creates a Router
@@ -46,7 +48,10 @@ public interface RouterBuilder extends Builder<RouterBuilder, Router> {
 	 * @see Router#getExternalGatewayInfo()
 	 */
 	RouterBuilder externalGateway(String networkId, Boolean enableSNAT);
-	
+
+	RouterBuilder externalGateway(String networkId, Boolean enableSNAT, List<ExternalFixedIps> externalFixedIps);
+
+
 	/**
 	 * @see Router#getExternalGatewayInfo()
 	 */

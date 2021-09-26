@@ -25,5 +25,13 @@ public interface NetFloatingIPBuilder extends Builder<NetFloatingIPBuilder, NetF
    * @return the floating ip builder
    */
   NetFloatingIPBuilder portId(String portId);
+
+	/**
+	 * floatingIpAddress fip.
+	 *
+	 * @param floatingIpAddress the floatingIp address
+	 * @return the floating ip builder
+	 */
+  NetFloatingIPBuilder floatingIpAddress(String floatingIpAddress);
 	
 }

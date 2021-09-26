@@ -308,6 +308,12 @@ public class NeutronFloatingIP implements NetFloatingIP {
       f.portId = portId;
       return this;
     }
+
+    @Override
+    public NetFloatingIPBuilder floatingIpAddress(String floatingIpAddress) {
+      f.floatingIpAddress = floatingIpAddress;
+      return this;
+    }
   }
 
 
