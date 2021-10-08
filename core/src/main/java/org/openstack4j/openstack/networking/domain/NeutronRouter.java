@@ -241,6 +241,13 @@ public class NeutronRouter implements Router {
             return this;
         }
 
+        @Override
+        public RouterBuilder externalGateway(String networkId, Boolean enableSNAT, List<ExternalFixedIps> externalFixedIps) {
+            m.externalGatewayInfo = new NeutronExternalGateway(networkId,enableSNAT,externalFixedIps);
+            return this;
+
+        }
+
         /**
          * {@inheritDoc}
          */

@@ -35,6 +35,7 @@ public class NeutronFirewallRule implements FirewallRule {
 	public enum FirewallRuleAction {
 		ALLOW,
 		DENY,
+		REJECT,
 		UNRECOGNIZED;
 
 		@JsonCreator
