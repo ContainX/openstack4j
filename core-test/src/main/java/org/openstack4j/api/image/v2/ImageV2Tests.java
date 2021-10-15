@@ -268,8 +268,7 @@ public class ImageV2Tests extends AbstractTest {
          }
          File file = new File(uri);
          ActionResponse download = osv3().imagesV2().download(imageId, file);
-         // Should fail to write to file
-         assertEquals(download.getCode(), 400);
+         assertEquals(download.getCode(), 200);
      }
 
     @Override
