@@ -1,5 +1,7 @@
 package org.openstack4j.model.octavia;
 
+import java.util.List;
+
 import org.openstack4j.common.Buildable;
 import org.openstack4j.model.ModelEntity;
 import org.openstack4j.model.octavia.builder.LbPoolV2Builder;
@@ -60,7 +62,7 @@ public interface LbPoolV2 extends ModelEntity, Buildable<LbPoolV2Builder> {
      */
     List<ListItem> getListeners();
 
-
+    List<ListItem> getLoadbalancers();
     /**
      * @return List of members that belong to the pool.
      */
@@ -70,4 +72,8 @@ public interface LbPoolV2 extends ModelEntity, Buildable<LbPoolV2Builder> {
      * @return Health monitor associated with the pool.
      */
     String getHealthMonitorId();
+    
+
+    LbProvisioningStatus getProvisioningStatus();
+    LbOperatingStatus getOperatingStatus();
 }

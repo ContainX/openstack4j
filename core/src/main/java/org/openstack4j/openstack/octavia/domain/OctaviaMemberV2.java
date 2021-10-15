@@ -38,6 +38,7 @@ public class OctaviaMemberV2 implements MemberV2 {
     @JsonProperty("admin_state_up")
     private boolean adminStateUp = true;
 
+    private String name;
     /**
      * {@inheritDoc}
      */
@@ -94,6 +95,29 @@ public class OctaviaMemberV2 implements MemberV2 {
         return id;
     }
 
+    @Override
+    public String getName(){
+        return name;
+    }
+    
+    @JsonProperty("provisioning_status")
+    private String provisioningStatus;
+
+    @JsonProperty("operating_status")
+    private String operatingStatus ;
+    
+    @Override
+    public String getOperatingStatus()
+    {
+    	return operatingStatus;
+    }
+    
+    @Override
+    public String getProvisioningStatus()
+    {
+    	return provisioningStatus;
+    }
+    
     @Override
     public String toString(){
         return MoreObjects.toStringHelper(this)
@@ -203,6 +227,12 @@ public class OctaviaMemberV2 implements MemberV2 {
         @Override
         public MemberV2Builder adminStateUp(boolean adminStateUp){
             m.adminStateUp = adminStateUp;
+            return this;
+        }
+        
+        @Override
+        public MemberV2Builder name(String name){
+            m.name = name;
             return this;
         }
     }

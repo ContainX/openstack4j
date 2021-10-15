@@ -42,4 +42,14 @@ public class OctaviaServiceImpl implements OctaviaService {
         return Apis.get(HealthMonitorV2Service.class);
     }
 
+    @Override
+    public L7PolicyService l7Policy() {
+        return Apis.get(L7PolicyService.class);
+    }
+    
+    @Override
+    public L7RuleService l7Rule()
+    {
+        return Apis.get(L7RuleService.class);
+    }
 }
