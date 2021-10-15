@@ -83,4 +83,10 @@ public interface NetworkingService extends RestService {
      * @return the Availability Zone Service API
      */
     AvailabilityZoneService availabilityzone();
+
+    /**
+     *
+     * @return QoS Policy Service API
+     */
+    QoSPolicyService qosPolicies();
 }

@@ -6,6 +6,7 @@ import org.openstack4j.api.networking.NetFloatingIPService;
 import org.openstack4j.api.networking.NetworkService;
 import org.openstack4j.api.networking.NetworkingService;
 import org.openstack4j.api.networking.PortService;
+import org.openstack4j.api.networking.QoSPolicyService;
 import org.openstack4j.api.networking.RouterService;
 import org.openstack4j.api.networking.SecurityGroupRuleService;
 import org.openstack4j.api.networking.SecurityGroupService;
@@ -125,6 +126,10 @@ public class NetworkingServiceImpl implements NetworkingService {
     @Override
     public AvailabilityZoneService availabilityzone() {
         return Apis.get(AvailabilityZoneService.class);
-    }	
+    }
 
+    @Override
+    public QoSPolicyService qosPolicies() {
+        return Apis.get(QoSPolicyService.class);
+    }
 }

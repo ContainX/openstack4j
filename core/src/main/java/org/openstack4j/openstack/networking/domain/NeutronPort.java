@@ -87,6 +87,9 @@ public class NeutronPort implements Port {
 	@JsonProperty("binding:profile")
 	private Map<String, Object> profile;
 
+	@JsonProperty("qos_policy_id")
+	private String qosPolicyId;
+
 	public static PortBuilder builder() {
 		return new PortConcreteBuilder();
 	}
@@ -232,6 +235,14 @@ public class NeutronPort implements Port {
 		return profile;
 	}
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getQosPolicyId() {
+        return qosPolicyId;
+    }
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -276,6 +287,10 @@ public class NeutronPort implements Port {
 		this.profile = profile;
 	}
 
+    public void setQosPolicyId(String qosPolicyId) {
+        this.qosPolicyId = qosPolicyId;
+    }
+
 	/**
      * {@inheritDoc}
      */
@@ -297,6 +312,7 @@ public class NeutronPort implements Port {
 				    .add("allowed_address_pairs", allowedAddressPairs).add("port_security_enabled ", portSecurityEnabled)
 				    .add("binding:host_id", hostId).add("binding:vif_type", vifType).add("binding:vif_details", vifDetails)
 				    .add("binding:vnic_type", vNicType).add("binding:profile", profile)
+				    .add("qos_policy_id", qosPolicyId)
 				    .toString();
 	}
 
@@ -308,7 +324,7 @@ public class NeutronPort implements Port {
 		return java.util.Objects.hash(id, name, adminStateUp, deviceId,
 				deviceOwner, fixedIps, macAddress, networkId, tenantId,
 				securityGroups, allowedAddressPairs, portSecurityEnabled, hostId,
-				vifType, vifDetails, vNicType, profile);
+                vifType, vifDetails, vNicType, profile, qosPolicyId);
 	}
 
 	/**
@@ -338,7 +354,8 @@ public class NeutronPort implements Port {
 					java.util.Objects.equals(vifType, that.vifType) &&
 					java.util.Objects.equals(vifDetails, that.vifDetails) &&
 					java.util.Objects.equals(vNicType, that.vNicType) &&
-					java.util.Objects.equals(profile, that.profile)) {
+                    java.util.Objects.equals(profile, that.profile) &&
+                    java.util.Objects.equals(qosPolicyId, that.qosPolicyId)) {
 				return true;
 			}
 		}
@@ -529,6 +546,11 @@ public class NeutronPort implements Port {
 			return this;
     	}
 
+        @Override
+        public PortBuilder qosPolicyId(String qosPolicyId) {
+            m.qosPolicyId = qosPolicyId;
+            return this;
+        }
 	}
 
 }

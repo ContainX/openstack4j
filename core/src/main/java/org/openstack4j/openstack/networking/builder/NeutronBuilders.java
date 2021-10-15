@@ -190,4 +190,24 @@ public class NeutronBuilders implements NetworkBuilders {
     public ListenerV2UpdateBuilder listenerV2Update(){
         return NeutronListenerV2Update.builder();
     }
+
+    @Override
+    public QoSPolicyBuilder qosPolicy() {
+        return NeutronQoSPolicy.builder();
+    }
+
+    @Override
+    public BandwidthLimitRuleBuilder bandwidthLimitRule() {
+        return NeutronBandwidthLimitRule.builder();
+    }
+
+    @Override
+    public DscpMarkingRuleBuilder dscpMarkingRule() {
+        return NeutronDscpMarkingRule.builder();
+    }
+
+    @Override
+    public MinimumBandwidthRuleBuilder minimumBandwidthRule() {
+        return NeutronMinimumBandwidthRule.builder();
+    }
 }
