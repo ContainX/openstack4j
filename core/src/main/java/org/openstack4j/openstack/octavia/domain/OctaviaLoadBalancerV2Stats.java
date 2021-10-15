@@ -24,6 +24,9 @@ public class OctaviaLoadBalancerV2Stats implements LoadBalancerV2Stats {
     @JsonProperty("active_connections")
     private Integer activeConnections;
 
+    @JsonProperty("request_errors")
+    private Integer requestErrors;
+
     /**
      *
      * {@inheritDoc}
@@ -57,6 +60,15 @@ public class OctaviaLoadBalancerV2Stats implements LoadBalancerV2Stats {
         return activeConnections;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public Integer getRequestErrors() {
+        return requestErrors;
+    }
+
     @Override
     public String toString(){
         return MoreObjects.toStringHelper(this)
@@ -64,6 +76,7 @@ public class OctaviaLoadBalancerV2Stats implements LoadBalancerV2Stats {
                 .add("bytesOut", bytesOut)
                 .add("totalConnections", totalConnections)
                 .add("activeConnections", activeConnections)
+                .add("requestErrors", requestErrors)
                 .toString();
     }
 }
