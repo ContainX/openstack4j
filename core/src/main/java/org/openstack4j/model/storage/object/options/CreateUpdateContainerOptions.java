@@ -62,6 +62,19 @@ public final class CreateUpdateContainerOptions {
         add(VERSIONS_LOCATION, containerName);
         return this;
     }
+
+    /**
+     * Enables history versioning mode on this container. The value is the name of another container.
+     * You must UTF-8-encode and then URL-encode the name before you include it in the header.
+     * To disable versioning, set the header to an empty string.
+     *
+     * @param containerName the container name of the other container
+     * @return CreateUpdateContainerOptions
+     */
+    public CreateUpdateContainerOptions historyLocation(String containerName) {
+        add(HISTORY_LOCATION, containerName);
+        return this;
+    }
     
     /**
      * Sets the read ACL (if supported) to allow public access
