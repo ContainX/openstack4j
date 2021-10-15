@@ -1247,6 +1247,15 @@ public class Builders {
      */
     public static RecordsetBuilder recordset() { return DesignateRecordset.builder(); }
 
+    /**
+     * The builder to create NetworkIPAvailability entities
+     *
+     * @return the NetworkIPAvailability builder
+     */
+    public static NetworkIPAvailabilityBuilder networkIPAvailability() {
+        return NeutronNetworkIPAvailability.builder();
+    }
+
     public static WorkflowBuilders workflow() {
         return new MistralBuilders();
     }
