@@ -1,0 +1,17 @@
+{
+    "trunk":{
+        "status":"DOWN",
+        "sub_ports":[],
+        "name":"trunk1",
+        "admin_state_up":true,
+        "tenant_id":"1b9ef7f7ec0c41ac83e3ea0df5257f60",
+        "created_at":"2019-03-28T05:41:32Z",
+        "tags":[],
+        "updated_at":"2019-03-28T05:41:32Z",
+        "revision_number":0,
+        "project_id":"1b9ef7f7ec0c41ac83e3ea0df5257f60",
+        "port_id":"0908f280-d0e8-45c6-acec-85714181ddb1",
+        "id":"8fc625a7-d9a9-415f-83b3-87e9926990fd",
+        "description":""
+    }
+}
