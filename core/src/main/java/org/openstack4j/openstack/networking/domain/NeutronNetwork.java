@@ -351,6 +351,12 @@ public class NeutronNetwork implements Network {
         }
 
         @Override
+        public NetworkBuilder mtu(Integer mtu) {
+            m.mtu = mtu;
+            return this;
+        }
+
+        @Override
         public Network build() {
             return m;
         }

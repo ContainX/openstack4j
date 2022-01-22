@@ -31,5 +31,11 @@ public interface NetworkUpdate extends ModelEntity, Buildable<NetworkUpdateBuild
      * @return true if this network is shared
      */
     boolean isShared();
-    
+
+    /**
+     * Requires the net-mtu-writable extension
+     *
+     * @return the MTU value to update on the network
+     */
+    Integer getMTU();
 }
