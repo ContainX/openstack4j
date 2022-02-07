@@ -8,6 +8,7 @@ import org.openstack4j.common.RestService;
 import org.openstack4j.model.common.ActionResponse;
 import org.openstack4j.model.network.Network;
 import org.openstack4j.model.network.NetworkUpdate;
+import org.openstack4j.model.network.options.NetworkListOptions;
 
 /**
  * OpenStack (Neutron) Network based Operations
@@ -24,8 +25,15 @@ public interface NetworkService extends RestService {
 	 * @return List of Network
 	 */
 	List<? extends Network> list(Map<String, String> filteringParams);
-	
 
+	/**
+	 * Lists the networks to which the current authorized tenant has access
+	 *
+	 * @author bboyHan (bboyhan@yeah.net)
+	 * @param options setting filter parameters
+	 * @return List of Network
+	 */
+	List<? extends Network> list(NetworkListOptions options);
 	/**
 	 * Lists the networks to which the current authorized tenant has access
 	 * 

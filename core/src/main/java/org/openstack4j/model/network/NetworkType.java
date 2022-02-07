@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * The type of Network
- * 
+ *
  * @author Jeremy Unruh
  */
 public enum NetworkType {
@@ -16,7 +16,7 @@ public enum NetworkType {
   VXLAN,
   GRE
 	;
-	
+
 	@JsonCreator
 	public static NetworkType forValue(String value) {
 		if (value != null)
@@ -28,10 +28,10 @@ public enum NetworkType {
 		}
 		return null;
 	}
-	
+
 	@JsonValue
-	public String toJson() {
+	public String getNetworkType() {
 		return name().toLowerCase();
 	}
-	
+
 }
