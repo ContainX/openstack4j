@@ -15,6 +15,7 @@ import org.openstack4j.api.networking.ext.FirewallAsService;
 import org.openstack4j.api.networking.ext.LbaasV2Service;
 import org.openstack4j.api.networking.ext.LoadBalancerService;
 import org.openstack4j.api.networking.ext.NetQuotaService;
+import org.openstack4j.api.networking.qos.NetQosService;
 
 /**
  * OpenStack Networking Operations API
@@ -77,6 +78,14 @@ public class NetworkingServiceImpl implements NetworkingService {
     @Override
     public SecurityGroupRuleService securityrule() {
         return Apis.get(SecurityGroupRuleService.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public NetQosService qos() {
+        return Apis.get(NetQosService.class);
     }
 
     /**

@@ -1,6 +1,7 @@
 package org.openstack4j.model.network.builder;
 
 import org.openstack4j.model.network.ext.builder.*;
+import org.openstack4j.model.network.qos.builder.*;
 
 /**
  * The Network builders
@@ -64,6 +65,34 @@ public interface NetworkBuilders {
      * @return the floating ip builder
      */
     public NetFloatingIPBuilder netFloatingIP();
+
+    /**
+     * The builder to create a Neutron QoS Policy
+     *
+     * @return the QoS Policy builder
+     */
+    public NetQosPolicyBuilder netQosPolicy();
+
+    /**
+     * The builder to create a Neutron QoS Bandwidth Limit Rule
+     *
+     * @return the QoS Policy builder
+     */
+    public NetQosBandwidthLimitRuleBuilder netQosBandwidthLimitRule();
+
+    /**
+     * The builder to create a Neutron QoS DSCP Marking Rule
+     *
+     * @return the QoS Policy builder
+     */
+    public NetQosDscpMarkingRuleBuilder netQosDscpMarkingRule();
+
+    /**
+     * The builder to create a Neutron QoS Minimum Bandwidth Rule
+     *
+     * @return the QoS Policy builder
+     */
+    public NetQosMinimumBandwidthRuleBuilder netQosMinimumBandwidthRule();
 
     /**
      * The builder to create NetQuota entities
